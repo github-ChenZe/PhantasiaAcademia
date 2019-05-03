@@ -1,0 +1,245 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{基本概念}
+\subsection{公理性概念}
+\subsubsection{热力学极限}
+热力学对大量分子的处理可以理解为, 假象自己坐在平顶的小屋子里, 雨滴不断落下, 如果记录时间和屋顶受力的关系可以得到不平滑的图像. 但如果增加屋顶的面积, 在受力的记录值增加的同时受力大小的涨落也会减小, 如果记录压强, 那么增加屋顶的面积就可以得到有意义的\emph{热力学极限}.
+\par
+将雨滴替换成运动的分子, 分子数目极大故压强涨落可以忽略, 从而得到有意义的体系压强. 同样地, 通过假设分子数为无穷大, 可以得到常数的气体密度.
+\subsubsection{热力学量}
+\begin{definition}[强度量与广延量]
+与系统大小无关的变量谓强度量, 与系统大小有关的变量谓广延量.
+\end{definition}
+\begin{ex}
+将气体二等分, 压强$p$与温度$T$皆不变, 故此二者为强度量.
+\end{ex}
+\begin{ex}
+将气体二等分, 体积$V$和内能$U$分别减少至一半, 故此二者为广延量.
+\end{ex}
+\begin{finale}
+\begin{axiom}[理想气体定律]
+理想气体符合Boyle定律, Charles定律, Gay-Lussac定律. 从而
+\[ pV = nRT. \]
+\end{axiom}
+\end{finale}
+理想气体定律的适用假定了分子为点状且不存在相互作用. 它在很大范围内可以描述气体但并不总是适用.
+\begin{definition}[态函数]
+具有固定且明确的值而与到达该状态的路径无关的可观测量谓态函数.
+\end{definition}
+\begin{definition}[平衡态]
+系统的平衡态谓其各种宏观性质不随时间变化的状态.
+\end{definition}
+通常仅仅需要有限多个态函数就可以完全确定系统的状态.
+\begin{ex}
+给定气体系统的$p$和$V$可以完全确定其状态, 故任何态函数都可以写成$S\pare{p,V}$的形式, 但在更复杂的情形(比如固体)可能还需要电磁场等参数.
+\end{ex}
+\begin{definition}[弛豫时间]
+系统从非平衡态达到平衡的时间谓弛豫时间.
+\end{definition}
+\subsubsection{热量}
+转移的热能, 谓\emph{热量}.
+\begin{ex}
+把手放在火炉边取暖和摩擦以取暖分别是热量传递和做功, 二者带来的结果都是手的温度上升.
+\end{ex}
+\begin{ex}
+因此, 内能$U$是态函数, 而做功$W$和热量$Q$非态函数.
+\end{ex}
+\begin{definition}[热容]
+物体吸收热量与上升温度之比谓热容, 即
+\[ C = \eddon{Q}{T}. \]
+\end{definition}
+\begin{definition}[比热容与摩尔热容]
+单位质量的热容谓比热容, $\SI{1}{mol}$物质的热容为摩尔热容.
+\end{definition}
+气体热容存在两种定义方式, 即气体分别置于定容容器或定压容器(例如活塞)中, 分别即
+\begin{finale}
+\[ C_V = \pare{\ddelon{Q}{T}}_V, \quad C_p = \pare{\ddelon{Q}{T}}_p.\]
+\end{finale}
+\subsection{数学概念}
+\subsubsection{组合问题}
+\begin{ex}
+假设系统有$n$个原子, 每个原子可以处于两个状态之一, 分别具有一个单位的能量(一个能量量子)或不具有能量. 假设系统有$r$个能量量子, 则不同量子排列的总数为\footnote{此处假设原子可分辨.}
+\begin{finale}
+\[ \Omega = \frac{n!}{\pare{n-r}!r!} \equiv C_n^r. \]
+\end{finale}
+\end{ex}
+组合问题中通常对庞大的阶乘取对数以缓解其巨大的数量级, 简单地积分替代求和可以证明
+\begin{theorem}[粗糙的Stiring近似]
+\[ \ln n! \sim n \ln n - n + O\pare{\ln n}. \]
+\end{theorem}
+\begin{ex}
+通常余项是可以忽略的, 对于$n=10^{23}$的情形, 余项导致的相对误差可能只有$10^{-24}$量级.
+\end{ex}
+\subsubsection{概率}
+\paragraph{离散随机变量}只能取有限多个值的随机变量谓\emph{离散随机变量}, 设取值$x_i$的概率为$P_i$, 则
+\[ \sum_i P_i = 1. \]
+\begin{definition}[期望值与方均值]
+期望值谓
+\begin{finale}
+\[ \expc{x} = \sum_i x_i P_i. \]
+\end{finale}
+关于$x$的函数的均值谓
+\[ \expc{f\pare{x}} = \sum_i f\pare{x_i}P_i. \]
+特别地, 方均值谓
+\begin{finale}
+\[ \expc{x^2} = \sum_i x_i^2 P_i. \]
+\end{finale}
+\end{definition}
+\paragraph{连续随机变量}\emph{连续随机变量}可以在一个区间内取值. 如果$P\pare{x}\rd{x}$是$x$取在$\pare{x, x+\rd{x}}$内的概率, 则
+\[ \int P\pare{x}\,\rd{x} = 1. \]
+\begin{definition}[期望值与方均值]
+期望值谓
+\begin{finale}
+\[ \expc{x} = \int xP\pare{x}\,\rd{x}. \]
+\end{finale}
+关于$x$的函数的均值谓
+\[ \expc{f\pare{x}} = \int f\pare{x}P\pare{x}\,\rd{x}. \]
+特别地, 方均值谓
+\begin{finale}
+\[ \expc{x^2} = \int x^2 P\pare{x}\,\rd{x}. \]
+\end{finale}
+\end{definition}
+\begin{ex}
+考虑正态分布
+\[ P\pare{x} = \rec{\sqrt{2\pi}\sigma}e^{-\frac{x^2}{2a^2}}. \]
+有$\expc{x} = 0$, $\expc{x^2} = \sigma^2$.
+\end{ex}
+\subsubsection{统计学量}
+\begin{finale}
+\begin{definition}[方差和标准差]
+方差谓
+\[ \sigma_x^2 = \expc{\pare{x-\expc{x}}^2}. \]
+标准差谓
+\[ \sigma_x = \sqrt{\expc{\pare{x-\expc{x}}^2}}. \]
+\end{definition}
+\end{finale}
+\begin{corollary}[方差公式]\quad
+\begin{finale}
+\[ \sigma_x^2 = \expc{x^2} - \expc{x}^2. \]
+\end{finale}
+\end{corollary}
+\paragraph{线性变换}设随机变量$y$为随机变量$x$的一个线性变换, $y=ax+b$, 则
+\begin{finale}
+\[ \expc{y} = a\expc{x} + b, \quad \sigma_y = a\sigma_x. \]
+\end{finale}
+\paragraph{独立随机变量}两个随机变量是\emph{独立随机变量}, 如果知道其中一者不会得到另一者的信息. 此时
+\begin{finale}
+\[ \expc{xy} = \expc{x}\expc{y}. \]
+\end{finale}
+\begin{ex}
+设随机变量$y$是$n$个随机变量$x_i$的和, 满足$\expc{x_i} = x$且$\sigma_{x_i} = \sigma_x$对所有$i$一致成立. 则
+\[ \expc{y} = n\expc{x}, \]
+\[ \sigma_y^2 = \expc{y^2} - \expc{y}^2 = \sum_i\expc{x_i^2} + \sum_{i,j}\expc{x_ix_j} - n^2\expc{x}^2 = n\expc{x^2} - n\expc{x}^2 = n\sigma_x^2. \]
+或者$\sigma_y = \sqrt{n}\sigma_x$.
+\end{ex}
+把误差视为随机变量, 这个结论意味着在重复测量$n$次并取平均之后, 误差的期望会按照$1/\sqrt{n}$降低. 此外, 在一条直线上的随机行走, 其位移的期望值谓零但方均根呈$\sqrt{n}$增加.
+\subsubsection{二项分布}
+\begin{theorem}[Bernoulli实验]
+Bernoulli实验谓一有概率$p$取$1$(成功), 概率$1-p$取$0$(失败)的随机变量.
+\end{theorem}
+单次Bernoulli实验满足
+\[ \expc{x} = p,\quad \expc{x^2} = p,\quad \sigma_x = \sqrt{p\pare{1-p}}. \]
+\begin{definition}[二项分布, Bernoulli分布]
+二项分布$P\pare{n,k}$谓$n$次Bernoulli实验中获得$k$次成功的概率, 即
+\[ P\pare{n,k} = C_n^kp^k\pare{1-p}^{n-k}. \]
+\end{definition}
+二项分布满足
+\begin{finale}
+\[ \expc{k} = np, \sigma_k^2 = np\pare{1-p}. \]
+\end{finale}
+\subsection{温度}
+\subsubsection{热平衡}
+\begin{definition}[热平衡]
+两个物体之间若不存在净的热交换则谓其处于热平衡.
+\end{definition}
+由于热总是从高温物体传向低温物体, 热平衡等价于两个物体之间温度相等. 热平衡是一种等价关系:
+\begin{finale}
+\begin{axiom}[热力学第零定律]
+分别与第三个系统处于热平衡的两个系统之间处于热平衡.
+\end{axiom}
+\end{finale}
+第零定律预示了温度作为态函数的存在\cite{ZhangYuMin}. 他也保证了温度计的工作——两个校准过的温度计测量一个系统总是得到相同的结果.
+\subsubsection{宏观态与微观态}
+\begin{ex}
+若盒子内有$n$枚硬币, 随机朝上或朝下, 则考虑所有硬币的可能状态一共有$2^n$种微观态. 但考虑「有多少硬币分别朝上或朝下」则有$n+1$中宏观态(将硬币倒出来清点).
+\end{ex}
+因此, 可以用数量巨大的同等可能的微观态描述一个系统. 可以实际测量的是系统的宏观态, 不同宏观态由于微观态数量不同从而占有的概率不同. 对于具体的由原子构成的系统而言, 微观态意味着每个原子的位置、速度, 宏观态意味着系统的温度、压强等.
+\subsubsection{温度的统计定义}
+\begin{definition}
+系统的能量为$E$时, 所有可能的微观状态数记作$\Omega\pare{E}$.
+\end{definition}
+\begin{axiom}
+热力学系统满足
+\begin{cenum}
+\item 每一个微观态是同等可能出现的;
+\item 内部动力学使微观态连续变化;
+\item 足够长的时间后, 系统会遍历所有微观态且处于每个态的时间相同.
+\end{cenum}
+\end{axiom}
+\begin{corollary}
+系统将选择使微观数取最大值的宏观态.
+\end{corollary}
+因此, 假设两个系统的能量分别为$E_1$和$E_2$, 其中$E_1+E_2=E$为常数, 则热平衡时微观组态达到最多, 故
+\[ \eddon{}{E_1}\pare{\Omega_1\pare{E_1}\Omega\pare{E_2}}=0. \]
+从而
+\[ \eddon{\ln \Omega_1}{E_1} = \eddon{\ln \Omega_2}{E_2}. \]
+\begin{definition}[温度]
+定义温度$T$满足
+\begin{finale}
+\[ \rec{k_B T} = \eddon{\ln\Omega}{E}. \]
+\end{finale}
+\end{definition}
+\begin{remark}
+	在温度的统计定义出现之前, 可以存在各种温标:
+	\begin{cenum}
+		\item 经验温标: 选择某种物质的随温度改变的物理量(例如水银柱的长度), 均分这种变化以定义温度;
+		\item 理想气体温标: 定义水的三相点为$\SI{273.16}{K}$之后, 通过理想气体可以定义温度$T\pare{p} = \SI{273.16}{K} \cdot p/p_0$, 其中$p_0$是$\SI{273.16}{K}$时的压强.
+	\end{cenum}
+\end{remark}
+\subsubsection{系综}
+\begin{definition}[开放系统, 封闭系统与孤立系统]
+与外界有能量和物质交换的系统谓开放系统, 只有能量交换的谓封闭系统, 没有交换的谓孤立系统.
+\end{definition}
+\begin{definition}[微正则系综]
+微正则系综谓具有相同且确定的能量的一堆系统的系综.
+\end{definition}
+\begin{definition}[正则系综]
+正则系综谓可以与一巨大热源交换能量的一堆系统的系综.
+\end{definition}
+\begin{definition}[巨正则系综]
+巨正则系综谓可以与一巨大源交换能量和粒子的一堆系统的系综.
+\end{definition}
+\subsubsection{正则系综}
+考虑两个系统, 其中一个具有小能量$\epsilon$, 谓\emph{系统}, 另一个具有庞大的能量$E-\epsilon$, 谓热源. 假设\emph{对于每个$\epsilon$, 小系统只有一种可能微观态}, 则系统具有能量$\epsilon$的概率为
+\begin{equation}
+\label{eq:boltzmanndistribution}
+P\pare{\epsilon} \propto \Omega\pare{E-\epsilon} = \exp\brac{\ln\Omega\pare{E} - \eddon{\ln\Omega\pare{E}}{E}\epsilon} \propto e^{-\epsilon/k_BT}.
+\end{equation}
+上述分布谓\emph{Boltzmann分布}, $e^{-\epsilon/k_BT}$谓\emph{Boltzmann因子}.
+\begin{corollary}
+小系统处于微观态$\varphi$的概率为
+\begin{finale}
+\[ P\pare{\varphi} \propto e^{-E_\varphi/k_BT},\quad P\pare{\varphi} = \frac{e^{-E_\varphi/k_BT}}{\sum_i e^{-E_i/k_BT}}. \]
+\end{finale}
+\end{corollary}
+\subsubsection{应用}
+\begin{finale}
+通常引入如下的记号
+\[ \beta = \rec{k_B T} = \eddon{\ln\Omega}{E},\quad e^{-E/k_BT} = e^{-\beta E}. \]
+\end{finale}
+\begin{ex}[等温大气]
+气体分子在等温大气中大致分布为(等温情形下动能贡献的因子是固定的)
+\[ n\pare{z} = n\pare{0} e^{-mgz/k_BT}. \]
+同时由
+\[ \rd{p} = -\rho g\rd{z},\quad p=nk_BT \]
+可以得到同样的结果.
+\end{ex}
+\begin{ex}[活化能]
+化学反应的速率大约与$\exp\pare{E_{\mathrm{act}}/k_BT}$成正比. 对于$\SI{0.5}{eV}$的活化能, 在$\SI{300}{K}$时温度上升$\SI{10}{K}$速率大约提升一倍.
+\end{ex}
+\begin{ex}
+太阳主要发生核反应\ce{p+ + p+ -> d+ + e+ + $\overbar{\nu}$}. 两个核接近到$\SI{e-15}{m}$时$E=\SI{1}{MeV}$, 相应的Boltzmann因子只有$10^{-1200}$. 反应之所以发生来自于量子隧穿.
+\end{ex}
+\end{document}

@@ -1,0 +1,272 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{热力学势}
+\subsection{定义}
+\subsubsection{内能\texorpdfstring{$U$}{U}}
+内能的自然变量为$S$和$V$,
+\begin{finale}
+\[ U = U\pare{S,V},\quad \rd{U} = T\rd{S} - p\rd{V}. \]
+\end{finale}
+对于\emph{可逆等容过程}, 有
+\[ \rd{U} = T\rd{S} = \dbar Q_{\mathrm{rev}} = C_V \rd{T}. \]
+\subsubsection{焓\texorpdfstring{$H$}{H}}
+焓的自然变量为$S$和$p$,
+\begin{finale}
+\[ H = H\pare{S,p} = U + PV,\quad \rd{H} = T\rd{S} + V\rd{p}. \]
+\end{finale}
+对于\emph{可逆等压过程}, 有
+\[ \rd{H} = T\rd{S} = \dbar Q_{\mathrm{rev}} = C_p \rd{T}. \]
+\subsubsection{Helmholtz自由能\texorpdfstring{$F$}{F}}
+Helmholtz自由能的自然变量为$T$和$V$,
+\begin{finale}
+\[ F = F\pare{T,V} = U - TS,\quad \rd{F} = -S\rd{T} - p\rd{V}. \]
+\end{finale}
+对于\emph{等温过程}, 有
+\begin{equation}
+\label{eq:F=-pdV}
+\rd{F} = -p\rd{V}.
+\end{equation}
+对于\emph{等温等容过程}, $F$守恒.
+\subsubsection{Gibbs自由能\texorpdfstring{$G$}{G}}
+Gibbs自由能的自然变量为$T$和$p$,
+\begin{finale}
+\[ G = G\pare{T,p} = H - TS,\quad \rd{F} = -S\rd{T} + V\rd{p}. \]
+\end{finale}
+对于\emph{等温等压过程}, $G$守恒.
+\begin{ex}
+相变发生时, 等温等压下二态共存, 故$\Delta G = 0$.
+\end{ex}
+\begin{ex}[Gibbs-Helmholtz方程]
+直接展开定义$F=U-TS$与$G=H-TS$并注意到等容条件下$\rd{U}=T\rd{S}$, 等压条件下$\rd{H} = T\rd{S}$, 立刻有
+\begin{align}
+U &= -T^2\pare{\ddelon{}{T}\frac{F}{T}}_V, \\
+\label{eq:hbyddg}
+H &= -T^2\pare{\ddelon{}{T}\frac{G}{T}}_p.
+\end{align}
+\end{ex}
+\subsection{应用}
+\subsubsection{约束与资用能}
+由\eqref{eq:F=-pdV}, 可逆过程等温下系统对外做功的量即为其Helmholtz自由能的减小量. 更一般的情形下$\dbar W$不一定为体积功, 此时
+\[ \dbar W \ge \rd{U} - \dbar Q_{\text{rev}} = \rd{U} - T\rd{S} = \rd{F}. \]
+如果系统是孤立的, 外界不对系统做功, 则$\rd{F}\le 0$, $F$下降至极小值时系统达到平衡.
+\begin{ex}
+在固定体积的封闭容器内发生的燃烧适用之.
+\end{ex}
+如果去除体积不变的约束, 并假设环境具有温度$T_0$和压强$p_0$, 对于体积功以外的功$\dbar W$有相应的
+\[ \dbar W \ge \rd{U} + p_0\rd{V} - T_0\rd{S}. \]
+定义\emph{资用能}$A = U + p_0V - T_0S$, 有
+\[ \dbar W \ge \rd{A}. \]
+如果系统是孤立的, $\rd{A}\le 0$, $A$不断减小直到平衡达到为止.
+\begin{ex}
+恒容的热孤立系统的$\rd{U}$和$\rd{V}$皆为零, 平衡时熵$S$取得最大值.
+\end{ex}
+\begin{ex}[等温等容过程]
+此时$A$为Helmholtz自由能, 平衡时$F$取最小值.
+\end{ex}
+\begin{ex}[等温等压过程]
+此时$A$为Gibbs自由能, 平衡时$G$取最小值.
+\end{ex}
+\begin{finale}
+\begin{corollary}
+$\Delta F$标志着系统在等温等容过程中做非体积功的能力, $\Delta G$标志着系统在等温等压过程中做非体积功的能力.
+\end{corollary}
+\end{finale}
+\begin{ex}
+恒温恒压条件下进行的化学反应会使系统的资用能取最小值, 故$\Delta G < 0$时化学反应可以发生.
+\end{ex}
+\subsubsection{Maxwell关系}
+通过$\rd{U}$, $\rd{H}$, $\rd{F}$, $\rd{G}$的表达式以及恰当微分条件, 可以得到
+\begin{finale}
+\begin{corollary}[Maxwell关系]
+\begin{align*}
+\pare{\ddelon{T}{V}}_S &= -\pare{\ddelon{p}{S}}_V, \\
+\pare{\ddelon{T}{p}}_S &= \pare{\ddelon{V}{S}}_p, \\
+\pare{\ddelon{S}{V}}_T &= \pare{\ddelon{p}{T}}_V, \\
+\pare{\ddelon{S}{p}}_T &= -\pare{\ddelon{V}{T}}_p.
+\end{align*}
+\end{corollary}
+\end{finale}
+\begin{ex}
+应用Maxwell关系并注意$C=\partial S/\partial T$可以得到
+\[ \pare{\ddelon{C_p}{p}}_T = T \brac{\ddelon{}{p}\pare{\ddelon{S}{T}}_p}_T = -T\brac{\ddelon{}{T}\pare{\ddelon{V}{T}}_p}_p = -T\pare{\dddelon{V}{T}}_p. \]
+\[ \pare{\ddelon{C_V}{V}}_T = T \brac{\ddelon{}{V}\pare{\ddelon{S}{T}}_V}_T = T\brac{\ddelon{}{T}\pare{\ddelon{p}{T}}_V}_V =T\pare{\dddelon{p}{T}}_V. \]
+对于理想气体, 两者皆为零.
+\end{ex}
+Maxwell关系将「神秘的」各种$\partial S$转化为各种$\partial V$或者$\partial p$来表示, 因此有必要给这些量特殊的地位.
+\begin{definition}[等压膨胀率和绝热膨胀率]
+等压膨胀率和绝热膨胀率分别为
+\[ \beta_p = \rec{V}\pare{\ddelon{V}{T}}_p,\quad \beta_S = \rec{V}\pare{\ddelon{V}{T}}_S. \]
+\end{definition}
+\begin{definition}[等温压缩率和绝热压缩率]
+等压膨胀率和绝热膨胀率分别为
+\[ \kappa_T = -\rec{V}\pare{\ddelon{V}{p}}_T,\quad \kappa_S = -\rec{V}\pare{\ddelon{V}{p}}_S. \]
+\end{definition}
+\begin{remark}
+\label{rm:体积的改变用膨胀率和压缩率写出}
+体积的微小变化可以写作$\rd{V}/V = \beta_p \rd{T} - \kappa_T \rd{p}$, 若维持$\rd{V} = 0$则$\rd{p} = \beta_p/\kappa_T\,\rd{T}$, 由于两个系数的数量级悬殊, 很小的温度改变若维持体积不变需要很大压强.
+\end{remark}
+\begin{ex}
+考虑$S=S\pare{T,V}$可得
+\[ C_p - C_V = T\brac{\pare{\ddelon{S}{T}}_p - \pare{\ddelon{S}{T}}_V} = T\brac{\pare{\ddelon{S}{V}}_T\pare{\ddelon{V}{T}}_p}. \]
+应用Maxwell关系与互反定理后有
+\[ C_p - C_V = -\pare{\ddelon{p}{V}}_T\pare{\ddelon{V}{T}}_p\pare{\ddelon{V}{T}}_p = \frac{TV\beta_p^2}{\kappa_T}. \]
+\end{ex}
+\begin{ex}[理想气体的熵]
+\label{ex:entropyofidealgases}
+考虑$S=S\pare{T,V}$且$C_V$对于理想气体固定, 有
+\[ S = \int \rd{S} = \int \pare{\ddelon{S}{V}}_T\,\rd{V} + \int \pare{\ddelon{S}{T}}_V\,\rd{T} = \int \pare{\ddelon{p}{T}}_V\,\rd{V} + \int\frac{C_V}{T}\,\rd{T} \]
+注意$\partial p/\partial T = nR/V$, 有
+\begin{equation}
+\label{eq:entropyofidealgases}
+S = C_V \ln T + nR\ln V + \const.
+\end{equation}
+\end{ex}
+\begin{ex}
+等温压缩率与绝热压缩率之比, 对定义应用互反定理并整理可得
+\[ \frac{\kappa_T}{\kappa_S} = \frac{\pare{\ddelon{V}{T}}_p\pare{\ddelon{T}{p}}_V}{\pare{\ddelon{V}{S}}_p\pare{\ddelon{S}{p}}_V} = \frac{\pare{\ddelon{V}{T}}_p\pare{\ddelon{S}{V}}_p}{\pare{\ddelon{p}{T}}_V\pare{\ddelon{S}{p}}_V} = \frac{\pare{\ddelon{S}{T}}_p}{\pare{\ddelon{S}{T}}_V} = \frac{C_p}{C_V} = \gamma. \]
+对于理想气体, 等压过程和绝热过程分别对应
+\[ \frac{\rd{p}}{p} = -\frac{\rd{V}}{V},\quad \frac{\rd{p}}{p} = -\gamma \frac{\rd{V}}{V}. \]
+可知前开结论成立.
+\end{ex}
+\section{更多热力学系统}
+\subsection{弹性杆}
+\begin{definition}[等温Youngs模量]
+胁强谓$\sigma = \rd{f}/A$, 胁变谓$\epsilon = \rd{L}/L$, 等温Youngs模量谓
+\begin{finale}
+\[ E_T = \frac{\sigma}{\epsilon} = \frac{L}{A}\pare{\ddelon{f}{L}}_T. \]
+\end{finale}
+\end{definition}
+Youngs模量衡量了等温情形下拉伸一根杆需要施加的力. Youngs模量总是正数.
+\begin{definition}[等张力线胀率]
+等张力线胀率谓
+\begin{finale}
+\[ \alpha_f = \rec{L} \pare{\ddelon{L}{T}}_f. \]
+\end{finale}
+\end{definition}
+等张力线胀率衡量了在杆末端悬挂一定质量的重物的情形下, 加热之产生的形变量大小. 等张力线胀率对金属是正数, 但对于橡胶是负数.
+\begin{ex}
+保持恒定长度的金属丝, 张力随温度变化
+\[ \pare{\ddelon{f}{T}}_L = -\pare{\ddelon{f}{L}}_T\pare{\ddelon{L}{T}}_f = -AE_T\alpha_f. \]
+从而如果单纯提高温度, 吉他弦的张力变小因而音调变低, 但实际情况比这\href{https://www.zhihu.com/question/64200607}{复杂得多}.
+\end{ex}
+对于弹性杆, 相应的
+\begin{finale}
+\[ \rd{U} = T \rd{S} + f \rd{L},\quad \rd{F} = -S\rd{T} + f\rd{L}. \]
+\end{finale}
+由恰当微分条件可以导出Maxwell关系
+\[ \pare{\ddelon{S}{L}}_T = -\pare{\ddelon{f}{T}}_L = AE_T\alpha_f. \]
+$\alpha>0$意味着拉伸杆导致熵增, 这与理想气体的情形相同, 系统将吸收热量. 但对于橡胶, 由于橡胶分子最初盘绕在一起, 拉伸后熵反而减小并释放热量.
+\begin{ex}
+弹性杆等温伸长时, 内能的变化
+\[ \pare{\ddelon{U}{L}}_T = T\pare{\ddelon{S}{L}}_T + f = f + ATE_T \alpha_f. \]
+第一项表示做功而进入杆的能量, 第二项表示杆的吸热量. 对于理想气体, 这两者抵消.
+\end{ex}
+\subsection{液滴}
+液滴具有表面张力, 改变表面积需要做功
+\begin{finale}
+\[ \dbar W = \gamma \rd{A}. \]
+\end{finale}
+如果通过注射器构造气泡且液体的压强为$p$, 则
+\[ \dbar W = \gamma \rd{A} = 8\pi r\gamma r\rd{r} = F\rd{x} = p\cdot 4\pi r^2\rd{r}. \]
+\begin{finale}
+\[ p = \frac{2\gamma}{r}. \]
+\end{finale}
+\begin{ex}
+球形液膜有内外两层表面, 因此相应的的压强差为
+\[ p_{\text{内}} - p_0 = \frac{4\gamma}{r}. \]
+\end{ex}
+\begin{remark}
+表面张力可视为表面液体分子受到表面法向内侧分子吸引的结果. $\gamma$是形成单位面积的表面需要的能量, 可以间接衡量表面张力的大小.
+\end{remark}
+对于气泡, 相应的
+\begin{finale}
+\[ \rd{U} = T\rd{S} + \gamma \rd{A},\quad \rd{F} = -S\rd{T} + \gamma\rd{A}. \]
+\end{finale}
+由恰当微分条件可以导出Maxwell关系
+\[ \pare{\ddelon{S}{A}}_T = -\pare{\ddelon{\gamma}{T}}_A. \]
+\begin{ex}
+气泡等温扩大时, 内能的变化
+\[ \pare{\ddelon{U}{A}}_T = T\pare{\ddelon{S}{A}}_T + \gamma = \gamma - T\pare{\ddelon{\gamma}{T}}_A. \]
+第一项表示做功而传入表面的能量, 第二项表示面积变化而流入的热量.
+\end{ex}
+通常$\gamma$和温度相关并且随温度增加而减少, 因此相应的吸热量大于零, 故导致熵增.
+\subsection{磁偶极子}
+磁偶极子在磁场中的受力为$\grad \pare{\vm \cdot \vB}$, 因此相应的能量为$-\vm\cdot\vB$, 改变磁场所做的功为
+\begin{finale}
+\[ \dbar W = - \vm\cdot \rd{\vB}. \]
+\end{finale}
+对于一般的顺磁性物质,
+\[ m = MV,\quad M \approx \chi H,\quad B = \mu_0\pare{H+M}\approx \mu_0 H, \]
+因此
+\[ \chi \approx \frac{\mu_0 M}{B}. \]
+磁化率$\chi$满足Curie定律, 即
+\[ \chi \propto \rec{T}. \]
+特别地, 温度上升导致$\chi$下降.
+\par
+在顺磁性的情形, 施加磁场引起磁矩的同向排列, 相应的
+\begin{finale}
+\[ \rd{U} = T\rd{S} - m\rd{B},\quad \rd{F} = -S\rd{T} - m\rd{B}. \]
+\end{finale}
+由恰当微分条件可以导出Maxwell关系
+\begin{equation}
+\label{eq:dsdb=dchidt}
+\pare{\ddelon{S}{B}}_T = \pare{\ddelon{m}{T}}_B \approx \frac{VB}{\mu_0}\pare{\ddelon{\chi}{T}}_B.
+\end{equation}
+\begin{ex}
+$B$等温增加时, 热量的变化
+\[ \dbar Q = T\pare{\ddelon{S}{B}}_T\rd{B} \approx \frac{TVB}{\mu_0}\pare{\ddelon{\chi}{T}}_B\rd{B} < 0. \]
+因此等温增加磁场会导致放热. 绝热减小$B$时,
+\[ \pare{\ddelon{T}{B}}_S = -\pare{\ddelon{T}{S}}_B \pare{\ddelon{S}{B}}_T = -\frac{TVB}{\mu_0 C_B}\pare{\ddelon{\chi}{T}}_B. \]
+其中$C_B$为固定磁场时的热容. 此时温度会下降.
+\end{ex}
+绝热去磁的过程可以从微观的角度理解, 温度高时磁偶极子的指向随机, 低温时磁偶极子指向较为规则. 减小磁场也会导致指向随机化, 熵不变则热运动本身的熵减小, 因此温度减小.
+\par
+磁冷却的步骤为, 首先将样品放在液氦浴中, 增加外磁场, 谓等温磁化. 随后将样品与液氦浴热孤立并缓慢(可逆且绝热地)减小磁场.
+\par
+磁冷却的另外解释谓, 等温磁化后能级间隔增大, 但Boltzmann分布的曲线仍然不变, 因此粒子的倾向于下降到低能级. 绝热去磁时由于系统被热孤立, 粒子无法改变能级, 但能级间隔减小, 粒子的能量一致下降, 变为低温的Boltzmann分布.
+\section{热力学第三定律}
+Nernst发现, $\Delta G = \Delta H - T\Delta S$中$T\rightarrow 0$时$\Delta G\rightarrow \Delta H$, 但它们之间的差距却比线性减小更快, 因此推断$T\rightarrow 0$时$\Delta S\rightarrow 0$.
+\begin{finale}
+\begin{axiom}[热力学第三定律]
+接近绝对零度时, 内平衡系统发生任何反应的熵皆不变.
+\end{axiom}
+\end{finale}
+\begin{corollary}[热力学第三定律]
+处于内平衡的所有系统的熵在绝对零度时皆相等, 可取为零.
+\end{corollary}
+Plank最初的表示仅针对理想晶体, 但它实际上对任何系统都是正确的, 包括低温液体\ce{^4He}, 低温气体金属内电子. 玻璃可能并非处于内平衡, 但它最终会弛豫成为理想晶体.
+\begin{remark}
+虽然原子核具有$2I+1$的自旋简并度, 但极度低温下相互作用可能令简并消失, 可以处于唯一的状态.
+\end{remark}
+类似的思想可以说明
+\begin{corollary}[热力学第三定律]
+处于内平衡的系统各个方面对熵的贡献在$T\rightarrow 0$时趋于零.
+\end{corollary}
+\begin{ex}
+$T\rightarrow 0$时热容趋于零, 因为
+\[ C = T\pare{\ddelon{S}{T}}\rightarrow 0. \]
+\end{ex}
+\begin{ex}
+低温时热膨胀停止, 因为
+\[ \pare{\ddelon{V}{T}}_p = -\pare{\ddelon{S}{p}}_T\rightarrow 0. \]
+\end{ex}
+\begin{ex}
+低温时没有气体保持为理想气体, 这可以从前开二例得到, 也可以从\cref{ex:entropyofidealgases}得到.
+\end{ex}
+\begin{ex}
+低温时Curie定律失效. 由\eqref{eq:dsdb=dchidt}可得$\partial \chi/\partial T\rightarrow 0$, 这与$\chi\propto 1/T$矛盾. $\chi$衡量的是外磁场对磁矩的影响, 但是当$T$足够小时, 磁矩本身的相互作用足以让磁矩排列整齐. 低温下, 相互作用变得重要, 因此不能将各个磁矩分开考虑.
+\end{ex}
+\begin{finale}
+\begin{corollary}[热力学第三定律]
+在有限步骤内无法达到绝对零度.
+\end{corollary}
+\end{finale}
+\begin{ex}
+如果在某个磁场下, 系统在$T = 0$时$S>0$, 则存在横竖折线(分别对应等温磁化和绝热去磁)达到绝对零度. 反之横竖折线需要无限次变向以达到绝对零度.
+\end{ex}
+\begin{remark}
+Carnot定理与热力学第二定律无法推出热力学第三定律, 因为在绝对零度下是无法运行热机的——绝对零度的系统无法在不加热的条件下改变状态.
+\end{remark}
+\end{document}

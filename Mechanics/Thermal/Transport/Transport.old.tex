@@ -1,0 +1,176 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{输运性质}
+\subsection{气体输运性质}
+气体输运性质需要考虑\emph{非平衡态}, 但仍为恒稳态(参数不随时间变化). 动量、热量和粒子的输运分别对应黏性、热传导和扩散.
+\subsubsection{黏性}
+\begin{definition}[黏性系数]
+两层速度不同的液体间有切向力$F$, 则黏性系数满足
+\begin{finale}
+\[ \tau_{ij} = \frac{F}{A} = \eta\eddon{\expc{u_i}}{x_j}. \]
+\end{finale}
+\end{definition}
+黏性实际上源于动量输运——漂移速率$u$较小的流体层向上移动会拖慢上层的漂移速率, 从而导致黏性力. 单个与$x_j$方向成角度$\theta$运动的分子转移的动量为
+\[ -m\pare{\ddelon{\expc{u_i}}{x_j}}\lambda\cos\theta. \]
+从而单位面积上单位时间内转移的动量为
+\[ \int_0^{\pi}\int_0^\infty v\cos\theta nf\pare{v} \,\rd{v}\half\sin\theta\,\rd{\theta}\cdot m{\pare{\ddelon{\expc{u_i}}{x_j}}\lambda\cos\theta} = \rec{3}nm\lambda\expc{v}\pare{\ddelon{\expc{u_i}}{x_j}}. \]
+\begin{finale}
+\[ \eta = \rec{3}mn\lambda\expc{v} \sim \frac{5}{16} \rec{d^2} \pare{\frac{mk_BT}{\pi}}^{1/2}. \]
+\end{finale}
+\begin{pitfall}
+不可以通过Maxwell-Boltzmann分布的$\expc{v}$得到右边, 因为此处模型有经过严重简化.
+\end{pitfall}
+引人注目的是, 黏性系数与压强在很大范围内无关.
+\begin{ex}
+通过圆柱扭摆可以测量$\eta$. 外圆柱体以恒定的$\omega_0$转动, 有效速度梯度为$r\omega'\pare{r}$. 因而由力矩平衡,
+\[ r\cdot r\cdot r\omega'\pare{r} = \const. \]
+\[ \omega\pare{r} = \frac{\omega_0 b^2}{b^2-a^2}\frac{r^2-a^2}{r^2}. \]
+从而施加在内圆柱上的力矩
+\[ G = 2\pi a l \cdot a \cdot \eta\frac{\omega_0 ab^2}{b^2-a^2}\eddon{}{r}\frac{r^2-a^2}{r^2} = 4\pi \omega_0l\eta\frac{a^2b^2}{b^2-a^2}. \]
+\end{ex}
+\subsubsection{热传导}
+\begin{definition}[热导率]
+热能由高温向低温流动的流量为$J_i$, 则热导率满足
+\begin{finale}
+\[ J_i = -\kappa \pare{\ddelon{T}{x_i}}. \]
+\end{finale}
+\end{definition}
+单个分子转移的热量为
+\[ C_m \pare{\ddelon{T}{x_i}}\lambda\cos\theta. \]
+从而单位面积上单位时间内转移的热量为
+\[ \int_0^\pi\int_0^\infty v\cos\theta nf\pare{v}\,\rd{v}\half\sin\theta\,\rd{\theta}\cdot C_m \pare{\ddelon{T}{x_i}}\lambda\cos\theta = \rec{3}nC_m\lambda\expc{v}\pare{\ddelon{T}{x_i}}. \]
+\begin{finale}
+\[ \kappa = \rec{3}C_V\lambda\expc{v} \sim \frac{25}{32d^2}C_m\pare{\frac{k_BT}{\pi m}}^{1/2}. \]
+\end{finale}
+\begin{pitfall}
+不可以通过Maxwell-Boltzmann分布的$\expc{v}$得到右边, 因为此处模型有经过严重简化.
+\end{pitfall}
+引人注目的是, 热导率与压强在很大范围内无关.
+\begin{ex}
+通过两个同轴恒温圆柱可以测量$\kappa$. 由热平衡,
+\[ rT'\pare{r} = \const. \]
+\[ T\pare{r} = \frac{\pare{T_2-T_1}\ln\pare{r/a}}{\ln\pare{b/a}} + T_1. \]
+从而内圆柱的产热功率
+\[ Q = 2\pi rl\kappa T'\pare{r} = 2\pi al\kappa\frac{T_2-T_1}{\ln\pare{a/b}}. \]
+\end{ex}
+\subsubsection{扩散}
+\begin{definition}[自扩散系数]
+标记的分子由高密度向低密度流动的流量为$\Phi_i$, 则自扩散系数满足
+\begin{finale}
+\[ \Phi_i = -D\pare{\ddelon{n^*}{x_i}}. \]
+\end{finale}
+\end{definition}
+特定速率和方向转移的分子数为
+\[ \pare{\ddelon{n^*}{x_i}}\lambda\cos\theta. \]
+从而单位面积上单位时间内转移的净分子数为
+\[ \int_0^\pi\int_0^\infty v\cos\theta nf\pare{v}\,\rd{v}\half\sin\theta\,\rd{\theta}\cdot \pare{\ddelon{n^*}{x_i}}\lambda\cos\theta = \rec{3}\lambda\expc{v}\pare{\ddelon{n^*}{x_i}}. \]
+\begin{finale}
+\[ D = \rec{3}\lambda\expc{v} \sim \frac{3}{8nd^2}\pare{\frac{k_BT}{\pi m}}^{1/2}. \]
+\end{finale}
+\begin{pitfall}
+不可以通过Maxwell-Boltzmann分布的$\expc{v}$得到右边, 因为此处模型有经过严重简化.
+\end{pitfall}
+引人注目的是, 自扩散系数与压强成反比.
+\begin{remark}[三维扩散方程]
+\label{rm:threedimensionaldiffusioneq}
+由
+\[ \oiint_S \vPhi\cdot\rd{\vsigma} = -\ddelon{}{t}\iiint_V n^*\,\rd{V}. \]
+加上$\vPhi = -D\nabla n^*$立刻有
+\[ \ddelon{n^*}{t} = D\laplacian n^*. \]
+\end{remark}
+\subsection{热扩散方程}
+用和\rmref{threedimensionaldiffusioneq}相同的方法可以得到
+\begin{finale}
+\[ \ddelon{T}{t} = D\laplacian T, \quad D = \frac{\kappa}{C}. \]
+\end{finale}
+\subsubsection{一维情形}
+分离变量可得
+\[ T \propto \exp\pare{i\pare{kx-\omega t}}, \]
+其中
+\[ k = \pm\pare{1+i}\sqrt{\frac{\omega}{2D}}. \]
+如果要求$x>0$部分的解并且不希望$T$的空间部分在$x\rightarrow\infty$时发散, 则选取其中一解且
+\[ T\pare{x,t} = \sum_\omega A\pare{\omega} e^{-i\omega t}\exp\pare{\pare{i-1}\sqrt{\frac{\omega}{2D}}x}. \]
+设定边界条件(正弦温度进入地面传播)
+\[ T\pare{0,t} = T_0 + \Delta T \cos \Omega t = T_0 + \frac{\Delta T}{2} e^{i\Omega t} + \frac{\Delta T}{2} e^{-i \Omega t}. \]
+在$x=0$处有
+\[ T\pare{0,t} = \sum_\omega A\pare{\omega} e^{-i\omega t}. \]
+立刻有
+\begin{equation}
+\label{eq:skindelta}
+T\pare{x,t} = T_0 + \frac{\Delta T}{2}e^{-x/\delta}\cos\pare{\Omega t - \frac{x}{\delta}}, \quad \delta = \sqrt{\frac{2D}{\Omega}} = \sqrt{\frac{2\kappa}{\Omega C}}.
+\end{equation}
+其中$\delta$谓趋肤深度.
+\subsubsection{热平衡态}
+在恒稳态下,
+\[ \laplacian T = 0. \]
+\begin{ex}
+一维的Laplace方程的通解为
+\[ T = \frac{\pare{T_2 - T_1}x}{L} + T_1. \]
+从而热通量为
+\[ J = -\kappa\pare{\ddelon{T}{x}} = \frac{\kappa}{L}\pare{T_1 - T_2}. \]
+\end{ex}
+\subsubsection{球的热扩散方程}
+如果$T$具有球对称性则扩散方程变为
+\begin{finale}
+\[ \ddelon{T}{t} = \frac{\kappa}{C}\rec{r^2}\ddelon{}{r}\pare{r^2 \ddelon{T}{r}}. \]
+\end{finale}
+\begin{ex}[球形恒稳态]
+恒稳态下显然$T$为「Coulomb势」
+\[ T = A + \frac{B}{r}. \]
+\end{ex}
+\begin{ex}[球形鸡]
+设鸡半径$a$, 初始温度$T_0$, 边界温度$T_1$, 则引入
+\[ T\pare{r,t} = T_1 + \frac{B\pare{r,t}}{r}. \]
+可以将热方程变为一维情形
+\[ \ddelon{B}{t} = D\dddelon{B}{r}. \]
+显然有边界条件$B\pare{0,t} = 0$, $B\pare{a,t} = 0$, $B\pare{r,0} = r\pare{T_0 - T_1}$. 用
+\[ B = \sin\pare{kr}e^{-i\omega t} \]
+试探之, 加上前二边界条件可得
+\[ i\omega = Dk^2 = D\pare{\frac{n\pi}{a}}^2. \]
+故通解为
+\[ B\pare{r,t} = \sum_{n=1}^\infty A_n \sin\pare{\frac{n\pi r}{a}}e^{-D\pare{n\pi/a}^2 t}. \]
+代入$t=0$时的边界条件并借助Fourier展开(三角函数正交性)得到
+\[ A_m = \frac{2a}{m\pi}\pare{T_1 - T_0}\pare{-1}^m. \]
+\[ T\pare{r,t} = T_1 + \frac{2a}{\pi}\pare{T_1-T_0} \sum_{n=0}^\infty \frac{\pare{-1}^n}{n}\frac{\sin\pare{n\pi r/a}}{r}e^{-D\pare{n\pi/a}^2t}. \]
+特别地, 中心温度为
+\[ T\pare{0,t} \sim T_1 - 2\pare{T_1 - T_0}e^{-D\pare{\pi/a}^2t}. \]
+值得注意的是, 加热时间$t\propto a^2 \propto m^{2/3}$.
+\end{ex}
+\begin{ex}
+假设一球形动物具有半径$a$, 在平衡态下它的温度为$T = A + B/r$, $B = a\pare{T_0 - T_1}$. 可得总热通量为$4\pi a^2 \kappa B/a^2$, 故$\Phi\propto a$, 而产热量$\propto a^3$.
+\end{ex}
+由热量损失和温差呈正比, 可以得到
+\begin{finale}
+\begin{corollary}[Newton冷却定律]
+\[ T_{\text{内}} - T_{\text{外}} = \pare{T_{\text{内}} - T_{\text{外}}}_0 e^{-\lambda t}. \]
+\end{corollary}
+\end{finale}
+\subsubsection{Prandtl数}
+热传递并非改变物体温度的全部因素. 对流也会带走热量. 其比重的衡量大致为
+\begin{finale}
+\begin{definition}[Prandtl数]
+\[ \sigma_p = \frac{\nu}{D} = \frac{\eta c_p}{\kappa}. \]
+\end{definition}
+\end{finale}
+对于理想气体, 采用修正后的$\eta$-$\kappa$关系可得
+\[ \sigma_p = \frac{2}{3}. \]
+当$\sigma_p \gg 1$时对流扩散占主导, $\sigma_p \ll 1$时热扩散占主导.
+\subsubsection{热源}
+单位时间内单位体积产生热量$H$时, 热扩散方程修正为
+\begin{finale}
+\[ \ddelon{T}{t} = D\laplacian T + \frac{H}{C}. \]
+\end{finale}
+\begin{ex}
+长$L$的导体棒, 两端温度维持在$T_0$, 则
+\[ \dddelon{T}{x} = -\frac{H}{\kappa}. \]
+从而$T = T_0 + Hx\pare{L-x}/\pare{2\kappa}$.
+\end{ex}
+\subsubsection{粒子扩散}
+\begin{ex}
+设半径为$a$的生物吸附周围的粒子使$r=a$处的离子密度为零, 则
+\[ n\pare{r} = n_0\pare{1-\frac{a}{r}}. \]
+可知吸附率$\propto 4\pi a n_0$. 即正比于半径. 因此单细胞生物无法过大.
+\end{ex}
+\end{document}

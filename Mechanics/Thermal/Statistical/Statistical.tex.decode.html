@@ -1,0 +1,2405 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head>
+   <title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)" /> 
+<!-- xhtml,svg,pic-align,charset=utf-8,html --> 
+<meta name="src" content="Statistical.tex.tex" /> 
+<link rel="stylesheet" type="text/css" href="Statistical.tex.css" /> 
+</head><body 
+>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>统计力学</h3>
+<!--l. 7--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>配分函数</h4>
+<!--l. 8--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">1.1.1   </span> <a 
+ id="x1-30001.1.1"></a>能量均分定理</h5>
+<!--l. 9--><p class="noindent" >如果一个系统的能量由<img 
+src="Statistical.tex2x.svg" alt="n  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />个随机变量<img 
+src="Statistical.tex3x.svg" alt="xi  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />决定, <img 
+src="Statistical.tex4x.svg" alt="        2
+Ei = &#x03B1;ixi  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,则相应的
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex5x.svg" alt="                    (   &#x2211;      )
+P (x1,x2,&#x22C5;&#x22C5;&#x22C5;,xn) &#x221D; exp  - &#x03B2;   &#x03B1;ix2i  .
+                         i
+" class="math-display"  /></center>
+<!--l. 10--><p class="nopar" > 能量的期望值
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex6x.svg" alt="      &#x2211;  &#x222B;  &#x03B1; x2exp (- &#x03B2;&#x2211;  &#x03B1; x2)dxn
+&#x27E8;E&#x27E9; =    -&#x211D;n&#x222B;-i-i-----&#x2211;---i-2ii-n---=  nkBT.
+       i    &#x211D;n exp (- &#x03B2; i&#x03B1;ixi)dx       2
+" class="math-display"  /></center>
+<!--l. 12--><p class="nopar" > 注意分子和分母的重积分可化为积分的乘积并且除了一项外皆可以抵消. <div class="finaleBox">
+</p>
+   <div class="newtheorem">
+<!--l. 15--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3001r1"></a>
+<span 
+class="cmbx-10">定理 1.1 </span>(能量均分定理)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">如果一个系统的能量是</span><img 
+src="Statistical.tex7x.svg" alt="n  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">个平方模之和且系统与温度为</span><img 
+src="Statistical.tex8x.svg" alt="T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的热源相连, 则系统能量的期望值为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex9x.svg" alt="&#x27E8;E &#x27E9; = n &#x00D7; 1k T.
+          2 B
+" class="math-display"  /></center>
+<!--l. 17--><p class="nopar" >
+</p>
+   </div>
+   </div>
+   <div class="newtheorem">
+<!--l. 20--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3002r1"></a>
+<span 
+class="cmbx-10">例 1.1 </span>(单原子气体的平动)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">单原子气体的平动具有</span><img 
+src="Statistical.tex10x.svg" alt="3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">个平方模, 因此</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex11x.svg" alt="&#x27E8;E&#x27E9; = 3k T.
+      2 B
+" class="math-display"  /></center>
+<!--l. 22--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 24--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3003r2"></a>
+<span 
+class="cmbx-10">例 1.2 </span>(双原子气体的转动)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">转动模是两个平方模的和</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex12x.svg" alt="-L21   L22-
+2I1 + 2I2.
+" class="math-display"  /></center>
+<!--l. 26--><p class="nopar" > <span 
+class="cmti-10">沿分子轴向的转动惯量非常小, 故常温下不能被激发. 从而</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex13x.svg" alt="      5
+&#x27E8;E&#x27E9; = -kBT.
+      2
+" class="math-display"  /></center>
+<!--l. 28--><p class="nopar" >
+                                                                  
+
+                                                                  
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 30--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3004r3"></a>
+<span 
+class="cmbx-10">例 1.3 </span>(双原子气体的振动)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">在平动和转动的基础上, 加上相对运动的一个平方模和谐振子势能的一个平方模, 得到</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex14x.svg" alt="&#x27E8;E&#x27E9; = 7kBT.
+      2
+" class="math-display"  /></center>
+<!--l. 32--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 34--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3005r4"></a>
+<span 
+class="cmbx-10">例 1.4.</span>  </span><span 
+class="cmti-10">上面的三个例子的摩尔热容</span><img 
+src="Statistical.tex15x.svg" alt="CV  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">分别为</span><img 
+src="Statistical.tex16x.svg" alt="3R&#x2215;2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>      <img 
+src="Statistical.tex17x.svg" alt="5R &#x2215;2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>      <img 
+src="Statistical.tex18x.svg" alt="7R&#x2215;2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+<span 
+class="cmti-10">而对于理想气体一致有</span><img 
+src="Statistical.tex19x.svg" alt="CV = Cp + R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 从而</span><img 
+src="Statistical.tex20x.svg" alt="&#x03B3;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">分别为</span><img 
+src="Statistical.tex21x.svg" alt="5&#x2215;3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span> <img 
+src="Statistical.tex22x.svg" alt="7&#x2215;5  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span> <img 
+src="Statistical.tex23x.svg" alt="9&#x2215;7  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 37--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3006r5"></a>
+<span 
+class="cmbx-10">例 1.5 </span>(Dulong-Petit定律)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">固体原子可以视为有三个简振模,         外加三个平动模,</span>
+<span 
+class="cmti-10">相应</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex24x.svg" alt="&#x27E8;E&#x27E9; = 3kBT,  R = 3R.
+" class="math-display"  /></center>
+<!--l. 39--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 41--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3007r1"></a>
+                                                                  
+
+                                                                  
+<span 
+class="cmbx-10">附注 1.1.</span>  </span><span 
+class="cmti-10">能量均分定理假设了随机参量可以任意取值,       但当</span><img 
+src="Statistical.tex25x.svg" alt="T &#x2192; 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">时,</span>
+<span 
+class="cmti-10">参量量子化取值的特性可能令上述积分失效. 同时参量的简谐振动可能仅在参量足够小时适用, 如果温度过高, 参量可能处于不能适用这种近似的位置.</span>
+</p>
+   </div>
+<!--l. 44--><p class="indent" >   <div class="pitfallBox"> 能量均分定理仅当温度足够高, 热能远大于量子化能级间隔时适用. </div>
+</p>
+   <div class="newtheorem">
+<!--l. 47--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3008r6"></a>
+<span 
+class="cmbx-10">例 1.6 </span>(Brown运动)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">花粉颗粒具有</span><img 
+src="Statistical.tex26x.svg" alt="   &#x27E8;  &#x27E9;
+12m  v2 = 32kBT  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的平均动能, 因此质量小的颗粒具有更大的甚至对肉眼显著的速度.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 50--><p class="noindent" ><span class="head">
+<a 
+ id="x1-3009r7"></a>
+<span 
+class="cmbx-10">例 1.7 </span>(Rayleigh-Jeans定律)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">考虑边长为</span><img 
+src="Statistical.tex27x.svg" alt="L  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的空腔内的电磁驻波,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex28x.svg" alt="       1 &#x2202;2E
+&#x2207;2E  = c2&#x2202;t2-.
+" class="math-display"  /></center>
+<!--l. 52--><p class="nopar" > <span 
+class="cmti-10">分离变量有</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex29x.svg" alt="E = E0 sin nx&#x03C0;x-sin ny&#x03C0;ysin nz&#x03C0;z-sin 2&#x03C0;ct,
+           L       L       L      &#x03BB;
+" class="math-display"  /></center>
+<!--l. 54--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex30x.svg" alt="( nx&#x03C0;)2   (ny&#x03C0;)2   (nz&#x03C0;)2   ( 2&#x03C0;)2
+  -L--  +  -L--  +  -L--  =   &#x03BB;-- .
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 55--><p class="nopar" > <span 
+class="cmti-10">考虑到电磁波有两个偏振方向, 波数空间球内的态的数目为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex31x.svg" alt="        1   4&#x03C0;( 2    2   2)3&#x2215;2  8&#x03C0;L3-
+N = 2 &#x00D7; 8 &#x00D7; 3  nx + ny + nz   =  3&#x03BB;3 .
+" class="math-display"  /></center>
+<!--l. 57--><p class="nopar" > <span 
+class="cmti-10">在波数空间内取一球壳, 得到单位波长内的态的数量为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex32x.svg" alt="      8&#x03C0;L3
+dN  = --4-d&#x03BB;.
+       &#x03BB;
+" class="math-display"  /></center>
+<!--l. 59--><p class="nopar" > <span 
+class="cmti-10">由能量均分定理, 每个谐振子平均贡献</span><img 
+src="Statistical.tex33x.svg" alt="kBT  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的能量(这是因为谐振子有动能和势能), 能量密度为</span>
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-3010r1"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex34x.svg" alt="du = 8&#x03C0;kBT-.
+       &#x03BB;4
+" class="math-display"  /></center></td><td class="equation-label">(1)</td></tr></table>
+<!--l. 64--><p class="nopar" >
+<span 
+class="cmti-10">这导致高频出的能量密度发散, 即紫外灾变.</span>
+</p>
+   </div>
+<!--l. 67--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">1.1.2   </span> <a 
+ id="x1-40001.1.2"></a>配分函数的定义</h5>
+   <div class="newtheorem">
+<!--l. 68--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4001r1"></a>
+                                                                  
+
+                                                                  
+<span 
+class="cmbx-10">定义 1.1 </span>(单粒子配分函数)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">配分函数</span><img 
+src="Statistical.tex35x.svg" alt="Z  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">是对所有态的Boltzmann因子之和,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex36x.svg" alt="    &#x2211;
+Z =    e-&#x03B2;E&#x03B1;.
+     &#x03B1;
+" class="math-display"  /></center>
+<!--l. 70--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 72--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4002r2"></a>
+<span 
+class="cmbx-10">附注 1.2.</span>  </span><span 
+class="cmti-10">用配分函数导出物理量时, 有些物理量由它的对数决定故可定义到与之相差一个常数, 有些物理量由它的对数的微分决定故可精确确定.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 75--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4003r8"></a>
+<span 
+class="cmbx-10">例 1.8.</span>  </span> <span 
+class="cmti-10">具有能量</span><img 
+src="Statistical.tex37x.svg" alt="� &#x0394;&#x2215;2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的二能级系统的配分函数为</span>
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-4004r2"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex38x.svg" alt="         (   )
+          &#x03B2;-&#x0394;
+Z = 2cosh   2   .
+" class="math-display"  /></center></td><td class="equation-label">(2)</td></tr></table>
+<!--l. 81--><p class="nopar" >
+                                                                  
+
+                                                                  
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 83--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4005r9"></a>
+<span 
+class="cmbx-10">例 1.9.</span>  </span> <span 
+class="cmti-10">具有能量</span><img 
+src="Statistical.tex39x.svg" alt="(n + 12)&#x210F;&#x03C9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的谐振子的配分函数为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex40x.svg" alt="    -e- 12&#x03B2;&#x210F;&#x03C9;-  ------1-----
+Z = 1- e-&#x03B2;&#x210F;&#x03C9; = 2sinh(&#x03B2;&#x210F;&#x03C9;&#x2215;2).
+" class="math-display"  /></center>
+<!--l. 86--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 88--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4006r10"></a>
+<span 
+class="cmbx-10">例 1.10.</span>  </span><span 
+class="cmti-10">具有能量</span><img 
+src="Statistical.tex41x.svg" alt="n&#x210F;&#x03C9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的</span><img 
+src="Statistical.tex42x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">-能级系统的配分函数为</span>
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-4007r3"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex43x.svg" alt="     1- e-N&#x03B2;&#x210F;&#x03C9;
+Z =  1---e--&#x03B2;&#x210F;&#x03C9;-.
+" class="math-display"  /></center></td><td class="equation-label">(3)</td></tr></table>
+<!--l. 93--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 95--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4008r11"></a>
+                                                                  
+
+                                                                  
+<span 
+class="cmbx-10">例 1.11.</span>  </span> <span 
+class="cmti-10">具有量子化的角动量的系统的能级为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex44x.svg" alt="      &#x210F;2
+EJ =  2IJ (J + 1), J = 0,1,&#x22C5;&#x22C5;&#x22C5;.
+" class="math-display"  /></center>
+<!--l. 98--><p class="nopar" > <span 
+class="cmti-10">考虑简并度后的配分函数为</span>
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-4009r4"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex45x.svg" alt="    &#x2211;&#x221E;
+Z =    (2J + 1) e- &#x03B2;&#x210F;2J(J+1)&#x2215;2I.
+    j=0
+" class="math-display"  /></center></td><td class="equation-label">(4)</td></tr></table>
+<!--l. 103--><p class="nopar" >
+</p>
+   </div>
+<!--l. 105--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">1.1.3   </span> <a 
+ id="x1-50001.1.3"></a>得出态函数</h5>
+<!--l. 107--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-60001.1.3"></a><span 
+class="cmbx-10">内能</span><img 
+src="Statistical.tex46x.svg" alt="U  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /></span>
+   内能是能量的期望值, 故
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex47x.svg" alt="    &#x2211;
+    --i&#x2211;Eie--&#x03B2;Ei
+U =     ie- &#x03B2;Ei  .
+" class="math-display"  /></center>
+<!--l. 108--><p class="nopar" > <div class="finaleBox">
+                                                                  
+
+                                                                  
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex48x.svg" alt="U = - dlnZ-= k T 2dlnZ-.
+       d&#x03B2;     B    dT
+" class="math-display"  /></center>
+<!--l. 110--><p class="nopar" > </div>
+</p>
+<!--l. 112--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-70001.1.3"></a><span 
+class="cmbx-10">热容</span><img 
+src="Statistical.tex49x.svg" alt="CV  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /></span>
+   通过<img 
+src="Statistical.tex50x.svg" alt="CV = (&#x2202;U&#x2215;&#x2202;T )V  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex51x.svg" alt="         [  (     )      (  2    ) ]
+CV = kBT  2  &#x2202;-ln-Z   + T   &#x2202;-ln-Z-    .
+              &#x2202;T    V       &#x2202;T2   V
+" class="math-display"  /></center>
+<!--l. 113--><p class="nopar" >
+</p>
+<!--l. 114--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-80001.1.3"></a><span 
+class="cmbx-10">熵</span><img 
+src="Statistical.tex52x.svg" alt="S  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /></span>
+   概率
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex53x.svg" alt="Pi = e-&#x03B2;Ei&#x2215;Z, lnPi = - &#x03B2;Ei - lnZ.
+" class="math-display"  /></center>
+<!--l. 115--><p class="nopar" > 采用熵的Gibbs表示,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex54x.svg" alt="        &#x2211;
+S = - kB   PilnPi = kB(&#x03B2;U + lnZ).
+         i
+" class="math-display"  /></center>
+<!--l. 117--><p class="nopar" > <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex55x.svg" alt="    U-
+S =  T +kB lnZ.
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 119--><p class="nopar" > </div>
+</p>
+<!--l. 121--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-90001.1.3"></a><span 
+class="cmbx-10">Helmholtz自由能</span><img 
+src="Statistical.tex56x.svg" alt="F  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /></span>
+   由<img 
+src="Statistical.tex57x.svg" alt="F =  U - T S  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 立刻有 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex58x.svg" alt="F  = - k T lnZ, Z = e-&#x03B2;F.
+       B
+" class="math-display"  /></center>
+<!--l. 123--><p class="nopar" > </div>
+</p>
+<!--l. 125--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-100001.1.3"></a><span 
+class="cmbx-10">压强</span><img 
+src="Statistical.tex59x.svg" alt="p  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /></span>
+   通过<img 
+src="Statistical.tex60x.svg" alt="dF = - SdT - pdV  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex61x.svg" alt="p = - (&#x2202;F &#x2215;&#x2202;V)
+             T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex62x.svg" alt="       (      )
+         &#x2202;lnZ-
+p = kBT   &#x2202;V   T .
+" class="math-display"  /></center>
+<!--l. 126--><p class="nopar" >
+</p>
+<!--l. 127--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-110001.1.3"></a><span 
+class="cmbx-10">焓</span><img 
+src="Statistical.tex63x.svg" alt="H  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /></span>
+   <img 
+src="Statistical.tex64x.svg" alt="H = U + pV  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex65x.svg" alt="        [  (     )      (      )  ]
+H = k T  T  &#x2202;-ln-Z    +V   &#x2202;lnZ-    .
+     B        &#x2202;T   V       &#x2202;V   T
+" class="math-display"  /></center>
+<!--l. 128--><p class="nopar" >
+</p>
+<!--l. 129--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-120001.1.3"></a><span 
+class="cmbx-10">Gibbs自由能</span><img 
+src="Statistical.tex66x.svg" alt="H  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /></span>
+   <img 
+src="Statistical.tex67x.svg" alt="G = F + pV  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex68x.svg" alt="                 [          (     )  ]
+                             &#x2202;-ln-Z
+G  = F + pV = kBT - lnZ + V   &#x2202;V    T .
+" class="math-display"  /></center>
+<!--l. 130--><p class="nopar" >
+</p>
+   <div class="newtheorem">
+<!--l. 131--><p class="noindent" ><span class="head">
+<a 
+ id="x1-12001r3"></a>
+<span 
+class="cmbx-10">附注 1.3.</span>
+</span><span 
+class="cmti-10">只需要记住</span><img 
+src="Statistical.tex69x.svg" alt="U  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">和</span><img 
+src="Statistical.tex70x.svg" alt="F  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的表达式就可以通过</span><img 
+src="Statistical.tex71x.svg" alt="S = - (&#x2202;F &#x2215;&#x2202;T)V  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">等导出剩下的热力学量而无需暴力求导.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 134--><p class="noindent" ><span class="head">
+<a 
+ id="x1-12002r12"></a>
+<span 
+class="cmbx-10">例 1.12 </span>(二能级系统)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">通过在</span><a 
+href="#x1-4003r8"><span 
+class="cmti-10">例</span><span 
+class="cmti-10">&#x00A0;1.8</span></a><span 
+class="cmti-10">中导出的</span><img 
+src="Statistical.tex72x.svg" alt="Z  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">可以得到</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex73x.svg" alt="     (    )       (   )2     (   )
+       &#x2202;U-         &#x03B2;&#x0394;-        &#x03B2;&#x0394;-
+CV =   &#x2202;T  V = kB   2    sech   2   .
+" class="math-display"  /></center>
+<!--l. 136--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex74x.svg" alt="    U             &#x0394;      ( &#x03B2;&#x0394;)        [     ( &#x03B2;&#x0394; )]
+S = --+ kBlnZ = - ---tanh   --- + kB ln  2cosh  ---  .
+    T             2T       2                  2
+" class="math-display"  /></center>
+<!--l. 137--><p class="nopar" >      <span 
+class="cmti-10">在低温下,        熵趋向于零,        因为系统必定处于最低能态.        高温下两个能态被同等占据,</span>
+<img 
+src="Statistical.tex75x.svg" alt="S = kB ln 2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">与预期相符.</span>
+</p><!--l. 140--><p class="indent" >   <span 
+class="cmti-10">热容则在低温和高温时皆趋于零, 因为低温的能量不足以造成热激发, 而高温时两个能态同等占据, 吸热不足矣改变这一情形.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 142--><p class="noindent" ><span class="head">
+<a 
+ id="x1-12003r13"></a>
+                                                                  
+
+                                                                  
+<span 
+class="cmbx-10">例 1.13 </span>(谐振子)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">通过在</span><a 
+href="#x1-4005r9"><span 
+class="cmti-10">例</span><span 
+class="cmti-10">&#x00A0;1.9</span></a><span 
+class="cmti-10">中导出的</span><img 
+src="Statistical.tex76x.svg" alt="Z  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-12004r5"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex77x.svg" alt="                (            )
+      dlnZ-       1   ---1----
+U = -  d&#x03B2;   = &#x210F;&#x03C9;  2 + e&#x03B2;&#x210F;&#x03C9; - 1  .
+" class="math-display"  /></center></td><td class="equation-label">(5)</td></tr></table>
+<!--l. 147--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex78x.svg" alt="     (   )
+       &#x2202;U-            2 --e&#x03B2;&#x210F;&#x03C9;----
+CV =   &#x2202;T  V = kB(&#x03B2;&#x210F;&#x03C9;)  (e&#x03B2;&#x210F;&#x03C9; - 1)2.
+" class="math-display"  /></center>
+<!--l. 148--><p class="nopar" > <span 
+class="cmti-10">特别地, 高温时</span><img 
+src="Statistical.tex79x.svg" alt="CV &#x2192;  kB  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 这与能量均分定理相符.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 151--><p class="noindent" ><span class="head">
+<a 
+ id="x1-12005r14"></a>
+<span 
+class="cmbx-10">例 1.14 </span>(转动双原子分子)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">通过</span><a 
+href="#x1-4008r11"><span 
+class="cmti-10">例</span><span 
+class="cmti-10">&#x00A0;1.11</span></a><span 
+class="cmti-10">中的</span><img 
+src="Statistical.tex80x.svg" alt="Z  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+<span 
+class="cmti-10">高温下以积分近似求和</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex81x.svg" alt="    &#x2211;&#x221E;                    &#x222B; &#x221E;
+Z =    (2J + 1)e-&#x03B2;&#x0394;J (J+1) &#x2248;   (2J +1)e- &#x03B2;&#x0394;J (J+1)dJ = -1-.
+    J=0                    0                        &#x03B2;&#x0394;
+" class="math-display"  /></center>
+<!--l. 153--><p class="nopar" > <span 
+class="cmti-10">从而</span><img 
+src="Statistical.tex82x.svg" alt="U = kBT  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span> <img 
+src="Statistical.tex83x.svg" alt="CV  = kB  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">与能量均分定理相符.</span>
+                                                                  
+
+                                                                  
+</p>
+   </div>
+<!--l. 156--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">1.1.4   </span> <a 
+ id="x1-130001.1.4"></a>组合配分函数</h5>
+<!--l. 157--><p class="noindent" >如果<img 
+src="Statistical.tex84x.svg" alt="E  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />有多个独立项, 配分函数可以写成这些项各自的配分函数的积,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex85x.svg" alt="    &#x2211;   -&#x03B2;Ei,j   &#x2211;  &#x2211;   -&#x03B2;(E(ai)+E(jb))
+Z =    e      =       e           = ZaZb.
+     i,j          i  j
+" class="math-display"  /></center>
+<!--l. 158--><p class="nopar" > 从而<img 
+src="Statistical.tex86x.svg" alt="lnZ = lnZ  +lnZ
+         a      b  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 因此依赖于<img 
+src="Statistical.tex87x.svg" alt="ln Z  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的态函数是各个项目的独立贡献之和.
+</p>
+   <div class="newtheorem">
+<!--l. 160--><p class="noindent" ><span class="head">
+<a 
+ id="x1-13001r15"></a>
+<span 
+class="cmbx-10">例 1.15.</span>  </span><img 
+src="Statistical.tex88x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">个独立谐振子的配分函数</span><img 
+src="Statistical.tex89x.svg" alt="Z = ZN
+      SHO   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+<span 
+class="cmti-10">其中</span><img 
+src="Statistical.tex90x.svg" alt="Z
+  SHO   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">由</span>(<a 
+href="#x1-4007r3">3<!--tex4ht:ref: eq:harmonicpartition --></a>)<span 
+class="cmti-10">给出.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 163--><p class="noindent" ><span class="head">
+<a 
+ id="x1-13002r16"></a>
+<span 
+class="cmbx-10">例 1.16.</span>  </span>                                    <span 
+class="cmti-10">的双原子分子的转动和振动的配分函数</span><img 
+src="Statistical.tex91x.svg" alt="Z = ZvibZrot   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+<span 
+class="cmti-10">其中</span><img 
+src="Statistical.tex92x.svg" alt="Zvib   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">和</span><img 
+src="Statistical.tex93x.svg" alt="Zrot   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">分别由</span>(<a 
+href="#x1-4007r3">3<!--tex4ht:ref: eq:harmonicpartition --></a>)<span 
+class="cmti-10">和</span>(<a 
+href="#x1-4009r4">4<!--tex4ht:ref: eq:rotationpartition --></a>)<span 
+class="cmti-10">给出.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 167--><p class="noindent" ><span class="head">
+<a 
+ id="x1-13003r17"></a>
+<span 
+class="cmbx-10">例 1.17 </span>(Curie定律)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">考虑</span><img 
+src="Statistical.tex94x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">个磁偶极子,</span>
+<span 
+class="cmti-10">根据取向可以有能量</span><img 
+src="Statistical.tex95x.svg" alt="� &#x03BC;BB  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">. 由</span>(<a 
+href="#x1-4004r2">2<!--tex4ht:ref: eq:bipartition --></a>)<span 
+class="cmti-10">得到的总的配分函数为</span>
+</p>
+                                                                  
+
+                                                                  
+   <center class="math-display" >
+<img 
+src="Statistical.tex96x.svg" alt="ZN  = ZN , F = - kBT ln ZN = - NkBT ln[2cosh(&#x03B2;&#x03BC;BB )].
+" class="math-display"  /></center>
+<!--l. 169--><p class="nopar" > <span 
+class="cmti-10">可以得到磁矩</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex97x.svg" alt="      (   )
+m = -  &#x2202;F-   = N &#x03BC;B tanh(&#x03B2;&#x03BC;BB ).
+       &#x2202;B   T
+" class="math-display"  /></center>
+<!--l. 171--><p class="nopar" >                                              <span 
+class="cmti-10">高温弱磁场下</span><img 
+src="Statistical.tex98x.svg" alt="m &#x221D; 1&#x2215;T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+<span 
+class="cmti-10">并且由</span><img 
+src="Statistical.tex99x.svg" alt="m &#x221D; &#x03C7;H  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">与</span><img 
+src="Statistical.tex100x.svg" alt="B &#x2248; H  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">可得Curie定律.</span>
+</p>
+   </div>
+<!--l. 174--><p class="noindent" >
+</p>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-140002"></a>对具体系统的应用</h3>
+<!--l. 175--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-150002.1"></a>理想气体</h4>
+<!--l. 176--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.1   </span> <a 
+ id="x1-160002.1.1"></a>态函数</h5>
+<!--l. 177--><p class="noindent" >尺度为<img 
+src="Statistical.tex101x.svg" alt="L  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的箱子内的例子的波函数为
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex102x.svg" alt="           (  )3&#x2215;2
+&#x03C8; (x,y,z) = -2    sin (kxx )sin(kyy)sin (kzz).
+            L
+" class="math-display"  /></center>
+<!--l. 178--><p class="nopar" > 由边界条件, 相应的
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex103x.svg" alt="ki = ni&#x03C0; , ni = 0,1,&#x22C5;&#x22C5;&#x22C5;.
+     L
+" class="math-display"  /></center>
+<!--l. 180--><p class="nopar" > <img 
+src="Statistical.tex104x.svg" alt="k  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />空间中一个态占据体积<img 
+src="Statistical.tex105x.svg" alt="(&#x03C0;&#x2215;L)3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 因此对于固定模长的<img 
+src="Statistical.tex106x.svg" alt="k  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 相应的态密度为
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-16001r6"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex107x.svg" alt="         14&#x03C0;k2dk   V k2dk
+g(k)dk = 8(&#x03C0;&#x2215;L)3-= --2&#x03C0;2-.
+" class="math-display"  /></center></td><td class="equation-label">(6)</td></tr></table>
+<!--l. 185--><p class="nopar" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.2   </span> <a 
+ id="x1-170002.1.2"></a>配分函数</h5>
+<!--l. 187--><p class="noindent" >用积分近似求和, 并注意能量<img 
+src="Statistical.tex108x.svg" alt="        2 2
+E (k) = &#x210F; k &#x2215;2m  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex109x.svg" alt="    &#x222B; &#x221E;                &#x222B; &#x221E;     22   V k2dk   V ( mk  T)3 &#x2215;2
+Z =     e-&#x03B2;E(k)g (k)dk =     e-&#x03B2;&#x210F; k&#x2215;2m----2- = -3  ---B--    .
+     0                  0             2&#x03C0;     &#x210F;     2&#x03C0;
+" class="math-display"  /></center>
+<!--l. 188--><p class="nopar" > 引入<span 
+class="cmti-10">量子密度</span><img 
+src="Statistical.tex110x.svg" alt="nQ  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />和<span 
+class="cmti-10">热波长</span><img 
+src="Statistical.tex111x.svg" alt="&#x03BB;th  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />之后可得 <div class="finaleBox">
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-17001r7"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex112x.svg" alt="                        (      )
+           V--        1-  mkBT-- 3&#x2215;2        ----h-----
+Z = V nQ = &#x03BB;3th , nQ =  &#x210F;3   2&#x03C0;      ,  &#x03BB;th = &#x221A;2-&#x03C0;mkBT-.
+" class="math-display"  /></center></td><td class="equation-label">(7)</td></tr></table>
+<!--l. 194--><p class="nopar" >
+</div>
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.3   </span> <a 
+ id="x1-180002.1.3"></a>可分辨性</h5>
+   <div class="newtheorem">
+<!--l. 197--><p class="noindent" ><span class="head">
+<a 
+ id="x1-18001r1"></a>
+<span 
+class="cmbx-10">例 2.1.</span>  </span><span 
+class="cmti-10">双粒子的二能级系统, 粒子可分辨时配分函数为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex113x.svg" alt="Z  = e0 + e-&#x03B2;&#x03F5; + e-&#x03B2;&#x03F5; + e-2&#x03B2;&#x03F5; = Z2.
+  2
+" class="math-display"  /></center>
+<!--l. 199--><p class="nopar" > <span 
+class="cmti-10">粒子不可分辨时</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex114x.svg" alt="Z2 = e0 + e-&#x03B2;&#x03F5; + e-2&#x03B2;&#x03F5; &#x2044;= Z2.
+" class="math-display"  /></center>
+<!--l. 201--><p class="nopar" >
+</p>
+   </div>
+<!--l. 203--><p class="noindent" >理想气体分子是不可分辨的, 如果作为近似而忽略有多个粒子占据相同能及的情形可以认为
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex115x.svg" alt="      ZN
+ZN =  ---.
+      N !
+" class="math-display"  /></center>
+<!--l. 204--><p class="nopar" > 分母的<img 
+src="Statistical.tex116x.svg" alt="N !  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />用于消去重复. 如果可及的能级数远远大于气体中的分子数这种近似是合理的. 这要求<img 
+src="Statistical.tex117x.svg" alt="n &#x226A; nQ  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+</p>
+   <div class="newtheorem">
+<!--l. 206--><p class="noindent" ><span class="head">
+                                                                  
+
+                                                                  
+<a 
+ id="x1-18002r2"></a>
+<span 
+class="cmbx-10">例 2.2.</span>  </span><span 
+class="cmti-10">室温下,       对于</span><img 
+src="Statistical.tex118x.svg" alt="N2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">有</span><img 
+src="Statistical.tex119x.svg" alt="n &#x2248; 1025m3   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+<img 
+src="Statistical.tex120x.svg" alt="nQ &#x2248; 1031m3   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,                                                             因此适用这一近似.</span>
+<span 
+class="cmti-10">金属中电子的</span><img 
+src="Statistical.tex121x.svg" alt="n &#x2248; 1029m3   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">而</span><img 
+src="Statistical.tex122x.svg" alt="nQ &#x2248; 1025m3   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 因此无法适用该近似.</span>
+</p>
+   </div>
+<!--l. 209--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.4   </span> <a 
+ id="x1-190002.1.4"></a>得出态函数</h5>
+<!--l. 210--><p class="noindent" >配分函数的常数系数不会影响依赖于<img 
+src="Statistical.tex123x.svg" alt="&#x2202; lnZN &#x2215;&#x2202;T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的态函数的值, 由
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex124x.svg" alt="        (   )
+     -1-  V-- N   (   3&#x2215;2)N
+ZN = N !  &#x03BB;3th    &#x221D;  VT      ,
+" class="math-display"  /></center>
+<!--l. 211--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex125x.svg" alt="lnZN = N lnV + 3N- ln T + const.
+                2
+" class="math-display"  /></center>
+<!--l. 212--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex126x.svg" alt="      &#x2202;lnZN--  3              3
+U = -   &#x2202;&#x03B2;   = 2N kBT,  CV =  2NkB.
+" class="math-display"  /></center>
+<!--l. 213--><p class="nopar" > 这和能量均分定理的结果是一致的.
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex127x.svg" alt="     (   )     [            ]
+p = -  &#x2202;F-   =  &#x2202;(kBT-lnZN-)  = nkBT.
+       &#x2202;V  T        &#x2202;V       T
+" class="math-display"  /></center>
+<!--l. 215--><p class="nopar" > 这与理想气体方程的结果是一致的.
+                                                                  
+
+                                                                  
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex128x.svg" alt="H = U + pV = 5 Nk  T,  C =  5Nk  .
+             2   B      p   2  B
+" class="math-display"  /></center>
+<!--l. 217--><p class="nopar" > 这和之前的结果是一致的. 保留常数项计算并近似<img 
+src="Statistical.tex129x.svg" alt="lnN ! &#x2248; N lnN - N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 有
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex130x.svg" alt="                      [  (  3 )   ]
+F = - kBT lnZN = NkBT  ln n&#x03BB;th - 1 .
+" class="math-display"  /></center>
+<!--l. 219--><p class="nopar" >
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-19001r8"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex131x.svg" alt="G = F + pV = N k T ln (n&#x03BB;3) .
+                B       th
+" class="math-display"  /></center></td><td class="equation-label">(8)</td></tr></table>
+<!--l. 223--><p class="nopar" >
+再通过<img 
+src="Statistical.tex132x.svg" alt="S = (U - F )&#x2215;T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />可得 <div class="finaleBox">
+</p>
+   <div class="newtheorem">
+<!--l. 226--><p class="noindent" ><span class="head">
+<a 
+ id="x1-19002r1"></a>
+<span 
+class="cmbx-10">推论 2.1 </span>(Sackur-Tetrode方程)<span 
+class="cmbx-10">.</span>  </span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex133x.svg" alt="        [           ]
+S = N k  5 - ln(n&#x03BB;3 ) .
+      B  2        th
+" class="math-display"  /></center>
+<!--l. 227--><p class="nopar" >
+                                                                  
+
+                                                                  
+</p>
+   </div>
+   </div>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.5   </span> <a 
+ id="x1-200002.1.5"></a>Gibbs佯谬</h5>
+   <div class="newtheorem">
+<!--l. 231--><p class="noindent" ><span class="head">
+<a 
+ id="x1-20001r3"></a>
+<span 
+class="cmbx-10">例 2.3.</span>  </span><span 
+class="cmti-10">如果不考虑不可分辨性, 直接忽略</span><img 
+src="Statistical.tex134x.svg" alt="1&#x2215;N !  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">因子而求出熵, 有</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex135x.svg" alt="                        &#x03BB;3th
+F = - kBT ln ZN = N kBln V-,
+" class="math-display"  /></center>
+<!--l. 233--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex136x.svg" alt="         (       3 )
+S = N kB  3 - ln &#x03BB;th .
+          2     V
+" class="math-display"  /></center>
+<!--l. 234--><p class="nopar" > <span 
+class="cmti-10">注意此时的熵变成了非广延量.</span>
+</p>
+   </div>
+<!--l. 237--><p class="noindent" >在前开<img 
+src="Statistical.tex137x.svg" alt="S  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的表达式中考虑Joule膨胀, 可以正确得到<img 
+src="Statistical.tex138x.svg" alt="N kB ln 2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的熵增.
+如果抽去原本分开的两份理想气体中的隔板令其混合, 可视为两份Joule膨胀, 从而有<img 
+src="Statistical.tex139x.svg" alt="2N kBln2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的熵增.
+</p>
+   <div class="newtheorem">
+<!--l. 238--><p class="noindent" ><span class="head">
+<a 
+ id="x1-20002r4"></a>
+<span 
+class="cmbx-10">例 2.4.</span>  </span><span 
+class="cmti-10">将理想气体复制粘贴一份,    无论副本与原件是否有容器壁分隔,    各热力学势皆因此翻倍,    因此熵也应当翻倍——所以在一份理想气体中抽去或插入隔板不应当改变熵.</span>
+<span 
+class="cmti-10">由于粒子的不可分辨性, 不可视为两份Joule膨胀.</span>
+</p>
+   </div>
+                                                                  
+
+                                                                  
+<!--l. 241--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.6   </span> <a 
+ id="x1-210002.1.6"></a>双原子气体的热容</h5>
+<!--l. 242--><p class="noindent" >在<a 
+href="#x1-13002r16">例&#x00A0;1.16</a>中的配分函数中加上平动项, 得到双原子气体的配分函数
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex140x.svg" alt="Z = ZtransZvibZrot.
+" class="math-display"  /></center>
+<!--l. 243--><p class="nopar" > 计算可得<img 
+src="Statistical.tex141x.svg" alt="T &#x2192;  0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />时<img 
+src="Statistical.tex142x.svg" alt="CV &#x2248;  32R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex143x.svg" alt="T &#x2248; &#x210F;2&#x2215;(2IkB)  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />时转动被激发,
+<img 
+src="Statistical.tex144x.svg" alt="CV &#x2248;  52R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex145x.svg" alt="T &#x2248; &#x210F;&#x03C9;&#x2215;kB  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />时振动被激发, <img 
+src="Statistical.tex146x.svg" alt="CV  &#x2248; 72R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.1.7   </span> <a 
+ id="x1-220002.1.7"></a>相对论性气体</h5>
+<!--l. 246--><p class="noindent" >在相对论的情形下, <img 
+src="Statistical.tex147x.svg" alt="E2 = p2c2 + m2c4  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 极端相对论情形下有<img 
+src="Statistical.tex148x.svg" alt="E = pc  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 光子符合这一情况.
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex149x.svg" alt="    &#x222B; &#x221E;                  (    )3 &#x222B; &#x221E;             (     )3
+Z =    e-&#x03B2;&#x210F;kcg(k)dk = -V-  -1--      e-xx2dx = V-- kBT-  .
+     0                2&#x03C0;2  &#x03B2;&#x210F;c    0            &#x03C0;2   &#x210F;c
+" class="math-display"  /></center>
+<!--l. 247--><p class="nopar" > 引入平行于热波长的<img 
+src="Statistical.tex150x.svg" alt="&#x039B;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 有 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex151x.svg" alt="    V--      &#x210F;c&#x03C0;2&#x2215;3
+Z = &#x039B;3,  &#x039B; =  kBT  .
+" class="math-display"  /></center>
+<!--l. 250--><p class="nopar" > </div>
+假设气体密度足够低, 总的配分函数为
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex152x.svg" alt="       N
+ZN = Z--,  lnZN = N lnV + 3N lnT + const.
+      N!
+" class="math-display"  /></center>
+<!--l. 253--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex153x.svg" alt="U  = - d-ln-ZN-= 3N k T, C  = 3N k .
+        d&#x03B2;         B     V       B
+" class="math-display"  /></center>
+<!--l. 254--><p class="nopar" > 注意到这和能量均分定理不相符, 因为能量不再是平方模.
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-22001r9"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex154x.svg" alt="      (   )    [           ]
+p = -  &#x2202;F-   =   &#x2202;kBT-ln-ZN-  = nkBT  = u.
+       &#x2202;V   T       &#x2202;V      T          3
+" class="math-display"  /></center></td><td class="equation-label">(9)</td></tr></table>
+<!--l. 259--><p class="nopar" >
+这和理想气体方程的结果是一致的.
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex155x.svg" alt="H  = U + pV = 4kBT,  Cp = 4N kB.
+" class="math-display"  /></center>
+<!--l. 261--><p class="nopar" > 这意味着绝热指数<img 
+src="Statistical.tex156x.svg" alt="&#x03B3; = 4&#x2215;3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />. 保留常数项计算并近似<img 
+src="Statistical.tex157x.svg" alt="ln N! = N lnN - N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 有
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex158x.svg" alt="                     [  (  3)   ]
+F = - kB ln ZN = N kBT ln n &#x039B;  - 1 .
+" class="math-display"  /></center>
+<!--l. 263--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex159x.svg" alt="G = F + pV = N k T ln(n&#x039B;3).
+                B
+" class="math-display"  /></center>
+<!--l. 264--><p class="nopar" > 再通过<img 
+src="Statistical.tex160x.svg" alt="S = (U - F)&#x2215;T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />可得
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex161x.svg" alt="S = N kB[4 - ln(n&#x039B;3 )] .
+" class="math-display"  /></center>
+<!--l. 266--><p class="nopar" > 特别地, <img 
+src="Statistical.tex162x.svg" alt="p = u&#x2215;3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />而非理想气体的<img 
+src="Statistical.tex163x.svg" alt="p = 2u &#x2215;3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />. 由于<img 
+src="Statistical.tex164x.svg" alt="U  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />仍仅与温度有关,
+(<span 
+class="cmbx-10">??</span>)的推导可以适用, 因此绝热膨胀时
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex165x.svg" alt="pV4&#x2215;3 = const, V T3 = const.
+" class="math-display"  /></center>
+<!--l. 268--><p class="nopar" >
+</p>
+   <div class="newtheorem">
+<!--l. 269--><p class="noindent" ><span class="head">
+<a 
+ id="x1-22002r5"></a>
+<span 
+class="cmbx-10">例 2.5.</span>  </span><span 
+class="cmti-10">宇宙膨胀时</span><img 
+src="Statistical.tex166x.svg" alt="T &#x221D; V-1&#x2215;3 &#x221D; a-1   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">.                   而对于非相对论性理想气体,</span>
+<img 
+src="Statistical.tex167x.svg" alt="V T3&#x2215;2 = const  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span> <img 
+src="Statistical.tex168x.svg" alt="T &#x221D; a-2   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 因此非相对论性理想气体的冷却更快.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 272--><p class="noindent" ><span class="head">
+<a 
+ id="x1-22003r6"></a>
+<span 
+class="cmbx-10">例 2.6.</span>  </span><span 
+class="cmti-10">非相对论性粒子由质量守恒可得</span><img 
+src="Statistical.tex169x.svg" alt="&#x03C1; &#x221D; a-3   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,          然而相对论性粒子</span><img 
+src="Statistical.tex170x.svg" alt="&#x03C1; &#x221D; u &#x221D; p &#x221D; a-4   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+<span 
+class="cmti-10">因此宇宙膨胀时相对论性气体密度下降更快. 因此早期宇宙的密度是以辐射为主导的, 其后膨胀才导致其变为物质为主导的.</span>
+</p>
+   </div>
+<!--l. 275--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-230002.2"></a>化学势</h4>
+<!--l. 276--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.1   </span> <a 
+ id="x1-240002.2.1"></a>化学势的意义</h5>
+   <div class="newtheorem">
+<!--l. 277--><p class="noindent" ><span class="head">
+<a 
+ id="x1-24001r1"></a>
+                                                                  
+
+                                                                  
+<span 
+class="cmbx-10">定义 2.1.</span>  </span><span 
+class="cmti-10">等容、绝热地加入粒子导致的内能改变量谓化学势.</span>
+</p>
+   </div>
+<!--l. 280--><p class="noindent" >从定义可以得到
+</p>
+   <div class="align"><img 
+src="Statistical.tex171x.svg" alt="pict"  /></div>
+<!--l. 286--><p class="indent" >   由于化学反应常常发生于等容等压过程中, <img 
+src="Statistical.tex172x.svg" alt="dG  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的表达式更为常用.
+</p>
+   <div class="newtheorem">
+<!--l. 287--><p class="noindent" ><span class="head">
+<a 
+ id="x1-24002r1"></a>
+<span 
+class="cmbx-10">附注 2.1.</span>  </span><span 
+class="cmti-10">虽然</span><img 
+src="Statistical.tex173x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">取整数值,</span>
+<span 
+class="cmti-10">但是当</span><img 
+src="Statistical.tex174x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">充分大时</span><img 
+src="Statistical.tex175x.svg" alt="dN  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">仍然是合理的.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 290--><p class="noindent" ><span class="head">
+<a 
+ id="x1-24003r2"></a>
+<span 
+class="cmbx-10">推论 2.2.</span>  </span> <span 
+class="cmti-10">粒子数不守恒则</span><img 
+src="Statistical.tex176x.svg" alt="&#x03BC; = 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">.</span>
+</p>
+   </div>
+<!--l. 294--><p class="indent" >   <div class="pitfallBox"> <img 
+src="Statistical.tex177x.svg" alt="&#x03BC;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />并不仅仅取决于粒子的类型, 它和<img 
+src="Statistical.tex178x.svg" alt="p  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />与<img 
+src="Statistical.tex179x.svg" alt="T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />一样是强度量并且大小取决于环境. </div>
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-24004r10"></a>
+   <center class="math-display" >
+                                                                  
+
+                                                                  
+<img 
+src="Statistical.tex180x.svg" alt="dS = dU-+ pdV- - &#x03BC;dN-.
+      T    T      T
+" class="math-display"  /></center></td><td class="equation-label">(10)</td></tr></table>
+<!--l. 300--><p class="nopar" >
+通过条件<img 
+src="Statistical.tex181x.svg" alt="dS &#x2265; 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />可以得出系统演化的方向,
+</p>
+   <div class="newtheorem">
+<!--l. 302--><p class="noindent" ><span class="head">
+<a 
+ id="x1-24005r7"></a>
+<span 
+class="cmbx-10">例 2.7.</span>  </span><span 
+class="cmti-10">两个可以相互交换热量的孤立系统, 总内能守恒, 熵变</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex182x.svg" alt="     (        )
+dS =   -1 - 1-  dU &#x2265; 0.
+       T1   T2    1
+" class="math-display"  /></center>
+<!--l. 304--><p class="nopar" > <span 
+class="cmti-10">因此热量从高温流向低温, 温度相等时达到平衡.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 307--><p class="noindent" ><span class="head">
+<a 
+ id="x1-24006r8"></a>
+<span 
+class="cmbx-10">例 2.8.</span>  </span><span 
+class="cmti-10">两个可以交换粒子的孤立系统,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex183x.svg" alt="     ( &#x03BC;1  &#x03BC;2 )
+dS =   T-- T-- dN2.
+        1    2
+" class="math-display"  /></center>
+<!--l. 309--><p class="nopar" > <span 
+class="cmti-10">如果它们温度相等, 那么当</span><img 
+src="Statistical.tex184x.svg" alt="&#x03BC;1 = &#x03BC;2   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">时达到平衡. 参考</span><span 
+class="cmbx-10">??</span><span 
+class="cmti-10">可以发现化学势的作用可以类比于压强.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 312--><p class="noindent" ><span class="head">
+<a 
+ id="x1-24007r9"></a>
+                                                                  
+
+                                                                  
+<span 
+class="cmbx-10">例 2.9.</span>  </span> <span 
+class="cmti-10">由</span>(<a 
+href="#x1-19001r8">8<!--tex4ht:ref: eq:gofidealgases --></a>)<span 
+class="cmti-10">并注意到在等温等压下</span><img 
+src="Statistical.tex185x.svg" alt="n  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">是固定的, 理想气体的化学势为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex186x.svg" alt="    (   )
+     &#x2202;G-             (  3)   G-
+&#x03BC; =  &#x2202;N   p,T = kBT ln  n&#x03BB;th  = N .
+" class="math-display"  /></center>
+<!--l. 315--><p class="nopar" > <span 
+class="cmti-10">可以发现化学势就是单个粒子的Gibbs自由能.</span>
+</p>
+   </div>
+<!--l. 318--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.2   </span> <a 
+ id="x1-250002.2.2"></a>巨配分函数</h5>
+<!--l. 319--><p class="noindent" >通过类似于正则系综的Boltzmann分布(<span 
+class="cmbx-10">??</span>)的推导可以导出巨正则系综的分布. 假设小系统具有粒子数<img 
+src="Statistical.tex187x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />与能量<img 
+src="Statistical.tex188x.svg" alt="&#x03F5;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+相应的源的熵为
+</p>
+   <div class="align"><img 
+src="Statistical.tex189x.svg" alt="pict"  /></div>
+<!--l. 324--><p class="indent" >   这里假设系综具有固定的体积. 由<img 
+src="Statistical.tex190x.svg" alt="S = kB ln &#x03A9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 相应地
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex191x.svg" alt="P (&#x03F5;,N ) &#x221D; e&#x03B2;(&#x03BC;N-&#x03F5;).
+" class="math-display"  /></center>
+<!--l. 325--><p class="nopar" > 定义<img 
+src="Statistical.tex192x.svg" alt="Z " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为<span 
+class="cmti-10">巨配分函数</span>. <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex193x.svg" alt="Pi = 1-e&#x03B2;(&#x03BC;Ni-Ei), Z = &#x2211;   e&#x03B2;(&#x03BC;Ni-Ei).
+     Z                  i
+" class="math-display"  /></center>
+<!--l. 328--><p class="nopar" > </div>
+仿照<a 
+href="#x1-50001.1.3">1.1.3<!--tex4ht:ref: statefunctionsbypartitionfunction --></a>中的方法, 可以导出
+                                                                  
+
+                                                                  
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex194x.svg" alt="                  (     )
+    &#x2211;              &#x2202;-ln-Z
+N =    NiPi = kBT    &#x2202;&#x03BC;   &#x03B2;.
+     i
+" class="math-display"  /></center>
+<!--l. 331--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex195x.svg" alt="               (      )
+U = &#x2211;  E P = -   &#x2202;lnZ-  + &#x03BC;N.
+     i  i i       &#x2202;&#x03B2;   &#x03BC;
+" class="math-display"  /></center>
+<!--l. 332--><p class="nopar" >
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-25001r11"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex196x.svg" alt="S = - kB &#x2211; PilnPi = U---&#x03BC;N-+-kBT-ln-Z-.
+                           T
+" class="math-display"  /></center></td><td class="equation-label">(11)</td></tr></table>
+<!--l. 336--><p class="nopar" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.3   </span> <a 
+ id="x1-260002.2.3"></a>巨热力学势</h5>
+<!--l. 338--><p class="noindent" ><a 
+href="#x1-50001.1.3">1.1.3<!--tex4ht:ref: statefunctionsbypartitionfunction --></a>中Helmholtz自由能和配分函数之间有简单的表达式, 相应地可以定义<span 
+class="cmti-10">巨热力学势 </span><div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex197x.svg" alt="&#x03A6;G  = - kBT lnZ.
+" class="math-display"  /></center>
+<!--l. 340--><p class="nopar" > </div>
+由(<a 
+href="#x1-25001r11">11<!--tex4ht:ref: eq:sbygrandpartition --></a>)可得
+</p>
+                                                                  
+
+                                                                  
+   <center class="math-display" >
+<img 
+src="Statistical.tex198x.svg" alt="&#x03A6;G  = U - T S - &#x03BC;N = F - &#x03BC;N.
+" class="math-display"  /></center>
+<!--l. 343--><p class="nopar" > <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex199x.svg" alt="d&#x03A6;G = - SdT - pdV - N d&#x03BC;.
+" class="math-display"  /></center>
+<!--l. 345--><p class="nopar" > </div>
+</p>
+   <div class="newtheorem">
+<!--l. 347--><p class="noindent" ><span class="head">
+<a 
+ id="x1-26001r10"></a>
+<span 
+class="cmbx-10">例 2.10.</span>  </span><span 
+class="cmti-10">对于理想气体,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex200x.svg" alt="                    [  (  3)   ]          (  3 )
+&#x03A6;G = F - &#x03BC;N = N kBT  ln n &#x03BB;th - 1  - N kBT ln n&#x03BB;th = - NkBT = - pV.
+" class="math-display"  /></center>
+<!--l. 349--><p class="nopar" > <span 
+class="cmti-10">注意</span><img 
+src="Statistical.tex201x.svg" alt="&#x03A6;G  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">可以由三个变量</span><img 
+src="Statistical.tex202x.svg" alt="T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span> <img 
+src="Statistical.tex203x.svg" alt="V  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span> <img 
+src="Statistical.tex204x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">决定, 因此由上式</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex205x.svg" alt="      (&#x2202;&#x03A6;G )      ( &#x2202;&#x03A6;G )   ( &#x2202;N )              N
+- N =  -&#x2202;&#x03BC;-     =   &#x2202;N--      &#x2202;&#x03BC;-     = - kBT &#x00D7; k-T = - N.
+             T,V          T,V      T,V           B
+" class="math-display"  /></center>
+<!--l. 351--><p class="nopar" > <span 
+class="cmti-10">于是验证成立.</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex206x.svg" alt="     (&#x2202; &#x03A6;G)        (&#x2202;&#x03A6;G )    ( &#x2202;&#x03BC;)         ( &#x2202;&#x03BC; )
+- p = -&#x2202;V-     = -  -&#x2202;&#x03BC;-      &#x2202;V-      = N   &#x2202;V-     .
+            T,&#x03BC;            T,V       T,&#x03A6;G           T,&#x03A6;G
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 353--><p class="nopar" >     <span 
+class="cmti-10">但约束</span><img 
+src="Statistical.tex207x.svg" alt="&#x03A6;G = - NkBT  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">与</span><img 
+src="Statistical.tex208x.svg" alt="T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">为常数意味着</span><img 
+src="Statistical.tex209x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">为常数,</span>
+<span 
+class="cmti-10">相应地</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex210x.svg" alt="(   )
+ -&#x2202;&#x03BC;          - kBT-
+ &#x2202;V   T,&#x03A6;G = -   V  .
+" class="math-display"  /></center>
+<!--l. 355--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex211x.svg" alt="(     )
+  &#x2202;&#x03A6;G-    = - N &#x00D7; --kBT-= - p.
+   &#x2202;V  T,&#x03BC;          V
+" class="math-display"  /></center>
+<!--l. 356--><p class="nopar" > <span 
+class="cmti-10">于是再次验证成立.</span>
+</p>
+   </div>
+<!--l. 359--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.4   </span> <a 
+ id="x1-270002.2.4"></a>单粒子的化学势</h5>
+<!--l. 360--><p class="noindent" >考虑(<a 
+href="#x1-24004r10">10<!--tex4ht:ref: eq:sinuvn --></a>)以及<img 
+src="Statistical.tex212x.svg" alt="S  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />所谓广延量之事实, 如果将系统通过复制粘贴而将尺度扩大至<img 
+src="Statistical.tex213x.svg" alt="&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />倍, 则相应的<img 
+src="Statistical.tex214x.svg" alt="U  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+<img 
+src="Statistical.tex215x.svg" alt="V  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex216x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />与<img 
+src="Statistical.tex217x.svg" alt="S  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />本身都扩大至<img 
+src="Statistical.tex218x.svg" alt="&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />倍, 从而<img 
+src="Statistical.tex219x.svg" alt="S  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />正是<img 
+src="Statistical.tex220x.svg" alt="U  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+<img 
+src="Statistical.tex221x.svg" alt="V  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex222x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的线性组合,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex223x.svg" alt="    U   pV    &#x03BC;N
+S = --+ ----  ---.
+    T    T    T
+" class="math-display"  /></center>
+<!--l. 361--><p class="nopar" > 立刻有<img 
+src="Statistical.tex224x.svg" alt="G = &#x03BC;N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 又由<img 
+src="Statistical.tex225x.svg" alt="&#x03A6;G = F - &#x03BC;N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <div class="finaleBox">
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-27001r12"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex226x.svg" alt="&#x03BC; = G-, &#x03A6;  = - pV.
+    N     G
+" class="math-display"  /></center></td><td class="equation-label">(12)</td></tr></table>
+<!--l. 367--><p class="nopar" >
+</div>
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.5   </span> <a 
+ id="x1-280002.2.5"></a>化学反应</h5>
+<!--l. 370--><p class="noindent" >对于多种粒子并存的情形, 把各个粒子的化学势对热力学势的贡献相加即可, 如等温等压下
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex227x.svg" alt="dG = &#x2211;  &#x03BC;idNi.
+      i
+" class="math-display"  /></center>
+<!--l. 371--><p class="nopar" >
+</p>
+<!--l. 372--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-290002.2.5"></a><span 
+class="cmbx-10">粒子数守恒定律</span></span>
+   如果一个等温恒容的系统可以产生或消灭粒子, 平衡时
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex228x.svg" alt="(   )
+ &#x2202;F-     = 0,  &#x03BC; = 0.
+ &#x2202;N   V,T
+" class="math-display"  /></center>
+<!--l. 373--><p class="nopar" > 如果粒子的数量是守恒的, 比如
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex229x.svg" alt="e- + e+ -&#x21BD;-&#x21C0;-- &#x03B3; + &#x03B3;,
+" class="math-display"  /></center>
+<!--l. 375--><p class="nopar" > 则电子和正电子的Helmholtz函数满足
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex230x.svg" alt="( &#x2202;F )         ( &#x2202;F )       dN
+ ----        +  ----        --+-= 0.
+ &#x2202;N -  V,T,N+    &#x2202;N+   V,T,N- dN-
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 377--><p class="nopar" > 光子的化学势为零<span class="footnote-mark"><a 
+href="Statistical.tex2.html#fn1x0"><sup class="textsuperscript">1</sup></a></span><a 
+ id="x1-29001f1"></a> 故可以忽略之.
+从而
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex231x.svg" alt="&#x03BC;+ + &#x03BC;- = 0.
+" class="math-display"  /></center>
+<!--l. 379--><p class="nopar" >
+</p>
+   <div class="newtheorem">
+<!--l. 380--><p class="noindent" ><span class="head">
+<a 
+ id="x1-29002r11"></a>
+<span 
+class="cmbx-10">例 2.11.</span>  </span><span 
+class="cmti-10">对于理想气体,        化学势在</span><a 
+href="#x1-24007r9"><span 
+class="cmti-10">例</span><span 
+class="cmti-10">&#x00A0;2.9</span></a><span 
+class="cmti-10">中给出,</span>
+<span 
+class="cmti-10">可得</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex232x.svg" alt="         ( &#x03BB;3th-)
+&#x03BC; = kBT ln kBT   +kBT lnp.
+" class="math-display"  /></center>
+<!--l. 382--><p class="nopar" > <span 
+class="cmti-10">如果将标准状况</span><img 
+src="Statistical.tex233x.svg" alt="T = 298K  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span> <img 
+src="Statistical.tex234x.svg" alt="p-&#x2218; = 105Pa  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的化学势记作</span><img 
+src="Statistical.tex235x.svg" alt="&#x03BC;-&#x2218; " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 则相同温度下</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex236x.svg" alt="                  p
+&#x03BC;(p) = &#x03BC;-&#x2218; + kBT ln--&#x2218; .
+                 p
+" class="math-display"  /></center>
+<!--l. 384--><p class="nopar" >
+</p>
+   </div>
+<!--l. 386--><p class="indent" >   考虑一个简单的气体反应(例如互变异构)
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex237x.svg" alt="A --&#x21BD;&#x21C0;-- B,
+" class="math-display"  /></center>
+<!--l. 387--><p class="nopar" > 如果过程是等温等压的, 有
+</p>
+                                                                  
+
+                                                                  
+   <center class="math-display" >
+<img 
+src="Statistical.tex238x.svg" alt="dG = (&#x03BC;B - &#x03BC;A)dNB.
+" class="math-display"  /></center>
+<!--l. 389--><p class="nopar" > 根据前开对<img 
+src="Statistical.tex239x.svg" alt="&#x03BC;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的结论,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex240x.svg" alt="                     p
+&#x0394;rGm  = &#x0394;rG -&#x2218;m + RT ln -B.
+                     pA
+" class="math-display"  /></center>
+<!--l. 391--><p class="nopar" > 平衡时 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex241x.svg" alt="        &#x0394;rG--&#x2218;-
+ln K = -  RT  .
+" class="math-display"  /></center>
+<!--l. 394--><p class="nopar" > </div>
+对于更一般的化学反应, 在反应物的分压前加上相应的系数即可. 如果<img 
+src="Statistical.tex242x.svg" alt="&#x03BD;i  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为化学计量数, 则平衡时
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex243x.svg" alt="&#x2211;
+   &#x03BD;i&#x03BC;i = 0.
+  i
+" class="math-display"  /></center>
+<!--l. 397--><p class="nopar" > 相应的<img 
+src="Statistical.tex244x.svg" alt="K  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex245x.svg" alt="     &#x220F; ( pi) &#x03BD;i
+K =      p-&#x2218;-   .
+     i
+" class="math-display"  /></center>
+<!--l. 399--><p class="nopar" > 由(<span 
+class="cmbx-10">??</span>),
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex246x.svg" alt="dlnK      1d (&#x0394;rG -&#x2218;&#x2215;T)   &#x0394;rH -&#x2218;
+-dT---= - R-----dT---- = -RT-2-.
+" class="math-display"  /></center>
+<!--l. 401--><p class="nopar" >
+</p>
+                                                                  
+
+                                                                  
+   <div class="newtheorem">
+<!--l. 402--><p class="noindent" ><span class="head">
+<a 
+ id="x1-29003r3"></a>
+<span 
+class="cmbx-10">推论 2.3 </span>(le Chatelier原理)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">放热反应升温时左移,</span>
+<span 
+class="cmti-10">吸热反应升温时右移.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 405--><p class="noindent" ><span class="head">
+<a 
+ id="x1-29004r4"></a>
+<span 
+class="cmbx-10">推论 2.4 </span>(van&#8217;t Hoff方程)<span 
+class="cmbx-10">.</span>  </span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex247x.svg" alt="               -&#x2218;
+-dlnK--= - &#x0394;rH---.
+d (1&#x2215;T )      R
+" class="math-display"  /></center>
+<!--l. 406--><p class="nopar" >
+</p>
+   </div>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.6   </span> <a 
+ id="x1-300002.2.6"></a>渗透</h5>
+   <div class="newtheorem">
+<!--l. 409--><p class="noindent" ><span class="head">
+<a 
+ id="x1-30001r2"></a>
+<span 
+class="cmbx-10">定义 2.2 </span>(渗透压)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">组织渗透所需要施加的压强谓渗透压.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 412--><p class="noindent" ><span class="head">
+<a 
+ id="x1-30002r12"></a>
+<span 
+class="cmbx-10">例 2.12.</span>  </span><span 
+class="cmti-10">装在上开口半透膜内的糖水浸入水中, 水会进入膜, 糖水水位上升直到水压抵消渗透压为止.</span>
+                                                                  
+
+                                                                  
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 415--><p class="noindent" ><span class="head">
+<a 
+ id="x1-30003r2"></a>
+<span 
+class="cmbx-10">附注 2.2.</span>  </span><span 
+class="cmti-10">渗透是典型的熵驱动的现象, 糖水的例子中重力势能增加了. 加热橡胶提起重物也是.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 418--><p class="noindent" ><span class="head">
+<a 
+ id="x1-30004r13"></a>
+<span 
+class="cmbx-10">例 2.13 </span>(溶剂化学势)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">当纯</span><img 
+src="Statistical.tex248x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">蒸汽和液体</span><img 
+src="Statistical.tex249x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">平衡时,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex250x.svg" alt="                            *
+&#x03BC;*A(l) = &#x03BC;*A(g) = &#x03BC;-&#x2218;A(g) +kBT ln p-A&#x2218; .
+                           p
+" class="math-display"  /></center>
+<!--l. 420--><p class="nopar" > <span 
+class="cmti-10">溶质</span><img 
+src="Statistical.tex251x.svg" alt="B  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">溶解于溶剂</span><img 
+src="Statistical.tex252x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">中, 此时不再处理纯</span><img 
+src="Statistical.tex253x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex254x.svg" alt="&#x03BC;    = &#x03BC;    = &#x03BC;-&#x2218;   +k  T ln pA.
+ A(l)    A(g)    A(g)   B     p-&#x2218;
+" class="math-display"  /></center>
+<!--l. 422--><p class="nopar" > <span 
+class="cmti-10">由Raoult定律,</span> <img 
+src="Statistical.tex255x.svg" alt="pA  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">会小于</span><img 
+src="Statistical.tex256x.svg" alt=" *
+pA  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 从而溶液中</span><img 
+src="Statistical.tex257x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的化学势减小,</span>
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-30005r13"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex258x.svg" alt="               *          pA    *
+&#x03BC;A (g) = &#x03BC;A (l) = &#x03BC;A(l) +RT ln p*-= &#x03BC;A(l) + RT lnxA.
+                           A
+" class="math-display"  /></center></td><td class="equation-label">(13)</td></tr></table>
+                                                                  
+
+                                                                  
+<!--l. 427--><p class="nopar" >
+</p>
+   </div>
+<!--l. 429--><p class="noindent" >蒸汽压主要由<img 
+src="Statistical.tex259x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />贡献, 平衡时纯<img 
+src="Statistical.tex260x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />和溶液的相应的压强为<img 
+src="Statistical.tex261x.svg" alt="p  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />和<img 
+src="Statistical.tex262x.svg" alt="p+ &#x03A0;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex263x.svg" alt="&#x03BC;*A(p) = &#x03BC;A (p+ &#x03A0;) = &#x03BC;*A(p+ &#x03A0; )+ RT lnxA.
+" class="math-display"  /></center>
+<!--l. 430--><p class="nopar" > 由于<img 
+src="Statistical.tex264x.svg" alt="A  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的蒸汽和液体是平衡的, 这里不区分二者的化学势. 如果液体的体积为<img 
+src="Statistical.tex265x.svg" alt="VA  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+则由等温下<img 
+src="Statistical.tex266x.svg" alt="dG = V dp  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />有
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex267x.svg" alt=" *       *
+&#x03BC;A (p) = &#x03BC;A(p)+ &#x03A0;VA + RT lnxA.
+" class="math-display"  /></center>
+<!--l. 432--><p class="nopar" > 低浓度下<img 
+src="Statistical.tex268x.svg" alt="lnxA &#x2248; xB  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 因此 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex269x.svg" alt="&#x03A0;V  = nBRT.
+" class="math-display"  /></center>
+<!--l. 435--><p class="nopar" > </div>
+</p>
+   <div class="newtheorem">
+<!--l. 437--><p class="noindent" ><span class="head">
+<a 
+ id="x1-30006r3"></a>
+<span 
+class="cmbx-10">附注 2.3.</span>  </span><span 
+class="cmti-10">溶质分子如果视为理想气体,        则半透膜向其施加相当于</span><img 
+src="Statistical.tex270x.svg" alt="cBRT  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">之压强,</span>
+<span 
+class="cmti-10">该压强是单向的——溶剂分子也会受到这一压强, 引发向溶液方向的流动. 只有施加等大反向的压强之后渗透才会停止.</span>
+</p>
+   </div>
+<!--l. 440--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a 
+ id="x1-310002.3"></a>光子</h4>
+                                                                  
+
+                                                                  
+<!--l. 441--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.1   </span> <a 
+ id="x1-320002.3.1"></a>电磁辐射的经典热力学</h5>
+<!--l. 442--><p class="noindent" >非零温度下, 任何物质都可以发出<span 
+class="cmti-10">热辐射</span>. 常温下它们的波长很长, 故肉眼不可见. 但是高温下,
+比如炉子中金属的红光则是可见的热辐射.
+</p><!--l. 444--><p class="indent" >   将环境视为体积为<img 
+src="Statistical.tex271x.svg" alt="V  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的容器, 为空窖, 温度为<img 
+src="Statistical.tex272x.svg" alt="T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 窖壁可以导热,
+则考虑(<a 
+href="#x1-22001r9">9<!--tex4ht:ref: eq:pisu3 --></a>), 能量密度
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex273x.svg" alt="u = U-= n&#x210F;&#x03C9;,  p = u.
+    V             3
+" class="math-display"  /></center>
+<!--l. 445--><p class="nopar" > 后式对相对论性气体成立. 由通量<img 
+src="Statistical.tex274x.svg" alt="&#x03A6; = nc&#x2215;4  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />可知单位面积上的功率
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex275x.svg" alt="          1
+I = &#x210F;&#x03C9; &#x03A6; = 4uc.
+" class="math-display"  /></center>
+<!--l. 447--><p class="nopar" > 然而在等温条件下改变窖的体积, 能量密度应当是不变的——把发红的烙铁放在窖内, 改变窖的体积不应当改变光的强度. 因此由<img 
+src="Statistical.tex276x.svg" alt="dU = T dS - pdV  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex277x.svg" alt="   (    )      (   )         (    )         (    )
+u =  &#x2202;U-   = T  &#x2202;S-   - p = T  &#x2202;p-   - p = T  &#x2202;u-   - u.
+     &#x2202;V  T      &#x2202;V  T          &#x2202;T  V       3  &#x2202;T  V   3
+" class="math-display"  /></center>
+<!--l. 449--><p class="nopar" > 立刻有<img 
+src="Statistical.tex278x.svg" alt="u = AT 4  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 引入Stefan-Boltzmann常量<img 
+src="Statistical.tex279x.svg" alt="&#x03C3; = Ac&#x2215;4  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />有
+<div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex280x.svg" alt="    1
+I = -uc = &#x03C3;T 4.
+    4
+" class="math-display"  /></center>
+<!--l. 452--><p class="nopar" > </div>
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.2   </span> <a 
+ id="x1-330002.3.2"></a>谱能量密度</h5>
+<!--l. 455--><p class="noindent" >假设有两个空窖, 它们的形状、大小或者材料可能不同但是温度相同, 现在将它们通过管子连接, 相应的能量通量<img 
+src="Statistical.tex281x.svg" alt="I = uc&#x2215;4  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 但由于两个空窖处于热平衡,
+                                                                  
+
+                                                                  
+因此净能量通量为零. 故<img 
+src="Statistical.tex282x.svg" alt="u  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />与空窖的形状、大小、材质无关.
+</p>
+   <div class="newtheorem">
+<!--l. 456--><p class="noindent" ><span class="head">
+<a 
+ id="x1-33001r3"></a>
+<span 
+class="cmbx-10">定义 2.3 </span>(谱能量密度)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">谱能量密度</span><img 
+src="Statistical.tex283x.svg" alt="u&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">满足</span><img 
+src="Statistical.tex284x.svg" alt="u&#x03BB;d&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">为波长在</span><img 
+src="Statistical.tex285x.svg" alt="&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">与</span><img 
+src="Statistical.tex286x.svg" alt="&#x03BB; + d&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">之间的光子的能量密度.</span>
+</p>
+   </div>
+<!--l. 459--><p class="indent" >   在管道中加入滤波器可知<img 
+src="Statistical.tex287x.svg" alt="u&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />和那些因素也是无关的. 现在假设空窖会吸收并发射辐射.
+</p>
+   <div class="newtheorem">
+<!--l. 460--><p class="noindent" ><span class="head">
+<a 
+ id="x1-33002r4"></a>
+<span 
+class="cmbx-10">定义 2.4 </span>(谱吸收率)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">谱吸收率</span><img 
+src="Statistical.tex288x.svg" alt="&#x03B1;&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">表示物体对波长</span><img 
+src="Statistical.tex289x.svg" alt="&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的入射辐射吸收的比率.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 463--><p class="noindent" ><span class="head">
+<a 
+ id="x1-33003r5"></a>
+<span 
+class="cmbx-10">定义 2.5 </span>(谱辐射功率)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">谱辐射功率</span><img 
+src="Statistical.tex290x.svg" alt="e
+ &#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">满足</span><img 
+src="Statistical.tex291x.svg" alt="e d&#x03BB;
+ &#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">为单位面积内表面发射的波长在</span><img 
+src="Statistical.tex292x.svg" alt="&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">与</span><img 
+src="Statistical.tex293x.svg" alt="&#x03BB; + d&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">之间的辐射功率.</span>
+</p>
+   </div>
+<!--l. 466--><p class="indent" >   在平衡时, 吸收功率和发射功率相等, 即
+</p>
+   <div class="newtheorem">
+<!--l. 467--><p class="noindent" ><span class="head">
+<a 
+ id="x1-33004r5"></a>
+<span 
+class="cmbx-10">推论 2.5 </span>(Kirchhoff定律)<span 
+class="cmbx-10">.</span>  </span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex294x.svg" alt="e     c
+-&#x03BB;-=  -u&#x03BB;.
+&#x03B1; &#x03BB;   4
+" class="math-display"  /></center>
+<!--l. 468--><p class="nopar" >
+                                                                  
+
+                                                                  
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 470--><p class="noindent" ><span class="head">
+<a 
+ id="x1-33005r4"></a>
+<span 
+class="cmbx-10">附注 2.4.</span>  </span><span 
+class="cmti-10">Kirchhoff定律说明特定波长下的良好的吸收体是良好的发射体.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 473--><p class="noindent" ><span class="head">
+<a 
+ id="x1-33006r6"></a>
+<span 
+class="cmbx-10">定义 2.6 </span>(黑体)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">黑体谓对于任何波长</span><img 
+src="Statistical.tex295x.svg" alt="&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">皆有</span><img 
+src="Statistical.tex296x.svg" alt="&#x03B1; &#x03BB; = 1  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的物体.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 476--><p class="noindent" ><span class="head">
+<a 
+ id="x1-33007r7"></a>
+<span 
+class="cmbx-10">定义 2.7 </span>(黑体空窖与黑体辐射)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">黑体空窖谓壁为黑体的墙.           黑体空窖内会包含和壁有相同温度的光子气体,</span>
+<span 
+class="cmti-10">谓黑体辐射.</span>
+</p>
+   </div>
+<!--l. 479--><p class="indent" >   假设日地距离为<img 
+src="Statistical.tex297x.svg" alt="D  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 则太阳<img 
+src="Statistical.tex298x.svg" alt="S  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />发射的辐射被地球<img 
+src="Statistical.tex299x.svg" alt="E  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />接收的部分为
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex300x.svg" alt="          (      )
+    2    4  &#x03C0;R2E-
+4&#x03C0;R S &#x22C5;&#x03C3;T S 4&#x03C0;D2  ,
+" class="math-display"  /></center>
+<!--l. 480--><p class="nopar" > 地球的辐射功率为
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex301x.svg" alt="4&#x03C0;R2E &#x22C5;&#x03C3;T4E.
+" class="math-display"  /></center>
+<!--l. 482--><p class="nopar" > 平衡时两者相等, 故
+                                                                  
+
+                                                                  
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex302x.svg" alt="      &#x2218;----
+TE      RE
+TS- =   2D-.
+" class="math-display"  /></center>
+<!--l. 484--><p class="nopar" > 可算得<img 
+src="Statistical.tex303x.svg" alt="TE &#x2248; 280K.  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />
+</p>
+<!--l. 486--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-340002.3.2"></a><span 
+class="cmbx-10">光压</span></span>
+   如果所有光子都沿着相同方向而不是如光字气体随机取向, 则相应的<img 
+src="Statistical.tex304x.svg" alt="p = u  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 而<img 
+src="Statistical.tex305x.svg" alt="I = uc  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+</p>
+   <div class="newtheorem">
+<!--l. 487--><p class="noindent" ><span class="head">
+<a 
+ id="x1-34001r14"></a>
+<span 
+class="cmbx-10">例 2.14.</span>  </span><span 
+class="cmti-10">太阳在地球表面的功率为</span><img 
+src="Statistical.tex306x.svg" alt="F = 1370W/m2   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 相应的光压</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex307x.svg" alt="p = I= 4.6�Pa.
+    c
+" class="math-display"  /></center>
+<!--l. 489--><p class="nopar" >
+</p>
+   </div>
+<!--l. 491--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.3   </span> <a 
+ id="x1-350002.3.3"></a>光子的统计力学</h5>
+<!--l. 492--><p class="noindent" >光子作为正弦波可以视为谐振子产生的, 故能量符合谐振子能量. 类似于(<a 
+href="#x1-16001r6">6<!--tex4ht:ref: eq:statedensity --></a>)的推导,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex308x.svg" alt="         V-k2dk
+g (k)dk =   2&#x03C0;2  &#x00D7;2.
+" class="math-display"  /></center>
+<!--l. 493--><p class="nopar" > 因子<img 
+src="Statistical.tex309x.svg" alt="2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />来自于光有两个偏振方向的事实. 由<img 
+src="Statistical.tex310x.svg" alt="&#x03C9; = ck  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex311x.svg" alt="         V-&#x03C9;2d&#x03C9;
+g(&#x03C9;)d&#x03C9; =  &#x03C0;2c3 .
+" class="math-display"  /></center>
+<!--l. 495--><p class="nopar" > 使用方程(<a 
+href="#x1-12004r5">5<!--tex4ht:ref: eq:uofharmonic --></a>)获得单个谐振子的内能, 总内能为
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex312x.svg" alt="&#x222B; &#x221E;    (1      1   )           V &#x210F; &#x222B; &#x221E;  &#x03C9;3d &#x03C9;    ( V&#x03C0;2k4 )
+    &#x210F;&#x03C9;  2 + e&#x03B2;&#x210F;&#x03C9; --1 g(&#x03C9;)d&#x03C9; &#x2192;  &#x03C0;2c3    e&#x03B2;&#x210F;&#x03C9; --1-=  15c3&#x210F;B3- T 4.
+ 0                                  0
+" class="math-display"  /></center>
+<!--l. 497--><p class="nopar" > 其中谐振子能量常数项<img 
+src="Statistical.tex313x.svg" alt="1
+2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />导致的发散积分归入真空能后消去. <div class="finaleBox">
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-35001r14"></a>
+   <center class="math-display" >
+<img 
+src="Statistical.tex314x.svg" alt="    V &#x03C0;2k4        &#x03C0;2k4
+A = 15c3&#x210F;B3 , &#x03C3; = 60c2B&#x210F;3.
+" class="math-display"  /></center></td><td class="equation-label">(14)</td></tr></table>
+<!--l. 503--><p class="nopar" >
+</div>
+导出总内能的被积式即为谱能量密度, 即<span 
+class="cmti-10">黑体分布</span>, 采用不同的宗量有
+</p>
+   <div class="newtheorem">
+<!--l. 506--><p class="noindent" ><span class="head">
+<a 
+ id="x1-35002r1"></a>
+<span 
+class="cmbx-10">定理 2.1 </span>(Planck黑体辐射定律)<span 
+class="cmbx-10">.</span>  </span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex315x.svg" alt="     -&#x210F;----&#x03C9;3----       8&#x03C0;h---&#x03BD;3--        8&#x03C0;hc----1-----
+u&#x03C9; = &#x03C0;2c3 e&#x03B2;&#x210F;&#x03C9; - 1,  u&#x03BD; = c3 e&#x03B2;h&#x03BD; - 1, u&#x03BB; =  &#x03BB;5  e&#x03B2;hc&#x2215;&#x03BB; - 1.
+" class="math-display"  /></center>
+<!--l. 507--><p class="nopar" >
+                                                                  
+
+                                                                  
+</p>
+   </div>
+<!--l. 509--><p class="indent" >   在长波处与Rayleigh-Jeans定律(<a 
+href="#x1-3010r1">1<!--tex4ht:ref: eq:rayleighjeans --></a>)相符. Planck黑体分布表明高频的紫外区其实并未被激发,
+因而解决紫外灾变. 直接对<img 
+src="Statistical.tex316x.svg" alt="u&#x03BB;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />求导取最值可得
+</p>
+   <div class="newtheorem">
+<!--l. 510--><p class="noindent" ><span class="head">
+<a 
+ id="x1-35003r6"></a>
+<span 
+class="cmbx-10">推论 2.6 </span>(Wien定律)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">设</span><img 
+src="Statistical.tex317x.svg" alt="&#x03BB;max   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">为能量密度最大的相应波长, 则</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex318x.svg" alt="&#x03BB;maxT = const.
+" class="math-display"  /></center>
+<!--l. 512--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 514--><p class="noindent" ><span class="head">
+<a 
+ id="x1-35004r15"></a>
+<span 
+class="cmbx-10">例 2.15 </span>(宇宙微波背景辐射)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">天空中各个方向有几乎各向同性的与</span><img 
+src="Statistical.tex319x.svg" alt="2.7K  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">的黑体辐射相符的宇宙微波背景辐射. 由于不同温度的黑体辐射的叠加无法得到单一的黑体辐射分布,</span>
+<span 
+class="cmti-10">可以推断宇宙曾经处于热平衡状态. 此外, 通过</span><img 
+src="Statistical.tex320x.svg" alt="u &#x221D; T 4   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">可以推出宇宙早期的温度, 它更小且更热.</span>
+</p>
+   </div>
+<!--l. 517--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.3.4   </span> <a 
+ id="x1-360002.3.4"></a>Einstein系数</h5>
+<!--l. 518--><p class="noindent" >假设原子气体处在光子气体中, 电子发生跃迁, 将系统简化为二能级系统, 有三种过程可以发生:
+     </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
+  1. </dt><dd 
+class="enumerate-enumitem">自发辐射(一个光子被发射):
+     <center class="math-display" >
+     <img 
+src="Statistical.tex321x.svg" alt="dN2
+-dt-= - A21N2.
+     " class="math-display"  /></center>
+     <!--l. 521--><p class="nopar" >
+                                                                  
+
+                                                                  
+     </p></dd><dt class="enumerate-enumitem">
+  2. </dt><dd 
+class="enumerate-enumitem">吸收(一个光子被吸收):
+     <center class="math-display" >
+     <img 
+src="Statistical.tex322x.svg" alt="dN1
+dt--= - N1B12u &#x03C9;.
+     " class="math-display"  /></center>
+     <!--l. 523--><p class="nopar" >
+     </p></dd><dt class="enumerate-enumitem">
+  3. </dt><dd 
+class="enumerate-enumitem">受激辐射(吸收一个光子后发出一个光子, 并激发另一原子发出光子):
+     <center class="math-display" >
+     <img 
+src="Statistical.tex323x.svg" alt="dN2- = - N2B21u &#x03C9;.
+ dt
+     " class="math-display"  /></center>
+     <!--l. 525--><p class="nopar" ></p></dd></dl>
+<!--l. 527--><p class="noindent" >平衡时有
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex324x.svg" alt="                            N2-   g2 -&#x03B2;&#x210F;&#x03C9;
+N2B21u&#x03C9; + N2A21 = N1B12u&#x03C9;,  N1  = g1e    .
+" class="math-display"  /></center>
+<!--l. 528--><p class="nopar" > 其中<img 
+src="Statistical.tex325x.svg" alt="g1  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />和<img 
+src="Statistical.tex326x.svg" alt="g2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />分别是两个能及的简并度. 得到
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex327x.svg" alt="u&#x03C9; = ------A21&#x2215;B21&#x03B2;&#x210F;&#x03C9;----.
+     (g1B12&#x2215;g2B21 )e   - 1
+" class="math-display"  /></center>
+<!--l. 530--><p class="nopar" > 与Planck黑体辐射定律比较可得
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex328x.svg" alt="B21   g1         &#x210F;&#x03C9;3
+B---= g-, A21 = &#x03C0;2c3B21.
+ 12    2
+" class="math-display"  /></center>
+<!--l. 532--><p class="nopar" >
+</p>
+   <div class="newtheorem">
+<!--l. 533--><p class="noindent" ><span class="head">
+                                                                  
+
+                                                                  
+<a 
+ id="x1-36004r16"></a>
+<span 
+class="cmbx-10">例 2.16.</span>  </span><span 
+class="cmti-10">当</span><img 
+src="Statistical.tex329x.svg" alt="N2&#x2215;g2 &#x003E; N1 &#x2215;g1   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">时受激辐射率大于吸收率, 如果通过其他能级的跃迁保证高能级的原子数足够大而低能级的原子数足够小则可产生激光.</span>
+</p>
+   </div>
+<!--l. 536--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">2.4   </span> <a 
+ id="x1-370002.4"></a>声子</h4>
+<!--l. 537--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.4.1   </span> <a 
+ id="x1-380002.4.1"></a>Einstein模型</h5>
+<!--l. 538--><p class="noindent" >Einstein模型假设了固体的所有振动模都有相同的频率<img 
+src="Statistical.tex330x.svg" alt="&#x03C9;E  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 通过(<a 
+href="#x1-12004r5">5<!--tex4ht:ref: eq:uofharmonic --></a>),
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex331x.svg" alt="U = 3NUSHO =  3N-&#x210F;&#x03C9;E + -3N&#x210F;&#x03C9;E--.
+               2       e&#x03B2;&#x210F;&#x03C9;E - 1
+" class="math-display"  /></center>
+<!--l. 539--><p class="nopar" > 设特征温度<img 
+src="Statistical.tex332x.svg" alt="&#x0398;
+  E  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />满足<img 
+src="Statistical.tex333x.svg" alt="&#x210F;&#x03C9;  = k &#x0398;
+  E    B  E  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex334x.svg" alt="x = &#x0398;  &#x2215;T
+     E  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />有
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex335x.svg" alt="          (1       1    )       ( &#x2202;U )       x2ex
+U = 3R&#x0398;E   2 + e&#x0398;E&#x2215;T --1 ,  C =   &#x2202;T- = 3R --x----2.
+                                           (e - 1)
+" class="math-display"  /></center>
+<!--l. 541--><p class="nopar" > 当<img 
+src="Statistical.tex336x.svg" alt="T &#x2192; &#x221E; " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex337x.svg" alt="C &#x2192;  3R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />可正确复制Dulong-Petit定律. 低温下热容快速下降.
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.4.2   </span> <a 
+ id="x1-390002.4.2"></a>Debye模型</h5>
+<!--l. 544--><p class="noindent" >Debye模型设定<img 
+src="Statistical.tex338x.svg" alt="g(&#x03C9;)d&#x03C9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为<img 
+src="Statistical.tex339x.svg" alt="&#x03C9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />到<img 
+src="Statistical.tex340x.svg" alt="&#x03C9;+ d&#x03C9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />内振动模的个数,
+<img 
+src="Statistical.tex341x.svg" alt="&#x222B; g = 3N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex342x.svg" alt="         4&#x03C0;k2dk       3Vk2dk          3V&#x03C9;2d &#x03C9;
+g(k)dk = (2&#x03C0;-&#x2215;L-)3 &#x00D7; 3 =-2&#x03C0;2--,  g(&#x03C9;) = -2&#x03C0;2v2-.
+                                           s
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 545--><p class="nopar" > 其中<img 
+src="Statistical.tex343x.svg" alt="&#x03C9; = vsk  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 因子<img 
+src="Statistical.tex344x.svg" alt="3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />来源于每个晶格振动有一个纵向极化和两个横向极化的事实. 假设频率从零开始激发至最大频率<img 
+src="Statistical.tex345x.svg" alt="&#x03C9;D  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+即<span 
+class="cmti-10">Debye频率</span>, 可知
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex346x.svg" alt="     ( 6N &#x03C0;2v3s)1&#x2215;3             9N&#x03C9;2d&#x03C9;
+&#x03C9;D =   --V----   ,  g(&#x03C9;) d&#x03C9; = --&#x03C9;3---.
+                                 D
+" class="math-display"  /></center>
+<!--l. 547--><p class="nopar" > 相应地定义<span 
+class="cmti-10">Debye温度</span><img 
+src="Statistical.tex347x.svg" alt="&#x0398;D  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />满足<img 
+src="Statistical.tex348x.svg" alt="&#x210F;&#x03C9;D = kB&#x0398;D  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex349x.svg" alt="    &#x222B; &#x03C9;    (            )                        &#x222B; &#x03C9;    3
+U =    D &#x210F;&#x03C9;  1 + ---1---- g(&#x03C9;)d&#x03C9; = 9N &#x210F;&#x03C9;D + 9N-&#x210F;   D --&#x03C9;-d&#x03C9;-.
+     0       2   e&#x03B2;&#x210F;&#x03C9; - 1           8         &#x03C9;3D   0  e&#x03B2;&#x210F;&#x03C9; - 1
+" class="math-display"  /></center>
+<!--l. 549--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex350x.svg" alt="    (    )       &#x222B; &#x03C9;D    3 &#x210F;&#x03C9;&#x03B2;  (     )         &#x222B; xD   4x
+C =   &#x2202;U-  = 9N-&#x210F;     --&#x03C9;-e-----  -&#x210F;&#x03C9;-- d&#x03C9; = 9R-     x-e-dx-.
+      &#x2202;T      &#x03C9;3D  0   (e&#x03B2;&#x210F;&#x03C9; - 1)2  kBT2       x3D  0   (ex - 1)2
+" class="math-display"  /></center>
+<!--l. 550--><p class="nopar" > 其中<img 
+src="Statistical.tex351x.svg" alt="x = &#x03B2;&#x210F;&#x03C9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Statistical.tex352x.svg" alt="xD = &#x03B2;&#x210F;&#x03C9;D  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />. 高温下<img 
+src="Statistical.tex353x.svg" alt="xD &#x2192;  0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 相应地<img 
+src="Statistical.tex354x.svg" alt="C &#x2192; 3R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+低温下<img 
+src="Statistical.tex355x.svg" alt="xD &#x2192; &#x221E; " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 积分可近似为定值, <img 
+src="Statistical.tex356x.svg" alt="C &#x221D; T3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">2.4.3   </span> <a 
+ id="x1-400002.4.3"></a>声子色散关系</h5>
+<!--l. 553--><p class="noindent" >间距为<img 
+src="Statistical.tex357x.svg" alt="a  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的单原子链的振动满足
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex358x.svg" alt="m �un = K (un+1 - 2un + un-1).
+" class="math-display"  /></center>
+<!--l. 554--><p class="nopar" > 用<img 
+src="Statistical.tex359x.svg" alt="un = exp[i(k&#x03C9;a - &#x03C9;t)]  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />试探之, 可得
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex360x.svg" alt="   ( 4K )1&#x2215;2
+&#x03C9; =  m--    |sin(ka&#x2215;2)|.
+" class="math-display"  /></center>
+<!--l. 556--><p class="nopar" > 在长波情形下, <img 
+src="Statistical.tex361x.svg" alt="qa &#x2192; 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 有<img 
+src="Statistical.tex362x.svg" alt="&#x03C9; &#x2192;  vsk  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 其中
+</p>
+   <center class="math-display" >
+<img 
+src="Statistical.tex363x.svg" alt="     (   )
+       K- 1&#x2215;2
+vs = a m     .
+" class="math-display"  /></center>
+<!--l. 558--><p class="nopar" > 因此低频时Debye模型的假设是恰当的, 低温下只有低频声子, 故低温情形热容符合Debye模型的预言.
+</p><!--l. 561--><p class="indent" >   如果晶体中存在不同类型的原子, 色散关系就会有多个分支, 其中光学支在<img 
+src="Statistical.tex364x.svg" alt="k = 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />附近会有非零的<img 
+src="Statistical.tex365x.svg" alt="&#x03C9;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />. Einstein模型可以良好地描述光学模.
+</p> 
+</body></html> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+

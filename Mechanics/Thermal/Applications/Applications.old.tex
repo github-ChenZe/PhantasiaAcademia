@@ -1,0 +1,144 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{应用}
+\subsection{声波}
+\subsubsection{流体中的声速公式}
+连续性方程与Euler方程
+\[ \div\pare{\rho\vvu} = -\ddelon{\rho}{t},\quad -\rec{\rho}\nabla p = \ddelon{\vvu}{t} + \pare{\vvu\cdot\nabla} \vvu \]
+在一维情形下分别为
+\[ \ddelon{\pare{\rho u}}{x} = -\ddelon{\rho}{t},\quad -\rec{\rho}\ddelon{p}{x} = \ddelon{u}{t} + u\ddelon{u}{x}. \]
+对连续性方程展开微分并忽略二阶项, 记$\delta s = \delta \rho/\rho$, 有
+\[ u\ddelon{s}{x} + \ddelon{u}{x} = -\ddelon{s}{t}\quad\longrightarrow\quad \ddelon{u}{x} = -\ddelon{s}{t}. \]
+在Euler方程中忽略二阶项并借助体积模量有
+\[ B = -V\ddelon{p}{V} = \rho\ddelon{p}{\rho}\quad\longrightarrow\quad -\rec{\rho}\ddelon{p}{x} = -\frac{B}{\rho}\ddelon{s}{x} = \ddelon{u}{t}. \]
+两条方程可消去$u$, 从而
+\[ \dddelon{s}{x} = \frac{\rho}{B}\dddelon{s}{t},\quad v_s = \sqrt{\frac{B}{\rho}}. \]
+\subsubsection{气体声速}
+等温条件下和绝热条件下分别有
+\[ v_s = \sqrt{\frac{B_T}{\rho}} = \sqrt{\frac{p}{\rho}} = \sqrt{\frac{\rec{3}nm\expc{v^2}}{\rho}} = \sqrt{\expc{v_x^2}}. \]
+\[ v_s = \sqrt{\frac{B_S}{\rho}} = \sqrt{\frac{\gamma p}{\rho}} = \sqrt{\frac{\gamma\expc{v^2}}{3}} = \sqrt{\gamma\expc{v_x^2}}. \]
+特别地, 在等温和绝热的条件下都有$v_s\propto \sqrt{T/m}$.
+\begin{ex}
+在绝热条件下计算的大气声速为$v_s=\SI{340}{m/s}$, 与实验符合.
+\end{ex}
+如果声波在传播时有足够长的时间让被压缩的部分和周围达到热平衡, 则声波可以视为等温的. 这关系到声波的波长和由\eqref{eq:skindelta}给出的热波的趋肤深度$\delta$, 分别有
+\[ \lambda = \frac{2\pi v_s}{\omega},\quad \delta = \sqrt{\frac{2D}{\omega}}. \]
+在低频区域, 声波可以视为绝热的.
+\begin{finale}
+\begin{equation}
+\label{eq:speedofsound}
+v_s = \sqrt{\frac{B}{\rho}} = \sqrt{\frac{\gamma p}{\rho}}.
+\end{equation}
+\end{finale}
+\begin{ex}
+对于相对论性气体, 由\eqref{eq:pisu3}, $p = u/3$, 相应地
+\[ v_s = \sqrt{\frac{p}{\rho}} = \frac{c}{\sqrt{3}}. \]
+\end{ex}
+\subsection{激波}
+\subsubsection{激波的定义}
+一个扰动(比如高速飞过的飞机)的\emph{Mach数}谓
+\[ M = \frac{w}{v_s}. \]
+其中$w$为扰动通过介质的速度. 借助\eqref{eq:speedofsound}, 立刻有
+\begin{equation}
+\label{eq:Msquaredinthermals}
+M^2 = \frac{\rho v_1^2}{\gamma p_1}.
+\end{equation}
+\par
+如果速度大于声速, 则为该扰动为\emph{激波波前}. 由三项守恒定律分别有(下标$1$表示前方, $2$表示后方, $\tilde{u}$为单位质量的内能)
+\begin{cenum}
+\item 通过的质量通量在激波波前处相等,
+\begin{equation}
+\label{eq:shockmassconservation}
+\rho_2 v_2 = \rho_1 v_1 = \Phi_m.
+\end{equation}
+\item 动量守恒要求单位面积上的力与穿过的动量之和在两侧相等,
+\begin{equation}
+\label{eq:shockmomentumconservation}
+p_2 + \rho_2 v_2^2 = p_1 + \rho_1 v_1^2.
+\end{equation}
+\item 能量守恒要求单位面积压强做功的功率与穿过的能量之和在两侧相等,
+\begin{equation}
+\label{eq:shockenergyconservation}
+p_2 v_2 + \pare{\rho_2 \tilde{u}_2 + \half \rho_2 v_2^2}v_2 = p_1 v_1 + \pare{\rho_1 \tilde{u}_1 + \half \rho_1 v_1^2}v_1.
+\end{equation}
+\end{cenum}
+\subsubsection{Rankine-Hugoniot条件}
+\begin{lemma}
+\label{lem:RHconditionLemma1}
+$v_1^2 - v_2^2 = \pare{p_2 - p_1}\pare{\rho_1^{-1} + \rho_2^{-1}}$.
+\end{lemma}
+\begin{proof}
+直接整理\eqref{eq:shockmassconservation}得到
+\begin{equation}
+\label{eq:diffpinphianddiffrho}
+p_2 - p_1 = \rho_1 v_1^2 - \rho_2 v_2^2 = \Phi_m^2\pare{\rho_1^{-1} - \rho_2^{-1}}.
+\end{equation}
+将它代入下式即得证.
+\[ v_1^2 - v_2^2 = \pare{v_1 - v_2}\pare{v_1 + v_2} = \Phi_m^2\pare{\rho_1^2 - \rho_2^2}\pare{\rho_1^2 + \rho_2^2}.  \qedhere \]
+\end{proof}
+\begin{lemma}
+\label{lem:RHconditionLemma2}
+假设气体为理想气体并具有绝热指数$\gamma$, 则
+\[ \frac{\rho_2^{-1}}{\rho_1^{-1}} = \frac{\pare{\gamma+1}p_1+\pare{\gamma-1}p_2}{\pare{\gamma-1}p_1+\pare{\gamma+1}p_2}. \]
+\end{lemma}
+\begin{proof}
+由\eqref{eq:uinpandgamma}将压强代换为单位质量的内能, 并代入\eqref{eq:shockenergyconservation},
+\[ \gamma\rho_2v_2\tilde{u}_1 + \half\rho_2v_2^3 = \gamma\rho_1v_1\tilde{u}_1 + \half\rho_1v_1^3. \]
+除以\eqref{eq:shockmassconservation}, 再利用\eqref{eq:uinpandgamma}将内能代换为压强,
+\[ \frac{\gamma p_2}{\pare{\gamma - 1}\rho_2} + \half v_2^2 = \frac{\gamma p_1}{\pare{\gamma - 1}\rho_1} + \half v_1^2. \]
+借助\lref{RHconditionLemma1}并去除分母,
+\[ 2\gamma\pare{p_1\rho_1^{-1} - p_2\rho_2^{-1}} + \pare{\gamma - 1}\pare{p_2 - p_1}\pare{\rho_1^{-1} + \rho_2^{-1}} = 0. \qedhere \]
+\end{proof}
+\begin{finale}
+\begin{theorem}[Rankine-Hugoniot条件]
+设激波波前具有Mach数$M$,
+\[ \frac{p_2}{p_1} = \frac{2\gamma M_1^2 - \pare{\gamma - 1}}{\gamma + 1},\quad \frac{\rho_2}{\rho_1} = \frac{v_1}{v_2} = \frac{\pare{\gamma + 1}M_1^2}{2+\pare{\gamma - 1}M-1^2}. \]
+\end{theorem}
+\end{finale}
+\begin{proof}
+通过\lref{RHconditionLemma2}以及\eqref{eq:diffpinphianddiffrho},
+\[ \rho_1 v_1^2 = \Phi_m^2\rho_1^{-1} = \frac{p_2 - p_1}{1 - \rho_2^{-1}/\rho_1^{-1}} = \half \brac{\pare{\gamma - 1}p_1 + \pare{\gamma + 1}p_2}. \]
+又由\eqref{eq:Msquaredinthermals}即可得证左边的等式,
+\[ M_1^2 \gamma p_1 = \half \brac{\pare{\gamma - 1}p_1 + \pare{\gamma + 1}p_2}. \]
+将左边的等式代入\lref{RHconditionLemma2}可得右边的等式.
+\end{proof}
+\begin{ex}
+在单原子气体的极限下, $\rho_2/\rho_1$不会超过$4$.
+\end{ex}
+激波中不可能发生$\rho_2<\rho_1$, 否则气体在波前膨胀冷却并超声速, 违反第二定律. 通过\eqref{eq:entropyofidealgases}与Rankine-Hugoniot条件展开熵变
+\[ \Delta S = S_2 - S_1 = C_V \ln\brac{\frac{p_2}{p_1}\pare{\frac{\rho_1}{\rho_2}}^{\gamma}} \]
+可以发现超音速的情况下总是熵增. 即激波将动能转化为热能.
+\subsection{Brown运动与涨落}
+\subsubsection{Brown运动}
+\emph{Langevin方程}(一维情形)为
+\[ m\dot{v} = -\alpha v + F\pare{t},\quad m\eddon{}{t}\pare{x\dot{x}} = m\dot{x}^2 - \alpha x \dot{x} + F\pare{t}. \]
+分别对各项求时间平均, 即
+\[ m\eddon{}{t}\expc{x\dot{x}} = k_B T - \expc{x\dot{x}}. \]
+假设$t=0$时有边界条件$x=0$,
+\[ \half \eddon{}{t}\expc{x^2} = \expc{x\dot{x}} = \frac{k_BT}{\alpha}\pare{1-e^{-\alpha t/m}}. \]
+对于充分大的$t$, 有
+\[ \expc{x^2} = \frac{2k_BTt}{\alpha}. \]
+\begin{remark}
+可以发现扩散率与耗散$\alpha$的联系.
+\end{remark}
+定义\emph{速度关联函数}$\expc{v\pare{0}v\pare{t}}$为
+\[ \lim_{T\rightarrow\infty} \rec{T}\int_{-T/2}^{T/2} v\pare{t'}v\pare{t+t'}\,\rd{t'}. \]
+它描述了某一时刻的速度与其后的速度的相关程度. 对于Brown运动, 通过Langevin方程, 对$\tau\rightarrow 0$成立
+\[ \frac{v\pare{0}v\pare{t+\tau} - v\pare{0}v\pare{\tau}}{\tau} = -\frac{\alpha}{m} v\pare{0}v\pare{t} + \frac{v\pare{0}F\pare{t}}{m}. \]
+对时间取平均并取极限,
+\[ \eddon{}{t}\expc{v\pare{0}v\pare{t}} = -\frac{\alpha}{m}\expc{v\pare{0}v\pare{t}}. \]
+从而
+\[ \expc{v\pare{0}v\pare{t}} = \expc{v\pare{0}^2}e^{-\alpha t/m}. \]
+因此, 速度关联函数以速度自身的弛豫速度相同的速率衰减.
+\subsubsection{Johnson噪声}
+假设电阻$R$被连接到长度为$L$, 电阻为$R$的传输线上, 传输线允许$k=n\pi/L$, 频率$\omega = ck$的模. 每个模有平均能量$k_B T$, 故每单位长度传输线传输的能量为
+\[ k_BT\frac{\Delta \omega}{c\pi}, \]
+相应地, 考虑到传输的能量有一半向左, 一半向右, 电阻$R$消耗的能量为
+\[ \rec{2\pi}k_BT\Delta\omega = \half \frac{\expc{V^2}}{2R}. \]
+故在频率间隔$\Delta f$内有涨落
+\begin{finale}
+\[ \expc{V^2} = 4k_BTR\Delta f. \]
+\end{finale}
+\end{document}

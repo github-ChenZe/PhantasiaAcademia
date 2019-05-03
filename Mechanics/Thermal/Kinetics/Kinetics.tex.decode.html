@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head>
+   <title></title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="generator" content="TeX4ht (http://www.tug.org/tex4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.tug.org/tex4ht/)" /> 
+<!-- xhtml,svg,pic-align,charset=utf-8,html --> 
+<meta name="src" content="Kinetics.tex.tex" /> 
+<link rel="stylesheet" type="text/css" href="Kinetics.tex.css" /> 
+</head><body 
+>
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>气体动理学理论</h3>
+<!--l. 7--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>Maxwell-Boltzmann分布</h4>
+<!--l. 8--><p class="noindent" >
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">1.1.1   </span> <a 
+ id="x1-30001.1.1"></a>速度分布</h5>
+<!--l. 9--><p class="noindent" >Boltzmann分布可以被用来得出速率分布, 如果假设分子(单原子)气体的能量仅包括动能,
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex2x.svg" alt="    1   2   1  2   1   2  1   2
+E = 2mv  =  2mvx + 2mv y + 2mv z.
+" class="math-display"  /></center>
+<!--l. 10--><p class="nopar" > 并且假设分子之间存在相互碰撞但分子间的相互作用力可以忽略, 故分子可以看作正则系综中的小系统.
+</p><!--l. 13--><p class="indent" >   由于速度的三个分量可以视为三个随机变量, 因此分量<img 
+src="Kinetics.tex3x.svg" alt="i  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />具有大小<img 
+src="Kinetics.tex4x.svg" alt="vi  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的概率为
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex5x.svg" alt="        -mv2&#x2215;2kT
+g(vi) &#x221D; e  i  B  .
+" class="math-display"  /></center>
+<!--l. 14--><p class="nopar" > 归一化条件要求<img 
+src="Kinetics.tex6x.svg" alt="&#x222B;
+  g = 1  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 从而 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex7x.svg" alt="       &#x2218; --m----   2
+g(vi) =  ------e-mvi&#x2215;2kBT .
+         2&#x03C0;kBT
+" class="math-display"  /></center>
+<!--l. 17--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex8x.svg" alt="       &#x2218; ------
+         2kBT   &#x27E8; 2&#x27E9;   kBT
+&#x27E8;|vi|&#x27E9; =   -&#x03C0;m--,  vi  = -m--.
+" class="math-display"  /></center>
+<!--l. 18--><p class="nopar" > </div>
+</p>
+   <h5 class="subsubsectionHead"><span class="titlemark">1.1.2   </span> <a 
+ id="x1-40001.1.2"></a>速率分布</h5>
+<!--l. 21--><p class="noindent" >考虑速率分布具有<img 
+src="Kinetics.tex9x.svg" alt="4&#x03C0;v2dv  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的简并, 有
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex10x.svg" alt="f (v) &#x221D; v2e-mv2&#x2215;2kBT.
+" class="math-display"  /></center>
+<!--l. 22--><p class="nopar" > 归一化可得 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex11x.svg" alt="          (      )3&#x2215;2
+f (v) = &#x221A;4- -m---    v2e-mv2&#x2215;2kBT.
+         &#x03C0;  2kBT
+" class="math-display"  /></center>
+<!--l. 25--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex12x.svg" alt="       &#x2218; ------      &#x2218; ------
+vmax =   2kBT-, &#x27E8;v&#x27E9; =   8kBT,
+          m             &#x03C0;m
+" class="math-display"  /></center>
+<!--l. 26--><p class="nopar" >
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex13x.svg" alt="&#x27E8;  &#x27E9;  3k  T         &#x2218; ----  &#x2218; 3k-T--
+ v2 = --B--,  vrms =  &#x27E8;v2&#x27E9; =   --B--.
+        m                      m
+" class="math-display"  /></center>
+<!--l. 27--><p class="nopar" >
+</p>
+   <table 
+class="equation"><tr><td> <a 
+ id="x1-4001r1"></a>
+                                                                  
+
+                                                                  
+   <center class="math-display" >
+<img 
+src="Kinetics.tex14x.svg" alt="      1   &#x27E8; &#x27E9;   3
+&#x27E8;Ek&#x27E9; =- m  v2 = -kBT.
+      2         2
+" class="math-display"  /></center></td><td class="equation-label">(1)</td></tr></table>
+<!--l. 31--><p class="nopar" >
+</div>
+</p>
+   <div class="newtheorem">
+<!--l. 33--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4002r1"></a>
+<span 
+class="cmbx-10">例 1.1.</span>  </span><span 
+class="cmti-10">通过刻有螺旋凹槽的速度选择器可以验证上述分布,             然而结果似乎与</span><img 
+src="Kinetics.tex15x.svg" alt=" 4 -mv2&#x2215;kBT
+v e  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">吻合,</span>
+<span 
+class="cmti-10">原因在于泻出的气体分子并非全部气体分子(实际上其速率较大), 且细缝有有限宽度, 而相应速率区间宽度正比于速率大小.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 36--><p class="noindent" ><span class="head">
+<a 
+ id="x1-4003r2"></a>
+<span 
+class="cmbx-10">例 1.2.</span>  </span><span 
+class="cmti-10">另一方法是由于</span><img 
+src="Kinetics.tex16x.svg" alt="vx  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">符合正态分布,</span>
+<span 
+class="cmti-10">考虑Doppler效应后气体分子光谱频率会随</span><img 
+src="Kinetics.tex17x.svg" alt="vx  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">变化, 同样呈正态分布, 通过检查半峰全宽判断参数是否相符.</span>
+</p>
+   </div>
+<!--l. 39--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x1-50001.2"></a>压强</h4>
+<!--l. 40--><p class="noindent" >压强可以由<img 
+src="Kinetics.tex18x.svg" alt="T  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Kinetics.tex19x.svg" alt="V  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />和<img 
+src="Kinetics.tex20x.svg" alt="N  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />唯一确定, 即
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex21x.svg" alt="p = f (T,V,N ).
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 41--><p class="nopar" > 理想气体方程即为一例. 下面开始推导之. <div class="finaleBox"> 速率在<img 
+src="Kinetics.tex22x.svg" alt="(v,v +dv)  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />内,
+与给定方向呈<img 
+src="Kinetics.tex23x.svg" alt="(&#x03B8;,&#x03B8; + d&#x03B8;)  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />角度的分子数为
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex24x.svg" alt="nf (v)dv 1sin &#x03B8;d&#x03B8;.
+        2
+" class="math-display"  /></center>
+<!--l. 45--><p class="nopar" > </div>
+将方向设为容器壁法向, 则单位时间内相应的撞击单位面积容器壁的分子数即为这种分子扫过体积中的分子数, 即
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex25x.svg" alt="           1                     1
+dV nf (v)dv 2 sin&#x03B8;d&#x03B8; = v cos &#x03B8;nf (v)dv2 sin&#x03B8;d&#x03B8;.
+" class="math-display"  /></center>
+<!--l. 48--><p class="nopar" > 每个分子改变的动量为<img 
+src="Kinetics.tex26x.svg" alt="2mv cos&#x03B8;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 从而
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex27x.svg" alt="    &#x222B; &#x03C0;&#x2215;2&#x222B; &#x221E;           (                   )
+p =         (2mv cos&#x03B8;) v cos&#x03B8;nf (v)dv1 sind&#x03B8;  = 1 nm &#x27E8;v2&#x27E9; .
+     0   0                          2         3
+" class="math-display"  /></center>
+<!--l. 50--><p class="nopar" > 由(<a 
+href="#x1-4001r1">1<!--tex4ht:ref: eq:EktoT --></a>)立刻有 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex28x.svg" alt="pV = N kBT.
+" class="math-display"  /></center>
+<!--l. 53--><p class="nopar" > </div>
+</p>
+   <div class="newtheorem">
+<!--l. 55--><p class="noindent" ><span class="head">
+<a 
+ id="x1-5001r1"></a>
+<span 
+class="cmbx-10">附注 1.1.</span>  </span><span 
+class="cmti-10">理想气体状态方程还可以写成</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex29x.svg" alt="p&#x03BC; = &#x03C1;RT.
+" class="math-display"  /></center>
+<!--l. 57--><p class="nopar" >                <span 
+class="cmti-10">其中</span><img 
+src="Kinetics.tex30x.svg" alt="&#x03BC;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">是相对分子质量.                       如果系统中存在多种分子,</span>
+<span 
+class="cmti-10">则</span><img 
+src="Kinetics.tex31x.svg" alt="&#x03BC;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">可取(加权)平均相对分子质量.</span>
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 60--><p class="noindent" ><span class="head">
+<a 
+ id="x1-5002r2"></a>
+<span 
+class="cmbx-10">附注 1.2.</span>  </span><span 
+class="cmti-10">像这样把几个态函数连接起来的方程谓状态方程,</span>
+<span 
+class="cmti-10">从</span><span 
+class="cmbx-10">??</span><span 
+class="cmti-10">也可以写出「固体/液体状态方程」</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex32x.svg" alt="V&#x2215;V0 = 1+ &#x03B2;pdT - T0 - &#x03BA;T (p- p0).
+" class="math-display"  /></center>
+<!--l. 62--><p class="nopar" >
+</p>
+   </div>
+<!--l. 64--><p class="indent" >   <div class="pitfallBox"> 理想气体方程只有在温度不太低, 压强不太高时适用. </div>
+动能密度为
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex33x.svg" alt="            1   &#x27E8; 2&#x27E9;      2
+u = n&#x27E8;Ek&#x27E9; = 2nm  v  ,  p = 3 u.
+" class="math-display"  /></center>
+<!--l. 68--><p class="nopar" > <div class="finaleBox">
+</p>
+   <div class="newtheorem">
+<!--l. 70--><p class="noindent" ><span class="head">
+<a 
+ id="x1-5003r1"></a>
+<span 
+class="cmbx-10">公理 1.1 </span>(Dalton定律)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">混合气体的总压强为分压之和,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex34x.svg" alt="    (&#x2211;    )       &#x2211;
+p =     ni  kBT =    pi.
+      i            i
+                                                                  
+
+                                                                  
+" class="math-display"  /></center>
+<!--l. 72--><p class="nopar" >
+</p>
+   </div>
+   </div>
+<div class="pitfallBox"> Dalton定律可以单独分体积或者分压, 但不得同时适用. </div>
+   <div class="newtheorem">
+<!--l. 78--><p class="noindent" ><span class="head">
+<a 
+ id="x1-5004r3"></a>
+<span 
+class="cmbx-10">附注 1.3 </span>(另一推导)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">直接考虑速度分量可得</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex35x.svg" alt="    &#x222B; &#x221E;
+p =    (2mvi)ving(vi)dvi = nkBT.
+     0
+" class="math-display"  /></center>
+<!--l. 80--><p class="nopar" > <span 
+class="cmti-10">这种方法还可以推出单位时间内撞击单位面积的分子数为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex36x.svg" alt="    &#x222B; &#x221E;             1         1
+&#x03A6; =  0 ving(vi)dvi = 2n &#x27E8;|vi|&#x27E9; = 4n&#x27E8;v&#x27E9;.
+" class="math-display"  /></center>
+<!--l. 82--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 84--><p class="noindent" ><span class="head">
+<a 
+ id="x1-5005r4"></a>
+<span 
+class="cmbx-10">附注 1.4 </span>(从Virial定理推导)<span 
+class="cmbx-10">.</span>
+</span><span 
+class="cmti-10">由Virial定理,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex37x.svg" alt="                                &#x222F;            &#x222D;
+3                1 &#x2211;          1             1          1
+2N kBT = &#x27E8;Ek&#x27E9; = -2    &#x27E8;F &#x22C5;r&#x27E9; = 2  Spr&#x22C5;d&#x03C3; =  2   V pdV = 2 pV.
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 86--><p class="nopar" >
+</p>
+   </div>
+<!--l. 88--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x1-60001.3"></a>泻流</h4>
+   <div class="newtheorem">
+<!--l. 89--><p class="noindent" ><span class="head">
+<a 
+ id="x1-6001r1"></a>
+<span 
+class="cmbx-10">定义 1.1 </span>(通量)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">通量谓单位时间内通过单位面积的量:</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex38x.svg" alt="       Quantity Passed
+Flux = --------------.
+        Area &#x00D7; Time
+" class="math-display"  /></center>
+<!--l. 91--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 93--><p class="noindent" ><span class="head">
+<a 
+ id="x1-6002r2"></a>
+<span 
+class="cmbx-10">定义 1.2 </span>(分子通量)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">分子数的通量谓分子通量, 记作</span><img 
+src="Kinetics.tex39x.svg" alt="&#x03A6;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">.</span>
+</p>
+   </div>
+   <center class="par-math-display" >
+<img 
+src="Kinetics.tex40x.svg" alt="    &#x222B; &#x03C0;&#x2215;2&#x222B; &#x221E;
+&#x03A6; =          vcos&#x03B8;nf (v)dv1 sin &#x03B8;d &#x03B8; = 1n &#x27E8;v&#x27E9;.
+     0    0              2         4
+" class="par-math-display"  /></center>
+<!--l. 96--><p class="nopar" > <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex41x.svg" alt="    1           p
+&#x03A6; = 4n &#x27E8;v&#x27E9; = &#x221A;--------.
+             2&#x03C0;mkBT
+" class="math-display"  /></center>
+                                                                  
+
+                                                                  
+<!--l. 98--><p class="nopar" > 特别地, 泻流速率与质量的平方根成反比. </div>
+</p>
+   <div class="newtheorem">
+<!--l. 101--><p class="noindent" ><span class="head">
+<a 
+ id="x1-6003r3"></a>
+<span 
+class="cmbx-10">例 1.3 </span>(Knudsen方法)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">将具有蒸汽压的液体放在称上, 观察质量的变化率,</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex42x.svg" alt="  |    |
+-1||dM--||       ----pA----
+m | dt | = &#x03A6;A = &#x221A; 2&#x03C0;mkBT .
+" class="math-display"  /></center>
+<!--l. 103--><p class="nopar" > <span 
+class="cmti-10">从而可以得到蒸汽压.</span>
+</p>
+   </div>
+<!--l. 106--><p class="indent" >   注意到从上面的推到可以得到(由于速度快的分子单位时间内能划过更大的路程)泻出的分子速率分布应当符合
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex43x.svg" alt="        3 -mv2&#x2215;2kBT
+vf (v) ~ v e       .
+" class="math-display"  /></center>
+<!--l. 107--><p class="nopar" >
+</p>
+   <div class="newtheorem">
+<!--l. 108--><p class="noindent" ><span class="head">
+<a 
+ id="x1-6004r4"></a>
+<span 
+class="cmbx-10">例 1.4.</span>  </span><span 
+class="cmti-10">从小孔中泻出的分子气体的平均动能为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex44x.svg" alt="         1  &#x222B;&#x221E; v2v3e- 12&#x03B2;mv2dv          4
+&#x27E8;Ek &#x27E9;out = 2m 0&#x222B;&#x221E;--3--1&#x03B2;mv2---= 2kBT  = 3 &#x27E8;Ek&#x27E9;inner.
+             0  v e 2    dv
+" class="math-display"  /></center>
+<!--l. 110--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+                                                                  
+
+                                                                  
+<!--l. 112--><p class="noindent" ><span class="head">
+<a 
+ id="x1-6005r5"></a>
+<span 
+class="cmbx-10">例 1.5.</span>  </span><span 
+class="cmti-10">两个由带孔隔板分隔的容器,          孔大时平衡态为</span><img 
+src="Kinetics.tex45x.svg" alt="T1 = T2   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">,</span>          <img 
+src="Kinetics.tex46x.svg" alt="p1 = p2   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">.</span>
+<span 
+class="cmti-10">孔小时</span><img 
+src="Kinetics.tex47x.svg" alt="&#x03A6;1 = &#x03A6;2   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">, 即</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex48x.svg" alt="&#x221A;p1- = &#x221A;p2-.
+  T1     T2
+" class="math-display"  /></center>
+<!--l. 114--><p class="nopar" >
+</p>
+   </div>
+   <div class="newtheorem">
+<!--l. 116--><p class="noindent" ><span class="head">
+<a 
+ id="x1-6006r6"></a>
+<span 
+class="cmbx-10">例 1.6 </span>(Knudesen流动)<span 
+class="cmbx-10">.</span>  </span><span 
+class="cmti-10">两端有压强差的细管中,             经过某点的流量可以近似为「向下游」的粒子密度减去「向上游」的粒子密度,</span>
+<span 
+class="cmti-10">这近似为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex49x.svg" alt="&#x03A6; (x) ~ 1 &#x27E8;v&#x27E9;[n (x - &#x03BB;)- n (x + &#x03BB;)].
+       4
+" class="math-display"  /></center>
+<!--l. 118--><p class="nopar" > <span 
+class="cmti-10">借助</span><img 
+src="Kinetics.tex50x.svg" alt="    1   &#x27E8; 2&#x27E9;
+p = 3nm  v " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">可得</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex51x.svg" alt="        3  &#x27E8;v&#x27E9;      p1 - p2
+&#x03A6; (x ) ~ 4m-&#x27E8;v2&#x27E9; &#x22C5;2&#x03BB; &#x22C5;-L--.
+" class="math-display"  /></center>
+<!--l. 120--><p class="nopar" > <span 
+class="cmti-10">忽略常数因子并假定</span><img 
+src="Kinetics.tex52x.svg" alt="&#x03BB; ~ D  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+class="cmti-10">即管径可得</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex53x.svg" alt="       D3-p1-- p2
+&#x03A6; (x) ~ &#x27E8;v&#x27E9;  L   .
+" class="math-display"  /></center>
+<!--l. 122--><p class="nopar" > <span 
+class="cmti-10">因此加宽管道可以获得更高流速.</span>
+                                                                  
+
+                                                                  
+</p>
+   </div>
+<!--l. 125--><p class="noindent" >
+</p>
+   <h4 class="subsectionHead"><span class="titlemark">1.4   </span> <a 
+ id="x1-70001.4"></a>平均自由程和碰撞</h4>
+<!--l. 126--><p class="noindent" >设<img 
+src="Kinetics.tex54x.svg" alt="P (t)  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为一个特定的分子直到时刻<img 
+src="Kinetics.tex55x.svg" alt="t  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />不发生碰撞的概率, 则
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex56x.svg" alt="P (t +dt) = P (t)(1 - n&#x03C3;vdt).
+" class="math-display"  /></center>
+<!--l. 127--><p class="nopar" > 后一个因子是它在其后的<img 
+src="Kinetics.tex57x.svg" alt="dt  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />时间内不发生碰撞的概率. 解得(归一化后)
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex58x.svg" alt="P (t) = n&#x03C3;ve- n&#x03C3;vt.
+" class="math-display"  /></center>
+<!--l. 129--><p class="nopar" > 相应的平均散射时间为 <div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex59x.svg" alt="&#x03C4; = &#x27E8;t&#x27E9; = -1-.
+         n&#x03C3;v
+" class="math-display"  /></center>
+<!--l. 132--><p class="nopar" > </div>
+其中<img 
+src="Kinetics.tex60x.svg" alt="&#x03C3;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />皆为散射截面积, 通常可取为<img 
+src="Kinetics.tex61x.svg" alt="             2
+&#x03C3; = &#x03C0;(a1 + a2)  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />. <img 
+src="Kinetics.tex62x.svg" alt="a1  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />和<img 
+src="Kinetics.tex63x.svg" alt="a2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />分别为两种分子之半径.
+</p><!--l. 136--><p class="indent" >   为了求出平均自由程, 需明确上式中<img 
+src="Kinetics.tex64x.svg" alt="v  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的意义——即相对速度的均值.
+</p>
+   <div class="align"><img 
+src="Kinetics.tex65x.svg" alt="pict"  /></div>
+<!--l. 141--><p class="indent" >   其中换元<img 
+src="Kinetics.tex66x.svg" alt="           &#x221A; -
+x = (v - u)&#x2215; 2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, <img 
+src="Kinetics.tex67x.svg" alt="           &#x221A; -
+y = (v + u)&#x2215;  2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />. 最终积分能化成这种形式纯粹为Maxwell-Boltzmann分布的指数因子的巧合.
+<div class="finaleBox">
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex68x.svg" alt="&#x03BB; = &#x221A;-1-- = k&#x221A;BT--.
+      2n &#x03C3;    2p&#x03C3;
+" class="math-display"  /></center>
+<!--l. 143--><p class="nopar" > </div>
+</p>
+   <div class="newtheorem">
+<!--l. 145--><p class="noindent" ><span class="head">
+<a 
+ id="x1-7001r5"></a>
+<span 
+class="cmbx-10">附注 1.5.</span>  </span><span 
+class="cmti-10">可能是受到平均自由程公式的影响, </span><span class="cite"><span 
+class="cmti-10">[</span><span 
+class="cmbx-10">?</span><span 
+class="cmti-10">]</span></span><span 
+class="cmti-10">中采纳的碰撞频率为</span>
+</p>
+   <center class="math-display" >
+<img 
+src="Kinetics.tex69x.svg" alt="    &#x221A;-
+Z =  2&#x03C0;d2n &#x27E8;v&#x27E9;.
+" class="math-display"  /></center>
+<!--l. 147--><p class="nopar" >
+</p>
+   </div>
+<!--l. 149--><p class="indent" >   <div class="pitfallBox"> 对于单种分子, 散射截面积应当使用<img 
+src="Kinetics.tex70x.svg" alt="&#x03C0;d2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />. </div>
+</p> 
+</body></html> 
+
+                                                                  
+
+                                                                  
+                                                                  
+
+

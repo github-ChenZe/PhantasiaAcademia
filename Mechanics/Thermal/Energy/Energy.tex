@@ -1,0 +1,345 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{能量与热力学第一定律}
+\subsection{热力学第一定律}
+\begin{finale}
+\begin{axiom}[热力学第一定律]
+能量是守恒的, 热量和功为能量的形式.
+\[ \rd{U} = \dbar W + \dbar Q. \]
+\end{axiom}
+\end{finale}
+\begin{ex}
+用力$F$将弹性绳拉伸长度$\rd{x}$做功为$\dbar W = F\rd{x}$, 压活塞做功为$\dbar W = -p\rd{V}$. 
+\end{ex}
+\begin{finale}
+外界对系统做功, 则$\dbar W>0$.
+\end{finale}
+\subsubsection{热容}
+对于体积功的情形, 假设内能可写为$U\pare{T,V}$,
+\[ \dbar Q = \rd{U} + p\rd{V} = \pare{\ddelon{U}{T}}_V \rd{T} + \brac{\pare{\ddelon{U}{V}}_T + p} \rd{V}. \]
+在分别约束体积和压强不变的情况下,
+\begin{finale}
+\[ C_V = \pare{\frac{\dbar Q}{\rd{T}}}_V = \pare{\ddelon{U}{T}}_V. \]
+\[ C_p = \pare{\frac{\dbar Q}{\rd{T}}}_p = C_V + \brac{\pare{\ddelon{U}{V}}_T + p}\pare{\ddelon{V}{T}}_p. \]
+\end{finale}
+\begin{pitfall}
+$\Delta U = C_V\Delta{T}$并非总是成立的. 只有改变$U$和$V$无关或者$V$不变时成立.
+\end{pitfall}
+\begin{ex}
+$\SI{1}{mol}$的单原子理想气体, $pV = RT$而$U = \frac{3}{2}RT$, 故摩尔热容
+\[ C_V = \frac{3}{2} R, \quad C_p = C_V + R = \frac{5}{2} R, \quad \gamma = \frac{C_p}{C_V} = \frac{5}{3}. \]
+\end{ex}
+\begin{ex}
+对于非单原子的理想气体, 由
+\[ C_V = \frac{R}{\gamma - 1}, \]
+单位质量和单位体积的内能分别为
+\begin{equation}
+\label{eq:uinpandgamma}
+\tilde{u} = \frac{C_V VNT}{\rho V} = \frac{p}{\rho\pare{\gamma - 1}}, \quad u = \rho\tilde{u} = \frac{p}{\gamma - 1}.
+\end{equation}
+\end{ex}
+\subsection{等温与绝热过程}
+\begin{definition}[准静态过程]
+过程谓准静态的, 如果它足够缓慢从而弛豫时间极短或每一时刻都可以视为平衡态.
+\end{definition}
+\begin{definition}[可逆过程]
+一个过程谓可逆的, 如果该过程的反演可能发生.
+\end{definition}
+\begin{ex}[可逆过程]
+分子之间的碰撞反弹与分子和容器壁之间的碰撞反弹是可逆的.
+\end{ex}
+\begin{ex}[不可逆过程]
+鸡蛋打碎和通电电阻产热是不可逆过程. 将一致朝上的硬币晃动之后导致其方向随机也是不可逆过程.
+\end{ex}
+如果操作足够缓慢, 保障系统在整个过程中都处于近似的平衡态, 则该过程谓\emph{准静态过程}.
+\begin{finale}
+\begin{axiom}
+准静态过程是可逆的.
+\end{axiom}
+\end{finale}
+\subsubsection{理想气体的等温膨胀}
+对于理想气体, $\Delta T=0$意味着$\Delta U = 0$.
+\[ \Delta Q = \int \dbar Q = -\int \rd{W} = \int_{V_1}^{V_2} \frac{RT}{V}\,\rd{V} = RT\ln\frac{V_2}{V_1}. \]
+\subsubsection{理想气体的绝热膨胀}
+当$\Delta Q = 0$, 对$\SI{1}{mol}$理想气体有
+\begin{equation}
+\label{eq:adiabeticidealgases}
+\rd{U} = C_V \rd{T} = \frac{R}{\gamma - 1} \rd{T} = -p \rd{V} = -\frac{RT}{V}\rd{V}.
+\end{equation}
+从而$TV^{\gamma - 1} = \const$,
+\begin{finale}
+\[ \quad pV^{\gamma} = \const. \]
+\end{finale}
+\begin{ex}[绝热大气]
+再次考虑大气的
+\[ T\frac{\rd{p}}{p} = -\frac{mg}{k_B}\rd{z}, \]
+由绝热条件知
+\[ \pare{1-\gamma}\frac{\rd{p}}{p} + \gamma\frac{\rd{T}}{T} = 0. \]
+从而
+\[ \edton{T}{z} = -\pare{\frac{\gamma - 1}{\gamma}}\frac{mg}{k_B} = -\frac{M_mg}{C_p}. \]
+\end{ex}
+\section{熵与热力学第二定律}
+\subsection{热力学第二定律}
+\begin{finale}
+\begin{axiom}[热力学第二定律]
+\label{ax:thermalII}
+不可能有这样的过程, 其唯一结果为热量完全转化为功.
+\end{axiom}
+\end{finale}
+\begin{ex}
+砖块砸向地面, 机械能被转化为热能, 但相反的过程却难以发生.
+\end{ex}
+\subsubsection{Carnot热机}
+Carnot热机由四个步骤组成:
+\begin{cenum}
+\item $A\rightarrow B$: 气体自高温热源$T_h$处吸收热量$Q_h$, 等温膨胀, 对外做功;
+\[ Q_h = RT_h\ln\frac{V_B}{V_A}. \]
+\item $B\rightarrow C$: 接着气体会做绝热膨胀, 再次对外做功, 损失温度;
+\[ \frac{T_h}{T_l} = \pare{\frac{V_B}{V_C}}^{1-\gamma}. \]
+\item $C\rightarrow D$: 气体将热量$Q_l$释放给低温热源$T_l$, 等温收缩, 被外界做功;
+\[ Q_l = RT_l\ln\frac{V_C}{V_D}. \]
+\item $D\rightarrow A$: 气体最后做绝热收缩, 再次被外界做功, 温度上升回$T_h$.
+\[ \frac{T_l}{T_h} = \pare{\frac{V_D}{V_A}}^{1-\gamma}. \]
+\end{cenum}
+从而$V_B/V_C=V_A/V_D$, 这刚好意味着$V_A/V_B=V_D/V_C$, 从而
+\begin{finale}
+\[ \frac{Q_h}{Q_l}=\frac{T_h}{T_l},\quad \eta = \frac{W}{Q_h} = 1 - \frac{T_l}{T_h}. \]
+\end{finale}
+\begin{corollary}[Carnot定理]
+运行在两个一定温度的热源之间的可逆热机, 效率皆相同.
+\end{corollary}
+\begin{proof}
+反向运行低效热机$E$, 从低温处吸热, 被外界做功将热传给高温处. 将高效热机$E'$的输出功输入$E$. 由于$E'$效率高, 抽取的$Q'_h$较小, 故实际上这个二热机的组合体自发地从低温处吸热运往高温处.
+\end{proof}
+\begin{finale}
+\begin{corollary}[热力学第二定律]
+\label{coll:thermalII}
+不可能有这样的过程, 其唯一结果为热量自低温物体传到高温物体.
+\end{corollary}
+\end{finale}
+\begin{proof}
+否则把这个神器和Carnot热机构成联合, Carnot放出$Q_l$热量它就将$Q_l$从低温处传向高温处, 则热量被完全转化为功, 违反\cref{ax:thermalII}.
+\end{proof}
+\begin{theorem}
+\cref{coll:thermalII}和\cref{ax:thermalII}等价.
+\end{theorem}
+\begin{proof}
+否则将违反\cref{ax:thermalII}的神器的输入设为$T_h$, 输出功作为Carnot热机的输入, 逆向运行Carnot热机则热量从低温处传向高温处, 违反\cref{coll:thermalII}.
+\end{proof}
+\begin{ex}[逆向运行的热机]
+冰箱的效率定义为$\eta = Q_l/W = T_l/\pare{T_h - T_l}$, 逆向运行Carnot热机可以达到在低温处吸收热量的效果.
+\end{ex}
+\subsubsection{Clausius定理}
+\begin{theorem}[Clausius定理]
+对于任一闭循环, 下列不等式成立且等号当且仅当循环可逆时成立:
+\begin{finale}
+\[ \oint \frac{\dbar Q}{T} \le 0. \]
+\end{finale}
+\end{theorem}
+\begin{proof}
+假设循环是如此复杂, 有$i$个节点, 每个节点处热机都从热源$T_i$获得热量$\dbar{Q_i}$, 最终输出功为
+\[ \dbar W = \sum \dbar Q_i. \]
+\par
+需要注意的是, $\dbar Q_i$可能是正的, 也可能是负的——如果所有$\dbar Q_i$都是正的, 那么热机将热量完全转化为功, 这是不可能的. 因此, 在某些节点, 热机反而把热量塞给了热源.
+\par
+现在引入一个额外的热源$T$和足够多的卡诺热机, 每个卡诺热机分别连接着$T$和$T_i$, 它们这样工作: 如果原来的热机从$T_i$处吸收热量, 则卡诺热机从$T$处吸收同样的热量补偿它, 并且不可避免地向外界做功$\dbar W_i$. 如果原来的热机向$T_i$处释放热量, 则卡诺热机吸收相同大小的热量并被外界做功后把热量塞回给$T$.
+\par
+这样的话, 对外输出的总功是$\dbar W + \sum \dbar W_i$, 但这个热机完全就是从$T$处吸收热量再塞回去, 所以输出功必然不会是正功.
+\[ \dbar W + \sum \dbar W_i = \sum \pare{\dbar Q_i + \dbar W_i} \le 0. \]
+对于Carnot热机, 成立
+\[ \frac{\dbar Q_i + \dbar W_i}{T} = \frac{\dbar Q_i}{T_i}, \]
+立刻得到Clausius不等式.
+\end{proof}
+\begin{ex}
+可以发现Carnot循环符合上述定理(等号成立).
+\end{ex}
+\begin{ex}
+假设高温热源具有热容$C_h$, 低温热源具有热容$C_l$, 由$C\rd{T} = \rd{Q}$以及
+\[ \int_{T_l}^{T_f}\frac{\dbar Q_l}{T_l} = \int_{T_h}^{T_f}\frac{\dbar Q_h}{T_h}, \]
+得到热平衡温度满足
+\[ T_f^{C_h+C_l} = T_h^{C_h}T_l^{C_l}. \]
+代入$\Delta W = \delta Q_h - \delta Q_l$可得总输出功.
+\end{ex}
+\subsubsection{Otto热机}
+Otto热机是内燃机的四冲程循环, 它的步骤为
+\begin{cenum}
+\item $A\rightarrow B$: 气体做绝热收缩, 压强和温度皆上升;
+\[ p_AV_h^{\gamma} = p_BV_l^{\gamma}. \]
+\item $B\rightarrow C$: 接着气体会等容吸热$Q_l$, 压强和温度皆上升;
+\[ Q_l = C_V\pare{T_C - T_B} \]
+\item $C\rightarrow D$: 气体做绝热膨胀, 温度和压强皆下降;
+\[ p_CV_l^{\gamma} = p_DV_h^{\gamma}. \]
+\item $D\rightarrow A$: 最后气体等容放热$Q_2$, 压强和温度皆下降.
+\[ Q_h = C_V\pare{T_D - T_A} \]
+\end{cenum}
+\[ \eta = \frac{Q_1 - Q_2}{Q_1} = 1 - \frac{V_h\pare{p_D-p_A}}{V_l\pare{p_C-p_B}} = 1-\frac{V_hp_D}{V_lp_C} = 1 - \pare{\frac{V_h}{V_l}}^{1-\gamma}. \]
+\subsection{熵}
+\begin{definition}[熵]
+熵是一个态函数, 满足
+\begin{finale}
+\[ \rd{S} = \frac{\dbar Q_{\mathrm{rev}}}{T}. \]
+\end{finale}
+\end{definition}
+从而
+\[ S\pare{B} - S\pare{A} = \int_A^B \frac{\dbar Q_{\mathrm{rev}}}{T}. \]
+\begin{corollary}
+绝热过程熵变为零.
+\end{corollary}
+$Q_{\mathrm{rev}}$意味着选取一个可逆过程为路径. 如果过程不可逆, 将它和一个可逆过程组合, 由Clausius不等式可得
+\[ \int_A^B \frac{\dbar Q}{T} \le \int_A^B\frac{\dbar Q_{\mathrm{rev}}}{T} \le 0. \]
+从而
+\[ \rd{S} = \frac{\dbar Q_{\mathrm{rev}}}{T} \ge \frac{\dbar Q}{T}. \]
+对于热孤立系统, 任何过程皆满足$\dbar Q = 0$(虽然内部可能存在热交换), 因此
+\begin{finale}
+\[ \rd{S} \ge 0. \]
+\end{finale}
+\begin{ex}
+宇宙作为一个热孤立系统, 内能恒定而熵恒增加. 假设有温度为$T_R$的大热源和温度为$T_S$, 热容为$C$的小系统, 达到热平衡时熵变为
+\[ \Delta S_{\mathrm{universe}} = \Delta S_{\mathrm{sys}} + \Delta S_{\mathrm{source}} = C\brac{\ln \frac{T_R}{T_S} + \frac{T_R}{T_S} - 1} \ge 0. \]
+\end{ex}
+\subsubsection{热力学第一定律}
+对于$U=\dbar Q + \dbar W = \dbar Q - p\rd{V}$, 如果限制$\dbar{Q}$为可逆热交换$\dbar Q_{\text{rev}}$, 则可以写成
+\begin{finale}
+\[ \rd{U} = T \rd{S} - p \rd{V}. \]
+\end{finale}
+这样可以将$T$和$p$用其它物理量表示出来,
+\[ T = \pare{\ddelon{U}{S}}_V,\quad p = \pare{\ddelon{U}{V}}_S,\quad \frac{p}{T} = \pare{\ddelon{S}{V}}_U. \]
+\begin{ex}
+\label{ex:transofp}
+两个系统的压强分别为$p_1$和$p_2$, 温度分别为$T_1$和$T_2$, 之间有内能$\Delta U$和体积$\Delta V$的转移. 熵变可以写为
+\[ \Delta S = \pare{\rec{T_1} - \rec{T_2}}\Delta U + \pare{\frac{p_1}{T_1} - \frac{p_2}{T_2}}\Delta V. \]
+当系统达到平衡时, 熵达到最大值, 两个系数皆为零, 故$p_1 = p_2$, $T_1 = T_2$.
+\end{ex}
+\begin{ex}[Joule膨胀]
+将$\SI{1}{mol}$理想气体容器的阀门打开, 使其体积不可逆地扩散至两倍, 过程绝热故$\Delta U = 0$, $\Delta T = 0$. 取可逆的等温膨胀,
+\[ \Delta S = \int_{V_0}^{2V_0} \frac{p\rd{V}}{T} = R\ln 2. \]
+\end{ex}
+\begin{pitfall}
+$\rd{S} = \dbar Q_{\mathrm{rev}}/T$的$\dbar Q$必须为可逆过程的$Q$, Joule膨胀中$\dbar Q=0$是不可逆的情形.
+\end{pitfall}
+\begin{ex}
+Joule膨胀中, 可逆情况宇宙的$\Delta S = 0$(系统吸热和环境放热抵消了), 但不可逆情况下宇宙产生$\Delta S = R \ln 2$的熵变.
+\end{ex}
+\begin{ex}[混合熵]
+两个等温等压的容器装有理想气体, 体积分别为$xV$和$\pare{1-x}V$, 混合后熵变为
+\begin{align*}
+\Delta S &= xNk_B\int_{xV}^V\frac{\rd{V_1}}{V_1} + \pare{1-x}Nk_B\int_{\pare{1-x}V}^V\frac{\rd{V_2}}{V_2}\\
+&= -Nk_B\brac{x\ln x+\pare{1-x}\ln\pare{1-x}}.
+\end{align*}
+\end{ex}
+\subsubsection{熵的统计基础}
+由温度的定义和前开结论,
+\[ \rec{k_BT} = \eddon{\ln\Omega}{E},\quad \rec{T} = \pare{\ddelon{S}{U}}_V. \]
+可得
+\begin{finale}
+\[ S = k_B \ln\Omega. \]
+\end{finale}
+\begin{ex}[Joule膨胀]
+Joule膨胀后由于每个粒子可以选择在容器左侧或右侧, 微观态数目多出因子$\Omega = 2^{N_A}$, 熵增
+\[ \Delta S = k_B \ln 2^{N_A} = R \ln 2. \]
+\end{ex}
+\begin{ex}[Maxwell妖]
+假设分子被分在两个腔室, Maxwell妖控制一个阀门并让速度快的分子通向高温侧, 可以导致热从低温向高温流动, 如果这一过程没有引起其它变化就违反了热力学第二定律. 然而Maxwell妖需要使用并擦除其获得的关于分子的信息, 因此这过程不可逆并导致了熵增.
+\end{ex}
+\subsubsection{熵和概率}
+\begin{ex}
+如果系统有$5$种可能的组态, 熵为$S = k_B\ln 5$, 但如果每种组态还包含$3$种微观态, 总的熵为
+\[ S_{\mathrm{total}} = k_B\ln 15 = k_B \ln 5 + k_B \ln 3 = S + S_{\mathrm{micro}}. \]
+\end{ex}
+现在假设系统有$N$个等概率的微观态, 按照相对应的宏观态分组, 每个组有$n_i$个微观态. 总的熵为
+\[ S_{\text{\textit{total}}} = S + S_{\text{\textit{micro}}}. \]
+其中
+\[ S_{\text{\textit{micro}}} = \expc{S_i} = \sum_i P_i S_i. \]
+相应的
+\[ S = S_{\text{\textit{total}}} - S_{\text{\textit{micro}}} = k_B\pare{\ln N - \sum_i P_i \ln n_i}. \]
+\begin{finale}
+\begin{corollary}[熵的Gibbs表示]
+\[ S = -k_B \sum_i P_i \ln P_i. \]
+\end{corollary}
+\end{finale}
+\begin{ex}
+微正则系综有$\Omega$个宏观态, 相应的熵为
+\[ S = -k_B \sum_i \rec{\Omega}\ln\rec{\Omega} = k_B \ln\Omega. \]
+\end{ex}
+\begin{ex}
+在$\sum_i P_i = 1$且$\sum_i P_i E_i = U$的条件下求使$S = -k_B\sum_i P_i \ln P_i$取最大值的分布. 通过Lagrange乘数法有
+\[ \ddelon{}{P_j} \sum_i\pare{-P_i\ln P_i - \lambda P_i - \mu P_i E_i} = 0, \]
+即$P \propto e^{-\mu E}$, 这正是Boltzmann分布.
+\end{ex}
+\subsection{信息论}
+\subsubsection{信息和Shannon熵}
+\begin{definition}[信息量]
+一个表述的的信息量谓
+\[ Q = -k \log P. \]
+其中$P$谓该表述发生的概率, $k$在以bit为单位时为$1$, $\log$取$\log_2$. 热力学的情形则$k=k_B$, $\log$取$\ln$.
+\end{definition}
+\begin{definition}[平均信息量, Shannon熵]
+如果有一组表述且相应的信息量和概率分别为$Q_i$和$P_i$, 则平均信息量, 即Shannon熵定义为
+\[ S = \expc{Q} = \sum_i Q_i P_i = -k\sum_i P_i \log P_i. \]
+\end{definition}
+\begin{ex}
+六面体骰子的特定结果的信息量为$Q = k \log 6$, 故Shannon熵为
+\[ S = k\log 6 = \SI{2.58}{bit}. \]
+\end{ex}
+\begin{ex}
+假设骰子有偏, 有五个面的概率为$1/10$而第六个面的概率为$1/2$, 则相应的Shannon熵为
+\[ S = k \pare{5\times \rec{10}\log 10 + \half \log 2} = \SI{2.16}{bit}. \]
+\end{ex}
+\begin{ex}
+成功率为$P$的Bernoulli实验的Shannon熵为
+\[ S = -P\log P - \pare{1-P}\log\pare{1-P}. \]
+可见当$P=0$或$P=1$(即实验结果唯一时)实验结果不提供信息.
+\end{ex}
+\begin{ex}[Maxwell妖]
+一个$N$-bit的计算物件连接到温度为$T$的热源, 则擦除信息导致熵减$Nk_B\ln 2$, 即导致每bit有$k_B T\ln 2$的热量耗散. 如果Maxwell妖石图反转Joule膨胀, 则它至少需要储存$N_A$个bit的信息, 但是擦除它们会导致热量耗散.
+\end{ex}
+\subsubsection{数据压缩}
+假设有一段数据, 其中$0$出现的概率为$P$而$1$出现的概率为$1-P$, 则特定的二进制序列出现的概率为
+\[ P\pare{x_1, x_2, \cdots, x_n } = P\pare{x_1} P\pare{x_2} \cdots P\pare{x_n} \sim P^{nP}\pare{1-P}^{n\pare{1-P}}, \]
+这是因为平均而言, 这段数据中有$nP$个$0$和$n\pare{1-P}$个$1$. 因此
+\[ P\pare{x_1, x_2, \cdots, x_n } \sim \rec{2^{nS}},\quad S = -P\log P - \pare{1-P}\log\pare{1-P}. \]
+因此大约只需要$nS$个bit编码这些典型序列.
+\begin{theorem}[Shannon无噪声信道编码定理]
+如果算法将长度为$n$的典型序列压缩到长度$nR$, 则$R > S$时可以存在可靠的压缩方案, $R < S$时不存在.
+\end{theorem}
+\subsubsection{量子信息}
+\begin{definition}[密度矩阵]
+如果量子系统处在态$\ket{\psi_i}$的概率为$P_i$, 则相应的密度矩阵为
+\[ \vrho = \sum_i P_i \ket{\psi_i} \bra{\psi_i}. \]
+\end{definition}
+\begin{definition}[纯态]
+如果$P_j \neq 0$而$P_{i\neq j} = 0$则谓系统处于纯态. 反之谓混态.
+\end{definition}
+\begin{definition}[算符的期望值]
+算符的期望值可表示为
+\[ \expc{\hat{A}} = \tr \pare{\hat{A}\vrho}. \]
+\end{definition}
+\begin{definition}[von Neumann熵]
+量子系统的von Neumann熵定义为
+\[ S\pare{\vrho} = -\tr\pare{\vrho \log \vrho}. \]
+\end{definition}
+\begin{ex}
+密度矩阵不一定是对角的——对于Stein-Gerlach实验, 如果选取自旋$z$分量朝上和朝下为基, 则观测自旋的$x$分量或者$y$分量的密度矩阵不是对角阵.
+\end{ex}
+\subsubsection{概率论}
+下面的两条结论是显然成立的:
+\begin{align*}
+P\pare{A\cap B} &= P\pare{A\mid B}P\pare{B}, \\
+P\pare{A\cap B} &= P\pare{B\mid A}P\pare{A}.
+\end{align*}
+立刻可以推出
+\begin{theorem}[Bayes定理]
+\begin{finale}
+\[ P\pare{A\mid B} = \frac{P\pare{B\mid A}P\pare{A}}{P\pare{B}}. \]
+\end{finale}
+\end{theorem}
+\begin{ex}
+如果运动员中有$1\%$嗑药, 药物检测有$95\%$的概率正确, 则药物检测阳性的条件下, 运动员嗑药的概率为
+\[ P\pare{D\mid A} = \frac{P\pare{A\mid D}P\pare{D}}{P\pare{A}} = \frac{0.95\times 0.01}{0.95\times 0.01 + 0.05\times 0.99} = 0.16. \]
+\end{ex}
+\begin{ex}[可分辨性]
+如果一对夫妇有两个小孩, 其中一个为男孩, 则另一个为女孩的概率为$2/3$. 但如果较高的为男孩, 则另一个为女孩的概率为$1/2$.
+\end{ex}
+\end{document}

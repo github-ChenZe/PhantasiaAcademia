@@ -1,0 +1,467 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{经典非理想气体}
+\subsection{实际气体}
+\subsubsection{van der Waals气体}
+\begin{remark}
+	分子之间存在引力和斥力, 总的相互作用可以表示为
+	\[ f = \frac{\lambda}{r^s} - \frac{\mu}{r^t},\quad  s>t. \]
+	其中第一项为斥力, 第二项为引力. 相应的势能为
+	\[ \epsilon_p = \frac{\lambda'}{r^{s'}} - \frac{\mu'}{r^{t'}},\quad \lambda' = \frac{\lambda}{s-1},\quad \mu' = \frac{\mu}{t-1}. \]
+	两条曲线的形状$r$小时递减, 大时递增, 在$0$处发散. 对于有体积的分子, 在无相互作用时可以采用硬球势
+	\[ \epsilon_p = \begin{cases} \infty,\quad r<d,\\ 0,\quad r>d.\end{cases} \]
+	在有相互作用时, 考虑到斥力随$r$递减较快, 只考虑引力,
+	\[ \epsilon_p = \begin{cases} \infty,\quad r<d,\\ 0,\quad -\frac{\mu'}{r^{t'}}>d.\end{cases} \]
+\end{remark}
+van der Waals气体考虑了气体分子的有限体积以及分子间的相互作用, 这里设$\moleV$是摩尔体积.
+\begin{finale}
+\begin{axiom}[van der Waals方程]
+\[ \pare{p + \frac{a}{\moleV^2}}\pare{\moleV - b} = RT. \]
+\end{axiom}
+\end{finale}
+\begin{remark}
+通过在理想气体方程中分别对$p$和$\moleV$引入修正可以得到van der Waals方程, 修正压强满足
+\[ p_\Delta = -\ddelon{U_\Delta}{V} = \ddelon{}{V}\frac{a\molen^2}{V} = -\frac{a}{\moleV^2}. \]
+其中$U_\Delta$表示相互吸引力导致的内能下降, 它正比于分子数目与邻近分子数目的乘积. 也可以在理想气体的配分函数中引入修正得到
+\[ Z_N = \rec{N!}\pare{\frac{V - \molen b}{\lambda_{\mathrm{th}}^3}}^Ne^{\beta a\molen^2/V}, \]
+再通过$p = -\pare{\partial F/\partial V}_T$得到van der Waals方程.
+\end{remark}
+\begin{ex}
+van der Waals气体的熵为
+\[ \rd{S} = \pare{\ddelon{S}{T}}_V\rd{T} + \pare{\ddelon{S}{V}}_T\rd{V} = \pare{\ddelon{S}{T}}_V\rd{T} + \pare{\ddelon{p}{T}}_V\rd{V}. \]
+\[ S = C_V \ln T + R\ln \pare{V-b} + \const. \]
+\end{ex}
+将不同温度下的等温线画出, 高温时等温线与理想气体的情形接近, 然而温度降低时曲线可能成$S$型, 有一部分的$\pare{\partial V/\partial p}_T$为正值. 发生此种转变的等温线谓\emph{临界等温线}, 该曲线上相应的拐点谓\emph{临界点}.
+\par
+通过考虑条件$\pare{\partial p/\partial V}_T = 0$与$\pare{\partial^2 p/\partial V^2}_T = 0$可得临界点
+\begin{equation}
+\label{eq:vdwcritical}
+V_c = 3b,\quad T_c = \frac{8a}{27Rb},\quad p_c = \frac{a}{27b^2}.
+\end{equation}
+\begin{ex}
+水的$a=\SI{5.537}{bar.L^2/mol}$, $b=\SI{0.03049}{L/mol}$, 求得水的临界点$T_c=\SI{647}{K}$, $p_c=\SI{22.1}{MPa}$.
+\end{ex}
+考虑$p = -\pare{\partial F/\partial V}_T$, 可以讲$F$分解为$p$的积分和一个取决于$T$的项(也可以从$Z_N$的表达式中得到)
+\[ F = f\pare{T} - RT\ln\pare{V-b} - \frac{a}{V}. \]
+\[ G = F + pV = f\pare{T} - RT\ln\pare{V-b} - \frac{a}{V} + pV. \]
+压缩率反常的部分不稳定, 从而临界等温线以下, 同一压强可能对应两个体积(第三个不稳定), 因而$G$在这些压强处会有两个分支. 分支图像呈$X$型, 故两支的化学势与压缩率显著不同. 可以预期一支对应液相, 一支对应气相, $G$的两支相交处即为气液共存态.
+\par
+当压强连续改变时, 气体支或液体支可能会维持原有的物相而选取$G$较高的态, 分别得到\emph{过冷气体}与\emph{过热液体}. 事实上, 将$G$对$V$作图后, 两支之间存在微小的能量势垒, 故无法立即越过.
+\par
+如果气液共存点分别记为$P_1$和$P_2$, 小心地沿着等温线在这两点之间积分, 有
+\[ \int_{P_1}^{P_2}V\,\rd{p} = \int_{P_1}^{P_2} \pare{\ddelon{G}{p}}_T\,\rd{p} = G\pare{P2} - G\pare{P1} = 0. \]
+\begin{finale}
+\begin{corollary}[Maxwell面积法则]
+设气液共存点为压强为$p$, 则$p$-$V$等温线被与等压线所围成两部分封闭图形面积相等.
+\end{corollary}
+\end{finale}
+\subsubsection{Diterici方程}
+Diterici考虑到碰撞容器壁的分子因为吸引力的作用而减小了动能从而减小了粒子数密度, 且吸引力反比于$V$, 用Boltzmann因子修正之可得
+\begin{finale}
+\begin{axiom}[Diterici方程]
+\[ p\pare{\moleV - b} = RT \exp\pare{-\frac{a}{RT\moleV}}. \]
+\end{axiom}
+\end{finale}
+通过$\pare{\partial p/\partial V}_T = 0$与$\pare{\partial^2 p/\partial V^2}_T = 0$亦可求得临界点
+\[ T_c = \frac{a}{4Rb},\quad p_c = \frac{a}{4e^2b^2},\quad  V_c = 2b .\]
+\subsubsection{Virial模型}
+直接在理想气体方程中引入修正,
+\begin{finale}
+\begin{axiom}[Onnes方程]
+\[ \frac{p\moleV}{RT} = 1 + \frac{B\pare{T}}{\moleV} + \frac{C\pare{T}}{\moleV^2} + \cdots. \]
+\end{axiom}
+\end{finale}
+其中$B$, $C$等谓\emph{Virial系数}, $B=0$时的温度谓\emph{Boyle温度}.
+\begin{ex}
+van der Waals方程可重写为
+\[ p = \frac{RT}{\moleV - b} - \frac{a}{\moleV^2} = 1 + \rec{V}\pare{b - \frac{a}{RT}} + \pare{\frac{b}{V}}^2 + \pare{\frac{b}{V}}^3 + \cdots. \]
+\end{ex}
+如果要在理想气体方程中引入Virial展开的第一项修正$B\pare{T}/\moleV$, 则相应的$p$要引入修正$p_\Delta = RTB\pare{T}/\moleV^2$, 故$F$应当引入修正$RTB\pare{T}/\moleV$, 相应的修正在配分函数中为$Z_\Delta = 1-NB\pare{T}/V$. 引入分子吸引势后,
+\[ Z_\Delta = \rec{V^N}\int_{V^N} e^{-\frac{\beta}{2}\sum_{i\neq j}V\pare{r_{ij}}}\,\rd{^N\vr} \approx 1 + \rec{V^N}\int_{V^N} \brac{e^{-\frac{\beta}{2}\sum_{i\neq j}V\pare{r_{ij}}} - 1}\,\rd{^3r}. \]
+系数$1/V^N$用于保证$V=0$时吸引势带来的配分函数修正为零, 同时第二步变换使方括号内的量为小量, 对每个分子可以考虑唯一一个与之足够靠近的分子之间的相互作用, 这样带来大约$N^2/2$种组合,
+\[ Z_\Delta \approx 1 + \frac{N^2}{2V^N}\int_{V_N} \brac{e^{-\beta V\pare{r}} - 1}\,\rd{^N\vr} = 1 + \frac{N^2}{2V^2}\int_V \brac{e^{-\beta V\pare{r}}}\,\rd{\vr}. \]
+\[ B\pare{T} = \frac{N}{2}\int_V\brac{1-e^{-\beta V\pare{r}}}\,\rd{\vr}. \]
+\begin{ex}
+氩的Virial系数$B$随温度递增并在Boyle温度附近变号. 可以理解为$\brac{1-\exp\pare{-\beta V\pare{r}}}$项在分子半径内为$1$, 在分子半径外存在阱. 当温度上升时, 阱变浅从而$B$变正.
+\end{ex}
+\subsubsection{约化坐标}
+\begin{definition}[约化坐标]
+$p$, $V$, $T$相应的约化坐标为
+\[ \tilde{p} = \frac{p}{p_c},\quad \tilde{V} = \frac{V}{V_c},\quad \tilde{T} = \frac{T}{T_c}. \]
+\end{definition}
+\begin{ex}
+参考\eqref{eq:vdwcritical}, van der Waals方程用约化坐标可以表示为
+\[ p_c\tilde{p} = \frac{RT_c\tilde{T}}{V_c\tilde{V} - b} - \frac{a}{V_c^2\tilde{V}^2},\quad \tilde{p} + \frac{3}{\tilde{V}^2} = \frac{8\tilde{T}}{3\tilde{V} - 1}. \]
+\end{ex}
+\begin{theorem}[对应态定律]
+约化坐标下不同物质的相图可重叠.
+\end{theorem}
+\subsection{冷却真实气体}
+\subsubsection{Joule膨胀}
+气体从容器中自由扩散至空容器谓\emph{Joule膨胀}, 这一过程内能不变.
+\begin{definition}[Joule系数]
+Joule膨胀下温度对体积的变化率谓Joule系数,
+\[ \mu_\stname{J} = \pare{\ddelon{T}{V}}_U. \]
+\end{definition}
+经过简单的变换可以得到
+\begin{align*}
+\mu_\stname{J} &= -\pare{\ddelon{T}{U}}_V\pare{\ddelon{U}{V}}_T = -\rec{C_V}\brac{T\pare{\ddelon{S}{V}}_T - p}.
+\end{align*}
+\begin{finale}
+\[ \mu_\stname{J} = -\rec{C_V}\brac{T\pare{\ddelon{p}{T}}_V - p}. \]
+\end{finale}
+\begin{ex}
+van der Waals气体相应的Joule系数为
+\[ \mu_\stname{J} = -\rec{C_V}\pare{\frac{RT}{V-b} - \frac{RT}{V-b} + \frac{a}{V^2}} = -\frac{a}{C_V V^2}. \]
+这是负数, 因为吸引力使气体膨胀时动能减小. 对于理想气体, 显然$\mu_\stname{J}$ = 0.
+\end{ex}
+\subsubsection{等温膨胀}
+等温膨胀下, 借用前开推导
+\[ \pare{\ddelon{U}{V}}_T = T\pare{\ddelon{p}{T}}_V - p. \]
+\begin{ex}
+van der Waals气体在等温膨胀时内能变化
+\[ \Delta U = \int_{V_1}^{V_2} \frac{a}{V^2}\,\rd{V} = a\pare{\rec{V_1} - \rec{V_2}}. \]
+\end{ex}
+\subsubsection{Joule-Kelvin膨胀}
+也称作Joule-Thomson膨胀. 气体从高压$p_1$, 体积$V_1$处经过节流阀流向低压$p_2$, 并占据体积$V_2$. 由活塞的做功量可知
+\[ U_1 + p_1 V_1 = U_2 + p_2 V_2,\quad H_1 = H_2. \]
+因此, Joule-Thomson膨胀是等焓的.
+\begin{definition}[Joule-Kelvin系数]
+Joule-Kelvin膨胀下温度对压强的变化率谓Joule-Kelvin系数,
+\[ \mu_\stname{JK} = \pare{\ddelon{T}{p}}_H. \]
+\end{definition}
+经过简单的变换可以得到
+\begin{align*}
+\mu_\stname{JK} &= -\pare{\ddelon{T}{H}}_p\pare{\ddelon{H}{p}}_T = -\rec{C_p}\brac{T\pare{\ddelon{S}{p}}_T - V}.
+\end{align*}
+\begin{finale}
+\[ \mu_\stname{JK} = \rec{C_V}\brac{T\pare{\ddelon{V}{T}}_p - V}. \]
+\end{finale}
+由于$\rd{H} = T\rd{S} + V\rd{p} = 0$, 熵变
+\[ \Delta S = -\int_{p_1}^{p_2}\frac{V}{T}\,\rd{p}. \]
+对于理想气体, 熵变$\Delta S = R\ln\pare{p_1/p_2}>0$, 故该过程不可逆.
+\par
+制冷与制热的分解为$\mu_\stname{JK}=0$, 在
+\[ \pare{\ddelon{V}{T}}_p = \frac{V}{T} \]
+处发生. van der Waals气体的$p$-$T$图中由一C型曲线划分划分之. 只有在最大反转温度以下操作才有可能通过Joule-Kelvin膨胀液化气体.
+\subsubsection{气体的液化}
+通过Joule-Kelvin膨胀液化气体可以通过逆流热量交换器借助已冷却的液体预先冷却进入的高压气体. 液化器可视为进入$1$单位质量的高压气, 得到$y$质量的液体与$1-y$质量的废气的装置. 记单位质量的焓为$h$, 则
+\[ h_\stname{in} = yh_\stname{L} + \pare{1-y}h_\stname{f},\quad y = \frac{h_\stname{f}-h_\stname{in}}{h_\stname{f}-h_\stname{L}}. \]
+如果输入气体的温度给定, 由于输出气体是未被液化的部分, 输出液体与其蒸气平衡, 两个输出的比焓可视为确定. 为了让$y$最大, 需要$h_\stname{in}$最大, 即
+\[ \pare{\ddelon{h_\stname{in}}{p_\stname{in}}}_{T_\stname{in}} = 0,\quad \mu_\stname{JK} = 0. \]
+故需要在反转曲线上运行制冷机使之有最大效率.
+\subsection{相变}
+\subsubsection{潜热}
+物体发生相变需要吸收的热量谓\emph{潜热},
+\[ L = \Delta Q_\stname{rev} = T_c\pare{S_2 - S_1}. \]
+热容在该点有尖峰. 故熵在相变点有不连续跃阶. 可以估计
+\[ \Delta S = \Delta\pare{k_B\ln\Omega} \approx k_B\ln\pare{\frac{V_\stname{g}}{V_\stname{l}}}^N \approx k_B\ln \pare{10^3}^N\approx 7R. \]
+考虑分子之间的相互吸引, 稍微增加系数$7$可得\emph{Trouton规则},
+\[ L \approx 10RT_b. \]
+这对大多数物质符合较好(系数在$8$到$10$之间), 除了\ce{He}和\ce{H2O}.
+\subsubsection{Clausius-Clapeyron方程}
+将相变视为化学反应, 平衡时
+\[ \rd{G} = \mu_1\rd{N_1} + \mu_2\rd{N_2} = 0,\quad \mu_1 = \mu_2. \]
+这意味着在相界上,
+\begin{align*}
+& \mu_1\pare{p+\rd{p},T+\rd{T}} - \mu_1\pare{p,T} = -s_1\rd{T} + v_1\rd{p} \\
+=& \mu_2\pare{p+\rd{p},T+\rd{T}} - \mu_2\pare{p,T} = -s_2\rd{T} + v_2\rd{p}.
+\end{align*}
+小写字母的$s$和$v$表示单粒子的熵和体积, 同时令$l$为单粒子潜热,
+\[ \eddon{p}{T} = \frac{s_2-s_1}{v_2-v_1} = \frac{l}{T\pare{v_2 - v_1}}. \]
+\begin{finale}
+\begin{theorem}[Clausius-Clapeyron方程]
+\[ \eddon{p}{T} = \frac{L}{T\pare{V_2 - V_1}}. \]
+\end{theorem}
+\end{finale}
+对于液体-气体相变, 假设$V_2\gg V_1$且满足理想气体方程,
+\[ \eddon{p}{T} = \frac{Lp}{RT^2},\quad \ln p = -\frac{L}{RT} + \const. \]
+从而得到相界
+\[ p = p_0 \exp\pare{-\frac{L}{RT}}. \]
+注意$\exp$部分相等于Boltzmann因子. 实际上潜热与温度相关, 相界上
+\[ \eddon{}{T}\pare{\frac{L}{T}} = \pare{\ddelon{\Delta S}{T}}_p + \eddon{p}{T}\pare{\ddelon{\Delta S}{p}}_T = \frac{C_{g,p} - C_{l,p}}{T} + \eddon{p}{T}\brac{\ddelon{\pare{S_g - S_l}}{p}}_T. \]
+\[ \rec{T}\eddon{L}{T} - \frac{L}{T^2} = \frac{C_{g,p} - C_{l,p}}{T} - \eddon{p}{T}\brac{\ddelon{\pare{V_g-V_l}}{T}}_p \approx \frac{C_{g,p} - C_{l,p}}{T} - \frac{Lp}{RT^2}\frac{R}{p}. \]
+其中借助了$V_l\ll V_g$近似, 从而
+\[ L = L_0 + \pare{C_{g,p} - C_{l,p}} T. \]
+相应的相界为
+\[ p = p_0\exp\pare{-\frac{L_0}{RT} + \frac{\pare{C_{g,p} - C_{l,p}}\ln T}{R}}. \]
+\par
+对于固-液相变, 如果忽略$L$和$\Delta V$对温度的依赖关系, 可得
+\[ p = p_0 + \frac{L}{\Delta V}\ln\pare{\frac{T}{T_0}}. \]
+由于$\Delta V$较小故该相界的斜率相当大. 
+\par
+相图中固-液和气-液相界存在交点谓\emph{三相电}, 气-液相界在$T$足够大时中断, 谓\emph{临界点}. 大多数物体的固-液相界斜率为正(即增大压强有利于凝固), 但水正好相反.
+\begin{remark}
+水的这一特性源于氢键, 冰的密度小于水, 从而水结冰从水面开始而水的内部仍维持较高温度, 从而生物得以存活.
+\end{remark}
+\subsubsection{稳定性和亚稳定性}
+当温度不变, 压强改变时, 化学势的变化谓
+\[ \pare{\ddelon{\mu}{p}}_T = v, \]
+其中$v$为单粒子体积. $\mu$-$p$图上气体的等温线相对而言具有更高的斜率, 从而与液体的等温线呈$X$型交叉. 故高压下液体稳定, 低压下气体稳定.
+\par
+当压强不变, 温度改变时, 化学势的变化谓
+\[ \pare{\ddelon{\mu}{T}}_p = -s, \]
+其中$s$为单粒子熵, $\mu$-$T$图上气体的等温线相对而言具有更负的斜率, 从而与液体的等温线呈$X$型交叉. 故高温下气体稳定, 低温下液体稳定.
+\par
+然而加热液体时, 液体可能沿着液体的等温线形成\emph{过热液体}. 冷却气体时气体也可能沿着气体的等温线并形成\emph{过冷气体}. 这种态的形成可以解释为, 如果液体的压强稍微增加, 则气液平衡要求
+\[ \pare{\ddelon{\mu_l}{p_l}}_T \rd{p_l} = \pare{\ddelon{\mu_g}{p}}_T\rd{p},\quad v_l\rd{p_l} = v_g\rd{p},\quad V_l\rd{p_l} = \frac{RT\rd{p}}{p}. \]
+从而当对液体施加额外压强$\Delta p_l$时, 相应的蒸汽压为
+\[ p = p_0 \exp\pare{\frac{V_l\Delta p_l}{RT}}. \]
+对于液滴, 由于表面张力带来的压强增加为$\Delta p_l = 2\gamma/r$.
+\begin{finale}
+\begin{theorem}[Kelvin公式]
+液滴的蒸汽压$p$与其液体蒸气压$p_0$间成立
+\[ p = p_0\exp\pare{\frac{2\gamma V_l}{rRT}}. \]
+\end{theorem}
+\end{finale}
+因此当试图对气体降温, 气体会首先形成小液滴, 但液滴会立即蒸发. 如果大气中存在灰尘, 则灰尘具有足够大的半径从而水滴可以在上面凝结, 最终可以超过临界大小并可以形成云.
+\par
+当煮沸液体时, 气泡附近液体的压强会比液体内部压强小, $\Delta p_l = -2\gamma r$, 气泡内蒸汽压为
+\[ p = p_0\exp\pare{-\frac{2\gamma V_l}{rRT}}. \]
+从而气泡内蒸汽压过低, 无法对抗水压故破裂. 加入沸石可以形成成核中心从而允许气泡产生.
+\begin{ex}
+气泡室内装有液态氢等透明液体, 温度恰好低于其沸点, 施加磁场后带电粒子经过时足以成核而产生气泡从而可推断核质比.
+\end{ex}
+\begin{ex}
+与蒸气处于平衡的半径为$r$的球形液滴,
+\[ \rd{G} = \mu_l\rd{N_l} + \mu_g\rd{N_g} + \gamma\rd{A} = \pare{8\pi \gamma r - \frac{4\pi r^2 \delta\mu\rho_l}{m}}\rd{r}. \]
+当$r=2\gamma m /\pare{\rho_l\Delta \mu}$时$G$有最大值, 故在此临界半径一下液滴将收缩蒸发, 而在此临界半径以上液滴将增大. 因此云中小液体会蒸发转移至大液滴中.
+\end{ex}
+\subsubsection{Gibbs相率}
+当一个系统内的不同物质谓\emph{组元}, 假设系统具有$C$个组元, 每个组元处于$P$个相中, 指定$C-1$个组元的摩尔分数和总的$p$与$T$即可获得系统的状态, 导致有$P\pare{C-1}+2$个未知量. 如果每个各个相彼此平衡, 则
+\[ \mu_{C_i,p_1} = \mu_{C_i,p_2} = \cdots = \mu_{C_i,p_P}. \]
+一共有$C\pare{P-1}$个方程. 自由度$F = \brac{P\pare{C-1}+2} - C\pare{P-1}$.
+\begin{finale}
+\begin{theorem}[Gibbs相率]
+系统的自由度数
+\[ F = C - P + 2. \]
+\end{theorem}
+\end{finale}
+\begin{ex}
+如果系统只有一种组元, 如果只有一个相, 则$F=2$, 整个$p$-$T$平面可及. 如果有两个相, $F=1$, 只有在共存线上可及, 如果有三个相, $F=0$, 只有三相电可及.
+\end{ex}
+\begin{ex}
+如果系统有两种组元(比如混合液体)且压强保持不变, 如果只有一个相则$F=2$, 整个$x$-$T$平面可及, 如果有两个相. $F=1$, 则只能存在于$x$-$T$平面上的一条线. 如果有三个相, $F=0$, 只能存在于$x$-$T$平面上一点.
+\end{ex}
+\subsubsection{依数性}
+由\eqref{eq:musolutionbymupure}即$\mu_{\ce{A(l)}} = \mu_{\ce{A(l)}}^* + RT\ln x_{\ce{A}}$以及平衡条件$\mu_{\ce{A(g)}} = \mu_{\ce{A(l)}}$, 有
+\[ \ln x_{\ce{A}} = \frac{\Delta G_g}{RT} = \frac{\Delta H_g - T\Delta S_g}{RT} \approx -x_{\ce{B}},\quad \Delta G_g = \mu_{\ce{A(g)}} - \mu_{\ce{A(l)}}. \]
+其中假定$\Delta H$和$\Delta S$几乎与温度无关. 特别地, 当$x_{\ce{A}} = 1$时$G_g=0$, 此时$T$正好为气液平衡温度$T^*$. 从而
+\[ -x_{\ce{B}} = \frac{\Delta H_g}{R}\pare{\rec{T} - \rec{T^*}} \approx \frac{\Delta H_g}{RT^{*2}}\pare{T^* - T}. \]
+故相应地有
+\begin{corollary}[沸点升高常数]
+\[ T - T^* = K_\stname{b}x_{\ce{B}},\quad K_\stname{b} = \frac{RT^{*2}}{\Delta H_g}. \]
+\end{corollary}
+\begin{corollary}[冰点降低常数]
+\[ T^* - T = K_\stname{f}x_{\ce{B}},\quad K_\stname{f} = \frac{RT^{*2}}{\Delta H_l}. \]
+\end{corollary}
+\subsubsection{相变的分类}
+Ehrenfest对相变的分类谓, \emph{一级相变}为导致$G$不连续的相变, \emph{二级相变}为导致$G$的导数不连续的相变. 现代的相变分类直接分为一级相变(包含潜热)和连续相变(不包含潜热).
+\begin{ex}
+固-液-气相变是典型的一级相变.
+\end{ex}
+\begin{ex}
+热容或者压缩率的不连续, 如超导, 构成二级相变. 铁磁体在Curie点以上失去磁性并没有造成不连续, 因此是连续相变. 临界点处的相变由于不包含潜热, 故也是二级相变.
+\end{ex}
+\begin{ex}
+临界乳光谓气体在接近临界点时看到模糊的有色彩的图像, 因为临界点处气体的密度涨落极大, 故折射率变化极大.
+\end{ex}
+\paragraph{对称破缺} 固-液相变存在对称性的改变(固体比液体的对称性低), 因此固-液相变是清晰的, 因为对称性只能选择存在或不存在. 然而气-液相变并没有发生显著的对称性改变, 可以通过临界点绕过清晰的相变.
+\begin{ex}
+铁磁性和顺磁性也是对称破缺导致相变的例子, 前者不具有旋转对称性而后者具有. 超导态则不具有高温下的波函数相位相同的对称性.
+\end{ex}
+\begin{ex}
+$\beta$黄铜是\ce{CuZn}, 具有体心立方结构, 低温时\ce{Cu}被\ce{Zn}环绕, 高温时两种原子随机占据. 
+\end{ex}
+\subsubsection{Ising模型}
+将物质视为一组格座, 每个格座可以取$\pm 1$并与相邻者相互作用, 具有Hamilton量
+\[ \hat{H} = -J\sum_{i,j{\textit{相邻}}} S_i S_j. \]
+\begin{ex}
+考虑具有方形的四格座的系统, 配分函数为
+\[ Z = 2e^{-\beta\pare{-4J}} + 12e^{-\beta\times 0} + 2e^{-\beta\pare{4J}} = 12+4\cosh 4\beta J. \]
+从而平均能量
+\[ \expc{E} = -\eddon{\ln Z}{\beta} = -\frac{4J\sinh 4\beta J}{3+\cosh 4\beta J}. \]
+温度上升时, $\expc{E}$从$-4J$缓慢增加至$0$, $N$增加时这一变化会更加尖锐, 构成相变.
+\end{ex}
+对于一维模型中自旋平行排列的态, 随机翻转一个态导致的
+\[ \Delta F = 4J - k_B T\ln N. \]
+$\ln N$源于有$N$种改变自旋的选择的事实. 故$F$总是负的, 一维的Ising模型总是倾向于无序.
+\par
+二维Ising模型可以有相变存在. 通过一种Monte-Carlo方法, 即Metropolis算法算法可以实施这一过程.
+\begin{cenum}
+\item 随机选取一个自旋并翻转它的态;
+\item 如果这个过程降低了系统的能量就保留这一翻转, 如果它升高了能量则以$1-e^{-\beta\Delta E}$的概率返回原来的状态;
+\item 再次随机选取自旋并重复.
+\end{cenum}
+可以发现如果$T=0$, 则翻转只有在降低能量时发生. 如果$T\rightarrow \infty$则翻转几乎总是发生, 系统趋于无序. 由
+\[ \expc{E} = -\eddon{\ln Z}{\beta},\quad \expc{E^2} = \rec{Z}\edddon{Z}{\beta},\quad C = \eddon{\expc{E}}{T} = k_B\beta^2\pare{\expc{E^2} - \expc{E}^2}, \]
+测量$\expc{E}$和$\expc{E^2}$可以得到热容. 假设系统和外场由相互作用能$\Delta E = -BX$, 相应的
+\[ \expc{X}  = \rec{Z} \sum_i X_i e^{-\beta\pare{E_i-BX_i}} = \rec{\beta}\pare{\ddelon{\ln Z}{\beta}}_T = -\pare{\ddelon{F}{B}}_T. \]
+\[ \expc{X^2} - \expc{X}^2 = k_B T\chi,\quad \chi = \ddelon{\expc{X}}{B}. \]
+将$X$解释为磁矩, $B$解释为磁场, $\chi$为磁化率则可以模拟磁化率的变化.
+\begin{remark}
+最终可以发现磁矩$m$在超过某临界温度后突然消失.
+\end{remark}
+\section{量子气体}
+\subsection{Bose-Einstein统计与Fermi-Dirac统计}
+\subsubsection{全同粒子}
+交换算子与Hamilton算子是对易的,
+\[ \hat{P}\psi\pare{\vr_1, \vr_2}=\psi\pare{\vr_2,\vr_1},\quad \brac{\hat{H},\hat{P}} = 0. \]
+因此它们有共同的本征函数. 但$\hat{P}$满足$\hat{P}^2=I$, 故本征值只能是$\pm 1$. 因此
+\[ \hat{P} \psi\pare{\vr_1,\vr_2} = \pm\psi\pare{\vr_2,\vr_1}. \]
+\begin{finale}
+\begin{axiom}
+波函数交换对称, 即
+\[ \hat{P} \psi\pare{\vr_1,\vr_2} = \psi\pare{\vr_2,\vr_1} \]
+的粒子为Bose子. 波函数交换反对称, 即
+\[ \hat{P} \psi\pare{\vr_1,\vr_2} = -\psi\pare{\vr_2,\vr_1} \]
+的粒子为Fermi子.
+\end{axiom}
+\end{finale}
+\begin{remark}
+三维空间中的交换可以视为$\vr = \vr_1 - \vr_2$在球面上扫过一段路径. 路径可收缩为一点则没有交换粒子, 路径不可收缩为一点则粒子交换. 然而二维空间上一段圆周不可收缩为一点, 尽管这是两次连续的粒子交换. 因此统计性质无法简单划分, 被称为任意子.
+\end{remark}
+\begin{corollary}[Pauli不相容原理]
+两个Fermi子不可能具有相同的态.
+\end{corollary}
+\begin{proof}
+否则$P\ket{\psi}\ket{\psi} = -\ket{\psi}\ket{\psi} = \ket{\psi}\ket{\psi}$, 故$\ket{\psi}\ket{\psi}$, 不能存在.
+\end{proof}
+两个不可分辨的Bose子, 可能的态为
+\[ \ket{0},\quad \ket{1},\quad \rec{\sqrt{2}}\pare{\ket{1}\ket{0} + \ket{0}\ket{1}}. \]
+第三种态是成为$\hat{P}$的本征态的纠缠态. 而两个不可分辨的Fermi子, 由Pauli不相容原理只能具有纠缠态
+\[ \rec{\sqrt{2}}\pare{\ket{1}\ket{0} - \ket{0}\ket{1}}. \]
+\subsubsection{全同粒子的统计}
+假设有$n_i$个粒子放入态$i$中, 则相应的巨配分函数
+\[ \cZ = \sum_{\curb{n_i}} \prod_i e^{n_i\beta\pare{\mu - E_i}}. \]
+由于求和对所有可能的$\curb{n_i}$的组合进行, 因此求和和乘积是可以交换的,
+\[ \cZ = \prod_i \sum_{\curb{n_i}} e^{n_i\beta\pare{\mu - E_i}}. \]
+对于Bose子, $n_i = 0, 1, 2, \cdots$. 对于Fermi子, $n_i=0,1$. 从而
+\begin{equation}
+\label{eq:partitionofquantum}
+\ln \cZ_B = -\sum_i \ln\brac{1 - e^{\beta\pare{\mu-E_i}}},\quad \ln \cZ_F = \sum_i \ln\brac{1 + e^{\beta\pare{\mu - E_i}}}.
+\end{equation}
+每个能级上的粒子数
+\[ \expc{n_i} = -\rec{\beta}\pare{\ddelon{\ln\cZ}{E_i}}. \]
+\begin{finale}
+\begin{theorem}[Bose-Einstein分布与Fermi-Dirac分布]
+\label{thm:quantumdistribution}
+对于Bose子和Fermi子分别成立
+\[ f_B\pare{E} = \rec{e^{\beta\pare{E-\mu}} - 1},\quad f_F\pare{E} = \rec{e^{\beta\pare{E-\mu}} + 1}. \]
+\end{theorem}
+\end{finale}
+\begin{remark}
+高温下两种分布和Boltzmann分布的行为一致. 注意$E=\mu$时Bose-Einstein分布发散, 因此Bose子的化学势必定小于最低能态的能量.
+\end{remark}
+\subsection{量子气体和凝聚}
+\subsubsection{无相互作用的量子流体}
+如果每个态有$2S+1$个可能的自旋, 如果能态$\vk$对应的配分函数为$\cZ_k$, 其中$\cZ$由\eqref{eq:partitionofquantum}给出. 巨配分函数就是
+\[ \cZ = \prod_{\vk} \cZ_{\vk}^{2S+1}. \]
+仿照\eqref{eq:statedensity}的推导可得态密度为
+\[ g\pare{k}\,\rd{k} = \frac{4\pi k^2\rd{k}}{\pare{2\pi/L}^3}\times\pare{2S+1}, \quad g\pare{E}\rd{E} = \frac{\pare{2S+1}VE^{1/2}\rd{E}}{\pare{2\pi}^2}\pare{\frac{2m}{\hbar^2}}^{3/2}. \]
+其中$E=\hbar^2k^2/\pare{2m}$. 巨势
+\begin{align*}
+\Phi_G &= -k_BT\ln \cZ = -k_BT\int_0^\infty \cZ_E g\pare{E}\,\rd{E} \\
+&= -k_BT\frac{\pare{2S+1}V}{\pare{2\pi}^2}\pare{\frac{2m}{\hbar^2}}^{3/2}\int_0^\infty \cZ_E E^{1/2}\,\rd{E}\\
+&= -\frac{2}{3} \frac{\pare{2S+1}V}{\pare{2\pi}^2}\pare{\frac{2m}{\hbar^2}}^{3/2}\int_0^\infty f\pare{E} E^{3/2}\,\rd{E}.
+\end{align*}
+其中$f$由\tref{quantumdistribution}给出. 爆算, 有
+\begin{equation}
+\label{eq:Ninintegral}
+N = -\pare{\ddelon{\Phi_G}{\mu}}_{T,V} = \brac{\frac{\pare{2S+1}V}{\pare{2\pi}^2}\pare{\frac{2m}{\hbar^2}}^{3/2}} \int_0^\infty f\pare{E} E^{1/2}\,\rd{E}.
+\end{equation}
+\begin{equation}
+\label{eq:Uinintegral}
+U = \eddon{\beta\Phi_G}{\beta} + \mu N = \brac{\frac{\pare{2S+1}V}{\pare{2\pi}^2}\pare{\frac{2m}{\hbar^2}}^{3/2}} \int_0^\infty f\pare{E} E^{3/2}\,\rd{E}.
+\end{equation}
+由多对数函数$\Li$的结果和热波长$\lambda_{\mathrm{th}}$的定义\eqref{eq:Zinlambdath}
+\[ \int_0^\infty \frac{E^{n-1}\,\rd{E}}{z^{-1}e^{\beta E} \pm 1} = \pare{k_BT}^n\Gamma\pare{n}\brac{\mp \Li_n\pare{\mp z}},\quad \lambda_{\mathrm{th}} = \frac{h}{\sqrt{2\pi mk_B T}}. \]
+引入\emph{逸度}$z$后, 可以将$N$与$U$表示如下($+$号对Bose子适用, $-$号对Fermi子适用).
+\begin{finale}
+\[ N = \frac{\pare{2S+1}V}{\lambda_{\mathrm{th}}^2}\brac{\mp \Li_{3/2}\pare{\mp z}},\quad z = e^{\beta\mu}, \]
+\[ U = \frac{3}{2}k_B T \frac{\pare{2S+1}V}{\lambda_{\mathrm{th}}^2}\brac{\mp \Li_{5/2}\pare{\mp z}} = \frac{3}{2}Nk_B T \frac{\Li_{5/2}\pare{\mp z}}{\Li_{3/2}\pare{\mp z}}. \]
+\end{finale}
+\begin{ex}
+在理想气体极限下, 注意$z\ll 1$时$\Li_n\pare{z}\approx z$, 有$U\approx \frac{3}{2}k_BT$, $\Phi_G = -\frac{2}{3}U = -pV$, 这些结论都是成立的.
+\subsubsection{Fermi气体}
+在绝对零度, 按照Fermi-Dirac分布, Fermi子的能级会从下往上依次填充, 占据的最高能量谓\emph{Fermi能量}$E_F$, 故
+\[ E_F = \mu\pare{T=0}. \]
+这是因为$\mu = \partial E/\partial N$. 相应的波矢记为$k_F$, 则
+\[ E_F = \frac{\hbar^2k_F^2}{2m},\quad N = \in_0^{k_F} g\pare{\vk}\,\rd^3\vk = \frac{\pare{2S+1}V}{2\pi^2}\frac{k_F^2}{3}. \]
+记$n=N/V$可以得到
+\begin{finale}
+\[ k_F = \pare{\frac{6\pi^2 n}{2S+1}}^{1/3},\quad E_F = \frac{\hbar^2}{2m}\pare{\frac{6\pi^2 n}{2S+1}}^{2/3}. \]
+\end{finale}
+\end{ex}
+定义Fermi温度$T_F = E_F/k_B$, 通常这是$\SI{e4}{K}$的量, 低于此温度时$E$的分布为$f\pare{E}g\pare{E}\propto E^{1/2}$, 并在$E=\mu$附近阶跃至零.
+\par
+由\eqref{eq:muGNandPhiGpV}, $\Phi_G = -pV$, 而由前一节的结论, $\Phi_G = -\frac{2}{3}U$, 故
+\[ p = \frac{2U}{3V},\quad \expc{E} = \frac{\int_0^{E_F}Eg\pare{E}\,\rd{E}}{\int_0^{E_F}g\pare{E}\,\rd{E}} = \frac{3}{5}E_F. \]
+因而弹性模量
+\[ B = -V\ddelon{p}{V} = \frac{10U}{9V} = \frac{2}{3}nE_F. \]
+这和实验数据数量级相符.
+\begin{theorem}[Sommerfeld公式]
+记$\psi\pare{E} = \int_0^E\phi\pare{E}\,\rd{E}$, 则
+\[ I = \int_0^\infty \phi\pare{E} f\pare{E}\,\rd{E} \approx 2 \sum_{s=0, 2|s}^\infty \pare{\frac{\rd{^s\psi}}{\rd{E^s}}}_{E=\mu}\pare{k_BT}^s\pare{1-2^{1-s}}\zeta\pare{s}. \]
+\end{theorem}
+\begin{proof}
+引入$x = \pare{E-\mu}/\pare{k_BT}$并分部积分后Taylor展开,
+\[ I = -\int_0^\infty \psi\pare{E}\eddon{f}{E}\,\rd{E} = \sum_{s=0}^\infty \rec{s!}\pare{\frac{\rd{^s\psi}}{\rd{x^s}}}_{x=0}\int_{-\mu/\pare{k_B T}}^\infty \frac{x^2e^x\,\rd{x}}{\pare{e^x+1}^2}. \]
+在$k_B T\ll \mu$时, 将积分下限替换为$-\infty$, 并硬展开分母, 有
+\[ \int_{-\infty}^\infty \frac{x^se^x\,\rd{x}}{\pare{e^x+1}^2} = 2\pare{s!}\pare{1-2^{1-s}}\zeta\pare{s}. \qedhere \]
+\end{proof}
+由\eqref{eq:Ninintegral}与Sommerfeld公式,
+\[ N = \frac{V}{3\pi^2}\pare{\frac{2m}{\hbar^2}}^{3/2}\mu^{3/2}\brac{1+\frac{\pi^2}{8}\pare{\frac{k_BT}{\mu}}^2+\cdots}. \]
+\[ \mu\pare{T} = \mu\pare{0}\brac{1-\frac{\pi^2}{12}\pare{\frac{k_BT}{\mu\pare{0}}}^2 + \cdots}. \]
+这意味着$\mu\pare{T}$和$\mu\pare{0}$之间相差无几, 在室温下不超过$0.01\%$.
+\begin{ex}
+由\eqref{eq:Uinintegral}并借助前开关于$N$与$\mu$之结论,
+\begin{align*}
+U &= \frac{V}{5\pi^2} \pare{\frac{2m}{\hbar}}^{3/2}\mu\pare{T}^{5/2}\brac{1+\frac{5\pi^2}{8}\pare{\frac{k_BT}{\mu\pare{0}}}^2+\cdots} \\
+&= \frac{3}{5} N\mu\pare{T}\brac{1+\frac{\pi^2}{2}\pare{\frac{k_BT}{\mu\pare{0}}}^2+\cdots} \\
+&= \frac{3}{5} N\mu\pare{0}\brac{1+\frac{5\pi^2}{12}\pare{\frac{k_BT}{\mu\pare{0}}}^2+\cdots}.
+\end{align*}
+相应地有
+\[ C_V \approx \frac{3}{2}Nk_B\pare{\frac{\pi^2}{3}\frac{k_BT}{\mu\pare{0}}}. \]
+因而低温时电子对热容的贡献是主要的, 声子的贡献呈$T^3$.
+\end{ex}
+\subsubsection{Bose气体}
+由\eqref{eq:Ninintegral}和\eqref{eq:Uinintegral}, 当$\mu = 0$, 即$z=1$时,
+\[ N = \frac{\pare{2S+1}V}{\lambda_{\mathrm{th}}^3}\zeta\pare{\frac{3}{2}},\quad U=\frac{3}{2}Nk_BT\frac{\zeta\pare{\frac{5}{2}}}{\zeta\pare{\frac{3}{2}}}. \]
+其中$\zeta\pare{\frac{3}{2}} = 2.612$,$\zeta\pare{\frac{5}{2}}/\zeta\pare{\frac{3}{2}}=0.513$.
+\begin{ex}
+对于光子, 类似的结论需要修正. 由$E = \hbar kc$, 相应地
+\[ g\pare{E}\,\rd{E} = \frac{V}{\pi^2\hbar^3c^3}E^2\rd{E},\quad U = \int_0^\infty \frac{Eg\pare{E}\,\rd{E}}{z^{-1}e^{\beta E}-1} = \pare{k_BT}^4\Gamma\pare{4}\Li_4\pare{z}. \]
+对于光子, 由\cref{muiszero}, $\mu = 0$, 可以正确复制\eqref{eq:Aandsigma},
+\[ U = \frac{V\pi^2}{15\hbar^2c^3}\pare{k_BT}^4. \]
+\end{ex}
+如果$E\propto k^2$, 则必须$\mu<0$即$z\in\pare{0,1}$否则$f$发散. 然而由\eqref{eq:Ninintegral},
+\begin{equation}
+\label{eq:ninLi}
+\frac{n\lambda_{\mathrm{th}}^3}{2S+1} = \Li_{3/2}\pare{z}\in\pare{0,2.612}.
+\end{equation}
+如果$n$过大或者$T$过小则$z$无解, 原因在于此时
+\[ k_B T_c = \frac{2\pi\hbar^2}{m}\brac{\frac{n}{2.612\pare{2S+1}}}^{2/3} \]
+求和转化为积分失效. 当$T<T_c$, $z\rightarrow 1$, 激发态$k\neq 0$上的$n_1$仍然可以由\eqref{eq:ninLi}给出,
+\begin{equation}
+\label{eq:natTc}
+n_1 \approx \frac{\pare{2S+1}\zeta\pare{\frac{3}{2}}}{\lambda_{\mathrm{th}}\pare{T}^3}\propto T^{3/2},\quad n = \frac{N}{V} = \frac{\pare{2S+1}\zeta\pare{\frac{3}{2}}}{\lambda_{\mathrm{th}}\pare{T_c}^3}.
+\end{equation}
+因此当$T$减小时, 激发态上的粒子数减小, 基态上有宏观数量的粒子占据, 谓\emph{Bose-Einstein凝聚}.
+\begin{ex}
+当$T<T_c$时, 只有激发态的粒子贡献内能, 从而
+\[ U = \frac{3}{2}Nk_BT\frac{\zeta\pare{\frac{5}{2}}}{\zeta\pare{\frac{3}{2}}} = 0.77Nk_BT_c\pare{\frac{T}{T_c}}^{5/2}. \]
+对比\eqref{eq:Uinintegral}可以发现区别.
+\end{ex}
+通过\eqref{eq:Ninintegral}与\eqref{eq:natTc},
+\[ \frac{T}{T_c} = \brac{\frac{\zeta\pare{\frac{3}{2}}}{\Li_{3/2}\pare{z}}}^{3/2}. \]
+可以得到逸度$z$在$T<T_c$时是相当接近$1$的.
+\begin{ex}
+\ce{^4He}在$\SI{2.2}{K}$时会变为超流体, 有零黏度和无限热导率, 估算得\ce{^4He}得$T_c=\SI{3.1}{K}$, 考虑到\ce{^4He}之间的相互作用, 可以认为这一值与实验相符.
+\end{ex}
+\begin{ex}
+磁场下低密度超冷原子气体在$T_c$下速度也会聚集在$v=0$处.
+\end{ex}
+\end{document}

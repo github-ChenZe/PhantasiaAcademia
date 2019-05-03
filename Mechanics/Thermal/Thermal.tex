@@ -1,0 +1,41 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\title{热力学与统计力学}
+\author{C.Z.}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+%\newread\file
+%\openin\file=directories.tmp
+%\loop\unless\ifeof\file
+%    \read\file to\fileline
+%    \ifeof\file\else\subfile{\fileline}\fi
+%    \repeat
+%\closein\file
+
+\subfile{Concepts/Concepts}
+\subfile{Kinetics/Kinetics}
+\subfile{Transport/Transport}
+\subfile{Energy/Energy}
+\subfile{Potentials/Potentials}
+\subfile{Statistical/Statistical}
+\subfile{NonIdealGases/NonIdealGases}
+\subfile{Applications/Applications}
+
+\begin{thebibliography}{9}
+	\bibitem{ZhangYuMin}
+ 	张玉民,
+	\textit{热学},
+	科学出版社,
+	2nd edition,
+	2006.
+\end{thebibliography}
+
+\end{document}

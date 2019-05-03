@@ -1,0 +1,151 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{气体动理学理论}
+\subsection{Maxwell-Boltzmann分布}
+\subsubsection{速度分布}
+Boltzmann分布可以被用来得出速率分布, 如果假设分子(单原子)气体的能量仅包括动能,
+\[ E= \half mv^2 = \half mv_x^2 + \half mv_y^2 + \half mv_z^2. \]
+并且假设分子之间存在相互碰撞但分子间的相互作用力可以忽略, 故分子可以看作正则系综中的小系统.
+\par
+由于速度的三个分量可以视为三个随机变量, 因此分量$i$具有大小$v_i$的概率为
+\[ g\pare{v_i} \propto e^{-mv_i^2/2k_BT}. \]
+归一化条件要求$\int g = 1$, 从而
+\begin{finale}
+\[ g\pare{v_i} = \sqrt{\frac{m}{2\pi k_B T}} e^{-mv_i^2/2k_BT}. \]
+\[ \expc{\abs{v_i}} = \sqrt{\frac{2k_BT}{\pi m}},\quad \expc{v_i^2} = \frac{k_BT}{m}. \]
+\end{finale}
+\subsubsection{速率分布}
+考虑速率分布具有$4\pi v^2\rd{v}$的简并, 有
+\[ f\pare{v} \propto v^2 e^{-mv^2/2k_BT}. \]
+归一化可得
+\begin{finale}
+\[ f\pare{v} = \frac{4}{\sqrt{\pi}}\pare{\frac{m}{2k_BT}}^{3/2}v^2e^{-mv^2/2k_BT}. \]
+\[ \submax{v} = \sqrt{\frac{2k_BT}{m}},\quad \expc{v} = \sqrt{\frac{8k_BT}{\pi m}}, \]
+\[ \expc{v^2} = \frac{3k_BT}{m}, \quad \rms{v} = \sqrt{\expc{v^2}} = \sqrt{\frac{3k_BT}{m}}. \]
+\begin{equation}
+  \label{eq:EktoT}
+  \expc{E_k} = \half m\expc{v^2} = \frac{3}{2}k_BT.
+\end{equation}
+\end{finale}
+\begin{ex}
+通过刻有螺旋凹槽的速度选择器可以验证上述分布, 然而结果似乎与$v^4e^{-mv^2/k_BT}$吻合, 原因在于泻出的气体分子并非全部气体分子(实际上其速率较大), 且细缝有有限宽度, 而相应速率区间宽度正比于速率大小.
+\end{ex}
+\begin{ex}
+另一方法是由于$v_x$符合正态分布, 考虑Doppler效应后气体分子光谱频率会随$v_x$变化, 同样呈正态分布, 通过检查半峰全宽判断参数是否相符.
+\end{ex}
+\subsection{压强}
+压强可以由$T$, $V$和$N$唯一确定, 即
+\[ p = f\pare{T, V, N}. \]
+理想气体方程即为一例. 下面开始推导之.
+\begin{finale}
+速率在$\pare{v, v+\rd{v}}$内, 与给定方向呈$\pare{\theta, \theta+\rd{\theta}}$角度的分子数为
+\[ nf\pare{v}\rd{v}\half\sin\theta\rd{\theta}. \]
+\end{finale}
+将方向设为容器壁法向, 则单位时间内相应的撞击单位面积容器壁的分子数即为这种分子扫过体积中的分子数, 即
+\[ \rd{V} nf\pare{v}\rd{v}\half\sin\theta\rd{\theta} = v\cos\theta nf\pare{v}\rd{v}\half\sin\theta\rd{\theta}. \]
+每个分子改变的动量为$2mv\cos\theta$, 从而
+\[ p=\int_0^{\pi/2}\int_0^\infty \pare{2mv\cos\theta}\pare{v\cos\theta nf\pare{v}\,\rd{v}\half\sin\,\rd{\theta}} = \rec{3}nm\expc{v^2}. \]
+由\eqref{eq:EktoT}立刻有
+\begin{finale}
+\[ pV = Nk_B T. \]
+\end{finale}
+\begin{remark}
+	理想气体状态方程还可以写成
+	\[ p\mu = \rho RT. \]
+	其中$\mu$是相对分子质量. 如果系统中存在多种分子, 则$\mu$可取(加权)平均相对分子质量.
+\end{remark}
+\begin{remark}
+	像这样把几个态函数连接起来的方程谓状态方程, 从\rmref{体积的改变用膨胀率和压缩率写出}也可以写出「固体/液体状态方程」
+	\[ V/V_0 = 1 + \beta_p\,\rd{T-T_0} - \kappa_T\pare{p-p_0}. \]
+\end{remark}
+\begin{pitfall}
+	理想气体方程只有在温度不太低, 压强不太高时适用.
+\end{pitfall}
+动能密度为
+\[ u = n\expc{E_k} = \half nm\expc{v^2},\quad p=\frac{2}{3}u. \]
+\begin{finale}
+\begin{axiom}[Dalton定律]
+混合气体的总压强为分压之和,
+\[ p = \pare{\sum_i n_i} k_B T = \sum_i p_i. \]
+\end{axiom}
+\end{finale}
+\begin{pitfall}
+Dalton定律可以单独分体积或者分压, 但不得同时适用.
+\end{pitfall}
+\begin{remark}[另一推导]
+直接考虑速度分量可得
+\[ p =\int_0^\infty \pare{2mv_i}v_ing\pare{v_i}\,\rd{v_i} = nk_BT. \]
+这种方法还可以推出单位时间内撞击单位面积的分子数为
+\[ \Phi = \int_0^\infty v_i ng\pare{v_i}\,\rd{v_i} = \half n\expc{\abs{v_i}} = \rec{4} n\expc{v}. \]
+\end{remark}
+\begin{remark}[从Virial定理推导]
+由Virial定理,
+\[ \frac{3}{2}Nk_BT = \expc{E_k} = -\half \sum\expc{\vF\cdot\vr} = \half \oiint_S p\vr\cdot\,\rd{\vsigma} = \half \iiint_V p\,\rd{V} = \half pV. \]
+\end{remark}
+\subsection{泻流}
+\begin{definition}[通量]
+通量谓单位时间内通过单位面积的量:
+\[ \text{通量} = \frac{\text{通过量}}{\text{面积} \times \text{时间}}. \]
+\end{definition}
+\begin{definition}[分子通量]
+分子数的通量谓分子通量, 记作$\Phi$.
+\end{definition}
+\[ \Phi = \int_0^{\pi/2}\int_0^\infty v\cos\theta nf\pare{v}\,\rd{v}\half\sin\theta\,\rd{\theta} = \rec{4}n\expc{v}. \]
+\begin{finale}
+\[ \Phi = \rec{4}n\expc{v} = \frac{p}{\sqrt{2\pi mk_B T}}. \]
+特别地, 泻流速率与质量的平方根成反比.
+\end{finale}
+\begin{ex}[Knudsen方法]
+将具有蒸汽压的液体放在称上, 观察质量的变化率,
+\[ \rec{m}\abs{\edton{M}} = \Phi A = \frac{pA}{\sqrt{2\pi mk_B T}}.  \]
+从而可以得到蒸汽压.
+\end{ex}
+注意到从上面的推到可以得到(由于速度快的分子单位时间内能划过更大的路程)泻出的分子速率分布应当符合
+\[ v f\pare{v} \sim v^3 e^{-mv^2/2k_BT}. \]
+\begin{ex}
+从小孔中泻出的分子气体的平均动能为
+\[ \expc{E_k}_{\text{出}} = \half m\frac{\int_0^\infty v^2v^3e^{-\half \beta mv^2}\,\rd{v}}{\int_0^\infty v^3 e^{-\half \beta mv^2}\,\rd{v}} = 2k_BT = \frac{4}{3}\expc{E_k}_{\text{内}}. \]
+\end{ex}
+\begin{ex}
+两个由带孔隔板分隔的容器, 孔大时平衡态为$T_1=T_2$, $p_1 = p_2$. 孔小时$\Phi_1 = \Phi_2$, 即
+\[ \frac{p_1}{\sqrt{T_1}} = \frac{p_2}{\sqrt{T_2}}. \]
+\end{ex}
+\begin{ex}[Knudesen流动]
+两端有压强差的细管中, 经过某点的流量可以近似为「向下游」的粒子密度减去「向上游」的粒子密度, 这近似为
+\[ \Phi\pare{x} \sim \rec{4} \expc{v} \brac{n\pare{x-\lambda} - n\pare{x+\lambda}}. \]
+借助$p = \rec{3}nm\expc{v^2}$可得
+\[ \Phi\pare{x} \sim \frac{3}{4m}\frac{\expc{v}}{\expc{v^2}} \cdot 2\lambda \cdot\frac{p_1 - p_2}{L}. \]
+忽略常数因子并假定$\lambda \sim D$即管径可得
+\[ \Phi\pare{x} \sim \frac{D^3}{\expc{v}}\frac{p_1-p_2}{L}. \]
+因此加宽管道可以获得更高流速.
+\end{ex}
+\subsection{平均自由程和碰撞}
+设$P\pare{t}$为一个特定的分子直到时刻$t$不发生碰撞的概率, 则
+\[ P\pare{t+\rd{t}} = P\pare{t} \pare{1- n\sigma v\,\rd{t}}. \]
+后一个因子是它在其后的$\rd{t}$时间内不发生碰撞的概率. 解得(归一化后)
+\[ P\pare{t} =  n\sigma ve^{-n\sigma vt}. \]
+相应的平均散射时间为
+\begin{finale}
+\[ \tau = \expc{t} = \rec{n\sigma v}. \]
+\end{finale}
+其中$\sigma$皆为散射截面积, 通常可取为$\sigma = \pi\pare{a_1+a_2}^2$. $a_1$和$a_2$分别为两种分子之半径.
+\par
+为了求出平均自由程, 需明确上式中$v$的意义——即相对速度的均值.
+\begin{align*}
+ \expc{v_r} &= \iint \abs{\vv - \vvu} f\pare{\vv}\,\rd{\vv}f\pare{\vvu}\,\rd{\vvu} \\
+ &= \sqrt{2}\int\abs{\vx}f\pare{\vx}\,\rd{vx}\int f\pare{\vy}\,\rd{\vy} = \sqrt{2}\expc{v}.
+\end{align*}
+其中换元$\vx = \pare{\vv-\vvu}/\sqrt{2}$, $\vy = \pare{\vv+\vvu}/\sqrt{2}$. 最终积分能化成这种形式纯粹为Maxwell-Boltzmann分布的指数因子的巧合.
+\begin{finale}
+\[ \lambda = \rec{\sqrt{2}n\sigma} = \frac{k_B T}{\sqrt{2}p\sigma}. \]
+\end{finale}
+\begin{remark}
+	可能是受到平均自由程公式的影响, \cite{ZhangYuMin}中采纳的碰撞频率为
+	\[ Z = \sqrt{2} \pi d^2 n\expc{v}. \]
+\end{remark}
+\begin{pitfall}
+	对于单种分子, 散射截面积应当使用$\pi d^2$.
+\end{pitfall}
+\end{document}

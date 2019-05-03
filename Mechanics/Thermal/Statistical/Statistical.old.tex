@@ -1,0 +1,561 @@
+\documentclass[../Thermal.tex]{subfiles}
+
+\begin{document}
+
+\section{统计力学}
+\subsection{配分函数}
+\subsubsection{能量均分定理}
+如果一个系统的能量由$n$个随机变量$x_i$决定, $E_i = \alpha_i x_i^2$,则相应的
+\[ P\pare{x_1, x_2, \cdots, x_n} \propto \exp\pare{-\beta \sum_i \alpha_i x_i^2}. \]
+能量的期望值
+\[ \expc{E} = \sum_i \frac{\int_{\R^n} \alpha_i x_i^2 \exp\pare{-\beta\sum_i \alpha_i x_i^2} \rd{x^n}}{\int_{\R^n} \exp\pare{-\beta\sum_i \alpha_i x_i^2} \rd{x^n}} = \frac{n}{2}k_BT. \]
+注意分子和分母的重积分可化为积分的乘积并且除了一项外皆可以抵消.
+\begin{finale}
+\begin{theorem}[能量均分定理]
+如果一个系统的能量是$n$个平方模之和且系统与温度为$T$的热源相连, 则系统能量的期望值为
+\[ \expc{E} = n\times \half k_B T. \]
+\end{theorem}
+\end{finale}
+\begin{ex}[单原子气体的平动]
+单原子气体的平动具有$3$个平方模, 因此
+\[ \expc{E} = \frac{3}{2} k_B T. \]
+\end{ex}
+\begin{ex}[双原子气体的转动]
+转动模是两个平方模的和
+\[ \frac{L_1^2}{2I_1} + \frac{L_2^2}{2I_2}. \]
+沿分子轴向的转动惯量非常小, 故常温下不能被激发. 从而
+\[ \expc{E} = \frac{5}{2} k_BT. \]
+\end{ex}
+\begin{ex}[双原子气体的振动]
+在平动和转动的基础上, 加上相对运动的一个平方模和谐振子势能的一个平方模, 得到
+\[ \expc{E} = \frac{7}{2} k_BT. \]
+\end{ex}
+\begin{ex}
+上面的三个例子的摩尔热容$C_V$分别为$3R/2$, $5R/2$, $7R/2$, 而对于理想气体一致有$C_V = C_p + R$, 从而$\gamma$分别为$5/3$, $7/5$, $9/7$.
+\end{ex}
+\begin{ex}[Dulong-Petit定律]
+固体原子可以视为有三个简振模, 外加三个平动模, 相应
+\[ \expc{E} = 3k_BT,\quad R = 3R. \]
+\end{ex}
+\begin{remark}
+能量均分定理假设了随机参量可以任意取值, 但当$T\rightarrow 0$时, 参量量子化取值的特性可能令上述积分失效. 同时参量的简谐振动可能仅在参量足够小时适用, 如果温度过高, 参量可能处于不能适用这种近似的位置.
+\end{remark}
+\begin{pitfall}
+能量均分定理仅当温度足够高, 热能远大于量子化能级间隔时适用.
+\end{pitfall}
+\begin{ex}[Brown运动]
+花粉颗粒具有$\half m\expc{v^2}=\frac{3}{2}k_BT$的平均动能, 因此质量小的颗粒具有更大的甚至对肉眼显著的速度.
+\end{ex}
+\begin{ex}[Rayleigh-Jeans定律]
+考虑边长为$L$的空腔内的电磁驻波,
+\[ \laplacian \vE = \rec{c^2}\dddelon{E}{t}. \]
+分离变量有
+\[ E = E_0\sin\frac{n_x\pi x}{L}\sin\frac{n_y\pi y}{L}\sin\frac{n_z\pi z}{L}\sin\frac{2\pi ct}{\lambda}, \]
+\[ \quad \pare{\frac{n_x\pi}{L}}^2+\pare{\frac{n_y\pi}{L}}^2+\pare{\frac{n_z\pi}{L}}^2 = \pare{\frac{2\pi}{\lambda}}^2. \]
+考虑到电磁波有两个偏振方向, 波数空间球内的态的数目为
+\[ N = 2\times\rec{8}\times\frac{4\pi}{3}\pare{n_x^2+n_y^2+n_z^2}^{3/2} = \frac{8\pi L^3}{3\lambda^3}. \]
+在波数空间内取一球壳, 得到单位波长内的态的数量为
+\[ \rd{N} = \frac{8\pi L^3}{\lambda^4}\rd{\lambda}. \]
+由能量均分定理, 每个谐振子平均贡献$k_BT$的能量(这是因为谐振子有动能和势能), 能量密度为
+\begin{equation}
+\label{eq:rayleighjeans}
+\rd{u} = \frac{8\pi k_B T}{\lambda^4}.
+\end{equation}
+这导致高频出的能量密度发散, 即紫外灾变.
+\end{ex}
+\subsubsection{配分函数的定义}
+\begin{definition}[单粒子配分函数]
+配分函数$Z$是对所有态的Boltzmann因子之和,
+\[ Z = \sum_\alpha e^{-\beta E_\alpha}. \]
+\end{definition}
+\begin{remark}
+用配分函数导出物理量时, 有些物理量由它的对数决定故可定义到与之相差一个常数, 有些物理量由它的对数的微分决定故可精确确定.
+\end{remark}
+\begin{ex}
+\label{ex:twolevelsystem}
+具有能量$\pm \Delta/2$的二能级系统的配分函数为
+\begin{equation}
+\label{eq:bipartition}
+Z = 2\cosh\pare{\frac{\beta\Delta}{2}}.
+\end{equation}
+\end{ex}
+\begin{ex}
+\label{ex:harmonic}
+具有能量$\pare{n+\half}\hbar\omega$的谐振子的配分函数为
+\[ Z = \frac{e^{-\half \beta \hbar \omega}}{1-e^{-\beta\hbar\omega}} = \rec{2\sinh \pare{\beta\hbar\omega/2}}. \]
+\end{ex}
+\begin{ex}
+具有能量$n\hbar\omega$的$N$-能级系统的配分函数为
+\begin{equation}
+\label{eq:harmonicpartition}
+Z = \frac{1-e^{-N\beta\hbar\omega}}{1-e^{-\beta\hbar\omega}}.
+\end{equation}
+\end{ex}
+\begin{ex}
+\label{ex:quantumangularmomentum}
+具有量子化的角动量的系统的能级为
+\[ E_J = \frac{\hbar^2}{2I}J\pare{J+1}, \quad J = 0,1,\cdots. \]
+考虑简并度后的配分函数为
+\begin{equation}
+\label{eq:rotationpartition}
+Z = \sum_{j=0}^\infty \pare{2J+1}e^{-\beta \hbar^2J\pare{J+1}/2I}.
+\end{equation}
+\end{ex}
+\subsubsection{得出态函数}
+\label{statefunctionsbypartitionfunction}
+\paragraph{内能$U$} 内能是能量的期望值, 故
+\[ U = \frac{\sum_i E_i e^{-\beta E_i}}{\sum_i e^{-\beta E_i}}. \]
+\begin{finale}
+\[ U = -\eddon{\ln Z}{\beta} = k_BT^2 \eddon{\ln Z}{T}. \]
+\end{finale}
+\paragraph{热容$C_V$} 通过$C_V=\pare{\partial U/\partial T}_V$,
+\[ C_V = k_BT\brac{2\pare{\ddelon{\ln Z}{T}}_V + T\pare{\dddelon{\ln Z}{T}}_V}. \]
+\paragraph{熵$S$} 概率
+\[ P_i = e^{-\beta E_i}/Z,\quad \ln P_i = -\beta E_i - \ln Z. \]
+采用熵的Gibbs表示,
+\[ S = -k_B \sum_i P_i \ln P_i = k_B\pare{\beta U + \ln Z}. \]
+\begin{finale}
+\[ S = \frac{U}{T} + k_B \ln Z. \]
+\end{finale}
+\paragraph{Helmholtz自由能$F$} 由$F=U-TS$, 立刻有
+\begin{finale}
+\[ F = -k_BT\ln Z,\quad Z = e^{-\beta F}. \]
+\end{finale}
+\paragraph{压强$p$} 通过$\rd{F} = -S\rd{T} - p\rd{V}$, $p=-\pare{\partial F/\partial V}_T$.
+\[ p = k_B T \pare{\ddelon{\ln Z}{V}}_T. \]
+\paragraph{焓$H$} $H = U + pV$,
+\[ H = k_B T\brac{T\pare{\ddelon{\ln Z}{T}}_V + V\pare{\ddelon{\ln Z}{V}}_T}. \]
+\paragraph{Gibbs自由能$H$} $G = F + pV$,
+\[ G = F + pV = k_B T\brac{-\ln Z + V\pare{\ddelon{\ln Z}{V}}_T}. \]
+\begin{remark}
+只需要记住$U$和$F$的表达式就可以通过$S = -\pare{\partial F/\partial T}_V$等导出剩下的热力学量而无需暴力求导.
+\end{remark}
+\begin{ex}[二能级系统]
+通过在\eref{twolevelsystem}中导出的$Z$可以得到
+\[ C_V = \pare{\ddelon{U}{T}}_V = k_B\pare{\frac{\beta \Delta}{2}}^2\sech\pare{\frac{\beta\Delta}{2}}. \]
+\[ S = \frac{U}{T} + k_B\ln Z = -\frac{\Delta}{2T}\tanh\pare{\frac{\beta \Delta}{2}} + k_B \ln \brac{2\cosh\pare{\frac{\beta \Delta}{2}}}. \]
+在低温下, 熵趋向于零, 因为系统必定处于最低能态. 高温下两个能态被同等占据, $S=k_B\ln 2$与预期相符. 
+\par
+热容则在低温和高温时皆趋于零, 因为低温的能量不足以造成热激发, 而高温时两个能态同等占据, 吸热不足矣改变这一情形.
+\end{ex}
+\begin{ex}[谐振子]
+通过在\eref{harmonic}中导出的$Z$,
+\begin{equation}
+\label{eq:uofharmonic}
+U = -\eddon{\ln Z}{\beta} = \hbar\omega\pare{\half + \rec{e^{\beta\hbar\omega} - 1}}.
+\end{equation}
+\[ C_V = \pare{\ddelon{U}{T}}_V = k_B\pare{\beta\hbar\omega}^2\frac{e^{\beta\hbar\omega}}{\pare{e^{\beta\hbar\omega}-1}^2}. \]
+特别地, 高温时$C_V\rightarrow k_B$, 这与能量均分定理相符.
+\end{ex}
+\begin{ex}[转动双原子分子]
+通过\eref{quantumangularmomentum}中的$Z$, 高温下以积分近似求和
+\[ Z = \sum_{J=0}^\infty \pare{2J+1}e^{-\beta\Delta J\pare{J+1}} \approx \int_0^\infty \pare{2J+1}e^{-\beta\Delta J\pare{J+1}}\,\rd{J} = \frac{1}{\beta \Delta}. \]
+从而$U=k_BT$, $C_V=k_B$与能量均分定理相符.
+\end{ex}
+\subsubsection{组合配分函数}
+如果$E$有多个独立项, 配分函数可以写成这些项各自的配分函数的积,
+\[ Z = \sum_{i,j} e^{-\beta E_{i,j}} = \sum_i\sum_j e^{-\beta\pare{E_i^{(a)} + E_j^{(b)}}} = Z_a Z_b. \]
+从而$\ln Z = \ln Z_a + \ln Z_b$, 因此依赖于$\ln Z$的态函数是各个项目的独立贡献之和.
+\begin{ex}
+$N$个独立谐振子的配分函数$Z = Z_{\mathrm{SHO}}^N$, 其中$Z_{\mathrm{SHO}}$由\eqref{eq:harmonicpartition}给出.
+\end{ex}
+\begin{ex}
+\label{ex:twoatomvibrot}
+的双原子分子的转动和振动的配分函数$Z = Z_{\mathrm{vib}}Z_{\mathrm{rot}}$, 其中$Z_{\mathrm{vib}}$和$Z_{\mathrm{rot}}$分别由\eqref{eq:harmonicpartition}和\eqref{eq:rotationpartition}给出.
+\end{ex}
+\begin{ex}[Curie定律]
+考虑$N$个磁偶极子, 根据取向可以有能量$\pm \mu_B B$. 由\eqref{eq:bipartition}得到的总的配分函数为
+\[ Z_N = Z^N,\quad F = -k_BT\ln Z_N = -Nk_BT\ln\brac{2\cosh\pare{\beta\mu_B B}}. \]
+可以得到磁矩
+\[ m = -\pare{\ddelon{F}{B}}_T = N\mu_B \tanh\pare{\beta \mu_B B}. \]
+高温弱磁场下$m\propto 1/T$, 并且由$m\propto \chi H$与$B\approx H$可得Curie定律.
+\end{ex}
+\section{对具体系统的应用}
+\subsection{理想气体}
+\subsubsection{态函数}
+尺度为$L$的箱子内的例子的波函数为
+\[ \psi\pare{x,y,z} = \pare{\frac{2}{L}}^{3/2} \sin\pare{k_x x}\sin\pare{k_y y}\sin\pare{k_z z}. \]
+由边界条件, 相应的
+\[ k_i = \frac{n_i \pi}{L}, \quad n_i = 0,1,\cdots. \]
+$k$空间中一个态占据体积$\pare{\pi/L}^3$, 因此对于固定模长的$k$, 相应的态密度为
+\begin{equation}
+\label{eq:statedensity}
+g\pare{k}\rd{k} = \rec{8}\frac{4\pi k^2\rd{k}}{\pare{\pi/L}^3} = \frac{Vk^2\rd{k}}{2\pi^2}.
+\end{equation}
+\subsubsection{配分函数}
+用积分近似求和, 并注意能量$E\pare{k} = \hbar^2 k^2/2m$,
+\[ Z = \int_0^\infty e^{-\beta E\pare{k}}g\pare{k}\,\rd{k} = \int_0^\infty e^{-\beta \hbar^2 k^2/2m}\frac{Vk^2\,\rd{k}}{2\pi^2} = \frac{V}{\hbar^3}\pare{\frac{mk_BT}{2\pi}}^{3/2}. \]
+引入\emph{量子密度}$n_Q$和\emph{热波长}$\lambda_{\mathrm{th}}$之后可得
+\begin{finale}
+\begin{equation}
+\label{eq:Zinlambdath}
+Z = Vn_Q = \frac{V}{\lambda_{\mathrm{th}}^3},\quad n_Q = \rec{\hbar^3}\pare{\frac{mk_BT}{2\pi}}^{3/2},\quad \lambda_{\mathrm{th}} = \frac{h}{\sqrt{2\pi mk_B T}}.
+\end{equation}
+\end{finale}
+\subsubsection{可分辨性}
+\begin{ex}
+双粒子的二能级系统, 粒子可分辨时配分函数为
+\[ Z_2 = e^0 + e^{-\beta\epsilon} + e^{-\beta\epsilon} + e^{-2\beta\epsilon} = Z^2. \]
+粒子不可分辨时
+\[ Z_2 = e^0 + e^{-\beta\epsilon} + e^{-2\beta\epsilon} \neq Z^2. \]
+\end{ex}
+理想气体分子是不可分辨的, 如果作为近似而忽略有多个粒子占据相同能及的情形可以认为
+\[ Z_N = \frac{Z^N}{N!}. \]
+分母的$N!$用于消去重复. 如果可及的能级数远远大于气体中的分子数这种近似是合理的. 这要求$n \ll n_Q$.
+\begin{ex}
+室温下, 对于\ce{N2}有$n\approx\SI{e25}{m^{-3}}$, $n_Q\approx\SI{e31}{m^{-3}}$, 因此适用这一近似. 金属中电子的$n\approx\SI{e29}{m^{-3}}$而$n_Q\approx\SI{e25}{m^{-3}}$, 因此无法适用该近似.
+\end{ex}
+\subsubsection{得出态函数}
+配分函数的常数系数不会影响依赖于$\partial \ln Z_N/\partial T$的态函数的值, 由
+\[ Z_N = \rec{N!}\pare{\frac{V}{\lambda_{\mathrm{th}}^3}}^N \propto \pare{VT^{3/2}}^N, \]
+\[ \ln Z_N = N \ln V + \frac{3N}{2}\ln T + \const. \]
+\[ U = -\ddelon{\ln Z_N}{\beta} = \frac{3}{2}Nk_BT,\quad C_V = \frac{3}{2}Nk_B. \]
+这和能量均分定理的结果是一致的.
+\[ p = -\pare{\ddelon{F}{V}}_T = \brac{\ddelon{\pare{k_B T\ln Z_N}}{V}}_T = nk_BT. \]
+这与理想气体方程的结果是一致的.
+\[ H = U + pV = \frac{5}{2}Nk_BT,\quad C_p = \frac{5}{2}Nk_B. \]
+这和之前的结果是一致的. 保留常数项计算并近似$\ln N! \approx N\ln N - N$, 有
+\[ F = -k_BT\ln Z_N = Nk_BT\brac{\ln\pare{n\lambda_{\mathrm{th}}^3} - 1}. \]
+\begin{equation}
+\label{eq:gofidealgases}
+G = F + pV = Nk_BT\ln\pare{n\lambda_{\mathrm{th}}^3}.
+\end{equation}
+再通过$S = \pare{U-F}/T$可得
+\begin{finale}
+\begin{corollary}[Sackur-Tetrode方程]
+\[ S = Nk_B\brac{\frac{5}{2}-\ln\pare{n\lambda_{\mathrm{th}}^3}}. \]
+\end{corollary}
+\end{finale}
+\subsubsection{Gibbs佯谬}
+\begin{ex}
+如果不考虑不可分辨性, 直接忽略$1/N!$因子而求出熵, 有
+\[ F = -k_BT\ln Z_N = Nk_B\ln\frac{\lambda_{\mathrm{th}}^3}{V}, \]
+\[ S = Nk_B\pare{\frac{3}{2} - \ln\frac{\lambda_{\mathrm{th}}^3}{V}}. \]
+注意此时的熵变成了非广延量.
+\end{ex}
+在前开$S$的表达式中考虑Joule膨胀, 可以正确得到$Nk_B\ln 2$的熵增. 如果抽去原本分开的两份理想气体中的隔板令其混合, 可视为两份Joule膨胀, 从而有$2Nk_B\ln 2$的熵增.
+\begin{ex}
+将理想气体复制粘贴一份, 无论副本与原件是否有容器壁分隔, 各热力学势皆因此翻倍, 因此熵也应当翻倍——所以在一份理想气体中抽去或插入隔板不应当改变熵. 由于粒子的不可分辨性, 不可视为两份Joule膨胀.
+\end{ex}
+\subsubsection{双原子气体的热容}
+在\eref{twoatomvibrot}中的配分函数中加上平动项, 得到双原子气体的配分函数
+\[ Z = Z_{\mathrm{trans}}Z_{\mathrm{vib}}Z_{\mathrm{rot}}. \]
+计算可得$T\rightarrow 0$时$C_V\approx \frac{3}{2}R$, $T\approx \hbar^2/\pare{2Ik_B}$时转动被激发, $C_V\approx\frac{5}{2}R$, $T\approx \hbar\omega/k_B$时振动被激发, $C_V\approx \frac{7}{2}R$.
+\subsubsection{相对论性气体}
+在相对论的情形下, $E^2 = p^2c^2 + m^2 c^4$, 极端相对论情形下有$E=pc$, 光子符合这一情况.
+\[ Z = \int_0^\infty e^{-\beta \hbar kc}g\pare{k}\,\rd{k} = \frac{V}{2\pi^2}\pare{\rec{\beta\hbar c}}^3\int_0^\infty e^{-x}x^2\,\rd{x} = \frac{V}{\pi^2}\pare{\frac{k_B T}{\hbar c}}^3. \]
+引入平行于热波长的$\Lambda$, 有
+\begin{finale}
+\[ Z = \frac{V}{\Lambda^3},\quad \Lambda = \frac{\hbar c\pi^{2/3}}{k_BT}. \]
+\end{finale}
+假设气体密度足够低, 总的配分函数为
+\[ Z_N = \frac{Z^N}{N!},\quad \ln Z_N = N \ln V + 3N \ln T + \const. \]
+\[ U = -\eddon{\ln Z_N}{\beta} = 3Nk_BT,\quad C_V = 3Nk_B. \]
+注意到这和能量均分定理不相符, 因为能量不再是平方模.
+\begin{equation}
+\label{eq:pisu3}
+p = -\pare{\ddelon{F}{V}}_T = \brac{\ddelon{k_BT\ln Z_N}{V}}_T = nk_BT = \frac{u}{3}.
+\end{equation}
+这和理想气体方程的结果是一致的.
+\[ H = U + pV = 4k_BT,\quad C_p = 4Nk_B. \]
+这意味着绝热指数$\gamma=4/3$. 保留常数项计算并近似$\ln N! = N\ln N - N$, 有
+\[ F = -k_B\ln Z_N = Nk_BT\brac{\ln \pare{n\Lambda^3} - 1}. \]
+\[ G = F + pV = Nk_BT\ln\pare{n\Lambda^3}. \]
+再通过$S=\pare{U-F}/T$可得
+\[ S = Nk_B\brac{4 - \ln\pare{n\Lambda^3}}. \]
+特别地, $p=u/3$而非理想气体的$p=2u/3$. 由于$U$仍仅与温度有关, \eqref{eq:adiabeticidealgases}的推导可以适用, 因此绝热膨胀时
+\[ pV^{4/3} = \const,\quad VT^3 = \const. \]
+\begin{ex}
+宇宙膨胀时$T\propto V^{-1/3} \propto a^{-1}$. 而对于非相对论性理想气体, $VT^{3/2}=\const$, $T\propto a^{-2}$, 因此非相对论性理想气体的冷却更快.
+\end{ex}
+\begin{ex}
+非相对论性粒子由质量守恒可得$\rho \propto a^{-3}$, 然而相对论性粒子$\rho \propto u \propto p \propto a^{-4}$, 因此宇宙膨胀时相对论性气体密度下降更快. 因此早期宇宙的密度是以辐射为主导的, 其后膨胀才导致其变为物质为主导的.
+\end{ex}
+\subsection{化学势}
+\subsubsection{化学势的意义}
+\begin{definition}
+等容、绝热地加入粒子导致的内能改变量谓化学势.
+\end{definition}
+从定义可以得到
+\begin{align*}
+\rd{U} &= T\rd{S} - p\rd{V} + \mu \rd{N},\\
+\rd{F} &= -S\rd{T} - p\rd{V} + \mu \rd{N},\\
+\rd{G} &= -S\rd{T} + V\rd{p} + \mu\rd{N}.
+\end{align*}
+由于化学反应常常发生于等容等压过程中, $\rd{G}$的表达式更为常用.
+\begin{remark}
+虽然$N$取整数值, 但是当$N$充分大时$\rd{N}$仍然是合理的.
+\end{remark}
+\begin{corollary}
+\label{coll:muiszero}
+粒子数不守恒则$\mu=0$.
+\end{corollary}
+\begin{pitfall}
+$\mu$并不仅仅取决于粒子的类型, 它和$p$与$T$一样是强度量并且大小取决于环境.
+\end{pitfall}
+\begin{equation}
+\label{eq:sinuvn}
+\rd{S} = \frac{\rd{U}}{T} + \frac{p\rd{V}}{T} - \frac{\mu \rd{N}}{T}.
+\end{equation}
+通过条件$\rd{S}\ge 0$可以得出系统演化的方向,
+\begin{ex}
+两个可以相互交换热量的孤立系统, 总内能守恒, 熵变
+\[ \rd{S} = \pare{\rec{T_1} - \rec{T_2}}\rd{U_1} \ge 0. \]
+因此热量从高温流向低温, 温度相等时达到平衡.
+\end{ex}
+\begin{ex}
+两个可以交换粒子的孤立系统,
+\[ \rd{S} = \pare{\frac{\mu_1}{T_1} - \frac{\mu_2}{T_2}}\rd{N_2}. \]
+如果它们温度相等, 那么当$\mu_1=\mu_2$时达到平衡. 参考\eref{transofp}可以发现化学势的作用可以类比于压强.
+\end{ex}
+\begin{ex}
+\label{ex:muofidealgases}
+由\eqref{eq:gofidealgases}并注意到在等温等压下$n$是固定的, 理想气体的化学势为
+\[ \mu = \pare{\ddelon{G}{N}}_{p,T} = k_B T \ln\pare{n\lambda_{\mathrm{th}}^3} = \frac{G}{N}. \]
+可以发现化学势就是单个粒子的Gibbs自由能.
+\end{ex}
+\subsubsection{巨配分函数}
+通过类似于正则系综的Boltzmann分布\eqref{eq:boltzmanndistribution}的推导可以导出巨正则系综的分布. 假设小系统具有粒子数$N$与能量$\epsilon$, 相应的源的熵为
+\begin{align*}
+S\pare{U-\epsilon, \cN - N} &= S\pare{U,\cN} - \epsilon\pare{\ddelon{S}{U}}_{\cN, V} - N\pare{\ddelon{S}{\cN}}_{U,V}\\
+&= S\pare{U,N} - \rec{T}\pare{\epsilon - \mu N}.
+\end{align*}
+这里假设系综具有固定的体积. 由$S=k_B\ln\Omega$, 相应地
+\[ P\pare{\epsilon,N} \propto e^{\beta\pare{\mu N - \epsilon}}. \]
+定义$\cZ$为\emph{巨配分函数}.
+\begin{finale}
+\[ P_i = \rec{\cZ} e^{\beta\pare{\mu N_i - E_i}},\quad \cZ = \sum_i e^{\beta\pare{\mu N_i - E_i}}. \]
+\end{finale}
+仿照\ref{statefunctionsbypartitionfunction}中的方法, 可以导出
+\[ N = \sum_i N_i P_i = k_BT\pare{\ddelon{\ln \cZ}{\mu}}_{\beta}. \]
+\[ U = \sum_i E_i P_i = -\pare{\ddelon{\ln \cZ}{\beta}}_\mu + \mu N. \]
+\begin{equation}
+\label{eq:sbygrandpartition}
+S = -k_B \sum P_i \ln P_i = \frac{U - \mu N + k_B T\ln \cZ}{T}.
+\end{equation}
+\subsubsection{巨热力学势}
+\ref{statefunctionsbypartitionfunction}中Helmholtz自由能和配分函数之间有简单的表达式, 相应地可以定义\emph{巨热力学势}
+\begin{finale}
+\[ \Phi_G = -k_B T\ln \cZ. \]
+\end{finale}
+由\eqref{eq:sbygrandpartition}可得
+\[ \Phi_G = U - TS -\mu N = F - \mu N. \]
+\begin{finale}
+\[ \rd{\Phi_G} = -S\rd{T} - p\rd{V} - N\rd{\mu}. \]
+\end{finale}
+\begin{ex}
+对于理想气体,
+\[ \Phi_G = F - \mu N = Nk_BT\brac{\ln\pare{n\lambda_{\mathrm{th}}^3} - 1} - Nk_BT\ln\pare{n\lambda_{\text{th}}^3} = -Nk_BT = -pV. \]
+注意$\Phi_G$可以由三个变量$T$, $V$, $N$决定, 因此由上式
+\[ -N = \pare{\ddelon{\Phi_G}{\mu}}_{T,V} = \pare{\ddelon{\Phi_G}{N}}_{T,V}\pare{\ddelon{N}{\mu}}_{T,V} = -k_BT\times \frac{N}{k_BT} = -N. \]
+于是验证成立.
+\[ -p = \pare{\ddelon{\Phi_G}{V}}_{T,\mu} = -\pare{\ddelon{\Phi_G}{\mu}}_{T,V}\pare{\ddelon{\mu}{V}}_{T,\Phi_G} = N\pare{\ddelon{\mu}{V}}_{T,\Phi_G}. \]
+但约束$\Phi_G=-Nk_BT$与$T$为常数意味着$N$为常数, 相应地
+\[ \pare{\ddelon{\mu}{V}}_{T,\Phi_G} = -\frac{-k_BT}{V}. \]
+\[ \pare{\ddelon{\Phi_G}{V}}_{T,\mu} = -N\times \frac{-k_BT}{V} = -p. \]
+于是再次验证成立.
+\end{ex}
+\subsubsection{单粒子的化学势}
+考虑\eqref{eq:sinuvn}以及$S$所谓广延量之事实, 如果将系统通过复制粘贴而将尺度扩大至$\lambda$倍, 则相应的$U$, $V$, $N$与$S$本身都扩大至$\lambda$倍, 从而$S$正是$U$, $V$, $N$的线性组合,
+\[ S = \frac{U}{T} + \frac{pV}{T} - \frac{\mu N}{T}. \]
+立刻有$G=\mu N$, 又由$\Phi_G = F - \mu N$,
+\begin{finale}
+\begin{equation}
+\label{eq:muGNandPhiGpV}
+\mu = \frac{G}{N},\quad \Phi_G = -pV.
+\end{equation}
+\end{finale}
+\subsubsection{化学反应}
+对于多种粒子并存的情形, 把各个粒子的化学势对热力学势的贡献相加即可, 如等温等压下
+\[ \rd{G} = \sum_i \mu_i \rd{N_i}. \]
+\paragraph{粒子数守恒定律} 如果一个等温恒容的系统可以产生或消灭粒子, 平衡时
+\[ \pare{\ddelon{F}{N}}_{V,T} = 0,\quad \mu = 0. \]
+如果粒子的数量是守恒的, 比如
+\[ \ce{e- + e+ <=> $\gamma$ + $\gamma$}, \]
+则电子和正电子的Helmholtz函数满足
+\[ \pare{\ddelon{F}{N_-}}_{V,T,N+} + \pare{\ddelon{F}{N_+}}_{V,T,N_-} \eddon{N_+}{N_-} = 0. \]
+光子的化学势为零\footnote{对于发光二极管可能并非如此.}故可以忽略之. 从而
+\[ \mu_+ + \mu_- = 0. \]
+\begin{ex}
+对于理想气体, 化学势在\eref{muofidealgases}中给出, 可得
+\[ \mu = k_BT\ln\pare{\frac{\lambda_{\mathrm{th}}^3}{k_B T}} + k_B T\ln p. \]
+如果将标准状况$T=\SI{298}{K}$, $\stdst{p}=\SI{e5}{Pa}$的化学势记作$\stdst{\mu}$, 则相同温度下
+\[ \mu\pare{p} = \stdst{\mu} + k_BT\ln\frac{p}{\stdst{p}}. \]
+\end{ex}
+考虑一个简单的气体反应(例如互变异构)
+\[ \ce{A <=> B}, \]
+如果过程是等温等压的, 有
+\[ \rd{G} = \pare{\mu_B -\mu_A}\rd{N_B}. \]
+根据前开对$\mu$的结论,
+\[ \state[superscript-right={},subscript-right=m,subscript-left=r]{G} = \state[subscript-right=m,subscript-left=r]{G} + RT\ln\frac{p_B}{p_A}. \]
+平衡时
+\begin{finale}
+\[ \ln K = -\frac{\state[subscript-left=r]{G}}{RT}. \]
+\end{finale}
+对于更一般的化学反应, 在反应物的分压前加上相应的系数即可. 如果$\nu_i$为化学计量数, 则平衡时
+\[ \sum_i \nu_i \mu_i = 0. \]
+相应的$K$为
+\[ K = \prod_i \pare{\frac{p_i}{\stdst{p}}}^{\nu_i}. \]
+由\eqref{eq:hbyddg},
+\[ \eddon{\ln K}{T} = -\rec{R}\eddon{\pare{\state[subscript-left=r]{G}/T}}{T} = \frac{\state[subscript-left=r]{H}}{RT^2}. \]
+\begin{corollary}[le Chatelier原理]
+放热反应升温时左移, 吸热反应升温时右移.
+\end{corollary}
+\begin{corollary}[van't Hoff方程]
+\[ \eddon{\ln K}{\pare{1/T}} = -\frac{\state[subscript-left=r]{H}}{R}. \]
+\end{corollary}
+\subsubsection{渗透}
+\begin{definition}[渗透压]
+组织渗透所需要施加的压强谓渗透压.
+\end{definition}
+\begin{ex}
+装在上开口半透膜内的糖水浸入水中, 水会进入膜, 糖水水位上升直到水压抵消渗透压为止.
+\end{ex}
+\begin{remark}
+渗透是典型的熵驱动的现象, 糖水的例子中重力势能增加了. 加热橡胶提起重物也是.
+\end{remark}
+\begin{ex}[溶剂化学势]
+当纯\ce{A}蒸汽和液体\ce{A}平衡时,
+\[ \mu_{\ce{A(l)}}^* = \mu_{\ce{A(g)}}^* = \stdst{\mu_{\ce{A(g)}}} + k_BT\ln\frac{p_{\ce{A}}^*}{\stdst{p}}. \]
+溶质\ce{B}溶解于溶剂\ce{A}中, 此时不再处理纯\ce{A},
+\[ \mu_{\ce{A(l)}} = \mu_{\ce{A(g)}} = \stdst{\mu_{\ce{A(g)}}} + k_BT\ln\frac{p_{\ce{A}}}{\stdst{p}}. \]
+由Raoult定律, $p_A$会小于$p_A^*$, 从而溶液中\ce{A}的化学势减小,
+\begin{equation}
+\label{eq:musolutionbymupure}
+\mu_{\ce{A(g)}} = \mu_{\ce{A(l)}} = \mu_{\ce{A(l)}}^* + RT\ln\frac{p_{\ce{A}}}{p_{\ce{A}}^*} = \mu_{\ce{A(l)}}^* + RT\ln x_{\ce{A}}.
+\end{equation}
+\end{ex}
+蒸汽压主要由\ce{A}贡献, 平衡时纯\ce{A}和溶液的相应的压强为$p$和$p+\Pi$,
+\[ \mu_{\ce{A}}^*\pare{p} = \mu_{\ce{A}}\pare{p+\Pi} = \mu_{\ce{A}}^*\pare{p+\Pi} + RT\ln x_{\ce{A}}. \]
+由于\ce{A}的蒸汽和液体是平衡的, 这里不区分二者的化学势. 如果液体的体积为$V_A$, 则由等温下$\rd{G} = V\rd{p}$有
+\[ \mu_{\ce{A}}^*\pare{p} = \mu_{\ce{A}}^*\pare{p} + \Pi V_{\ce{A}} + RT\ln x_{\ce{A}}. \]
+低浓度下$\ln x_{\ce{A}}\approx x_{\ce{B}}$, 因此
+\begin{finale}
+\[ \Pi V = n_{\ce{B}}RT. \]
+\end{finale}
+\begin{remark}
+溶质分子如果视为理想气体, 则半透膜向其施加相当于$c_{\ce{B}}RT$之压强, 该压强是单向的——溶剂分子也会受到这一压强, 引发向溶液方向的流动. 只有施加等大反向的压强之后渗透才会停止.
+\end{remark}
+\subsection{光子}
+\subsubsection{电磁辐射的经典热力学}
+非零温度下, 任何物质都可以发出\emph{热辐射}. 常温下它们的波长很长, 故肉眼不可见. 但是高温下, 比如炉子中金属的红光则是可见的热辐射.
+\par
+将环境视为体积为$V$的容器, 为空窖, 温度为$T$, 窖壁可以导热, 则考虑\eqref{eq:pisu3}, 能量密度
+\[ u = \frac{U}{V} = n\hbar\omega, \quad p = \frac{u}{3}. \]
+后式对相对论性气体成立. 由通量$\Phi = nc/4$可知单位面积上的功率
+\[ I = \hbar \omega \Phi = \rec{4}uc. \]
+然而在等温条件下改变窖的体积, 能量密度应当是不变的——把发红的烙铁放在窖内, 改变窖的体积不应当改变光的强度. 因此由$\rd{U} = T\rd{S} - p\rd{V}$,
+\[ u = \pare{\ddelon{U}{V}}_T = T\pare{\ddelon{S}{V}}_T - p = T\pare{\ddelon{p}{T}}_V - p = \frac{T}{3}\pare{\ddelon{u}{T}}_V - \frac{u}{3}. \]
+立刻有$u=AT^4$, 引入Stefan-Boltzmann常量$\sigma = Ac/4$有
+\begin{finale}
+\[ I = \rec{4}uc = \sigma T^4. \]
+\end{finale}
+\subsubsection{谱能量密度}
+假设有两个空窖, 它们的形状、大小或者材料可能不同但是温度相同, 现在将它们通过管子连接, 相应的能量通量$I = uc/4$, 但由于两个空窖处于热平衡, 因此净能量通量为零. 故$u$与空窖的形状、大小、材质无关.
+\begin{definition}[谱能量密度]
+谱能量密度$u_\lambda$满足$u_\lambda \rd{\lambda}$为波长在$\lambda$与$\lambda+\rd{\lambda}$之间的光子的能量密度.
+\end{definition}
+在管道中加入滤波器可知$u\lambda$和那些因素也是无关的. 现在假设空窖会吸收并发射辐射.
+\begin{definition}[谱吸收率]
+谱吸收率$\alpha_\lambda$表示物体对波长$\lambda$的入射辐射吸收的比率.
+\end{definition}
+\begin{definition}[谱辐射功率]
+谱辐射功率$e_\lambda$满足$e_\lambda \rd{\lambda}$为单位面积内表面发射的波长在$\lambda$与$\lambda+\rd{\lambda}$之间的辐射功率.
+\end{definition}
+在平衡时, 吸收功率和发射功率相等, 即
+\begin{corollary}[Kirchhoff定律]
+\[ \frac{e_\lambda}{\alpha_\lambda} = \frac{c}{4}u_\lambda. \]
+\end{corollary}
+\begin{remark}
+Kirchhoff定律说明特定波长下的良好的吸收体是良好的发射体.
+\end{remark}
+\begin{definition}[黑体]
+黑体谓对于任何波长$\lambda$皆有$\alpha_\lambda=1$的物体.
+\end{definition}
+\begin{definition}[黑体空窖与黑体辐射]
+黑体空窖谓壁为黑体的墙. 黑体空窖内会包含和壁有相同温度的光子气体, 谓黑体辐射.
+\end{definition}
+假设日地距离为$D$, 则太阳$S$发射的辐射被地球$E$接收的部分为
+\[ 4\pi R_{S}^2\cdot \sigma T_{S}^4\pare{\frac{\pi R_{E}^2}{4\pi D^2}}, \]
+地球的辐射功率为
+\[ 4\pi R_{E}^2\cdot \sigma T_{E}^4. \]
+平衡时两者相等, 故
+\[ \frac{T_{E}}{T_{S}} = \sqrt{\frac{R_{E}}{2D}}. \]
+可算得$T_{E}\approx\SI{280}{K}.$
+\paragraph{光压} 如果所有光子都沿着相同方向而不是如光字气体随机取向, 则相应的$p=u$, 而$I=uc$.
+\begin{ex}
+太阳在地球表面的功率为$F=\SI{1370}{W/m^2}$, 相应的光压
+\[  p = \frac{I}{c} = \SI{4.6}{\micro Pa}. \]
+\end{ex}
+\subsubsection{光子的统计力学}
+光子作为正弦波可以视为谐振子产生的, 故能量符合谐振子能量. 类似于\eqref{eq:statedensity}的推导,
+\[ g\pare{k}\rd{k} = \frac{Vk^2\rd{k}}{2\pi^2}\times 2. \]
+因子$2$来自于光有两个偏振方向的事实. 由$\omega = ck$,
+\[ g\pare{\omega}\rd{\omega} = \frac{V\omega^2\rd{\omega}}{\pi^2c^3}. \]
+使用方程\eqref{eq:uofharmonic}获得单个谐振子的内能, 总内能为
+\[ \int_0^\infty \hbar\omega\pare{\half + \rec{e^{\beta \hbar \omega} - 1}} g\pare{\omega}\,\rd{\omega} \rightarrow \frac{V\hbar}{\pi^2 c^3}\int_0^\infty \frac{\omega^3\,\rd{\omega}}{e^{\beta\hbar\omega} - 1} = \pare{\frac{V\pi^2k_B^4}{15c^3\hbar^3}}T^4. \]
+其中谐振子能量常数项$\half$导致的发散积分归入真空能后消去.
+\begin{finale}
+\begin{equation}
+\label{eq:Aandsigma}
+A = \frac{V\pi^2k_B^4}{15c^3\hbar^3},\quad \sigma = \frac{\pi^2k_B^4}{60c^2\hbar^3}.
+\end{equation}
+\end{finale}
+导出总内能的被积式即为谱能量密度, 即\emph{黑体分布}, 采用不同的宗量有
+\begin{theorem}[Planck黑体辐射定律]
+\[ u_\omega = \frac{\hbar}{\pi^2c^3}\frac{\omega^3}{e^{\beta \hbar\omega} - 1},\quad u_\nu = \frac{8\pi h}{c^3}\frac{\nu^3}{e^{\beta h \nu} - 1},\quad u_\lambda = \frac{8\pi hc}{\lambda^5}\frac{1}{e^{\beta hc/\lambda} - 1}. \]
+\end{theorem}
+在长波处与Rayleigh-Jeans定律\eqref{eq:rayleighjeans}相符. Planck黑体分布表明高频的紫外区其实并未被激发, 因而解决紫外灾变. 直接对$u_\lambda$求导取最值可得
+\begin{corollary}[Wien定律]
+设$\lambda_{\mathrm{max}}$为能量密度最大的相应波长, 则
+\[ \lambda_{\mathrm{max}} T = \const. \]
+\end{corollary}
+\begin{ex}[宇宙微波背景辐射]
+天空中各个方向有几乎各向同性的与$\SI{2.7}{K}$的黑体辐射相符的宇宙微波背景辐射. 由于不同温度的黑体辐射的叠加无法得到单一的黑体辐射分布, 可以推断宇宙曾经处于热平衡状态. 此外, 通过$u\propto T^4$可以推出宇宙早期的温度, 它更小且更热.
+\end{ex}
+\subsubsection{Einstein系数}
+假设原子气体处在光子气体中, 电子发生跃迁, 将系统简化为二能级系统, 有三种过程可以发生:
+\begin{cenum}
+\item 自发辐射(一个光子被发射):
+\[ \eddon{N_2}{t} = -A_{21}N_2. \]
+\item 吸收(一个光子被吸收):
+\[ \eddon{N_1}{t} = -N_1 B_{12}u_{\omega}. \]
+\item 受激辐射(吸收一个光子后发出一个光子, 并激发另一原子发出光子):
+\[ \eddon{N_2}{t} = -N_2B{21}u_{\omega}. \]
+\end{cenum}
+平衡时有
+\[ N_2B_{21}u_{\omega} + N_2A_{21} = N_1B_{12}u_{\omega},\quad \frac{N_2}{N_1} = \frac{g_2}{g_1}e^{-\beta \hbar \omega}. \]
+其中$g_1$和$g_2$分别是两个能及的简并度. 得到
+\[ u_{\omega} = \frac{A_{21}/B_{21}}{\pare{g_1B_{12}/g_2B{21}}e^{\beta\hbar\omega} - 1}. \]
+与Planck黑体辐射定律比较可得
+\[ \frac{B_{21}}{B_{12}} = \frac{g_1}{g_2},\quad A_{21} = \frac{\hbar\omega^3}{\pi^2c^3}B_{21}. \]
+\begin{ex}
+当$N_2/g_2>N_1/g_1$时受激辐射率大于吸收率, 如果通过其他能级的跃迁保证高能级的原子数足够大而低能级的原子数足够小则可产生激光.
+\end{ex}
+\subsection{声子}
+\subsubsection{Einstein模型}
+Einstein模型假设了固体的所有振动模都有相同的频率$\omega_E$, 通过\eqref{eq:uofharmonic},
+\[ U = 3NU_{\mathrm{SHO}} = \frac{3N}{2}\hbar\omega_E + \frac{3N\hbar\omega_E}{e^{\beta\hbar\omega_E} - 1}. \]
+设特征温度$\Theta_E$满足$\hbar\omega_E = k_B\Theta_E$, $x=\Theta_E/T$有
+\[ U = 3R\Theta_E \pare{\half + \rec{e^{\Theta_E/T} - 1}},\quad C = \pare{\ddelon{U}{T}} = 3R\frac{x^2e^x}{\pare{e^x-1}^2}. \]
+当$T\rightarrow\infty$, $C\rightarrow 3R$可正确复制Dulong-Petit定律. 低温下热容快速下降.
+\subsubsection{Debye模型}
+Debye模型设定$g\pare{\omega}\rd{\omega}$为$\omega$到$\omega+\rd{\omega}$内振动模的个数, $\int g = 3N$.
+\[ g\pare{k}\rd{k} = \frac{4\pi k^2\rd{k}}{\pare{2\pi/L}^3}\times 3 = \frac{3Vk^2\rd{k}}{2\pi^2},\quad g\pare{\omega} = \frac{3V\omega^2\rd{\omega}}{2\pi^2v_s^2}. \]
+其中$\omega = v_s k$, 因子$3$来源于每个晶格振动有一个纵向极化和两个横向极化的事实. 假设频率从零开始激发至最大频率$\omega_D$, 即\emph{Debye频率}, 可知
+\[ \omega_D = \pare{\frac{6N\pi^2v_s^3}{V}}^{1/3},\quad g\pare{\omega}\rd{\omega} = \frac{9N\omega^2\rd{\omega}}{\omega_D^3}. \]
+相应地定义\emph{Debye温度}$\Theta_D$满足$\hbar\omega_D = k_B\Theta_D$.
+\[ U = \int_0^{\omega_D}\hbar\omega\pare{\half + \rec{e^{\beta\hbar\omega}-1}} g\pare{\omega}\,\rd{\omega} = \frac{9}{8}N\hbar\omega_D + \frac{9N\hbar}{\omega_D^3}\int_0^{\omega_D} \frac{\omega^3\,\rd{\omega}}{e^{\beta\hbar\omega} - 1}. \]
+\[ C = \pare{\ddelon{U}{T}} = \frac{9N\hbar}{\omega_D^3}\int_0^{\omega_D}\frac{\omega^3e^{\hbar\omega\beta}}{\pare{e^{\beta\hbar\omega} - 1}^2}\pare{\frac{\hbar\omega}{k_BT^2}}\,\rd{\omega} = \frac{9R}{x_D^3}\int_0^{x_D}\frac{x^4e^x\,\rd{x}}{\pare{e^x-1}^2}. \]
+其中$x=\beta\hbar\omega$, $x_D = \beta\hbar\omega_D$. 高温下$x_D\rightarrow 0$, 相应地$C\rightarrow 3R$, 低温下$x_D\rightarrow\infty$, 积分可近似为定值, $C\propto T^3$.
+\subsubsection{声子色散关系}
+间距为$a$的单原子链的振动满足
+\[ m\ddot{u}_n = K\pare{u_{n+1} - 2u_n + u_{n-1}}. \]
+用$u_n = \exp\brac{i\pare{k\omega a- \omega t}}$试探之, 可得
+\[ \omega = \pare{\frac{4K}{m}}^{1/2}\abs{\sin\pare{ka/2}}. \]
+在长波情形下, $qa\rightarrow 0$, 有$\omega\rightarrow v_s k$, 其中
+\[ v_s = a\pare{\frac{K}{m}}^{1/2}. \]
+因此低频时Debye模型的假设是恰当的, 低温下只有低频声子, 故低温情形热容符合Debye模型的预言.
+\par
+如果晶体中存在不同类型的原子, 色散关系就会有多个分支, 其中光学支在$k=0$附近会有非零的$\omega$. Einstein模型可以良好地描述光学模.
+\end{document}
