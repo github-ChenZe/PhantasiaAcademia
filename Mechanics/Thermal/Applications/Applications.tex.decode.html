@@ -12,6 +12,11 @@
 <!-- xhtml,svg,pic-align,charset=utf-8,html --> 
 <meta name="src" content="Applications.tex.tex" /> 
 <link rel="stylesheet" type="text/css" href="Applications.tex.css" /> 
+<script type="text/javascript" 
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" 
+></script> 
+<script type="text/javascript" 
+src="../../../layout.js"></script> 
 </head><body 
 >
    <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
@@ -28,42 +33,42 @@
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex2x.svg" alt="           &#x2202; &#x03C1;    1      &#x2202;u
-&#x2207; &#x22C5;(&#x03C1;u) = --&#x2202;t,  -&#x03C1;&#x2207;p  = &#x2202;t-+ (u &#x22C5;&#x2207; )u
+src="Applications.tex2x.svg" alt="           ∂ ρ    1      ∂u
+∇ ⋅(ρu) = −-∂t,  −ρ∇p  = ∂t-+ (u ⋅∇ )u
 " class="math-display"  /></center>
 <!--l. 10--><p class="nopar" > 在一维情形下分别为
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex3x.svg" alt="&#x2202;(&#x03C1;u) = - &#x2202;&#x03C1;-, - 1-&#x2202;p= &#x2202;u-+u &#x2202;u.
- &#x2202;x      &#x2202;t     &#x03C1;&#x2202;x    &#x2202;t    &#x2202;x
+src="Applications.tex3x.svg" alt="∂(ρu) = − ∂ρ-, − 1-∂p= ∂u-+u ∂u.
+ ∂x      ∂t     ρ∂x    ∂t    ∂x
 " class="math-display"  /></center>
 <!--l. 12--><p class="nopar" > 对连续性方程展开微分并忽略二阶项, 记<img 
-src="Applications.tex4x.svg" alt="&#x03B4;s = &#x03B4;&#x03C1;&#x2215;&#x03C1;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 有
+src="Applications.tex4x.svg" alt="δs = δρ∕ρ  " class="math"; />, 有
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex5x.svg" alt="  &#x2202;s   &#x2202;u    &#x2202;s         &#x2202;u    &#x2202;s
-u &#x2202;x + &#x2202;x = - &#x2202;t  -&#x2192;    &#x2202;x-= -&#x2202;t-.
+src="Applications.tex5x.svg" alt="  ∂s   ∂u    ∂s         ∂u    ∂s
+u ∂x + ∂x = − ∂t  −→    ∂x-= −∂t-.
 " class="math-display"  /></center>
 <!--l. 14--><p class="nopar" > 在Euler方程中忽略二阶项并借助体积模量有
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex6x.svg" alt="B = - V &#x2202;p-= &#x03C1;&#x2202;p  -&#x2192;    - 1 &#x2202;p-= - B-&#x2202;s-= &#x2202;u.
-       &#x2202;V    &#x2202; &#x03C1;         &#x03C1; &#x2202;x     &#x03C1; &#x2202;x   &#x2202;t
+src="Applications.tex6x.svg" alt="B = − V ∂p-= ρ∂p  −→    − 1 ∂p-= − B-∂s-= ∂u.
+       ∂V    ∂ ρ         ρ ∂x     ρ ∂x   ∂t
                                                                   
 
                                                                   
 " class="math-display"  /></center>
 <!--l. 16--><p class="nopar" > 两条方程可消去<img 
-src="Applications.tex7x.svg" alt="u  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 从而
+src="Applications.tex7x.svg" alt="u  " class="math"; />, 从而
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex8x.svg" alt="                   &#x2218; --
- &#x2202;2s   &#x03C1; &#x2202;2s          B
-&#x2202;x2-=  B-&#x2202;t2-, vs =   &#x03C1;-.
+src="Applications.tex8x.svg" alt="                   ∘ --
+ ∂2s   ρ ∂2s          B
+∂x2-=  B-∂t2-, vs =   ρ-.
 " class="math-display"  /></center>
 <!--l. 18--><p class="nopar" >
 </p>
@@ -73,21 +78,21 @@ src="Applications.tex8x.svg" alt="                   &#x2218; --
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex9x.svg" alt="    &#x2218; ---- &#x2218; --  &#x2218; -1-----2-
-vs =  BT-=    p=   -3nm-&#x27E8;v&#x27E9; = &#x2218; &#x27E8;v2&#x27E9;.
-       &#x03C1;      &#x03C1;        &#x03C1;         x
+src="Applications.tex9x.svg" alt="    ∘ ---- ∘ --  ∘ -1-----2-
+vs =  BT-=    p=   -3nm-⟨v⟩ = ∘ ⟨v2⟩.
+       ρ      ρ        ρ         x
 " class="math-display"  /></center>
 <!--l. 21--><p class="nopar" >
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex10x.svg" alt="    &#x2218; ----  &#x2218; ---  &#x2218;------
-      BS-     &#x03B3;p-    &#x03B3;&#x27E8;v2&#x27E9;  &#x2218; ---2-
-vs =   &#x03C1;  =   &#x03C1;  =     3  =   &#x03B3; &#x27E8;vx&#x27E9;.
+src="Applications.tex10x.svg" alt="    ∘ ----  ∘ ---  ∘------
+      BS-     γp-    γ⟨v2⟩  ∘ ---2-
+vs =   ρ  =   ρ  =     3  =   γ ⟨vx⟩.
 " class="math-display"  /></center>
 <!--l. 22--><p class="nopar" > 特别地, 在等温和绝热的条件下都有<img 
-src="Applications.tex11x.svg" alt="    &#x2218; ----
-vs &#x221D;  T&#x2215;m  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />.
+src="Applications.tex11x.svg" alt="    ∘ ----
+vs ∝  T∕m  " class="math"; />.
 </p>
    <div class="newtheorem">
 <!--l. 24--><p class="noindent" ><span class="head">
@@ -96,34 +101,32 @@ vs &#x221D;  T&#x2215;m  " class=\OT1\textquoteright \OT1\textquoteright math\OT
 <span 
 class="cmbx-10">例 1.1.</span>  </span><span 
 class="cmti-10">在绝热条件下计算的大气声速为</span><img 
-src="Applications.tex12x.svg" alt="vs = 340m/s  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex12x.svg" alt="vs = 340m/s  " class="math"; /><span 
 class="cmti-10">, 与实验符合.</span>
 </p>
    </div>
 <!--l. 27--><p class="indent" >   如果声波在传播时有足够长的时间让被压缩的部分和周围达到热平衡, 则声波可以视为等温的. 这关系到声波的波长和由(<span 
 class="cmbx-10">??</span>)给出的热波的趋肤深度<img 
-src="Applications.tex13x.svg" alt="&#x03B4;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 分别有
+src="Applications.tex13x.svg" alt="δ  " class="math"; />, 分别有
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex14x.svg" alt="              &#x2218; ----
-    2&#x03C0;vs        2D
-&#x03BB; = -&#x03C9;--,  &#x03B4; =  -&#x03C9;-.
+src="Applications.tex14x.svg" alt="              ∘ ----
+    2πvs        2D
+λ = -ω--,  δ =  -ω-.
 " class="math-display"  /></center>
-<!--l. 28--><p class="nopar" > 在低频区域, 声波可以视为绝热的. <div class="finaleBox">
-</p>
+<!--l. 28--><p class="nopar" > 在低频区域, 声波可以视为绝热的. </p><div class="finaleBox">
    <table 
 class="equation"><tr><td> <a 
  id="x1-4002r1"></a>
    <center class="math-display" >
 <img 
-src="Applications.tex15x.svg" alt="    &#x2218; --   &#x2218;---
-      B-     &#x03B3;p-
-vs =  &#x03C1;  =   &#x03C1; .
+src="Applications.tex15x.svg" alt="    ∘ --   ∘---
+      B-     γp-
+vs =  ρ  =   ρ .
 " class="math-display"  /></center></td><td class="equation-label">(1)</td></tr></table>
 <!--l. 34--><p class="nopar" >
-</div>
-</p>
+</p></div>
    <div class="newtheorem">
 <!--l. 36--><p class="noindent" ><span class="head">
 <a 
@@ -133,14 +136,14 @@ class="cmbx-10">例 1.2.</span>  </span><span
 class="cmti-10">对于相对论性气体, 由</span>(<span 
 class="cmbx-10">??</span>)<span 
 class="cmti-10">,</span> <img 
-src="Applications.tex16x.svg" alt="p = u&#x2215;3  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex16x.svg" alt="p = u∕3  " class="math"; /><span 
 class="cmti-10">, 相应地</span>
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex17x.svg" alt="    &#x2218; --
+src="Applications.tex17x.svg" alt="    ∘ --
       p   -c-
-vs =  &#x03C1; = &#x221A;3-.
+vs =  ρ = √3-.
 " class="math-display"  /></center>
 <!--l. 38--><p class="nopar" >
 </p>
@@ -165,7 +168,7 @@ src="Applications.tex18x.svg" alt="M  = w-.
      vs
 " class="math-display"  /></center>
 <!--l. 43--><p class="nopar" > 其中<img 
-src="Applications.tex19x.svg" alt="w  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为扰动通过介质的速度. 借助(<a 
+src="Applications.tex19x.svg" alt="w  " class="math"; />为扰动通过介质的速度. 借助(<a 
 href="#x1-4002r1">1<!--tex4ht:ref: eq:speedofsound --></a>), 立刻有
 </p>
    <table 
@@ -173,17 +176,17 @@ class="equation"><tr><td> <a
  id="x1-6001r2"></a>
    <center class="math-display" >
 <img 
-src="Applications.tex20x.svg" alt="      &#x03C1;v21
-M 2 = &#x03B3;p-.
+src="Applications.tex20x.svg" alt="      ρv21
+M 2 = γp-.
         1
 " class="math-display"  /></center></td><td class="equation-label">(2)</td></tr></table>
 <!--l. 48--><p class="nopar" >
 </p><!--l. 50--><p class="indent" >   如果速度大于声速, 则为该扰动为<span 
 class="cmti-10">激波波前</span>. 由三项守恒定律分别有(下标<img 
-src="Applications.tex21x.svg" alt="1  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />表示前方,
+src="Applications.tex21x.svg" alt="1  " class="math"; />表示前方,
 <img 
-src="Applications.tex22x.svg" alt="2  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />表示后方, <img 
-src="Applications.tex23x.svg" alt="&#x02DC;u  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为单位质量的内能)
+src="Applications.tex22x.svg" alt="2  " class="math"; />表示后方, <img 
+src="Applications.tex23x.svg" alt="˜u  " class="math"; />为单位质量的内能)
      </p><dl class="enumerate-enumitem"><dt class="enumerate-enumitem">
   1. </dt><dd 
 class="enumerate-enumitem">通过的质量通量在激波波前处相等,
@@ -192,7 +195,7 @@ class="equation"><tr><td> <a
  id="x1-6003r3"></a>
      <center class="math-display" >
      <img 
-src="Applications.tex24x.svg" alt="&#x03C1;2v2 = &#x03C1;1v1 = &#x03A6;m.
+src="Applications.tex24x.svg" alt="ρ2v2 = ρ1v1 = Φm.
      " class="math-display"  /></center></td><td class="equation-label">(3)</td></tr></table>
                                                                   
 
@@ -206,7 +209,7 @@ class="equation"><tr><td> <a
  id="x1-6005r4"></a>
      <center class="math-display" >
      <img 
-src="Applications.tex25x.svg" alt="p2 + &#x03C1;2v22 = p1 + &#x03C1;1v21.
+src="Applications.tex25x.svg" alt="p2 + ρ2v22 = p1 + ρ1v21.
      " class="math-display"  /></center></td><td class="equation-label">(4)</td></tr></table>
      <!--l. 61--><p class="nopar" >
      </p></dd><dt class="enumerate-enumitem">
@@ -218,7 +221,7 @@ class="equation"><tr><td> <a
      <center class="math-display" >
      <img 
 src="Applications.tex26x.svg" alt="      (           )           (            )
-p v +  &#x03C1; &#x02DC;u +  1&#x03C1; v2 v = p v +   &#x03C1; &#x02DC;u + 1&#x03C1; v2  v.
+p v +  ρ ˜u +  1ρ v2 v = p v +   ρ ˜u + 1ρ v2  v.
  2 2    2 2   2 22   2   1 1     1 1  2 1 1   1
      " class="math-display"  /></center></td><td class="equation-label">(5)</td></tr></table>
      <!--l. 66--><p class="nopar" >
@@ -236,7 +239,7 @@ p v +  &#x03C1; &#x02DC;u +  1&#x03C1; v2 v = p v +   &#x03C1; &#x02DC;u + 1&#x0
                                                                   
 <span 
 class="cmbx-10">引理 1.1.</span>  </span> <img 
-src="Applications.tex27x.svg" alt="v21 - v22 = (p2 - p1) (&#x03C1;-1 1+ &#x03C1;-21) " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex27x.svg" alt="v21 − v22 = (p2 − p1) (ρ−1 1+ ρ−21) " class="math"; /><span 
 class="cmti-10">.</span>
 </p>
    </div>
@@ -253,7 +256,7 @@ class="equation"><tr><td> <a
  id="x1-7002r6"></a>
    <center class="math-display" >
 <img 
-src="Applications.tex28x.svg" alt="p - p  = &#x03C1; v2- &#x03C1; v2= &#x03A6;2 (&#x03C1;-1- &#x03C1;-1) .
+src="Applications.tex28x.svg" alt="p − p  = ρ v2− ρ v2= Φ2 (ρ−1− ρ−1) .
  2   1    11    22    m   1    2
 " class="math-display"  /></center></td><td class="equation-label">(6)</td></tr></table>
 <!--l. 78--><p class="nopar" >
@@ -262,7 +265,7 @@ src="Applications.tex28x.svg" alt="p - p  = &#x03C1; v2- &#x03C1; v2= &#x03A6;2 
    <center class="math-display" >
 <img 
 src="Applications.tex29x.svg" alt="                             (      )(      )
-v21 - v22 = (v1 - v2)(v1 + v2) = &#x03A6;2m &#x03C1;21 - &#x03C1;22 &#x03C1;21 + &#x03C1;22 .
+v21 − v22 = (v1 − v2)(v1 + v2) = Φ2m ρ21 − ρ22 ρ21 + ρ22 .
 " class="math-display"  /></center>
 <!--l. 80--><p class="nopar" >
 </p>
@@ -274,7 +277,7 @@ v21 - v22 = (v1 - v2)(v1 + v2) = &#x03A6;2m &#x03C1;21 - &#x03C1;22 &#x03C1;21 +
 <span 
 class="cmbx-10">引理 1.2.</span>  </span> <span 
 class="cmti-10">假设气体为理想气体并具有绝热指数</span><img 
-src="Applications.tex30x.svg" alt="&#x03B3;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex30x.svg" alt="γ  " class="math"; /><span 
 class="cmti-10">, 则</span>
 </p>
                                                                   
@@ -282,8 +285,8 @@ class="cmti-10">, 则</span>
                                                                   
    <center class="math-display" >
 <img 
-src="Applications.tex31x.svg" alt="&#x03C1;-21-  (&#x03B3;-+1)p1-+-(&#x03B3;---1)p2
-&#x03C1;-11 = (&#x03B3; - 1)p1 + (&#x03B3; + 1)p2.
+src="Applications.tex31x.svg" alt="ρ−21-  (γ-+1)p1-+-(γ-−-1)p2
+ρ−11 = (γ − 1)p1 + (γ + 1)p2.
 " class="math-display"  /></center>
 <!--l. 85--><p class="nopar" >
 </p>
@@ -299,8 +302,8 @@ href="#x1-6007r5">5<!--tex4ht:ref: eq:shockenergyconservation --></a>),
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex32x.svg" alt="&#x03B3;&#x03C1;2v2&#x02DC;u1 + 1&#x03C1;2v32 = &#x03B3;&#x03C1;1v1&#x02DC;u1 + 1&#x03C1;1v31.
-         2                2
+src="Applications.tex32x.svg" alt="γρ v ˜u + 1ρ v3 = γρ v˜u  + 1ρ v3.
+  2 2 1  2 2 2     11 1   2 1 1
 " class="math-display"  /></center>
 <!--l. 89--><p class="nopar" > 除以(<a 
 href="#x1-6003r3">3<!--tex4ht:ref: eq:shockmassconservation --></a>), 再利用(<span 
@@ -308,22 +311,21 @@ class="cmbx-10">??</span>)将内能代换为压强,
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex33x.svg" alt="---&#x03B3;p2---  1 2   --&#x03B3;p1----  1 2
-(&#x03B3; - 1)&#x03C1;2 + 2v2 = (&#x03B3; - 1)&#x03C1;1 + 2v1.
+src="Applications.tex33x.svg" alt="   γp2     1 2     γp1      1 2
+(γ-− 1)ρ2-+ 2v2 = (γ −-1)ρ1-+ 2v1.
 " class="math-display"  /></center>
 <!--l. 91--><p class="nopar" > 借助<a 
-href="#x1-7001r1">引理&#x00A0;1.1</a>并去除分母,
+href="#x1-7001r1">引理 1.1</a>并去除分母,
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex34x.svg" alt="  (            )                (        )      -|
-2&#x03B3; p1&#x03C1;-11- p2&#x03C1;-21 + (&#x03B3; - 1)(p2 - p1) &#x03C1;-11+ &#x03C1;-21 = 0.--
+src="Applications.tex34x.svg" alt="  (            )                (        )
+2γ p1ρ−11− p2ρ−21 + (γ − 1)(p2 − p1) ρ−11+ ρ−21 = 0.-|
 " class="math-display"  /></center>
 <!--l. 93--><p class="nopar" >
 </p>
    </div>
-<!--l. 95--><p class="noindent" ><div class="finaleBox">
-</p>
+   <div class="finaleBox">
    <div class="newtheorem">
 <!--l. 96--><p class="noindent" ><span class="head">
 <a 
@@ -336,42 +338,42 @@ class="cmbx-10">定理 1.1 </span>(Rankine-Hugoniot条件)<span
 class="cmbx-10">.</span>
 </span><span 
 class="cmti-10">设激波波前具有Mach数</span><img 
-src="Applications.tex35x.svg" alt="M  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex35x.svg" alt="M  " class="math"; /><span 
 class="cmti-10">,</span>
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex36x.svg" alt="p2   2&#x03B3;M-21 --(&#x03B3;-- 1) &#x03C1;2   v1   ---(&#x03B3;-+1)M-12---
-p1 =     &#x03B3; + 1    ,  &#x03C1;1 = v2 = 2+ (&#x03B3; - 1)M - 12.
+src="Applications.tex36x.svg" alt="p2   2γM-21 −-(γ-− 1) ρ2   v1   ---(γ-+1)M-12---
+p1 =     γ + 1    ,  ρ1 = v2 = 2+ (γ − 1)M − 12.
 " class="math-display"  /></center>
 <!--l. 98--><p class="nopar" >
 </p>
    </div>
    </div>
-<!--l. 101--><p class="noindent" >
+<!--l. 101--><p class="indent" >
 </p>
    <div class="proof">
 <!--l. 102--><p class="indent" >   <span class="head">
 <span 
 class="cmti-10">Proof.</span> </span>通过<a 
-href="#x1-7003r2">引理&#x00A0;1.2</a>以及(<a 
+href="#x1-7003r2">引理 1.2</a>以及(<a 
 href="#x1-7002r6">6<!--tex4ht:ref: eq:diffpinphianddiffrho --></a>),
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex37x.svg" alt="&#x03C1;1v12= &#x03A6;2m &#x03C1;-11=  --p2 --1p1-1-= 1[(&#x03B3; - 1)p1 + (&#x03B3; + 1)p2].
-               1- &#x03C1;2 &#x2215;&#x03C1;1    2
+src="Applications.tex37x.svg" alt="ρ1v12= Φ2m ρ−1=  --p2 −-p1--= 1[(γ − 1)p1 + (γ + 1)p2].
+          1    1− ρ−21∕ρ−11   2
 " class="math-display"  /></center>
 <!--l. 103--><p class="nopar" > 又由(<a 
 href="#x1-6001r2">2<!--tex4ht:ref: eq:Msquaredinthermals --></a>)即可得证左边的等式,
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex38x.svg" alt="   2     1
-M 1&#x03B3;p1 = 2 [(&#x03B3; - 1)p1 +(&#x03B3; + 1)p2].
+src="Applications.tex38x.svg" alt="         1
+M 12γp1 = 2 [(γ − 1)p1 +(γ + 1)p2].
 " class="math-display"  /></center>
 <!--l. 105--><p class="nopar" > 将左边的等式代入<a 
-href="#x1-7003r2">引理&#x00A0;1.2</a>可得右边的等式.                                         __
+href="#x1-7003r2">引理 1.2</a>可得右边的等式.                                         __
 </p>
    </div>
    <div class="newtheorem">
@@ -381,25 +383,25 @@ href="#x1-7003r2">引理&#x00A0;1.2</a>可得右边的等式.                   
 <span 
 class="cmbx-10">例 1.3.</span>  </span><span 
 class="cmti-10">在单原子气体的极限下,</span> <img 
-src="Applications.tex39x.svg" alt="&#x03C1;2&#x2215;&#x03C1;1   " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex39x.svg" alt="ρ2∕ρ1   " class="math"; /><span 
 class="cmti-10">不会超过</span><img 
-src="Applications.tex40x.svg" alt="4  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex40x.svg" alt="4  " class="math"; /><span 
 class="cmti-10">.</span>
                                                                   
 
                                                                   
 </p>
    </div>
-<!--l. 111--><p class="noindent" >激波中不可能发生<img 
-src="Applications.tex41x.svg" alt="&#x03C1;2 &#x003C; &#x03C1;1  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 否则气体在波前膨胀冷却并超声速, 违反第二定律.
+<!--l. 111--><p class="indent" >   激波中不可能发生<img 
+src="Applications.tex41x.svg" alt="ρ2 &#x003C; ρ1  " class="math"; />, 否则气体在波前膨胀冷却并超声速, 违反第二定律.
 通过(<span 
 class="cmbx-10">??</span>)与Rankine-Hugoniot条件展开熵变
 </p>
    <center class="math-display" >
 <img 
 src="Applications.tex42x.svg" alt="                   [   (  )  ]
-                    p2  &#x03C1;1  &#x03B3;
-&#x0394;S = S2 - S1 = CV ln p1 &#x03C1;2
+                    p2  ρ1  γ
+ΔS = S2 − S1 = CV ln p1 ρ2
 " class="math-display"  /></center>
 <!--l. 112--><p class="nopar" > 可以发现超音速的情况下总是熵增. 即激波将动能转化为热能.
 </p>
@@ -415,34 +417,34 @@ class="cmti-10">Langevin方程</span>(一维情形)为
    <center class="math-display" >
 <img 
 src="Applications.tex43x.svg" alt="                    -d         2
-m &#x02D9;v = - &#x03B1;v+ F (t), m dt (xx&#x02D9;) = mx&#x02D9; - &#x03B1;x&#x02D9;x+ F (t).
+m ˙v = − αv+ F (t), m dt (xx˙) = mx˙ − αx˙x+ F (t).
 " class="math-display"  /></center>
 <!--l. 117--><p class="nopar" > 分别对各项求时间平均, 即
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex44x.svg" alt="m d-&#x27E8;xx&#x02D9;&#x27E9; = kBT - &#x27E8;xx&#x02D9;&#x27E9;.
+src="Applications.tex44x.svg" alt="m d-⟨xx˙⟩ = kBT − ⟨xx˙⟩.
   dt
 " class="math-display"  /></center>
 <!--l. 119--><p class="nopar" > 假设<img 
-src="Applications.tex45x.svg" alt="t = 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />时有边界条件<img 
-src="Applications.tex46x.svg" alt="x = 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+src="Applications.tex45x.svg" alt="t = 0  " class="math"; />时有边界条件<img 
+src="Applications.tex46x.svg" alt="x = 0  " class="math"; />,
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex47x.svg" alt="1 d-&#x27E8;x2&#x27E9; = &#x27E8;x&#x02D9;x&#x27E9; = kBT-(1- e-&#x03B1;t&#x2215;m) .
-2 dt              &#x03B1;
+src="Applications.tex47x.svg" alt="1 d-⟨x2⟩ = ⟨x˙x⟩ = kBT-(1− e−αt∕m) .
+2 dt              α
 " class="math-display"  /></center>
 <!--l. 121--><p class="nopar" > 对于充分大的<img 
-src="Applications.tex48x.svg" alt="t  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 有
+src="Applications.tex48x.svg" alt="t  " class="math"; />, 有
 </p>
                                                                   
 
                                                                   
    <center class="math-display" >
 <img 
-src="Applications.tex49x.svg" alt="&#x27E8;x2&#x27E9; = 2kBTt.
-         &#x03B1;
+src="Applications.tex49x.svg" alt="⟨x2⟩ = 2kBTt.
+         α
 " class="math-display"  /></center>
 <!--l. 123--><p class="nopar" >
 </p>
@@ -453,42 +455,42 @@ src="Applications.tex49x.svg" alt="&#x27E8;x2&#x27E9; = 2kBTt.
 <span 
 class="cmbx-10">附注 1.1.</span>  </span><span 
 class="cmti-10">可以发现扩散率与耗散</span><img 
-src="Applications.tex50x.svg" alt="&#x03B1;  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  /><span 
+src="Applications.tex50x.svg" alt="α  " class="math"; /><span 
 class="cmti-10">的联系.</span>
 </p>
    </div>
 <!--l. 127--><p class="indent" >   定义<span 
 class="cmti-10">速度关联函数</span><img 
-src="Applications.tex51x.svg" alt="&#x27E8;v(0)v (t)&#x27E9; " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />为
+src="Applications.tex51x.svg" alt="⟨v(0)v (t)⟩ " class="math"; />为
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex52x.svg" alt="       &#x222B; T&#x2215;2
- lim  1-     v (t&#x2032;)v(t+ t&#x2032;)dt&#x2032;.
-T &#x2192;&#x221E; T  -T&#x2215;2
+src="Applications.tex52x.svg" alt="       ∫ T∕2
+ lim  1-     v (t′)v(t+ t′)dt′.
+T →∞ T  −T∕2
 " class="math-display"  /></center>
 <!--l. 128--><p class="nopar" > 它描述了某一时刻的速度与其后的速度的相关程度. 对于Brown运动, 通过Langevin方程,
 对<img 
-src="Applications.tex53x.svg" alt="&#x03C4; &#x2192; 0  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />成立
+src="Applications.tex53x.svg" alt="τ → 0  " class="math"; />成立
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex54x.svg" alt="v(0)v(t+-&#x03C4;)--v(0)v(&#x03C4;)= - &#x03B1;-v(0)v(t)+ v(0)F-(t).
-          &#x03C4;              m              m
+src="Applications.tex54x.svg" alt="v(0)v(t+-τ)−-v(0)v(τ)= − α-v(0)v(t)+ v(0)F-(t).
+          τ              m              m
 " class="math-display"  /></center>
 <!--l. 130--><p class="nopar" > 对时间取平均并取极限,
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex55x.svg" alt="d-&#x27E8;v(0)v(t)&#x27E9; = --&#x03B1; &#x27E8;v (0) v(t)&#x27E9;.
+src="Applications.tex55x.svg" alt="d-⟨v(0)v(t)⟩ = −-α ⟨v (0) v(t)⟩.
 dt             m
 " class="math-display"  /></center>
 <!--l. 132--><p class="nopar" > 从而
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex56x.svg" alt="            &#x27E8;    2&#x27E9;  -&#x03B1;t&#x2215;m
-&#x27E8;v(0)v(t)&#x27E9; =  v(0)  e     .
+src="Applications.tex56x.svg" alt="            ⟨    2⟩  −αt∕m
+⟨v(0)v(t)⟩ =  v(0)  e     .
                                                                   
 
                                                                   
@@ -498,38 +500,38 @@ src="Applications.tex56x.svg" alt="            &#x27E8;    2&#x27E9;  -&#x03B1;t
    <h5 class="subsubsectionHead"><span class="titlemark">1.3.2   </span> <a 
  id="x1-100001.3.2"></a>Johnson噪声</h5>
 <!--l. 137--><p class="noindent" >假设电阻<img 
-src="Applications.tex57x.svg" alt="R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />被连接到长度为<img 
-src="Applications.tex58x.svg" alt="L  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 电阻为<img 
-src="Applications.tex59x.svg" alt="R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的传输线上, 传输线允许<img 
-src="Applications.tex60x.svg" alt="k = n&#x03C0; &#x2215;L  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />,
+src="Applications.tex57x.svg" alt="R  " class="math"; />被连接到长度为<img 
+src="Applications.tex58x.svg" alt="L  " class="math"; />, 电阻为<img 
+src="Applications.tex59x.svg" alt="R  " class="math"; />的传输线上, 传输线允许<img 
+src="Applications.tex60x.svg" alt="k = nπ ∕L  " class="math"; />,
 频率<img 
-src="Applications.tex61x.svg" alt="&#x03C9; = ck  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />的模. 每个模有平均能量<img 
+src="Applications.tex61x.svg" alt="ω = ck  " class="math"; />的模. 每个模有平均能量<img 
 src="Applications.tex62x.svg" alt="k T
- B  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />, 故每单位长度传输线传输的能量为
+ B  " class="math"; />, 故每单位长度传输线传输的能量为
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex63x.svg" alt="    &#x0394;&#x03C9;-
-kBT c&#x03C0; ,
+src="Applications.tex63x.svg" alt="    Δω-
+kBT cπ ,
 " class="math-display"  /></center>
 <!--l. 138--><p class="nopar" > 相应地, 考虑到传输的能量有一半向左, 一半向右, 电阻<img 
-src="Applications.tex64x.svg" alt="R  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />消耗的能量为
+src="Applications.tex64x.svg" alt="R  " class="math"; />消耗的能量为
 </p>
    <center class="math-display" >
 <img 
-src="Applications.tex65x.svg" alt="             &#x27E8; 2&#x27E9;
-1-kBT &#x0394;&#x03C9; = 1 -V--.
-2&#x03C0;         2  2R
+src="Applications.tex65x.svg" alt="             ⟨ 2⟩
+1-kBT Δω = 1 -V--.
+2π         2  2R
 " class="math-display"  /></center>
 <!--l. 140--><p class="nopar" > 故在频率间隔<img 
-src="Applications.tex66x.svg" alt="&#x0394;f  " class=\OT1\textquoteright \OT1\textquoteright math\OT1\textquoteright \OT1\textquoteright ; align=\OT1\textquoteright \OT1\textquoteright absmiddle\OT1\textquoteright \OT1\textquoteright  />内有涨落 <div class="finaleBox">
-</p>
+src="Applications.tex66x.svg" alt="Δf  " class="math"; />内有涨落 </p><div class="finaleBox">
    <center class="math-display" >
 <img 
-src="Applications.tex67x.svg" alt="&#x27E8;V2&#x27E9; = 4kBT R&#x0394;f.
+src="Applications.tex67x.svg" alt="⟨V2⟩ = 4kBT RΔf.
 " class="math-display"  /></center>
-<!--l. 143--><p class="nopar" > </div>
-</p> 
+<!--l. 143--><p class="nopar" >
+</p></div>
+    
 </body></html> 
 
                                                                   
