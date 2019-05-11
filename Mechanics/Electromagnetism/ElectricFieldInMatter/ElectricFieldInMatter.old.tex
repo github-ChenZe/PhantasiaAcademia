@@ -1,0 +1,196 @@
+\documentclass[../Electromagnetism.tex]{subfiles}
+
+\begin{document}
+
+\section{电介质存在下的静电场} % (fold)
+\label{sec:电介质存在下的静电场}
+
+\subsection{电偶极子} % (fold)
+\label{sub:电偶极子}
+
+\subsubsection{电偶极子的微观形态} % (fold)
+\label{ssub:电偶极子的微观形态}
+
+\begin{definition}[电偶极矩]
+	不重合的电荷$+q$和$-q$的电偶极矩为$\vp = q\vd$, 指向正电荷.
+\end{definition}
+\begin{finale}
+	\begin{corollary}[电偶极矩的受力矩]
+		电偶极矩在电场中受力矩
+		\begin{equation}
+			\label{eq:电偶极矩的受力矩}
+			\vM = \vp \times \vE.
+		\end{equation}
+	\end{corollary}
+\end{finale}
+电偶极子产生的电势为
+\begin{equation}
+	\label{eq:电偶极子产生的电势}
+	\varphi = \rec{4\pi\epsilon_0}\frac{p\cos\theta}{r^2} = \rec{4\pi\epsilon_0}\frac{\vp\cdot\hat{\vr}}{r^2}.
+\end{equation}
+\begin{corollary}[偶极子产生的电场]
+	偶极子产生电场
+	\[ \vE\pare{r,\theta} = \frac{p}{4\pi\epsilon_0 r^3}\pare{2\hat{\vr}\cos\theta + \hat{\vtheta} \sin\theta}. \]
+	特别地, 在偶极子的轴线和水平面上分别有电场
+	\[ E\pare{r, 0} = \rec{4\pi\epsilon_0}\frac{2p}{r^3},\quad E\pare{r, \frac{\pi}{2}} = \rec{4\pi\epsilon_0}\frac{p}{r^3}. \]
+\end{corollary}
+在外电场的作用下, 同时发生两种极化:
+\begin{cenum}
+	\item 位移极化: 无极分子中正负电荷中心发生移动引发极化;
+	\item 取向极化: 有极分子受力矩\eqref{eq:电偶极矩的受力矩}作用引发极化.
+\end{cenum}
+\begin{definition}[极化强度]
+	单位体积内偶极矩的矢量和谓极化强度,
+	\[ \vP = \frac{\sum \vp_i}{\Delta V}. \]
+\end{definition}
+\begin{definition}[极化率]
+	各向同性电介质中的极化率$\chi$满足
+	\begin{equation}
+		\label{eq:极化率定义}
+	 	\vP = \epsilon_0 \chi \vE.
+	 \end{equation}
+\end{definition}
+\begin{remark}
+	对于非各向同性的物体, 极化率可能为张量而$\vP$不再与$\vE$同向, 此时$\vP = \epsilon_0 \vchi \vE$. 甚至还存在$\vP$对$\vE$并非单值而取决于历史的\href{https://zh.wikipedia.org/wiki/%E9%93%81%E7%94%B5%E6%80%A7}{铁电体}.
+\end{remark}
+
+% subsubsection 电偶极子的微观qing (end)
+
+\subsubsection{电偶极子的宏观形态} % (fold)
+\label{ssub:电偶极子的宏观形态}
+
+\begin{definition}[自由电荷与极化电荷]
+	物质极化导致的宏观电荷谓极化电荷, 反之谓自由电荷.
+\end{definition}
+\begin{ex}
+	摩擦或接触引起的电荷为自由电荷.
+\end{ex}
+物质极化后产生电势由\eqref{eq:电偶极子产生的电势}
+\[ \varphi = \rec{4\pi\epsilon_0}\iiint \vP\cdot\nabla_{\vr}\pare{\rec{\rcurs}}\,\rd{\tau} = \rec{4\pi\epsilon_0}\brac{\oiint \frac{\vP \cdot \rd{\vva}}{\rcurs} - \iiint \frac{\pare{\nabla_{\vr}\cdot\vP\,\rd{\tau}}}{\rcurs}}. \]
+\begin{finale}
+	\begin{corollary}[极化表面电荷与体电荷]
+		物质极化后产生的电场可等同为由表面电荷$\sigma_b$与体电荷$\rho_b$产生的, 其中
+		\begin{equation}
+			\label{eq:极化表面电荷与体电荷}
+		 	\sigma_b = \vP\cdot\hat{\vn},\quad \rho_b = -\div\vP.
+		 \end{equation}
+	\end{corollary}
+\end{finale}
+\begin{ex}
+	体积电荷可以解释为, 设定物体内部一封闭曲面, 则内部偶极矩电荷相抵, 曲面上的电荷量为$-qnl\cos\theta\,\rd{a} = -\vP\cdot\rd{\vva}$, 积分后恰为散度.
+\end{ex}
+\begin{ex}
+	类似的思路导致表面上具有电荷$\vP\cdot\rd{\vn}$.
+\end{ex}
+\begin{ex}
+	在电容器中间插入电介质, 则电介质两侧会带表面电荷. 无论电介质是否与金属接触, 表面电荷皆为电介质的$P$.
+\end{ex}
+\begin{ex}
+	带电玻璃棒可以极化小纸片而吸引之.
+\end{ex}
+
+% subsubsection 电偶极子的宏观形态 (end)
+
+% subsection 电偶极子 (end)
+
+\subsection{电介质存在下的方程} % (fold)
+\label{sub:电介质存在下的方程}
+
+\subsubsection{电介质存在下的电位移方程} % (fold)
+\label{ssub:电介质存在下的电位移方程}
+
+自由电荷和束缚电荷同时对激发电场有贡献. 由\eqref{eq:极化表面电荷与体电荷},
+\[ \oiint_S \vE\cdot\,\rd{\vva} = \frac{q_0 + q'}{\epsilon_0} \Longrightarrow \oiint \pare{\epsilon_0 \vE + \vP}\,\rd{\vva} = q_0. \]
+\begin{definition}[电位移]
+	电位移谓$\vD = \epsilon_0 \vE + \vP$.
+\end{definition}
+\begin{definition}[介电常量和相对介电常量]
+	介电常量谓$\epsilon = \epsilon_0 \pare{1+\chi}$, 相对介电常量谓$\epsilon_{\mathrm{r}} = \epsilon/\epsilon_0 = 1+\chi$.
+\end{definition}
+考虑\eqref{eq:极化率定义}, 就有
+\begin{finale}
+	\[ \vD = \epsilon_0\pare{1+\chi}\vE = \epsilon \vE. \]
+\end{finale}
+\begin{ex}
+	均匀电介质($\chi$处处相同)内, $\rho' \propto \iint \vP \propto \iint \vE \propto \iint \vD \propto \rho_0$. 从而其自由电荷为零处诱导体电荷亦为零.
+\end{ex}
+\begin{finale}
+	\begin{corollary}[电介质存在时的Gau\ss 定律]
+		\begin{equation}
+			\label{eq:电介质存在时的Gauss定律}
+			\oiint \epsilon\vE\cdot\rd{\vva} = \oiint \vD\cdot\rd{\vva} = q_0.
+		\end{equation}
+	\end{corollary}
+\end{finale}
+\begin{remark}
+	$\vD$和$\vP$应视为宏观平均值, 即$\rec{V}\iiint \epsilon \vE$和$\rec{V}\iiint \vP$.
+\end{remark}
+\begin{ex}
+	\label{ex:带电金属球在均匀电介质内}
+	半径$R$, 电荷$q_0$的金属球埋在介电常量$\epsilon$的电介质内,
+	\[ \oiint \vD\cdot\rd{\vva} = D_r 4\pi r^2\Longrightarrow \vD = \frac{q_0}{4\pi r^2}\hat{\vr},\quad \vE = \frac{q_0}{4\pi\epsilon r^2}\hat{\vr}.\]
+	在电介质内壁上有电荷
+	\begin{equation}
+		\label{eq:电介质内壁上电荷}
+	 	\sigma' = \vP\cdot\hat{\vr} = -\frac{\epsilon - \epsilon_0}{\epsilon}\sigma_0,\quad \sigma = \sigma_0 + \sigma' = \frac{\sigma_0}{\epsilon}.
+	\end{equation}
+\end{ex}
+\begin{ex}
+	在平行板电容器中间插入介电常量为$\epsilon$的电介质, 左右金属板分别有电荷密度$\pm\sigma_{0}$. 则类似于\eref{平行无限大平面上均匀分布的异号电荷产生的电场}, 有
+	\[ \vE = \frac{\vD}{\epsilon} = \frac{\sigma_0}{\epsilon}\hat{\vn}. \]
+	电介质左右介面上极化电荷面密度与\eqref{eq:电介质内壁上电荷}相符,
+	\[ \sigma' = \pm\vP\cdot\vn = \pm \epsilon_0\chi\vE\hat{\vn} = \pm\frac{\epsilon - \epsilon_0}{\epsilon}\sigma_0. \]
+\end{ex}
+\begin{finale}
+	\begin{corollary}[含有电介质的电容]
+		含电介质的平行金属板的电容器的电容为
+		\[ C = \frac{q_0}{U} = \frac{\epsilon S}{d}. \]
+	\end{corollary}
+\end{finale}
+即充入电介质后, 电容增大.
+\begin{remark}
+	对于导体埋在均匀电介质内的情形, \eqref{eq:电介质内壁上电荷}成立从而随后的推导都成立, 故$\vD = \epsilon_0 \vE_0$.
+\end{remark}
+\begin{pitfall}
+	对于非均匀的电介质, 不能草率认为$\vD = \epsilon_0 \vE_0$.
+\end{pitfall}
+通过\eqref{eq:电介质存在时的Gauss定律}和\eqref{eq:Kirchhoff定律}, 边界处成立
+\[ D_1^\perp = D_2\perp,\quad \frac{\vD_1^{\parallelsum}}{\epsilon_1} = \frac{\vD_2^{\parallelsum}}{\epsilon_2}. \]
+\[ \epsilon_1 E_1^\perp - \epsilon_2 E_2^\perp = \sigma_0,\quad \vE_1^{\parallelsum} = \vE_2^{\parallelsum}. \]
+当$\vD$场穿过介质时, 发生折射,
+\[ \frac{\tan \alpha_1}{\tan \alpha_2} = \frac{\epsilon_1}{\epsilon_2}. \]
+
+% subsubsection 电介质存在下的电位移方程 (end)
+
+\subsubsection{电介质存在下的能量} % (fold)
+\label{ssub:电介质存在下的能量}
+
+从\eqref{eq:带电体系静电能}可知电介质存在时具有能量
+\[ W = \half\iiint \rho_0 V\,\rd{\tau} = \half\oiint \vD V\,\rd{\vva} - \half \iiint \vD\cdot\laplacian V\,\rd{\tau} = \half\iiint \vD\cdot\vE \,\rd{\tau}. \]
+因此, 电场的能量密度为
+\begin{finale}
+	\[ u = \half \vD\cdot\vE. \]
+\end{finale}
+\begin{pitfall}
+	\eqref{eq:带电体系静电能}不能直接适用, 它对束缚电荷无法得到正确结果.
+\end{pitfall}
+\begin{ex}
+	\eqref{eq:电容器场能的历史推导}中的推导可以适用, 因此\eqref{eq:电容器场能}的结论可以适用, 由\eqref{eq:平行板电容器电容}知
+	\[ u = \frac{\half CU^2}{Sd} = \frac{DE}{2}, \]
+	这和刚才的结果相符.
+\end{ex}
+\begin{ex}
+	\eref{带电金属球在均匀电介质内}中的场能为
+	\[ W = \iiint \half \frac{q_0}{4\pi r^2}\frac{q_0}{4\pi \epsilon r^2} \,\rd{\tau} = \frac{q_0^2}{8\pi\epsilon R}. \]
+\end{ex}
+\begin{remark}
+	对于非线性材料, 如铁电体, 在强制伸缩时因为极化程度改变而呈现异号电荷, 谓压电效应. 如果给它通电, 可以反过来造成形变, 谓逆压电效应. 二者在话筒和石英振荡器等材料上有应用.
+\end{remark}
+
+% subsubsection 电介质存在下的能量 (end)
+
+% subsection 电介质存在下的方程 (end)
+
+% section 电介质存在下的静电场 (end)
+
+\end{document}

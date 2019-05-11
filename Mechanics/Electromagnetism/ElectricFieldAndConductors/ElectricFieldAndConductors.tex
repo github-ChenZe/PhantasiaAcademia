@@ -1,0 +1,301 @@
+\documentclass[../Electromagnetism.tex]{subfiles}
+
+\begin{document}
+
+\section{有导体时的静电场} % (fold)
+\label{sec:有导体时的静电场}
+
+\subsection{静电场中的导体} % (fold)
+\label{sub:静电场中的导体}
+
+\subsubsection{导体处的电场} % (fold)
+\label{ssub:导体处的电场}
+
+\begin{definition}[导体中的静电平衡]
+	当导体内处处无电流时, 谓其处于静电平衡.
+\end{definition}
+\begin{corollary}[静电平衡条件]
+	处于静电平衡的导体, 内部电场处处为零.
+\end{corollary}
+\begin{remark}
+	\label{rm:静电平衡可能要求非零电场}
+	在化学反应存在的情形下, 静电平衡可能要求非零电场.
+\end{remark}
+\begin{corollary}[导体附近电场的性质]\quad
+	\begin{cenum}
+		\item 导体是等势体, 导体表面是等势面;
+		\item 导体内部体电荷密度为零, 表面可能有非零$\sigma$;
+		\item 导体表面处电场呈法向, $E$局部正比于$\sigma$,
+		\[ \vE_S = \frac{\sigma \hat{\vn}}{\epsilon_0}. \]
+	\end{cenum}
+\end{corollary}
+\begin{remark}
+	注意与\cref{ex:无限大平面上均匀分布的电荷产生的电场}中的结论区分, 这其实显示了外界电场对电荷分布的影响.
+\end{remark}
+参考\cref{ex:无限大平面上均匀分布的电荷产生的电场}可以发现外界电场(除了$\rd{a}$上的电荷之外的源产生的电场)为$\vE' = \sigma\hat{\vn}/\pare{2\epsilon_0}$.
+\begin{finale}
+	\begin{corollary}[导体表面受力]
+		导体表面元$\rd{a}$的受力为
+		\begin{equation}
+			\label{eq:导体表面元受力}
+			\rd\vF = \frac{\sigma^2\,\rd{a}}{2\epsilon_0}\hat{\vn}.
+		\end{equation}
+	\end{corollary}
+\end{finale}
+假设有两球相距足够远且由导线连接而等势, 有
+\[ V_A = \frac{q_A}{4\pi\epsilon_0 R_A} = V_B = \frac{q_B}{4\pi\epsilon_0 R_B}. \]
+可知$q\propto R$, $\sigma \propto 1/R \propto \kappa$, 其中$\kappa$为曲率. 于是带电导体曲率大处电荷密度大.
+\begin{ex}
+	避雷针的尖端具有相当大的电荷密度, 因此放电容易发生在大气和尖端之间.
+\end{ex}
+
+% subsubsection 导体处的电场 (end)
+
+\subsubsection{导体静电平衡的分析} % (fold)
+\label{ssub:导体静电平衡的分析}
+
+\begin{ex}
+	\label{ex:点电荷在导体上感应}
+	导体外一电电荷$+q$在导体上感应的负电荷设为$-q_{-}$, 证明$q_{-}<+q$.
+\end{ex}
+\begin{proof}
+	负电荷处的电场线
+	\begin{cenum}
+		\item 不可能源于表面正电荷(导体表面等势);
+		\item 不可能源于无穷远点(否则导体表面电势会矛盾);
+		\item 只能源于$+q$.
+	\end{cenum}
+	则存在$+q$附近的非封闭曲面满足$\iint_{q_{-}} \vE\cdot\rd{a} = \iint_{S} \vE\cdot\rd{a} < \oiint_{+q} \vE\cdot\rd{a}$. 最后一步的积分也可以用\cref{coll:电场线的性质}替代.
+\end{proof}
+\begin{ex}
+	两个带电导体靠近, 总有一个导体的电荷不会有两点异号.
+\end{ex}
+\begin{proof}
+	如果近端异号电荷的电场线相连, 则远端不可能相连, 会引发电势矛盾. 近端异号电荷的电场线相斥同样引发电势矛盾.
+\end{proof}
+\begin{ex}
+	\label{ex:封闭金属壳外表面总电荷}
+	封闭金属壳内封闭有电荷$q$, 在壳层内构造Gau\ss 面可知壳层内外表面总电荷分别为$\pm q$.
+\end{ex}
+\begin{ex}
+	\label{ex:导体外有点电荷的接地导体的表面电荷密度}
+	将\cref{ex:点电荷在导体上感应}中的导体接地, 设地面电势$\varphi_G = \varphi_\infty = 0$, 则导体上没有点的$\sigma > 0$, 否则导体与地面不等势. 此外, 如果接地导体外是带电导体, 则带电导体的电荷处处为正, 否则外导体不等势.
+\end{ex}
+定量分析在足够对称的条件下也是可行的.
+\begin{ex}
+	\label{ex:球外有点电荷的导体球的电势}
+	半径$R$, 电荷$Q$的导体球外有距离球心$l$的点电荷$q$. 球的电势可以直接积分,
+	\[ \varphi_O = \frac{q}{4\pi\epsilon_0 l} + \rec{4\pi\epsilon_0 R}\oiint \sigma\,\rd{a} = \frac{q}{4\pi\epsilon_0 l} + \frac{Q}{4\pi\epsilon_0 R}. \]
+\end{ex}
+\begin{ex}
+	参考\cref{ex:球外有点电荷的导体球的电势}, 接地导体球上的感应电荷为
+	\[ q' = -\frac{q}{R}{l}. \]
+\end{ex}
+\begin{ex}
+	无限大接地金属版外$l$处有点电荷$q$, 则金属板处的电势和不接地而在$-l$处设定电荷$-q$的结果相当. 参考\cref{ex:平行无限大平面上均匀分布的异号电荷产生的电场}, 金属版上
+	\[ E\pare{r} = \rec{2\pi\epsilon_0}\frac{q}{r^2}\cos^3\theta,\quad \sigma = \frac{q}{2\pi l^2}\cos^3\theta. \]
+	注意到接地导致右壁电荷密度为零(\cref{ex:导体外有点电荷的接地导体的表面电荷密度}). 通过导体内$E=0$仔细计算$\sigma$也会得到同样的结果.
+\end{ex}
+\begin{ex}
+	两块金属板平行放置, 分别有电荷$q_A$和$q_B$, 表面电荷密度适合
+	\[  \left\{\begin{array}{ll}
+		\sigma_1 + \sigma_2 + \sigma_3 - \sigma_4 = 0, & \text{第二块导体内电场为零} \\
+		\sigma_1 - \sigma_2 - \sigma_3 - \sigma_4 = 0, & \text{第一块导体内电荷为零} \\
+		\pare{\sigma_3 + \sigma_4} S = q_B, & \text{第二块导体电荷守恒} \\
+		\pare{\sigma_1 + \sigma_2} S = q_A, & \text{第一块导体电荷守恒}
+	\end{array}\right. \]
+	得到
+	\[ \sigma_1 = \sigma_4 = \frac{q_A + q_B}{2S},\quad \sigma_2 = -\sigma_3 = \frac{q_A - q_B}{2S}. \]
+	对于$q_A=-q_B$的情形(电容器), 就有电荷分布在两板内侧两端. 
+\end{ex}
+\begin{ex}
+	在中间插入一中性板, 又有
+	\[ \sigma_1 = \sigma_6 = \frac{q_A+q_B}{2S},\quad \sigma_2 = -\sigma_3 = \sigma_4 = -\sigma_5 = \frac{q_A-q_B}{2S}. \]
+\end{ex}
+	
+% subsubsection 导体静电平衡的分析 (end)
+
+\subsubsection{金属壳内外的静电场} % (fold)
+\label{ssub:金属壳内外的静电场}
+
+通过构造电场线可以发现
+\begin{finale}
+	\begin{corollary}[金属壳内的电场]\quad
+		\begin{cenum}
+			\item 金属壳内的电场恒为零, 无论球外电场如何;
+			\item 壳内不含电荷的金属壳内壁处处有$\sigma = 0$;
+		\end{cenum}
+	\end{corollary}
+\end{finale}
+\begin{ex}
+	将带电的验电器上的电荷通过金属棒转移到(几乎)封闭导体壳的内壁, 则电荷将会悉数聚集于导体壳外壁.
+\end{ex}
+如果壳内有电荷, 那么金属壳外可能有电场.
+\begin{ex}
+	如果金属壳接地, 则金属壳内虽然有电荷, 金属壳外电场仍然为零.
+\end{ex}
+\begin{finale}
+	\begin{corollary}[静电屏蔽]\quad
+		\begin{cenum}
+			\item 金属壳内的电场于壳外电场无关;
+			\item 接地金属壳外的电场于壳内电场无关;
+		\end{cenum}
+	\end{corollary}
+\end{finale}
+\begin{ex}
+	如果金属壳不接地, 则由\cref{ex:封闭金属壳外表面总电荷}, 金属壳外的电场可能于壳内电荷相关.
+\end{ex}
+\begin{corollary}[静电屏蔽的定量]
+	\label{coll:静电屏蔽的定量}
+	设壳内、内壁、外壁和壳外分别有电荷$q_1$, $q_2$, $q_3$和$q_4$, 则
+	\begin{finale}
+		壳内、内壁的电荷$q_1$和$q_2$在内壁以外产生的电场皆为零. 壳外、外壁的电荷$q_4$和$q_3$在外壁以内产生的电场皆为零. 
+	\end{finale}
+\end{corollary}
+\begin{ex}
+	金属球壳外的电场与壳内的电荷放置无关.
+\end{ex}
+\begin{remark}
+	在绘制金属壳外的电场线时, 只需考虑金属壳的总电荷和壳外的电荷, 无需关心壳内的电场线.
+\end{remark}
+\begin{ex}
+	Van de Graaff起电机可以让金属罩与地面之间产生强电场而引发高速粒子流. 起电机的原理为
+	\begin{cenum}
+		\item 绝缘传送带A端外有针尖为高压直流电源正极, 传送带A端接地;
+		\item 空气在A端电离, 正离子附着于传送带上;
+		\item 传送带将电荷传送至外有与金属壳附着的针尖的B端;
+		\item B端因针尖静电感应产生电势差导致空气电离, 正离子附着于针尖;
+		\item 由\cref{coll:静电屏蔽的定量}, 金属壳内壁的电荷与传送带电荷抵消, 外壁带正电;
+		\item 因此, 金属壳与地面之间电势差不断升高.
+	\end{cenum}
+\end{ex}
+\begin{ex}
+	如果平方反比定律(\cref{ax:Coulomb定律})不成立, 则\cref{coll:Gauss定律}不能成立, 因此均匀带电球壳内部电场非零. 如果用导线将球壳与球壳内部的导体连接, 内部导体会带电. 事实证明没有这种带电, 从而(精确地)验证了平方反比定律.
+\end{ex}
+
+% subsubsection 金属壳内外的静电场 (end)
+
+% subsection 静电场中的导体 (end)
+
+\subsection{电容器} % (fold)
+\label{sub:电容器}
+
+\subsubsection{电容的定义} % (fold)
+\label{ssub:电容的定义}
+
+对于孤立导体,参考\cref{ex:均匀带电球面的电势}可以发现$q=CV$, 其中$q$为常数. 对于两个带相反电荷的导体, 之间的电压为
+\begin{finale}
+	\begin{corollary}[特殊电容器]\quad
+		\begin{cenum}
+			\item 平板电容器满足
+			\begin{equation}
+				\label{eq:平行板电容器电容}
+				U = \frac{d}{\epsilon_0 S}Q.
+			\end{equation}
+			\item 圆柱形电容器满足
+			\[ U = \frac{\ln\pare{R_2/R_2}}{2\pi\epsilon_0 L}Q. \]
+			\item 球形电容器满足
+			\[ U = \rec{4\pi\epsilon_0}\frac{R_2 - R_1}{R_1 R_2}Q. \]
+		\end{cenum}
+	\end{corollary}
+\end{finale}
+\begin{definition}[电容]
+	电容器的电容$C$满足
+	\[ C = \frac{Q}{U}. \]
+\end{definition}
+\begin{finale}
+	\begin{corollary}[电容器的并联与串联]\quad
+		\begin{cenum}
+			\item 电容器并联时满足
+			\[ C = C_1 + C_2 + \cdots + C_n. \]
+			\item 电容器串联时满足
+			\[ \rec{C} = \rec{C_1} + \rec{C_2} + \cdots + \rec{C_n}. \]
+		\end{cenum}
+		特别地, 并联增大电容而串联减小电容.
+	\end{corollary}
+\end{finale}
+\begin{ex}
+	通过增大平行板的面积(卷起)可以增大电容. 通过串联可以增大耐击穿能力.
+\end{ex}
+
+% subsubsection 电容的定义 (end)
+
+\subsubsection{静电仪器} % (fold)
+\label{ssub:静电仪器}
+
+\begin{ex}
+	用带电导体A感应导体B, 将B近端分开知B将带电. 或将B接地随后移除A, 由\cref{ex:导体外有点电荷的接地导体的表面电荷密度}知B将带电.
+\end{ex}
+\begin{ex}
+	参考Wimshurst起电机的\href{https://www.youtube.com/watch?v=Zilvl9tS0Og}{视频演示}和\href{http://phy.tw/\%E7\%A7\%91\%E5\%AD\%B8\%E5\%AF\%A6\%E9\%A9\%97/item/211-item-title}{文字解释}. 两个圆盘分别带有电刷和边缘处分开的锡箔, 当其中一片锡箔偶然带电时, 令二圆盘逆向转动, 内部圆盘的锡箔感应带电, 从而外部圆盘也感应带电. 在固定点通过针尖可收集电荷至Leyden瓶内.
+\end{ex}
+\begin{ex}
+	通过将验电器的外壳改成金属, 将外壳和上方金属棒分别于二电势不相等的导体连接, 外壳和指针感应处异号电荷, 由\eqref{eq:导体表面元受力}知指针偏转与电势差正相关.
+\end{ex}
+\begin{ex}
+	可以对静电计做如下实验:
+	\begin{cenum}
+		\item 将金属壳接地, 以带电导体靠近之, 指针张开;
+		\item 将与指针相连的金属棒接地, 指针闭合;
+		\item 将上一步的接地端开, 指针仍然闭合;
+		\item 取下带电导体, 指针张开.
+	\end{cenum}
+\end{ex}
+
+% subsubsection 静电仪器 (end)
+
+% subsection 电容器 (end)
+
+\subsection{静电能} % (fold)
+\label{sub:静电能}
+
+\subsubsection{带电体系静电能} % (fold)
+\label{ssub:带电体系静电能}
+
+\begin{finale}
+	\begin{corollary}[带电体系静电能]
+		离散/连续的带电体系具有能量
+		\begin{equation}
+			\label{eq:带电体系静电能}
+			W = \half \sum_i q_i V_i = \half \iiint \rho V\,\rd{\tau}.
+		\end{equation}
+	\end{corollary}
+\end{finale}
+\begin{remark}
+	静电能应当理解为场具有的能量.
+\end{remark}
+\begin{ex}
+	带电导体组的能量可写为
+	\[ W = \half \sum_i Q_i V_i. \]
+	求和对每个导体分别进行, 因为导体是等势的. 由\cref{ex:导体外有点电荷的接地导体的表面电荷密度}后段, 如果一导体接地而另一导体带电, 则两导体之间纯吸引, 因此该情形下两导体之间的电势与距离正相关.
+\end{ex}
+可以认为公式对电容器也适用, 从而
+\begin{corollary}[电容器的能量]
+	电容器具有能量
+	\begin{finale}
+		\begin{equation}
+			\label{eq:电容器场能}
+			W = \half QU = \frac{Q^2}{2C} = \half CU^2.
+		\end{equation}
+	\end{finale}
+\end{corollary}
+\begin{remark}
+	从$u\,\rd{q}$的作用入手, 同样可以得到
+	\begin{equation}
+		\label{eq:电容器场能的历史推导}
+		W = \int_0^Q u\,\rd{q} = \rec{C}\int_0^Q q\,\rd{q} = \frac{Q^2}{2C}.
+	\end{equation}
+\end{remark}
+\begin{remark}
+	将\eqref{eq:带电体系静电能}中的积分区域与电势皆拆分为$A$和$B$两部分, 则
+	\[ W = \half \iiint_A \rho V_A \,\rd{\tau} + \half \iiint_B \rho V_B \,\rd{\tau} + \iiint \rho V_{AB} \,\rd{\tau}. \]
+	前两项是分别搭建$A$和$B$两部分的能量, 最后一项是两者之间的相互作用能. 如果两者电荷布局不变, 则考虑相互作用能即可.
+\end{remark}
+
+% subsubsection 带电体系静电能 (end)
+
+% subsection 静电能 (end)
+
+% section 有导体时的静电场 (end)
+
+\end{document}

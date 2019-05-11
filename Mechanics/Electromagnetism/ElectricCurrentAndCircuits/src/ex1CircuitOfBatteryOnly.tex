@@ -1,0 +1,13 @@
+\documentclass{standalone}
+
+\usepackage{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+
+\begin{document}
+	\begin{circuitikz}
+			\draw (4,0) to [battery1] (0,0);
+			\draw (0,3) to [battery1] (4,3);
+			\draw (4,3) to [battery1] (4,0);
+			\draw (0,0) to [battery1] (0,3);
+	\end{circuitikz}
+\end{document}

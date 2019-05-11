@@ -1,0 +1,234 @@
+\documentclass[../Electromagnetism.tex]{subfiles}
+
+\begin{document}
+
+\section{真空静电场} % (fold)
+\label{sec:真空静电场}
+
+\subsection{电场及其产生} % (fold)
+\label{sub:电场及其产生}
+
+\subsubsection{电荷} % (fold)
+\label{ssub:电荷}
+
+\begin{definition}[电荷的分类]
+	电荷分为正电荷和负电荷.
+\end{definition}
+\begin{finale}
+	\begin{axiom}[Coulomb定律]
+		\label{ax:Coulomb定律}
+		两个点电荷之间有相互作用力
+		\[ \vF = \frac{1}{4\pi\epsilon_0} \frac{q Q}{\rcurs^2}\hrcurs. \]
+	\end{axiom}
+\end{finale}
+\begin{corollary}[同性相斥, 异性相吸]
+	带同种电荷的两个物体相互排斥, 反之亦然.
+\end{corollary}
+\begin{ex}
+	当带电体与验电器的小球接触时, 金属箔得到同种电荷并张开.
+\end{ex}
+\begin{definition}[绝缘体和导体]
+	允许电荷流动的物体谓绝缘体, 反之谓导体.
+\end{definition}
+金属的导电机制谓自由电子的定向移动. 电解质溶液的导电机制谓带电粒子的宏观运动.
+\begin{axiom}[电荷守恒]
+	封闭系统的电荷守恒.
+\end{axiom}
+\begin{axiom}[电荷量子化]
+	带电体所带电荷只能是元电荷$e$的整数倍.
+\end{axiom}
+\begin{definition}[点电荷模型]
+	带电体的尺度远小于带电体之间的具体时, 可抽象为点电荷.
+\end{definition}
+\begin{ex}[Coulomb定律的验证]
+	通过扭秤实验知两球之间距离为$r/2$时, 扭角为距离为$r$时的$4$倍. 故$F\propto r^{-2}$. 通过接触二全同铁球令电荷均分可验证$F\propto q$, 或者实验验证$F_{AC}/F_{BC} = F_{AD}/F_{BD}$得到相同结论, 这还可以导出$q_A/q_B = F_{AC}/F_{BC}$.
+\end{ex}
+\begin{axiom}[叠加原理]
+	作用在一个点电荷上的静电力等于其它点电荷单独存在时分别作用于该电荷上的静电力的矢量和.
+\end{axiom}
+
+% subsubsection 电荷 (end)
+
+\subsubsection{静电场} % (fold)
+\label{ssub:静电场}
+
+\begin{definition}[电场强度]
+	场中每个点的的测试电荷$q$受力设为$\vF$, 则
+	\[ \vE = \frac{\vF}{q}. \]
+\end{definition}
+各点大小与方向均相同的电场谓\emph{均匀电场}.
+\begin{corollary}[电场强度的叠加原理]
+	诸点电荷在某点单独产生的电场强度为$\vE_i$, 则该点
+	\[ \vE = \sum \vE_i.\]
+	对于连续电荷分布, 设电荷密度$\rho$, 有
+	\begin{finale}
+		\[ \vE = \rec{4\pi\epsilon_0}\iiint \frac{\rho\,\rd{\tau}}{\rcurs^2}\hrcurs. \]
+	\end{finale}
+	对于面电荷和线电荷, 相应的积分变为
+	\begin{equation*}
+		\label{eq:面电荷和线电荷的电场的积分表示}
+		\vE = \rec{4\pi\epsilon_0}\iint \frac{\sigma\,\rd{a}}{\rcurs^2}\hrcurs,\quad \vE = \rec{4\pi\epsilon_0}\int \frac{\lambda\,\rd{l}}{\rcurs^2}\hrcurs.
+	\end{equation*}
+\end{corollary}
+\begin{ex}
+	\label{ex:均匀带电圆盘的电场}
+	均匀带电圆盘产生的电场为
+	\[ E_z = \frac{\sigma z}{4\pi\epsilon_0}\int_0^{2\pi}\rd{\varphi}\int_0^R \rec{r\,\rd{r}}{\pare{r^2+z^2}^{3/2}} = \frac{\sigma}{2\epsilon_0}\brac{1-\rec{\sqrt{1+\pare{R/z}^2}}}. \]
+	特别地, 对于充分大的$R$, 有
+	\[ E \approx \frac{\sigma}{2\epsilon_0}. \]
+	而对于充分小的$R$, 可以得到与点电荷相符的
+	\[ E \approx \frac{\sigma}{4\epsilon_0}\frac{R^2}{z^2} = \frac{q}{4\pi\epsilon_0 z^2}. \]
+\end{ex}
+
+% subsubsection 静电场 (end)
+
+% subsection 电场及其产生 (end)
+
+\subsection{电场的相关量} % (fold)
+\label{sub:电场的相关量}
+
+\subsubsection{电通量与Gau\ss 定律} % (fold)
+\label{ssub:电通量与gauss_定律}
+
+单个点电荷产生在环绕它的闭曲面上的电通量为
+\[ \Phi_E = \oiint \rec{4\pi\epsilon_0}\frac{q\hrcurs\cdot\,\rd{a}}{\rcurs^2} = \frac{q}{4\pi\epsilon_0} \iiint \div\frac{\hrcurs}{\rcurs^2}\,\rd{\tau} = \frac{q}{\epsilon_0}. \]
+如果曲面不环绕$q$, 则相应的积分为零. 将电荷的贡献累加, 即
+\begin{finale}
+	\begin{corollary}[Gau\ss 定律]
+		\label{coll:Gauss定律}
+		设曲面$S$环绕总电荷量$Q$, 则
+		\[ \iint_S \vE\cdot\rd{\sigma} = \frac{Q}{\epsilon_0}. \]
+	\end{corollary}
+\end{finale}
+\begin{pitfall}
+	不能认为曲面外的电荷对曲面上的电场无贡献, 只是其电通量为零.
+\end{pitfall}
+\begin{ex}
+	\label{ex:无限大平面上均匀分布的电荷产生的电场}
+	通过构造包含平面的对称盒子, 无限大平面上分布均匀电荷$\sigma$产生的电场强度满足$2\epsilon_0 AE = Aq$,
+	\begin{finale}
+		\[  E = \frac{\sigma}{2\epsilon_0}. \]
+	\end{finale}
+\end{ex}
+\begin{ex}
+	\label{ex:平行无限大平面上均匀分布的异号电荷产生的电场}
+	同样的办法可以证明, 两块带相反等量均匀电荷的无限大平面外的电场为零, 内部的电场为
+	\begin{finale}
+		\[ E = \frac{\sigma}{\epsilon_0}. \]
+	\end{finale}
+\end{ex}
+\begin{ex}
+	\label{ex:均匀带电球面的电场}
+	电荷$q$均匀分布在半径为$R$的球面上, 有$E\cdot 4\pi r^2 = q/\epsilon_0$而内部电场为零, 均匀带电球对外产生的电荷与球心处电电荷无异.
+\end{ex}
+\begin{ex}
+	同样地, 电荷均匀分布的球体内部的电场强度为
+	\begin{finale}
+		\[ \vE = \frac{q}{4\pi\epsilon_0 R^3}\vr. \]
+	\end{finale}
+\end{ex}
+\begin{remark}
+	球壳电场在$R$处的突变可以假设非零厚度解决, 此时球壳层内电场线性由零上升.
+\end{remark}
+
+% subsubsection 电通量与gauss_定律 (end)
+
+\subsubsection{电场线与电势} % (fold)
+\label{ssub:电场线与电势}
+
+\begin{definition}[电场线]
+	处处与电场方向相切的曲线谓电场线.
+\end{definition}
+通过将\emph{电场线密度}定义为过与某一电场线垂直的单位面元的电场线条数, 并按照$N=K\vE\cdot\rd{\sigma}$分配之, 故电场线的密度正比于静电场强度.
+\begin{finale}
+	\begin{corollary}[电场线的性质]
+		\label{coll:电场线的性质}
+		电场线满足
+		\begin{cenum}
+			\item 点电荷$q$发出的电场线数量正比于$q$;
+			\item 电场线始于正电荷, 止于负电荷;
+			\item 电场线不与自身相交.
+		\end{cenum}
+	\end{corollary}
+\end{finale}
+\begin{remark}
+	电场线的合理性源于平方反比定律以及$\div\pare{\hrcurs}{\rcurs^2}=0$之事实, 否则穿过源外封闭曲面的电场线数目不一定守恒.
+\end{remark}
+电场对点电荷做功为
+\[ A = \int_{r_1}^{r_2} \frac{qQ}{4\pi\epsilon_0}\frac{\rd{r}}{r^2} = \frac{qQ}{4\pi\epsilon_0}\pare{\rec{r_1} - \rec{r_2}}. \]
+积分与路径无关, 知
+\begin{corollary}[Kirchhoff定律]
+	对于静电场成立
+	\begin{equation}
+		\label{eq:Kirchhoff定律}
+		\oint \vE\cdot\rd{\vl} = 0.
+	\end{equation}
+\end{corollary}
+\begin{remark}
+	$\div \vE = \rho/\epsilon_0$与$\rot \vE = 0$可以推出电场在恰当的边界条件下唯一确定. 注意在缺乏边界条件的情况下, 例如点电荷外的电场, 处处有$\div \vE = 0$与$\rot \vE = 0$但不能认为电场为零.
+\end{remark}
+\begin{definition}[电势]
+	选定参考点$P_0$, 则$P$点的电势为
+	\[ \varphi = \int_P^{P_0} \vE\cdot\rd{\vl}. \]
+\end{definition}
+\begin{pitfall}
+	电势沿着电场的方向下降.
+\end{pitfall}
+\begin{corollary}[电势与功]
+	静电力从$A$到$B$对点电荷$q$做功为
+	\[ W_{AB} = q\pare{V_A - V_B}. \]
+\end{corollary}
+\begin{remark}
+	默认情形下将电势的参考点取为无穷远点.
+\end{remark}
+\begin{corollary}[电势的显式表达]
+	对于体积分布的电荷, 电势可计算为
+	\begin{finale}
+		\begin{equation}
+			\label{eq:体积电荷电势的积分表达}
+			V = \rec{4\pi\epsilon_0} \iiint\frac{\rho\,\rd{\tau}}{\rcurs}.
+		\end{equation}
+	\end{finale}
+	对于面电荷和线电荷, 相应的表达式参考\eqref{eq:面电荷和线电荷的电场的积分表示}变化.
+\end{corollary}
+\begin{ex}
+	\label{ex:均匀带电圆盘的电势}
+	形如\cref{ex:均匀带电圆盘的电场}中的电场, 通过对$E$积分或者直接用\eqref{eq:体积电荷电势的积分表达}, 在轴线上有
+	\[ V = \frac{\sigma}{4\pi\epsilon_0}\int_0^{2\pi}\rd{\varphi}\int_0^R \frac{r\,\rd{r}}{\sqrt{r^2+z^2}} = \frac{\sigma}{2\epsilon_0}\pare{\sqrt{R^2+z^2}-z}. \]
+\end{ex}
+\begin{ex}
+	\label{ex:均匀带电球面的电势}
+	\cref{ex:均匀带电球面的电场}中的均匀带电球面的电势为
+	\[  
+		V = 
+		\begin{fracarray}
+			\displaystyle
+			\frac{q}{4\pi\epsilon_0 r}, & r\ge R, \\
+			\displaystyle
+			\frac{q}{4\pi\epsilon_0 R}, & r < R.
+		\end{fracarray}
+	 \]
+\end{ex}
+\begin{finale}
+	\begin{corollary}[静电电场与电势]
+		$\vE = -\laplacian \varphi = -\ddelon{V}{n}\hat{\vn}$.
+	\end{corollary}
+\end{finale}
+\begin{pitfall}
+	\cref{ex:均匀带电圆盘的电势}电势在零处不可微, 只能求出两侧的方向导数得到两侧电场.
+\end{pitfall}
+\begin{definition}[等势面]
+	静电场中电势相等的点组成的面谓等势面.
+\end{definition}
+\begin{corollary}[等势面与电场]
+	等势面与电场线垂直, 等势面密集处电场强度大.
+\end{corollary}
+
+
+% subsubsection 电场线与电势 (end)
+
+% subsection 电场的相关量 (end)
+
+% section 真空静电场 (end)
+
+\end{document}

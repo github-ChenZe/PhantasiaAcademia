@@ -1,0 +1,449 @@
+\documentclass[../Electromagnetism.tex]{subfiles}
+
+\begin{document}
+
+\graphicspath{{ElectricCurrentAndCircuits/src}{src}}
+
+\section{恒定电流和电路} % (fold)
+\label{sec:恒定电流和电路}
+
+\subsection{恒定电流} % (fold)
+\label{sub:恒定电流}
+
+\subsubsection{定义与性质} % (fold)
+\label{ssub:定义与性质}
+
+\begin{definition}[电流]
+	单位时间内流过导线截面的电荷量谓电流$I$.
+\end{definition}
+\begin{definition}[电流密度]
+	单位时间内流过单位截面积的电荷量谓电流密度$\vJ$.
+\end{definition}
+\begin{definition}[恒定电流]
+	各点的$\vJ$不随时间变化的电流谓恒定电流.
+\end{definition}
+\begin{corollary}[电流作为通量]\quad
+	\[ I = \iint_S \vJ\cdot\rd{\vva}. \]
+\end{corollary}
+\begin{corollary}[电荷守恒定律]
+	设闭曲面$S$环绕电荷量$q$, 则
+	\begin{finale}
+		\[ \oiint_S \vJ\cdot\rd{\vva} = -\eddon{q}{t}. \]
+	\end{finale}
+	特别地, 当曲面$S$内的电荷不随时间变化时,
+	\[ \oiint_S \vJ\cdot\rd{\vva} = 0. \]
+\end{corollary}
+\begin{corollary}[电流线的性质]
+	$\vJ$的场线是与自身无交的封闭曲线.
+\end{corollary}
+\begin{remark}
+	恒定电流是由恒定电场激发的, 因此关于静电场的结论适用之.
+\end{remark}
+\begin{corollary}[直流电路的性质, Kirchhoff第一定律]\quad
+	\begin{cenum}
+		\item 直流电路各截面电流$I$相同;
+		\item 直流电路流入一节点的电荷量等于流出的电荷量.
+	\end{cenum}
+\end{corollary}
+
+% subsubsection 定义与性质 (end)
+
+\subsubsection{物理性质} % (fold)
+\label{ssub:物理性质}
+
+\begin{finale}
+	\begin{axiom}[Ohm定律]
+		线状金属导体两端电流与电阻之间成立
+		\begin{equation}
+			\label{eq:Ohm定律}
+			U = IR.
+		\end{equation}
+	\end{axiom}
+\end{finale}
+\begin{corollary}[Ohm定律的微分形式]\quad
+	\[ \vJ = \gamma \vE. \]
+\end{corollary}
+\begin{remark}
+	Ohm定律对于半导体等非线性元件可能不适用.
+\end{remark}
+\begin{pitfall}
+	Ohm定律对含电源的电路不直接适用.
+\end{pitfall}
+\begin{definition}[电阻率和电导率]
+	柱形均匀导体的电阻率$\rho$和电导率$\gamma$满足
+	\[ R = \rho\frac{l}{S},\quad \gamma = \rec{\rho}. \]
+\end{definition}
+\begin{remark}
+	实验上, 电阻率与温度近似成立$\rho_t = \rho_0\pare{1+\alpha T}$. 极低温下可能存在超导而无法适用之.
+\end{remark}
+\begin{remark}
+	可以算得电导率近似为$\gamma = ne^2\tau/\pare{2m}$, 在铜线中$\SI{2}{A}$的电流大约导致$\SI{e-4}{m/s}$量级的电子漂移. 然而实际上开关接通后, 建立的电磁场扰动光速传播, 因而匀速在电路各处建立电场产生电流.
+\end{remark}
+\begin{finale}
+	\begin{axiom}[Joule定律]
+		电流通过电阻的发热效率为
+		\[ \eddon{Q}{t} = I^2R. \]
+	\end{axiom}
+\end{finale}
+\begin{remark}
+	这一发热量应当理解为电子受到电场加速后的撞击产热.
+\end{remark}
+\begin{corollary}[电路中电势做功]
+	电路中电势做功的功率为
+	\begin{equation}
+		\label{eq:电路中电势做功}
+		\eddon{W}{t} = UI = I^2R = \frac{U^2}{R}.
+	\end{equation}
+\end{corollary}
+\begin{remark}
+	通过Ohm定律\eqref{eq:Ohm定律}可以发现电势做功完全转化为热能. 然而如果电路中存在电动机将电能转化为机械能, 则这种等量关系不能成立. 事实上, Ohm定律对于电动机不成立.
+\end{remark}
+\begin{pitfall}
+	\eqref{eq:电路中电势做功}中的后两个等号仅对纯电阻电路成立.
+\end{pitfall}
+
+% subsubsection 物理性质 (end)
+
+\subsubsection{电源和电动势} % (fold)
+\label{ssub:电源和电动势}
+
+根据\eqref{eq:Kirchhoff定律}, 电源中必须存在非静电力做功. 静电力制造了电源开路状态下的电荷偏移, 从而制造两端的电势差, 电路接通后当静电力和非静电力平衡时电路有恒定电流.
+\begin{remark}
+	电池中的静电平衡验证了\rmref{静电平衡可能要求非零电场}.
+\end{remark}
+\begin{finale}
+	\begin{corollary}[含电源电路的Ohm定律]\quad
+		\[ \cE = \int_-^+ \vE_s\cdot\rd{\vl} = U + Ir. \]
+		其中$\vE_s$为非静电力等效电场, $r$为电源内阻.
+	\end{corollary}
+\end{finale}
+\begin{corollary}[全电路的Ohm定律]
+	含有电源的纯电阻电路满足
+	\begin{equation}
+		\label{eq:全电路的Ohm定律}
+		\cE = I\pare{r+R}.
+	\end{equation}
+\end{corollary}
+\begin{figure}
+	\centering
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\begin{circuitikz}
+			\draw (0,0) to (0,3);
+			\draw (4,0) to [battery1, l={}{$\cE_2,r_2$}, *-*] (0,0);
+			\draw (0,3) to [battery1, l={}{$\cE_1,r_1$}, *-*] (4,3);
+			\draw (0.4,1.5) [anchor=west] node {$I$};
+			\draw (0.3,2) [thick, ->] -- (0.3,1);
+			\draw (4,0) to [R, l=$R$] (4,3);
+			\draw (0,0) [anchor=north] node {$D$};
+			\draw (4,0) [anchor=north] node {$C$};
+			\draw (0,3) [anchor=south] node {$A$};
+			\draw (4,3) [anchor=south] node {$B$};
+		\end{circuitikz}
+		\caption{}
+		\label{fig:含电源电路示例1}
+	\end{subfigure}
+	\begin{subfigure}{.45\textwidth}
+		\centering
+		\begin{circuitikz}
+			\draw (4,0) to [battery1] (0,0);
+			\draw (0,3) to [battery1] (4,3);
+			\draw (4,3) to [battery1] (4,0);
+			\draw (0,0) to [battery1] (0,3);
+		\end{circuitikz}
+		\caption{}
+		\label{fig:纯电源电路示例1}
+	\end{subfigure}
+\end{figure}
+\begin{ex}
+	在\fref{含电源电路示例1}中, 设$\cE_1 = \SI{6}{V}$, $r_1 = \SI{1}{\ohm}$, $\cE_2 = \SI{4}{V}$, $r_2 = \SI{2}{\ohm}$, $R = \SI{2}{\ohm}$. 由\eqref{eq:全电路的Ohm定律}, 有
+	\[ I = \frac{\cE_1 + \cE_2}{r_1 + r_2 + R} = \SI{2}{A},\quad U_{AB} = \cE_1 - Ir_2 = \SI{4}{V},\quad U_{CD} = \cE_2 - Ir_2 = \SI{0}{V}. \]
+\end{ex}
+\begin{remark}
+	当电流更大的时候, 甚至会出现电源两侧电势差为负数的情形.
+\end{remark}
+\begin{ex}
+	在\fref{纯电源电路示例1}中, 电流为$I = 4\cE/\pare{4r} = \cE/r$, 从而任意电源外任意两点皆有$U = 0$.
+\end{ex}
+\begin{figure}
+	\centering
+	\begin{circuitikz}
+		\draw (0,1) -- (1,1) node[draw, circle, fill=white] {G} -- (2,1) (2,1) node[spdt, anchor=west] (Sw) {};
+		\draw (Sw.out 1) -| (3.5,2);
+		\draw (Sw.out 2) -| (3.5,0);
+		\draw (3.5,2) to [battery1, l=$\cE_s$, -*] (5,2);
+		\draw (3.5,0) to [battery1, l=$\cE_x$] (5,0);
+		\draw (5,0) -- (5,4);
+		\draw (5,3) to [pR, n=mypot, transform shape, *-] (-1,3);
+		\draw (-1,3) -- (-1,4);
+		\draw (mypot.wiper) -| (0,1);
+		\draw (-1,4) to [battery1, l=$\cE$] (2,4) to [resistor, l=$R$] (5,4);
+	\end{circuitikz}
+	\caption{补偿法测量电动势}
+	\label{fig:补偿法测量电动势}
+\end{figure}
+通过补偿法可以测量电动势. 如\fref{补偿法测量电动势}.
+\begin{cenum}
+	\item $\cE_s$是电动势已知且稳定的标准电池, $\cE_x$是待测电池;
+	\item 将开关接通至$\cE_x$, 调整电阻使$G$的示数为零, 此时$U=\cE_x=IR$, 其中$I$为干路电流, $R$为变阻器阻值;
+	\item 将开关接通至$\cE_s$, 调整电阻使$G$的示数为零, 此时$U=\cE_i=I'R'$, 其中$I'$为干路电流, $R'$为变阻器阻值;
+	\item 因此, $\cE_x/\cE_i = R/R'$.
+\end{cenum}
+\begin{remark}
+	为了在导线中建立电场, 导线内部虽然没有体电荷, 但在表面边界处于接头处可以存在面电荷.
+\end{remark}
+\begin{corollary}[直流电路的能量转换]
+	纯电阻电路中,
+	\[ \cE I = I^2 \pare{r+R}. \]
+\end{corollary}
+\begin{remark}
+	如果电源中有多个电动势, 有可能存在一些电源的非静电力作负功, 此时电源处于充电状态.
+\end{remark}
+
+% subsubsection 电源和电动势 (end)
+
+% subsection 恒定电流 (end)
+
+\subsection{电路分析} % (fold)
+\label{sub:电路分析}
+
+\subsubsection{Kirchhoff方程组} % (fold)
+\label{ssub:kirchhoff方程组}
+
+\begin{finale}
+	\begin{corollary}[Kirchhoff第一定律]
+		电路的每一个节点皆成立
+		\[ \sum_i \pm I_i = 0. \]
+	\end{corollary}
+\end{finale}
+\begin{remark}
+	每个节点约定流入取正, 流出取负. 如果解得$I$为负数, 则说明电流与预设方向相反.
+\end{remark}
+\begin{finale}
+	\begin{corollary}[Kirchhoff第二定律]
+		电路的每一个回路皆成立
+		\[ \sum_i U_i = \sum_i \pm\cE_i - \sum_i \pm I_i R_i = 0. \]
+	\end{corollary}
+\end{finale}
+\begin{remark}
+	规定绕行方向后, 具体的正负号由绕行方向与电势方向共同决定.
+\end{remark}
+\begin{theorem}[电路的Euler公式]
+	设电路中有支路数$b$, 节点数$n$和独立回路数$m$, 则
+	\[ b = m + n - 1. \]
+\end{theorem}
+\begin{proof}
+	参见\href{https://en.wikipedia.org/wiki/Planar_graph#Euler's_formula}{平面图的Euler公式}.
+\end{proof}
+对于一个一般电路, 有$b$个未知量(电流), 有$n-1$个独立的Kirchhoff第一定律方程和$m$个独立的Kirchhoff第二定律方程, 因此是完备的.
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{.45\textwidth}
+		\centering
+		\begin{circuitikz}
+			\draw (0,1.1) to [battery1, l=$\cE_1$] (0,0);
+			\draw (0,1.1) to [resistor, l=$R_1$, i^>=$I_1$] (0,4);
+			\draw (0,4) -- (2,4);
+			\draw (0,0) -- (2,0);
+			\draw (2,1.1) to [battery1, l=$\cE_2$] (2,0);
+			\draw (2,1.1) to [resistor, l=$R_2$, i^<=$I_2$] (2,4);
+			\draw (2,4) -- (4,4);
+			\draw (2,0) -- (4,0);
+			\draw (4,1.1) -- (4,0);
+			\draw (4,1.1) to [resistor, l=$R_3$, i^<=$I_3$] (4,4);
+		\end{circuitikz}
+		\caption{}
+		\label{fig:Kirchhoff方程组求解示例1}
+	\end{subfigure}
+	\begin{subfigure}[b]{.45\textwidth}
+		\centering
+		\begin{circuitikz}
+			\draw (0,0) to [battery1, l=$\cE$] (4,0);
+			\draw (0,0) to [short, i^>=$I$] (0,3);
+			\draw (0,3) to [resistor, l=$R_2$, i_>=$I_2$] (2,1.5);
+			\draw (0,3) to [resistor, l=$R_1$, i^>=$I_1$] (2,4.5);
+			\draw (4,3) to [resistor, l=$R_3$, i_<=$I_3$] (2,4.5);
+			\draw (4,3) to [resistor, l=$R_4$, i^<=$I_4$] (2,1.5);
+			\draw (4,3) to [short] (4,0);
+			\draw (2,4.5) to [short, i^>=$I_G$] (2,3) node[draw, circle, fill=white] {G} -- (2,1.5);
+		\end{circuitikz}
+		\caption{}
+		\label{fig:Kirchhoff方程组求解示例2}
+	\end{subfigure}
+	\caption{}
+\end{figure}
+\begin{ex}
+	对于\fref{Kirchhoff方程组求解示例1}中的回路, 有
+	\[ \begin{cases}
+		I_1 = I_2 + I_3,\\
+		\cE_1 - \cE_2 = I_1 R_1 + I_2 R_2,\\
+		\cE_2 = -I_2 R_2 + I_3 R_3.
+	\end{cases} \]
+	如果设$\cE_1 = \SI{32}{V}$, $\cE_2 = \SI{24}{V}$, $R_1 = \SI{5}{\ohm}$, $R_2 = \SI{6}{\ohm}$, $R_3 = \SI{54}{\ohm}$, 解得$I_1 = \SI{1}{A}$, $I_2 = \SI{-0.5}{A}$, $I_3 = \SI{0.5}{A}$.
+\end{ex}
+\begin{ex}
+	\label{ex:Wheatstone电桥用Kirchhoff方程求解}
+	对于\fref{Kirchhoff方程组求解示例2}中的Wheatstone电桥, 欲求出$I_G$与$\cE$和诸$R$的关系,
+	\[ \begin{cases}
+		I_1 = I_3 + I_G,\\
+		I_4 = I_G + I_2,\\
+		I = I_1 + I_2,\\
+		I_1 R_1 = I_2 R_2,\\
+		I_3 R_3 = I_4 R_4,\\
+		\cE = I_1 R_1 + I_3 R_3.
+	\end{cases} \]
+	暴力解得
+	\[ I_G = 
+		\begin{vmatrix}
+ 		1 & 0 & -1 & 0 & 0 \\
+ 		0 & -1 & 0 & 1 & 0 \\
+ 		R_1 & -R_2 & 0 & 0 & 0 \\
+ 		0 & 0 & R_3 & -R_4 & 0 \\
+ 		R_1 & 0 & R_3 & 0 & \cE \\
+		\end{vmatrix}/
+		\begin{vmatrix}
+ 		1 & 0 & -1 & 0 & -1 \\
+ 		0 & -1 & 0 & 1 & -1 \\
+ 		R_1 & -R_2 & 0 & 0 & 0 \\
+ 		0 & 0 & R_3 & -R_4 & 0 \\
+ 		R_1 & 0 & R_3 & 0 & 0 \\
+		\end{vmatrix}.
+	\]
+	特别地, 当$R_1 R_4 = R_2 R_3$时, 电桥平衡, 此时$I_G = 0$.
+\end{ex}
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{.45\textwidth}	
+		\centering
+		\begin{circuitikz}
+			\draw (0,0) to [battery1, l=$U$] (5,0);
+			\draw (0,0) to [short, i^>=$I$] (0,3) to [short, -*] (0.5,3);
+			\draw (0.5,3) to [short] (0.5,1.5) to [resistor, l=$R_2$, i_>=$I_2$] (2.5,1.5);
+			\draw (0.5,3) to [short] (0.5,4.5) to [resistor, l=$R_1$, i^>=$I_1$] (2.5,4.5);
+			\draw (4.5,3) to [short] (4.5,4.5) to [resistor, l=$R_3$, i_<=$I_3$] (2.5,4.5);
+			\draw (4.5,3) to [short] (4.5,1.5) to [resistor, l=$R_4$, i^<=$I_4$] (2.5,1.5);
+			\draw (5,0) to [short] (5,3) to [short, -*] (4.5,3);
+			\draw (2.5,4.5) to [resistor, l=$R_5$, i^>=$I_5$] (2.5,1.5);
+		\end{circuitikz}
+		\caption{}
+		\label{fig:Kirchhoff方程组求解示例3}
+	\end{subfigure}	
+	\begin{subfigure}[b]{.53\textwidth}
+		\centering
+		\begin{circuitikz}
+			\draw (0,0) to [R, l=$R_1$] (2,2) to [R, l=$R_3$] (4,0);
+			\draw (0,0) to [R, l=$R_2$] (2,-2) to [R, l=$R_4$] (4,0);
+			\draw (0,0) to [battery1, l=$\cE$] (4,0);
+			\draw (2,2) to [short, i^>=$I_G$, *-] (6,2) to (6,0)node[draw, circle, fill=white] {G} to [short] (6,-2) to [short, -*] (2,-2);
+		\end{circuitikz}
+		\caption{}
+		\label{fig:Wheatstone电桥变换为适用Thevenin定理的情形}
+	\end{subfigure}
+	\caption{}
+\end{figure}
+\begin{ex}
+	对于\fref{Kirchhoff方程组求解示例3}中的电桥, 欲求出其电阻, 接通一虚拟无内阻电源$U$, 仿照\eref{Wheatstone电桥用Kirchhoff方程求解}可得$I = U/\SI{32}{\ohm}$, 相当于$R=\SI{32}{\ohm}$.
+\end{ex}
+
+% subsubsection kirchhoff方程组 (end)
+
+\subsubsection{二端网络理论} % (fold)
+\label{ssub:二端网络理论}
+
+\begin{definition}[二端网络]
+	电路中任意划出来的有两个引出端的部分谓二端网络, 由线性元件组成的二端网络谓线性二端网络, 内部有电源者谓有源二端网络, 反之谓无源二端网络. 流经其两个端点的电流和两个端点之间的电压谓二端网络的电压.
+\end{definition}
+\begin{definition}[等效二端网络]
+	如果将二端网络$N_1$和$N_2$在任何电路中可以相互替换而剩余部分任何支路的电流不变, 则谓之等效二端网络.
+\end{definition}
+提供恒定电压的电源(例如无内阻的电源)谓\emph{恒压电源}, 提供恒定电流的电源(例如大内阻的电源)谓\emph{恒流电源}.
+\begin{finale}
+	\begin{theorem}[电路的叠加定理]
+		多电源电路中每一支路的电流等于每个电源单独存在时该支路的电流之和.
+	\end{theorem}
+\end{finale}
+\begin{remark}
+	\label{rm:电源的单独存在}
+	「单独存在」谓电源的电动势归零而内阻仍然存在. 对于恒流电源, 其不存在谓断路. 对于恒压电源, 其不存在谓短路.
+\end{remark}
+\begin{ex}
+	欲求由单个电阻$R$构成的无限方形网络电路的相邻两点$A$和$B$之间的电阻, 在其之间接通而恒流$I$的电源, 并在电源之间接通导线至无穷远点, 此时若$A$和$B$单独存在(即$B$或$A$断路)则相应的$A$与$B$之间的电流皆为$I/4$, 故总电流为$I/2$, 因此$U_{AB} = IR/2$. 在$A$和$B$之间改接该电压的电源, 知等效电阻为$R/2$.
+\end{ex}
+\begin{finale}
+	\begin{theorem}[电路的替代定理]
+		若某电路中二端网络$N$的电压为$U_{AB}$, 则以电压为$U$的恒压电源替换其外的部分, $N$中各支路电流不变.
+	\end{theorem}
+\end{finale}
+有源二端网络的\emph{开路电压}谓两个引出端不与外界相接时的电压. \emph{除源网络}谓将网络内部所有电源摘除后的结果, 「摘除」的定义参考\rmref{电源的单独存在}.
+\begin{finale}
+	\begin{theorem}[Thevenin定理]
+		有端二源网络等价于恒压电源$U_e$与电阻$R_e$的串联支路, 其中$U_e$为其开路电压, $R_e$为其除源电阻.
+	\end{theorem}
+\end{finale}
+\begin{proof}
+	证明经过了一条替换链:
+	\begin{cenum}
+		\item $N$与$N_1$二端相连;
+		\item $N$与$N_1$二端相连, 其中一端导线上存在相反的两个$U_0$恒压电源;
+		\item $N_1$中任何一条支路$B$的电流等于「$N$与除源$N_1$二端相连, 其中一端导线上存在相反的一个$U_0$恒压电源」与「除源$N$与$N_1$二端相连, 其中一端导线上存在相反的一个$U_0$恒压电源」之和;
+		\item 前者可见电流为零, 后者即为所求.\qedhere
+	\end{cenum}
+\end{proof}
+\begin{ex}
+	两个电动势为$\cE$而内阻为$r$的电源并联, 其等价于内阻$r/2$而电动势$\cE$的电源.
+\end{ex}
+\begin{ex}
+	将\eref{Wheatstone电桥用Kirchhoff方程求解}中的Wheatstone电桥变换为\fref{Wheatstone电桥变换为适用Thevenin定理的情形}中的电路, 有
+	\[ U_3 = \frac{R_3 \cE}{R_1 + R_3},\quad U_4 = \frac{R_4 \cE}{R_2 + R_4}, \quad U_e = U_0 = U_3 + U_4. \]
+	\[ R_e = \frac{R_1R_3}{R_1 + R_3} + \frac{R_2 R_4}{R_2 + R_4}. \]
+	可以得到相同的结果.
+\end{ex}
+\begin{theorem}[恒流电源与恒压电源的等效]
+	电阻$R_1$串联恒压源$U$与电阻$R_2$串联恒流源$I$等效当且仅当$R_1 = R_2$且$U = IR_2$.
+\end{theorem}
+
+% subsubsection 二端网络理论 (end)
+
+\subsubsection{物质中的电现象} % (fold)
+\label{ssub:物质中的电现象}
+
+\begin{ex}
+	当温度足够高时($\SI{1300}{K}$)电子动能大于逸出功者增加, 引发热电子发射.
+\end{ex}
+\begin{ex}
+	紧密接触的二金属介面两侧间存在电势差, 与逸出功的关系为$eU_{AB} = W_B - W_A$, 产生电动势$\Pi_{BA} = U_{AB}$. 摩擦起电的机制类似, 摩擦主要是为了增大接触面积并增加紧密型.
+\end{ex}
+\begin{ex}
+	一般而言, 将金属直接串联围城回路则电动势相互抵消, 不会有电流. 但如果回路中存在电解质溶液, 则可以产生非零电动势.
+\end{ex}
+\begin{ex}[Seebeck效应]
+	如果将多种不同金属围成环, 接头处温度不同, 则可能逸出功之差不同, 因此可能会产生温差电流. 提供的电流可以视为一个可逆热机, 其中$T_i \propto Q_i \propto qV_i$, 第一个等号来源于可逆性. 从而$\cE = \Delta \Pi \propto \Delta T$, 效率为$\eta = 1 - T_1/T_2$.
+\end{ex}
+\begin{ex}[Peltier效应]
+	将电源与锑-铋-锑串联, 则两个锑-铋节点处分别吸热和放热, 调转电流方向则吸热/放热调转, 因此这与Joule热不相同. 这是因为在两个节电处, 温差电导致的电动势方向相反, 故做功符号相反, 而做功来源于周围内能.
+\end{ex}
+\begin{ex}[Thomson效应]
+	实验表明Seebeck效应的电路中的电流并非正比于温差. 如果将电阻中部加热而通电, 则电阻两侧分别吸热和放热, 因为电子有(在热力学上)从高温处扩散到低温处的趋势, 故在两侧静电力分别做正功和负功. 非静电力等效电场的大小和电动势满足
+	\[ E' = \mu\pare{T} \eddon{T}{l},\quad \cE = \int_{T_1}^{T_2}\mu\pare{T}\,\rd{T}. \]
+	其中$\mu$是Thomson系数.
+\end{ex}
+\begin{ex}
+	将两节不同金属焊接起来就得到电热偶, 维持一个端点的温度为$T_2$, 另一个端点接触待测物, 温度$T_2$, 可以证明$T_2$处节电之间电流计不影响, 从而可以通过电流测量温度. 为了提高灵敏度还可以串联多个电热偶得到温差电堆.
+\end{ex}
+\begin{ex}[液体导电]
+	电解质溶液在电场下会发生电荷迁移, $J = nqu_+ + nqu_-$而$u_{\pm}\propto E$, 故Joule定律仍然成立.
+\end{ex}
+\begin{ex}[气体导电]
+	如果气体发生电离后施加电场, 电子和离子会发生定向运动而引发电流. 电压较低时, 离子浓度相对稳定, 故类似于液体导电, 气体暂时适用Joule定律. 当电压增加, 离子变成主要在电极处消失而并非由复合导致, 因此增加电压后电流仍稳定. 继续增加电压, 则电子动能又足够导致新的电离, 如果再增加至击穿电压就发生自持放电, 之后发生辉光放电.
+\end{ex}
+\begin{ex}
+	发生辉光放电时, 电流增大反而有电压减小, 因此不存在稳定工作点, 故日光灯需要限流电阻.
+\end{ex}
+
+% subsubsection 物质中的电现象 (end)
+
+% subsection 电路分析 (end)
+
+% section 恒定电流和电路 (end)
+
+\end{document}
