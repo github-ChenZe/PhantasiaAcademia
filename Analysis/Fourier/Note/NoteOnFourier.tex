@@ -1,0 +1,535 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[singleton, margintoc]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{Fourier分析中有用的结论}
+
+\begin{pitfall}
+    未纳入Fouier变换的内容.
+\end{pitfall}
+
+\section{常用预备知识} % (fold)
+\label{sec:常用预备知识}
+
+\subsection{高等结论} % (fold)
+\label{sub:高等结论}
+
+\subsubsection{记号} % (fold)
+\label{ssub:记号}
+
+$\tilde{f}_n$表示$f$的Fourier级数至$n$次的和. $R$表示可积函数, $\abs{R}$表示可积且绝对可积的函数, $R^2$表示可积且平方可积的函数.\footnote{非通用记号.}
+
+% subsubsection 记号 (end)
+
+\subsubsection{收敛性} % (fold)
+\label{ssub:收敛性}
+
+\centerline{
+    \begin{tabular}{ccccc}
+        单调(一致)有界 & $\otimes$ & (一致)收敛 & $\Rightarrow$ & (一致)收敛\phantom{.} \\
+        单调(一致)$\searrow 0$ & $\otimes$ & (一致)有界 & $\Rightarrow$ & (一致)收敛.
+    \end{tabular}
+}
+\centerline{
+    $f_n\pare{x}\le a_n$一致成立且$\sum a_n$收敛$\quad\Rightarrow\quad \sum f_n\pare{x}$一致收敛.
+}
+
+% subsubsection 收敛性 (end)
+
+\subsubsection{积分} % (fold)
+\label{ssub:积分}
+
+\centerline{
+    \begin{tabular}{ccccc}
+        常义可积 & $+$ & 可积 & $\Rightarrow$ & 绝对(或平方)可积\\
+        广义可积 & $+$ & 绝对可积 & $\Rightarrow$ & 可积.
+    \end{tabular}
+}
+
+\begin{finale}
+    \[ \begin{array}{c}
+        \displaystyle \int_{0}^{\pi/2} \cos^n x\,\rd{x}\\
+        \veq \\
+        \displaystyle \int_{0}^{\pi/2} \sin^n x\,\rd{x}
+    \end{array} = \begin{cases}
+        \displaystyle \frac{\pare{n-1}!!}{n!!}\frac{\pi}{2},\quad n\ \mathrm{even},\\
+        \\
+        \displaystyle \frac{\pare{n-1}!!}{n!!},\quad n\ \mathrm{odd}.
+    \end{cases} \]
+\end{finale}
+
+% subsubsection 积分 (end)
+
+% subsection 高等结论 (end)
+
+\subsection{初等结论} % (fold)
+\label{sub:初等结论}
+
+\subsubsection{三角恒等式} % (fold)
+\label{ssub:三角恒等式}
+
+\begin{finale}
+    \begin{theorem}[初等公式-积化和差]
+        \begin{align*}
+            \sin a\sin b &= \half\brac{\cos\pare{a-b}-\cos\pare{a+b}},\\
+            \sin a\cos b &= \half\brac{\sin\pare{a-b}+\sin\pare{a+b}},\\
+            \cos a\sin b &= \half\brac{-\sin\pare{a-b}+\sin\pare{a+b}},\\
+            \cos a\cos b &= \half\brac{\cos\pare{a-b}+\cos\pare{a+b}}.
+        \end{align*}
+    \end{theorem}
+    \begin{remark}
+        如果要背下来, 考虑
+        %\[ {\color{red}U}\pare{a}{\color{red}V}\pare{b} = \rec{4}\left(\begin{array}{c}
+        %    \big(1+V-U\pare{1-V}\big)\pare{{\color{red}UV}}\pare{a-b}\\
+        %    +\\
+        %    \big(1+V+U\pare{1-V}\big)\pare{{\color{red}UV}}\pare{a+b}
+        %\end{array}\right). \]
+        \[ U\pare{a} + V\pare{b} = \half\brac{\pm\pare{UV}\pare{\frac{a-b}{2}}\pm\pare{UV}\pare{\frac{a+b}{2}}}. \]
+        其中$\sin$对应$-1$, 而$\cos$对应$1$. 仅当左侧有$\sin b$时二者异号, 此时总是满足「大减小」的关系.
+    \end{remark}
+    \begin{theorem}[初等公式-和差化积]
+        \begin{align*}
+            \sin a + \sin b = \half \cos \frac{a-b}{2} \sin \frac{a+b}{2},\\
+            \cos a + \cos b = \half \cos \frac{a-b}{2} \cos \frac{a+b}{2}.
+        \end{align*}
+        \begin{remark}
+            如果要背下来, 考虑
+            \[ {U}\pare{a} + {U}\pare{b} = \half \cos \frac{a-b}{2}{U}\pare{\frac{a+b}{2}}. \]
+        \end{remark}
+    \end{theorem}
+\end{finale}
+\begin{finale}
+    \begin{definition}[Dirichlet核]
+        \[ D_n\pare{x} = \half + \sum_{k=1}^n \cos kx = \frac{\sin\pare{n+\half}x}{2\sin\frac{x}{2}}. \]
+        $D_n$满足
+        \[ \int_0^\pi D_n\pare{x}\,\rd{x} = \frac{\pi}{2}. \]
+    \end{definition}
+\end{finale}
+\begin{reflex}{三角函数的积的积分计算}{三角函数的积的积分计算}
+    在Fouier级数展开中遇到两个三角函数的积, 优先考虑三角变换.
+\end{reflex}
+\begin{ex}
+    将$\sin^3 x+\cos^4 x$展开为Fourier级数.
+\end{ex}
+\begin{ex}
+    将$f\pare{x} = \sgn x$展开为Fourier级数后求其前$N$项和.
+\end{ex}
+\begin{ex}
+    设$f\in\abs{R}$以$2\pi$为周期, 则$f\pare{x}\sin x$的Fourier级数正是$f\pare{x}$的级数各项乘$\sin x$的结果.
+\end{ex}
+\begin{ex}
+    求$\cos \alpha x$的Fourier展开.
+\end{ex}
+\begin{reflex}{积分的计算}{积分的计算}
+    在Fouier级数展开中遇到分母存在三角函数的情形, 优先考虑转化为Dirichlet核.
+\end{reflex}
+\begin{ex}
+    求$\ln \pare{2\cos x/2}$的Fourier展开.
+\end{ex}
+
+% subsubsection 三角恒等式 (end)
+
+% subsection 初等结论 (end)
+
+% section 常用预备知识 (end)
+
+\section{理论性结论} % (fold)
+\label{sec:理论性结论}
+
+\subsection{系数结论} % (fold)
+\label{sub:系数结论}
+
+\subsubsection{系数下降率} % (fold)
+\label{ssub:系数下降率}
+
+\begin{finale}
+    \begin{theorem}[Bessel不等式]
+        设$f\in R^2$, 则
+        \[ \frac{a_0^2}{2} + \sum_{n=1}^\infty \pare{a_n^2 + b_n^2} \le \rec{\pi}\int_{-\pi}^\pi f^2\pare{x}\,\rd{x}. \]
+    \end{theorem}
+\end{finale}
+
+\begin{finale}
+    \begin{lemma}[Riemann-Lebesgue引理]
+        若$f\in \abs{R}$, 则
+        \[ a_n=o\pare{1},\quad b_n=o\pare{1}. \]
+    \end{lemma}
+    \begin{lemma}[Bessel]
+        若$f\in R^2$, 则
+        \[ \sum_{n=1}^\infty \pare{a_n^2 + b_n^2} \]
+        收敛.
+    \end{lemma}
+    \begin{theorem}[可微性与H\"older条件]
+        若$f$满足$\abs{f\pare{x}-f\pare{y}}\le L\abs{x-y}^\alpha$, 则
+        \[ a_n = O\pare{\rec{n^\alpha}},\quad b_n = O\pare{\rec{n^\alpha}}. \]
+    \end{theorem}
+    \begin{theorem}[可微性与系数下降率]
+        \label{thm:可微性与系数下降率}
+        若$f$周期, 且在除了$k$个点外有$k+1$阶导数, $\dn{f}{k}$处处连续且$\dn{f}{k+1}\in\abs{R}$, 则
+        \[ a_n=o\pare{\rec{n^{k+1}}},\quad b_n=o\pare{\rec{n^{k+1}}}. \]
+    \end{theorem}
+\end{finale}
+\begin{pitfall}
+    若在\cref{thm:可微性与系数下降率}中去掉周期性条件, 则$o$符号可能会削弱为$O$符号.
+\end{pitfall}
+\begin{reflex}{系数下降率}{系数下降率}
+    在存在可微条件下通过导数的Fourier展开证明系数下降率, 无可微条件时通过光滑性条件做差估计积分.
+\end{reflex}
+\begin{ex}
+    $\sum \pare{\sin nx}/\sqrt{n}$与$\sum \pare{\sin nx}/\ln n$不是$R^2$函数的Fourier级数.
+\end{ex}
+\begin{ex}
+    $f\in R^2$, 证明$\sum a_n/n$绝对收敛.
+\end{ex}
+\begin{ex}
+    设$f$连续, 周期且分段光滑, $f'\in R^2$, 证明$\tilde{f}_n$绝对一致收敛.
+\end{ex}
+
+% subsubsection 系数下降率 (end)
+
+% subsection 系数结论 (end)
+
+\subsection{导出Fourier级数} % (fold)
+\label{sub:导出fourier级数}
+
+\subsubsection{导数, 积分与和} % (fold)
+\label{ssub:导数_积分与和}
+
+\begin{finale}
+    \begin{proposition}[和函数的展开]
+        一致收敛的Fourier级数必是其和函数的Fourier级数.
+    \end{proposition}
+    \begin{proposition}[导数的展开]
+        \label{prp:导数的展开}
+        设$f$连续且周期, 在除有限个点外可导, $f'\in\abs{R}$, 则
+        \begin{equation}
+            \label{eq:导数的展开}
+            f'\pare{x} \sim \sum_{n=0}^\infty \pare{nb_n\cos nx - na_n\sin nx}.
+        \end{equation}
+    \end{proposition}
+    \begin{proposition}[积分的展开]
+        \label{prop:积分的展开}
+        设$f\in R^2$, 则
+        \[ \int_0^x \brac{f\pare{t}-\frac{a_0}{2}}\,\rd{t} = \sum_{n=1}^\infty \frac{b_n}{n} + \pare{\sum_{n=0}^\infty -\frac{b_n}{n}\cos nx + \frac{a_n}{n}\sin nx}. \]
+    \end{proposition}
+\end{finale}
+
+\begin{pitfall}
+    函数的一阶导数满足\cref{prp:导数的展开}的条件, 亦不能直接对高阶导数使用之.
+\end{pitfall}
+
+\begin{reflex}{求原函数的Fourier展开}{求原函数的Fourier展开}
+    设$f\sim a_0/2+\cdots$, 则$F$的Fourier展开通过对$f$的非常数项逐项积分, 再将$a_0x/2$展开.
+\end{reflex}
+
+\begin{ex}
+    求$x^3$的Fourier级数.
+\end{ex}
+
+% subsubsection 导数_积分与和 (end)
+
+% subsection 导出fourier级数 (end)
+
+\subsection{收敛性结论} % (fold)
+\label{sub:收敛性结论}
+
+\subsubsection{\texorpdfstring{$L^2$}{L2}空间内的收敛} % (fold)
+\label{ssub:L2空间内的收敛}
+
+\begin{finale}
+    \begin{proposition}[范数最优性]
+        设$f\in R^2$, $T_n$是一般的$n$次三角多项式,
+        \[ \norm{f-\tilde{f}_n} \le \norm{f-T_n}. \]
+    \end{proposition}
+    \begin{lemma}[平方平均收敛]
+        若$f\in R^2$, 则
+        \[ \lim_{n\rightarrow \infty} \int_{-\pi}^\pi \abs{\tilde{f}_n-f}^2\,\rd{x} = 0. \]
+    \end{lemma}
+    \begin{lemma}[Parseval]
+        若$f,g\in R^2$, 则
+        \[ \frac{a_0^2}{2} + \sum_{n=1}^\infty \pare{a_n^2+b_n^2} = \rec{\pi}\int_{-\pi}^\pi f^2\pare{x}\,\rd{x}. \]
+        \[ \frac{a_0 a'_0}{2} + \sum_{n=1}^\infty \pare{a_na'_n+b_nb'_n} = \rec{\pi}\int_{-\pi}^\pi f\pare{x}g\pare{x}\,\rd{x}. \]
+    \end{lemma}
+\end{finale}
+
+% subsubsection L2空间内的收敛 (end)
+
+\subsubsection{可积函数的收敛} % (fold)
+\label{ssub:可积函数的收敛}
+
+\begin{finale}
+    \begin{theorem}[局部化定理]
+        \[ \tilde{f}_n\pare{x} = \rec{\pi}\int_0^\delta \brac{f\pare{x+t}+f\pare{x-t}}D_n\pare{t}\,\rd{t} + o\pare{1}. \]
+    \end{theorem}
+%\end{finale}
+%\begin{finale}
+    \begin{theorem}[Dirichlet定理]
+        若$f\in\abs{R}$且$f$分段光滑, 则$\tilde{f}_n$收敛且
+        \[ \tilde{f}_n \rightarrow \half\brac{f\pare{x^-}+f\pare{x^+}}. \]
+    \end{theorem}
+    \begin{theorem}[Fej\'er定理]
+        设$f\in\abs{R}$, 则
+        \[ \sigma\pare{\tilde{f}}_n \rightarrow \half\brac{f\pare{x^-}+f\pare{x^+}}, \]
+        其中$\sigma$表示Ces\`aro求和, 如果右端的极限存在.
+    \end{theorem}
+    \begin{theorem}
+        若$f$连续且周期, 则$\sigma\pare{\tilde{f}}_n$一致收敛于$f$.
+    \end{theorem}
+    \begin{theorem}
+        设$f$连续且周期且分段光滑, $f'\in R^2$ , 则$\tilde{f}_n$绝对一致收敛于$f$.
+    \end{theorem}
+    \begin{theorem}[唯一性定理]
+        Fourier级数相同的两个连续周期函数相等.
+    \end{theorem}
+\end{finale}
+
+\begin{ex}
+    利用Parseval恒等式证明\cref{prop:积分的展开}.
+\end{ex}
+\begin{ex}
+    设$f$连续且周期且分段光滑, $f'$亦分段光滑, \eqref{eq:导数的展开}中的展开式收敛到$\brac{f'\pare{x^-}+f'\pare{x^+}}/2$.
+\end{ex}
+\begin{ex}
+    对$x^2$展开后, 可知$\sum 1/n^2$的值, 再由Parseval恒等式得到$\sum 1/n^4$的值.
+\end{ex}
+
+% subsubsection 可积函数的收敛 (end)
+
+\subsubsection{理论性结论总结} % (fold)
+\label{ssub:理论性结论总结}
+
+\begin{longtable}{|c|c|c|c|c|c|}
+    \hline
+    可积性 & 周期\footnote{不附带连续性要求的周期性是无意义的.} & 连续 & 分段光滑 & 结论 \\
+    \hline
+    $f$或$\abs{f}$ & & & & $a_n = o\pare{1},\ b_n = o\pare{1}$ \\
+    \hline
+    \multirow{3}{*}{$f$且$f^2$} & & & & \multirow{2}{*}{$\displaystyle\frac{a_0^2}{2} + \sum_{n=1}^\infty \pare{a_n^2 + b_n^2} = \+<f|f>$}\\
+    &&&&\\
+    &&&&$\norm{\tilde{f}_n-f}\rightarrow 0$\\
+    \hline
+    $f'$且$\abs{f'}$ & \multicolumn{2}{|c|}{\checkmark} & \checkmark & $a'_n = nb_n,\ b'_n=-na_n$\\
+    \hline
+    \multirow{2}{*}{$f$且$f^2$} &&&& \multirow{2}{*}{$\displaystyle F-\frac{a_0}{2}x\sim A_n=-\frac{b_n}{n},\ B_n=\frac{a_n}{n} $}\\
+    &&&&\\
+    \hline
+    \multirow{2}{*}{\checkmark} & \multicolumn{2}{|c|}{\checkmark} & & \multirow{2}{*}{$\displaystyle a_n=O\pare{\+/1/n^\alpha/}, b_n=O\pare{\+/1/n^\alpha/}$} \\
+    & \multicolumn{2}{|c|}{H\"older} && \\
+    \hline
+    $f^{\pare{k+1}}$且 & \multicolumn{2}{|c|}{\multirow{2}{*}{\checkmark}} & \multirow{2}{*}{$C^k$} & \multirow{2}{*}{$\displaystyle a_n=o\pare{\+/1/n^{k+1}/}, b_n=o\pare{\+/1/n^{k+1}/}$} \\
+    $\abs{f^{\pare{k+1}}}$ & \multicolumn{2}{|c|}{} &&\\
+    \hline
+    \multirow{2}{*}{$f$且$f^2$} & & & \multirow{2}{*}{\checkmark} & \multirow{2}{*}{$\displaystyle \tilde{f}_n \rightarrow \half\brac{f\pare{x^-}+f\pare{x^+}}$}\\
+    &&&&\\
+    \hline
+    \multirow{2}{*}{$f$且$\abs{f}$} & \multicolumn{2}{|c|}{\multirow{2}{*}{\checkmark}} & &  \multirow{2}{*}{$\displaystyle\tilde{f}_n \rightarrow \half\brac{f\pare{x^-}+f\pare{x^+}} $} \\
+    &\multicolumn{2}{|c|}{}&&\\
+    \hline
+    \multirow{2}{*}{\checkmark} & \multicolumn{2}{|c|}{\multirow{2}{*}{\checkmark}} & & $\sigma\pare{\tilde{f}}_n$一致收敛于$f$\\
+     & \multicolumn{2}{|c|}{} & & Fourier级数唯一\\
+    \hline
+\end{longtable}
+
+% subsubsection 理论性结论总结 (end)
+
+% subsection 收敛性结论 (end)
+
+% section 理论性结论 (end)
+
+\section{计算性结论} % (fold)
+\label{sec:计算性结论}
+
+\subsection{Fourier级数的计算} % (fold)
+\label{sub:fourier级数的计算}
+
+\subsubsection{定义} % (fold)
+\label{ssub:定义}
+
+\begin{finale}
+
+\begin{multicols}{2}
+    \begin{theorem}
+        周期为$2\pi$的函数, 其Fourier展开为
+        \begin{align*}
+            &f = \frac{a_0}{2} +\\
+            &\sum_{n=1}^\infty \pare{a_n\cos nx + b_n\sin nx}.
+        \end{align*}
+    \end{theorem}
+    \begin{theorem}
+        周期为$2l$的函数, 其Fourier展开为
+        \begin{align*}
+            &f = \frac{a_0}{2} +\\
+            &\sum_{n=1}^\infty \pare{a_n\cos \frac{n\pi x}{l} + b_n\sin \frac{n\pi x}{l}}.
+        \end{align*}
+    \end{theorem}
+\end{multicols}
+
+\end{finale}
+\begin{finale}
+\begin{multicols}{2}
+    \textit{其中}
+    \[ a_n = \rec{\pi} \int_{-\pi}^{\pi} f\pare{x}\cos nx\,\rd{x},\]
+    \[ b_n = \rec{\pi} \int_{-\pi}^\pi f\pare{x}\sin nx\,\rd{x}. \]
+    \textit{其中}
+    \[ a_n = \rec{l} \int_{-l}^{l} f\pare{x}\cos \frac{n\pi x}{l}\,\rd{x},\]
+    \[ b_n = \rec{l} \int_{-l}^{l} f\pare{x}\sin \frac{n\pi x}{l}\,\rd{x}. \]
+\end{multicols}
+\end{finale}
+\begin{finale}
+\begin{multicols}{2}
+    \textit{当$f$为偶函数时, 有}
+    \[ a_n = \frac{2}{\pi} \int_{0}^{\pi} f\pare{x}\cos nx\,\rd{x},\]
+    \[ b_n = 0. \]
+    \textit{当$f$为偶函数时, 有}
+    \[ a_n = \frac{2}{l} \int_{0}^{l} f\pare{x}\cos \frac{n\pi x}{l}\,\rd{x},\]
+    \[ b_n = 0. \]
+\end{multicols}
+\end{finale}
+
+\begin{finale}
+\begin{multicols}{2}
+    \textit{当$f$为奇函数时, 有}
+    \[ a_n = 0, \]
+    \[ b_n = \frac{2}{\pi} \int_{0}^\pi f\pare{x}\sin nx\,\rd{x}. \]
+    \textit{当$f$为奇函数时, 有}
+    \[ a_n = 0, \]
+    \[ b_n = \frac{2}{l} \int_{0}^l f\pare{x}\sin \frac{n\pi x}{l}\,\rd{x}. \]
+\end{multicols}
+\end{finale}
+
+\begin{reflex}{一般长度区间上的展开}{一般长度区间上的展开}
+    按如下法则替换在$\brac{-\pi,\pi}$上的展开:\\
+\centerline{
+    \begin{tabular}{ccc}
+        $\pi$ & $\longrightarrow$ & $l$\\
+        \multirow{2}{*}{$n x$} & \multirow{2}{*}{$\longrightarrow$} & \multirow{2}{*}{$\displaystyle\frac{n\pi x}{l}.$}\\
+        &&
+    \end{tabular}
+}
+\vspace{-.5em}
+\end{reflex}
+
+% subsubsection 定义 (end)
+
+\subsubsection{特殊函数的展开} % (fold)
+\label{ssub:特殊函数的展开}
+
+\paragraph{三角函数的展开} % (fold)
+\label{par:三角函数的展开}
+ 
+对于三角函数的展开, 直接参考\cref{reflex:三角函数的积的积分计算}.
+
+ % paragraph 三角函数的展开 (end) 
+
+ \paragraph{幂函数的展开} % (fold)
+ \label{par:幂函数的展开}
+
+ 对于幂函数, 考虑
+\begin{reflex}{幂函数的展开}{幂函数的展开}
+    如果整个区间上都是幂函数, 参考\cref{prop:积分的展开}对$f\pare{x}=x$的展开逐次积分. 但是常数项通过直接计算得到.
+\end{reflex}
+例题参考\cref{prop:积分的展开}及以下.
+
+ % paragraph 幂函数的展开 (end)
+
+\paragraph{指数函数的展开} % (fold)
+\label{par:指数函数的展开}
+
+对于指数函数, 考虑
+\begin{reflex}{指数函数的展开}{指数函数的展开}
+    用Euler公式展开, 或者分部积分后递归. 选择自己常用的方法即可.
+\end{reflex}
+\begin{ex}
+    求$e^{2x}$的Fourier展开.
+\end{ex}
+
+% paragraph 指数函数的展开 (end)
+
+% subsubsection 特殊函数的展开 (end)
+
+\subsubsection{对称性的使用} % (fold)
+\label{ssub:对称性的使用}
+
+\begin{reflex}{对特殊等分点具有对称性的情形}{对特殊等分点具有对称性的情形}
+    若$f$对某些$\brac{-l,l}$的等分点具有奇/偶对称性, 当且仅当具有相反对称性的三角函数项的系数为零.
+\end{reflex}
+\begin{ex}
+    如果$f\pare{x\pm\pi}=-f\pare{x}$, 证明$f$的展开只有奇次项, 即$a_{2n}=0$且$b_{2n}=0$.
+\end{ex}
+\begin{ex}
+    如果$f\pare{x\pm\pi}=f\pare{x}$, 证明$f$的展开只有偶次项, 即$a_{2n-1}=0$且$b_{2n-1}=0$.
+\end{ex}
+\begin{ex}
+    $f\in \abs{R}$在$\pare{0,\pi/2}$上有定义, 将其延拓到$\pare{-\pi,\pi}$上使其Fourier级数具有形式
+    \[ \sum_{n=1}^\infty a_{2n-1}\cos\pare{2n-1}x. \]
+\end{ex}
+
+% subsubsection 对称性的使用 (end)
+
+% subsection fourier级数的计算 (end)
+
+\subsection{非对称区间上的展开} % (fold)
+\label{sub:非对称区间上的展开}
+
+\subsubsection{奇延拓与偶延拓} % (fold)
+\label{ssub:奇延拓与偶延拓}
+
+\begin{reflex}{非对称区间上的展开}{非对称区间上的展开}
+    对于$\brac{0,l}$上定义的函数, 若要求展开为余弦级数, 则偶延拓后展开; 若要求展开为正弦级数, 则奇延拓后展开.
+\end{reflex}
+\begin{ex}
+    设有
+    \[ f\pare{x} = \left\{\begin{array}{ll}
+        x, & x\in\brac{0,\frac{a}{2}},\\
+        a-x, & x\in\blr{\frac{a}{2},a},
+    \end{array} \right. , \]
+    将其分别展开为余弦级数和正弦级数.
+\end{ex}
+
+% subsubsection 奇延拓与偶延拓 (end)
+
+% subsection 非对称区间上的展开 (end)
+
+\subsection{级数求和} % (fold)
+\label{sub:级数求和}
+
+\subsubsection{特殊点代入} % (fold)
+\label{ssub:特殊点代入}
+
+\begin{ex}
+    对$f\pare{x}=\sgn x$展开, 并证明对$x\in\pare{0,\pi}$成立
+    \[ \sum_{k=1}^\infty \frac{\sin \pare{2k-1}x}{2k-1} = \frac{\pi}{4}, \]
+    并求和
+    \[ \sum_{n=1}^\infty \frac{\pare{-1}^{n-1}}{2n-1}. \]
+\end{ex}
+
+特殊点代入后, 可能还需要观察系数的特点, 稍作变换.
+
+\begin{ex}
+    展开$\cos ax$并证明
+    \[ \cot x = \rec{x} + \sum{n=1}^\infty \frac{2x}{x^2- n^2\pi}. \]
+\end{ex}
+
+% subsubsection 特殊点代入 (end)
+
+\subsubsection{Parseval恒等式} % (fold)
+\label{ssub:parseval恒等式}
+
+\begin{ex}
+    通过对$x^4$的展开求
+    \[ \sum_{n=1}^\infty \frac{1}{n^8}. \]
+\end{ex}
+
+\begin{reflex}{利用Fourier展开求级数和}{利用Fourier展开求级数和}
+    展开后观察系数与欲求级数的关系在两种方法中择一使用.
+\end{reflex}
+
+% subsubsection parseval恒等式 (end)
+
+% subsection 级数求和 (end)
+
+% section 计算性结论 (end)
+
+\end{document}

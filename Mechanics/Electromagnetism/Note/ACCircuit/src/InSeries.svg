@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="101.01424mm"
+   height="14.831738mm"
+   viewBox="0 0 101.01424 14.831738"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="InSeries.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-513.11143"
+     inkscape:cy="37.637609"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg8"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="789"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1"
+     transform="translate(-11.028589,-143.95988)" />
+  <g
+     transform="translate(120.50712,-138.66821)"
+     inkscape:label="Resistor"
+     id="g847">
+    <g
+       id="g841">
+      <path
+         inkscape:connector-curvature="0"
+         d="m -120,150 h 15.5 l 2,3 3,-6 3,6 3,-6 3,6 3,-6 2,3 H -70"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         inkscape:label="none"
+         id="path839" />
+    </g>
+    <text
+       style="font-style:normal;font-weight:normal;font-size:6.57894754px;line-height:100%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"
+       xml:space="preserve"
+       transform="translate(-95,143.66667)"
+       id="text845"><tspan
+         x="-2.2351742e-08"
+         y="0"
+         sodipodi:role="line"
+         id="tspan843">$R$</tspan></text>
+  </g>
+  <g
+     id="g885"
+     inkscape:label="Inductro"
+     transform="translate(170.50712,-138.66821)">
+    <g
+       id="g879"
+       inkscape:label="Inductro">
+      <path
+         id="path867"
+         inkscape:label="none"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -120,150 h 13"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path869"
+         inkscape:label="none"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="M -70,150 H -83"
+         inkscape:connector-curvature="0" />
+      <path
+         id="path871"
+         inkscape:label="arc"
+         sodipodi:type="arc"
+         sodipodi:start="0"
+         sodipodi:ry="3"
+         sodipodi:rx="3"
+         sodipodi:open="true"
+         sodipodi:end="3.1415927"
+         sodipodi:cy="150"
+         sodipodi:cx="-104"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -101,150 a 3,3 0 0 1 -1.5,2.59808 3,3 0 0 1 -3,0 A 3,3 0 0 1 -107,150" />
+      <path
+         id="path873"
+         inkscape:label="arc"
+         sodipodi:type="arc"
+         sodipodi:start="0"
+         sodipodi:ry="3"
+         sodipodi:rx="3"
+         sodipodi:open="true"
+         sodipodi:end="3.1415927"
+         sodipodi:cy="150"
+         sodipodi:cx="-98"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -95,150 a 3,3 0 0 1 -1.5,2.59808 3,3 0 0 1 -3,0 A 3,3 0 0 1 -101,150" />
+      <path
+         id="path875"
+         inkscape:label="arc"
+         sodipodi:type="arc"
+         sodipodi:start="0"
+         sodipodi:ry="3"
+         sodipodi:rx="3"
+         sodipodi:open="true"
+         sodipodi:end="3.1415927"
+         sodipodi:cy="150"
+         sodipodi:cx="-92"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -89,150 a 3,3 0 0 1 -1.5,2.59808 3,3 0 0 1 -3,0 A 3,3 0 0 1 -95,150" />
+      <path
+         id="path877"
+         inkscape:label="arc"
+         sodipodi:type="arc"
+         sodipodi:start="0"
+         sodipodi:ry="3"
+         sodipodi:rx="3"
+         sodipodi:open="true"
+         sodipodi:end="3.1415927"
+         sodipodi:cy="150"
+         sodipodi:cx="-86"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -83,150 a 3,3 0 0 1 -1.5,2.59808 3,3 0 0 1 -3,0 A 3,3 0 0 1 -89,150" />
+    </g>
+    <text
+       id="text883"
+       xml:space="preserve"
+       y="144.39882"
+       x="-95"
+       style="font-style:normal;font-weight:normal;font-size:6.57894754px;line-height:100%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"><tspan
+         id="tspan881"
+         sodipodi:role="line"
+         y="144.39882"
+         x="-95">$L$</tspan></text>
+  </g>
+</svg>

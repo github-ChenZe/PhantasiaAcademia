@@ -34,6 +34,71 @@ Therefore for one asp to have signi contrib, $T = E/k$.
 
 $T$, $n$, $u$之不同分别引发热量、数量、动量流, 即导致热传导、扩散与黏滞.
 
+\subsection{mean free path} % (fold)
+\label{sub:mean_free_path}
+
+colli param: distance perpendi $\vv$ rel center. for effective colli to take place, $b < d$. $\pi b^2$ \emph{section efficace} est. for $d_1 \neq d_2$, il est $\sigma = \pi\pare{d_1^2+d_2^2}/4$.
+\par
+freq colli:
+\[ \expc{z} = \pi d^2\cdot\expc{v_{\mathrm{rel}}}\cdot n \]
+quo $\expc{z}$ being  num de colli for uno molecule. cum $p=nkT$,
+\[ \Rightarrow \expc{z} = \frac{4\sigma p}{\sqrt{\pi mkT}}. \]
+\begin{ex}
+	dans etat standard, $\expc{z} = \SI{6.5e9}{\Hz}$.
+\end{ex}
+\[ \lambda = \frac{\expc{v_{\mathrm{rel}}}}{\expc{z}} = \rec{\sqrt{2}n\sigma}. \]
+\begin{ex}
+	$\lambda \sim 200d$ dans etat standard est typical molecule.
+\end{ex}
+
+% subsection mean_free_path (end)
+
+\subsubsection{thermal coeff} % (fold)
+\label{ssub:thermal_coeff}
+
+for molecule uno atom, thermal coeff
+\begin{finale}
+	\[ \kappa = \rec{3}nC\lambda\expc{v} = \frac{\pi}{d^2}\sqrt{\frac{kT}{m\pi}}. \]
+\end{finale}
+
+\begin{remark}
+	applies only for $d \ll \lambda \ll L$.
+\end{remark}
+
+\begin{finale}
+	\[ \frac{\eta C_V}{\kappa} = 1. \]
+\end{finale}
+
+% subsubsection thermal_coeff (end)
+
+\subsubsection{Vis coeff} % (fold)
+\label{ssub:vis_coeff}
+
+\begin{finale}
+	\[ \eta = \rec{3}nm\lambda\expc{v} = \frac{m\expc{v}}{3\sqrt{2}\sigma} = \frac{2}{3\sigma}\sqrt{\frac{kmT}{\pi}}. \]
+\end{finale}
+\begin{ex}[measurement of $\eta$ via rotation and torq]
+	outer linear veloc $\omega\pare{R+\delta}$, quod provides grad de veloc
+	\[ \frac{\omega\pare{R+\delta}}{\delta} \approx \frac{\omega R}{\delta}, \]
+	torq balanced,
+	\[ G = 2\pi RL\cdot\eta\cdot\frac{\omega R}{\delta}\cdot R. \]
+\end{ex}
+
+% subsubsection vis_coeff (end)
+
+\subsubsection{diff coeff} % (fold)
+\label{ssub:diff_coeff}
+
+\begin{finale}
+	\[ D = -\rec{3}\lambda\expc{v} = \frac{2}{3\pi nd^2}\sqrt{\frac{kT}{\pi m}} = \frac{2}{3\pi d^2 p}\cdot\sqrt{\frac{k^3}{\pi m}} T^{3/2}. \]
+\end{finale}
+
+\begin{finale}
+	\[ \frac{D\rho}{\eta} = 1. \]
+\end{finale}
+
+% subsubsection diff_coeff (end)
+
 % subsection transp (end)
 
 \end{document}

@@ -1,0 +1,81 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[singleton, margintoc]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{交流电}
+
+\section{简谐交流电} % (fold)
+\label{sec:简谐交流电}
+
+\subsection{物理量} % (fold)
+\label{sub:物理量}
+
+\subsubsection{有效值} % (fold)
+\label{ssub:有效值}
+
+\begin{definition}
+    [有效值]简谐量的有效值谓在同一纯电阻上产生相同Joule热的等效直流电的相应值.
+\end{definition}
+\begin{finale}
+    \begin{proposition}
+        电压和电流的有效值分别为
+        \[ U\+_rms_ = \frac{U}{\sqrt{2}},\quad I\+_rms_ = \frac{I}{\sqrt{2}}. \]
+    \end{proposition}
+\end{finale}
+
+% subsubsection 有效值 (end)
+
+\subsubsection{阻抗与幅角} % (fold)
+\label{ssub:阻抗与幅角}
+
+\begin{definition}
+    [阻抗与幅角]交流电路中元件的阻抗与幅角分别为
+    \[ Z = \frac{U\+_m_}{I\+_m_} = \frac{U\+_rms_}{I\+_rms_}, \]
+    \[ \varphi = \varphi\+_u_ - \varphi\+_i_. \]
+\end{definition}
+
+\begin{longtable}{|c|c|c|}
+    \hline
+    元件 & 阻抗 & 幅角 \\
+    \hline
+    \+:r6{\incfig{2cm}{triplet}} & \+:r2{\+$\omega L$} & \+:r2{\+$+\frac{\pi}{2}$} \\
+    & & \\
+    \cline{2-3}
+    & \+:r2{\+$R$} & \+:r2{\+$0$} \\
+    & & \\
+    \cline{2-3}
+    & \+:r2{\+$\rec{\omega C}$} & \+:r2{\+$-\frac{\pi}{2}$} \\
+    & & \\
+    \hline 
+\end{longtable}
+
+% subsubsection 阻抗与幅角 (end)
+
+\subsubsection{功率} % (fold)
+\label{ssub:功率}
+
+\begin{definition}
+    [视在功率]
+    \[ S = I\+_rms_ U\+_rms_. \]
+\end{definition}
+\begin{definition}
+    [有功电阻]
+    \[ \+gR = Z\cos\varphi. \]
+\end{definition}
+\begin{finale}
+    \begin{definition}
+        [平均功率, 有功功率]
+        \[ P = \expc{p} = I\+_rms_ U\+_rms_ \cos\varphi = I^2 Z\cos\varphi = I^2 \+gR. \]
+    \end{definition}
+\end{finale}
+
+
+% subsubsection 功率 (end)
+
+% subsection 物理量 (end)
+
+% section 简谐交流电 (end)
+
+\end{document}

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="71.858429mm"
+   height="71.720772mm"
+   viewBox="0 0 71.858429 71.720771"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+   sodipodi:docname="wheatstone.svg">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="-342.88205"
+     inkscape:cy="154.47049"
+     inkscape:document-units="mm"
+     inkscape:current-layer="svg8"
+     showgrid="false"
+     inkscape:window-width="1440"
+     inkscape:window-height="789"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
+     inkscape:window-maximized="1" />
+  <defs
+     id="defs2" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1"
+     transform="translate(-38.182185,-117.98288)" />
+  <g
+     id="g824"
+     inkscape:label="Resistor"
+     transform="rotate(-45,-197.50623,-52.580414)">
+    <g
+       id="g818">
+      <path
+         id="path816"
+         inkscape:label="none"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -120,150 h 15.5 l 2,3 3,-6 3,6 3,-6 3,6 3,-6 2,3 H -70"
+         inkscape:connector-curvature="0" />
+    </g>
+    <text
+       id="text822"
+       transform="translate(-95,143.66667)"
+       xml:space="preserve"
+       y="0"
+       x="0"
+       style="font-style:normal;font-weight:normal;font-size:6.57894754px;line-height:100%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"><tspan
+         id="tspan820"
+         sodipodi:role="line"
+         y="0"
+         x="-2.225861e-07">$R_1$</tspan></text>
+  </g>
+  <g
+     transform="rotate(45,138.4065,263.4408)"
+     inkscape:label="Resistor"
+     id="g852">
+    <g
+       id="g846">
+      <path
+         inkscape:connector-curvature="0"
+         d="m -120,150 h 15.5 l 2,3 3,-6 3,6 3,-6 3,6 3,-6 2,3 H -70"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         inkscape:label="none"
+         id="path844" />
+    </g>
+    <text
+       style="font-style:normal;font-weight:normal;font-size:6.57894754px;line-height:100%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"
+       xml:space="preserve"
+       transform="translate(-95,143.66667)"
+       id="text850"><tspan
+         x="-2.225861e-07"
+         y="0"
+         sodipodi:role="line"
+         id="tspan848">$R_2$</tspan></text>
+  </g>
+  <g
+     id="g890"
+     inkscape:label="Resistor"
+     transform="rotate(-45,-137.1509,-77.580411)">
+    <g
+       id="g884">
+      <path
+         id="path882"
+         inkscape:label="none"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -120,150 h 15.5 l 2,3 3,-6 3,6 3,-6 3,6 3,-6 2,3 H -70"
+         inkscape:connector-curvature="0" />
+    </g>
+    <text
+       id="text888"
+       transform="translate(-95,143.66667)"
+       xml:space="preserve"
+       y="0"
+       x="0"
+       style="font-style:normal;font-weight:normal;font-size:6.57894754px;line-height:100%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"><tspan
+         id="tspan886"
+         sodipodi:role="line"
+         y="0"
+         x="-2.225861e-07">$R_4$</tspan></text>
+  </g>
+  <g
+     transform="rotate(45,78.051171,238.4408)"
+     inkscape:label="Resistor"
+     id="g938">
+    <g
+       id="g932">
+      <path
+         inkscape:connector-curvature="0"
+         d="m -120,150 h 15.5 l 2,3 3,-6 3,6 3,-6 3,6 3,-6 2,3 H -70"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         inkscape:label="none"
+         id="path930" />
+    </g>
+    <text
+       style="font-style:normal;font-weight:normal;font-size:6.57894754px;line-height:100%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+       x="0"
+       y="0"
+       xml:space="preserve"
+       transform="translate(-95,143.66667)"
+       id="text936"><tspan
+         x="-2.225861e-07"
+         y="0"
+         sodipodi:role="line"
+         id="tspan934">$R_3$</tspan></text>
+  </g>
+  <g
+     id="g998"
+     inkscape:label="Resistor"
+     transform="matrix(1.4130556,0,0,0.99999989,71.255605,-114.1396)"
+     style="stroke-width:0.84124094">
+    <g
+       id="g992"
+       style="stroke-width:0.84124094">
+      <path
+         id="path990"
+         inkscape:label="none"
+         style="fill:none;stroke:#000000;stroke-width:0.84124094;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+         d="m -50,150 h 15.5 l 2,3 3,-6 3,6 3,-6 3,6 3,-6 2,3 H 0"
+         inkscape:connector-curvature="0" />
+    </g>
+    <text
+       id="text996"
+       transform="translate(-25,143.66667)"
+       xml:space="preserve"
+       y="0"
+       x="0"
+       style="font-style:normal;font-weight:normal;font-size:6.57894754px;line-height:100%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.84124094"><tspan
+         id="tspan994"
+         sodipodi:role="line"
+         y="0"
+         x="-2.2351742e-08"
+         style="stroke-width:0.84124094">$R$</tspan></text>
+  </g>
+</svg>

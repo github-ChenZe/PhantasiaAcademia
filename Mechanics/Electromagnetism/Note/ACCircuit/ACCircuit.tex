@@ -1,0 +1,273 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[singleton, margintoc]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{交流电路}
+
+\section{暂态过程} % (fold)
+\label{sec:暂态过程}
+
+\subsection{基本电路} % (fold)
+\label{sub:基本电路}
+
+\subsubsection{基础理论} % (fold)
+\label{ssub:基础理论}
+
+如果电流不是恒定电流, 则Kirchhoff第一/第二定律不精确成立. 但仍可视为近似成立. 这要求电磁信号传遍整个电路所需时间远小于源变化的周期, i.e.
+\[ L \ll cT = \lambda \Leftrightarrow f\ll\rec{\Delta t} = \frac{c}{l}. \]
+缓慢变化的$\rho$, $\vJ$可以视为满足Coloumb和BSL定律.
+\par
+\begin{table}
+    \begin{tabular}{|c|c|}
+    \hline
+    元件 & 电势降\\
+    \hline
+    电感 & $V = L\dot{I}$\\
+    \hline
+    电容 & $V = Q/C$\\
+    \hline
+    电阻 & $V = IR$\\
+    \hline
+    \end{tabular}
+\end{table}
+\begin{ex}[RC电路]
+    充电: 附加初始条件$Q\pare{0}=0$, $I_0$直接求出.
+    放电: 附加初始条件$Q_0$, $I_0 = 0$.
+\end{ex}
+\begin{ex}[RL电路]
+    充磁: 附加初始条件$I_0=0$.
+    放磁: 附加初始条件$I_0$.
+\end{ex}
+\begin{ex}[LC电路]
+    $C$带电量$Q_0$, 附加初始条件$Q_0$, $I_0=0$. 得到简谐振动.
+\end{ex}
+
+% subsubsection 基础理论 (end)
+
+% subsection 基本电路 (end)
+
+% section 暂态过程 (end)
+    
+\section{稳态过程} % (fold)
+\label{sec:稳态过程}
+
+\subsection{简谐交流电} % (fold)
+\label{ssub:简谐交流电}
+
+\subsubsection{有效值} % (fold)
+\label{ssub:有效值}
+
+电压/电动势/电流不一定同相.
+\begin{definition}[有效值]
+    简谐量的有效值谓一个周期内纯电阻元件产生的Joule热满足$Q_{\mathrm{AC}}=Q_{\mathrm{DC}}$.
+\end{definition}
+电流的有效值$I_{\mathrm{rms}} = I_{\mathrm{max}}/\sqrt{2}$, 电压的有效值$U_{\mathrm{rms}} = U_{\mathrm{max}}/\sqrt{2}$.
+
+% subsubsection 有效值 (end)
+
+\subsubsection{基础元件} % (fold)
+\label{ssub:基础元件}
+
+\begin{definition}[阻抗]
+    $Z = U_m/I_m = U/I$.
+\end{definition}
+则此时$U_m \cos\pare{\omega t + \phi_u} = I_m R\cos\pare{\omega t + \phi+i}$.
+
+\begin{tabular}{|c|c|c|c|}
+    \hline
+    元件 & 阻抗 & $\phi_u - \phi_i$ & 复阻抗\\
+    \hline
+    电阻 & $R$ & $0$ & $R$ \\
+    \hline
+    电容 & $1/\pare{\omega C}$ & $-\pi/2$ & $1/\pare{\vj \omega C}$ \\
+    \hline
+    电感 & $\omega L$ & $\pi/2$ & $\vj \omega L$ \\
+    \hline
+\end{tabular}
+
+% subsubsection 基础元件 (end)
+
+\subsubsection{电功率} % (fold)
+\label{ssub:电功率}
+
+瞬时功率
+\[ p = IU \brac{\cos\varphi + \cos\pare{2\omega t + \varphi}}. \]
+\[ P = \expc{p} = IU\cos\varphi = I^2Z\cos\varphi. \]
+
+\begin{definition}[视在功率]
+    \[ S = IU. \]
+\end{definition}
+\begin{definition}[功率因素]
+    \[ \cos\varphi = P/IU. \]
+\end{definition}
+\begin{definition}[有功电阻]
+    \[ r=Z\cos\varphi. \]
+\end{definition}
+\begin{finale}
+    \[ P = I^2 r. \]
+\end{finale}
+
+% subsubsection 电功率 (end)
+
+\subsubsection{矢量法} % (fold)
+\label{ssub:矢量法}
+
+\begin{ex}
+    对RL电路, $U = \sqrt{U_L^2 + U_R^2}$, $\tan \varphi = U_L/U_R$. 再考虑$U=IZ$将$U$替换为$Z$, 从而求解$U$和$\varphi$.
+\end{ex}
+
+\begin{ex}
+    对RC电路, $U = \sqrt{U_C^2 + U_R^2}$, $\tan \varphi = -U_C/U_R$.
+\end{ex}
+
+\begin{ex}
+    对RLC电路, $U = \sqrt{\pare{U_L-U_C}^2 + U_R^2}$, $\tan \varphi = \pare{U_L-U_C}/U_R$.
+\end{ex}
+
+\begin{remark}
+    当$\phi = 0$, 电路出现纯电阻性. 此时出现共振, $\omega L = 1/\pare{\omega C}$.
+\end{remark}
+
+% subsubsection 矢量法 (end)
+
+\subsubsection{共振电路} % (fold)
+\label{ssub:共振电路}
+
+共振时具有最大电流, 且 
+\[ U_{Cm} = U_{Lm} = \rec{R}\sqrt{\frac{L}{C}}\varepsilon_m. \]
+\[ Q = \rec{R}\sqrt{\frac{L}{C}}. \]
+共振时, 若$Q>1$, 则电压放大.
+\begin{proposition}[$Q$作为放大倍数]
+    \[ Q = U_{Cm}/\varepsilon = U_{Cm}/\varepsilon. \]
+\end{proposition}
+电路中储存的能量
+\[ W_{em} = LI^2 \pare{\cos^2\omega t + \+/\omega_0^2/\omega^2/ \sin^2 \omega t}. \]
+电路在一个周期中消耗的能量
+\[ W_R = I^2 RT = 2\pi \+/I^2R/\omega/. \]
+\begin{proposition}[$Q$与能量衰减]
+    \[ \+/W_{em}/W_R/ = Q. \]
+\end{proposition}
+共振时的功率
+
+\[ P = \frac{I^2 R\omega^2}{R^2\omega^2 + L^2\pare{\omega^2 - \omega_0^2}^2}. \]
+\begin{proposition}[$Q$与半峰展宽]
+    设$P\pare{\omega_\pm} = \half P\pare{\omega_0}$, 则
+    \[ \frac{\Delta \omega}{\omega_0} = \rec{Q}. \]
+\end{proposition}
+
+% subsubsection 共振电路 (end)
+
+\subsubsection{混合电路} % (fold)
+\label{ssub:混合电路}   
+
+并联电路时,
+\[ Z= \rec{\sqrt{R^{-2} + Z^{-2}}}. \]
+\begin{ex}
+    $R\parallelsum C + L$: 以$U_C=U_R$为基准, 矢量画出$I_R$和$I_C$, 画出$I = I_R+I_C$, 考虑$U_L$是$I$的逆时针旋转$\pi/2$.
+\end{ex}
+
+% subsubsection 混合电路 (end)
+
+\subsubsection{复数法} % (fold)
+\label{ssub:复数法}
+
+对电压$u=U_m\cos\pare{\omega t+\varphi_u}$构造相应的复数$\+vu = U_m\aph{\omega t + \varphi_u}$. 相应的电压为
+\[ u\pare{t} = \Re \+vu\pare{t}. \]
+\begin{definition}[复峰值, 复有效值]
+    \[ \+vU_m = U_m\aph{\phi_u},\quad \+vU = U\aph{\phi_u}. \]
+\end{definition}
+\begin{definition}[复阻抗]
+    \[ \+vZ = Z\aph{\varphi_u - \varphi_i}. \]
+\end{definition}
+\begin{finale}
+    对于复阻抗, $\+vZ$的并联/串联法则与纯电阻完全相同. 对于复有效值, Kirchhoff定律适用.
+\end{finale}
+\begin{ex}
+    [串联电路]
+    $\+vZ = \+vZ_1 + \+vZ_2$. 在RL电路中, 这正是$\+vZ = R+\+vj \omega L$.
+\end{ex}
+\begin{ex}
+    [并联电路]
+    $\rec{\+vZ} = \rec{\+vZ_1} + \rec{\+vZ_2}$.
+\end{ex}
+\begin{ex}[RLC谐振]
+    \[ Z = \rec{\+>R^{-2} + \pare{1/\omega L + \omega C}^2<}. \]
+\end{ex}
+\begin{ex}
+    铝线圈套在通有交流电的螺线管上被弹出, 这是因为铝环可视为RL串联电路, 
+    \[ B \propto \cos \pare{\omega t},\quad \varepsilon \propto \cos\pare{\omega t - \pi/2},\quad I \propto \cos \pare{\omega t - \pi/2 - \varphi}. \]
+    考虑螺线管外侧有向外的磁场分量, 与电流叉乘有非零分量.
+\end{ex}
+\begin{proposition}
+    [瞬时功率]
+    \begin{align*}
+        p\pare{t} &= \rec{4} \pare{\pare{\+vi+\conj{\+vi}} + \pare{\+vu+\conj{\+vu}}}\\
+        &= \rec{2}\pare{\conj{\+vI}\+vU + \+vI\conj{\+vU} + \+vI\+vU e^{2\+vj\omega t} + \+vI \+vJ e^{-2\+vj\omega t}}.
+    \end{align*}
+\end{proposition}
+\begin{finale}
+    \begin{corollary}
+        [平均功率]
+        \[ P = IU\cos\varphi. \]
+    \end{corollary}
+    其中$\cos \varphi$谓功率因数.
+\end{finale}
+有功功率谓
+\[ P\+_work_ = IU\cos\varphi = S\cos\varphi. \]
+无功功率谓
+\[ P\+_waste_ = IU\sin\varphi = S\cos\varphi. \]
+\begin{ex}
+    电感型的网络并联一适当电容可提升功率因数.
+\end{ex}
+\begin{proposition}
+    [有功电阻]
+    考虑
+    \[ P = I^2Z\cos\varphi = I^2 r, \]
+    定义$r = Z\cos\varphi$谓有功电阻.
+\end{proposition}
+\begin{figure}[ht]
+    \centering
+    \incfig{3cm}{wheatstone}
+\end{figure}
+\begin{ex}
+    Wheatstone电桥的平衡条件为
+    \[ \+vZ_1\+vZ_4=\+vZ_2\+vZ_3. \]
+\end{ex}
+
+% subsubsection 复数法 (end)
+
+\subsubsection{变压器} % (fold)
+\label{ssub:变压器}
+
+变压器初级线圈
+\[ \+vU_1 = \+vI_1 \+vZ_1 - \+vI_2 \+vZ_M, \]
+\[ 0 = -\+vI_1 \+vZ_m + \+vI_2 \+vZ_1. \]
+在理想变压器假设下, 即无漏磁, 无电阻, 无缺损, 感抗极大.
+\begin{finale}
+    \[ \+/\+vI_1/\+vI_2/ = \+/\+vU_2/\+vU_1/ = \+/N_2/N_1/. \]
+\end{finale}
+
+% subsubsection 变压器 (end)
+
+\subsubsection{低通滤波器} % (fold)
+\label{ssub:低通滤波器}
+
+RC串联, C作为输出.
+\[ \+/U\+_out_/U\+_in_/ = \rec{\sqrt{1+\pare{\omega RC}\+2}}. \]
+
+% subsubsection 低通滤波器 (end)
+
+\subsubsection{整流器} % (fold)
+\label{ssub:整流器}
+
+在变压器输出端串联一二极管, 可将交流电转化为直流电. 同时将负载与电容器并联, 可达到滤波.
+
+% subsubsection 整流器 (end)
+
+% subsection 简谐交流电 (end)
+
+% section 稳态过程 (end)
+
+\end{document}

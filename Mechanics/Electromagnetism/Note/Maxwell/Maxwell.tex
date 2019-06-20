@@ -1,0 +1,171 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc, singleton]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{Maxwell理论}
+
+\section{Maxwell方程组} % (fold)
+\label{sec:maxwell方程组}
+
+\subsection{\texorpdfstring{Amp\'ere修正项}{Ampere修正项}} % (fold)
+\label{sub:Ampere修正项}
+
+\subsubsection{位移电流} % (fold)
+\label{ssub:位移电流}
+
+\[ \+vj_D = \varepsilon_0 \+DtD{\+vE}. \]
+\begin{ex}
+    半径为$a$的长直螺线管, 单位长度匝数$n$, 载有交流电$I=I_0 \sin \omega t$. 求位移电流密度.
+\end{ex}
+\begin{proof}
+    [解]
+    由Faraday定律,
+    \[ E\cdot 2\pi s = -\+dtd{\Phi_B}, \]
+    代入$\+vj_D = \varepsilon \+DtD{\+vE}$即可.
+\end{proof}
+\begin{ex}
+    在缓慢充电的平行板电容器中,
+    \[ E = \frac{Q}{\pi\varepsilon a^2}, \]
+    \[ \+vj_D = \varepsilon\+DtDE = \frac{I}{\pi a^2}. \]
+    故位移电流强度$I_D = I$. 由对称性可得到磁场
+    \[ B = \frac{\mu_0 I}{2\pi s}. \]
+\end{ex}
+\begin{finale}
+    全电流连续.
+\end{finale}
+
+% subsubsection 位移电流 (end)
+
+% subsection 修正项 (end)
+
+\subsection{单色平面波} % (fold)
+\label{sub:单色平面波}
+
+\subsubsection{基本物理量} % (fold)
+\label{ssub:基本物理量}
+
+对于单色平面波, 成立
+\[ \displaystyle \begin{cases}
+    \+vE = \+vE_0 e^{i\pare{\+vk \cdot \+vr - \omega t}},\\
+    \+vB = \frac{\+vk\times\+vE}{\omega}.
+    \end{cases} \]
+
+\begin{finale}
+    \[ cB = E, \quad \lambda = 2\pi, \omega T = 2\pi, T = \frac{2\pi}{\omega}. \]
+\end{finale}
+
+% subsubsection 基本物理量 (end)
+
+\subsubsection{导体中的电磁波} % (fold)
+\label{ssub:导体中的电磁波}
+
+对于单色波, 成立
+\[ \+vJ = \sigma \+vE,\quad \+vD = \epsilon \+vE, \quad \+vB = \mu \+vH. \]
+由此
+\[ \+DtD\rho = -\frac{\sigma}{\epsilon_0}\rho, \]
+\[ \tau = \frac{\epsilon_0}{\sigma}. \]
+导体内部Maxwell方程组变为
+\[ \div\+vD = 0, \div\+vB = 0, \]
+\[ \curl = -\+DtD{\+vB},\quad \curl\+vH = \sigma \+vE + \+DtD{\+vD}. \]
+从而分别产生
+\[ \+vk \cdot \+vE = 0,\quad \+vk \cdot\+vB = 0, \]
+\[ \+vk \times \+vE = \omega vB, \]
+第四条方程导致
+\[ k^2 = \+vk\cdot\+vk = \omega^2 \mu \epsilon \pare{1+i\frac{\sigma}{\omega \epsilon}}. \]
+\begin{pitfall}
+    电场不一定与传播方向垂直.
+\end{pitfall}
+\[ \+vE = \+vE_0 e^{-\+v\alpha\cdot\+vr} \exp\brac{i\pare{\+v\beta\cdot\+vr - \omega t}}. \]
+
+\begin{ex}
+    对于电磁波垂直从真空入射导体的情形, $\+v\alpha = \alpha \+uz$, $\+vbeta = \beta\+uz$, 则
+    \[ \begin{cases}
+        \beta^2 - \alpha^2 = \omega^2\mu\epsilon,\\
+        2\alpha \beta = \omega \mu \sigma.
+    \end{cases} \]
+    对于良导体, $\alpha \sim \beta \gg 1$.
+\end{ex}
+
+% subsubsection 导体中的电磁波 (end)
+
+\subsubsection{电磁波的激发} % (fold)
+\label{ssub:电磁波的激发}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{9cm}{excitationOfEMWave}
+    \caption{电磁波的激发装置}
+    \label{fig:电磁波的激发装置}
+\end{figure}
+如\cref{fig:电磁波的激发装置}, 要激发电磁波, 电路必须是开放的, 且
+\[ \omega_0 = \rec{\sqrt{LC}} \]
+足够高.
+
+% subsubsection 电磁波的激发 (end)
+
+\subsubsection{电磁波的偏振} % (fold)
+\label{ssub:电磁波的偏振}
+
+在一点处的电场箭头所指的运动轨迹. 主要有线偏振, 圆偏振和椭圆偏振.
+
+% subsubsection 电磁波的偏振 (end)
+
+% subsection 单色平面波 (end)
+
+\subsection{电磁场的能量和动量} % (fold)
+\label{sub:电磁场的能量和动量}
+
+\subsubsection{一般电磁场} % (fold)
+\label{ssub:一般电磁场}
+
+\[ \iiint \+vf\cdot\+vv\,\rd{V} = \iiint \pare{\rho \+vE + \rho \+vv\times \+vB}\cdot \+vv \,\rd{V} = \iiint \+vE \cdot \+vj\,\rd{V}. \]
+\begin{finale}
+    \begin{theorem}
+        功率密度为$\+vE\cdot\+vj$.
+    \end{theorem}
+\end{finale}
+记$w$为能量密度, 则能量守恒要求
+\[ -\+DtDw = -\div \+vS + \+vE \cdot \+vJ. \]
+将$\+vJ$通过Amp\`ere定律展开, 则
+\[ \rec{\mu_0} \+vE\cdot\pare{\curl\+vB} - \epsilon_0\+vE\cdot\+DtD{\+vE} = -\+DtDw - \div \+vS. \]
+通过
+\[ \+vE\cdot\pare{\curl\+vB} = -\div\pare{\+vE\times\+vB} + \+vB\cdot\pare{\curl\+vE}, \]
+以及
+\[ \curl\+vE = -\+DtD{\+vB}, \]
+就有
+\[ \iiint \+vE\cdot\+vj\,\rd{V} + \oiint\pare{\rec{\mu_0}\+vE\times\+vB}\cdot\rd{\+vA} = -\+dtd{}\iiint\pare{\half \epsilon_0 E^2 + \rec{2\mu_0}B^2}\,\rd{V}. \]
+右侧为电磁场能量减小速率, 左侧第一项为电磁场对实物粒子做功的速率, 左侧第二项为单位时间内从边界流出的能量.
+\begin{finale}
+    \begin{theorem}
+        [Poynting定理]场能和力学能量之和之变化率等于从边界流出的能量通量, 即
+        \[ \+dtd{\pare{U+W}} = -\oiint \+vS\,\rd{\+vA}. \]
+    \end{theorem}
+    \begin{corollary}
+        全空间实物例子力学能量与场能之和守恒.
+    \end{corollary}
+\end{finale}
+\begin{finale}
+    \[ \+vS = \+vE \times \+vB \]
+    对介质存在的情形下仍然成立.
+\end{finale}
+
+% subsubsection 一般电磁场 (end)
+
+\subsubsection{电磁波} % (fold)
+\label{ssub:电磁波}
+
+\begin{ex}
+    单色平面波电场和磁场的能量密度相同. $\+vS$沿着$\+vk$的方向. 大小为$c\epsilon_0E^2$, 即能量密度乘光速.
+\end{ex}
+波的强度定义为$S$在一个周期内的平均值的大小. $I \propto E^2$.
+\[ I = \half c\epsilon_0 E^2 = wc,\quad w = \epsilon_0 E^2 = \epsilon_0 E_0^2 \cos\pare{\+vk\cdot\+vr - \omega t}. \]
+
+% subsubsection 电磁波 (end)
+
+% subsection 电磁场的能量和动量 (end)
+
+% section maxwell方程组 (end)
+
+\end{document}

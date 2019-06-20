@@ -1,21 +1,58 @@
-\documentclass{ctexart}
+\documentclass[hidelinks]{ctexart}
 
-\usepackage{van-de-la-sehen}
+\usepackage[margintoc, singleton]{van-de-la-sehen}
 
 \begin{document}
 
+\showtitle{线性变换}
+
+\section{线性变换与矩阵} % (fold)
+\label{sec:线性变换与矩阵}
+
+\subsection{矩阵的对角化} % (fold)
+\label{sub:矩阵的对角化}
+
+\subsubsection{对角化判准} % (fold)
+\label{ssub:对角化判准}
+
 \begin{finale}
-	$A$ of $n\times n$ is similar to a diagonal matrix iff $A$ has $n$ eigenvec of linear independent.
+    $A$ of $n\times n$ is similar to a diagonal matrix iff $A$ has $n$ eigenvec of linear independent.
 \end{finale}
 \begin{corollary}[crit for diag]
-	\begin{cenum}
-		\item if $A$ has diff $n$ eigenvals;
-		\item solve for eigensubsp of $\lambda_i$s'.
-	\end{cenum}
+    \begin{cenum}
+        \item if $A$ has diff $n$ eigenvals;
+        \item solve for eigensubsp of $\lambda_i$s'.
+    \end{cenum}
 \end{corollary}
 Alg index defined as multiplixity of $\lambda$ as a root. Geo index defined as dim the space ass.
 \begin{finale}
-	diagonalizable iff Alg index equals to Geo index of each $\lambda_i$.
+    diagonalizable iff Alg index equals to Geo index of each $\lambda_i$.
 \end{finale}
+
+% subsubsection 对角化判准 (end)
+
+% subsection 矩阵的对角化 (end)
+
+\subsection{不变子空间} % (fold)
+\label{sub:不变子空间}
+
+\subsubsection{核与像} % (fold)
+\label{ssub:核与像}
+
+\begin{proposition}
+    $\ker\+sA=\curb{0}\Leftrightarrow \img\+sA = V \Leftrightarrow \+sA$为双射.
+\end{proposition}
+\begin{proposition}
+    $\+sA$可逆当且仅当$A$可逆.
+\end{proposition}
+\begin{definition}
+    [线性同构]线性双射谓线性同构.
+\end{definition}
+
+% subsubsection 核与像 (end)
+
+% subsection 不变子空间 (end)
+
+% section 线性变换与矩阵 (end)
 
 \end{document}

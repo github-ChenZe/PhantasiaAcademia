@@ -1,0 +1,108 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{电磁感应} % (fold)
+\label{sec:电磁感应}
+
+\[ \cE = -\eddon{\Phi}{t} = -\eddon{\vB}{t}\cdot\vS - \vB\cdot\eddon{\vS}{t} = \cE_{\mathrm{induced}} + \cE_{\mathrm{motive}}. \]
+\begin{ex}[measurement of $\vM$ to $\vB$]
+	with $Q = \Delta \Phi/R$, where $\Phi = BS$, $H = nI_0 = B_0/\mu_0$.
+\end{ex}
+
+\subsection{Induced emf} % (fold)
+\label{sub:induced_emf}
+
+\subsubsection{motive generated E} % (fold)
+\label{ssub:motive_generated_e}
+
+\[ \Phi' - \Phi + \Phi_{\mathrm{side}} = 0. \]
+\[ \cE = \eddon{\Phi_{\mathrm{side}}}{t} = \iint_{\mathrm{side}} \vB\cdot\rd{S_{\mathrm{side}}}/\rd{t}, \]
+quo via expanding $\rd{S} = \rd{l}\times \vv\,\rd{t}$,
+\[ \cE = \oint \vK\cdot\rd{\vl} = \oint\pare{\vv\times\vB}\cdot\rd{\vl}. \]
+
+% subsubsection motive_generated_e (end)
+
+\subsubsection{感生电动势} % (fold)
+\label{ssub:感生电动势}
+
+由$\vB$的变化而产生, 涡旋电场.
+\begin{finale}
+	\[ \curl \vE_{\mathrm{edd}} = -\ddelon{\vB}{t},\quad \vE_{\mathrm{edd}} = -\ddelon{\vA}{t}. \]
+\end{finale}
+With
+\[ \vA = \frac{\mu_0}{4\pi} \iiint \frac{\vj\,\rd{V'}}{\rcurs}, \]
+$\vE_{\mathrm{edd}}$ may be obtained.
+
+\begin{multicols}{2}
+	\noindent
+	\begin{align*}
+		\curl \vE &= - \ddelon{\vB}{t},\\
+		\oint \vE\cdot\rd{\vl} &= -\eddon{\Phi}{t}.
+	\end{align*}
+	\begin{align*}
+		\curl \vB &= \mu_0 \vj,\\
+		\oint \vB\cdot\rd{\vl} &= \mu_0 I_0.
+	\end{align*}
+\end{multicols}
+Cum symmetry, quo evaluate ex.p.8.
+
+% subsubsection 感生电动势 (end)
+
+\subsubsection{自感和互感} % (fold)
+\label{ssub:自感和互感}
+
+通有电流的线圈$1$所激发的磁场穿过线圈$2$的磁通量为
+\[ \Psi_{21} = M_{21}I_1, \]
+则$1$中电流变化时,
+\[ \cE_{21} = -\eddon{\Phi_{21}}{t} = -M_{21}\eddon{I_1}{t}. \]
+类似定义$M_{12}$.
+\begin{finale}
+	互感系数具有对称性, 即$M_{12}=M_{21}$.
+\end{finale}
+\begin{proof}
+	\[ \Psi_{21} = \oint_{C_2} \vA_1\cdot\rd{\vl_2}, \]
+	with
+	\[ \vA_1 = \frac{\mu_0 I}{4\pi} \oint_{C_1}\frac{\rd{\vl_1}}{r_{12}}, \]
+	\[ \Phi_{21} = \frac{\mu_0 I_1}{4\pi} \oint_{C_2}\oint_{C_1}\frac{\rd{\vl_1}\cdot\rd{\vl_2}}{r_{12}}. \]
+\end{proof}
+\begin{pitfall}
+	cf ex.p.8., on $\Phi$ of m-dipole through $S$, $\Phi = -\Phi_{\mathrm{out-of-}S}$.
+\end{pitfall}
+\begin{reflex}{计算互感系数}{计算互感系数}
+	在计算互感系数时, 使用更容易得到磁通量的$I$计算磁场.
+\end{reflex}
+通有电流的线圈对自身会有磁通量, $\Phi = LI$. 通过
+\[ L = \frac{\mu_0}{4\pi} \oint_C\oint_C \frac{\rd{\vl_1}\cdot\rd{\vl_2}}{r_{12}} \]
+会导致发散. Deferred evaluation of $L$.
+\paragraph{自感-互感关系} % (fold)
+\label{par:自感_互感关系}
+
+若每一个线圈的磁感线都完全穿过另一个线圈, 则
+\[ M = \sqrt{L_1 L_2}, \]
+实际上则有
+\[ M = k\sqrt{L_1 L_2}, \]
+变压器主/副线圈之间$k\approx 0.98$.
+\begin{proof}
+	\begin{align*}
+		M&= \frac{N_2\Phi_{21}}{I_1} = \frac{N_1\Phi-{12}}{I_2},\\
+		L_1 &= \frac{N_1\Phi_11}{I_1},\\
+		L_2 &= \frac{N_2\Phi_{22}}{I_2}.
+	\end{align*}
+	plus the condition $\Phi{21}=\Phi{11}$, $\Phi{12}=\Phi{22}$.
+\end{proof}
+\begin{ex}
+	通过列出$\cE_1$, $\cE_2$, $I_1$与$I_2$和$I$之间的关系给出并联/串联线圈时得到的$L$.
+\end{ex}
+
+% paragraph 自感_互感关系 (end)
+
+% subsubsection 自感和互感 (end)
+
+% subsection induced_emf (end)
+
+% section 电磁感应 (end)
+
+\end{document}

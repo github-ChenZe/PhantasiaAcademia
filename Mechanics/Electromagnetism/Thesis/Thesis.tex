@@ -1,0 +1,364 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-sehen}
+\usepackage{float}
+
+\title{旋转对称导体的表面电荷分布的数值解法}
+\author{陈泽}
+\date{}
+
+\let\oldcite\cite
+\def\cite#1{\textsuperscript{\oldcite{#1}}}
+
+\begin{document}
+    
+\maketitle
+
+\subsection*{求解方法} % (fold)
+\label{sub:求解方法}
+
+\subsubsection*{电场求解} % (fold)
+\label{ssub:电场求解}
+
+导体具有旋转对称性的情形下, 电势具有如下表达式\cite{jackson_classical_1999}:
+\begin{equation}
+    \label{eq:multipole_expansion}
+    \varphi = \sum_{n=0}^\infty \frac{A_n}{r^{n+1}}P_n\pare{\cos\theta}, 
+\end{equation}
+其中$P_n$为Legendre多项式. 通过考虑有限项的情形, 可以对一些特殊形状的导体给出电荷分布\cite{Polyakov}.
+而通过增加项数设法使等势面与所求导体表面重合亦可给出导体的$\varphi$.
+\par
+取\eqref{eq:multipole_expansion}的前$n$项以近似真实的$\varphi$,
+\begin{equation}
+\label{eq:phi_approx}
+    \varphi_n = \sum_{i=0}^n \frac{A_i}{r^{i+1}}P_i\pare{x},
+\end{equation}
+其中$x=\cos\theta$. 设$r=r\pare{\cos\theta}$为导体表面, 其电势为$\varphi_0$. 对$x=\cos\theta$的范围$\brac{-1,1}$取$n+1$等分, 有分点$x_0, x_1,\cdots, x_n$. 通过要求$\varphi_n$在诸分点上等势, 即求解
+\begin{equation}
+\label{eq:brutal_interpolation}
+    \begin{pmatrix}
+        \frac{P_0\pare{x_0}}{r\pare{x_0}} & \frac{P_1\pare{x_0}}{r\pare{x_0}^2} & \cdots & \frac{P_n\pare{x_0}}{r\pare{x_0}^{n+1}}\\
+        \frac{P_0\pare{x_1}}{r\pare{x_1}} & \frac{P_1\pare{x_1}}{r\pare{x_1}^2} & \cdots & \frac{P_n\pare{x_1}}{r\pare{x_1}^{n+1}}\\
+        \vdots & \vdots & \vdots & \vdots \\
+        \frac{P_0\pare{x_n}}{r\pare{x_n}} & \frac{P_1\pare{x_n}}{r\pare{x_n}^2} & \cdots & \frac{P_n\pare{x_n}}{r\pare{x_n}^{n+1}}\\
+    \end{pmatrix}\begin{pmatrix}
+        A_0\\
+        A_1\\
+        \vdots\\
+        A_n
+    \end{pmatrix} = \begin{pmatrix}
+        \varphi_0 \\
+        \varphi_0 \\
+        \vdots\\
+        \varphi_0
+    \end{pmatrix},
+\end{equation} 
+可以给出等势面逼近导体表面的电势$\varphi_n$.
+\par
+特别地, 此种方法可以立即给出孤立导体的电容. 由于$4\pi\epsilon_0 A_0$值即为导体的电荷总量, 有
+\[ C = \frac{4\pi\epsilon_0 A_0}{\varphi_0}. \]
+
+\par
+在给出电势的值之后, 由
+\[ E = \abs{\grad \varphi} \]
+即可给出电场强度大小
+\begin{equation}
+    \label{eq:numerical_E_field}
+    E = \sqrt{\pare{\sum_{i=0}^n \frac{\pare{i+1}A_iP_i}{r^{i+2}}}^2 + \pare{\sum_{i=0}^n \frac{A_i P'_i\pare{\cos\theta}\sin\theta}{r^{i+2}}}^2}.
+\end{equation}
+
+% subsubsection 电场求解 (end)
+
+\subsubsection*{电荷密度求解} % (fold)
+\label{ssub:电荷密度求解}
+
+通过\eqref{eq:numerical_E_field}求解$\sigma$固然可行, 然而这样做可能存在问题. 一曰上述逼近得到的$\varphi$在导体表面上会有微小振荡, 此种振荡导致取梯度得到的$E$亦发生振荡, 在外凸或内凹处为甚. 二曰若欲提高上述方法之精度, 唯一方法为增加分点的数量$n$, 然而这会导致\eqref{eq:brutal_interpolation}左侧的矩阵过大并可能导致求解是数值不稳定.
+\par
+
+一种更为妥当的方法为通过\eqref{eq:phi_approx}中的诸$A_i$(即多极矩)反解出$\sigma$的分布. 引入$\lambda\pare{x}\,\rd{x}=\rd{Q}$为满足$\cos\theta=x$的$\theta$到满足$\cos\theta=x+\rd{x}$的$\theta$之间的电荷总量\footnote{$\lambda$在此处的量纲为电荷而非线电荷, 但由于此处$\lambda$表示单位$\cos\theta$上的电荷量, 以$\lambda$表示为妥.}, 其中$x=\cos\theta$, 则
+\[ 2\pi\sigma r\sqrt{r^2+r'\pare{\theta}^2} = \lambda. \]
+\par
+假定$\lambda$具有展开
+\[ \lambda\pare{x} = \sum_{l=0}^\infty \Lambda_l P_l\pare{x}, \]
+而$r\pare{x}^n$具有展开
+\[ r\pare{x}^n = \sum_{p=0}^\infty C_{n,p}P_p\pare{x}, \]
+则
+\begin{equation}
+    \label{eq:fitting_lambdas}
+    A_n = \int_{-1}^1 r\pare{x}^n\lambda\pare{x}P_n\pare{x}\,\rd{x} = \int_{-1}^1 \sum_{p,l} C_{n,p}\Lambda_l P_pP_lP_n\,\rd{x}.
+\end{equation}
+关于Legendre多项式的积的积分有\cite{dougall_1953}
+\begin{align*}
+    &\int_{-1}^1 P_n P_p P_q \,\rd{x} \\
+    & = \left\{\begin{array}{ll}
+    \expc{npq}, & p+q-n\ge 0\,\text{且}\, n+q-p\ge 0 \,\text{且}\, n+p-q\ge 0, \\
+    0, &\text{其它情况}.
+\end{array}\right..
+\end{align*}
+其中
+\begin{align*}
+\expc{npq} &= \frac{2}{n+p+q+1}\frac{L_{\pare{p+q-n}/2}L_{\pare{n+q-p}/2}L_{\pare{n+p-q}/2}}{L_{\pare{p+q+n}/2}},\\
+L_n &= \frac{\pare{2n}!}{2^n \pare{n!}^2}.
+\end{align*}
+关于两个Legendre多项式的积的展开有\cite{dougall_1953},
+\[ P_p P_q = \sum_{k=0}^{p+q} \bra{pq}\ket{k} P_k, \]
+其中
+\begin{align*}
+    \bra{pq}\ket{k} &= \left\{\begin{array}{ll}
+    A_{p,q,k}, & p+q-k \mod 2 \,\text{且} \, k\ge\abs{p-q}, \\
+    0, &\text{其它情况}.
+    \end{array}\right.,\\
+    A_{p,q,k} &= \frac{2p+2q-4k+1}{2p+2q-2k+1}\frac{L_k L_{p-k} L_{q-k}}{L_{p+q-k}}.
+\end{align*}
+于是有
+\[ C_{n,k} = \sum_{m=k}^\infty \sum_{i=0}^m C_{n-1,i}C_{1,m-i}\bra{i,m-i}\ket{k}. \]
+如果对$r\pare{x}$的展开截断到$P_q$项, 即取
+\[ r_q\pare{x} = \sum_{i=0}^q C_{1,i} P_i\pare{x} \]
+近似之, 则
+\[ C_{n,k} = \sum_{m=k}^{nq} \sum_{\substack{i=\max\\\curb{\substack{m-q\\0}}}}^{\pare{n-1}q} C_{n-1,i}C_{1,m-i}\bra{i,m-i}\ket{k}.\quad\pare{k=0,1,\cdots,nq} \]
+现在令
+\[ \cM_{nl} = \sum_{p=0}^{nq} C_{n,p}\bra{nl}\ket{p}, \]
+则\eqref{eq:fitting_lambdas}可写作
+\[ \begin{pmatrix}
+    \cM_{00} & \cM_{01} & \cdots & \cM_{0n} \\
+    \cM_{10} & \cM_{01} & \cdots & \cM_{1n} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    \cM{n0} & \cM{n1} & \cdots & \cM{nn}
+\end{pmatrix}\begin{pmatrix}
+    \Lambda_0\\
+    \Lambda_1\\
+    \vdots\\
+    \Lambda_n
+\end{pmatrix} = \begin{pmatrix}
+    A_0\\
+    A_1\\
+    \vdots\\
+    A_n
+\end{pmatrix}. \]
+由此可以得到$\lambda$的近似. 由定义知
+\begin{equation}
+    \label{eq:lambda_to_sigma}
+    \sigma = \frac{\lambda}{2\pi r\sqrt{r\pare{t}^2 + r'\pare{t}^2}},
+\end{equation}
+从而可以得到$\sigma$.
+
+% subsubsection 电荷密度求解 (end)
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.36\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{src/Example3.pdf}
+        \caption{椭球状导体}
+        \label{fig:椭球状导体}
+    \end{subfigure}
+    \begin{subfigure}[b]{.61\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/EllipseSection.pdf}
+        \vskip3em
+        \caption{椭球状导体的截面}
+        \label{fig:椭球状导体的截面}
+    \end{subfigure}
+    \caption{}
+    \label{fig:椭球状导体形状}
+\end{figure}
+
+\subsubsection*{若干例子} % (fold)
+\label{ssub:若干例子}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/Ellipse.pdf}
+    \caption{椭球状导体的电荷分布}
+    \label{fig:椭球状导体的电荷分布}
+\end{figure}
+
+\paragraph{椭球状导体}
+椭球状导体如\cref{fig:椭球状导体形状}表面电荷分布有精确解\cite{Smythe}
+\[ \sigma = \frac{Q}{4\pi abc}\pare{\frac{x^2}{a^4}+\frac{y^2}{b^4}+\frac{z^2}{c^4}}^{-1/2}. \]
+
+选择长轴$a=5$, 短轴$b=c=4$的导体
+\[ r\pare{\theta} = \frac{5}{\sqrt{1+9\pare{1-\cos^2 \theta}/16}}, \]
+绕长轴旋转得椭球面, 取$12$等分点数值求解之结果为
+\[ V = \frac{4.32833}{r} + \frac{6.50225 P_2\pare{\cos \theta}}{r^3} + \frac{8.82447 P_4\pare{\cos \theta}}{r^5} + \cdots, \]
+
+这一情形的近似收敛极快, 故\eqref{eq:numerical_E_field}和\eqref{eq:lambda_to_sigma}的结果差别不大且皆与精确解十分接近.
+
+椭球状导体的电容公式为\cite{Smythe}
+\[ C = 8\pi\epsilon_0\curb{\int_0^\infty \brac{\pare{a^2+\theta}\pare{b^2+\theta}\pare{c^2+\theta}}^{-1/2}\,\rd{\theta}}^{-1}, \]
+从而对于该导体
+\[ \frac{C}{4\pi\epsilon_0} = \SI{4.32809}{\meter}. \]
+数值解$\SI{4.32833}{\meter}$与之十分接近(若取$25$等分点的展开则可以得到$6$位有效数字).
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.30\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{src/Example1.pdf}
+        \caption{花生状导体}
+        \label{fig:花生状导体}
+    \end{subfigure}
+    \begin{subfigure}[b]{.65\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/PeanutSection.pdf}
+        \vskip3em
+        \caption{花生状导体的截面}
+        \label{fig:花生状导体的截面}
+    \end{subfigure}
+    \caption{}
+    \label{fig:花生状导体形状}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/Peanut.pdf}
+    \caption{花生状导体的电荷分布}
+    \label{fig:花生状导体的电荷分布}
+\end{figure}
+
+\paragraph{花生状导体}
+下列极坐标图形
+\[ r\pare{\theta} = \sqrt{0.2+\cos^2\theta} \]
+绕$z$轴旋转(如\cref{fig:花生状导体形状}所示)的形状作为导体, 取$14$等分点数值求解之结果为
+\[  V = \frac{0.800503}{r}+\frac{0.138466 P_2\pare{\cos\theta}}{r^3}+\frac{0.00915213 P_4\pare{\cos\theta}}{r^5} + \cdots. \]
+前几项之系数与取$40$等分点后求解之结果相差无几, 这些结果列在\cref{fig:花生状导体的电荷分布}中. 可以见到通过\eqref{eq:numerical_E_field}求解的结果在$\theta\approx\pi/2$出有震荡, 但是通过\eqref{eq:lambda_to_sigma}求解的结果可以消除这些震荡, 并且结果与取$40$等分点反解得到的结果相当接近.
+
+\paragraph{苹果状导体}
+下列极坐标图形($\theta\in\pare{0,\pi}$)
+\[ r\pare{\theta} = 1 + \exp \left\{-\left(\theta-\frac{\pi }{4}\right)^2\right\}+0.3 \exp \left\{-(\theta-\pi )^2\right\}+\sin \left(\frac{\theta}{2}\right) \]
+绕$z$轴旋转(如\cref{fig:苹果状导体的形状}所示, 虽然截面看上去更像心形\footnote{献给我刚刚高考完的高中同学, 虽然这种方法对这个图形不收敛.}.)的形状作为导体, 取$12$等分点数值求解之结果为
+\[ V = \frac{2.27704}{r}+\frac{0.211129 P_1\pare{\cos\theta}}{r^2}-\frac{0.152111 P_2\pare{\cos\theta}}{r^3} + \cdots. \]
+然而通过\eqref{eq:numerical_E_field}和\eqref{eq:lambda_to_sigma}求解的结果虽然在$\theta>0.5$处符合较好, 但是在$\theta<0.5$处有相当大的区别. \eqref{eq:numerical_E_field}在$\theta=0$附近出现了(相当荒谬的)$\sigma$增加的情形, 但$\theta=0$附近是凹陷处, 电荷量理应极小. 而\eqref{eq:lambda_to_sigma}在$\theta=0$附近则出现了(同样荒谬的)$\sigma < 0$的情形, 这是在导体表面不可能的.
+\par
+尽管如此, \eqref{eq:lambda_to_sigma}的求解结果仍然减缓了震荡, 并且在$\theta\rightarrow 0$时给出了$\sigma$的正确趋势, 而不是像\eqref{eq:numerical_E_field}的结果在震荡后给出错误的趋势.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{src/Example2.pdf}
+        \caption{苹果状导体}
+        \label{fig:苹果状导体}
+    \end{subfigure}
+    \begin{subfigure}[t]{.62\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/AppleSection.pdf}
+        \caption{苹果状导体的截面}
+        \label{fig:苹果状导体的截面}
+    \end{subfigure}
+    \caption{}
+    \label{fig:苹果状导体的形状}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/Apple.pdf}
+    \caption{苹果状导体的电荷分布}
+    \label{fig:苹果状导体的电荷分布}
+\end{figure}
+
+% subsubsection 若干例子 (end)
+
+\subsubsection*{存在的问题} % (fold)
+\label{ssub:存在的问题}
+
+苹果状导体的例子并非孤立的. 这种方法实际上对于很大一部分导体会失效. 以$r\pare{\theta} = \sqrt{0.1+\cos^2\theta}$(即稍微修改了花生状导体中的参数)绕$z$轴旋转所得形状的导体为例, 取$25$等分点后求解得$\sigma$如\cref{fig:逼近失败的电荷密度}所示, 可以发现在导体内凹处$\sigma$反常地发散了.
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[t]{.47\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/MalformSigma.pdf}
+        \caption{逼近失败的电荷密度}
+        \label{fig:逼近失败的电荷密度}
+    \end{subfigure}
+    \begin{subfigure}[t]{.47\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/MalformV.pdf}
+        \caption{逼近失败的电势}
+        \label{fig:逼近失败的电势}
+    \end{subfigure}
+    \caption{}
+    \label{fig:失败的例子}
+\end{figure}
+\par
+考察此种情形的$\varphi$(如\cref{fig:逼近失败的电势}所示), 可以发现$\theta=\pi/2$附近除了在等分点处$\varphi=\SI{1}{\volt}$外, 在其他点都有相当严重的震荡, 足以导致等势面发生严重畸变, 从而这一解几乎没有价值.
+\par
+此种现象之原因在于, \eqref{eq:multipole_expansion}在远处可严格成立, 但在$r$与导体的尺度相当时却有可能发散. 具有旋转对称性的导体的$\pare{n+1}$-极矩\eqref{eq:fitting_lambdas}积分中存在$r'\pare{x}^n$项. 这是一个$O\pare{R_+^n}$级别的项. 其中$R_+$是导体上的点到坐标原点距离的最大值. 这一项在\eqref{eq:multipole_expansion}中的贡献为$A_n/r^{n+1}$, 如果没有$A_n=o\pare{R_-^n}$, 其中$R_-$为导体上的点到坐标原点距离的最小值, 则\eqref{eq:multipole_expansion}可能会在导体表面附近某点发散, 此种方法将因此失效.
+\par
+在$r\pare{\theta} = \sqrt{0.1+\cos^2\theta}$的例子中, 导体表面的点到原点的距离在$\theta=\pi/2$附近被减至过小, 从而电势在这附近发散. 类似的问题对旋转对称的椭球也会出现. 注意旋转对称的椭球是均匀线电荷的等势面, 从而
+\[ A_n = \int_{-c}^c z^n\lambda\,\rd{z} = k_n c^n, \]
+其中$c$是椭圆的焦距, 也是均匀线电荷长度的一半. 因此如果$c>a$或$c>b$, 则必然此种方法不适用于该椭球. 而对于前面的例子$a=5$, $b=4$, $c=3$则仍然适用.
+\par
+事实上, 还有一类显然不会收敛的情形, 即导体表面存在退化(不可微, 退化为线段或变为有边曲面)情形. 因为若\eqref{eq:multipole_expansion}收敛, 则在这附近$\varphi$是调和函数(从而可微), 不可能产生退化曲面. 因此这自动排除了通过此种方法计算圆柱表面电荷分布的可能性, 也导致在苹果状导体中出现的发散.
+\par
+另一方面, 等势面族必须符合一二阶微分方程\cite{Smythe}, 或参考下文的Thomson方程\eqref{eq:Thomson}. 若导体表面可微, 则有可能将导体表面略微「向内推」得到包含于导体内的一等势面, 最终当等势面发生上述退化情形时这一过程终止. 由$A_n=O\pare{R_+^n}$可知这一退化等势面上的点到原点的最长距离即是\eqref{eq:multipole_expansion}的收敛半径\footnote{有可能内推会导致等势面变得不连通. 但如果在一个连通的退化曲面导体上放置电荷, 则必然在其外产生连通的等势面. 因此, 助教安泽宇在第一次习题课中所主张「通过旋转对称椭球的极限推知线段导体的表面电荷」存在缺陷不无道理, 因为在线段导体上任意放置全正电荷皆可以产生连通的等势面.}.
+\par
+因此, 这一方法对处理存在局部突起的导体表面相当无力. 具有局部突起的表面经过「内推」很快会得到具有「尖点」的表面, 导致\eqref{eq:multipole_expansion}在感兴趣的$r$处发散. 这也可以通过$A_n$的下降率解释, 正电荷总是在尖端附近聚集, 因此局部突起会贡献相当大的多极矩, 导致$A_n$的下降率不足以令\eqref{eq:multipole_expansion}在感兴趣的$r$处收敛.
+
+% subsubsection 存在的问题 (end)
+
+% subsection 求解方法 (end)
+
+\subsection*{结论验证} % (fold)
+\label{sub:结论验证}
+
+\subsubsection*{Thomson方程} % (fold)
+\label{ssub:thomson方程}
+
+Thomson方程
+\begin{equation}
+    \label{eq:Thomson}
+    \eddon{E}{n} + 2\kappa_M E = 0
+\end{equation}
+已经被多位作者用不同方法证明\cite{Bhattacharya}, 这里导数沿导体表面法向, $E$是电场强度大小, $\kappa$为该点平均曲率. 我校Fan Desen在\cite{Fan_1988}中质疑Luo Enze\cite{Enze_1986}导出\eqref{eq:Thomson}的步骤, 并指\eqref{eq:Thomson}不能精确成立. 本文决定验证\eqref{eq:Thomson}.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.7\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/EllipseCurve.pdf}
+        \caption{椭球状导体的Thomson方程的验证}
+        \label{fig:椭球状导体的Thomson方程的验证}
+    \end{subfigure}
+    \begin{subfigure}{.7\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/PeanutCurve.pdf}
+        \caption{花生状导体的Thomson方程的验证}
+        \label{fig:花生状导体的Thomson方程的验证}
+    \end{subfigure}
+    \begin{subfigure}{.7\textwidth}
+        \centering
+        \includegraphics[trim={0 8cm 0 8cm},clip,width=\textwidth]{src/AppleCurve.pdf}
+        \caption{苹果状导体的Thomson方程的验证}
+        \label{fig:苹果状导体的Thomson方程的验证}
+    \end{subfigure}
+    \caption{}
+    \label{fig:导体的Thomson方程的验证}
+\end{figure}
+
+\par
+旋转曲面的主曲率有\cite{Kuhnel}
+\[ \kappa_1 = \frac{\dot{s}\ddot{z}-\ddot{s}\dot{z}}{\pare{\dot{s}^2+\dot{z}^2}^{3/2}},\quad%
+ \kappa_2 = \frac{\dot{z}}{s\sqrt{\dot{s}^2+\dot{z}^2}}. \]
+其中
+\[ s = r\sin\theta, z = r\cos\theta, \]
+而$\kappa_M = \pare{\kappa_1+\kappa_2}/2$. 另一方面, 极坐标中的法向导数为\cite{LiuCS}
+\[ \ddelon{u}{n} = \frac{r\pare{\theta}}{\sqrt{r^2\pare{\theta}+\brac{r'\pare{\theta}}^2}}\brac{\ddelon{u}{r} - \frac{r'\pare{\theta}}{r^2\pare{\theta}}\ddelon{u}{\theta}}. \]
+为了验证\eqref{eq:Thomson}, 只需要验证
+\begin{equation}
+\label{eq:ThomsonLog}
+2\kappa_M = \+dnd{\log E}.
+\end{equation}
+
+\cref{fig:导体的Thomson方程的验证}中是前面三个例子的\eqref{eq:ThomsonLog}左右两侧的比较. 可以发现对于椭球状和花生状的例子符合极好, 而苹果状的例子在$t>0.5$处符合较好, 但在$t<0.5$处左右两侧差异相当显著. 出现差异之处正好是之前所说「无法收敛」之处. 因此, 对\eqref{eq:ThomsonLog}两侧的比较可以用来估计数值结果是否合理. 两者符合时可以认为数值结果是足够精确的.
+\par
+最后, \eqref{eq:Thomson}应当是精确成立的. Fan Desen以「Luo Enze的导出过程存在循环论证」, 「\eqref{eq:Thomson}和Laplace方程定义域」者云云, 指\eqref{eq:Thomson}不能成立, 尚有速断之嫌.
+
+% subsubsection thomson方程 (end)
+
+% subsection 结论验证 (end)
+
+\bibliographystyle{unsrt}
+\bibliography{ThesisEM}
+
+\end{document}

@@ -1,0 +1,29 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{finale}
+	\[ \int_0^{\pi/2} \cos^\alpha x \sin^\beta x\,\rd{x} = \half B\pare{\frac{\alpha}{2},\frac{\beta+1}{2}}, \]
+	\[ B\pare{x,y} = \frac{\Gamma\pare{x}\Gamma\pare{y}}{\Gamma\pare{x+y}}, \]
+	\[ \Gamma\pare{x} = \pare{x-1}!. \]
+\end{finale}
+\begin{reflex}{第二类曲面积分的面积元}{第二类曲面积分的面积元}
+	设有曲面参数化$\pare{u,v}\mapsto \pare{x,y,z}$, 可有变换
+	\[ \rd{x}\,\rd{y} = \pm\ddelon{\pare{x,y}}{\pare{u,v}}\,\rd{u}\,\rd{v}. \]
+	\begin{pitfall}
+		实际应用时, 应通过法向量的方向确定其符号.
+	\end{pitfall}
+	通常对容易参数化的曲面有用.
+\end{reflex}
+\begin{pitfall}
+	适用Gauss定理时, 注意被积函数的不连续点, 并挖去之.
+\end{pitfall}
+\begin{ex}
+	求电场在椭球面上的通量, 理应挖去球面. 若电场的分母变为
+	\[ \rec{\sqrt{\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}}}, \]
+	则所挖去者应为椭球面.
+\end{ex}
+
+\end{document}

@@ -1,0 +1,62 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ex5-7.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{517.26556733bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.13829639)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ex5-7.pdf}}%
+    \put(0.34739981,1.04489484){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24441711\unitlength}\raggedright $T_1$\end{minipage}}}%
+    \put(0.82960585,0.34685608){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22163254\unitlength}\raggedright $T_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ex5-7.pdf}}%
+    \put(0.72603921,0.61282766){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.18641983\unitlength}\raggedright $Q$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ex5-7.pdf}}%
+    \put(0.5546725,1.0835127){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$R_1$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ex5-7.pdf}}%
+    \put(0.61927952,0.01700544){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$R_2$}}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,34 @@
+\documentclass{article}
+
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{breakable}
+\tcbuselibrary{listings}
+
+\lstset{
+}
+
+\lstdefinestyle{fancylst}{
+}
+
+\newtcblisting{nlst}[1][]{
+      breakable,
+      colback=gray!20!white,
+      listing only,
+      listing options={style=fancylst},
+}
+
+\begin{document}
+
+\mbox{}
+\vspace{16.5cm}
+
+\begin{nlst}
+problem at page break
+problem at page break
+problem at page break
+problem at page break
+problem at page break
+problem at page break
+\end{nlst}
+
+\end{document}

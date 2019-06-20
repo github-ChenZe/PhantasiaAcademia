@@ -1,0 +1,494 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc, singleton]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{磁场相关结论}
+
+\section{磁场大小相关量} % (fold)
+\label{sec:磁场大小相关量}
+
+\subsection{真空中磁场} % (fold)
+\label{sub:真空中磁场}
+
+\subsubsection{BSL定律} % (fold)
+\label{ssub:bsl定律}
+
+\begin{finale}
+    \begin{theorem}
+        [BSL定律]
+        小电流元产生的磁场为
+        \[ \rd{\+vB} = \frac{\mu_0}{4\pi} \frac{I \,\rd{\+vl}\times{\hrcurs}}{\rcurs^2}. \]
+        总的磁场为
+        \[ \+vB = \frac{\mu_0}{4\pi}\int_L \frac{I\,\rd{\+vl}\times\hrcurs}{\rcurs^2}. \]
+    \end{theorem}
+\end{finale}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{4cm}{symmetry}
+        \caption{关于平面对称的电流}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{4cm}{ex58}
+        \caption{习题5.8图}
+        \label{fig:习题5.8图}
+    \end{subfigure}
+    \caption{沿平面对称电流}
+    \label{fig:沿平面对称电流}
+\end{figure}
+\begin{corollary}
+    \label{coll:沿平面对称的电流的磁场}
+    电流分布有对称平面时, 在对称平面上的磁场垂直于对称平面.
+\end{corollary}
+\begin{sample}
+    \begin{ex}[习题5.8]
+        如\cref{fig:习题5.8图}所示, 电流均匀分布在宽度$2a$的平面导体薄板上, 电流强度$I$, 求板中垂平面上到板的距离为$x$的一点$P$处的磁场.
+    \end{ex}
+    \begin{solution}
+        由\cref{coll:沿平面对称的电流的磁场}, $P$处的磁场$\+vB\parallelsum AB$, 对孤立导线的磁场积分即可.
+    \end{solution}
+    \begin{hardlink}
+        参考\cref{table:特殊构型的磁场}获得孤立导线的$\+vB$.
+    \end{hardlink}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{11.5cm}{irregularSolenoid}
+    \caption{一般螺线管的磁场}
+    \label{fig:一般螺线管的磁场}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:一般螺线管的磁场}所示, 求$P$处的磁场.
+    \end{ex}
+    \begin{solution}
+        由\cref{coll:沿平面对称的电流的磁场}知只需考虑磁场的$\+uz$分量, 从而
+        \[ \vB = \frac{\mu_o\kappa}{4\pi}\int_{-\infty}^{\infty}\rd{z}\oint_C\frac{\rd{\+vl\times\brcurs^{\parallel}}}{\rcurs^3} = \frac{\mu_0\kappa}{2\pi}\oint_C \frac{\+v{\+gr}\times\rd{\+v{\+gr}}}{\+gr^2}. \]
+        注意积分仅有$\+uz$分量, 从而等价于
+        \[ B = \frac{\mu_0\kappa}{2\pi}\oint_C\frac{\+uz\cdot\pare{\+v{\+gr}\times\rd{{\+v{\+gr}}}}}{\+gr^2} = \frac{\mu_0\kappa}{2\pi} \oint_C \frac{\rd{\+v{\+gr}}\cdot\pare{\+uz\times\+v{\+gr}}}{\+gr^2} = \frac{\mu_0\kappa}{2\pi}\oint_C \frac{\rd{w}}{w}. \qedhere \]
+    \end{solution}
+\end{sample}
+
+% subsubsection bsl定律 (end)
+
+\subsubsection{磁标势与磁偶极子} % (fold)
+\label{ssub:磁标势与磁偶极子}
+
+\begin{multicols}{2}
+\begin{definition}
+    [立体角]
+    曲面关于某点$O$的立体角有如下二等价定义,\\
+    \centerline{
+        \begin{tabular}
+            {c}
+            {曲面在点$O$处单位球面上投影面积} \\ {\rotatebox{90}{$\Leftrightarrow$}} \\ \+:r2{\+$\Omega = \iint_S \frac{\hat{\+vr}\cdot\rd{\+vS}}{r^2}.$}\\
+        \end{tabular}
+    }
+\end{definition}
+    \incfig{3.5cm}{solidAngle}
+\end{multicols}
+
+\begin{pitfall}
+    立体角是方向敏感的, 计算时需事先约定曲面的正方向.
+\end{pitfall}
+
+\begin{longtable}
+    {|c|c|c|}
+    \hline
+    构型 & 参考点 & 立体角\\
+    \hline
+    \+:r4{\incfig{2cm}{solidAngleOfDisk}} & \+:r4{轴线上一点} & \+:r4{\+$2\pi\pare{1-\cos\theta_0}$} \\
+    &&\\
+    &&\\
+    &&\\
+    \hline
+    \+:r3{\incfig{3cm}{solidAngleOfPlane}} & \+:r3{平面外一点} & \+:r3{\+$2\pi$} \\
+    &&\\
+    &&\\
+    \hline
+    \+:r4{\incfig{2cm}{solidAngleOfClosed}} & \+:r2{闭曲面内一点} & \+:r2{\+$4\pi$} \\
+    &&\\
+    & \+:r2{闭曲面外一点} & \+:r2{\+$0$}\\
+    &&\\
+    \hline
+\end{longtable}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{4cm}{solidAngleOfLoop}
+        \caption{立体角微元在源处的表示}
+        \label{fig:立体角微元在源处的表示}
+    \end{subfigure}
+    \begin{subfigure}[b]{.5\textwidth}
+        \centering
+        \incfig{5cm}{solidAngleOfLoopCone}
+        \caption{立体角微元在源外的表示}
+        \label{fig:立体角微元在源外的表示}
+    \end{subfigure}
+    \caption{载流线圈立体角微元的两种表示}
+    \label{fig:载流线圈立体角微元的两种表示}
+\end{figure}
+\begin{theorem}
+    如\cref{fig:立体角微元在源处的表示}, 载流线圈在$\+vr$处产生的磁场满足
+    \[ \+vB \cdot \rd{\+vl} = \frac{\mu_0 I}{4\pi}\,\rd{\Omega}. \]
+\end{theorem}
+\begin{finale}
+    \begin{theorem}
+        [磁标势]如\cref{fig:立体角微元在源外的表示}载流线圈在$\+vr$处的磁场为
+        \[ \+vB\pare{\+vr} = \frac{\mu_0 I}{4\pi}\grad \Omega\pare{\+vr}. \]
+    \end{theorem}
+\end{finale}
+\begin{finale}
+    \begin{definition}
+        [磁偶极矩]对小线圈(或电流分布)定义磁偶极矩
+        \[ \+vm = I\+va = \half I\oint_C\+vr'\times\rd{\+vr'}. \]
+    \end{definition}
+\end{finale}
+\begin{hardlink}
+    参考\cref{table:特殊构型的磁场}获得磁偶极子的$\+vB$.
+\end{hardlink}
+
+% subsubsection 磁标势与磁偶极子 (end)
+
+\subsubsection{\texorpdfstring{Gau\ss 与Amp\`ere定律}{Gauss定律与Ampere定律}} % (fold)
+\label{ssub:gauss与amp1ere定律}
+
+\begin{finale}
+    \begin{equation*}
+        \oiint \+vB\cdot\rd{\+vS} = 0,\quad \oint \+vB\cdot\rd{\+vl} = \mu_0 \iint_S \+vJ\cdot\rd{\+vS}.
+    \end{equation*}
+\end{finale}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{5cm}{coaxisCylinder}
+    \caption{共轴圆柱电流}
+    \label{fig:共轴圆柱电流}
+\end{figure}
+
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:共轴圆柱电流}所示, 内外二导体上通有等大反向电流, 求各处$\+vB$.
+    \end{ex}
+    \begin{solution}
+        构造对圆形环路适用Amp\`ere定律.
+    \end{solution}
+\end{sample}
+\begin{hardlink}
+    参考\cref{table:特殊构型的磁场}获得螺绕环/螺线管的$\+vB$.
+\end{hardlink}
+
+\begin{reflex}
+    {适用Amp\`ere定律的情形}{适用Ampere定律的情形}
+    当构型存在\emph{旋转对称性}或\emph{平移对称性}时可以之求磁场.
+\end{reflex}
+
+% subsubsection gauss与amp1ere定律 (end)
+
+\subsubsection{特殊构型的磁场} % (fold)
+\label{ssub:特殊构型的磁场}
+
+\begin{reflex}
+    {有介质时的磁场}{有介质时的磁场}
+    对于下列构型, 将$\mu_0$替换为$\mu$即得到填充了介质时的磁场.
+\end{reflex}
+
+\begin{longtable}[h]{|c|c|c|c|}
+    \hline
+    构型 & 位置 & $\+vB$ & $\+vA$ \\
+    \hline
+    \+:r4{\incfig{3cm}{longwire}} & \+:r4{线外} & \+:r4{\+$\frac{\mu_0 I\+u\varphi}{2\pi s}$} & \+:r4{\+$-\frac{\mu_0I}{2\pi}\ln s$} \\
+    &&& \\
+    &&& \\
+    &&& \\
+    \hline
+    \+:r4{\incfig{2.7cm}{loop}} & \+:r4{中轴} & \+:r4{\+$\frac{\mu_0 R^2I\+uz}{2\pare{z^2+R^2}^{3/2}}$}& \\
+    &&&\\
+    &&&\\
+    &&&\\
+    \hline
+    \+:r7{\incfig{3cm}{solenoid}} & \+:r3{中轴} & \hspace{-4em}\+$\mu_0nI\+uz\cdot$ & \+:r5{} \\
+    &&\+:r2{\+$\frac{\pare{\cos\beta_1+\cos\beta_2}}{2}$} &\\
+    &&&\\
+    & \+:r2{环内} & \+:r2{\+$\mu_0nI\+uz$} & \+:r2{\+$\half \mu_0 nIs$} \\
+    &&&\\
+    & \+:r2{环外} & \+:r2{\+$0$} & \+:r2{\+$\half \mu_0 nI\frac{a^2}{s}$} \\
+    &&&\\
+    \hline
+    \+:r4{\incfig{4cm}{loopSolenoid}}& \+:r4{环内} & \+:r4{\+$\frac{\mu_0 NI}{2\pi s}\+u\varphi$}&\\
+    &&&\\
+    &&&\\
+    &&&\\
+    \hline
+    \+:r4{\incfig{4cm}{magneticFieldOfCylindricalCurrent}} & \+:r2{线内} & \+:r2{\+$\frac{\mu_0 Is}{2\pi a^2}\+u\varphi$} & \+:r2{\+$-\frac{\mu_0 Is^2}{4\pi a^2} + c$} \\
+    &&&\\
+    &\+:r2{线外}& \+:r2{\+$\frac{\mu_0 I}{2\pi s}\+u\varphi$} & \+:r2{\+$-\frac{\mu_0I}{2\pi}\ln s$} \\
+    &&&\\
+    \hline
+    \+:r4{\incfig{4cm}{planarCurrent}} & \+:r4{面外} & \+:r4{\+$\half \mu_0 \+v\kappa \times \+un$}&\\
+    &&&\\
+    &&&\\
+    &&&\\
+    \hline
+    \+:r5{\incfig{1.5cm}{mdipoleConfig}} & \+:r5{任意} & \+:r2{\hspace{-4em}\+$\frac{\mu_0}{4\pi r^3}\cdot$} & \+:r5{\+$\+vA = \frac{\mu_0\+vm\times\+ur}{4\pi r^2}$}\\
+    &&&\\
+    &&\+:r3{\+$\begin{cases}
+        \brac{3\pare{\+vm\cdot\+ur}\+ur-\+vm}\\
+        2\cos\theta\+ur+\sin\theta\+u\theta
+    \end{cases}$\hspace{-1.5em}}&\\
+    &&&\\
+    &&&\\
+    \hline
+    \caption{特殊构型的磁场}
+    \label{table:特殊构型的磁场}
+\end{longtable}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{3.5cm}{cylindricalCurrentCarved}
+        \caption{带空穴的圆柱电流}
+        \label{fig:带空穴的圆柱电流}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{3.5cm}{cylindricalCurrentCarvedEquivalent}
+        \caption{带空穴的圆柱的等效}
+        \label{fig:带空穴的圆柱的等效}
+    \end{subfigure}
+    \caption{}
+    \label{fig:带空穴的圆柱电流例题}
+\end{figure}
+
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:带空穴的圆柱电流}所示, 半径为$a$的长圆柱导线内被挖去半径为$b$的圆柱, 设电流均匀分布且电流密度为$\+vJ$, 求空管内磁感应强度.
+    \end{ex}
+    \begin{solution}
+        考虑如\cref{fig:带空穴的圆柱的等效}的等效体, 即在整个半径为$a$的圆柱内通密度为$\+vJ$的电流, 在空穴处通$\+vJ'=-\+vJ$的电流, 则
+        \[ \+vB = \+vB_+ + \+vB_- = \frac{\mu_0\+vJ\times\+vs}{2} - \frac{\mu_0\+vJ\times\+vs'}{2} = \frac{\mu_0\+vJ\times\+vd}{2}. \qedhere  \]
+    \end{solution}
+\end{sample}
+
+% subsubsection 特殊构型的磁场 (end)
+
+% subsection 真空中磁场 (end)
+
+\subsection{物质中的磁场} % (fold)
+\label{sub:物质中的磁场}
+
+\subsubsection{边值关系} % (fold)
+\label{ssub:边值关系}
+
+\begin{longtable}{|c|c|c|}
+    \hline
+    \diagbox{环境}{物理量} & $\+vB^{\parallel}$ & $B_\perp$ \\
+    \hline
+    真空 & $\+vB^{\parallel}_2 - \+vB^{\parallel}_1 = \mu_0 \+un\times \+v\kappa$ & $B_{1\perp} = B_{2\perp}$ \\
+    \hline
+\end{longtable}
+
+% subsubsection 边值关系 (end)
+
+% subsection 物质中的磁场 (end)
+
+\subsection{磁矢势} % (fold)
+\label{sub:磁矢势}
+
+\subsubsection{定义与性质} % (fold)
+\label{ssub:定义与性质}
+
+\begin{finale}
+    \begin{definition}
+        [磁矢势]
+        \begin{equation}
+        \label{eq:potentialA}
+            \+vA\pare{\+vr} = \frac{\mu_0}{4\pi}\iiint_V \frac{\+vJ\,\rd{V}}{\rcurs}.
+        \end{equation}
+    \end{definition}
+    \begin{theorem}
+        磁矢势\eqref{eq:potentialA}满足
+        \[ \div \+vA = 0,\quad \laplacian \+vA = 0,\quad \curl \+vA = \+vB. \]
+        \begin{equation}
+        \label{eq:oint_A_as_flux}
+            \oint_C \+vA \cdot\rd{\+vl} = \iint_S \+vB\cdot\rd{\+v\sigma}.
+        \end{equation}
+    \end{theorem}
+\end{finale}
+\begin{hardlink}
+    参考\cref{table:特殊构型的磁场}获得特殊构型的$\+vA$.
+\end{hardlink}
+\begin{figure}[ht]
+    \centering
+    \incfig{4cm}{fluxThroughLoopOutsideWire}
+    \caption{导线外的圆环}
+    \label{fig:导线外的圆环}
+\end{figure}
+\begin{sample}
+    \begin{ex}[习题8.3]
+        如\cref{fig:导线外的圆环}, 求通过圆环的磁通量.
+    \end{ex}
+    \begin{solution}
+        通过\eqref{eq:oint_A_as_flux}计算磁通量,
+        \[ \iint_S \+vB\cdot\rd{\+v\sigma} = \oint_C \+vA\cdot\rd{\+vl} = \int_0^{2\pi}\frac{\mu_0R}{2\pi}\ln\pare{d+R\sin\theta}\sin\theta\,\rd{\theta}. \qedhere \]
+    \end{solution}
+    \begin{hardlink}
+        参考\eqref{eq:oint_rec_cos}得到积分的结果.
+    \end{hardlink}
+\end{sample}
+
+% subsubsection 定义与性质 (end)
+
+% subsection 磁矢势 (end)
+
+% section 磁场大小相关量 (end)
+
+\section{能量与受力} % (fold)
+\label{sec:能量与受力}
+
+\subsection{\texorpdfstring{Amp\`ere与Lorentz力}{Ampere力与Lorentz力}} % (fold)
+\label{sub:ampere与Lorentz力}
+
+\subsubsection{一般线圈} % (fold)
+\label{ssub:一般线圈}
+
+\begin{finale}
+    \begin{theorem}
+        [Amp\'ere力]磁场中载流线元的受力为
+        \[ \rd{\+vF} = I\rd{\+vl}\times\+vB. \]
+    \end{theorem}
+    \begin{corollary}
+        均匀磁场中载流直导线的受力为
+        \[ \+vF = I\+vl\times\+vB. \]
+    \end{corollary}
+    \begin{corollary}
+        任意载流线圈受到的力和力学势能分别为
+        \[ \+vF = \grad\pare{I\Phi},\quad U\+_m_ = -I\Phi. \]
+    \end{corollary}
+\end{finale}
+\begin{corollary}
+    均匀磁场中稳恒闭合线圈不受力.
+\end{corollary}
+
+% subsubsection 一般线圈 (end)
+
+\subsubsection{面电流受力} % (fold)
+\label{ssub:面电流受力}
+
+\begin{pitfall}
+    计算面电流受力时, 应当采用面电流两侧的$\expc{\+vB}$.
+\end{pitfall}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{4cm}{magneticFieldOfSurfaceCylindricalCurrent}
+        \caption{圆柱面电流}
+        \label{fig:圆柱面电流}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{4cm}{solenoid}
+        \caption{螺线管面电流}
+        \label{fig:螺线管面电流}
+    \end{subfigure}
+    \caption{}
+    \label{fig:面电流受力例题}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        计算\cref{fig:面电流受力例题}的两个构型的上半表面受力.
+    \end{ex}
+    \begin{solution}
+        \vcf{EM005D.p.13, .14}.
+    \end{solution}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{coaxisKappaForce}
+    \caption{共轴面电流的受力}
+    \label{fig:共轴面电流的受力}
+\end{figure}
+\begin{sample}
+    \begin{ex}[习题8.3]
+        如\cref{fig:共轴面电流的受力}, 计算单位长度上外侧面电流的受力.
+    \end{ex}
+    \begin{solution}
+        注意$\expc{\+vB} = \+vB/2$, 故
+        \[ \+dldF = I\pare{-\+uz}\times\expc{\+vB} = \frac{\mu_0 I^2}{4\pi b}\+us. \qedhere \]
+    \end{solution}
+\end{sample}
+
+
+% subsubsection 面电流受力 (end)
+
+\subsubsection{磁偶极子} % (fold)
+\label{ssub:磁偶极子}
+
+\begin{finale}
+    \begin{theorem}
+        磁偶极子的受力、力学势能、力矩分别为
+        \[ \+vF = \+vm\cdot\grad\+vB,\quad U\+_m_ = -\+vm\cdot\+vB,\quad \+v\tau = \+vm\times\+vB. \]
+    \end{theorem}
+\end{finale}
+
+% subsubsection 磁偶极子 (end)
+
+\subsubsection{Lorentz力} % (fold)
+\label{ssub:lorentz力}
+
+\begin{remark}
+    [磁力与Ampere力做功]考虑导线的移动速率$\+vu$, 电子在导线内的相对移动速率$\+vv$, 则
+    \[ P\propto \brac{\pare{\+vu+\+vv}\times\+vB}\cdot\pare{\+vu+\+vv} \propto I\pare{\rd{\+vl}\times\+vB}\cdot\+vu + I\pare{\+vu\times\+vB}\cdot\rd{\+vl}. \]
+    第一项即Amp\`ere力做功, 第二项即动生电动势做功.
+\end{remark}
+\leavevmode
+\InsertBoxR{-1}{\parbox{4cm}{\begin{mtips}
+    通过\[ \nu=\omega/\pare{2\pi}, \]\[T=2\pi/\omega\]得到相应的量.
+\end{mtips}}}[0]\vspace*{-\baselineskip}
+\begin{finale}[right skip=5cm,]
+    \begin{theorem}
+        [均匀磁场中的带电粒子]
+        \begin{align*}
+            \omega_c &= \frac{qB}{m}\\
+            R &= \frac{mv_\perp}{qB}.
+        \end{align*}
+        螺距$h=v_\parallel T$.
+    \end{theorem}
+\end{finale}
+\leavevmode
+
+% subsubsection lorentz力 (end)
+
+% subsection ampere与Lorentz力 (end)
+
+% section 能量与受力 (end)
+
+\section{数学工具} % (fold)
+\label{sec:数学工具}
+
+\subsection{微积分工具} % (fold)
+\label{sub:微积分工具}
+
+\subsubsection{定积分} % (fold)
+\label{ssub:定积分}
+
+\begin{align}
+    \label{eq:oint_rec_cos}
+    \int_0^{2\pi} \rec{a+\cos\theta}\,\rd{\theta} &= \frac{2\pi}{\sqrt{a^2 - 1}}.
+\end{align}
+
+% subsubsection 定积分 (end)
+
+% subsection 微积分工具 (end)
+
+% section 数学工具 (end)
+
+\end{document}

@@ -1,0 +1,31 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+	
+考虑题目中的图6.8, 按照
+\xymatrix{
+	\ar[d]^3 & \ar[l]^2 \\
+	\ar[r]^4 & \ar[u]^1
+}的顺序标记各边, 有
+\begin{multicols}{2}
+\noindent
+\begin{align*}
+\vF_1 + \vF_3 &= I\varepsilon \hat{\vz}\times\pare{\vB_1-\vB_3} \\
+&= I\varepsilon^2\hat{\vz}\times\ddelon{\vB}{y} \\
+&= m\pare{{\color{blue}\ddelon{B_x}{y}}\hat{\vy} - {\color{red}\ddelon{B_y}{y}}\hat{\vx}}.
+\end{align*}
+\begin{align*}
+\vF_2 + \vF_4 &= I\varepsilon \hat{\vy}\times\pare{\vB_4-\vB_1} \\
+&= I\varepsilon^2\hat{\vy}\times\ddelon{\vB}{z} \\
+&= m\pare{{\color{blue}\ddelon{B_x}{z}}\hat{\vz} - {\color{red}\ddelon{B_z}{z}}\hat{\vx}}.
+\end{align*}
+\end{multicols}
+再通过
+\[ \div \vB = 0 \Rightarrow {\ddelon{B_x}{x}} + {\color{red}\ddelon{B_y}{y}} + {\color{red}\ddelon{B_z}{z}} = 0, \]
+\[ \curl \vB = 0 \Rightarrow {\color{blue}\ddelon{B_x}{y}} = {\ddelon{B_y}{x}},\quad {\color{blue}\ddelon{B_x}{z}}={\ddelon{B_z}{x}}. \]
+\[ \Longrightarrow \vF = \vF_1 + \vF_2 + \vF_3 + \vF_4 = \mu \pare{\ddelon{B_x}{x}\hat{\vx}+\ddelon{B_y}{x}\hat{\vy}+\ddelon{B_z}{x}\hat{\vz}} = \pare{\vmu\cdot\grad}\vB. \]
+
+
+\end{document}

@@ -1,0 +1,68 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ex58.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{618.80380706bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.15561048)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ex58.pdf}}%
+    \put(0.8371873,0.42545083){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ex58.pdf}}%
+    \put(0.31229858,1.08394761){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ex58.pdf}}%
+    \put(0.29378432,0.45435387){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08310966\unitlength}\raggedright $I$\end{minipage}}}%
+    \put(0.47093766,0.62373603){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.38533654\unitlength}\raggedright \end{minipage}}}%
+    \put(0.48424396,0.68290542){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25625475\unitlength}\raggedright $B$\end{minipage}}}%
+    \put(-0.00402527,0.44396515){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25625475\unitlength}\raggedright $A$\end{minipage}}}%
+    \put(0.14487953,0.520149){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25625475\unitlength}\raggedright $a$\end{minipage}}}%
+    \put(0.32841335,0.63788768){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25625475\unitlength}\raggedright $b$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ex58.pdf}}%
+    \put(0.48424396,0.68290542){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25625475\unitlength}\raggedright $B$\end{minipage}}}%
+    \put(0.82338084,0.6645406){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25625475\unitlength}\raggedright $\+vB$\end{minipage}}}%
+    \put(0.60464134,0.49265587){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.18836334\unitlength}\raggedright $P$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

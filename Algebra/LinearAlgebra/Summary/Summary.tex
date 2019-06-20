@@ -1,0 +1,113 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\usepackage{lipsum}
+
+\begin{document}
+
+\section{线性空间, 线性变换, 欧氏空间, 二次型} % (fold)
+\label{sec:线性空间_线性变换_欧氏空间_二次型}
+
+\begin{theorem}
+    向量在基$\vB$下的坐标为$X$, 则在新的基$\vC = \vB P$下坐标为
+    \[ X' = P^{-1}X. \]
+\end{theorem}
+
+\hrule
+
+\begin{paracol}{2}
+
+    \begin{theorem}
+        设线性空间有基
+        \[ \vB=\pare{v_1,v_2,\cdots,v_n}. \]
+        线性变换$\sA$在基$\vB$下的矩阵$\cA$为
+        \[ \begin{pmatrix}
+            \vert & \vert & \cdots & \vert \\
+            \sA v_1 & \sA v_2 & \cdots & \sA v_n \\
+            \vert & \vert & \cdots & \vert
+        \end{pmatrix}. \]
+    \end{theorem}
+
+\switchcolumn
+
+    \begin{theorem}
+        设Euclid空间有基
+        \[ \vB=\pare{v_1,v_2,\cdots,v_n}. \]
+        二次型$Q$在基$\vB$下的矩阵$\cA$为
+        \[ \begin{pmatrix}
+            \bra{v_1}\ket{v_1} & \bra{v_1}\ket{v_2} & \cdots & \bra{v_1}\ket{v_n} \\
+            \bra{v_2}\ket{v_1} & \bra{v_2}\ket{v_2} & \cdots & \bra{v_2}\ket{v_n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            \bra{v_n}\ket{v_1} & \bra{v_n}\ket{v_2} & \cdots & \bra{v_n}\ket{v_n}
+        \end{pmatrix}. \]
+    \end{theorem}
+
+\end{paracol}
+
+\hrule
+
+\begin{paracol}{2}
+
+    \begin{theorem}
+        设线性变换在基$\vB$下的矩阵为$\cA$, 在基
+        \[ \vC = \vB P \]
+        下的矩阵为$\cA'$, 则
+        \[ \cA' = P^{-1}\cA P. \]
+    \end{theorem}
+
+    \switchcolumn
+
+    \begin{theorem}
+        设二次型在基$\vB$下的矩阵为$\cA$, 在基
+        \[ \vC = \vB P \]
+        下的矩阵为$\cA'$, 则
+        \[ \cA' = P^T \cA P. \]
+    \end{theorem}
+
+\end{paracol}
+
+\hrule
+
+\begin{paracol}{2}
+    
+    \begin{theorem}
+        线性变换属于不同特征值的向量
+        \[ \ket{\lambda_1}, \ket{\lambda_2}, \cdots, \ket{\lambda_k} \]
+        是线性无关的.
+    \end{theorem}
+
+    \switchcolumn
+
+    \begin{theorem}
+        对称矩阵属于不同特征值的向量
+        \[ \ket{\lambda_1}, \ket{\lambda_2}, \cdots, \ket{\lambda_k} \]
+        是彼此正交的.
+    \end{theorem}
+
+\end{paracol}
+
+\hrule
+
+\begin{paracol}{2}
+
+    \begin{theorem}
+        对复方阵$\cA$, 存在可逆矩阵$P$使得
+        \[ P^{-1}\cA P = \Lambda \]
+        为对角阵的充要条件为代数重数与几何重数相等.
+    \end{theorem}
+    
+    \switchcolumn
+
+    \begin{theorem}
+        对对称矩阵$\cA$, 总存在正交矩阵$P$使得
+        \[ P^{-1}\cA P = \Lambda \]
+        为对角阵.
+    \end{theorem}
+
+\end{paracol}
+
+% section 线性空间_线性变换_欧氏空间_二次型 (end)
+
+
+
+\end{document}

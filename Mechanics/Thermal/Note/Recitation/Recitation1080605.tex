@@ -1,0 +1,61 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{ex}[4.7]
+    \[ U = \rec{3} U \Rightarrow u = 3p \Rightarrow U = 3pV. \]
+    绝热情形下,
+    \[ \dbar Q = \rd{U} + p\,\rd{V} = 0 \Longrightarrow 3p\,\rd{V} + 3V\,\rd{p} + p\,\rd{V} = 0. \]
+\end{ex}
+\begin{ex}[4.8]
+    概率密度的换元,
+    \[ f\pare{v}\,\rd{V} = 4\pi \pare{\frac{m}{2\pi kT}}^{3/2} v^2 e^{-\frac{mv^2}{2kT}}\,\rd{v}, \]
+    将$v$悉数代换为$v_p x$即可. 如果是换成$\varepsilon$表示, 考虑$\rd{\varepsilon} = mv\,\rd{v}$即可.
+\end{ex}
+\begin{finale}
+    \[ g\pare{x} = \frac{4}{\sqrt{\pi}}x^2 e^{-x^2}. \]
+\end{finale}
+\begin{ex}[4.12]
+    平均势能
+    \[ \frac{\displaystyle\int_0^L mgz N_0 e^{-\frac{mgz}{kT}}\,\rd{z}}{\displaystyle\int_0^L N_0 e^{-\frac{mgz}{kT}}\,\rd{z}}. \]
+\end{ex}
+\begin{finale}
+    双原子气体在室温下视为
+    \[ C_V = \frac{5}{2}R. \]
+    其中平动和转动被激发.
+\end{finale}
+\begin{finale}
+    \begin{align*}
+        p &= \rec{3}nm\expc{v^2},\\
+        \lambda &= \rec{\sqrt{2}n\pi d^2},\\
+        \kappa &= \rec{3} n\expc{v}\lambda c_e = \frac{\kappa}{\pi d^2} \sqrt{\frac{kT}{\pi m}},\\
+        \eta &= \rec{3} nm\expc{v}\lambda = \frac{2}{3\pi d^2} \sqrt{\frac{mkT}{\pi}}, \\
+        D &= \rec{3}\expc{v}\lambda = \frac{2}{3\pi nd^2}\sqrt{\frac{kT}{\pi m}}.
+    \end{align*}
+\end{finale}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ex5-5}
+\end{figure}
+\begin{ex}[5.5]
+    \[ \+dzd\rho = \SI{1.03}{\kilogram\per\meter^4}, \]
+    \[ \Delta N = -D\pare{\+dzdn}_{z_0} S. \]
+\end{ex}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ex5-7}
+\end{figure}
+\begin{ex}[5.7]
+    两个共轴圆柱面被分别维持在温度$T_1$和$T_2$.
+\end{ex}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{exRotating}
+\end{figure}
+\begin{ex}
+    旋转圆柱面.
+\end{ex}
+
+\end{document}

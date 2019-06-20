@@ -1,0 +1,82 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc, singleton, epu, nova]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{不同语言共有特性的对比}
+
+\section{字符串处理} % (fold)
+\label{sec:字符串处理}
+
+\subsection{正则表达式} % (fold)
+\label{sub:正则表达式}
+
+\subsubsection{模式提取} % (fold)
+\label{ssub:模式提取}
+
+\begin{pylst}
+import re
+
+data = "id: 8, id: 42, id: 312"
+regex = re.compile("id: ([0-9]+)")
+
+it = re.finditer(regex, data)
+for match in it:
+    print match.group(1)
+\end{pylst}
+\begin{javalst}
+import java.util.regex.*;
+
+public class RegexMatch {
+    public static void main(String[] args) {
+        String s = "id: 8, id: 42, id: 312";
+        Pattern pattern = Pattern.compile("id: ([0-9]+)");
+        Matcher match = pattern.matcher(s);
+        while (match.find()) {
+            System.out.println(match.group(1));
+        }
+    }
+}
+\end{javalst}
+\begin{jslst}
+var re = @</id: ([0-9]+)/g>@;
+var s = "id: 8, id: 42, id: 312";
+var m;
+
+do {
+    m = re.exec(s);
+    if (m) {
+        console.log(m[1]);
+    }
+} while (m);
+\end{jslst}
+\begin{cshlst}
+using System;
+using System.Text.RegularExpressions;
+
+namespace RegexTest
+{
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            string text = "id: 8, id: 42, id: 312";
+            string search = "id: ([0-9]+)";
+            MatchCollection matches = Regex.Matches(text, search);
+            foreach (Match m in matches)
+            {
+                Console.WriteLine(m.Groups[1]);
+            }
+        }
+    }
+}
+\end{cshlst}
+
+% subsubsection 模式提取 (end)
+
+% subsection 正则表达式 (end)
+
+% section 字符串处理 (end)
+
+\end{document}

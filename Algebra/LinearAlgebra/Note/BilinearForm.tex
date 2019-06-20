@@ -1,0 +1,142 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[singleton, margintoc]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{二次型}
+
+\section{正定矩阵} % (fold)
+\label{sec:正定矩阵}
+
+\subsection{正定矩阵的性质} % (fold)
+\label{sub:正定矩阵的性质}
+
+\subsubsection{正定矩阵的判定} % (fold)
+\label{ssub:正定矩阵的判定}
+
+\begin{theorem}[Sylvester判准]
+    对称矩阵$A$是正定的当且仅当$A$的各阶顺序主子式大于零.
+\end{theorem}
+
+\begin{proposition}
+    对称的$A$正定当且仅当$A$的所有特征值大于零.
+\end{proposition}
+
+\begin{pitfall}
+    不能认为「所有特征值大于零」的矩阵都是正定的 --- 需要保证对称.
+\end{pitfall}
+
+% subsubsection 正定矩阵的判定 (end)
+
+\subsubsection{正定矩阵的分解} % (fold)
+\label{ssub:正定矩阵的分解}
+
+\begin{ex}
+    设$A$正定, 证明存在正定矩阵使得$A=P^2$.
+\end{ex}
+\begin{proof}
+    $\lambda_i>0$, $\exists Q\in SO$ s.t. $A = Q^T \diag\curb{\lambda_i} Q$ $\Rightarrow$ $\sqrt{A} = Q^T \diag\curb{\sqrt{\lambda_i}} Q$正定, $A = \sqrt{A}^2$.
+\end{proof}
+\begin{ex}
+    设$A$和$B$正定, 则
+    \[ \det \pare{AB} \le \pare{\rec{n}\tr \pare{AB}}^{1/n}. \]
+\end{ex}
+\begin{proof}
+    设$A=P^T P$, $B = Q^T Q$, 则$\det \pare{AB} = \det \pare{PQ^T QP^T}$且$\tr \pare{AB} = \tr \pare{PQ^T QP^T}$, 且$PQ^TQP^T=\pare{PQ^T}\pare{PQ^T}^T$, 引用AG不等式即可.
+\end{proof}
+
+% subsubsection 正定矩阵的分解 (end)
+
+% subsection 正定矩阵的性质 (end)
+
+\subsection{半定和负定矩阵} % (fold)
+\label{sub:半定和负定矩阵}
+
+\subsubsection{负定矩阵} % (fold)
+\label{ssub:负定矩阵}
+
+\begin{pitfall}
+    不能认为负定矩阵的Sylvester准则为「\sout{各阶顺序主子式小于零}」.
+\end{pitfall}
+
+\begin{proposition}
+    $A$正定当且仅当$-A$负定.
+\end{proposition}
+\begin{proposition}
+    $A$正定当且仅当负惯性指数为零.
+\end{proposition}
+
+% subsubsection 负定矩阵 (end)
+
+\subsubsection{半定矩阵} % (fold)
+\label{ssub:半定矩阵}
+
+\begin{theorem}[Sylvester判准]
+    对称矩阵$A$是半正定的当且仅当$A$的各阶主子式非负.
+\end{theorem}
+\begin{proposition}
+    对称矩阵$A$半正定当且仅当$A=P^T P$, $P$对称但不可逆.
+\end{proposition}
+\begin{pitfall}
+    半正定的Sylvester判准要求各阶主子式, 而非仅仅顺序主子式.
+\end{pitfall}
+\begin{proof}[半正定矩阵各个判准的证明]
+    先证正定$\Leftrightarrow$存在不可逆的$P$满足$A=P^TP$,
+    后证正定$\Leftrightarrow$Sylvester条件.
+    \begin{cenum}
+        \item 若$A$半正定, 则存在可逆的$P$满足
+        \[ A = P^T I_r I_r P, \]
+        考虑$I_r P$即可.
+        \item 若$A=P^TP$, 则
+        \[ v^T A v = v^TP^T Pv = \norm{Pv}^2 \ge 0. \]
+        $P$不可逆, 故存在非零的$v$使等号成立.
+        \item 若$A$半正定, $Q_k\pare{x_1,\cdots,x_k} = Q\pare{x_1,\cdots,x_k,0,\cdots}$为正定或半正定的, 归纳可知.
+        \item 若$A$的主子式皆非负, 考虑
+        \[ D_n = \det\pare{\lambda I +A} = \+m[
+        | \lambda+a_{12} | a_{12}         | \cdots | a_{1n}         |
+        | a_{21}         | \lambda+a_{22} | \cdots | a_{2n}         |
+        | \vdots         | \vdots         | \ddots | \vdots         |
+        | a_{n1}         | a_{n2}         | \cdots | \lambda+a_{nn} |
+        ],
+        \]
+        各行加零后拆分, 有$2^n$个行列式. $D\pare{i_1,i_2,\cdots,i_k}$即为$2^k$个行列式中的一个, 例如
+        \leavevmode \InsertBoxR{2}{\parbox{4cm}{\begin{mtips}
+            如果将行列式完全按列(或者行)展开, 就会得到那$2^n$个项.
+        \end{mtips}}}[1]
+        \[ D\pare{1,2,3} = \det\+m[
+        | a_{11} | a_{12} | a_{13} | 0       |
+        | a_{21} | a_{22} | a_{23} | 0       |
+        | a_{31} | a_{32} | a_{33} | 0       |
+        | a_{41} | a_{42} | a_{43} | \lambda |
+        ],
+        \]
+        \leavevmode
+        \[ D\pare{1,3} = \det\+m[
+        | a_{11} | 0       | a_{13} | 0       |
+        | a_{21} | \lambda | a_{23} | 0       |
+        | a_{31} | 0       | a_{33} | 0       |
+        | a_{41} | 0       | a_{43} | \lambda |
+        ] \]
+        显然得到$A$的主子式. 取$A$的$\curb{i_1,i_2,\cdots,i_k}$列,
+        \[ \det\pare{\lambda I_k +A_k} = \lambda^k + \sum_{t=1}^k\sum_{t_1<t_2<\cdots<t_k} D\pare{i_1,i_2,\cdots,i_k}. \]
+        由上面的观察,
+        \[ \det\pare{\lambda I_k + A_k} = \lambda^k + \sum_{t=1}^k\lambda^{k-t} \sum D_t, \]
+        求和号内为$\le k$阶的主子式的和. 故只有$\lambda \le 0$的解.
+        \qedhere
+    \end{cenum}
+\end{proof}
+\begin{corollary}
+    对$\lambda>0$, $\lambda I+A$正定, 则$A$半正定.
+\end{corollary}
+
+% subsubsection 半定矩阵 (end)
+
+% subsubsection 定义 (end)
+
+% subsection 半定和负定矩阵 (end)
+
+% section 正定矩阵 (end)
+
+
+\end{document}

@@ -1,0 +1,45 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{theorem}[Transformation of matrix of inner prod]
+	For basis $\vB = \vA T$, inner prod on $\vA$ being $G$, then inner prod on $\vB$ is $T^T GT$.
+\end{theorem}
+\begin{theorem}[perpendi implies linear indepen]
+	if $\vA$ mutually perpendi, then linear indepen.
+\end{theorem}
+
+\begin{theorem}[G-S proc]
+	Normal standard basis exists for any subspace: via Gra-Sch proced. In $\R^2$ for example,
+	\[ r = \beta - \frac{\bra{\alpha}\ket{\beta}}{\bra{\alpha}\ket{\alpha}}\alpha. \]
+	\begin{cenum}
+		\item normalize $\alpha_1$ sic $\ve_1 = \alpha_1/\abs{\alpha_1}$;
+		\item $\beta_2 = \alpha_2 - \bra{\alpha_2}\ket{\ve_1} \ve_1$;
+		\item normalizing $\beta_2$ yields $\ve_2$; $\beta_2$ being nonzero guaranteed by linear indepen;
+		\item $\beta_k = \alpha_k - \sum^{k-1} \bra{\alpha_k}\ket{\ve_k}\ve_k$;
+	\end{cenum}
+\end{theorem}
+
+\begin{theorem}[orth transf]
+	Linear transf $\bra{Tu}\ket{Tv}=\bra{u}\ket{v}$ iff $\bra{Tv}\ket{Tv} = \bra{v}\ket{v}$ for all.
+\end{theorem}
+\begin{theorem}[orth tranf iff perserve uno ns basis]
+	If $T\vB$ where $\vB$ is uno ns basis is uno ns basis, then $T$ is orth transf.
+\end{theorem}
+
+\begin{theorem}
+	those transform a NS basis are orth matrices. thus $O$ and $SO$ are groups.
+\end{theorem}
+
+\begin{finale}
+	eigen vec of diff eigenv of a SYMMTERIC MATRIX are perpendi to each other.
+\end{finale}
+
+\begin{finale}
+	for a real SYMMETRIC MATRIX, there is always $T\in O$ st
+	\[ T^{-1} AT = \Lambda. \]
+\end{finale}
+
+\end{document}
