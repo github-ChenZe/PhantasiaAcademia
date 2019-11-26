@@ -1,0 +1,78 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'SinArcsinEven.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{3021.09282726bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.22878459)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{SinArcsinEven.pdf}}%
+    \put(0.95684262,0.06877029){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{SinArcsinEven.pdf}}%
+    \put(0.24135544,0.20735645){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y(x)$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{SinArcsinEven.pdf}}%
+    \put(0.40393507,0.00256804){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$2\pi$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{SinArcsinEven.pdf}}%
+    \put(0.55419941,0.19007123){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$2\pi$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{SinArcsinEven.pdf}}%
+    \put(0.69093512,0.08847341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12358191\unitlength}\raggedright $2\pi$\end{minipage}}}%
+    \put(0.19520321,0.17343595){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $y_1$\end{minipage}}}%
+    \put(0.23592906,0.06295434){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $y_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{SinArcsinEven.pdf}}%
+    \put(0.3026352,0.0884734){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $x_1$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{SinArcsinEven.pdf}}%
+    \put(0.7359239,0.06137963){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $x_1$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{SinArcsinEven.pdf}}%
+    \put(0.77384107,0.08984246){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $x'_1$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{SinArcsinEven.pdf}}%
+    \put(0.15869038,0.11696118){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $x_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{SinArcsinEven.pdf}}%
+    \put(0.65469915,0.13726078){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $x_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{SinArcsinEven.pdf}}%
+    \put(0.61994352,0.12534456){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14687054\unitlength}\raggedright $x'_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{SinArcsinEven.pdf}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,7 @@
+/@\cinclude{pthread.h}@/
+int pthread_wait_destroy(/@\+c{pthread\_barrier\_t}@/* barrier);
+/* 成功时返回0或PTHREAD_BARRIER_SERIAL_THREAD, 否则返回错误代码 */
+/@\lhend @/
+/* 排序线程: 排序自己的部分 */
+heapsort(...);
+pthread_barrier_wait(&b);

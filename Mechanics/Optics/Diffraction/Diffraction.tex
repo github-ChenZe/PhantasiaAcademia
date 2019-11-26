@@ -1,0 +1,880 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\DeclareMathOperator{\sinc}{sinc}
+\makeatletter
+\DeclareFontFamily{U}{tipa}{}
+\DeclareFontShape{U}{tipa}{m}{n}{<->tipa10}{}
+\newcommand{\arc@char}{{\usefont{U}{tipa}{m}{n}\symbol{62}}}%
+
+\newcommand{\arcover}[1]{\mathpalette\arc@arc{#1}}
+
+\newcommand{\arc@arc}[2]{%
+  \sbox0{$\m@th#1#2$}%
+  \vbox{
+    \hbox{\resizebox{\wd0}{\height}{\arc@char}}
+    \nointerlineskip
+    \box0
+  }%
+}
+\makeatother
+
+\begin{document}
+
+\section{衍射} % (fold)
+\label{sec:衍射}
+
+衍射谓波动传输中遇到障碍物时, 绕过障碍物并在障碍物后方的几何阴影区域造成光强分布. 即无法通过反射/折射定律解释的绕射现象.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{DiffractionToShadow}
+\end{figure}
+明显的衍射现象要求障碍物的尺度合适($10^3\lambda$到$10\lambda$). 太大向直线传播过渡, 太小向散射过渡. 光束受限最显著的方向光束会展开.
+
+\subsection{Huygens-Fresnel原理} % (fold)
+\label{sub:huygens_fresnel原理}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{HuygensFresnel}    
+    \caption{Huygens-Fresnel原理}
+\end{figure}
+\begin{theorem}[Huygens-Fresnel原理]
+    空间某点的振动可视为波前上所有面元的次波相干叠加的结果. 即
+    \[ \tilde{U}\pare{P} = \iint_{\Sigma} \rd{\tilde{U}\pare{P}}. \]
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{KirchhoffFactor}
+    \caption{波前面元的贡献}
+\end{figure}
+将诸面元的光场叠加,
+\begin{align*}
+    \rd{\tilde{U}} &\propto \rd{\Sigma}, \propto \tilde{U}_0\pare{Q}, \propto \frac{e^{ikr}}{r},\propto F\pare{\theta_0,\theta}. \\
+    \Rightarrow \tilde{U}\pare{P} &= k\iint_{\Sigma} \tilde{U}_0\pare{Q} F\pare{\theta_0,\theta} F\pare{\theta_0,\theta} \cdot \frac{e^{ikr}}{r}\,\rd{\sigma}.
+\end{align*}
+Kirchhoff边界条件要求
+\[ F\pare{\theta_0,\theta} = \half\pare{\cos\theta_0 + \cos\theta},\quad K = \frac{-i}{\lambda} = \frac{e^{-i\pi}}{\lambda}. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{KirchhoffBoundary}
+    \caption{Kirchhoff边界条件}
+\end{figure}
+$\Sigma_1$全遮蔽, $\Sigma_2$(无穷大半球面)积分为零, $\Sigma_0$全透射. 从而
+\[ \tilde{U}\pare{P} = -\frac{i}{2\pi} \iint_{\Sigma_0} \pare{\cos\theta_0 + \cos\theta} \tilde{U}_0\pare{Q} \frac{e^{ikr}}{r}\,\rd{\sigma}. \]
+假设傍轴条件$\theta - \theta_0 \sim 0$, $r\sim r_0$, 则
+\[ \tilde{U}\pare{P} = -\frac{i}{\lambda r_0} \iint_{\Sigma_0} \tilde{U}_0\pare{Q}e^{ikr}\,\rd{\sigma}. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{3cm}{BabinetI} \raisebox{1.4cm}{$+$}
+    \incfig{3cm}{BabinetII} \raisebox{1.4cm}{$=$}
+    \incfig{3cm}{BabinetIII}
+    \caption{Babinet原理}
+\end{figure}
+\begin{theorem}[Babinet原理]
+    互补屏的衍射场的复振幅之和等于自由传播波场.
+\end{theorem}
+从而在光源的几何像之外, 通过互补屏光强相抵.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.343 1, 3, 4, 5 (p.251)
+
+% paragraph 作业 (end)
+
+% subsection huygens_fresnel原理 (end)
+
+\subsection{Fresnel圆孔/圆屏衍射} % (fold)
+\label{sub:fresnel圆孔_圆屏衍射}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{FresnelDiffraction}
+    \caption{Fresnel衍射装置}
+    \label{fig:Fresnel衍射装置}
+\end{figure}
+如\cref{fig:Fresnel衍射装置}, $R\sim \SI{}{\meter}$, $\rho\sim \SI{}{\milli\meter}$, $b=\SI{3}{\meter}$--$\SI{5}{\meter}$. 圆孔衍射现象为同心圆环. 而圆屏衍射中心总是亮点(Poisson光斑).
+\begin{figure}[ht]
+    \centering
+    \incfig{11cm}{FresnelHalfPeriodZoneSep}
+    \caption{半波带法}
+    \label{fig:半波带法}
+\end{figure}
+如\cref{fig:半波带法}, 各个半波带的复振幅为
+\begin{align*}
+    \tilde{U}_1\pare{P_0} &= A_1\pare{P_0} e^{i\varphi_1}, \\
+    \tilde{U}_2\pare{P_0} &= A_2\pare{P_0} e^{i\varphi_1 + \pi}, \\
+    \tilde{U}_3\pare{P_0} &= A_3\pare{P_0} e^{i\varphi_1 + 2\pi}, \cdots.
+\end{align*}
+振幅可直接叠加,
+\begin{align*}
+    A\pare{P_0} &= A_1 - A_2 + A_3 - A_4 + \cdots, \\
+    A_k &\propto f\pare{\theta_k} \cdot \frac{\Delta \Sigma_k}{r_k}.
+\end{align*}
+其中$\Delta \Sigma_k$是第$k$个环的面积.
+\begin{figure}
+    \centering
+    \incfig{11cm}{FresnelHalfPeriodArea}
+    \caption{半波带面积的计算}
+    \label{fig:半波带面积的计算}
+\end{figure}
+如\cref{fig:半波带面积的计算}, $h = R - R\cos \alpha$, 而
+\[ \Sigma = 2\pi R^2 \pare{1-\cos \alpha}. \]
+在$\bigtriangleup SMP_0$内,
+\begin{align*}
+    \cos\alpha &= \frac{R^2 + \pare{R+b}^2 - r^2}{2R\pare{R+b}}. \\
+    \rd{\Sigma} &= 2\pi R^2 \sin\alpha\,\rd{\alpha} \Rightarrow \sin\alpha\rd{\alpha} = \frac{\rd{\Sigma}}{2\pi R^2}. \\
+    \sin\alpha\,\rd{\alpha} &= R\pare{R+b} \Rightarrow \+drd\Sigma = \frac{2\pi R\cdot r}{R+b}.
+\end{align*}
+令$\rd{r} = \lambda/2$, $\rd{\Sigma_k} = \Delta \Sigma_k$, 则
+\[ \frac{\Delta \Sigma_k}{r_k} = \frac{2\pi R \cdot\lambda/2}{R+b} = \frac{\pi R\lambda}{R+b} \]
+与$k$无关.
+\[ f\pare{\theta_k} = \half\pare{\cos\theta_0 + \cos\theta_k} = \half\pare{1+\cos\theta_k}. \]
+\begin{figure}
+    \centering
+    \incfig{10cm}{AmplitudeSuperposition}
+    \caption{$A_k$求和相消}
+    \label{fig:a_k求和相消}
+\end{figure}
+如\cref{fig:a_k求和相消}, 上下交错的$A_k$求和后相消.
+\begin{cenum}
+    \item 对于圆孔衍射,
+    \[ A\pare{P_0} = \half \brac{A_1 + \pare{-1}^{n+1}A_n}. \]
+    $n$的奇偶性导致明暗交替变化.
+    \item 对于自由传播, 最高级的$n$对应$f\pare{\theta_n} = 0$, 从而
+    \[ A\pare{P_0} = \half A_1\pare{P_0}. \]
+    \item 对于圆屏幕衍射,
+    \[ A\pare{P_0} = A_{k+1} - A_{k+2} + \cdots + \cancelto{0}{A_n} = \half A_{k+1}\pare{P_0}. \]
+    故中心有亮点, 与$k$的奇偶性无关.
+\end{cenum}
+
+\paragraph{矢量图解法} % (fold)
+\label{par:矢量图解法}
+
+将半波带分解为多份环带, 则每份环带的相位不一致, 所贡献之$A$亦不一致. 每个环带的贡献以矢量图(\cref{fig:Fresnel半波带近似})时须具备相应之方向. 此外, 多个周期的强度叠加应当具有类似\cref{fig:多个周期的Fresnel半波带近似}之样态, 盖波带之振幅成减少趋势.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{FresnelHalfPeriodZone}
+    \caption{Fresnel半波带近似}
+    \label{fig:Fresnel半波带近似}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{VectorSuperposition}
+    \caption{多个周期的Fresnel半波带近似}
+    \label{fig:多个周期的Fresnel半波带近似}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        若圆孔包含$1/2$个半波带, $OB = \displaystyle \frac{\sqrt{2}}{2}PM = \frac{\sqrt{2}}{2}A_1$, $I = 2I_0$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于自由传播的球面波, $\displaystyle \tilde{U} = \frac{a}{r}e^{ikr}$. 在衍射屏处, $\tilde{U}\pare{O} = \displaystyle \frac{a}{R}e^{ikR}$, 在屏幕处$\displaystyle \tilde{U}\pare{P} = \frac{a}{R+b}e^{ik\pare{R+b}}$. 注意$\tilde{U}\pare{P} = \displaystyle \half \tilde{U}_1\pare{P}$, 其中
+        \[ \tilde{U}_1\pare{P} = k\iint_{\Sigma_1} \tilde{U}\pare{\theta}F\pare{\theta_0,\theta} \frac{e^{ikr}}{r}\,\rd{\Sigma}. \]
+        其中
+        \[ F\pare{\theta,\theta_0} = 1,\quad \tilde{U}\pare{O} = \frac{a}{R}e^{ikR},\quad \frac{\rd{\Sigma}}{r} = \frac{2\pi R}{R+b}\,\rd{r}. \]
+        代入上面的积分,
+        \begin{align*}
+            \tilde{U}_1\pare{P} &= \frac{2\pi aK}{R+b} e^{ikR} \int_b^{b+\lambda/2} e^{ikr}\,\rd{r} \\
+            &= -\frac{2\lambda aK}{i\pare{R+b}} e^{ik\pare{R+b}} \\
+            &\Rightarrow -\frac{\lambda K}{i} = 1 \Rightarrow K = -\frac{i}{\lambda}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% paragraph 矢量图解法 (end)
+
+\paragraph{Fresnel波带片} % (fold)
+\label{par:fresnel波带片}
+
+如\cref{fig:Fresnel波带片的制作}, 计算波带的半径后将奇数波带全部涂黑, 就可以实现波带片的制作.
+\begin{figure}[ht]
+    \centering
+    \incfig{11cm}{FresnelZonePlate}
+    \caption{Fresnel波带片的制作}
+    \label{fig:Fresnel波带片的制作}
+\end{figure}
+\begin{align*}
+    \rho_k^2 &= R^k - \pare{R-h_k}^2 \\
+    &= r_k^2 + \pare{b+h_k}^2. \\
+    2Rh_k &= r_k^2 + b^2 - 2bh_k, \\
+    2h_k\pare{R+b} &= r_k^2 - b^2 = kb\lambda + \Delta\pare{\lambda^2}. \\
+    \Rightarrow h_k &= \frac{Rb\lambda}{2\pare{R+b}}. \\
+    \rho_k^2 &= r_k^2 - \pare{b+h_k}^2 \\
+    &= r_k^2 - b^2 - 2bh_k \\
+    &= kb\lambda - 2b\cdot \frac{Rb\lambda}{2\pare{R+b}} \\
+    &= \frac{Rb}{R+b}\cdot k\lambda. \\
+    \rho_k &= \sqrt{\frac{Rbk\lambda}{R+b}} = \sqrt{k}\rho_1,\quad \rho_1 = \sqrt{\frac{Rb\lambda}{R+b}}. \\
+    R\rightarrow \infty &\Rightarrow \rho_1 = \sqrt{b\lambda}. \quad
+    \rho_k^2 = \frac{Rb}{R+b}\cdot k\lambda \Rightarrow \frac{k\lambda}{\rho_k^2} = \frac{R+b}{Rb}\\ & \Rightarrow \rec{R} + \rec{b} = \frac{k\lambda}{\rho_k^2} = \frac{\lambda}{\rho_1^2} = \rec{f},\quad f = \frac{\rho_1^2}{\lambda}.
+\end{align*}
+故Fresnel波带片可以作为透镜使用.
+\begin{sample}
+    \begin{ex}
+        若Fresnel波带片有$20$个半波带, 其中奇数带露出, 偶数带挡住, 则轴上场点的强度
+        \[ A' = A_1 + A_3 + \cdots + A_{10} = 10A_1\Rightarrow I = 100A_1^2 = 400 I_0. \]
+        如果将偶数带加$\pi$相位, 则$A' = 20A_1$.
+    \end{ex}
+\end{sample}
+\begin{figure}
+    \centering
+    \incfig{12cm}{SubfocusOfFresnelZone}
+    \caption{Fresnel波带片的次焦点}
+\end{figure}
+$R\rightarrow\infty$, $b=f$是主焦点, 划分了$k$个半波带. 在$\displaystyle b = f' = \frac{f}{3}$处会出现次焦点, 因为对于这个新的$b$, 由$\rho_k \propto \sqrt{bk/\pare{R+k}}\sim\sqrt{bk}$可知同一个$\rho_k$对应的级数为$3k$. 因此, 原先波带片的通过波带被各分$3$份, 其中两份相消, 故振幅减至$1/3$. 在$f' = f/5, f/7, \cdots$都有类似的现象.
+\begin{remark}
+    Fresnel波带片还存在虚焦点, 即衍射光发散.
+\end{remark}
+\begin{remark}
+    余弦波带片只存在一个主焦点. Fresnel波带片对应方波的Fourier变换, 故存在多个峰, 但余弦的Fourier变换只有一个峰.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        对于一张经典Fresnel波带片的制作, 提出两点要求:
+        \begin{cenum}
+            \item 对于$\lambda = \SI{633}{\nano\meter}$, 第一焦距$f_1 = \SI{400}{\milli\meter}$.
+            \item 主焦点光强为自由光强的$10^4$倍.
+        \end{cenum}
+    \end{ex}
+    \begin{proof}[解]
+        $f_1 = \displaystyle \frac{\rho_1^2}{\lambda} \Rightarrow \rho_1 = \sqrt{f_1\lambda}$. $I = NI_0 = NA_0^2$, 相应振幅为$\sqrt{N}A_0 = \sqrt{N}A_1/2 = 50A_1$. 故需要透过$50$个半波带, 即总共有$100$个波带,
+        \[ \rho_{100} = \sqrt{100}\rho_1 = \SI{5}{\milli\meter}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{5.5cm}
+        \centering
+        \incfig{5cm}{ComplexZonePlate1}
+        \caption{}
+        \label{fig:复杂波带片1}
+    \end{subfigure}
+    \let\saveinfty\infty%
+    \def\infty{\max}%
+    \begin{subfigure}[b]{6.5cm}
+        \centering
+        \incfig{6cm}{ComplexZonePlate1Vector}
+        \caption{}
+        \label{fig:复杂波带片1向量图}
+    \end{subfigure}
+    \let\infty\saveinfty%
+    \caption{复杂波带片}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:复杂波带片1}所示, 波带片
+        \begin{cenum}
+            \item 第一个孔隙通过波长$0\sim \lambda/4$, 通过一半振幅, 振幅$A_1$;
+            \item 第二个孔隙通过波长$\lambda/4\sim \lambda/2$, 通过一半振幅, 振幅$A_2$;
+            \item 第三个孔隙通过波长$\lambda/2\sim \infty$, 通过一半振幅, 振幅$A_3$.
+        \end{cenum}
+        各振幅分别如\cref{fig:复杂波带片1向量图}所示. 则$\+vA = \+vA_1 + \+vA_2 + \+vA_3$,
+        \[ A_1 = \frac{\sqrt{2}}{2} A_0,\quad A_2 = \frac{\sqrt{2}}{2}A_0,\quad A_3 = \frac{A_0}{2}\Rightarrow A = \half A_0\Rightarrow I = \rec{4}I_0. \]
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{5.5cm}
+        \centering
+        \incfig{5cm}{ComplexZonePlate2}
+        \caption{}
+        \label{fig:复杂波带片2}
+    \end{subfigure}
+    \let\saveinfty\infty%
+    \def\infty{\max}%
+    \begin{subfigure}[b]{6.5cm}
+        \centering
+        \incfig{6cm}{ComplexZonePlate2Vector}
+        \caption{}
+        \label{fig:复杂波带片2向量图}
+    \end{subfigure}
+    \let\infty\saveinfty%
+    \caption{复杂波带片}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:复杂波带片2}所示, 波带片
+        \begin{cenum}
+            \item 第一个孔隙通过波长$0\sim \lambda/4$, 通过一半振幅, 振幅$A_1$;
+            \item 第一个孔隙通过波长$\lambda/4 \sim \lambda/2$, 通过全部振幅, 振幅$A_2$.
+        \end{cenum}
+        各振幅分别如\cref{fig:复杂波带片2向量图}所示. 则$\+vA = \+vA_1 + \+vA_2$,
+        \[ A_1 = \frac{\sqrt{2}}{2}A_0, \quad A_2 = \sqrt{2}A_0,\quad A = \frac{\sqrt{2}}{2}A_0 \Rightarrow I = \frac{I_0}{2}. \]
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{5.5cm}
+        \centering
+        \incfig{5cm}{ComplexZonePlate3}
+        \caption{}
+        \label{fig:复杂波带片3}
+    \end{subfigure}
+    \let\saveinfty\infty%
+    \def\infty{\max}%
+    \begin{subfigure}[b]{6.5cm}
+        \centering
+        \incfig{6cm}{ComplexZonePlate3Vector}
+        \caption{}
+        \label{fig:复杂波带片3向量图}
+    \end{subfigure}
+    \let\infty\saveinfty%
+    \caption{复杂波带片}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:复杂波带片3}所示, 波带片
+        \begin{cenum}
+            \item 第一个孔隙通过波长$0\sim \lambda/2$, 通过$1/4$振幅, 振幅$A_1$;
+            \item 第二个孔隙通过波长$\lambda/2\sim \lambda$, 通过$3/4$振幅, 振幅$A_2$;
+            \item 第三个孔隙通过波长$\lambda\sim \infty$, 通过$1/4$振幅, 振幅$A_3$.
+        \end{cenum}
+        各振幅分别如\cref{fig:复杂波带片3向量图}所示. 则$\+vA = \+vA_1 + \+vA_2 + \+vA_3$,
+        \[ A_1 = \frac{A_0}{2}, \quad A_2 = \frac{3A_0}{2}, \quad A_3 = \frac{A_0}{4}, \quad A = -\frac{3}{4}A_0 \Rightarrow I = \frac{9}{16}A_0. \]
+    \end{ex}
+\end{sample}
+
+% paragraph fresnel波带片 (end)
+
+\paragraph{Kinoform透镜} % (fold)
+\label{par:kinoform透镜}
+
+Kinoform自中心向外逐步挖去$2\pi$相位.
+
+% paragraph kinoform透镜 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.207-209 1, 3, 5, 6, 8, 10 (p.151) 比较波带片和透镜的优劣, 并据此说明哪些地方波带片比透镜更具有优势.
+
+% paragraph 作业 (end)
+
+\par
+小论文在$12$月中旬首次答辩.
+
+% subsection fresnel圆孔_圆屏衍射 (end)
+
+\subsection{Fraunhofer衍射} % (fold)
+\label{sub:fraunhofer衍射}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{11cm}{FraunhoferApparatus}
+    \caption{Fraunhofer衍射装置图}
+\end{figure}
+光通过透镜打到衍射屏上, 后再次经过透镜聚焦于观察屏. 
+
+\subsubsection{单缝衍射的强度公式} % (fold)
+\label{ssub:单缝衍射的强度公式}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{11cm}{FraunhoferIllustration}
+    \caption{单缝衍射强度计算}
+    \label{fig:单缝衍射强度计算}
+\end{figure}
+\begin{figure}
+    \centering
+    \incfig{6cm}{FraunhoferVector}
+    \caption{Fraunhofer衍射的矢量图解法}
+    \label{fig:Fraunhofer衍射的矢量图解法}
+\end{figure}
+如\cref{fig:单缝衍射强度计算}, 缝宽$AC = a$, 则总光程差$\Delta l = a\sin\theta$, 总相位差$\delta = \displaystyle \frac{2\pi}{\lambda} a\sin\theta$. 使用矢量图解法(如\cref{fig:Fraunhofer衍射的矢量图解法}),
+\[ A_\theta = \frac{2\alpha}{AB} = 2R\sin \alpha.\quad R = \frac{\arcover{AB}}{a\alpha}.\quad\Rightarrow A_\theta = \arcover{AB}\cdot \pare{\frac{\sin\alpha}{\alpha}}. \]
+其中$\delta'\rightarrow 0$时得到几何像点的场强$A_0 = \arcover{AB}$.
+\[ A_\theta = A_0 \pare{\frac{\sin\alpha}{\alpha}},\quad \alpha = \frac{\delta}{2} = \frac{\pi a\sin\theta}{\lambda},\quad I_\theta = I_0 \brac{\frac{\sin\alpha}{\alpha}}^2. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{FraunhoferByIntegral}
+    \caption{积分求解Fraunhofer衍射的强度}
+\end{figure}
+也可以使用复数积分法.
+\[ \Delta L = -x\sin\theta, \]
+从而
+\begin{align*}
+    \tilde{U}\pare{\theta} &= \frac{-i}{\lambda f}\iint \tilde{U}_0 e^{ikr}\,\rd{x}\,\rd{y} \\
+    &= C\cdot \int_{-a/2}^{a/2} e^{-ikx\sin\theta}\,\rd{x} \\
+    &= ac \frac{\sin\alpha}{\alpha} = \tilde{U}_0 \pare{\frac{\sin\alpha}{\alpha}}.\\
+    \alpha &= \frac{\pi a\sin\theta}{\lambda},\quad \theta = 0,\ \tilde{U}\pare{0} = ac.
+\end{align*}
+
+% subsubsection 单缝衍射的强度公式 (end)
+
+\subsubsection{矩孔衍射} % (fold)
+\label{ssub:矩孔衍射}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{12cm}{FraunhoferRectangle}
+    \caption{矩孔衍射的强度计算}
+\end{figure}
+设$Q\pare{x,y,0}$, 衍射方向$\+vr = \pare{\cos\alpha,\cos\beta,\cos\delta}$, $\overrightarrow{OQ} = \pare{x,y,0}$. 此时光程差
+\[ \Delta r = -x\cos\alpha - y\cos\beta. \]
+$Q$点之场点为$P\pare{\theta_1,\theta_2}$, $CP\parallelsum \+vr$, 与$y'z'$面成$\theta_1 = \pi/2-\alpha$, 与$x'z'$面$\theta_2 = \pi/2 - \beta$. 从而$\Delta L = \Delta r = -x\sin\theta_1 - y\sin\theta_2$.
+\begin{align*}
+    \tilde{U}\pare{\theta_1,\theta_2} &= c\int_{-a/2}^{a/2} \,\rd{x} \int_{-b/2}^{b/2}\,\rd{y}\, e^{ik\Delta L} \\
+    &= \tilde{U}\pare{0,0} \frac{\sin \alpha}{\alpha}\cdot \frac{\sin\beta}{\beta}. \\
+    \tilde{U}\pare{0,0} &= abc,\quad \alpha = \frac{\pi a\sin\theta}{\lambda},\quad \beta = \frac{\pi b\sin\theta}{\lambda},\quad c \propto \frac{-ie^{ikr_0}}{\lambda f}.
+\end{align*}
+当$\theta_1 = \theta_2 = 0$, $\displaystyle \frac{\sin\alpha}{\alpha} = \frac{\sin\beta}{\beta} = 1$, 故$\tilde{U}\pare{0,0} = abc$.
+
+% subsubsection 矩孔衍射 (end)
+
+\subsubsection{单缝衍射因子特点} % (fold)
+\label{ssub:单缝衍射因子特点}
+
+主极大点即中央明纹中心的位置(零级衍射斑或主极强). 此时$\alpha = 0$, $I=I_0$为最大值. 此时根据Fermat原理发生等相位干涉.
+\par
+此时当点光源向上移动, $P$会向下移动以抵消增加的光程. 如果缝上下移动也可以得到一样的结果. 暗纹的位置发生在$\alpha = \pm m\pi$处.
+\[ \alpha = \frac{\pi a\sin\theta}{\lambda} = \pm m\pi. \]
+若$\theta$足够小, 则$\theta = \displaystyle \frac{m\lambda}{a}$.
+\par
+次极大的位置发生在$\displaystyle \+d\alpha d{}\pare{\frac{\sin\alpha}{\alpha}} = 0$处. 相应的光强为
+\[ 0.0472I_0,\quad 0.0165I_0,\quad 0.0083I_0, \cdots. \]
+故次极大的光强远小于主极大.
+\par
+相邻暗纹的宽度定义为明纹的角宽度. 中央明纹$\displaystyle \Delta\theta_0 = 2\frac{\lambda}{a}$, 线宽度$\Delta x_0 = \displaystyle \frac{2f\lambda}{a}$. 其它明纹的宽度为
+\[ \Delta\theta = \frac{\lambda}{a}. \]
+\begin{remark}
+    细丝衍射的图样可以通过Babinet原理得到.
+\end{remark}
+在某个方向受限, 就会其方向上展宽.
+\begin{sample}
+    \begin{ex}
+        单缝Fraunhofer衍射实验中, 波长$\SI{600}{\nano\meter}$, 透镜焦距$\SI{200}{\nano\meter}$, 单缝宽度$\SI{15}{\micro\meter}$, 求零级衍射斑的半角宽度和屏幕上显示的零级斑的几何宽度.
+    \end{ex}
+    \begin{solution}
+        半角宽度$\displaystyle \Delta\theta_0 = \frac{\lambda}{a} = \SI{0.04}{\radian}$, 几何宽度$\displaystyle l = f\Delta \theta_0 = \SI{8}{\milli\meter}$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        钠黄光$\lambda = \SI{589.3}{\nano\meter}$垂直入射到$a=\SI{0.20}{\milli\meter}$的单缝上. 透镜焦距$f=\SI{40}{\centi\meter}$.
+        \begin{cenum}
+            \item 中央明纹宽度$2f\lambda / a = \SI{2.4}{\milli\meter}$.
+            \item 第一级暗纹和第二级暗纹距离$f\lambda/a$.
+            \item $\SI{3.54}{\milli\meter}$处, $\Delta L = a\sin\theta$, $\displaystyle \frac{a\sin\theta}{\lambda/2}\approx 6$, 故大约分为$6$个半波带.
+        \end{cenum}
+    \end{ex}
+\end{sample}
+
+% subsubsection 单缝衍射因子特点 (end)
+
+% subsection fraunhofer衍射 (end)
+
+\subsection{光学仪器的像分辨本领} % (fold)
+\label{sub:光学仪器的像分辨本领}
+
+\subsubsection{Fraunhofer圆孔衍射} % (fold)
+\label{ssub:fraunhofer圆孔衍射}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{FraunhoferCircular}
+    \caption{圆孔衍射的强度计算}
+\end{figure}
+\begin{align*}
+    CQ' &= CQ\cdot \cos\varphi = \rho\cos\varphi, \\
+    \Delta r &= r' - r_0 = - CQ'\sin\theta = \rho \cos \varphi\sin\theta. \\
+    E\pare{P_\theta} &= -\frac{i}{\lambda f} \iint E\pare{\theta} e^{ikr}\,\rd{x}\,\rd{y} \\
+    &= c\iint_{x^2+y^2<a^2} e^{ik\Delta r}\,\rd{x}\,\rd{y} \\
+    &= c\int_0^{2\pi}\,\rd\varphi \int_0^a \rho,\rd{\rho}\,\rd{e^{ik\rho\cos\varphi\sin\theta}}.
+\end{align*}
+故$\displaystyle E\pare{\theta} \propto \frac{2J_1\pare{u}}{u}$, $\displaystyle u = \frac{2\pi a\sin\theta}{\lambda}$. $\displaystyle I\pare{\theta} = I_0 \cdot\brac{\frac{J_1\pare{u}}{i}}^2$. $J\pare{1.22\pi} = 0$. 
+其中Airy斑发生在$\Delta \theta = \displaystyle 1.22 \frac{\lambda}{D}$, 这是第一暗环对应的角半径, 其中$D$为圆孔直径.
+\begin{remark}
+    这解释了为何手机相机/数码相机/单反的镜头依次增大.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        对于人眼, 取波长$\SI{0.55}{\micro\meter}$, 瞳孔直径取$\SI{2}{\milli\meter}$, $f = \SI{20}{\milli\meter}$, $\displaystyle d = 2f\Delta\theta = \SI{14}{\micro\meter}$, 和视网膜细胞密度匹配.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\SI{1}{\milli\meter}$的氦氖激光的发射角$\Delta\theta_0 = 1.22\lambda/D = 2.7'$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        光圈数为$f/D$. 故光圈$4.0$时, $\delta y_m = 1.22\times 4\lambda$, $d = f\Delta\theta = \SI{2.7}{\micro\meter}$是最小分辨率.
+    \end{ex}
+\end{sample}
+Rayleigh判据给出了两个物点可分辨的条件, 即两个像的分离恰好等于Airy斑的半径. $\delta\theta' = \Delta\theta = 1.22\lambda'/D = 1.22\lambda/D$. 物方$\displaystyle \delta\theta = 1.22\lambda/\pare{nD}$, $\delta l = s\cdot\delta\theta$.
+\par
+望远镜的目镜选择使总放大率将仪器的最小分辨角放大到人眼能分辨的最小角度$1'$. 故有效放大率$M = 1'/\delta\theta$.
+\par
+显微镜的物镜$\delta = 1.22\lambda/\pare{n'D}$. 显微镜在齐明点工作, 可采用Abbe正弦条件,
+\[ n\delta y\sin u = n'\delta'y\sin u'. \]
+在$u\gg u'$的条件下, 取$\sin u' = u' = D/\pare{2l}$, 则
+\[ \delta y_m = \frac{n' \frac{D/2}{l}\Delta\theta_m l}{n\sin u} = \frac{0.61\lambda}{n\sin u}. \]
+其中$n\sin u$谓数值孔径(Numerical Aperture). 总放大率将仪器的最小分辨距离放大到明视距离处的最小分辨距离$\SI{0.1}{\milli\meter}$. 有效放大率$M = \SI{0.1}{\milli\meter}/\delta y_m$.
+\begin{sample}
+    \begin{ex}
+        显微镜数值孔径$1.0$, $\lambda = \SI{0.55}{\nano\meter}$, 则
+        \[ \Delta y_m = \frac{0.61\lambda}{\mathrm{N.A.}} = \SI{335.5}{\nano\meter},\quad M = \frac{\SI{0.1}{\milli\meter}}{8y_m} = 300. \]
+    \end{ex}
+\end{sample}
+对于油浸显微镜, $n=1.5$, $\delta y_m = \displaystyle \frac{0.61\lambda}{1.5\times\sin \pi/2} = 0.4\lambda$. 令$\lambda$减小至紫外区甚至X射线区, 可进一步提高分辨率. 还可以使用电子, 即电子显微镜, 此时使用磁场聚焦.
+
+% subsubsection fraunhofer圆孔衍射 (end)
+
+\begin{remark}
+    定义Fresnel数为$\displaystyle F = \frac{a^2}{L\lambda}$, 则$F\ll 1$时适用Fraunhoffer衍射, $F\gtrapprox 1$时适用Fresnel衍射, $F \gg 1$时适用几何光学.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.224-225 1, 2, 4(p.164) 和 p.235 1, 3, 4, 5 (p.171)
+
+% paragraph 作业 (end)
+
+% subsection 光学仪器的像分辨本领 (end)
+
+\subsection{多缝Fraunhofer衍射} % (fold)
+\label{sub:多缝fraunhofer衍射}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{11cm}{DiffractionGratingApparatus}
+    \caption{多缝Fraunhofer衍射的装置}
+\end{figure}
+具有周期性结构或光学性能者谓光栅. 将一个缝变为多个缝后, 多个缝之间在衍射后将发生干涉. 对于单缝衍射,
+\[ \alpha = \pi a \sin \theta / \lambda,\quad a_{\theta} = a_0 \frac{\sin\alpha}{\alpha}. \]
+对于多缝,
+\[ l_2 = l_1 + d\sin\theta,\quad \cdots,\quad l_N = l_1 + \pare{N-1} d\sin\theta,\quad a_\theta^{\pare{1}} = a_\theta^{\pare{2}} = \cdots = a_\theta^{\pare{N}}. \]
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{6cm}
+        \centering
+        \incfig{5cm}{GratingPathDiff}
+        \caption{多缝衍射光程差}
+    \end{subfigure}
+    \begin{subfigure}[b]{6cm}
+        \centering
+        \incfig{5cm}{GratingByVector}
+        \caption{多缝衍射矢量图解法}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+使用矢量图解法, 注意这是等长矢量的叠加, 而总的矢量数目取决于光栅大小(光场有效覆盖面积)$Nd$, $N$就是有效的刻线数目. 每次转过的角度为$2\beta$. 合成总的矢量长度(即振幅)为
+\[ A_\theta = OB_N = 2 OC\cdot \sin N\beta. \]
+而$a_\theta = OB_1 = 2OC\cdot \sin \beta$, 就有
+\[ A_\theta = a_\theta \frac{\sin N\beta}{\sin \beta} = a_0 \frac{\sin\alpha}{\alpha} \cdot \frac{\sin N\beta}{\sin\beta} \Rightarrow I_\theta = I_0 \pare{\frac{\sin\alpha}{\alpha}}^2 \pare{\frac{\sin N\beta}{\sin\beta}}^2. \]
+其中$\alpha = \displaystyle \frac{\pi a\sin\theta}{\lambda}$, $\beta = \displaystyle \frac{\pi d\sin\theta}{\lambda}$.
+
+\paragraph{主极大} % (fold)
+\label{par:主极大}
+
+位置$\beta = j\pi$, $\displaystyle \sin\theta = j \frac{\lambda}{d}$. 数目$j\+_max_ = \lfloor d/\lambda \rfloor$. 强度由$\beta\rightarrow 0$近似下得$I\theta = N^2 I_0$.
+
+% paragraph 主极大 (end)
+
+\paragraph{次极大} % (fold)
+\label{par:次极大}
+
+此时要求$\displaystyle \frac{\sin N\beta}{\sin \beta} = 0$, 即$N\beta = m\pi, \beta \neq n\pi$. 故$\sin\theta = \displaystyle \frac{\lambda}{Nd}$且$\sin\theta \neq \frac{n\lambda}{d}$. 在$\brac{0,\lambda / d}$中存在
+\[ \frac{\lambda}{Nd},\quad \frac{2\lambda}{Nd},\quad \cdots,\quad \frac{\pare{N-1}\lambda}{Nd}. \]
+故$\displaystyle \sin\theta = \pare{j + \frac{m}{N}} \frac{\lambda}{d}$, $m = 1,2,\cdots,N-1$. 在两个零点之间有一个次极大, 两两主极大之间有$N-2$个次极大.
+
+% paragraph 次极大 (end)
+
+\paragraph{半角宽度} % (fold)
+\label{par:半角宽度}
+
+中心到邻近的暗纹
+\begin{align*}
+    d\sin\theta &= j\lambda,\quad d\pare{\sin\pare{\theta \pm \Delta\theta}} = j\lambda \pm \frac{\lambda}{N}\\ &\Rightarrow d\cos\theta\Delta\theta = \frac{\lambda}{N}\Rightarrow \Delta\theta = \frac{\lambda}{Nd\cos\theta}.
+\end{align*}
+$\Delta\theta$为主极强的半角宽度.
+
+% paragraph 半角宽度 (end)
+
+\subsubsection{单缝衍射因子的作用} % (fold)
+\label{ssub:单缝衍射因子的作用}
+
+极大值的强度会被调制, 可能出现缺级. 缝间干涉极大, 即$\displaystyle \sin\theta = j\lambda/d$和单缝衍射极小$\sin\theta = j'\lambda/a$同时满足. 此时$j\lambda / d = j'\lambda / a$同时成立, 即$d/a = j/j'$.
+
+% subsubsection 单缝衍射因子的作用 (end)
+
+\subsubsection{积分求解多缝衍射} % (fold)
+\label{ssub:积分求解多缝衍射}
+
+将光栅中的各个缝分别考虑, 则
+\begin{align*}
+    \Delta l &= d\sin\theta,\quad L_j = L_1 + \pare{j-1}\Delta L. \\
+    \tilde{U}\pare{\theta} &= C \iint_\Sigma \tilde{U}_0\pare{x} e^{ikr}\,\rd{x}. \\
+    r_j &= L_j - x_j \sin\theta, \\
+    \tilde{U}\pare{\theta} &= \sum_{j=1}^N \brac{C\iint_{\Sigma_j} \tilde{U}_0\pare{x_j} e^{ikr_j}\,\rd{x_j}}. \\
+    \iint_{\Sigma_j} \tilde{U}_0\pare{x_j} e^{ikr_j}\,\rd{x_j} &= e^{ikL_j} \int_{-d/2}^{d/2} \tilde{U}_0\pare{x} e^{-ikx_j\sin\theta}\,\rd{x_j}. \\
+    \tilde{U}\pare{\theta} &= C\pare{\sum_{j=1}^N e^{ikL_j}}\int_{-d/2}^{d/2} \tilde{U}_0\pare{x} e^{-ikx\sin\theta}\,\rd{x} \\
+    &= \tilde{N}\pare{\theta} \cdot \tilde{U}^{\pare{0}}\pare{\theta}. \\
+    \beta &= \frac{\pi d\sin\theta}{\lambda},\quad \Delta l = d\sin\theta,\quad 2\beta = k\Delta l. \\
+    \tilde{N}\pare{\theta} &= e^{ikL_1}\pare{1+e^{2i\beta} + e^{i4\beta}+ \cdots} = \frac{\sin N\beta}{\sin\beta}. \\
+    \tilde{U}^{\pare{0}}\pare{\theta} &\propto \int_{-a/2}^{a/2} e^{ikx_j\sin\theta}\,\rd{x_j} = \frac{\sin\alpha}{\alpha}. \\
+    \Rightarrow I\pare{\theta} &\propto \pare{\frac{\sin\alpha}{\alpha}}^2\pare{\frac{\sin N\beta}{\sin\beta}}^2.
+\end{align*}
+这是对于黑白光栅的最终结果. 若振幅透过率$1+\cos\brac{2\pi x/d}$, 则
+\begin{align*}
+    \tilde{U}\pare{\theta} &\propto \int_{-d/2}^{d/2}\brac{1+\cos\pare{2\pi x/d}} e^{-ikx\sin\theta} \\
+    &= \int_{-d/2}^{d/2} \pare{1+\half e^{i2\pi x/d} + \half e^{-i2\pi x/d}} e^{-ikx\sin\theta}\,\rd{x} \\
+    &\propto \frac{\sin\beta}{\beta} + \half \sinc\pare{\beta - \pi} + \half \sinc\pare{\beta + \pi}.
+\end{align*}
+这是正弦光栅的结果. 在$\beta = n\pi$处, 若$m\neq 0,1$, 则$\tilde{U} = 0$.
+
+% subsubsection 积分求解多缝衍射 (end)
+
+\paragraph{透射式光栅} % (fold)
+\label{par:透射式光栅}
+
+对于非正入射的光栅,
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{ObliqueGrating1}
+        \caption{}
+        \label{fig:斜入射的光栅1}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{ObliqueGrating2}
+        \caption{}
+        \label{fig:斜入射的光栅2}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{ObliqueGratingRefl1}
+        \caption{}
+        \label{fig:斜入射的反射光栅1}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{ObliqueGratingRefl2}
+        \caption{}
+        \label{fig:斜入射的反射光栅2}
+    \end{subfigure}
+    \caption{斜入射的光栅}
+\end{figure}
+\begin{cenum}
+    \item 如\cref{fig:斜入射的光栅1}, 入射$L_1 < L_2$, 出射$L_1 < L_2$,
+    \[ d\pare{\sin\theta_0 + \sin\theta} = j\lambda. \]
+    \item 如\cref{fig:斜入射的光栅2}, 入射$L_1 < L_2$, 出射$L_1 > L_2$,
+    \[ d\pare{\sin\theta - \sin\theta_0} = j\lambda. \]
+    \item 如\cref{fig:斜入射的反射光栅2}, 入射$L_1 < L_2$, 出射$L_1 < L_2$,
+    \[ d\pare{\sin\theta + \sin\theta_0} = j\lambda. \]
+    \item 如\cref{fig:斜入射的反射光栅1}, 入射$L_1 < L_2$, 出射$L_1 > L_2$,
+    \[ d\pare{\sin\theta - \sin\theta_0} = j\lambda. \]
+\end{cenum}
+
+% paragraph 透射式光栅 (end)
+
+\paragraph{与Young干涉的比较} % (fold)
+\label{par:与young干涉的比较}
+
+双缝衍射$I\pare{\theta} = \displaystyle 4I_0 \frac{\sin^2\alpha}{\alpha^2}\cos^2\beta$, 而Young干涉
+\begin{align*}
+    I &= 2I_0 \brac{1+\cos\Delta\varphi} \\ &= 2I_0\brac{1+\cos\pare{\frac{2\pi d}{\lambda}\sin\theta}} = 2I_0\pare{1+\cos2\beta} = 4I_0\cos^2\beta.
+\end{align*}
+当$a\ll \lambda, \alpha = \displaystyle \frac{\pi a}{\lambda}\sin\theta \rightarrow 0$, 故$\displaystyle \frac{\sin\alpha}{\alpha} = 1$. 因此若$a\ll \lambda$, 则二者相等.
+
+% paragraph 与young干涉的比较 (end)
+
+\begin{remark}[干涉与衍射的比较]
+    \mbox{}
+    \begin{cenum}
+        \item 两者都是光的波动性的具体表现;
+        \item 干涉是光波被分割为有限多束或分离的无限多束, 且服从几何光学定律;
+        \item 衍射需要将波前分割为无限多连续的次波源, 不服从几何光学定律;
+        \item 计算时, 干涉的矢量图解是折线, 复振幅的叠加是级数; 衍射的矢量图解是光滑曲线, 复振幅叠加需要用积分;
+        \item 实际中两者总是同时存在的, 条纹要受单元衍射因子的调制.
+    \end{cenum}
+\end{remark}
+
+% subsection 多缝fraunhofer衍射 (end)
+
+\subsection{光栅光谱仪} % (fold)
+\label{sub:光栅光谱仪}
+
+\subsubsection{光栅的分光原理} % (fold)
+\label{ssub:光栅的分光原理}
+
+考虑正入射的情形, $d\sin\theta = j\lambda$. 当$j=0$, 这和$\lambda$无关, 故不同颜色的光产生的衍射是一致的. 但当$j\neq 0$, $\theta_j$同时也是$\lambda$的函数, ($j$级别次光谱). 定义色散本领
+\[ D_\theta = \frac{\delta \theta}{\delta\lambda} = \frac{j}{d\cdot{\cos\theta_j}}. \]
+当$j=0$, $D_\theta = 0$. 线色散本领谓
+\[ D_l = \frac{\delta l}{\delta \lambda} = \frac{f\delta\theta}{\delta \lambda} = \frac{jf}{d\cdot{\cos\theta_k}},\quad D_l = fD_\theta. \]
+色散本领指中心位置分离的程度, 不反映谱线是否重叠. 谓了考虑颜色能否分辨, 需要Rayleigh判据. 条纹半角宽度为$\Delta\theta = \displaystyle \frac{\lambda}{Nd\cos\theta}$, $\delta \theta = \Delta \theta$, $\delta \lambda = \delta\theta / D_\theta = \Delta \theta / D_0 = \lambda / kN$. 分辨本领
+\[ R = \frac{\lambda}{\delta \lambda} = kN. \]
+设$\lambda\+_max_ = \lambda\+_min_ + \Delta\lambda$, 则
+\[ j\pare{\lambda\+_min_ + \Delta \lambda} \le \pare{j+1} \lambda\+_min_,\quad \Delta \lambda \le \lambda\+_min_ / j. \]
+当$j=1$, $\lambda\+_min_ > \lambda\+_max_ /2$. 量程
+\[ d\pare{\sin\theta \pm \sin\theta_0} = j\lambda,\quad \sin\theta + \sin\theta_0 \le 2. \]
+故$\lambda \le 2d/j$. 对于通常的平行光入射, $\lambda \le d/j$, 一级光谱对应$\lambda \le d$.
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{BlazedGratingUnit}
+        \caption{}
+        \label{fig:闪耀光栅光程差}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{UnBlazedGratingUnit}
+        \caption{}
+        \label{fig:普通光栅光程差}
+    \end{subfigure}
+    \begin{subfigure}[b]{5cm}
+        \centering
+        \incfig{5cm}{UnBlazedGratingSingleUnit}
+        \caption{}
+        \label{fig:普通反射光栅单元}
+    \end{subfigure}
+    \begin{subfigure}[b]{5cm}
+        \centering
+        \incfig{5cm}{BlazedGratingSingleUnit}
+        \caption{}
+        \label{fig:闪耀光栅单元}
+    \end{subfigure}
+    \caption{普通反射式光栅和闪耀光栅}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{BlazedGratingI}
+        \caption{第一种方式入射闪耀光栅}
+        \label{fig:第一种方式入射闪耀光栅}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{BlazedGratingII}
+        \caption{第二种方式入射闪耀光栅}
+        \label{fig:第二种方式入射闪耀光栅}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+\begin{remark}
+    透射光栅的光能分散且主要集中在无色散的零级衍射上. 其主要原因在于单元衍射因子与缝间干涉因子的主极强相互重叠.
+\end{remark}
+\par
+闪耀光栅的设计思想为, 使单元衍射的零级(几何反射)对准$N$元干涉的一级或更高级. 普通光栅的光栅面与反射面平行, 而闪耀光栅使上述两面不平行.
+\par
+光栅的衍射包括单元衍射和缝间干涉两部分, 这两部分是各自独立的.
+\[ I\pare{\theta} = I_0\pare{\frac{\sin \alpha}{\alpha}}^2 \pare{\frac{\sin N\beta}{\sin\beta}}^2. \]
+其中
+\[ \alpha = \frac{\pi}{\lambda}a\pare{\sin\theta' \pm \sin\theta'_0},\quad \beta = \frac{\pi}{\lambda}d\pare{\sin\theta\pm\sin\theta_0}. \]
+对于\cref{fig:普通反射光栅单元}的反射单元组合的光栅\cref{fig:普通光栅光程差}, 几何反射光的缝间光程差为零, 故单元衍射零级和缝间干涉零级重合. 然而对于\cref{fig:闪耀光栅单元}的反射单元组合的光栅\cref{fig:闪耀光栅光程差}, 几何反射光的缝间光程不等于零, 故故单元衍射零级和缝间干涉零级分离. 现定义\emph{闪耀角}为槽面发现和光栅平面法线之间的夹角$\theta_b$.
+\par
+以$N$元干涉的零级与光栅平面的法线夹角有关. 单元衍射零级与小反射面的法线夹角有关. 如\cref{fig:第一种方式入射闪耀光栅}, 对于第一种方式入射,
+\[ \Delta L = 2d\sin\theta_b. \]
+干涉极大条件要求
+\[ 2d\sin\theta_b = k\lambda. \]
+从而一级闪耀波长
+\[ \lambda_{1b} = 2d\sin\theta_b. \]
+如\cref{fig:第二种方式入射闪耀光栅}, 对于第二种方式入射,
+\[ \Delta L = d\sin 2\theta_b. \]
+干涉极大条件要求
+\[ d\sin 2\theta_b = j\lambda. \]
+从而一级闪耀波长
+\[ \lambda_{1b} = d\sin 2\theta_b. \]
+\begin{remark}
+    闪耀光栅在除了闪耀波长外的其它波长也有足够的强度.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.16 3, 5(p.264), p.30 1, 3, 4(p.275)
+
+% paragraph 作业 (end)
+
+% subsubsection 光栅的分光原理 (end)
+
+% subsection 光栅光谱仪 (end)
+
+\subsection{三维光栅} % (fold)
+\label{sub:三维光栅}
+
+关于晶体之若干定义如下:
+\begin{cenum}
+    \item 外部具有规则的几何形状, 内部原子具有周期性排列结构, 有序或空间对称者, 谓\emph{晶体}.
+    \item 晶体内部原子按周期性排列者, 如食盐, 雪花, 天然水晶等, 谓\emph{单晶体}. 若仅在局部区域内按周期性规则排列, 不同区域内原子之排列并不相同, 则谓\emph{多晶体}.
+    \item 从周期结构中抽象出来的等同点谓\emph{晶格}或空间点阵.
+    \item 相邻格点之间的间隔谓\emph{晶格常数}.
+    \item 格点所构成之平面, 谓晶面. 晶体中有很多晶面族, 不同晶面族有不同的间距, 谓\emph{晶格常数}, 记作$d$.
+\end{cenum}
+X射线是一种短波($\SI{10}{\angstrom}$--$\SI{e-2}{\angstrom}$). X射线进入晶体后出射, 期间带电离子会受迫振动, 散射电磁波, 相干叠加后发生衍射, 衍射极大值方向即为X射线出射方向. 晶面之间发生干涉叠加.
+\begin{remark}
+    X射线波长和晶格常数匹配, 故可以产生衍射.
+\end{remark}
+\par
+二维光栅有强度
+\[ I\pare{\theta_1,\theta_2} = I_0\pare{\theta_1,\theta_2} \pare{\frac{\sin N_1\beta_1}{\sin\beta_1}}^2 \pare{\frac{\sin N_2\beta_2}{\sin\beta_2}}^2. \]
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{InterferencePoints}
+    \caption{点间干涉}
+    \label{fig:点间干涉}
+\end{figure}
+
+\paragraph{点间干涉} % (fold)
+\label{par:点间干涉}
+
+对于如\cref{fig:点间干涉}的点间干涉, 光程差为零的条件(即衍射零级)为
+\[ \delta = a\pare{\cos\theta - \cos\theta_0} = 0 \Rightarrow \theta = \theta_0. \]
+
+% paragraph 点间干涉 (end)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{Bragger}
+    \caption{面间干涉}
+    \label{fig:面间干涉}
+\end{figure}
+
+\paragraph{面间干涉} % (fold)
+\label{par:面间干涉}
+
+对于如\cref{fig:面间干涉}的面间干涉, 干涉极强的条件为
+\[ \Delta = d\sin\theta + d\sin\theta = 2d\sin\theta = k\lambda. \]
+$2d\sin\theta = k\lambda$即Bragg条件.
+\begin{remark}
+    不能认为光栅方程在$\theta = \theta_0$时得到Bragg方程. 光栅方程$\theta$和$\theta_0$为法向夹角, 而Bragg方程为切向.  很多情况下无法同时满足入射方向, 晶体取向和入射波长的要求, 因此可能没有主极大.
+\end{remark}
+
+% paragraph 面间干涉 (end)
+
+\paragraph{Laue法} % (fold)
+\label{par:laue法}
+
+连续谱X射线与单晶作用, 角度固定, 晶面从入射波长中选择满足衍射条件的波长, 形成Laue斑.
+
+% paragraph laue法 (end)
+
+\paragraph{Debye法} % (fold)
+\label{par:debye法}
+
+单色X射线与多晶体作用, 大量无规则取向的多晶晶粒提供Bragg条件的成立可能性, 形成Debye环.
+
+% paragraph debye法 (end)
+
+\paragraph{衍射仪法} % (fold)
+\label{par:衍射仪法}
+
+探测器由低$\theta$到高$\theta$转动, 逐一探测和记录各条衍射线的位置($2\theta$角度)和强度. 探测器和试样同时转动, 角速度$2:1$, 保证衍射线和入射线始终成$2\theta$.
+
+% paragraph 衍射仪法 (end)
+
+% subsection 三维光栅 (end)
+
+% section 衍射 (end)
+
+\end{document}

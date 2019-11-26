@@ -1,0 +1,619 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\subsubsection*{配置} % (fold)
+\label{ssub:配置}
+
+\noindent
+T.A. Jin Shuyue QQ:1134546557\\
+T.A. Lin Xiao QQ:445490861, Tel: 18356024315\\
+
+成绩 25\%作业 + 10\%课堂 + 65\%期末考试.
+
+% subsubsection 配置 (end)
+
+\section{事件} % (fold)
+\label{sec:事件}
+
+\subsection{事件之运算, 概率与性质} % (fold)
+\label{sub:事件之运算_概率与性质}
+
+\begin{definition}
+    随机试验是对随机现象的实现和对它某个特征的观测. 要求至少二结果, 且每次实验得到其中一个, 且实验前不能预知.
+\end{definition}
+\begin{definition}
+    随机试验中每一单一结果谓基本事件.
+\end{definition}
+\begin{sample}
+    \begin{ex}
+        若实验为投三次硬币, 则「正反反」, 「正正反」等为基本事件.
+    \end{ex}
+\end{sample}
+\begin{definition}
+    随机试验中所有基本事件构成集合谓样本空间, 用$\Omega$或$S$表示. 其内的元素谓样本点, 以$\omega$表示.
+\end{definition}
+\begin{remark}
+    根据试验的目的, 样本空间的元素和不同.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        投三次硬币, 具体的「正反反」等构成一样本空间, 然而亦可以由正面次数为样本空间.
+    \end{ex}
+\end{sample}
+\begin{definition}
+    随机事件, 简称事件, 谓随机试验中我们所关心的可能出现的各种结果, 由一个或若干个事件组成, 常用大写字母表示.
+\end{definition}
+\begin{finale}
+    事件是部分结果所构成集合.
+\end{finale}
+\begin{definition}
+    必然事件谓试验中必定发生的事件, 不可能事件谓试验中不可能发生的事件.
+\end{definition}
+\begin{definition}
+    随机试验的结果包含在$A$中, 则谓$A$发生. $A\subset \Omega$.
+\end{definition}
+\begin{remark}
+    不严格地说, 样本空间的子集谓事件. 但此处应排除不可测集.
+\end{remark}
+\begin{definition}
+    子事件$A\subset B$谓$A$之发生蕴含$B$之发生者. 事件之和$A\cup B$谓$A$与$B$中至少一者发生之事件. 事件之积或交$A\cap B$谓同时发生$A$与$B$之事件, 若$A\cap B = \varnothing$则谓二者互斥. 对立事件$A^c$谓$A$不发生之事件. 事件之差$A-B$或$AB^c$谓事件$A$发生而$B$不发生之事件.
+\end{definition}
+\begin{theorem}[De Morgan律]
+    \[ \pare{\bigcup A_i}^c = \bigcap A_i^c,\quad \pare{\bigcap A_i}^c = \bigcup A_i^c. \]
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        $A,B,C$不同时发生可以表示为$A^c\cup B^c \cup C^c$. $A,B,C$三者中至少发生一个可以表示为
+    $A^cB^c + A^cC^c + B^cC^c$.
+    \end{ex}
+\end{sample}
+\begin{definition}[事件的互斥]
+    事件$A,B$不同时发生则谓之互斥(不相容). 即$A\cap B = \varnothing$.
+\end{definition}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+论坛1, 3, 周二交.
+
+% paragraph 作业 (end)
+
+\subsubsection{概率的定义及性质} % (fold)
+\label{ssub:概率的定义及性质}
+
+\begin{definition}[古典概型]
+    古典概型满足两个条件,
+    \begin{cenum}
+        \item 有限性: 试验结果是有有限个($n$个);
+        \item 等可能性: 每个基本事件发生的可能性相同.
+    \end{cenum}
+\end{definition}
+记$f\pare{A}$为$A$发生的频率, 即重复试验$N$次, $\#A$表示A发生的次数, 则
+\[ f\pare{A} = \frac{\# A}{N}, \]
+人们发现当$N\rightarrow \infty$, $f\pare{A}$趋于稳定, 且满足
+\begin{cenum}
+    \item 若$A=\Omega$, $f_N\pare{A} = 1$;
+    \item 若$A=\curb{\omega_1,\omega_2}$,
+    \[ f_N\pare{A} = f_N\pare{\curb{\omega_1}} + f_N\pare{\curb{\omega_2}}. \]
+    \item 不相容事件发生频率等于频率之和.
+\end{cenum}
+\begin{finale}
+    \begin{axiom}[概率的公理化定义]
+        \mbox{}
+        \begin{cenum}
+            \item 设$A$是随机事件, 则
+            \[ 0\le P\pare{A} \le 1. \]
+            \item 必然事件之概率为$1$,
+            \[ P\pare{\Omega} = 1 = P\pare{\bigcup_{i=1}^n \curb{\omega_i}} = \sum_{i=1}^n P\pare{\curb{\omega_i}}. \]
+            \item 不相容事件$A_1,A_2,\cdots$之和的概率等于其各自概率之和,
+            \[ P\pare{\bigcup_{i=1}^\infty A_i} = \sum_{i=1}^\infty P\pare{A_i}. \]
+        \end{cenum}
+    \end{axiom}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        在第三条公理中不假定对有限列的成立性, 欲求$P\pare{\varnothing}$,
+        \[ 1 = P\pare{\Omega \cap \varnothing \cap \varnothing \cdots} = P\pare{\Omega} + P\pare{\varnothing} + P\pare{\varnothing} + \cdots. \]
+        故$P\pare{\varnothing} = 0$.
+    \end{ex}
+    \begin{ex}
+        类似技巧可得有限可加性.
+    \end{ex}
+    \begin{ex}
+        设$B\subset A$, 则$A = B + \pare{A-B}$, 由有限可加性可得
+        \[ P\pare{A} = P\pare{B} + P\pare{A-B} \Rightarrow P\pare{A-B} = P\pare{A} - P\pare{B}. \]
+    \end{ex}
+\end{sample}
+\begin{finale}
+    \begin{corollary}
+        \mbox{}
+        \begin{cenum}
+            \item 单调性, 即$A\subset B\Rightarrow P\pare{A}\le P\pare{B}$;
+            \item $P\pare{A^c} = 1-P\pare{A}$;
+            \item 加法定理, 即
+            \begin{align*}
+                P\pare{\bigcap A_k} =& \sum P\pare{A_k} - \sum_{i<j}P\pare{A_iA_j} + \sum_{i<j<k}P\pare{A_iA_jA_k} \\
+                & - \cdots + \pare{-1}^{n-1}P\pare{A_1A_2\cdots A_n}. 
+            \end{align*}
+            \item 次可加性:
+            \[ P\pare{\bigcap^\infty A_n}\le \sum^\infty P\pare{A_n}. \]
+            \item 下连续性: 若$A_n\subset A_{n+1}$, 则
+            \[ P\pare{\sum^\infty A_n} = \lim_n P\pare{A_n}. \]
+            \item 上连续性: 若$A_n \supset A_{n+1}$, 则
+            \[ P\pare{\bigcap^\infty A_n} = \lim_n P\pare{A_n}. \]
+        \end{cenum}
+    \end{corollary}
+\end{finale}
+\begin{proof}[第三点的证明]
+    对于两个集合的情形可通过基本的运算律证明二集合的情形, 后归纳证明之.
+\end{proof}
+\begin{proof}[第四点的证明]
+    \inlinehardlink{互斥化}
+    \[ \sum^\infty A_n = A_1 + \pare{A_2-A_1} + \pare{A_3 - A_1\cup A_2} + \cdots, \]
+    后引用单调性即可.
+\end{proof}
+\begin{proof}[第五点的证明]
+    考虑如下事实: 若$\curb{A_n}$两两互斥, 则
+    \[ P\pare{\lim \bigcup^\infty A_n} = \lim P\pare{\bigcup^\infty A_n} = \sum^\infty P\pare{A_n}. \]
+    考虑$B_n = A_{n+1} - A_n$, 则
+    \[ P\pare{\bigcup^\infty A_n} = P\pare{\sum^\infty B_n} = \sum^\infty P\pare{B_n} = \sum^\infty \pare{P\pare{A_{n+1}} - P\pare{A_n}}. \qedhere \]
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        设$P\pare{A} = P\pare{B} = P\pare{C} = 1/4$, $P\pare{AB}= P\pare{AC} = 0$, $P\pare{BC} = 1/6$, 求$P\pare{A^cB^cC^c}$.
+        \begin{align*}
+            &P\pare{A^cB^cC^c} = 1-P\pare{A+B+C} \\
+            &= 1-\\&\brac{P\pare{A} + P\pare{B} + P\pare{C} - P\pare{AB} - P\pare{BC} - P\pare{AC} + P\pare{ABC}}.
+        \end{align*}
+        \inlinehardlink{矛盾?}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        证明
+        \[ P\pare{\prod^\infty A_n} \ge \sum^\infty P\pare{A_n} - n+1. \]
+    \end{ex}
+\end{sample}
+\begin{remark}
+    将可以计算概率的事件之集合记作$\+cF$, 则$\+cF$构成样本空间的$\sigma$-代数.
+\end{remark}
+\begin{definition}[概率空间]
+    $\pare{\Omega,\+cF,P}$谓样本空间.
+\end{definition}
+\begin{corollary}
+    任何一个基本事件的概率都为$1/N$. 设$A$中包含$m$个基本事件, 则事件$A$的概率为
+\[ P\pare{A} = \frac{m}{n} = \frac{\abs{A}}{\abs{\Omega}}. \]
+\end{corollary}
+
+% subsubsection 概率的定义及性质 (end)
+
+% subsection 事件之运算_概率与性质 (end)
+
+\subsection{古典概型} % (fold)
+\label{sub:古典概型}
+
+\subsubsection{计数原理} % (fold)
+\label{ssub:计数原理}
+
+\paragraph{乘法原理} % (fold)
+\label{par:乘法原理}
+
+若过程I有一种方式, 过程II有两种方式, 则依次进行过程I和II有$n_1n_2$种方式.
+
+% paragraph 乘法原理 (end)
+
+\paragraph{加法原理} % (fold)
+\label{par:加法原理}
+
+若过程I有一种方式, 过程II有两种方式, 则进行过程I或II有$n_1 + n_2$种方式.
+
+% paragraph 加法原理 (end)
+
+\paragraph{排列} % (fold)
+\label{par:排列}
+
+$n$个不同元素, 有放回取出$r$个排列有$n^r$种. 不放回有$P_n^r = n\pare{n-1}\cdots\pare{n-r+1}$种.   
+
+% paragraph 排列 (end)
+
+\paragraph{组合} % (fold)
+\label{par:组合}
+
+$n$个不同元素, 不放回取出$r$个组合, 种数为
+\[ C_n^r = \binom{n}{r} = \frac{n\pare{n-1}\cdots \pare{n-r+1}}{r!} = \frac{n!}{r!\pare{n-r}!}. \]
+有放回则为
+\[ \binom{n+r-1}{r}. \]
+
+% paragraph 组合 (end)
+
+\begin{sample}
+    \begin{ex}
+        四人双打联系, 结对方式
+        \[ \half\binom{4}{2} = 3. \]
+        注意除以$2$以去除比赛重复.
+    \end{ex}
+    \begin{ex}
+        $6$人分$3$组, 每组$2$人, 分别$3$项不同工作, 求不同方式数:
+        \[ \binom{6}{2}\binom{4}{2}\binom{2}{2}. \]
+        \inlinehardlink{有序?}
+    \end{ex}
+    \begin{ex}
+        $7$人分$3$组, 执行同一人物, 其中一组$3$人, 另两组各$2$人, 求不同方式数:
+        \[ \rec{2!}\binom{7}{3}\binom{4}{2}\binom{2}{2}. \]
+        注意除以$2!$以除去二人组的顺序.
+    \end{ex}
+\end{sample}
+\paragraph{多组组合模式} % (fold)
+\label{par:多组组合模式}
+
+$n$各不同元素分为$k$个相异组, 每个组分别$n_1,n_2,\cdots$人. 则分法共
+\[ \frac{n!}{n_1!\cdot n_2!\cdot\cdots\cdot n_k!}. \]
+
+% paragraph 多组组合模式 (end)
+
+\paragraph{分类排序} % (fold)
+\label{par:分类排序}
+
+$n$个元素有$k$类, 同类全同, 每个类分别$n_1,n_2,\cdots$个. 则排列数共
+\[ \frac{n!}{n_1!\cdot n_2!\cdot\cdots\cdot n_k!}. \]
+
+% paragraph 分类排序 (end)
+
+\begin{sample}
+    \begin{ex}
+        $N$个产品, 其中$M$个废品, 随机取$n$个, 求恰好有$m$个废品的概率.
+        \begin{cenum}
+            \item 有放回选取:
+            \[ P = \binom{n}{m}\pare{\frac{M}{N}}^m\pare{1-\frac{M}{N}}^{n-m}. \]
+            \item 不放回选取:
+            \[ P = \frac{\binom{M}{m}\binom{n}{n-m}}{\binom{N}{n}}. \]
+        \end{cenum}
+    \end{ex}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+8, 9, 10, 12.
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        $n$男$m$女排成一排, 求$A=\curb{\text{任意二女不相邻}}$的概率. 若排成一圈如何?
+    \end{ex}
+    \begin{proof}[解]
+        $\#\Omega = \pare{n+m}!$, $\#A=\displaystyle n!\binom{n+1}{m}m!$. 但是若站成一圈, 则$\#\Omega = \pare{n+m-1}!$, $\#A=\displaystyle \pare{n-1}!\binom{n}{m}m!$. \inlinehardlink{插板法}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $r$个{\color{red}不同}球随机放入编号$1$至$n$的$n$个盒子, 求概率
+        \begin{cenum}
+            \item $A=$指定的$r$个盒子各一个球;
+            \item $B=$每盒之多一球;
+            \item $C=$某指定盒中有$m$个球.
+        \end{cenum}
+        若球相同又如何?
+    \end{ex}
+    \begin{proof}[解]
+        $\#\Omega = n^r$, $\# A = r!$, $\# B = \displaystyle \binom{n}{r}r!$, $\#C\displaystyle = \binom{r}{m}\pare{n-1}^{r-m}$. 相同时, 不同放法之差别在于盒子中球的个数. \inlinehardlink{插板法} 将$r$个球排列, 取$n-1$个隔板, 排列之, 有$\#\displaystyle \Omega = \frac{\pare{n-1+r}!}{\pare{n-1}!r!} = \binom{n-1+r}{r}$. $\#A = 1$, $\#B = \binom{n}{r}$, $\#C \displaystyle = \binom{n-2+r-m}{r-m}$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        生日问题视为分球入盒问题.
+    \end{ex}
+    \begin{ex}
+        $x+y+z = 15$的非负整数解的数量视为分球入盒问题.
+        \[ \# \Omega = \binom{15+2}{15}. \]
+        正整数解则不允许空盒子,
+        \[ \# \Omega = \binom{15-1}{2}. \]
+    \end{ex}
+\end{sample}
+\begin{finale}
+    $n$个不同元素(桶)有放回地取$r$个(放球), 不计次序,
+    \[ \# \Omega = \binom{n+r-1}{r}. \]
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        $n$个人做都$N$个座位, 求概率
+        \begin{cenum}
+            \item 任何人都没有邻座;
+            \item 每个人都有邻座;
+            \item 任何关于中心对称的两个座位都至少一个空着.
+        \end{cenum}
+    \end{ex}
+\end{sample}
+
+% subsubsection 计数原理 (end)
+
+% subsection 古典概型 (end)
+
+\subsection{几何概型} % (fold)
+\label{sub:几何概型}
+
+\begin{definition}
+    设$\Omega$是Euclid空间中的集合, 满足$0 < m\pare{\Omega} < \infty$. 对其中任何子集, 谓
+    \[ P\pare{A} = \frac{m\pare{A}}{m\pare{\Omega}} \]
+    为其几何概率.
+\end{definition}
+\begin{remark}
+    这里的等可能性体现在落在区域$A$的概率与区域$A$的测度成正比且与其形状位置无关.
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GeoProbWaiting}
+    \caption{蓝色区域面积和方形面积的比即为会面概率}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        甲乙约定$\brac{0,T}$时间内会面, 每个人等$t$分钟, 求$A=$甲乙会面的概率.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}[Buffon投针实验]
+        间隔$a$的平行线, 投长度$l<a$的针, 求相交的概率.
+    \end{ex}
+    \begin{proof}[解]
+        设针的位置由针的「中点到最近平行线的距离$\rho$」以及「针和该平行线所成锐角$\theta$」决定.
+        \[ \Omega = \curb{0 \le \rho \le \frac{a}{2}, 0 \le \theta \le \frac{\pi}{2}}. \]
+        \[ E = \curb{\rho \le \frac{l}{2}\sin\theta}. \]
+        \[ P\pare{E} = \frac{m\pare{E}}{m\pare{E}} = \frac{\displaystyle\int_0^{\pi/2}\frac{l}{2}\sin\theta\,\rd{\theta}}{\displaystyle\frac{\pi a}{4}}\Rightarrow \pi = \frac{2l}{P\pare{E}a}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        圆周上任取三点, 求$\bigtriangleup ABC$是锐角三角形的概率($1/4$).
+    \end{ex}
+    \begin{ex}
+        圆周上任取$A,B$连成弦, 任取$C,D$连成弦, 求相交概率($1/3$).
+    \end{ex}
+\end{sample}
+
+% subsection 几何概型 (end)
+
+\subsection{条件概率与独立性} % (fold)
+\label{sub:条件概率与独立性}
+
+\begin{definition}[条件概率]
+    设$A$, $B$是随机试验$\Omega$种的两个事件, $P\pare{B} > 0$,
+    \[ P\pare{A\vert B} = \frac{P\pare{AB}}{P\pare{B}} \]
+    谓条件$B$下发生$A$的概率.
+\end{definition}
+\begin{remark}
+    这正是两者的面积比. 实际上相当于以$B$作为样本空间时$A$的发生概率.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        $10$个产品, $3$个次品, 一个个不放回抽取, 问第一次取到次品后第二次再取到次品的概率.
+    \end{ex}
+    \begin{proof}[解]
+        从$10$个产品中取两个, 则
+        \[ \#\Omega = 10\times 9 = 90. \]
+        设$A$为第一次取出次品, $B$为第二次取出次品. 则
+        \[ \#\pare{AB} = 6, \#A = 27\Rightarrow P\pare{B\vert A} = \frac{P\pare{AB}}{P\pare{A}} = \frac{2}{9}. \qedhere \]
+    \end{proof}
+    \begin{remark}
+        也可以直接替换样本空间, 从而$9$个产品取$2$个次品.
+    \end{remark}
+\end{sample}
+\begin{finale}
+    \begin{theorem}[乘法定理]
+        $P\pare{AB} = P\pare{A\vert B}P\pare{B}$. 推广可得
+        \[ P\pare{A_1\cdots A_n} = P\pare{A_1}P\pare{A_2\vert A_1}\cdots P\pare{A_n\vert A_1\cdots A_{n-1}}. \]
+    \end{theorem}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        某人忘记电话号码最后一个数字, 求三次以内拨通的概率.
+    \end{ex}
+    \begin{proof}[解]
+        记$A_n$为第$n$次拨通,
+        \begin{align*}
+            P\pare{A_1 \cup A_2 \cup A_3} &= 1-P\pare{A_1^c A_2^c A_3^c}\\ &= 1 - P\pare{A_1^c}P\pare{A_2^c\vert A_1^c}P\pare{A_3^c\vert A_1^cA_2^c}\\ &= 1 - \frac{9}{10}\frac{8}{9}\frac{7}{8}. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \label{ex:nn结绳问题}
+        $n$根短绳$2n$个端头任意两两连接, 求恰好连城$n$个圆的概率.
+    \end{ex}
+    \begin{proof}[解]
+        $\Omega$为连接结果的集合. 设$2n$个头排成一排, 规定$2k-1$和$2k$位置上的头相连. $A$=恰好连成$n$个圈, $A_i$为第$i$根绳连成一个圈. $A_1$发生当且仅当$\exists\, k$使第一根绳头在$2k-1$和$2k$上.
+        \[ P\pare{A_1} = \frac{2n\pare{2n-2}!}{\pare{2n}!} = \rec{2n-1}, \]
+        \[ P\pare{A_2\vert A_1} = \rec{2n-3}, \Rightarrow P\pare{A_{k+1}\vert A_1\cdots A_k} = \rec{2\pare{n-k}-1}, \]
+        \[ \Rightarrow P\pare{A} = \rec{\pare{2n-1}!!}. \qedhere \]
+    \end{proof}
+\end{sample}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+16, 18, 39, 47.
+
+% paragraph 作业 (end)
+
+\begin{definition}[样本空间的划分]
+    设$B_1,\cdots, B_n$是样本空间$\Omega$中两两不相容的一组事件, 且$\bigcup B = \Omega$, 则谓$\curb{B_1,\cdots, B_n}$是$\Omega$的一个分割.
+\end{definition}
+\begin{finale}
+    \begin{theorem}[全概率公式]
+        设$\curb{B_1,\cdots,B_n}$是样本空间的一个划分, 且$P\pare{B_i} > 0$皆成立, 则
+        \[ P\pare{A} = \sum_{i=1}^n P\pare{A\vert B_i} P\pare{B_i}. \]
+    \end{theorem}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        零部件由三个厂家提供, $B_1$提供一半, $B_2$和$B_3$提供$25\%$, $B_1$和$B_2$的次品率是$2\%$, $B_3$的次品率是$4\%$. 从该厂中任取一个产品, 问这个零部件是次品的概率.
+    \end{ex}
+    \begin{proof}[解]
+        设$A=$取出次品, $B_i=$该零件由$B_i$提供, 则$P\pare{A} = $
+        \[ P\pare{A\vert B_1}P\pare{B_1} + P\pare{A\vert B_2}P\pare{B_2} + P\pare{A\vert B_3}P\pare{B_3} = 2.5\%. \qedhere \]
+\end{proof}
+\end{sample}
+\begin{sample}
+    \begin{proof}[\cref{ex:nn结绳问题}的另一解法]
+        设$A_i$表示$i$连成圈, $E=A_1\cdots A_n$,
+        \[ P_n = P\pare{E} = P\pare{E\vert A_1}P\pare{A_1} + \underbrace{P\pare{E\vert A_1^c}}_{=0}P\pare{A_1^c} = P_{n-1}\rec{2n-1}.\qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}[Polya罐子模型]
+        罐中有$a$白球$b$黑球, 每次随机去一个并且连同$c$个同色球放回罐中, 如此反复进行. 证明第$n$次取出白球的概率为$\displaystyle \frac{a}{a+b}$.
+    \end{ex}
+    \begin{proof}
+        $n=1$时自然成立. 即$A_k$表示第$k$次取出了白球, 假设$a=k-1$时成立, 则
+        \begin{align*}
+            P\pare{A_k} &= P\pare{A_k\vert A_{k-1}}P\pare{A_{k-1}} + P\pare{A_{k}\vert A_{k-1}^c}\pare{A_{k-1}^c}\\ &= \frac{a'+c}{a'+c+b'}\frac{a'}{a'+b'} + \frac{a'}{a'+\pare{b'+c}}\frac{b'}{a'+b'} = \frac{a'}{a'+b'} = \frac{a}{a+b}.\qedhere 
+        \end{align*}
+        \inlinehardlink{$a,b$ in place of $a',b'$ and $1$ in place of $k-1$?}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        罐中有$a$黑球$b$白球, 从中任意取一球, 若白球则放回, 若黑球则替换为白球后放回. 重复$n$次, 求第$n+1$次取出白球的概率.
+    \end{ex}
+    \begin{proof}[解]
+        设$A_n=$第$n$次取出白球,
+        \begin{align*}
+            P\pare{A_{n+1}} &= P\pare{A_{n+1}\vert A_n}P\pare{A_n} + P\pare{A_{n+1}\vert A_n^c}P\pare{A_n^c} \\
+            &= P_nP_n + \pare{P_n+\rec{a+b}}\pare{1-P_n}.\\
+            &= \pare{1-\rec{a+b}}P_n + \rec{a+b}.
+        \end{align*}
+        考虑到$\displaystyle P_1 = \frac{b}{a+b}$, 有
+        \[ P_{n+1} = 1-\pare{1-\rec{a+b}}^n \frac{a}{a+b}.\qedhere \]
+    \end{proof}
+    \inlinehardlink{解法存在漏洞?}
+\end{sample}
+\begin{sample}
+    \begin{ex}[政治问题调查]
+        欲获得被调查者就一敏感问题$A$之看法, 先要求被试者抛硬币, 构造一无关问题$B$, 规定
+        \begin{cenum}
+            \item 正面时如实回答$A$;
+            \item 反面时回答$B$.
+        \end{cenum}
+        在此情形下,
+        \[ P\pare{\text{回答是}} = P\pare{\text{是}\vert \text{正面}}q + P\pare{\text{是}\vert \text{反面}}\pare{1-q}. \]
+        假设回答是的频率是$\displaystyle\frac{k}{n}$, $P\pare{\text{是}\vert \text{反面}} = h$, 则
+        \[ \frac{k}{n} \approx P\pare{\text{是}\vert \text{正面}} q + h\pare{1-q}\Rightarrow P\pare{\text{是}\vert \text{正面}} = \frac{\frac{k}{n} - h\pare{1-q}}{q}. \]
+    \end{ex}
+\end{sample}
+\begin{finale}
+    \begin{theorem}[Bayes公式]
+        知道结果, 欲获得原因之概率,
+        \[ P\pare{B_i\vert A} = \frac{P\pare{AB_i}}{P\pare{A}} = \frac{P\pare{A\vert B_i}P\pare{B_i}}{\sum_i P\pare{A\vert B_i}P\pare{B_i}}. \]
+    \end{theorem}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        某癌症诊断试剂, 患病下阳性的概率为$95\%$, 未患病下阴性的概率为$95\%$, 社区患病率$0.5\%$.某人检测为阳性, 求其患病概率.
+    \end{ex}
+    \begin{proof}[解]
+        记$A$为阳性, $B$为患病, 则
+        \[ P\pare{B\vert A} = \frac{P\pare{A\vert B}P\pare{B}}{P\pare{A\vert B}P\pare{B} + P\pare{A\vert B^c}P\pare{B^c}} = 8.7\%. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{remark}
+    Bayes学派认为, $B$是某事件, $P\pare{B}$为先验概率, 根据个人只是或已有结果得到. $A$是当前试验结果或数据, $P\pare{B\vert A}$是后验概率.
+\end{remark}
+\begin{definition}
+    若$P\pare{AB} = P\pare{A}P\pare{B}$, 则谓两事件独立. 对于多个事件, 若
+    \[ P\pare{A_iA_j} = P\pare{A_i}P\pare{A_j}, \]
+    \[ P\pare{A_iA_jA_k} = P\pare{A_i}P\pare{A_j}P\pare{A_k}, \]
+    \[ \cdots \]
+    \[ P\pare{A_1\cdots A_n} = P\pare{A_1} \cdots P\pare{A_n}. \]
+    则谓$A_1,\cdots, A_n$相互独立. 可数事件列谓相互独立的, 如果其中任何有限事件子集都是相互独立的.
+\end{definition}
+\begin{remark}
+    即事件$B$的发生与否对事件$A$发生之概率无影响.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        抛一硬币两次, $A=$第一次出现正面, $B=$第二次出现正面, 则$A$和$B$是独立的, 但$A$和$AB$不是独立的.
+    \end{ex}
+\end{sample}
+\begin{theorem}
+    $A,B$独立$\Leftrightarrow$ $A^c,B^c$独立 $\Leftrightarrow$ $A^c,B$独立 $\Leftrightarrow$ $A,B^c$独立. 对于多个事件, 记$\tilde{A}_i$为$A_i$与$A_i^c$中任一, 者
+    \[ P\pare{\tilde{A}_1\cdots \tilde{A}_n} = P\pare{\tilde{A}_1}\cdots P\pare{\tilde{A}_n}. \]
+\end{theorem}
+\begin{proof}
+    $P\pare{A^cB^c} = 1-P\pare{A\cup B} = 1-P\pare{A} - P\pare{B} + P\pare{A}P\pare{B} = \pare{1-P\pare{A}}\pare{1-P\pare{B}} = P\pare{A^c}P\pare{B^c}$.
+\end{proof}
+\begin{pitfall}
+    相互独立蕴含两两独立, 两两独立不蕴含独立.
+\end{pitfall}
+\begin{ex}
+    四个小球, 分别写$1$, $2$, $3$, $123$, 取出一球, 设$A_i$为含有数字$i$的概率, 求$A_i$之间的独立性.
+\end{ex}
+\begin{sample}
+    \begin{ex}
+        $A$, $B$, $C$三人独立地破译密码, 分别有$1/3$, $1/4$, $1/5$的概率破译密码, 问能破译的概率如何.
+    \end{ex}
+    \begin{proof}
+        $A^c$, $B^c$, $C^c$也是相互独立的, 故
+        \[ 1-P\pare{A^cB^cC^c} = 1-\pare{1-P\pare{A}}\pare{1-P\pare{B}}\pare{1-\pare{C}}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设有电路$\pare{1+2}\parallel\pare{3+4}$和$\pare{1\parallel 2} + \pare{2\parallel 4}$, 数字分别表示四个继电器. 设继电器导通的概率为$p$, 分别求两个电路通路的概率.
+    \end{ex}
+    \begin{proof}[解]
+        设$A_i$表示第$i$个开关通路, 对于第一个电路,
+        \begin{align*}
+            P\pare{E} &= P\pare{A_1A_2 \cup A_3A_4} \\&= P\pare{A_1A_2} + P\pare{A_3A_4} - P\pare{A_1A_2A_3A_4} = 2p^2 -p^4. 
+        \end{align*}
+        对于第二个电路,
+        \[ P\pare{E} = P\pare{\pare{A_1\cup A_3}\pare{A_2\cup A_4}} = \pare{2p-p^2}^2. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        某人独立向一目标射击$n$次, 每次命中率$p$, 求$n$次至少射中一次的概率.
+    \end{ex}
+    \begin{proof}[解]
+        $\displaystyle P\pare{\bigcup A_i} = 1 - P\pare{\bigcap A_i^c} = 1 - \prod P\pare{A_i^c} = 1 - \pare{1-p}^n$.
+    \end{proof}
+\end{sample}
+\centerline{
+    \xymatrix{
+        \text{trial: }E \ar[d]& \\
+        \text{样本空间}\Omega \ar[d]& \text{所有可能结果} \ar[l] \\
+        \text{事件} A\subset \Omega \ar[d]\ar[r] & \text{事件之间的关系} \\
+        P\pare{A}\ar[r] & \text{公理化定义}  \\
+    }
+}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+50, 59, 65, 74, 76, 81, 82.
+
+% paragraph 作业 (end)
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        & 有序 & 无序 & \\
+        \hline
+        \+:r2{放回} & \+:r2{$\displaystyle M^n$} & \+:r2{$\displaystyle \binom{M+n-1}{n}$} & \+:r2{Boson}\\
+        &&& \\
+        \hline
+        \+:r2{不放回} & \+:r2{$\displaystyle A_M^n$} & \+:r2{$\displaystyle \binom{M}{n}$} & \+:r2{Fermion} \\
+        &&& \\
+        \hline
+        &可分辨&不可分辨 & \\ 
+        \hline
+    \end{tabular}
+    \caption{$M$个物体, 取$n$次}
+\end{table}
+
+% subsection 条件概率与独立性 (end)
+
+% section 事件 (end)
+
+\end{document}

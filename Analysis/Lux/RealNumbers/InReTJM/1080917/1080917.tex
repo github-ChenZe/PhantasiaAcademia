@@ -1,0 +1,68 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{SinAndArcsin}
+    \caption{$\arcsin$示意}
+    \label{fig:arcsin示意}
+\end{figure}
+如\cref{fig:arcsin示意}, 图中是$\sin$函数的图像, 而橙色的箭头表示$\arcsin$函数的作用, 即将$y$轴(蓝色)上$\brac{-1,1}$内的点映射到$x$轴(红色)在$\brac{-\pi/2,\pi/2}$内的点, 并且恰好满足$\sin x = y$.
+\begin{finale}
+    \begin{lemma}
+        \label{lem:arcsin关系}
+        对于$x\in \brac{-\frac{\pi}{2},\frac{\pi}{2}}$, 有
+        \[ \arcsin \sin x = x. \]
+        或者写作
+        \[ \underset{ \underset{\displaystyle \brac{-\frac{\pi}{2},\frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x} \xrightarrow{\sin} \sin x \xrightarrow{\arcsin} x. \]
+    \end{lemma}
+\end{finale}    
+\begin{figure}[ht]
+    \centering
+    \incfig{14cm}{SinPure}
+    \caption{$\sin$示意}
+    \label{fig:sin示意}
+\end{figure}
+\par
+如\cref{fig:sin示意}, 绿色箭头表示$\sin$函数的作用, 将整个$x$轴映到$y$轴的$\brac{-1,1}$内. 惟不同的$x$可被映射至相同的$y$. 此外, 黄色标注的区间是与$\brac{-\pi/2,\pi/2}$相差奇数倍$\pi$者, 暂时称为第二类区间; 而留白则为与$\brac{-\pi/2,\pi/2}$相差偶数倍$\pi$者, 暂时称为第一类区间.
+\begin{figure}[ht]
+    \centering
+    \incfig{14cm}{SinArcsinEven}
+    \caption{$\arcsin\sin$在第一类区间的示意}
+    \label{fig:sin第一类示意}
+\end{figure}
+\par
+观察\cref{fig:sin第一类示意}中在第一类区间(留白部分)可以发现, 图中$x_1$和$x'_1$两点恰好被映射(绿色箭头)至同一$y_1$, 但是将$\arcsin$作用(橙色箭头)到$y_1$后只得到了$x_1$. 追踪$x_1$的路径可以发现
+\[ \underset{ \underset{\displaystyle \brac{-\frac{\pi}{2},\frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x_1} \xrightarrow{\sin} \sin x_1 \xrightarrow{\arcsin} x_1, \]
+这正是\cref{lem:arcsin关系}的结论. 对于$x'_1$, 可以发现
+\[ \underset{ \underset{\displaystyle \brac{2\pi -\frac{\pi}{2},2\pi + \frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x'_1} \xrightarrow{\sin} \sin x'_1 = \sin \underset{ \underset{\displaystyle \brac{-\frac{\pi}{2},\frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x_1} \xrightarrow{\arcsin} x_1 = x'_1 - 2\pi, \]
+这样就证明了$\arcsin \sin x'_1 = x'_1 - 2\pi$. 对于第一类区间的其它$x$, 例如$x_2$也有类似的结论.
+\begin{figure}[ht]
+    \centering
+    \incfig{14cm}{SinArcsinOdd}
+    \caption{$\arcsin\sin$在第二类区间的示意}
+    \label{fig:sin第二类示意}
+\end{figure}
+\par
+对于\cref{fig:sin第二类示意}中的第二类区间也可以采用完全类似的思路,
+\[ \underset{ \underset{\displaystyle \brac{\pi -\frac{\pi}{2},\pi + \frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x_1} \xrightarrow{\sin} \sin x_1 = \sin \underset{ \underset{\displaystyle \brac{-\frac{\pi}{2},\frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{\pare{\pi - x_1}} \xrightarrow{\arcsin} \pi - x_1. \]
+这样立即得到了
+\begin{finale}
+    \begin{lemma}
+        \label{lem:arcsin关系2}
+        对于$x\in \brac{\pi -\frac{\pi}{2},\pi + \frac{\pi}{2}}$, 有
+        \[ \arcsin \sin x = \pi - x. \]
+        或者写作
+        \[ \underset{ \underset{\displaystyle \brac{\pi -\frac{\pi}{2},\pi + \frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x} \xrightarrow{\sin} \sin x \xrightarrow{\arcsin} \pi - x. \]
+    \end{lemma}
+\end{finale}
+对于$x'_1$,
+\[ \underset{ \underset{\displaystyle \brac{3\pi -\frac{\pi}{2},3\pi + \frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x'_1} \xrightarrow{\sin} \sin x'_1 = \sin \underset{ \underset{\displaystyle \brac{\pi-\frac{\pi}{2},\pi + \frac{\pi}{2}}}{\mathbin{\rotatebox[origin=c]{-90}{$\in$}}}}{x_1} \xrightarrow{\arcsin} \pi - x_1  = 3\pi - x'_1. \]
+这样就证明了$\arcsin \sin x'_1 = 3\pi - x'_1$. 对于第二类区间的其它$x$也可以类似论证.
+\par
+因此, 对于任意的$k\in\+bZ$, 分$k$的奇偶可以对$\displaystyle \brac{k\pi - \frac{\pi}{2}, k\pi + \frac{\pi}{2}}$中的$x$得到的$\arcsin \sin x$的值.
+
+\end{document}

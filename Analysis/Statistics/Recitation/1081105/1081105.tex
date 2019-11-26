@@ -1,0 +1,76 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\Var}{Var}
+
+\begin{document}
+
+\begin{remark}
+    正态分布的$n$阶中心距可以通过参变求导得到.
+\end{remark}
+\begin{ex}
+    $X_1, \cdots, X_n$ i.i.d $\sim \exp\pare{\lambda}$. 求$X_{\pare{1}}$和$\sum X_i - X_{\pare{1}}$的分布, 以及两者是否独立.
+\end{ex}
+\begin{proof}
+    $f\pare{x_{\pare{1}}, \cdots, x_{\pare{n}}} = n! \lambda^n \exp\curb{-\lambda \sum x_{\pare{i}}} I\pare{x_{\pare{1}}< \cdots < x_{\pare{n}}}$. 变形可得
+    \begin{align*}
+        f\pare{x_{\pare{1}}, \cdots, x_{\pare{n}}} &= n\lambda e^{-n\lambda x_{\pare{1}}} \pare{n-1}! \exp\curb{-\lambda \sum_{i=2} \pare{x_{\pare{i}} - x_{\pare{1}}}}\\ & I\pare{0 < x_{\pare{2}} - x_{\pare{1}} < x_{\pare{3}} - x_{\pare{2}} < \cdots}. 
+    \end{align*}
+    令$Y_i = X_{\pare{i}} - X_{\pare{1}}$, 则$Y_i$都和$X_{\pare{1}}$相互独立.
+    \par
+    考虑指数分布的和, 即若$X_1$到$X_n$都服从$\exp\pare{-\lambda}$, 则
+    \[ f\pare{X_1+X_2 = t} = \int_0^t \lambda e^{-\lambda x_1} \cdot \lambda e^{-\lambda\pare{t-x_1}}\,\rd{x_1} = \lambda^2 te^{-\lambda t}. \]
+    归纳可得$n$个的和为
+    \[ f_n\pare{x} = \frac{\lambda^n x^{n-1}}{\pare{n-1}!} e^{-\lambda x}. \]
+    而题目中$\sum \pare{X_i - X_{\pare{1}}}$就是$n-1$个指数分布的和.
+\end{proof}
+\begin{remark}
+    可以通过条件概率计算, 即
+    \[ f = \sum_k f\pare{\sum_{i=1}^n \pare{X_i - X_{\pare{1}}}\vert X_{\pare{1}} = X_k}\cdot P\pare{X_{\pare{1}} = X_k}. \]
+\end{remark}
+\begin{remark}
+    $Y_i = X_{\pare{i}} - X_{\pare{1}}$和$X_{\pare{1}}$相互独立, 因为减去$X_{\pare{1}}$这一操作恰好消去了$X_{\pare{i}}$和$X_{\pare{1}}$的关系.
+\end{remark}
+期望的很多性质可以灵活运用. 而且应当注意$E\pare{X_1 + X_2} = EX_1 + EX_2$无论$X_1$和$X_2$之间关系如何都成立.
+\begin{pitfall}
+    $E\pare{X^2} \neq {EX}^2$, $E\pare{X^n} \neq \pare{EX}^n$. 高阶矩的计算只能依赖于积分.
+\end{pitfall}
+$\Var\pare{X_1+X_2} = E\brac{\pare{X_1+X_2}^2} - \pare{E\pare{X_1 + X_2}}^2 = \Var X_1 + \Var X_2 + \cov\pare{X_1, X_2}$.
+\begin{ex}
+    设$X,Y\sim N\pare{\sigma^2, 2\sigma^2, \sqrt{2}/4}$, 则
+    \[ \Var\pare{x,y} = \sigma^2 + 2\sigma^2 + 2\sqrt{\sigma^2 \cdot 2\sigma^2} \frac{\sqrt{2}}{4} = 4\sigma^2. \]
+\end{ex}
+对于非连续或离散的$X$, 若$X>0$则都有
+\[ EX = \int_0^\infty \pare{1-F\pare{x}}\,\rd{x} + \int_{-\infty}^0 \pare{-F\pare{x}}\,\rd{x}. \]
+\par
+若$X$有pdf$f_X\pare{x}$, 则$\abs{X}$有pdf$f_{\abs{X}}\pare{x} = f_X\pare{x} + f_X\pare{-x}$.
+\par
+使用cdf求分布, 例如$X,Y$服从矩形上的均匀分布, 求$X-Y$的分布.
+\par
+\begin{ex}
+    设$X\sim \exp\pare{\lambda}$, $m = \lfloor x \rfloor$, $n = \curb{x}$, 则
+    \begin{equation}
+        P\pare{n\le t\vert m=k} = \frac{P\pare{x\in\brac{k,k+t}}}{P\pare{x\in \brac{k,k+1}}}
+    \end{equation}
+    后调用指数分布的cdf即可.
+\end{ex}
+\paragraph{条件独立} % (fold)
+\label{par:条件独立}
+
+若$f_{X\vert Z} \pare{x} \cdot f_{Y\vert Z} \pare{y} = f_{X,Y\vert Z}\pare{x,y}$则谓$X,Y$条件独立.
+
+% paragraph 条件独立 (end)
+
+\begin{ex}
+    假设有两类球则, $X_2\vert X_1 \sim B\pare{n-k, \displaystyle \frac{p_2}{1-p_1}}$. $E\pare{X_2\vert X_1 = k} = \pare{n-k}\cdot\displaystyle \frac{p_2}{1-p_1}$. $\Var\pare{X_2\vert X_1 = k} = \pare{n-k}\displaystyle \frac{p_2}{1-p_1}\frac{1-p_1-p_2}{1-p_1}$. 若欲求$\Var\pare{X_1+\cdots+X_k}$, 则注意$X_1 + \cdots + X_k$亦服从二项分布即可.
+\end{ex}
+\begin{pitfall}
+    $\Var$不能线性拆分.
+\end{pitfall}
+Poisson分布的期望可通过
+\[ 1 = \sum_{n=0}^\infty e^{-\lambda} \frac{\lambda^n}{n!} \Rightarrow \sum_{n=1}^\infty \frac{\lambda^{n-1}}{\pare{n-1}!}\cdot\lambda = \lambda. \]
+而
+\[ E\pare{X^2} = \sum_{n=1} \brac{n\pare{n-1}+n} e^{-\lambda} \frac{\lambda^n}{n!} = \sum_{n=2} n\pare{n-1}\frac{e^{-\lambda}\lambda^n}{n!} + \sum_{n=1}^\infty n \frac{e^{-\lambda}\lambda^n}{n!} = \lambda^2 + \lambda. \]
+故$\Var\pare{X} = E\pare{X^2} - \pare{EX}^2 = \lambda^2.$
+
+\end{document}

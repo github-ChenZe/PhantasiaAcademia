@@ -1,0 +1,66 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'SingleSheetExp.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1425.38679949bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.48435027)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{SingleSheetExp.pdf}}%
+    \put(0.248749,0.38113171){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19453448\unitlength}\raggedright $\pi i$\end{minipage}}}%
+    \put(0.248749,0.12856864){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19453448\unitlength}\raggedright $-\pi i$\end{minipage}}}%
+    \put(0.19778767,0.23590261){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19453448\unitlength}\raggedright $0$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{SingleSheetExp.pdf}}%
+    \put(0.71343726,0.23590261){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19453448\unitlength}\raggedright $0$\end{minipage}}}%
+    \put(0.44328348,0.22274024){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11161813\unitlength}\raggedright $x$\end{minipage}}}%
+    \put(0.2593793,0.48105651){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11161813\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0.40288834,0.42896805){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11161813\unitlength}\raggedright $z$\end{minipage}}}%
+    \put(0.95778997,0.22805541){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16264358\unitlength}\raggedright $u$\end{minipage}}}%
+    \put(0.77707489,0.47574139){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16264358\unitlength}\raggedright $v$\end{minipage}}}%
+    \put(0.91205832,0.42699155){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16264358\unitlength}\raggedright $w$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{SingleSheetExp.pdf}}%
+  \end{picture}%
+\endgroup%

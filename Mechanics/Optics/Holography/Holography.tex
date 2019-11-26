@@ -1,0 +1,46 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{全息照相} % (fold)
+\label{sec:全息照相}
+
+\subsection{全息照相原理} % (fold)
+\label{sub:全息照相原理}
+
+\subsubsection{Huygens-Fresnel原理的实质} % (fold)
+\label{ssub:huygens_fresnel原理的实质}
+
+只需要再现物的波前就可以再现物的光波.
+
+% subsubsection huygens_fresnel原理的实质 (end)
+
+\subsubsection{波前的全息记录} % (fold)
+\label{ssub:波前的全息记录}
+
+将物光波$\tilde{U}_O = \sum u_n\pare{Q} = A_O\pare{Q} e^{i\varphi\pare{Q}}$与参考光$\tilde{U}_R$干涉, 则
+\[ I\pare{Q} = \pare{\tilde{U}_O + \tilde{U}_R}\pare{\tilde{U}_O + \tilde{U}_R}^* = A_R^2 + A_O^2 + \tilde{U}_O \tilde{U}_R^* \tilde{U}_R \tilde{U}_O ^*. \]
+冲洗有
+\[ t = t_0 + t_1 I = t_0 + \beta \pare{A_R^2 + A_O^2 + \tilde{U}_O \tilde{U}_R^* \tilde{U}_R \tilde{U}_O ^*}. \]
+再现时
+\begin{align*}
+    \tilde{U}_R' &= A_R' e^{i\varphi_R'}, \\
+    U_T &= U_R't = \pare{t_0 + \beta A_R^2 + \beta A_0^2} U_R' \\
+    &+ \beta U_R' U_R^* \tilde{U}_0 + \beta U_R' U_R \tilde{U}_0^*.
+\end{align*}
+\begin{remark}
+    Fresnel波带片可以拟制为平行光与轴上一点发出之球面波产生之干涉. 黑白光栅可以通过Fourier展开成为正弦光栅的叠加, 从而可视为点光源组合.
+\end{remark}
+\begin{remark}
+    通过多种颜色的参考光干涉可以得到彩色的全息像.
+\end{remark}
+
+% subsubsection 波前的全息记录 (end)
+
+% subsection 全息照相原理 (end)
+
+% section 全息照相 (end)
+
+\end{document}

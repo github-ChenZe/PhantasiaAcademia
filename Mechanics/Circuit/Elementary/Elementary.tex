@@ -1,0 +1,357 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\subsubsection*{配置} % (fold)
+\label{ssub:配置}
+
+\noindent
+Prof Liang Futian ftliang@ustc.edu.cn \\
+T.A. Chen Baolin cbl001@ustc.edu.cn \\
+T.A. Jin Zhanhong jinzh@mail.ustc.edu.cn \\
+作业: 该章结束后下一节课交\\
+考试: 闭卷统一\\
+成绩: 作业20\%-30\%, 考试80\%-70\%\\
+18周中会有一次习题课, 一次总复习, 一次可能的机动课时, 固定上课约13次\\
+Coverage: 第一章: 集总参数电路中的电压、电流的约束关系, 含第五、六、八章内容(3-4次); 第二章: 网孔分析和节点分析(2次); 第四章: 分解方法和单口网络, 含第三章部分(2次); 第五章: 电容元件与电感元件(0.5-1次); 第六章: 一阶电路(2次); 第七章: 二阶电路(1次), 阻抗和导纳(1次). \\
+方法:
+\begin{cenum}
+    \item KCL, KVL
+    \item 叠加原理, 置换定理
+    \item 网孔法, 节点法
+    \item Thevenin, Norton等效
+    \item 一阶电路, 三要素法
+\end{cenum}
+基础概念:
+\begin{cenum}
+    \item 集总电路, 集总元件, 关联方向
+    \item KCL, KVL
+    \item 电阻, 电容, 电感
+    \item 电压源, 电流源, 受控源
+    \item 叠加原理, 置换定理
+    \item Thevenin, Norton等效
+    \item 单口网络
+    \item 激励相应(零状态/零输入/全相应)
+    \item 三要素法
+    \item 三种阻尼状态
+    \item 阻抗和导纳
+\end{cenum}
+
+% subsubsection 配置 (end)
+
+\section{集总参数电路中电压、电流的约束关系} % (fold)
+\label{sec:集总参数电路中电压_电流的约束关系}
+
+\begin{definition}
+    电阻, 电容, 电感等集总参数元件组成的电路谓集总电路.
+\end{definition}
+\begin{definition}
+    只含有电阻元件和电源元件的电路谓电阻电路.
+\end{definition}
+\begin{remark}
+    另一类为动态电路.
+\end{remark}
+\begin{definition}
+    集总参数即器件的尺寸远远小于信号的波长之情形下的参数.
+\end{definition}
+\begin{remark}
+    当信号铍旅很高时, 每一点的参数需要分别考虑, 谓分布参数.
+\end{remark}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+3, 4, 6, 7, 12, 16, 21, 23, 37\\
+staff.ustc.edu.cn/\textasciitilde ftliang/FET\_I/
+
+% paragraph 作业 (end)
+
+\subsection{电流, 电压与功率} % (fold)
+\label{sub:电流_电压与功率}
+
+电路的电性能可以用一组表示为时间函数的变量来描述, 最常用到的是电量、电流、电压和功率.
+\par
+电量的单位是库伦, $\SI{1}{C} = \SI{6.24e18}{}$个电子的电量, 以符号$q$或$Q$表示.
+\par
+单位时间内通过导线横截面的电量谓电流强度,
+\[ i\pare{t} = \+dtdq. \]
+\begin{remark}
+    $\SI{1}{GHz}$的示波器, 对于$\SI{1}{\mu A}$的电流, 一个周期内只会流过$6240$个电子. 一个电子的计数偏差都会引起超过万分之一的误差.
+\end{remark}
+直流电大小和方向不随时间变化, 谓直流电(DC), 记作$I$. 大小/时间随时间变化时, 谓交流电(AC).
+\par
+正电荷的运动方向规定为电流方向. 但电流方向不一定能事先求出, 故引入参考方向, 若电流与参考方向一致则电流为正, 否则电流为负. {\color{red}电流的参考方向不一定是电流的正方向.}
+\par
+电压, 或电位差, 以$u$表示. $a$, $b$亮点之间的电压表明单位正电荷由$a$转移到$b$时得到或失去的能量, 即
+\[ u = \frac{\rd{w}}{\rd{q}}. \]
+正电荷由$a$转移到$b$若获得能量, 则$a$为低电位(负极), $b$为高电位, 反之亦然. 电势变化体现了正电荷的能量得失.
+\par
+若电压的大小和极性都不随时间变动, 则为直流电压. 否则谓交流电压.
+\par
+电压的参考极性在元件两端用$+$和$-$表示. 以所得正负值决定实际电势差.
+\par
+尽管如此, 通常对电压使用关联参考方向, 即电流与电压降的参考方向一致.
+\begin{pitfall}
+    不要和电源的电动势方向混淆.
+\end{pitfall}
+电荷在电路的某些部分(例如电源处)获得能量, 而在另外一些部分(如电阻元件处)失去能量.
+\par
+电路吸收或提供能量的速率即功率, 用符号$p$表示. 设$a$点转移到$b$点的正电量为$\rd{q}$, 且$a$到$b$的电压降为$u$, 则
+\[ \rd{w} = u\,\rd{q}. \]
+电荷失去能量, 则这段电路吸收能量.
+\[ p = ui. \]
+\par
+为功率假设参考方向, 可以使用关联与电压和电流的参考方向. $u$和$i$同向时$p$默认参考方向为元件吸收能量. 此时$p$为正时表示吸收能量.
+
+% subsection 电流_电压与功率 (end)
+
+\subsection{Kirchhoff定律} % (fold)
+\label{sub:kirchhoff定律}
+
+将每一个二端元件视为一条支路, 则可以定义流经之路的电流和电压.
+\par
+支路的连接点谓节点, 节点是两条或两条以上支路的连接点. 电路中的任意闭合路径谓回路. 回路内部不另含支路的回路谓网孔. 含元件较多的电路谓电网络, 简称网络.
+\par
+KCL表明任意集总电路中的任一节点, 在任一时刻, 流入或流出该节点的所有支路电流之代数和为零.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{KCL}
+    \caption{}
+    \label{fig:KCL例1}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如图\cref{fig:KCL例1}, KCL表明
+        \[ i_1 + i_2 - i_3 = 0. \]
+    \end{ex}
+\end{sample}
+使用KCL前需要选定参考方向.
+\par
+割集是具有下列性质的支路的集合,
+\begin{cenum}
+    \item 若将集合的所有支路切割(移除), 电路将成为两个分离部分;
+    \item 然而只要少切割或移除任何一条支路, 电路仍连通.
+\end{cenum}
+对于任意集总电路的任意割集, 流经所有支路的电流的代数和为零.
+\par
+一组电流当且仅当满足一个KCL方程式才是线性相关的.
+\begin{sample}
+    \begin{ex}
+        S2 设$i_1=\SI{5}{A}$, $i_2 = \SI{2}{A}$, $i_3 = \SI{-3}{A}$, 试求$i_4$.
+    \end{ex}
+    \begin{proof}[解]
+        图中电流参考方向已经给定,
+        \[ -i_1 + i_2 + i_3 - i_4 = 0. \qedhere \]
+    \end{proof}
+\end{sample}
+KVL表明对于任一集总电路中的任一回路, 在任一时刻, 沿着该回路的所有支路电压降的代数和为零.
+\par
+一组电压当且仅当满足一个KVL方程时才是线性相关的.
+\begin{sample}
+    \begin{ex}
+        课本例1-4.
+    \end{ex}
+\end{sample}
+电压可以采用双下标记法, $u_{ab}$表示$a$到$b$的电压降低, 即$a$为$+$而$b$为$-$. 此种方法可回避参考方向问题.
+
+% subsection kirchhoff定律 (end)
+
+\subsection{电阻元件} % (fold)
+\label{sub:电阻元件}
+
+每一元件电压与电流之间有关系, 谓VCR. VCR连通Kirchhoff定律是集总电路分析的基础. 电阻元件是从实际电阻器抽象出来的模型, 反映电阻器对电流呈阻力作用.
+\par
+Ohm定律表明$u=Ri$. $u$为电阻元件两端的电压, $i$为流过电阻元件的电流, $R$为常数. 故$u$与$i$呈正比关系, 满足这一性质的元件谓线性元件.
+\par
+$i$-$u$平面内可绘制二者关系曲线($u$-$i$关系图), 谓伏安特性曲线. 其斜率为电阻.
+\par
+电导用符号$G$表示, 定义为$\displaystyle G = \rec{R}$, 单位为西, 记作$S$.
+\begin{sample}
+    \begin{ex}
+        电阻之并联, 有
+        \[ G = G_1 + G_2. \]
+    \end{ex}
+\end{sample}
+\par
+具有确定$u$-$i$关系的元件具有无记忆性.
+\par
+任意二端元件, 若有关系$f\pare{u,i} = 0$, 无论是否线性, 以及电压/电流波形如何, 皆谓电阻元件. 特性曲线不随时间变化的谓定常的, 反之谓时变的.
+\par
+二极管可视为非线性电阻, 电阻随电压和电流的大小和方向改变, 且伏安特性曲线关于原点不对称.
+\par
+在电压和电流关联参考方向下,
+\[ p = Ri^2 = \frac{i^2}{G} = \frac{u^2}{R} = Gu^2. \]
+\par
+伏安特性曲线斜率为负时, $p<0$, 从而元件对外提供能量.
+\par
+$R\rightarrow \infty$时$i=0$, $R = 0$时$u = 0$. 
+
+% subsection 电阻元件 (end)
+
+\subsection{电容元件} % (fold)
+\label{sub:电容元件}
+
+把两块金属极版用介质隔开就可以构成一个简单的电容器.
+\par
+理想介质不导电, 在外电源的作用下, 两块极板上能储存等量的异号电荷.
+\par
+外电源撤走后, 极板上的电荷能长久地储存下去.
+\par
+在任一时刻$t$, 其电荷$q\pare{t}$同两端电压$u\pare{t}$之间的关系可以用$u$-$q$曲线确定的元件谓\emph{电容元件}.
+\par
+若$u$-$q$平面上的特性曲线是一条通过原点的直线, 且不随时间变化, 则谓之线性时不变电容元件.
+\[ q\pare{t} = Cu\pare{t}, \quad i\pare{t} = C\+dtdu,\quad u\pare{t} = u\pare{t_0} + \rec{C} \int_{t_0}^t i\pare{\xi}\,\rd{\xi}. \]
+正方向按照电流-电压关联参考方向确定. 特别地, 当$i\pare{t}$为正时, 正电荷向正极板聚集, $\dot{q}\pare{t}>0$.
+\par
+若电容电流在闭区间内有界, 则电容电压在其开区间内连续. {\color{red}电容两端电压不能突变.}
+\par
+在$t_1$到$t_2$区间内吸收的能量为
+\[ w_C\pare{t_1,t_2} = \half C\brac{u^2\pare{t_2} - u^2\pare{t_1}}. \]
+换言之, 在任一时刻, 电容储存的能量仅仅与其电压有关,
+\[ w = \half Cu^2\pare{t}. \]
+
+% subsection 电容元件 (end)
+
+\subsection{电感元件} % (fold)
+\label{sub:电感元件}
+
+电流$i\pare{t}$同其磁链$\psi{t}$之间的关系可以用$i$-$\psi$平面上的一条曲线来确定, 则此二端元件谓\emph{电感元件}.
+\[ \psi\pare{t} = Li\pare{t}. \]
+当电压参考方向与磁链的参考方向符合右手定则时,
+\[ u = \+dtd\psi = L\+dtdi,\quad i\pare{t} = i\pare{t_0} \rec{L}\int_{t_0}^t u\pare{\xi}\,\rd{\xi}. \]
+\begin{remark}
+    $u$和感应电动势方向相差一个负号.
+\end{remark}
+若电感电压在闭区间内有界, 则电感电流在其开区间内连续. {\color{red}电感电流不能突变.}
+在$t_1$到$t_2$区间内吸收的能量为
+\[ w_L\pare{t_1,t_2} = \half L\brac{i^2\pare{t_2} - i^2\pare{t_1}}. \]
+换言之, 在任一时刻, 电感储存的能量仅仅与其电流有关,
+\[ w = \half LI^2. \]
+
+% subsection 电感元件 (end)
+
+\subsection{电压源} % (fold)
+\label{sub:电压源}
+
+理想电源自身没有能量损耗, 是从实际电源抽象出来的一种模型. 理想情形下, 单位正电荷由电源负极转移到正极时, 就能获得这一定值能量的全部. {\color{red}理想电源的端电压$u$是定值, 等于电源的电动势.}
+\begin{cenum}
+    \item 端电压可能随时间变化, 但和电流是无关的;
+    \item 电压源的电压是由它本身决定的, 而流过的电流是任意的.
+\end{cenum}
+在$u$-$i$平面上, 电压源在时刻$t_1$的伏安特性曲线是一条平行于$i$轴, 纵坐标$u_S\pare{t_1}$的直线. 电压源的特性曲线表明了电压源端电压与电流大小无关.\\
+\inlinehardlink{书本例1-7, 1-9}\\
+\begin{remark}
+    电流源的关联参考方向和一般元件无差别. 如果算得$p$为负, 则电源向外提供功率.
+\end{remark}
+
+% subsection 电压源 (end)
+
+\subsection{电流源} % (fold)
+\label{sub:电流源}
+
+电流源有两个基本性质, 它发出的电流是定值$I_S$或者是时间函数$i_S\pare{t}$, 与两端电压无关. 当电压为零时, 电流不受影响. 电流源的电流是由它本身决定的, 它两端的电压由与之连接的外电路决定.
+\par
+电流源两端电压可以有不同极性. 因而电流源可以对外电路提供能量, 也可以从外电路吸收能量. 
+\par
+在$u$-$i$平面上, 电流源在时刻$t_1$的伏安特性曲线是一条平行于$u$轴且纵坐标为$i_S\pare{t_1}$的直线. 特性曲线表明了电流源电流与端电压大小无关.\\
+\inlinehardlink{电流源和电压源的表示}\\
+\inlinehardlink{书本例1-10}\\
+
+% subsection 电流源 (end)
+
+\subsection{受控源} % (fold)
+\label{sub:受控源}
+
+\emph{受控源}是一种双口元件. 它含有两条支路, 其一为控制支路, 这条支路为开路或者短路. 另一为受控支路.
+\par
+压/流控电压/电流源, 分别写为VCVS, CCVS, VCCS, CCCS.\\
+\inlinehardlink{四种受控源的画法}
+\begin{remark}
+    电压源中间的线平行于支路, 电流源中间的线垂直于支路.
+\end{remark}
+VCVS的受控关系为
+\[ i_1 = 0,\quad u_2 - \mu u_1 = 0. \]
+CCVS为
+\[ u_1 = 0,\quad u_2 - ri_1 = 0. \]
+VCCS为
+\[ i_1 = 0,\quad i_2 - gu_1 = 0. \]
+CCCS为
+\[ u_1 = 0,\quad i_2 - \alpha i_1 = 0. \]
+例如对于线性的$VCVS$, $u_2$和$u_1$的关系是一条过原点直线.\\
+\inlinehardlink{书本例1-13}\\
+\inlinehardlink{书本例1-14}
+在列出KVL和KCL时, 现将受控源暂时视为独立源, 惟参数受到控制. 其次, 在列出方程后, 找到控制量与待求解量的关系.
+
+% subsection 受控源 (end)
+
+\subsection{公式} % (fold)
+\label{sub:公式}
+
+\paragraph{串联电路的分压公式} % (fold)
+\label{par:串联电路的分压公式}
+
+若$n$个电阻串联, 则第$k$个电阻的电压为
+\[ U_k = \frac{R_k}{\sum R_i} U. \]
+分压电路习惯
+\begin{cenum}
+    \item 机壳为地, 是参考点, 即$-$端;
+    \item 各节点到参考节点的电压降为该点的节点电压;
+    \item 参考节点$c$的电压为$u_c=u_{cc} = 0$, 故该参考节点谓零电位点.
+\end{cenum}
+\inlinehardlink{书本例1-15, 1-16}
+\begin{remark}
+    未给定电压源而仅有电压数值时应当自行补全之.
+\end{remark}
+
+% paragraph 串联电路的分压公式 (end)
+
+% subsection 公式 (end)
+
+\subsection{KCL与KVL的独立性} % (fold)
+\label{sub:kcl与kvl的独立性}
+
+与一个节点相连接的各支路, 电流受到KCL约束. 与一个回路相连接的各支路, 电压受到KVL约束. 这种只取决于互联形式的约束谓拓扑约束. 例如在图\inlinehardlink{S1}中下方三个点在拓扑上为同一点.
+\par
+来自元件的性质, 即每个元件的电压及流过其电流的关系, 谓元件约束.
+\par
+根据这两类约束, 可以列出联系电路中所有电压变量, 电流变量的足够的独立方程组. 具体说, 对一个具有$b$条支路的电路, 可以列出联系$b$条支路电流变量和电压变量所需的$2b$个独立方程.
+\par
+\begin{sample}
+    \begin{ex}
+        如\inlinehardlink{S2}, 依次对四个节点和两个回路应用KCL和KVL,
+        \[ \begin{cases}
+            i_0 - i_1 = 0,\\
+            i_1-i_2-i_3 = 0,\\
+            i_2+i_4 = 0,\\
+            -i_0 + i_3 - i_4 = 0,
+        \end{cases}\quad\begin{cases}
+            u_1+u_3-u{s1} = 0,\\
+            -u_3+u_2+u_{s2} = 0.
+        \end{cases} \]
+        再由元件的Ohm定律列出元件约束.
+    \end{ex}
+\end{sample}
+注意$b$条电路的VCR恰好可得$b$条方程, 剩下的$b$个独立方程恰好由KCL和KVL提供.
+\par
+设电路的节点数为$n$, 则独立的KCL方程为$n-1$个. 注意到虽然$n$个节点可列出$n$条方程, 但每个电流恰好出现$\pm$两次, 故总和为零, 从而只有$n-1$条独立方程.
+\par
+对于一个包含$b$条支路平面电路由$b-\pare{n-1}$个网孔, 这可以由数学归纳法证明, cf. Euler's formula. 且所列的$m=b-\pare{n-1}$个网孔是相互独立的. 考虑到$m+1$个网孔构成闭合多面体从而$m+1$个方程无法完全独立, 故最多有$m$条独立方程.
+\par
+总的独立KCL和KVL方程数为$n-1+m = n-1+b-\pare{n-1} = b$.
+\begin{cenum}
+    \item 支路电流和支路电压法可以显著减少需要列出方程的数目;
+    \item 各支路的电流和电压由VCR相联系, 故求出一者即可;
+    \item 电阻的VCR是已知的, 故求解电流/电压之一即可.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        对于\inlinehardlink{S2}, 可以列出\inlinehardlink{补全}.
+    \end{ex}
+\end{sample}
+
+% subsection kcl与kvl的独立性 (end)
+
+% section 集总参数电路中电压_电流的约束关系 (end)
+
+\end{document}

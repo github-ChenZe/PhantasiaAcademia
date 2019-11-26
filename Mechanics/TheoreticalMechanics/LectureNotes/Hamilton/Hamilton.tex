@@ -1,0 +1,190 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{Hamilton力学} % (fold)
+\label{sec:hamilton力学}
+
+\subsection{Hamilton正则方程} % (fold)
+\label{sub:hamilton正则方程}
+
+\subsubsection{Legendre变换与正则方程} % (fold)
+\label{ssub:legendre变换与正则方程}
+
+\paragraph{Legendre变换} % (fold)
+\label{par:legendre变换}
+
+设有多元函数$f\pare{x,y}$, $\rd{f} = u\,\rd{x} + v\,\rd{y}$,
+\[ u = \+DxDf, \quad v = \+DyDf. \]
+将自变量作替换$\pare{x,y}\mapsto \pare{u,y}$, 则
+\[ x = x\pare{u,y},\quad v = v\pare{u,y}. \]
+从而$f\pare{x,y} = f\pare{x\pare{u,y},y} = \overbar{f}\pare{u,y}$. 引入$g = -f+ux$, 则
+\[ \rd{g} = -\rd{f} + u\,\rd{x} + x\,\rd{u} = -u\,\rd{x} + v\,\rd{y} + u\,\rd{x} + x\,\rd{u} = x\,\rd{u} - v\,\rd{y}. \]
+从而$g$自然地以$u$和$y$为基本变量, $\displaystyle x = \+DuDg$, $\displaystyle v = -\+DyDg$. 再引入$g_1 = -f+vy$, 则
+\[ \rd{g_1} = -\rd{f} + v\,\rd{y} + y\,\rd{v} = -u\,\rd{x} - v\,\rd{y} + v\,\rd{y} + y\,\rd{u} = -u\,\rd{x} + y\,\rd{v} .\]
+从而$g_1$自然地以$x$和$v$为基本变量, $\displaystyle u = -DxD{g_1}$, $\displaystyle y = \+DvD{g_1}$. 引入$g_2 = -f+ux+vy$, 则
+\[ \rd{g_2} = \rd{g_1} + u\,\rd{x} + v\,\rd{y} = x\,\rd{u} + y\,\rd{v}. \]
+从而$g_2$自然地以$u$和$v$为基本变量. $\displaystyle x = \+DuD{g_2}$, $\displaystyle y = \+DvD{g_2}$. 推广到一般的$f\pare{x_\alpha,y_\alpha}$, 则
+\[ \rd{f} = \sum_\alpha \pare{\+D{x_\alpha}Df \,\rd{x_\alpha} + \+D{y_\alpha}Df \,\rd{y_\alpha}} = \sum_\alpha \pare{u_\alpha\,\rd{x_\alpha} + v_\alpha\,\rd{y_\alpha}}. \]
+在变换$\pare{x_\alpha,y_\alpha}\mapsto \pare{u_\alpha,y_\alpha}$下,
+\begin{align*}
+    g &= -f + \sum x_\alpha u_\alpha, \\
+    \rd{g} &= -\rd{f} + \sum_\alpha \pare{x_\alpha \,\rd{u_\alpha} + u_\alpha\,\rd{x_\alpha}} \\
+    &= -\sum_\alpha \pare{u_\alpha\,\rd{x_\alpha} + v_\alpha \,\rd{y_\alpha}} + \sum_\alpha \pare{x_\alpha\,\rd{u_\alpha} + u_\alpha\,\rd{x_\alpha}} \\
+    &= \sum_\alpha \pare{x_\alpha\,\rd{u_\alpha} - v_\alpha\,\rd{y_\alpha}}. \\
+    x_\alpha &= \+D{u_\alpha}Dg,\quad v_\alpha = -\+D{y_\alpha}Dg.
+\end{align*}
+此时谓$f\leftrightarrow g$互为Legendre变换.
+
+% paragraph legendre变换 (end)
+
+\paragraph{正则方程的导出} % (fold)
+\label{par:正则方程的导出}
+
+$L = L\pare{q_\alpha,\dot{q}_\alpha,t}$, 从而
+\[ \rd{L} = \sum_\alpha \pare{\+D{q_\alpha}DL \,\rd{q_\alpha} + p_\alpha\,\rd{\dot{q}_\alpha}} + \+DtDL\,\rd{t}. \]
+考虑变量替换$\pare{q_\alpha,\dot{q}_\alpha}\mapsto \pare{q_\alpha,p_\alpha}$, 则
+\[ H = -L + \sum_{\alpha=1}^s p_\alpha \dot{q}_\alpha = H\pare{q_\alpha,p_\alpha,t}. \]
+替换后$H$的微分
+\begin{align*}
+    \rd{H} &= -\rd{L} + \sum_\alpha\pare{p_\alpha \,\rd{\dot{q}_\alpha} + \dot{q}_\alpha\,\rd{p_\alpha}} \\
+    &= -\sum_\alpha \pare{\+D{q_\alpha}DL\,\rd{q_\alpha} + p_\alpha\,\rd{\dot{q}_\alpha}} + \sum_\alpha \pare{p_\alpha\,\rd{\dot{q}_\alpha} + \dot{q}_\alpha\,\rd{p_\alpha}} - \+DtDL\,\rd{t} \\
+    &= \sum_\alpha \pare{\dot{q}_\alpha \,\rd{p_\alpha} - \+D{q_\alpha}DL\,\rd{q_\alpha}} - \+DtDL\,\rd{t}.
+\end{align*}
+在这一变换下,
+\[ -\+D{q_\alpha}DL = \+D{q_\alpha}DH,\quad \dot{q}_\alpha = \+D{p_\alpha}DH,\quad -\+DtDL = \+DtDH. \]
+$H$谓Hamilton函数. 由运动方程, $\dot{p}_\alpha = \displaystyle \+D{q_\alpha}DL$, 则
+\[ \left\{ \begin{aligned}
+    \dot{p}_\alpha &= -\+D{q_\alpha}DH, \\
+    \dot{q}_\alpha &= \+D{p_\alpha}DH,
+\end{aligned} \right.\quad -\+DtDL = \+DtDH. \]
+前两组方程即为Hamilton正则方程. 这包含$2s$个一阶微分方程.
+\begin{remark}
+    第一组方程是由Lagrange方程导出的, 有物理背景. 而第二组方程纯粹是数学上变换的结果. 但在Hamilton力学中, 两组方程皆须被视为运动方程之一部分, 且$q_\alpha$和$p_\alpha$之间并无任何先验的联系.
+\end{remark}
+每一对$\pare{q_\alpha,p_\alpha}$谓一对共轭正则变量.
+\begin{remark}
+    $H$和广义能量函数在数值上相等. 但广义能量并未要求$H$为$q$和$p$的函数.
+\end{remark}
+\begin{ex}
+    谐振子$\displaystyle L = \half m\dot{x}^2 - \half kx^2$, $\displaystyle p = m\dot{x}$,
+    \begin{align*}
+        H &= -L + p\dot{x} = -\half m\dot{x}^2 + \half kx^2 + m\dot{x}^2 \\
+        &= \half m\dot{x}^2 + \half kx^2 \\
+        &= \frac{p^2}{2m} + \half kx^2.
+    \end{align*}
+    倒数第二行可以得到广义能量, 但最后一行的结果(以$q,p$表示)才是Hamilton函数. 相应的运动方程为
+    \[ \dot{x} = \frac{p}{m},\quad \dot{p} = -kx\Rightarrow \ddot{x} = -\frac{k}{m}x \Rightarrow \ddot{x} + \frac{k}{m}x = 0. \]
+\end{ex}
+\begin{pitfall}
+    $H$的最终表达式不应出现$\dot{q}$.
+\end{pitfall}
+给定$H\pare{q,p,t}$, 通过正则方程即可写出运动方程. 然而在实际操作过程中, 须先写下Lagrange函数$L$, 通过Legendre变换得到$H\pare{q,p,t}$, 再借助正则方程. 为了将$\dot{q}$消去, 考虑反解
+\[ L\pare{q_\alpha,\dot{q}_\alpha,t} \rightarrow p_\alpha = \+D{\dot{q}_\alpha} DL\pare{q_\beta,\dot{q}_\beta, t} \rightarrow \dot{q}_\alpha = \dot{q}_\alpha \pare{q_\beta, p_\beta, t}. \]
+从而
+\[ H = -L\brac{q_\alpha, \dot{q}_\beta\pare{q_\beta,p_\beta,t},t} + \sum_\alpha p_\alpha\dot{q}_\alpha\pare{q_\beta,p_\beta,t} = H\pare{q_\alpha,p_\alpha,t}. \]
+
+% paragraph 正则方程的导出 (end)
+
+% subsubsection legendre变换与正则方程 (end)
+
+\subsubsection{Hamilton原理与正则方程} % (fold)
+\label{ssub:hamilton原理与正则方程}
+
+在Lagrange力学中,
+\begin{align*}
+    S &= \int_{t_1}^{t_2} L\pare{q_\alpha,\dot{q}_\alpha,t}\,\rd{t} \\
+    &= \int_{t_1}^{t_2} \brac{\sum_\alpha p_\alpha \dot{q}_\alpha - H\pare{q_\alpha,p_\alpha,t}}\,\rd{t}.
+\end{align*}
+在位形空间($s$维)中, 坐标变分为$\delta q_\alpha$, $\delta \dot{q}_\alpha = \displaystyle \+dtd{} \delta q_\alpha$. 从而
+\begin{align*}
+    \delta S &= \int_{t_1}^{t_2} \delta L\,\rd{t} = \sum_\alpha \int_{t_1}^{t_2} \pare{\+D{q_\alpha}DL\delta q_\alpha + \+D{\dot{q}_\alpha}DL \delta \dot{q}_\alpha}\,\rd{t} \\
+    &= \sum_\alpha \int_{t_1}^{t_2} \pare{\+D{q_\alpha}D{L} - \+dtd{} \+D{\dot{q}_\alpha}DL}\delta q_\alpha\,\rd{t} + \left.\sum_\alpha \+D{\dot{q}_\alpha}DL \delta q_\alpha\right\vert_{t_1}^{t_2}.
+\end{align*}
+对于固定边界的变分, $\delta q_\alpha\pare{t_1} = 0$, $\delta q_\alpha\pare{t_2} = 0$, 对$\delta \dot{q}_\alpha\pare{t_1}$和$\delta\dot{q}_\alpha\pare{t_2}$无要求. $\delta S = 0$对任意独立坐标变分$\delta q_\alpha$成立, 得到
+\[ \+D{q_\alpha}DL - \+dtd{} \+D{\dot{q}_\alpha}DL = 0,\quad \alpha = 1,\cdots, s. \]
+\par
+在Hamilton力学中, 相空间为$2s$维, 分部积分时考虑到$\displaystyle p_\alpha\delta\dot{q}_\alpha = p_\alpha \+dtd{}\delta q_\alpha = \+dtd{}\pare{p_\alpha\delta q_\alpha} - \dot{p}_\alpha \delta q_\alpha$, 有
+\begin{align*}
+    \delta S &= \sum_\alpha \int_{t_1}^{t_2} \pare{p_\alpha\delta\dot{q}_\alpha + \dot{q}_\alpha \delta p_\alpha - \+D{q_\alpha}DH \delta q_\alpha - \+D{p_\alpha}DH \delta p_\alpha}\,\rd{t} \\
+    &= \sum_\alpha \int_{t_1}^{t_2} \pare{-\dot{p}_\alpha \delta q_\alpha + \dot{q}_\alpha \delta p_\alpha - \+D{q_\alpha}DH\delta q_\alpha - \+D{p_\alpha}DH\delta p_\alpha}\,\rd{t} + \left. p_\alpha \delta q_\alpha \right\vert_{t_1}^{t_2} \\
+    &= \sum_\alpha \int_{t_1}^{t_2} \brac{-\pare{\dot{p}_\alpha + \+D{q_\alpha}DH}\delta q_\alpha + \pare{\dot{q}_\alpha - \+D{p_\alpha}DH}\delta p_\alpha}\,\rd{t} + \left. p_\alpha\delta q_\alpha \right\vert_{t_1}^{t_2}.
+\end{align*}
+固定边界条件为$\delta q_\alpha\pare{t_1} = \delta q_\alpha\pare{t_2} = 0$, $\delta p_\alpha\pare{t_1} = \delta p_\alpha\pare{t_2} = 0$. 由$\delta q_\alpha$和$\delta p_\alpha$独立且任意, $\delta S = 0$,
+\[ \dot{p}_\alpha = -\+D{q_\alpha}DH,\quad \dot{q}_\alpha = \+D{p_\alpha}DH. \]
+\begin{remark}
+    变分时, $q$和$p$已无任何先验关系, 地位完全对等, 故固定边界条件要求两者皆不移动.
+\end{remark}
+\begin{remark}
+    坐标和动量的分野在Hamilton力学中并不明显, 有可能一组描述下的动量在另一组描述下成为坐标.
+\end{remark}
+\begin{remark}
+    虽然此种推到不要求完整的固定边界条件($\delta p = 0$), 但如果将变分写为
+    \[ \delta S = \delta \int_{t_1}^{t_2} \brac{\sum_\alpha \half \pare{p_\alpha\dot{q}_\alpha - q_\alpha\dot{p}_\alpha} - H\pare{q_\alpha,p_\alpha,t}}\,\rd{t}, \]
+    则$\delta S = 0$需要代入完整的固定边界条件(包含$\delta p = 0$)才能得到正确的正则方程.
+\end{remark}
+
+% subsubsection hamilton原理与正则方程 (end)
+
+\subsubsection{循环坐标与Routh方法} % (fold)
+\label{ssub:循环坐标与routh方法}
+
+通过正则方程,
+\begin{align*}
+    \+dtdH &= \sum_\alpha\pare{\+D{q_\alpha}DH \dot{q}_\alpha + \+D{p_\alpha}H\dot{p}_\alpha} + \+DtdH \\
+    &= \sum_\alpha \pare{\+D{q_\alpha}DH \+D{p_\alpha}DH - \+D{p_\alpha}DH \+D{q_\alpha}DH} + \+DtDH = \+DtDH.
+\end{align*}
+若Hamilton函数不显含时间, 则$\displaystyle \+DtDH = 0\Rightarrow \dot{H} = 0$, $H=\const$.
+
+\paragraph{循环坐标} % (fold)
+\label{par:循环坐标}
+
+若Hamilton函数不含某广义坐标$q_\beta$(但可能出现相应的动量$p_\beta$), 则谓之循环坐标. 此时
+\[ \dot{p}_\beta = -\+D{q_\beta}DH = 0\Rightarrow p_\beta = \const. \]
+在Lagrange力学下, 若$q_\beta$为循环坐标, 则$L = L\pare{q_\alpha,\dot{q}_\alpha,\dot{q}_\beta,t}$, 其中$\alpha$是除$\beta$外的$s-1$个值. $p_\beta = \const$, 然而$\dot{q}_\beta$在一般情形下并非常量, 故仍出现在余下$s-1$个方程中.
+\par
+在Hamilton力学中, 若相应的Hamilton函数为$H\pare{q_\alpha,p_\alpha,p_\beta,t}$, 从而$p_\beta = C$蕴含$H\pare{q_\alpha,p_\alpha,C,t}$, 从而
+\[ \dot{q}_\alpha = \+D{p_\alpha}DH,\quad \dot{p}_\alpha = -\+D{q_\alpha}DH \]
+不受$\dot{q}_\beta$的影响, $\beta$对应的自由度直接由$p_\beta = C$消去, 而$\displaystyle \dot{q}_\beta = \+D{p_\beta}DH$.
+
+% paragraph 循环坐标 (end)
+
+\paragraph{有心力系统} % (fold)
+\label{par:有心力系统}
+
+在极坐标下,
+\begin{align*}
+    L &= \half m\pare{\dot{r}^2 + r^2\dot{\varphi}^2} - V\pare{r}. \\
+    p_r &= \+D{\dot{r}}DL = m\dot{r} \Rightarrow \dot{r} = \frac{p_r}{m}. \\
+    p_\varphi &= \+D{\dot{\varphi}}DL = mr^2\dot{\varphi} \Rightarrow \dot{\varphi} = \frac{p_\varphi}{mr^2}. \\
+    H &= p_r\dot{r} + p_\varphi\dot{\varphi} - L = \frac{p_r^2}{2m} + \frac{p_\varphi^2}{2mr^2} + V\pare{r} = \frac{p_r^2}{2m} + V\+_eff_\pare{r}. \\
+    \dot{r} &= \+D{p_r}DH = \frac{p_r}{m},\quad \dot{p}_r = -\+DrD{H} = \frac{p_\varphi^2}{mr_3} - \+DrDV. \\
+    \dot{\varphi} &= \+D{p_\varphi}DH = \frac{p_\varphi}{mr^2},\quad \dot{p}_\varphi = -\+D\varphi DH = 0.
+\end{align*}
+Hamilton方法并未比Lagrange方法提供更多便利.
+
+% paragraph 有心力系统 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+2.16, 3.1, 3.2, 3.4, 3.6, 3.7, 3.8, 3.9, 3.10, 3.11.
+
+% paragraph 作业 (end)
+
+\paragraph{Routh方法} % (fold)
+\label{par:routh方法}
+
+仅对循环坐标进行Legendre变换后列出Lagrange方程, 可方便消去循环坐标.
+
+% paragraph routh方法 (end)
+
+% subsubsection 循环坐标与routh方法 (end)
+
+% subsection hamilton正则方程 (end)
+
+% section hamilton力学 (end)
+
+\end{document}

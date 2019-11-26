@@ -1,0 +1,67 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'SphericalCoor.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{820.81452617bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.88001037)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{SphericalCoor.pdf}}%
+    \put(0.44985407,0.60720857){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.33155219\unitlength}\raggedright $\theta$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{SphericalCoor.pdf}}%
+    \put(0.37806125,0.29393089){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.49993893\unitlength}\raggedright $\varphi$\end{minipage}}}%
+    \put(0.53339476,0.53019448){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.48183569\unitlength}\raggedright $\+vr$\end{minipage}}}%
+    \put(0.82951654,0.34923697){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.36735527\unitlength}\raggedright $\+ve_y$\end{minipage}}}%
+    \put(-0.00303233,0.04095391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.36735527\unitlength}\raggedright $\+ve_x$\end{minipage}}}%
+    \put(0.34051042,0.88457881){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.71809651\unitlength}\raggedright $\+ve_z$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{SphericalCoor.pdf}}%
+    \put(0.66702034,0.6503122){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.35113204\unitlength}\raggedright $\+ve_\theta$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{SphericalCoor.pdf}}%
+    \put(0.68529487,0.70696325){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.35113204\unitlength}\raggedright $\+ve_\varphi$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{SphericalCoor.pdf}}%
+    \put(0.60305947,0.75264958){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.35113204\unitlength}\raggedright $\+ve_r$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

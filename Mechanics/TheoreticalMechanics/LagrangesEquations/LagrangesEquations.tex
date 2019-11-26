@@ -1,0 +1,164 @@
+\documentclass[../TheoreticalMechanics.tex]{subfiles}
+
+\begin{document}
+
+\section{Lagrange方程} % (fold)
+\label{sec:lagrange方程}
+
+\subsection{Lagrange表述} % (fold)
+\label{sub:lagrange表述}
+
+\subsubsection{作用量的变分} % (fold)
+\label{ssub:作用量的变分}
+
+\begin{axiom}[Hamilton原理]
+	系统在的运动使
+	\[ I = \int_1^2 L\,\rd{t},\quad L = T-V \]
+	取稳定值.
+\end{axiom}
+\begin{lemma}[作用量的变分]
+	将轨迹$y\pare{t} = y\pare{t,0}$偏移为$y\pare{t,\alpha} = y\pare{t,0} + \alpha \eta\pare{t}$, 则对于
+	\[ J\pare{\alpha} = \int_1^2 L\pare{y\pare{x,\alpha},\dot{y}\pare{x,\alpha},t}\,\rd{t} \]
+	成立
+	\[ \eddon{J}{\alpha} = \int_1^2 \pare{\ddelon{L}{y} - \eddon{}{t}\ddelon{f}{\dot{y}}}\ddelon{y}{\alpha}\,\rd{x}. \]
+\end{lemma}
+\begin{finale}
+	\begin{theorem}[Lagrange方程]
+		系统的运动方程满足
+		\[ \ddelon{L}{q_i} - \eddon{}{t}\pare{\ddelon{L}{\dot{q_i}}} = 0. \]
+	\end{theorem}
+\end{finale}
+\begin{ex}
+	$y\pare{x}$绕$y$轴的最小旋转曲面使
+	\[ 2\pi \int_1^2 x\sqrt{1+\dot{y}^2}\,\rd{x} \]
+	最小, 即
+	\[ x = a\cosh \frac{y-b}{a}, \]
+	然而对于$x_1$, $x_2$充分靠近的点, 这给出的并非面积取最小值的曲线.
+\end{ex}
+\begin{pitfall}
+	Lagrange方程的解并非总是使作用量取最小值.
+\end{pitfall}
+
+% subsubsection 作用量的变分 (end)
+
+\subsubsection{对非完整约束的应用} % (fold)
+\label{ssub:对非完整约束的应用}
+
+\begin{theorem}[非完整约束的变分]
+	设系统具有$f_i\pare{q_1,\cdot,q_n;\dot{q}_1,\cdots,\dot{q}_n}=0$形式的约束, 引入Lagrange乘数$\lambda\pare{t}$, 则系统的运动轨迹使
+	\[ \int_1^2 \pare{L+\sum_{i=1}^m\lambda_i f_i}\,\rd{t} = 0 \]
+	取稳定值, 于是成立
+	\begin{finale}
+		设$Q_k$为广义力, 则
+		\[ \eddon{}{t}\pare{\ddelon{L}{\dot{q}_k}} - \ddelon{L}{q_k} = Q_k = \sum_{i=1}^m\curb{\lambda_i\brac{\ddelon{f_i}{q_k} - \eddon{}{t}\pare{\ddelon{f_i}{\dot{q}_k}}} - \eddon{\lambda_i}{t}\ddelon{f_i}{\dot{q}_k}}. \]
+	\end{finale}
+\end{theorem}
+\begin{remark}
+	对$T-U$变分后展开对$U$的变分, 由\cref{coll:Lagrange方程适用于速度相关势}知后者为
+	\[ \delta \int_1^2 U\,\rd{t} = \int_1^2 \sum_k\brac{\ddelon{U}{q_k} - \eddon{}{t}\pare{\ddelon{U}{\dot{q}_k}}}\delta q_k\,\rd{t} = -\int_1^2 \sum_k Q_k \delta q_k\,\rd{t}, \]
+	从而仅有由势引发的力做功, 约束力不能做功. 注意到对于符合约束的偏移, $f_i=0$一致成立, 故这一论述对非完整约束也适用. 即使$\delta I$对于某些偏移非零, 对于符合约束的偏移它仍然是零.
+\end{remark}
+\begin{ex}
+	半径为$r$的圆柱沿倾角为$\phi$的斜面无滑动滚下, 则相应的约束为$r\,\rd{\theta} = \rd{x}$, 从而列出(含有约束的)Lagrange方程
+	\[ \begin{cases}
+		M\ddot{x} - Mg\sin\phi + \lambda = 0,\\
+		Mr^2\ddot{\theta} - \lambda r = 0.
+	\end{cases} \]
+\end{ex}
+
+% subsubsection 对非完整约束的应用 (end)
+
+\subsubsection{电磁-力学对偶} % (fold)
+\label{ssub:电磁-力学对偶}
+
+\begin{theorem}[电路的Lagrange量]
+	设有若干$LRC$电路, 并且允许存在互感$\curb{M_{jk}}$, 则电路可视为具有如下Lagrange量$L$和耗散函数$\cF$的系统:
+	\[ L = \half \sum_j L_j \dot{q}_j^2 + \half \sum_{jk}\dot{q_j}\dot{q_k} - \sum_j \frac{q_j^2}{2C_j} + \sum_j e_j\pare{t} q_j, \]
+	\[ \cF = \half \sum_j R_j \dot{q}_j^2. \]
+\end{theorem}
+
+% subsubsection 电磁-力学对偶 (end)
+
+% subsection lagrange表述 (end)
+
+\subsection{守恒定律} % (fold)
+\label{sub:守恒定律}
+
+\subsubsection{动量守恒} % (fold)
+\label{ssub:动量守恒}
+
+\begin{definition}[正则动量]
+	引入广义坐标$\curb{q_j}$后, 可定义正则动量
+	\[ p_j = \ddelon{L}{\dot{q}_j}. \]
+\end{definition}
+\begin{ex}
+	磁场中的带电粒子的Lagrange量在\cref{coll:Lorentz力由Lagrange方程导出}中给出, 相应的正则动量$p_x = m\dot{x} + qA_x$.
+\end{ex}
+\begin{finale}
+	\begin{corollary}[动量守恒]
+		若Lagrange量不包含某一广义坐标$q_j$, 则相应的正则动量守恒, 即
+		\[ p_j = \const. \]
+	\end{corollary}
+\end{finale}
+\begin{corollary}[(线)广义力的意义]
+	设$U$与速度无关, $q_j$的变化意味着沿某轴$\vn$的平移, 则相应的广义力
+	\[ Q_j = \sum_i \vF_i\cdot\ddelon{\vr_i}{q_j} = \vn\cdot\sum_i \vF_i = \vn\cdot\vF. \]
+\end{corollary}
+\begin{corollary}[(线)正则动量的意义]
+	设$U$与速度无关, $q_j$的变化意味着沿某轴$\vn$的平移, 则相应的正则动量
+	\[ p_j = \ddelon{T}{\dot{q}_j} = \vn\cdot\sum_i m_i\vv_i = \vn\cdot\vp. \]
+\end{corollary}
+\begin{remark}
+	因此, 当势能与速度无关时, (平移不变下)正则动量的守恒蕴含线动量的守恒.
+\end{remark}
+\begin{corollary}[(角)广义力的意义]
+	设$U$与速度无关, $q_j$的变化意味着绕某轴$\vn$的旋转, 则相应的广义力
+	\[ Q_j = \sum_i \vF_i\cdot\ddelon{\vr_i}{q_j} = \sum_i \vn\cdot\vr_i\times\vF_i = \vn\cdot\vN. \]
+\end{corollary}
+\begin{corollary}[(角)正则动量的意义]
+	设$U$与速度无关, $q_j$的变化意味着绕某轴$\vn$的旋转, 则相应的正则动量
+	\[ p_j = \ddelon{T}{\dot{q}_j} = \vn\cdot\sum_i \vr_i \times m_i\vv_i = \vn\cdot\vL. \]
+\end{corollary}
+\begin{remark}
+	因此, 当势能与速度无关时, (旋转不变下)正则动量的守恒蕴含角动量的守恒.
+\end{remark}
+
+% subsubsection 动量守恒 (end)
+
+\subsubsection{能量守恒} % (fold)
+\label{ssub:能量守恒}
+
+\begin{lemma}[Lagrange量对时间的变化]\quad
+	\label{lem:Lagrange量对时间的变化}
+	\[ \eddon{}{t}\pare{\sum_j \dot{q}_j\ddelon{L}{\dot{q}_j}-L}+\ddelon{L}{t} = 0. \]
+\end{lemma}
+\begin{finale}
+	\begin{definition}[Hamilton量]
+		质点系统的Hamilton量为
+		\[ H = \sum_j \dot{q}_j\ddelon{L}{\dot{q}_j} - L. \]
+	\end{definition}
+	\begin{corollary}[能量守恒]
+		如果$L$与时间无关, 则相应的Hamilton量守恒, 即
+		\[ H = \const. \]
+	\end{corollary}
+\end{finale}
+\begin{corollary}[Hamilton量的意义]
+	设$L$有类似于\cref{thm:动能的分解}中的展开$L=L_0 + L_1 + L_2$, 则$H = L_2 - L_0$. 如果诸$L_i$是不含时的且$U$与速度无关, 则$L_2 = T$, $L_0 = -V$, $H = T + V = E$.
+\end{corollary}
+\begin{pitfall}
+	对于更一般的系统, $H$不一定为能量, $H$守恒也不蕴含能量守恒.
+\end{pitfall}
+\begin{corollary}[耗散函数与Hamilton量]
+	设耗散函数$\cF$为$\curb{\dot{q}_j}$的二次齐次函数, 则\cref{lem:Lagrange量对时间的变化}变为
+	\[ \eddon{H}{t} + \ddelon{L}{t} = \sum_j \ddelon{\cF}{\dot{q}_j}\dot{q}_j. \]
+	如果$L$不含时, 则
+	\[ \eddon{H}{t} = -2\cF. \]
+\end{corollary}
+
+% subsubsection 能量守恒 (end)
+
+% subsection 守恒定律 (end)
+
+% section lagrange方程 (end)
+
+\end{document}

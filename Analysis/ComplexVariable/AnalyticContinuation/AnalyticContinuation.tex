@@ -1,0 +1,122 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{解析开拓} % (fold)
+\label{sec:解析开拓}
+
+\subsection{解析开拓} % (fold)
+\label{sub:解析开拓}
+
+\begin{theorem}[唯一性定理]
+    设$\func{f,g}{D}{\+bC}$, $z_n\rightarrow z_0\in D$, $f\pare{z_n} = g\pare{z_n}$对任意$n$成立, 则$f\equiv g$.
+\end{theorem}
+\begin{definition}
+    若$\func{f}{D}{\+bC}$, $\func{F}{G\supset D}{\+bC}$且$\restr{F}{D} = F$, 则谓$F$为$f$从$D$到$G$的开拓. 若$f$和$F$都是解析的, 则谓之解析开拓.
+\end{definition}
+\begin{sample}
+    \begin{ex}
+        $f\pare{z} = \displaystyle \sum_{n=0}^\infty z^n$仅仅在$D=B\pare{0,1}$内解析. 但$f\pare{z} = \displaystyle \rec{1-z} = F\pare{z}$在$D$内成立, 而$F$在$\+bC\backslash\curb{1}$上解析. 因此$F$是$f$的解析开拓.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    由唯一性定理, $\func{f}{D}{\+bC}$, $\func{F_1,F_2}{G\supset D}{\+bC}$都是$f$的解析开拓, 则$F_1\equiv F_2$, 即解析开拓唯一.
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{AnalyticContinuationCaseI}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{AnalyticContinuationCaseII}
+    \end{subfigure}
+\end{figure}
+考虑两个区域$D_1$和$D_2$且$D_1\cap D_2 = D \neq \varnothing$, 且$\func{f}{D_1}{\+bC}$, $\func{f}{D_2}{\+bC}$, $\restr{f_1}{D} = \restr{f_2}{D}$, 则令
+\[ f\pare{z} = \begin{cases}
+    f_1\pare{z},& z\in D_1, \\
+    f_2\pare{z},& z\in D_2.
+\end{cases} \]
+则$\func{f}{D_1\cup D_2}{\+bC}$且同时为$f_1$和$f_2$的解析开拓. 这是解析开拓的标准方法.
+\begin{remark}
+    在$D_1$的边缘附近Taylor展开, 若收敛圆盘有覆盖$D_1$外的部分, 则这一展开构成一解析开拓.
+\end{remark}
+若有区域$D_1$和$D_2$且且$\func{f}{D_1}{\+bC}$, $\func{f}{D_2}{\+bC}$, $f_1$在$D_1\cup\gamma$上连续, $f_2$在$D_2\cup\gamma$上连续, 其中$\gamma$是$D_1$和$D_2$的共同边界, 且$\restr{f_1}{\gamma} = \restr{f_2}{\gamma}$, 则
+\[ f\pare{z} = \begin{cases}
+    f_1\pare{z},& z\in D_1, \\
+    f_2\pare{z},& z\in D_2, \\
+    f_1\pare{z} = f_2\pare{z}, & z\in \gamma.
+\end{cases} \]
+也是解析的, 故构成$f_1$和$f_2$的解析开拓.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{AnalyticContinuationCaseIIMorera}
+\end{figure}
+\begin{proof}
+    由Morera定理, 为了证明$f$是解析的, 只需要$\displaystyle \oint_C f = 0$且$f$连续. 对于跨过$\gamma$的围道$C$, 设$C_1 = C\cap D_1$, $C_2 = C\cap D_2$, 则沿着$C_1 + \gamma_C$和$C_2 + \gamma^-_C$的积分为零.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        设$f\pare{z} = \displaystyle \sum_{n=1}^\infty z^{n!} = z + z^{2!} + z^{3!} + \cdots = \sum a_n z^n$, 则收敛半径$R=1$. 在边界上以$\xi_0$为圆心的任何小圆盘都会存在$\xi_1 = e^{2\pi i p/q}$, 其中$p/q$为既约分数. 则$r\xi_1$在$B\pare{0,1}$内. 若可以解析开拓到$B\pare{0,1}$外, 则$\displaystyle \lim_{r\rightarrow 1} f\pare{r\xi_1} = f\pare{\xi_1}$. 惟
+        \[ f\pare{r\xi_1} = \sum_{n=1}^\infty r^{n!}\xi_1^{n!} e^{2\pi ip/q\cdot n!} = \sum_{n=q}^\infty r^{n!} + \sum_{n=1}^{q-1} r^{n!}\xi_1^{n!}. \]
+        而$\displaystyle \sum_{n=q}^\infty r^{n!} > \pare{N-q}r^{n!}$. 故$\displaystyle \lim_{r\rightarrow 1} \sum_{n=q}^\infty r^{n!} = \infty$, 故$\displaystyle \lim_{r\rightarrow 1} f\pare{r\xi_1} = \infty$. 从而$f$无法被开拓至$\abs{z}\ge 1$处.
+    \end{ex}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.143 2, 3
+
+% paragraph 作业 (end)
+
+% subsection 解析开拓 (end)
+
+\subsection{\texorpdfstring{$\Gamma$}{Gamma}函数} % (fold)
+\label{sub:gamma函数}
+
+$\Gamma$函数和$B$函数之定义为
+\[ \Gamma\pare{s} = \int_0^\infty t^{s-1} e^{-t}\,\rd{t},\quad B\pare{p,q} = \int_0^1 t^{p-1} \pare{q-t}^{q-1}\,\rd{t}. \]
+其中若干性质摘录如下:
+\begin{cenum}
+    \item $\Gamma\pare{s}$在$\pare{0,\infty}$上可定义且连续, $B\pare{p,q}$在$\pare{0,\infty}\times \pare{0,\infty}$上连续.
+    \item $\Gamma\pare{s+1} = s\Gamma\pare{s}$, $\forall s>0$.
+    \item $\Gamma\pare{n+1} = n!$, $\forall n$. $\Gamma\pare{1} = 1$, $\displaystyle \Gamma\pare{\half} = \sqrt{\pi}$.
+    \item $\ln \Gamma\pare{ts_1 + \pare{1-t}s_2} \le t\ln \Gamma\pare{s_1} + \pare{1-t} \ln \Gamma\pare{s_2}$, $0\le t\le 1$, 故$\ln \Gamma\pare{s}$是凸函数.
+    \item $\displaystyle \Gamma\pare{x} = \lim_{n\rightarrow\infty} \frac{n!n^x}{x\pare{x+1}\cdots \pare{x+n}}$.
+    \item $\displaystyle B\pare{p,q} = \frac{\Gamma\pare{p}\Gamma\pare{q}}{\Gamma\pare{p+q}}$, $\displaystyle B\pare{p,q} = B\pare{q,p}$.
+    \item $\displaystyle B\pare{p+1,q+1} = \frac{pq}{\pare{p+q+1}\pare{p+q}}B\pare{p,q}$.
+    \item $\displaystyle \Gamma\pare{2x} = \frac{2^{2x-1}}{\sqrt{\pi}} \Gamma\pare{x} \Gamma\pare{x+\half}$.
+    \item $\displaystyle \Gamma\pare{p} \Gamma\pare{1-p} = \frac{\pi}{\sin p\pi}$.
+    \item $\displaystyle \Gamma\pare{x+1} \sim \displaystyle \pare{\frac{x}{e}}^x \sqrt{2\pi x}$.
+\end{cenum}
+\begin{remark}
+    若$f$在$\pare{0,+\infty}$连续, $f\pare{x+1} = f\pare{x}$, $f\pare{1} = 1$, 且$\ln f$是凸函数, 则$f\pare{s} = \Gamma\pare{s}$.
+\end{remark}
+若在
+\[ \Gamma\pare{z} = \int_0^\infty t^{z-1}e^{-t}\,\rd{t} \]
+中设$t^{z-1} = e^{\pare{z-1}\ln t}$, 则$\Gamma\pare{z}$在$\Re z>0$处解析. 由唯一性定理, $\Gamma\pare{z+1} = z\Gamma\pare{z}$在全平面成立. 从而令$\displaystyle \Gamma\pare{z} = \frac{\Gamma\pare{z+1}}{z}$可以将$\Gamma\pare{z}$的定义域扩充到$\Re z>-1, z\neq 0$处. 此时$z=0$为一阶极点, 且$\Residue\pare{\Gamma\pare{z},0} = \Gamma\pare{1} = 1$. 同理可以将$\Gamma$延拓至$\Re z>-2$, $z\neq 0, -1$处. $\Residue \pare{\Gamma\pare{z},-1} = \displaystyle \lim_{z\rightarrow -1} \pare{z+1}\Gamma\pare{z} = -1$. 一般地, 通过
+\[ \Gamma\pare{z} = \frac{\Gamma\pare{z+n}}{z\pare{z+1}\cdots \pare{z+n-1}} \]
+将定义域开拓至$\+bC\backslash \curb{0,-1,\cdots, -2}$处. 且
+\[ \Residue\pare{\Gamma\pare{z}, -n} = \pare{-1}^n \rec{n!}. \]
+\begin{theorem}
+    $\func{\Gamma\pare{z}}{\+bC\backslash\curb{0,-1,-2,\cdots}}{\+bC}$无零点, 且$0,-1,-2,\cdots$为其一阶极点.
+\end{theorem}
+\begin{theorem}
+    $1/\Gamma\pare{z}$是整函数.
+\end{theorem}
+\begin{theorem}
+    $\displaystyle \frac{\Gamma'\pare{z}}{\Gamma\pare{z}} = - \gamma - \rec{z} + \sum_{n=1}^\infty \pare{\rec{n} - \rec{n+z}}$.
+\end{theorem}
+\begin{theorem}
+    $\displaystyle \rec{\Gamma\pare{z}} = ze^{\gamma z} \displaystyle \prod_{n=1}^\infty \pare{1+\frac{z}{n}}e^{-z/n}$.
+\end{theorem}
+
+% subsection gamma函数 (end)
+
+% section 解析开拓 (end)
+
+\end{document}

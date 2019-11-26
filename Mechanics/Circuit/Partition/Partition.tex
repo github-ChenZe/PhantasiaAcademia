@@ -1,0 +1,391 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+\tikzstyle{densely dashed} = [dash pattern=on 4pt off 3pt]
+
+\begin{document}
+
+\section{分解方法与单/双口网络} % (fold)
+\label{sec:分解方法与单_双口网络}
+
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) -- (2,0) -- (2,2) -- (0,2) -- (0,0);
+        \draw (1,1) node[above]{$\+cN$};
+    \end{circuitikz}
+    \begin{circuitikz}
+        \draw (0,1) node[above]{$\Rightarrow$};
+        \draw (0,0) node[above]{};
+    \end{circuitikz}
+    \begin{circuitikz}
+        \draw (0,0) -- (2,0) -- (2,2) -- (0,2) -- (0,0);
+        \draw (4,0) -- (6,0) -- (6,2) -- (4,2) -- (4,0);
+        \draw (2,0.5) to[short, i=$i_1$] (4,0.5);
+        \draw (4,1.5) to[short, i=$i_2$] (2,1.5);
+    \end{circuitikz}
+\end{figure}
+对外有两个端口的网络谓\emph{二端网络}或\emph{单口网络}. 一个单口网络出了通过它的两个端钮和外界相连接外, 别无其他联系, 则单口网络的VCR也是由网络本身决定的. 分解之基本步骤为
+\begin{cenum}
+    \item 把网络划分为两个单口网络$N_1$和$N_2$;
+    \item 分别求出$N_1$和$N_2$的VCR;
+    \item 联立两者的VCR, 求得其端电压与电流;
+    \item 分别求解其内部各支路电压与电流.
+\end{cenum}
+如果单口网络中不含有任何能通过电或非电的方式与网络之外的某种变量相耦合的元件, 则这个单口网络谓明确的. 单口网络可用下列若干方式之一描述:
+\begin{cenum}
+    \item 详尽的电路模型;
+    \item 端口电压与电流的约束关系: 方程或曲线;
+    \item 等效电路.
+\end{cenum}
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[short] (4,0) to [short, -o] (6,0) node[right]{$1'$};
+        \draw (4,0) to[R=20<\ohm>] (4,3);
+        \draw (0,0) to[european voltage source, v<=\mbox{}, l_=10<\volt>] (0,3) to[R=5<\ohm>,i=$i_1$] (4,3) to[short, -o, i=$i$] (6,3) node[right]{$1$};
+        \draw [densely dashed] (6,3) to[twoport, l=$X$, v=$u$] (6,0);
+    \end{circuitikz}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{课本例4-1}
+    \end{ex}
+    \begin{proof}[解]
+        先列出整个电路的方程, 后消去$u$和$i$以外的变量.
+        \[ \begin{cases}
+            10 = 5i_1 + u,\\
+            u = 20\pare{i_1-  i}.
+        \end{cases}\Rightarrow u = 8-4i. \]
+    \end{proof}
+\end{sample}
+\begin{remark}
+    如果$X$是一个电流源$i_s$(方向向下, 正极在上), 则节点法更方便求解.
+    \[ \pare{\rec{5}+\rec{20}}\times u-\pare{\rec{5}}\times 10 = -i_s. \]
+    此种方法, 外施电流源$i$求单口网络两段电压$u$的方法.
+\end{remark}
+\begin{corollary}
+    单口网路VCR与外电路无关, 完全可以在最简单外接电路的情况下求VCR. 常见方法为外施电流源求电压/外施电压源求电流.
+\end{corollary}
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[short] (4,0) to[R=$R_3$, -o] (6,0);
+        \draw (0,0) to[european voltage source, v<=\mbox{}, l=$u_s$] (0,3) to [R=$R_1$] (2,3) to [R=$R_2$] (4,3) to [short, -o, i<=$i$] (6,3);
+        \draw (4,3) to[short] (4,4.5) to [european controlled current source, i=$\alpha i$, *-*] (2,4.5) to[short] (2,3);
+        \draw (4,0) to[european current source, i=$i_s$, *-*] (4,3);
+        \draw [densely dashed] (6,3) to[european current source, i<=$i$, v=$u$] (6,0);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:例1}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        设想在电路两端施加电流源$i$, 得到VCR,
+        \[ u = \brac{u_s + \pare{R_1+R_2}\times i_2} + \brac{R_1+R_3+\pare{1-\alpha}\times R_2}\times i. \]
+    \end{ex}
+\end{sample}
+
+\subsection{置换定理} % (fold)
+\label{sub:置换定理}
+
+若网络$N$由两个单口网络$N_1$和$N_2$连接组成, 且各支路电压/电流皆有唯一解. 设已知端口电压和电流, 则$N_2$可以用相同电压的电压或相同电流的电流源替换而不改变$N_1$的各支路电流.
+\begin{proof}
+    设$N_1$内支路$k$的电压/电流分别为$u_k=\alpha_k$, $i_k = \beta_k$, 端口$u=\alpha$, $i=\beta$. 置换之后, 需要论证$u'_k = \alpha_k$, $i'_k = \beta_k$.
+    \par
+    典型的KCL方程的形式为$\displaystyle \sum i'_k = 0$, 而显然相应的$\displaystyle \sum \beta_k = 0$, 考虑到$\beta_k$是唯一解答, 必有$i'_k = \beta_k$.
+    \par
+    还需要证明所设的解答是否满足置换$N_2$电压源的VCR. 答案也是肯定的, 流过电压源的电流可以是任何值.
+    \par
+    同样的方法可以论证电流为$\beta$的电流源置换$N_2$的情况, 换成对$u_k$的论证即可.
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[short] (4,0);
+        \draw (0,0) to[european voltage source, v<=\mbox{}, l=12<\volt>] (0,3) to [R=6<\ohm>] (2,3) to [R=10<\ohm>] (4,3) to [short, i<=$i$] (7,3);
+        \draw (4,3) to[short] (4,4.5) to [european controlled current source, i=$0.5 i$, *-*] (2,4.5) to[short] (2,3);
+        \draw (4,0) to[european current source, i=1<\ampere>, *-*] (4,3);
+        \draw (0,0) to[short, -*] (4,0) to[R=5<\ohm>] (6,0) to[short, -*] (7,0) to[short] (9,0) to[european voltage source, v<=\mbox{}, l_=10<\volt>] (9,3) to[R=5<\ohm>, i<=$i_1$, -*] (7,3) to[R=20<\ohm>] (7,0);
+        \draw (6,3) to[open, v=$u$] (6,0);
+        \draw[densely dashed] (6,4) -- (6,-1);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:例2}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{课本例4-5} $N_2$的节点电压方程为$u=8-4i$. 联立两者的VCR,
+        \[ \begin{cases}
+            8-4i = 28+16i,\\
+            i=\SI{-1}{\ampere}, \\
+            u=\SI{12}{\volt}.
+        \end{cases} \]
+        以$\SI{12}{\volt}$电压源置换$N_1$, 得到
+        \[ u = 5i_1 + 10,\quad i_1 = \frac{12-10}{5} = \SI{0.4}{\ampere}. \]
+        用$\SI{-1}{\ampere}$电流源替换$N_2$. $\SI{6}{\ohm}$电阻上无电流, 得到
+        \[ u_2 = \SI{12}{\volt}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{课本例4-6} 含有非线性电阻的电路.
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[short,-*] (3,0) to[short,-o] (4.5,0) to[short] (6,0);
+        \draw (3,0) to[R=5<\ohm>, i<=$i_1$, -*] (3,3);
+        \draw (0,0) to[european voltage source, v<=\mbox{}, l_=15<\volt>] (0,3) to[R=7.5<\ohm>] (3,3) to[short,-o] (4.5,3) to[short,i=$i$] (6,3);
+        \draw (6,3) to[twoport, l=$N$] (6,0);
+    \end{circuitikz}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{练习题4-2} $N$的VCR为$u=i+2$, 求解$i_1$.
+    \end{ex}
+\end{sample}
+
+% subsection 置换定理 (end)
+
+\subsection{单口网络的等效电路} % (fold)
+\label{sub:单口网络的等效电路}
+
+如果单口网络$N$和$N'$的VCR完全重合, 则谓之等效的. 对于外电路两者无差别.
+\begin{sample}
+    \begin{ex}
+        \cref{fig:例1}中的网络有VCR
+        \[ u = 8-4i,\quad i = 2-\frac{u}{4}. \]
+        从而可以等效为电压源和电阻的串联, 或者电流源和电阻的并联.
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (7,3) to[short,o-,i=$i$] (5,3) to[R=1<\kilo\ohm>, *-*] (2,3) to [R=1<\kilo\ohm>] (0,3) to[european voltage source, v=\mbox{}, l=10<\volt>] (0,0);
+        \draw (5,3) -- (5,4) to[european controlled current source, i=$0.5i$] (2,4) -- (2,3);
+        \draw (0,0) to[short, -o] (7,0);
+        \draw (7,0) to[open, v<=$u$] (7,3);
+    \end{circuitikz}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{例4-9} 设受控源控制量为$i$, 外接电流源, 则
+        \[ u = 1\times\pare{i-0.5i} + 1\times i + 10 = 1.5i+10. \]
+    \end{ex}
+\end{sample}
+只含电阻的和受控源的单口网络, 端口电压与端口电流的比值谓其输入电阻.
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{练习题4-6}
+    \end{ex}
+\end{sample}
+
+% subsection 单口网络的等效电路 (end)
+
+\subsection{等效规律与公式} % (fold)
+\label{sub:等效规律与公式}
+
+在某些情况下可直接使用一些结论或公式而无需每次从VCR着手. 对于含受控源的单口网络, 即使结构简单, 一般也需要外施电源求VCR的方法处理, 无直接公式.
+
+\paragraph{两电压源串联} % (fold)
+\label{par:两电压源串联}
+
+不同极性串联时,
+\[ u_s = u_{s1} + u_{s2}. \]
+
+% paragraph 两电压源串联 (end)
+
+\paragraph{电压源的并联} % (fold)
+\label{par:电压源的并联}
+
+电压源的并联一般将违背KVL, 从而只有相同电压源做极性一致的并联才是允许的, 此时等效电路即为其中任一电压源.
+\[ u_s = u_{s1} = u_{s2}. \]
+
+% paragraph 电压源的并联 (end)
+
+\paragraph{电流源的并联} % (fold)
+\label{par:电流源的并联}
+
+电流源并联,
+\[ i_s = i_{s1} + i_{s2}. \]
+
+% paragraph 电流源的并联 (end)
+
+\paragraph{电流源串联} % (fold)
+\label{par:电流源串联}
+
+电流源串联, 可能违背KCL. 只有电流相等, 方向一致才允许,
+\[ i_s = i_{s1} + i_{s2}. \]
+
+% paragraph 电流源串联 (end)
+
+\paragraph{电压源与电流源/电阻并联} % (fold)
+\label{par:电压源与电流源_电阻并联}
+
+此时所并联的元件为多余元件, 可直接去除之. 端口电压总是等于电压源的电压.
+\[ u_s = u_{s1}. \]
+
+% paragraph 电压源与电流源_电阻并联 (end)
+
+\paragraph{电流源与电压源/电阻串联} % (fold)
+\label{par:电流源与电压源_电阻串联}
+
+同样可直接去除之,
+\[ i_s = i_{s1}. \]
+
+% paragraph 电流源与电压源_电阻串联 (end)
+
+\paragraph{电阻与电源的串/并联} % (fold)
+\label{par:电阻与电源的串_并联}
+
+与$R'$并联的$i_s$源和与$R$并联的$u$源等效, 如果
+\[ \begin{cases}
+    R = R',\\
+    u_s = R' i_s \Leftrightarrow i_s = u_s/R'.
+\end{cases} \]
+
+% paragraph 电阻与电源的串_并联 (end)
+
+\paragraph{电阻的串/并联} % (fold)
+\label{par:电阻的串_并联}
+
+略去之.
+
+% paragraph 电阻的串_并联 (end)
+
+\begin{sample}
+    \begin{ex}
+        用分解方法求解\cref{fig:例2}的电路图. 直接求等效电路即可.
+    \end{ex}
+\end{sample}
+
+% subsection 等效规律与公式 (end)
+
+\subsection{Th\'evenin定理} % (fold)
+\label{sub:thevenin定理}
+
+含电源/线性电阻和受控源的单口网络, 无论结构如何复杂, 就其端口而言, 可等效为一个电压源串联电阻支路. 电压源等于其开路电压$u_{OC}$, 串联电阻$R_0$等于独立源置零时的等效电阻$R_{ab}$.
+\par
+若含源线性单口网络$N$的端口电压$u$和电流$i$为非关联参考方向, 则VCR为
+\[ u = u_{OC}R_i. \]
+
+\begin{circuitikz}
+    \draw (0,0) -- (2,0) -- (2,2) -- (0,2) -- (0,0);
+    \draw (2,0.5) to[short,-o] (3,0.5) -- (3.5,0.5);
+    \draw (2,1.5) to[short,-o,i=$i$] (3,1.5) -- (3.5,1.5);
+    \draw (3.5,0) -- (5.5,0) -- (5.5,2) -- (3.5,2) -- (3.5,0);
+\end{circuitikz}
+\begin{circuitikz}
+    \draw (0,0) -- (2,0) -- (2,2) -- (0,2) -- (0,0);
+    \draw (2,0.5) to[short,-o] (3,0.5) -- (3.5,0.5);
+    \draw (2,1.5) to[short,-o,i=$i$] (3,1.5) -- (3.5,1.5);
+    \draw (3.5,0.5) to[european current source, l=$i$] (3.5,1.5);
+\end{circuitikz}
+
+\begin{proof}
+    由于单口网络的VCR关系与外界电路无关, 可外接一电流源$i$去求网络两端的电压$u$, 从而得出其VCR.
+    \par
+    用电流源$i$施加与$N$两端, 则由叠加原理, 两端的电压正是电流源和内部独立源分别单独存在时产生的电压.
+    \par
+    \[ u = \text{电流源$i$产生的电压} + \text{$N$中所有独立源产生的电压}. \]
+    第二项就是$u_{OC}$, 第一项就是独立源置零, 只有电流源时的端电压. 从而是$R_{ab}i$.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{书例4-13}
+    \end{ex}
+    \begin{proof}[解]
+        沿着虚线分割, 分别求出开路时的端电压以及去除电压源后的等效电阻即可.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        若含源单口网络的开路电压为$u_{OC}$, 短路电流为$i_{SC}$, 则Th\'evenin等效电阻
+        \[ R_O = \frac{u_{OC}}{i_{SC}}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{书例4-16}
+    \end{ex}
+    \begin{proof}[解]
+        显然开路电压为$u=\SI{10}{\volt}$. 为求等效电阻, 可以对受控源的小回路再次应用Th\'evenin定理.
+    \end{proof}
+\end{sample}
+\begin{cenum}
+    \item Th\'evenin定理是由叠加原理导出的. 其运用于含线性受控源电路时, 每个独立源单独作用时, 其它独立源置零, 惟受控源需保留;
+    \item 求等效电阻时, 必须考虑受控源的作用, 不能像处理独立源那样将受控源短路或开路;
+\end{cenum}
+
+% subsection thevenin定理 (end)
+
+\subsection{Norton定理} % (fold)
+\label{sub:norton定理}
+
+含电源/线性电阻和受控源的单口网络, 无论结构如何复杂, 就其端口而言, 可等效为一个电流源并联电阻支路. 电流源电流等于其短路电流$i_{SC}$, 并联电阻$R_0$等于独立源置零时的等效电阻$R_{ab}$.
+
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{书例4-17}
+    \end{ex}
+    \begin{proof}[解]
+        通过电阻并联公式求等效电阻, 通过叠加原理分别置零两个电压源求短路电流.
+    \end{proof}
+\end{sample}
+
+% subsection norton定理 (end)
+
+\subsection{最大功率传递定理} % (fold)
+\label{sub:最大功率传递定理}
+
+设单口网络负载电阻为$R_L$, 则$R_L$很大或很小时, 功率$i^2R_L = u^2/R_L$都很小. $R_L$的功率为
+\[ p = i^2R_L = \pare{\frac{u_{OC}}{R_O+R_L}}^2R_L \]
+$\Rightarrow R_L=R_O$时功率最大. 此时最大功率$p\+_max_ = \displaystyle \frac{u^2_{OC}}{4R}$.
+
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{书例4-18}
+    \end{ex}
+    \begin{proof}[解]
+        欲求出$R_L$上的功率占比, 通过$R_L$的电流倒推电源电流得到总功率即可.
+    \end{proof}
+\end{sample}
+
+% subsection 最大功率传递定理 (end)
+
+\subsection{Y-\texorpdfstring{$\Delta$}{Delta}变换} % (fold)
+\label{sub:y_delta变换}
+
+对于$Y$形网络, 分别用$R_1$, $R_2$, $R_3$中心连接到各端点的电阻. $\Delta$形网络中, $R_{12}$, $R_{31}$, $R_{23}$分别表示各端点之间的电阻.
+\begin{finale}
+    \begin{theorem}[Y-$\Delta$变换]
+        \begin{align*}
+            R_1 &= \frac{R_{31}R_{12}}{R_{12}+R_{23}+R_{31}},\\
+            R_2 &= \frac{R_{23}R_{12}}{R_{12}+R_{23}+R_{31}},\\
+            R_3 &= \frac{R_{31}R_{23}}{R_{12}+R_{23}+R_{31}}.
+        \end{align*}
+        即分子为电阻之和, 分母为相邻两臂上的电阻.
+        \begin{align*}
+            R_{12} &= \frac{R_1R_2 + R_2R_3 + R_3R_1}{R_3}, \\
+            R_{23} &= \frac{R_1R_2 + R_2R_3 + R_3R_1}{R_1}, \\
+            R_{31} &= \frac{R_1R_2 + R_2R_3 + R_3R_1}{R_2}.
+        \end{align*}
+        即分子为电阻两两之积之和, 分母为相对臂上的电阻.
+    \end{theorem}
+\end{finale}
+
+% subsection y_delta变换 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+习题四 1 5 7 9 17 19 30 34 35 49
+
+% paragraph 作业 (end)
+
+% section 分解方法与单_双口网络 (end)
+
+\end{document}

@@ -1,0 +1,31 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{ex}
+    求极限
+    \[ \lim_{n\rightarrow\infty} \pare{\sqrt{n+1} - \sqrt{n}}. \]
+\end{ex}
+\begin{proof}[解]
+    由平方差公式,
+    \[ \lim_{n\rightarrow\infty} \pare{\sqrt{n+1} - \sqrt{n}} = \lim_{n\rightarrow\infty} \rec{\sqrt{n+1} + \sqrt{n}}. \]
+    直觉告诉我们分母无界, 从而极限为零, 现在证明之. 为了使用夹挤定理, 考虑
+    \[ 0 \le \rec{\sqrt{n+1} + \sqrt{n}} \le \rec{\sqrt{n}}, \]
+    显然两端的极限都是零, 从而中间的极限是零.
+\end{proof}
+\begin{ex}
+    求极限
+    \[ \lim_{n\rightarrow\infty} \pare{1-\rec{n}}^{n^2}. \]
+\end{ex}
+\begin{proof}[解]
+    注意到
+    \[ 0 < \pare{1-\rec{n}}^{n^2} < \rec{\pare{1+\rec{n}}^{n^2}}, \]
+    而$\displaystyle \pare{1+\rec{n}}^{n^2} \ge 1 + n^2\cdot \rec{n} = 1+n$,
+    从而
+    \[ 0 < \pare{1-\rec{n}}^{n^2} < \rec{1+n}, \]
+    由夹挤定理, 两侧极限为零从而中间极限为零.
+\end{proof}
+
+\end{document}

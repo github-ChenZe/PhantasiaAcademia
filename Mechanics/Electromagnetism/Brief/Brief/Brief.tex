@@ -233,7 +233,7 @@
 
 常用积分:
 \begin{align*}
-	\int \sqrt{x^2+z^2} &= \half x\sqrt{x^2+z^2} + \half z^2 \ln\pare{x+\sqrt{x^2+z^2}}. \\
+	\int \sqrt{x^2+z^2}\,\rd{x} &= \half x\sqrt{x^2+z^2} + \half z^2 \ln\pare{x+\sqrt{x^2+z^2}}. \\
 	\int \rec{\sqrt{x^2+z^2}}\,\rd{x} &= \ln \pare{x+\sqrt{x^2+z^2}}.\\
 	\int \frac{x}{\sqrt{x^2+z^2}}\,\rd{x} &= \sqrt{x^2+z^2}.\\
 	\int \rec{\pare{x^2+z^2}^{3/2}}\,\rd{x} &= \frac{x}{z^2\sqrt{x^2+z^2}}.\\
@@ -246,6 +246,17 @@
 	\int r^2e^{-r}\,\rd{r} &= e^{-r}\pare{-2-2r-r^2}.\\
 	\int r^n e^{-r}\,\rd{r} &= e^{-r}\pare{-n! - \frac{n!}{1!} r - \frac{n!}{2!} r^2 - \cdots - \frac{n!}{n!}r^n}.
 \end{align*}
+\begin{finale}
+	参考HG.p.222.6.(1).,
+	\[ \int_0^{\frac{\pi}{2}} \sin^n x\,\rd{x} = \begin{cases}
+		\displaystyle \frac{\pare{n-1}!!}{n!!}\frac{\pi}{2},\quad n\ \mathrm{even},\\
+		\\
+		\displaystyle \frac{\pare{n-1}!!}{n!!},\quad n\ \mathrm{odd}.
+	\end{cases} \]
+\end{finale}
+\begin{finale}
+	\[ \int_0^{2\pi} \rec{a+\cos x}\,\rd{x} = \frac{2\pi}{\sqrt{a^2-1}}. \]
+\end{finale}
 \begin{pitfall}
 	对于$y''=\lambda y^n$型的方程, 不能通过设$y=\pare{a x + b}^{\mu}$求解, 必须分离变量.
 \end{pitfall}

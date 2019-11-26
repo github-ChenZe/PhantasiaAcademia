@@ -1,0 +1,445 @@
+\documentclass{ctexart}
+
+\usepackage[nea]{van-de-la-sehen}
+
+\begin{document}
+
+\subsubsection*{配置} % (fold)
+
+\headerstamp
+
+\noindent
+Prof. Shao Song songshao@ustd.edu.cn \\
+助教 Qiu Jiahao qiujh@mail.ustc.edu.cn\\
+助教 Cao Yang cy412@mail.ustc.edu.cn\\
+助教 Zhao Jianjie zjianjie@mail.ustc.edu.cn\\
+
+% subsubsection 配置 (end)
+
+\subsubsection*{基础知识} % (fold)
+ 
+\centerline{
+\xymatrix{
+    & \text{Cauchy积分理论: Cauchy积分定理/公式, C-R方程,} \\
+    \text{复变函数} \ar[ru]\ar[r]\ar[rd]& \text{Weierstra\ss 级数理论: } f\pare{z} = \sum_{n\in\+bN}a_n\pare{z-z_n}^n, \\
+    & \text{Riemann几何理论: 保形映射.}
+}
+}
+section 7.2, 8.5, 8,6 excluded.
+\par
+12月28日上午期末考. 12.28上午9:00-11:00在5303和5304.
+
+% subsubsection 基础知识 (end)
+
+\section{复数与平面点集} % (fold)
+\label{sec:复数与平面点集}
+
+\subsection{Definition and Arithmetic} % (fold)
+\label{sub:definition_and_arithmetic}
+
+\begin{definition}
+    $i^2=-1$, 谓$i$为虚根单位. 形如$x+iy$ where $x\in \+bR$ and $y\in \+bR$者谓复数. $x=\Re z$谓实部, $y= \Im z$谓虚部. 全体复数集合记为$\+bZ$.\par
+    若$z=x+iy$, 则$\conj{z}=x-iy$谓其共轭. $\abs{z} = \sqrt{x^2+y^2}$谓其模.
+\end{definition}
+\begin{lemma}
+    $z\in\+bR\Leftrightarrow \Im z = 0$. 此外, 若$\Re z=0$, 则谓之纯虚数, 包括$0$.
+\end{lemma}
+\begin{lemma}
+    \label{lem:实数或虚数的判断}
+    $z\in\+bR\Leftrightarrow z=\conj{z}$. 而$z$为纯虚数当且仅当$\conj{z}=-z$.
+\end{lemma}
+\begin{lemma}
+    $\displaystyle \Re z = \frac{z+\conj{z}}{2}, \Im z = \frac{z-\conj{z}}{2i}.$
+\end{lemma}
+\begin{definition}
+    将$z=x+iy$视为向量$\pare{x,y}$, 则加减同向量加减. 且
+    \[ z_1\cdot z_2 = \pare{x_1x_2-y_1y_2} + i\pare{x_1y_2 + x_2y_1}. \]
+\end{definition}
+\begin{lemma}
+    复数的四则运算符合交换律, 结合律与分配律.
+\end{lemma}
+\begin{proposition}
+    \hfill $\abs{z}^2 = z\cdot\conj{z}.$ \hfill\mbox{}\\
+    特别地, 当$\abs{z} = 1$, 
+    \[ \abs{z} = \rec{z}. \]
+    更一般地,
+    \[ \frac{z_1}{z_2} = \frac{z_1\cdot\conj{z_2}}{\abs{z_2}^2}. \]
+\end{proposition}
+\begin{proposition}[共轭的性质]\leavevmode
+    \begin{cenum}
+        \item $\conj{\conj{z}} = z$;
+        \item $\conj{z_1+z_2} = \conj{z_1}+\conj{z_2}$, $\conj{z_1z_2} = \conj{z_1}\conj{z_2}$;
+        \item $\conj{z_1z_2} = \abs{z_1}\abs{z_2}$;
+        \item $\abs{\conj{z}} = \abs{z}$.
+    \end{cenum}
+\end{proposition}
+\begin{proof}[第三点的证明]$\abs{z_1z_2}^2 = \pare{z_1z_2}\conj{\pare{z_1z_2}} = \pare{z_1\conj{z_1}}\pare{z_2\conj{z_2}} = \abs{z_1}^2\abs{z_2}^2.$
+\end{proof}
+\begin{equation}
+    \label{eq:复数平方和展开}
+    \boxed{\abs{z_1\pm z_2}^2 = \abs{z_1}^2 + \abs{z_2}^2 \pm 2\Re\pare{z_1\conj{z_2}}}.
+\end{equation}
+\begin{proposition}[模的不等式]\leavevmode
+    \label{prop:模的不等式}
+    \begin{cenum}
+        \item $\Re z \le \abs{z}$, $\Im z \le \abs{z}$;
+        \item $\abs{z_1+z_2} \le \abs{z_1} + \abs{z_2}$; 等号成立当且仅当$\exists t\ge 0$ s.t. $z_1 = tz_2$或$z_2 = tz_1$.
+        \item $\abs{z_1-z_2} \ge \abs{\abs{z_1} - \abs{z_2}}$.
+    \end{cenum}
+\end{proposition}
+\begin{proof}[第二条的证明]
+    i.e, $\abs{z_1+z_2}^2 \le \pare{\abs{z_1}+\abs{z_2}}^2$
+    \begin{align*}
+         &\pare{z_1+z_2}\pare{\conj{z_1}+\conj{z_2}} = z_1\conj{z_1} + z_2\conj{z_2} + \conj{z_1}z_2 + z_1\conj{z_2}\\
+          =& \abs{z_1}^2 + \abs{z_2}^2 + 2\Re\pare{z_1\conj{z_2}} \\
+          \le& \abs{z_1}^2 + \abs{z_2}^2 + 2\abs{z_1}\abs{z_2}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{remark}
+    第二条的两项可类推至任意多项.
+\end{remark}
+\begin{proof}[第三条的证明]
+    $\abs{z_2} = \abs{z_2-z_1+z_1} \le \abs{z_2-z_1} + \abs{z_1}$.
+\end{proof}
+\begin{corollary}
+    \begin{equation}
+        \label{eq:平行四边形恒等式}
+        \abs{z_1+z_2}^2 + \abs{z_1-z_2}^2 = 2\pare{\abs{z_1}^2 + \abs{z_2}^2}. 
+    \end{equation}
+\end{corollary}
+\begin{sample}
+    \begin{ex}[$\+bC$上无法定义全序]
+        序公理要求$a>0, b>c \Rightarrow ab>ac$. 反之$a<0, b>c\Rightarrow ab<ac$. 设$i>0$, 则$ii > i\cdot 0 = 0 \Rightarrow -1 > 0$. 若$i<0$, 则$-i>0$, 类似.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $z_1z_2 = 0\Leftrightarrow z_1=0\lor z_2 = 0$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \frac{z}{1+z^2} \in\+bR \Leftrightarrow \abs{z} = 1 \lor z\in\+bR$.\hfill\inlinehardlink{\cref{lem:实数或虚数的判断}}
+    \end{ex}
+    \begin{proof}
+        右侧为实数$\Leftrightarrow$
+        $\displaystyle\frac{z}{1+z^2} = \frac{\conj{z}}{1+\conj{z}^2}$, 即$\pare{z-\conj{z}}\pare{1-z\conj{z}} = 0$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$p\pare{z}$是一实系数多项式, $z_0$为一根, 则$\conj{z_0}$亦然.
+    \end{ex}
+    \begin{corollary}
+        奇数阶实系数多项式必有实根.
+    \end{corollary}
+\end{sample}
+\begin{sample}
+    \begin{ex}[Cauchy不等式]
+        \[ \sum_j a_jb_j \le \sum\abs{a_j}^2\sum \abs{b_j}^2. \]
+    \end{ex}
+    \begin{proof}
+        考虑  
+        \[ \sum \abs{a_j - \lambda b_j}^2 = \sum \abs{a_j}^2 + \abs{\lambda}^2 \sum \abs{b_j}^2 - 2\Re\conj{\lambda}\sum a_jb_j. \]
+        令$\lambda = \sum a_jb_j/\sum \abs{b_j}^2$即可.
+    \end{proof}
+    \begin{remark}[Lagrange恒等式]
+        \[ \abs{\sum a_jb_j}^2 = \sum\abs{a_j}^2\sum\abs{b_j}^2 - \sum_{k<j}\abs{a_k\conj{b_j} - a_k\conj{b_k}}^2. \]
+    \end{remark}
+    \begin{remark}
+        可类似推广至积分情形.
+    \end{remark}
+\end{sample}
+
+% subsection definition_and_arithmetic (end)
+
+\subsection{复数的几何表示} % (fold)
+\label{sub:复数的几何表示}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ComplexPlane}
+\end{figure}
+\begin{cenum}
+    \item $z = x_0 + iy_0 \mapsto \pare{x_0,y_0}\in\+bR^2\mapsto \overrightarrow{OP}$;
+    \item 用$\overrightarrow{OP}$的长度和角度表示$z$;
+    \item $x_0 = r\cos\theta$, $y_0 = r\sin\theta$;
+    \item $\theta$谓$z$的辐角, 记作$\theta = \Arg z$.
+\end{cenum}
+\[ \boxed{ z = \abs{z}\pare{\cos\Arg z + i\sin\Arg z}.} \]
+\begin{remark}
+    $0$没有辐角的定义; 辐角不唯一, $\theta + 2\pi n$皆为辐角.
+\end{remark}
+\begin{definition}
+    $-\pi < \theta \le \theta$的辐角谓辐角的主值, 记作$\arg z$. 从而
+    \[ \Arg z = \arg z + 2k\pi. \]
+\end{definition}
+\begin{lemma}
+    \[ \arg z = \begin{cases}
+        \arctan y_0/x_0,\quad \text{第一/第四象限},\\
+        \pi + \arctan y_0/x_0,\quad \text{第二象限},\\
+        -\pi + \arctan y_0/x_0,\quad \text{第三象限}.
+    \end{cases} \]
+\end{lemma}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GeometicInterpretationOfVectorCalculations}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GeometricInterpretationOfComplexMultiplication}
+\end{figure}
+\begin{cenum}
+    \item 复数的加法满足平行四边形法则;
+    \item $z_1-z_2$以$z_2$为起点, $z_1$为中点;
+    \item $\abs{z_1-z_2}$为$z_1,z_2$对应点之距离.
+\end{cenum}
+\begin{theorem}
+    \[ z_1z_2 = r_1r_2\pare{\cos\pare{\theta_1+\theta_2} + i\sin\pare{\theta_1+\theta_2}}. \]
+    \[ \boxed{\abs{z_1z_2} = \abs{z_1}\abs{z_2},\quad \Arg z_1z_2 = \Arg z_1 + \Arg z_2.} \]
+    \[ \boxed{\abs{\frac{z_1}{z_2}} = \frac{\abs{z_1}}{\abs{z_2}},\quad \Arg \frac{z_1}{z_2} = \Arg z_1 - \Arg z_2.} \]
+\end{theorem}
+\begin{remark}
+    配合\cref{prop:模的不等式}可得三角不等式. 配合\eqref{eq:平行四边形恒等式}可得平行四变形四边平方和等于对角线平方和.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.17 1(2)(4), 2(1), 5, 7.
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        $z_1 = r_1\pare{\cos\theta_1 + i\sin\theta_1}$, $z_2 = r_2\pare{\cos\theta_2+i\sin\theta_2}$, 若$\abs{z_2}=1$, 则$z_1z_2$表示将$z_1$旋转$\theta_2$.
+    \end{ex}
+    \begin{ex}
+        $z_1\perp z_2$当且仅当$\Re z_1\conj{z_2} = 0$. $z_1\parallelsum z_2$当且仅当$\Im z_1\conj{z_2} = 0$.
+    \end{ex}
+    \begin{proof}
+        $z_1\perp z_2$即$\arg z_2/z_1 = \pm \pi/2$. $z_1\parallelsum z_2$即$z_2/z_1$为实数.
+    \end{proof}
+    \begin{ex}
+        $z_1$, $z_2$, $z_3$和$z_4$共圆当且仅当
+        \[ \Im \frac{\frac{z_1-z_3}{z_1-z_4}}{\frac{z_1-z_3}{z_2-z_4}} = 0. \]
+    \end{ex}
+    \begin{ex}
+        以$z_0$为圆心, $r$为半径的圆的方程是$\abs{z-z_0} = r$. 即\inlinehardlink{\eqref{eq:复数平方和展开}}
+        \[ z\conj{z} + Az + \conj{A}\conj{z} + B = 0. \]
+    \end{ex}
+    \begin{ex}
+        椭圆方程可以写为
+        \[ \abs{z-z_1} + \abs{z-z_2} = a. \]
+        类似写出抛物线/双曲线的方程.
+    \end{ex}
+    \begin{ex}[Apollonius圆]
+        \[ \frac{\abs{z-z_1}}{\abs{z-z_2}} = a. \]
+    \end{ex}
+\end{sample}
+\begin{theorem}[De Moivre公式]
+    令$z_n = r_n\pare{\cos\theta_n + i\sin \theta_n}$, 则
+    \[ z_1\cdot \cdots \cdot z_n = r_1\cdot\cdots\cdot r_n\pare{\cos\pare{\theta_1+\cdots + \theta_n} + i\sin\pare{\theta_1 + \cdots + \theta_n}}. \]
+    故(设定$r_1 = \cdots = r_n = 1$)
+    \[ \boxed{z^n = \pare{\cos\theta + i\sin\theta}^n = \cos n\theta + i\sin n\theta.} \]
+\end{theorem}
+\begin{remark}
+    对于负整数的情形,
+    \begin{align*}
+        \pare{\cos\theta+i\sin\theta}^n & = \rec{\pare{\cos\theta + i\sin\theta}^{-n}} = \rec{\cos\pare{-n\theta} + i\sin\pare{-n\theta}} \\
+        & = \cos\pare{-n\theta} - i\sin \pare{n\theta} = \cos n\theta + i\sin n\theta. 
+    \end{align*}
+\end{remark}
+\begin{remark}
+    设定$n=2,3,\cdots$可以得到$n$-倍角公式. 也可以帮助记忆三角函数的加法公式.
+\end{remark}
+\paragraph{方根} % (fold)
+\label{par:方根}
+
+谓$z = \sqrt[n]{\omega}\Leftrightarrow z^n = \omega$. 令$\omega = r\pare{\cos\theta + i\sin\theta}$, $z = \rho\pare{\cos\varphi + i\sin\varphi}$.
+\[ z^n = \rho^n\pare{\cos\rho+i\sin\rho}^n = r^n\pare{\cos n\varphi + i\sin n\varphi} = r\pare{cos\theta + i\sin\theta}. \]
+\[ \Rightarrow \begin{cases}
+    \rho^n = r,\\
+    n\varphi = \theta + 2k\pi,
+\end{cases}\Leftrightarrow \begin{cases}
+    \rho = \sqrt[n]{r},\\
+    \varphi = \pare{\theta+2k\pi}/n.
+\end{cases} \]
+\begin{theorem}[方根]
+    复数域下方根为集合, 即开根构成一多值函数(并非函数),
+    \[ \boxed{\sqrt[n]{\omega} = \sqrt[n]{r} \pare{\cos \frac{\theta+2k\pi}{n} + i\sin \frac{\theta + 2k\pi}{n}},\quad k = 0, 1, \cdots, n-1.} \]
+\end{theorem}
+\begin{remark}
+    $\sqrt{2}$在这种情形下应当为$\pm \sqrt{2}$, 不再是其算术平方根.
+\end{remark}
+\begin{ex}
+    $\sqrt[n]{1} = \curb{1,\omega,\cdots,\omega^{n-1}}$, 其中
+    \[ \omega = \cos \frac{2\pi}{n} + i\sin \frac{2\pi}{n}. \]
+\end{ex}
+
+% paragraph 方根 (end)
+
+\subsubsection{扩充复平面} % (fold)
+\label{ssub:扩充复平面}
+
+\paragraph{扩充实数域} % (fold)
+\label{par:扩充实数域}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{ProjCircle}
+    \caption{实数到圆的映射}
+    \label{fig:实数到圆的映射}
+\end{figure}
+如图\cref{fig:实数到圆的映射}可以得到$\+bS^1\mapsto \+bR$, 除了$N$没有像. 如果定义$N\mapsto \infty$并定义
+\[ \+bR^* = \+bR\cup\curb{\infty} \]
+为\emph{广义实数域}或\emph{扩充实数域}, 此时有双射$\+bS^1\leftrightarrow \+bR$. 
+
+% paragraph 扩充实数域 (end)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{12cm}{ProjSphere2}
+    \caption{复平面到球的映射}
+    \label{fig:复平面到球的映射}
+\end{figure}
+类似在复数中引入$\infty$, 不定义其辐角, 对于$a\in \+bC$定义$a\pm\infty = \infty$, $a\in \+bC\backslash \curb{0}$定义$\infty\cdot a = a\cdot \infty = \infty$, $a/0 = \infty$, $a/\infty = 0$. 谓$\infty$\emph{无穷远点}.
+\[ \+bC^* = \+bC\cup\curb{\infty} \]
+为\emph{广义复数域}或\emph{扩充复数域}, 此时有双射$\+bS^2\leftrightarrow \+bR$.
+\begin{pitfall}
+    $\infty\pm \infty$, $\infty/\infty$, $0/0$无意义.
+\end{pitfall}
+图\cref{fig:复平面到球的映射}是光滑映射, 满足$\abs{z}>1$时映射到北半球, $\abs{z}<1$时映射到南半球, $\abs{z}=1$映射到赤道. 具体地, 设$z=x+iy$, 球面上
+\[ x_1 = \frac{2x}{x^2+y^2+1},\quad x_2 = \frac{2y}{x^2+y^2+1},\quad x_3 = \frac{x^2+y^2-1}{x+2+y^2+1}. \]
+反之
+\[ x + iy = \frac{x_1 + ix_2}{1-x_3}. \]
+$\+bS^2$上的圆与$\+bC$上的圆一一对应(包括圆), 其中$\+bC$上直线对应于$\+bS$上过$N$的圆.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.18. 15 16(3)(5) 17(1)(4)(6)(7) 20
+
+% paragraph 作业 (end)
+
+% subsubsection 扩充复平面 (end)
+
+% subsection 复数的几何表示 (end)
+
+\subsection{平面点集} % (fold)
+\label{sub:平面点集}
+
+\subsubsection{复数列} % (fold)
+\label{ssub:复数列}
+
+\begin{definition}[复数列]
+    $\curb{z_n}\subset \+bC$谓复数列.
+\end{definition}
+\begin{definition}[复数列的收敛]
+    $\displaystyle_{n\rightarrow\infty} z_n = z_0$, 如果任意$\epsilon>0$, 存在$N$使得$n>N$时$\abs{z_n - z_0} < \epsilon$.
+    \par
+    $\displaystyle\lim_{n\rightarrow\infty} z_n = \infty$, 如果任意$M>0$, 存在$N$使得$n>N$时$\abs{z_n} > M$.
+\end{definition}
+设$B_r\pare{z}$表示$z$为圆心, $r$为半径的圆. 而$B_R\pare{\infty} = \setcond{z\in\+bC}{\abs{z}>R}$.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{SeqOnComplex}
+    \caption{复数列收敛的示意}
+\end{figure}
+\begin{lemma}
+    复数列收敛于$z_0$当且仅当任何圆盘$B_\epsilon\pare{z_0}$外仅有有限多个$z_k$.
+\end{lemma}
+\begin{theorem}
+    设$z_n = x_n + iy_n$, $z_0 = x_0+iy_0$, 则$z_n\rightarrow z_0$当且仅当$x_n\rightarrow x_0$且$y_0\rightarrow y_0$.
+\end{theorem}
+\begin{proof}
+    由三角不等式可证.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \lim_{n\rightarrow\infty} z_n = z_0$, 则
+        \[ \lim_{n\rightarrow\infty} \frac{z_1 + \cdots + z_n}{n} = z_0. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 复数列 (end)
+
+\subsubsection{复平面的拓扑} % (fold)
+\label{ssub:复平面的拓扑}
+
+\begin{definition}[区域]
+    非空的连通开集, 谓区域.
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ComplexTopology}
+    \caption{复平面的拓扑}
+\end{figure}
+谓$x$为$A$的内点, 若有某$B_r\pare{x}\subset A$. 谓外点若有某$B_r\pare{x}\subset A^c$. 谓边界点若不为内外点, 此时任何$B_r\pare{x}$都与$A$和$A^c$有交.
+\begin{definition}[开集]
+    谓$A$为开集, 若$A = \Int A$. $A^c$为开集则谓$A$为闭集, 此时$A = \Int A + \partial A$.
+\end{definition}
+\begin{remark}
+    在开集上定义函数可以方便导数的使用.
+\end{remark}
+\begin{remark}
+    闭集内点列的极限若收敛, 则收敛于其内.
+\end{remark}
+\begin{definition}[有界]
+    集合为有界的, 若$\exists\, M$使得$\forall z\in A$, $\abs{z} < M$. 即存在$A\subset B_R\pare{0}$.
+\end{definition}
+实数六大等价公理:
+\begin{multicols}{2}
+    \begin{cenum}
+        \item 单调收敛定理;
+        \item Bolzano-Weierstra\ss 定理;
+        \item Cauchy判准;
+        \item Cantor定理;
+        \item 闭区间紧致性;
+        \item 上确界原理.
+    \end{cenum}
+\end{multicols}
+\begin{definition}[紧致性]
+    集合$A$谓紧致的, 若其任何开覆盖都有有限子覆盖.
+\end{definition}
+\begin{theorem}
+    Euclid空间中有界闭集等价于紧集.
+\end{theorem}
+\begin{definition}[曲线]
+    $\func{\gamma}{\brac{a,b}}{\pare{x\pare{t} + iy\pare{t}}\in \+bC}$若$x$, $y$皆连续则谓(连续)曲线. $\gamma\pare{a} = \gamma\pare{b}$时谓封闭的. $\gamma$不自交谓简单的(Jordan)曲线, 即$\curb{t_1, t_2}\neq {a,b}$时$\gamma\pare{t_1}\neq \gamma\pare{t_2}$. 不自交且封闭则谓简单闭曲线, 或围道.
+\end{definition}
+\begin{remark}
+    在简单闭曲线条件外, 约定$\gamma$是逐段光滑的, 即除有限个点外, 其它地方皆可导.
+\end{remark}
+\begin{definition}[曲线的长度]
+    \[ L\pare{\gamma} = \sup_P \setcond{\sum_{k=1}^n \abs{\gamma\pare{t_k} - \gamma\pare{t_{k-1}}}}{a=t_0 < t_1 < \cdots < t_n = b}. \]
+    设$\gamma'\pare{t} = x'\pare{t} + iy'\pare{t}$, 则
+    \[ L\pare{\gamma} = \int_a^b \sqrt{x'\pare{t}^2 + y'\pare{t}^2} \,\rd{t}. \]
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{Connect}
+    \caption{(道路)连通与非(道路)连通集示意}
+\end{figure}
+\begin{definition}[连通]
+    谓$A\subset \+bC$(道路)连通, 若$\forall x\neq y\in A$, $\exists\, \func{\gamma}{\brac{a,b}}{A}$, 满足$\gamma\pare{a} = x$, $\gamma\pare{b} = y$.
+\end{definition}
+\begin{theorem}[Jordan曲线定理]
+    任何简单闭曲线皆将平面分成两个区域, 一个区域有界, 一个区域无解, 它们以该曲线为共同边界.
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{SimplyConnected}
+    \caption{单连通与非单连通集示意}
+\end{figure}
+\begin{definition}[单连通]
+    $D$谓单连通区域, 若$D$中任何简单闭曲线的内部全部包含在$D$内. 若不为单连通则谓之复联通. 若$\partial D$有$n$条简单闭曲线(包含退化情形)则谓之$n$-连通的.
+\end{definition}
+
+% subsubsection 复平面的拓扑 (end)
+
+% subsection 平面点集 (end)
+
+% section 复数与平面点集 (end)
+
+\end{document}

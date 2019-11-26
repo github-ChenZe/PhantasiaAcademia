@@ -1,0 +1,72 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Hexagon.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{745.59477078bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.59696311)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Hexagon.pdf}}%
+    \put(0.92830971,0.04151381){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.67252161\unitlength}\raggedright $x$\end{minipage}}}%
+    \put(0.39948935,0.5933264){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.67252161\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Hexagon.pdf}}%
+    \put(0.61073007,0.50423164){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20980372\unitlength}\raggedright $R_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Hexagon.pdf}}%
+    \put(0.5058282,0.41801093){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20980372\unitlength}\raggedright $R_1$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Hexagon.pdf}}%
+    \put(0.5776788,0.25275456){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20980372\unitlength}\raggedright $R_3$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Hexagon.pdf}}%
+    \put(0.7587423,0.31742009){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20980372\unitlength}\raggedright $R_4$\end{minipage}}}%
+    \put(0.63286259,0.13588491){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.27584513\unitlength}\raggedright $\varphi$\end{minipage}}}%
+    \put(0.64378388,0.31177516){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.27584513\unitlength}\raggedright $\varphi$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Hexagon.pdf}}%
+    \put(0.47593836,0.14296684){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20980372\unitlength}\raggedright $R_6$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{Hexagon.pdf}}%
+    \put(0.58515126,0.0679548){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20980372\unitlength}\raggedright $R_5$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{Hexagon.pdf}}%
+    \put(0.22768208,0.22053033){\color[rgb]{0,0,0}\rotatebox{-47.86654422}{\makebox(0,0)[lt]{\begin{minipage}{0.30768028\unitlength}\raggedright $\frac{a}{2}$\end{minipage}}}}%
+  \end{picture}%
+\endgroup%

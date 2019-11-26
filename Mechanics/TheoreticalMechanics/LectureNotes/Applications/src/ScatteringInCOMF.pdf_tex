@@ -1,0 +1,61 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ScatteringInCOMF.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1110.91137503bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.48237007)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ScatteringInCOMF.pdf}}%
+    \put(0.12035711,0.30067963){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.26233288\unitlength}\raggedright $m_1,\+vv_{1}$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ScatteringInCOMF.pdf}}%
+    \put(0.58522631,0.2659591){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\theta$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ScatteringInCOMF.pdf}}%
+    \put(0.59872882,0.21966506){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.26233288\unitlength}\raggedright $m_2,\+vv_{2}$\end{minipage}}}%
+    \put(0.53649405,0.34743938){\color[rgb]{0,0,0}\rotatebox{29.99999963}{\makebox(0,0)[lt]{\begin{minipage}{0.26233287\unitlength}\raggedright $m_1,\+vv'_{1}$\end{minipage}}}}%
+    \put(0.13566487,0.10092364){\color[rgb]{0,0,0}\rotatebox{29.99999963}{\makebox(0,0)[lt]{\begin{minipage}{0.26233287\unitlength}\raggedright $m_2,\+vv'_{2}$\end{minipage}}}}%
+  \end{picture}%
+\endgroup%

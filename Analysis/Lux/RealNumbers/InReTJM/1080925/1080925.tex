@@ -1,0 +1,37 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+对于第$8$问, 考虑
+\begin{align*}
+    \rec{x+1} - \frac{3}{x^3+1} &= \rec{x+1} - \frac{3}{\pare{x+1}\pare{x^2-x+1}} \\
+    &= \frac{x^2-x+1}{\pare{x+1}\pare{x^2-x+1}} -\frac{3}{\pare{x+1}\pare{x^2-x+1}} \\
+    &= \frac{x^2-x-2}{\pare{x+1}\pare{x^2-x+1}} \\
+    &= \frac{\pare{1+x}\pare{x-2}}{\pare{x+1}\pare{x^2-x+1}}.
+\end{align*}
+对于第$13$问, 我的建议是
+\begin{cenum}
+    \item 假设$a_0, b_0$皆非零(否则可以直接划掉最高次项);
+    \item 此时
+    \[ \frac{a_0 x^m + a_1 x^{m-1} + \cdots + a_m}{b_0 x^n + b_1 x^{n-1} + \cdots + b_n} = \frac{a_0 x^m\pare{1 + \frac{a_1}{a_0 x} + \cdots + \frac{a_m}{a_0x^m}}}{b_0 x^n\pare{1 + \frac{b_1}{b_0 x} + \cdots + \frac{b_m}{b_0x^n}}}; \]
+    \item 注意到
+    \[ \lim_{x\rightarrow \infty} \frac{\pare{1 + \frac{a_1}{a_0 x} + \cdots + \frac{a_m}{a_0x^m}}}{\pare{1 + \frac{b_1}{b_0 x} + \cdots + \frac{b_m}{b_0x^n}}} = 1; \]
+    \item 从而原先的极限完全等于
+    \[ \lim_{x\rightarrow\infty} \frac{a_0 x^m}{b_0 x^n} = \frac{a_0}{b_0} \lim_{x\rightarrow\infty} x^{m-n}. \]
+\end{cenum}
+对于第$4$题第$1$问, 作等价量代换后
+\[ \frac{\sin \alpha x}{\tan \beta x} = \underbrace{\frac{\sin \alpha x}{\alpha x}}_{1} \underbrace{\frac{\alpha x}{\beta x}}_{\displaystyle \frac{\alpha}{\beta}} \underbrace{\frac{\beta x}{\sin \beta x}}_{1} \underbrace{\cos \beta x}_{1}. \]
+对于第$3$小问, 记$a_n = n^2q^n$, 则
+\[ \frac{a_{n+1}}{a_n} = q\cdot \pare{1+\rec{n}}^2. \]
+必定存在$N$和$q'$满足$n>N$时$\displaystyle \frac{a_{n+1}}{a_n} = q\cdot \pare{1+\rec{n}}^2 < q' < 1$, 故$k>N$时
+\[ a_k = a_N \cdot \frac{a_{N+1}}{a_N} \cdot \frac{a_{N+2}}{a_{N+1}} \cdot\cdots\cdot \frac{a_k}{a_{k-1}} \le a_N q'^{k-N}. \]
+注意到$N$(从而$a_N$)是固定的, 而$q'^{k-N}\rightarrow 0$, 从而$a_k\rightarrow 0$.
+\par
+对于第$5$题, 左边表达式可定义为\\
+\boxed{\centerline{对于任意$M$, 存在$\delta>0$使得$\abs{x-a}<\delta$时$f\pare{x} > M$.}}
+右边表达式是类似的,\\
+\boxed{\centerline{对于任意$M$, 存在$L$使得$x<L$时$f\pare{x} < -M$.}}
+
+\end{document}

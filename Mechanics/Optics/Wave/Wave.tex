@@ -1,0 +1,692 @@
+\documentclass{ctexart}
+
+\usepackage[nea]{van-de-la-sehen}
+
+\begin{document}
+
+\headerstamp
+
+\section{波动光学} % (fold)
+\label{sec:波动光学}
+
+\subsection{定态光波与复振幅表述} % (fold)
+\label{sub:定态光波与复振幅表述}
+
+波面谓等相位面, 波线谓能量传播值方向. 平面波对应同心光束, 球面波对应平行光束.
+\par
+振动在空间中的传播谓波, 具有时空双重周期性(频率和波长). 波可以分为标量波和矢量波, 光(电磁波)为矢量波. 由Maxwell方程组
+\begin{align*}
+    \div\+vD &= \rho,\quad \div\+vE = \frac{\rho}{\epsilon_0},\\
+    \div\+vB &= 0,\quad \\
+    \curl\+vE &= -\+DtD{\+vB},\quad \\
+    \curl\+vH &= \+vJ + \+DtD{\+vD},\quad \curl\+vB =\mu_0 \+vJ + \epsilon_0\mu_0 \+DtD{\+vE}.
+\end{align*}
+其中$\+vD = \epsilon\+vE$, $\+vB = \mu \+vH$, $\+vJ = \sigma\+vE$. 从而
+\begin{align*}
+    \curl\curl\+vE &= \grad\pare{\div\+vE} - \laplacian \+vE = -\laplacian \+vE \\
+    &= \curl\pare{-\+DtD{\+vB}}\\
+    &= -\+DtD{}\mu_0\epsilon_0 \+DtD{\+vE},\\
+    \laplacian \+vE &= \mu_0\epsilon_0 \frac{\partial^2 \+vE}{\partial t}.
+\end{align*}
+从而电磁波以速度$v = \displaystyle\rec{\sqrt{\epsilon_0 \mu_0}}$传播. 有简谐解
+\[ \begin{cases}
+    \+vE\pare{\+vr, t} = \+vE_0 \cos\pare{\omega t - \+vk_0\cdot\+vr + \varphi},\\
+    \+vB\pare{\+vr, t} = \+vB_0 \cos\pare{\omega t - \+vk_0\cdot\+vr + \varphi}.
+\end{cases} \]
+故$\+vB_0 = \sqrt{\mu_0\epsilon_0}\+vn\times\+vE_0$, $\displaystyle \+vR_0 = \frac{w}{c} = \frac{2\pi}{\lambda}$. $\+vS = \+vE\times\+vH$,
+\[ I = \expc{\+vS} = \half E_0H_0 = \half \sqrt{\frac{\epsilon_0}{\mu_0}} E_0^2. \]
+光波的波长短, 频率高, 发射体为围观客体. 定态光波假设发光时间远大于光波周期. 定态波场要求
+\begin{cenum}
+    \item 空间各点的扰动是同频率的间谐振动;
+    \item 波场中各点扰动的振幅不随时间变化, 扰动在空间形成一个稳定的振幅分布.
+\end{cenum}
+\begin{remark}
+    严格的定态不平常只有无限长单色波列. 实际上连续激光束已经是很好的定态波场.
+\end{remark}
+定态标量波有表达式
+\[ U\pare{p,t} = A\pare{p}\cos\pare{\omega t - \varphi\pare{p}}, \]
+其中$p$为场点. 对于平面波, $A\pare{p} = \const$, $\varphi\pare{p}$是直角坐标的线性函数. 球面波的振幅反比于场点到振源的距离, 相位是场点到振源距离的线性函数, 即
+\[ U\pare{p,t} = \frac{a}{r}\cos\pare{\omega t - kr + \varphi_0}. \]
+用\emph{复振幅}可分别表示为
+\[ \tilde{U}\pare{p} = A_0e^{i\pare{\+vk\cdot\+vr + \varphi_0}}, \]
+以及
+\[ \tilde{U}\pare{p} = \frac{a}{r}e^{i\pare{kr + \varphi_0}}. \]
+此时强度可以表示为
+\[ I = \tilde{U}^*\pare{p} \tilde{U}\pare{p}. \]
+在某一{\color{red}波前}上复振幅互为共轭的波, 谓共轭波. $\tilde{U}^*\pare{p}$即$\tilde{U}$的共轭波.
+\begin{figure}
+    \centering
+    \incfig{8cm}{PlaneWaveAndConj}
+    \caption{\cref{ex:平面波复振幅及其共轭}图}
+    \label{fig:平面波复振幅及其共轭图}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:平面波复振幅及其共轭}
+        如\cref{fig:平面波复振幅及其共轭图}. 一列平面波, 传播方向平行于$x$-$z$面, 与$z$轴成倾角$\theta$, 求$z=0$面上的复振幅分布. $k_x = k\sin\theta$, $k_z = k \cos\theta$, 从而
+        \[ \tilde{U}\pare{x,y} = Ae^{i\pare{\+vk\cdot\+vr + \varphi_0}} = Ae^{ik\sin\theta \cdot x}. \]
+        共轭波即此波关于$y$-$z$平面反射者,
+        \[ \tilde{U}^*\pare{x,y} = A\exp\brac{-ikx\sin\theta} = A\exp\brac{kx\sin\pare{-\theta}}.  \]
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    共轭波不是在波场中处处共轭, 而仅仅是在波场中某一面)通常是接收屏平面)上点点共轭.
+\end{pitfall}
+\begin{pitfall}
+    无特别声明时, 共轭波视为来自波前的同一侧.
+\end{pitfall}
+\begin{figure}
+    \centering
+    \incfig{12cm}{SphericalWaveAndConj}
+    \caption{\cref{ex:球面波复振幅及其共轭}图}
+    \label{fig:球面波复振幅及其共轭图}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:球面波复振幅及其共轭}
+        如\cref{fig:球面波复振幅及其共轭图}, 与$z=0$平面距离为$R$的两个物点在此平面上产生的复振幅分布为
+        \[ \tilde{U}\pare{x,y,0} = \frac{a}{\sqrt{x^2+y^2+R^2}}e^{ik\sqrt{x^2+y^2+R^2}}, \]
+        以及
+        \[ \tilde{U}\pare{x,y,0} = \frac{a}{\sqrt{\pare{x-x_1}^2 + \pare{y-y_1}^2 + R^2}}e^{ikr}. \]
+        相应的共轭波在是图中以虚线标出, 注意向原发出点关于$x$-$y$平面对称点汇聚的球面波具有
+        \[ \tilde{U'}\pare{x,y,0} = \frac{a}{r}e^{-ikr} = \tilde{U}^* \]
+        且来自波前同一侧.
+    \end{ex}
+\end{sample}
+
+% subsection 定态光波与复振幅表述 (end)
+
+\subsection{波前} % (fold)
+\label{sub:波前}
+
+\begin{figure}
+    \centering
+    \incfig{8cm}{SphericalApprox}
+    \caption{轴上物点近似}
+    \label{fig:轴上物点近似}
+\end{figure}
+如\cref{fig:轴上物点近似}, 由$O$发出的球面波有
+\[ \tilde{U}\pare{x',y'} = \frac{a}{\sqrt{\rho^2 + z^2}}e^{ikr} \approx \frac{a}{z\pare{1+\rho^2/2z^2}}e^{ik\pare{z+\rho^2/2z}}. \]
+傍轴条件要求$\rho^2/z^2 \ll 1$, 此时
+\[ \tilde{U}\pare{x',y'} = \frac{a}{z}e^{ik\pare{z+\rho^2/2z}}. \]
+远场条件要求$z\gg \rho^2/\lambda$, 此时
+\[ \tilde{U}\pare{x',y'} = \frac{a}{z\pare{1+\rho^2/2z}}e^{ikz}. \]
+两个条件同时满足, 则
+\[ \tilde{U}\pare{x',y'} = \frac{a}{z}e^{ikz}, \]
+即正入射的平面波.
+\begin{remark}
+    对于光波, 通常远场条件蕴含傍轴条件.
+\end{remark}
+\begin{figure}
+    \centering
+    \incfig{8cm}{SphericalApproxOffAxis}
+    \caption{轴外物点近似}
+    \label{fig:轴外物点近似}
+\end{figure}
+如\cref{fig:轴外物点近似}, 对于轴外物点,
+\begin{align*}
+    \tilde{U}\pare{x,y,z} &= \frac{a}{\sqrt{\pare{x-x'}^2+\pare{y-y'}^2+\pare{z-z'}^2}}e^{ikr}.
+\end{align*}
+考虑
+\[ r_0 = \sqrt{z^2 + x'^2 + y'^2} = z + \frac{x'^2+y'^2}{2} + \cdots, \]
+\[ r'_0 = \sqrt{z^2 + x^2 + y^2} = z + \frac{x^2+y^2}{2} + \cdots, \]
+\begin{align*}
+    r &= z + \frac{x^2+x'^2 - 2xx'}{2z} + \frac{y^2+y'^2-2yy'}{2z}\\ &= z + \frac{x^2+y^2}{2z} + \frac{x'^2+y'^2}{2z} - \frac{xx'+yy'}{z}. 
+\end{align*}
+若$Q$, $P$都傍轴, 则
+\[ \tilde{U}\pare{x',y'} = \frac{a}{z} e^{ik\pare{r_0 + \frac{x^2+y^2}{2z}}}e^{-i \frac{k}{z}\pare{xx'+yy'}} = \frac{a}{z} e^{ik\pare{r'_0 + \frac{x'^2+y'^2}{2z}}}e^{-i \frac{k}{z}\pare{xx'+yy'}}. \]
+若$P$傍轴, $Q$傍轴外还远场, 则
+\[ \tilde{U}\pare{x',y'} = \frac{a}{z}e^{ikr_0}e^{-i\frac{k}{z}\pare{xx'+yy'}}. \]
+若$Q$傍轴, $P$远场, 则
+\[ \tilde{U}\pare{x',y'} = \frac{a}{z}e^{ikr'_0}e^{-i\frac{k}{z}\pare{xx'+yy'}}. \]
+这是接收平面上入射的平面波, 方向从物点指向接收平面中心.
+
+\paragraph{Gau\ss 光束} % (fold)
+\label{par:gauss_光束}
+
+光学谐振腔内能稳定存在Gau\ss 光束,
+\[ \tilde{U}\pare{x,y,z} = \frac{A}{\omega\pare{z}} e^{-\frac{x^2+y^2}{\omega^2\pare{z}}} e^{-ik\brac{\frac{x^2+y^2}{2r\pare{z}}+z}+i\varphi\pare{z}}. \]
+其中
+\[ \omega\pare{z} = w_0 \pare{1+\frac{\lambda^2 z^2}{\pi w_0^4}}^{1/2},\quad r\pare{z} = z\pare{1+\frac{\pi^2w_0^4}{\lambda^2 z^2}}. \]
+
+% paragraph gauss_光束 (end)
+
+% subsection 波前 (end)
+
+\subsection{光的横波性与五种偏振态} % (fold)
+\label{sub:光的横波性与五种偏振态}
+
+纵波谓传播方向与振动方向相同者(如机械波), 无偏振. 横波谓于之正交者, 有偏振. 光波的偏振方向一般指电场的偏振方向. 偏振片谓仅允许一种偏振方向通过者. {\color{red}光的偏振态都是迎着光传播的方向看到的.}
+\par
+自然光的偏振是各向同性的. 线偏光谓存在单一振动方向者. Malus定律对线偏振光成立, 即线偏振光在一方向上之$I = I_0\cos^2\alpha$, $E = E\cos\alpha$.
+\par
+自然光经起偏器, 变为线偏振光, 强度变为原先之一半. 起偏器之方向无影响.
+\par
+不同方向的横振动中, 某一方向占有优势, 这类光波谓部分偏振光. 部分偏振光的偏振程度用偏振度衡量,
+\[ P = \frac{I_M - I_m}{I_M + I_m}. \]
+$P=0$者为自然光, $P=1$者为线偏振光.
+\par
+圆偏光谓电矢量在传播方向之正交平面内作匀速转动者. 迎着传播方向, 电矢量逆时针转动者, 谓左旋, 反之谓右旋. 两个振幅相等, 方向垂直, 相位差$\pm \pi/2$的振动和合成, 即为圆偏振光. 
+\par
+椭圆偏振光谓电场矢量匀速转动而扫过一椭圆者. 二方向垂直振幅不等或相位差不等于$\pm\pi/2$者所合成者谓椭圆偏振. 上述若干偏振光可统一为
+\[ \begin{cases}
+    E_x = A_x \cos\omega t \+ve_x,\\
+    E_y = A_y \cos\pare{\omega t + \delta}\+ve_y.
+\end{cases} \]
+$A_x=A_y$, $\delta = \pm\pi/2$为圆偏光. $A_x\neq A_y$或$\delta\neq \pm\pi/2$为椭圆偏光.
+\par
+设$\varphi$是$y$分量之相位对$x$分量之超前, 则\cref{fig:椭圆偏振光示例}中给出了不同范围$\delta$的偏振样态. 其中第一行为左旋偏振, 第二行为右旋偏振.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaMinusPi}
+        \caption{$\delta = -\pi$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaMinusHalfPiMore}
+        \caption{$-\pi\!<\!\delta\!<\!-\+/\pi/2/$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaMinusHalfPi}
+        \caption{$\delta = -\+/\pi/2/$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaMinusHalfPiLess}
+        \caption{$-\+/\pi/2/<\delta<0$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaZero}
+        \caption{$\delta = 0$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaZero}
+        \caption{$\delta = 0$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaPlusHalfPiLess}
+        \caption{$0<\delta<\+/\pi/2/$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaPlusHalfPi}
+        \caption{$\delta=\+/\pi/2/$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaPlusHalfPiMore}
+        \caption{$\+/\pi/2/ < \delta < \pi$}
+    \end{subfigure}
+    \begin{subfigure}{.19\textwidth}
+        \centering
+        \incfig{2cm}{DeltaPlusPi}
+        \caption{$\delta = \pi$}
+    \end{subfigure}
+    \caption{椭圆偏振光示例}
+    \label{fig:椭圆偏振光示例}
+\end{figure}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.147-148 1,3,5,6(p.108); p.159-160 1,2(p.117); 思考题: 举例说明无线电波和光波的异同之处; 偏振光在日常生活还可以有哪些应用; p,245 2,3 (p.179)
+
+% paragraph 作业 (end)
+
+考虑到
+\[ \frac{E_y}{A_y} = \pare{\frac{E_x}{A_x}}\cos\delta - \sin\omega t \sin \delta,\quad \frac{E_x}{A_x} \sin\delta = \sin\omega t \sin \delta, \]
+得到
+\[ \pare{\frac{E_x}{A_x}}^2 + \pare{\frac{E_y}{A_y}}^2 - \frac{2E_xE_y}{A_xA_y} \cos\delta = \sin^2\delta. \]
+不能用检偏器区分部分偏振光和椭圆偏振光.
+\begin{cenum}
+    \item 检偏器旋转不改变光强: 圆偏/自然;
+    \item 检偏器旋转改变光强且消光: 单方向偏振;
+    \item 检偏器旋转改变光强且不消光: 部分偏振/椭圆偏振.
+\end{cenum}
+\begin{remark}
+    给两个眼镜不同的偏振, 同时发出两种偏振的信号, 从而两个眼睛将接收到不同信号, 这是3D电影的原理.
+\end{remark}
+
+% subsection 光的横波性与五种偏振态 (end)
+
+\subsection{光在电介质表面的反射和折射, Fresnel公式} % (fold)
+\label{sub:光在电介质表面的反射和折射_fresnel公式}
+
+\begin{figure}
+    \centering
+    \incfig{8cm}{PSKCoordinate}
+    \caption{psk坐标系}
+    \label{fig:psk坐标系}
+\end{figure}
+局部建立如\cref{fig:psk坐标系}的psk坐标系\footnote{p谓德文之parallel, s谓senkrech.}(右手). 假设
+\[ \begin{cases}
+    \+vE_1 = \+vA_1 e^{i\pare{\+vk_1\cdot \+vr - \omega_1 t}},\\
+    \+vE'_1 = \+vA'_1 e^{i\pare{\+vk'_1\cdot \+vr - \omega'_1 t}},\\
+    \+vE_2 = \+vA_2 e^{i\pare{\+vk_2\cdot \+vr - \omega_2 t}}.
+\end{cases} \]
+在边界有
+\[ \+vn\times \pare{\+vE_2 - \+vE_1} = 0,\quad \+vn\times\pare{\+vH_2 - \+vH_1} = 0. \]
+从而
+\[ \+vn\times{\+vE_1 + \+vE'_1} = \+vn\times\+vE_2. \]
+\[ \Rightarrow \+vn\times \+vA_1 e^{i\pare{\+vk_1\cdot \+vr - \omega_1 t}} + \+vn\times \+vA'_1 e^{i\pare{\+vk'_1\cdot \+vr - \omega'_1 t}} = \+vn\times \+vA_2 e^{i\pare{\+vk_2\cdot \+vr - \omega_2 t}}. \]
+上述条件对于任意$\pare{x,y,t}$成立, 从而$\omega_1 = \omega'_1 = \omega_2 = \omega$, 并且
+\[ k_{1x} \cdot x + k_{1y} \cdot y = k'_{1x}\cdot x + k'_{1y}\cdot y = k_{2x} \cdot x + k_{2y}\cdot y. \]
+因此$k_{1x} = k'_{1x} = k_{2x} = 0$(从而共面), $k_{1y} = k'_{1y} = k_{2y}$, 故
+\[ k_1 \sin i_1 = k'_1 \sin i'_1 = k_2 \sin i_2, \]
+同时给出反射和折射定律.
+\par
+对于S波, 电场满足
+\[ \+vn\times\+vA_1 + \+vn\times\+vA'_1 = \+vn\times\+vA_2 \Rightarrow A_{1s} + A'_{1s} = A_{2s}. \]
+对于磁场, 类似有
+\[ H_{1p} \cos i_1 - H'_{1p}\cos i'_1 = H_{2p}\cos i_2. \]
+将$H$以$A$表示, 则
+\[ \cos i_1 \pare{A_{1s} - A'_{1s}}\sqrt{\frac{\epsilon_1}{\mu_1}} = \cos i_2 A_{2s}\sqrt{\frac{\epsilon_2}{\mu_2}}. \]
+对于非铁磁性材料有近似$\sqrt{\epsilon_r} = n = 1/\sin i$, 故
+\[ \cos i_1 \pare{A_{1s} - A'_{1s}} \sin i_2 = \cos i_2 A_{2s} \sin i_1. \]
+可解得
+\[ r_s = \frac{A'_{1s}}{A_{1s}} = \frac{\sin \pare{i_2 - i_1}}{\sin \pare{i_1+i_2}} = \frac{n_1\cos i_1 - n_2\cos i_2}{n_1\cos i_1 + n_2 \cos i_2}, \]
+\[ t_s = \frac{A_{2s}}{A_{1s}} = \frac{2\cos i_1\sin i_2}{\sin \pare{i_1+i_2}} = \frac{2n_1 \cos i_1}{n_1\cos i_1 + n_2\cos i_2}. \]
+对于P波, 类似有
+\[ r_p = \frac{A'_{1p}}{A_{1p}} = \frac{\tan\pare{i_1 - i_2}}{\tan\pare{i_1+i_2}} = \frac{n_2\cos i_1 - n_1\cos i_2}{n_2\cos i_1 + n_1\cos i_2}, \]
+\[ t_p = \frac{A_{2p}}{A_{1p}} = \frac{2\sin i_2 \cos i_1}{\sin\pare{i_1 + i_2}\cos\pare{i_1 - i_2}} = \frac{2n_1\cos i_1}{n_2\cos i_1 + n_1\cos i_2}. \]
+\par
+反射的光强为
+\[ R_s = \frac{I'_{1s}}{I_{1s}} = r_s^2 = \frac{\sin^2\pare{i_1-i_2}}{\sin^2\pare{i_1+i_2}}. \]
+能流为
+\[ \+gR_s = \frac{W'_{1s}}{W_{1s}} = R_s. \]
+折射的光强为
+\[ T_s = \frac{I_{2s}}{I_{2s}}{\frac{n_2}{n_1}}t_s^2, \]
+能流需要考虑截面积的改变,
+\[ \+gT_s = \frac{W_{2s}}{W_{1s}} = \frac{\cos i_2}{\cos i_1} T_s. \]
+对于P波有完全对应的结论, 见\cref{table:各种反射率和透射率}.
+\begin{pitfall}
+    光强意味着单位波面面积上的能量通量, 而能流是取界面两侧的光束管计算其总能量通量.
+\end{pitfall}
+\begin{pitfall}
+    $r$和$t$有可能为复数.
+\end{pitfall}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{c>{\centering\arraybackslash}m{1cm}>{\centering\arraybackslash}m{3.5cm}>{\centering\arraybackslash}m{3.5cm}}
+        \toprule
+        \+:c{2}{c}{比率} & \+:c{1}{c}{$p$分量} & \+:c{1}{c}{$s$分量} \\
+        \midrule
+        & 振幅 & $\displaystyle r_p = \frac{A'_{1p}}{A_{1p}}$ & $\displaystyle r_s = \frac{A'_{1s}}{A_{1s}}$ \\
+        {反} & $=$ & $\displaystyle \frac{\tan\pare{i_1 - i_2}}{\tan\pare{i_1+i_2}}$ & $\displaystyle \frac{\sin \pare{i_2 - i_1}}{\sin \pare{i_1+i_2}}$ \\
+        & $=$ & $\displaystyle \frac{n_2\cos i_1 - n_1\cos i_2}{n_2\cos i_1 + n_1\cos i_2}$ & $\displaystyle \frac{n_1\cos i_1 - n_2\cos i_2}{n_1\cos i_1 + n_2 \cos i_2}$ \\
+        \cmidrule{2-4}
+        {射} & 光强 & $\displaystyle R_p = \frac{I'_{1p}}{I_{1p}} = \abs{r_p}^2$ & $\displaystyle R_s = \frac{I'_{1s}}{I_{1s}} = \abs{r_s}^2$ \\
+        \cmidrule{2-4}
+         & 能流 & $\displaystyle \+gR_p = \frac{W'_{1p}}{W_{1p}} = R_p$ & $\displaystyle \+gR_s = \frac{W'_{1s}}{W_{1s}} = R_s$ \\
+        \midrule
+         & 振幅 & $\displaystyle t_p = \frac{A_{2p}}{A_{1p}}$ & $\displaystyle t_s = \frac{A_{2s}}{A_{1s}}$ \\
+         {透} & $=$ & $\displaystyle \frac{2\sin i_2 \cos i_1}{\sin\pare{i_1 + i_2}\cos\pare{i_1 - i_2}}$ & $\displaystyle \frac{2\cos i_1\sin i_2}{\sin \pare{i_1+i_2}}$ \\
+         & $=$ & $\displaystyle \frac{2n_1\cos i_1}{n_2\cos i_1 + n_1\cos i_2}$ & $\displaystyle \frac{2n_1 \cos i_1}{n_1\cos i_1 + n_2\cos i_2}$ \\
+        \cmidrule{2-4}
+        {射} & 光强 & $\displaystyle T_p = \frac{I_{2p}}{I_{1p}} = \abs{r_t}^2$ & $\displaystyle T_s = \frac{I_{2s}}{I_{1s}} = \abs{r_s}^2$ \\
+        \cmidrule{2-4}
+         & 能流 & $\displaystyle \+gT_p = \frac{W_{2p}}{W_{1p}} = \frac{\cos i_2}{\cos i_1}T_p$ & $\displaystyle \+gT_s = \frac{W_{2s}}{W_{1s}} = \frac{\cos i_2}{\cos i_1}T_s$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{各种反射率和透射率}
+    \label{table:各种反射率和透射率}
+\end{table}
+\paragraph{正入射情形} % (fold)
+\label{par:正入射情形}
+
+此时
+\[ r_p = -r_s = \frac{n_2-n_1}{n_2+n_1},\quad R_p = R_s = \+gR_p = \+gR_s = \pare{\frac{n_2-n_1}{n_2+n_1}}^2, \]
+\[ t_p = t_s = \frac{2n_1}{n_1+n_2},\quad T_p = T_s = \+gT_p = \+gT_s = \frac{4n_1n_2}{\pare{n_2+n_1}^2}. \]
+
+% paragraph 正入射情形 (end)
+
+\paragraph{Brewster角} % (fold)
+\label{par:brewster角}
+
+此时
+\[ i_B = \tan^{-1} \frac{n_2}{n_1}, \]
+若$i_1 = i_B$, 则$i_1 + i_2 = \pi/2$, 此时$R_p = \+gR_p = 0$, 反射为线偏振光.
+
+% paragraph brewster角 (end)
+
+\paragraph{全反射和衰逝波} % (fold)
+\label{par:全反射和衰逝波}
+
+$k = \displaystyle\frac{2\pi}{\lambda}$, $k_2 = \displaystyle \frac{n_2}{n_1}k_1$, 从而
+\begin{align*}
+     k_{2z} &= \sqrt{k_2^2 - k_{2y}^2}\\
+     &= \sqrt{\pare{\frac{n_2}{n_1}}^2 k_1^2 - k_1^2 \sin^2 i_1}\\
+     &= k_1\sqrt{\pare{\frac{n_2}{n_1}}^2 - \sin^2 i_1}\\
+     &= k_2\cos i_2.
+\end{align*}
+设$i_c = \arcsin\displaystyle \frac{n_2}{n_1}$, 则$i_1=i_c$时
+\[ k_{2z} = i\tilde{k},\quad \tilde{k} = \frac{2\pi}{\lambda}\sqrt{\sin^2 i_1 - \sin^2 i_2}, \]
+\[ \+vE = \+vA_2 e^{-\tilde{k} z} e^{i\pare{k_{2y} y - \omega t}}, \]
+其中衰减指数$\displaystyle d_z = \rec{\tilde{k}}$. 故光波进入介质后短时间内即消失.
+
+% paragraph 全反射和衰逝波 (end)
+
+\paragraph{Stokes倒逆关系} % (fold)
+\label{par:stokes倒逆关系}
+
+如\cref{fig:Stokes倒逆关系}, 考虑逆着反射方向和入射方向的强度分别为$Ar$和$At$的光线, 由光路可逆,
+\begin{figure}
+    \centering
+    \begin{subfigure}{.47\textwidth}
+        \centering
+        \incfig{4cm}{StokesRelation}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}{.47\textwidth}
+        \centering
+        \incfig{4cm}{StokesRelation2}
+        \caption{}
+    \end{subfigure}
+    \caption{Stokes倒逆关系}
+    \label{fig:Stokes倒逆关系}
+\end{figure}
+\[ rr + tt' = 1,\quad r' = -r. \]
+
+% paragraph stokes倒逆关系 (end)
+
+\paragraph{相位关系与半波损失} % (fold)
+\label{par:相位关系与半波损失}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{cc>{\centering\arraybackslash}m{3.5cm}>{\centering\arraybackslash}m{3.5cm}}
+        \toprule
+        \+:c{2}{c}{分类} & \+:c{1}{c}{$\delta_p$} & \+:c{1}{c}{$\delta_s$} \\
+        \midrule
+        \+:r{2}{$n_1 < n_2$} & $i_1 < i_B$ & $0$ & \+:r{2}{$\pi$} \\
+        \cmidrule{2-3}
+        & $i > i_B$ & $\pi$ & \\
+        \midrule
+        \+:r{6}{$n_1 > n_2$} & $i_1 < i_B$ & $\pi$ & \+:r{2}{0} \\
+        \cmidrule{2-3}
+         & $i_B < i_1 < i_c$ & $0$ & \\
+        \cmidrule{2-4}
+        & {$i_1 > i_c$} & $ \displaystyle 2\arctan \frac{n_1}{n_2}\cdot \frac{\sqrt{\pare{n_1/n_2}^2\sin^2 i_1 - 1}}{\cos i_1}$ & $\displaystyle 2\arctan \frac{n_2}{n_1}\cdot\frac{\sqrt{\pare{n_1/n_2}^2\sin^2 i_1 - 1}}{\cos i_1}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{各种反射与折射相位差}
+    \label{table:各种反射与折射相位差}
+\end{table}
+
+当$t_s$和$t_p$为正实数, 相位不发生改变. 惟入射角大于全反射角时, 需分离实部虚部,
+\[ r_s  = \frac{\cos i_1 - i\sqrt{\sin^2 i_1 - \sin^2 i_c}}{\cos i_1 + i\sqrt{\sin^2 i_2 - \sin^2 i_c}},\quad r_p = \frac{n_2^2\cos i_1 - in_1^2 \sqrt{\sin^2 i_1 - \sin^2 i_c}}{n_2^2 \cos i_1 + in_1^2\sqrt{\sin^2 i_1 - \sin^2 i_c}}. \]
+而$t$除了全反射时, 总是正实数. 关于相位关系有
+\[ E_2 = \abs{t} e^{i\arg t} A_1 e^{i\pare{\+vk_2\cdot\+vr - \omega t}},\quad E'_1 = \abs{r}e^{i\arg r}e^{i\pare{\+vk'\cdot \+vr - \omega t}}. \]
+当$i_1>i_2$, $\delta_{rs} = \pi$, $i_1<i_B$时, $\delta_{rp} = 0$, 而$i_1 > i_B$时$\delta_{rp} = \pi$. 当$i_1<i_2$且$i_1<i_c$时, $\delta_{rs} = 0$, 若$i<i_B$, $\delta_{rp} = \pi$, 若$i_1 > i_B$则$\delta_{rp} = 0$. 而此时对于$i_1>i_c$的情形, $\arg r$见\cref{table:各种反射与折射相位差}.
+\begin{figure}
+    \centering
+    \begin{subfigure}{.47\textwidth}
+        \centering
+        \incfig{4cm}{AirToLen0}
+        \caption{$n_1<n_2$正入射}
+        \label{fig:空气到玻璃正入射}
+    \end{subfigure}
+    \begin{subfigure}{.47\textwidth}
+        \centering
+        \incfig{4cm}{LenToAir0}
+        \caption{$n_1>n_2$正入射}
+        \label{fig:玻璃到空气正入射}
+    \end{subfigure}
+    \begin{subfigure}{.95\textwidth}
+        \centering
+        \incfig{4cm}{AirToLenHalfPi}
+        \caption{掠入射}
+        \label{fig:掠入射}
+    \end{subfigure}
+    \caption{若干极端入射情况}
+    \label{fig:若干极端入射情况}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:空气到玻璃正入射}和\cref{fig:玻璃到空气正入射}, 正入射时, 反射光$p$和$s$分量相位改变,
+        \[ \begin{array}{ccc}
+            & n_1 < n_2 & n_1 > n_2 \\
+            r_p & + & - \\
+            r_s & - & + \\
+            t_p & + & + \\
+            t_s & + & +
+        \end{array}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:掠入射}, 掠入射时, 反射光$p$和$s$分量的相位同时取反, 无论$n_1$与$n_2$关系如何.
+    \end{ex}
+\end{sample}
+以任何角度(小于临界角)入射时, 第二介质上表面反射和第二介质下表面反射的光之间总会发生$\displaystyle \frac{\lambda}{2}$的波长移动, 产生半波损失.
+\begin{cenum}
+    \item 自然光入射时, 反射/折射光都是部分偏振光;
+    \item 圆偏振光入射时, 反射/折射光都是椭圆偏振;
+    \item 线偏振光入射时, 反射还是线偏振;
+    \item 但全反射时, 产生椭圆偏振;
+    \item Brewster角入射, 反射光为S线偏振光.
+\end{cenum}
+
+% paragraph 相位关系与半波损失 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.264 3, 4, 7, 9, 11(p.192) 习题7与习题6定义有关
+
+% paragraph 作业 (end)
+
+% subsection 光在电介质表面的反射和折射_fresnel公式 (end)
+
+\subsection{波的叠加与干涉} % (fold)
+\label{sub:波的叠加与干涉}
+
+波的独立性表明, 两列或多列波同时存在时, 在其交叠区域内其传播互不干扰.
+\par
+波的叠加原理表明, 交叠区域内各个点的振幅是各列波的振幅的线性叠加.
+\par
+叠加并非强度/振幅的简单叠加, 而是振动矢量的叠加. 对于电磁波就是电矢量的叠加. 此外, 叠加原理要求线性介质且振幅不太强.
+\par
+叠加可以利用振幅矢量叠加图解, 或者复数法.
+\par
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{SuperpositionByVector}
+    \caption{波的矢量叠加}
+    \label{fig:波的矢量叠加}
+\end{figure}
+如\cref{fig:波的矢量叠加}, 可以按照矢量叠加.
+\par
+在干涉中通常使用复数法,
+\[ \tilde{\psi}_1 = \tilde{U}_1 e^{-i\omega t}, \quad \tilde{\psi}_2 = \tilde{U}_2 e^{-i\omega t}, \]
+则
+\[ \tilde{\psi} = \tilde{\psi}_1 + \tilde{\psi}_2 = \pare{\tilde{U}_1 + \tilde{U}_2}e^{-i\omega t}. \]
+其中
+\[ \tilde{U} = \tilde{U}_1 + \tilde{U}_2 = A_1 e^{i\varphi_1\pare{P}} = A_2 e^{i\varphi_2\pare{P}} = Ae^{i\varphi\pare{P}}. \]
+相应的光强为
+\[ I = \tilde{\varphi^*}\tilde{\varphi} = I_1 + I_2 + \underbrace{2 A_1\pare{P} A_2\pare{P} \cos\brac{\omega_1 t - \omega_2 t + \delta\pare{P}}}_{\text{干涉项}}, \]
+\[ \delta\pare{P} = \varphi_1\pare{P} - \varphi_2\pare{P}. \]
+相干条件谓
+\begin{cenum}
+    \item 频率相同(必要条件);
+    \item 存在相互平行的振动分量(矢量波的要求);
+    \item 存在稳定的相位差$\delta\pare{P}$(光波的要求).
+\end{cenum}
+在假设振动方向, 传播方向相同而频率不同的情况下,
+\[ \psi_1 = A_0 \cos\pare{\omega_1 t - k_1 z},\quad \psi_2 = A_0 \cos\pare{\omega_2 t - k_1 z},\quad \psi = \psi_1 = \psi_2, \]
+从而
+\[ \psi = 2A_0 \cos\pare{\omega_m t - k_m z} \cos\pare{\overline{\omega} - \overline{k} z}, \]
+其中
+\[ \omega_m = \frac{\omega_1 - \omega_2}{2},\quad \overline{\omega} = \frac{\omega_1 + \omega_2}{2}, \]
+\[ k_m = \frac{k_1 - k_2}{2},\quad \overline{k} = \frac{k_1 + k_2}{2}. \]
+从而低频波会调制高频波. 最终光强为
+\[ I = 4A_0^2 \cos^2\pare{\omega_m t- k_m z}, \]
+故形成光学拍, 拍频为$2\omega_m$, 强度由时间变化. 不同频率的单色光叠加形成光学拍, 且不同频率的定态光波叠加形成非定态光. 不同频率的单色光是非相干的.
+\par
+若两列光相互垂直, 则干涉项为零. 叠加后
+\[ \+v\psi = \+v\psi_1 + \+v\psi_2 \Rightarrow \abs{\psi}^2 = \abs{\psi_1}^2 + \abs{\psi_2}^2. \]
+若两振动不垂直, 则只考虑垂直分量, 有
+\[ \+v\psi = \+v\psi_1 + \+v\psi_2 \Rightarrow I = I_1  + I_{2y}^2 + I_{2x}^2 + 2\+vA_1\cdot\+vA_2 \cos2\pare{\delta\pare{P}}. \]
+持续一段时间的干涉, 有
+\[ I = I_1 + I_2 + 2A_1A_2 \expc{\cos\delta\pare{P}}, \]
+若$\delta$在一段时间内完全随机则不发生干涉, 若$\delta$在$I$内稳定则发生干涉. 若$\delta = 2\pi k$, 则发生相长干涉. 若$\delta = 2\pi\pare{k+1/2}$, 则发生相消干涉. 分别
+\[ I = I_1 + I_2 + \pm 2\sqrt{I_1I_2}. \]
+两光源之间有固定相位差, 因而按振幅叠加, 则谓\emph{相干光源}. 反之若两光源间无固定相位差, 按强度叠加, 则谓\emph{非相干光源}.
+\begin{ex}
+    普通原子随机发射波列振动方向和位相相互独立, 故不相干.
+\end{ex}
+\par
+光扰动的时间周期为$\SI{e-15}{\second}$量级, 实验观测时间为$\SI{e-1}{\second}$量级, 探测器响应时间为$\SI{e-9}{\second}$量级, 故实际观测者都是对能量对时间的平均值.
+\par
+即时交叉项能否转化为不为零的时间平均, 取决于二光场的相位差能否保持恒定. $\tau$充分小时不要求频率相同和相差恒定都可以发生干涉. $\tau$足够大且大于拍周期以及光扰动周期时, 暂态干涉效果消失.
+\par
+若要观测到稳定干涉, 则需要$\Delta \omega = 0$且$\delta\varphi_0 = \delta\pare{p}$为恒量. 以后仅考虑稳定干涉.
+\par
+干涉的显著程度可用干涉条纹的反衬度描述,
+\[ \gamma = \frac{I_{\mathrm{max}} - I_{\mathrm{min}}}{I_{\mathrm{max}} + I_{\mathrm{min}}}. \]
+$I_{\mathrm{min}}=0$, 干涉相消, 则$\gamma = 1$. $I_{\mathrm{max}} = I_{\mathrm{min}}$, 光强均匀, 则$\gamma = 0$.
+\par
+考虑两偏振波的叠加, 并且假设$\delta = 2\pi j$或$\delta = 2\pi \pare{j+1/2}$,
+\[ I\pare{P} = I_1 + I_2 + 2\sqrt{I_1I_2} \cos\theta \cos\delta\Rightarrow \gamma = \frac{2\sqrt{k}\cos\theta}{1+k},\quad k = \frac{I_1}{I_2}. \]
+$k=1$, $\theta=0$时有最大干涉. 当$\theta = 0$, 有
+\[ I_{\mathrm{max}} = \pare{E_{10} + E_{20}}^2,\quad I_{\mathrm{min}} = \pare{E_{10} - E_{20}}^2,\quad \gamma = \frac{2E_{10}E_{20}}{E_{10}^2 + E_{20}^2}, \]
+$I = 2I_0 = I_1 + I_2$.
+\par
+当$k=1$, $E_{10} = E_{20} = A$, $\displaystyle I = 4A^2 \cos \frac{\delta\pare{P}}{2}$.
+
+% subsection 波的叠加与干涉 (end)
+
+\subsection{两个点源的干涉} % (fold)
+\label{sub:两个点源的干涉}
+
+\begin{figure}
+    \centering
+    \incfig{6cm}{InterfereTwoSources}
+    \caption{两个点源的干涉}
+    \label{fig:两个点源的干涉}
+\end{figure}
+两个球面波, 如\cref{fig:两个点源的干涉}, 有
+\[ \psi_1 = A_1\cos\pare{k_1 r_1 - \omega t} = A_1 \cos\pare{n_1 r_1 \frac{2\pi}{\lambda}-\omega t}, \]
+\[ \psi_2 = A_2\cos\pare{k_2 r_2 - \omega t} = A_1 \cos\pare{n_2 r_2 \frac{2\pi}{\lambda}-\omega t}. \]
+则
+\[ I\pare{P} = I_1\pare{P} + I_2\pare{P} + 2\sqrt{I_1 I_2}\cos\delta\pare{P}. \]
+进一步假定$A_1 = A_2 = A$, $\delta \pare{P} = \displaystyle \frac{2\pi}{\lambda}\pare{n_2 r_2 - n_1 r_2}$, 特别在真空中括号内为$r_2 - r_1$. 当$\delta = j\lambda$时发生相长干涉, $\delta = \pare{j+1/2}\lambda$时发生相消干涉. $j$谓干涉级数.
+\par
+等强面为旋转双曲面, 接受屏上为双曲线. 干涉是非定域的, 处处可见.
+
+\paragraph{Young干涉实验} % (fold)
+\label{par:young干涉实验}
+
+将每一波列分为若干部分, 将各个部分叠加. 这几部分是相干的. 例如利用双缝隙分割波列.
+\par
+\begin{figure}
+    \centering
+    \incfig{8cm}{YoungsInterfere}
+    \caption{Young干涉实验}
+    \label{fig:Young干涉实验}
+\end{figure}
+如\cref{fig:Young干涉实验}, 通常双孔间隔$d\sim\SI{0.1}{\milli\meter}$到$\SI{1}{\milli\meter}$, 横向观察范围$\rho\sim\SI{1}{\centi\meter}$到$\SI{10}{\centi\meter}$, 幕与双孔的距离$D\sim\SI{1}{\meter}$到$\SI{10}{\meter}$. 光屏出复振幅
+\[ \tilde{U}\pare{x',y'} = \frac{a}{z} e^{ik\brac{z + \frac{\rho^2}{2z} + \frac{\rho'^2}{2z}}} e^{-i\frac{k}{z}\pare{xx'+yy'}}. \]
+近似有
+\[ e^{-i\frac{k}{z}\pare{xx'+yy'}} = e^{-i\frac{k}{D} \frac{d}{2}x'},\quad e^{\cdots} = e^{i \frac{k}{D}\frac{d}{2}x'}. \]
+从而
+\[ \tilde{U}_1 = B e^{-i\frac{k}{D} \frac{d}{2}x'}, \quad \tilde{U}_2 = Be^{i \frac{k}{D}\frac{d}{2}x'}, \]
+其中
+\[ B = \frac{a}{D} e^{ik\brac{D + \frac{x^2}{2D} + \frac{x'^2 + y'^2}{2D}}}. \]
+\[ \tilde{U} = \tilde{U}_1 + \tilde{U}_2 = B\cdot 2\cos\pare{\frac{kdx'}{2D}}. \]
+于是
+\[ I = \tilde{U}^* \tilde{U} = 4\pare{\frac{a}{D}}^2 \cos^2 \pare{\frac{kdx'}{2D}}. \]
+在傍轴条件下, 等强线是一组平行于$y$轴的直线,
+\begin{cenum}
+    \item 条纹亮度呈$\cos^2$分布;
+    \item 明条纹: $\displaystyle x' = j\pi \frac{2D}{kd} = j\frac{D}{d}\lambda$;
+    \item 暗条纹: $\displaystyle x' = \pare{j+1/2}\frac{D}{d}\lambda$;
+    \item 间距$\Delta x = D\lambda/d$, $\Delta\theta \approx d/D$, $\Delta x\Delta \theta \approx \lambda$.
+\end{cenum}
+特别地, 当白光入射, 中心条纹仍为白光, 但下一级条纹会发生分离. $\lambda \nearrow$, $x'\nearrow$, 从而红光会相对远离中心而紫光会相对靠近中心, 故条纹内紫外红.
+\begin{sample}
+    \begin{ex}
+        \ce{HeNe}激光$\SI{632.8}{\nano\meter}$照射间隔$\SI{0.5}{\milli\meter}$, $\SI{2}{\meter}$处的干涉条纹间距为
+        \[ \Delta x = \lambda D/d = \SI{2.4}{\milli\meter}, \]
+        是波长的$\SI{4e3}{}$倍.
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{MaterialInYoungs}
+    \caption{具有介质的Young干涉}
+    \label{fig:具有介质的Young干涉}
+\end{figure}
+对于充满介质的情形, $k' = 2\pi n /\lambda$, 而条纹
+\[ \frac{k' dx'}{2D} = j\pi \Rightarrow \Delta x = \frac{D}{n}\frac{\lambda}{d}. \]
+在缝$S_1$前放置介质一小块介质, 则光程如\cref{fig:具有介质的Young干涉},
+\[ \pare{S_1P} = r_1 - t + nt = r_1 + \pare{n-1}t. \]
+当$n>1$时, 中心(零级)条纹会向$S_1$(向上)移动.
+
+% paragraph young干涉实验 (end)
+
+\begin{sample}
+    \begin{ex}
+        白光干涉最大干涉级次.
+        \[ x_j = j \frac{D}{d}\lambda \]
+        \[ x_{j+1} = j \frac{D}{d}\pare{\lambda + \Delta \lambda}, \]
+        \[ \Rightarrow j_{\mathrm{max}} = \lambda / \Delta \lambda. \]
+    \end{ex}
+\end{sample}
+
+\subsubsection{两束平行光的干涉} % (fold)
+\label{ssub:两束平行光的干涉}
+
+取振幅$A_1$, $A_2$, 初相位$\varphi_{10}$, $\varphi_{20}$, 大小$k_1 = k_2 = k$, 则$z=0$处波前
+\[ \varphi_1\pare{x',y'} = k\cos\alpha_1 x' + k\cos\beta_1 y' - \varphi_{10}, \]
+\[ \varphi_2\pare{x',y'} = k\cos\alpha_2 x' + k\cos\beta_2 y' - \varphi_{10}, \]
+\[ \delta\pare{x',y'} = kx'\pare{\cos\alpha_1 - \cos\alpha_2} + ky'\pare{\cos\beta_1 - \cos\beta_2} + \varphi_{20} - \varphi_{10}. \]
+光强
+\[ I = \pare{A_1+A_2}^2 \pare{1+\gamma \cos\delta},\quad \gamma = \frac{2A_1A_2}{A_1^2 + A_2^2}. \]
+其中
+\[ \delta \pare{x',y'} = \begin{cases}
+    2j\pi,\quad \text{亮条纹},\\
+    \pare{2j+1}\pi,\quad \text{暗条纹}.
+\end{cases} \]
+\[ \Delta x' \xlongequal{\text{$y'$不变}} \frac{2\pi}{k\pare{\cos\alpha_1 - \cos\alpha_2}} = \frac{\lambda}{\cos\alpha_1 - \cos\alpha_2}. \]
+\[ \Delta y' \xlongequal{\text{$x'$不变}} \frac{2\pi}{k\pare{\cos\beta_1 - \cos\beta_2}} = \frac{\lambda}{\cos\beta_1 - \cos\beta_2}. \]
+从而$x'$方向上的空间频率为
+\[ f_{x'} = \rec{\Delta x'} = \frac{\cos\alpha_1 - \cos\alpha_2}{\lambda}. \]
+$y'$方向上的空间频率为
+\[ f_{y'} = \rec{\Delta y'} = \frac{\cos\beta_1 - \cos\beta_2}{\lambda}. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{IntereferenceOfPlaneWavesEx}
+    \caption{\cref{ex:平面波干涉例1}图}
+    \label{fig:平面波干涉例1图}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:平面波干涉例1}
+        如\cref{fig:平面波干涉例1图}, 两束相干平行光, $\lambda = \SI{0.6}{\micro\meter}$, 传播方向与$x$-$z$平面平行, 与$z$轴的夹角分别为$\theta_1 = \SI{15}{\degree}$, $\theta_2 = \SI{-30}{\degree}$, 振幅比$A_1/A_2 = 1/2$, 求$z=0$波前上干涉条纹的性质.
+    \end{ex}
+    \begin{proof}[解]
+        $x$方向上的周期为$\SI{0.79}{\micro\meter}$, $y$方向上的空间周期为$\infty$.
+    \end{proof}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.180 2, 3, 5, 7
+
+% paragraph 作业 (end)
+
+% subsubsection 两束平行光的干涉 (end)
+
+% subsection 两个点源的干涉 (end)
+
+% section 波动光学 (end)
+
+\end{document}

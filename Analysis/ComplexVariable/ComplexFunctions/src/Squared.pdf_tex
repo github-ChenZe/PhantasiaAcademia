@@ -1,0 +1,69 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Squared.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1532.94572004bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.31055947)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Squared.pdf}}%
+    \put(0.57364997,1.24081938){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13978689\unitlength}\raggedright $w=z^n$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Squared.pdf}}%
+    \put(0.38703447,1.18770036){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1397869\unitlength}\raggedright $2\pi/n$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Squared.pdf}}%
+    \put(0.57364997,0.89834149){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13978689\unitlength}\raggedright $w=z^2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Squared.pdf}}%
+    \put(0.62257537,0.7298983){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.55915794,0.74463265){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15567969\unitlength}\raggedright $z=\sqrt{w}$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Squared.pdf}}%
+    \put(0.39612061,0.5551647){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.26000363\unitlength}\raggedright $\+bC$\end{minipage}}}%
+    \put(0.19203176,0.51043289){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15488388\unitlength}\raggedright $+$\end{minipage}}}%
+    \put(0.19203176,0.47129256){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15488388\unitlength}\raggedright $-$\end{minipage}}}%
+    \put(0.19203176,0.1679549){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15488388\unitlength}\raggedright $+$\end{minipage}}}%
+    \put(0.19203176,0.12881454){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15488388\unitlength}\raggedright $-$\end{minipage}}}%
+    \put(0.39071971,1.21448324){\color[rgb]{0,0,0}\rotatebox{45}{\makebox(0,0)[lt]{\begin{minipage}{0.13978689\unitlength}\raggedright $2\pi/n$\end{minipage}}}}%
+  \end{picture}%
+\endgroup%

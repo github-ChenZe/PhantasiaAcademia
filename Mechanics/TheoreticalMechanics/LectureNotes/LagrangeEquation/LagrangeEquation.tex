@@ -1,0 +1,1612 @@
+\documentclass{ctexart}
+
+\usepackage[nea]{van-de-la-sehen}
+\usepackage{picins}
+
+\begin{document}
+
+\headerstamp
+
+\section{Lagrange方程} % (fold)
+\label{sec:lagrange方程}
+
+\subsection{约束} % (fold)
+\label{sub:约束}
+
+约束是对质点(系)的运动状态的强制性限制,
+\[ f_j\pare{\+vr_i,\dot{\+vr}_i, t} = 0,\quad i = 1,\cdots, N,\quad j = 1,\cdots, m. \]
+将力分为约主动力和约束力,
+\[ m_i\ddot{\+vr}_i = \underbrace{\+vF_i}_{\text{主动力}} + \underbrace{\+vR_i}_{\text{约束力}}. \]
+主动力预先给定, 力律已知, 例如$\+vF = m\+vg$, $F - kx$, $F = \mu N$. 约束力则预先未知, 例如支持力、静摩擦力.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+判断下列是否为保守力, 如果是, 写出势能$V$.
+\begin{cenum}
+    \item $F_x = ayz + bx + c$, $F_y = axz + bz$, $F_z = axy + by$;
+    \item $\displaystyle F_x = -ze^x$, $F_y = \ln z$, $F_z = e^{-x} + \frac{y}{z}$;
+    \item $\displaystyle \+vF = \frac{a}{r}\+ve_r$.
+\end{cenum}
+
+% paragraph 作业 (end)
+
+几何约束谓形如$\displaystyle f_j\pare{\+vr_i, t} = 0$者. 微分约束谓形如$\displaystyle f_j\pare{\+vr_i,\dot{\+vr}_i,t} = 0$者.
+\begin{ex}
+    几何约束如刚体
+    \[ \abs{\+vr_i - \+r_j} = c_{ij} = \const, \]
+    曲面
+    \[ f\pare{\+vr,t} = 0, \]
+    曲线
+    \[ \begin{cases}
+        f_1\pare{\+vr,t} = 0,\\
+        f_2\pare{\+vr,t} = 0.
+    \end{cases} \]
+\end{ex}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{RollingWithoutSlip}
+    \caption{无滑动滚动}
+    \label{fig:无滑动滚动}
+\end{figure}
+对几何约束微分可得
+\[ \+dtd{f_j} = 0\Rightarrow \+DtD{f_j} + \sum_i \+D{\+vr_i}D{f_j}\cdot\dot{\+vr}_i = 0. \]
+从而微分约束可能成为几何约束.
+\begin{ex}
+    圆柱体的无滑动滚动, 如\cref{fig:无滑动滚动}, 有约束
+    \[ \dot{x_0} - R\dot{\theta} = 0, \]
+    可以变为几何约束
+    \[ x - R\theta = \const. \]
+\end{ex}
+\begin{definition}[完整约束]
+    完整约束谓几何约束或可积分为几何约束之微分约束.
+\end{definition}
+\begin{definition}[自由度]
+    自由度谓描述系统位形所需的独立参数的数量, 记为$S$.
+\end{definition}
+\begin{ex}
+    单个粒子限制在曲面上运动, 其自由度为$2$. 限制在曲线上运动, 自由度为$1$.
+\end{ex}
+\begin{ex}
+    $N$个质点组成的自由质点系的自由度为$3N$, 若有$k$个完整约束则自由度变为$3N-k$.
+\end{ex}
+非完整约束谓不可积的微分约束. 非完整约束不改变自由度数目.
+\begin{ex}
+    竖直圆盘在水平桌面上的无滑动滚动.
+\end{ex}
+\begin{ex}
+    小球在平面上无滑动滚动, 其质心坐标$\pare{x,y}$可作为一广义坐标. 考虑到转动自由度具有$2$个, 惟无滑动滚动之约束减少一个自由度, 故一共$3$个自由度. \inlinehardlink{笔误?}
+\end{ex}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{RollingOnPlane}
+    \caption{平面上的滑动滚动}
+    \label{fig:平面上的无滑动滚动}
+\end{figure}
+\begin{ex}
+    如\cref{fig:平面上的无滑动滚动}, 有约束
+    \[ \begin{cases}
+        \dot{x} = v\cos\theta = a\dot{\varphi} \cos\theta\pare{t},\\
+        \dot{y} = v\sin\theta = a\dot{\varphi} \sin\theta\pare{t}.
+    \end{cases} \]
+    从而
+    \[ \begin{cases}
+        \rd{x} = a\cos\theta\rd{\varphi},\\
+        \rd{y} = a\sin\theta \rd{\varphi},
+    \end{cases} \]
+    即$\sin\theta\,\rd{x} - \cos \theta\,\rd{y} = 0$, 这是不可积的约束(非恰当微分, \cref{rm:恰当微分的判定}).
+\end{ex}
+\begin{remark}[恰当微分的判定]
+    \label{rm:恰当微分的判定}
+    $F_x\,\rd{x} + F_y\,\rd{y} + F_z\,\rd{z}$是恰当微分则要求
+    \[ \curl \pare{\varphi\+vF} = 0\Rightarrow \grad\varphi\times\+vF + \varphi\curl\+vF = 0. \]
+    用$\+vF$点乘两侧, 则要求
+    \[ \+vF\cdot\pare{\curl \+vF} = 0. \]
+    实际上, 这是充要条件.
+\end{remark}
+\begin{definition}[定常约束]
+    约束谓定常的, 如果$\+D{t}D{f_j} = 0$, 否则谓非定常的.
+\end{definition}
+\begin{ex}
+    并非所有约束都可以通过选取恰当坐标系变为定常约束, 例如膨胀气球上的蚂蚁.
+\end{ex}
+\begin{definition}[双侧约束]
+    双侧约束谓形如$f_j = 0$者, 单侧约束谓形如$f_j \le 0$者. 前者不可解除, 后者可以(不等号严格成立时).
+\end{definition}
+\begin{ex}
+    摆绳若无需绷紧, 则属于单侧约束.
+\end{ex}
+
+\subsubsection{约束带来的困难} % (fold)
+\label{ssub:约束带来的困难}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{Atwood}
+    \caption{Atwood机}
+    \label{fig:Atwood机}
+\end{figure}
+\begin{ex}[Atwood机]
+    \label{ex:Atwood机}
+    如\cref{fig:Atwood机}, 可列出方程
+    \[ \begin{cases}
+        m_1\ddot{y_1} = m_1g - T_1,\\
+        m_2\ddot{y_2} = m_2g - T_2,\\
+        m_3\ddot{y_3} = m_3g - T_2.
+    \end{cases} \]
+    同时由于滑轮无质量, 必有
+    \[ T_1 = 2T_2. \]
+    再由速度约束
+    \[ y_1 + y = l_1, \]
+    \[ \pare{y_2 - y} + \pare{y-3 - y} = l_2, \]
+    消去$y$后恰好有五个方程, 五个未知数, 故可解出.
+    \[ \boxed{\ddot{y_2} = \frac{4m_2m_3 + m_1m_2 - 3m_1m_3}{4m_2m_3 + m_1m_2 + m_1m_3}g,}\]
+    \[ \boxed{\ddot{y_3}=\frac{4m_2m_3 + m_1m_3 - 3m_1m_2}{4m_2m_3 + m_1m_2 + m_1m_3}g,}\]
+    \[ \boxed{\ddot{y_1} = \frac{m_1m_2 + m_1m_3 - 4m_2m_3}{4m_2m_3 + m_1m_2 + m_1m_3}g.} \]
+\end{ex}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{Hexagon}
+    \caption{六边形平衡}
+    \label{fig:六边形平衡}
+\end{figure}
+\begin{ex}
+    如\cref{fig:六边形平衡}, 受力平衡时, 对最顶上的杆受力分析,
+    \[ R_2 = \frac{mg}{2}, \]
+    对下面的杆,
+    \[ R_1 = R_3, \quad R_4 = R_2 + mg = \frac{3}{2}mg. \]
+    力矩平衡,
+    \begin{equation}
+        \label{eq:六边形平衡1}
+        R_3 a\sin\varphi + mg\frac{a}{2}\sin\varphi = R_4 a\cos\varphi = \frac{3}{2}mga\cos\varphi. 
+    \end{equation}
+    设弹簧平衡时长度$a$等于边长, 则对再下一层杆受力分析,
+    \[ R_3 + R_5 = ka\cos\varphi, \]
+    \[ R_6 = R_4 + mg = \frac{5}{2}mg, \]
+    力矩平衡,
+    \begin{align}
+        ka\cos\varphi \frac{a}{2}\sin\varphi &= R_3 a\sin\varphi + R_4 a\cos\varphi + mg \frac{a}{2}\cos\varphi \\
+        \label{eq:六边形平衡2}
+        &= 2mga\cos\varphi + R_3 a\sin\varphi. 
+    \end{align}
+    将\eqref{eq:六边形平衡1}代入\eqref{eq:六边形平衡2},
+    \[ \half ka^2\sin\varphi\cos\varphi = 3mga\cos\varphi, \]
+    \[ \sin \varphi \cos\varphi = \frac{6mg}{ka}\cos\varphi. \]
+    一种情形谓$\varphi = \pi/2$, 则情况显然. 另一情形谓$\varphi < \pi/2$, 要求
+    \[ \sin\varphi = \frac{6mg}{ka} < 1. \]
+    则有$\varphi <\pi/2$与$\varphi > \pi/2$二解.
+\end{ex}
+坐标不独立之解决方法谓引入独立的广义坐标, 约束力未知之解决方法谓D'Alembert原理.
+
+% subsubsection 约束带来的困难 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1.1, 1.2, 1.3. 同埋
+\begin{ex}
+    判断下列约束是否为完整约束:
+    \begin{cenum}
+        \item $\pare{y^2-x^2-z}\,\rd{x} + \pare{z-y^2-xy}\,\rd{y} + x\,\rd{z} = 0$;
+        \item $\pare{2x + y + z} \,\rd{x} + \pare{x+2y+z}\,\rd{y} + \pare{x+y+2z}\,\rd{z} = 0$;
+        \item $\pare{x^2+y^2+z^2}\,\rd{x} + 2\pare{x\,\rd{x} + y\,\rd{y} + z\,\rd{z}} = 0$.
+    \end{cenum}
+\end{ex}
+\begin{remark}
+    习题1-2中的自由度数目为$2$平动自由度与$2$转动自由度, 加上一约束$r{\theta}' = R\theta$.
+\end{remark}
+
+% paragraph 作业 (end)
+
+\subsubsection{广义坐标} % (fold)
+\label{ssub:广义坐标}
+
+系统位形为$\pare{\+vr_1,\+vr_2,\cdots,\+vr_N}$, 在$k$个完整约束下$\+vr_i$不独立, 自由度为$s=3N - k$. 引入$s$个广义坐标, 则这些广义坐标唯一确定了系统的瞬时位形.
+\[ \+vr_i = \+vr_i\pare{q_\alpha, t},\quad i=1,\cdots, N,\quad  \alpha=1,\cdots, s. \]
+使用广义坐标时,
+\begin{cenum}
+    \item 约束条件自动满足故无需再考虑之;
+    \item 不一定具有长度量纲;
+    \item 不一定三个坐标为一组.
+\end{cenum}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GenCoor1}
+    \caption{圆周运动的广义坐标}
+    \label{fig:圆周运动的广义坐标}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GenCoor2}
+    \caption{双摆的广义坐标}
+    \label{fig:双摆的广义坐标}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+    \incfig{6cm}{GenCoor3}
+    \caption{滑动杆的广义坐标}
+    \label{fig:滑动杆的广义坐标}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:圆周运动的广义坐标}, 选取广义坐标$\theta$, 则
+        \[ \begin{cases}
+            x = R\cos\theta,\\
+            y = R\sin\theta.
+        \end{cases} \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:双摆的广义坐标}, 引入两个角度后,
+        \[ \begin{cases}
+            x_1 = l_1\sin\theta_1,\\
+            y_1 = l_1\cos\theta_1,
+        \end{cases}\quad \begin{cases}
+            x_2 = l_1\sin\theta_1 + l_2\sin\theta_2,\\
+            y_2 = l_1\cos\theta_1 + l_2\cos\theta_2.
+        \end{cases} \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:滑动杆的广义坐标}, 可以引入广义坐标$\theta$, $x$或$y$.
+    \end{ex}
+\end{sample}
+记广义速度为$\dot{q}_\alpha$, 则
+\[ \+D{\dot{q}_\alpha}D{\dot{\+vr}} = \+D{\dot{q}_k}D{}\pare{\+D{q_j}D{\+vr}\+D{t}D{q_j} + \+D{t}D{\+vr}} = \+D{\dot{q}_k}D{}\pare{\+D{q_j}D{\+vr}\dot{q}_j}. \]
+从而
+\[ \boxed{\+D{\dot{q}_k}D{\dot{\+vr}} = \+D{q_k}D{\+vr}.} \]
+
+% subsubsection 广义坐标 (end)
+
+% subsection 约束 (end)
+
+\subsection{D'Alembert原理与Lagrange方程} % (fold)
+\label{sub:d_alembert原理与lagrange方程}
+
+\subsubsection{D'Alembert原理} % (fold)
+\label{ssub:d_alembert原理}
+
+\paragraph{虚位移} % (fold)
+\label{par:虚位移}
+
+虚位移谓假想的, 一切可能的, 满足瞬时约束条件的无限小位移$\delta\+vr_i$. 与实位移$\rd{\+vr_i}$的区别为
+\[ \+vr_i \xrightarrow{\rd{t}} \+vr_i+\rd{\+vr_i},\quad \+vr_i \xrightarrow{\delta t = 0} \+vr_i + \delta\+vr_i. \]
+假设质点系具有完整约束
+\[ f_j\pare{\+vr_i, t} = 0,\quad j = 1,\cdots, k, \]
+虚位移满足约束, 故
+\[ f_j\pare{\+vr_i+\delta \+vr_i,t} = 0 \Rightarrow f_j\pare{\+vr_i,t} + \sum_{i=1}^N \+D{\+vr_i}D{f_j}\cdot\delta\+vr_i = 0 \Rightarrow \sum_{i=1}^N \+D{\+vr_i}D{f_j}\cdot\delta\+vr_i = 0, \]
+即$\delta f_j = 0$.
+
+% paragraph 虚位移 (end)
+
+\paragraph{实位移} % (fold)
+\label{par:实位移}
+
+实位移则应当满足$t+\rd{t}$时的约束条件, 即
+\[ f_j\pare{\+vr_i + \rd{\+vr_i}, t+\rd{t}} = 0 \Rightarrow \sum_{i=1}^N \+D{\+vr_i}D{f_j}\cdot\delta\+vr_i + \+DtD{f_j}\rd{t} = 0, \]
+即$\rd{f_j} = 0$. 对于定常约束, 即$\displaystyle \+DtD{f_j} = 0$, 实位移和虚位移满足方程相同.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{TimeDependentConstr}
+    \caption{虚位移和实位移示意}
+    \label{fig:虚位移和实位移示意}
+\end{figure}
+如\cref{fig:虚位移和实位移示意}, 如果约束不含时, 则实位移可能是多个虚位移中的一个. 在约束含时的情形下, 实位移和虚位移有很大区别.
+\begin{finale}
+    $\delta$符号除了对时间起冻结作用, 其它方面同$\rd{}$无区别.
+\end{finale}
+\begin{sample}
+    \begin{ex}[$\delta$和$\rd{}$的区别]
+        对于长度$r=r_0+vt$的单摆, $\delta \+vr$和$\rd{\+vr}$存在区别. $\delta \+vr$由于不能含时, 必须沿切线方向, 惟$\rd{\+vr}$可以有径向分量.
+    \end{ex}
+    \begin{remark}
+        此外, $\delta \+vr$是对整个$\+vr\pare{t}$的变分, 而$\rd{\+vr}$只是某个时间点的位矢变化.
+    \end{remark}
+\end{sample}
+\begin{remark}
+    变分原理与Fermat原理表述相似. Fermat原理之成立, 在于光程之变分非处于最小值处则与邻近路径之相位差显著而自身发生干涉, 故消光而仅有稳定值之路径得以保留.
+\end{remark}
+
+% paragraph 实位移 (end)
+
+\paragraph{虚功} % (fold)
+\label{par:虚功}
+
+虚位移$\delta\+vr_i$下, 有虚功
+\[ \delta W = \sum_{i=1}^N\pare{\+vF_i + \+vR_i} \cdot\delta\+vr_i. \]
+约束力的虚功之和为
+\begin{equation}
+    \label{eq:约束力的虚功之和}
+    \sum_{i=1}^N \+vR_i\cdot\delta\+vr_i. 
+\end{equation}
+
+% paragraph 虚功 (end)
+
+\paragraph{理想约束} % (fold)
+\label{par:理想约束}
+
+若约束力对质点的虚功之和\eqref{eq:约束力的虚功之和}为零, 则谓之理想约束. 这不要求对每个质点的虚功为零.
+\begin{sample}
+    \begin{ex}
+        被约束在光滑曲面上的质点, 应当满足曲面方程
+        \[ f\pare{\+vr, t} = 0. \]
+        虚位移的条件谓$\delta f = 0$, 即$\grad f \cdot\delta\+vr = 0$. 而曲面的约束力(支持力)沿曲面法向, 故$\+vR = \lambda\grad f$, 故$\+vR\cdot\delta\+vr = 0$, 构成理想约束.
+    \end{ex}
+    \begin{ex}
+        被约束在光滑曲线上的质点,
+        \[ \begin{cases}
+            f_1\pare{\+vr,t} = 0,\\
+            f_2\pare{\+vr,t} = 0,
+        \end{cases}\Rightarrow \begin{cases}
+            \grad f_1 \cdot \delta \+vr = 0,\\
+            \grad f_2 \cdot \delta \+vr = 0.
+        \end{cases} \]
+        约束力(支持力)视为两个曲面的约束力的合成, 从而$\+vR = \lambda_1 \grad f_1 + \lambda_2 \grad f_2$, 显然对粒子不做功.
+    \end{ex}
+    \begin{ex}
+        刚体中任意两点之间的距离有
+        \[ \abs{\+vr_i - \+vr_j}^2 = c_{ij}^2 = \const. \]
+        发生虚位移时,
+        \[ \delta\abs{\+vr_i - \+vr_j}^2 = 0 \Rightarrow \pare{\+vr_i - \+vr_j} \cdot\delta\pare{\+vr_i - \+vr_j} = 0. \]
+        约束力虚功之和
+        \[ \sum_{i=1}^N \+vR_i\delta\+vr_i = \sum_{i\neq j} \+vF_{ij}\cdot\delta\+vr_i = \half \sum_{i\neq j} \pare{\+vF_{ij}\cdot\delta\+vr_i + \+vF_{ji}\cdot\delta\+vr_j}. \]
+        由Newton第三定律, $\+vF_{ij} = -\+vF_{ji} \parallelsum \pare{\+vr_i - \+vr_j}$, 从而右侧
+        \[ \half \sum_{i\neq j} \pare{\+vF_{ij}\cdot\delta\+vr_i + \+vF_{ji}\cdot\delta\+vr_j} = \half \sum_{i\neq j} \lambda_{ij}\pare{\+vr_i - \+vr_j}\cdot\delta\pare{\+vr_i - \+vr_j} = 0. \]
+        从而刚体构成理想约束.
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    判断是否理想约束, 以虚功之{\color{red}和}为准.
+\end{pitfall}
+
+% paragraph 理想约束 (end)
+
+\paragraph{D'Alembert原理} % (fold)
+\label{par:d_alembert原理}
+
+列出所有质点的Newton第二定律方程,
+\[ \+vF_i + \+vR_i = m_i\ddot{\+vr_i},\quad  i = 1,\cdots, N. \]
+对诸质点的虚功的求和,
+\[ \sum_{i=1}^N \pare{\+vF_i + \+vR_i}\cdot\delta\+vr_i = \sum_{i=1}^N m_i\ddot{\+vr}_i \cdot\delta\+vr_i. \]
+在理想约束条件下,
+\[ \sum_{i=1}^N \pare{\+vF_i - m_i\ddot{\+vr}_i}\cdot\delta\+vr_i = 0. \]
+引入广义虚位移$\delta q_\alpha$, 则
+\[ \delta \+vr_i = \sum_{\alpha=1}^s \+D{q_\alpha}D{\+vr_i}\delta q_\alpha, \]
+\[ \sum_{i=1}^n\pare{\+vF_i - m_i\ddot{\+vr}_i}\cdot\sum_{\alpha=1}^s \+D{q_\alpha}D{\+vr_i}\delta q_\alpha = 0, \]
+\[ \Rightarrow \sum_{\alpha=1}^s \brac{\sum_{i=1}^N \pare{\+vF_i - m_i\ddot{\+vr}_i}\cdot\+D{q_\alpha}D{\+vr_i}} \delta q_\alpha = 0. \]
+由于各个$q_\alpha$都是独立的, 其系数必定一致为零,
+\[ \boxed{\sum_{i=1}^N \pare{\+vF_i - m_i\ddot{\+vr}_i}\cdot\+D{q_\alpha}D{\+vr_i} = 0,\quad \alpha = 1,\cdots, s.} \]
+当所有主动力都为保守力时, 谓该系统为保守系统. 此时$\+vF_i = -\grad_i V$.
+\[ Q_\alpha = \sum_{i=1}^N \+vF_i \cdot \+D{q_\alpha}D{\+vr_i} = -\sum_{i=1}^N \+D{\+vr_i}D{V}\cdot\+D{q_\alpha}D{\+vr_i} = -\+D{q_\alpha}D{V} \]
+谓广义主动力. 则D'Alembert原理要求
+\[ Q_\alpha = \sum_{i=1}^N m_1\ddot{\+vr}_i\cdot\+D{q_\alpha}D{\+vr_i},\quad \alpha = 1,\cdots,s. \]
+特别对于保守系,
+\begin{equation}
+    \label{eq:保守力的DAlembert原理}
+    -\+D{q_\alpha}D{V} = \sum_{i=1}^N m_1\ddot{\+vr}_i\cdot\+D{q_\alpha}D{\+vr_i},\quad \alpha = 1,\cdots,s. 
+\end{equation}
+\begin{sample}
+    \begin{ex}
+        对于Atwood机(\cref{fig:Atwood机}), 主动力
+        \[ \+vF_i = m_i g\+ve_y,\quad i = 1,2,3. \]
+        D'Alembert原理要求
+        \[ \sum_{i=1}^3 \pare{\+vF_i - m_i\ddot{\+vr}_i}\cdot \delta\+vr_i = 0. \]
+        由$\+vr_i = y_i\+ve_y$, $\ddot{\+vr}_i = \ddot{y}_i\+ve_y$, $\delta \+vr_i = \delta y_i \+ve_y$,
+        \begin{equation}
+            \label{eq:DAlembert于Atwood机}
+            \Rightarrow \sum_{i=1}^3 m_i\pare{g  - \ddot{y}_i}\cdot\delta y_i = 0. 
+        \end{equation}
+        在约束$y_2+y_3 + 2y_1 = \const$下,
+        \[ \ddot{y}_1 = -\frac{\ddot{y}_2 + \ddot{y_3}}{2},\quad \delta y_1 = -\frac{\delta y_2 + \delta y_3}{2}. \]
+        代入\eqref{eq:DAlembert于Atwood机}可得
+        \begin{align*}
+            &-m_1\pare{g+\frac{\ddot{y_2} + \ddot{y}_3}{2}}\pare{\frac{\delta y_2 + \delta y_3}{2}} \\
+            &+ m_2\pare{g - \ddot{y}_2}\delta y_2 + m_3\pare{g - \ddot{y}_3}\delta y_3 = 0.
+        \end{align*}
+        由$\delta y_i$的独立性知相应项系数为零. 求解与\cref{ex:Atwood机}之结论相同.
+    \end{ex}
+    \begin{ex}
+        也可以直接在第一步就引入广义坐标,
+        \[ \sum_{i=1}^3 \pare{\+vF_i - m_i\ddot{\+vr}_i}\cdot\+D{q_\alpha}D{\+vr_i} = 0. \]
+        以$y_2$和$y_3$为独立广义坐标, 则
+        \[ \+D{y_2}D{\+vr_1} = -\half\+ve_y,\quad \+D{y_3}D{\+vr_1} = -\half\+ve_y, \]
+        \[ \+D{y_2}D{\+vr_2} = \+ve_y,\quad \+D{y_3}D{\+vr_2} = 0, \]
+        \[ \+D{y_2}D{\+vr_3} = 0,\quad \+D{y_3}D{\+vr_3} = \+ve_y. \]
+        注意为零的导数项源于$y_2$和$y_3$相互独立之事实. 则D'Alembert原理要求
+        \[ \alpha=2,\quad m_1\pare{g-\ddot{y}_1}\pare{-\half} + m_2\pare{g-\ddot{y}_2} = 0, \]
+        \[ \alpha=3,\quad m_1\pare{g-\ddot{y}_1}\pare{-\half} + m_3\pare{g-\ddot{y}_3} = 0. \]
+    \end{ex}
+    \begin{ex}
+        也可以使用\eqref{eq:保守力的DAlembert原理}求解.
+        \[ V = -\sum_{i=1}^3 m_i g y_i = \half mg\pare{y_2+y_3} - m_2 gy_2 - m_3gy_3 + \const. \]
+        \[ Q_2 = -\+D{y_2}D{V} = \pare{m_2 - \frac{m_1}{2}}g, \]
+        \[ Q_3 = -\+D{y_3}D{V} = \pare{m_3 - \frac{m_1}{2}}g. \]
+        \[ \alpha=2,\quad \sum_{i=1}^3 m_i\ddot{\+vr}_i\cdot\+D{y_2}D{\+vr_i} = m_1 \ddot{y}_1 \pare{-\half} + m_2\ddot{y}_2 = \pare{m_2 - \frac{m_1}{2}}g, \]
+        \[ \alpha=3,\quad \sum_{i=1}^3 m_i\ddot{\+vr}_i\cdot\+D{y_3}D{\+vr_i} = m_2 \ddot{y}_1 \pare{-\half} + m_3\ddot{y}_3 = \pare{m_3 - \frac{m_1}{2}}g. \]
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    $q_\alpha$无需具有长度量纲, 相应的$Q_\alpha$也无需具有力量纲.
+\end{pitfall}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{HangRotOnPlane}
+    \caption{\cref{ex:书本例1-1}图}
+    \label{fig:书本例1-1图}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:书本例1-1}
+        如\cref{fig:书本例1-1图}, 系统有两个自由度,
+        \[ \+vr_1 = r\+ve_r,\quad \+vr_2 = \pare{r-l}\+ve_z,\quad \+vF_i = -m_ig\+ve_z, \]
+        \[ \delta \+vr_1 = \delta r\+ve_r + r\delta\theta\+ve_\theta,\quad \delta\+vr_2 = \delta z\+ve_z = \delta r\+ve_z. \]
+        D'Alembert原理要求
+        \[ \sum_{i=1}^2 \pare{\+vF_i - m_i\ddot{r}_i}\cdot\delta\+vr_i = 0. \]
+    \end{ex}
+    \begin{ex}
+        也可以最开始就使用广义坐标$\pare{r,\theta}$, 则
+        \[ \+DrD{\+vr_1} = \+ve_r,\quad \+D{\theta}D{\+vr_1} = r\+ve_\theta,\quad \+D{r}D{\+vr_2} = \+ve_z. \]
+        \begin{align*}
+            \alpha = r,&\quad \brac{-m_1g\+ve_z - m_1\pare{\ddot{r}-r\dot{\theta}^2}\+ve_r - m_1\pare{r\ddot{\theta}+2\dot{r}\dot{\theta}}\+ve_\theta}\cdot\+ve_r\\ &+ \brac{-m_2g\+ve_z - m_2\ddot{r}\+ve_z}\cdot\+ve_z = 0, \\
+            \alpha = \theta, &\quad \brac{-m_1 g\+ve_z - m_1\pare{\ddot{r}-r\dot{\theta}^2}\+ve_r - m_1\pare{r\ddot{\theta} + 2\dot{r}\dot{\theta}}\+ve_\theta}\cdot r\+ve_\theta = 0.
+        \end{align*}
+    \end{ex}
+    \begin{ex}
+        也可以使用\eqref{eq:保守力的DAlembert原理}求解,
+        \[ V = -\sum_{i=1}^2 m_i gz_i = m_2g\pare{r-l}, \]
+        \[ \alpha =r,\quad -m_2 g = \sum_{i=1}^2 m_i\ddot{r}_i\cdot\+D{r}D{\+vr_i} = \cdots, \]
+        \[ \alpha=\theta,\quad 0 = m_1 \ddot{\+vr}_1 \cdot r\+ve_\theta. \]
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    对于曲线坐标系, 求$\partial/\partial q$时应格外注意.
+\end{pitfall}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:圆周运动的广义坐标}, 仅有一个自由度, 取$q_1 = \theta$,
+        \[ \+vr = R\+ve_r,\quad \delta\+vr = R\delta\theta \+ve_\theta,\quad \+D\theta D{\+vr} = R\+ve_\theta. \]
+        此外,
+        \[ \ddot{\+vr} = -R\dot{\theta}^2\+ve_r + R\ddot{\theta}\+ve_\theta, \]
+        \[ \+vF = -mg\+ve_y = -mg\pare{\sin\theta \+ve_r + \cos\theta \+ve_\theta}. \]
+        D'Alembert原理要求
+        \[ \pare{\+vF - m\ddot{\+vr}}\cdot\+D\theta D{\+vr} = 0 \Rightarrow R\ddot{\theta} + g\cos\theta = 0. \]
+    \end{ex}
+    \begin{ex}
+        使用\eqref{eq:保守力的DAlembert原理},
+        \[ V = mgy = mgR\sin\theta, \]
+        \[ -\+D{\theta}D{V} = m\ddot{\+vr}\cdot\+D{\theta}D{\+vr} \Rightarrow m\pare{-R\dot{\theta}^2 \+ve_r + R\ddot{\theta}\+ve_\theta}\cdot R\+ve_\theta = mR^2\ddot{\theta}. \]
+    \end{ex}
+\end{sample}
+
+% paragraph d_alembert原理 (end)
+
+\paragraph{虚功原理} % (fold)
+\label{par:虚功原理}
+
+在静力学平衡情形下, D'Alembert原理退化为虚功原理.
+\[ \sum_{i=1}^N \+vF_i \cdot\delta\+vr_i = 0 \Leftrightarrow \sum_{i=1}^N \+vF_i \cdot \+D{q_\alpha}D{\+vr_i} = 0 \Leftrightarrow Q_\alpha = 0 \Leftrightarrow \+D{q_\alpha}DV = 0. \]
+
+% paragraph 虚功原理 (end)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{Hexagon2}
+    \caption{六边形平衡}
+    \label{fig:六边形平衡2}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:六边形平衡2}, 主动力为$mg$和$ka\cos\varphi$. 虚功原理要求
+        \[ \sum_{i=1}^N \+vF_i\cdot\delta\+vr_i = 0. \]
+        \begin{align*}
+            &-mg\+ve_y\cdot\delta\pare{y_1\+ve_y} - mg\+ve_y\cdot\delta\pare{x_2\+ve_x + y_2\+ve_y}\\
+            &-mg\+ve_y\cdot\delta\pare{-x_2\+ve_x + y_2\+ve_y}\\
+            &+\pare{-mg\+ve_y - ka\cos\varphi \+ve_x}\cdot\delta\pare{x_3\+ve_x + y_3\+ve_y} \\
+            &+\pare{-mg\+ve_y + ka\cos\varphi \+ve_x}\cdot\delta\pare{-x_3\+ve_x + y_3\+ve_y} = 0 \\
+            &\Rightarrow mg\delta y_1 + 2mg\delta y_2 + 2mg\delta y_3 + 2ka\cos\varphi\delta x_3 = 0.
+        \end{align*}
+        由$y_1=2a\sin\varphi$, $y_2 = \frac{3}{2}a\sin\varphi$, $y_3 =\half a\sin\varphi$, $x_3 = \frac{a}{2} + \frac{a}{2}\cos\varphi$, 从而
+        \[ 6\cos\varphi - \frac{ka\sin\varphi\cos\varphi}{mg} = 0. \]
+    \end{ex}
+    \begin{ex}
+        也可以通过
+        \[ \sum_{i=1}^N \+vF_i \cdot \+D{\varphi}D{\+vr_i} = 0, \]
+        再代入
+        \[ \+vF_1 = -mg\+ve_y = \+vF_2 = \+vF_3, \]
+        \[ \+vF_4 = -mg\+ve_y - ka\cos\varphi\+ve_x,\quad \+vF_5 = -mg\+ve_y + ka\cos\varphi\+ve_x. \]
+    \end{ex}
+    \begin{ex}
+        直接写出
+        \[ V = mgy_1 + 2mgy_2 + 2mgy_3 + \half k\pare{a\cos\varphi}^2 = 6mg\sin\varphi + \half ka^2\cos^2\varphi, \]
+        并要求$\partial V/\partial \varphi = 0$.
+    \end{ex}
+\end{sample}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1.5, 1.6, 1.8, 1.10, 1.11
+
+% paragraph 作业 (end)
+
+\begin{remark}
+    对于习题1.8和1.13, 使用虚功原理时可以借助$\dot{\theta}=\const$的结论, 但使用Lagrange方程时不可以, 必须将能量中含有$\dot{\theta}$的量一并纳入.
+\end{remark}
+
+\begin{remark}
+    由D'Alembert原理
+    \[ \sum_i \pare{\+vF_i - m_i\ddot{\+vr}_i}\delta \+vr_i = 0 \]
+    无法推出
+    \[ \+vF_i + \+vR_i - m_i\ddot{\+vr}_i = 0. \]
+    但是解除约束后,
+    \[ \sum_i \pare{\+vF_i + \+vR_i - m_i\ddot{\+vr}_i}\cdot\delta\+vr_i = 0. \]
+    考虑解除后, $\delta \+vr_i$互相独立, 可推知
+    \[ \+vF_i + \+vR_i - m_i\ddot{\+vr}_i = 0. \]
+\end{remark}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{RodEquilib}
+    \caption{杆在曲面上平衡}
+    \label{fig:杆在曲面上平衡}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:杆在曲面上平衡}, 若杆的$B$端在曲面上处处平衡, 则主动力$\+vF = -mg\+ve_y$代入虚功原理有
+        \[ mg\delta y_C = 0 \Rightarrow y_C = \const = \frac{a}{2}. \]
+    \end{ex}
+    \begin{ex}
+        取$\theta$为广义坐标, $x = a\sin\theta$, 曲线方程$F\pare{x,y} = 0$. 从而
+        \[ x_C = \half x = \frac{a}{2}\sin\theta,\quad y_C = \frac{a}{2}\cos\theta + y\pare{x}, \]
+        \[ \delta y_C = \pare{-\frac{\sin\theta}{2}+\+dxdy\cos\theta}a\delta\theta,\quad -mg\delta y_C = 0, \]
+        \[ \Rightarrow \frac{\sin\theta}{2} = \+dxdy \cos\theta. \]
+        可以得到同样结果.
+    \end{ex}
+    \begin{ex}
+        写出其势能
+        \[ V = mgy_C = mg\brac{\frac{a}{2}\cos\theta + y\pare{x}}, \]
+        \[ \+d\theta dV = 0\Rightarrow -\frac{a}{2}\sin\theta + \+dxdy\cos\theta = 0. \]
+    \end{ex}
+\end{sample}
+\begin{remark}
+    $y_C$不能唯一确定系统位形, 故不得作为广义坐标.
+\end{remark}
+
+% subsubsection d_alembert原理 (end)
+
+\subsubsection{D'Alembert原理到Lagrange方程} % (fold)
+\label{ssub:d_alembert原理到lagrange方程}
+
+可证明如下二关系式:
+\begin{align}
+    \label{eq:relation_fundamental_1}
+    \+D{q_\alpha}D{\+vr_i} &= \+D{\dot{q}_\alpha}D{\dot{\+vr}_i}, \\
+    \label{eq:relation_fundamental_2}
+    \+dtd{}\+D{q_\alpha}D{\+vr_i} &= \+D{q_\alpha}D{\dot{\+vr}_i}.
+\end{align}
+\begin{proof}
+    由$\dot{\+vr}_i = \dot{\+vr}_i\pare{q_\alpha,\dot{q}_\alpha,t}$,
+    \[ \+dtd{\+vr_i} = \+DtD{\+vr_i} + \sum_\alpha \+D{q_\alpha}D{\+vr_i}\dot{q_\alpha}. \]
+    注意$\displaystyle \+D{\dot{q}_\beta}D{}\+DtD{\+vr_i} = 0$, 即得到\eqref{eq:relation_fundamental_1}.
+    \[ \+D{q_\beta}D{\dot{\+vr}_i} = D{q_\beta}D{}\pare{\+DtD{\+vr_i} + \sum_\alpha \+D{q_\alpha}D{\+vr_i}\dot{q}_\alpha} = \+DtD{}\+D{q_\beta}D{\+vr_i} + \sum_\alpha \dot{q}_\alpha \+D{q_\alpha}D{}\+D{q_\beta}D{\+vr_i}. \]
+    即得到\eqref{eq:relation_fundamental_2}.
+\end{proof}
+广义力可写作
+\begin{align*}
+    Q_\alpha &= \sum_i m_i\ddot{\+vr}_i \cdot \+D{q_\alpha}D{\+vr_i} \\
+    &= \+dtd{} \pare{\sum_i m_i\dot{\+vr}_i \cdot\+D{q_\alpha}D{\+vr_i}} - \sum_i m_i\dot{\+vr}_i \cdot\+dtd{} \pare{\+D{q_\alpha}D{\+vr_i}} \\
+    &= \+dtd{} \pare{\sum_i m_i\dot{\+vr}_i \cdot\+D{q_\alpha}D{\+vr_i}} - \sum_i m_i\dot{\+vr}_i\cdot\+D{q_\alpha}D{\dot{\+vr}_i} \\
+    &= \+dtd{}\+D{\dot{q}_\alpha}D{} \pare{\half \sum_i m_i\abs{\dot{\+vr}_i}^2} - \+D{q_\alpha}D{} \pare{\half \sum_i m_i \abs{\dot{\+vr}_i}^2} \\
+    &= \+dtd{}\+D{\dot{q}_\alpha}DT - \+D{q_\alpha}D{T}.
+\end{align*}
+\begin{finale}
+    \begin{theorem}[Lagrange方程]
+        设$T=T\pare{q_\alpha, \dot{q}_\alpha, t}$,
+        \[ \+dtd{}\pare{\+D{\dot{q}_\alpha}DT} - \+D{q_\alpha}D{T} = Q_\alpha,\quad \alpha = 1, \cdots, s. \]
+        特别地, 对于保守主动力, $Q_\alpha = \displaystyle -\+D{q_\alpha}DV$, 设$L = T-V$, 则
+        \[ \+dtd{}\pare{\+D{\dot{q}_\alpha}DL} - \+D{q_\alpha}D{L} = 0. \]
+        其中$L$谓该保守系的Lagrange函数.
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    由D'Alembert导出Lagrange方程的过程应当记住.
+\end{remark}
+\begin{remark}
+    半保守系的Lagrange方程可写为
+    \[ \+dtd{}\pare{\+D{\dot{q}_\alpha}DL} - \+D{q_\alpha}D{L} = Q_\alpha, \]
+    其中$Q_\alpha$是非保守系.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        考虑\cref{fig:Atwood机}中的Atwood机, 有
+        \[ L = T-V = \half\sum_i m_i \dot{y}_i^2 + \sum_{i=1}^3 m_i gy_i. \]
+        有$\displaystyle y_1 = \half\pare{C - y_2 - y_3}$, 代入得
+        \begin{align*}
+            L &= \rec{8}m_1\pare{\dot{y_2}+\dot{y_3}}^2 + \half m_2\dot{y}_2^2 \\ &+ \half m_3\dot{y}_3^2 + \half m_1g\pare{C-y_2 - y_3} + m_2 gy_2 + m_3gy_3. 
+        \end{align*}
+        两个Lagrange方程分别为
+        \[ \+dtd{}\+D{\dot{y}_2}DL - \+D{y_2}DL = \rec{4}m_1\pare{\ddot{y}_2 + \ddot{y}_3} + m_2\ddot{y}_2 + \half m_1 g - m_2 g = 0. \]
+        \[ \+dtd{}\+D{\dot{y}_3}DL - \+D{y_3}DL = \rec{4}m_1\pare{\ddot{y}_2 + \ddot{y}_3} + m_3\ddot{y}_3 + \half m_1 g - m_3 g = 0. \]
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    $L$最终务必写为独立广义坐标的函数后求偏导数.
+\end{pitfall}
+\begin{sample}
+    \begin{ex}
+        考虑\cref{fig:圆周运动的广义坐标}中的系统,
+        \[ L = \half mR^2\dot{\theta}^2 - mgy = \half mR^2\dot{\theta}^2 - mgR\sin\theta, \]
+        \[ \+dtd{}\+D{\dot{\theta}}DL - \+D{\theta}DL = 0\Rightarrow mR\ddot{\theta} + mgR\cos\theta = 0. \]
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{4cm}{Pendulum}
+    \caption{单摆}
+    \label{fig:单摆}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:单摆}所示的单摆系统, 有
+        \[ L = T-V = \half m\pare{\dot{x}^2 + \dot{y}^2} + mgy = \half ml\dot{\theta}^2 + mgl\cos\theta, \]
+        \[ \+dtd{}\+D{\dot{\theta}}DL - \+D{\theta}DL = 0\Rightarrow ml\ddot{\theta} + mgl\sin\theta = 0. \]
+        当$\theta \ll 1$时, 近似有
+        \[ \ddot{\theta} + \frac{g}{l} \theta = 0. \]
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{OscOnCycloid}
+    \caption{摆线上振动}
+    \label{fig:摆线上振动}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:摆线上振动}
+        如\cref{fig:摆线上振动}, 曲线为
+        \[ \begin{cases}
+            x = R\pare{\theta - \sin\theta}, \\
+            y = R\pare{1+\cos\theta},
+        \end{cases} \]
+        可得
+        \begin{align*}
+            L &= T-V = \half m\pare{\dot{x}^2 + \dot{y}^2} - mgy \\
+            &= \frac{m}{2} R^2\dot{\theta}^2 \brac{\pare{1-\cos\theta}^2 + \sin^2\theta} - mgR\pare{1+\cos\theta} \\
+            &= mR^2\dot{\theta}^2\pare{1-\cos\theta} - mgR\pare{1+\cos\theta}. \\
+            \+dtd{}\+D{\dot{\theta}}DL - \+D{\theta}D{L} & = 0 \Rightarrow \pare{1-\cos\theta}\ddot{\theta} = \rec{2R}\pare{g-R\dot{\theta}^2}\sin\theta.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1.12, 1.13
+
+% paragraph 作业 (end)
+
+\begin{remark}
+    对于复摆(1,12), 可以考虑强行列出极坐标到直角坐标的转化, 也可以通过矢量得到动能的表达式.
+\end{remark}
+
+\paragraph{广义坐标选取的任意性} % (fold)
+\label{par:广义坐标选取的任意性}
+
+考虑坐标变换$q_\alpha\mapsto \bar{q}_\beta = \bar{q}_\beta\pare{q_\alpha, t}$及其逆变换$q_\alpha = q_\alpha\pare{\bar{q}_\beta,t}$, 则
+\[ \+d{\dot{\bar{q}}_\beta}d{\dot{q}_\alpha} = \+d{\bar{q}_\beta}d{q_\alpha},\quad \+d{\bar{q}_\beta}d{\dot{q}_\alpha} = \+d{t}d{} \+d{\bar{q}_\beta}d{q_\alpha}. \]
+设$\bar{L}\pare{\bar{q}_\beta, \dot{\bar{q}}_\beta, t} = L\pare{q_\alpha,\dot{q}_\alpha,t}$. 已知对于$L$的Lagrange方程成立, 则由
+\[ \+D{\bar{q}_\beta}D{\bar{L}} = \sum_\alpha \pare{\+D{q_\alpha}D{L}\+D{\bar{q}_\beta}D{q_\alpha} + \+D{\dot{q}_\alpha}D{L}\+D{\bar{q}_\beta}D{\dot{q}_\alpha}}, \]
+\[ \+D{\dot{\bar{q}}_\beta}D{\bar{L}} = \sum_\alpha \pare{\+D{\dot{q}_\alpha}D{L}\+D{\dot{\bar{q}}_\beta}D{\dot{q}_\alpha}} = \sum_\alpha \pare{\+D{\dot{q}_\alpha}D{L}\+D{{\bar{q}}_\beta}D{{q}_\alpha}}, \]
+知对于$\bar{L}$的Lagrange方程为
+\begin{align*}
+    \+dtd{}\+D{\dot{\bar{q}}_\beta}D{\bar{L}} - \+D{\bar{q}_\beta}D{\bar{L}} &= \+dtd{} \pare{\sum_\alpha {\+D{\dot{q}_\alpha}D{L}\+D{{\bar{q}}_\beta}D{{q}_\alpha}}} - \sum_\alpha \pare{\+D{q_\alpha}D{L}\+D{\bar{q}_\beta}D{q_\alpha} + \+D{\dot{q}_\alpha}D{L}\+D{\bar{q}_\beta}D{\dot{q}_\alpha}} \\
+    &= \sum_\alpha \brac{\+dtd{}\pare{\+D{\dot{q}_\alpha}DL}\+D{\bar{q}_\beta}D{q_\alpha} + \+D{\dot{q}_\alpha}DL \+dtd{} \+D{\bar{q}_\beta}D{q_\alpha}} - \sum_\alpha \pare{\+D{q_\alpha}D{L}\+D{\bar{q}_\beta}D{q_\alpha} + \+D{\dot{q}_\alpha}DL \+dtd{} \+D{\bar{q}_\beta}D{q_\alpha}} \\
+    &= \sum_\alpha \pare{\+dtd{}\+D{\dot{q}_\alpha}DL - \+D{q_\alpha}DL}\+D{\bar{q}_\beta}D{q_\alpha} = 0.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        继续\cref{ex:摆线上振动}中的讨论, 考虑到
+        \[ 1-\cos\theta = 2\sin^2 \frac{\theta}{2},\quad 1+\cos\theta = 2\cos^2 \frac{\theta}{2}, \]
+        可得
+        \begin{align*}
+            L &= mR^2\dot{\theta}^2\pare{1-\cos\theta} - mgR\pare{1+\cos\theta} \\
+            &= 8mR^2 \pare{\+dtd{} \frac{\theta}{2}}^2 \sin^2 \frac{\theta}{2} - 2mgR\cos^2\frac{\theta}{2}.
+        \end{align*}
+        令$u = \cos \pare{\theta/2}$, 则
+        \[ L = 8mR^2 \dot{u}^2 - 2mgRu^2. \]
+        立刻得到简谐振动
+        \[ \ddot{u} + \frac{g}{4R}u = 0. \]
+    \end{ex}
+\end{sample}
+
+% paragraph 广义坐标选取的任意性 (end)
+
+% subsubsection d_alembert原理到lagrange方程 (end)
+
+% subsection d_alembert原理与lagrange方程 (end)
+
+\subsection{Hamilton原理与Lagrange方程} % (fold)
+\label{sub:hamilton原理与lagrange方程}
+
+\subsubsection{泛函与变分} % (fold)
+\label{ssub:泛函与变分}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.47\textwidth}
+        \centering
+        \incfig{5cm}{GeodesicOnPlane}
+        \caption{平面上的最短路径}
+        \label{fig:平面上的最短路径}
+    \end{subfigure}
+    \begin{subfigure}[b]{.47\textwidth}
+        \centering
+        \incfig{5cm}{Brachistochrone}
+        \caption{最速降线问题}
+        \label{fig:最速降线问题}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+\begin{ex}[平面上的最短路径]
+    \label{ex:平面上的最短路径}
+    如\cref{fig:平面上的最短路径}, 平面上的最短路径变为找到$y\pare{x}$使得
+    \[ l = \int_{x_1}^{x_2} \sqrt{1+y'\pare{x}^2}\,\rd{x} \]
+    最小.
+\end{ex}
+\begin{ex}[Fermat原理]
+    \label{ex:Fermat原理}
+    光在两端间传播所需的时间最少, 故光路为使
+    \[ t = \rec{c} \int_{x_1}^{x_2} n\pare{1+y'\pare{x}^2}\,\rd{x} \]
+    最小者.
+\end{ex}
+\begin{ex}[最速降线问题]
+    \label{ex:最速降线问题}
+    如\cref{fig:最速降线问题}, 最速降线即为使
+    \[ t = \int_{x_1}^{x_2} \sqrt{\frac{1+y'\pare{x}^2}{2gy\pare{x}}}\,\rd{x} \]
+    最小之路径.
+\end{ex}
+
+% paragraph 问题的提出 (end)
+
+\paragraph{泛函} % (fold)
+\label{par:泛函}
+
+泛函谓形如
+\[ J\brac{y\pare{x}} = \int_{x_1}^{x_2} f\brac{y\pare{x},y'\pare{x},x}\,\rd{x} \]
+者. 其中$y\pare{x}$未知. 给定$y\pare{x}$的取值有确定的$J\pare{y}$.
+
+% paragraph 泛函 (end)
+
+\paragraph{泛函的变分} % (fold)
+\label{par:泛函的变分}
+
+对$y\pare{x}$做微小扰动$y\pare{x}\mapsto y\pare{x} + \delta y\pare{x}$, $J$有相应的扰动
+\[ J\mapsto J+\delta J = J\brac{y\pare{x} + \delta y\pare{x}} - J\brac{y\pare{x}}. \]
+在变分时不改变边界条件, 即维持$\delta y\pare{x_1} = \delta y\pare{x_2} = 0$.
+
+% paragraph 泛函的变分 (end)
+
+\paragraph{变分的运算规则} % (fold)
+\label{par:变分的运算规则}
+
+变分和求导是可以交换的, 即
+\[ \delta \pare{y'\pare{x}} = \pare{\delta y\pare{x}}'. \]
+
+% paragraph 变分的运算规则 (end)
+
+\paragraph{泛函的极值条件} % (fold)
+\label{par:泛函的极值条件}
+
+设$y\pare{x}$使$J\pare{y}$取得最小值, 则邻近路径可写为
+\[ y\pare{x} + \delta y\pare{x} = y\pare{x} + \alpha \eta\pare{x} = y\pare{\alpha, x}, \]
+其中$\alpha$为无穷小参数, $y\pare{0,x} = y\pare{x}$, $\eta\pare{x_1} = 0$, $\eta\pare{x_2} = 0$.
+\par
+将$J$暂时视为$\alpha$的函数, 则$J = J\brac{y\pare{\alpha,x}}$. 在极值点处应当有
+\begin{align*}
+    \left.\+D{\alpha}D{J\brac{y\pare{\alpha,x}}}\right\vert_{\alpha = 0} &= 0. \\
+    \delta J\vert_{\alpha = 0} &= J\brac{y\pare{x} + \alpha \eta\pare{x}} - J\brac{y\pare{x}} \\
+    &= \left.\+D{\alpha}D{J\brac{y\pare{\alpha,x}}}\right\vert_{\alpha = 0}\alpha = 0. \\
+    \delta J &= \int_{x_1}^{x_2} f\brac{y+\delta y, y'+\delta y', x}\,\rd{x} - \int_{x_1}^{x_2} f\brac{y,y',x}\,\rd{x} \\
+    &= \int_{x_1}^{x_2} \brac{\+DyDf \delta y + \+D{y'}D{f} \delta y'}\,\rd{x} \\
+    &= \int_{x_1}^{x_2} \brac{\+D{y}D{f} \delta y + \+D{y'}D{f} \+dxd{} \delta y}\,\rd{x} \\
+    &= \int_{x_1}^{x_2} \brac{\+D{y}Df \delta y + \+dxd{}\pare{\+D{y'}Df \delta y} - \pare{\+dxd{}\+D{y'}D{f}}\delta y}\,\rd{x} \\
+    &= \int_{x_1}^{x_2} \brac{\+D{y}Df  - \pare{\+dxd{}\+D{y'}D{f}}}\delta y\,\rd{x} \\
+    &= 0.
+\end{align*}
+其中中间项由不动边界条件消除. 上式对于任意$\delta y$皆成立, 故放括号内为零.
+\begin{theorem}[Euler方程]
+    \[ \+D{y}D{f} - \+dxd{}\+D{y'}D{f} = 0. \]
+\end{theorem}
+对于有多个独立变量的泛函,
+\[ J\brac{y_\alpha\pare{x}} = \int_{x_1}^{x_2} f\brac{y_\alpha\pare{x},y'\pare{x},x}\,\rd{x}, \]
+则$\delta J = 0$需要对每个$y_\alpha$的单独变分成立, 即
+\[ \+D{y_\alpha}D{f} - \+dxd{}\+D{y'_\alpha}D{f} = 0,\quad \alpha = 1,\cdots, s. \]
+
+% paragraph 泛函的极值条件 (end)
+
+\begin{sample}
+    \begin{ex}
+        对于\cref{ex:平面上的最短路径}, $f\pare{y,y',x} = \sqrt{1+y'\pare{x}^2}$, 则Euler方程取
+        \[ \+d{x}d{} \pare{\frac{y'\pare{x}}{\sqrt{1+y'\pare{x}^2}}} = 0 \Rightarrow \frac{y'\pare{x}}{\sqrt{1+y'\pare{x}^2}} = C \Rightarrow y' = a \Rightarrow y = ax+b. \]
+        \cref{ex:Fermat原理}在均匀介质中可类似处理.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于\cref{ex:最速降线问题}, 有
+        \[ \+DyDf = -\sqrt{\frac{1+y'^2}{8gy^3}},\quad \+D{y'}D{f} = \frac{y'}{\sqrt{2gy\pare{1+y'^2}}}. \]
+        代入Euler方程, 有
+        \[ -\half \sqrt{\frac{1+y'^2}{y^3}} = \+dxd{} \frac{y'}{\sqrt{y\pare{1+y'^2}}}. \]
+        即
+        \[ -\half \sqrt{\frac{1+y'^2}{y^3}}\,\rd{x} = \rd{\frac{y'}{\sqrt{y\pare{1+y'^2}}}}, \]
+        \[ -\half \sqrt{\frac{1+y'^2}{y^3}}\frac{\rd{y}}{y'} = \frac{\rd{y'}}{\sqrt{y\pare{1+y'^2}^3}} - \half \frac{y'\,\rd{y}}{\sqrt{y^3\pare{1+y'^2}^3}}. \]
+        化简得
+        \[ -\half \frac{\rd{y}}{y} = \half \frac{\rd{y'^2}}{1+y'^2}. \]
+        从而
+        \[ y\pare{1+y'^2} = C_1 = \const. \]
+        设$y'>0$, 则
+        \[ y' = \sqrt{\frac{C_1}{y} - 1}\Rightarrow x = -\sqrt{y\pare{C_1 - y}} + C_1 \arctan \sqrt{\frac{y}{C_1 - y}} + C_2. \]
+        令$\displaystyle \arctan \sqrt{\frac{y}{C_1 - y}} = \frac{\theta}{2}$, 则
+        \[ \tan \frac{\theta}{2} = \sqrt{\frac{y}{C_1 - y}},\quad  \cos \frac{\theta}{2} = \sqrt{\frac{C_1 - y}{y}},\quad \sin \frac{\theta}{2} = \sqrt{\frac{y}{C_1}}. \]
+        解得
+        \[ \begin{cases}
+            x = C_1 \pare{\theta - \sin \theta}/2 + C_2,\\
+            y = C_1\pare{1-\cos\theta}/2.
+        \end{cases} \]
+        这正是摆线.
+    \end{ex}
+\end{sample}
+
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1.16 -- 1.19
+
+% paragraph 作业 (end)
+
+% subsubsection 泛函与变分 (end)
+
+\subsubsection{由Hamilton原理推导Lagrange方程} % (fold)
+\label{ssub:由hamilton原理推导lagrange方程}
+
+\begin{figure}
+    \centering
+    \incfig{6cm}{ConfigVarTime}
+    \caption{极值路径示意}
+    \label{fig:极值路径示意}
+\end{figure}
+Hamilton原理表明, 系统从$\pare{t_1, q_\alpha\pare{t_1}}$到$\pare{t_2, q_\alpha\pare{t_2}}$的所有可能路径中, 只有使得$S$取极值的路径才是真实的, 其中$S$为作用量泛函,
+\[ S = \int_{t_1}^{t_2} L\brac{q_\alpha\pare{t},\dot{q}_\alpha\pare{t}, t}\,\rd{t}. \]
+极值条件下$\delta S = 0$, 由诸$\delta q_\alpha$之独立性可得
+\[ \+D{q_\alpha}DL - \+dtd{} \+D{\dot{q}_\alpha}DL = 0,\quad \alpha = 1,\cdots,s. \]
+\begin{remark}
+    $\dot{q}_\alpha$本身无固定边界要求.
+\end{remark}
+\begin{remark}
+    原理本身不具有物理内容, 仍需指定$L$之具体形式以得到运动方程.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        在惯性参考系中,
+        \[ L = \half m\dot{\+vr}^2 - V\pare{\+vr}, \]
+        在旋转的非惯性参考系(以撇号标记)中,
+        \begin{align*}
+            \+vr'\pare{t} &= \+vr\pare{t} - \+vr_0\pare{t} = \sum_i x'_i\+ve'_i ,\\
+            \+vv'\pare{t} &= \+dtd{\+vr'} - \+v\omega\times\+vr = \+vv - \+vv_0 - \+v\omega\times\+vr'.
+        \end{align*}
+        这一坐标变换下, 在新的坐标系中,
+        \begin{align*}
+            L &= \half mv^2 - V\pare{r} = \half m\pare{\+vv_0 + \+dtd{\+vr'}}\cdot\pare{\+vv_0 + \+dtd{\+vr'}} - V\pare{\+vr'+\+vr_0} \\
+            &= \half mv_0^2 + m\+vv_0\cdot\+dtd{\+vr'} + \half m\pare{\+dtd{\+vr'}}^2 - V\pare{\+vr' + \+vr_0} \\
+            &= \half mv_0^2 + \+dtd{}\pare{m\+vv_0\cdot\+vr'} - m\+va_0\cdot\+vr' \\
+            &\phantom{=}\, + \half m\brac{\+vv'^2 + \pare{\+v\omega\times\+vr'}^2 + 2\+vv' \cdot\pare{\+v\omega\times\+vr'}} - V\pare{\+vr'+\+vr_0}. \\
+            L' &= \half m \brac{\+vv'^2 + \pare{\+v\omega\times\+vr'}^2 + 2\+vv'\cdot\pare{\+v\omega\times\+vr'}} - m\+va_0\cdot\+vr' - V\pare{\+vr'+\+vr_0} \\
+            &= \frac{m}{2}\sum_i\brac{\dot{x}'^2_i + \pare{\+v\omega\times\+vr'}^2_i + 2\dot{x}'_i\pare{\+v\omega\times\+vr'}_i}\\
+            &\phantom{=}\, - V\pare{\+vr' + \+vr_0} - m\sum_i a'_{0i}x'_i. \\
+            \+D{\dot{x}'_i}DL &= m\dot{x}'_i + m\sum_{jk} \epsilon{ijk}\omega'_j x'_k, \\
+            \+D{\+vv'}DL &= m\+vv' + m\+v\omega\times\+vr'.
+        \end{align*}
+        其中$L$和$L'$给出等效的Lagrange函数, 因为划去的两项$\displaystyle \half mv_0^2 + \+dtd{}\pare{m\+vv_0\cdot\+vr'}$是$\pare{q,t}$的函数对时间的全微分, 由\cref{thm:规范不变性}不改变运动方程.
+        \par
+        将$\+va_0$和$\+v\omega$的分量写出, 则
+        \[ \+va_0 = \sum_i a'_{0i}\+ve'_i,\quad \+v\omega = \sum_i \omega'_i \+ve'_i. \]
+        列出Lagrange方程
+        \[ \+D{x'_i}DL - \+dtd{} \+D{\dot{x}'_i}DL = 0, \]
+        其中
+        \[ \+dtd{} \+D{\dot{x}'_i}DL = m\ddot{x}'_i + m\sum_{ij}\epsilon_{ijk}\pare{\dot{\omega}'_jx'_k + \omega'_j \dot{x}'_k}, \]
+        \[ \+dtd{}\+D{\+vv'}D{L} = m\+va' + m\dot{\+v\omega}\times\+vr' + m\+v\omega\times\+vv'. \]
+        注意此处仅作为简记符号, 不能先写出$\displaystyle \+D{\+vv'}D{L}$的矢量形式再求导. 为了求出$\displaystyle \+D{x'_i}D{L}$, 考虑到
+        \begin{align*}
+            L &= \frac{m}{2}\sum_i \dot{x}'^2_i + \frac{m}{2}\omega^2\sum_i x'^2_i - \frac{m}{2}\pare{\sum_i \omega'_i x'_i}^2  \\
+            &\phantom{=}\, + m\sum_{ijk} \epsilon_{ijk} \dot{x}'_i\omega'_jx'_k - V\pare{\+vr'+\+vr_0} - m\sum_i a'_{0i}x'_i,\\
+            \displaystyle \+D{x'_i}D{L} &= m\omega x'_i - m\omega'_i\pare{\+v\omega\cdot\+vr'} + m\sum_{jk} \epsilon_{ijk} \dot{x}'_j \omega'_k - \+D{x'_i}DV - ma'_{0i},\\
+            \+D{\+vr'}DL &= m\omega^2 \+vr' - m\pare{\+v\omega\cdot\+vr'}\+v\omega - m\+v\omega\times\+vv' - \+D{\+vr'}D{V} - m\+va_0.
+        \end{align*}
+        注意$\omega^2\+vr' - \pare{\+v\omega\cdot\+vr'}\+v\omega = -\+v\omega\times\pare{\+v\omega\times\+vr'}$, 即可列出Lagrange方程, 得到
+        \[ m\+va' = -m\dot{\+v\omega}\times\+vr' - 2m\+v\omega\times\+vv' - m\+v\omega\pare{\+v\omega\times \+vr'} - m\+va_0 - \+D{\+vr'}D{V}.\qedhere \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 由hamilton原理推导lagrange方程 (end)
+
+% subsection hamilton原理与lagrange方程 (end)
+
+\subsection{进一步讨论} % (fold)
+\label{sub:进一步讨论}
+
+\subsubsection{可加性与非唯一性} % (fold)
+\label{ssub:可加性与非唯一性}
+
+\paragraph{可加性} % (fold)
+\label{par:可加性}
+
+如果系统可分解为两个子系统, 且分别有独立的Lagrange函数$L_A$和$L_B$, 则$L = L_A+L_B$, 谓可加性.
+
+% paragraph 可加性 (end)
+
+\paragraph{非唯一性} % (fold)
+\label{par:非唯一性}
+
+第一种情形谓将设$L'=cL$, 则$L'$仍为描述此系统的Lagrange函数. 此时$S'=cS$, 故最值条件仍然相同. 第二种情形, 谓在$L$中加入一$\pare{q_\beta,t}$的函数的全导数项, 即
+\[ L' = L + \+dtd{}f\pare{q_\beta, t} \]
+所得新的Lagrange函数与原先的函数亦等价. 可以证明二者同时满足Lagrange方程. 考虑
+\[ \dot{f} = \+DtDf + \sum_\beta \+D{q_\beta}D{f}\dot{q}_\beta, \]
+\[ \+D{\dot{q}_\beta}D{\dot{f}} = \+D{q_\beta}D{f},\quad \+D{q_\beta}D{\dot{f}} = \+dtd{}\+D{q_\beta}D{f}. \]
+从而对于$L'$,
+\[ \+D{q_\alpha}D{L'} = \+D{q_\alpha}DL + \+D{q_\alpha}D{\dot{f}} = \+D{q_\alpha}DL + \+dtd{}\+D{q_\alpha}D{f}, \]
+\[ \+D{\dot{q}_\alpha}D{L'} = \+D{\dot{q}_\alpha}DL + \+D{\dot{q}_\alpha}D{\dot{f}} = \+D{\dot{q}_\alpha}DL + \+D{q_\alpha}D{f}. \]
+从而
+\begin{align*}
+    \+D{q_\alpha}D{L'} - \+dtd{}\+D{\dot{q}_\alpha}D{L'} &=  \+D{q_\alpha}DL + \+D{q_\alpha}D{\dot{f}} = \+D{q_\alpha}DL + \+dtd{}\+D{q_\alpha}D{f} - \+dtd{}\pare{\+D{\dot{q}_\alpha}DL + \+D{q_\alpha}D{f}} \\
+    &= \+D{q_\alpha}DL - \+dtd{}\pare{\+D{\dot{q}_\alpha}DL } + \+ddt{} \+D{q_\alpha}Df - \+dtd{} \+D{q_\alpha}Df = 0.
+\end{align*}
+也可以由变分原理,
+\[ S' = S + f\vert_{t_1}^{t_2}. \]
+由端点固定而$f$仅为$q$的函数, 知$\delta \pare{f\vert_{t_1}^{t_2}} = 0$, 故$\delta S = 0$和$\delta S' = 0$等价.
+\begin{figure}[ht]
+    \centering
+    \centerline{
+    \xymatrix{
+        \delta S = 0 \ar@{<=>}[r]\ar@{<=>}[d]& \delta S' = 0 \\
+        \displaystyle \+D{q_\alpha}DL - \+dtd{} \+D{\dot{q}_\alpha}DL = 0 \ar@{<=>}[r]& \displaystyle \+D{q_\alpha}D{L'} - \+dtd{} \+D{\dot{q}_\alpha}D{L
+        } = 0 \ar@{<=>}[u]
+    }}
+    \caption{}
+\end{figure}
+\begin{finale}
+    \begin{theorem}[规范不变性]
+        \label{thm:规范不变性}
+        设$f\pare{q_\alpha, t}$, 则$L' = \displaystyle L + \+dtd{}f\pare{q_\alpha,t}$给出完全相同的运动方程.
+    \end{theorem}
+\end{finale}
+\begin{ex}
+    特别地, 在Lagrange函数中加入常数或者时间的函数不改变运动方程.
+\end{ex}
+\begin{remark}
+    非唯一性表明$L$总的取值无意义.
+\end{remark}
+
+% paragraph 非唯一性 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1.20, 1.21, 1.24, 1.25, 1.26, 1.28
+
+% paragraph 作业 (end)
+
+% subsubsection 可加性与非唯一性 (end)
+
+\subsubsection{解题实例} % (fold)
+\label{ssub:解题实例}
+
+用Lagrange方法解题之一般程序为
+\begin{cenum}
+    \item 确定独立的广义坐标$q_\alpha$, 写出$T$, $V$以及$L = L\pare{q_\alpha,\dot{q}_\alpha,t} = T-V$;
+    \item 列出方程组
+    \[ \+D{q_\alpha}D{L} - \+dtd{} \+D{\dot{q}_\alpha}DL = 0,\quad \alpha = 1,\cdots, s; \]
+    \item 结合初始条件, 求解方程组;
+    \item 解释结果的物理意义
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        对于$L = \displaystyle \half m\pare{\dot{x}^2 + \dot{y}^2 + \dot{z}^2}$. 由
+        \[ \+DxDL = \+DyDL = \+DzDL = 0, \]
+        \[ \+D{\dot{x}}DL = m\dot{x},\quad \+D{\dot{y}}DL = m\dot{y},\quad \+D{\dot{z}}DL = m\dot{z}. \]
+        由$\displaystyle \+DxDL - \+dtd{} \+D{\dot{x}}DL = 0$得
+        \[ m\ddot{x} = m\ddot{y} = m\ddot{z} = 0\Rightarrow x = c_1,\quad y=c_2,\quad  z=c_3,\quad L = \const. \]
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    不可将求解(即使是部分解)后的$L$再代入Lagrange方程. $L$应当为系统位形坐标的函数. 正确方法为一次性写下所有方程组, 而方程可以代入.
+\end{pitfall}
+
+% subsubsection 解题实例 (end)
+
+\subsubsection{平衡问题} % (fold)
+\label{ssub:平衡问题}
+
+\paragraph{求平衡位形} % (fold)
+\label{par:求平衡位形}
+
+求出势能最小值. 或虚功原理.
+
+% paragraph 求平衡位形 (end)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{PendulumComplex}
+    \caption{\cref{ex:双摆平衡}的示意图}
+    \label{fig:双摆平衡的示意图}
+\end{figure}
+
+\paragraph{求约束力} % (fold)
+\label{par:求约束力}
+
+解除约束之后, 设约束力变为主动力, 此时应用虚功原理即可.
+\begin{sample}
+    \begin{ex}
+        \label{ex:双摆平衡}
+        如\cref{fig:双摆平衡的示意图}, 求平衡时$\+vF$的大小, 以及原点处约束力.
+    \end{ex}
+    \begin{proof}[解]
+        设$\+vr_1$, $\+vr_2$, $\+vr_3$分别表示两个杆的质心和力的作用点, 则
+        \begin{align*}
+            \+vr_1 &= \frac{l_1}{2} \pare{\sin\theta_1 \+ve_x + \cos\theta_1 \+ve_y}, \\
+            \+vr_2 &= \pare{l_1\sin\theta_1 + \frac{l_2}{2}\sin\theta_2}\+ve_x + \pare{l_1\sin\theta_1 + \frac{l_2}{2}\cos\theta_2}\+ve_y, \\
+            \+vr_3 &= \pare{l_1 \sin\theta_1 + l_2\sin\theta_2}\+ve_x + \pare{l_1\cos\theta_1 + l_2\cos\theta_2}\+ve_y.
+        \end{align*}
+        考虑到主动力为
+        \[ m_1 \+vg = m_1g\+ve_y,\quad m_2 \+vg = m_2 g\+ve_y,\quad \+vF = F\+ve_x, \]
+        代入虚功原理$m_1 \+vg\cdot\delta\+vr_1 + m_2 \+vg\cdot\delta \+vr_2 + \+vF\cdot\delta\+vr_3 = 0$, 并以$\theta_1$和$\theta_2$为广义坐标即可.
+    \end{proof}
+    \begin{proof}[用Lagrange方法求解]
+        将$\+vF$视为保守力, 则
+        \[ V = V_g + V_F,\quad V_g = -\frac{m_2}{2}gl_2\cos\theta_1 - m_2 g\pare{l_1 \cos\theta_1 + \frac{l_2}{2}\cos\theta_2}, \]
+        \[ V_F = -Fx_3 = -F\pare{l_1\sin\theta_1 + l_2\sin\theta_2}. \]
+        求$V$的最小值即可.
+    \end{proof}
+    \begin{proof}[求解原点处的约束力]
+        将原点处的约束解除, 则广义坐标在$\theta_1, \theta_2$之外还有$x_0, y_0$. 此时主动力除了$m_1\+vg$, $m_2\+vg$, $\+vF$之外, 还应包括原点处的约束力$\+vf$. 此时$\+vr_1$, $\+vr_2$, $\+vr_3$应加上$\+vr_0$. 虚功原理要求
+        \[ m_1\+vg\cdot\delta \+vr_1 + m_2 \+vg\cdot\delta \+vr_2 + \+vF\cdot\delta\+vr_3 + \+vf\cdot\delta\+vr_0 = 0. \]
+        将诸$\+vr_i$用$\theta_1,\theta_2,x_0,y_0$表示出来即可. 惟关于$\theta$的方程不受影响, 未提供新信息. 仅关于$x_0$和$y_0$的方程变为
+        \[ \pare{m_1\+vg + m_2\+vg + \+vF + \+vf} \cdot \+ve_x = 0,\quad \pare{m_1\+vg + m_2\+vg + \+vF + \+vf} \cdot \+ve_y = 0. \]
+        立即得到约束力$\+vf = -m_1\+vg - m_2\+vg - \+vF$.
+    \end{proof}
+    \begin{proof}[用Lagrange方法求解]
+        解除约束后, $V=V_g + V_F + V_f$, 其中
+        \[ V_f = -\pare{f_x x_0 + f_y y_0}. \]
+        列出
+        \[ \+D{\theta_1}DV = \+D{\theta_2}DV = \+D{x_0}DV = \+D{y_0}DV = 0, \]
+        即可求解约束力. 惟应当注意解除约束后, $V_g$和$V_F$的形式将发生变化, 例如
+        \[ V_g = -m_1 g\pare{y_0 + \frac{l_1}{2}\cos\theta_1} - m_2 g\pare{y_0 + l_1\cos\theta_1 + \frac{l_2}{2}\cos\theta_2}, \]
+        \[ V_F = -Fx_3 = -F\pare{x_0 + l_1\sin\theta_1 + l_2\sin\theta_2}. \]
+        同样, 对$\theta_1$和$\theta_2$的极值条件未提供新信息. 对$x_0$和$y_0$的极值条件表明
+        \[ 0 = -\+D{x_0}D{V} = -F - f_x = 0,\quad 0 = \+D{y_0}DV = -\pare{m_1+m_2}g - f_y = 0. \]
+        同样解得$\+vf = -\+vF - m_1\+vg - m_2\+vg$.
+    \end{proof}
+\end{sample}
+
+% paragraph 求约束力 (end)
+
+\paragraph{Lagrange乘子法求约束力} % (fold)
+\label{par:lagrange乘子法求约束力}
+
+对于静止平衡问题, 解除相应的约束$l$个, 则解除后广义坐标$q_\alpha$有$s$个, 自由度为$s-l$. 约束条件有$l$个,
+\[ f_j\pare{q_\alpha, t} = 0,\quad \delta f_j = \sum_{\alpha=1}^3 \+D{q_\alpha}D{f_j}\delta q_\alpha = 0,\quad j = 1,\cdots, l. \]
+虚功原理表明
+\[ \sum_{i=1}^N \+vF_i\cdot\delta\+vr_i = 0\Rightarrow \sum_{\alpha=1}^s\pare{ \underbrace{\sum_{i=1}^N \+vF_i \cdot \+D{q_\alpha}D{\+vr_i}}_{Q_\alpha}}\delta q_\alpha = 0. \]
+惟此时$q_\alpha$并非独立, 不能退出$Q_\alpha = 0$对所有$\alpha$成立. 引入Lagrange乘数$\lambda_i$, 则对约束有
+\[ \sum_{j=1}^l \lambda_i \sum_{\alpha=1}^s \+D{q_\alpha}D{f_j} \delta q_\alpha = 0. \]
+\[ \Rightarrow \sum_{\alpha=1}^s \pare{Q_\alpha + \sum_{j=1}^l \lambda_j \+D{q_\alpha}D{f_j}}\delta q_\alpha = 0. \quad \alpha = 1,\cdots, s. \]
+总能人为选择$\lambda_j$, 使得(前$l$个)
+\[ Q_\alpha + \sum_{j=1}^l \lambda_j \+D{q_\alpha}D{f_j} = 0,\quad \alpha = 1,\cdots, l. \]
+剩下的项目为
+\[ \sum_{\alpha = l+1}^s \pare{Q_\alpha + \sum_{j=1}^l\lambda_j \+D{q_\alpha}D{f_j}} \delta q_\alpha = 0. \]
+剩下的$s-l$个坐标选为独立广义坐标. 总之
+\[ Q_\alpha + \sum_{j=1}^l \lambda_j \+D{q_\alpha}D{f_j} = 0,\quad \alpha = 1,\cdots,l,l+1,\cdots, s. \]
+其中$Q_\alpha$为广义主动力, $\displaystyle \sum_{j=1}^l \lambda_j \+D{q_\alpha}D{f_j}$为约束力沿$\alpha$广义坐标的分量.
+\begin{sample}
+    \begin{ex}
+        用Lagrange乘子法解\cref{ex:双摆平衡}.
+    \end{ex}
+    \begin{proof}[解]
+        约束条件为
+        \[ f_1\pare{x_0, y_0} = x_0 = 0,\quad f_2\pare{x_0,y_0} = y_0 = 0. \]
+        Lagrange乘子法要求
+        \[ Q_\alpha + \lambda_1 \+D{q_\alpha}D{f_1} + \lambda_2 \+D{q_\alpha}D{f_2} = 0. \]
+        注意此时$\alpha$有$4$个. 令$q_1 = \theta_1$, $q_2 = \theta_2$, $q_3 = x_0$, $q_4 = y_0$, 则
+        \[ \+D{q_1}D{f_1} = \+D{q_2}D{f_1} = \+D{q_4}D{f_1} = 0,\quad \+D{x_0}D{f_1} = 1, \]
+        \[ \+D{q_1}D{f_2} = \+D{q_2}D{f_2} = \+D{q_3}D{f_2} = 0,\quad \+D{y_0}D{f_1} = 1. \]
+        于是$Q_1 = 0$, $Q_2 = 0$,
+        \[ Q_3 + \lambda_1 = 0,\quad Q_4 + \lambda_2 = 0.\qedhere \]
+    \end{proof}
+\end{sample}
+
+% paragraph lagrange乘子法求约束力 (end)
+
+% subsubsection 平衡问题 (end)
+
+% subsection 进一步讨论 (end)
+
+\subsection{不独立坐标与Lagrange乘子} % (fold)
+\label{sub:不独立坐标与lagrange乘子}
+
+设$L = L\pare{u_m,\dot{u}_m, t}$, 其中$m=1,\cdots,M>s$(自由度), 并且有约束
+\[ f_j\pare{u_m,t} = 0,\quad j = 1,\cdots, l,\quad l = M-s. \]
+作用量
+\[ S = \int L\pare{u_m,\dot{u}_m,t}\,\rd{t},\quad \delta S = 0. \]
+其中
+\[ \delta S = \sum_{m=1}^M \int\pare{\+D{u_m}DL - \+dtd{}\+D{\dot{u}_m}{L}}\delta u_m \,\rd{t} + \cancelto{0}{\sum_{m=1}^M \left.\+D{\dot{u}_m}DL\delta u_m \right\vert_{t_1}^{t_2}}. \]
+\[ \sum_{m=1}^M \int \pare{\+D{u_m}DL - \+dtd{}\+D{\dot{u}_m}{L}}\delta u_m \,\rd{t} = 0. \]
+约束
+\[ \delta f_j = \sum_{m=1}^M \+D{u_m}D{f_j} \delta u_m = 0,\quad j = 1,\cdots, l. \]
+引入Lagrange乘子, 则
+\[ \lambda_j \delta f_j = 0 = \lambda_j \sum_m\+D{u_m}D{f_j}\delta u_m = 0, \]
+\[ \sum_{j=1}^l \lambda_j \sum_{m=1}^M \+D{u_m}D{f_j} \delta u_M = 0, \]
+\[ \sum_{m=1}^M \pare{\sum_{j=1}^l \lambda_j \+D{u_m}D{f_j}}\delta u_m = 0. \]
+将零项加入$\delta S$, 则
+\[ \sum_{m=1}^M \int \pare{\+D{u_m}D{L} - \+dtd{}\+D{\dot{u}_m}D{L} + \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j}}\delta u_m\,\rd{t} = 0. \]
+选取$\lambda_j$, 使得
+\[ \+D{u_m}D{L} - \+dtd{} \+D{\dot{u}_m}DL + \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j} = 0,\quad  m = 1,\cdots, l. \]
+\[ \sum_{m=l+1}^M \int\pare{\+D{u_m}DL - \+dtd{}\+D{\dot{u}_m}DL + \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j}}\delta u_m\,\rd{t} = 0. \]
+$s = M-l$, 取$s$个$\delta u_m$独立. 从而
+\[ \+D{u_m}DL - \+dtd{}\+D{\dot{u}_m}DL + \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j} = 0,\quad m = 1,\cdots, l,l+1,\cdots, M. \]
+\begin{pitfall}
+    Lagrange乘子不一定是常数.
+\end{pitfall}
+注意到若
+\[ \+dtd{} \+D{\dot{q}_\alpha}DL - \+D{q_\alpha}DL = Q_\alpha, \]
+则推断$Q_\alpha$为广义非保守力. 而Lagrange乘子法所得方程表明
+\[ \+dtd{} \+D{\dot{u}_m}DL - \+D{u_m}D{L} = \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j},\quad  m = 1,\cdots, l. \]
+因此$\displaystyle \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j}$就是约束力在广义坐标$m$上的分量.
+\par
+特别地, 在静止平衡的条件下, 有
+\[ -\+D{u_m}DV + \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j} = 0. \]
+\begin{sample}
+    \begin{ex}
+        对于在固定圆周上运动之约束,
+        \[ L = L\pare{x,y,\dot{x},\dot{y}},\quad  x^2+y^2=l^2. \]
+        对$L+\lambda\pare{x^2+y^2 - l^2}$变分.
+    \end{ex}
+\end{sample}
+
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1.29, 1.31, 1.33, 1.34
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        用Lagrange乘子法解\cref{ex:双摆平衡}.
+    \end{ex}
+    \begin{proof}[解]
+        $V=V_g + V_F$, $u_m = x_0, y_0, \theta_1, \theta_2$, $f_1 =  x_0 = 0$, $f_2 = y_0 = 0$,
+        \begin{align*}
+            V &= V_g + V_F\\
+            & = -m_1g\pare{y_0 + \frac{l_1}{2}\cos\theta_1}  - m_2g\pare{y_0 + l_1\cos\theta_1 + \frac{l_2}{2}\cos\theta_2}\\
+            & \phantom{=}\, - F\pare{x_0 + l_1\sin\theta_1 + l_2\sin\theta_2}.
+        \end{align*}
+        \begin{flalign*}
+            x_0: && \+D{x_0}DV = \sum_{j=1}^2\lambda_j \+D{x_0}D{f_j} &\Rightarrow -F = \lambda_1, &\\
+            y_0: && \+D{y_0}DV = \sum_{j=1}^2\lambda_j \+D{y_0}D{f_j} &\Rightarrow -\pare{m_1+m_2}g = \lambda_2, &\\
+            \theta_1: && \+D{\theta_1}DV = \sum_{j=1}^2 \lambda_j\+D{\theta_1}D{f_j} &\Rightarrow \frac{m_1gl_1}{2}\sin\theta_1 + m_2gl_1\sin\theta_1 - Fl_1\cos\theta_1 = 0, &\\
+            \theta_2: && \+D{\theta_2}DV = \sum_{j=1}^2 \lambda_j\+D{\theta_2}D{f_j} &\Rightarrow \frac{m_2gl_2}{2}\sin\theta_2 - Fl_2\cos\theta_2 = 0. &
+        \end{flalign*}
+        和之前的结果相同.
+    \end{proof}
+\end{sample}
+
+设定新的作用量
+\[ S' = \int \brac{L\pare{u_m,\dot{u}_m,t} + \sum_{j=1}^l \lambda_j f_j\pare{u_m,t}}\,\rd{t}, \]
+$\delta S' = 0$, $\delta u_m$和$\delta \lambda_j$任意, 其中$m=1,\cdots,M$, $j=1,\cdots,l$.
+\begin{align*}
+    &\delta S' = \int \brac{\delta L + \sum_{j=1}^l \pare{\delta\lambda_j f_j + \lambda_j\delta f_j}}\,\rd{t} \\
+    &= \int\brac{\sum_{m=1}^M\pare{\+D{u_m}DL - \+dtd{}\+D{\dot{u}_m}DL}\delta u_m + \sum_{m=1}^M \sum_{j=1}^l \lambda_j \+D{u_m}D{f_j}\delta u_m + \sum_{j=1}^l f_j\delta \lambda_j}\,\rd{t} \\
+    &= \sum_{m=1}^M \int\pare{\+D{u_m}DL - \+dtd{}\+D{\dot{u}_m}DL + \sum_{j=1}^l\lambda_j\+D{u_m}D{f_j}}\delta u_m\,\rd{t} + \sum_{j=1}^l \int f_j\delta\lambda_j\,\rd{t} \\
+    &= 0.
+\end{align*}
+这样变分无需再单独列出$f_j = 0$的条件, 因为对$\lambda_j$的变分已经包含这一条件. 由$\delta u_m$和$\delta \lambda_j$的任意性,
+\[ \+D{u_m}DL - \+dtd{}\+D{\dot{u}_m}DL + \sum_{j=1}^l\lambda_j\+D{u_m}D{f_j} = 0,\quad f_j\pare{u_m,t} = 0. \]
+\begin{sample}
+    \begin{ex}
+        求\cref{ex:Atwood机}(\cref{fig:Atwood机})中Atwood机的约束力.
+    \end{ex}
+    \begin{proof}[解]
+        约束为$f = 2y_1 + y_2 + y_3 = \const$.
+        \[ L = \half \sum_{i=1}^3 m_i \dot{y}_i + \sum_{i=1}^3 m_i gy_i. \]
+        \[ S' = \int\pare{L + \lambda f}\,\rd{t}. \]
+        要求$\delta S' = 0$, 对任意$\delta y_i$和$\delta\lambda$皆成立,
+        \[ \+D{y_i}DL - \+dtd{}\+D{\dot{y}_i}DL + \lambda\+D{y_i}Df = 0,\quad i = 1,2,3. \]
+        \[ \begin{cases}
+            m_1g - m_1\ddot{y}_1 + 2\lambda = 0 \Rightarrow m_1\ddot{y_1} = m_1 g + 2\lambda, \\
+            m_ig - m_2\ddot{y}_i + \lambda = 0\Rightarrow m_i\ddot{y}_i = m_i g + \lambda, \quad i = 2,3, \\
+            f=0 \Rightarrow 2y_1 + y_2 - y_3 = \const.
+        \end{cases} \]
+        由运动方程知
+        \[ \begin{cases}
+            m_1\ddot{y}_1 = m_1 g - T\Rightarrow 2\lambda = -T_1,\\
+            m_3\ddot{y}_3 = m_3 g - T'\Rightarrow \lambda = -T_2.
+        \end{cases}\qedhere \]
+    \end{proof}
+\end{sample}
+定义于$q_\alpha$共轭的广义动量为
+\[ p_\alpha = \+D{\dot{q}_\alpha}DL. \]
+若$\displaystyle \+D{\dot{q}_\alpha}DV = 0$, 则$\displaystyle p_\alpha = \+D{\dot{q}_\alpha}DT$完全由动能带来. 引入广义动量后, Lagrange方程可改写为
+\[ \+dtd{p_\alpha} = \+D{q_\alpha}DL = \+D{q_\alpha}DT + Q_\alpha. \]
+与动量定理类比, 右侧可视为一力, 惟并非$\alpha$所受广义力, 除非$T$仅仅是$\dot{q}$的函数.
+\begin{pitfall}
+    广义力和广义动量无需具有力和动量的因次.
+\end{pitfall}
+\begin{sample}
+    \begin{ex}
+        对于一般的运动粒子, 在平面直角坐标系中,
+        \[ L = \half m\pare{\dot{x}^2 + \dot{y}^2} - V\pare{x,y}, \]
+        \[ p_x = \+D{\dot{x}}DL = m\dot{x},\quad p_y = \+D{\dot{y}}DL = m\dot{y}. \]
+        而在平面极坐标系中,
+        \[ L = \half m\pare{\dot{r}^2 + r^2\dot{\theta}^2} - V\pare{r,\theta}, \]
+        \[ p_r = \+D{\dot{r}}DL = m\dot{r},\quad p_\theta = \+D{\dot{\theta}}DL = mr^2\dot{\theta} = mv_{\theta}r, \]
+        后者正是角动量. 如果广义坐标具有角度因次, 则相应的广义动量具有角动量因次.
+    \end{ex}
+\end{sample}
+\begin{lemma}
+    如果$q_\alpha$选择为质点的极角, 则$p_\alpha$为相应的角动量.
+\end{lemma}
+对于一个质点系,
+\[ L = \sum_{i=1}^N \half m_i \dot{\+vr}_i^2 - V\pare{\+vr_i}. \]
+现在考虑$q_\beta$作的微小位移$q_\beta+\Delta q_\beta$. 如果$q_\beta$是某个描述质点系整体性质的物理量, 则这一变化对应着质点系的整体变化.
+\begin{cenum}
+    \item 当$\delta q_\beta$对应某方向上的整体平移时, $\+vr_i \mapsto \+vr_i + \delta q_\beta \+vn$, 即$\displaystyle \+D{q_\beta}D{\+vr_i} = \+vn$.
+    \[ p_\beta = \+D{\dot{q}_\beta}DL = \+D{\dot{q}_\beta}DT = \sum_{i=1}^N m_i\dot{\+vr}_i\+D{\dot{q}_\beta}D{\dot{\+vr}_i} = \sum_{i=1}^N m_i\+vr_i\cdot\+D{q_\beta}D{\+vr_i} = \+vn\cdot\sum_{i=1}^N m_i \dot{\+vr_i} = \+vn\cdot \+vp. \]
+    故$q_\beta$的共轭动量对应系统的总栋梁在该方向上的分量. 对于带电粒子, 这一结论不适用之.
+    \item 当$\delta q_\beta$对应整体绕着某矢量的纯转动时, $\+vr_i \mapsto \+vr_i + \Delta q_\beta \+vn\times\+vr_i$, 即$\displaystyle \+D{q_\beta}D{\+vr_i} = \+vn\times\+vr_i$. 类似上面的步骤,
+    \begin{align*}
+         p_\beta &= \+D{\dot{q}_\beta}D{T} = \sum_{i=1}^N m_i\dot{\+vr}_i\cdot\+D{q_\beta}D{\+vr_i} = \sum_{i=1}^N m_i \dot{\+vr}_i\cdot\pare{\+vn\times\+vr_i} \\
+         &= \sum_{i=1}^N \+vn\cdot\pare{\+vr_i\times m_i \dot{\+vr}_i} = \+vn\cdot\sum_{i=1}^N\pare{\+vr_i\times m_i\dot{\+vr}_i} = \+vn\cdot\+vJ.
+    \end{align*}
+    故$q_\beta$的共轭动量对应系统的总角动量在该方向上的分量.
+\end{cenum}
+
+% subsection 不独立坐标与lagrange乘子 (end)
+
+\subsection{运动积分与守恒定律} % (fold)
+\label{sub:运动积分与守恒定律}
+
+若某个量$f_i\pare{q_\alpha\pare{t},\dot{q}_\alpha\pare{t},t}$在运动过程中保持恒定, 则谓之运动积分. 其中$q_\alpha\pare{t}$是运动方程的解, 应满足
+\[ \+dtd{}\+D{\dot{q}_\alpha}DL - \+D{q_\alpha}DL = 0. \]
+这和微分约束
+\[ F_i\pare{q_\alpha,\dot{q}_\alpha,t} = 0 \]
+的差别在于, 后者是事先给定的, 而前者是求解后才成立的. 后者与初始条件无关, 前者的守恒量大小取决于初始条件.
+
+\subsubsection{能量守恒定律} % (fold)
+\label{ssub:能量守恒定律}
+
+若$L = L\pare{q_\alpha,\dot{q}_\alpha,t}$, 其本身对时间的变化
+\[ \+dtdL = \+DtDL = \sum_\alpha\pare{\+D{q_\alpha}DL \dot{q}_\alpha + D{\dot{q}_\alpha}DL + \+D{\dot{q}_\alpha}DL \ddot{q}}. \]
+而根据运动方程$\dot{p}_\alpha = \displaystyle \+D{q_\alpha}DL$,
+\[ \+dtdL = \+DtDL + \sum_{\alpha} \pare{\dot{p}_\alpha \dot{q}_\alpha + p_\alpha \ddot{q}_\alpha} = \+DtDL + \+dtd{}\sum_\alpha p_\alpha \dot{q}_\alpha. \]
+\[ \+dtd{}\pare{\sum_\alpha p_\alpha\dot{q}_\alpha - L} = -\+DtDL. \]
+于是广义能量
+\[ H = \sum_{\alpha = 1}^s p_\alpha\dot{q}_\alpha  - L, \quad \+dtdH = -\+DtDL. \]
+若$\displaystyle \+DtDL = 0$, 则$\displaystyle \+dtdH = 0$, $H=\const$, 谓广义能量积分.
+
+\paragraph{动能表达式} % (fold)
+\label{par:动能表达式}
+
+注意到$\displaystyle T = \half \sum_{i=1}^N m_i \dot{\+vr}_i^2$, 其中
+\[ \dot{\+vr}_i = \+DtD{\+vr_i} + \sum_{\alpha=1}^s \+D{q_\alpha}D{\+vr_i}\dot{q}_\alpha. \]
+\begin{align*}
+    T &= \half \sum m_i\pare{\+DtD{\+vr_i} + \sum_\alpha \+D{q_\alpha}D{\+vr_i}\dot{q}_\alpha}\pare{\+DtD{\+vr_i}+\sum_\beta \+D{q_\beta}D{\+vr_i}\dot{q}_\beta} \\
+    &= \half \sum m_i \+DtD{\+vr_i}\cdot\+DtD{\+vr_i} + \half \sum_i m_i\+DtD{\+vr_i}\cdot\sum_\beta \+D{q_\beta}D{\+vr_i}\dot{q}_\beta \\
+    &\phantom{=}\, + \half \sum_i m_i\+DtD{\+vr_i}\cdot\sum_\alpha \+D{q_\alpha}D{\+vr_i}\dot{q}_\alpha + \half \sum_i \sum_\alpha \sum_\beta m_i \+D{q_\alpha}D{\+vr_i}\+D{q_\beta}D{\+vr_i}\dot{q}_\alpha \dot{q}_\beta \\
+    &= \underbrace{ \half\sum m_i \+DtD{\+vr_i}\+DtD{\+vr_i} }_{T_0} + \underbrace{ \sum_\alpha \pare{\sum_i m_i \+DtD{\+vr_i}\cdot\+D{q_\alpha}D{\+vr_i}}\dot{q}_\alpha }_{T_1} \\
+    &\phantom{=}\, + \underbrace{ \half \sum_{\alpha,\beta}\pare{\sum_i m_i \+D{q_\alpha}D{\+vr_i}\cdot\+D{q_\beta}D{\+vr_i}}\dot{q}_\alpha\dot{q}_\beta }_{T_2}.
+\end{align*}
+其中$T_i$是$\dot{q}$的$i$次形式. 对于定常约束, 必定可以找到一套广义坐标$q_\alpha$使得, $\+vr_i$不显含$t$, 从而$T=T_2$是$\dot{q}$的二次齐次函数.
+
+% paragraph 动能表达式 (end)
+
+\paragraph{广义能量} % (fold)
+\label{par:广义能量}
+
+若$\+D{\dot{q}_\alpha}D{V} = 0$,
+\[ p_\alpha = \+D{\dot{q}_\alpha}DL = \+D{\dot{q}_\alpha}DT = \+D{\dot{q}_\alpha}D{}\pare{T_0+T_1+T_2}. \]
+\begin{align*}
+    H &= \sum_\alpha p_\alpha \dot{q}_\alpha - L = \sum_\alpha \+D{\dot{q}_\alpha}DT\dot{q}_\alpha - \pare{T-V} \\
+    &= \sum_\alpha \+D{\dot{q}_\alpha}D{}\pare{T_0+T_1+T_2}\dot{q}_\alpha - \pare{T_0+T_1+T_2} + V \\
+    &= 0\cdot T_0 + 1\cdot T_1 + 2\cdot T_2 - \pare{T_0+T_1+T_2} + V = T_2 - T_0 + V.
+\end{align*}
+其中最后一行使用了Euler定理, 即
+\begin{theorem}
+    若$f\pare{x_i}$为$x_i$的$m$此齐次多项式, 即$f\pare{\lambda x_i} = \lambda^m f\pare{x_i}$, 则
+    \[ \sum_i \+D{x_i}D{f}x_i = mf\pare{x_i}. \]
+\end{theorem}
+\begin{proof}
+    令$y_i = \lambda x_i$, 则
+    \[ \+d{\lambda}d{f\pare{\lambda {x_i}}} = \+d{\lambda}d{}\pare{\lambda^m f\pare{x_i}}. \]
+    左边为
+    \[ \+d{\lambda}d{f\pare{y_i}} = \sum_i \+D{y_i}Df \+D{\lambda}D{y_i}D{\lambda} = \sum_i \+D{y_i}D{f} x_i. \]
+    右边为
+    \[ m\lambda^{m-1}f\pare{x_i}. \]
+    令$\lambda = 1$即可.
+\end{proof}
+对于定常约束, $T=T_2$, 则$H = T+V = E$正是机械能. 对于非定常约束, $H\neq T+V$. 广义能量具有可加性, 广义能量等于子系统的广义能量之和. 广义能量之守恒条件为$\displaystyle \+DtDL = 0$.
+
+\begin{figure}
+    \centering
+    \incfig{4cm}{HamiltonTimeDependent}
+    \caption{含时约束}
+    \label{fig:含时约束}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:含时约束},
+        \begin{align*}
+            L &= T-V = T = \frac{m}{2}\pare{\dot{r}^2 + r^2\dot{\theta}^2} \\
+            &= \half m \pare{\dot{r}^2 + \omega^2 r^2} \\
+            &= T_0 + T_2.
+        \end{align*}
+        这一系统满足$\displaystyle \+DtDL = 0$, 但
+        \begin{align*}
+            H &= p_r\dot{r} - L = T_2 - T_0 = \half m\pare{\dot{r}^2 - \omega^2r^2} = \const.
+        \end{align*}
+        而机械能
+        \[ E = T = \half m\pare{m\dot{r}^2 + \omega^2 r^2} \neq \const. \]
+        故这一系统之广义能量守恒而机械能不守恒.
+    \end{ex}
+    \begin{remark}
+        这一例子中约束力虚功为零, 故仍为理想约束. 惟实功非零, 故机械能不守恒.
+    \end{remark}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于Lagrange函数
+        \[ L = e^{\lambda t}\pare{\half m\dot{x}^2 - \half kx^2}. \]
+        显然$\displaystyle \+DtDL \neq 0$, 广义能量
+        \[ H = \+D{\dot{x}}DL \dot{x} - L \]
+        不守恒. Lagrange方程为
+        \[ \+dtd{}\+DxDL - \+DxDL = 0, \]
+        \[ \+dtd{}\pare{e^{\lambda t} m\dot{x}} + e^{\lambda t} kx = 0 \Rightarrow m\ddot{x} + m\lambda \dot{x} + \frac{k}{m} x = 0. \]
+        特别地,
+        \[ x = e^{-\frac{\lambda}{2}t}A\cos\pare{\sqrt{\omega^2 - \frac{\lambda^2}{4}} t} \]
+        是一个解.
+        \par
+        令$\displaystyle q = e^{-\frac{\lambda}{2}t}x$, 则$\displaystyle \dot{x} = e^{-\frac{\lambda}{2}t} \pare{\dot{q} - \frac{\lambda}{2}q}$.
+        \begin{align*}
+            L &= e^{\lambda t} \brac{\frac{m}{2}e^{-\lambda t} \pare{\dot{q} - \frac{\lambda}{2}q}^2 - \frac{k}{2}e^{-\lambda t}q^2} \\
+            &= \frac{m}{2} \pare{\dot{q} - \frac{\lambda}{2}q}^2 - \half k q^2 = \frac{m}{2}\pare{\dot{q}^2 - \lambda q\dot{q} + \frac{\lambda^2}{4}q^2} - \half m\omega^2 q^2 \\
+            &= \half m\dot{q}^2 - \half m\pare{\omega^2 - \frac{\lambda^2}{4}}q^2 - \+dtd{} \pare{\frac{m}{4}\lambda q^2}. \\
+            \Rightarrow L &=\half m\dot{q}^2 - \half m\pare{\omega^2 - \frac{\lambda^2}{4}}q^2,\quad \+D{t}DL = 0. \\ 
+            H' &= \+D{\dot{q}}D{L'} \dot{q} - L' = \half m\dot{q}^2 + \half m\pare{\omega^2 - \frac{\lambda^2}{4}}q^2 = \const. \\
+            H' &= e^{\lambda t}\pare{\half m\dot{x}^2 + \half mx\dot{x} + \half m\omega^2 x^2} = \const.
+        \end{align*}
+        用原有的坐标写出$H'$,
+        \[ H' = e^{\lambda t}\pare{\half m\dot{x}^2 + \half mx\dot{x} + \half m\omega^2 x^2} = \const = H'\pare{x,\dot{x},t}. \]
+    \end{ex}
+    \begin{remark}
+        理想约束下保守的完整系统有$L = T - V$, 而对于非保守系统则$L$非取此种形式, 惟仍有写下Lagrange函数之可能. $H'$显含时间, 但仍守恒.
+    \end{remark}
+\end{sample}
+
+% paragraph 广义能量 (end)
+
+% subsubsection 能量守恒定律 (end)
+
+\subsubsection{循环坐标与广义动量积分} % (fold)
+\label{ssub:循环坐标与广义动量积分}
+
+$q_\beta$谓可遗坐标(循环坐标), 如果$\+D{q_\beta}DL = 0$. 尽管如此, $L$仍然可能(其实是必须)含有$\dot{q}_\beta$. Lagrange方程为
+\[ \+dtd{} \+D{\dot{q}_\beta}DL = \+D{q_\beta}DL = 0\Rightarrow \+dtd{} p_\beta = 0 \Rightarrow p_\beta = \const. \]
+设$q_\beta$为循环坐标, $L = L\pare{q_1,\cdots,q_{\beta-1},q_{\beta+1},\cdots,q_s,\dot{q}_1,\cdots,\dot{q}_s,t}$, 考虑$q_\beta$的平移$q_\beta \mapsto q'_\beta = q_\beta + \Delta q_\beta$, 其中$\Delta q_\beta = \const$, 则$L$完全不变. 此种变换谓系统的对称变换.
+
+% subsubsection 循环坐标与广义动量积分 (end)
+
+\subsubsection{对称性} % (fold)
+\label{ssub:对称性}
+
+在对称变换下, 物理定律的表现形式不变. 例如对自由例子,
+\[ m\ddot{\+vr} = 0, \]
+在时间平移($t\mapsto t+\Delta t$), 空间平移($\+vr \mapsto \+vr + \Delta \+vr$), 空间转动$\+vr \mapsto R\+vr$和Galileo变换$\+vr \mapsto \+vr + \+vv t$下不变.
+\par
+万有引力定律
+\[ \ddot{\+vr} = -\frac{GM}{r^2}\+ur \]
+具有时间平移不变性, 但不具有空间平移不变性.
+\par
+对称性可以分为
+\begin{cenum}
+    \item 时空对称性(平移, 反演)和内部对称性(规范);
+    \item 连续对称性(平移, Galileo)和分立对称性(反射, 电荷共轭);
+    \item 整体对称性(变换参数不依赖于空间点)和局域对称性(规范, 广义坐标不变性).
+\end{cenum}
+以及超对称, 例如Boson和Femion.
+\par
+对称性限制了物理系统的作用量. 由时间平移和空间平移不变性, $L$不依赖于空间坐标和时间, $L = L\pare{\+vv}$. 由空间转动不变性, $L$不依赖于具体空间方向, $L=L\pare{v^2}$. 由Galileo对称性,
+\[ \+vv' = \+vv + \+v\epsilon \Rightarrow L\pare{v^2} = L\pare{v'^2} - 2\+D{v'^2}DL \+vv'\cdot\+v\epsilon = L\pare{v'^2} - 2\+D{v'^2}D{L}\+dtd{}\pare{\+vr'\cdot\+v\epsilon}, \]
+仅当$L\pare{v^2} - L\pare{v'^2} = \displaystyle \+dtd{} f\pare{\+vr,t}$时才能保证运动方程形式不变. 故
+\[ L\propto v^2. \]
+\begin{theorem}[Noether定理]
+    物理体系的每一个连续对称变换, 都有一个守恒量与之对应.
+\end{theorem}
+例如平移对称对应动量守恒, $U\pare{1}$对应电荷守恒 $SU\pare{2}$对应同位旋. 正如之前看到的, 对$t$的平移不变性, 即$\displaystyle \+DtDL = 0$蕴含$H = \const$. 对$q_\beta$的平移不变性蕴含相应的$p_\beta = \const$. 如果$\Delta q_\beta$表示空间平移, 则相应的守恒定律为动量守恒. 如果$\Delta q_\beta$表示空间转动, 则相应的守恒定律为角动量守恒.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1.35, 36, 37, 38
+
+% paragraph 作业 (end)
+
+\par
+考虑连续的无穷小变换$q_\alpha\pare{t}\mapsto q'_\alpha\pare{t} = q_\alpha\pare{t} + \epsilon \Delta q_\alpha$, 则相应的Lagrange函数变为
+\[ L\pare{q_\alpha, \dot{q}_\alpha, t} = L\pare{q'_\alpha - \epsilon \Delta q_\alpha, \dot{q}'_\alpha - \epsilon \Delta \dot{q}_\alpha, t} = L'\pare{q'_\alpha, \dot{q}'_\alpha, t}. \]
+{\color{red} 若$L'\pare{q_\alpha, \dot{q}_\alpha, t} = L\pare{q_\alpha, \dot{q}_\alpha, t} + \displaystyle \epsilon \+dtd{} f\pare{q_\alpha,t}$, 则该变换为对称变换.}
+\begin{align*}
+    L\pare{q_\alpha, \dot{q}_\alpha, t} &= L'\pare{q_\alpha+\epsilon\Delta q_\alpha, \dot{q}_\alpha + \epsilon \Delta \dot{q}_\alpha, t} \\
+    &= L'\pare{q_\alpha, \dot{q}_\alpha, t} + \epsilon \sum_\alpha \pare{\+D{q_\alpha}D{L'}\Delta q_\alpha + \+D{\dot{q}_\alpha}D{L'}\Delta \dot{q}_\alpha} + O\pare{\epsilon^2} \\
+    &= L'\pare{q_\alpha, \dot{q}_\alpha, t} + \epsilon \sum_\alpha \pare{\+D{q_\alpha}D{L}\Delta q_\alpha + \+D{\dot{q}_\alpha}D{L}\Delta \dot{q}_\alpha} + O\pare{\epsilon^2} \\
+    &= L'\pare{q_\alpha, \dot{q}_\alpha, t} + \epsilon \sum_\alpha \pare{\dot{p}_\alpha \Delta q_\alpha + p_\alpha \Delta \dot{q}_\alpha} \\
+    &= L'\pare{q_\alpha, \dot{q}_\alpha, t} + \epsilon \+dtd{} \sum_{\alpha} p_\alpha \Delta q_\alpha. \\
+    &\Rightarrow \epsilon\+dtd{} f\pare{q_\alpha,t} = -\epsilon \+dtd{}\sum_{\alpha} p_\alpha \Delta q_\alpha, \\
+    &\Leftrightarrow f\pare{q_\alpha, t} + \sum_\alpha p_\alpha \Delta q_\alpha = C = \const.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        对于旋转对称的平面系统, $L = \displaystyle \half m\pare{\dot{x}^2 + \dot{y}^2} - V\pare{x^2+y^2}$, 则转动变换
+        \begin{align*}
+            \begin{cases}
+                x' = x+\epsilon y,\\
+                y' = -\epsilon x + y
+            \end{cases} & \Rightarrow \begin{cases}
+                \Delta x = y,\quad \Delta y = -x, \\
+                \Rightarrow \dot{x} = \dot{x'} - \epsilon \dot{y},\quad \dot{y} = \dot{y}' + \epsilon \dot{x}.
+            \end{cases}\\
+            \dot{x}'^2 + \dot{y}'^2 &= \dot{x}^2 + \dot{y}^2 + O\pare{\epsilon^2},\\
+            x'^2 + y'^2 &= x^2 + y^2 + O\pare{\epsilon^2}, \\
+            \Rightarrow L\pare{x,y,x',y'} &= \half m\pare{\dot{x}^2 + \dot{y}^2} - V\pare{x^2 + y^2} \\
+            &= \half m\pare{\dot{x}'^2 + \dot{y}'^2} - V\pare{x'^2 + y'^2} \\
+            &= L'\pare{x', y', \dot{x}', \dot{y}'}.
+        \end{align*}
+        故改变换为对称变换, $f\pare{x,y,t} = 0$, 故运动积分
+        \[ p_x \Delta x + p_y \Delta y = p_x y - p_y x = C = -J_z. \]
+    \end{ex}
+\end{sample}
+对称变换下$\displaystyle S' = \int L'\pare{q_\alpha, \dot{q}_\alpha, t}\,\rd{t} = \int L\pare{q_\alpha, \dot{q}_\alpha, t}\,\rd{t} + \epsilon f\vert_1^2 = S + \epsilon f\vert_1^2$. 这有时也作为对称变换的判准.
+
+% subsubsection 对称性 (end)
+
+% subsection 运动积分与守恒定律 (end)
+
+\subsection{进一步推广} % (fold)
+\label{sub:进一步推广}
+
+\subsubsection{广义势能} % (fold)
+\label{ssub:广义势能}
+
+\paragraph{带电粒子} % (fold)
+\label{par:带电粒子}
+
+普通势能的$V$和$\dot{q}$是无关的, 故相应的广义力和$\+vv$无关. 惟对于带电粒子, 这一点不能成立. 若取广义势能为形式$U = U\pare{q_\alpha, \dot{q}_\alpha, t}$, 而$Q_\alpha = \displaystyle \+dtd{} \+D{\dot{q}_\alpha}DU - \+D{q_\alpha}DU$, 运动方程为
+\[ \+dtd{} \+D{\dot{q}_\alpha}DT - \+D{q_\alpha}DT = Q_\alpha \Rightarrow \+dtd{} \+D{\dot{q}_\alpha}DL - \+D{q_\alpha}DL = 0. \]
+故若广义力有上述形式, 则Lagrange方程仍然适用.
+\par
+可以预期$U$取形式$U\pare{q_\alpha, \dot{q}_\alpha, t} = \displaystyle \sum_\alpha U_\alpha\pare{q_\beta,t}\dot{q}_\alpha + U_0\pare{q_\beta, t}$, 这样才能保证$Q_\alpha$不依赖于$\ddot{q}$. 电磁场为
+\begin{align*}
+    \+vE &= -\grad \varphi\pare{\+vr, t} - \+DtD{\+vA\pare{\+vr, t}},\\
+    \+vB &= \curl \+vA\pare{\+vr, t},
+\end{align*}
+其中$\varphi$为电标势, $\+vA$为磁场矢势.
+\begin{remark}[规范不变性]
+    对$\varphi$和$\+vA$作如下变换
+    \begin{align*}
+        \varphi \mapsto \varphi' &= \varphi - \+DtD{}\alpha\pare{\+vr, t}, \\
+        \+vA \mapsto \+vA' &= \+vA + \grad \alpha\pare{\+vr, t}.
+    \end{align*}
+    则$\+vE$和$\+vB$仍然不变, 因为$\grad$和$\displaystyle \+DtD{}$可交换, 而$\curl\grad\alpha = 0$.
+\end{remark}
+取$q_\alpha = x_\alpha$, 则Lorentz力相应的
+\begin{align*}
+    Q_\alpha &= F_\alpha = e\pare{E_\alpha + \sum_{\beta, \gamma} \epsilon_{\alpha\beta\gamma}\dot{x}_\beta B_\gamma} \\
+    &= e\pare{-\+D{x_\alpha}D\varphi - \+DtD{A_\alpha} - \sum_{\beta, \gamma}\epsilon_{\alpha\beta\gamma} \dot{x}_\beta\sum_{\delta, \sigma} \epsilon_{\gamma\delta\sigma}\+D{x_\delta}D{A_\sigma}} \\
+    &= e\brac{-\+D{x_\alpha}D\varphi - \+DtD{A_\alpha} + \sum_{\beta, \delta, \sigma} \pare{\delta_{\alpha\delta}\delta_{\beta\sigma} - \delta_{\alpha\sigma}\delta_{\beta\delta}}\dot{x}_\beta \+D{x_\delta}D{A_\sigma}} \\
+    &= e\brac{-\+D{x_\alpha}D\varphi - \+DtD{A_\alpha} + \sum_\beta \dot{x}_\beta\pare{\+D{x_\alpha}D{A_\beta} - \+D{x_\beta}D{A_\alpha}}} \\
+    &= e\brac{-\+D{x_\alpha}D\varphi + \sum_\beta \dot{x}_\beta\+D{x_\alpha}D{A_\beta} - \+DtD{A_\alpha}  - \sum_\beta \dot{x}_\beta\+D{x_\beta}D{A_\alpha}} \\
+    &= e\brac{-\+D{x_\alpha}D{}\pare{\varphi - \sum_\beta \dot{x}_\beta A_\beta} - \+dtd{A_\beta}} \\
+    &= e\brac{-\+D{x_\alpha}D{}\pare{\varphi - \sum_\beta \dot{x}_\beta A_\beta} - \+dtd{}\+D{\dot{x}_\alpha}D{}\sum_\beta \dot{x}_\beta A_\beta} \\
+    &= e\brac{-\+D{x_\alpha}D{}\pare{\varphi - \sum_\beta \dot{x}_\beta A_\beta} - \+dtd{}\+D{\dot{x}_\alpha}D{}\pare{\sum_\beta \dot{x}_\beta A_\beta - \varphi}} \\
+    &= e\brac{-\+D{x_\alpha}D{}\pare{\varphi - \+vv\cdot\+vA} + \+dtd{} \+D{\dot{x}_\alpha}D{}\pare{\varphi - \+vv\cdot\+vA}} \\
+    \Rightarrow U &= e\pare{\varphi - \+vv\cdot\+vA} \\
+    \Rightarrow L &= \half mv^2 - e\pare{\varphi - \+vv\cdot\+vA}.
+\end{align*}
+此时Lagrange方程仍然成立.
+\begin{pitfall}
+    除非$\varphi$和$\+vA$不显含时间, 否则不能认为能量守恒.
+\end{pitfall}
+广义动量
+\[ p_\alpha = \+D{\dot{x}_\alpha}DL = m\dot{x}_\alpha + eA_\alpha \Rightarrow \underbrace{\+vp}_{\text{广义动量}} = \underbrace{m\+vv}_{\text{机械动量}} + \underbrace{e\+vA}_{\text{电磁动量}}. \]
+在圆周运动的情形下,
+\begin{align*}
+    L &= \half mR^2\dot{\theta}^2 - e\pare{\varphi - R\dot{\theta}A_\theta},
+\end{align*}
+此时仅有一个广义坐标. 角动量
+\[ p_\theta = \+D{\dot{\theta}}DL = \underbrace{mR^2\dot{\theta}}_{\text{机械角动量}} + \underbrace{eRA_\theta}_{\text{电磁角动量}}. \]
+广义能量
+\begin{align*}
+    H &= \sum_\alpha p_\alpha \dot{x}_\alpha - L \\
+    &= \+vp \cdot \+vv - L \\
+    &= \pare{m\+vv + e\+vA} \cdot \+vv - \half mv^2 + e\pare{\varphi - \+vv\cdot\+vA} \\
+    &= \half mv^2 + e\varphi \\
+    &= \frac{\pare{\+vp - e\+vA}^2}{2m} + e\varphi.
+\end{align*}
+
+% paragraph 带电粒子 (end)
+
+\paragraph{狭义相对论} % (fold)
+\label{par:狭义相对论}
+
+光速不变原理要求$\rd{s}^2 = \rd{s'}^2$在不同惯性参考系下一致, 即要求Lorentz变换. 此外还要求相对性原理, 即物理定律在所有惯性系中形式相同.
+
+% paragraph 狭义相对论 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+2.18, 2.19, 同埋
+\begin{ex}
+    已知$\+vF = -\grad V - m\+va_0 - 2m\+v\omega\times\+vv - m\dot{\+v\omega}\times\+vr - m\+v\omega\times\pare{\+v\omega \times\+vr}$, 其中$\+va_0, \+v\omega$与$\+vr, \+vv$无关, 求广义势能$U\pare{\+vr, \+vv, t}$.
+\end{ex}
+\begin{ex}
+    $L = \displaystyle \half mv^2 - e\pare{\varphi - \+vv\cdot\+vA}$在规范变换
+    \[ \begin{cases}
+        \varphi &\mapsto \varphi' = \varphi + \displaystyle \+DtD\alpha,\\
+        \+vA &\mapsto \+vA' = \+vA + \grad \alpha
+    \end{cases} \]
+    下变为$L'$, 说明$L'$与$L$是否等价.
+\end{ex}
+光速不变原理要求
+\begin{align*}
+    \rd{t'} &= \frac{\rd{t} - v_0 \,\rd{x} / c^2}{\sqrt{1-v_0^2/c^2}}, \\
+    \rd{x'} &= \frac{\rd{x} - v_0 \,\rd{t}}{\sqrt{1-v_0^2/c^2}}, \\
+    \rd{y'} &= \rd{y}, \\
+    \rd{z'} &= \rd{z}.
+\end{align*}
+在这一变换下,
+\[ \rd{s}^2 = c^2 \rd{t}^2 - \rd{x}^2 - \rd{y}^2 - \rd{z}^2 = \rd{s'}^2. \]
+Lorentz对称性要求在不同惯性参考系中,
+\[ S' = S \Rightarrow S = -m_0\int c\, \rd{s}. \]
+其中$m_0$为力学意义所要求, $c$为量纲所要求. 从而
+\[ S = -m_0 c^2 \int \sqrt{1-\frac{v^2}{c^2}}\,\rd{t} \Rightarrow L = -m_0 c \sqrt{1-\frac{v^2}{c^2}}. \]
+相应的共轭动量和广义能量为
+\begin{align*}
+    p_i &= \+D{\dot{x}_i}DL = \+D{v_i}DL = \frac{m_0v_i}{\sqrt{1-\frac{v^2}{c^2}}} \Rightarrow \+vp = \frac{m_0\+vv}{\sqrt{1-\frac{v^2}{c^2}}} = m\+vv. \\
+    H &= p_iv_i - L = \frac{m_0v^2}{\sqrt{1-\frac{v^2}{c^2}}} + m_0c^2\sqrt{1-\frac{v^2}{c^2}} = \frac{m_0c^2}{\sqrt{1-\frac{v^2}{c^2}}}.
+\end{align*}
+对于充分小的$v$, 有
+\[ L = -m_0c^2 \sqrt{1-\frac{v^2}{c^2}} = -m_0c^2 + \half m_0v^2. \]
+丢弃常数项可得经典力学下的动能. 此时
+\[ H = m_0c^2 + \half m_0v^2. \]
+在存在相互作用的情形下,
+\begin{align*}
+    S &= \int L\,\rd{t} = \int \pare{-m_0 c^2 \sqrt{1-\frac{v^2}{c^2}} - V\pare{r}}\,\rd{t} \\
+    &= - \int m_0c^2\sqrt{1-\frac{v^2}{c^2}}\,\rd{t} - \int V\pare{r}\,\rd{t}
+\end{align*}
+不是Lorentz协变的. 对于带电粒子,
+\[ L = -m_0c^2 \sqrt{1-\frac{v^2}{c^2}} - e\brac{\varphi\pare{\+vr, t} - \+vv \cdot\+vA\pare{\+vr,t}}. \]
+\[ S = \int L\,\rd{t} = -m_0 c \int \rd{s} - e\int \varphi\,\rd{t} + e\int \+vv\cdot\+vA\,\rd{t}. \]
+将$\varphi / c$定义为$A_0$, 则
+\[ S = -m_0 c\int\rd{s} - e\int \pare{A_0\,\rd{x_0} - A_1\,\rd{x_1} - A_2\,\rd{x_2} - A_3\,\rd{x_3}}. \]
+第二个积分式作为Minkowski空间中的标量积是Lorentz不变的.
+
+% paragraph 作业 (end)
+
+% subsubsection 广义势能 (end)
+
+% subsection 进一步推广 (end)
+
+% section lagrange方程 (end)
+
+\end{document}

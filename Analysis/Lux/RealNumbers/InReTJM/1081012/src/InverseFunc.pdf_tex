@@ -1,0 +1,81 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'InverseFunc.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{2014.04810147bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.86648445)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{InverseFunc.pdf}}%
+    \put(0.97346004,0.49836397){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $x$\end{minipage}}}%
+    \put(0.60213965,0.85478899){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{InverseFunc.pdf}}%
+    \put(0.70002354,0.49836397){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $a$\end{minipage}}}%
+    \put(0.86919243,0.49836397){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $b$\end{minipage}}}%
+    \put(0.6010757,0.61007928){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $c$\end{minipage}}}%
+    \put(0.6010757,0.74413765){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $d$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{InverseFunc.pdf}}%
+    \put(0.51500007,0.63386764){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.30619829\unitlength}\raggedright $\frac{\pi}{2}$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{InverseFunc.pdf}}%
+    \put(0.35465977,0.83994448){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $x$\end{minipage}}}}%
+    \put(-0.00176527,0.46862407){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $y$\end{minipage}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{InverseFunc.pdf}}%
+    \put(0.35465975,0.56650798){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $a$\end{minipage}}}}%
+    \put(0.35465975,0.73567688){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $b$\end{minipage}}}}%
+    \put(0.24294446,0.46756014){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $c$\end{minipage}}}}%
+    \put(0.10888607,0.46756013){\color[rgb]{0,0,0}\rotatebox{90}{\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $d$\end{minipage}}}}%
+    \put(0.19113374,0.68221543){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32769823\unitlength}\raggedright $x=\varphi\pare{y}$\end{minipage}}}%
+    \put(0.72189082,0.69856803){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.27685744\unitlength}\raggedright $y=\psi\pare{x}$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{InverseFunc.pdf}}%
+    \put(0.69660261,0.0153681){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $x$\end{minipage}}}%
+    \put(0.32528221,0.37179313){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{InverseFunc.pdf}}%
+    \put(0.4231661,0.0153681){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $a$\end{minipage}}}%
+    \put(0.59233499,0.0153681){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $b$\end{minipage}}}%
+    \put(0.32421826,0.12708341){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $c$\end{minipage}}}%
+    \put(0.32421826,0.26114179){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.1521456\unitlength}\raggedright $d$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

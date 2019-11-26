@@ -1,0 +1,25 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{figure}
+    \centering
+    \incfig{10cm}{InverseFunc}
+    \caption{函数及其反函数的积分的几何意义}
+    \label{fig:函数及其反函数的积分的几何意义}
+\end{figure}
+\begin{ex}
+    设$x = \varphi\pare{y}$在$\brac{c,d}$上连续且$\varphi{y} > 0$, $c\ge 0$, $\varphi$严格递增. $y = \psi\pare{x}$是$x = \varphi\pare{y}$的反函数, $a = \varphi\pare{c}$, $b = \varphi\pare{d}$, 求积分和
+    \[ \int_c^d \varphi\pare{y}\,\rd{y} + \int_a^b \psi\pare{x}\,\rd{x}. \]
+\end{ex}
+\begin{proof}[解]
+    结果就是$db-ac$. 如\cref{fig:函数及其反函数的积分的几何意义}, 绿色部分就是
+    \[ \int_a^b \psi\pare{x}\,\rd{x}, \]
+    红色部分就是
+    \[ \int_c^d \varphi\pare{y}\,\rd{y}. \]
+    由几何意义立即得到结果.
+\end{proof}
+
+\end{document}

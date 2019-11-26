@@ -1,0 +1,67 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'RefrMagnification.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1281.47377315bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.35428446)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{RefrMagnification.pdf}}%
+    \put(0.23950733,0.03242988){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.3310751\unitlength}\raggedright $\Sigma$\end{minipage}}}%
+    \put(0.08697631,0.03514526){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.18800337\unitlength}\raggedright $n$\end{minipage}}}%
+    \put(0.70735605,0.04685053){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.18800337\unitlength}\raggedright $n'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{RefrMagnification.pdf}}%
+    \put(0.11998874,0.21092641){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24239427\unitlength}\raggedright $i$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{RefrMagnification.pdf}}%
+    \put(0.51597763,0.17308926){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24239427\unitlength}\raggedright $i'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{RefrMagnification.pdf}}%
+    \put(0.13825175,0.11028093){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$s$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{RefrMagnification.pdf}}%
+    \put(0.62284996,0.11028093){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$s'$}}}%
+    \put(0.02364821,0.22820533){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14350439\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0.96354624,0.13834208){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14350439\unitlength}\raggedright $y'$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

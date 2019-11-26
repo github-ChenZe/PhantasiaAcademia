@@ -1,0 +1,469 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc, singleton, nova]{van-de-la-sehen}
+
+\newtcbox{\mylib}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
+  right=0mm,left=0.15mm,arc=1pt,boxsep=2pt,fontupper=\ttfamily,
+  colframe=gray,coltext=gray!25!black,colback=gray!10!white
+}
+
+\robustify{\mylib}
+\newcommand{\mcode}[1]{\ \mylib{#1} \ }
+
+\begin{document}
+
+\showtitle{多线程编程}
+
+\section{线程API} % (fold)
+\label{sec:线程api}
+
+\subsection{线程结构} % (fold)
+\label{sub:线程结构}
+
+\subsubsection{线程标识} % (fold)
+\label{ssub:线程标识}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_equal(/@\+c{pthread\_t}@/ tid1, /@\+c{pthread\_t}@/ tid2);
+/* 线程ID相等时返回非零值, 否则返回零 */
+\end{clst}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+/* 返回当前线程ID */
+/@\+c{pthread\_t}@/ pthread_self(void);
+/@\lhend @/
+printf("thread id is %lx.", (unsigned long) pthread_self());
+\end{clst}
+
+\mcode{pthread\_t}的具体类型是平台相关的.
+
+% subsubsection 线程标识 (end)
+
+\subsubsection{分离状态} % (fold)
+\label{ssub:分离状态}
+
+线程若处于分离状态, 则线程的底层资源会在线程终止时立即被收回. 默认情形下, 线程的终止状态会一直被保存, 直到被分离.
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+/* 分离线程 */
+int pthread_detach(/@\+c{pthread\_t}@/ tid);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+
+% subsubsection 分离状态 (end)
+
+\subsection{线程操作} % (fold)
+\label{sub:线程操作}
+
+\subsubsection{线程创建} % (fold)
+\label{ssub:线程创建}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_create(/@\+c{pthread\_t}@/ *thread, const /@\+c{pthread\_attr\_t}@/ *attr,
+    void *(*/@\+c{start\_routine}@/) (void *), void *arg);
+/* 成功时返回0, 否则返回错误代码 */
+/@\lhend @/
+/@\+c{pthread\_t}@/ ntid;
+void* thr_fn(void* arg);
+err = pthread_create(&ntid, NULL, thr_fn, NULL);
+\end{clst}
+\mcode{attr}可以为\mcode{NULL}.
+
+% subsubsection 线程创建 (end)
+
+\subsubsection{线程退出} % (fold)
+\label{ssub:线程退出}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+void pthread_exit(void* rval_ptr);
+/@\lhend @/
+void* thr_fn(void* arg)
+{
+    pthread_exit((void*) 1);
+}
+\end{clst}
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_join(/@\+c{pthread\_t}@/ thread, void** rval_ptr);
+/* 成功时返回0, 否则返回错误代码 */
+/@\lhend @/
+void* thr_fn(void* arg);
+/@\+c{pthread\_t}@/ tid;
+void* tret;
+err = pthread_join(tid, tret);
+\end{clst}
+\mcode{pthread\_join}使线程进入分离状态.\\对已经分离的线程调用\mcode{pthread\_join}会产生未定义行为.
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_cancel(/@\+c{pthread\_t}@/ tid);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\mcode{pthread\_exit}由线程自行调用以主动退出, \mcode{pthread\_join}由外部线程调用等待其退出.
+\par
+\mcode{rval\_ptr}可以为\mcode{NULL}.
+\par
+如下机制都可以退出线程:
+\begin{cenum}
+    \item \mcode{return (void*) 8};
+    \item \mcode{pthread\_cancel(...)};
+    \item \mcode{pthread\_exit(...)}.
+\end{cenum}
+
+% subsubsection 线程退出 (end)
+
+\subsubsection{退出回调} % (fold)
+\label{ssub:退出回调}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+void pthread_cleanup_push(void (*rtn)(void*), void* arg);
+/@\lhend @/
+void cleanup(void* arg);
+pthread_cleanup_push(cleanup, "thread 1 first handler");
+pthread_cleanup_pop(0);
+\end{clst}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+void pthread_cleanup_pop(int execute);
+\end{clst}
+
+回调函数会在如下条件下被触发:
+\begin{cenum}
+    \item 调用\mcode{pthread\_exit(...)};
+    \item 相应取消请求;
+    \item 用非零的\mcode{execute}调用\mcode{pthread\_cleanup\_pop};
+\end{cenum}
+
+\begin{pitfall}
+    回调程序需要注意
+    \begin{cenum}
+        \item 线程通过\mcode{return}返回时不会触发回调函数;
+        \item 即使已经调用\mcode{pthread\_cleanup\_pop(...)},\\再\mcode{pthread\_exit(...)}时仍然会调用回调;
+        \item 调用顺序与注册顺序相反;
+        \item 在FreeBSD或者OSX上,\\如果在\mcode{pthread\_cleanup\_push(...)}和\\\mcode{pthread\_cleanup\_pop(...)}之间\mcode{return}, 可能出现错误, 因此必须使用\mcode{pthread\_exit(...)};
+        \item \mcode{pthread\_cleanup\_push(...)}和\\\mcode{pthread\_cleanup\_pop(...)}必须配对出现.
+    \end{cenum}
+\end{pitfall}
+
+% subsubsection 退出回调 (end)
+
+% subsection 线程操作 (end)
+
+% subsection 线程结构 (end)
+
+% section 线程api (end)
+
+\section{互斥量API} % (fold)
+\label{sec:互斥量api}
+
+\subsection{互斥量操作} % (fold)
+\label{sub:互斥量操作}
+
+\subsubsection{创建} % (fold)
+\label{ssub:创建}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_mutex_init(/@\+c{pthread\_mutex\_t}@/* restrict mutex,
+    const /@\+c{pthread\_mutexattr\_t}@/* restrict attr);
+/* 成功时返回0, 否则返回错误代码 */
+/@\lhend @/
+struct /@\+c{foo}@/
+{
+    int f_count;
+    /@\+c{pthread\_mutex\_t}@/ f_lock;
+};
+struct /@\+c{foo}@/* fp;
+if (pthread_mutex_init(&fp->f_lock, NULL) != 0)
+    /* error */;
+\end{clst}
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_mutex_destroy(/@\+c{pthread\_mutex\_t}@/* mutex);
+/* 成功时返回0, 否则返回错误代码 */
+/@\lhend @/
+pthread_mutex_destroy(&fp->f_lock);
+\end{clst}
+\mcode{attr}可以为\mcode{NULL}.
+\par
+\mcode{PTHREAD\_MUTEX\_INITIALIZER}可以初始化静态分配的互斥量.
+
+% subsubsection 创建 (end)
+
+\subsubsection{上锁与解锁} % (fold)
+\label{ssub:上锁与解锁}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_mutex_lock(/@\+c{pthread\_mutex\_t}@/* mutex);
+int pthread_mutex_trylock(/@\+c{pthread\_mutex\_t}@/* mutex);
+int pthread_mutex_unlock(/@\+c{pthread\_mutex\_t}@/* mutex);
+/* 成功时返回0, 否则返回错误代码 */
+/@\lhend @/
+pthread_mutex_lock(&fp->f_lock);
+fp->f_count++;
+pthread_mutex_unlock(&fp->f_lock);
+\end{clst}
+\mcode{pthread\_mutex\_trylock}会尝试锁住互斥量. 如果调用时其未锁住, 则返回零, 否则返回\mcode{EBUSY}.
+
+\begin{pitfall}
+    考虑通过维持固定的上锁顺序以防止死锁. 注意上锁顺序可能影响代码复杂度.
+\end{pitfall}
+
+% subsubsection 上锁与解锁 (end)
+
+\subsubsection{限时加锁} % (fold)
+\label{ssub:限时加锁}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+/@\cinclude{time.h}@/
+int pthread_mutex_timedlock(/@\+c{pthread\_mutex\_t}@/* restrict mutex,
+    const struct /@\+c{timespec}@/* restrict tsptr);
+/* 成功时返回0, 否则返回错误代码 */
+/@\lhend @/
+struct /@\+c{timespec}@/ tout;
+/@\+c{pthread\_mutex\_t}@/ lock = PTHREAD_MUTEX_INITIALIZER;
+clock_gettime(CLOCK_REALTIME, &tout);
+tout.tv_sec += 10;
+err = pthread_mutex_timedclock(&lock, &tout);
+\end{clst}
+\mcode{tsptr}是愿意等待至的时刻. 超时将返回\mcode{ETIMEDOUT}.
+\begin{pitfall}
+    OSX尚不支持\mcode{pthread\_mutex\_t}.
+\end{pitfall}
+
+% subsubsection 限时加锁 (end)
+
+% subsection 互斥量操作 (end)
+
+\subsection{读写锁操作} % (fold)
+\label{sub:读写锁操作}
+
+\subsubsection{读写锁创建} % (fold)
+\label{ssub:读写锁创建}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_rwlock_init(/@\+c{pthread\_rwlock\_t}@/* restrict rwlock,
+    const /@\+c{pthread\_rwlockattr\_t}@/* restrict attr);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_rwlock_destroy(/@\+c{pthread\_rwlock\_t}@/* rwlock);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\mcode{attr}可以为\mcode{NULL}.
+\par
+\mcode{PTHREAD\_RWLOCK\_INITIALIZER}可以初始化静态分配的读写锁.
+
+% subsubsection 读写锁创建 (end)
+
+\subsubsection{读写上锁与解锁} % (fold)
+\label{ssub:读写上锁与解锁}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_rwlock_rdlock(/@\+c{pthread\_rwlock\_t}@/* rwlock);
+int pthread_rwlock_tryrdlock(/@\+c{pthread\_rwlock\_t}@/* rwlock);
+int pthread_rwlock_wrlock(/@\+c{pthread\_rwlock\_t}@/* rwlock);
+int pthread_rwlock_trywrlock(/@\+c{pthread\_rwlock\_t}@/* rwlock);
+int pthread_rwlock_unlock(/@\+c{pthread\_rwlock\_t}@/* rwlock);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\mcode{pthread\_rwlock\_trylock}会尝试锁住互斥量. 如果调用时其未锁住, 则返回零, 否则返回\mcode{EBUSY}.
+\par
+读写锁可能处于三种状态:
+\begin{cenum}
+    \item 读加锁: 可以进行读加锁, 但写加锁阻塞;
+    \item 写加锁: 阻塞任何加锁;
+    \item 不加锁.
+\end{cenum}
+
+% subsubsection 读写上锁与解锁 (end)
+
+\subsubsection{读写限时加锁} % (fold)
+\label{ssub:读写限时加锁}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+/@\cinclude{time.h}@/
+int pthread_rwlock_timedrdlock(/@\+c{pthread\_rwlock\_t}@/* restrict rwlock,
+    const struct /@\+c{timespec}@/* restrict tsptr);
+int pthread_rwlock_timedwrlock(/@\+c{pthread\_rwlock\_t}@/* restrict rwlock,
+    const struct /@\+c{timespec}@/* restrict tsptr);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+
+% subsubsection 读写限时加锁 (end)
+
+\subsection{自旋锁操作} % (fold)
+\label{sub:自旋锁操作}
+
+\subsubsection{自旋锁创建} % (fold)
+\label{ssub:自旋锁创建}
+
+自旋锁不会令等待的线程休眠, 而是使之自旋忙等.
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_spin_init(/@\+c{pthread\_spinlock\_t}@/* restrict lock,
+    int pshared);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_spin_destroy(/@\+c{pthread\_spinlock\_t}@/* lock);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\mcode{pshared}可以设定为\mcode{PTHREAD\_PROCESS\_SHARED}, 表示自旋锁能被访问底层锁内存的线程获取, 即使它们属于不同进程.\\或者\mcode{PTHREAD\_PROCESS\_PRIVATE}, 表示只能被进程内部的线程访问.
+
+% subsubsection 自旋锁创建 (end)
+
+\subsubsection{自旋上锁与解锁} % (fold)
+\label{ssub:自旋上锁与解锁}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_spin_lock(/@\+c{pthread\_spinlock\_t}@/* lock);
+int pthread_spin_trylock(/@\+c{pthread\_spinlock\_t}@/* lock);
+int pthread_spin_unlock(/@\+c{pthread\_spinlock\_t}@/* lock);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+
+% subsubsection 自旋上锁与解锁 (end)
+
+% subsection 自旋锁操作 (end)
+
+% subsection 读写锁操作 (end)
+
+\subsection{条件变量} % (fold)
+\label{sub:条件变量}
+
+\subsubsection{变量创建} % (fold)
+\label{ssub:变量创建}
+
+所有条件需要由一互斥量保护.
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_cond_init(/@\+c{pthread\_cond\_t}@/* restrict cond,
+    const /@\+c{pthread\_condattr\_t}@/* restrict attr);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_cond_destroy(/@\+c{pthread\_cond\_t}@/* cond);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\mcode{attr}可以为\mcode{NULL}.
+\par
+\mcode{PTHREAD\_COND\_INITIALIZER}可以初始化静态分配的条件.
+
+% subsubsection 变量创建 (end)
+
+\subsubsection{等待条件} % (fold)
+\label{ssub:等待条件}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_cond_wait(/@\+c{pthread\_cond\_t}@/* restrict cond,
+    /@\+c{pthread\_mutex\_t}@/* restrict mutex);
+int pthread_cond_timedwait(/@\+c{pthread\_cond\_t}@/* restrict cond,
+    /@\+c{pthread\_mutex\_t}@/* restrict mutex,
+    const struct /@\+c{timespec}@/* restrict tsptr);
+/@\lhend @/
+/@\+c{pthread\_cond\_t}@/ qready;
+/@\+c{pthread\_mutex\_t}@/ qlock;
+pthread_mutex_lock(&qlock);
+pthread_cond_wait(&qready, &qlock);
+/* deque message */
+pthread_mutex_unlock(&qlock);
+/* process message */
+\end{clst}
+调用上述的等待函数后, 会发生
+\begin{cenum}
+    \item 线程休眠;
+    \item 互斥量解锁;
+\end{cenum}
+直到条件被激活, 互斥量再次被锁住, 线程被激活.
+
+% subsubsection 等待条件 (end)
+
+\subsubsection{唤醒线程} % (fold)
+\label{ssub:唤醒线程}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_cond_signal(/@\+c{pthread\_cond\_t}@/* cond);
+int pthread_cond_broadcast(/@\+c{pthread\_cond\_t}@/* cond);
+/@\lhend @/
+pthread_mutex_lock(&qlock);
+/* enque message */
+pthread_mutex_unlock(&qlock);
+pthread_cond_signal(&qready);
+\end{clst}
+上述唤醒函数将激活因调用等待函数被挂起的线程.
+\par
+\mcode{pthread\_cond\_signal}唤醒至少一个线程,\\而\mcode{pthread\_cond\_broadcast}唤醒所有线程.
+
+% subsubsection 唤醒线程 (end)
+
+% subsection 条件变量 (end)
+
+\subsection{屏障} % (fold)
+\label{sub:屏障}
+
+\subsubsection{屏障创建} % (fold)
+\label{ssub:屏障创建}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_barrier_init(/@\+c{pthread\_barrier\_t}@/* restrict barrier,
+    const /@\+c{pthread\_barrierattr\_t}@/* restrict attr,
+    unsigned int count);
+/* 成功时返回0, 否则返回错误代码 */
+/@\lhend @/
+/@\+c{pthread\_barrier\_t}@/ b;
+/* 主线程也参与屏障 */
+pthread_barrier_init(&b, NULL, NTHR + 1);
+/* 分多线程对数组分部排序 */
+pthread_barrier_wait(&b);
+/* 合并排序 */
+\end{clst}
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_barrier_destroy(/@\+c{pthread\_barrier\_t}@/* barrier);
+/* 成功时返回0, 否则返回错误代码 */
+\end{clst}
+\mcode{attr}可以为\mcode{NULL}.\\
+\mcode{count}指定在允许所有线程继续运行之前, 必须到达屏障的线程数目.
+
+% subsubsection 屏障创建 (end)
+
+\subsubsection{屏障等待} % (fold)
+\label{ssub:屏障等待}
+
+\begin{clst}
+/@\cinclude{pthread.h}@/
+int pthread_wait_destroy(/@\+c{pthread\_barrier\_t}@/* barrier);
+/* 成功时返回0或PTHREAD_BARRIER_SERIAL_THREAD, 否则返回错误代码 */
+/@\lhend @/
+/* 排序线程: 排序自己的部分 */
+heapsort(...);
+pthread_barrier_wait(&b);
+\end{clst}
+对其中一个线程会返回\mcode{PTHREAD\_BARRIER\_SERIAL\_THREAD}, 剩下的返回零.
+
+% subsubsection 屏障等待 (end)
+
+% subsection 屏障 (end)
+
+% section 互斥量api (end)
+
+\end{document}

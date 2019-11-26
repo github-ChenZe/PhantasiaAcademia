@@ -1,0 +1,24 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{cenum}
+    \item 例1的话, 就是这个数列从某一项开始就要等于它的极限.
+    \item 例3的话, 我为了赶时间所以写得有些跳... 倒数第三行那一步其实是想这样做: 「找到一个常数$A$使得$\frac{\pare{n-5}^5}{n^4} > n-A$对所有$n$成立(当然可以弱化成对充分大的$n$成立)」. 这里不能把$\frac{n-5}{n}$放成$1$, 这样放缩的方向其实反了. 这一步具体如何完成其实不同的人会有不同的方法, 所以我没有展开它(原谅我真的时间仓促...). 你可以试试完全重写倒数第三行之后的内容. 我等一下也会重写一下例3... 因为我自己都觉得我写得非常unreadable.
+    \item 例5首先要注意$a_n>0$, 所以第一个case的绝对值我去掉了.
+    \begin{cenum}
+        \item $N\pare{\epsilon}$使得$n>N\pare{\epsilon}$时${a_n}<\epsilon$, 这就意味着$n>N\pare{\epsilon^2}$时${a_n}<\epsilon^2$, 即$\sqrt{\abs{a_n}} < \epsilon$.
+        \item 例5下面的那个case可以用$\epsilon$-$N$语言说明(当然也有别的办法). $N\pare{\epsilon}$使得$n>N\pare{\epsilon}$时$\abs{a_n-a}<\epsilon$, 那么$n>N\pare{\sqrt{a}\epsilon}$时$\abs{a_n-a}<\sqrt{a}\epsilon$, 这时候通过
+        \[ \abs{\sqrt{a_n} - \sqrt{a}} = \abs{\frac{a_n-a}{\sqrt{a}}} \]
+        就知道$n>N\pare{\sqrt{a}\epsilon}$时有$\abs{\sqrt{a_n} - \sqrt{a}} < \epsilon$. 对于这一点, 我建议参考下面的\cref{ex:cepsilon}.
+    \end{cenum}
+    \item 例6反方向确实不成立. 反例比如$a_n = \pare{-1}^n$.
+\end{cenum}
+\begin{ex}
+    \label{ex:cepsilon}
+    设$c>0$为常量. 证明$\displaystyle \lim_{n\rightarrow} a_n = a$当且仅当$\forall \epsilon > 0$, $\exists\, N$使得$n>N$时都有$\abs{a_n - a} < c\epsilon$. (标准的$\epsilon$-$N$语言就是$c=1$的情况.)
+\end{ex}
+
+\end{document}

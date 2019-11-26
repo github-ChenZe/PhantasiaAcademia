@@ -1,0 +1,416 @@
+\documentclass[../TheoreticalMechanics.tex]{subfiles}
+
+\begin{document}
+
+\section{正则变换} % (fold)
+\label{sec:正则变换}
+
+\subsection{正则变换的定义} % (fold)
+\label{sub:正则变换的定义}
+
+\subsubsection{正则变换条件} % (fold)
+\label{ssub:正则变换条件}
+
+\begin{definition}[正则变换]
+    变换$Q_i = Q_i\pare{q,p,t}$, $P_i = P_i\pare{q,p,t}$谓正则变换, 如果存在$K$满足
+    \[ \dot{Q}_i = \+D{P_i}DK,\quad \dot{P}_i = -\+D{Q_i}DK. \]
+    若其不显含时间, 则谓限制正则变换.
+\end{definition}
+\begin{lemma}[正则变换后的作用量]
+    若有常数$\lambda$以及$F\pare{p,q}$, 则
+    \[ \lambda\pare{p_i\dot{q}_i-H} = P_i\dot{Q}_i - K + \+dtdF \]
+    下成立$\delta \int_1^2 L\,\rd{t} = 0$. $F$谓该正则变换的生成函数.
+\end{lemma}
+\begin{ex}
+    对于变换$Q_i = \mu q_i$, $P_i = \nu p_i$, 可以取$\lambda = \mu\nu$, 于是$K = \mu\nu H$.
+\end{ex}
+\begin{remark}
+    考察$\lambda = 1$的情形, 即
+    \begin{equation}
+        \label{eq:变换后的Lagrange量}
+        p_i\dot{q}_i - H = P_i\dot{Q}_i - K + \+dtdF 
+    \end{equation}
+    的情形即可.
+\end{remark}
+\begin{finale}
+    \begin{theorem}[正则变换的生成函数]
+        欲令\eqref{eq:变换后的Lagrange量}成立, 对于给定形式的$F$需成立相应的坐标关系
+        \begin{alignat*}{3}
+            & F = F_1 \pare{q,Q,t} \qquad && p_i = \+D{q_i}D{F_1} \qquad && P_i = -\+D{Q_i}D{F_1} \\
+            & F = F_2 \pare{q,P,t} - Q_iP_i\qquad && p_i = \+D{q_i}D{F_2} \qquad && Q_i = \+D{P_i}D{F_2} \\
+            & F = F_3\pare{p,Q,t} + q_ip_i \qquad && q_i = -\+D{p_i}D{F_3} \qquad && P_i = -\+D{Q_i}D{F_3} \\
+            & F = F_4\pare{p,P,t} + q_ip_i - Q_iP_i \qquad && q_i = -\+D{p_i}D{F_4} \qquad && Q_i = \+D{P_i}D{F_4}.
+        \end{alignat*}
+        相应的变换Hamilton量为
+        \begin{equation}
+            \label{eq:正则变换下的Hamilton量}
+            K = H + \+DtD{F_n}. 
+        \end{equation}
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    若$F$给定, 总可以通过(必要时逆转)两个关于$p$和$q$的方程解出正则变换. 若正则变换给定, 则可以通过直接积分得到相应的$F$.
+\end{remark}
+\begin{ex}[正则变换可混合]
+    如下的生成函数
+    \[ F = F'\pare{q_1,p_2,P_1,Q_2,t} - Q_1P_1 + q_2p_2 \]
+    分别是第二类与第三类的混合, 对两个坐标分别适用两类的结论.
+\end{ex}
+
+% subsubsection 正则变换条件 (end)
+
+\subsubsection{例子} % (fold)
+\label{ssub:例子}
+
+\begin{ex}[恒等正则变换]
+    考虑第二类$F_2 = q_iP_i$, 则$p=P$, $q=Q$, $K=H$.
+\end{ex}
+\begin{ex}[坐标变换]
+    对于$F_2 = f_i\pare{q_1,\cdots,q_n;t}P_i$, 相应的
+    \begin{equation}
+        \label{eq:坐标变换作为正则变换}
+        Q_i = f_i\pare{q_1,\cdots,q_n;t}. 
+    \end{equation}
+    因此, 坐标变换是正则变换.
+\end{ex}
+\begin{ex}
+    对于$F_2 = f_i\pare{q_1,\cdots,q_n;t}P_i + g\pare{q_1,\cdots,q_n;t}$, $Q_i$形如\eqref{eq:坐标变换作为正则变换}而
+    \[ \+vp = \+D{\+vq}D{\+vf}\+vP + \+D{\+vq}Dg\Rightarrow\+vP = \brac{\+D{\+vq}D{\+vf}}^{-1}\brac{\+vp - \+D{\+vq}Dg}. \]
+\end{ex}
+\begin{ex}[相空间旋转]
+    考虑第一类$F_1 = q_kQ_k$, 则$p=Q$, $P=-q$, 这是相空间的旋转.
+\end{ex}
+\begin{ex}[简谐振动]
+    考虑谐振子
+    \[ H = \rec{2m}\pare{p^2 + m^2\omega^2q^2}, \]
+    引入新坐标$Q$使之为循环坐标, 可推测
+    \begin{align*}
+        p &= f\pare{P}\cos Q,\\
+        q &= \frac{f\pare{P}}{m\omega}\sin Q.
+    \end{align*}
+    变换不显含时间, 故
+    \[ K = H = \frac{f^2\pare{P}}{2m}. \]
+    考虑第一类的
+    \[ F_1 = \frac{m\omega q^2}{2}\cot Q, \]
+    \[ \def\arraystretch{2.2}\begin{array}{*2{>{\displaystyle}c}}
+        p = \+DqD{F_1} = m\omega q\cot Q \\
+        P = -\+DQD{F_1} = \frac{m\omega q^2}{2\sin^2 Q}
+    \end{array} \Rightarrow \begin{array}{*2{>{\displaystyle}c}}
+        q = \sqrt{\frac{2P}{m\omega}}\cos Q \\
+        p = \sqrt{2pm\omega}\cos Q
+    \end{array} \Rightarrow f\pare{P} = \sqrt{2m\omega P} \Rightarrow H = \omega P. \]
+    注意$Q$是循环坐标, 从而$Q=\omega t + \alpha$, 
+\end{ex}
+
+% subsubsection 例子 (end)
+
+% subsection 正则变换的定义 (end)
+
+\subsection{辛几何与正则变换} % (fold)
+\label{sub:辛几何与正则变换}
+
+\subsubsection{辛表述} % (fold)
+\label{ssub:辛表述}
+
+\begin{finale}
+    \begin{theorem}[限制正则变换条件]
+        对于不含时的变换$Q_i=Q_i\pare{q,p}$, $P_i=P_i\pare{q,p}$, $H$不变. 若Hamilton方程\eqref{eq:Hamilton方程}对$q,p$成立且欲使之对$P,Q$亦成立, 则
+        \begin{equation}
+            \label{eq:限制正则变换条件}
+            \pare{\+D{q_j}D{Q_i}}_{q,p} = \pare{\+D{P_i}D{p_j}}_{Q,P},\quad \pare{\+D{p_j}D{Q_i}}_{q,p} = -\pare{\+D{P_i}D{q_j}}_{Q,P}. 
+        \end{equation}
+    \end{theorem}
+\end{finale}
+\begin{lemma}[辛坐标变换]
+    \label{lem:辛坐标变换}
+    设$\+v\eta$如\eqref{eq:辛形式Hamilton方程}中所示, 并设坐标变换$\+v\zeta = \+v\zeta\pare{\+v\eta}$, $\dot{\+v\zeta}=\+vM\dot{\+v\eta}$, 则\eqref{eq:辛形式Hamilton方程}在新坐标下为
+    \begin{equation}
+        \label{eq:辛坐标变换}
+        \dot{\+v\zeta} = \+vM\+vJ\+vM^T\+D{\+v\zeta}DH.  
+    \end{equation}
+\end{lemma}
+\begin{lemma}[限制正则变换条件的辛表述]
+    限制正则变换不改变Hamilton量, 且新坐标下仍然成立Hamilton方程, 从而
+    \begin{equation}
+        \label{eq:限制正则变换条件的辛表述}
+        \+vM\+vJ\+vM^T = \+vJ\Leftrightarrow \+vM^T\+vJ\+vM = \+vJ.
+    \end{equation}
+\end{lemma}
+\begin{remark}
+    \eqref{eq:限制正则变换条件的辛表述}与\eqref{eq:限制正则变换条件}等价.
+\end{remark}
+\begin{lemma}[正则变换作为群]
+    \label{lem:正则变换作为群}
+    设有连续两次坐标变换(可能含时)且分别有如\cref{lem:辛坐标变换}中定义的$\+vM$和$\+vM'$且皆满足\eqref{eq:限制正则变换条件的辛表述}. 又合成变换的相应矩阵为$\+vM''$, 则$\+vM''$亦满足\eqref{eq:限制正则变换条件的辛表述}.
+\end{lemma}
+\begin{lemma}[无穷小含时正则变换]
+    \label{lem:无穷小含时正则变换}
+    对于含时的无穷小正则变换, 设
+    \[ Q_i = q_i + \delta q_i,\quad P_i = p_i + \delta p_i,\quad \+v\zeta = \+v\eta + \delta\+v\eta. \]
+    采用生成函数$F_2 = q_iP_i + \epsilon G\pare{q,P,t}$, 则($\partial P$在一阶近似下等于$\partial p$)
+    \[ p_j = \+D{q_j}D{F_2} = P_j + \epsilon \+D{q_j}DG,\quad Q_j = \+D{P_j}D{F_2} = q_j + \epsilon \+D{P_j}DG,\quad \delta\+v\eta = \epsilon\+vJ\+D{\+v\eta}DG. \]
+\end{lemma}
+\begin{lemma}[无穷小含时正则变换条件]
+    设$G$如\cref{lem:无穷小含时正则变换}中定义, 则
+    \[ \+vM = \+D{\+v\eta}D{\+v\zeta} = \+vI + \+D{\+v\eta}D{\delta\+v\eta} = \+vI + \epsilon \+vJ \frac{\partial^2 G}{\partial\+v\eta\partial\+v\eta}. \]
+    在此条件下,
+    \[ \+vM\+vJ\+vM^T = \+vJ. \]
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[正则变换条件的辛表述]
+        设有正则变换$\+v\zeta\pare{\+v\eta,t}$, 将其分解为$\+v\eta\mapsto\+v\zeta\pare{t_0}\mapsto\+v\zeta\pare{t}$, 则由\cref{lem:正则变换作为群}, 相应的$\+vM$成立
+        \[ \+vM \+vJ \+vM^T = \+vJ. \]
+    \end{theorem}
+\end{finale}
+\begin{theorem}[正则坐标的体积微元作为不变量]
+    \label{thm:正则坐标的体积微元作为不变量}
+    对于正则变换$\+v\eta\mapsto\+v\zeta$, $\det\+vM = 1$, 从而
+    \[ \pare{\rd{\eta}} = \rd{q_1}\cdots\rd{q_n}\rd{p_1}\cdots\rd{p_n} = \pare{\rd{\zeta}} = \rd{Q_1}\cdots\rd{Q_n}\rd{P_1}\cdots\rd{Q_n}. \]
+\end{theorem}
+
+% subsubsection 辛表述 (end)
+
+\subsubsection{Poisson括号} % (fold)
+\label{ssub:poisson括号}
+
+\begin{definition}[Poisson括号]
+    Poisson括号之定义如
+    \[ \brac{u,v}_{q,p} = \+D{q_i}Du\+D{p_i}Dv - \+D{p_i}Du\+D{q_i}Dv \Leftrightarrow \brac{u,v}_{\+v\eta} = \bra{\+D{\+v\eta}Du}\+vJ\ket{\+D{\+v\eta}Dv}. \]
+\end{definition}
+\begin{finale}
+    \begin{theorem}[基的Poisson括号]
+        记$\brac{\+v\eta,\+v\eta}_{\+v\eta}$为$a_{ij}=\brac{\eta_i,\eta_j}$的矩阵, 则
+        \[ \begin{array}{c}
+            \brac{q_j,q_k}_{q,p} = 0 = \brac{p_j,p_k}_{q,p} \\
+            \brac{q_j,p_k}_{q,p} = \delta_{jk} = -\brac{p_j,q_k}_{q,p}
+        \end{array} \Leftrightarrow \brac{\+v\eta,\+v\eta}_{\+v\eta} = \+vJ. \]
+    \end{theorem}
+\end{finale}
+\begin{lemma}[变换基的Poisson括号]
+    设$\+v\zeta$是一组新的正则变量$\pare{P,Q}$, 则
+    \[ \brac{\+v\zeta,\+v\zeta}_{\+v\eta} = \pare{\+D{\+v\eta}D{\+v\zeta}}^T\+vJ\pare{\+D{\+v\eta}D{\+v\zeta}} = \+vM^T\+vJ\+vM. \]
+    特别地, 对于正则变量,
+    \[ \brac{\+v\zeta,\+v\zeta}_{\+v\eta} = \+vJ. \]
+\end{lemma}
+\begin{theorem}[正则变量的Poisson括号]
+    设$\+v\zeta$为正则变量, 则在任何正则坐标下$\+v\eta$下
+    \[ \brac{\+v\zeta,\+v\zeta}_{\+v\eta} = \+vJ. \]
+\end{theorem}
+\begin{finale}
+    \begin{theorem}[Poisson括号作为不变量]
+        设$\+v\eta$和$\+v\zeta$为正则坐标, 则
+        \[ \brac{u,v}_{\+v\eta} = \brac{u,v}_{\+v\zeta}. \]
+    \end{theorem}
+\end{finale}
+\begin{lemma}[Poisson括号的结合律]
+    以下标表示偏导数, 则
+    \[ \brac{u,\brac{v,w}} = i_iJ_{ij}\pare{v_kJ_{kl}w_l}_j. \]
+    从而$\brac{u,\brac{v,w}} + \brac{v,\brac{w,u}} + \brac{w,\brac{u,v}}$中含有$w$的二阶导数的项为
+    \[ \pare{J_{ij}+J_{ji}}J_{kl}u_iv_kw_{lj} = 0. \]
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[Poisson括号的性质]
+        \label{thm:Poisson括号的性质}
+        Poisson括号满足
+        \begin{cenum}
+            \item 反对称性
+            \[ \brac{u,u} = 0,\quad \brac{u,v} = -\brac{v,u}. \]
+            \item 线性
+            \[ \brac{au+bv,w} = a\brac{u,w} + b\brac{v,w}. \]
+            \item Leibniz法则
+            \[ \brac{uv,w} = \brac{u,w}v + u\brac{v,w}. \]
+            \item Jacobi恒等式
+            \[ \brac{u,\brac{v,w}} + \brac{v,\brac{w,u}} + \brac{w,\brac{u,v}} = 0. \]
+        \end{cenum}
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    注意Poisson括号和叉乘$\+va\times\+vb$以及交换子$\brac{A,B}=AB-BA$之间的相似性.
+\end{remark}
+\begin{definition}[Lagrange括号]
+    Poisson括号之定义如
+    \[ \curb{u,v}_{q,p} = \+DuD{q_i}\+DvD{p_i} - \+DuD{p_i}\+DvD{q_i} \Leftrightarrow \curb{u,v}_{\+v\eta} = \bra{\+DuD{\+v\eta}}\+vJ\ket{\+DvD{\+v\eta}}. \]
+\end{definition}
+\begin{theorem}[基的Lagrange括号]
+        记$\curb{\+v\eta,\+v\eta}_{\+v\eta}$为$a_{ij}=\curb{\eta_i,\eta_j}$的矩阵, 则
+        \[ \begin{array}{c}
+            \curb{q_j,q_k}_{q,p} = 0 = \curb{p_j,p_k}_{q,p} \\
+            \curb{q_j,p_k}_{q,p} = \delta_{jk} = -\curb{p_j,q_k}_{q,p}
+        \end{array} \Leftrightarrow \curb{\+v\eta,\+v\eta}_{\+v\eta} = \+vJ. \]
+\end{theorem}
+\begin{pitfall}
+    Lagrange括号不成立Jacobi恒等式.
+\end{pitfall}
+\begin{theorem}[Lagrange括号-Poisson括号倒易关系]
+    对于正则变量的函数$\+vu$,
+    \[ \curb{\+vu,\+vu}\brac{\+vu,\+vu} = -\+vI. \]
+\end{theorem}
+\begin{lemma}[限制正则变换的Poisson括号条件]
+    \label{lem:限制正则变换的Poisson括号条件}
+    设有正则变换$Q=Q\pare{q,p}$, $P=P\pare{q,p}$, 又设$p=\phi\pare{q,Q}$, $P=\psi\pare{p,Q}$, 则
+    \[ \+DQDQ = \+DpDQ\+DQD\phi = 1, \]
+    \[ \brac{Q,P} = \+DqDQ\+DQD\psi\+DpDQ - \+DqDQ\pare{\+DqD\psi + \+DQD\psi\+DqDQ} = 1 = -\+DpDQ\+DqD\psi. \]
+\end{lemma}
+\begin{theorem}[限制正则变换的生成函数存在]
+    设$\phi$和$\psi$如\cref{lem:限制正则变换的Poisson括号条件}中定义, 设所求生成函数为第一类$F_1\pare{q,Q}$,
+    \[ \+DQD\phi = -\+DqD\psi, \]
+    其中
+    \[ p = \+DqD{F_1},\quad P = -\+DQD{F_1}, \]
+    从而存在解$F_1$.
+\end{theorem}
+
+% subsubsection poisson括号 (end)
+
+\subsubsection{Poisson括号表述} % (fold)
+\label{ssub:poisson括号表述}
+
+\begin{finale}
+    \begin{theorem}[Poisson括号与变化率]
+        对于物理量$u\pare{p,q,t}$, 成立
+        \[ \+dtdu = \brac{u,H} + \+DtDu. \]
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    特别地, $\dot{\+v\eta} = \brac{\+v\eta,H}$, 这正是Hamilton方程.
+\end{remark}
+\begin{corollary}[守恒量条件]
+    $u$是守恒量当且仅当
+    \[ \brac{H,u} = \+DtDu. \]
+    特别地, 不显含时间的$u$守恒当且仅当$\brac{H,u} = 0$.
+\end{corollary}
+\begin{corollary}[Poisson定理]
+    \label{coll:Poisson定理}
+    设$u,v$为守恒量, 则$\brac{u,v}$亦为守恒量.
+\end{corollary}
+\begin{lemma}[无穷小变换与Poisson括号]
+    考虑正则变换$\+v\zeta = \+v\eta + \delta\+v\eta$, 由\cref{lem:无穷小含时正则变换}, 选取第二类生成函数$G$, 有
+    \[ \partial u = u\pare{\+v\eta + \delta\+v\eta} - u\pare{\+v\eta} = \+D{\+v\eta}D{u}\delta\+v\eta = \epsilon\bra{\+D{\+v\eta}D{u}}\+vJ\ket{\+D{\+v\eta}DG} = \epsilon\brac{u,G}. \]
+    \[ \delta\+v\eta = \epsilon\+vJ\+D{\+v\eta}D{G\pare{\+v\eta}} = \epsilon\brac{\+v\eta, G}. \]
+    特别地, 取$G=H$, $\epsilon = \rd{t}$, 则变换$\delta\+v\eta = \dot{\+v\eta}\,\rd{t}$.
+\end{lemma}
+\begin{remark}
+    这意味着, $H$就是「坐标随时间变化」这一变换的生成函数. 同欧式空间之坐标变换对「主动变换」与「被动变换」之区分相似, 此处指变换为「被动变换」.
+\end{remark}
+\begin{pitfall}
+    被动变换下, $H$可能会被变换为另一函数$K$, 盖被动变换除了单纯的坐标移动尚可能为系统引入额外的速度.
+\end{pitfall}
+\begin{lemma}[Hamilton量的变换与Poisson括号]
+    设点$\+cA$在被动变换诠释下变为点$\+cA'$, 在主动变换诠释下变为点$\+cB$, 并设在被动变换诠释下Hamilton量由$H$变为$K$, 从而任何函数$u$都有$u\pare{\+cA} = u\pare{\+cB}$, 则由\eqref{eq:正则变换下的Hamilton量},
+    \begin{align*}
+        \partial H &= H\pare{\+cB} - K\pare{\+cA'} = H\pare{\+cB} - H\pare{\+cA} - \epsilon\+DtDG \\
+        &= \epsilon\brac{H,G} - \epsilon\+DtDG = -\epsilon\+dtdG. 
+    \end{align*}
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[守恒量条件]
+        守恒量是保持Hamilton量不变的变换的生成函数.
+    \end{theorem}
+\end{finale}
+\begin{ex}
+    设$H$关于某一坐标$q_i$平移不变, 且$G\pare{p,q}=p_i$, 则相应的$\delta q_j = \epsilon \delta_{ij}$, $\delta p_i = 0$恰为该坐标的平移, 故相应的$p_i$为守恒量.
+\end{ex}
+\begin{remark}
+    对于$G_l = \pare{\+vJ\+v\eta}_l = J_{lr}\eta_r$, 相应的变换为$\delta \eta_k = \epsilon \delta_{kl}$.
+\end{remark}
+\begin{ex}
+    对于$G = xp_y - yp_x$并取$\epsilon = \rd{\theta}$, 则相应的变化即为$q$和$p$旋转$\rd{\theta}$. 从而, 绕一轴旋转的生成函数为$G = \+vL\cdot\+vn$. 注意此处的$p$为正则动量而非机械动量.
+\end{ex}
+\begin{lemma}[无穷小变换的积分]
+    设有运动参数$\alpha$, 取$\epsilon = \rd{\alpha}$, 则
+    \[ u\pare{\alpha} = u_0 + \alpha\brac{u,G}_0 + \frac{\alpha^2}{2!}\brac{\brac{u,G},G}_0 + \frac{\alpha^3}{3!}\brac{\brac{\brac{u,G},G},G}_0 + \cdots. \]
+\end{lemma}
+\begin{ex}
+    考虑$\brac{x,L_z} = y$, $\brac{y,L_z} = x$, 则累积的旋转变换即为
+    \[ X = x\pare{1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \cdots} - y\pare{\theta - \frac{\theta^3}{3!} + \cdots} = x\cos\theta - y\sin\theta. \]
+\end{ex}
+\begin{ex}
+    对于
+    \[ H = \frac{p^2}{2m} - max,\quad \brac{x,H} = \frac{p}{m},\quad \brac{\brac{x,H},H} = a, \]
+    从而
+    \[ x = x_0 + \frac{p_0t}{m} + \frac{at^2}{2}. \]
+\end{ex}
+\begin{finale}
+    \begin{theorem}[经典力学的Heisenberg绘景]
+        记$\cap{\+vH} = \brac{\dot, H}$, 在Taylor展开下
+        \[ u\pare{t} = ue^{\+cap{\+vH}t} \]
+    \end{theorem}
+\end{finale}
+\begin{theorem}[Liouville定理]
+    由\cref{thm:正则坐标的体积微元作为不变量}, 相空间内按时间轨迹移动的一体积微元其体积不变. 特别地, 设$D$为系宗在相空间内一点的密度, 其随体导数为零, 从而
+    \[ \+DtDD = -\brac{D,H}. \]
+    特别地, 在平衡态下, $\brac{D,H} = 0$.
+\end{theorem}
+
+% subsubsection poisson括号表述 (end)
+
+\subsubsection{Poisson括号与角动量} % (fold)
+\label{ssub:poisson括号与角动量}
+
+\begin{lemma}[向量的无穷小变换]
+    对于空间中固定(不随跟随变换)的一组基,
+    \[ \partial \+vF = \rd{\theta}\brac{\+vF,\+vL\cdot\+vn}. \]
+    特别地, 对于空间旋转,
+    \begin{equation}
+        \label{eq:角动量的Poisson括号作为旋转}
+        \brac{\+vF,\+vL\cdot\+vn} = \+vn\times\+vF. 
+    \end{equation}
+\end{lemma}
+\begin{ex}
+    设$\+vA = \pare{\+vr\times\+vB}/2$, 则相应的$\brac{\+vA,L_z} = \pare{0,0,-Bx/2}$, 而$\+vn\times\+vA = \pare{-Bz/2,0,0}$.
+\end{ex}
+\begin{pitfall}
+    \eqref{eq:角动量的Poisson括号作为旋转}仅在$\+vF$作为$\pare{p,q}$的函数而不涉及任何不跟随正则变换的矢量的情形下适用.
+\end{pitfall}
+\begin{theorem}[角动量的Poisson括号作为指标置换]
+    $\brac{F_i,L_j} = F_k$, 其中$i,j,k$按右手顺序.
+\end{theorem}
+\begin{corollary}[Poisson括号作为置换]
+    $\brac{L_i,L_j} = L_k$, $\brac{p_i,L_j}=p_k$. 由\cref{coll:Poisson定理}, 如果角动量的两个分量守恒, 那么第三个分量必定守恒. 如果$L_x$, $L_y$, $p_z$守恒, 则动量和角动量皆守恒.
+\end{corollary}
+\begin{theorem}[角动量的Poisson括号消灭标量]
+    $\brac{\+vF\cdot\+vG,\+vL\cdot\+vn} = 0$.
+\end{theorem}
+\begin{corollary}[$L^2$与$\+vL$对易]
+    $\brac{L^2,\+vL\cdot\+vn} = 0$.
+\end{corollary}
+\begin{remark}
+    两个角动量分量不能同时被选为正则变量, 但$L$和$L_z$可以.
+\end{remark}
+
+% subsubsection poisson括号与角动量 (end)
+
+\subsubsection{对称群} % (fold)
+\label{ssub:对称群}
+
+\begin{definition}[李代数]
+    李代数谓一装配有满足\cref{thm:Poisson括号的性质}的二元运算$\brac{\cdot,\cdot}$的线性空间, 同时
+    \[ \brac{u_i,u_j} = \sum_k c_{ij}^k u_k \]
+    中的$c_{ij}^k$谓结构常数.
+\end{definition}
+\begin{ex}
+    $L_x,L_y,L_z$以及\cref{lem:旋转生成元}中的无穷小旋转矩阵生成元$\+vM_x,\+vM_y,\+vM_z$所成李代数满足$c_{ij}^k=\epsilon_{ijk}$.
+\end{ex}
+\begin{ex}
+    中心力场问题的Laplace-Runge-Lenz矢量有
+    \[ \+vA = \+vp\times\+vL - \frac{mk\+vr}{r}. \]
+    记
+    \[ \+vD = \frac{\+vA}{\sqrt{-2mE}}, \]
+    则有$\brac{D_i,L_j}=\epsilon_{ijk}D_k$, $\brac{D_i,L_j}=\epsilon_{ijk}L_k$. 可以发现中心力场问题具有$SO_4$对称性. 这是在六维相空间中的对称性.
+\end{ex}
+\begin{ex}
+    对于二维空间各向同性谐振子, 设
+    \[ A_{ij} = \rec{2m}\pare{p_ip_j + m^2\omega^2x_ix_j}. \]
+    显然$A_{11}$和$A_{22}$是守恒量, 且$A_{21}=A_{12}=\sqrt{A_{11}A_{22}}\cos\pare{\theta_2-\theta_1}$也是守恒量, 设
+    \[ S_1 = \frac{A_{12}+A_{21}}{2\omega},\quad S_2 = \frac{A_{22}-A_{11}}{2\omega},\quad S_3 = \frac{L}{2}, \]
+    则
+    \[ S_1^2 + S_2^2 + S_3^2 = \frac{H^2}{4\omega^2},\quad \brac{S_i,S_j} = \epsilon_{ijk}S_k, \]
+    可以断定该谐振子具有$SO_3$(或者$SU_2$)对称性. 实际上, $n$-维谐振子的对称群为$SU_n$.
+\end{ex}
+
+% subsubsection 对称群 (end)
+
+% subsection 辛几何与正则变换 (end)
+
+% section 正则变换 (end)
+
+\end{document}

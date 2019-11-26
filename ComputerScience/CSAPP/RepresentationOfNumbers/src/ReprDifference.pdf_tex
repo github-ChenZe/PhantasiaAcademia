@@ -1,0 +1,96 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ReprDifference.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1636.04488343bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.49439156)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ReprDifference.pdf}}%
+    \put(0.06548872,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-8$\end{minipage}}}%
+    \put(0.10216255,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-7$\end{minipage}}}%
+    \put(0.13883639,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-6$\end{minipage}}}%
+    \put(0.17551022,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-5$\end{minipage}}}%
+    \put(0.21218403,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-4$\end{minipage}}}%
+    \put(0.24885784,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-3$\end{minipage}}}%
+    \put(0.28553165,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-2$\end{minipage}}}%
+    \put(0.32220546,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $-1$\end{minipage}}}%
+    \put(0.36804773,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $0$\end{minipage}}}%
+    \put(0.40472154,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04223073\unitlength}\raggedright $1$\end{minipage}}}%
+    \put(0.44139535,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $2$\end{minipage}}}%
+    \put(0.47806916,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $3$\end{minipage}}}%
+    \put(0.51474298,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $4$\end{minipage}}}%
+    \put(0.55141681,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $5$\end{minipage}}}%
+    \put(0.58809064,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $6$\end{minipage}}}%
+    \put(0.62476447,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $7$\end{minipage}}}%
+    \put(0.66143831,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $8$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ReprDifference.pdf}}%
+    \put(0.38507486,0.49668362){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16993418\unitlength}\raggedright $-2^3=-8$\end{minipage}}}%
+    \put(0.28422188,0.40499907){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16993418\unitlength}\raggedright $2^2=4$\end{minipage}}}%
+    \put(0.28422188,0.35915681){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16993418\unitlength}\raggedright $2^1=2$\end{minipage}}}%
+    \put(0.28422188,0.31331454){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16993418\unitlength}\raggedright $2^0=1$\end{minipage}}}%
+    \put(0.34599408,0.32012443){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ReprDifference.pdf}}%
+    \put(-0.00000027,0.14828238){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16993418\unitlength}\raggedright \binaryseq{1011}\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ReprDifference.pdf}}%
+    \put(-0.00000027,0.05659782){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16993418\unitlength}\raggedright \binaryseq{1111}\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{ReprDifference.pdf}}%
+    \put(0.28422183,0.45084123){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.16993418\unitlength}\raggedright $2^3=8$\end{minipage}}}%
+    \put(0.16337601,-0.19782883){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{ReprDifference.pdf}}%
+    \put(0.69811214,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $9$\end{minipage}}}%
+    \put(0.73478597,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $10$\end{minipage}}}%
+    \put(0.77145981,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $11$\end{minipage}}}%
+    \put(0.80813364,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $12$\end{minipage}}}%
+    \put(0.84480747,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $13$\end{minipage}}}%
+    \put(0.88148131,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $14$\end{minipage}}}%
+    \put(0.91815514,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $15$\end{minipage}}}%
+    \put(0.95482897,0.25830383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $16$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{ReprDifference.pdf}}%
+    \put(0.46497164,0.20119747){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $16$\end{minipage}}}%
+    \put(0.61166693,0.10951295){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.05427067\unitlength}\raggedright $16$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

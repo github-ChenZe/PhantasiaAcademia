@@ -1,0 +1,576 @@
+\documentclass{ctexart}
+
+\let\olddiv\div
+\usepackage[margintoc, singleton, lux]{van-de-la-sehen}
+\def\binaryseq#1{{\texttt{#1}}}
+\DeclareSIUnit{\bits}{bits}
+\DeclareSIUnit{\bytes}{B}
+\newcolumntype{?}{!{\vrule width 2pt}}
+\newcolumntype{"}{!{\vrule width 1pt}}
+\usepackage{float}
+
+\begin{document}
+
+\showtitle{数的表示}
+
+\section{基础知识} % (fold)
+\label{sec:基础知识}
+
+\subsection{信息存储} % (fold)
+\label{sub:信息存储}
+
+\subsubsection{数据长度} % (fold)
+\label{ssub:数据长度}
+
+计算机中的数据是以二进制序列(一个由\binaryseq{0}和\binaryseq{1}构成的序列)储存的, 二进制序列的长度$n$(\binaryseq{0}和\binaryseq{1}总个数)反映了这个数据的长度——如果序列的长度是$n$, 就说这个数据长度是$\SI[parse-numbers=false]{n}{\bits}$.
+\begin{sample}
+    \begin{ex}
+        \label{ex:二进制序列的bits数}
+        二进制序列\binaryseq{0100 0110}的\footnote{按照惯例, 二进制序列每隔$4$位空一格, 防止眼花.}长度是$\SI{8}{\bits}$. 序列\binaryseq{111 0001 1001 1001}的长度是$\SI{15}{\bits}$. \binaryseq{1000 0011 0000 0011}的长度是$\SI{16}{\bits}$.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    bit是\textbf{bi}nary digi\textbf{t}(即二进制位)的缩并, 也有可能考虑到bit这个词本身还有作为small portion的意思.\footnote{\href{https://en.wiktionary.org/wiki/bit\#Etymology_3}{Wiktionary: bit}}
+\end{remark}
+实际应用中更常用的数据长度单位是byte, 即\textbf{字节}, 记作B. 按照定义, $\SI{1}{\bytes} = \SI{8}{\bits}$.
+\def\cellunderbrace{\raisebox{.5\normalbaselineskip}[0pt][0pt]{$\underbrace{\phantom{abcdefghij}\hspace*{14\tabcolsep}}$}}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c"c|c|c|c?c|c|c|c"c|c|c|c|}
+        \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} & \multicolumn{1}{c}{\rotatebox{-90}{\small{bit}}} \\
+        \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} & \multicolumn{1}{c}{$\uparrow$} \\
+        \hline
+        &&&&&&&&\texttt{0}&\texttt{1}&\texttt{0}&\texttt{0}&\texttt{1}&\texttt{0}&\texttt{0}&\texttt{1} \\
+        \hline\hline
+        &\texttt{1}&\texttt{1}&\texttt{1}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{1}&\texttt{1}&\texttt{0}&\texttt{0}&\texttt{1}&\texttt{1}&\texttt{0}&\texttt{0}&\texttt{1} \\
+        \hline\hline
+        \texttt{1}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{1}&\texttt{1}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{0}&\texttt{1}&\texttt{1} \\
+        \hline
+        \multicolumn{8}{c}{\cellunderbrace}& \multicolumn{8}{c}{\cellunderbrace}\\
+        \multicolumn{8}{c}{字节(B)}& \multicolumn{8}{c}{字节(B)}\\
+    \end{tabular}
+    \caption{数据长度示例}
+    \label{table:数据长度示例}
+\end{table}
+\begin{sample}
+    \begin{ex}
+        在\cref{ex:二进制序列的bits数}中(或参考\cref{table:数据长度示例}), \binaryseq{0100 0110}的长度为$\SI{1}{\bytes}$. \binaryseq{111 0001 1001 1001}的长度, 按定义是$\SI{1.875}{\bytes}$, 但没有人会这样写——没有人关心这种整除不了的情况. 最后, \binaryseq{1000 0011 0000 0011}的长度是$\SI{2}{\bytes}$.
+    \end{ex}
+    \begin{ex}
+        $\SI{1}{\bytes}$长度的数据有多少种不同可能? $2^8 = 256$种.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    数据长度通常按字节计数, 这是因为$\SI{8}{\bits}$给出的$256$种组合能放得下字母表和各种奇怪的标点符号.\footnote{\href{https://stackoverflow.com/questions/42842662/why-is-1-byte-equal-to-8-bits}{Stackoverflow: Why is 1 Byte equal to 8 Bits?}} 这也解释也为什么没人关心「不能整除」的情况.
+\end{remark}
+
+% subsubsection 数据长度 (end)
+
+\subsubsection{十六进制表示} % (fold)
+\label{ssub:十六进制表示}
+
+二进制表示法过于冗长. 如果需要使用国际化字符集, 比如表示中文, 则每个字符需要$\SI{16}{\bits}$长度的数据来编码——这样才能有足够多的组合区分不同字符, 故每个字符都需要长度为$16$的二进制序列(就像\cref{ex:二进制序列的bits数}的第三个例子那样)表示.
+\par
+为了缩短长度, 先考虑长度为$4$的二进制序列, 可以先将它们对应到十进制无符号整数. \inlinehardlink{\cref{def:无符号整数的编码}}
+\begin{sample}
+    \begin{ex}
+        \binaryseq{1001}对应到的十进制整数为$1\times 2^3 + 1\times 2^0 = 9$. \binaryseq{1110}对应到的十进制整数为$1\times 2^3 + 1\times 2^2 + 1\times 2^1 = 14$.
+    \end{ex}
+\end{sample}
+对于任意长度(实际上要求是$4$的倍数)的序列, 例如\binaryseq{0111 0011 1110 1001}, 每$4$位转化为十进制, 可得\binaryseq{7 3 14 9}. 这样做还是有问题——如果我把它写成\binaryseq{73149}, 就容易混淆——哪些地方是两位数?
+\par
+解决方案就是将转化后得到的两位数用单个字符表示——分别是\binaryseq{A}到\binaryseq{F} $6$个字母, 如\cref{table:十进制十六进制二进制转换}所示.
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c?c|c|c|}
+        \hline
+        十进制 & 十六进制 & 二进制 & 十进制 & 十六进制 & 二进制 \\
+        \hline
+        0 & \binaryseq{0} & \binaryseq{0000} & 8 & \binaryseq{8} & \binaryseq{1000} \\
+        \hline
+        1 & \binaryseq{1} & \binaryseq{0001} & 9 & \binaryseq{9} & \binaryseq{1001} \\
+        \hline
+        2 & \binaryseq{2} & \binaryseq{0010} & 10 & \binaryseq{A} & \binaryseq{1010} \\
+        \hline
+        3 & \binaryseq{3} & \binaryseq{0011} & 11 & \binaryseq{B} & \binaryseq{1011} \\
+        \hline
+        4 & \binaryseq{4} & \binaryseq{0100} & 12 & \binaryseq{C} & \binaryseq{1100} \\
+        \hline
+        5 & \binaryseq{5} & \binaryseq{0101} & 13 & \binaryseq{D} & \binaryseq{1101} \\
+        \hline
+        6 & \binaryseq{6} & \binaryseq{0110} & 14 & \binaryseq{E} & \binaryseq{1110} \\
+        \hline
+        7 & \binaryseq{7} & \binaryseq{0111} & 15 & \binaryseq{F} & \binaryseq{1111} \\
+        \hline
+    \end{tabular}
+    \caption{十六进制表示法}
+    \label{table:十进制十六进制二进制转换}
+\end{table}
+\begin{sample}
+    \begin{ex}
+        将\binaryseq{1101 1110 1010 1101 1011 1110 1110 1111}转化为十六进制序列, 结果为\binaryseq{DEADBEEF}.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    \binaryseq{DEADBEEF}这样数据可以用来填充内存以快速发现未初始化的变量——当程序员发现调试器上出现\binaryseq{DEADBEEF}这种不可思议的巧合时多多少少会怀疑一下.\footnote{\href{https://en.wikipedia.org/wiki/Magic_number_(programming)\#Magic_debug_values}{Wikipedia: Magic number}}
+\end{remark}
+
+% subsubsection 十六进制表示 (end)
+
+% subsection 信息存储 (end)
+
+% section 基础知识 (end)
+
+\section{整数} % (fold)
+\label{sec:整数}
+
+\subsection{整数的表示} % (fold)
+\label{sub:整数的表示}
+
+\subsubsection{无符号整数的表示} % (fold)
+\label{ssub:无符号整数的表示}
+
+这一小节的标题应当叫做「非负整数的表示」, 因为这一小节介绍的表示方法只能表示非负整数.
+\begin{finale}
+    \begin{definition}[无符号整数的编码]
+        \label{def:无符号整数的编码}
+        设有一长度为$\SI[parse-numbers=false]{n}{\bits}$的二进制序列$\overline{b_{n-1}b_{n-2}\cdots b_1b_0}$, 则谓其对应的\textbf{无符号整数}为
+        \begin{equation}
+            \label{eq:无符号整数的编码}
+            B = b_{n-1} \times 2^{n-1} + b_{n-2} \times 2^{n-2} + \cdots + b_1 \times 2^1 + b_0 \times 2^0. 
+        \end{equation}
+    \end{definition}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        \label{ex:无符号整数四位示意}
+        考虑\cref{fig:无符号整数表示示意}中的四个数, 分别有
+        \[ \begin{array}{ccccccccccc}
+            \text{\binaryseq{0001}} &=& & & & & & & 1\times 2^0 &=& 1,\\
+            \text{\binaryseq{0101}} &=& & & 1\times 2^2 & & & +&1\times 2^0 &=& 5,\\
+            \text{\binaryseq{1011}} &=& 1\times 2^3 & & & +&1\times 2^1 & +&1\times 2^0 &=& 11,\\
+            \text{\binaryseq{1111}} &=& 1\times 2^3 & +&1\times 2^2 & +&1\times 2^1 & +&1\times 2^0 &=& 15. \qedhere
+        \end{array} \]
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{UnsignedRepr}
+    \caption{无符号整数表示示意}
+    \label{fig:无符号整数表示示意}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:无符号整数极端值}
+        $\displaystyle \underbrace{\overline{11\cdots 11}}_{n\text{个}} = 2^{n-1} + 2^{n-2} + \cdots + 2^1 + 2^0 = \boxed{2^n - 1.}$ 这是最大的$n$位无符号整数.
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    长度为$\SI[parse-numbers=false]{n}{\bits}$时最高位对应的权重为$2^{n-1}$而非$2^n$——因为最低一项的权重是$2^0$.
+\end{pitfall}
+
+% subsubsection 无符号整数的表示 (end)
+
+\subsubsection{补码表示} % (fold)
+\label{ssub:补码表示}
+
+为了能让二进制序列表示复数, 不能让所有位的权重都是正的——必须引入一个负的权重. 在\eqref{eq:无符号整数的编码}中将最高位的权重$2^{n-1}$修改为$-2^{n-1}$可以做到这一点.
+\begin{finale}
+    \begin{definition}[补码编码]
+        \label{def:补码编码}
+        设有一长度为$\SI[parse-numbers=false]{n}{\bits}$的\textbf{补码编码}的二进制序列$\overline{\overline{b_{n-1}b_{n-2}\cdots b_1b_0}}$, 则其对应的整数为
+        \begin{equation}
+            \label{eq:补码编码}
+            B = -b_{n-1} \times 2^{n-1} + b_{n-2} \times 2^{n-2} + \cdots + b_1 \times 2^1 + b_0 \times 2^0. 
+        \end{equation}
+    \end{definition}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        \label{ex:补码编码四位示意}
+        考虑\cref{fig:补码表示示意}中的四个数, 分别有
+        \[ \begin{array}{ccccccccccc}
+            \text{\binaryseq{0001}} &=& & & & & & & 1\times 2^0 &=& 1,\\
+            \text{\binaryseq{0101}} &=& & & 1\times 2^2 & & & +&1\times 2^0 &=& 5,\\
+            \text{\binaryseq{1011}} &=& -1\times 2^3 & & & +&1\times 2^1 & +&1\times 2^0 &=& -5,\\
+            \text{\binaryseq{1111}} &=& -1\times 2^3 & +&1\times 2^2 & +&1\times 2^1 & +&1\times 2^0 &=& -1. \qedhere
+        \end{array} \]
+    \end{ex}
+\end{sample}
+\begin{figure}[t]
+    \centering
+    \incfig{10cm}{TwosComplementRepr}
+    \caption{补码表示示意}
+    \label{fig:补码表示示意}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:补码编码极端值}
+        $\displaystyle \underbrace{\overline{\overline{01\cdots 11}}}_{n\text{位}} = 2^{n-2} + \cdots + 2^1 + 2^0 = \boxed{2^{n-1} - 1.}$ 这是最大的$n$位补码编码的整数. $\displaystyle \underbrace{\overline{\overline{10\cdots 00}}}_{n\text{位}} = \boxed{-2^{n-1}.}$ 这是最小的$n$位补码编码的整数. 此外, $\displaystyle \underbrace{\overline{\overline{11\cdots 11}}}_{n\text{个}} = -2^{n-1} + 2^{n-2} + \cdots + 2^1 + 2^0 = \boxed{-1.}$
+    \end{ex}
+\end{sample}
+\begin{finale}
+    \begin{theorem}[补码表示的符号]
+        补码表示为正当且仅当最高位$b_{n-1}=0$. 补码表示为负当且仅当最高位$b_{n-1}=1$.
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    这正是补码表示的最高位被称作符号位的原因. 尽管如此, 应当注意$b_{n-1}=1$的作用不等同于符号, 即
+    \[ \overline{\overline{1b_{n-1}\cdots b_1b_0}} {\color{red}\neq} -\overline{\overline{0b_{n-1}\cdots b_1b_0}}. \]
+\end{remark}
+\begin{pitfall}
+    将\cref{ex:无符号整数四位示意}和\cref{ex:无符号整数极端值}与\cref{ex:补码编码四位示意}和\cref{ex:补码编码极端值}相比照, 可以发现同样的二进制序列分别解释为无符号整数和补码编码时可能得到不同的值.
+\end{pitfall}
+\begin{pitfall}
+    补码编码的权重对位数敏感——最高位的权重需要调转. 因此, 补码编码的二进制序列开头的\binaryseq{0}不可轻易省略. 例如补码编码下$\underbrace{\overline{\overline{01\cdots 11}}}_{n\text{位}}\neq \underbrace{\overline{\overline{1\cdots 11}}}_{n-1\text{位}}$. 当然, 解释为无符号整数时二者相等.
+\end{pitfall}
+\begin{remark}
+    这里引入如下约定: 二进制序列被解释为无符号整数时使用单横线$\overline{b_n\cdots b_1}$, 解释为补码表示时使用双横线$\overline{\overline{b_n\cdots b_1}}$——因为后者可以取到两种符号, 前者仅一种. 但这一约定不是通用的.
+\end{remark}
+
+% subsubsection 补码表示 (end)
+
+\subsubsection{两种编码下的值关系} % (fold)
+\label{ssub:两种编码下的值关系}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{UCTransform}
+    \caption{两种编码值之异同}
+    \label{fig:两种编码值之异同}
+\end{figure}
+将\eqref{eq:无符号整数的编码}和\eqref{eq:补码编码}列出对比,
+\begin{align*}
+    {\overline{b_{n-1}b_{n-2}\cdots b_1b_0}} &= \phantom{-}b_{n-1} \times 2^{n-1} + b_{n-2} \times 2^{n-2} + \cdots + b_1 \times 2^1 + b_0 \times 2^0, \\
+    \overline{\overline{b_{n-1}b_{n-2}\cdots b_1b_0}} &= {\color{red}-}b_{n-1} \times 2^{n-1} + b_{n-2} \times 2^{n-2} + \cdots + b_1 \times 2^1 + b_0 \times 2^0,
+\end{align*}
+可以发现唯一的区别在于最高位项分别被解释为$\pm b_{n-1}2^{n-1}$. 如果最高位$b_{n-1} = 0$, 则该序列解释为无符号整数或补码编码的结果一致(即\cref{fig:两种编码值之异同}中的亮箭头):
+\[ \overline{0b_{n-2}\cdots b_1b_0} = \overline{\overline{0b_{n-2}\cdots b_1b_0}}. \]
+\cref{ex:无符号整数四位示意}和\cref{ex:补码编码四位示意}的中的前两个序列\binaryseq{0001}和\binaryseq{0101}即是一例. 对于$b_{n-1}\neq 0$的情形, 通过上式的对比或参考\cref{fig:两种编码值之关系}, 可得二者之关系.
+\begin{finale}
+    \begin{theorem}[两种编码值之关系]
+        \label{thm:两种编码值之关系}
+        同一二进制序列分别解释为无符号整数与补码编码时,
+        \[ {\overline{b_{n-1}b_{n-2}\cdots b_1b_0}} - \overline{\overline{b_{n-1}b_{n-2}\cdots b_1b_0}} = b_{n-1} \times 2^{n}. \]
+        \begin{cenum}
+            \item 最高位$b_{n-1} = 0$, \[ {\overline{b_{n-1}b_{n-2}\cdots b_1b_0}} = \overline{\overline{b_{n-1}b_{n-2}\cdots b_1b_0}}. \]
+            \item 最高位$b_{n-1} = 1$, \[ {\overline{b_{n-1}b_{n-2}\cdots b_1b_0}} = \overline{\overline{b_{n-1}b_{n-2}\cdots b_1b_0}} + 2^n. \]
+        \end{cenum}
+        前者反映在\cref{fig:两种编码值之异同}中的亮箭头, 后者反映在其暗箭头.
+    \end{theorem}
+\end{finale}
+\begin{figure}[ht]
+    \centering
+    \incfig{12cm}{ReprDifference}
+    \caption{两种编码值之关系}
+    \label{fig:两种编码值之关系}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        对于\cref{fig:两种编码值之关系}中的两个数, 分别有\\
+        \centerline{
+            \xymatrix{
+                \overline{1011} \ar@{=}[r] & 1\times 2^3 & +1\times 2^1 + 1\times 2^0 & =11\\
+                \overline{\overline{1011}} \ar@{=}[r] & -1\times 2^3 \ar[u]_{+2^4} & +1\times 2^1 + 1\times 2^0 &= -5 \ar[u]^{+16}
+            }
+        }
+        以及\\
+        \centerline{
+            \xymatrix{
+                \overline{1111} \ar@{=}[r] & 1\times 2^3 & +1\times 2^2 + 1\times 2^1 + 1\times 2^0 & =15\\
+                \overline{\overline{1111}} \ar@{=}[r] & -1\times 2^3 \ar[u]_{+2^4} & +1\times 2^2 + 1\times 2^1 + 1\times 2^0 &= -1 \ar[u]^{+16}
+            }
+        }
+        这验证了\cref{thm:两种编码值之关系}的后一情形.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        重新考虑\cref{ex:无符号整数极端值}和\cref{ex:补码编码极端值}, $\displaystyle \underbrace{\overline{11\cdots 11}}_{n\text{个}} = 2^n - 1$, $\displaystyle \underbrace{\overline{\overline{11\cdots 11}}}_{n\text{个}} = -1$, 显然有两者之差为$2^n$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 两种编码下的值关系 (end)
+
+\subsubsection{整数转化为二进制表示} % (fold)
+\label{ssub:整数转化为二进制表示}
+
+\begin{theorem}[正整数转化为无符号二进制表示]
+    \label{thm:正整数转化为无符号二进制表示}
+    设有正整数$B_0 = B$, 按如下步骤得到一列$\curb{b_k}$:
+    \begin{cenum}
+        \item 将$B_0$除以$2$并保留余数, $B_0 = 2B_1 + b_0$;
+        \item 若$B_1$不等于零, 则继续除以$2$并保留余数, $B_1 = 2B_2 + b_1$;
+        \item 若$B_2$仍不为零, 则类推$B_k = 2B_{k+1} + b_k$, 直到$B_k=0$时停止.
+    \end{cenum}
+    则$\overline{b_n\cdots b_0} = B$.
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        欲将$11$转化为无符号整数的二进制表示, 通过\\
+        \centerline{
+            \xymatrix@R-1pc{
+                11 &=& 2\times& 5\ar[llld] &+ 1 \\
+                5 &=& 2\times& 2\ar[llld] &+ 1\ar@/_/[u] \\
+                2 &=& 2\times& 1\ar[llld] &+ 0\ar@/_/[u] \\
+                1 &=& 2\times& 0 &+ 1\ar@/_/[u]
+            }
+        }
+        注意第一次除法的余数放在最低位, 最后一次除法的余数放在最高位, 得到$11 = \overline{1011}$, 与\cref{ex:无符号整数四位示意}相符.
+    \end{ex}
+\end{sample}
+\begin{theorem}[非负整数转化为补码编码]
+    非负整数转化为补码编码之步骤与\cref{thm:正整数转化为无符号二进制表示}相同, 惟符号位应设定为\binaryseq{0}.
+\end{theorem}
+若$B$为负整数而欲将其转化为补码表示, 则需要一些精妙的操作. 特别需注意, 转化为补码表示时应事先给定总位数$n+1$. 由$-B$为正整数, 故可以二进制展开为
+\[ \abs{B} = \overline{\overline{b_n b_{n-1} \cdots b_1 b_0}}. \]
+现在取
+\[ \reflectbox{B} = \overline{\overline{\reflectbox{b}_n \reflectbox{b}_{n-1} \cdots \reflectbox{b}_1 \reflectbox{b}_0}}. \]
+其中$\reflectbox{b}_i$是对$b_i$取反的结果, 即如果$b_i = 0$则$\reflectbox{b}_i = 1$, 反之若$b_i = 1$则$\reflectbox{b}_i = 0$. 则必定有
+\[ \abs{B} + \reflectbox{B} = \underbrace{\overline{\overline{11\cdots 11}}}_{n\text{个}} = - 1. \]
+在正式求出$B$的补码表示之前, 先对上面的结果看一个例子.
+\begin{sample}
+    \begin{ex}
+        \label{ex:-5转化为补码表示}
+        设$B = -5$, 并且欲转化为$4$位数之补码表示. 由$\abs{B} = 5 = \overline{\overline{0101}}$, $\reflectbox{B} = \overline{\overline{1010}}$, 则$\abs{B} + \reflectbox{B} = \overline{\overline{1111}} = -1$.
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    必须保证所欲转化为补码之位数足够而使$b_n=0, \reflectbox{b}_n=1$为可能.
+\end{pitfall}
+\begin{finale}
+    \begin{theorem}
+        设$B$为负整数且$-2^n < B$, 记$\abs{B} = \overline{b_n b_{n-1} \cdots b_1 b_0}$并设$\reflectbox{b}_i$是对$b_i$取反的结果, 则
+        \[ -B = \overline{\overline{\reflectbox{b}_n \reflectbox{b}_{n-1} \cdots \reflectbox{b}_1}} + 1. \]
+        其中$+1$直接按照无符号二进制加法之规则执行即可.\inlinehardlink{\cref{ex:极端负数之补码表示}}
+    \end{theorem}
+\end{finale}
+\begin{sample}
+    \begin{ex}[\cref{ex:-5转化为补码表示}续]
+        $\reflectbox{B} = \overline{\overline{1010}}$, 故$-B = \overline{\overline{1010}} + 1 = \overline{\overline{1011}}$, 和\cref{ex:补码编码四位示意}相符.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$B = -1$, 分步执行之,
+        \begin{cenum}
+            \item $-B = 1 = \overline{\overline{00\cdots 01}}$;
+            \item $\reflectbox{B} = \overline{\overline{11\cdots 10}}$;
+            \item $-B = \reflectbox{B} + 1 = \overline{\overline{11\cdots 10}} + 1 = \overline{\overline{11\cdots 11}}$;
+        \end{cenum}
+        这和\cref{ex:补码编码极端值}相符.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \label{ex:极端负数之补码表示}
+        一种相当特殊的情况为$B = -2^n$, 此时
+        \begin{cenum}
+            \item $-B = 2^n = \overline{\overline{10\cdots 00}}$;
+            \item $\reflectbox{B} = \overline{\overline{01\cdots 11}}$;
+            \item $-B = \reflectbox{B} + 1 = \overline{\overline{01\cdots 11}} + 1 = {\color{red}?}$;
+        \end{cenum}
+        根据\cref{ex:补码编码极端值}, $\overline{\overline{01\cdots 11}}$已经是补码表示之最大值, 无法再加任何数. 然而如果直接按普通(无符号)的加法规则执行, 则可得$-B = \overline{\overline{01\cdots 11}} + 1 = \overline{\overline{10\cdots 00}}$, 这和\cref{ex:补码编码极端值}相符.
+    \end{ex}
+\end{sample}
+
+% subsubsection 整数转化为二进制表示 (end)
+
+% subsection 整数的表示 (end)
+
+% section 整数 (end)
+
+\section{浮点数} % (fold)
+\label{sec:浮点数}
+
+\subsection{浮点数的表示} % (fold)
+\label{sub:浮点数的表示}
+
+\subsubsection{二进制小数} % (fold)
+\label{ssub:二进制小数}
+
+\begin{finale}
+    \begin{definition}[二进制小数的展开]
+        设有二进制小数
+        \[ b=\overline{b_m b_{m-1} \cdots b_1 b_0.b_{-1}b_{-2}\cdots b_{-n-1}b_{-n}}, \]
+        则其值为
+        \begin{align*}
+            b = & b_m\times 2^m + b_{m-1}\times 2^{m-1} + \cdots + b_1\times 2^1 + b_0\times 2^0 \\
+            &+ b_{-1}\times 2^{-1} + b_{-2}\times 2^{-2} + \cdots + b_{-n-1}\times 2^{-n-1} + b_{-n}\times 2^{-n}. 
+        \end{align*}
+    \end{definition}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        设$b = \overline{101.11}$, 则
+        \[ b = 1\times 2^2 + 1\times 2^0 + 1\times 2^{-1} + 1\times 2^{-2} = 5\frac{3}{4}. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 二进制小数 (end)
+
+\subsubsection{IEEE浮点数表示} % (fold)
+\label{ssub:ieee浮点数表示}
+
+\definecolor{signbluecolor}{RGB}{214,252,255}
+\definecolor{expgreencolor}{RGB}{186,255,182}
+\definecolor{significandcolor}{RGB}{255,181,178}
+\newcolumntype{Q}{>{\columncolor{signbluecolor}\ttfamily}c}
+\newcolumntype{E}{>{\columncolor{expgreencolor}\ttfamily}c}
+\newcolumntype{M}{>{\columncolor{significandcolor}\ttfamily}c}
+
+IEEE浮点数表示为$\pare{-1}^s\times M\times 2^E$, 因此浮点数在储存是也被划分为三个部分. \cref{fig:浮点数的布局}中每一个小方格对应一个二进制位, 同样颜色的方格对应相同的部分:
+\begin{cenum}
+    \item \colorbox{signbluecolor}{符号位$s$}, 决定该浮点数之正负;
+    \item \colorbox{expgreencolor}{阶码$E$}, 决定指数之大小, 但绿色区域的值需要经过一变换才能得到正确的$E$;
+    \item \colorbox{significandcolor}{尾数$M$}, 决定系数的大小, 但是红色区域的值需要经过一变换才能得到正确的$M$.
+\end{cenum}
+\begin{figure}[ht]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \scalebox{0.6}{
+    \begin{tabular}{|Q|E|E|E|E|E|E|E|E|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|M|}
+    \hline
+     &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&\\
+    \hline
+    \end{tabular}
+    }
+    \caption{浮点数的布局}
+    \label{fig:浮点数的布局}
+\end{figure}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|Q|E|M|c|}
+        \hline
+        \diagbox{类型}{项目} & 符号位 & 阶码$k$位 & 尾数$n$位 & $\mathrm{Bias}=2^k-1$ \\
+        \hline
+        单精度 & 1 & 8 & 23 & 127\\
+        \hline
+        双精度 & 1 & 11 & 52 & 1023\\
+        \hline
+    \end{tabular}
+    \caption{两种浮点数的规格}
+    \label{table:两种浮点数的规格}
+\end{table}
+\begin{figure}[H]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{tabular}{|Q|EEEEEEEE|MMMMMMMMMMMMMMMMMMMMMMM|}
+    \hline
+     31&30&\multicolumn{6}{c}{\cellcolor{expgreencolor}\texttt{exp}}&23&22&&&&&&&\multicolumn{8}{c}{\cellcolor{significandcolor}\texttt{frac}}&&&&&&&&0\\
+    \hline
+    \end{tabular}
+    \caption{单精度浮点数的布局}
+    \label{fig:单精度浮点数的布局}
+\end{figure}
+\begin{figure}[H]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{tabular}{|Q|EEEEEEEE|MMMMMMMMMMMMMMMMMMMMMMM|}
+    \hline
+     63&\multicolumn{8}{c}{\cellcolor{expgreencolor}\texttt{62 exp 52}}&51&&&&&&&&\multicolumn{7}{c}{\cellcolor{significandcolor}\texttt{frac}}&&&&&&&&0\\
+    \hline
+    \end{tabular}
+    \caption{双精度浮点数的布局}
+    \label{fig:双精度浮点数的布局}
+\end{figure}
+单精度浮点数与双精度浮点数之布局分别如\cref{fig:单精度浮点数的布局}和\cref{fig:双精度浮点数的布局}所示, 其具体规格在\cref{table:两种浮点数的规格}中列出.
+
+% subsubsection ieee浮点数表示 (end)
+
+\subsubsection{规格化值与非规格化值} % (fold)
+\label{ssub:规格化值与非规格化值}
+
+设浮点数的值为$\pare{-1}^s\times M\times 2^E$, 问题转化为从浮点数的表示中获得$s$, $E$, $M$的值.
+
+\paragraph{规格化值} % (fold)
+\label{par:规格化值}
+
+这是最普遍的情况, 只要\colorbox{expgreencolor}{\texttt{exp}}不全为\binaryseq{0}或\binaryseq{1}. 此时浮点数的值应这样获得:
+\begin{cenum}
+    \item 符号位$s$即为\colorbox{signbluecolor}{第32位}值.\footnote{图中标注为第$31$位, 是因为图中右边第一位标注为$0$.}
+    \item 设$e$是\colorbox{expgreencolor}{\texttt{exp}}的无符号整数值, 在\cref{table:两种浮点数的规格}中获得$\mathrm{Bias}$后, $E = e - \mathrm{Bias}$.
+    \item 设\colorbox{significandcolor}{\texttt{frac}}是二进制序列$\overline{f_{n-1}\cdots f_1f_0}$, 则$M = \overline{1.f_{n-1}\cdots f_1f_0}$.
+\end{cenum}
+\begin{figure}[h]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{tabular}{|Q|EEEEEEEE|MMMMMMMMMMMMMMMMMMMMMMM|}
+    \hline
+     0&0&1&1&1&1&1&0&0&0&1&0&0&\multicolumn{19}{c|}{\cellcolor{significandcolor}$\cdots$}\\
+    \hline
+    \end{tabular}
+    \caption{规格化单精度浮点数示例}
+    \label{fig:规格化单精度浮点数示例}
+\end{figure}
+\begin{figure}[h]
+    \renewcommand{\arraystretch}{1.5}
+    \centering
+    \begin{tabular}{|Q|EEEEEEEE|MMMMMMMMMMMMMMMMMMMMMMM|}
+    \hline
+     0&0&0&0&0&0&0&0&0&0&1&0&0&\multicolumn{19}{c|}{\cellcolor{significandcolor}$\cdots$}\\
+    \hline
+    \end{tabular}
+    \caption{非规格化单精度浮点数示例}
+    \label{fig:非规格化单精度浮点数示例}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        设浮点数形如\cref{fig:规格化单精度浮点数示例}, 则由\colorbox{expgreencolor}{\texttt{exp}}不全为\binaryseq{0}或\binaryseq{1}知其为规格化浮点数.
+        \begin{cenum}
+            \item 显然$s=0$;
+            \item \texttt{exp}$=e=\overline{01111100} = 124$, $\mathrm{Bias} = 127$, $E = e-\mathrm{Bias} = -3$;
+            \item \texttt{frac}$=\overline{01}$, $M = \overline{1.01} = 1.25$.
+        \end{cenum}
+        因此, 其值为$\pare{-1}^0\times 1.25\times 0.125 = 0.15625.$
+    \end{ex}
+\end{sample}
+
+% paragraph 规格化值 (end)
+
+\paragraph{非规格化值} % (fold)
+
+\label{par:非规格化值}
+
+当\colorbox{expgreencolor}{\texttt{exp}}全为\binaryseq{0}时出现, 此时浮点数相当接近零, 其值应当这样获得:
+\begin{cenum}
+    \item 符号位$s$即为\colorbox{signbluecolor}{第32位}值.
+    \item 在\cref{table:两种浮点数的规格}中获得$\mathrm{Bias}$后, $E = 1 - \mathrm{Bias}$.
+    \item 设\colorbox{significandcolor}{\texttt{frac}}是二进制序列$\overline{f_{n-1}\cdots f_1f_0}$, 则$M = \overline{0.f_{n-1}\cdots f_1f_0}$.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        设浮点数形如\cref{fig:非规格化单精度浮点数示例}, 则由\colorbox{expgreencolor}{\texttt{exp}}全为\binaryseq{0}知其为非规格化浮点数.
+        \begin{cenum}
+            \item 显然$s=0$;
+            \item $E = e-\mathrm{Bias} = -126$;
+            \item \texttt{frac}$=\overline{01}$, $M = \overline{0.01} = 0.25$.
+        \end{cenum}
+        因此, 其值为$\pare{-1}^0\times 0.25\times 2^{-126} \approx \SI{2.94e-39}{}.$
+    \end{ex}
+\end{sample}
+
+% paragraph 非规格化值 (end)
+
+\paragraph{特殊值} % (fold)
+\label{par:特殊值}
+
+当\colorbox{expgreencolor}{\texttt{exp}}全为\binaryseq{1}时出现.
+\begin{cenum}
+    \item 若\colorbox{significandcolor}{\texttt{frac}}全为\binaryseq{0}, 则为无穷大, 符号由$s$决定.
+    \item 若\colorbox{significandcolor}{\texttt{frac}}不全为\binaryseq{0}, 则为\binaryseq{NaN}, 即Not a Number.
+\end{cenum}
+
+% paragraph 特殊值 (end)
+
+\begin{remark}
+    浮点数有两个零——$\pm 0.0$, 两者只有符号位不同, 且其它位皆为\binaryseq{0}.
+\end{remark}
+
+% subsubsection 规格化值与非规格化值 (end)
+
+% subsection 浮点数的表示 (end)
+
+% section 浮点数 (end)
+
+\end{document}

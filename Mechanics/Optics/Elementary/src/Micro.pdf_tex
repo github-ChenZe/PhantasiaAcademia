@@ -1,0 +1,66 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Micro.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{2157.64287032bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.33950176)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Micro.pdf}}%
+    \put(0.17643882,0.19863816){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13553641\unitlength}\raggedright $F'_O$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Micro.pdf}}%
+    \put(0.45452011,0.19863816){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.13553641\unitlength}\raggedright $F_E$\end{minipage}}}%
+    \put(0.66020502,0.20289408){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14963478\unitlength}\raggedright $w'$\end{minipage}}}%
+    \put(0.12302462,0.30261516){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11165953\unitlength}\raggedright $L_O$\end{minipage}}}%
+    \put(0.61390518,0.34123952){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.11165953\unitlength}\raggedright $L_E$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Micro.pdf}}%
+    \put(0.34388577,0.23760107){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$\Delta$}}}%
+    \put(-0.00115405,0.21948555){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.06753401\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0.50932364,0.15493098){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.06753401\unitlength}\raggedright $y_1$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Micro.pdf}}%
+    \put(0.53159242,0.20289408){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.14963478\unitlength}\raggedright $w'$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

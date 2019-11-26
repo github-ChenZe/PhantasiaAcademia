@@ -1,0 +1,89 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'MultiInterference.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1250.51343542bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.70033121)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{MultiInterference.pdf}}%
+    \put(0.01370866,0.42335346){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_1$}}}%
+    \put(0.01370866,0.27941248){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n$}}}%
+    \put(0.01370866,0.13547146){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_2$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{MultiInterference.pdf}}%
+    \put(0.1483275,0.29169911){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$h$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{MultiInterference.pdf}}%
+    \put(0.28813162,0.43289105){\color[rgb]{0,0,0}\rotatebox{60}{\makebox(0,0)[lb]{\smash{$Ar$}}}}%
+    \put(0.16744448,0.54207775){\color[rgb]{0,0,0}\rotatebox{-60}{\makebox(0,0)[lb]{\smash{$A$}}}}%
+    \put(0.44406757,0.43289105){\color[rgb]{0,0,0}\rotatebox{60}{\makebox(0,0)[lb]{\smash{$Atrt'$}}}}%
+    \put(0.60000335,0.43289116){\color[rgb]{0,0,0}\rotatebox{60}{\makebox(0,0)[lb]{\smash{$Atr^3t'$}}}}%
+    \put(0.7559389,0.43289136){\color[rgb]{0,0,0}\rotatebox{60}{\makebox(0,0)[lb]{\smash{$Atr^5t'$}}}}%
+    \put(0.9118745,0.43289165){\color[rgb]{0,0,0}\rotatebox{60}{\makebox(0,0)[lb]{\smash{$Atr^7t'$}}}}%
+    \put(0.26928458,0.34107081){\color[rgb]{0,0,0}\rotatebox{-68.828569}{\makebox(0,0)[lb]{\smash{$At$}}}}%
+    \put(0.42522051,0.34107091){\color[rgb]{0,0,0}\rotatebox{-68.828569}{\makebox(0,0)[lb]{\smash{$Atr^2$}}}}%
+    \put(0.58115628,0.34107096){\color[rgb]{0,0,0}\rotatebox{-68.828569}{\makebox(0,0)[lb]{\smash{$Atr^4$}}}}%
+    \put(0.73709201,0.34107099){\color[rgb]{0,0,0}\rotatebox{-68.828569}{\makebox(0,0)[lb]{\smash{$Atr^6$}}}}%
+    \put(0.36026383,0.2400523){\color[rgb]{0,0,0}\rotatebox{69.718945}{\makebox(0,0)[lb]{\smash{$Atr$}}}}%
+    \put(0.5161998,0.2400524){\color[rgb]{0,0,0}\rotatebox{69.718945}{\makebox(0,0)[lb]{\smash{$Atr^3$}}}}%
+    \put(0.6721355,0.24005256){\color[rgb]{0,0,0}\rotatebox{69.718945}{\makebox(0,0)[lb]{\smash{$Atr^5$}}}}%
+    \put(0.82807119,0.24005271){\color[rgb]{0,0,0}\rotatebox{69.718945}{\makebox(0,0)[lb]{\smash{$Atr^7$}}}}%
+    \put(0.35936575,0.14624023){\color[rgb]{0,0,0}\rotatebox{-60}{\makebox(0,0)[lb]{\smash{$Att'$}}}}%
+    \put(0.51530185,0.14623996){\color[rgb]{0,0,0}\rotatebox{-60}{\makebox(0,0)[lb]{\smash{$Atr^2t'$}}}}%
+    \put(0.67123797,0.14623971){\color[rgb]{0,0,0}\rotatebox{-60}{\makebox(0,0)[lb]{\smash{$Atr^4t'$}}}}%
+    \put(0.82717407,0.14623946){\color[rgb]{0,0,0}\rotatebox{-60}{\makebox(0,0)[lb]{\smash{$Atr^6t'$}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{MultiInterference.pdf}}%
+    \put(0.09424701,0.68210432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.33243487,0.56472397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$1$}}}%
+    \put(0.48837097,0.56472397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$2$}}}%
+    \put(0.64430686,0.56472397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$3$}}}%
+    \put(0.80024251,0.56472397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$4$}}}%
+    \put(0.95617816,0.56472397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$5$}}}%
+    \put(0.40954608,0.00352591){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$1'$}}}%
+    \put(0.56548218,0.00352591){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$2'$}}}%
+    \put(0.7214179,0.00352591){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$3'$}}}%
+    \put(0.87735355,0.00352591){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$4'$}}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,808 @@
+\documentclass{ctexart}
+
+\usepackage[singleton, margintoc, nova]{van-de-la-sehen}
+\usepackage{picins/picins}
+\usepackage{float}
+
+\begin{document}
+
+\showtitle{数列极限}
+
+\section{数列极限的存在性} % (fold)
+\label{sec:数列极限的存在性}
+
+\subsection{\texorpdfstring{$\epsilon$-$N$语言}{按定义得到}} % (fold)
+\label{sub:按定义得到}
+
+\subsubsection{基本方法} % (fold)
+\label{ssub:基本方法}
+
+\begin{definition}[$\epsilon$-$N$语言]
+    谓数列$\curb{a_n}$收敛于$a$, 如果对于任意$\epsilon>0$, 都存在$N$使得对于每个自然数$n>N$都有$\abs{a_n-a}<\epsilon$.
+\end{definition}
+除了一些相当基础的题目, 这种证明方法并不常用——它的作用更多是推导出下面的这些证明方法. 尽管如此, 这里还是列举一些用$\epsilon$-$N$语言的例子.
+\begin{sample}
+    \begin{ex}
+        若收敛数列$\curb{a_n}$的每一项都是整数, 则该数列有何性质?
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        证明$\displaystyle\lim_{n\rightarrow\infty} \frac{\sin n}{n} = 0$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 基本方法 (end)
+
+\subsubsection{适当放大法} % (fold)
+\label{ssub:适当放大法}
+
+这一方法对于任何$\epsilon>0$, 手动找到$N\pare{\epsilon}$使得$n>N$时$\abs{a_n-a}<\epsilon$. 通常它的步骤是这样的:
+\begin{cenum}
+    \item 对于任意$\epsilon$我现在想要找到$N\pare{\epsilon}$, 使得$\abs{a_n-a} < \epsilon$对任意$n>N\pare{\epsilon}$.
+    \item 把$\abs{a_n-a} < \epsilon$稍作改写, 变成$g\pare{n}<f\pare{n, \epsilon}$. 其中$g$和$f$要尽可能简单, 并且可以(通常是不得不)含有$a$.
+    \parpic(2in,1in)[r]{\parbox{2in}{\begin{mtips}
+        这一节的内容在实际做题时不一定用得上, 故可以跳过.
+    \end{mtips}}}
+    \item 对于固定的$\epsilon$, 能不能轻松地找到相应的$N\pare{\epsilon}$让$g\pare{n}<f\pare{n, \epsilon}$在$n>N\pare{\epsilon}$时成立? 如果不能, 做简单的放缩
+    \[ g\pare{n} < G\pare{n} < F\pare{n,\epsilon} < f\pare{n,\epsilon} \]
+    之后可以吗?
+    \item 如果可以的话, 就已经找到了符合要求的$N\pare{\epsilon}$, 从而极限存在. 此外, 其实证明$N\pare{\epsilon}$存在即可, 如果其形式复杂则无需具体写出.
+\end{cenum}
+这一步骤相当抽象, 需要应用到具体的例子上.
+\begin{sample}
+    \begin{ex}
+        证明数列$\displaystyle\curb{\frac{n^5}{2^n}}$收敛于$0$.
+    \end{ex}
+    \begin{proof}
+        按部就班地执行上面的步骤:
+        \begin{cenum}
+            \item 对于任意$\epsilon>0$, 我要找到$N\pare{\epsilon}$使得$\abs{\frac{n^5}{2^n}}<\epsilon$对$n>N\pare{\epsilon}$皆成立.
+            \item 把$\abs{\frac{n^5}{2^n}}<\epsilon$稍作改写, 变为$\displaystyle \underbrace{n^5}_{g\pare{n}} < \underbrace{\epsilon 2^n}_{f\pare{n,\epsilon}}$.
+            \item 对上述$n^5 < \epsilon\cdot 2^n$找到$N\pare{\epsilon}$方便吗? 似乎并不, 从而需要进一步的放缩.
+            \begin{cenum}
+                \item 所追求的放缩为
+                \[ \begin{array}{cccc}
+                    \text{$n>N\pare{\epsilon}$时,} & n^5 & < & \epsilon\cdot 2^n \\
+                    \Uparrow & {\mathbin{\rotatebox[origin=c]{-90}{$\leqslant$}}} & \Uparrow & {\mathbin{\rotatebox[origin=c]{-90}{$\geqslant$}}} \\
+                    \text{存在$N\pare{\epsilon}$, 当$n>N\pare{\epsilon}$时,} & g_?\pare{n} & < & f_?\pare{\epsilon, n}.
+                \end{array} \]
+                \item 右侧需要将指数放为多项式. 考虑($n>10$时)
+                \begin{align*}
+                    2^n &= \pare{1+1}^n = 1+\binom{n}{1} + \binom{n}{2} + \cdots + \binom{n}{n}\\ &> \binom{n}{6} = \frac{n\pare{n-1}\cdots\pare{n-5}}{6!} > \frac{n\pare{n-5}^5}{6!} > \frac{n^6}{6! 2^5}.
+                \end{align*}
+                \item 从而所求放缩为
+                \[ \begin{array}{cccc}
+                    \text{$n>N\pare{\epsilon}$时,} & n^5 & < & \epsilon\cdot 2^n \\
+                    \Uparrow & {\mathbin{\rotatebox[origin=c]{-90}{$\leqslant$}}} & \Uparrow & {\mathbin{\rotatebox[origin=c]{-90}{$\geqslant$}}} \\
+                    \text{存在$N\pare{\epsilon}$, $n>N\pare{\epsilon}$时,} & n^5 & < & \displaystyle\epsilon\cdot\frac{n^6}{6!2^5}.
+                \end{array} \]
+                \item 现在只需证明存在$N\pare{\epsilon}$, 使得$n>N\pare{\epsilon}$时$\displaystyle n^5 < \displaystyle\epsilon\frac{n^6}{6!2^5}$.
+            \end{cenum}
+        
+            \item $N\pare{\epsilon}$现在很容易找到了.\qedhere
+        \end{cenum}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        证明$\curb{\sqrt[n]{n}}$收敛于$1$.
+    \end{ex}
+    提示: 可以考虑这个不等式:
+    \[ \pare{1+\epsilon}^n > \frac{n\pare{n-1}}{2}\epsilon^2. \]
+\end{sample}
+\begin{remark}
+    适当放大法并非独立于$\epsilon$-$N$语言. 它只是一用具体应用$\epsilon$-$N$的套路. 但单纯地使用$\epsilon$-$N$语言的题目并不多.
+\end{remark}
+\begin{remark}
+    适用这种方法时, 会需要不断将不等式化成更简单的形式. 注意{\color{red}只能将不等式往更严格的方向化}. 即要求使化简后的不等式成立的$n$需要使化简前的不等式成立.
+\end{remark}
+
+% subsubsection 适当放大法 (end)
+
+\subsubsection{借助已有极限} % (fold)
+\label{ssub:借助已有极限}
+
+一类题目会以「已知$\displaystyle \lim_{n\rightarrow\infty} a_n=a$, 求证$\displaystyle \lim_{n\rightarrow\infty} f\pare{a_n}$存在且等于某数」的形式出现. 这类题目唯一的套路就是将$f\pare{a_n}$的$\epsilon$-$N$语言转化为$a_n$的$\epsilon_n$语言, 需要(也可能不需要)结合前面的「适当放大法」来做.
+\begin{sample}
+    \begin{ex}
+        \label{ex:平方根对数列的连续性}
+        若$a_n\ge 0$且$\displaystyle \lim_{n\rightarrow\infty} a_n = a$, 证明$\displaystyle \lim_{n\rightarrow\infty} \sqrt{a_n} = \sqrt{a}$.
+    \end{ex}
+    \begin{proof}
+        如果$\displaystyle \lim_{n\rightarrow\infty} a_n = a = 0$, 则对于任意$\epsilon$, 存在$N\pare{\epsilon}$使得$n>N\pare{\epsilon}$时$a_n < \epsilon$. 那么对于任意$\epsilon'$, $取M\pare{\epsilon'} = N\pare{\epsilon'^2}$就可以保证$n>M\pare{\epsilon}$时$\sqrt{a_n}<\epsilon$了.
+        \par
+        如果$\displaystyle \lim_{n\rightarrow\infty} a_n = a > 0$, 则由\inlinehardlink{常用等式\eqref{eq:方根差}}
+        \[ \abs{\sqrt{a_n} - \sqrt{a}} = \abs{\frac{a_n-a}{\sqrt{a_n}+\sqrt{a}}} < \abs{\frac{a_n-a}{\sqrt{a}}}, \]
+        结论便是显然的了.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        若$\displaystyle \lim_{n\rightarrow\infty} a_n = a$, 证明$\displaystyle \lim_{n\rightarrow\infty} \abs{a_n} = \abs{a}$. 反之如何?
+    \end{ex}
+    提示: \inlinehardlink{常用不等式\eqref{eq:三角不等式2}}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \label{ex:sin对数列的连续性}
+        若$\displaystyle \lim_{n\rightarrow \infty} a_n = a$, 证明
+        \[ \lim_{n\rightarrow \infty} \sin a_n = \sin a. \]
+    \end{ex}
+    提示: \inlinehardlink{常用等式\eqref{eq:和差化积}}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$p>1$, $\displaystyle\lim_{n\rightarrow\infty}a_n = 1$, 证明$\displaystyle \lim_{n\rightarrow\infty} \log_p a_n = 0$.
+    \end{ex}
+    提示: 可能需要适当放大法.
+\end{sample}
+
+% subsubsection 借助已有极限 (end)
+
+\subsubsection{Cauchy判准} % (fold)
+\label{ssub:cauchy判准}
+
+\begin{theorem}[Cauchy判准]
+    设数列$\curb{a_n}$满足对于任意$\epsilon$, 存在$N$使得任意$n,m>N$皆有$\abs{a_n - a_m} < \epsilon$, 则$\curb{a_n}$收敛.
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        若数列$\curb{a_n}$满足存在常数$M$, 使得对于一切$n$都有
+        \[ A_n = \abs{a_2 - a_1} + \abs{a_3 - a_2} + \cdots + \abs{a_{n+1}-a_n} \le M. \]
+        证明$\curb{A_n}$收敛和$\curb{a_n}$收敛.
+    \end{ex}
+    提示: \inlinehardlink{\cref{thm:单调收敛定理}, 常用不等式\eqref{eq:三角不等式}}
+\end{sample}
+\begin{definition}[压缩映射]
+    谓$\func{f}{\brac{a,b}}{\+bR}$为压缩映射, 若
+    \begin{cenum}
+        \item $f\pare{\brac{a,b}}\subset \brac{a,b}$, 即$f\pare{x}$是$\brac{a,b}$到自身的变换;
+        \item 存在常数$k<1$, 使得对任何$x,y\in\brac{a,b}$成立$\abs{f\pare{x} - f\pare{y}} \le k\abs{x-y}$.
+    \end{cenum}
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{CompressedMapping}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{CompressedMapping1}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{CompressedMapping2}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{CompressedMapping3}
+    \end{subfigure}
+    \caption{压缩映射图示}
+    \label{fig:压缩映射图示}
+\end{figure}
+压缩映射的一个例子如\cref{fig:压缩映射图示}所示, 注意到$f\pare{\brac{a,b}}\subset \brac{a,b}$(第一个条件)且$f$将$\brac{a,b}$「严格地压扁」了(第二个条件).
+\begin{pitfall}
+    第二个条件不能被替换为$\abs{f\pare{x} - f\pare{y}} < \abs{x-y}$.
+\end{pitfall}
+\begin{theorem}[压缩映射原理]
+    设$f$是$\brac{a,b}$上的压缩映射, 则$f\pare{x}$在$\brac{a,b}$内有唯一不动点$\xi$满足$f\pare{\xi}=\xi$. 又设$a_0\in\brac{a,b}$, $a_{n+1} = f\pare{a_n}$, 则$\curb{a_n}$收敛至$\xi$.
+\end{theorem}
+举例而言, \cref{fig:压缩映射图示}中, $\brac{a,b}$被映射到$\brac{a_1,b_1}\subset \brac{a,b}$, 接着$\brac{a_1,b_1}$被映射到$\brac{a_2,b_2}\subset \brac{a_1,b_1}\subset \brac{a,b}$, 再被映射到$\brac{a_3,b_3}\subset\brac{a_2,b_2}\subset \brac{a_1,b_1}\subset \brac{a,b}$. 最终, 这个区间套的长度会收敛到零(根据第二个条件), 刚好框住一个点.
+\begin{sample}
+    \begin{ex}
+        \label{ex:平方根不动点}
+        设$a_1 = \sqrt{2}$, $a_{n+1} = \sqrt{2+a_n}$, 求证$\curb{a_n}$收敛并求出极限.
+    \end{ex}
+    \begin{proof}[解]
+        先验证$f\pare{x}=\sqrt{2+x}$是$\brac{0,2}$上的压缩映射.
+        \begin{cenum}
+            \item $f\pare{\brac{0,2}} = \brac{\sqrt{2},2}\subset\brac{0,2}$是显然的;
+            \item 对于$x,y\in\brac{0,2}$, \inlinehardlink{常用等式\eqref{eq:方根差}}
+            \begin{align*}
+                \abs{f\pare{x} - f\pare{y}} &= \abs{\sqrt{2+x} - \sqrt{2+y}}\\&= \frac{\abs{x-y}}{\sqrt{2+x}+\sqrt{2+y}} \le \rec{2\sqrt{2}}\abs{x-y}. 
+            \end{align*}
+        \end{cenum}
+        故$f$是压缩映射, 求得不动点为$\xi = 2$, 立即可断定$\displaystyle \lim_{n\rightarrow\infty}a_n = 2$.
+    \end{proof}
+    \inlinehardlink{\cref{ex:平方根单调方法}}要求用单调收敛定理得到同一结论.
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \label{ex:Newton迭代不动点}
+        设$b_1=1$, $\displaystyle b_{n+1} = 1 + \rec{b_n}$, 证明其收敛并求出极限.
+    \end{ex}
+    \inlinehardlink{\cref{ex:Newton迭代单调方法}}要求用单调收敛定理得到同一结论.
+\end{sample}
+
+% subsubsection cauchy判准 (end)
+
+% subsection 按定义得到 (end)
+
+\subsection{单调数列} % (fold)
+\label{sub:单调数列}
+
+\subsubsection{基本方法} % (fold)
+\label{ssub:基本方法}
+
+\begin{theorem}[单调收敛定理]
+    \label{thm:单调收敛定理}
+    设$\curb{a_n}$有界且单调, 则$\curb{a_n}$收敛.
+\end{theorem}
+实际应用时, 这一定理不要求$\curb{a_n}$从第一项开始就单调——只要从第$N$项开始单调就行.
+\begin{sample}
+    \begin{ex}
+        $\displaystyle a_n = \frac{n^5}{2^n}$, 证明$\curb{a_n}$收敛并求其极限.
+    \end{ex}
+    \begin{proof}
+        前后作比, $\displaystyle \frac{a_{n+1}}{a_n} = \half \cdot\pare{1+\rec{n}}^5$. 对于充分大的$n$, 这个右边小于$1$. 故$a_n > 0$且$\curb{a_n}$从某项开始单调递减, 故$\curb{a_n}$收敛.
+        \par
+        对$\displaystyle {a_{n+1}} = \half \cdot\pare{1+\rec{n}}^5\cdot a_n$两侧取极限\inlinehardlink{\cref{thm:极限的四则运算}}, $\displaystyle \lim_{n\rightarrow\infty}a_n = 0$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle a_n = \rec{n+1} + \cdots + \rec{2n}$, 证明$\curb{a_n}$收敛.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$0<b_0<a_0$, 递推定义
+        \[ a_n = \frac{a_{n-1} + b_{n-1}}{2},\quad b_n = \sqrt{a_{n-1}b_{n-1}}, \]
+        证明两个数列收敛于同一极限.
+    \end{ex}
+    提示: \inlinehardlink{常用不等式\eqref{eq:AGH不等式}}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \label{ex:sin迭代收敛}
+        $a_0=1$, $a_{n+1} = \sin a_n$, 证明$\curb{a_n}$收敛.
+    \end{ex}
+    提示: \inlinehardlink{常用不等式\eqref{eq:sin的基本不等式}}
+\end{sample}
+
+% subsubsection 基本方法 (end)
+
+\subsubsection{放缩以证明有界} % (fold)
+\label{ssub:放缩以证明有界}
+
+若数列以求和的形式给出, 其有界性的证明常常需要技巧, 其中以放缩最为常用.
+\begin{sample}
+    \begin{ex}
+        记$S_n = 1+\rec{2^p}+\rec{3^p}+\cdots$, 证明$p>1$时$\curb{S_n}$收敛.
+    \end{ex}
+    \begin{proof}
+        单调性显然. 为证明有界性, 考虑这样放缩$S_n$:
+        \[ 1+\underbrace{\rec{2^p}}_{\displaystyle\le 1\cdot\rec{1^p}}+\underbrace{\rec{3^p}+\rec{4^p}}_{\displaystyle\le 2\cdot\rec{2^p}}+\underbrace{\rec{5^p}+\rec{6^p}+\rec{7^p}+\rec{8^p}}_{\displaystyle\le 4\cdot\rec{4^p}}+\cdots, \]
+        可得
+        \[ S \le 1 + 1 + 2^{1-p} + 4^{1-p} + 8^{1-p} + \cdots, \]
+        这是一个收敛的等比数列求和.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        记$\displaystyle a_n = \pare{1+\half}\pare{1+\rec{2^2}}\cdots\pare{1+\rec{2^n}}$, 证明$a_n$收敛.
+    \end{ex}
+    \begin{proof}
+        单调性显然, 为了证明有界性, 考虑不等式\inlinehardlink{\cref{thm:连乘积的上限}}
+        \[ \pare{1+\rec{2^2}}\cdots\pare{1+\rec{2^n}} < \rec{1-\rec{2}} \]
+        即可.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle a_n = 1 + \rec{\sqrt{2}} + \cdots + \rec{\sqrt{n}} - 2\sqrt{n}$, 求证$\curb{a_n}$收敛.
+    \end{ex}
+    提示: 借助\inlinehardlink{常用等式\eqref{eq:方根差}}放缩.
+\end{sample}
+
+% subsubsection 放缩以证明有界 (end)
+
+\subsubsection{归纳以证明有界/单调} % (fold)
+\label{ssub:归纳以证明有界/单调}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{PositiveFixedPoint}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{PositiveFixedPoint1}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{PositiveFixedPoint2}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{PositiveFixedPoint3}
+    \end{subfigure}
+    \caption{\cref{ex:归纳以证明有界例1}中前若干项的图示}
+    \label{fig:归纳以证明有界例1中前若干项的图示}
+\end{figure}
+对于递推定义的数列$a_{n+1} = f\pare{a_n}$, 有界性通常不是显然的\footnote{下文假设$f$是连续的.}. 通常按照如下步骤证明它是有界且单调的.
+\begin{cenum}
+    \item 对于什么样的$x$, 有$x = f\pare{x}$? 这个$x$实际上就是这个数列极限的可能值.
+    \item $a_0<x$还是$a_0>x$?
+    \item 如果$a_0 < x$,
+    \begin{cenum}
+        \item 证明在假设$a_n < x$下可以得到$a_{n+1} < x$;
+        \item 在这种情形下, 再证明$a_{n+1}>a_n$, 就可以得到单调有界性.
+    \end{cenum}
+    \item 反之如果$a_0 > x$,
+    \begin{cenum}
+        \item 证明在假设$a_n > x$下可以得到$a_{n+1} > x$;
+        \item 在这种情形下, 再证明$a_{n+1}<a_n$, 就可以得到单调有界性.
+    \end{cenum}
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        \label{ex:归纳以证明有界例1}
+        设$\displaystyle a_1 = \frac{c}{2}$, $\displaystyle a_{n+1} = \frac{c}{2} + \frac{a_n^2}{2}$, 其中$0\le c\le 1$, 证明$\curb{a_n}$的极限存在并求出之.
+    \end{ex}
+    \begin{proof}
+        \sout{按图索骥}:
+        \begin{cenum}
+            \item $\displaystyle x = \frac{c}{2} + \frac{x^2}{2}$, 从而$x = 1 \pm \sqrt{1-c}$.
+            \item 可以发现\inlinehardlink{常用等式\eqref{eq:Bernoulli不等式}}$\displaystyle a_0 = \frac{c}{2} \le 1 - \sqrt{1-c}$.
+            \begin{cenum}
+                \item 可以发现$\displaystyle x \le 1 - \sqrt{1-c}$时$\displaystyle \frac{c}{2} + \frac{x^2}{2} \le 1 - \sqrt{1-c} $.
+                \item 可以发现$\displaystyle x \le 1 - \sqrt{1-c}$时$\displaystyle \frac{c}{2} + \frac{x^2}{2} \ge x$. 得到$\curb{a_n}$有界单调. 收敛于\inlinehardlink{\cref{thm:极限对常数的保号性}}$\displaystyle 1 - \sqrt{1-c}$.\qedhere
+            \end{cenum}
+        \end{cenum}
+    \end{proof}
+\end{sample}
+\begin{proof}[\cref{ex:归纳以证明有界例1}的另一个证明]
+    前一个证明是套路的, 但需要较大的计算量. 通过对归纳法的更多运用可以减少很多计算量.
+    \begin{cenum}
+        \item $\curb{a_n}$是有界的: 由递推式可以知道$\displaystyle a_n \ge \frac{c}{2}$. 此外, 还是从递推式推知, 若$a_n<1$则$a_{n+1}<1$.
+        \item $\curb{a_n}$是单调的: 由递推式可以知道$a_1>a_0$. 如果$a_n>a_{n-1}$确定成立, 则
+        \[ a_{n+1} - a_n = \frac{a_{n}^2 - a_{n-1}^2}{2} = \frac{\pare{a_n+a_{n-1}}\pare{a_n-a_{n-1}}}{2} > 0.\qedhere \]
+    \end{cenum}
+\end{proof}
+\par
+\cref{fig:归纳以证明有界例1中前若干项的图示}中的红线是$y=x$的图像, 蓝线是$\displaystyle y = \frac{c}{2} + \frac{x^2}{2}$的图像. 交点即$1-\sqrt{1-c}$. 用图中的方法可以做图找出$\curb{a_n}$的前若干项, 并且在几何上很好地说明了有界性和单调性.
+\begin{sample}
+    \begin{ex}
+        \label{ex:平方根单调方法}
+        用上面的方法给\cref{ex:平方根不动点}一个证明.
+    \end{ex}
+\end{sample}
+
+% subsubsection 归纳以证明/单调 (end)
+
+\subsubsection{振荡数列} % (fold)
+\label{ssub:振荡数列}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{NegativeFixedPoint}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{NegativeFixedPoint1}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{NegativeFixedPoint2}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{NegativeFixedPoint3}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{NegativeFixedPoint4}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{NegativeFixedPoint5}
+    \end{subfigure}
+    \caption{\cref{ex:振荡数列例1}中前若干项的图示}
+    \label{fig:振荡数列例1中前若干项的图示}
+\end{figure}
+
+有些情况下数列并非从第$N$项开始单调, 而是诸如奇数项子列单调递减, 偶数项子列单调递增.
+\begin{sample}
+    \begin{ex}
+        \label{ex:振荡数列例1}
+        设$a_0 = 3$, $\displaystyle a_{n+1} = \rec{1+a_n}$, 求证$\curb{a_n}$的极限存在并求出之.
+    \end{ex}
+    \begin{proof}
+        考虑迭代两次的结果, 即
+        \[ a_{n+2} = \frac{1+a_n}{2+a_n}, \]
+        可以发现当如下事实:
+        \begin{cenum}
+            \item 当$\displaystyle a_n > \frac{\sqrt{5}-1}{2}$, $\displaystyle a_n > a_{n+2} > \frac{\sqrt{5}-1}{2}$;
+            \item 反之若$\displaystyle a_n < \frac{\sqrt{5}-1}{2}$, $\displaystyle a_n < a_{n+2} < \frac{\sqrt{5}-1}{2}$.
+        \end{cenum}
+        故$a_0, a_2, a_4, \cdots$单调递减, $a_1 = 1/4, a_3, a_5, \cdots$单调递增, 二者皆单调有界故收敛, 极限为\inlinehardlink{\cref{thm:极限的四则运算}}$\displaystyle \frac{\sqrt{5}-1}{2}$. 知$\displaystyle \lim_{n\rightarrow\infty} a_n = \frac{\sqrt{5}-1}{2}$.
+    \end{proof}
+\end{sample}
+\cref{fig:振荡数列例1中前若干项的图示}中红线是$y=x$的图像, 蓝线是$\displaystyle y=\frac{1}{1+x}$的函数图像. 用图中的方法可以做图找出$\curb{a_n}$的前若干项. 左边的一列正好是$a_0, a_2, a_4$, 可以看到绿色的点往逐次下滑, 即单调递减; 右边的一列是$a_1, a_3, a_5$, 对应单调递增.
+\par
+对比\cref{ex:归纳以证明有界例1}和\cref{ex:振荡数列例1}以及相应的图\cref{fig:归纳以证明有界例1中前若干项的图示}和\cref{fig:振荡数列例1中前若干项的图示}可以发现:
+\begin{cenum}
+    \item 对于由$a_{n+1} = f\pare{a_n}$定义的数列, 如果存在$x$满足$f\pare{x} = x$(即不动点), 那么单调性和有界性都是普遍的.
+    \item 有可能$\curb{a_n}$是单调的, 也有可能子列$a_0, a_2, a_4, \cdots$和$a_1, a_3, a_5,\cdots$呈现完全相反的单调性. 前者对应的情形是$f\pare{x}$在不动点处斜率为正的情形, 后者对应斜率为负的情形.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        \label{ex:Newton迭代单调方法}
+        用上面的方法给\cref{ex:Newton迭代不动点}一个证明.
+    \end{ex}
+\end{sample}
+
+% subsubsection 振荡数列 (end)
+
+% subsection 单调数列 (end)
+
+\subsection{判定数列发散} % (fold)
+\label{sub:判定数列发散}
+
+\subsubsection{无界数列} % (fold)
+\label{ssub:无界数列}
+
+\begin{definition}[无界数列]
+    若对于任意$M$, 存在$n$使得$\abs{a_n} > M$, 则谓$\curb{a_n}$无界.
+\end{definition}
+\begin{theorem}[无界数列发散]
+    设$\curb{a_n}$无界, 则$\curb{a_n}$发散.
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle a_n = \frac{n^3+n-7}{n+3}$, 证明$\curb{a_n}$发散.
+    \end{ex}
+\end{sample}
+
+% subsubsection 无界数列 (end)
+
+\subsubsection{按定义得到} % (fold)
+\label{ssub:按定义得到}
+
+\begin{theorem}[$\epsilon$-$N$语言的逆]
+    \label{thm:数列极限定义的逆}
+    $\curb{a_n}$发散当且仅当对于任意$a$, 存在$\epsilon_0$使得对于任意$N$都存在$n>N$满足$\abs{a_n-a} \ge \epsilon_0$.
+\end{theorem}
+这种方法很不常用. 大多数情况下都可以用其它方法证明一个数列的极限不存在.
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle a_n = \pare{-1}^n\frac{n}{n+1}$, 证明$a_n$发散.
+    \end{ex}
+    \begin{proof}
+        按照\cref{thm:数列极限定义的逆}, 需要先任意取$a$. 当$a=0$时取$\epsilon_0 = 1/2$, 任何$n$都满足$\abs{a_n-a} \ge \epsilon_0$.
+        \par
+        当$a>0$是同样取$\epsilon_0 = 1/2$, 对于任意$N$, 任取大于$N$的奇数$n$都有$\abs{a_n-a} \ge \epsilon_0$. $a<0$的情形也是类似的.
+    \end{proof}
+\end{sample}
+
+% subsubsection 按定义得到 (end)
+
+\subsubsection{发散子列} % (fold)
+\label{ssub:发散子列}
+
+\begin{theorem}[子列发散蕴含发散]
+    \label{thm:子列发散蕴含发散}
+    若$\curb{a_n}$存在一发散子列, 则$\curb{a_n}$发散.
+\end{theorem}
+这一结论通常不单独使用——因为判定子列发散还是需要别的方法.
+
+% subsubsection 发散子列 (end)
+
+\subsubsection{子列极限不同} % (fold)
+\label{ssub:子列极限不同}
+
+\begin{theorem}
+    设$\curb{a_n}$有二子列$\curb{a_{n_k}}$和$\curb{a_{m_k}}$收敛于不同极限, 则$\curb{a_n}$发散.
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        证明$\curb{\sin n}$发散.
+    \end{ex}
+    \begin{proof}
+        \begin{itemize}
+            \item 所有形如$\pare{2k\pi + \pi/4, 2k\pi + 3\pi/4}$的区间中必定有整数, 取$n_k$为相应区间中的一个整数. 此外, 所有形如$\pare{2k\pi - 3\pi/4, 2k\pi - \pi/4}$的区间中也必定有整数, 取$m_k$为相应区间中的一个整数.
+            \item 若$\curb{\sin n_k}$或$\curb{\sin m_k}$中任何一者发散, 则$\curb{\sin n}$发散\inlinehardlink{\cref{thm:子列发散蕴含发散}}.
+            \item 若两者皆收敛, 则由于$\sin n_k > \sqrt{2}/2$而$\sin m_k < -\sqrt{2}/2$, 两列的极限必定不同, 故$\curb{\sin n}$发散.\qedhere
+        \end{itemize}
+    \end{proof}
+\end{sample}
+
+% subsubsection 子列极限不同 (end)
+
+\subsubsection{由运算得到} % (fold)
+\label{ssub:由运算得到}
+
+参考\cref{thm:极限的四则运算}, 通常用于递推定义的数列, 在递推式两侧取极限, 通常能得到$\displaystyle \lim_{n\rightarrow \infty} a_n$「要么收敛于某$A$, 要么发散」的结论.
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle x_1 = \frac{c}{2}$, $\displaystyle x_{n+1} = \frac{c}{2} + \frac{x_n^2}{2}$, 证明若$c>1$则$\curb{x_n}$发散.
+    \end{ex}
+    \begin{proof}
+        设$\displaystyle \lim_{n\rightarrow \infty} x_n = x$, 则在递推式两侧取极限\inlinehardlink{\cref{thm:极限的四则运算}}, 有
+        \[ x = \frac{c}{2} + \frac{x^2}{2}. \]
+        $c>1$时这个二次方程无解, 矛盾.
+    \end{proof}
+\end{sample}
+
+% subsubsection 由运算得到 (end)
+
+% subsection 判定数列发散 (end)
+
+% section 数列极限的存在性 (end)
+
+\section{数列极限的求值} % (fold)
+\label{sec:数列极限的求值}
+
+\begin{pitfall}
+    尽管这一节叫做「数列极限的求值」, 但实际上数列的存在性仍必须证明, 只不过求值的过程中可能顺带得到了存在性(或者证明存在性的过程中顺带得到了值).
+\end{pitfall}
+
+\subsection{由运算得到} % (fold)
+\label{sub:由运算得到}
+
+\subsubsection{有理函数的情形} % (fold)
+\label{ssub:有理函数的情形}
+
+\begin{theorem}[极限的四则运算]
+    \label{thm:极限的四则运算}
+    若$\displaystyle \lim_{n\rightarrow\infty}a_n$和$\displaystyle \lim_{n\rightarrow\infty}b_n$存在且分别为$a$和$b$, 则
+    \[ \lim_{n\rightarrow\infty} \pare{a_n\pm b_n},\quad \lim_{n\rightarrow\infty} a_n b_n \]
+    皆存在. 并且当$\displaystyle \lim_{n\rightarrow\infty} b_n \neq 0$时$\displaystyle\lim_{n\rightarrow\infty}\frac{a_n}{b_n}$存在. 存在时分别有
+    \[ \lim_{n\rightarrow\infty} \pare{a_n\pm b_n} = a\pm b,\quad \lim_{n\rightarrow\infty} a_n b_n = ab, \lim_{n\rightarrow\infty} \frac{a_n}{b_n} = \frac{a}{b}. \]
+\end{theorem}
+\begin{corollary}[多项式和极限可交换]
+    若$R\pare{x}$是$x$的一个有理函数, 则
+    \[ \lim_{n\rightarrow \infty} a_n = a \Rightarrow \lim_{n\rightarrow \infty} R\pare{a_n} = R\pare{a}, \]
+    其中$R\pare{a}$必须有意义.
+\end{corollary}
+\begin{sample}
+    \begin{ex}
+        若$\displaystyle \lim_{n\rightarrow\infty} \frac{x_n-a}{x_n+a} = 0$, 证明$\displaystyle \lim_{n\rightarrow\infty} x_n = a$.
+    \end{ex}
+    提示: $\displaystyle x_n = a\cdot \frac{1+y_n}{1-y_n}$, 其中$\displaystyle y_n = \frac{x_n-a}{x_n+a}$.
+\end{sample}
+更多例子可以参考\inlinehardlink{\cref{ex:归纳以证明有界例1}}和\inlinehardlink{\cref{ex:振荡数列例1}}.
+\begin{pitfall}
+    不能认为$\curb{a_n}$收敛就有$\displaystyle \lim_{n\rightarrow\infty}\frac{a_{n+1}}{a_n} = 1$.
+\end{pitfall}
+
+% subsubsection 有理函数的情形 (end)
+
+\subsubsection{一般连续函数的情形} % (fold)
+\label{ssub:一般连续函数的情形}
+
+直接参考\inlinehardlink{\cref{ex:平方根对数列的连续性}}及其以下的各个例子.
+\begin{sample}
+    \begin{ex}
+        设$a_0 = 1$, $a_{n+1} = \sin a_n$, 证明$\curb{a_n}$收敛并求其值.
+    \end{ex}
+    \begin{proof}
+        $\curb{a_n}$收敛\inlinehardlink{\cref{ex:sin迭代收敛}}, 设$\displaystyle \lim_{n\rightarrow\infty} a_n = a$, 于是\inlinehardlink{\cref{ex:sin对数列的连续性}}知
+        \[ \lim_{n\rightarrow\infty} \sin a_n = \sin a. \]
+        对$a_{n+1} = \sin a_n$两侧取极限就有$a = \sin a$, $a=0$.
+    \end{proof}
+\end{sample}
+
+% subsubsection 一般连续函数的情形 (end)
+
+% subsection 由运算得到 (end)
+
+\subsection{由不等式得到} % (fold)
+\label{sub:由不等式得到}
+
+\subsubsection{极限的保号性} % (fold)
+\label{ssub:极限的保号性}
+
+\begin{theorem}[极限对常数的保号性]
+    \label{thm:极限对常数的保号性}
+    设$a \le b_n \le c$对任意$n$成立, 则若$\curb{b_n}$收敛, 则
+    \[ a \le \lim_{n\rightarrow \infty} b_n \le c. \]
+\end{theorem}
+\begin{theorem}[极限对数列的保号性]
+    设$a_n \le b_n \le c_n$对任意$n$成立, 则若$\curb{a_n}$, $\curb{b_n}$和$\curb{c_n}$皆收敛, 则
+    \[ \lim_{n\rightarrow \infty} a_n \le \lim_{n\rightarrow \infty} b_n \le \lim_{n\rightarrow \infty} c_n. \]
+\end{theorem}
+这一结论通常不能直接求出极限, 典型的使用情况是对于递推定义的$a_{n+1}=f\pare{a_n}$求出了多个根$x=f\pare{x}$之后用这一结论排除掉不可能的极限值.\inlinehardlink{\cref{ex:归纳以证明有界例1}}
+\begin{sample}
+    \begin{ex}
+        证明对于任意给定的整数$k$, 都有
+        \[ e \ge 1 + \rec{1!} + \rec{2!} + \cdots + \rec{k!}. \]
+    \end{ex}
+    \begin{proof}
+        $e$的定义式$\displaystyle e = \lim_{n\rightarrow\infty} \pare{1+\rec{n}}^n$中极限存在且序列单调递增, 故对于任意$n\ge k$,
+        \begin{align*}
+            e &\ge \pare{1+\rec{n}}^n = 1 + n\cdot\rec{n} + \frac{n\pare{n-1}}{2!}\pare{\rec{n}}^2 + \cdots\\
+            & \phantom{\ge \pare{1+\rec{n}}^n \ge} + \frac{n!}{k!\pare{n-k}!}\pare{\rec{n}}^k + \cdots + \pare{\rec{n}}^n \\
+            & \ge 1 + n\cdot\rec{n} + \frac{n\pare{n-1}}{2!}\pare{\rec{n}}^2 + \cdots + \frac{n!}{k!\pare{n-k}!}\pare{\rec{n}}^k.
+        \end{align*}
+        对右侧取极限$n\rightarrow\infty$, (逐项取极限, 例如$\displaystyle \frac{n!}{k!\pare{n-k}!}\pare{\rec{n}}^k \rightarrow \rec{k!}$), 右侧变为
+        \[ 1 + \rec{1!} + \rec{2!} + \cdots + \rec{k!}. \]
+        由极限保号性,
+        \[ e \ge 1 + \rec{1!} + \rec{2!} + \cdots + \rec{k!}. \qedhere \]
+    \end{proof}
+\end{sample}
+
+% subsubsection 极限的保号性 (end)
+
+\subsubsection{夹挤定理} % (fold)
+\label{ssub:夹挤定理}
+
+\begin{theorem}[夹挤定理]
+    \label{thm:夹挤定理}
+    若$\displaystyle \lim_{n\rightarrow\infty} a_n =\lim_{n\rightarrow\infty} c_n = L$, 且$a_n \le b_n \le c_n$, 则$\displaystyle \lim_{n\rightarrow\infty} b_n$存在且$\displaystyle \lim_{n\rightarrow\infty} b_n = L$.
+\end{theorem}
+这一定理的用法通常是, 当被要求求$\displaystyle \lim_{n\rightarrow \infty} b_n$时, 因为$b_n$形状复杂, 故先构造如上的$\curb{a_n}$和$\curb{c_n}$来得到$b_n$的极限.
+\begin{sample}
+    \begin{ex}
+        设$b>a>0$, 求$\displaystyle \lim_{n\rightarrow\infty} \pare{a^n+b^n}^{\rec{n}}$.
+    \end{ex}
+    \begin{proof}[解]
+        设$\displaystyle b_n = \pare{a^n+b^n}^{\rec{n}}$, $\displaystyle a_n = \pare{b^n}^{\rec{n}}$, $\displaystyle c_n = \pare{2b^n}^{\rec{n}}$, 则$\curb{a_n}$,$\curb{b_n}$,$\curb{c_n}$显然满足夹挤定理的条件, $L = b$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\curb{a_n}$的极限, 其中$\displaystyle a_n = \frac{1! + 2! + \cdots + n!}{n!}$.
+    \end{ex}
+    \begin{proof}[解]
+        $1!+2!+\cdots+n! \le \pare{n-2}\pare{n-2}! + \pare{n-1}! + n! < 2\pare{n-1}! + n!$,
+        \[ \Rightarrow 1 < a_n < \frac{2}{n} + 1. \]
+        由夹挤定理可得$\displaystyle \lim_{n\rightarrow\infty} a_n = 1$.
+    \end{proof}
+\end{sample}
+
+% subsubsection 夹挤定理 (end)
+
+% subsection 由不等式得到 (end)
+
+\subsection{Stolz定理} % (fold)
+\label{sub:stolz定理}
+
+\subsubsection{基本方法} % (fold)
+\label{ssub:基本方法}
+
+\begin{theorem}[$\displaystyle \frac{*}{\infty}$型的Stolz定理]设$\curb{a_n}$是严格单调递增的无穷大量, 又存在
+\[ \lim_{n\rightarrow\infty} \frac{b_{n+1}-b_n}{a_{n+1}-a_n} = l, \]
+则有
+\[ \lim_{n\rightarrow\infty} \frac{b_n}{a_n} = l. \]
+\end{theorem}
+\begin{theorem}[$\displaystyle \frac{0}{0}$型的Stolz定理]设$\curb{a_n}$是严格单调递减的无穷小量, 而$\curb{b_n}$是无穷小量, 又存在
+\[ \lim_{n\rightarrow\infty} \frac{b_{n+1}-b_n}{a_{n+1}-a_n} = l, \]
+则有
+\[ \lim_{n\rightarrow\infty} \frac{b_n}{a_n} = l. \]
+\end{theorem}
+\begin{remark}
+    两个命题中的$l$都可以是无穷.
+\end{remark}
+\begin{pitfall}
+    Stolz定理中分母单调的条件不可缺少, 而分子不需要此条件.
+\end{pitfall}
+\begin{pitfall}
+    Stolz定理不可倒转——即不能由$\displaystyle \lim_{n\rightarrow\infty} \frac{b_n}{a_n} = l$推出$\displaystyle \lim_{n\rightarrow\infty} \frac{b_{n+1}-b_n}{a_{n+1}-a_n}$.
+\end{pitfall}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle a_n = \frac{1! + 2! + \cdots + n!}{n!}$, 求$\curb{a_n}$的极限.
+    \end{ex}
+    \begin{proof}
+        由Stolz定理,
+        \[ \lim_{n\rightarrow\infty} = \lim_{n\rightarrow\infty} \frac{\pare{n+1}!}{\pare{n+1}! - n!} = \lim_{n\rightarrow\infty} \frac{\pare{n+1}!}{n!n} = 1.\qedhere \]
+    \end{proof}
+\end{sample}
+\begin{corollary}[Cauchy定理]
+    设$\curb{a_n}$收敛于$a$, 则
+    \[ \lim_{n\rightarrow \infty} \frac{a_1+\cdots+a_n}{n} = a. \]
+\end{corollary}
+\begin{sample}
+    \begin{ex}
+        设$\curb{a_n}$收敛, 证明$\displaystyle\lim_{n\rightarrow \infty} \sqrt[n]{a_1\cdot \cdots \cdot a_n} = a$.
+    \end{ex}
+    提示: \inlinehardlink{常用不等式\eqref{eq:AGH不等式}, \cref{thm:夹挤定理}}
+\end{sample}
+
+% subsubsection 基本方法 (end)
+
+\subsubsection{变换到容易应用的情形} % (fold)
+\label{ssub:变换到容易应用的情形}
+
+由递推式定义的数列有可能发散到无穷大, 也有可能收敛到零, Stolz定理提供了计算其发散/收敛速度的方法, 但需要一定技巧.
+\begin{sample}
+    \begin{ex}
+        设$a_1 > 0$, $\displaystyle a_{n+1} = a_n + \rec{a_n}$, 证明
+        \[ \lim_{n\rightarrow\infty} \frac{a_n}{\sqrt{2n}} = 1. \]
+    \end{ex}
+    \begin{proof}
+        记$b_n = a_n^2$, 则
+        \[ b_{n+1} - b_n = \rec{b_n} + 2, \]
+        显然$\curb{b_n}$必定发散, 从而
+        \[ \lim_{n\rightarrow\infty} \pare{b_{n+1} - b_n} = 2 \Rightarrow \lim_{n\rightarrow\infty} \frac{b_n}{2n} = 1\Rightarrow \lim_{n\rightarrow\infty} \frac{a_n}{\sqrt{2n}} = 1.\qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$0<a_1<1$, $a_{n+1} = a_n - a_n^2$, 证明
+        \[ \lim_{n\rightarrow\infty} na_n = 1. \]
+    \end{ex}
+    提示: 设$\displaystyle b_n = \rec{a_n}$.
+\end{sample}
+另一类变换常常发生在级数求和的情形下, 即Abel变换.
+\begin{sample}
+    \begin{ex}
+        设$S_n = a_1 + \cdots + a_n$, $\displaystyle A_n = \frac{a_1 + 2a_2 + \cdots + na_n}{n}$, 若$\curb{S_n}$收敛, 证明$\displaystyle \lim_{n\rightarrow\infty} A_n = 0$.
+    \end{ex}
+    \begin{proof}
+        注意到$a_i = S_i - S_{i-1}$, 从而
+        \[ A_n = \frac{S_1 + 2\pare{S_2 - S_1} + \cdots + n\pare{S_n - S_{n-1}}}{n} = S_n - \frac{S_1 + \cdots + S_{n-1}}{n}. \]
+        由Stolz定理得到$\displaystyle \lim_{n\rightarrow\infty} A_n = 0$.
+    \end{proof}
+\end{sample}
+\begin{remark}
+    从这个定理也可以看出Stolz定义不可以逆用. 设
+    \[ a_n = \begin{cases}
+        1/n,\quad n\text{是完全平方数},\\
+        0,\quad \text{其它情形}.
+    \end{cases} \]
+    则$\curb{na_n}$并不收敛到零.
+\end{remark}
+
+% subsubsection 变换到容易应用的情形 (end)
+
+% subsection stolz定理 (end)
+
+\subsection{常用初等结论} % (fold)
+\label{sub:常用初等结论}
+
+\subsubsection{等式} % (fold)
+\label{ssub:等式}
+
+\begin{flalign}
+    \label{eq:幂差}%
+    && \sqrt[n]{a} - \sqrt[n]{b} &= \frac{a-b}{\sqrt[n]a^{n-1} + \sqrt[n]{a}^{n-2}\sqrt[n]{b} + \cdots + \sqrt[n]{b}^{n-1}}. &\\
+    \label{eq:方根差}%
+    \text{特别地,} && \sqrt{a} - \sqrt{b} &= \frac{a - b}{\sqrt{a} + \sqrt{b}}. &\\
+    \label{eq:和差化积}%
+    \text{(和差化积)} && \sin a + \sin b &= \half \cos\frac{a-b}{2}\sin\frac{a+b}{2}. &\\
+    && \cos a + \cos b &= \half \cos \frac{a-b}{2} \cos \frac{a+b}{2}. &
+\end{flalign}
+
+% subsubsection 等式 (end)
+
+\subsubsection{不等式} % (fold)
+\label{ssub:不等式}
+
+\begin{flalign}
+    \label{eq:Bernoulli不等式}
+    \text{(Bernoulli不等式)} && \pare{1+x}^r - 1 &< rx,\quad 0 < r < 1, &\\
+    && \pare{1+x}^r - 1 &> rx,\quad r>1, &\\
+    \label{eq:AGH不等式}
+    \text{(平均值不等式)} && \frac{n}{\displaystyle\rec{a_1}+\cdots+\rec{a_n}} &\le \sqrt[n]{a_1\cdot \cdots \cdot a_n} \le \frac{a_1 + \cdots + a_n}{n}. &\\
+    \label{eq:sin的基本不等式}
+    && \sin x & < x, \quad\pare{x>0} &\\
+    \label{eq:三角不等式}%
+    \text{(三角不等式)} && \abs{a+b} &\le \abs{a} + \abs{b}, &\\
+    \label{eq:三角不等式2}%
+    && \abs{a-b} &\ge \abs{\abs{a} - \abs{b}}. &
+\end{flalign}
+\begin{theorem}[连乘积的上限]
+    \label{thm:连乘积的上限}
+    设$a_n > -1$对所有$n$成立, $s_n = \abs{a_1} + \cdots + \abs{a_n}$, 则
+    \[ \pare{1+a_1}\cdots\pare{1+a_n} \le 1 + s_n + s_n^2 + \cdots + s_n^n. \]
+    如果$s_n\le s<1$对任意$n$都成立, 则
+    \[ \pare{1+a_1}\cdots\pare{1+a_n} \le \rec{1-s}. \]
+\end{theorem}
+
+% subsubsection 不等式 (end)
+
+% subsection 常用初等结论 (end)
+
+% section 数列极限的求值 (end)
+
+% section 数列极限 (end)
+
+\end{document}

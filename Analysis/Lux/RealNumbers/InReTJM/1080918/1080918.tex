@@ -1,0 +1,16 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{ex}
+    设$\displaystyle \lim_{n\rightarrow \infty} = l$, 证明$\displaystyle \lim_{n\rightarrow \infty} \abs{a_n} = \abs{l}$.
+\end{ex}
+\begin{proof}
+    要证明$\displaystyle \lim_{n\rightarrow \infty} \abs{a_n} = \abs{l}$, 只需证明{\color{red}对于任意$\epsilon>0$, 存在$N$使得$n>N$时$\displaystyle\abs{\abs{a_n} - \abs{l}} < \epsilon$}.
+    \par
+    现有的条件是$\displaystyle \lim_{n\rightarrow \infty} a_n = l$. 故对于任意$\epsilon>0$, 存在$N$使得$n>N$时$\displaystyle\abs{{a_n} - {l}} < \epsilon$. 由于$\abs{\abs{a_n} - \abs{l}} \le \abs{a_n - l}$, 可以断定对于任意$\epsilon>0$, 存在$N$使得$n>N$时$\displaystyle\abs{\abs{a_n} - \abs{l}} < \epsilon$, 这正是要证明的红色字部分.
+\end{proof}
+
+\end{document}

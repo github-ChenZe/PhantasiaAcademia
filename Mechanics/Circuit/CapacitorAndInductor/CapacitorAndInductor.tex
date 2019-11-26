@@ -1,0 +1,368 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{电容和电感} % (fold)
+\label{sec:电容和电感}
+
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{书例5-1}
+    \end{ex}
+    \begin{proof}[解]
+        由$\displaystyle i = \+dtdu$得到$i=\pm\SI{0.4}{\ampere}$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{书例5-2}
+    \end{ex}
+    \begin{proof}[解]
+        写出$i\pare{t}$的函数式后, 分段积分即可.
+    \end{proof}
+\end{sample}
+
+\subsection{电容电压的连续和记忆性质} % (fold)
+\label{sub:电容电压的连续和记忆性质}
+
+\[ u_C\pare{t} = \rec{C} \int_{-\infty}^t i\pare{\xi}\,\rd{\xi} = u_C\pare{t_0} + \rec{C} \int_{t_0}^t i\pare{\xi}\,\rd{\xi}. \]
+设电容的厨师电压$u_C\pare{t_0} = U_0$, 则$u_C\pare{t} = U_0 + \displaystyle \rec{C} \int_{t_0}^t i\pare{\xi}\,\rd{\xi}$. 故{\color{red}一个已充电的电容可以等效为一个未充电的电容与电压源相串联的电路. 电压源的电压值即为$t_0$时电容两侧的电压$U_0$}.
+
+% subsection 电容电压的连续和记忆性质 (end)
+
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{书例5-3} 已知$C = \SI{4}{\farad}$, $i\pare{t}$波形如图所示.
+        \begin{cenum}
+            \item 试求电容电压$u_C\pare{t}$;
+            \item 求$u_C\pare{0}$, $u_C\pare{1}$, $u_C\pare{-0.5}$;
+            \item 试作出$t>0$时该电容的等效电路.
+        \end{cenum}
+    \end{ex}
+    \begin{proof}[解]
+        电容电压
+        \[ u_C\pare{t} = \rec{C} \int_{-\infty}^t i\pare{\xi}\,\rd{\xi} = 0.5 + 0.75t. \]
+        其它时刻的电压类似求得. $t>0$时该电容之等效电路由电压源$\SI{0.5}{\volt}$与未充电电容$\SI{4}{\farad}$串联构成.
+    \end{proof}
+\end{sample}
+
+\subsection{电容的储能} % (fold)
+\label{sub:电容的储能}
+
+$t_1$到$t_2$期间增加能量
+\[ \half C\pare{u^2\pare{t_2} - u^2\pare{t_1}}\Rightarrow W = \half Cu^2. \]
+
+% subsection 电容的储能 (end)
+
+\subsection{电感元件} % (fold)
+\label{sub:电感元件}
+
+二端元件之磁通匝链数正比于电流者谓电感.
+\[ u\pare{t} = \+dtd\Psi = L\+dtdi. \]
+流过电感的电流本身不能突变. 设电感初始电流$i_0$, 则
+\[ i_L\pare{t} = I_0 + i_1\pare{t}. \]
+故$t>t_0$时可等效为初始电流为零的电感与电流源的并联电路, 其中电流源的电流值即为$t_0$时刻的电感电流$I_0$.
+
+\begin{sample}
+    \begin{ex}
+        已知$t>0$时电感电压$u=e^{-t}\SI{}{\volt}$. 且在某一时刻$t_1$有电压$u=\SI{0.4}{\volt}$. 在这一时刻
+        \begin{cenum}
+            \item 电流$i_L$的变化率
+            \[ i_L\pare{0} = i_R\pare{0} = \frac{u\pare{0}}{R} = \SI{1}{\ampere},\quad i_L\pare{t} = i_L\pare{0} - \rec{L}\int_0^t u\,\rd{\xi} = e^{-t}. \]
+            \item 电感的磁链
+            \[ \Psi\pare{t} = Li. \]
+            \item 电感的储能
+            \[ W = \half LI^2. \]
+            \item 电感的磁场放出能量的速率
+            \[ p = ui. \]
+            \item 电阻中消耗能量的速率
+            \[ p_R = i^2\pare{t}R. \]
+        \end{cenum}
+    \end{ex}
+\end{sample}
+
+% subsection 电感元件 (end)
+
+\subsection{电容和电感的对偶} % (fold)
+\label{sub:电容和电感的对偶}
+
+若将$u$和$i$呼唤, $C$和$L$互换, 则电容和VCR变为电感的VCR.
+
+\subsubsection{状态变量} % (fold)
+\label{ssub:状态变量}
+
+状态变量谓一组最少的变量, 使得在已知其$t_0$时数值和$t\ge t_0$时输入的情形下可确定$t\ge t_0$时其在电路中的状态. 电容电压和电感电流都是状态变量.
+
+% subsubsection 状态变量 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+习题五 1, 3, 6, 8, 10
+
+% paragraph 作业 (end)
+
+% subsection 电容和电感的对偶 (end)
+
+\subsection{非线性电容} % (fold)
+\label{sub:非线性电容}
+
+非线性电容不能用单一的电容值表征. 将$C\pare{u}$替换为$\displaystyle C = \+didu$即可令之前的公式适用.
+
+% subsection 非线性电容 (end)
+
+\subsection{非线性电感} % (fold)
+\label{sub:非线性电感}
+
+非线性电感的$i$-$\psi$之间的关系不能用单一的$L$表征.
+
+% subsection 非线性电感 (end)
+
+\subsection{电容器模型} % (fold)
+\label{sub:电容器模型}
+
+实际电容器可以用电容作为模型. 如果其消耗的能量不可忽略, 则可在模型中添加一并联电导$G$. 若电容两端电压变化率很高, 电流产生的磁场不可忽略, 则须在模型中添加电感元件$L$.
+
+% subsection 电容器模型 (end)
+
+\subsection{电感器模型} % (fold)
+\label{sub:电感器模型}
+
+电感线圈以电感元件表示时准确性较差. 如果其消耗的能量不可忽略, 则可在模型中添加一串联电阻$R$. 若电感两端电压变化率很高, 电容的作用不可忽略 则须在模型中并联电容元件$C$.
+
+% subsection 电感器模型 (end)
+
+\subsection{电容串/并联} % (fold)
+\label{sub:电容串并联}
+
+$n$个电容元件串联, 各电容初始电压为$u_1\pare{0}, \cdots, u_n\pare{0}$. 故总初始电压即所有初始电压之和.
+\[ \rec{C_S} = \rec{C_1} + \cdots + \rec{C_n}. \]
+电容并联之等效电容为电容的求和.
+
+% subsection 电容串/并联 (end)
+
+\subsection{电感串/并联} % (fold)
+\label{sub:电感串并联}
+
+电感串联后, $L = L_1 + \cdots + L_n$. 电感并联后
+\[ \rec{L} = \rec{L_1} + \cdots + \rec{L_n}. \]
+
+% subsection 电感串/并联 (end)
+
+\subsection{时间常数} % (fold)
+\label{sub:时间常数}
+
+电容的无输入响应$U_0 \exp{-t/RC}$的指数是无量纲的, 即$\tau = RC$具有时间量纲, 称为时间常数. 电容-电阻构成的电路在经过时间$\tau$后电压减少到原来的$e^{-1}$.
+
+% subsection 时间常数 (end)
+
+\subsection{电感-电阻电路的零输入响应} % (fold)
+\label{sub:电感_电阻电路的零输入响应}
+
+$RL$电路的零输入响应谓先将$L$充满至$i_0$, 后将其分离与电阻串联. 其满足
+\[ L\+dtd{i_L} + Ri_L = 0, \quad i_L\pare{0} = I_0,\quad i_L\pare{t} = I_0 e^{-t/\tau}. \]
+其中$\tau = L/R$谓时间常数. 相应的电压为
+\[ u_L = L\+dtd{i_L} = -RI_0 e^{-t/\tau}. \]
+
+\begin{remark}
+    零输入响应是指输入为零时, 单纯由初始状态产生的响应.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{p.245.6-8(2)}
+    \end{ex}
+    \begin{solution}
+        电容电压不能跃变, 故$u_C\pare{0} = U$. 时间常数为$\tau = \pare{R_1+R_2}C$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{p.245.6-9}
+    \end{ex}
+    \begin{solution}
+        电感电流不能跃变, 故$u_L\pare{0} = \SI{1}{\ampere}$. 时间常数为$\tau = L/R = \SI{0.1}{\second}$.
+    \end{solution}
+\end{sample}
+
+% subsection 电感_电阻电路的零输入响应 (end)
+
+\subsection{零状态响应} % (fold)
+\label{sub:零状态响应}
+
+零初始状态下, 初始时刻施加于电路的输入所产生的响应谓零状态响应. 对于电流源$I_0$, 电容$C$于电阻$R$的并联, 由KCL,
+\[ C \+dtd{u_C} + \frac{u_C}{R} = I_S,\quad u_C\pare{0} = 0. \]
+初始条件由由电容电压不能跃变保证. 随着电容电压逐渐增长, 流过电阻的电流也在逐渐增长, 电流完全流过电阻, 电容电压几乎不再变化. 当直流电路中各个元件的电压和电流都不再随时间变化时, 电路进入直流稳态. 完整解为通解加特解, 即
+\[ u_C\pare{t} = Ke^{-t/\tau} + RI_S. \]
+$t=0$时$u=0$, 故$K=-RI_S$. 零状态解为$u_C\pare{t} = \displaystyle RI_S\pare{1-e^{-t/\tau}}$. 当$t=4\tau$时, 离稳态仅仅由$1.8\%$的偏差, 可认为几乎达到.
+
+% subsection 零状态响应 (end)
+
+\subsection{电感-电阻电路的零状态响应} % (fold)
+\label{sub:电感_电阻电路的零状态响应}
+
+电压源, 电感与电阻串联. $t=0$时开关闭合, 电感电流不能跃变, 故初始$u_L\pare{0} = 0$. 电流上升, 电阻电压增大, 电感电压减小, 电流变化减缓.
+\[ L\+dtd{i_L} + Ri_L = U_S. \]
+\begin{remark}
+    通解中齐次方程解部分谓固有响应分量, 与输入无关. 无论如何输入, 这一分量一般具有$Ke^{st}$之形式, $K$与输入有关. 这一分量之变化全然取决于电路本身. 特解谓强制响应分量, 其形式一般如输入之形式相同. 如强制响应为常量或周期函数, 则谓之稳态响应分量.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{例6-3}
+    \end{ex}
+    \begin{solution}
+        用Th\'evenin定理化简电感外的电路, 得到$U = \SI{15}{\volt}$, $R_0 = \SI{5}{\ohm}$, 时间常数$\tau = L/R_0 = 10/5 = \SI{2}{\second}$. $t \rightarrow \infty$有$i_L\pare{\infty} = \SI{3}{\ampere}$, 故$\displaystyle i_L\pare{t} = \displaystyle 3\pare{1-e^{-t/2}}$. 用网孔法可求解其它网孔的电流.
+    \end{solution}
+\end{sample}
+
+% subsection 电感_电阻电路的零状态响应 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+6. 1, 2, 3, 7, 14, 21, 35, 40, 43
+
+% paragraph 作业 (end)
+
+\subsection{线性动态电路的叠加原理} % (fold)
+\label{sub:线性动态电路的叠加原理}
+
+多个独立源作用于线性动态电路, 则零状态响应本身为各个独立源单独作用时所产生响应的代数和. 初始状态和输入共同作用下的响应谓完全响应, 即零输入响应与零状态响应之和.
+
+\begin{sample}
+    \begin{ex}
+        若电源-电容-电阻并联电路中$u_C\pare{0} = U_0 \neq 0$, 则
+        \[ u_C\pare{t} = Ke^{-t/\tau} + RI_S,\quad u_C\pare{0} = K+RI_S = U_0. \]
+        因此$\displaystyle u_C\pare{t} = RI_S + \pare{U_0 - RI_S}e^{-t/\tau}$.
+    \end{ex}
+\end{sample}
+\begin{cenum}
+    \item 先求解$C$的初始电压, 得到零输入响应$U_0 e^{-t/\tau}$;
+    \item 再求解$C$外的Th\'evenin等效, 得到零状态响应$U_S\pare{1-e^{-t/\tau}}$;
+    \item 相加得到实际的$U$.
+\end{cenum}
+
+% subsection 线性动态电路的叠加原理 (end)
+
+\subsection{三要素法} % (fold)
+\label{sub:三要素法}
+
+三要素法适用于直流输入的情况. 结果总为
+\[ u_C\pare{t} = \brac{u_C\pare{0} - u_C\pare{\infty}}e^{-t/\tau} + u_C\pare{\infty}. \]
+对电感和任意支路都适用. 通式为
+\[ f\pare{t} = f\pare{\infty} + \brac{f\pare{0} - f\pare{\infty}} e^{-t/\tau}. \]
+其中每个支路的时间常数$\tau$都相同.
+\par
+三要素法解题的一般步骤:
+\begin{cenum}
+    \item 用电压为$u_C\pare{0}$的直流电压源置换电容, 用电流为$i_L\pare{0}$的直流电流源置换电感, 得到$t=0$时的等效电路, 求任一电压或电流的初始值$u_{jk}\pare{0}$或$i_j\pare{0}$.
+    \item 用开路代替电容, 短路代替电感, 得到$t=\infty$的等效电路, 求得稳态值$u_{jk}\pare{\infty}$或$i_j\pare{\infty}$.
+    \item 求$N_1$得Th\'evenin或Norton等效, 计算$\tau = R_0C$或$\tau=L/R_0$.
+    \item 根据三要素法, $\displaystyle f\pare{t} = f\pare{\infty} + \brac{f\pare{0} - f\pare{\infty}} e^{-t/\tau}$.
+\end{cenum}
+其中
+\begin{cenum}
+    \item 求初始值时,
+    \begin{cenum}
+        \item 电容$u_C\pare{0_+} = u_C\pare{0_-}$, 电感$i_L\pare{0_+} = i_L\pare{0_-}$.
+        \item 作$t=0_+$的等效电路, 用电压为$u_C\pare{0}$的直流电压源置换电容, 用电流为$i_L\pare{0}$的直流电流源置换电感.
+        \item 求$t=0_+$时的等效电路的所需初始值$f\pare{0_+}$.
+    \end{cenum}
+    \item 求稳态值时,
+    \begin{cenum}
+        \item 作$t=\infty$的等效电路, 电容开路, 电感短路.
+        \item 在$t=\infty$的等效电路中求所需稳态值$f\pare{\infty}$.
+    \end{cenum}
+    \item 求时间常数$\tau$时,
+    \begin{cenum}
+        \item 先求出动态元件两端的Th\'evenin等效. 求$R_0$时
+        \begin{cenum}
+            \item 独立源若为零值, 则直接用电阻的串并联化简;
+            \item 独立源为零值, 外加电压$u$, 求输入端电流$j$, 等效电阻等于端钮上的电压与电流比;
+            \item 开路电压比短路电流(独立源保留).
+        \end{cenum}
+        \item 含受控源的电路只能用2, 3两种方法.
+        \item 电路的时间常数$\tau = R_0C$或$\tau = L/R_0$.
+    \end{cenum}
+    \item 代入三要素法的公式,
+    \[ f\pare{t} = f\pare{\infty} + \brac{f\pare{0_+} - f\pare{\infty}}e^{-t/\tau}. \]
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        \inlinehardlink{ppt.p.49}
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    不能认为对于电感/电容以外的支路仍然有$f\pare{0_-}=f\pare{0_+}$.
+\end{pitfall}
+
+% subsection 三要素法 (end)
+
+\subsection{阶跃函数与阶跃响应} % (fold)
+\label{sub:阶跃函数与阶跃响应}
+
+单位阶跃函数
+\[ \epsilon\pare{t} = \begin{cases}
+    0, & t<0, \\
+    1, & t>0.
+\end{cases} \]
+延时阶跃函数$\epsilon\pare{t-t_0}$在$t>t_0$时取$1$, $t<t_0$时取$0$.
+\par
+阶梯函数(例如方波)可写为阶跃函数之和.
+\begin{cenum}
+    \item 零状态电路对单位阶跃信号的响应谓单位阶跃响应, 记为$s\pare{t}$;
+    \item $As\pare{t}$得到对幅度$A$的响应;
+    \item $s\pare{t-t_0}$是对延时阶跃信号的响应\inlinehardlink{课件}.
+\end{cenum}
+
+% subsection 阶跃函数与阶跃响应 (end)
+
+\subsection{一阶电路子区间分析} % (fold)
+\label{sub:一阶电路子区间分析}
+
+分段常量信号作用下的一阶电路还可以按若干子区间进行分析. 设分段常量信号在$t=0$时作用于电路, 把$0<t<\infty$划分为若干子区间$\blr{t_j,t_{j+1}}$, 每一子区间的输入信号为一常量. 区间信号端点处发生跃变, 除了$u_C$和$i_L$连续外其他量可能随之跃变.
+
+% subsection 一阶电路子区间分析 (end)
+
+\subsection{冲激函数} % (fold)
+\label{sub:冲激函数}
+
+单位冲激函数又作Dirac-$\delta$函数, 其定义为$\delta\pare{t} = 0$, $t\neq 0$. 惟成立
+\[ \int_{-\infty}^{+\infty} \delta\pare{t}\,\rd{t} = 0. \]
+冲激函数所含面积谓其强度. 单位冲激函数谓强度为$1$单位的冲激函数. 冲激电流强度的量纲为$\SI{}{\ampere\second}$, 即$\SI{}{\coulomb}$.
+\begin{pitfall}
+    单位冲激函数指强度为$\SI{1}{\coulomb}$, 而非幅度为$\SI{1}{\ampere}$.
+\end{pitfall}
+冲激电流的幅度趋于$\infty$. 单位延时冲击函数为$\delta\pare{t-t_0}$, 即$t=t_0$处宽度趋于零而幅度无穷大, 但具有单位面积的脉冲.
+\begin{remark}
+    其它形状脉冲的极限也可以写作冲激函数.
+\end{remark}
+冲激函数是阶跃函数的导数, 即$\displaystyle \+dtd{\epsilon\pare{t}} = \delta\pare{t}$.
+
+% subsection 冲激函数 (end)
+
+\subsection{电容电压和电感电流的跃变} % (fold)
+\label{sub:电容电压和电感电流的跃变}
+
+输入为有限值时, $u_C$和$i_L$不能跃变. 但响应冲激函数时可以. 在存在冲激电流时,
+\[ u_C\pare{0_+} = u_C\pare{0_-}+\rec{C}\int_{0_-}^{0_+} i\,\rd{\xi}. \]
+若电荷$Q$流经电容, 则
+\[ u_C\pare{0_+} = u_C\pare{0_-} + \frac{Q}{C}. \]
+对于电感,
+\[ i_L\pare{0_+} = i_L\pare{0_-} + \rec{L} \int_{0_-}^{0_+} u\,\rd{t}. \]
+若冲激电压为$U\delta\pare{t}$, 则
+\[ i_L\pare{0_+} = i_L\pare{0_-} + \frac{U}{L}. \]
+
+% subsection 电容电压和电感电流的跃变 (end)
+
+\subsection{冲激响应} % (fold)
+\label{sub:冲激响应}
+
+可以认为冲激信号作用于零状态电路时, 立即在电路中建立了初始状态, $t>0$时电路响应即由该初始状态产生. 对于$t>0$, $h\pare{t}$是零输入响应.
+
+% subsection 冲激响应 (end)
+
+% section 电容和电感 (end)
+
+\end{document}

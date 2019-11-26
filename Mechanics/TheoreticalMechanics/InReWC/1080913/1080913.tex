@@ -1,0 +1,37 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{SystemPlane}
+    \caption{地面参考系的系统}
+    \label{fig:地面参考系的系统}
+\end{figure}
+系统如\cref{fig:地面参考系的系统}所示, 设$M$以加速度$a$运动, 向右为正方向. 将整个系统切换到随$M$运动的参考系(即向右以$a$加速运动的参考系).
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{SystemM}
+    \caption{滑动参考系的系统}
+    \label{fig:滑动参考系的系统}
+\end{figure}
+\par
+如\cref{fig:滑动参考系的系统}所示, 在新的参考系中, $A$和$B$都受三个力的作用: 支持力和重力, 以及变换参考系导致向左的惯性力$ma$. 如果设在这个新的参考系中, $A$和$B$沿着斜面的加速度分别为$a'_A$和$a'_B$, 可列出方程
+\begin{align*}
+    ma\cos\alpha + mg\sin\alpha &= ma'_A,\\
+    -ma\cos\beta + mg\sin \beta &= ma'_B.
+\end{align*}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{SystemAcc}
+    \caption{各个质点的加速度}
+    \label{fig:各个质点的加速度}
+\end{figure}%
+这里有三个未知数$a$, $a'_A$, $a'_B$, 故还需要一条方程. 这正是地面参考系中横向动量守恒. 如\cref{fig:各个质点的加速度}得到各个质点在地面参考系中的横向加速度, 则横向动量变化率
+\[ m\pare{a - a'_A\cos\alpha} + m\pare{a+a'_B\cos\beta} + Ma = 0. \]
+三条方程联立, 解得
+\[ a= -\frac{mg\pare{\sin 2\beta - \sin 2\alpha}}{2\pare{M+m} - m\pare{\cos 2\beta + \cos 2\alpha}}. \]
+
+\end{document}

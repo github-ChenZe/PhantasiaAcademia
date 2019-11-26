@@ -1,0 +1,631 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\usepackage{picins}
+\def\laplacian{\grad^2}
+
+\begin{document}
+
+\subsubsection*{配置} % (fold)
+\label{ssub:配置}
+
+\noindent
+Prof. Li Mingzhe limz@ustc.edu.cn\\
+T.A. Zhao Dehao dhzhao@mail.ustc.edu.cn\\
+T.A. Zhao Qi zq1624@mail.ustc.edu.cn\\
+T.A. Qin Yichen qin@mail.ustc.edu.cn
+
+\paragraph{Syllubus} % (fold)
+\label{par:syllubus}
+
+Chapter 5 removed.
+
+% paragraph syllubus (end)
+
+\paragraph{推荐书目} % (fold)
+\label{par:推荐书目}
+
+Landau, Goldstein, Ft. Worth, 金尚年, 梁昆淼.
+
+% paragraph 推荐书目 (end)
+
+\paragraph{成绩} % (fold)
+\label{par:成绩}
+
+平时30\%, 期中30\%, 期末40\%(半数考题一致).
+
+% paragraph 成绩 (end)
+
+% subsubsection 配置 (end)
+
+\section{Newton力学} % (fold)
+\label{sec:newton力学}
+
+\subsection{矢量及其分量} % (fold)
+\label{sub:矢量及其分量}
+
+默认右手坐标系.
+\begin{definition}[Kronecker-$\delta$符号]
+    \[ \delta_{ij} = \begin{cases}
+        1,\quad i=j,\\
+        0,\quad i\neq j.
+    \end{cases} \]
+\end{definition}
+\begin{ex}
+    \hfill $\displaystyle \+va\cdot\+vb = \sum_{i,j} a_ib_j\delta_{ij}.$ \hfill\mbox{}
+\end{ex}
+\begin{definition}
+    向量的方向余弦即其与坐标轴之夹角的余弦值, 如
+    \[ a_x = a\cos\alpha. \]
+\end{definition}
+\begin{ex}[动能与功的表示]
+    \[ T = \half m\+vv\cdot\+vv = \frac{\+vp\cdot\+vp}{2m}. \]
+    \[ \rd{W} = \+vF\cdot\rd{\+vr}. \]
+    特别地, 若力与位移垂直则不做功.
+\end{ex}
+\begin{definition}[Levi-Civita符号]
+    \[ \epsilon_{ijk} = \begin{cases}
+        1,\quad \pare{i\ j\ k}\text{is an even permutation of } \pare{1\ 2\ 3},\\
+        -1,\quad \pare{i\ j\ k}\text{is an odd permutation of } \pare{1\ 2\ 3},\\
+        0,\quad \text{otherwise}.
+    \end{cases} \]
+\end{definition}
+\begin{theorem}[叉乘的分量表示]
+    \[ \+va\times\+vb = \begin{vmatrix}
+        \hat{\+vx} & \hat{\+vy} & \hat{\+vz} \\
+        a_x & a_y & a_z \\
+        b_x & b_y & b_z
+    \end{vmatrix}. \]
+    设$\+vc = \+va\times\+vb$, 则
+    \[ c_i = \sum_{j,k} \epsilon_{ijk}a_jb_k. \]
+\end{theorem}
+\begin{ex}
+    \hfill $\epsilon_{ijk} = \epsilon_{kij} = \epsilon_{jki} = -\epsilon_{jik} = -\epsilon_{kji} = -\epsilon_{ikj}.$ \hfill\mbox{}
+\end{ex}
+特别地,
+\[ \+ve_i \cdot \+ve_j = \delta_{ij}, \quad \+ve_{i}\cdot\pare{\+ve_j\times \+ve_k} = \epsilon_{ijk}. \]
+\[ \epsilon_{ijk}\epsilon_{pqr} = \begin{vmatrix}
+    \delta_{ip} & \delta_{iq} & \delta_{ir} \\
+    \delta_{jp} & \delta_{jq} & \delta_{jr} \\
+    \delta_{kp} & \delta_{kq} & \delta_{kr}
+\end{vmatrix}. \]
+\begin{ex}[Lagrange恒等式]
+    \begin{equation}
+        \label{eq:Lagrange恒等式}
+        \sum_k \epsilon_{ijk}\epsilon_{klm} = \sum_k \epsilon_{ijk}\epsilon_{lmk} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}. 
+    \end{equation}
+\end{ex}
+\begin{ex}[矢量积的性质]
+    With the properties of Levi-Civita symbol above, one obtains
+    \begin{align}
+        \+va\times\+vb &= -\+vb\times\+va,\\
+        \label{eq:三重积置换}\pare{\+va\times\+vb}\cdot\+vc &= \pare{\+vc\times\+va}\cdot\+vb = \pare{\+vb\times\+vc}\cdot\+vb,\\
+        \+va\times\pare{\+vb\times\+vc} &= \+vb\pare{\+va\cdot\+vc} - \+vc\pare{\+va\cdot\+vb}.
+    \end{align}
+    The third identity is obtained from \eqref{eq:Lagrange恒等式}.
+\end{ex}
+\begin{ex}
+    角动量
+    \[ \+vJ = \+vr\times\+vp. \]
+    力矩
+    \[ \+vM = \+vr\times\+vF. \]
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+\begin{ex}
+    证明
+    \[ \+vA\cdot\pare{\+vB\times\+vC} = \begin{vmatrix}
+        A_x & A_y & A_z \\
+        B_x & B_y & B_z \\
+        C_x & C_y & C_z
+    \end{vmatrix} \]
+    同埋\eqref{eq:三重积置换}. 结合$\+vA,\+vB,\+vC$张开的平行六面体说明其几何意义.
+\end{ex}
+\begin{ex}
+    由\eqref{eq:Lagrange恒等式}, 证明
+    \[ \pare{\+vA\times\+vB}\cdot\pare{\+vC\times\+vD} = \pare{\+vA\cdot\+vC}\pare{\+vB\cdot\+vD} - \pare{\+vB\cdot\+vC}\pare{\+vA\cdot\+vD}. \]
+\end{ex}
+\begin{proof}
+    适用求和约定,
+    \begin{align*}
+        \pare{\+vA\times\+vB} \cdot\pare{\+vC\times\+vD} &= \pare{\epsilon A_jB_k}\pare{\epsilon_{ilm}C_lD_m} \\
+        &= \pare{\epsilon_{ijk}\epsilon_{ilm}}A_jB_kC_lD_m \\
+        &= \pare{\delta_{jl}\delta_{km} - \delta_{jm}\delta_{rl}}A_jB_kC_lD_m \\
+        &= \pare{\+vA\cdot\+vC}\pare{\+vB\cdot\+vD} - \pare{\+vB\cdot\+vC}\pare{\+vA\cdot\+vD}. \qedhere
+    \end{align*}
+\end{proof}
+
+% paragraph 作业 (end)
+
+% subsection 矢量及其分量 (end)
+
+\subsection{正交坐标变换} % (fold)
+\label{sub:正交坐标变换}
+
+\subsubsection{平面转动} % (fold)
+\label{ssub:平面转动}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{CoorRot}
+\end{figure}
+\begin{lemma}
+    \[ \+ve'_i\cdot\+ve_j = \+cR_{ij}. \]
+\end{lemma}
+\begin{finale}
+\begin{lemma}[旋转变换的矩阵表述]
+    \[ \begin{pmatrix}
+        x'_1 \\
+        x'_2
+    \end{pmatrix} = \begin{pmatrix}
+        \cos\theta & \sin\theta \\
+        -\sin\theta & \cos\theta
+    \end{pmatrix}\begin{pmatrix}
+        x_1\\
+        x_2
+    \end{pmatrix} = \+cR\pare{\theta}\begin{pmatrix}
+        x_1\\
+        x_2
+    \end{pmatrix}. \]
+\end{lemma}
+\end{finale}
+\begin{lemma}
+    $\+cR\pare{\theta}$属于$SO_2$, 满足
+    \[ \+cR^{-1}\pare{\theta} = \+cR^T\pare{\theta} \Leftrightarrow \+cR^T\+cR = E. \]
+\end{lemma}
+
+% subsubsection 平面转动 (end)
+
+\subsubsection{三维转动} % (fold)
+\label{ssub:三维转动}
+
+\begin{lemma}
+    三维下的旋转可类似表示为
+    \[ \begin{pmatrix}
+        x'_1 \\
+        x'_2 \\
+        x'_3
+    \end{pmatrix} = \+cR \begin{pmatrix}
+        x_1 \\
+        x_2 \\
+        x_3
+    \end{pmatrix}. \]
+    其中亦有$\+cR^T\+cR = E$, 因为对于任意$\+vx$都有$\+vx^T\+cR^T\+cR\+vx = \+vx^T\+vx$.
+\end{lemma}
+\begin{lemma}
+    $n$维实正交矩阵有独立参数个数
+    \[ N = n^2 - \brac{n^2 - \frac{n\pare{n-1}}{2}} = \frac{n\pare{n-1}}{2}. \]
+\end{lemma}
+\begin{pitfall}
+    此处坐标变换之转动不随时间变化.
+\end{pitfall}
+
+% subsubsection 三维转动 (end)
+
+\subsubsection{标量, 矢量, 张量的定义} % (fold)
+\label{ssub:标量_矢量_张量的定义}
+
+\begin{mtips}
+    求和约定启用.
+\end{mtips}
+\begin{longtable}{rl}
+    正交坐标变换 & $\displaystyle x'_i = R_{ij}x_j$ \\
+    标量 & $\phi' = \phi$ \\
+    矢量 & $A_i' = R_{ij}A_j\Leftrightarrow A_i' = RA$ \\
+    二阶张量 & $B'_{ij} = R_{ik}R_{jl}B_{kl} \Leftrightarrow B' = RBR^T$ \\
+    三阶张量 & $C'_{ijk} = R_{ik}R_{jm}R_{kn}C_{lmn}$ \\
+\end{longtable}
+\begin{mtips}
+    矩阵乘法$\+cC = \+cB\+cC$以分量形式写作
+    \[ \+cC_{ij} = \+cB_{ik}\+cC_{kj}. \]
+    矢量变换$\+vv = \+cA\+vu$以分量形式写作
+    \[ \+vv_i = \+cA_{ij}\+vv_j. \]
+\end{mtips}
+
+% subsubsection 标量_矢量_张量的定义 (end)
+
+% subsection 正交坐标变换 (end)
+
+\subsection{矢量的微分运算与导数} % (fold)
+\label{sub:矢量的微分运算与导数}
+
+\begin{lemma}[坐标变换下的导数]
+    求导时$\+cR$是不变的,
+    \[ \pare{\+d\phi d{\+vv}}' = \+d{\phi'}d{\+vv'} = \+d{\phi}d{\pare{\+cR\+vv}} = \+cR\+d\phi d{\+vv}. \]
+    特别地, $t$可作为标量使用(非相对论性力学).
+\end{lemma}
+\begin{lemma}
+    对于固定直角坐标系, $\rd{\+ve_i} = 0$,
+    \[ \rd{\+vr} = \rd{x}_i \+ve_i. \]
+    \[ \+vv = \dot{x}_i \+ve_i,\quad \+va = \ddot{x}_i \+ve_i. \]
+\end{lemma}
+\begin{pitfall}
+    一般地$\rd{\+vr}$与$\+vr$不平行.
+\end{pitfall}
+
+\subsubsection{正交坐标系中的速度与加速度} % (fold)
+\label{ssub:正交坐标系中的速度与加速度}
+
+\paragraph{极坐标系} % (fold)
+\label{par:极坐标系}
+
+由$\pare{r,\theta}$二参量表示.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{PolarCoor}
+\end{figure}
+\begin{pitfall}
+    对于运动中的质点, 基矢量随时间变化, 即$\+ve_r\pare{t},\+ve_\theta\pare{t}$.
+\end{pitfall}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{PolarDelta}
+\end{figure}
+\[ \abs{\Delta\+ve_r} = \abs{\Delta\+ve_\theta} \approx \Delta\theta. \]
+\[ \boxed{\dot{\+ve_r} = \dot{\theta}\+ve_\theta,\quad \dot{\+ve_\theta} = -\dot{\theta}\+ve_r.} \]
+\begin{finale}
+    \begin{theorem}[极坐标系中的位矢, 速度与加速度]
+        \[ \+vr = r\+ve_r,\quad \+vv = \dot{r}\+ve_r + r\dot{\theta}\+ve_\theta. \]
+        \[ a_r = \ddot{r} - r\dot{\theta}^2,\quad a_\theta = r\ddot{\theta} + 2\dot{r}\dot{\theta}. \]
+    \end{theorem}
+\end{finale}
+\begin{finale}
+    \begin{theorem}[极坐标系下的动能]
+        \[ T = \half m\+vv\cdot\+vv = \frac{m}{2}\pare{\dot{r}^2 + r^2\dot{\theta}^2}. \]
+    \end{theorem}
+\end{finale}
+
+% paragraph 极坐标系 (end)
+
+\paragraph{柱坐标系} % (fold)
+\label{par:柱坐标系}
+
+由$\pare{r,\theta,z}$三参量表示, 且
+\[ \+ve_z = \+ve_r \times \+ve_\theta. \]
+\begin{finale}
+    \begin{theorem}[柱坐标系中的位矢, 速度与加速度]
+        \[ \+vr = r\+ve_r + z\+ve_z,\quad \+vv = \dot{r}\+ve_r + r\dot{\theta}\+ve_\theta + \dot{z}\+ve_z. \]
+        \[ a_r = \ddot{r} - r\dot{\theta}^2,\quad a_\theta = r\ddot{\theta} + 2\dot{r}\dot{\theta},\quad a_z = \ddot{z}. \]
+    \end{theorem}
+\end{finale}
+
+% paragraph 柱坐标系 (end)
+
+\paragraph{球坐标系} % (fold)
+\label{par:球坐标系}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{SphericalCoor}
+\end{figure}
+由$\pare{r,\theta,\varphi}$三参量表示.
+\[ r>0,\quad 0\le\theta\le\pi,\quad 0\le\varphi\le 2\pi. \]
+所对应基矢量满足
+\[ \+ve_r = \+ve_\theta \times\+ve_\varphi. \]
+变换到直角坐标系, 有
+\begin{align*}
+    \+ve_r &= \sin\theta\pare{\cos\varphi \+ve_x + \sin\varphi\+ve_y} + \cos\theta\+ve_z, \\
+    \+ve_\theta &= \cos\theta\pare{\cos\varphi \+ve_x + \sin\varphi\+ve_y} -\sin\theta\+ve_z, \\
+    \+ve_\varphi &= -\sin\varphi\+ve_x + \cos\varphi\+ve_y.
+\end{align*}
+\begin{remark}
+    $\+ve_\theta$的分解可直接视为将$\+ve_r$沿$\theta$增大的方向旋转$\pi/2$. $\+ve_\varphi$可由$\+ve_r\times\+ve_\theta$得到.
+\end{remark}
+\begin{align*}
+    \dot{\+ve_r} =& \pare{\underline{\dot\cos\theta\cos\varphi} - \dot{\phi}\sin\theta\sin\varphi}\+ve_x\\
+    &+ \pare{\underline{\dot{\theta}\cos\theta\sin\varphi} + \dot{\varphi}\sin\theta\cos\varphi}\+ve_y - \underline{\dot{\theta}\sin\theta}\+ve_z.\\
+    \dot{\+ve_r} =& \dot{\theta}\+ve_\theta + \dot{\varphi}\sin\theta\+ve_\varphi. \\
+    \dot{\+ve_\theta} =& -\dot{\theta}\+ve_r + \dot{\varphi}\cos\theta\+ve_\varphi. \\
+    \dot{\+ve_\varphi} =& -\dot{\varphi}\sin\theta\+ve_r - \dot{\varphi}\cos\theta\+ve_\theta. \\
+    \+vv =& \dot{r}\+ve_r + r\dot{\+ve_r} \\
+    =& \dot{r}\+ve_r + r\dot{\theta}\+ve_\theta+r\dot{\varphi}\sin\theta\+ve_\varphi.
+\end{align*}
+\begin{finale}
+    \begin{theorem}[球坐标系下的速度, 加速度]
+        \[ v_r = \dot{r},\quad v_\theta = r\dot{\theta},\quad v_\varphi = r\dot{\varphi}\sin\theta. \]
+        \vskip-3em
+        \begin{align*}
+            a_r &= \ddot{r} - r\dot{\theta}^2 - r\dot{\varphi}^2\sin^2\theta,\\
+            a_\theta &= r\ddot{\theta} + 2\dot{r}\dot{\theta} - r\dot{\varphi}^2\sin\theta\cos\theta \\
+            a_\varphi &= r\ddot{\varphi}\sin\theta + 2\dot{r}\dot{\varphi}\sin\theta + 2r\dot{\theta}\dot{\varphi}\cos\theta.
+        \end{align*}
+    \end{theorem}
+\end{finale}
+
+% paragraph 球坐标系 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+若$\+vA$和$\+vB$为矢量, 用三维正交变换证明$\+vA\cdot\+vB$为标量.
+
+% paragraph 作业 (end)
+
+\begin{proof}
+    用矢量的变换公式,
+    \begin{align*}
+        A'_i B'_i &= C_{ij}^{-1} A_j C_{ik}^{-1} B_k \\
+        &= A_j C_{ij}^{-1} C_{ik}^{-1} B_k \\
+        &= A_jB_k \underbrace{\pare{C^{-1}_{ji}}^T C^{-1}_{ik}}_{\delta_{jk}} \\
+        &= A_jB_j.
+    \end{align*}
+\end{proof}
+
+% subsubsection 正交坐标系中的速度与加速度 (end)
+
+\subsubsection{转动与角速度} % (fold)
+\label{ssub:转动与角速度}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{RotCone}
+    \caption{纯转动示意}
+\end{figure}
+对于纯转动,
+\[ \abs{\+vr} = \abs{\+vr+\Delta\+vr} = r. \]
+\[ \abs{\Delta \+vr} = r\sin\alpha\Delta\theta. \]
+角位移
+\[ \abs{\Delta\+v\theta} = \Delta\+v\theta, \]
+角速度
+\[ \+v\omega = \frac{\Delta\+v\theta}{\Delta t}. \]
+\[ \boxed{\Delta\+vA = \Delta\+v\theta\times\+vA,\quad \dot{\+vA} = \+v\omega\times\+vA.} \]
+对于旋转任何矢量都成立.
+
+% subsubsection 转动与角速度 (end)
+
+% subsection 矢量的微分运算与导数 (end)
+
+\subsection{矢量场与矢量分析} % (fold)
+\label{sub:矢量场与矢量分析}
+
+在空间中每一点关联(可能)随时间变化的标量, 谓标量场$\varphi\pare{\+vr,t}$. 在空间中每一点关联(可能)随时间变化的矢量, 谓矢量场$\+vA\pare{\+vr,t}$.
+\[ \grad = \+ve_x \+DxD{} + \+ve_y\+DxD{} + \+ve_z\+DzD{} = \+D{\+vr}D{}. \]
+简记为$\displaystyle \pare{\+DxD{}, \+DyD{}, \+DzD{}}$.
+
+\subsubsection{标量场的梯度} % (fold)
+\label{ssub:标量场的梯度}
+
+标量场有梯度
+\[ \grad\varphi\pare{\+vr, t} = \sum_i \+ve_i \+D{x_i}D{\varphi}. \]
+谓$\varphi$是稳定的, 如果$\displaystyle \+D{t}D{\varphi} = 0$.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GradPerpToContour}
+    \caption{梯度垂直于等值面}
+\end{figure}
+\[ \rd{\varphi} = \grad\varphi \cdot\+rd{\+vr}. \]
+故在$\varphi$的等值曲面上,
+\[ \grad\varphi \cdot \rd{\+vr} = 0. \]
+即$\nabla\varphi$垂直于$\varphi$的等值面.
+\begin{sample}
+    \begin{ex}
+        设$\varphi\pare{\+vr} = r$, 则相应的
+        \[ \grad\varphi = \frac{\+vr}{r} = \hat{\+vr}. \]
+    \end{ex}
+    \begin{ex}
+        设$\varphi\pare{\+vr}$是保守势场$V\pare{r}$,
+        \[ \grad\varphi = \grad V  = \+drdV \hat{\+vr}. \]
+        对于保守力, $\+vF\pare{\+vr} = -\grad V$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 标量场的梯度 (end)
+
+\subsubsection{矢量场的旋度与散度} % (fold)
+\label{ssub:矢量场的旋度与散度}
+
+矢量场
+\[ \+vA\pare{\+vr} = A_x\pare{x,y,z}\+ve_x + A_y\pare{x,y,z}\+ve_y + A_z\pare{x,y,z}\+ve_z \]
+的散度为
+\[ \div \+vA = \+DxD{A_x} + \+DyD{A_y} + \+DzD{A_z} = \partial_i A_i. \]
+标量场的梯度的散度谓其Laplacian,
+\[ \div\grad \varphi = \laplacian \varphi = \+D{x^2}D{^2\varphi}+\+D{y^2}D{^2\varphi}+\+D{z^2}D{^2\varphi}. \]
+\begin{finale}
+    \begin{theorem}[散度定理, Gau\ss 公式]
+        \[ \oiint_S \+vA\cdot\+rd{\+vS} = \iiint_V \div\+vA \,\rd{V}. \]
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    如果$\div\+vA\neq 0$, 场就是有源的.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        设$\+vA\pare{\+vr} = \+vr$, 有
+        \[ \div\+vr = \+DxDx + \+DyDy + \+DzDz = 3. \]
+    \end{ex}
+\end{sample}
+矢量场$\+vA\pare{\+vr}$的旋度为
+\[ \curl \+vA\pare{\+vr} = \begin{vmatrix}
+    \+ve_x & \+ve_y & \+ve_z \\
+    \partial_x & \partial_y & \partial_z \\
+    A_x & A_y & A_z
+\end{vmatrix} \Rightarrow \pare{\curl\+vA}_i = \epsilon_{ijk}\partial_j A_k. \]
+\begin{finale}
+    \begin{theorem}[Stokes定理]
+        \[ \oint_L \+vA\cdot\rd{\+vl} = \iint_S \pare{\curl\+vA}\cdot\rd{\+vS}. \]
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    力场$\+vF$是保守的当且仅当$\displaystyle\oint_L \+vF\cdot\rd{\+vl} = 0$对任意回路成立.
+\end{remark}
+\begin{finale}
+    \vskip-\baselineskip
+    \begin{flalign}
+        \label{eq:梯度无旋}
+        \text{Poincar\'e定理}&&\curl\grad\varphi &= 0,&\\
+        &&\div\pare{\curl \+vA} &= 0.&
+    \end{flalign}
+\end{finale}
+\begin{proof}[\eqref{eq:梯度无旋}的证明]
+    使用Levi-Civita符号,
+    \begin{align*}
+        \pare{\curl\grad\varphi}_i &= \epsilon_{ijk}\partial_{jk}\varphi = \epsilon_{ikj}\partial_{kj}\varphi = -\epsilon_{ijk}\partial_{jk}\varphi. \qedhere
+    \end{align*}
+\end{proof}
+\begin{theorem}[Poincar\'e-Helmholtz定理]
+    若$\div\+vB = 0$, 则必有$\+vB = \curl\+vA\pare{\+vr}$. 若$\curl\+vE = 0$则必有$\+vE = -\grad\varphi$.
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        $\+vF$为保守力$\Leftrightarrow \curl\+vF = 0 \Leftrightarrow \+vF = -\grad V$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 矢量场的旋度与散度 (end)
+
+% subsection 矢量场与矢量分析 (end)
+
+\subsection{Newton力学复习} % (fold)
+\label{sub:newton力学复习}
+
+\begin{remark}
+    Newton第三定律要求大小相等, 方向相反, 其弱表述不要求共线, 强表述则要求.
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{CoorTransform}
+    \caption{惯性参考系变换示意}
+\end{figure}
+\begin{theorem}[Galileo变换]
+    惯性参考系有无限多个. 惯性参考系间都是平权等价的. 两个惯性参考系之间总是互相匀速直线运动. 惯性系之间的物理量通过
+    \[ \+vr' = \+vr - \+vR,\quad \+vv' = \+vv - \+vu, \+va' = \+va, \]
+    \[ \+vF' = \+vF, m' = m \Rightarrow \+vF' = m\+va' \]
+    联系.
+\end{theorem}
+\begin{remark}
+    日常生活中除了重力和潮汐力源于阴历, 其他力基本都源于电磁相互作用.
+\end{remark}
+\begin{remark}
+    质量应当分为惯性质量(Newton第二定律中的质量)和引力质量(万有引力定律中的质量). 无理由认为二者有关联. 仅试验表明二者相等. 例如考虑Galileo自由落体实验,
+    \[ \+va = \frac{m_g}{m_i} \+vg. \]
+    试验表明$\+va = \+vg$且与物体的大小, 结构, 材料等无关.
+\end{remark}
+\begin{remark}[Eötvös实验]
+    如果引力质量不正比于惯性质量，那么引力与惯性力之合力矩将随地球自转变化，进而导致扭秤摆动. 没有实验观测到这方面的差异.
+\end{remark}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+\begin{cenum}
+    \item 证明
+    \[ \+dtd{}\brac{\+vr\times\pare{\+vv\times\+vr}} = r^2\+va + \pare{\+vr\cdot\+vv}\+vv - \pare{v^2+\+vr\cdot\+va}\+vr. \]
+    \item 证明
+    \begin{cenum}
+        \item $\grad r^n = nr^{\pare{n-2}}\+vr$;
+        \item $\laplacian \ln r = \displaystyle\rec{r^2}$;
+        \item $\grad\pare{\varphi\psi} = \varphi\grad\psi + \psi\grad\varphi$.
+    \end{cenum}
+\end{cenum}
+
+% paragraph 作业 (end)
+
+\subsubsection{非惯性系} % (fold)
+\label{ssub:非惯性系}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{TransformToFrameNova}
+    \caption{参考系变换示意}
+\end{figure}
+在惯性参考系$Oxyz$中, $\dot{\+ve_i} = 0$, 而在非惯性参考系$O'x'y'z'$中不然.
+\begin{alignat*}{3}
+    \+vr\pare{t} &= \+vr_0\pare{t} + \+vr'\pare{t}, &&\\
+    \+vr &= x_i \+ve_i,\quad & \+vr' &= x'_i\+ve'_i,\\
+    \+vv &= \dot{x}_i \+ve_i,\quad & \+vv' &= \dot{x}'_i\+ve'_i\neq \dot{\+vr}',\\
+    \+va &= \ddot{x}_i \+ve_i,\quad & \+va' &= \ddot{x}'_i\+ve'_i\neq\ddot{\+vr}'\neq\dot{\+vv}'.
+\end{alignat*}
+\begin{alignat*}{3}
+    \+vv &= \+vv_0 + \dot{\+vr}' = \+vv_0 + \+dtd{} x'_i \+ve'_i \quad & \dot{\+vv}' = \ddot{x}'_i\+ve'_i + \dot{x}'_i\dot{\+ve}'_i = \+va' + \+v\omega\times\+vv'. \\
+    &= \+vv_0 + \+vv' + x'_i\+v\omega\+ve'_i & \+va = \dot{\+vv}_0 + \dot{\+vv}' + \dot{\+v\omega}\times\+vr + \+v\omega\times\dot{\+vr} = \\
+    &= \boxed{\+vv_0 + \+vv' + \+v\omega \times \+vr'. } & \boxed{\+va_0 + \+va' + 2\+v\omega\times\+vv' + \dot{\+v\omega}\times\+vr' + \+v\omega\times\pare{\+v\omega\times\+vr'}.}
+\end{alignat*}
+\begin{finale}
+    \begin{theorem}[加速度变换公式]
+        在非惯性参考系中,
+        \begin{align*}
+            \+vv' &= \+vv - \+vv_0 - \+v\omega\+vr', \\
+            \+va' &= \+va - \+va_0 - 2\+v\omega\times\+vv' - \dot{\+v\omega}\times\+vr' - \+v\omega\times\pare{\+v\omega\times\+vr'}.
+        \end{align*}
+    \end{theorem}
+    \begin{theorem}[非惯性系的受力变换]
+        在非惯性系中,
+        \[ m\+va' = \+vF + \+vF_i, \]
+        \[ \+vF_i = \underbrace{-m\+va_0}_{\text{平动}} \underbrace{-2m\+v\omega\+vv'}_{\text{Coriolis力}} \underbrace{-m\dot{\+v\omega}\times\+vr'} \underbrace{-m\+v\omega\times\pare{\+v\omega\times\+vr'}}_{\text{离心}}. \]
+    \end{theorem}
+\end{finale}
+其中离心项
+\[ -\+v\omega\times\pare{\+v\omega\times\+vr'} = -\pare{\+v\omega\cdot\+vr'}\+v\omega + \omega^2\+vr' \]
+只有当$\+v\omega\perp\+vr'$时是真正「离心」的.
+\begin{finale}
+    \begin{theorem}[动量定理]
+        $\+vp = m\+vv$,
+        \[ \dot{\+vp} = \+vF. \]
+        若$\+vF = 0$, 则$\+vp$守恒. 在单个方向上亦成立.
+    \end{theorem}
+    \begin{theorem}[角动量定理]
+        $\+vJ = \+vr\times\+vp$,
+        \[ \dot{\+vJ} = \+vr\times\+vF = \+vM. \]
+        若$\+vM = 0$, 则$\+vJ$守恒. 在单个方向上亦成立.
+    \end{theorem}
+    \begin{theorem}[动能定理]
+        $\displaystyle T = \half mv^2 = \frac{p^2}{2m}$,
+        \[ \rd{T} = \+vF\cdot\rd{\+vr}. \]
+    \end{theorem}
+\end{finale}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.35\textwidth}
+        \incfig{4cm}{WorkDoneDifferentPath}
+    \end{subfigure}
+    \begin{subfigure}{.6\textwidth}
+        \parbox{2.2in}{\begin{mtips}\vskip-\baselineskip
+        \[ \dot{\+vp}\cdot\+vp = \half\+dtd{\+vp\cdot\+vp} = \half \+dtd{p^2}. \]\end{mtips}}
+    \end{subfigure}
+\end{figure}
+\begin{theorem}[做功与路径无关]
+    对于保守场, 即$\div\+vF = 0$者, 做功与路径无关, 即
+    \[ \int_{L_1} \+vF\cdot\rd{\+vr} = \int_{L_2} \+vF\cdot\rd{\+vr}. \]
+\end{theorem}
+\begin{theorem}[机械能守恒]
+    在保守场中可引入势能$\+vF = -\grad V$, 其中$\displaystyle \+DtDV = 0$,
+    \[ T_1 + V_1 = T_2 + V_2. \]
+    $\rd{V} = \grad V\cdot\rd{\+vr} = -\+vF\cdot\rd{\+vr} = -\rd{T}$, 故$E=T+V$守恒. 有非保守力做功时,
+    \[ E_2 - E_1 = W_\alpha. \]
+\end{theorem}
+功率$\displaystyle P = \+dtdW = \+dtd{\+vF\cdot\rd{\+vr}} = \+vF\cdot\+vv$, 而对于纯转动, $\+vv = \omega\times\+vr$,
+\[ P = \+vF\cdot\+vv = \+vF \cdot\pare{\+v\omega\times\+vr} = \+v\omega\times\+vM. \]
+质心$\displaystyle \+vr_0 = \frac{\sum m_i\+vr_i}{\sum m_i}$, $\+vr'_i = \+vr_i - \+vr_0$, $\+vv'_i = \+vv_i - \+vv_0$,
+\begin{theorem}[K\"onig定理]
+    以$A'$标记质心系中的物理量,
+    \[ \+vJ = \+vJ_0 + \+vJ',\quad T = T_0 + T',\quad \+vp' = 0. \]
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{NewtonThird}
+    \caption{Newton第三定律的加强表述}
+\end{figure}
+由动量定理,
+\[ \+vp_i = \sum_{j\neq i} \+vF{ij} + \+vF_i^e\Rightarrow \dot{\+vp} = \sum \dot{\+vp}_i = \sum_{i\neq j} \+vF_{ij} + \sum_i \+vF_i^e \Rightarrow \boxed{\+vp_i = \sum_i \+vF_i^e.} \]
+由角动量定理,
+\[ \dot{\+vJ_i} = \+vr_i\times\pare{\sum_{j\neq i} \+vF_{ij} + \+vF_i^e}, \]
+\[ \Rightarrow \dot{\+vJ} = \sum_{i\neq j} \+vr_i\times\+vF_{ij} + \sum_i \+vr_i\times\+vF_i^e = \sum_i \+vr_i\times\+vF_i^e \Rightarrow \boxed{\dot{\+vJ} = \sum_i \+vM_i^e.} \]
+其中根据Newton第三定律的加强表述,
+\[ \sum_{i\neq j} \+vr_i\times\+vF_{ij} = \half \sum_{i\neq j} \pare{\+vr_i\times\+vF_{ij} + \+vr_j\times\+vF_{ji}}  = \half\sum_{i\neq j} \pare{\+vr_i - \+vr_j} \times\+vF_{ij} = 0. \]
+由动能定理,
+\[ \rd{T} = \half\sum_{i\neq j} \+vF_{ij}\cdot\rd{\pare{\+vr_i - \+vr_j}} + \sum_i \+vF_i^e\cdot\rd{\+vr_i}. \]
+根据Newton第三定律的加强表述,
+\[ \+vF_{ij}\cdot\rd{\+vr_i - \+vr_j} = A_{ij} \pare{\+vr_i - \+vr_j}\,\rd{\pare{\+vr_i - \+vr_j}} = A_{ij} \abs{\+vr_i - \+vr_j}\,\rd{\abs{\+vr_i - \+vr_j}}. \]
+特别地, 对于刚体,
+\[ \rd{T} = \sum_i \+vF_i^e \cdot\rd{\+vr_i}. \]
+
+% subsubsection 非惯性系 (end)
+
+% subsection newton力学复习 (end)
+
+% section newton力学 (end)
+
+\end{document}

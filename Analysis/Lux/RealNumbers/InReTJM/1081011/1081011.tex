@@ -1,0 +1,34 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{ex}
+    证明$\displaystyle \lim_{n\rightarrow +\infty} nq^n = 0$, 其中$0<\abs{q}<1$.
+\end{ex}
+\begin{proof}
+    由题意, 存在$d>0$使得$q = \displaystyle \rec{1+d}$, 从而
+    \[ nq^n = \frac{n}{\pare{1+d}^n} = \frac{n}{1 + nd + \displaystyle \frac{n\pare{n-1}}{2}d^2 + \cdots + d^n} < \frac{2n}{n\pare{n-1}d^2} \rightarrow 0. \]
+    夹挤可得$nq^n\rightarrow 0$.
+\end{proof}
+下面这个定理你们书上应该有.
+\begin{theorem}[Leibniz公式]
+    \[ \pare{fg}^{\pare{n}} = f^{\pare{n}}g + C_n^1 f^{\pare{n-1}}g^{\pare{1}} + \cdots + C_n^k f^{\pare{n-k}}g^{\pare{k}} + \cdots + fg^{\pare{n}}. \]
+\end{theorem}
+\begin{ex}
+    设$y = x^2\ln\pare{1+x}$, 求$y^{\pare{50}}$.
+\end{ex}
+\begin{proof}[解]
+    代入Leibniz公式, 取$f=\ln\pare{1+x}$, $g=x^2$, 则
+    \[ \pare{fg}^{\pare{50}} = f^{\pare{50}}g + C_n^1 f^{\pare{49}}g' + C_n^2 f^{\pare{48}}g'' + C_n^3 f^{\pare{47}}g''' + \cdots. \]
+    注意$g'''$以及$g$的更高阶导数为零, 从而
+    \[ \pare{fg}^{\pare{50}} = f^{\pare{50}}g + C_n^1 f^{\pare{49}}g' + C_n^2 f^{\pare{48}}g''. \]
+    代入
+    \[ f = \ln \pare{1+x} \Rightarrow f^{\pare{n}} = \frac{\pare{-1}^{n-1}}{\pare{1+x}^{n}} \]
+    以及
+    \[ g = x^2,\quad g' = 2x,\quad g'' = 2 \]
+    即可.
+\end{proof}
+
+\end{document}

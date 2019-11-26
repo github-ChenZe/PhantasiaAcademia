@@ -1,0 +1,649 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{Laurent展开及其应用} % (fold)
+\label{sec:laurent展开及其应用}
+
+\subsection{Laurent展开} % (fold)
+\label{sub:laurent展开}
+
+形如
+\[ \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_0}^n = \sum_{n=0}^\infty a_n\pare{z-z_0}^n + \sum_{n=1}^\infty \frac{a_{-n}}{\pare{z-z_0}^n} \]
+的级数谓\emph{Laurent级数}.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{DiskConvOfLaurent}
+    \caption{Laurent级数的收敛区域}
+    \label{fig:Laurent级数的收敛区域}
+\end{figure}
+\begin{cenum}
+    \item 若$\sum_{n=0}^\infty a_n\pare{z-z_0}^n$以$R$为收敛半径, 由Abel定理, $\sum_{n=0}^\infty a_n\pare{z-z_0}^n$在$\abs{z-z_0}<R$内解析且内闭一致收敛.
+    \item 令$\xi = \displaystyle \rec{z-z_0}$. 则$\sum_{n=1}^\infty \frac{a_{-n}}{\pare{z-z_0}^n} = \sum_{n=1}^\infty a_{-n}\xi^n$. 由Abel定理, 设$\lambda$为收敛半径, 则$\abs{\xi}<\lambda$时$\displaystyle \sum_{n=1}^\infty a_{-n}\xi^n$内闭一致收敛. 此时$\abs{\xi}<\lambda\Leftrightarrow \abs{z-z_0} > \displaystyle \rec{\lambda}$. 令$r = \displaystyle\rec{\lambda}$.
+    \item 若$r>R$, 则$\displaystyle \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_0}^n$不存在.
+    \item 若$r<R$, 则$\displaystyle \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_0}^n$在$z<\abs{z-z_0}<R$上内闭一致收敛.
+    \item $r=R$时无法判定. 考虑
+    \[ \sum_{n=-\infty}^{+\infty} z^n,\quad \sum_{\stackrel{\scriptstyle n=-\infty}{n\neq 0}}^{+\infty} \frac{z^n}{n^2},\quad \sum_{\stackrel{\scriptstyle n=-\infty}{n\neq 0}}^{+\infty} \frac{z^n}{n}. \]
+    三者都有$r=R=1$, 但收敛情况各不相同.
+\end{cenum}
+\begin{theorem}
+    设$\func{f}{r<\abs{z-z_0}<R}{\+bC}$上解析, 则$f$在$r<\abs{z-z_0}<R$上必可Laurent展开, 即
+    \[ f\pare{z} = \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_0}^n. \]
+    其中
+    \[ a_n = \rec{2\pi i}\int_{\gamma} \frac{f\pare{z}}{\pare{z-z_0}^{n+1}}\,\rd{z}. \]
+    其中$\gamma$为圆环内绕$z_0$的简单闭曲线(\cref{fig:Laurent级数的收敛区域}). 且展开是唯一的.
+\end{theorem}
+\begin{remark}
+    Taylor展开和Laurent展开有相似之处. 都是在$D$内环绕$z_0$的一条围线.
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{DiskOfLaurentInt}
+    \caption{Laurent展开的积分式}
+    \label{fig:Laurent展开的积分式}
+\end{figure}
+\begin{proof}
+    由Cauchy定理, $a_n$和$\gamma$的选取无关. 由Cauchy积分定理, 见\cref{fig:Laurent展开的积分式},
+    \begin{align*}
+        f\pare{z} &= \rec{2\pi i} \int_{\abs{\xi - z_0} = r_2} \frac{f\pare{\xi}}{\xi - z}\,\rd{\xi} - \rec{2\pi i} \int_{\abs{\xi - z_0} = r_1} \frac{f\pare{\xi}}{\xi - z}\,\rd{\xi}.
+    \end{align*}
+    注意到在$\abs{\xi - z_0} = r_1$上,
+    \[ \rec{\xi - z} = \frac{-1}{\pare{z-z_0}\pare{1-\frac{\xi - z_0}{z-z_0}}} = -\sum_{n=1}^\infty \frac{\pare{\xi - z_0}^{n-1}}{\pare{z-z_0}^n}.  \]
+    故
+    \begin{align*}
+        -\rec{2\pi i} \int_{\abs{\xi - z_0} = r_1} \frac{f\pare{\xi}}{\xi - z}\,\rd{z} &= \sum_{n=1}^\infty \rec{2\pi i} \int \frac{f\pare{\xi}}{\pare{\xi - z_0}^{-n+1}} \,\rd{\xi}\,\pare{z-z_0}^{-n}\\ &= \sum_{n=-\infty}^{-1}a_n\pare{z-z_0}^n.
+    \end{align*}
+    而在$\abs{\xi - z_0} = r_2$上,
+    \[ \rec{\xi - z} = \rec{\pare{\xi - z_0}\pare{1-\frac{z - z_0}{\xi - z_0}}} = \sum_{n=0}^\infty \frac{\pare{z-z_0}^n}{\pare{\xi - z_0}^{n+1}}. \]
+    故
+    \[ \rec{2\pi i}\int_{\abs{\xi - z_0} = r_2} \frac{f\pare{\xi}}{\xi - z}\,\rd{\xi} = \sum_{n=0}^\infty a_n\pare{z-z_0}^n. \qedhere \]
+\end{proof}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.104-105 10(2), 11(1)(3)(5)
+
+% paragraph 作业 (end)
+
+\par
+求$f\pare{z}$在$z=z_0$处的Laurent展开,
+\begin{cenum}
+    \item 找到同心圆环: $r<\abs{z-z_0}<R$;
+    \item 凑出形如$\displaystyle \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_0}^{n}$.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle f\pare{z} = \rec{\pare{z-1}\pare{z-2}}$的Laurent展开, 在区域$0<\abs{z-1}<1$和$2<\abs{z}<\infty$内.
+    \end{ex}
+    \begin{proof}[解]
+        $\displaystyle f\pare{z} = \rec{z-1}\cdot\rec{z-2} = \rec{z-2} - \rec{z-1}$. 欲求在$0 < \abs{z-1} < 1$内的展开, 将$z-2$改写为$z-1-1$即可.
+    \end{proof}
+    \begin{remark}
+        使用$\displaystyle a_n = \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{z-\xi}^{n+1}}\,\rd{\xi}$计算相当不便. 宜用配凑.
+    \end{remark}
+    \begin{remark}
+        对于$\displaystyle f\pare{z} = \rec{z-1} \rec{\pare{z-2}^2}$, 注意到$\displaystyle \rec{\pare{z-2}^2} = -\+dzd{} \rec{z-2}$即可.
+    \end{remark}
+\end{sample}
+
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.105 13(1)(5)(6)(9) 14(3)(8)(9) 16
+
+% paragraph 作业 (end)
+
+\begin{remark}
+    解析部分Laurent展开和Taylor展开是相同的.
+\end{remark}
+求Laurent展开的方法有
+\begin{cenum}
+    \item 用公式$f\pare{z} = \displaystyle \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_0}^n$,
+    \[ a_n = \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{z-\xi}^2}\,\rd{\xi}. \]
+    \item 由Laurent展开的唯一性, 直接用已知的Taylor展开配凑之.
+\end{cenum}
+
+% subsection laurent展开 (end)
+
+\subsection{解析函数的孤立奇点} % (fold)
+\label{sub:解析函数的孤立奇点}
+
+\begin{definition}
+    设$\func{f}{D}{\+bC}$解析, $z_0\in \+bC$谓$f$的孤立奇点, 如果$\exists r>0$使$B_r\pare{z_0}\backslash \curb{z_0}\subset D$. 即$f$在$z_0$处无定义, 但在$z_0$附近解析.
+\end{definition}
+设$z_0$为$f$的孤立奇点, 则$f$在$0 < \abs{z-z_0} < r$上有Laurent展开
+\[ f\pare{z} = \sum_{n=0}^\infty a_n \pare{z-z_0}^n + \sum_{n=1}^\infty \frac{a_{-n}}{\pare{z-z_0}^n}. \]
+\begin{definition}
+    $f$的孤立奇点有三种情形,
+    \begin{cenum}
+        \item $\displaystyle \lim_{z\rightarrow z_0}f\pare{z} = a\in \+bC$, 则$z_0$为$f$的可去奇点(removable singularity);
+        \item $\displaystyle \lim_{z\rightarrow z_0}f\pare{z} = \infty$, 则$z_0$为$f$的极点(pole);
+        \item $\displaystyle \lim_{z\rightarrow z_0}f\pare{z}$不存在, 则$z_0$为$f$的本性/本征奇点(essential singularity).
+    \end{cenum}
+\end{definition}
+\begin{theorem}[Riemann]
+    $z_0$为$f\pare{z}$的可去奇点当且仅当$f\pare{z}$在$z_0$附近是有界的.
+\end{theorem}
+\begin{proof}
+    $\Rightarrow$: 极限存在蕴含在邻域内有界. $\Leftarrow$: 设$\exists r>0$使得$\abs{z-z_0}<r$时有$\abs{f\pare{z}}<M$. 设Laurent展开为
+    \[ f\pare{z} = \sum_{n=0}^\infty a_n \pare{z-z_0}^n + \sum_{n=1}^\infty \frac{a_{-n}}{\pare{z-z_0}^{n}}. \]
+    从而在有界的假设下, $\displaystyle \sum_{n=1}^\infty \frac{a_{-n}}{\pare{z-z_0}^{n}}$也在$z_0$附近有界. 注意到
+    \begin{align*}
+        \abs{a_{-n}} &= \abs{\rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi-z_0}^{n+1}}\,\rd{\xi}} \\
+        &\le \frac{M}{2\pi} \int_{\abs{\rho - z_0}=\rho} \rec{\abs{\xi - z_0}^{-n+1}}\,\rd{s} \\
+        &= \frac{M}{2\pi} \rec{\rho^{-n+1}}\cdot 2\pi \rho = \rho^nM \rightarrow 0,\quad \rho\rightarrow 0.
+    \end{align*}
+    于是$\displaystyle f\pare{z} = a_0 + a_1\pare{z-z_0} + a_2\pare{z-z_0}^2 + \cdots$在$z_0$处极限存在.
+\end{proof}
+\begin{theorem}
+    $z_0$为$f\pare{z}$的可去奇点当且仅当Laurent展开为
+    \[ \sum_{n=0}^\infty a_n\pare{z-z_0}^n. \]
+    从而$a_{-n} = 0$, $n \in \+bN_+$.
+\end{theorem}
+\begin{remark}
+    如果$z_0$为$f\pare{z}$的可去奇点, 令$f\pare{z_0} = a_0$, 则$z_0$将成为$f$的解析点. 即$z_0$为「赝」奇点.
+\end{remark}
+\begin{theorem}
+    $z_0$为$f\pare{z}$的极点, 当且仅当$z_0$为$\displaystyle \rec{f}$的零点. 即$\displaystyle \rec{f}$在$z_0$处极限为零, 即$\displaystyle \rec{f}$的可去奇点且取值为零.
+\end{theorem}
+\begin{proof}
+    $\Rightarrow$: $\lim_{z\rightarrow z_0} f\pare{z} = \infty$, 故$\exists r$使得$0<\abs{z-z_0}<r$时$f\pare{z} \neq 0$. 故$\displaystyle \rec{f}$在$0<\abs{z-z_0}<r$内解析. 但
+    \[ \lim_{z\rightarrow z_0} \rec{f\pare{z}} = \rec{\lim_{z\rightarrow z_0} f\pare{z}} = 0. \]
+    从而$z_0$为$\displaystyle \rec{f}$的可去奇点且为零点.
+    \par
+    $\Leftarrow$: $\displaystyle \lim_{z\rightarrow z_0} f\pare{z} = \lim_{z\rightarrow z_0} \rec{\rec{f\pare{z}}} = \infty$. 从而$z_0$处为极点.
+\end{proof}
+\begin{theorem}
+    谓$z_0$为$f\pare{z}$的$m$阶极点, 如果$z_0$是$\displaystyle \rec{f}$的$m$阶零点.
+\end{theorem}
+\begin{theorem}
+    $z_0$是$f$的$m$阶极点, 当且仅当在$z_0$附近
+    \[ f\pare{z} = \frac{g\pare{z}}{\pare{z-z_0}^m}, \]
+    其中$g\pare{z}$解析且在$z_0$及其附近$g\pare{z}\neq 0$.
+\end{theorem}
+将$g\pare{z}$Taylor展开, 有
+\begin{align*}
+    f\pare{z} &= \sum_{n=0}^\infty \frac{b_n\pare{z-z_0}^n}{\pare{z-z_0}^m}\\ &= \frac{b_0}{\pare{z-z_0}^m} + \frac{b_1}{\pare{z-z_0}^{m-1}} + \cdots + b_m + b_{m+1}\pare{z-z_0} + \cdots.
+\end{align*}
+由于$g\pare{z_0}$不为零, $b_0\neq 0$从而Laurent展开中$-m$阶项确实存在.
+\begin{theorem}
+    $z_0$为$f\pare{z}$的$m$阶极点当且仅当Laurent展开为
+    \[ f\pare{z} = \sum_{n=0}^\infty a_n\pare{z-z_0}^n + \frac{a_{-1}}{z-z_0} + \cdots + \frac{a_{-m}}{\pare{z-z_0}^m}, \quad a_{-m}\neq 0. \]
+    即在Laurent展开
+    \[ \sum_{n=0}^\infty a_n\pare{z-z_0}^n + \sum_{n=1}^\infty \frac{a_{-n}}{\pare{z-z_0}^n} \]
+    中$a_{-n}$只有有限多项非零, 且至少有一项非零.
+\end{theorem}
+\begin{theorem}
+    $z_0$为本性奇点当且仅当Laurent展开中$a_{-n}\neq 0$对无限多个$n\in \+bN$成立.
+\end{theorem}
+\begin{theorem}[Weierstra\ss]
+    $z_0$为本性奇点, 当且仅当$z_0$附近$f\pare{z}$的像在$\+bC$中是稠密的. 即$\forall A \in \+bC\cup\curb{\infty}$, 都有$z_n\rightarrow z_0$使得$\displaystyle \lim_{n\rightarrow \infty} f\pare{z_n} = A$.
+\end{theorem}
+\begin{proof}
+    若$A=\infty$, 此时$z_0$为本性奇点, 故非可去奇点, 故$f\pare{z}$在$z_0$附近无界, 即对于任何$n\in \+bN$存在$\abs{z_n - z_0}<1/n$满足$\abs{f\pare{z}} > {n}$. $z_n\rightarrow z_0$且$f\pare{z_n}\rightarrow \infty$.
+    \par
+    若$A$并非$\infty$, 则令$g\pare{z} = \displaystyle \rec{f\pare{z} - A}$. 则$z_0$也是$g\pare{z}$的孤立奇点(否则已经有序列令$f\pare{z_n}\equiv A$). 下证$g\pare{z}$在$z_0$附近无界, 从而$\forall n$, $\exists z_n$使得$\abs{z_n - z}<1/n$且
+    \[ \abs{g\pare{z_n}} = \abs{\rec{f\pare{z_n} - A}} > n \Rightarrow \abs{f\pare{z_n} - A} < \rec{n}. \]
+    即$\lim_{n\rightarrow \infty} f\pare{z_n} = A$且$z_n\rightarrow z_0$.
+    \par
+    反证$g\pare{z}$无界. 否则$z_0$为$g\pare{z}$的可去奇点, 此时$g\pare{z}$在$z_0$处解析. 若$g\pare{z_0}\neq 0$, 则$f\pare{z} = \displaystyle \rec{g\pare{z}} + A$, 从而$z_0$为$f$的可去奇点. 若$g\pare{z_0} = 0$则$z_0$为$f$的极点. 皆与假设矛盾.
+\end{proof}
+\begin{proof}[另一个证明]
+    使用反证法. 如果$\exists A\in \+bC$及$\epsilon > 0$, $\delta > 0$, 在$0<\abs{z-z_0}<\delta$内$\abs{f\pare{z} - A} > \epsilon$. 令$F\pare{z} = \displaystyle \frac{f\pare{z} - A}{z-z_0}$, 则$z_0$仍为$F$的孤立奇点. 且由假设有$z$足够接近$z_0$时$\abs{f\pare{z} - A}$一致大于某$\epsilon$. 从而
+    \[ \lim_{z\rightarrow z_0} F\pare{z} = \infty. \]
+    即$z_0$为$F$的极点. 从而
+    \[ F\pare{z} = \sum_{n=1}^\infty a_n\pare{z-z_0}^n + a_0 + \frac{a_{-1}}{z-z_0} + \cdots + \frac{a_{-m}}{\pare{z-z_0}^m},\quad a_{-m}\neq 0,\quad m\ge 1. \]
+    故$f\pare{z} = \pare{z-z_0}F\pare{z}$在$z_0$处有极点或可去奇点, 而非本性奇点.
+\end{proof}
+\begin{theorem}[Picard大定理]
+    $z_0$为$f$的本性奇点, 则$f$在$z_0$的任何邻域中都可以无穷次取到$\+bC$中的任何一个值, 除去一个可能点外. 即$\forall A \in \+bC\backslash\curb{A_0}$, $\forall r>0$, $\exists z_r$, $\abs{z_r - z_0}<r$, $f\pare{z_r} = A$.
+\end{theorem}
+\begin{ex}
+    设$f\pare{z} = e^{1/z}$, 则$f\pare{z} = \displaystyle 1 + \rec{z} + \rec{2!z^2} + \cdots$. 取$z_n = \displaystyle\rec{\ln A + 2n\pi i}$, 则$z_n\rightarrow 0$且$f\pare{z_n} = A$.
+\end{ex}
+定义$B_r\pare{\infty}$为$\abs{z}>r$, 若$f$在$\abs{z} > r$上解析, 则$\infty$为$f$的孤立奇点. 令$\xi = \displaystyle \rec{z}$, $g\pare{\xi} = \displaystyle f\pare{\rec{\xi}}$在$0<\abs{\xi}<r$内解析, $0$为$g\pare{\xi}$的孤立奇点.
+\begin{theorem}
+    $\infty$为$f$的可去奇点, 当且仅当$f\pare{z} = \displaystyle a_0 + \frac{a_{-1}}{z} + \frac{a_{-2}}{z^2} + \cdots$.
+\end{theorem}
+\begin{theorem}
+    $\infty$为$f$的极点, 当且仅当$f\pare{z} = \displaystyle \sum_{n=0}^\infty \frac{a_{-n}}{z^n} + a_1 z + \cdots + a_mz^m$, 其中$m>0$且$a_m\neq 0$.
+\end{theorem}
+\begin{theorem}
+    $\infty$为$f$的本性奇点, 当且仅当
+    \[ f\pare{z} = \sum_{n=0}^\infty \frac{a_{-n}}{z^n} + \sum_{n=1}^\infty a_n z^n, \]
+    其中$a_n\neq 0$对无穷多个$n$成立.
+\end{theorem}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.131 1(1)(3)(5)(7)
+
+% paragraph 作业 (end)
+
+\par
+设$\func{\+bC}{\+bC}$为整函数, 则$\infty$必为$f$的孤立奇点. 在零处的Taylor展开等于在无穷处的Laurent展开.
+\[ f\pare{z} = \sum_{n=0}^\infty a_n z^n  \]
+\begin{cenum}
+    \item 若$\infty$为$f$的可去奇点, 必有$f\pare{z} = a_0 \in \+bC$, 即Liouville定理.
+    \item 若$\infty$为$m$阶极点, 则$f$为$m$阶多项式.
+    \item 若$\infty$为本性奇点, 则$f\pare{z} = \displaystyle \sum_{n=0}^\infty a_nz^n$, 其中$a_n\neq 0$对无穷多个$n$成立. 此时$f\pare{z}$谓超越整函数.
+\end{cenum}
+
+\begin{theorem}[Picard小定理]
+    设有整函数$\func{f}{\+bC}{\+bC}$. 若$\+bC\backslash f\pare{\+bC}$的基数$\ge 2$, 则$f$必定是常值函数.
+\end{theorem}
+\begin{proof}
+    考虑其在无穷远点处的奇点类型. 若为可去奇点则为常值. 若为极点则$f\pare{z}$为多项式, 根据代数基本定理$f\pare{\+bC} = \+bC$. 若为本性奇点则根据Picard大定理, $\infty$附近$f$可取除一可能值外的任何值.
+\end{proof}
+\begin{ex}
+    $f$是一个整函数, 其值域是右半平面, 证明其为常值函数.
+\end{ex}
+
+% subsection 解析函数的孤立奇点 (end)
+
+\subsection{留数定理} % (fold)
+\label{sub:留数定理}
+
+计算$\displaystyle \int_{\gamma_k}f\pare{z}\,\rd{z}$时这一分割表明$z_k$为孤立奇点, 从而可以方便使用Cauchy积分定理.
+\begin{definition}
+    设$z_0$为孤立奇点, 则谓$\displaystyle \rec{2\pi i}\int_\gamma f\pare{z}\,\rd{z}$为留数, 记作$\Residue\pare{f,z_0}$.
+\end{definition}
+\begin{remark}
+    在Laurent展开中$\displaystyle f\pare{z} = \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_0}^n$, 特别地
+    \[ a_{-1} = \rec{2\pi i} \int_{\gamma} f\pare{z}\,\rd{z} \]
+    为留数.
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{fAnalyticInGamma}
+    \caption{\cref{thm:留数定理}示意}
+\end{figure}
+\begin{theorem}[留数定理]
+    \label{thm:留数定理}
+    设$f$在$\gamma$内仅有有限多个孤立奇点$z_1, z_2, \cdots, z_n$. 设$\gamma_1,\gamma_2,\cdots,\gamma_n$为包含$z_1,z_2,\cdots,z_n$的简单闭曲线, 则
+    \begin{align*}
+        \int_\gamma f\pare{z}\,\rd{z} &= \sum_{k=1}^n \int_{\gamma_k} f\pare{z}\,\rd{z} = \int_{\gamma_1} f\pare{z}\,\rd{z} + \cdots + \int_{\gamma_n} f\pare{z}\,\rd{z} \\
+        &= 2\pi i \sum_{k=1}^n \Residue\pare{f,z_0}.
+    \end{align*}
+\end{theorem}
+在这一定理下, 欲求$\displaystyle \int_{\gamma} f$, 可采取如下步骤:
+\begin{cenum}
+    \item $\gamma$内仅有有限多奇点, $z_1, z_2, \cdots, z_n$;
+    \item 对于$1\le k\le n$, 求$\Residue\pare{f,z_k}$;
+    \item 由留数定理, $\displaystyle \int_\gamma f\pare{z}\,\rd{z} = 2\pi i \sum_{k=1}^n \Residue\pare{f,z_k}$.
+\end{cenum}
+\begin{definition}
+    设$f$在$\abs{z}>r$时解析, $\infty$为$f$的孤立奇点, 则
+    \[ \Res\pare{f,\infty} = -\rec{2\pi i} \int_{\abs{z}=R} f\pare{z}\,\rd{z}. \]
+\end{definition}
+\begin{theorem}
+    设$f$在整个复平面上仅有有限多奇点, 设为$z_1, \cdots, z_n$, 则
+    \[ \Residue\pare{f,z_1} + \cdots + \Residue\pare{f,z_n} + \Residue\pare{f,\infty} = 0. \]
+\end{theorem}
+\begin{theorem}
+    $\displaystyle \Residue\pare{f,\infty} = -\Residue\pare{f\pare{\rec{z}}\rec{z^2}, 0}$.
+\end{theorem}
+\begin{proof}
+    注意$z\mapsto 1/z$将顺时针围道变为逆时针围道.
+    \begin{align*}
+        \Residue\pare{f,\infty} &= -\rec{2\pi i} \int_{\abs{z}=R}f\pare{z}\,\rd{x} \\ &\xlongequal{\xi = 1/z} -\rec{2\pi i} \int^{\mathrm{(clockwise)}}_{\abs{\xi} = 1/R} f\pare{\rec{\xi}} \pare{-\rec{\xi^2}}\,\rd{\xi} \\
+        &= -\rec{2\pi i} \int_{\abs{\xi} = 1/R} f\pare{\rec{\xi}} \pare{\rec{\xi^2}}\,\rd{\xi} \qedhere
+    \end{align*}
+\end{proof}
+求留数之一般方法谓
+\begin{cenum}
+    \item $z_0$为可去的, $\Residue\pare{f,z_0} = 0$.
+    \item $z_0$为$m$阶奇点, $\Residue\pare{f,z_0} = \displaystyle \rec{2\pi i}\int_\gamma \frac{g\pare{z}}{\pare{z-z_0}^m}\,\rd{z} = \frac{g^{\pare{m-1}}\pare{z_0}}{\pare{m-1}!}$, 故
+    \[ \Residue\pare{f,z_0} = \left.\rec{\pare{m-1}!} \+d{z^{m-1}}d{^{m-1}} \pare{\pare{z-z_0}^mf\pare{z}}\right\vert_{z=_0}. \]
+    \item 若$z_0$为本性奇点, 设$\displaystyle f\pare{z} = \sum_{n=-\infty}^\infty a_n\pare{z-z_0}^n$, $\Residue\pare{f,z_0} = a_{-1}$.
+\end{cenum}
+\begin{remark}
+    若Laurent展开可以容易求得, 则对于极点可有限考虑Laurent展开.
+\end{remark}
+\begin{remark}
+    对于一阶极点的情形, $\Residue\pare{f,z_0} = \displaystyle \lim_{z\rightarrow z_0} \pare{z-z_0}f\pare{z}$.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        $f\pare{z} = \displaystyle \rec{z}$, 则
+        \begin{align*}
+            \Residue\pare{f,i} &= \lim_{z\rightarrow i} \pare{z-i}\rec{1+z^2} = \lim_{z\rightarrow i}\rec{z+i} = \rec{2i}. \\
+            \Residue\pare{f,-i} &= -\rec{2i}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle f\pare{z} = \frac{g\pare{z}}{h\pare{z}}$, 且$g,h$在$z_0$附近解析, $g\pare{z_0}\neq 0$, $h\pare{z_0} = 0$, $h'\pare{z_0}\neq 0$. 则
+        \[ \Residue \pare{f,z_0} = \frac{g\pare{z_0}}{h'\pare{z_0}}. \]
+    \end{ex}
+    \begin{proof}
+        $\displaystyle
+            \Residue\pare{f,z_0} = \lim_{z\rightarrow z_0} \frac{g\pare{z}}{h\pare{z}} = \lim_{z\rightarrow z_0} \frac{g\pare{z}}{\frac{h\pare{z}-h\pare{z_0}}{z-z_0}} = \frac{g\pare{z_0}}{h'\pare{z_0}}.
+        $
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle f\pare{z} = \frac{e^z}{\sin z}$在$z_0=0$处的留数.
+    \end{ex}
+    \begin{proof}[解]
+        记$g\pare{z} = e^z$, $h\pare{z} = \sin z$, 则$g\pare{z_0} = 1\neq 0$, $h\pare{z_0} = 0$, $h'\pare{z_0} = 1\neq 0$, 故$\Residue\pare{f,z_0} = \displaystyle \frac{e^0}{\cos 0} = 1$.
+    \end{proof}
+    \begin{proof}[解2]
+        $0$为一阶极点, 故
+        \[ \Residue\pare{f,0} = \lim_{z\rightarrow 0} \pare{z-0}f\pare{z} = \lim_{z\rightarrow 0} \frac{e^z}{\frac{\sin z}{z}} = 1. \qedhere \]
+    \end{proof}
+    \begin{proof}[解3]
+        Taylor展开后分子提取$z$, 则
+        \begin{align*}
+            f\pare{z} &= \frac{e^z}{\sin z} = \frac{1+z + \frac{z^2}{2} + \cdots}{z-\frac{z^3}{3!} + \frac{z^5}{5!} - \cdots} 
+            &= \rec{z} \cdot \frac{1 + z + \frac{z^2}{2!} + \cdots}{1 - \frac{z^2}{3!} + \cdots} \\
+            &= \frac{g\pare{z}}{z} = \frac{a_0 + a_1 z + a_2 z^2 + \cdots}{z}.
+        \end{align*}
+        从而$z_0 = 0$处为$f$的一阶极点., $\Residue\pare{f,0} = a_0 = 1.$
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_{\abs{z}=1} \frac{z^2\sin^2 z}{\pare{1-e^z}^5}\,\rd{z}$.
+    \end{ex}
+    \begin{proof}[解]
+        只需求$\Residue\pare{\frac{z^2\sin^2 z}{\pare{1-e^z}^5}, 0}$. Taylor展开分子和分母, 则
+        \begin{align*}
+            \frac{z^2\sin^2 z}{\pare{1-e^z}^5} &= \frac{z^2 \pare{z-\frac{z^3}{3!} + \cdots}^2}{-\pare{z+\frac{z^2}{2!} + \frac{z^3}{3!} + \cdots}^5}\\ &= -\frac{\pare{1-\frac{z^2}{3!} + \cdots}^2}{z\pare{1+\frac{z}{2!}+\frac{z^3}{3!}}^5} \\
+            &= -\rec{z}g\pare{z} = -\rec{1+a_1z + a_2z^2 + \cdots}{z}.
+        \end{align*}
+        故$\Residue\pare{f,0} = -1$, $\displaystyle \int_{\abs{z}=1} \frac{z^2\sin^2 z}{\pare{1-e^z}^5}\,\rd{z} = -2\pi i$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\Residue\pare{f,-i}$, 其中$\displaystyle f\pare{z} = \frac{e^{iz}}{z\pare{z^2+1}^2}$.
+    \end{ex}
+    \begin{proof}[解]
+        $-i$为$f\pare{z}$的$2$-阶极点,
+        \[ \Residue\pare{f,-i} = \+dzd{}\pare{\frac{e^{iz}}{z\pare{z-i}^2}} = \frac{e}{4}. \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于$\displaystyle f\pare{z} = e^{z+1/z}$, 求$\Residue\pare{f,0}$.
+    \end{ex}
+    \begin{proof}[解]
+        对$f$做Laurent展开,
+        \begin{align*}
+            e^{z+1/z} &= \pare{1+z+\frac{z^2}{2!}+\frac{z^3}{3!}+\cdots}\pare{1+\rec{z}+\rec{2!z^2}+\rec{3!z^3}+\cdots}.
+        \end{align*}
+        其$z^{-1}$之系数为
+        \[ 1 + \rec{2!} + \rec{2!3!} + \rec{3!4!} + \cdots = \sum_{n=0}^\infty \rec{n!\pare{n+1}!}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_\gamma \frac{z\,\rd{z}}{\pare{z^2-1}^2\pare{z^2+1}}$, 其中$\gamma$是圆周$\abs{z-1} = \sqrt{3}$.
+    \end{ex}
+    \begin{proof}[解]
+        奇点有$z_1 = i$, $z_2=-i$($1$-阶极点)和$z_3 = 1, z_4 = -1$($2$-阶极点). 故$z_1, z_2, z_3$在$\gamma$内,
+        \[ \Residue\pare{f,z_1} = \lim_{z\rightarrow i}\pare{z-i}f\pare{z} = \rec{8},\quad \Residue\pare{f,z_2} = \rec{8}, \quad \Residue\pare{f,z_3} = -\rec{8}. \]
+        由留数定理,
+        \[ \int_\gamma f\pare{z}\,\rd{z} = 2\pi i\pare{\Residue\pare{f,z_1} + \Residue\pare{f,z_2} + \Residue\pare{f,z_3}} = \frac{\pi i}{4}. \qedhere \]
+    \end{proof}
+\end{sample}
+
+% subsection 留数定理 (end)
+
+\subsection{积分计算} % (fold)
+\label{sub:积分计算}
+
+对于$\displaystyle \int_0^{2\pi} R\pare{\sin\theta,\cos\theta}\,\rd{\theta}$形式的积分, 设
+\[ \begin{aligned}
+    z &= e^{i\theta} = \cos\theta + i\sin\theta, \\ 
+    \conj{z} &= \rec{z} = \cos\theta - i\sin\theta
+\end{aligned} \qquad \Rightarrow \qquad \begin{aligned}
+    \cos\theta &= \frac{z+ \rec{z}}{2}, \\
+    \sin\theta &= \frac{z - \rec{z}}{2i}.
+\end{aligned} \]
+再由$\displaystyle \rd{\theta} = \frac{\rd{z}}{e^{i\theta i}} = \frac{\rd{z}}{zi}$知
+\begin{align*}
+    \int_0^{2\pi} R\pare{\cos\theta,\sin\theta}\,\rd{\theta} &= \int_{\abs{z} = 1} R\pare{\frac{z-\rec{z}}{2i}, \frac{z+\rec{z}}{2}}\,\frac{\rd{z}}{zi}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        计算积分
+        \begin{align*}
+            \int_0^{2\pi} \frac{\rd{\theta}}{3 + \cos\theta + 2\sin\theta} &= 2\int_{\abs{z} = 1} \frac{\rd{z}}{\pare{i+2}z^2 + 6iz + i-2}.
+        \end{align*}
+        极点为$\displaystyle z_1 = -\frac{1+2i}{5}$, $\displaystyle z_2 = -1-2i$. 只有$z_1$在$\abs{z}=1$内, 故
+        \[ I = 2\pi i\cdot 2 \cdot \rec{4i} = \pi. \]
+    \end{ex}
+\end{sample}
+\begin{remark}
+    对于$\brac{0,\pi}$上的积分, 可以观察奇偶性, 或设法换为$\sin 2\theta$和$\cos 2\theta$后将积分限化为$\brac{0, 2\pi}$.
+\end{remark}
+\begin{remark}
+    对于$\displaystyle \int_0^{2\pi} R\pare{\sin n\theta,\cos n\theta}\,\rd{\theta}$, 可以通过
+    \[ \cos n\theta = \frac{z^n + z^{-n}}{2},\quad \sin\theta = \frac{z^n - z^{-n}}{2i} \]
+    化简.
+\end{remark}
+\begin{remark}
+    $z = R^{i\theta} = R\cos\theta + iR\sin\theta$.
+\end{remark}
+\begin{remark}
+    设$\displaystyle t = \tan \frac{\theta}{2}$, 则
+    \[ \sin\theta = \frac{2t}{1+t^2},\quad \cos\theta = \frac{1-t^2}{1+t^2},\quad \rd{\theta} = \frac{2\rd{t}}{1+t^2}. \]
+    故
+    \[ \int_0^{2\pi} R\pare{\sin\theta,\cos\theta} \,\rd{\theta} = 2\int_{-\infty}^{\infty} R\pare{\frac{2t}{1+t^2},\frac{1-t^2}{1+t^2}}\,\rec{1+t^2}\,\rd{t}. \]
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GeneralRIntegral}
+    \caption{实轴上积分的围道}
+    \label{fig:实轴上积分的围道}
+\end{figure}
+对于$\displaystyle \int_{-\infty}^{+\infty}f\pare{x}\,\rd{x}$形状的积分, 构造如\cref{fig:实轴上积分的围道}, 有
+\[ \int_{\gamma_R} f\pare{z}\,\rd{z} + \int_{-R}^R f\pare{x}\,\rd{x} = 2\pi i \sum_{k=1}^n \Residue\pare{f,z_k}. \]
+对于最简单的情况, $\gamma_R = C_R$, 若
+\[ \lim_{R\rightarrow\infty} \int_{C_R}f\pare{z}\,\rd{z} = 0, \]
+则上式可以化简. 由
+\[ \abs{\int_{C_R} f\pare{z}\,\rd{z}} \le \int_{C_R} \abs{f\pare{z}}\,\rd{z} \le M\pare{R}\int_{C_R}\,\rd{s} \le M\pare{R}\pi R. \]
+故$M\pare{R} = o\pare{R}$时积分为零.
+\begin{theorem}
+    若$f$在上半平面上仅有有限个奇点$z_1,\cdots, z_n$, 除此之外$f$解析, 且
+    \[ \lim_{z\rightarrow \infty} f\pare{z}\cdot z = 0, \]
+    则
+    \[ \int_{-\infty}^{+\infty} f\pare{x}\,\rd{x} = 2\pi i \sum_{k=1}^n \Residue\pare{f,z_k}. \]
+\end{theorem}
+\begin{proof}
+    令$C_R$为$z = Re^{i\theta}$, $0\le\theta\le \pi$. 取$R$充分大, $z_1,\cdots, z_n$在$C_R$与$\brac{-R,R}$内, 则由留数定理,
+    \[ \int_{C_R} f\pare{z}\,\rd{z} + \int_{-R}^R f\pare{x}\,\rd{x} = 2\pi i \sum_{k=1}^\infty\Residue\pare{f,z_k}. \]
+    于是若$\displaystyle \lim_{n\rightarrow\infty}\int_{C_R}f\pare{z}\,\rd{z} = 0$, 则
+    \[ \int_{-\infty}^{+\infty} f\pare{x}\,\rd{z} = 2\pi i \sum_{k=1}^n \Residue\pare{f,z_k}. \]
+    记$M\pare{R} = \max_{z\in C_R}\abs{f\pare{z}}$, 则由$\displaystyle \lim_{n\rightarrow\infty} zf\pare{z} = 0$, 有$\displaystyle \lim_{R\rightarrow \infty} RM\pare{R} = 0$.
+    于是
+    \begin{align*}
+        \abs{\int_{C_R}f\pare{z}\,\rd{z}} &\le \int_{C_R}\abs{f\pare{z}}\,\rd{s} \le M\pare{R}\int_{C_R}\rd{s} = \pi M\pare{R} R \rightarrow 0.
+    \end{align*}
+    故$\displaystyle \lim_{R\rightarrow\infty} \int_{C_R} f\pare{z}\,\rd{z} = 0$.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_{-\infty}^{+\infty} \frac{x^2-x+2}{x^4+10x^2+9}\,\rd{x}$.
+    \end{ex}
+    \begin{proof}[解]
+        $x^4 + 10x^2 + 9 = 0$解为$\pm i$和$\pm 3 i$, 从而$f\pare{z} = \displaystyle \frac{x^2-x+2}{x^4+10x^2+9}$在上半平面有奇点$i$和$3i$. 分别有留数
+        \[ \Residue\pare{f,i} = \frac{-1-i}{16},\quad \Residue\pare{f,3i} = \frac{3-7i}{48}. \]
+        故原式为$\displaystyle \frac{5}{12}\pi$.
+    \end{proof}
+\end{sample}
+\begin{remark}
+    常见情况为$f\pare{z} = \displaystyle \frac{P\pare{z}}{Q\pare{z}}$, 其中$P$和$Q$为多项式, $\deg Q \ge \deg P + 2$.
+\end{remark}
+\begin{remark}
+    对于下半平面奇点, 需要加上负号,
+    \[ \int_{-\infty}^\infty f\pare{x}\,\rd{x} = -2\pi i\sum_{k=1}^\infty \Residue\pare{f,z_k}. \]
+\end{remark}
+\begin{remark}
+    $z_k$仅仅是半平面内的留数, 切忌将所有留数相加.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_{-\infty}^{+\infty} \frac{\rd{x}}{\pare{x^2+a^2}^3}$.
+    \end{ex}
+    \begin{proof}[解]
+        $\displaystyle \Residue\pare{f,ai} = \rec{2!}\displaystyle \lim_{z\rightarrow ai} \frac{\rd^2{}}{\rd{z^2}}\brac{\frac{\pare{z-ai}^3}{\pare{z^2+a^2}^3}} = \frac{3}{16a^5 i}$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_{-\infty}^{+\infty} \frac{\rd{x}}{\pare{1+x^2}^{n+1}}$.
+    \end{ex}
+    \begin{proof}[解]
+        $\Residue\pare{f,i} = \displaystyle \rec{2i} \frac{\pare{2n}!}{2^{2n}\pare{n!}^2}$.
+    \end{proof}
+\end{sample}
+\begin{remark}
+    参考\inlinehardlink{习题p.131.1(7)}的结论.
+\end{remark}
+对于
+\[ \int_{-\infty}^{+\infty} f\pare{x}\cos\alpha x\,\rd{x},\quad \int_{-\infty}^{+\infty} \sin\alpha x\,\rd{x},\quad \pare{\alpha > 0}. \]
+这正是
+\[ \int_{-\infty}^{+\infty} e^{i\alpha x} f\pare{x}\,\rd{x} = \int_{-\infty}^{+\infty} f\pare{x}\cos\alpha x\,\rd{x} + i \int_{-\infty}^{+\infty} \sin\alpha x\,\rd{x} \]
+的「虚部」和「实部」.
+\begin{theorem}
+    若$f$仅在上半平面有有限个奇点$z_1,\cdots, z_n$, 且$\displaystyle \lim_{z\rightarrow \infty} f\pare{z} = 0$, 则
+    \[ \int_{-\infty}^{+\infty} f\pare{z}e^{i\alpha x} \,\rd{x} = 2\pi i \sum_{k=1}^n \Residue\pare{e^{i\alpha z}f\pare{z}, z_k}. \]
+\end{theorem}
+\begin{proof}
+    只需证明$R\rightarrow\infty$时$\displaystyle \int_{C_R}f\pare{z}\,\rd{z} \rightarrow 0$.
+    \begin{align*}
+        \abs{\int_{C_R} e^{i\alpha z}f\pare{z}\,\rd{z}} &\le \abs{\int_0^{\pi} e^{i\alpha R\pare{\cos\theta + i\sin\theta}}f\pare{Re^{i\theta}}Re^{i\theta}i\,\rd{\theta}} \\
+        &\le \int_0^\pi \abs{e^{-\alpha R\sin\theta} e^{i\alpha R\cos\theta} f\pare{Re^{i\theta}} Re^{i\theta}i}\,\rd{\theta} \\
+        &\le RM\pare{R}\int_0^\pi e^{-\alpha R\sin\theta}\,\rd{\theta} \\
+        &= 2RM\pare{R} \int_0^{\pi/2} e^{-\alpha R\cdot 2 \theta/\pi}\,\rd{\theta} \\
+        &= \frac{\pi}{\alpha}M\pare{R}\pare{1-e^{-\alpha R}} \rightarrow 0. \qedhere
+    \end{align*}
+\end{proof}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.132 3(1)(3)(5), 4(2)(4), 5(2), 6(1)(3)
+
+% paragraph 作业 (end)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{PartialCircAroundSingular}
+    \caption{}
+    \label{fig:环绕奇点的弧的积分}
+\end{figure}
+对于在$R$上存在奇点的情形, 需要如下引理.
+\begin{lemma}
+    如\cref{fig:环绕奇点的弧的积分}, 设$a$是$f$的一个奇点, $\displaystyle \lim_{z\rightarrow a}\pare{z-a}f\pare{z} = k$, 则
+    \[ \lim_{\rho\rightarrow 0} \int_{C_\rho} f\pare{z}\,\rd{z} = i\pare{\beta - \alpha} k. \]
+\end{lemma}
+\begin{sample}
+    \begin{ex}
+        欲求$\displaystyle \int_{-\infty}^{+\infty} \frac{\sin x}{x}\,\rd{x}$, 令$f\pare{z} = \displaystyle \frac{e^{iz}}{z}$, 则$z = 0$为$f\pare{z}$的一阶极点.
+        \[ \pare{\int_{-R}^{-\rho} + \int_{-C_\rho} + \int_\rho^R + \int_{C_R}}f\pare{z}\,\rd{z} = 0. \]
+        而$\displaystyle \lim_{z\rightarrow \infty}{e^{iz}}{z} = 0$, 因此
+        \begin{align*}
+            &\lim_{R\rightarrow\infty} \int_{C_R}f\pare{z}\,\rd{z} = 0. \\
+            &\lim_{\rho\rightarrow 0} \int_{C_\rho} f\pare{z}\,\rd{z} = i\pare{\pi - 0}\Residue\pare{f,0} = i\pi. \\
+            &\Rightarrow \int_{-\infty}^0 f\pare{x}\,\rd{x} - i\pi + \int_0^\infty f\pare{x}\,\rd{x} + 0 = 0. \\
+            &i\pi = \int_{-\infty}^{+\infty} \frac{e^{ix}}{x}\,\rd{x} = \int_{-\infty}^{+\infty} \frac{i\sin x}{x}\,\rd{x} = 0. \\
+            &\Rightarrow \int_{-\infty}^{\infty} \frac{\sin x}{x}\,\rd{x} = \pi \Rightarrow \int_0^\infty \frac{\sin x}{x}\,\rd{x} = \frac{\pi}{2}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{proposition}
+    若$f$在上半平面有奇点$z_1,\cdots,z_n$, 在$\+bR$上全体奇点为$a_1,\cdots,a_m$且皆为一阶极点, 且$\displaystyle \lim_{z\rightarrow\infty} f\pare{z}= 0$, 则有
+    \[ \int_{-\infty}^{+\infty} f\pare{z}e^{i\alpha z}\,\rd{z} = 2\pi i\sum_{k=1}^n \Residue\pare{f\pare{z}e^{i\alpha z},z_k} + \pi i \sum_{j=1}^m \Residue\pare{f\pare{z}e^{i\alpha z}, a_j}. \]
+\end{proposition}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_{-\infty}^{+\infty} \frac{x\cos x}{x^2 - 5x + 6}\,\rd{x}$.
+    \end{ex}
+    \begin{solution}[解]
+        记$\displaystyle f\pare{z} = \frac{z}{z^2 - 5z + 6}$, 则$\displaystyle \lim_{z\rightarrow\infty} f\pare{z} = 0$, 故$f\pare{z}$有奇点$a_1 = 2, a_2 = 3$, 且皆为一阶奇点. 于是
+        \begin{align*}
+            &\int_{-\infty}^{+\infty} \frac{x\cos x}{x^2 - 5x + 6}\,\rd{x} = \Re \brac{\int_{-\infty}^{+\infty} f\pare{x}e^{ix}\,\rd{x}} \\
+            &= \Re\brac{2\pi i \sum_{k=1}^n \Residue\pare{f\pare{z}e^{iz},z_k} + \pi i\sum_{j=1}^m \Residue\pare{f\pare{z}e^{iz},a_j}} \\
+            &= \Re\brac{\pi i \pare{\Residue\pare{f\pare{z}e^{iz}, a_1} + \Residue\pare{f\pare{z}e^{iz}, a_2}}} \\
+            &= \Re\brac{\pi\pare{-2\pare{\cos 2 + i\sin 2} + 3\pare{\cos 3 + i\sin 3}}} \\
+            &= \pi \pare{2\sin 2 - 3\sin 3}. \qedhere
+        \end{align*}
+    \end{solution}
+\end{sample}
+类似可证明
+\begin{align*}
+    && \int_0^{+\infty} \frac{x^p}{1+x}\,\rd{x} &= -\frac{\pi}{\sin p\pi}, \quad -1 < p < 0, & &\\
+    \text{Fresnel积分}&& \int_{0}^{+\infty} \cos x^2\,\rd{x} &= \int_0^{+\infty} \sin x^2\,\rd{x} = \half \sqrt{\frac{\pi}{2}}, & & \\
+    \text{Poisson积分}&& \int_{0}^{+\infty} e^{-ax^2}\cos bx\,\rd{x} &= \half \sqrt{\frac{\pi}{a}}e^{-\frac{b^2}{4a}}. & &
+\end{align*}
+
+% subsection 积分计算 (end)
+
+\subsection{辐角原理补充} % (fold)
+\label{sub:辐角原理补充}
+
+\begin{proposition}
+    设$a,b$分别为$f\pare{z}$的$m$阶零点和$n$阶极点, 则$\displaystyle \frac{f'\pare{z}}{f\pare{z}}$在$a,b$处有一阶极点. 且
+    \[ \Residue \pare{\frac{f'}{f}, a} = m,\quad \Residue \pare{\frac{f'}{f}, b} = -n. \]
+\end{proposition}
+\begin{proof}对于零点和极点分别有
+    \begin{align*}
+        f\pare{z} &= \pare{z-z_0}^m g\pare{z}, \\
+        \frac{f'}{f} &= \frac{m\pare{z-z_0}^{m-1}g\pare{z} + \pare{z-z_0}^m g'\pare{z}}{\pare{z-z_0}^m g\pare{z}} \\
+        &= \frac{m}{z-z_0} + \frac{g'\pare{z}}{g\pare{z}}. \\
+        f\pare{z} &= \pare{z-z_0}^{-n} h\pare{z}, \\
+        \frac{f'}{f} &= \frac{-n\pare{z-z_0}^{-n-1}h\pare{z} + \pare{z-z_0}^{-n}h'\pare{z}}{\pare{z-z_0}^{-n} h\pare{z}} \\
+        &= \frac{-n}{z-z_0} + \frac{h'\pare{z}}{h\pare{z}}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{theorem}[有极点的辐角原理]
+    设$f$在$D$内除了在有限多个极点外解析, 则
+    \[ \rec{2\pi i} \int_{\partial D} \frac{f'\pare{z}}{f\pare{z}}\,\rd{z} = N - P. \]
+    其中$N$和$P$分别为零点和极点的计数(计重数).
+\end{theorem}
+\begin{proof}
+    设全体零点为$z_1,\cdots, z_m$, 阶数为$\alpha_1,\cdots, \alpha_m$. 全体极点为$z'_1,\cdots, z'_n$, 阶数为$\beta_1,\cdots, \beta_n$, 则$N = \alpha_1+\cdots+\alpha_n$, $P=\beta_1+\cdots+\beta_n$, 故全体留数之和为$N-P$.
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{4cm}{CountZeroPathEx1}
+    \caption{}
+    \label{fig:零点计数例1图}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:零点计数例1}
+        证明$\lambda - z - e^{-z} = 0$在右半平面有且仅有一个实根, 其中$\lambda > 1$.
+    \end{ex}
+    \begin{proof}
+        构造如\cref{fig:零点计数例1图}的回路. 令$f\pare{z} = \lambda - z$, $\varphi\pare{z} = e^{-z}$. 在$\brac{-iR,iR}$上, $z = iy$, 从而
+        \[ \abs{f\pare{z}} = \abs{\lambda-iy} \ge \lambda > 1 = \abs{e^{-iy}} = \abs{\varphi\pare{z}}. \]
+        而在$C_R$上,
+        \[ \abs{f\pare{z}} = \abs{\lambda - z} \ge \abs{z} - \lambda = R-\lambda > 1 > \abs{e^{-x}} = \abs{\varphi\pare{z}} \]
+        对充分大的$R$成立. 由于$f\pare{z} = \lambda - z$在右半平面仅有一个根, 由$R$任意知$f\pare{z} - \varphi\pare{z}$在右半平面也仅有一个根. 显然是实根.
+    \end{proof}
+    \begin{proof}[另解]
+        令$z = x + iy$, 则原方程变为
+        \[ x + iy = \lambda - e^{-x}\cos y + ie^{-x}\sin y. \]
+        对比实部和虚部,
+        \[ x = \lambda - e^{-x}\cos y,\quad y = e^{-x}\sin y. \]
+        若$y\neq 0$, $y/\sin y = e^{-x}$, 故必定有$y = 0$. 此时就有$x + e^{-x} = \lambda$, 显然只有一个根.
+    \end{proof}
+\end{sample}
+
+% subsection 辐角原理补充 (end)
+
+% section laurent展开及其应用 (end)
+
+\end{document}

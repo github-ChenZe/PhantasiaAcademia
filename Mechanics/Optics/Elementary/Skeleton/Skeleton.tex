@@ -1,0 +1,271 @@
+\documentclass{standalone}
+
+\usepackage{ctex}
+\usepackage{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\def\terminology{\emph}
+\tikzstyle{border dashed}=[dash pattern=on 30pt off 20pt]
+
+\begin{document}
+\begin{tikzpicture}
+  \draw node [] (折射率定义) {折射率$\displaystyle n = \frac{c}{v}$}
+  node [below=3cm of 折射率定义] (折射定律) {折射定律$\displaystyle n_1 \sin i_1 = n_2 \sin i_2$}
+  node [left=3cm of 折射定律] (折射守恒量) {\parbox{6cm}{
+      无论介质如何复杂, $n \sin i$在折射过程中是守恒量.
+  }}
+  node [below right = 3cm and 3cm of 折射定律] (全反射角) {
+    在$i_c = \arcsin n_2/n_1$处发生全反射.
+  }
+  node [below=3cm of 全反射角] (全反射角条件) {
+    \parbox{6cm}{只有从折射率大进入折射率小的介质才可能发生全反射.}
+  }
+  node [below right = 3cm and 12cm of 折射定律] (最小偏转角) {
+    \parbox{6cm}{
+    顶角为$\alpha$的三棱镜, 最小偏转角$\delta$满足
+    \[ n = n_0 \frac{\sin \pare{\alpha+\delta}/2}{\sin \alpha/2}. \]
+    }
+  }
+  node [above left = 6cm and 6cm of 折射定律] (Huygens原理) {
+    \parbox{5cm}{
+    \paragraph{Huygens原理} % (fold)
+    \label{par:huygens原理}
+    波面上的每一面元是次波的波源, 次波的包络是下一时刻的波面.
+    % paragraph huygens原理 (end)
+    \incfig{5cm}{Huygens}
+    }
+  }
+  node [above right = 6cm and 6cm of 折射定律] (Fermat原理) {
+    \parbox{5cm}{
+    \paragraph{Fermat原理} % (fold)
+    \label{par:fermat原理}
+    两点之间光线传播的实际路径是使光程取平稳值的路径.
+    % paragraph huygens原理 (end)
+    }
+  }
+  node [above = 3cm of Fermat原理] (光程) {
+    \parbox{5cm}{
+        某段路径的\terminology{光程}即在传播过这段路径的相同时间内光在真空中经过的路程.
+    }
+  }
+  node [above = 3cm of 折射率定义] (反射定律) {
+    反射定律$i_r = i$
+  }
+  node [left = 6cm of 光程] (光程表达式) {
+    $\displaystyle \pare{QP} = \int_Q^P n\,\rd{l}.$
+  }
+  node [below right =6cm and 12cm of Fermat原理] (同心光束) {
+    \parbox{6cm}{
+    \terminology{同心光束}谓光线半身或反向交于一点者.
+    }
+  }
+  node [above=1.5cm of 同心光束] (物像点区分) {
+    在通过光具组前/后相交?
+  }
+  node [above left=1.5cm and 3cm of 物像点区分] (物点) {
+    物点
+  }
+  node [above =1.5cm of 物点] (实虚物点区分) {
+    交点为发出点/延长线?
+  }
+  node [above left=1.5cm and 0 cm of 实虚物点区分] (实物点) {
+    实物点
+  }
+  node [above right=1.5cm and 0 cm of 实虚物点区分] (虚物点) {
+    虚物点
+  }
+  node [above right=1.5cm and 3cm of 物像点区分] (像点) {
+    像点
+  }
+  node [above =1.5cm of 像点] (实虚像点区分) {
+    交点为汇聚点/反向延长线?
+  }
+  node [above left=1.5cm and 0 cm of 实虚像点区分] (实像点) {
+    实像点
+  }
+  node [above right=1.5cm and 0 cm of 实虚像点区分] (虚像点) {
+    虚像点
+  }
+  node [above=10.5cm of 同心光束] (实虚物像点的光程差计算) {
+  \parbox{13cm}{
+  \begin{longtable}{|c|c|c|}
+    \hline
+    \diagbox{物}{像} & 实像 & 虚像 \\
+    \hline
+    \+:r6{实物} & \+:r6{\incfig{4.5cm}{RealToReal}} & \+:r6{\incfig{4.5cm}{RealToIm}}\\
+    &&\\
+    &&\\
+    &&\\
+    &&\\
+    &&\\
+    光程 & $nQM + n'MQ'$ & $nQM - n'MQ'$ \\
+    \hline
+    \+:r6{虚物} & \+:r6{\incfig{4.5cm}{ImToReal}} & \+:r6{\incfig{4.5cm}{ImToIm}} \\
+    &&\\
+    &&\\
+    &&\\
+    &&\\
+    &&\\
+    光程 & $-nQM + n'MQ'$ & $-nQM - n'MQ'$ \\
+    \hline
+    \caption{实物/虚物成实像/虚像的例子}
+    \label{table:实物虚物成实像虚像的例子}
+  \end{longtable}
+  }
+  }
+  node [right=6cm of 像点] (严格成像) {
+  \parbox{6cm}{同心光束经过光具组变换后若能严格保持同心性则谓\terminology{严格成像}. \terminology{理想光具组}谓任何点皆可严格成像者.}
+  }
+  node [above=3cm of 严格成像] (严格成像条件) {
+  只有等光程的折射和反射才能保证严格成像.
+  }
+  node [below=3cm of 同心光束] (单球面成像) {
+  \parbox{12cm}{
+  \begin{table}
+  \begin{tabular}{cccc}
+  \toprule
+  类型 & 物像距公式 & 物方焦距 & 像方焦距 \\
+  \midrule
+  单球面反射 & $\displaystyle \rec{s} + \rec{s'} = \rec{f}$ & $\displaystyle f = -\frac{r}{2}$ & $\displaystyle f' = -\frac{r}{2}$ \\
+  \midrule
+  单球面折射 & $\displaystyle \frac{n}{s} + \frac{n'}{s'} = \frac{n'-n}{r}$ & $\displaystyle f = \frac{nr}{n'-n} = \frac{n}{\Phi}$ & $\displaystyle f' = \frac{n'r}{n'-n} = \frac{n}{\Phi}$ \\
+  \bottomrule
+  \end{tabular}
+      \caption{单个球面之成像}
+  \end{table}
+  }
+  }
+  node [below=1cm of 单球面成像] (光焦度) {
+  光焦度$\displaystyle \Phi = \frac{n}{f} = \frac{n'}{f'} = \frac{n'-n}{r}$
+  }
+  node [right=3cm of 单球面成像] (Gauss公式) {
+  Gau\ss 公式$\displaystyle \frac{f}{s} + \frac{f'}{s'} = 1$
+  }
+  node [below right=1cm and 3cm of 单球面成像] (光焦度Gauss公式) {
+  $\displaystyle \frac{n}{s} + \frac{n'}{s'} = \Phi$
+  }
+  node [right=3cm of 光焦度Gauss公式] (光焦度叠加) {
+  薄透镜$\displaystyle \Phi = \Phi_1 + \Phi_2 = \frac{n_L-n}{r_1} + \frac{n'-n_L}{r_2}$
+  }
+  node [right=3cm of 光焦度叠加] (磨镜者公式) {
+  磨镜者公式$\displaystyle n=n'=1\Rightarrow f=f'=\rec{\pare{n_L-1}\pare{\rec{r_1}-\rec{r_2}}}$
+  }
+  node [above = 3cm of Gauss公式] (Newton公式) {
+  Newton公式$xx' = ff'$
+  }
+  node [below right = 6cm and 4cm of Gauss公式] (透镜作图规则) {\parbox{6cm}{
+  透镜作图规则
+  \begin{cenum}
+    \setcounter{enumi}{-1}
+    \item 入射平行线, 成像$F'$面;
+    \item 入射平行于光轴的平行线, 出射过$F'$点;
+    \item 入射过$F$点, 出射平行于光轴;
+    \item 过透镜光心, 不变方向.
+    \end{cenum}
+    \incfig{6cm}{PositiveLenLines}}
+  }
+  node [above right= 0cm and 3cm of Gauss公式] (符号约定) {\parbox{10cm}{
+  \setlength\extrarowheight{5pt}
+\begin{table}[ht]
+    \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            $s$ & 物点在球面左侧为正物距(实物)\\
+            \hline
+            \+:r2{$s'$} & 像点在球面右侧为正像距(实像) \\
+            & 对于反射, 像在球面左侧为正, 右侧为负 \\
+            \hline
+            $r$ & 球心在球面右侧取正 \\
+            \hline
+            $u$ & 光轴到光线逆时针为正, 顺时针为负\\
+            \hline
+            $y$ & 光轴之上为正, 光轴之下为负 \\
+            \hline
+            $x$ & $Q$在$F$左侧为正, 右侧为负 \\
+            \hline
+            $x'$ & $Q'$在$F'$右侧为正, 左侧为负 \\
+            \hline
+        \end{tabular}
+    \caption{符号约定}
+    \label{table:符号约定}
+\end{table}
+\setlength\extrarowheight{0pt}}
+  }
+  node [below = 5cm of 单球面成像] (放大率公式) {
+  \parbox{6cm}{
+  放大率$\displaystyle V = \frac{y'}{y} = -\frac{ns'}{n's}$对折射和反射皆成立.}
+  }
+  node [right = 3cm of 放大率公式] (Lagrange-Helmholtz定理) {
+  Lagrange-Helmholtz定理 $ynu = y'n'u' = y''n''y''$}
+  node [below right = 1cm and 1.5cm of 放大率公式] (焦距表示放大率) {
+  $\displaystyle V = -\frac{fs'}{f's}$}
+  node [below = 3cm of 放大率公式] (Newton放大率) {
+  $\displaystyle V = -\frac{f}{x} = -\frac{x'}{f'}$}
+  node [below right = 3cm and 1.5cm of 放大率公式] (简单放大率) {
+  $\displaystyle V = -\frac{s'}{s}$}
+  ;
+  \draw[border dashed, line width=10pt, gray!20!white] ($ (符号约定) + (4,4) $) -- ($ (符号约定) + (-8,4) $) -- ($ (单球面成像) + (-7,2) $) -- ($ (单球面成像) + (-7,-6) $) -- ($ (单球面成像) + (-7,-14) $) -- ($ (透镜作图规则) + (3,-6) $) -- ($ (磨镜者公式) + (6,0) $) -- cycle;
+  \draw[border dashed, line width=10pt, gray!20!white] ($ (单球面成像) + (-7,2) $) -- ($ (光程) + (6,2) $) -- ($ (Huygens原理) + (-4,6) $) -- ($ (Huygens原理) + (-4,-15) $) -- ($ (单球面成像) + (-7, -6) $);
+  \draw[border dashed, line width=10pt, gray!20!white] ($ (光程) + (6,2) $) -- ($ (实虚物像点的光程差计算) + (-8,6) $) -- ($ (实虚物像点的光程差计算) + (8,6) $) -- ($ (符号约定) + (4,4) $);
+  \path[->, every node/.style={sloped, anchor=south, auto=false}]
+  (折射率定义) edge node {} (折射定律)
+  (折射定律) edge node {} (折射守恒量)
+  (折射定律) edge node {} (全反射角)
+  (全反射角) edge node {} (全反射角条件)
+  (折射定律) edge node {} (最小偏转角)
+  (Huygens原理) edge node {} (折射定律)
+  (Fermat原理) edge node{} (折射定律)
+  (光程) edge node{} (Fermat原理)
+  (Huygens原理) edge node {} (反射定律)
+  (Fermat原理) edge node{} (反射定律)
+  (光程) edge node{} (光程表达式)
+  (折射率定义) edge [bend right] node{} (光程表达式)
+  (Huygens原理) edge [<->, bend left=20] node{} (Fermat原理)
+  (同心光束) edge node{} (物像点区分)
+  (物像点区分) edge node{前} (物点)
+  (物像点区分) edge node{后} (像点)
+  (物点) edge node{} (实虚物点区分)
+  (像点) edge node{} (实虚像点区分)
+  (实虚物点区分) edge node{发出点} (实物点)
+  (实虚物点区分) edge node{汇聚点} (虚物点)
+  (实虚像点区分) edge node{汇聚点} (实像点)
+  (实虚像点区分) edge node{反向延长线} (虚像点)
+  (实物点) edge node{} (实虚物像点的光程差计算)
+  (虚物点) edge node{} (实虚物像点的光程差计算)
+  (实像点) edge node{} (实虚物像点的光程差计算)
+  (虚像点) edge node{} (实虚物像点的光程差计算)
+  (光程表达式) edge node{} (实虚物像点的光程差计算)
+  (像点) edge node{} (严格成像)
+  (严格成像) edge node{} (严格成像条件)
+  (像点) edge [bend left=20] node{} (单球面成像)
+  (折射定律) edge [bend left=20] node{} (单球面成像)
+  (反射定律) edge [bend left=13] node{} (单球面成像)
+  (单球面成像) edge node{} (Gauss公式)
+  (符号约定) edge node{} (Gauss公式)
+  (折射定律) edge [bend right=100] node{} (放大率公式)
+  (反射定律) edge [bend right=7] node{} (放大率公式)
+  (放大率公式) edge node{} (Lagrange-Helmholtz定理)
+  (符号约定) edge [bend left=65] node{} (Lagrange-Helmholtz定理)
+  (光焦度) edge node{} (单球面成像)
+  (Gauss公式) edge [<->] node{} (光焦度Gauss公式)
+  (光焦度) edge node{} (光焦度Gauss公式)
+  (光焦度叠加) edge node{} (Gauss公式)
+  (光焦度叠加) edge node{} (光焦度Gauss公式)
+  (光焦度叠加) edge node{} (磨镜者公式)
+  (光焦度) edge [bend right=7] node{} (磨镜者公式)
+  (符号约定) edge [bend right=7] node{} (磨镜者公式)
+  (Gauss公式) edge [<->] node{} (Newton公式)
+  (符号约定) edge [bend right=7] node{} (Newton公式)
+  (放大率公式) edge node{} (焦距表示放大率)
+  (放大率公式) edge node{} (Newton放大率)
+  (Newton公式) edge node{} (Newton放大率)
+  (放大率公式) edge node{$n=n', f=f'$} (简单放大率)
+  (Newton放大率) edge [<->] (简单放大率)
+  (焦距表示放大率) edge [<->] (简单放大率)
+  (光焦度) edge node{} (焦距表示放大率)
+  (Gauss公式) edge node{} (透镜作图规则)
+  ;
+\end{tikzpicture}
+\end{document}

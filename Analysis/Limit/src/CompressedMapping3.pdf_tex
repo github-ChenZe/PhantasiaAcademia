@@ -1,0 +1,66 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'CompressedMapping3.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{632.34428346bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.94949867)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{CompressedMapping3.pdf}}%
+    \put(0.86863326,0.01083619){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{CompressedMapping3.pdf}}%
+    \put(0.13084621,0.87937033){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y(x)$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{CompressedMapping3.pdf}}%
+    \put(0.47543684,0.06012199){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.26868844\unitlength}\raggedright $a_2$\end{minipage}}}%
+    \put(0.54660057,0.07909899){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.26868844\unitlength}\raggedright $b_2$\end{minipage}}}%
+    \put(-0.00393728,0.50822498){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.26868844\unitlength}\raggedright $a_3$\end{minipage}}}%
+    \put(-0.00393728,0.57938864){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.26868844\unitlength}\raggedright $b_3$\end{minipage}}}%
+    \put(0.05388482,0.70208913){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{CompressedMapping3.pdf}}%
+    \put(0.43362646,0.09315715){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{CompressedMapping3.pdf}}%
+  \end{picture}%
+\endgroup%

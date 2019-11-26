@@ -1,0 +1,70 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'RiemannLog.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1950.17151359bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.75771699)%
+    \put(0.48937974,0.83684358){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{RiemannLog.pdf}}%
+    \put(0.31137343,0.69949304){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20437764\unitlength}\raggedright $\+bC$\end{minipage}}}%
+    \put(0.15094799,0.66433128){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12174754\unitlength}\raggedright $+$\end{minipage}}}%
+    \put(0.15094799,0.63356476){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12174754\unitlength}\raggedright $-$\end{minipage}}}%
+    \put(0.15094799,0.3951241){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12174754\unitlength}\raggedright $+$\end{minipage}}}%
+    \put(0.15094799,0.36435756){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12174754\unitlength}\raggedright $-$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{RiemannLog.pdf}}%
+    \put(0.15094799,0.12591689){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12174754\unitlength}\raggedright $+$\end{minipage}}}%
+    \put(0.15094799,0.09515037){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12174754\unitlength}\raggedright $-$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{RiemannLog.pdf}}%
+    \put(0.861294,0.69746078){\color[rgb]{0,0,0}\rotatebox{-90}{\makebox(0,0)[lt]{\begin{minipage}{0.2968033\unitlength}\raggedright $\cdots$\end{minipage}}}}%
+    \put(0.861294,0.14366305){\color[rgb]{0,0,0}\rotatebox{-90}{\makebox(0,0)[lt]{\begin{minipage}{0.2968033\unitlength}\raggedright $\cdots$\end{minipage}}}}%
+    \put(0.50747886,0.14366305){\color[rgb]{0,0,0}\rotatebox{-90}{\makebox(0,0)[lt]{\begin{minipage}{0.2968033\unitlength}\raggedright $\cdots$\end{minipage}}}}%
+    \put(0.49209559,0.75899387){\color[rgb]{0,0,0}\rotatebox{-90}{\makebox(0,0)[lt]{\begin{minipage}{0.2968033\unitlength}\raggedright $\cdots$\end{minipage}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{RiemannLog.pdf}}%
+    \put(0.50736288,0.43092801){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25640078\unitlength}\raggedright $w=\Ln z$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

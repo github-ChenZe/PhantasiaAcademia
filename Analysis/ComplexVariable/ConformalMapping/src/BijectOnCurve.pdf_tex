@@ -1,0 +1,65 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'BijectOnCurve.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1817.5846995bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.37970678)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{BijectOnCurve.pdf}}%
+    \put(0.28033442,0.31429366){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D$}}}%
+    \put(0.21313378,0.10915484){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\gamma$}}}%
+    \put(0.11881708,0.18578717){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$U$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{BijectOnCurve.pdf}}%
+    \put(0.227635,0.18553828){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z_0$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{BijectOnCurve.pdf}}%
+    \put(0.79785133,0.17386718){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$w_0$}}}%
+    \put(0.76488639,0.3473045){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\Gamma=f\comp \gamma$}}}%
+    \put(0.79318139,0.25888261){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$V$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{BijectOnCurve.pdf}}%
+    \put(0.49608386,0.18225028){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$f$}}}%
+  \end{picture}%
+\endgroup%

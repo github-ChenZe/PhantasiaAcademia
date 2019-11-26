@@ -1,0 +1,62 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'RotCone.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{416.94252795bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.44670759)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{RotCone.pdf}}%
+    \put(0.38679221,1.45570079){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.69048714\unitlength}\raggedright $\Delta\+v\theta$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{RotCone.pdf}}%
+    \put(0.91728912,1.33213993){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08317091\unitlength}\raggedright $\Delta\theta$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{RotCone.pdf}}%
+    \put(0.55340693,0.52293636){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.49852702\unitlength}\raggedright $\+vr$\end{minipage}}}%
+    \put(0.84572475,0.73365399){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21834403\unitlength}\raggedright $\+vr+\Delta\+vr$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{RotCone.pdf}}%
+    \put(0.58703532,0.80882332){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.7195604\unitlength}\raggedright $\alpha$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

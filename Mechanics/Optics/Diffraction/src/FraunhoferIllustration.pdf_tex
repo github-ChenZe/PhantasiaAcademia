@@ -1,0 +1,72 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'FraunhoferIllustration.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1958.91663078bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.48742975)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{FraunhoferIllustration.pdf}}%
+    \put(0.28658381,0.47579425){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{FraunhoferIllustration.pdf}}%
+    \put(0.91776353,0.46157356){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x'$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{FraunhoferIllustration.pdf}}%
+    \put(0.91862846,0.20729895){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
+    \put(0.24244431,0.24284561){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$O$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{FraunhoferIllustration.pdf}}%
+    \put(0.22479587,0.36818764){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A$}}}%
+    \put(0.22479587,0.09204691){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$B$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{FraunhoferIllustration.pdf}}%
+    \put(0.19230871,0.2351451){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$a$}}}%
+    \put(0.51950068,0.47029011){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L_1$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{FraunhoferIllustration.pdf}}%
+    \put(0.29154028,0.09517332){\color[rgb]{0,0,0}\rotatebox{15}{\makebox(0,0)[lb]{\smash{$\Delta L$}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{FraunhoferIllustration.pdf}}%
+    \put(0.35511591,0.2395639){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\theta$}}}%
+    \put(0.91914226,0.35866184){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$P_\theta$}}}%
+    \put(0.91914226,0.25145967){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$P_0$}}}%
+  \end{picture}%
+\endgroup%

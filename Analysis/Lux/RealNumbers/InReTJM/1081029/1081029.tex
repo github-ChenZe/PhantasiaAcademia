@@ -1,0 +1,20 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{ex}
+    设$f\pare{x}$具有$n$阶连续导数, 且$f^{\pare{k}}\pare{0} = k, k=0,1,\cdots,n$. 记$P_n\pare{x} = a_0 + a_1x + \cdots + a_nx^n$. 要使得$f\pare{x} - P_n\pare{x}$在$x\rightarrow 0$时是比$x$尽可能高阶的无穷小, 那么$P_n\pare{x}$是什么?
+\end{ex}
+\begin{proof}[解]
+    由Taylor公式,
+    \[ f\pare{x} = c_{n+1}x^{n+1} + O\pare{x^{n+2}}. \]
+    因此
+    \[ f\pare{x} - P_n\pare{x} = -a_0 - a_1 x - \cdots - a_nx^n + c_{n+1} x^{n+1} + O\pare{x^{n+2}}. \]
+    为了使$f\pare{x} - P_n\pare{x}$是比$x$尽可能高阶的无穷小, 就要求对尽可能大的$k$, 有
+    \[ \frac{f\pare{x} - P_n\pare{x}}{x^k} = \frac{-a_0 - a_1 x - \cdots - a_nx^n + c_{n+1} x^{n+1} + O\pare{x^{n+2}}}{x^k} = 0. \]
+    容易看出当$a_0 = a_1 = \cdots = a_n = 0$时, 满足条件的$k$最大(至少是$n+1$).
+\end{proof}
+
+\end{document}

@@ -1,0 +1,30 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{align*}
+    \int_0^{2m\pi} \frac{\rd{x}}{\sin^4 x + \cos^4 x} &= \int_0^{4m\pare{\pi/2}} \frac{\rd{x}}{\sin^4 x + \cos^4 x} \\
+    &= 4m \int_0^{\pi/2} \frac{\rd{x}}{\cos^4 x + \sin^4 x} \\
+    &= 4m \int_{x=0}^{x=\pi/2} \frac{\tan^2 x + 1}{\tan^4 x + 1}\,\rd{\tan x} \\
+    &= 4m \int_0^{\infty} \frac{t^2+1}{t^4+1}\,\rd{t} \\
+    &= 4m \int_0^{\infty} \frac{1+\rec{t^2}}{t^2 + \rec{t^2}}\,\rd{t} \\
+    &= 4m \int_0^\infty \frac{\rd\pare{t - \rec{t}}}{\pare{t-\rec{t}}^2 + 2} \\
+    &= 4m \int_{-\infty}^{\infty} \frac{\rd{u}}{u^2 + 2} \\
+    &= \frac{4m\pi}{\sqrt{2}}.
+\end{align*}
+\begin{align*}
+    A &= 4\int_0^{\pi/4} \half a^2 \cos 2\varphi\,\rd{\varphi} \\
+    &= a^2 \sin 2\varphi \vert_0^{\pi/4} \\
+    &= a^2.
+\end{align*}
+半径为$a$的均匀半圆周, 质心坐标为
+\begin{align}
+    x_C &= \rec{\pi a} \int_0^\pi a\sin\theta\cdot a\,\rd{\theta} \\
+    &= \frac{2}{\pi} a.
+\end{align}
+细棒长$\SI{10}{\meter}$, $\rho\pare{x} = 7+0.2x$,
+\[ m = \int_0^{10} \pare{7+0.2x}\,\rd{x} = \SI{80}{\kilo\gram}. \]
+
+\end{document}

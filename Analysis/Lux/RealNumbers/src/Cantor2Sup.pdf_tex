@@ -1,0 +1,87 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Cantor2Sup.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{664.6840109bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.06307208)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Cantor2Sup.pdf}}%
+    \put(0.19343241,1.06871364){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $S$\end{minipage}}}%
+    \put(0.55450628,1.06871364){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.54475989\unitlength}\raggedright {\color{red}$B$}\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Cantor2Sup.pdf}}%
+    \put(0.19343241,0.97844518){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\alpha_1$\end{minipage}}}%
+    \put(0.77792081,0.97844518){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\beta_1$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{Cantor2Sup.pdf}}%
+    \put(0.19343241,0.86560961){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $S$\end{minipage}}}%
+    \put(0.55450628,0.86560961){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.54475989\unitlength}\raggedright {\color{red}$B$}\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{Cantor2Sup.pdf}}%
+    \put(0.19343241,0.77534114){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\alpha_2$\end{minipage}}}%
+    \put(0.56578981,0.77534114){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\beta_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{Cantor2Sup.pdf}}%
+    \put(0.19343241,0.66250554){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $S$\end{minipage}}}%
+    \put(0.55450628,0.66250554){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.54475989\unitlength}\raggedright {\color{red}$B$}\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{Cantor2Sup.pdf}}%
+    \put(0.31980823,0.57223707){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\alpha_2$\end{minipage}}}%
+    \put(0.56578981,0.57223707){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\beta_2$\end{minipage}}}%
+    \put(0.54773612,0.97167504){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $c_1$\end{minipage}}}%
+    \put(0.41684686,0.768571){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $c_2$\end{minipage}}}%
+    \put(0.48229149,0.56546685){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $c_3$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{Cantor2Sup.pdf}}%
+    \put(0.19343241,0.45940138){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $S$\end{minipage}}}%
+    \put(0.55450628,0.45940138){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.54475989\unitlength}\raggedright {\color{red}$B$}\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{Cantor2Sup.pdf}}%
+    \put(0.38299618,0.36913291){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\alpha_3$\end{minipage}}}%
+    \put(0.56578981,0.36913291){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\beta_3$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{Cantor2Sup.pdf}}%
+    \put(0.19343241,0.09832733){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $S$\end{minipage}}}%
+    \put(0.55450628,0.09832733){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.54475989\unitlength}\raggedright {\color{red}$B$}\end{minipage}}}%
+    \put(0.43038714,0.25629714){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $\vdots$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{Cantor2Sup.pdf}}%
+    \put(0.45972437,0.09832733){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32876039\unitlength}\raggedright $s$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{Cantor2Sup.pdf}}%
+  \end{picture}%
+\endgroup%

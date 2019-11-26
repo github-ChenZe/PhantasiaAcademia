@@ -1,0 +1,271 @@
+\documentclass[../TheoreticalMechanics.tex]{subfiles}
+
+\begin{document}
+
+\section{微振动} % (fold)
+\label{sec:微振动}
+
+\subsection{一般解} % (fold)
+\label{sub:一般解}
+
+\subsubsection{Lagrange方程} % (fold)
+\label{ssub:lagrange方程}
+
+\begin{lemma}[平衡点附近的Lagrange量]
+    记平衡点为$q_{0i}$, $\eta_i$为偏移量, 则其附近\footnote{下文适用Einstein求和约定}
+    \[ V = V_0 + \half \pare{\partial^2_{ij}V}_0\eta_i\eta_j. \]
+    记$V_{ij} = \pare{\partial^2_{ij}V}_0$,  并引入\cref{thm:动能的分解}中的系数, 则有
+    \[ L = \half\pare{T_{ij}\dot{\eta}_i\dot{\eta}_j - V_{ij}\eta_i\eta_j}. \]
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[Lagrange方程]
+        在平衡点附近, Lagrange方程为
+        \[ T_{ij}\ddot{\eta}_{ij} + V_{ij}\eta_j = 0. \]
+        其中$T_{ij}$和$V_{ij}$为对角矩阵. 在主轴坐标系下, 有
+        \[ L = \half \pare{T_i \dot{\eta_i}^2 - V_{ij}\eta_i\eta_j}. \]
+        \begin{equation}
+            \label{eq:主轴下微振动方程}
+            T_i\ddot{\eta}_i + V_{ij}\eta_j = 0.\qquad \mathrm{(no\ sum\ over\ }i \mathrm{)} 
+        \end{equation}
+    \end{theorem}
+\end{finale}
+
+% subsubsection lagrange方程 (end)
+
+\subsubsection{特征值问题} % (fold)
+\label{ssub:特征值问题}
+
+\begin{theorem}[矩阵表示的微振动方程]
+    引入$\eta_i = Ca_ie^{-i\omega t}$(取实部), 则\eqref{eq:主轴下微振动方程}变为
+    \begin{equation}
+        \label{eq:矩阵表示的微振动方程}
+         \+vV\+va = \omega^2 \+vT\+va.
+    \end{equation}
+    特别地, 这要求
+    \begin{equation}
+        \label{eq:微振动久期方程}
+        \det\pare{\+vV - \omega^2\+vT} = 0. 
+    \end{equation}
+\end{theorem}
+\begin{remark}
+    $\+vT$的正定性和由稳定点性质保证的$\+vV$的正定性及二者的对称性保证上述方程必定有解, 即$\omega$为实数且$\+va$为实矢量.
+\end{remark}
+\begin{theorem}[对角化的微振动方程]
+    \label{thm:对角化的微振动方程}
+    \eqref{eq:矩阵表示的微振动方程}可化为
+    \begin{equation}
+        \label{eq:对角化的微振动方程}
+        \+vA^T\+vT\+vA = \+vI,\quad \+vA^T\+vV\+vA = \+v\Lambda. 
+    \end{equation}
+    所求解出$\+vA$即为$n$个实特征向量$\+va$所成矩阵, 对应多个$\omega$值.
+\end{theorem}
+\begin{remark}
+    先取用一般矩阵将$\+vT$相合标准化为$\+vI$, $\+vV$仍为对称矩阵. 再通过$SO_n$中的矩阵将$\+vV$相似对角化, 此时$\+vT$仍为$\+vI$.
+\end{remark}
+
+% subsubsection 特征值问题 (end)
+
+\subsubsection{通解} % (fold)
+\label{ssub:通解}
+
+\begin{finale}
+    \begin{theorem}[微振动的通解]
+        求解\cref{thm:对角化的微振动方程}所得诸$\+va$可叠加得
+        \[ \eta_i = \sum_k C_k a_{ik}e^{-i\omega_k t}. \]
+        注意其中$C_k$可能为复数.
+    \end{theorem}
+\end{finale}
+\begin{corollary}[待定系数求解]
+    $C_k$满足
+    \[ \eta_i\pare{0} = \sum_k a_{ik}\Re C_k,\quad \dot{\eta}_i\pare{0} = \sum_k a_{ik}\omega_k \Im C_k. \]
+    从而可通过初始条件反解$C_k$.
+\end{corollary}
+\begin{finale}
+    \begin{corollary}[简正坐标]
+        在坐标变换$\+v\eta = \+vA\+v\zeta$下, 其中$\+vA$如\cref{thm:对角化的微振动方程}中定义, 有
+        \[ L = \half\pare{\dot{\zeta}_k\dot{\zeta}_k - \omega_k^2\zeta_k^2}. \]
+        相应的通解为
+        \[ \zeta_k = C_k e^{-i\omega_k t}. \]
+    \end{corollary}
+\end{finale}
+
+% subsubsection 通解 (end)
+
+% subsection 一般解 (end)
+
+\subsection{具体情形} % (fold)
+\label{sub:具体情形}
+
+\subsubsection{分子振动} % (fold)
+\label{ssub:分子振动}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{MolecularVibration}
+    \caption{双原子分子弹簧}
+    \label{fig:双原子分子弹簧}
+\end{figure}
+\begin{lemma}[对称双原子分子的能量]
+    \label{lem:对称双原子分子的能量}
+    对于如\cref{fig:双原子分子弹簧}中的双原子分子, 有
+    \[ L = T - V = \half\bra{\dot{\+v\eta}}\+vT\ket{\dot{\+v\eta}} - \half\bra{\+v\eta}\+vV\ket{\+v\eta}. \]
+    其中
+    \[ \+vT = \begin{pmatrix}
+        m & 0 & 0\\
+        0 & M & 0\\
+        0 & 0 & m
+    \end{pmatrix}, \+vV = \begin{pmatrix}
+        k & -k & 0\\
+        -k & 2k & -k\\
+        0 & -k & k
+    \end{pmatrix}. \]
+\end{lemma}
+\begin{lemma}[双原子分子的振动频率]
+    \cref{lem:对称双原子分子的能量}情形下\eqref{eq:微振动久期方程}的解为
+    \[ \omega_1 = 0,\quad \omega_2 = \sqrt{\frac{k}{m}},\quad \omega_3 = \sqrt{\frac{k}{m}\pare{1+\frac{2m}{M}}}. \]
+    相应的特征向量集
+    \[ \+vA = \begin{pmatrix}
+        \rec{\sqrt{2m+M}} & \rec{\sqrt{2m}} & \rec{\sqrt{2m\pare{1+\frac{2m}{M}}}} \\
+        \rec{\sqrt{2m+M}} & 0 & \frac{-2}{\sqrt{2M\pare{2+\frac{M}{m}}}} \\
+        \rec{\sqrt{2m+M}} & -\rec{\sqrt{2m}} & \rec{2m\pare{1+\frac{2m}{M}}}
+    \end{pmatrix}. \]
+\end{lemma}
+\begin{remark}
+    $\omega=0$是一个解, 这是因为$x_1$, $x_2$, $x_3$对应的三个$\eta$并非完全独立, 从而有多余的平移自由度. $\omega_2$对应仅两端原子振动的情形. $\omega_3$对应两端原子同方向运动, 中间原子相向运动的情形.
+\end{remark}
+\begin{lemma}[自由度计算]
+    由$n$个原子构成的分子有$3n$个自由度, 扣除$3$个平动和$3$个转动自由度后剩余$3n-6$个振动自由度.然而对于直线形分子, 应仅有$2$个转动自由度从而剩余$3n-5$个振动自由度.
+\end{lemma}
+\begin{ex}
+    直线形对称三原子分子有$2$个垂直于轴的振动自由度, 特征振动叠加可成为转动.
+\end{ex}
+
+% subsubsection 分子振动 (end)
+
+\subsubsection{受迫振动与阻尼振动} % (fold)
+\label{ssub:受迫振动与阻尼振动}
+
+\begin{lemma}[简正坐标下受迫振动的方程]
+    按照\eqref{eq:广义力的定义}定义广义力$Q_i$, 则在简正坐标下广义力Lagrange方程可以写为
+    \begin{equation}
+        \label{eq:简正坐标下受迫振动的方程}
+        \ddot{\zeta}_i + \omega_i^2\zeta_i = Q_i. 
+    \end{equation}
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[简正坐标下受迫振动的解]
+        \eqref{eq:简正坐标下受迫振动的方程}若为
+        \[ \ddot{\zeta}_i + \omega_i^2\zeta_i = Q_{0i}\cos\pare{\omega t + \delta_i}, \]
+        则有解
+        \[ \zeta_i = B_i\cos\pare{\omega t + \delta_i},\quad B_i = \frac{Q_{0i}}{\omega_i^2 - \omega^2}. \]
+    \end{theorem}
+\end{finale}
+\begin{lemma}[阻尼振动方程]
+    在存在阻尼之情形下, 考虑\cref{coll:Rayleigh耗散函数}中的
+    \[ \+cF = \half \+cF_{ij}\dot{\eta}_i\dot{\eta}_j, \]
+    则Lagrange方程变为
+    \begin{equation}
+        \label{eq:阻尼振动方程}
+        T_{ij}\ddot{\eta}_j + \+cF\dot{\eta}_j + V_{ij}\eta_j = 0. 
+    \end{equation}
+\end{lemma}
+\begin{lemma}[可对角化的阻尼]
+    若阻尼力正比于质点的质量和速度, 则$\+cF$与$\+vT$可同时对角化, 方程变为
+    \begin{equation}
+        \label{eq:可对角化的阻尼}
+        \ddot{\zeta}_i + \+cF_i + \omega_i^2\zeta_i = 0.\qquad \mathrm{(no\ sum\ over\ }i \mathrm{)} 
+    \end{equation}
+\end{lemma}
+\begin{remark}
+    在最一般情形下, $\+vT$, $\+vV$, $\+cF$无法同时对角化.
+\end{remark}
+\begin{finale}
+    \begin{theorem}[简正坐标下的阻尼振动解]
+        在简正坐标下, \eqref{eq:可对角化的阻尼}之解为
+        \[ \zeta_i = C_ie^{-\+cF_it/2}e^{-i\omega'_i t},\quad \omega'_i = \sqrt{\omega_i^2 - \frac{\+cF_i^2}{4}}. \]
+    \end{theorem}
+\end{finale}
+\begin{lemma}[一般坐标下的阻尼振动]
+    设对于复数$\gamma = -\kappa - 2\pi i \nu$, $\eta_j = Ca_je^{\gamma t}$为\eqref{eq:阻尼振动方程}一解, 则
+    \[ \+vV\+va + \gamma\+vF\+va + \gamma^2\+vT\+va = 0. \]
+    从而有非负的
+    \[ \kappa = \half \frac{\+va^\dagger\+vF\+va}{\+va^\dagger\+vT\+va}. \]
+    故在振动中有$e^{-\kappa t}$之衰减因子.
+\end{lemma}
+\begin{lemma}[一般坐标下的受迫振动]
+    在驱动力$F_i = F_{0i}e^{-i\omega t}$下, 受迫振动方程变为
+    \begin{equation}
+        \label{eq:一般坐标下的受迫振动}
+        V_{ij}\eta_j + \+cF_{ij}\dot{\eta}_j + T_{ij}\ddot{\eta}_j = F_{0i}e^{-i\omega t}. 
+    \end{equation}
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[一般坐标下的受迫振动解]
+        设\eqref{eq:一般坐标下的受迫振动}有解$\eta_j = A_je^{-i\omega t}$, 则
+        \begin{equation}
+            \label{eq:一般坐标下的受迫振动解}
+            \pare{V_{ij} - i\omega\+cF_{ij} - \omega^2T_{ij}}A_j - F_{0i} = 0\Rightarrow A_j = \frac{D_j\pare{\omega}}{D\pare{\omega}}. 
+        \end{equation}
+        其中右侧$D$是Cramer法则确定的行列式.
+    \end{theorem}
+\end{finale}
+
+\begin{lemma}[伴随振动频率]
+    \eqref{eq:一般坐标下的受迫振动解}中若$D\pare{\omega}=0$, 则$-\conj{\omega}$亦为一根. 从而
+    \[ D\pare{\omega} = G\pare{\omega - \omega_1}\pare{\omega - \omega_2} \cdots \pare{\omega - \omega_n}\pare{\omega + \conj{\omega_1}}\pare{\omega + \conj{\omega_2}}\cdots\pare{\omega + \conj{\omega_n}}. \]
+\end{lemma}
+\begin{remark}
+    若设$i\omega = \kappa + 2\pi i\nu$, 则由于非零$\kappa$的出现, $D\pare{\omega}$不再在共振$\nu$处归零或取得最值. 但若$\+cF$足够小, 这一偏移可忽略.
+\end{remark}
+
+% subsubsection 受迫振动与阻尼振动 (end)
+
+\subsubsection{受迫阻尼摆} % (fold)
+\label{ssub:受迫阻尼摆}
+
+\begin{lemma}[受迫阻尼摆的方程]
+    设常力矩$N$施加于阻尼摆上, 阻力矩为$\eta\omega$, 则
+    \[ N = mR^2\ddot{\phi} + \eta\dot{\phi} + mgR\sin\phi. \]
+    记临界频率$\omega_c$为阻力矩等于临界力矩$N_c = mgR$时的角速度, 则
+    \[ \omega_c = \frac{mgR}{\eta} = \frac{N_c}{\eta}. \]
+    \begin{equation}
+        \label{eq:受迫阻尼摆的方程}
+        \frac{N}{N_c} = \frac{\ddot{\phi}}{\omega_0^2} + \frac{\dot{\phi}}{\omega_c} + \sin\phi. 
+    \end{equation}
+\end{lemma}
+\begin{theorem}[受迫阻尼摆的运动形态]
+    受迫阻尼摆有如下若干类运动形态:
+    \begin{cenum}
+        \item 低力矩, 即$N \le N_c$, 最终将处于稳态$N = N_c\sin\theta$.
+        \item 无耗散, 即$\eta = 0$, 合力矩
+        \[ \tau = N - mgR\sin\theta. \]
+        若$N > N_c$, 则摆总体上将作加速转动.
+        \item 当$\omega_c \ll \omega_0$且$N>N_c$, $\dot{\phi}$将缓慢增加直到阻力矩抵消外力矩, 达到类稳态并在$\expc{\omega}$附近震荡. 在\eqref{eq:受迫阻尼摆的方程}中忽略$\ddot{\phi}$项可得
+        \[ \frac{N}{N_c} = \rec{\omega_c}\+dtd\phi + \sin\phi, \]
+        分离变量后可得
+        \[ \expc{\omega} = \left\{\begin{array}{ll}
+            0, & N<N_c,\\
+            \omega_c \brac{\pare{N/N_c}^2 - 1}^{1/2}, & N > N_c.
+        \end{array}\right. \]
+        \item 当$\eta\rightarrow 0$且$\omega_c\gg \omega_0$, $\expc{\omega}$可以有两种情形,
+        \[ \expc{\omega} = \left\{\begin{array}{ll}
+            0, & N<N_c,\\
+            \sim \pare{N/N_c}\omega_c, & 0 \le N.
+        \end{array}\right. \]
+        \item 对于$\omega_c\sim\omega_0$的情形, 应当为前二者之中和.
+    \end{cenum}
+\end{theorem}
+\begin{remark}
+    第三类情形当$\expc{\omega}$增大时$\omega$更偏向正弦震荡. 第四类情形注意$N < N_c$时两种情形皆有可能, 因此会有类似于磁滞回线的性质.
+\end{remark}
+\begin{remark}
+    \eqref{eq:受迫阻尼摆的方程}与Josephson效应之方程有类似之处.
+\end{remark}
+
+% subsubsection 受迫阻尼摆 (end)
+
+% subsection 具体情形 (end)
+
+% section 微振动 (end)
+
+\end{document}

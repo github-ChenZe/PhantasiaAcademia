@@ -1,0 +1,82 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'RefrSingleSphere.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1268.09597226bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.37864784)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{RefrSingleSphere.pdf}}%
+    \put(0.24203402,0.03277201){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.33456779\unitlength}\raggedright $\Sigma$\end{minipage}}}%
+    \put(0.08789386,0.03551603){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.18998671\unitlength}\raggedright $n$\end{minipage}}}%
+    \put(0.71481832,0.04734479){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.18998671\unitlength}\raggedright $n'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{RefrSingleSphere.pdf}}%
+    \put(0.28520514,0.35780632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.31261716\unitlength}\raggedright $M$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{RefrSingleSphere.pdf}}%
+    \put(0.09864782,0.21080987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $u$\end{minipage}}}%
+    \put(0.15958695,0.2478513){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $p$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{RefrSingleSphere.pdf}}%
+    \put(0.22520956,0.33144521){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $i$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{RefrSingleSphere.pdf}}%
+    \put(0.31243616,0.2525828){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $h$\end{minipage}}}%
+    \put(0.43370201,0.2525828){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $r$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{RefrSingleSphere.pdf}}%
+    \put(0.38173949,0.28842935){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $i'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{RefrSingleSphere.pdf}}%
+    \put(0.39370034,0.2119447){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $\phi$\end{minipage}}}%
+    \put(0.64425401,0.27624032){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $p'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{RefrSingleSphere.pdf}}%
+    \put(0.72670107,0.21291142){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24495141\unitlength}\raggedright $u'$\end{minipage}}}%
+    \put(0.29580384,0.17376844){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19954579\unitlength}\raggedright $H$\end{minipage}}}%
+    \put(0.22483129,0.17376844){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19954579\unitlength}\raggedright $A$\end{minipage}}}%
+    \put(0.49689273,0.17376844){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19954579\unitlength}\raggedright $C$\end{minipage}}}%
+    \put(0.9463858,0.17376844){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.19954579\unitlength}\raggedright $Q'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{RefrSingleSphere.pdf}}%
+    \put(0.13971024,0.11144436){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$s$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{RefrSingleSphere.pdf}}%
+    \put(0.62942073,0.11144436){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$s'$}}}%
+  \end{picture}%
+\endgroup%

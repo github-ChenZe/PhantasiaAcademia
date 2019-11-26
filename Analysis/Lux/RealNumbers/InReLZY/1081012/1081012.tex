@@ -1,0 +1,28 @@
+\documentclass{ctexart}
+
+\usepackage{geometry}
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{align*}
+    \frac{m\pare{1+x^m}}{1-x^m} - \frac{n\pare{1+x^n}}{1-x^n} &= \frac{\pare{1-x}\pare{1+x+\cdots +x^{n-1}}m\pare{1+x^m} - \pare{1-x}\pare{1+x+\cdots +x^{m-1}}n\pare{1+x^n}}{\pare{1-x}^2\pare{1+x+\cdots+x^{n-1}}\pare{1+x+\cdots+x^{m-1}}} \\
+    &= \frac{\pare{1+x+\cdots +x^{n-1}}m\pare{1+x^m} - \pare{1+x+\cdots +x^{m-1}}n\pare{1+x^n}}{\pare{1-x}\pare{1+x+\cdots+x^{n-1}}\pare{1+x+\cdots+x^{m-1}}}
+\end{align*}
+
+\par
+考虑$n=1$之特例,
+\begin{align*}
+    \frac{m}{1-x^m} - \frac{1}{1-x} &= \frac{m\pare{1-x} - \pare{1-x^m}}{\pare{1-x}\pare{1-x^m}} \\
+    %&= \frac{m\pare{1-x} - \pare{1-x}\pare{1+x+\cdots+x^{m-1}}}{\pare{1-x}^2\pare{1+x+\cdots+x^{m-1}}} \\
+    &= \frac{m - \pare{1+x+\cdots+x^{m-1}}}{\pare{1-x}\pare{1+x+\cdots+x^{m-1}}} \\
+    &= \frac{\pare{1-x} + \pare{1-x^2}+\cdots + \pare{1-x^{m-1}}}{\pare{1-x}\pare{1+x+\cdots+x^{m-1}}} \\
+   % &= \frac{\pare{1-x}\brac{1+\pare{1+x} + \cdots + \pare{1+x+\cdots+x^{m-2}}}}{\pare{1-x}\pare{1+x+\cdots+x^{m-1}}} \\
+    &= \frac{{1+\pare{1+x} + \cdots + \pare{1+x+\cdots+x^{m-2}}}}{\pare{1+x+\cdots+x^{m-1}}} \\
+    &\rightarrow \frac{1+2+\cdots + \pare{m-1}}{m} \\
+    &= \frac{m-1}{2}.
+\end{align*}
+从而
+\[ \frac{m}{1-x^m} - \frac{n}{1-x^n}\rightarrow \frac{m-n}{2}. \]
+
+\end{document}

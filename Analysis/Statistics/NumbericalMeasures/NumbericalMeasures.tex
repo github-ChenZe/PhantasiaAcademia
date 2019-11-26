@@ -1,0 +1,550 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\Var}{Var}
+
+\begin{document}
+
+\section{数字特征} % (fold)
+\label{sec:数字特征}
+
+\subsection{期望值} % (fold)
+\label{sub:期望值}
+
+\begin{definition}
+    对于离散型随机变量, 期望值(Expectation)为$EX = \displaystyle \sum_i x_ip\pare{x_i}$, 惟于$\displaystyle \sum_{i} \abs{x_i} p\pare{x_i}$不存在时谓期望不存在.
+\end{definition}
+\begin{definition}
+    对于连续型随机变量, 期望值(Expectation)为
+    \[ EX = \displaystyle \int_{\+bR} xf\pare{x}\,\rd{x}, \]
+    惟于$\displaystyle \int_{\+bR} \abs{x}f\pare{x}\,\rd{x}$不存在时谓期望不存在.
+\end{definition}
+对于一般的分布, 若
+\[ \int_{\+bR} \abs{x}\,\rd{F\pare{x}} \]
+收敛, 则定义期望值
+\[ EX = \int_{\+bR} x\,\rd{F\pare{x}}. \]
+常见分布的数学期望如
+\begin{cenum}
+    \item 二项分布:
+    \begin{align*}
+        EX &= \sum_{k=0}^n k\cdot\binom{n}{k} p^k\pare{1-p}^{n-k} \\
+        &= \sum_{k=1}^n \frac{n!}{\pare{k-1}!\pare{n-k}!} p^k\pare{1-p}^{n-k} \\
+        &= np \sum_{k=1}^n \binom{n-1}{k-1} p^{k-1}\pare{1-p}^{n-1-\pare{k-1}} \\
+        &= np.
+    \end{align*}
+    \item Poisson分布:
+    \begin{align*}
+        EX &= \sum_{k=0}^\infty k\cdot \frac{\lambda^k}{k!}e^{-\lambda} \\
+        &= \lambda \sum_{k=1}^\infty \frac{\lambda^{k-1}}{\pare{k-1}}e^{-\lambda} \\
+        &= \lambda.
+    \end{align*}
+    \item 均匀分布: $\displaystyle EX = \half\pare{a+b}$.
+    \item 正态分布: $\displaystyle EX = \mu$.
+    \item 指数分布: $\displaystyle EX = \lambda^{-1}$.
+    \item $\chi^2$分布: $\displaystyle EX = n$.
+    \item $t$分布: $\displaystyle EX = 0$.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle P\pare{X = \pare{-1}^k\cdot \frac{2^k}{k}} = \rec{2^k}$, 则虽然$\sum x_ip_i$收敛, 但$\sum \abs{x_i} p_i$发散故期望不存在.
+    \end{ex}
+    \begin{ex}
+        设$f\pare{x} = \displaystyle \rec{\pi\pare{1+x^2}}$, 则期望也不存在, 虽然$\displaystyle \int_{\+bR} xf\pare{x}\,\rd{x}$的Cauchy主值收敛.
+    \end{ex}
+\end{sample}
+随机变量满足若干性质, 如
+\begin{cenum}
+    \item 线性性: 设$c_1,\cdots,c_n$为常数, 则
+    \[ E\pare{c_1X_1 + \cdots + c_nX_n} = c_1 EX_1 + \cdots + c_nEX_n. \]
+    \item 若干个独立随机变量的积, 期望等于各变量期望的积. 即
+    \[ E\pare{X_1\cdots X_n} = EX_1\cdots EX_n. \]
+    这里假设各变量相互独立且期望存在. 此外, 设$X_1, \cdots, X_n$独立, 则
+    \[ Eg_1\pare{X_1} \cdots g_n\pare{X_n} = Eg_1\pare{X_1}\cdots Eg_n\pare{X_n}. \]
+    \item 对于离散型和连续型随机变量, 分别有
+    \[ Eg\pare{X} = \left\{ \begin{aligned}
+        & \sum_i g\pare{a_i}p_i, && \sum_i \abs{g\pare{a_i}}p_i < \infty, \\
+        & \int_{-\infty}^{+\infty} g\pare{x}f\pare{x}\,\rd{x}, && \int_{-\infty}^{+\infty} \abs{g\pare{x}}f\pare{x}\,\rd{x} < \infty.
+    \end{aligned}\right. \]
+\end{cenum}
+\begin{proof}[线性性的证明]
+    $c=0$时显然成立. $c\neq 0$时, 令$Y=cX$,
+    \begin{align*}
+        EY &= \int_{\+bR} y\,\rd{F_Y\pare{y}} \\
+        &= \int_{\+bR} y\,\rd{F_X\pare{\frac{y}{c}}} = \int_{\+bR} cx\,\rd{F_X\pare{x}} = cEX.
+    \end{align*}
+    考虑$Z = X+Y$, 则
+    \begin{align*}
+        EZ &= \int_{\+bR} zf_Z\pare{z}\,\rd{z} \\
+        &= \int_{\+bR} z \int_{\+bR} f\pare{x,z-x}\,\rd{x}\,\rd{z} \\
+        &= \iint_{\+bR^2} zf\pare{x,z-x}\,\rd{x}\,\rd{z} \\
+        &= \iint_{\+bR^2} \pare{x+y} f\pare{x,y}\,\rd{x}\,\rd{y} \\
+        &= \iint_{\+bR^2} xf\pare{x,y}\,\rd{x}\,\rd{y} + \iint_{\+bR^2} yf\pare{x,y}\,\rd{x}\,\rd{y} \\
+        &= EX + EY. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[乘积性质的证明]
+    设$Z = XY$,
+    \begin{align*}
+        EXY &= EZ = \int_{\+bR} zf_Z\pare{z}\,\rd{z},
+    \end{align*}
+    其中
+    \[ f_Z\pare{z} = \int_{\+bR} f_X\pare{x} f_Y\pare{\frac{z}{x}}\abs{x}\,\rd{x}. \]
+    \begin{align*}
+        \Rightarrow EXY &= \int_{\+bR} \int_{\+bR} zf_X\pare{x} f_Y\pare{\frac{z}{x}}\abs{x}\,\rd{x}\,\rd{z} \\
+        &= \iint_{\+bR^2} xyf_X\pare{x}f_Y\pare{y} \,\rd{x}\,\rd{y} \\
+        &= \int_{\+bR} xf_X\pare{x}\,\rd{x} \int_{\+bR} yf_Y\pare{y}\,\rd{y} \\
+        &= EX\cdot EY. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[随机变量函数期望的证明]
+    设$Y = g\pare{X}$, 设$g$单调增且可导, 则
+    \begin{align*}
+        EY &= \int_{\+vR} yf_Y\pare{y}\,\rd{y} \\
+        &= \int_{\+bR} yf_X\pare{g^{-1}\pare{y}}g'^{-1}\pare{y}\,\rd{y} \\
+        &= \int_{\+bR} g\pare{x} f_X\pare{x} \,\rd{x}. \qedhere
+    \end{align*}
+\end{proof}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+Ch.4: 2, 3
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        车上有$20$位乘客, 有$10$个车站, 停车当且仅当有人下车. 乘客在每个车站下车的可能性相等. 以$X$表示停车的次数, 求$EX$.
+    \end{ex}
+    \begin{proof}[解]
+        设$Y_i$满足第$i$个站有人下车时取$1$, 否则取$0$. 则
+        \[ X = \sum_{i=1}^{10} Y_i \Rightarrow EX = \sum_{i=1}^{10} EY_i. \]
+        其中
+        \[ EY_i = P\pare{\text{第$i$个站有人下车}} = 1 - \pare{\frac{9}{10}}^{20} = 0.8784. \]
+        故停车次数期望$EX = 8.784$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $n$个人的帽子放在一起, 每个人随机拿一顶帽子. 记$X$为拿对自己帽子的人数, 求$EX$.
+    \end{ex}
+    \begin{proof}[解]
+        设$Y_i$满足第$i$个人拿对自己帽子时为$1$, 否则为$0$. 则
+        \[ X = \sum_i Y_i \Rightarrow EX = \sum_i EY_i. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X\sim N\pare{0,1}$, 求$EY = E\brac{X^2+1}$.
+    \end{ex}
+    \begin{proof}[解]
+        $EY = EX^2 + E_1 = \displaystyle \int_{\+bR} x^2 \cdot \rec{\sqrt{2\pi}} e^{-x^2/2}\,\rd{x} + 1 = 2$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X\sim B\pare{n,p}$, 求$Y=X\pare{n-X}$的数学期望.
+    \end{ex}
+    \begin{proof}[解]
+        $EY = E\brac{-X^2+nX}$,
+        \begin{align*}
+            EX^2 &= \sum_{k=1}^n k^2 \binom{n}{k} p^k q^{n-k} \\
+            &= \sum_{k=1}^n \pare{k\pare{k-1} + k} \binom{n}{k} p^k q^{n-k}. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+
+\subsubsection{条件期望} % (fold)
+\label{ssub:条件期望}
+
+在给定随机变量$Y$的取值条件下$X$的条件期望, 记作$E\pare{X\vert Y=y} = E\pare{X\vert y}$. 若
+\[ \int_{\+bR} \abs{x} \,\rd{F_X} < \infty, \]
+或者在条件下
+\[ \int_{\+bR} \abs{x}\,\rd{F_{X\vert Y}\pare{x\vert y}} = A\pare{y} < \infty, \]
+则定义\emph{条件期望}
+\[ E\pare{X\vert Y=y} = \int x\,\rd{F_{X\vert Y}\pare{x\vert y}}. \]
+\[ E\pare{X\vert Y=y} = \left\{\begin{aligned}
+    &\sum_i x_i {p_i\pare{x_i\vert y}}, && \sum_i \abs{x_i} {p_i\pare{x_i\vert y}}<\infty, \\
+    &\int_{\+bR} x f_{X\vert Y}\pare{x\vert y}\,\rd{x}, && \int_{\+bR} \abs{x} f_{X\vert Y}\pare{x\vert y}\,\rd{x} < \infty.
+\end{aligned}\right. \]
+\begin{sample}
+    \begin{ex}
+        设$\pare{X,Y}\sim N\pare{a,b,\sigma_1^2,\sigma_2^2, \rho}$, 则
+        \[ Y\vert X=x \sim N\pare{b+\rho \frac{\sigma_2}{\sigma_1}\pare{x-a}, \pare{1-\rho^2}\sigma_2^2}. \]
+        故
+        \[ E\pare{Y\vert X=x} = b + \rho \frac{\sigma_2}{\sigma_1} \pare{x-a}. \]
+        欲研究不同因素的影响, 构成一回归问题,
+        \[ E\pare{Y\vert X=x} = \+v\beta^T \tilde{\+vx} = \beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p. \]
+    \end{ex}
+\end{sample}
+\begin{theorem}[全期望公式]
+    设$X,Y$为两个随机变量, 则
+    \[ EX = E\curb{E\brac{X\vert Y}}. \]
+\end{theorem}
+\begin{proof}
+    条件密度$\displaystyle f\pare{x\vert y} = \frac{f\pare{x,y}}{f_Y\pare{y}}$, 故
+    \begin{align*}
+        EX &= \int_{\+bR} xf_X\pare{x}\,\rd{x} \\
+        &= \int_{\+bR} x\brac{\int_{\+bR} f\pare{x,y}\,\rd{y}}\,\rd{x} \\
+        &= \int_{\+bR} x\int_{\+bR} f\pare{x\vert y}f_Y\pare{y}\,\rd{y}\,\rd{x} \\
+        &= \iint_{\+bR^2} xf\pare{x\vert y} f_Y\pare{y} \,\rd{x}\,\rd{y} \\
+        &= \int_{\+bR} \brac{\int_{\+bR}xf\pare{x\vert y}\,\rd{x}}f_Y\pare{y}\,\rd{y} \\
+        &= \int_{\+bR} E\pare{X\vert Y=y} \cdot f_Y\pare{y}\,\rd{y} \\
+        &= E\curb{E\brac{X\vert Y}}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        一个贼被关在有$3$个门的地牢, 第一个门走$3$个小时获得自由, 第二个门走$5$个小时返回地牢, 第三个门走$7$个小时回到地牢. 若{\color{red}每次选择每扇门的可能性都相同}, 设$X$是他获得自由所需要的时间, 求$EX$. 记$Y$为他选择的门, 则
+        \[ P\pare{Y = 1} = P\pare{Y = 2} = P\pare{Y = 3} = \rec{3}. \]
+        由全期望公式
+        \begin{align*}
+            E\pare{X} &= E\curb{E\brac{X\vert Y}} \\
+            &= \rec{3} E\brac{X\vert Y = 1} + \rec{3} E\brac{X\vert Y = 2} + \rec{3} E\brac{X\vert Y = 3} \\
+            &= \rec{3}\brac{3 + 5 + EX + 7 + EX}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\pare{X,Y} \sim N\pare{a,b,\sigma_1^2,\sigma_2^2, \rho}$. 则
+        \begin{align*}
+            EXY &= \iint_{\+bR^2} xy f\pare{x,y}\,\rd{x}\,\rd{y}.
+        \end{align*}
+        惟使用全期望公式可简化计算.
+        \begin{align*}
+            EXY &= E\brac{EXY\vert Y} \\
+            &= E\curb{Y E\brac{X\vert Y}} \\
+            &= E\curb{Y\brac{a+\rho \frac{\sigma_1}{\sigma_2}\pare{Y-b}}} \\
+            &= aEY + \rho \frac{\sigma_1}{\sigma_2}E\brac{\pare{Y-b}^2} \\
+            &= ab + \rho \sigma_1 \sigma_2.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 条件期望 (end)
+
+% subsection 期望值 (end)
+
+\subsection{中位数} % (fold)
+\label{sub:中位数}
+
+\begin{definition}
+    谓$m$为连续型随机变量$X$的中位数(Median), 如果
+    \[ P\pare{X\le m} \ge \half, \quad P\pare{X\ge m} \ge \half. \]
+\end{definition}
+\begin{sample}
+    \begin{ex}
+        中位数$m$使得$E\abs{X-c}$达到最小.
+    \end{ex}
+\end{sample}
+设$0<p<1$, 谓$\mu_p$为$X$的$p$分位数, 如果
+\[ P\pare{X\le \mu_p} \ge p,\quad P\pare{X\ge \mu_p} \ge 1-p. \]
+\par
+众数谓pdf或pmf最大处. 若$\mu>m$, 则谓分布右偏, $\mu < m$谓左偏.
+
+% subsection 中位数 (end)
+
+\subsection{方差和矩} % (fold)
+\label{sub:方差和矩}
+
+\begin{definition}
+    设$X$为随机变量, 分布为$F$. 若$X$平方可积, 则谓
+    \[ \Var\pare{X} = E\pare{X-EX}^2 = \sigma^2 \]
+    为$X$的方差(Variance). $\sqrt{\Var\pare{x}X} = \sigma$谓其标准差.
+\end{definition}
+\begin{theorem}
+    设$c$为常数, 则
+    \begin{cenum}
+        \item $0 \le \Var\pare{X} = EX^2 - \pare{EX^2}$, 因此$\pare{EX}^2 \le EX^2$.
+        \item $\Var\pare{cX} = c^2 \Var\pare{X}$.
+        \item $\Var\pare{X} = 0$当且仅当$P\pare{X=c=1}$, 此时$c=EX$.
+        \item 对任何常数$c$有$\Var\pare{X} \le E\pare{X-c}^2$. 等号成立当且仅当$c=EX$.
+        \item $X$和$Y$相互独立且$a,b$为常数, 则$\Var\pare{aX+bY} = a^2\Var\pare{X} + b^2\Var\pare{Y}$.
+    \end{cenum}
+\end{theorem}
+\begin{remark}
+    对于下凸函数总有Jensen不等式$Eh\pare{X} \ge h\pare{EX}$, 令$h = x^2$即可证明第一条.
+\end{remark}
+\begin{proof}[第五条的证明]
+    \begin{align*}
+        \Var\pare{aX+bY} &= \pare{aX+bY - E\brac{aX+bY}}^2 \\
+        &= \pare{a\pare{X-EX}+b\pare{y-EY}}^2 \\
+        &= a^2\Var\pare{X} + b^2\Var\pare{Y}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{lemma}
+    \label{lem:二阶退化随机变量}
+    设$\xi$是退化到$0$的随机变量, 则$E\xi^2 = 0$. 反之, 如果$\xi$的二阶矩存在且$E\xi^2 = 0$, 则$\xi$必为退化于零的随机变量.
+\end{lemma}
+\begin{proof}
+    若$\xi$平方可积, $E\xi^2 = 0$, 则假设不退化于零$0$, 则$P\pare{\xi = 0} < 1$. 故存在$\delta > 0$, 和$0<\epsilon < 1$, 使得$P\pare{\abs{\xi} > \delta} > \epsilon \Rightarrow E\xi^2 > \delta^2\epsilon$. 这是因为
+    \begin{align*}
+        E\xi^2 &= \int x^2\,\rd{F} \\
+        &\ge \int_{\abs{x}>\delta} x^2\,\rd{F} \\
+        &\ge \delta^2 \int_{\abs{x}>\delta} \,\rd{F} \\
+        &= \delta^2 P\pare{\abs{\xi}>\delta} > \delta^2\epsilon. \qedhere
+    \end{align*}
+\end{proof}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+25, 26, 33, 34, 36
+
+% paragraph 作业 (end)
+
+\par
+常见分布的方差如
+\begin{cenum}
+    \item 二项分布$\displaystyle \Var\pare{X} = np\pare{1-p}$;
+    \begin{align*}
+        EX^2 &= \sum_{k=0}^n k^2 \binom{n}{k} p^k \pare{1-p}^{n-k} \\
+        &= \sum_{k=2}^n \frac{n!}{\pare{k-2}!\pare{n-k}!} p^k \pare{1-p}^{n-k} + \sum_{k=1}^n \binom{n}{k}p^k\pare{1-p}^{n-k} \\
+        &= n\pare{n-1}p^2\sum_{n=2}^n \binom{n-2}{k-2} p^{k-2}\pare{1-p}^{n-k} + np. \\
+        \Rightarrow \Var\pare{X} &= EX^2 - \pare{EX}^2 = n\pare{n-1}p^2 + np - n^2p^2 = np\pare{1-p}.
+    \end{align*}
+    还可以通过二项分布的再生性求方差. $X = X_1 + \cdots + X_n$其中$X_i\sim B\pare{1,p}$, 故
+    \begin{align*}
+        \Var\pare{X} &= \Var\pare{\sum X_i} \\
+        &= n\Var\pare{X_1} = n\pare{p-p^2} = np\pare{1-p}.
+    \end{align*}
+    \item Poisson分布$\displaystyle \Var\pare{X} = \lambda$;
+    \begin{align*}
+        EX^2 &= \sum_{k=0}^\infty k^2 \frac{\lambda^k}{k!}e^{-\lambda} \\
+        &= \lambda^2 \sum_{k=2}^\infty \frac{\lambda^{k-2}}{\pare{k-2}!}e^{-\lambda} + \lambda \\
+        &= \lambda^2 + \lambda.
+    \end{align*}
+    \item 均匀分布$\displaystyle \Var\pare{X} = \frac{\pare{b-a}^2}{12}$;
+    \item 指数分布$\displaystyle \Var\pare{X} = \displaystyle \rec{\lambda^2}$;
+    \item 正态分布$\displaystyle \Var\pare{X} = \sigma^2$.
+    \begin{align*}
+        \Var\pare{X} &= \int_{\+bR} \pare{x-\mu}^2 \rec{\sqrt{2\pi}} e^{-\frac{\pare{x-\mu}^2}{2\sigma^2}}\,\rd{x} \\
+        &= \int_{\+bR} \sigma^2 t^2 \rec{\sqrt{2\pi}} e^{-t^2/2}\,\rd{t} = \sigma^2.
+    \end{align*}
+\end{cenum}
+谓$X^* = \displaystyle \frac{X-EX}{\sqrt{\Var{X}}}$谓标准化随机变量. 显然$EX^* = 0, \Var\pare{X^*} = 1$.
+
+\subsubsection{矩} % (fold)
+\label{ssub:矩}
+
+设$X$为随机变量, $c$为常数, $r$为正整数, 则$E\brac{\pare{X-c}^r}$谓关于$c$点的$r$阶矩(Moments). $c=0$时谓$\alpha_k = EX^r$谓$X$的$r$阶原点矩. $c=EX$则谓$\mu_k = E\brac{\pare{X-EX}^k}$谓$r$阶中心矩.
+\par
+引入\emph{偏度系数}
+\[ \gamma_1 = E\brac{\pare{\frac{X-\mu}{\sigma}}^3} = \frac{\mu_3}{\sigma^3} = \frac{E\brac{\pare{X-\mu}^3}}{\pare{E\brac{\pare{X-\mu}^2}}^{3/2}}. \]
+$\gamma_1$衡量分布的不对称程度, 即偏度(Skewness), . 对于一组未知分布的统计数据,
+\[ \hat{\gamma}_1 = \frac{\hat{\mu}_3}{\hat{\sigma}^3} = \frac{\displaystyle \rec{n} \sum\pare{x_i - \overbar{x}}^3}{s^3}. \]
+若$\gamma_1 > 0$, 则分布谓正偏的. 若$\gamma_1 < 0$, 则分布谓负偏的.
+\par
+引入\emph{峰度系数}
+\[ \gamma_2 = E\brac{\pare{\frac{X-\mu}{\sigma}}^4} = \frac{\mu_4}{\sigma^4} = \frac{E\brac{\pare{X-\mu}^4}}{\pare{E\brac{\pare{X-\mu}^2}}^2}. \]
+对于标准正态分布, $EX^4 = 3$. 峰度系数衡量分布的峰的凸起程度, 即峰度(Kurtosis).
+
+% subsubsection 矩 (end)
+
+% subsection 方差和矩 (end)
+
+\subsection{协方差与相关系数} % (fold)
+\label{sub:协方差与相关系数}
+
+注意到
+\begin{align*}
+    \Var\pare{X+Y} &= E\pare{E-EX+Y-EY}^2\\ &= \Var\pare{X} + \Var\pare{Y} + 2E\brac{\pare{X-EX}\pare{Y-EY}}.
+\end{align*}
+故定义协方差(Covariance)
+\[ \cov\pare{X,Y} = E\brac{\pare{X-EX}\pare{Y-EY}}. \]
+由协方差的定义, 立即得到性质
+\begin{align*}
+    \cov\pare{X,Y} &= \cov\pare{Y,X},\quad \cov{X,X} = \Var\pare{X}. \\
+    \cov\pare{X,Y} &= EXY - EXEY. \\
+    \cov\pare{X_1 + X_2, Y} &= \cov\pare{X_1,Y} + \cov\pare{X_2,Y}. \\
+    \cov\pare{a_1X_2 + a_2X_2, b_1Y_1 + b_2Y_2} &= \sum_{i,j} a_ib_j\cov\pare{X_i,Y_j}.
+\end{align*}
+若$X$和$Y$独立, 则$\cov\pare{X,Y}= 0$. 谓$X$, $Y$不相关, 如果$\cov\pare{X,Y} = 0$.
+\begin{pitfall}
+    独立蕴含不相关, 惟不相关不蕴含独立.
+\end{pitfall}
+对一般的随机向量$X = \begin{pmatrix}
+    X_1  & \cdots & X_n
+\end{pmatrix}^T$, $EX = \begin{pmatrix}
+    EX_1 & \cdots & X_n
+\end{pmatrix}^T$. 则定义\emph{协方差矩阵}
+\begin{align*}
+    \Sigma &= \Var\pare{X} = E\brac{\pare{X-EX}\pare{X-EX}^T} \\
+    &= E \begin{pmatrix}
+    \pare{X_1 - EX_1}^2 & \cdots & \pare{X_1 - EX_1} \pare{X_n - EX_n} \\
+    \vdots & \ddots & \vdots \\
+    \pare{X_n-EX_n}\pare{X_1 - EX_1} & \cdots & \pare{X_n - EX_n}^2
+    \end{pmatrix} \\
+    &= \pare{E\pare{X_i - EX_i}\pare{X_j - EX_j}}_{ij}.
+\end{align*}
+\begin{cenum}
+    \item $\Sigma$是对称的.
+    \item $\Sigma$是半正定的.
+    \begin{align*}
+        x^T \Sigma x &= \Var\pare{x^T X} = E\curb{x^T\brac{X-EX}\brac{X-EX}^T x} \ge 0.
+    \end{align*}
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        $n$元正态分布
+        \[ f\pare{\+vx} = \pare{2\pi}^{-n/2}\abs{\Sigma}^{-1/2} \exp\curb{-\half \pare{\+vx-\+v\mu}^T\Sigma^{-1}\pare{\+vx - \+v\mu}}. \]
+        此时
+        \[ \+v\mu = EX,\quad \Sigma = \cov\pare{X} = \Var\pare{X} = E\brac{\pare{X - \+v\mu}\pare{X-\+v\mu}^T}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于$X,Y\sim N\pare{a,b,\sigma_1^2,\sigma_2^2,\rho}$, $X\sim N\pare{a,\sigma_1^2}$, $Y \sim N\pare{b,\sigma_2^2}$,
+        \begin{align*}
+            E\brac{\pare{X-a}\pare{Y-b}} &= \iint_{\+bR^2} \pare{x-a}\pare{y-b}f\pare{x,y}\,\rd{x}\,\rd{y} \\
+            &= \iint_{\+bR^2} \sigma_1\sigma_2 s t \exp\curb{-\rec{2\pare{1-\rho^2}}\pare{s^2 - 2\rho st + t^2}} \\
+            &= \rho \sigma_1 \sigma_2.
+        \end{align*}
+        从而得到二元正态分布的$\Sigma$矩阵.
+    \end{ex}
+\end{sample}
+对于随机变量$X,Y$, 定义\emph{相关系数}
+\[ \rho_{X,Y} = \frac{\cov\pare{X,Y}}{\sqrt{\Var\pare{X}\Var\pare{Y}}}. \]
+可以发现$\rho_{X,Y} = \cov\pare{X^*, Y^*}$.
+\begin{sample}
+    \begin{ex}
+        二元正态分布的$\rho$即为$X$和$Y$的相关系数.
+    \end{ex}
+\end{sample}
+相关系数有性质
+\begin{cenum}
+    \item $X$和$Y$相互独立时, $\rho_{X,Y} = 0$.
+    \item $\abs{\rho_{X,Y}} \le 1$. 等号成立当且仅当$X,Y$之间存在严格的线性关系.
+    \begin{align*}
+        \rho_{X,Y} &= 1 \Rightarrow \text{存在$a>0$, $b\in\+bR$使得}X=aY+b. \\
+        \rho_{X,Y} &= -1 \Rightarrow \text{存在$a<0$, $b\in\+bR$使得}X=aY+b.
+    \end{align*}
+\end{cenum}
+\begin{pitfall}
+    $\rho_{X,Y} = 0$只是表示$X,Y$之间不存在线性相关, 但可以存在非线性的函数关系.
+\end{pitfall}
+\begin{lemma}[Cauchy-Schwarz不等式]
+    \label{lem:Cauchy-Schwarz不等式}
+    设$\xi, \eta$皆平方可积, 则
+    \[ \brac{E\xi\eta}^2 \le E\xi^2 E\eta^2. \]
+    等号成立当且仅当$P\pare{\xi = t_0 \eta} = 1$, 其中$t_0$为一常数.
+\end{lemma}
+\begin{proof}
+    令$f\pare{t} = E\pare{\xi - t\eta}^2 = t^2E\eta^2 - 2tE\xi\eta + E\xi^2$. 对于任意$t$, 结果都大于零, 故判别式
+    \[ 4\pare{E\xi\eta}^2 - 4E\eta^2 E\xi^2 \le 0. \]
+    等号成立当且仅当方程仅有一解, 即
+    \[ E\pare{\xi - t_0\eta}^2 = 0. \]
+    此时由\cref{lem:二阶退化随机变量},
+    \[ P\pare{\xi - t_0 \eta = 0} = 1. \qedhere \]
+\end{proof}
+\begin{proof}[相关系数的性质的证明]
+    由\cref{lem:Cauchy-Schwarz不等式}得到$\abs{\rho}\le 1$. 此外, $\rho = 1$当且仅当$\cov\pare{X,Y} = \sqrt{\Var\pare{X}}\sqrt{\Var\pare{Y}}$当且仅当判别式为零, 即$X-EX = t_0 \pare{Y-EY}$. 若$EX=EY= 0$, 则此时
+    \begin{align*}
+        \rho &= \frac{\cov\pare{X,Y}}{\sqrt{\Var\pare{X}\Var\pare{Y}}} = \frac{E\xi\cdot\eta}{\sqrt{E\xi^2 E\eta^2}} \\
+        &= \frac{t_0 E\eta^2}{\sqrt{t_0^2\pare{E\eta^2}^2}} = \frac{t_0}{\abs{t_0}}
+    \end{align*}
+    从而得到$\rho$的符号与$t_0$的符号之间的关系. $EX$或$EY$不为零时也是类似的.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        设$X \sim \displaystyle U\pare{-\half, \half}$, 而$Y = \cos X$. 证明$X$, $Y$不相关但$X$, $Y$之间存在非线性函数关系.
+    \end{ex}
+    \begin{proof}
+        $\displaystyle \cov\pare{X,Y} = EXY - EX\cdot EY = 0$.
+    \end{proof}
+\end{sample}
+\begin{theorem}
+    对于任何平方可积的非退化的随机变量, 如下四个命题相互等价:
+    \begin{cenum}
+        \item $\xi$和$\eta$不相关;
+        \item $\cov\pare{\xi,\eta} = 0$;
+        \item $E\xi \eta = E\xi \cdot E\eta$;
+        \item $\Var\pare{\xi + \eta}  = \Var\pare{\xi} + \Var\pare{\eta}$.
+    \end{cenum}
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        若$\pare{X,Y}$服从单位圆内的均匀分布, 则$\pare{X,Y}$不相关但是不独立.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X$和$Y$的分布率分别为
+        \[ X\sim \begin{pmatrix}
+            -1 & 0 & 1 \\
+            \rec{4} & \rec{2} & \rec{4}
+        \end{pmatrix},\quad Y \sim \begin{pmatrix}
+            0 & 1 \\
+            \rec{2} & \rec{2}
+        \end{pmatrix}.
+        \]
+        并且假设$P\pare{X\cdot Y = 0} = 1$, 则jpmf\\
+        \centerline{
+        \begin{tabular}{c|cc|c}
+            \diagbox{$X$}{$Y$} & $0$ & $1$ & \\
+            \hline
+            $-1$ & $1/4$ & $0$ & $1/4$ \\
+            $0$ & $0$ & $-1/2$ & $1/2$ \\
+            $1$ & $1/4$ & $0$ & $1/4$ \\
+            \hline
+            & $1/2$ & $1/2$ & $1$
+        \end{tabular}.
+        }
+        则$X$和$Y$不独立. 由$\cov\pare{X,Y} = EXY - EXEY$. 由$EX = 0$,
+        \[ EXY = \sum_{i,j} ijp_{ij} = 0. \]
+        这是因为$P\pare{XY=0} = 0$. 故$\cov\pare{X,Y} = 0$, 故不相关. 因此, $X$和$Y$既不独立也不相关.
+        \end{ex}
+\end{sample}
+\begin{remark}
+    在正态的情形下, 不相关和独立是等价的. 例如在二维正态分布中, $\pare{X,Y}\sim N\pare{\mu_1, \mu_2, \sigma_1^2, \sigma_2^2, \rho}$, $X$和$Y$独立等价于$\rho = 0$, 也就等价于$X$和$Y$不相关.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+57, 61, 77, 83
+
+% paragraph 作业 (end)
+
+% subsection 协方差与相关系数 (end)
+
+\subsection{其它数字特征} % (fold)
+\label{sub:其它数字特征}
+
+\begin{cenum}
+    \item 平均绝对差$E\abs{X-EX}$;
+    \item 矩母函数$g\pare{t} = Ee^{tX}$, 其中$t\in \+bR$;
+    \item 特征函数$\phi\pare{t} = Ee^{itX}$, 其中$t\in \+bR$.
+\end{cenum}
+\begin{theorem}
+    对任何随机变量$X$, $Y$, 分别由分布函数$F_X$和$F_Y$和特征函数$\phi_X$和$\phi_Y$, 则
+    \[ F_X = F_Y \Leftrightarrow \phi_X = \phi_Y. \]
+\end{theorem}
+故特征函数和分布函数一一对应.
+\begin{sample}
+    \begin{ex}
+        设$X\sim N\pare{a,\sigma^2}$, 考虑到
+        \begin{align*}
+            -\frac{\pare{x-a}^2}{2\sigma^2} + itx &= -\rec{2\sigma^2} \brac{x^2 - 2ax + a^2 - 2\sigma^2 itx} \\
+            &= -\rec{2\sigma^2} \brac{x^2 - 2\brac{a+i\sigma^2 t}x + a^2} \\
+            &= -\rec{2\sigma^2} \curb{\brac{x-\pare{a+\sigma^2 it}}^2 - \pare{a+\sigma^2it}^2 a+ a^2} \\
+            &= -\rec{2\sigma^2} \curb{\brac{x-\pare{a+\sigma^2 it}}^2 - 2a\sigma^2 it + \sigma^4t^2}.\\
+            \phi\pare{t} &= Ee^{itX} = \int_{\+bR} e^{itx} \rec{\sqrt{2\pi}\sigma} e^{-\frac{\pare{x-a}^2}{2\sigma^2}}\,\rd{x} \\
+            1 &= \int_{\+bR} \rec{\sqrt{2\pi}\sigma}e^{-\rec{2\sigma^2}\brac{x-\pare{a+\sigma^2it}}^2}\,\rd{x}.\\
+            \Rightarrow \phi\pare{t} &= e^{ait - \sigma^2/2t^2}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X\sim N\pare{a_1,\sigma_1^2}$, $Y\sim N\pare{b,\sigma_2^2}$, $X$和$Y$独立, 求$X+Y$的分布.
+        \[ \displaystyle \phi\pare{t} = Ee^{it\pare{X+Y}} = Ee^{itX}Ee^{itY} = \exp\curb{\pare{a+b}it - \frac{\sigma_1^2 + \sigma_2^2t^2}{2}}. \]
+    \end{ex}
+\end{sample}
+\inlinehardlink{各种分布的期望值/方差表}
+
+% subsection 其它数字特征 (end)
+
+% section 数字特征 (end)
+
+\end{document}

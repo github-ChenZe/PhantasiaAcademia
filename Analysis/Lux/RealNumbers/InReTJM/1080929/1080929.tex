@@ -1,0 +1,21 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+第二题, 先证明右侧是单调递增的, 即如果$x_2 > x_1$, 则
+\[ x_2 - \epsilon \sin x_2 > x_1 - \epsilon \sin x_1. \]
+这等价于证明
+\[ \epsilon\pare{\sin x_2 - \sin x_1} < x_2 - x_1, \]
+即(和差化积)
+\[ \epsilon\cdot 2\sin\pare{\frac{x_2-x_1}{2}} \cos\pare{\frac{x_2+x_1}{2}} < x_2 - x_1. \]
+由$\sin x < x$, 可知
+\[ \epsilon\cdot 2\sin\pare{\frac{x_2-x_1}{2}} \cos\pare{\frac{x_2+x_1}{2}} < \epsilon\cdot \pare{x_2 - x_1} \cos\pare{\frac{x_2+x_1}{2}}, \]
+于是上面的不等式显然成立.
+\par
+第三题, 如果$f\pare{x_1} = f\pare{x_2}$, 结论便是显然的(取$\xi = x_1$即可). 否则不放设$f\pare{x_1} < f\pare{x_2}$, 则
+\[ f\pare{x_1} < \frac{m_1 f\pare{x_1} + m_2 f\pare{x_2}}{m_1 + m_2} < f\pare{x_2}. \]
+因此由介值定理, 必定存在$\xi$使得$f\pare{\xi} = \displaystyle \frac{m_1 f\pare{x_1} + m_2 f\pare{x_2}}{m_1 + m_2}$.
+
+\end{document}

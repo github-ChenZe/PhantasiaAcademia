@@ -1,0 +1,48 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{一阶电路} % (fold)
+\label{sec:一阶电路}
+
+在动态电路中, KCL, KVL和元件的VCR仍然适用. 只含一个动态元件的线性, 时不变电路可以用线性常系数一阶常微分方程描述. 用一阶微分方程来描述的电路谓一阶电路.
+
+\subsection{分解方法} % (fold)
+\label{sub:分解方法}
+
+一阶电路可视为两个单口网络组成. 其一含电源及电阻元件, 其二含动态元件. 含电阻部分可用Norton或Th\'evenin定理化简.
+\par
+含电容的电路应化为电压源串联电阻串联电感. 含电感的电路应化为电流源并联电阻并联电感. 前者
+\[ R_0 C \+dtd{u_C} + u_C = u_{OC}\pare{t}\Leftrightarrow C\+dtd{u_C}G_0 u_C = i_{SC}\pare{t}. \]
+后者对偶可得.
+\par
+电容电压与电感电流为电路的状态变量, 故方程谓电路的状态方程. 以$x$泛指状态变量, $w$泛指输入, 则状态方程可归结为
+\[ \+dtdx = Ax + Bw. \]
+例如对电容.
+\par
+$t\ge t_0$时$RC$串联的等效电路中, 存在两个独立的电压源. 根据叠加原理可分别考虑两个源的效果.
+\begin{cenum}
+    \item 零输入响应: 仅由动态元件非零初始值作用引起的响应;
+    \item 零初始响应: 仅由电路输入所引起的响应.
+\end{cenum}
+
+% subsection 分解方法 (end)
+
+\subsection{零输入响应} % (fold)
+\label{sub:零输入响应}
+
+零输入响应仅仅是非零初始状态引起的. 若初始时刻储能谓零, 则这一响应为零.
+\[ \+dtd{u_C} = -\rec{R_0 C}u_C + \rec{R_0 C}u_{OC}\pare{t}. \]
+若所关心者为$t>0$时电路的情况, 则电路的方程为
+\[ RC\+dtd{u_C} + u_C = 0,\quad t\ge 0. \]
+则解为
+\[ u_C\pare{t} = Ke^{-\rec{RC}t},\quad u_C\pare{0} = K = U_0,\quad u_C\pare{t} = U_0e^{-\rec{RC}t}. \]
+电流在$t=0$时刻会发生跃变.
+
+% subsection 零输入响应 (end)
+
+% section 一阶电路 (end)
+
+\end{document}

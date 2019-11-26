@@ -1,0 +1,67 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'FresnelMirror.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1724.68292477bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.55752974)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{FresnelMirror.pdf}}%
+    \put(0.42438565,0.24281354){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32304074\unitlength}\raggedright $\theta$\end{minipage}}}%
+    \put(0.09264765,0.26890525){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20749155\unitlength}\raggedright $S_1$\end{minipage}}}%
+    \put(0.10159339,0.10614241){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20749155\unitlength}\raggedright $S_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{FresnelMirror.pdf}}%
+    \put(0.31857372,0.00317845){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$B$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{FresnelMirror.pdf}}%
+    \put(0.75697267,0.00356195){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$C$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{FresnelMirror.pdf}}%
+    \put(0.03947165,0.18962131){\color[rgb]{0,0,0}\makebox(0,0)[rb]{\smash{$d$}}}%
+    \put(0.5193501,0.55413915){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.20003677\unitlength}\raggedright $S$\end{minipage}}}%
+    \put(0.36155713,0.37895167){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15655051\unitlength}\raggedright $M_1$\end{minipage}}}%
+    \put(0.49947067,0.2348258){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15655051\unitlength}\raggedright $M$\end{minipage}}}%
+    \put(0.66347597,0.15655051){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15655051\unitlength}\raggedright $M_2$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

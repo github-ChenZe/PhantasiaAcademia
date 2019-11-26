@@ -160,9 +160,11 @@
 \label{ssub:gauss与amp1ere定律}
 
 \begin{finale}
-    \begin{equation*}
-        \oiint \+vB\cdot\rd{\+vS} = 0,\quad \oint \+vB\cdot\rd{\+vl} = \mu_0 \iint_S \+vJ\cdot\rd{\+vS}.
-    \end{equation*}
+    \vspace*{-\baselineskip}
+    \begin{align*}
+        \oiint \+vB\cdot\rd{\+vS} = 0,\quad & \oint \+vB\cdot\rd{\+vl} = \mu_0 \iint_S \+vJ\cdot\rd{\+vS}.\\
+        & \oint \+vH\cdot\rd{\+vl} = \iint_S \+vJ_f\cdot\rd{\+vS}.
+    \end{align*}
 \end{finale}
 
 \begin{figure}[ht]
@@ -196,7 +198,7 @@
 
 \begin{reflex}
     {有介质时的磁场}{有介质时的磁场}
-    对于下列构型, 将$\mu_0$替换为$\mu$即得到填充了介质时的磁场.
+    对于下列构型, 将$\mu_0$替换为$\mu$即得到填充了介质时的$\vB$. 将$\mu_0$去掉即可得到(填充了介质时的)$\+vH$.
 \end{reflex}
 
 \begin{longtable}[h]{|c|c|c|c|}
@@ -236,7 +238,7 @@
     &&&\\
     &&&\\
     \hline
-    \+:r5{\incfig{1.5cm}{mdipoleConfig}} & \+:r5{任意} & \+:r2{\hspace{-4em}\+$\frac{\mu_0}{4\pi r^3}\cdot$} & \+:r5{\+$\+vA = \frac{\mu_0\+vm\times\+ur}{4\pi r^2}$}\\
+    \+:r5{\incfig{1.5cm}{mdipoleConfig}} & \+:r5{任意} & \+:r2{\hspace{-4em}\+$\frac{\mu_0}{4\pi r^3}\cdot$} & \+:r5{\+$\frac{\mu_0\+vm\times\+ur}{4\pi r^2}$}\\
     &&&\\
     &&\+:r3{\+$\begin{cases}
         \brac{3\pare{\+vm\cdot\+ur}\+ur-\+vm}\\
@@ -277,12 +279,71 @@
     \end{solution}
 \end{sample}
 
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{3.5cm}{uniformCylindricalKappa}
+        \caption{均匀圆柱电流}
+        \label{fig:均匀圆柱电流}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{3.5cm}{spinningChargedSphere}
+        \caption{旋转均匀带电导体球}
+        \label{fig:旋转均匀带电导体球}
+    \end{subfigure}
+    \caption{}
+    \label{fig:特殊构型应用例题}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如图\cref{fig:均匀圆柱电流}所示, 圆柱面上有均匀面电流$\+v{\kappa}$, 求轴线上磁场.
+    \end{ex}
+    \begin{solution}
+        \inlinehardlink{参考\cref{table:特殊构型的磁场}获得单个线圈磁场.}
+        \begin{align*}
+        \+v{B} = \int_L \frac{\mu_0 \kappa R^2 \,\rd{z}}{2\pare{R^2+z^2}^{3/2}} &= \frac{\mu_0\kappa}{2}\pare{\frac{z_R}{\sqrt{z_R^2 + R^2}} - \frac{z_L}{\sqrt{z_L^2 + R^2}}}\\ &= \frac{\mu_0\kappa}{2}\pare{\cos{\theta_1}+\cos{\theta_2}}.
+        \end{align*}
+        \inlinehardlink{参考\eqref{eq:x_over_r3_int}获得积分结果.}
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        如图\cref{fig:旋转均匀带电导体球}所示, 球面上均匀带电, 球壳以角速度$\+v{\omega}$旋转, 求轴线上球内外磁场.
+    \end{ex}
+    \begin{solution}
+        
+    \end{solution}
+\end{sample}
+
 % subsubsection 特殊构型的磁场 (end)
 
 % subsection 真空中磁场 (end)
 
 \subsection{物质中的磁场} % (fold)
 \label{sub:物质中的磁场}
+
+\subsection{磁化强度} % (fold)
+\label{sub:磁化强度}
+
+\begin{finale}
+    \begin{definition}[磁化强度]
+        单位体积内磁偶极矩的矢量和谓磁化强度,
+        \[ \+v{M} = \frac{\sum \+v{\mu}}{\Delta V}. \]
+    \end{definition}
+\end{finale}
+\begin{finale}
+    \begin{theorem}[磁化电流密度]
+        磁化体电流密度和面电流密度分别为
+        \[ \+vJ = \curl \+v{M},\quad \+v{\kappa} = \+v{M}\times \+u{n}. \]
+    \end{theorem}
+\end{finale}
+\begin{corollary}
+    均匀磁化的介质, 磁化电流仅以面电流的形式出现.
+\end{corollary}
+
+% subsection 磁化强度 (end)
 
 \subsubsection{边值关系} % (fold)
 \label{ssub:边值关系}
@@ -445,15 +506,15 @@
 \label{ssub:lorentz力}
 
 \begin{remark}
-    [磁力与Ampere力做功]考虑导线的移动速率$\+vu$, 电子在导线内的相对移动速率$\+vv$, 则
+    [磁力与Amp\`ere力做功]考虑导线的移动速率$\+vu$, 电子在导线内的相对移动速率$\+vv$, 则
     \[ P\propto \brac{\pare{\+vu+\+vv}\times\+vB}\cdot\pare{\+vu+\+vv} \propto I\pare{\rd{\+vl}\times\+vB}\cdot\+vu + I\pare{\+vu\times\+vB}\cdot\rd{\+vl}. \]
     第一项即Amp\`ere力做功, 第二项即动生电动势做功.
 \end{remark}
 \leavevmode
-\InsertBoxR{-1}{\parbox{4cm}{\begin{mtips}
-    通过\[ \nu=\omega/\pare{2\pi}, \]\[T=2\pi/\omega\]得到相应的量.
+\InsertBoxR{-1}{\parbox{3.5cm}{\begin{mtips}
+    通过\[ \nu=\omega/\pare{2\pi}, \]\[T=2\pi/\omega\]得到其它量.
 \end{mtips}}}[0]\vspace*{-\baselineskip}
-\begin{finale}[right skip=5cm,]
+\begin{finale}[right skip=4cm,]
     \begin{theorem}
         [均匀磁场中的带电粒子]
         \begin{align*}
@@ -464,10 +525,119 @@
     \end{theorem}
 \end{finale}
 \leavevmode
+\begin{sample}
+    \begin{ex}
+        在回旋加速器中, 虽然粒子的轨道半径和速度有关, 但轨道频率恒为$f=qB/\pare{2\pi m}$, 依据频率切换电场方向即可. 最终加速至动能
+        \[ T = \frac{q^2B^2R^2}{2m}. \]
+    \end{ex}
+\end{sample}
 
 % subsubsection lorentz力 (end)
 
+\subsubsection{转动参考系} % (fold)
+\label{ssub:转动参考系}
+
+\begin{finale}
+    \begin{theorem}
+        [Larmor频率]
+        设质点在惯性参考系中受力$\+vF$且有均强磁场$\+vB$, 则在以Larmor频率
+        \[ \+v{\omega}_L = -\frac{q\+vB}{2m} \]
+        转动的参考系中, 运动方程变为
+        \[ m\+va' = \+vF + m\+v{\omega}_L\times\pare{\+v{\omega}_L\times\+vr}. \]
+    \end{theorem}
+\end{finale}
+
+% subsubsection 转动参考系 (end)
+
+\subsubsection{磁矩与角动量} % (fold)
+\label{ssub:磁矩与角动量}
+
+\begin{finale}
+    \begin{theorem}
+        [磁旋比]
+        对于荷质比一定的体系, 有
+        \[ \+v\mu = \gamma \+vL,\quad \gamma = \frac{q}{2m}. \]
+    \end{theorem}
+\end{finale}
+\begin{sample}
+    \begin{ex}
+        均匀带电旋转球壳的磁矩为
+        \[ \mu = \frac{q}{2m}L = \frac{q}{2m}\cdot\frac{2}{3}mR^2\omega = \frac{q\omega R^2}{3}. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 磁矩与角动量 (end)
+
+\subsubsection{复合场中的运动} % (fold)
+\label{ssub:复合场中的运动}
+
+\begin{finale}
+    \begin{theorem}[一般的匀强内的运动]
+        在匀强$\+vE$和$\+vB$中运动方程为
+        \[ \+dtd{\+vv} = \+va_E + \frac{q}{m}\pare{\+vv - \+vv_E}\times\+vB. \]
+        其中
+        \[ \+va_E = \frac{q}{m}\+uB\pare{\+vE\cdot\+uB},\quad \+vv_E = \frac{\+vE\times\+vB}{B^2}. \]
+    \end{theorem}
+\end{finale}
+\begin{hardlink}
+    参考\cref{lem:旋转矢量的微分方程}求解上述微分方程.
+\end{hardlink}
+
+% subsubsection 复合场中的运动 (end)
+
+\subsubsection{缓变磁场中的运动} % (fold)
+\label{ssub:缓变磁场中的运动}
+
+\begin{finale}
+    \begin{theorem}
+        [绝热不变量]
+        在缓慢变化的磁场中运动的电荷, 磁矩和磁通量守恒, 即
+        \[ \mu = \half qsv_{\perp} = \frac{mv_{\perp}^2}{2B} = \frac{q^2}{2\pi m}\Phi \]
+        守恒.
+    \end{theorem}
+\end{finale}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{mMirror}
+    \caption{磁镜}
+    \label{fig:磁镜}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:磁镜}所示, 例子以$v_0$速率出射, 求能被捕获的$\theta$应满足的条件.
+    \end{ex}
+    \begin{solution}
+        在磁场极大处平行于磁场的速度应下降至零, 故
+        \[ \frac{mv^2\sin^2\theta_m}{2B_0} = \frac{mv^2}{2B_m}\quad\Longrightarrow\quad \sin^2\theta_m = \frac{B_0}{B_m} = \rec{R\+_mi_}. \qedhere\]
+    \end{solution}
+\end{sample}
+\begin{remark}
+    $R\+_mi_$谓磁镜比.
+\end{remark}
+
+% subsubsection 缓变磁场中的运动 (end)
+
 % subsection ampere与Lorentz力 (end)
+
+\subsection{磁场能量} % (fold)
+\label{sub:磁场能量}
+
+\subsubsection{磁偶极子} % (fold)
+\label{ssub:磁偶极子}
+
+\begin{finale}
+    \begin{theorem}[磁偶极子受力]
+        磁场中的磁偶极子满足
+        \[ \+v{F} = \+v{m}\cdot\+v{B}, \quad \+v{\tau} = \+v{\mu}\times\+v{B}, \quad U = -\+v{\mu}\cdot\+v{B}. \]
+    \end{theorem}
+\end{finale}
+\begin{corollary}
+    磁偶极子的受力使磁偶极子磁通量有增加趋势.
+\end{corollary}
+
+% subsubsection 磁偶极子 (end)
+
+% subsection 磁场能量 (end)
 
 % section 能量与受力 (end)
 
@@ -484,8 +654,29 @@
     \label{eq:oint_rec_cos}
     \int_0^{2\pi} \rec{a+\cos\theta}\,\rd{\theta} &= \frac{2\pi}{\sqrt{a^2 - 1}}.
 \end{align}
+\begin{align}
+    \int \sqrt{x^2+z^2}\,\rd{x} &= \half x\sqrt{x^2+z^2} + \half z^2 \ln\pare{x+\sqrt{x^2+z^2}}. \\
+    \int \rec{\sqrt{x^2+z^2}}\,\rd{x} &= \ln \pare{x+\sqrt{x^2+z^2}}.\\
+    \int \frac{x}{\sqrt{x^2+z^2}}\,\rd{x} &= \sqrt{x^2+z^2}.\\
+    \label{eq:x_over_r3_int}\int \rec{\pare{x^2+z^2}^{3/2}}\,\rd{x} &= \frac{x}{z^2\sqrt{x^2+z^2}}.\\
+    \int \frac{x}{\pare{x^2+z^2}^{3/2}}\,\rd{x} &= -\rec{\sqrt{x^2+z^2}}.\\
+    \int \frac{x^2}{\pare{x^2+z^2}^{3/2}}\,\rd{x} &= -\frac{x}{\sqrt{x^2+z^2}} + \ln\abs{x+\sqrt{x^2+z^2}}.\\
+    \int \rec{\sqrt{r^2+z^2-2rzu}}\,\rd{u} &= \rec{rz}\sqrt{r^2+z^2-2rzu}. 
+\end{align}
 
 % subsubsection 定积分 (end)
+
+\subsubsection{微分方程} % (fold)
+\label{ssub:微分方程}
+
+\begin{lemma}
+    \label{lem:旋转矢量的微分方程}
+    如果$\+vv$满足微分方程
+    \[ \+dtd{\+vv} = \omega\times\+vv, \]
+    则$\+vv$以$\+v\omega$为角速度旋转.
+\end{lemma}
+
+% subsubsection 微分方程 (end)
 
 % subsection 微积分工具 (end)
 

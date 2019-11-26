@@ -1,0 +1,294 @@
+\documentclass[../TheoreticalMechanics.tex]{subfiles}
+
+\begin{document}
+
+\section{基本原理} % (fold)
+\label{sec:基本原理}
+
+\subsection{质点力学} % (fold)
+\label{sub:质点力学}
+
+\subsubsection{单质点力学} % (fold)
+\label{ssub:单质点力学}
+
+\begin{definition}[线动量]
+	质点的线动量谓
+	\[ \vp = m\vv. \]
+\end{definition}
+\begin{finale}
+	\begin{axiom}[Newton第二定律]	
+		\label{ax:Newton第二定律}
+		存在参考系使得对于单个质点成立
+		\[ \vF = \dot{\vp}. \]
+	\end{axiom}
+\end{finale}
+\begin{corollary}[动量守恒]
+	在惯性参考系下, 若质点上的$\vF=0$, 则质点的$\vp$不变.
+\end{corollary}
+\begin{definition}[惯性参考系]
+	使\cref{ax:Newton第二定律}成立的参考系谓惯性参考系.
+\end{definition}
+\begin{ex}
+	地球表面的实验室对于许多实验是不错的惯性参考系, 而当天文学效应需要考虑时可能要借助天体定义惯性参考系.
+\end{ex}
+\begin{definition}[角动量]
+	质点的角动量谓
+	\[ \vL = \vr \times \vp. \]
+\end{definition}
+\begin{definition}[力矩]
+	作用在位矢$\vr$的质点上的力$\vF$的力矩为
+	\[ \vN = \vr \times \vF. \]
+\end{definition}
+\begin{corollary}[角动量定理]
+	在惯性参考系下,
+	\[ \vN = \dot{\vL}. \]
+\end{corollary}
+\begin{corollary}[角动量守恒]
+	在惯性参考系下, 若质点的$\vN=0$, 则质点的$\vL$不变.
+\end{corollary}
+\begin{definition}[功]
+	力从点$1$作用在质点上到点$2$, 则相应的功谓
+	\[ W_{12} = \int_1^2 \vF\cdot\rd{\vs}. \]
+\end{definition}
+\begin{definition}[动能]
+	单个质点的动能谓
+	\[ T = \half mv_2. \]
+\end{definition}
+\begin{corollary}[功能原理]\quad
+	\[ W_{12} = T_2 - T_1. \]
+\end{corollary}
+\begin{definition}
+	当$\vF$满足下列等价的条件之一时, 谓其为保守力:
+	\[ \oint \vF\cdot\rd{\vs} = 0,\quad \vF = -\grad V\pare{\vr}. \]
+\end{definition}
+\begin{corollary}[机械能守恒定律]
+	若质点受保守力做功, 则$E=T+V$是守恒量, 即
+	\[ T_1 + V_1 = T_2 + V_2. \]
+\end{corollary}
+
+% subsubsection 单质点力学 (end)
+
+\subsubsection{多质点力学} % (fold)
+\label{ssub:多质点力学}
+
+\begin{definition}[质心]
+	多质点系的质心谓
+	\[ \vR = \frac{\sum m_i \vr_i}{\sum m_i} = \frac{\sum m_i \vr_i}{M}. \]
+\end{definition}
+\begin{definition}[质点系的动量]
+	质点系的动量谓
+	\[ \vP = \sum m_i \vv_i = M\dot{\vR}. \]	
+\end{definition}
+\begin{corollary}[质点系的动量定理]
+	设$\externalF = \sum_i \externalF_i$是作用在各质点上的力之和, 则
+	\[ \externalF = \dot{\vP} = M\edddon{\vR}{t}. \]
+\end{corollary}
+\begin{corollary}[质点系的动量守恒]
+	在惯性参考系下, $\externalF=0$, 则质点系的$\vP$不变.
+\end{corollary}
+\begin{definition}[质点系的角动量]
+	质点系的角动量谓
+	\[ \vL = \sum \vr_i\vp_i. \]	
+\end{definition}
+\begin{corollary}[质点系的角动量定理]
+	设$\externalN = \sum_i \externalN_i$是作用在各质点上的力矩之和, 则
+	\[ \externalN = \dot{\vL}. \]
+\end{corollary}
+\begin{corollary}[质点系的角动量守恒]
+	在惯性参考系下, $\externalN=0$, 则质点系的$\vL$不变.
+\end{corollary}
+\begin{pitfall}
+	质点系的角动量守恒要求Newton第三定律对相互作用力成立, 这对运动电荷之间的磁力可能无法直接适用.
+\end{pitfall}
+
+% subsubsection 多质点力学 (end)
+
+\subsubsection{坐标变换} % (fold)
+\label{ssub:坐标变换}
+
+\begin{finale}
+	\begin{corollary}[角动量的坐标变换]
+		设$\vR$和$\vv$是质点系的质心位矢和速度而$\vr'_i$和$\vp'_i$分别是相对质心的位矢和速度, 则
+		\[ \vL = \vR \times M\vv + \sum \vr'_i \times \vp'_i. \]
+	\end{corollary}
+	\begin{corollary}[动能的坐标变换]
+		设$v$是质点系质心的速度而$v'_i$是质点相对质心的速度, 则
+		\[ T = \half Mv^2 + \half \sum m_i v'^2_i. \]
+	\end{corollary}
+\end{finale}
+\begin{lemma}[质点间相互作用势能之和]
+	令$V_{ij}$是质点$i$和$j$之间的相互作用势, 则
+	\[ \sum_{i\neq j} \int_1^2 \vF_{\rsag{ij}}\cdot\rd{\vs_i} = -\half \sum_{i\neq j} \int \grad_{\rsag{ij}}V_{ij}\cdot\rd{\vr_{\rsag{ij}}} = \left.-\half \sum_{i\neq j}V_{ij}\right\vert_1^2. \]
+\end{lemma}
+\begin{corollary}[质点系的机械能守恒]
+	若质点系受保守力做功, 则$E=T+V$是守恒量, 即
+	\[ T_1 + V_1 = T_2 + V_2, \]
+	其中
+	\[ V = \sum V_i + \half \sum_{i\neq j} V_{ij}. \]
+\end{corollary}
+
+% subsubsection 坐标变换 (end)
+
+% subsection 质点力学 (end)
+
+\subsection{消去坐标} % (fold)
+\label{sub:消去坐标}
+
+\subsubsection{约束} % (fold)
+\label{ssub:约束}
+
+\begin{definition}[完整约束]
+	约束谓完整的, 如果它能被表示为
+	\begin{equation}
+		\label{eq:完整约束}
+		f\pare{\vr_1, \vr_2, \cdots, t} = 0.
+	\end{equation}
+	反之约束谓非完整的.
+\end{definition}
+\begin{ex}
+	刚体的约束可以表示为$\pare{\vr_i - \vr_j}^2 - c_{ij}^2 = 0$, 这是完整约束.
+\end{ex}
+\begin{ex}
+	在球面上滚下的小球的约束可以表示为$r^2 - a^2 \ge 0$, 这是非完整约束. 单纯的纯滚动条件$\omega R = v$也是非完整的.
+\end{ex}
+\begin{definition}[广义坐标]
+	对于含有$k$条完整约束的系统, 可以引入广义坐标$q_1,\cdots,q_{3N-k}$以消除约束.
+\end{definition}
+\begin{ex}
+	对于平面复摆, 可以引入$\theta_1$和$\theta_2$两个参数. 有时候会把角动量甚至能量作为广义坐标.
+\end{ex}
+\begin{ex}
+	对于非完整约束, 例如在平面上无摩擦滚动的圆盘, 即使保证圆盘是垂直的, 只能有方程
+	\[ \begin{cases}
+		\rd{x} - a\sin\theta\,\rd{\varphi} = 0,\\
+		\rd{y} + a\cos\theta\,\rd{\varphi} = 0.
+	\end{cases} \]
+	这无法被写成一个函数的全微分, 也就无法写成\eqref{eq:完整约束}的形式.
+\end{ex}
+
+% subsubsection 约束 (end)
+
+\subsubsection{D'Alembert原理与Lagrange方程} % (fold)
+\label{ssub:d_alembert原理与lagrange方程}
+
+\begin{definition}[虚位移]
+	一个虚位移$\delta\vr_i$是一个符合约束的坐标的微小改变.
+\end{definition}
+\begin{ex}
+	对于单个质点的虚位移, 约束力的做功通常为零. 即便对于一个在自由斜面上滑落的滑块, 约束力的总功非零但仅仅移动质点的虚功仍然为零.
+\end{ex}
+\begin{corollary}[D'Alembert原理]
+	假设约束力不做功, 设$\appliedF_i$为作用在质点上的非约束力, 则
+	\[ \sum \pare{\appliedF_i - \dot{\vp}_i}\cdot\delta\vr_i = 0. \]
+\end{corollary}
+\begin{corollary}[广义力]
+	在广义坐标下, 虚功可以写为
+	\[ \sum \vF_i\cdot\delta\vr_i = \sum Q_j \delta q_j, \]
+	其中$Q_j$谓广义力,
+	\begin{equation}
+	    \label{eq:广义力的定义}
+    	Q_j = \sum \vF_i\cdot\ddelon{\vr_i}{q_j}. 
+	\end{equation}
+\end{corollary}
+\begin{lemma}[广义速度对速度与广义坐标对坐标成比例]\quad
+	\[ \ddelon{\vv_i}{\dot{q}_j} = \ddelon{\vr_i}{q_j},\quad \eddon{}{t}\ddelon{\vv_i}{\dot{q}_j} = \ddelon{\vv_i}{q_j}. \]
+\end{lemma}
+\begin{corollary}[动能的变分]\quad
+	\[ \sum \dot{\vp}_i\cdot\delta\vr_i = \sum \pare{\eddon{}{t}\ddelon{T}{\dot{q}_j} - \ddelon{T}{q_j}}. \]
+\end{corollary}
+\begin{finale}
+	\begin{corollary}[D'Alembert原理]
+		对于不相关的广义坐标$\curb{q_i}$, 成立
+		\[ \eddon{}{t}\ddelon{T}{\dot{q}_j} - \ddelon{T}{q_j} = Q_j. \]
+	\end{corollary}
+\end{finale}
+\begin{definition}[Lagrange量]
+	系统的Lagrange量为$L=T-V$.
+\end{definition}
+\begin{finale}
+	\begin{corollary}[Lagrange方程]
+		设系统的Lagrange量为$L$而$V$与广义速度无关, 则
+		\begin{equation}
+			\label{eq:Lagrange方程}
+			\eddon{}{t}\ddelon{L}{\dot{q}_j} - \ddelon{L}{q_j} = 0.
+		\end{equation}
+	\end{corollary}
+\end{finale}
+\begin{corollary}[速度相关势]
+	\label{coll:Lagrange方程适用于速度相关势}
+	Lagrange方程对满足
+	\[ Q_k = -\ddelon{U}{q_k} + \eddon{}{t}\pare{\ddelon{U}{\dot{q}_k}} \]
+	的广义力同样适用.
+\end{corollary}
+\begin{corollary}[Lagrange量的规范不变性]
+	Lagrange量$L$和$\tilde{L}$给出相同的运动方程, 如果
+	\[ \tilde{L} = L + \eddon{F\pare{q,t}}{t}. \]
+\end{corollary}
+	
+% subsubsection d_alembert原理与lagrange方程 (end)
+
+% subsection 消去坐标 (end)
+
+\subsection{拓展与应用} % (fold)
+\label{sub:拓展与应用}
+
+\subsubsection{包含广义速度的Lagrange量与耗散函数} % (fold)
+\label{ssub:包含广义速度的lagrange量与耗散函数}
+
+\begin{corollary}[Lorentz力]
+	\label{coll:Lorentz力由Lagrange方程导出}
+	由\eqref{eq:Lagrange方程}, 势$U = q\varphi - q\vA\cdot\vv$给出Lorentz力$\vF = q\pare{\vE + \vv\times\vB}$.
+\end{corollary}
+\begin{proof}
+	$\delta_{pq}v_p\pare{\partial_j A_q - \partial_q A_j} = \rd\pare{A_i\,\rd{x_i}}\cdot\vv = v\times\pare{\rot\vA}$.
+\end{proof}
+\begin{pitfall}
+	$\vA$可能与$\curb{q_j}$有关, 务必完全展开全微分.
+\end{pitfall}
+\begin{corollary}[Rayleigh耗散函数]
+	\label{coll:Rayleigh耗散函数}
+	如果质点受到阻力$f_x = -k_x v_x$, 则引入Rayleigh耗散函数
+	\[ \cF = \half \sum\pare{k_x v_{1x}^2 + k_y v_{1y}^2 + k_z v_{1z}^2}. \]
+	则相应的Lagrange方程变为
+	\[ \eddon{}{t}\ddelon{L}{\dot{q}_j} - \ddelon{L}{q_j} + \ddelon{\cF}{\dot{q}_j} = 0. \]
+\end{corollary}
+\begin{corollary}[阻尼耗散的功]
+	对于\cref{coll:Rayleigh耗散函数}中的耗散, 克服阻力的做功的功率为$2\cF$.
+\end{corollary}
+
+% subsubsection 包含广义速度的lagrange量与耗散函数 (end)
+
+\subsubsection{应用} % (fold)
+\label{ssub:应用}
+
+\begin{theorem}[动能的分解]
+	\label{thm:动能的分解}
+	引入广义坐标后, 动能可以分解为
+	\[ T = M_0 + \sum M_j \dot{q}_j + \half\sum M_{jk} \dot{q}_j \dot{q}_k. \]
+	对于不含时的变换, 只有二次齐次项存在.
+\end{theorem}
+\begin{ex}
+	极坐标下有广义力$Q_r = F_r$, $Q_\theta = rF_\theta$,
+	\[ T = \half m\brac{\dot{r}^2 + \pare{r\dot{\theta}}^2}. \]
+	并且有相应的运动方程
+	\[ m\ddot{r} - mr\dot{\theta}^2 = F_r, \]
+	\[ \eddon{}{t}\pare{mr^2\dot{\theta}} = rF_\theta. \]
+\end{ex}
+\begin{ex}[Atwood装置]
+	处在滑轮下方$x_1$处的$M_1$和下方$x_2$处的$M_2$构成的系统满足
+	\[ L = \half\pare{M_1 + M_2} \dot{x}^2 + M_1 gx + M_2 g\pare{l-x}. \]
+	\[ \ddot{x} = \frac{M_1 - M_2}{M_1 + M_2}g. \]
+\end{ex}
+\begin{ex}
+	在匀速$\omega$旋转的杆上的自由质点有
+	\[ T = \half m\pare{\dot{r}^2 + r^2\omega^2}. \]
+	\[ \ddot{r} = r\omega^2,\quad r\propto e^{\omega t}. \]
+\end{ex}
+
+% subsubsection 应用 (end)
+
+% subsection 拓展与应用 (end)
+
+% section 基本原理 (end)
+
+\end{document}

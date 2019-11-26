@@ -1,0 +1,593 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{解析函数的级数展开} % (fold)
+\label{sec:解析函数的级数展开}
+
+\subsection{复级数的基本性质} % (fold)
+\label{sub:复级数的基本性质}
+
+\begin{definition}
+    设$\curb{z_n}\in\+bC$, $\displaystyle \sum_{n=1}^\infty z_n = z_1 + z_2 + \cdots$谓复级数. 若部分和
+    \[ s_n = \sum_{k=1}^n z_k \]
+    收敛于$s$, 则谓$\displaystyle \sum_{n=1}^\infty$收敛于$s$. 否则谓发散.
+\end{definition}
+\begin{remark}
+    $\lim$和$\sum$可以相互转化. $\sum$作为$\lim$即将$\sum z_n$转化为$\lim s_n$. $\lim$作为$\sum$即将$\lim a_n$转化为$\sum \pare{a_n - a_{n-1}}$.
+\end{remark}
+\begin{remark}
+    因此, $\displaystyle \sum_{n=1}^\infty z_n$收敛当且仅当
+    \[ \sum_{n=1}^\infty  \Re z_n,\quad \sum_{n=1}^\infty \Im z_n \]
+    皆收敛.
+\end{remark}
+\begin{remark}
+    因此, Cauchy判准可以直接应用. 即$\displaystyle \sum_{n=1}^\infty z_n$收敛当且仅当
+    \[ \forall \epsilon>0,\quad \exists\, N\in \+bN,\quad n,m>N \rightarrow \abs{z_n + \cdots + z_{n+m}} < \epsilon. \]
+    或者
+    \[ \forall \epsilon>0,\quad \exists\, N\in \+bN,\quad n<N, p>0\rightarrow \abs{z_n + \cdots + z_{n+p}} < \epsilon. \]
+\end{remark}
+\begin{remark}
+    若$\displaystyle \sum_{n=1}^\infty z_n$收敛则$\displaystyle \lim_{n\rightarrow \infty} z_n = 0$. 但反之不成立.
+\end{remark}
+\begin{definition}
+    若$\displaystyle \sum_{n=1}^\infty z_n < \infty$, 则谓之绝对收敛.
+\end{definition}
+\begin{remark}
+    绝对收敛蕴含收敛, 但反之不成立.
+\end{remark}
+\begin{remark}
+    $\displaystyle \sum_{n=1}^\infty z_n$绝对收敛当且仅当$\sum \Re z_n$和$\sum \Re y_n$绝对收敛.
+\end{remark}
+\begin{definition}
+    $\func{f_n}{D}{\+bC}$谓复函数列, 则$\displaystyle \sum_{n=1}^\infty f_n\pare{z}$谓复函数级数.
+    \[ s_n\pare{z} = \sum_{k=1}^k f_k\pare{z} \]
+    谓部分和.
+\end{definition}
+\begin{definition}
+    设$\func{s_n}{D}{\+bC}$是复函数列,
+    \begin{cenum}
+        \item 谓$s_n\pare{z}$逐点收敛于$s\pare{z}$, 若
+        \[ \forall z\in D,\quad \lim_{n\rightarrow\infty} s_n\pare{z} = s\pare{z}. \]
+        记作$s_n \rightarrow s$.
+        \item 谓$s_n\pare{z}$一致收敛于$s\pare{z}$, 若
+        \[ \forall \epsilon>0,\quad \exists\,N,\quad n>N\rightarrow \abs{s_n\pare{z}-s\pare{z}}<\epsilon,\quad \forall z\in D. \]
+        记作$s_n \rightrightarrows s$.
+    \end{cenum}
+\end{definition}
+在例如$C\brac{0,1}$上定义$\displaystyle d\pare{f,g} = \sup_{x\in \brac{0,1}} \abs{f\pare{x} - g\pare{x}}$, 则$d$构成一个度量. 又例如$\displaystyle d\pare{f,g} = \sqrt{\int_0^1 \abs{f\pare{x} - g\pare{x}}\,\rd{x}}$也构成一个度量.
+\begin{remark}
+    满足自零, 交换, 以及三角不等式者谓度量.
+\end{remark}
+\begin{ex}
+    定义$\func{f_n}{z\in B\pare{0,1}}{\+bC}$为$z^n$, 则$f_n$在开圆盘上逐点收敛于$0$, 但并非一致收敛.
+\end{ex}
+\begin{theorem}[Cauchy判准]
+    $\displaystyle \sum_{n=1}^\infty f_n\pare{z}$一致收敛当且仅当
+    \[ \forall \epsilon > 0,\quad \exists N\in \+bN_+,\quad m,n>N\rightarrow \abs{f_n\pare{z} + \cdots + f_m\pare{z}} < \epsilon,\quad \forall z\in D. \]
+\end{theorem}
+\begin{theorem}[Weierstra\ss 判准]
+    设$\func{f_n}{D}{\+bC}$, 且$\abs{f_n\pare{z}} \le a_n$. 若$\displaystyle \sum_{n=1}^\infty a_n <\infty$, 则$\displaystyle \sum_{n=1}^\infty f_n\pare{z}$一致收敛.
+\end{theorem}
+\begin{proof}
+    这是Cauchy判准的直接推论.
+\end{proof}
+\begin{theorem}[Weierstra\ss 定理]
+    \label{thm:weierstrass定理}
+    设$\func{f,f_n}{D}{\+bC}$, 设$\displaystyle \sum_{n=1}^\infty f_n\pare{z}$一致收敛于$f\pare{z}$, 则
+    \begin{cenum}
+        \item 如果$f_n$皆连续, 则$f\pare{z}$连续; 即
+        \[ \lim_{\xi \rightarrow z} \sum_{n=1}^\infty f_n\pare{\xi} = \sum_{n=1}^\infty \lim_{\xi \rightarrow z_0} f_n\pare{\xi},\quad \lim_{\xi\rightarrow z} f\pare{\xi} = f\pare{z}. \]
+        \item 如果$f_n$皆连续, 则对$\forall \gamma \subset D$, 有
+        \[ \int_\gamma f\pare{z}\,\rd{z} = \int_\gamma \sum_{n=1}^\infty f_z\pare{z}\,\rd{z} = \sum_{n=1}^\infty \int_\gamma f_n\pare{z}\,\rd{z}. \]
+        \item 若$f_n$解析, 则$f$解析且
+        \[ f^{\pare{k}}\pare{z} = \sum_{n=1}^\infty f^{\pare{k}}_n\pare{z},\quad k\in \+bN, \]
+        \[ \+dzd{}\sum_{n=1}^\infty f_n\pare{z} = \sum_{n=1}^\infty \+dzd{} f_n\pare{z}. \]
+    \end{cenum}
+    从而一致收敛时, $\sum$和$\displaystyle \lim, \int, \+dzd{}$皆可交换.
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{ConvUniformContinu}
+    \caption{一致收敛级数的连续型}
+\end{figure}
+\begin{proof}
+    欲证明$f$连续, $\forall \epsilon > 0$, $\exists\,\delta > 0$, 使得$\abs{z-z_0}<\delta$时$\abs{f\pare{z} - f\pare{z_0}}<\epsilon$.
+    \begin{cenum}
+        \item 由$s_n$连续, $\exists\, \delta>0$使得$\abs{z-z_0}<\delta$时
+        \[ \abs{s_n\pare{z} - s_n\pare{z_0}} < \frac{\epsilon}{3}. \]
+        \item 由一致收敛, $\exists\, N$使得$n>N$时
+        \[ \abs{s_n\pare{z} - f\pare{z}} < \frac{\epsilon}{3},\quad \forall z\in D. \]
+        \item 从而对于任意$\abs{z-z_0}<\delta$,
+        \begin{align*}
+            \abs{f\pare{z} - f\pare{z_0}} &= \abs{f\pare{z} - s_n\pare{z} + s_n\pare{z} - s_n\pare{z_0} + s_n\pare{z_0} - f\pare{z_0}} \\
+            &\le \abs{f\pare{z}  -s_n\pare{z}} + \abs{s_n\pare{z} - s_n\pare{z_0}} + \abs{s_n\pare{z_0} - f\pare{z_0}} \\
+            &\le \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} \\
+            &\le \epsilon.
+        \end{align*}
+    \end{cenum}
+    \par
+    欲证明积分和求和可交换, 注意$\forall \epsilon>0$, $\exists\, N$, 使得$n>N$时 
+    \[ \abs{\int_\gamma s_n\pare{z}\,\rd{z} - \int_\gamma f\pare{z}\,\rd{z}} \le \int_\gamma \abs{s_n\pare{z} - f\pare{z}}\,\rd{s} \le \epsilon \int_\gamma\rd{s}. \]
+    考虑到
+    \[ \lim_{n\rightarrow\infty} \sum_{k=1}^n \int_\gamma f_k\pare{z}\,\rd{z} = \lim_{n\rightarrow\infty}\int_\gamma s_n\pare{z}\,\rd{z}, \]
+    知积分与极限可交换.
+    \par
+    欲证明$f$解析, 即$\forall z_0 \in D$, $\exists r>0$, 使得$f\pare{z}$在$B_r\pare{z_0}$内处处可导. 取$r>0$使得$B_r\pare{z_0} \in D$. 这是一个单连通区域, 而由第一点, $f$连续; 由第二点,
+    \[ \int_{\gamma \subset B_r\pare{z_0}}f\pare{z}\,\rd{z} = \int_\gamma \sum_{n=1}^\infty f_n\pare{z}\,\rd{z} = \sum_{n=1}^\infty \int_\gamma f_n\pare{z}\,\rd{z} = 0. \]
+    这对任何$\gamma\subset B_r\pare{z_0}$成立. 根据Morera定理, $f$解析.
+    \par
+    与证明$f^{\pare{k}}$的表达式, 由Cauchy积分公式,
+    \begin{align*}
+        f^{\pare{k}}\pare{z} &= \frac{k!}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z}^{k+1}}\,\rd{\xi} = \frac{k!}{2\pi i} \int_\gamma \frac{\sum_{n=1}^\infty f_n\pare{\xi}}{\pare{\xi - z}^{k+1}}\,\rd{\xi} \\
+        &= \sum_{n=1}^\infty \frac{k!}{2\pi i} \int_\gamma \frac{f_n\pare{\xi}}{\pare{\xi - z}^{k+1}}\,\rd{\xi} = \sum_{n=1}^\infty f_n^{\pare{k}}\pare{z}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{definition}
+    谓$\func{s_n}{D}{\+bC}$内闭一致收敛于$s\pare{z}$, 若对于$D$内任意紧集$E$有$\restr{s_n}{E}$一致收敛于$\restr{s}{E}$.
+\end{definition}
+\begin{ex}
+    $s_n = z^n$在$B\pare{0,1}$上并不一致收敛, 但内闭一致收敛于$s=0$.
+\end{ex}
+\begin{remark}
+    将\cref{thm:weierstrass定理}中的一致收敛替换为内闭一致收敛, 结论仍然成立.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        令$\displaystyle \xi\pare{z} = \sum_{n=1}^\infty \rec{n^z}$, 其中$n^z = e^{z\ln n}$, 则
+        \[ \abs{n^z} = \abs{e^{x\ln n} + e^{iy\ln n}} = e^{x\ln n} = n^x. \]
+        当$\Re z = x \ge x_0 > 1$时, $\displaystyle \abs{\rec{n^z}}\le\rec{n^{x_0}}$. 因此$\displaystyle \sum_{n=1}^\infty \rec{n^z}$在$\Re z>1$上内闭一致收敛于$\xi\pare{z}$. 根据\cref{thm:weierstrass定理}, $\xi\pare{z}$在$\Re z > 1$上解析.
+    \end{ex}
+\end{sample}
+
+% subsection 复级数的基本性质 (end)
+
+\subsection{幂级数} % (fold)
+\label{sub:幂级数}
+
+\begin{definition}[幂级数]
+    形如$\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$, 其中$a_n,z_0\in \+bC$者谓幂级数.
+\end{definition}
+\begin{theorem}[Abel判准]
+    对于幂级数$\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$, 令
+    \[ R = \rec{\limsup \limits_{n\rightarrow \infty} \abs{a_n}^{1/n}}, \]
+    则$\abs{z-z_0}<R$时, $\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$收敛, $\abs{z-z_0}>R$时$\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$发散. 谓$R$其收敛半径, $B_R\pare{z_0}$其收敛圆.
+\end{theorem}
+\begin{remark}
+    $\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$在$B_R\pare{z_0}$中是内闭一致收敛的.
+\end{remark}
+\begin{remark}
+    $R=0$时, $\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$仅在$z=z_0$处收敛.
+\end{remark}
+\begin{remark}
+    $R=\infty$时, $\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$对所有$z_0$收敛.
+\end{remark}
+\begin{remark}
+    $0<R<\infty$时, $\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$的收敛域为${z-z_0}<R$.
+\end{remark}
+\begin{proof}
+    当$R=0$时, 由$R$的定义, 存在子列$a_{n_k}$使得$\abs{a_{n_k}}^{1/n}\rightarrow\infty$, 从而$a_{n_k}\pare{z-z_0}^{n_k}$当$z\neq z_0$时不能趋于零, 与Cauchy判准不符.
+    \par
+    当$R=\infty$时, 对于任意$z\neq z_0$, 由$R$的定义,
+    \[ \lim_{n\rightarrow} \abs{a_n}^{1/n} = 0. \]
+    对于任何$z$和充分大的$n$, $\displaystyle\abs{a_n}^{1/n} < \rec{{2\abs{z-z_0}}}$, 故$\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^{n_k}$收敛.
+    \par
+    当$0<R<\infty$, 取$\rho>0$使$\abs{z-z_0}<\rho<R$, 则对于充分大的$n$, $\abs{a_n}^{1/n} < \displaystyle \rec{\rho}$. 故$a_n\pare{z-z_0}^n < \displaystyle \pare{\frac{z-z_0}{\rho}}^n$. 而$\displaystyle \abs{\frac{z-z_0}{\rho}}<1$, 故级数显然收敛, 也可以由此看出其在$\clo{B}_\rho\pare{z_0}$上一致收敛.
+    \par
+    仍然需要考虑$\abs{z-z_0}>R$的情形, 取$\abs{z-z_0}>r>R$, 则存在子列$n_k$使得, $\abs{a_{n_k}}^{1/n_k}>\displaystyle \rec{r}$. 故$a_{n_k}\pare{z-z_0}^n > \displaystyle\abs{\frac{z-z_0}{r}}^{n_k}>1$, 故级数发散.
+\end{proof}
+由于多项式解析, $\displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$在收敛圆内内闭一致收敛, 故$f\pare{z} = \displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$在$B_R\pare{z_0}$内解析.
+\par
+此外, 如果幂级数在$z_1$处收敛, 则对于任何满足$\abs{z-z_0}<\abs{z_1-z_0}$的$z$, 幂级数都收敛. 如果幂级数在$z_2$处发散, 则对于任何满足$\abs{z-z_0}>\abs{z_2-z_0}$的$z$, 幂级数都发散.
+\begin{sample}
+    \begin{ex}
+        对于$\displaystyle \sum_{n=1}^\infty z^n$, 有$R=1$, 而满足$\abs{z}=1$的所有$z$都使之不收敛.
+    \end{ex}
+    \begin{ex}
+        对于$\displaystyle \sum_{n=1}^\infty \frac{z^n}{n^2}$, 有$R=1$, 而满足$\abs{z}=1$的所有$z$都使之收敛.
+    \end{ex}
+    \begin{ex}
+        对于$\displaystyle \sum_{n=1}^\infty \frac{z^n}{n}$, 有$R=1$, 而$z=1$时其发散, $\abs{z}=1$且$z\neq 1$时其收敛.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求收敛半径, 对于
+        \begin{cenum}
+            \item $\displaystyle \sum_{n=1}^\infty z^{n!}$;
+            \item $\displaystyle \sum_{n=0}^\infty \brac{3+\pare{-1}^n}^nz^n$;
+            \item $\displaystyle \sum_{n=0}^\infty \frac{n^n}{n!}z^n$.
+        \end{cenum}
+    \end{ex}
+    \begin{proof}[解]
+        对于$\displaystyle \sum_{n=1}^\infty z^{n!}$, 显然$R = \limsup\limits_{n\rightarrow \infty} \abs{a_n}^{1/n} = 1$.
+        \par
+        对于$\displaystyle \sum_{n=0}^\infty \brac{3+\pare{-1}^n}^nz^n$, $\abs{a_n}^{1/n} = 3+\pare{-1}^n$, $\limsup$为$4$, 故$R = 1/4$.
+        \par
+        对于$\displaystyle \sum_{n=0}^\infty \frac{n^n}{n!}z^n$, 考虑到$\displaystyle \lim_{n\rightarrow \infty} \frac{n}{\pare{n!}^{1/n}} = \rec{e}$即可.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \sum_{n=0}^\infty \frac{z^n}{n}$.
+    \end{ex}
+    \begin{proof}
+        $R=1$, 且在收敛圆盘内
+        \[ f'\pare{z} = \sum_{n=1}^\infty z^{n-1} = \rec{1-z}. \]
+        其中$1-z$恰好在$\Ln$的主值区域内, 从而
+        \[ f\pare{z} = \int_{0}^z \rec{1-z}\,\rd{z} = -\ln\pare{1-z}. \qedhere \]
+    \end{proof}
+\end{sample}
+
+% subsection 幂级数 (end)
+
+\subsection{Taylor展开} % (fold)
+\label{sub:taylor展开}
+
+\begin{theorem}
+    设$\func{f}{D}{\+bC}$是解析函数, 则对于任意$z_0\in D$, 取$r>0$使得$B_r\pare{z_0}\subset D$, 则对于任何$z\in B_r\pare{z_0}$, 有
+    \[ f\pare{z} = \sum_{n=0}^\infty \frac{f^{\pare{n}}\pare{z_0}}{n!}\pare{z-z_0}^n, \]
+    谓之$f$在$z_0$处的Taylor展开.
+\end{theorem}
+展开式的存在性在证明Cauchy积分公式的过程中已经提及. 下面证明系数的表达式.
+\begin{proof}[证明1]
+    设$f\pare{z} = b_0 + b_1\pare{z-z_0} + b_2\pare{z-z_0}^2+\cdots$. 对于$z=z_0$, 令$b_0 = f\pare{z_0}$, 则
+    \[ f'\pare{z} = b_1 + 2b_2\pare{z-z_0} + \cdots. \]
+    令$b_1 = f'\pare{z_1}$得
+    \[ f''\pare{z} = 2! b_2 + \cdots. \]
+    以此类推.
+\end{proof}
+\begin{proof}[证明2]
+    由Cauchy积分公式,
+    \begin{align*}
+        \frac{f^{n}\pare{z_0}}{n!} &= \rec{2\pi i} \int_\gamma \frac{f\pare{z}}{\pare{z-z_0}^{n+1}}\,\rd{z} \\
+        &= \rec{2\pi i} \int_\gamma \frac{\displaystyle \sum_{k=0}^\infty b_k\pare{z-z_0}^k}{\pare{z-z_0}^{n+1}}\,\rd{z} \\
+        &= \sum_{k=0}^\infty \frac{b_k}{2\pi i} \int_\gamma \rec{\pare{z-z_0}^{n-k+1}}\,\rd{z} = b_n. \qedhere
+    \end{align*}
+\end{proof}
+\begin{theorem}
+    $\func{f}{D}{\+bC}$处处可导当且仅当$\forall z_0\in D$, $\exists\, r$, 使得$\forall \abs{z-z_0}<r$, $
+    \displaystyle \sum_{n=0}^\infty a_n\pare{z-z_0}^n$解析.
+\end{theorem}
+在推导Cauchy积分公式之后, 有结论$\restr{f}{\partial D} = \restr{g}{\partial D}\Rightarrow f = g$处处成立. 由Taylor展开可以得到另一类似的结论. 对于任何球$B\in D$, 有结论$\restr{f}{B} = \restr{g}{B}\Rightarrow f = g$处处成立. 甚至有对于任何收敛列$z_n\rightarrow z_0$, $\restr{f}{\curb{z_n}} = \restr{g}{\curb{z_n}}\Rightarrow f = g$处处成立.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.103: 3(1)(3)(7)(8)(9), 4
+
+% paragraph 作业 (end)
+
+\begin{definition}
+    若$\func{f}{D}{\+bC}$, $z_0\in D$, $m\in \+bN$, $f\pare{z_0} = f'\pare{z_0} = \cdots = f^{\pare{m-1}}\pare{z_0} = 0$, $f^{\pare{m}}\pare{z_0}\neq 0$, 则谓$z_0$为$f$的$m$阶零点.
+\end{definition}
+\begin{theorem}
+    $\func{f}{D}{\+bC}$解析, $z_0 \in D$, 则如下命题等价:
+    \begin{cenum}
+        \item $z_0$为$f$的$m$阶零点;
+        \item $z_0$附近$f$可表示为$f\pare{z} = \pare{z-z_0}^mg\pare{z}$, 其中$g$在$z_0$附近解析, $g\pare{z_0}\neq 0$;
+        \item $\exists\, r>0$使得$f\pare{z} = \pare{z-z_0}g\pare{z}$对任意$z\in B_r\pare{z_0}$成立, 其中$g$在$B_r\pare{z_0}$上解析, $g\pare{z_0}\neq 0$.
+    \end{cenum}
+\end{theorem}
+\begin{proof}
+    由Taylor展开,
+    \[ f\pare{z} = \sum_{n=0}^\infty \frac{f^{\pare{n}}\pare{z_0}}{n!}\pare{z-z_0}^n \]
+    对任意$z\in B_r\pare{z_0}$成立. 考虑到$m$阶零点的定义, 有
+    \begin{align*}
+        f\pare{z} &= \pare{z-z_0}^m \brac{\frac{f^{\pare{m}}\pare{z_0}}{m!} + \frac{f^{\pare{m+1}}\pare{z_0}}{\pare{m+1}!}\pare{z-z_0} + \cdots}\\ & = \pare{z-z_0}^m g\pare{z}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        $f\pare{z} = \displaystyle z-\sin z = \frac{z^3}{3!} - \frac{z^5}{5!} + \cdots$. 故$z=0$是$f$的三阶零点. 也可以考虑到$f\pare{0} = 0$, $f'\pare{0} = 1-\cos 0 = 0$, $f''\pare{0} = \sin 0 = 0$, $f'''\pare{0} = \cos 0 \neq 0$知$z=0$是三阶零点.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    $f\pare{z_0} = f'\pare{z_0} = \cdots = 0$, $f^{\pare{m}}\neq 0$, 则$f\pare{z} = \pare{z-z_0}^mg\pare{z}$, 其中$g\pare{z_0}\neq 0$, 知道$g\pare{z}$在$z_0$附近不为零, 故$f\pare{z}$在$z_0$的某邻域内无其它零点.
+\end{remark}
+\begin{remark}
+    \label{rm:一列为零_处处为零}
+    如果对于任意$n$都有$f^{\pare{n}}\pare{z_0} = 0$, 则由Taylor展开, 在某个$B_r\pare{z_0}$内有$f\pare{z} \equiv 0$, 故$f\pare{z} = 0$在任意$z\in D$内成立(滚圆法).
+\end{remark}
+\begin{corollary}
+    若$\func{f,g}{D}{\+bC}$解析, 存在$B=B_r\pare{z_0}$使$\restr{f}{B} \equiv \restr{g}{B}$, 则$D$内$f\equiv g$.
+\end{corollary}
+\begin{proof}
+    这是\cref{rm:一列为零_处处为零}的推论.
+\end{proof}
+\begin{corollary}
+    若$\func{f}{D}{\+bC}$解析且非常值, 则任意零点必为有限阶零点, 且必定为孤立的, 即某一邻域内只有这一零点.
+\end{corollary}
+\begin{corollary}
+    若$\func{f}{D}{\+bC}$解析, 则或零点孤立, 或$f\equiv 0$.
+\end{corollary}
+\begin{theorem}[唯一性定理]
+    若$\func{f,g}{D}{\+bC}$解析, 且有点列$z_n\rightarrow z_0 \in D$满足$f\pare{z_n} = g\pare{z_n}$对每个$z_n$成立, 则$D$内$f\equiv g$.
+\end{theorem}
+\begin{proof}
+    $h=f-g$解析而零点不是孤立的, 故$h\equiv 0$.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        $f\pare{z} = \sin \displaystyle 1/z$, 则$z_n = \displaystyle \rec{n\pi}$处$f\pare{z_n} = 0$, 但$f\pare{z} \not\equiv 0$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$f\pare{z} = e^z$, 求$z=0$处的Taylor展开.
+    \end{ex}
+    \begin{proof}
+        $f^{\pare{n}}\pare{z} = e^z$, 故$f^{\pare{n}}\pare{0} = 1$对任意$n$成立, 从而
+        \[ f\pare{z} = \sum_{n=0}^\infty \frac{z^n}{n!}. \qedhere \]
+    \end{proof}
+    \begin{proof}
+        令$g\pare{z} = \displaystyle \sum_{z=0}^\infty$, 收敛半径$R=\infty$, 和$f\pare{z}$的定义域相同. 在实数轴上相等, 故处处相等.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\sin^2 z + \cos^2 z = 1$在实数轴上成立, 而两侧定义域皆为$\+bC$, 故等式在$\+bC$上成立.
+    \end{ex}
+\end{sample}
+类似可证明, 如下在实函数上成立的Taylor展开可适用于复变函数,
+\begin{cenum}
+    \item $\displaystyle \rec{1-z} = \sum_{n=0}^\infty z^n$, $\forall \abs{z}<1$;
+    \item $\displaystyle e^z = \sum_{n=0}^\infty \frac{z^n}{n!}$, $\forall z\in\+bC$;
+    \item $\displaystyle \cos z = \sum_{n=0}^\infty \pare{-1}^n\frac{z^{2n}}{\pare{2n}!}$, $\forall z\in\+bC$;
+    \item $\displaystyle \sin z = \sum_{n=0}^\infty \pare{-1}^{n}\frac{z^{2n+1}}{\pare{2n+1}!}$, $\forall z\in\+bC$;
+    \item $\displaystyle \ln {1+z} = \sum_{n=1}^\infty \pare{-1}^{n-1} \frac{z^n}{n}$, $\forall \abs{z}<1$;
+    \item $\displaystyle \pare{1+z}^\alpha = \sum_{n=0}^\infty \binom{\alpha}{n} z^n$, $\forall \abs{z}<1$, 其中
+    \[ \binom{\alpha}{n} = \frac{\alpha \pare{\alpha - 1}\cdots \pare{\alpha - n}}{n!},\quad \binom{\alpha}{0} = 1. \]
+\end{cenum}
+求Taylor展开的方法有如
+\begin{cenum}
+    \item 强行求$f^{\pare{n}}\pare{z_0}$;
+    \item 从已知函数如$\displaystyle \rec{1-z}$, $\ln\pare{1+z}$, $e^z$等配凑;
+    \item 从已知的幂级数出发, 作积分或求导;
+    \item 待定系数法.
+\end{cenum}
+
+% subsection taylor展开 (end)
+
+\subsection{辐角原理} % (fold)
+\label{sub:辐角原理}
+
+设$f\pare{z} = z^n$, 则$f$有$n$个零点. 而
+\[ \frac{f'\pare{z}}{f\pare{z}} = \frac{n}{z} \Rightarrow n = \rec{2\pi i} \int_{\abs{z} = r} \frac{\rd{z}}{z} = \rec{2\pi i} \int_\gamma \frac{f'\pare{z}}{f\pare{z}}\,\rd{z}. \]
+更一般地, $f\pare{z} = \pare{z-z_1}^{n_1}\pare{z-z_2}^{n_2}$, 则
+\[ \frac{f'\pare{z}}{f\pare{z}} = \frac{n_1}{z-z_1} + \frac{n_2}{z-z_2} \Rightarrow n = \rec{2\pi i} \int_{\abs{z} =r} \frac{\rd{z}}{z} = \rec{2\pi i }\int_\gamma  \frac{f'\pare{z}}{f\pare{z}}\,\rd{z}, \]
+
+其中$\gamma$围住$z_1$和$z_2$.
+\begin{figure}
+    \centering
+    \incfig{6cm}{CircleAroundZeros}
+    \caption{辐角原理证明路径}
+    \label{fig:辐角原理证明路径}
+\end{figure}
+\begin{theorem}
+    设$\func{f}{D}{\+bC}$是$\gamma$内的简单闭曲线, $\gamma$内部在$D$内而$f$在$\gamma$上无零点. 设$f$在$\gamma$内零点总个数为$N$, 则
+    \[ N = \rec{2\pi i} \int_\gamma \frac{f'\pare{z}}{f\pare{z}}\,\rd{z}. \]
+\end{theorem}
+\begin{proof}
+    设$z_1, \cdots, z_k$是$f$的零点, 分别为$n_1,\cdots, n_k$阶, $N = n_1 + \cdots + n_k$. $f$在$\gamma$内解析, 从而$f'\pare{z}/f\pare{z}$在除了$z_1,\cdots,z_k$外所有处解析. 对如\cref{fig:辐角原理证明路径}中的回路,
+    \[ \int_\gamma \frac{f'}{f} = \int_{\gamma_1} \frac{f'}{f} + \cdots + \int_{\gamma_2} \frac{f'}{f}. \]
+    考虑$\gamma_1$的回路, 取$\gamma_1$足够小, $f\pare{z}=\pare{z-z_1}^{m_1}g\pare{z}$, $g\pare{z}\neq 0$,
+    \begin{align*}
+        \int_{\gamma_1} \frac{f'\pare{z}}{f\pare{z}}\,\rd{z} &= \int_{\gamma_1} \frac{n_1\pare{z-z_1}^{n_1 - 1}g\pare{z} + \pare{z-z_1}^{n_1}g'\pare{z}}{\pare{z-z_1}^{n_1}g\pare{z}}\,\rd{z} \\
+        &= \int_{\gamma_1} \frac{n_1}{z-z_1}\,\rd{z} + \cancelto{0}{\int_{\gamma_1} \frac{g'\pare{z}}{g\pare{z}}\,\rd{z}} \\
+        &= 2\pi i n_1.
+    \end{align*}
+    故总的积分$\displaystyle \int_{\gamma} \frac{f'\pare{z}}{f\pare{z}}\,\rd{z} = 2\pi i\pare{n_1 + \cdots + n_k} = 2\pi i N$.
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ArgumentDelta}
+\end{figure}
+对于如图所示的路径, 定义
+\[ \Delta_P \Arg w = \text{$P$的起点到终点的辐角变化}. \]
+\begin{sample}
+    \begin{ex}
+        单位圆周逆时针的$\Delta_P \Arg w = 2\pi$.
+    \end{ex}
+    \begin{ex}
+        绕原点的回路顺时针的$\Delta_P \Arg w = -2\pi$.
+    \end{ex}
+    \begin{ex}
+        不环绕原点的回路$\Delta_P \Arg w = 0$.
+    \end{ex}
+\end{sample}
+\[ \rec{2\pi} \Delta_P \Arg w = \left\{\begin{aligned}
+    k, && \text{$P$逆时针绕$O$转$k$圈},\\
+    k, && \text{$P$未绕$O$转},\\
+    -k, && \text{$P$顺时针绕$O$转$k$圈}.
+\end{aligned}\right.. \]
+注意到这和$\displaystyle \rec{2\pi i} \int_\gamma \rec{w}\,\rd{w}$的性质相同. 故
+\[ \rec{2\pi i}\int_P \frac{\rd{w}}{w} = \rec{2\pi}\Delta_P \Arg w. \]
+令$w = f\pare{z}$, $P\pare{t} = f\pare{\gamma\pare{t}}$, 从而
+\[ \rec{2\pi i} = \int_\gamma \frac{f'\pare{z}}{f\pare{z}}\,\rd{z} = \rec{2\pi i} \int_\gamma \frac{\rd{f\pare{z}}}{f\pare{z}} = \rec{2\pi}\Delta_\gamma \Arg f\pare{z}. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{FunctionArgument}
+\end{figure}
+\begin{theorem}[辐角原理]
+    设$\func{f}{D}{\+bC}$解析, $\gamma$为简单闭曲线, $\gamma$内部在$D$内. $f\pare{z}\neq 0$, $z\in\gamma$. 则$f$在$\gamma$内部的零点总数等于$z$沿$\gamma$正向转一圈后, 其像$P\pare{t} = f\pare{\gamma\pare{t}}$绕$O$转的圈数.
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        $f\pare{z}$在$\abs{z} = 1$内有$n$个零点. 在$w = f\pare{z} = z^n$下, $\abs{z} = 1$的象绕着$O$转了$n$圈. 故有$n$个零点.
+    \end{ex}
+    \begin{ex}
+        设$f\pare{z} = z^5\pare{z^2+1}$, 则
+        \begin{align*}
+            \Delta_P \Arg f\pare{z} &= \Delta_\gamma \Arg z^5\pare{z^2+1} \\
+            &= 5 \Delta_\gamma \Arg z + \Delta_\gamma \pare{z+i} + \Delta_\gamma \pare{z-i} \\
+            &= 7\cdot 2\pi.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.104 6, 7 p.133 8(1)(4), 9(1)
+
+% paragraph 作业 (end)
+
+\begin{theorem}[Rouch\'e定理]
+    设$\func{f,g}{D}{\+bC}$解析, $\gamma$是$D$内的简单闭曲线, 其内部在$D$内. 如果对于任何$z\in\gamma$, 有$\abs{f\pare{z} - g\pare{z}} < \abs{f\pare{z}}$. 则$f$和$g$在$\gamma$内部的零点个数相同.
+\end{theorem}
+\begin{proof}
+    $\forall z\in\gamma$, $f\pare{z} \neq 0$且$g\pare{z} \neq 0$. 否则若$f\pare{z} = 0$, 则$\abs{g\pare{z}}<0$, 这是不可能的. 如果$g\pare{z} = 0$, 则$\abs{f\pare{z}} < \abs{f\pare{z}}$, 这也是不可能的. 两边除以$f\pare{z}$, 得到
+    \[ \abs{1 - \frac{g\pare{z}}{f\pare{z}}} < 1. \]
+    令$h\pare{z} = g\pare{z}/f\pare{z}$是$D\mapsto \+bC$的亚纯函数, 因为$\abs{1-h\pare{z}} < 1$. 从而$h\pare{z}$不会绕零转, 故
+    \[ \Delta_\gamma \Arg h\pare{z} = 0 \Rightarrow \Delta_\gamma \Arg f\pare{z} = \Delta_\gamma \Arg g\pare{z}. \qedhere \]
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        求$z^8 - 4z^5 + z^2 - 1 = 0$在$\abs{z} = 1$内部的零点个数.
+    \end{ex}
+    \begin{proof}[解]
+        $\abs{z^8 - 4z^5 + z^2 - 1 - \pare{-4z^5}} = \abs{z^8 + z^2 - 1} \le 3 < \abs{-4z^5}$在$\gamma$上成立. 取$f = -4z^5$, $g = z^8 - 4z^5 + z^2 - 1$, 从而$f$和$g$在$\abs{z} = 1$内零点个数相同. 故$f$和$g$在$\gamma$内部都有$5$个零点.
+    \end{proof}
+    \begin{remark}
+        将$4$改为$3$亦可.
+    \end{remark}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$z^4 - 6z + 3 = 0$在$1<\abs{z}<3$中的零点个数. 
+    \end{ex}
+    \begin{proof}[解]
+        对于$\abs{z} = 2$,
+        \[ \abs{z^4 - 6z + 3 - z^4} = \abs{-6z + 3} \le \abs{-6z} + 3 = 15 < 16 = \abs{z^4}. \]
+        从而$z^4 - 6z + 3 = 0$在$\abs{z} < 2$内有$4$个根.
+        \par
+        对于$\abs{z} = 1$,
+        \[ \abs{z^4 - 6z + 3 - \pare{-6z}} = \abs{z^4 + 3} \le 4 < 6 = \abs{-6z}. \]
+        故在$\abs{z}<1$内$z^4 - 6z + 3$有一根. 故在$1 < \abs{z} < 3$内有三个根.
+    \end{proof}
+    \begin{remark}
+        Rouch\'e定理已经表明$\abs{z}=1$上不会有根.
+    \end{remark}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        证明$e^z = az$在$\abs{z} < 1$内仅有一个实根, 其中$a > e$.
+    \end{ex}
+    \begin{proof}
+        直接由$\abs{e^z - az - \pare{-az}} < \abs{-az}$可得. 不等式之证明可通过
+        \[ \abs{e^z} = \abs{e^{\cos\theta}} \le e < a \]
+        得到. 于是$e^z = az$在$\abs{z} < 1$内的根与$-az$数目相同. 故有一个根. 为了证这个根是实数根, 设$z_0$是一个根, 则$\conj{z_0}$也是一个根, 故必定有$z_0 = \conj{z_0}$, 故是实数根.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $p\pare{z} = z^n + a_{n-1}z^{n-1} + \cdots + a_0$在$\+bC$上有根, $n\ge 1$.
+    \end{ex}
+    \begin{proof}
+        $\displaystyle \lim_{n\rightarrow \infty} \frac{p-z^n}{z^n} = 0$, 从而$\abs{z}\ge R$时
+        \[ \abs{\frac{p\pare{z} - z^n}{z^n}} < 1 \Rightarrow \abs{p\pare{z} - z^n} < \abs{z^n}. \]
+        由Rouch\'e定理, $p\pare{z}$在$z<R$内有$n$个根.
+    \end{proof}
+    \begin{proof}[用辐角原理证明]
+        \begin{align*}
+            \Delta_{\abs{z} = R} \Arg p\pare{z} &= \Delta_{\abs{z} = R} \Arg \pare{z^n + a_{n-1}z^{n-1}+\cdots + a_0} \\
+            &= \Delta_{\abs{z} = R} \Arg z^n \pare{1 + \frac{a_{n-1}}{z}+\cdots + \frac{a_0}{z^n}} \\
+            &= \Delta_{\abs{z} = R} \Arg z^n + \Delta_{\abs{z} = R} \Arg \pare{1 + \frac{a_{n-1}}{z}+\cdots + \frac{a_0}{z^n}}.
+        \end{align*}
+        对于充分大的$R$, $\displaystyle \abs{\frac{a_{n-1}}{z}+\cdots + \frac{a_0}{z^n}} < 1$, 从而第二个$\Delta_{\abs{z}=R}\Arg$为零. 此时$\Delta_{\abs{z} = R} \Arg p\pare{z} = n$.
+    \end{proof}
+\end{sample}
+\begin{ex}
+    对于任何$f\pare{z} = \pare{z-z_0}^n$, $w$的原象总有$n$个, 即$z_0 + \sqrt[n]{w}$.
+\end{ex}
+\begin{figure}
+    \centering
+    \incfig{12cm}{InverseFunc}
+\end{figure}
+\begin{theorem}
+    \label{thm:多重解}
+    设$\func{f}{D}{\+bC}$解析, $z_0 \in D$, $w = f\pare{z_0}$. 设$z_0$为$f\pare{z} - w_0$的$m$阶零点. 对于充分小的$\rho > 0$, 存在$\delta>0$使得$\forall a\in B_\delta\pare{w_0}$有$f\pare{z} - a$在$B_\rho\pare{z_0}$内有$m$个根.
+\end{theorem}
+\begin{proof}
+    取$\rho > 0$使得$f\pare{z} - w_0$在$B_\rho\pare{z_0}$内没有其它零点(这由零点的孤立性达到). 设$P$为$\abs{z-z_0} = \rho$的像, 则由假设, $w_0 \notin P$. 设$\delta = \min_{\abs{z-z_0} = \rho} \abs{f\pare{z} - w_0} > 0$, 则对于任何$a\in B_\delta\pare{w_0}$,
+    \[ \abs{f\pare{z} - w_0 - \pare{f\pare{z} - a}} = \abs{w_0 - a} < \delta \le \abs{f\pare{z} - w_0}. \]
+    于是由Rouch\'e定理, $f\pare{z} - a$在$\abs{z-z_0}<\rho$内有$m$个根.
+\end{proof}
+\begin{corollary}[开映射定理]
+    设$\func{D}{\+bC}$是非常值的解析函数, 则$f$将开集映为开集.
+\end{corollary}
+\begin{proof}
+    设$U\subset D$为开集, 证明$f\pare{U}$为开集. $\forall w_0 \in f\pare{U}$, $\exists \delta > 0$使$B_\delta\pare{w_0} \subset f\pare{U}$, $\exists z_0 \in U$使得$f\pare{z_0} = w_0$. 取$\rho$充分小, 且$B_\rho\pare{z_0} = U$. 取$\delta$如前一定理, 则$B_\delta\pare{w_0} \subset f\pare{B_\rho\pare{z_0}}\subset f\pare{U}$.
+\end{proof}
+\begin{remark}
+    $\func{f}{\+bR^n}{\+bR^m}$是连续的当且仅当$\+bR^m$中任何开集的原象仍为开集. 若$\func{f}{X}{Y}$为双射, 则$\func{f}{X}{Y}$连续当且仅当$f^{-1}$为开映射.
+\end{remark}
+\begin{ex}
+    对于解析的$f\pare{z}$, $\abs{f\pare{z}}$不能在$D$内取最值. 因为任何$w_0$附近的点都在值域内, 故总有模长更大者.
+\end{ex}
+\begin{remark}
+    若仅有$\func{f}{D}{\+bC}$连续则不能断定$f\pare{z}$为开映射. 例如$f\pare{z} = \abs{z}$.
+\end{remark}
+\begin{corollary}
+    若$\func{f}{D}{\+bC}$单叶解析, 则$f'\pare{z}\neq 0$, $\forall f'\pare{z} \neq 0$.
+\end{corollary}
+\begin{proof}
+    若$f'\pare{z_0} = 0$, 则$w_0 = f\pare{z_0}$有$m\ge 1$重根, $m\ge 2$.取$\rho > 0$使得$f'\pare{z}\neq 0$, $\forall z\in B_\rho\pare{z_0}$, 且设有$\delta$满足\cref{thm:多重解}, 即$\forall a\in B_\delta\pare{w_0}$, $f\pare{z} - w_0$在$B_\rho\pare{z_0}$内有$m$个零点. 取其中两个为$z_1$和$z_2$, 则$f'\pare{z_1} \neq 0$, $f'\pare{z_2}\neq 0$. 这表明${z_1}$和${z_2}$是两个一阶零点, 故不能相等. 因此$z_1\neq z_2$, 但$f\pare{z_1} = f\pare{z_2} = a$, 与$f$单叶矛盾.
+\end{proof}
+\begin{remark}
+    反之不能成立. $e^z\neq 0, \forall z\in \+bC$, 但$e^z$不是单叶的.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        $f\pare{z} = z^3$在$z=0$处导数为零, 并且构成$\+bC$的三重覆盖.
+    \end{ex}
+\end{sample}
+\begin{corollary}
+    设$\func{f}{D}{\+bC}$解析, $z_0 \in D$, $f'\pare{z_0}\neq 0$, 则存在$z_0$的开邻域$U$使得$\func{\restr{f}{U}}{U}{\+bC}$为单叶.
+\end{corollary}
+\begin{proof}
+    $f'\pare{z_0}\neq 0$, 从而$z_0$是$f\pare{z} - w_0$的一阶零点. 于是$\exists\, \rho > 0$, $\delta > 0$, 使得$\forall a\in B_\delta\pare{w_0}$, $f\pare{z} - a$在$B_\rho\pare{z_0}$内仅有一个零点. 由$f$连续, $\exists\, \rho_1 < \rho$使得$f\pare{B_\rho{z_0}}\subset B_\delta\pare{w_0}$, 故$f$在$B_{\rho_1}\pare{z_0}$上单叶.
+\end{proof}
+\begin{remark}
+    设$\func{\+vf}{\+bR^n}{\+bR^m}$, 且任意$\+vx_0\in\+bR^n$, 有$\abs{D\+vf\pare{\+vx_0}}\neq 0$. 则$\exists\, \+vx$的邻域$U\subset \+bR^n$和$\+vf\pare{\+vx_0}$的邻域$V$使得$\func{\restr{\+vf}{U}}{U}{V}$为同胚.
+\end{remark}
+\begin{remark}
+    对于一个解析函数$f = u+iv$, 有$\displaystyle \abs{f'\pare{z}}^2 = \begin{vmatrix}
+        u_x & u_y \\
+        v_x & v_y
+    \end{vmatrix}$. 由是得到这一情形的隐函数定理.
+\end{remark}
+\begin{corollary}
+    $\func{f}{D}{\+bC}$单叶, $\func{f^{-1}}{f\pare{D}}{D}$可定义, 则$\func{f^{-1}}{f\pare{D}}{D}$为解析函数.
+\end{corollary}
+\begin{proof}
+    由开映射定理, $f^{-1}$连续. 下面证明$f^{-1}$解析. 对于$w = f\pare{z}$, $w_0 = f\pare{z_0}$,
+    \begin{align*}
+        \lim_{w\rightarrow w_0} \frac{f^{-1}\pare{w} - f^{-1}\pare{w_0}}{w-w_0} &= \lim_{z\rightarrow z_0} \frac{z-z_0}{f\pare{z} - f\pare{z_0}} = \rec{f'\pare{z_0}}.
+    \end{align*}
+    故$f^{-1}$是解析的.
+\end{proof}
+\begin{remark}
+    由开映射定理, $f\pare{D}$是区域.
+\end{remark}
+\begin{theorem}
+    $\func{f}{D}{\+bC}$是非常值的解析映射, $z_0 \in D$, $w_0 = f\pare{z_0}$, $z_0$是$f\pare{z} - w_0$的$m$阶零点. 则存在$z_0$的邻区$V\subset D$以及一个解析映射$\func{\varphi}{V}{\+bC}$使得
+    \begin{cenum}
+        \item $f\pare{z} = w_0 + \pare{\varphi\pare{z}}^m$, $\forall z\in V$;
+        \item $\varphi'$在$V$内无零点且$\varphi$是$V$到$B_r\pare{w_0}$的可逆解析双射; 从而$\func{f}{V\backslash \curb{z_0}}{B_{r^m}\pare{w_0}\backslash\curb{w_0}}$上为$m$到$1$的映射. 且$\forall w_0 \in f\pare{D}$为$f\pare{D}$的内点, 即$f$为开映射.
+    \end{cenum}
+\end{theorem}
+\begin{proof}
+    存在$z_0$的邻域$U$使得$f\pare{z_0} - w_0 = \pare{z-z_0}^m g\pare{z}$且$g\pare{z}$在$U$上解析且$g\pare{z} \neq 0$恒成立. 下面求$\varphi$使得$\varphi^m\pare{z} = g\pare{z}$.
+    \par
+    由于$g\pare{z}\neq 0$, 故$g'\pare{z}/g\pare{z}$也是$U$上的解析函数. 故$\func{h}{U}{\+bC}$解析且$g'\pare{z}/g\pare{z} = h'\pare{z}$. 从而$\pare{ge^{-h}}' = e^{-h}\pare{g'-gh'} = 0$. 故$g=ce^{h}$. 不妨设$g = e^h$. 令$\varphi\pare{z} = e^{h\pare{z}/m}$, 稍微缩小$U$即可,
+\end{proof}
+
+% subsection 辐角原理 (end)
+
+% section 解析函数的级数展开 (end)
+
+\end{document}

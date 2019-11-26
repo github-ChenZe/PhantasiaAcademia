@@ -1,0 +1,306 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{保形映射} % (fold)
+\label{sec:保形映射}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{UtoV}
+\end{figure}
+\begin{theorem}[Riemann映射定理]
+    设$U$和$V$为单连通区域, 且$\# \partial U \ge 2$, $\# \partial V \ge 2$, 则存在解析的双射$\func{f}{U}{V}$.
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig{12cm}{Similar}
+\end{figure}
+若$z_0 \in D$, $f'\pare{z_0}\neq 0$, 则$f$在$z_0$处保形. 保形映射要求
+\[ \lim \frac{A'B'}{AB} = \lim \frac{A'C'}{AC}, \]
+而这正是两个方向导数, 必定相等.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{12cm}{CurveToCurve}
+\end{figure}
+
+除此之外, 保形映射还要求$\alpha\mapsto \alpha$. 设$\gamma$由参数$t$表征, $\gamma'\pare{t}$即为该点的切线方向. $\sigma'\pare{t_0} = f'\pare{\gamma\pare{t_0}} \gamma'\pare{t_0} = f'\pare{z_0} \gamma'\pare{t_0}$. 从而
+\begin{align*}
+    \Arg \sigma'\pare{t_0} &= \Arg f'\pare{z_0} + \Arg \gamma'\pare{t_0} \\
+    \Rightarrow \Arg \sigma'\pare{t_0} - \Arg \gamma'\pare{t_0} &= \Arg f'\pare{t_0} \\
+    \Rightarrow \Arg \sigma'_1\pare{t_0} - \Arg\sigma'_2\pare{t_0} &= \Arg\gamma'_1\pare{t_0} - \Arg \gamma'_1\pare{t_0}.
+\end{align*}
+从而两曲线的夹角得到保持, 且方向也保持.
+
+\begin{remark}
+    回顾保形映射的几何性质, 有
+    \begin{cenum}
+        \item $f$将开集映为开集;
+        \item $\func{f}{D}{\+bC}$单叶解析, 则$\forall z\in D$, $f'\pare{z}\neq 0$, 从而$\forall z\in D$有$f$在$z_0$处保形. 反之若$f$在$z_0$处保形, 由$f'\pare{z_0}\neq 0$知$f$单叶;
+        \item 若$\func{f}{D}{G}$为单叶满射, 则$\func{f^{-1}}{G}{D}$解析.
+    \end{cenum}
+\end{remark}
+\begin{proposition}
+    若$\func{f}{D}{G}$解析, $\gamma$为$D$内一简单闭曲线, 设$\Gamma = f\comp \gamma$是$\gamma$在$f$下的像, 且若$f$将$\gamma$一一映为$\Gamma$, 则$\func{f}{U}{V}$为双射, 且$\Gamma$的正向与$\gamma$一致, 其中$U$和$V$分别为$\gamma$和$\Gamma$的内部.
+\end{proposition}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{BijectOnCurve}
+\end{figure}
+\begin{proof}
+    「$\forall w_0 \in V$, 存在唯一的$z_0 \in U$满足$f\pare{z_0} = w_0$」等价于「$f\pare{z} - w_0$在$U$内仅有一个零点」. 由辐角原理, $f\pare{z} - w_0$在$U$内零点的总个数
+    \begin{align*}
+        N &= \rec{2\pi}\Delta_\gamma \Arg\pare{f\pare{z} - w_0} \\
+        &\xlongequal{w=f\pare{z}} \rec{2\pi} \Delta_\Gamma \Arg\pare{w-w_0} \\
+        &= \pm 1.
+    \end{align*}
+    但$N$表示零点个数, 从而$N = +1$. 若$w_0\notin V\cup \Gamma$, 则$f\pare{z}  - w_0$在$\omega$内零点个数
+    \[ N = \rec{2\pi} \Delta_\Gamma \Arg\pare{w-w_0} = 0. \]
+    从而$w_0$在$\Gamma$外, 故不存在$z_0\in U$使$f\pare{z_0}=w_0$. 若$w_0\in \Gamma$, 则由开映射定理, $\forall z_0\in U$, $f\pare{z_0}\neq w_0$.
+\end{proof}
+\begin{theorem}[Riemann映射定理]
+    设$U\subset \+bC$为单连通域, 边界多于一个点, 则存在解析双射$\func{f}{U}{B_1\pare{0}=\setcond{z\in\+bC}{\abs{z}<1}}$. 如果取定$z_0 \in U$, $w_0 \in B_1\pare{0}$, 并且要求$f\pare{z_0} = w_0$, $\arg f'\pare{z_0} = \alpha_0$, 则$f$被唯一确定.
+\end{theorem}
+\begin{remark}
+    由于圆盘$B_1\pare{0}$的边界多于一点并且构成单连通区域, 故$U$要求边界点数$\ge 2$且单连通.
+\end{remark}
+\begin{remark}
+    如果$U$并非单连通, 是否总能一一映射到另一单连通区域? 并非如此. 这样的双射一般不存在. 如果存在解析的双射$f$将$r_1<\abs{z}<r_2$映射为$R_1<\abs{w}<R_2$, 当且仅当
+    \[ \frac{r_1}{r_2} = \frac{R_1}{R_2}. \]
+\end{remark}
+设$U$和$V$为两个区域(不一定单连通), 如果存在双射$\func{f}{U}{V}$, 则谓$U$和$V$为解析等价的. 记为$U\sim V$. 则Riemann映射定理表明$U\sim B_1\pare{0}$, 其中$U$为边界点数大于$1$的单连通区域. 容易验证$\sim$为等价关系.
+\begin{remark}
+    $\+bC$即为边界为单点集的一个例子.
+\end{remark}
+\begin{theorem}[Poincar\'e-Koebe定理]
+    任意一个单连通的Riemann曲面必定解析等价于以下三者之一:
+    \begin{cenum}
+        \item $B_1\pare{0,1}$(边界点数$\ge 2$时);
+        \item $\+bC$(边界点数$=1$时);
+        \item $\+bC_{\infty} = S^2$(边界点数为零时).
+    \end{cenum}
+\end{theorem}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.183 1(2)(3), 2(2)
+
+% paragraph 作业 (end)
+
+\subsection{分式线性变换} % (fold)
+\label{sub:分式线性变换}
+
+\begin{definition}
+    记$\displaystyle M\pare{z} = \frac{az+b}{cz+d}$, 其中$a,b,c,d\in\+bC$而$ad-bc\neq 0$, 则谓$M\pare{z}$分式线性变换(M\"obius变换).
+\end{definition}
+\begin{remark}
+    若$ad=bc$, 则
+    \begin{cenum}
+        \item $d=0$, $\displaystyle M\pare{z} = \frac{az+b}{cz+d} = \frac{az+b}{cz} \xlongequal{b=0} \frac{a}{c}$.
+        \item $d\neq 0$, $\displaystyle M\pare{z} = \frac{az+b}{cz+d} = \frac{adz+bd}{d\pare{cz+d}} = \frac{bcz+bd}{d\pare{cz+d}} = \frac{b}{d}$.
+    \end{cenum}
+    两种情况下$M\pare{z}$都退化为常值函数.
+\end{remark}
+$M\pare{z}$在$\displaystyle z = -\frac{d}{c}$处有极点,
+\begin{cenum}
+    \item $c=0$, $\displaystyle M\pare{z} = \frac{a}{d}z + \frac{b}{d} = Az+B$, 这是一个整函数.
+    \item $c\neq 0$, 则$\displaystyle \func{M}{\+bC\backslash \curb{-\frac{d}{c}}}{\+bC}$. 且对于$\displaystyle d\neq -\frac{d}{c}$, $\displaystyle M'\pare{z} = \frac{ad-bc}{\pare{cz+d}^2} \neq 0$. 特别地, $M$在定义域内解析, 故导数处处非零. 且
+    \[ -\frac{d}{c}\mapsto \infty,\quad \infty \mapsto \frac{a}{c}. \]
+\end{cenum}
+逆映射
+\[ z = M^{-1}\pare{w} = \frac{-dw + b}{cw - a},\quad M\pare{z} = \frac{az+b}{cz+d}. \]
+故$M\pare{z}$有逆, $M^{-1}\comp M\pare{z} = z$. 令$\func{I}{\+bC}{\+bC}$, $I\pare{z} = z$, 则
+\begin{cenum}
+    \item $I\comp M = M = M \comp I$.
+    \item 设$\displaystyle M_1\pare{z} = \frac{a_1 z + b_1}{c_1 z + d_1}$, $\displaystyle M_2\pare{z} = \frac{a_2 z + b_2}{c_2 z + d_2}$, 则$\displaystyle M_2\comp M_1\pare{z} = \frac{az+b}{cz+d}$仍为分式线性变换,
+    \[ \begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix} = \begin{pmatrix}
+        a_2 & b_2 \\
+        c_2 & d_2
+    \end{pmatrix} \begin{pmatrix}
+        a_1 & b_1 \\
+        c_1 & d_1
+    \end{pmatrix}. \]
+\end{cenum}
+\begin{theorem}
+    记$\displaystyle \+cM = \curb{M\pare{z} = \frac{az+b}{cz+d}}$, 其中$ad-bc\neq 0$, $a,b,c,d\in \+bC$, 则$\+cM$构成群.
+    \begin{cenum}
+        \item $M_1\comp M_2 \in \+cM$, $\forall M_1,M_2\in \+cM$.
+        \item $M\comp I = I\comp M = M$, $\forall M\in \+cM$.
+        \item $M_3 \comp \pare{M_2\comp M_1} = \pare{M_3 \comp M_2} \comp M_1$.
+        \item $\forall M\in \+cM$, $\exists M^{-1}\in \+cM$使得$M\comp M^{-1} = M^{-1}\comp M = I$.
+    \end{cenum}
+\end{theorem}
+\begin{remark}
+    群谓存在「封闭, 可逆, 可结合, 有单位元」的运算的集合.
+\end{remark}
+\begin{ex}
+    记$GL_2 = \displaystyle \setcond{\begin{pmatrix}
+        a & b \\
+        c & d
+    \end{pmatrix}}{a,b,c,d \in \+bC, \begin{vmatrix}
+        a & b \\
+        c & d
+    \end{vmatrix} \neq 0}$, 则$GL_2$与分式线性变换之间有同态.
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.184 5, 6(1), 7, 8
+
+% paragraph 作业 (end)
+
+\begin{theorem}
+    设$\func{M}{\+bC_\infty}{\+bC_\infty}$为分式线性变换, 则$M$将圆周映射为圆周(直线视为过$\infty$处的圆).
+\end{theorem}
+\begin{proof}
+    $\abs{z-a} = r$经过$\displaystyle w=M\pare{z} = \frac{az+b}{cz+d}$后仍然满足$\abs{w-w_0} = R$.
+\end{proof}
+\begin{proof}[第二个证明]
+    任何一个分式线性变换都可以表示为
+    \[ T\pare{z} = z+b,\quad R\pare{z} = e^{i\theta}z,\quad S\pare{z} = rz,\quad H\pare{z} = \rec{z} \]
+    之间的复合.
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{Orientation}
+    \caption{分式线性映射的定向}
+\end{figure}
+\begin{remark}
+    设$\func{M}{\+bC_\infty}{\+bC_\infty}$为分式线性变换, $M$将$\gamma$映为$\Gamma$, 将$\gamma$上的$z_1,z_2$和$z_3$分别映为$w_1, w_2$和$w_3$, 则沿着$z_1, z_2, z_3$方向的左边映射为$w_1,w_2,w_3$的左边.
+\end{remark}
+取定圆周$\gamma$, 欲求分式线性变换$M\pare{z}$将$\gamma$映为$\Gamma$只需在圆周上取三点后列出线性方程组,
+\[ \begin{cases}
+    M\pare{z_1} &= w_1, \\
+    M\pare{z_2} &= w_2, \\
+    M\pare{z_3} &= w_3.
+\end{cases}\quad M\pare{z} = \frac{az+b}{cz+d}. \]
+\begin{definition}
+    设$z_1,z_2,z_3,z_4\in \+bC$且至少有三点不重合, 记
+    \[ \pare{z_1,z_2,z_3,z_4} = \frac{z_1-z_3}{z_1-z_4} \bigg/ \frac{z_2-z_3}{z_2-z_4} \]
+    为交比.
+\end{definition}
+\begin{remark}
+    若有任何一点为$\infty$, 则
+    \begin{align*}
+        \pare{\infty, z_2,z_3,z_4} &= \frac{z_2-z_4}{z_2-z_3}, \\
+        \pare{z_1,\infty, z_3,z_4} &= \frac{z_1-z_3}{z_1-z_4}, \\
+        \pare{z_1,z_2,\infty, z_4} &= \frac{z_2-z_4}{z_1-z_4}, \\
+        \pare{z_1,z_2,z_3, \infty} &= \frac{z_1-z_3}{z_2-z_3}.
+    \end{align*}
+\end{remark}
+如果取$z_1$为变量$z$, 则
+\[ \pare{z, z_2, z_3, z_4} = \frac{z-z_3}{z-z_4}\bigg/ \frac{z_2-z_3}{z_2-z_4}\in \+cM. \]
+在这一变换$M_1$下,
+\[ z_2 \mapsto 1,\quad z_3\mapsto 0,\quad z_4\mapsto \infty. \]
+现在假设$M_2\pare{w}=\pare{w,w_2,w_3,w_4}$, 则
+\[ w_2 \mapsto 1,\quad w_3\mapsto 0,\quad w_4\mapsto \infty. \]
+因此$M_2^{-1}\comp M_1$是将$z_2,z_3,z_4$分别映为$w_2,w_3,w_4$的分式线性变换.
+\begin{theorem}
+    在由$\pare{z,z_2,z_3,z_4} = \pare{w,w_2,w_3,w_4}$所确定的分式线性变换$M\pare{z} = w$下,
+    \[ z_2 \mapsto w_2, \quad z_3\mapsto w_3,\quad z_4\mapsto w_4. \]
+\end{theorem}
+\begin{remark}
+    这一定理中的$M$是唯一的. 若有$M_1$和$M_2$同时满足条件, 则在$M_2^{-1}\comp M_1$下$z_2,z_3,z_4$是不动点. 现在只需证明$M_2^{-1}\comp M_1$是恒等映射.
+\end{remark}
+\begin{lemma}
+    设$M\pare{z} = \displaystyle \frac{az+b}{cz+d}$, 则要么$M=I$, 要么$M$至多只有两个不动点.
+\end{lemma}
+\begin{proof}
+    $M\neq I$, 则
+    \[ M\pare{z} = z \Leftrightarrow \frac{az+b}{cz+d} \Leftrightarrow cz^2 + dz-az+b = 0. \]
+    故至多仅有两个根.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        求$M\pare{z}$将$D = \curb{\abs{z}>1, \abs{z-1}<2}$映射为$0<\Re w<1$.
+    \end{ex}
+    \begin{proof}
+        所求分式线性变换必定满足$-1\mapsto \infty$, 再选取满足$i\mapsto i$, $1\mapsto 0$者, 从而
+        \[ \pare{z, -1, i, 0} = \pare{w,\infty, i, 0} \]
+        从而$w = M_1\pare{z} = \displaystyle \frac{z-1}{z+1}$. 可以发现$M_1\pare{z}$将$D$映射为$0 < \Re w < 1/2$, 故$M\pare{z} = 2M_1\pare{z}$为所求.
+    \end{proof}
+    \begin{remark}
+        可以选择其它的三点组合, 例如
+        \[ -1\mapsto\infty,\quad i\mapsto 0,\quad 1\mapsto i, \]
+        惟定向需要注意.
+    \end{remark}
+\end{sample}
+\begin{corollary}
+    $w=M\pare{z}$为分式线性变换, 并且要求$z_1\mapsto w_1, z_2\mapsto w_2$, 则此时的分式线性变换为
+    \[ \frac{w-w_1}{w-w_2} = k \frac{z-z_1}{z-z_2},\quad k\in \+bC. \]
+    特别地, 若将$z_1$和$z_2$分别映射为$0$和$\infty$, 则
+    \[ w = k \frac{z-z_1}{z-z_2}. \]
+\end{corollary}
+
+现考虑将圆盘中某点$z_0$映射为像圆盘内的$w_0$.
+\begin{definition}
+    若$l$为连接$z_0$和$z^*_0$的线段的的中垂线, 则谓$z_0$和$z^*_0$关于$l$对称.
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{SymmCircle}
+    \caption{关于圆周的对称点}
+\end{figure}
+\begin{remark}
+    设$z_0$在$\gamma$内, 取$z_0^*$在从$a$到$z_0$到射线上, 满足
+    \[ \abs{z-a}\cdot \abs{z_0^* - a} = R^2, \]
+    则谓$z_0^*$和$z_0$关于$\gamma = \setcond{z}{\abs{z-a} = R}$对称.
+\end{remark}
+关于圆周的对称点满足$\arg\pare{z_0 - a} = \arg{z_0^* - a} = \theta$, 从而
+\begin{align*}
+    z_0 - a &= \abs{z_0 - a}e^{i\theta},\quad z_0^* - a = \abs{z_0^* - a}e^{i\theta}, \\
+    z_0^* - a &= \frac{R^2}{\abs{z_0 - a}}e^{i\theta} = \frac{R^2}{\abs{z_0 - a}e^{-i\theta}} = \frac{R^2}{\conj{z}_0 - \conj{a}}. \\
+    \Rightarrow z_0^* &= a + \frac{R^2}{\conj{z}_0 - \conj{a}}.
+\end{align*}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{ConjAlongCirc}
+\end{figure}
+\begin{lemma}
+    $z_0$和$z_0^*$关于圆周$\gamma$对称当且仅当过$z_0$, $z_0^*$的任何一个圆周都与$\gamma$正交.
+\end{lemma}
+\begin{proof}
+    从$a$作$C$的切线, 切点为$z'$, 则
+    \[ \abs{z'-a}^2 = \abs{z_0 - a}\abs{z_0^* - a} = R^2. \]
+    从而$\abs{z'-a} = R$, $z'\in \gamma$, 故$\gamma$与$C$正交.
+\end{proof}
+\begin{theorem}
+    设$w=M\pare{z}$将圆周$\gamma$映为圆周$\Gamma$, 则任何关于$\gamma$对称的两点的像都关于$\Gamma$对称. 
+\end{theorem}
+\begin{proof}
+    证明过$z_0^*$和$z_0$的圆都和$\Gamma$正交即可. 注意到任何经过$z_0$和$z_0^*$的圆$C$都是和$\gamma$正交的, 根据保形性, 像的圆也是正交的.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        求$M$使$\curb{\Im z>0}\mapsto B\pare{0,1}$且$a\mapsto 0$.
+    \end{ex}
+    \begin{solution}
+        由$a\mapsto 0$, $\conj{a}\mapsto \infty$, 从而
+        \[ w = \lambda \frac{z-a}{z-\conj{a}}. \]
+        又要求$z\in\+bR$时$\abs{w} = 1$, 则
+        \[ 1 = \abs{w} = \abs{\lambda \frac{z-a}{z-\conj{a}}} = \abs{\lambda}. \]
+        故$\displaystyle w = M\pare{z} = \lambda \frac{z-a}{z-\conj{a}}$, 其中$\abs{\lambda} = 1$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$M$将单位圆映射为单位圆, 且$a\mapsto 0$.
+    \end{ex}
+    \begin{solution}
+        $a\mapsto 0$, $a^* \mapsto \infty$.
+    \end{solution}
+\end{sample}
+
+% subsection 分式线性变换 (end)
+
+% section 保形映射 (end)
+
+\end{document}

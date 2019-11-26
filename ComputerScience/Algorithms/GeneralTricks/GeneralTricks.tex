@@ -1,0 +1,150 @@
+\documentclass{ctexart}
+
+\usepackage[singleton, margintoc, nova]{van-de-la-sehen}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue!70!black
+}
+\def\externallinksymbol{\raisebox{-.2\height}{\includegraphics[width=.9em]{externallink.eps}}}
+\let\oldhref\href
+\def\href{\externallinksymbol\oldhref}
+
+\newtcbox{\codephrase}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
+  right=0mm,left=0.15mm,arc=1pt,boxsep=2pt,fontupper=\ttfamily,
+  colframe=gray,coltext=gray!25!black,colback=gray!10!white
+}
+
+\robustify{\codephrase}
+
+\begin{document}
+
+\showtitle{算法}
+
+\section{一般算法} % (fold)
+\label{sec:一般算法}
+
+\subsection{位运算} % (fold)
+\label{sub:位运算}
+
+\subsubsection{二进制序列中1的个数} % (fold)
+\label{ssub:二进制序列中1的个数}
+
+\paragraph{Brian Kernighan算法} % (fold)
+\label{par:brian_kernighan算法}
+
+参考\href{https://www.geeksforgeeks.org/count-set-bits-in-an-integer/}{统计二进制序列中1的个数}, 其正确性考虑到如下事实: \emph{\codephrase{n-1}将\codephrase{n}的最低位1置零后在其后填充1, 因此\codephrase{n\&=n-1}恰好减少\codephrase{n}的二进制表示中的一个1.} 这一算法之时间复杂度为$O\pare{n_1}$, 其中$n_1$为1的个数.
+\begin{cpplst}
+int count_ones(unsigned int n)
+{
+    return n ? count_ones(n & (n - 1)) : 0;
+}
+\end{cpplst}
+
+% paragraph brian_kernighan算法 (end)
+
+\paragraph{1计数的分治算法} % (fold)
+\label{par:1计数的分治算法}
+
+注意如下事实: \emph{\codephrase{n}中1的个数, 等于其前半部分1的个数加上后半部分1的个数.} 惟以递归方法实现时, 复杂度$\displaystyle T\pare{n} = 2T\pare{\frac{n}{2}} + C$为线性复杂度, 仍有改进之余地.
+\par
+如果\codephrase{count}的前半部分表示和后半部分分别表示\codephrase{n}的前半部分和后半部分的1的个数, 而\codephrase{mask=0...01...1}与\codephrase{n}等长且长度为\codephrase{2l}, 则\\\centerline{\codephrase{((i >> l) \& mask) + (i \& mask)}}\\可得\codephrase{n}中1的个数. 自底向上实现即可. 其时间复杂度为$O\pare{\log\log n}$.
+\begin{cpplst}
+#define MASK(space) ((unsigned int) -1 / ((1 << (space)) + 1))
+// MASK(1) = 0b01010101010101010101010101010101
+// MASK(2) = 0b00110011001100110011001100110011
+
+#define MERGE(n, space) \
+    ((n & MASK(space)) + ((n >> space) & MASK(space)))
+
+int count_ones(unsigned int n)
+{
+    n = MERGE(n, 1);
+    n = MERGE(n, 2);
+    n = MERGE(n, 4);
+    n = MERGE(n, 8);
+    n = MERGE(n, 16);
+    return n;
+}
+\end{cpplst}
+
+% paragraph 1计数的分治算法 (end)
+
+% subsubsection 二进制序列中1的个数 (end)
+
+\subsubsection{唯一未重复} % (fold)
+\label{ssub:唯一未重复}
+
+设序列中除一个仅出现一次的元素外其他元素都出现两次, 求出这个仅出现一次的元素. 考虑到\codephrase{x\^{}y}是交换且结合且自反的, 知序列全体元素之\codephrase{xor}的结果为所求.
+
+\begin{cpplst}
+int find1_non_dup(int* arr, int n)
+{
+    return n ? *arr ^ find1_non_dup(arr + 1, n - 1) : 0;
+}
+\end{cpplst}
+
+% subsubsection 唯一未重复 (end)
+
+\subsubsection{仅有两个未重复} % (fold)
+\label{ssub:仅有两个未重复}
+
+设序列中除两个出现一次的元素外其他元素都出现两次, 求出这两个仅出现一次的元素. 设这两个仅出现一次元素为\codephrase{x}和\codephrase{y}, 则\codephrase{find1\_non\_dup}之最终结果为\codephrase{z=x\^{}y}. \codephrase{z}非零, 故存在最低位1,\\
+%\centerline{\codephrase{u = ((z\^{}(z-1)) >> 1) + 1}}
+\centerline{\codephrase{u = z \& (z \^{} (z - 1))}}
+将这一位提取出来. 对序列中与\codephrase{u}有共同非零位之全体取\codephrase{xor}可得其中一者, 对无共同非零位者得另一者.
+
+\begin{cpplst}
+void find2_non_dup(int* arr, int n, int* non_dup_pair)
+{
+    non_dup_pair[0] = non_dup_pair[1] = 0;
+    int pair_xor = find1_non_dup(arr, n);
+    int xor_lowest = pair_xor & (pair_xor ^ (pair_xor - 1));
+    for (int i = 0; i < n; i++)
+        non_dup_pair[!(arr[i] & xor_lowest)] ^= arr[i];
+}
+\end{cpplst}
+
+% subsubsection 仅有两个未重复 (end)
+
+% subsection 位运算 (end)
+
+\subsection{序列} % (fold)
+\label{sub:序列}
+
+\subsubsection{最长上升子序列} % (fold)
+\label{ssub:最长上升子序列}
+
+\paragraph{单纯求出长度} % (fold)
+\label{par:单纯求出长度}
+
+设有序列$a_0,\cdots, a_{N-1}$, 则如下命题成立: \emph{如果$a_{n_0}, \cdots, a_{n_i}$是以$a_{n_i}$结尾的最长上升子序列, 则$a_{n_0}, \cdots, a_{n_{i-1}}$是以$a_{n_{i-1}}$结尾的最长上升子序列.} 如果数组$l_n$标记以$a_n$结尾的最长上升子序列, 则$l_n$中的最大值就最长上升子序列的长度.
+
+\begin{cpplst}
+int length_of_longest_ascending_subsequence(int* arr, int n)
+{
+    int len_partial[n];
+    for (int i = 0; i < n; i++)
+        len_partial[i] = 1;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            if (arr[j] > arr[i]) continue;
+            len_partial[i] = max(len_partial[i],
+                len_partial[j] + 1);
+        }
+    }
+    return max_in(len_partial, n);
+}
+\end{cpplst}
+
+% paragraph 单纯求出长度 (end)
+
+% subsubsection 最长上升子序列 (end)
+
+% subsection 序列 (end)
+
+% section 一般算法 (end)
+
+\end{document}

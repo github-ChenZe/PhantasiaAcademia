@@ -1,0 +1,17 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{align*}
+    &\phantom{\Rightarrow} \int \frac{\rd{x}}{x^6\sqrt{1+x^2}} \\
+    u = \rec{x} \rightarrow \rd{x} = -\frac{\rd{u}}{u^2} &\Rightarrow -\int \frac{u^6\,\rd{u}}{u^2\sqrt{1+1/u^2}} \\
+    &\Rightarrow -\int \frac{u^5\,\rd{u}}{\sqrt{1+u^2}} \\
+    v = \sqrt{1+u^2} &\Rightarrow -\int \frac{u^4 \cdot u\,\rd{u}}{v} \\
+    \rd{v} = \frac{u \rd{u}}{v} &\Rightarrow -\int u^4\,\rd{v} \\
+    &\Rightarrow -\int \pare{v^2-1}^2\,\rd{v} \\
+    &\Rightarrow -v + \frac{2 v^3}{3} - \frac{v^5}{5}.
+\end{align*}
+
+\end{document}

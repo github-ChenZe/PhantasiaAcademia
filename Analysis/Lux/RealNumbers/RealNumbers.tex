@@ -1,0 +1,814 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc, singleton, nova, lux]{van-de-la-sehen}
+
+\usepackage{textgreek}
+
+\begin{document}
+
+\showtitle{实数理论}
+
+\section{公理化} % (fold)
+\label{sec:公理化}
+
+\subsection{公理化的思想} % (fold)
+\label{sub:公理化的思想}
+
+\subsubsection{几个例子} % (fold)
+\label{ssub:几个例子}
+
+数学不可避免证明, 证明便是回答各种「为什么」. 有疑议者谓, 对各种「原因」回答至何种程度为善. 且看下例
+\begin{sample}
+    \begin{ex}[甲和乙是两个英国人]\quad
+        \label{ex:英国人}
+        \begin{citem}
+            \item 甲: 你得进监狱.
+            \item 乙: 为什么?
+            \item 甲: 你昨天偷了坦克.
+            \item 乙: 偷坦克为什么要进监狱?
+            \item 甲: 按照英国法律, 这构成盗窃罪.
+            \item 乙: 为什么英国法律对我生效?
+            \item 甲: 因为英国法律是女皇陛下签署的.
+            \item 乙: 为何女皇陛下签署的法律对我生效?
+            \item 甲: 她签署的法律, 便是君主的意志, 英国的臣民应服从之.
+            \item 乙: 为何英国人须服从君主的意志?
+            \item 甲: 君权神授, 君主的意志便是上帝的意志.
+            \item 乙: 为何我要服从上帝的意志?
+        \end{citem}
+    \end{ex}
+\end{sample}
+甲和乙的争论, 最终可以归为「为何英国人应遵守上帝的意志」. 倘若二人对此达成共识, 即皆承认「英国人皆应遵守上帝的意志」而不问其原因, 则争论消弭. 反之, 争论还将继续:
+\begin{citem}
+    \item 甲: 不遵守上帝的意志, 会遭雷劈.
+    \item 乙: 为何我要避免遭雷劈?
+    \item 甲: 人都要活下去.
+    \item 乙: 为何我要活下去?
+    \item \dots
+\end{citem}
+数学家无法容忍此种「无限递归」, 因而在开始工作前势必不加证明地承认若干基本结论.
+\begin{sample}
+    \begin{ex}
+        \label{ex:平方展开}
+        证明$\pare{a+b}\pare{a+b} = a^2+2ab+b^2$.
+    \end{ex}
+    \begin{cenum}
+        \item $\pare{a+b}\pare{a+b} = a\pare{a+b} + b\pare{a+b}$, 乘法分配律使然.
+        \item 上式$= \pare{aa + ab} + \pare{ba + bb}$, 乘法分配律使然.
+        \item 上式$= \pare{aa + ab} + \pare{ab + bb}$, 乘法交换律使然.
+        \item 上式$= \brac{\pare{aa + ab} + ab} + bb$, 加法结合律使然.
+        \item 上式$= \brac{aa + \pare{ab + ab}} + bb$, 加法结合律使然.
+        \item 上式$= \brac{aa + \pare{1\cdot ab + 1\cdot ab}} + bb$, 这一步是为何?
+        \item 上式$= \brac{aa + \pare{\pare{1+1}ab}} + bb$, 乘法分配律使然.
+        \item 上式$= \brac{aa + 2ab} + bb$, 这一步是为何?
+        \item 上式$= a^2 + 2ab + b^2$, 乘方之定义与自左向右演算之规定使然.
+    \end{cenum}
+\end{sample}
+前开证明繁琐无以复加, 犹有可商榷之处:
+\begin{cenum}
+    \item {\color{red}为何乘法分配律成立?} 即, 为何$\pare{x+y}z = xz+yz$?
+    \item {\color{red}为何加法结合律成立?} 即, 为何$\pare{x+y} + z = x + \pare{y+z}$?
+    \item 第$6$步中, {\color{red}为何$x=1\cdot x$?}
+    \item 第$8$步中, {\color{red}为何$1+1=2$?}
+    \item 为何$aa=a^2$? 为何$\pare{x+y}+z = x+y+z$(注意这里不是结合律)?
+\end{cenum}
+最后一点系纯粹定义, 无争论价值. 而乘法分配律, 加法结合律云云, 数学家以基本结论(或谓公理)承认之. 至于$1\cdot x = x$, 则不妨亦作为基本结论(公理), 而将$1+1=2$视为$2$的定义.
+\begin{remark}
+    上揭算例仅供说明之用, 即仅示例公理化之思想. 除非课本要求, 否则无需记忆「在乘法分配律、加法结合律外尚有何公理」.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        这是一个有些擦边的例子, 但很好地说明了公理化的「build from scratch」的属性. 计算机程序是通过编译器将代码「编译」为二进制文件得到的. 而编译器作为一个程序, 只能由更早的编译器「编译」得到. 那么第一个编译器是如何「编译」出来的呢? 只能由早期的程序员人工写二进制文件, 用二进制能实现的为数不多的功能(公理)得到一个能支持少量语法的小型编译器, 再通过这个小型编译器编译简单的代码得到大型编译器.
+    \end{ex}
+\end{sample}
+
+% subsubsection 几个例子 (end)
+
+\subsubsection{益处} % (fold)
+\label{ssub:益处}
+
+公理化的好处, 首先是给出证明的结束点, 例如在\cref{ex:平方展开}中可以直接援用「乘法分配律」而无需说明其「为何成立」. 在\cref{ex:英国人}中, 两位英国人未曾达成任何共识, 自然彼此无法说服.
+\par
+这样做可以保证, 「只要我承认\emph{这些}东西, 我就可以有\emph{那些}结论」. 反过来有一个糟糕的例子: 初中的平面几何的假设混乱不堪, 不成体系.
+\begin{sample}
+    \begin{ex}
+        试证明三角形两边之和大于第三边.
+    \end{ex}
+\end{sample}
+在初中平面几何的体系下, 这让人觉得无从下手: 「我有哪些假设可以用」都未臻明确, 遑论给出令人信服的证明.
+\par
+益处其二, 在于「接口与实现之分离」, 即将诸如「实数」之类的对象\emph{抽象}为「成立若干性质」之对象, 而无需依赖于「实数即直线上的点」之具象. 实际上, 后者并未向「实数」提供任何有益的结论—— 形如直线上的点又如何? 点能做什么?
+\begin{sample}
+    \begin{ex}
+        {\ttfamily C}语言中有{\ttfamily open}函数, 负责打开文件. 它接受文件名作为输入, 输出有两种可能: 如果成功打开文件, 输出文件的编号(非负整数). 如果失败, 输出$-1$.
+    \end{ex}
+    将上揭{\ttfamily open}函数之性质作为公理, 则程序员只需判断其输出即可得知文件打开是否成功. 其具体实现——是Unix系统的实现, 还是Linux系统的实现, 还是一个聪明人藏在电脑中拨动开关, 在所不问.
+\end{sample}
+
+% subsubsection 益处 (end)
+
+% subsection 公理化的思想 (end)
+
+\subsection{小心有坑} % (fold)
+\label{sub:小心有坑}
+
+\subsubsection{不当假设} % (fold)
+\label{ssub:不当假设}
+
+初学者常有「不经意间援用错误假设」之问题.
+\begin{sample}
+    \begin{ex}[证明$1=2$]
+        假定$a=b$, 则
+        \begin{cenum}
+            \item $a^2- b^2 = ab - b^2$(这一恒等式对任意$a,b$成立).
+            \item $\pare{a+b}\pare{a-b} = b\pare{a-b}$(因式分解).
+            \item $a+b = b$(消去).
+            \item $2a = a$(由$a=b$).
+            \item $2 = 1$(消去, 注意前一恒等式对任意$a$成立).
+        \end{cenum}
+    \end{ex}
+    问题出在第$3$步, 在两侧消去$\pare{a-b}$时忽略了$a\neq b$之要求. 其所援用结论如下(标红部分为被忽略的前提):
+    \begin{lemma}[消去律]
+        设$ab=ac$且{\color{red}$a\neq 0$}, 则$b=c$.
+    \end{lemma}
+\end{sample}
+忽略前提是常见却又容易解决的一类错误——只需要学习每一个结论时记好相应的前提即可, 尤其是容易被忽略的前提.
+
+% subsubsection 不当假设 (end)
+
+\subsubsection{存在性} % (fold)
+\label{ssub:存在性}
+
+另一个不容易发现的错误是隐藏地假设了存在性. 「存在性」在高中并未被强调, 初学者可能没有意识到其重要性.
+\begin{sample}
+    \begin{ex}[反证法证明$8$是最大的自然数]
+        \label{ex:反证法证明8是最大的自然数}
+        \quad
+        \begin{cenum}
+            \item 如果$8$不是最大的自然数:
+            \item 设最大的自然数为$n$;
+            \item 则$n+1>n$, 与$n$是最大自然数的假设矛盾.
+            \item 故$8$是最大的自然数.
+        \end{cenum}
+    \end{ex}
+\end{sample}
+问题出在相当隐蔽的地方. 在找到问题之前, 先看看反证法是如何工作的:
+\begin{cenum}
+    \item 我想证明结论$P$;
+    \item 我先假设\emph{非$P$};
+    \item 我用各种已知正确的结论和严格而精妙的逻辑推理导出了一大票结论;
+    \item 我发现导出来的结论中, 有一个和已知结论矛盾, 或者和\emph{非$P$}矛盾;
+    \item 我断定非$P$是不可能的, 故$P$是成立的.
+\end{cenum}
+看上去, \cref{ex:反证法证明8是最大的自然数}遵守了上面的步骤. 但实际上, 它(至少在第$2$步)做出了一个额外的假设: 即\emph{最大的自然数是存在的}. 第$2$步应当完整表述为{\color{red}设最大的自然数存在, 且为$n$}. 显然, 反证法导出的矛盾, 否定的是{\color{red}最大的自然数存在}这个假设.
+\par
+回避这类问题的方法, 即是在证明中遇到任何一个数学名词时, 都先问自己:
+\begin{cenum}
+    \item 自己有没有假设它存在?
+    \item 它存在吗?
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        \label{ex:赖氏量}
+        给每个人都关联一个物理量$L$, 谓赖氏量. $L$满足既和身高(厘米)相等又和体重(千克)相等.
+    \end{ex}
+    现在证明, 任何体重小于$50$千克的人都是侏儒. 考虑其赖氏量$L$, 由赖氏量的定义知体重小于$50$千克者, $L<50$, 且$L$等于身高, 故身高$<50$厘米.
+\end{sample}
+这一谬误的原因在于假设了每个人都存在赖氏量$L$——对于大多数人, 满足定义条件的赖氏量是不存在的.
+
+% subsubsection 存在性 (end)
+
+\subsubsection{唯一性} % (fold)
+\label{ssub:唯一性}
+
+这是一个暂时不太重要的问题, 也(暂时)很少有犯错的机会.
+\begin{sample}
+    \begin{ex}
+        定义平方根如下: 对于任意实数$x$, 如果$y^2=x$, 则称$y$为$x$的平方根.
+    \end{ex}
+    这个定义没有\emph{唯一地}定义平方根——因为有正负两种选择.
+\end{sample}
+即便如此, 情况也不那么糟糕. 假设你需要证明「$x$的平方根$y$的四次方等于$x^2$」, 你可以按照如下步骤
+\begin{cenum}
+    \item 由定义, $y^2=x$;
+    \item 因此$y^4 = \pare{y^2}^2 = x^2$;
+\end{cenum}
+虽然平方根按定义并不唯一, 但这并不妨碍上面的推导.
+
+% subsubsection 唯一性 (end)
+
+\subsubsection{定义?还是公理?} % (fold)
+\label{ssub:定义_还是公理_}
+
+在很大程度上, 定义是依赖于公理的.
+\begin{sample}
+    \begin{definition}[{\ttfamily open}函数的定义]
+        \label{def:open的定义}
+        {\ttfamily open}是满足\cref{ax:open的公理}的{\ttfamily C}语言函数.
+    \end{definition}
+    \begin{axiom}[{\ttfamily open}函数的公理]
+        \label{ax:open的公理}
+        \quad
+        \begin{cenum}
+            \item 它接受一个文件名;
+            \item 它返回一个整数:
+            \begin{cenum}
+                \item 如果文件打开成功, 返回非负整数, 作为文件编号;
+                \item 如果打开失败, 返回$-1$.
+            \end{cenum}
+        \end{cenum}
+    \end{axiom}
+    这里定义和公理的分界有些模糊——把\cref{ax:open的公理}中的一些项移到\cref{def:open的定义}中未尝不可.
+\end{sample}
+也有一些公理本身不能被作为定义的一部分——譬如关乎性命的存在性.
+\begin{sample}
+    \begin{axiom}
+        {\ttfamily open}函数在{\ttfamily C}语言中是存在的.
+    \end{axiom}
+\end{sample}
+\begin{pitfall}
+    再次提醒, 下定义不意味着所定义的对象一定存在, 参考\cref{ex:赖氏量}.
+\end{pitfall}
+
+% subsubsection 定义_还是公理_ (end)
+
+% subsection 小心有坑 (end)
+
+% section 公理化 (end)
+
+\section{实数} % (fold)
+\label{sec:实数}
+
+\subsection{实数公理} % (fold)
+\label{sub:实数公理}
+
+有了前面公理化思想的铺垫, 现在就应该给实数下个定义了——这就要求回答「实数应满足哪些性质」的问题. 对实数既存的不严格的认知会帮助我们达到这一点.
+\par
+同时, 这些性质需要完整且恰如其分地刻画实数——不能遗漏任何有用的性质, 也不能过于复杂: 有用的性质被遗漏, 定义出的实数可能用处不大(比如无法算术, 无法比较); 而过于复杂的性质, 可能会像\cref{ex:赖氏量}中的赖氏量那样, 出现矛盾.
+
+\subsubsection{算术公理} % (fold)
+\label{ssub:算术公理}
+
+实数最重要的性质是能拿来计算. 这一部分无需多言——实数的算术在高中已经熟悉, 悉数列举这方面的公理显得枯燥, 仅简要总结之:
+\begin{finale}
+    \begin{axiom}[算术公理]
+        \label{ax:算术公理}
+        \quad
+        \begin{cenum}
+            \item 实数集上定义有封闭的加法与乘法.
+            \item 加法满足交换律, 结合律. 加法有单位元$0$.
+            \item 任何实数$x$都有加法逆元$-x$, 满足$x+\pare{-x} = 0$.
+            \item 乘法满足交换律, 结合律, 分配律. 乘法有单位元$1$.
+            \item 任何实数$x\neq 0$都有乘法逆元$1/x$, 满足$x\cdot\pare{1/x} = 1$.
+        \end{cenum}
+    \end{axiom}
+\end{finale}
+算术公理的一个应用已经在\cref{ex:平方展开}中体现——与其说那个例子告诉你如何使用这些公理, 不如说那个例子说明了这些公理的必要性: 它们保障了在实数上做各类熟悉的运算是可行的.
+\par
+需要注意的是, 一些看似显然的命题仍然需要证明, 例如
+\begin{ex}
+    \label{ex:天平原理}
+    若$x+y=x+z$, 则$y=z$.
+\end{ex}
+这确实可以从上面的算术公理导出, 但这更多是代数方面的内容, 和主题偏离太远.
+\begin{remark}[为什么不把\cref{ex:天平原理}例如公理?]
+    将它列入公理, 就可以避开它的证明了! 然而事情并没有想象的那么简单, 数学家会尽可能让公理都是彼此独立的. 这在下文中讲存在性的时候会进一步解释.
+\end{remark}
+
+% subsubsection 算术公理 (end)
+
+\subsubsection{序公理} % (fold)
+\label{ssub:序公理}
+
+算术公理并未完整地刻画实数的性质——它实际上刻画了\emph{域}的性质. 复数, 作为一个包含实数的集合, 满足完全相同的性质. 但在某些地方, 实数有别的性质使其更有用.
+\begin{sample}
+    \begin{ex}
+        按照高中知识, 实数域上可以定义区间$\pare{a,b}$.
+    \end{ex}
+    \begin{ex}
+        三角不等式; 算术-几何不等式($a+b>2\sqrt{ab}$); 糖水不等式\dots
+    \end{ex}
+\end{sample}
+两个例子都涉及到了实数之间的比较. 而第一个例子和第二个例子有明显的差别——前者纯粹是比较, 后者除了比较还涉及代数运算.
+\paragraph{全序公理}
+先不考虑涉及代数的问题. 实数首先满足「任何两个实数之间皆可比较」, 即实数间存在「小于」关系, 使得对任意实数$a$和$b$,
+\[ a<b,\quad a=b,\quad b<a \]
+之间恰好成立一者.
+\par
+但单纯这一公理不足以刻画\emph{序}的性质——我可以定义这样的比较: 如果两者同号或有一个为零则正常比较, 但两者异号则正数小于负数. 譬如$-1<0$, $0<1$, {\color{red}但$1<-1$}.
+\par
+如果这个问题不解决, 区间的定义会相当麻烦—— 比如$\pare{-1,1}$这个区间, 按定义是$\setcond{x}{-1<x\text{且}x<1}$, 这样得到的实际上是$\curb{0}$: 因为按定义, $1/2<-1$. 这导致$\pare{-1,0}\cup\curb{0}\cup\pare{0,1}\neq \pare{-1,1}$.
+\par
+更致命也更本质的缺陷在于, $a<b$且$b<c$居然推不出$a<c$. 因此, 将它(即$a<b$且$b<c$蕴含$a<c$)添加为公理, 问题便迎刃而解——前面的病态例子不满足这个公理. 这也解释了\emph{序}这个字, 它是一列按顺序下去的, 不会发生僭越.
+\begin{finale}
+    \begin{axiom}[序公理]
+        \label{ax:序公理}
+        实数间存在关系$<$, 满足:
+        \begin{cenum}
+            \item 任意两个实数之间,
+            \[ a<b,\quad a=b,\quad b<a \]
+            恰好成立一者.
+            \item $a<b$且$b<c$蕴含$a<c$.
+        \end{cenum}
+    \end{axiom}
+\end{finale}
+\paragraph{序-算术公理}
+为了说明算术方面的序公理, 考虑算术-几何不等式的例子.
+\begin{sample}
+    \begin{ex}
+        为了避免开方的定义的问题, 现在只证明
+        \[ a\neq b \Rightarrow \pare{a+b}^2 > 4ab. \]
+    \end{ex}
+    \begin{proof}
+        由\cref{ex:平方展开},
+        \[ \pare{a-b}^2 = a^2 - 2ab + b^2. \]
+        由$a-b\neq 0$有$\pare{a-b}^2>0$({\color{red}为什么?}). 故
+        \[ a^2 - 2ab + b^2 > 0. \]
+        两边加上$4ab$({\color{red}为什么可以?}),
+        \[ a^2 + 2ab + b^2 > 4ab. \]
+        再次由\cref{ex:平方展开},
+        \[ \pare{a+b}^2 > 4ab. \qedhere \]
+    \end{proof}
+\end{sample}
+考虑两个标红的「为什么」, 引入额外的公理是无法避免的.
+\begin{finale}
+    \begin{axiom}[序-算术公理]
+        \label{ax:序算术公理}
+        实数上的$<$成立
+        \begin{cenum}
+            \item $x<y$蕴含$x+z<y+z$.
+            \item $x>0$且$y>0$蕴含$xy>0$.
+        \end{cenum}
+    \end{axiom}
+\end{finale}
+一些看似显然的命题, 可以通过上面的公理推导得来.
+\begin{ex}
+    若$x>y$而$z>0$, 则$xz>yz$.
+\end{ex}
+这些命题, 在高中都已经接触过, 且更多属于代数内容.
+
+% subsubsection 序公理 (end)
+
+\subsubsection{上确界原理} % (fold)
+\label{ssub:上确界原理}
+
+直到现在, 一切结论都是熟悉的——只不过是被以一种繁琐的方式表达出来. 这样做是否完整地刻画了实数? 其实并未. 有理数满足刚刚提到的所有公理(\cref{ax:算术公理}, \cref{ax:序公理}和\cref{ax:序算术公理})——但常识告诉我们, 有理数不是实数.
+\begin{sample}
+    \begin{ex}
+        线段的长度是实数的一个很好的应用——长度可以相加(两条线段拼接在一起), 可以比较(看一个能不能盖住另一个). 但线段的长度并不能被有理数刻画——直角边边长为$1$的等腰直角三角形, 斜边长不是有理数. \'{I}\textpi\textpi\textalpha\textsigma\textomikron\textvarsigma (希帕索斯)发现了这一点, 被扔进了水里.
+    \end{ex}
+\end{sample}
+现在我们知道, 那个边长是$\sqrt{2}$. 有理数和无理数的区别之一在于前者可能无法开根(开根后可能不再是有理数). 是否可以尝试添加如下公理: 「任何正实数$x$皆有与之关联的正实数$\sqrt{x}$, 满足$\pare{\sqrt{x}}^2 = x$」? 这仍然是不够的——还有三次方要开. 但即使添加「正实数可以任意次开根」的公理也是不够的.
+\begin{sample}
+    \begin{ex}
+        代数数域, 即所有可以写成$a_n x^n + a_{n-1}x^{n-1} + \cdots + a_0 = 0$(其中$a_0, \cdots, a_n$是整数)的根的$x$构成的集合, 可以任意次开根, 但这仍然不能覆盖全部实数——$\pi$就不属于代数数域.
+    \end{ex}
+\end{sample}
+实际上, 有理数的本质缺陷在于「缝隙」——如果真的把实数和直线上的点对应起来, 有理数之间会存在缝隙.
+\begin{sample}
+    \begin{ex}
+        \label{ex:sqrt2的上下逼近}
+        考虑$\sqrt{2}$的十进制表示的前若干位, $1$, $1.4$, $1.41$, $1.414$, $1.4142$, $\cdots$. 每一步都是一个有理数——但逼近的最终结果是一个无理数. 反过来, $1.5$, $1.42,$, $1.415$, $1.4143$, $\cdots$是从上到下逼近$\sqrt{2}$. 直观上, 两个数列在不断趋近同一个数, 并在在实数内它们最终能「碰面」, 但在有理数范围内 它们被「隔开」了, 分隔点在有理数的世界里不可见.
+    \end{ex}
+\end{sample}
+为了修正这个漏洞, 也许可以要求「实数内单调缓慢增加的数列都有极限」——这几乎就是正确答案了. 惟一不好的地方在于, 「极限」的定义实际上有些冗长(虽然直观), 所以这一思路留待后文. 这里转而使用一个类似的思路回避「极限」的定义. 回到\cref{ex:sqrt2的上下逼近}, 看有没有方法能引入公理以填补缝隙.
+
+\begin{figure}[h]
+    \centering
+    \incfig{4cm}{sqrt2Sequence}
+    \caption{$\sqrt{2}$作为上确界}
+    \label{fig:sqrt2作为上确界}
+\end{figure}
+
+如\cref{fig:sqrt2作为上确界}, 其中红点表示$\sqrt{2}$的位置(这是有理数的缝隙)而黑点是\cref{ex:sqrt2的上下逼近}中的点列(都是有理数). $\sqrt{2}$这个数对于这个点列而言有相当大的意义——可以看出$\sqrt{2}$「正好卡住点列的右端」(不准使用「极限」这个概念!).
+\par
+于是如下的公理也许可以填补缝隙: 「如果一个实数正好卡住一个实数序列的右端, 那它也是一个实数」. 这和有理数区分开了——相比之下, 有理数不满足这个公理: $\sqrt{2}$卡住了一个有理数列的右端, 确不是有理数. 问题在于如何表示「正好卡住」.
+
+\begin{figure}[h]
+    \centering
+    \incfig{4cm}{sqrt2Sequence2}
+    \caption{不能作为上确界的点}
+    \label{fig:不能作为上确界的点}
+\end{figure}
+
+如\cref{fig:不能作为上确界的点}, 绿色的点和蓝色的点都不能表示「正好卡住」这样的概念——绿色的点太左了, 它右边还有逃脱的黑点; 左边的点太右了, 和黑点之间留了好大一片真空. 把蓝色和绿色的点排除, 就可以得到「正好卡住」的定义了. 在此之前, 先注意蓝色的点有一个学名, 谓「上界」:
+\begin{definition}[上界]
+    数集$E$的上界, 谓这样的数$\beta$, 满足任何$x\in E$都有$x \le \beta$.
+\end{definition}
+\begin{sample}
+    \begin{ex}
+        $\curb{1,2,3}$的上界可以是$3, 3.5, 65536, \cdots$. 
+    \end{ex}
+    \begin{ex}
+        \label{ex:有理数列不一定有上确界}
+        $\curb{1,1.4,1,41, 1.414, 1.4142, \cdots}$的上界可以是$1.5$, $2$, $65536$, $\cdots$. 注意\cref{fig:sqrt2作为上确界}和\cref{fig:不能作为上确界的点}中数轴上的方括号, 它划定了点列的上界.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    这个定义实际上不够严谨——数集是什么? 不能是实数集, 因为现在还没有定义实数. 实际上, 这里想说的是「有序集」, 也就是满足\cref{ax:序公理}的集合——上界唯一需要的操作只是比较. 虽然实数还没被定义, 但鉴于\cref{ax:序公理}已经被承认, 此时讨论上界是允许的.
+\end{remark}
+\begin{pitfall}
+    上界不是唯一的——它不是一个数, 而是一堆数的集合.
+\end{pitfall}
+现在可以给「正好卡住」一个定义了——数学家把正好卡住右端的数叫做「上确界」. 它不能小于点列中的任何一个数(排除绿点), 也不能大于任何一个上界(排除蓝点).
+\begin{definition}[上确界]
+    \label{def:上确界}
+    数集$E$的上确界, 谓这样的数$\gamma$, 满足
+    \begin{cenum}
+        \item $\gamma$是$E$的一个上界;
+        \item $\gamma$不大于$E$的任何一个上界.
+    \end{cenum}
+\end{definition}
+\begin{sample}
+    \begin{ex}
+        $\curb{1,2,3}$的上确界是$3$.
+    \end{ex}
+    \begin{ex}
+        $\curb{1,1.4,1,41, 1.414, 1.4142, \cdots}$的上确界是$\sqrt{2}$——当然我们还没定义实数, 所以暂时还不能这样说. 只能说它在有理数内是没有上确界的! 任何试图把有理数作为这个数列的上确界的尝试, 要么违反\cref{def:上确界}的第一个条件, 要么违反第二个条件.
+    \end{ex}
+\end{sample}
+
+只要强加一条「上确界存在」就可以把$\sqrt{2}$这样的坑填了. 于是可以引入最后一条公理:
+\begin{finale}
+    \begin{axiom}[上确界原理]
+        \label{ax:上确界原理}
+        实数集内任何有上界的非空子集都有实数上确界.
+    \end{axiom}
+\end{finale}
+这就和有理数区分开了——有理数集内的有上界的非空子集, 比如\cref{ex:有理数列不一定有上确界}中的$\curb{1,1.4,1,41, 1.414, 1.4142, \cdots}$, 是没有有理数上确界的.
+
+% subsubsection 上确界原理 (end)
+
+\subsubsection{实数集的存在性} % (fold)
+\label{ssub:实数集的存在性}
+现在实数的所有特征都已经刻画完毕了——在高中遇到过的所有结论, 都可以由这些公理一步步推导出来. 现在给出实数的定义:
+\begin{finale}
+    \begin{definition}[实数]
+        \label{def:实数的定义}
+        实数集$\+bR$谓满足算术公理(\cref{ax:算术公理}), 序公理(\cref{ax:序公理}), 序-算术公理(\cref{ax:序算术公理})和上确界原理(\cref{ax:上确界原理})的集合.
+    \end{definition}
+\end{finale}
+但这并不是一切——还没有证明前面列举的公理是自洽的: 它们太复杂了, 可能出现像\cref{ex:反证法证明8是最大的自然数}或者\cref{ex:赖氏量}中的赖氏量那样的问题——满足这些公理的集合根本不存在. 为了证明这样的集合的存在性, 一种方法就是把它构造出来. 下面列举三种比较著名的构造.
+\begin{sample}
+\paragraph{十进制构造}
+这是最熟悉的一种构造——把实数定义为$3.14$, $1.4142\cdots$这样的十进制表示, 然后定义恰当的四则运算和比较, 再证明这样能满足前面列举的所有公理——这证明是相当复杂的, 还得处理$0.999\cdots=1$这样的问题, 因此大多数教科书都选择了后两种构造.
+\paragraph{Cauchy构造}
+这种构造将$\+bR$定义为有理数列. 比如$1/2$就是$1/2$, $1/2$, $1/2$, $\cdots$, 而$\sqrt{2}$就是$1, 1.4, 1.41, 1.414, 1.4142, \cdots$. 需要注意的是, 多个数列可能对应同一个实数, 比如$\sqrt{2}$还可以是$1.5$, $1.42,$, $1.415$, $1.4143$, $\cdots$. 接着, 也要对这些有理数数列定义恰当的四则运算和比较, 并验证它们满足前面的所有公理.
+\paragraph{Dedekind分割}
+这种构造比较抽象, 但它非常生动地填补了有理数有缝隙这一点. 现在假设有理数$\+bQ$已经被定义了, 再定义\emph{Dedekind分割}为「把$\+bQ$砍成两半的操作」. 譬如可以砍出$\pare{-\infty, 1/2}$和$\pare{1/2,\infty}$; 也可以砍出$q^2<2$的所有有理数和 $q^2>2$的所有有理数. 
+\par
+这样可以得到不同的「分割有理数」的方法, 这些「分割」实际上就对应实数——前者对应$1/2$这个实数, 后者对应$\sqrt{2}$这个实数. 再对这些分割方法也定义四则运算和比较, 并验证它们满足前面列举的所有公理.
+\end{sample}
+既然实数集可以被构造出来, 它的存在性就已经获证了.
+\begin{finale}
+    \begin{theorem}[实数集存在]
+        满足\cref{def:实数的定义}的$\+bR$存在.
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    Kronecker称, 「God made the natural numbers; all else is the work of man.」构造实数在一定程度上说明了这句话——世界上本没有实数, 都是数学家造出来的.
+\end{remark}
+同时, 公理化的好处也可以看出来——不管用的是什么构造, 得到的$\+bR$都满足算术公理(\cref{ax:算术公理}), 序公理(\cref{ax:序公理}), 序-算术公理(\cref{ax:序算术公理})和上确界原理(\cref{ax:上确界原理}). 只要是严格从这几条公理做出推导得出的结论, 就必然成立而就无需关心所用实数集具体构造如何.
+\par
+\begin{figure}[ht]
+\centering
+\centerline{
+\xymatrix{
+    \text{算术公理}\ar[d]^{\text{定义}} & + & \text{序公理}\ar[d]^{\text{定义}}\\
+    \text{域}\ar[rdd]^{+} & & \text{有序集}\ar[ldd]_{+} \ar[r] & \text{可以定义上界}\ar[d]\\
+    & \text{序-算术公理}\ar[d]^{\text{定义}} & & \text{再定义上确界}\ar[d]\\
+    & \text{有序域}\ar[rd] & + & \text{上确界原理}\ar[ld]\\
+    & & \+bR &
+}}
+\caption{实数公理的脉络}
+\label{fig:实数公理的脉络}
+\end{figure}
+
+再厘清一下几条公理的思路, 如\cref{fig:实数公理的脉络}, 其中\emph{有序域}谓满足算术公理(\cref{ax:算术公理}), 序公理(\cref{ax:序公理}), 序-算术公理(\cref{ax:序算术公理})的集合. 实数集因此可以表示为\emph{满足上确界原理的有序域}. 最后不加证明地列出这条结论:
+\begin{finale}
+    \begin{theorem}[实数集的唯一性]
+        满足上确界原理的有序域彼此同构.
+    \end{theorem}
+\end{finale}
+这也说明了数学家为何不关心具体构造: 上面的三个构造都被证明形成了「满足上确界原理的有序域」. 因此, 虽然它们的形式不同, 但彼此是同构的. 这不是一个平凡的结论——满足上确界原理的集合不一定彼此同构. 比如$\+bZ$和$\+bR$都满足上确界原理, 但二者显然不同构. 有序域也不一定彼此同构, 比如$\+bQ$和$\+bR$都是有序域, 二者亦不同构. 而当两个条件叠加在一起的时候, 却能唯一确定$\+bR$.
+
+% subsubsection 实数集的存在性 (end)
+
+% subsection 实数公理 (end)
+
+\subsection{上确界原理的等价} % (fold)
+\label{sub:上确界原理的等价}
+
+上确界原理并不是消除有理数之间的缝隙以得到实数的唯一方法. 至少有五大与之等价的公理, 但它们大多需要额外的(并且更加复杂的)一些定义. 这些等价公理不会影响实数本身(现在实数已经确定下来了), 只是在了解实数的性质(尤其是做证明题)时会发挥强大的作用. 下文会用到「极限」这一概念, 列其定义于此而不做探讨.
+\begin{definition}[极限]
+    \label{def:极限}
+    谓数列$\curb{a_n}$收敛于$A$, 若对于任意$\varepsilon > 0$, 都存在$N$使得任意$n>N$都有$\abs{a_n-A} < \epsilon$, 并称$A$为$\curb{a_n}$之极限.
+\end{definition}
+
+\subsubsection{紧致性} % (fold)
+\label{ssub:紧致性}
+
+紧致性并非一个相当直观的概念——这个名词也多少让人迷惑. 它的英文是「compact」, 即「closely and neatly packed together」. 在数学上, 它的定义则没那么直接.
+\begin{definition}[紧致性]
+    \label{def:紧致性}
+    一个集合谓紧致的, 如果任何覆盖它的开区间族中都能找到有限多个区间覆盖它.
+\end{definition}
+在看几个例子之前, 很难理解这种性质是如何同「紧致」扯上关系的.
+\begin{sample}
+    \begin{ex}
+        $\curb{1,2,3}$是紧致的. 任何开区间族如果能覆盖它, 必定能选出最多三个区间来覆盖这三个点.
+    \end{ex}
+    \begin{ex}
+        $\pare{0,1}$不是紧致的, 因为$\curb{\pare{1/n,1}}$虽然覆盖了它, 但其中任何有限多个区间都无法覆盖——某个$1/m$以下的数都不能盖住.
+    \end{ex}
+    \begin{ex}
+        $\curb{1/n}$($n$取遍自然数)不是紧致的, 理由和上一个例子一样. 注意这个数列收敛于$0$.
+    \end{ex}
+    \begin{ex}
+        ${\+bR}$和${\+bQ}$也不是紧致的. $\curb{\pare{n,n+2}}$虽然覆盖它们, 但任何有限多个区间都无法覆盖.
+    \end{ex}
+\end{sample}
+第一个例子很好地显示了「packed together」——只有三个点. 第二个和第三个例子则没有「packed together」——实际上, 从第三个例子可以看出来, $\curb{1/n}$这个完全在$\pare{0,1}$内的序列「逃逸」了出来, 说明没有「pack」好. $\+bR$和$\+bQ$作为无界集合则根本没有「pack」.
+\par
+另一个紧致的例子是闭区间$\brac{a,b}$.这一点需要证明, 但可以先理解——如果把数集看作行李, $\pare{0,1}$就像是行李箱里的物品, $\curb{0,1}$作为边界就像是箱子. 如果没有箱子, 物品就没有被「pack」好. 反之, $\brac{0,1}$就成功了关上了箱子.
+\begin{finale}
+    \begin{theorem}[闭区间紧致]
+        $\+bR$上的闭区间是紧致的.
+    \end{theorem}
+    \begin{theorem}[等价性]
+        闭区间紧致和上确界原理等价.
+    \end{theorem}
+\end{finale}
+\begin{proof}[上确界原理蕴含闭区间紧致]
+    设对于闭区间$\brac{a,b}$, 开区间族$\+cC = \curb{\pare{a_n,b_n}}$覆盖之. 现在假设没有办法取出有限多个区间覆盖$\brac{a,b}$.
+    \begin{figure}[h]
+        \centering
+        \incfig{6cm}{FiniteCover}
+        \caption{蓝色的区间盖住了$c+\epsilon$}
+    \end{figure}
+    \par
+    考虑这样的$c$: $c$是那些使$\brac{a,c}$可以由$\+cC$中有限多个区间覆盖的数. $c<b$是显然的; 满足条件的$c$也是非空的——至少$\brac{a,a}$可以被一个区间盖住.
+    \par
+    把所有的$c$列出来, 就会有一个上确界$s$. $\brac{a,s}$可以由$\+cC$中有限多个区间覆盖——随便选一个覆盖$c$的区间, 它必然覆盖了某个$c-\varepsilon$, 而$\brac{a,c-\varepsilon}$是被有限多个区间覆盖的. 联合起来就能覆盖$\brac{a,c}$.
+    \par
+    这就矛盾了. 因为某个$c+\varepsilon$必定也被盖住了——所以$\brac{a,c+\epsilon}$也能被有限个区间盖住, $c$就不是上一段所说的上确界.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        现在来说明一下为闭区间的紧致性这能将$\+bR$和$\+bQ$区分开. 考虑在$\+bQ$上的区间, $I=\+bQ\cap\brac{0,1}$(即$\brac{0,1}$中的有理数), 它不是紧致的. 注意这里区间的定义, 把所有区间都看成是「在$\+bQ$内的」, 即$\pare{a,b}$表示$\setcond{x\in\+bQ}{a<x<b}$. 考虑有理数列$p_n\nearrow \sqrt{2}/2$和$q_n\searrow \sqrt{2}/2$, 则$\curb{\pare{-1,p_n}}\cup\curb{\pare{q_n,2}}$覆盖$I$, 但任何有限多个区间都不能覆盖.
+    \end{ex}
+\end{sample}
+既然「闭区间紧致」作为「上确界原理」的等价命题, 似乎应当在此处证明闭区间紧致蕴含上确界原理. 但这里采用另外的途径——用一种循环来证明等价性, 如\cref{fig:六大等价性的证明思路}.
+\begin{figure}[h]
+    \centering
+    \centerline{\xymatrix{
+        \text{上确界原理} \ar@{=>}[d]\ar@{=>}[r] & \text{闭区间紧致}\ar@{=>}[d] & \text{Bolzano–Weierstra\ss 定理}\ar@{=>}[dll] \\
+        \text{单调收敛定理}\ar@{=>}[r] & \text{闭区间套原理}\ar@{=>}[ul]\ar@{=>}[ur]\ar@{=>}[r] & \text{Cauchy判准}\ar@{=>}[u]
+    }}
+    \caption{六大等价性的证明思路}
+    \label{fig:六大等价性的证明思路}
+\end{figure}
+
+% subsubsection 紧致性 (end)
+
+\subsubsection{闭区间套原理} % (fold)
+\label{ssub:闭区间套原理}
+
+这个定理比较直观. 先看几个例子.
+\begin{sample}
+    \begin{ex}
+        考虑区间列$I_n=\pare{0,1/n}$, 这构成一个区间套——即任意一个$I_n$之后区间都包含在它以内. 虽然每个区间都是非空的, 而且层层嵌套, 但全体的交却是空的——$\cap I_n = \varnothing$.
+    \end{ex}
+    \begin{ex}
+        考虑相应的闭区间列$I_n=\brac{0,1/n}$, 这也构成一个区间套, 且全体的交非空——$\cap I_n = \curb{0}$.
+    \end{ex}
+\end{sample}
+\begin{finale}
+    \begin{theorem}[闭区间套原理]
+        设$I_n$是$\+bR$上的闭区间套, 每个$I_n$都非空, 则$\cap I_n$非空.
+    \end{theorem}
+    \begin{theorem}[等价性]
+        闭区间套原理等价于闭区间的紧致性.
+    \end{theorem}
+\end{finale}
+\begin{proof}[闭区间的紧致性蕴含闭区间套原理]
+    对于一个闭区间套$\+cI = \curb{I_n}$, 找一个有限大的开区间$J$包含$I_1$, 考虑$I_n$在$J$中的补$J_n = J-I_n$, 证明$\curb{J_n}$中的有限多个都不能覆盖$I_1$. 从而, 由$I_1$的紧致性, $\curb{J_n}$全体亦不能覆盖$I_1$.\inlinehardlink{自行补全之.}
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        注意$\+bQ$不满足闭区间套原理. 取有理数列$p_n\nearrow \sqrt{2}$和$q_n\searrow \sqrt{2}$, 则$\brac{p_n,q_n}$构成$\+bQ$内的闭区间套, 但全体的交(即$\curb{\sqrt{2}}$)在$\+bQ$非空.
+    \end{ex}
+\end{sample}
+%为了给出另一个方向的蕴含, 这里需要定理「开集」和「闭集」.
+%\begin{definition}[开集]
+%    开区间的任意并, 包括空集, 谓开集.
+%\end{definition}
+%\begin{definition}[闭集]
+%    开集在$\+bR$内的补谓闭集.
+%\end{definition}
+%\begin{sample}
+%    \begin{ex}
+%        $\pare{a,b}$是开集. $\pare{-1,0}\cup\pare{0,1}$也是开集.
+%    \end{ex}
+%    \begin{ex}
+%        $\pare{1,\infty}$和$\pare{-\infty,-1}$都是开集. 前者可以写成$\curb{\pare{1,n}}$的并, 后者类似. 从而$\pare{-\infty, -1}\cup\pare{1,\infty}$也是开集.
+%    \end{ex}
+%    \begin{ex}
+%        $\brac{-1,1}$是闭集, 因为它是$\pare{-\infty, -1}\cup\pare{1,\infty}$在$\+bR$内的补. 实际上, 任何闭区间都是闭的.
+%    \end{ex}
+%    \begin{ex}
+%        开集的任意并都是开的. 但开集的任意交不一定. $\curb{\pare{-1/n,1/n}}$全体的交是$\curb{0}$, 这不是开集.
+%    \end{ex}
+%    \begin{ex}
+%        闭集任意交皆闭, 但任意并则不一定.\inlinehardlink{自行补全之.}
+%    \end{ex}
+%    \begin{ex}
+%        空集既是开集又是闭集.
+%    \end{ex}
+%\end{sample}
+%\begin{pitfall}
+%    开集的任意交不一定是开集, 闭集的任意并也不一定是闭集.
+%\end{pitfall}
+%\begin{pitfall}
+%    集合可能既是开的又是闭的, 例如空集.
+%\end{pitfall}
+%通过引入开集, 可以给出紧致性的一个等价定义——仅仅是把\cref{def:紧致性}中的开区间修改为开集.
+%\begin{theorem}[紧致性的等价定义]
+%    一个集合是紧致的, 当且仅当任何覆盖其的{\color{red}开集}族中都有有限多个开集覆盖之.
+%\end{theorem}
+%\begin{proof}
+%    $\Rightarrow$: 如果集合$S$紧致且有一个开集族$\+cO$覆盖之, 由开集的定义可得一开区间族$\+cI$覆盖之——这些开区间就是组成$\+cO$中各开集的开区间. $S$紧致意味着可以找到$\+cI$中有限个开区间覆盖之, 把每个开区间的「父母」找到就得到了有限个开集.
+%    \par
+%    $\Leftarrow$: 如果「任何覆盖其的开集族中都有有限多个开集覆盖之」, 那么显然「任何覆盖其的开区间族中都有有限多个开区间覆盖之」.
+%\end{proof}
+%除了将「紧致性」的定义中的「开区间」拓展为「开集」, 闭区间套原理中的「闭区间套」也应当被相应拓展——但不是拓展为「闭集套」.
+%另一个方向的蕴涵不会直接给出, 而是像\cref{fig:六大等价性的证明思路}中指出的那样, 证明闭区间套原理蕴含上确界原理. 在此之前, 需要拓展闭区间套原理中的「闭区间套」.
+%\begin{theorem}[闭区间套原理的等价]
+%    \label{thm:闭区间套原理的等价}
+%    闭区间套原理$\Leftrightarrow$设有闭区间列$\+cI = \curb{I_n}$, 其中任意有限多个闭区间的交皆非空, 则$I_n$全体的交亦非空.
+%\end{theorem}
+%    \begin{figure}[h]
+%        \centering
+%        图还没插.
+%    \end{figure}
+%\begin{proof}
+%    $\Rightarrow$: 对于闭区间列$\curb{I_n}$, 考虑$J_n=I_1\cap\cdots\cap I_n$, 则$J_n$构成一个闭区间套, 且$\cap J_n=\cap I_n$非空.\inlinehardlink{自行补全之.}
+%    \par
+%    $\Leftarrow$: 闭区间套就是一种「任意有限多个闭区间的交皆非空」的特例.
+%\end{proof}
+%\begin{remark}
+%    虽然证明中只对可数个闭区间的情况证明了, 但实际上对任意多个闭区间都是成立的.
+%\end{remark}
+%\begin{proof}[闭区间套原理蕴含闭区间的紧致性]
+%    如果开区间列$\+cI=\curb{I_n}$覆盖了闭区间$J=\brac{a,b}$而其中任意有限多个都无法覆盖$J$, 必然$J$中有一点是
+%\end{proof}
+\begin{figure}[h]
+    \centering
+    \incfig{6cm}{Cantor2Sup}
+    \caption{构造收敛至上确界的闭区间套}
+    \label{fig:构造收敛至上确界的闭区间套}
+\end{figure}
+\begin{proof}[闭区间套原理蕴含上确界原理]
+    考虑$\+bR$的子集$S$而$B$是其所有上界. 如\cref{fig:构造收敛至上确界的闭区间套}对于任意$\alpha_1\in S$和$\beta_1\in B$, $I_1=\brac{\alpha_1, \beta_1}$是非空的闭区间. 用这种方式选取下一个闭区间:  如果$I_1$的中点$c$在$B$内, 则$I_2=\brac{\alpha_1,c}$, 否则$I_2=\brac{c,\beta_1}$. 以此类推选出一列闭区间套$\curb{I_n}$.
+    \par
+    设全体这种闭区间的交是$I$. 由闭区间套原理, $I$非空且$I$是单点集, 不会大于$B$中任何元素, 也不会小于任何一个$\alpha\in S$, 这正是上确界.
+\end{proof}
+
+% subsubsection 闭区间套原理 (end)
+
+\subsubsection{单调收敛定理} % (fold)
+\label{ssub:单调收敛定理}
+
+这是几大等价命题中最直观的一个.
+\begin{finale}
+    \begin{theorem}[单调收敛定理]
+        若实数数列$\curb{a_n}$单调且有界, 则其收敛.
+    \end{theorem}
+    \begin{theorem}[等价性]
+        单调收敛定理和上确界原理等价.
+    \end{theorem}
+\end{finale}
+\begin{proof}[上确界原理蕴含单调收敛定理]
+    不妨假设数列$\curb{a_n}$是单调递增的. 按照上确界原理, 数列存在一上确界$s$, 按照\cref{def:极限}(极限), 并且引用\cref{def:上确界}(上确界)中上确界的各种性质得到$s$必定为$\curb{a_n}$之极限即可.\inlinehardlink{自行补全之.}
+\end{proof}
+\begin{proof}[单调收敛定理蕴含闭区间套定理]
+    先将单调收敛定理推广至递减的情形, 后对闭区间套两端点分别应用单调收敛定理即可. \inlinehardlink{自行补全之.}
+\end{proof}
+
+% subsubsection 单调收敛定理 (end)
+
+\subsubsection[B-W定理]{Bolzano–Weierstra\ss 定理} % (fold)
+\label{ssub:b_w定理}
+
+这也是一个比较直观的定理——实际上, 除了紧致性有些玄学, 另外几个等价命题都是比较直观的.
+\begin{sample}
+    \begin{ex}
+        考虑数列$a_n = \pare{-1}^n$, 显然$\curb{a_n}$不收敛, 但$\curb{a_n}$的一个子列——$a_{2n}=1$是收敛的.
+    \end{ex}
+\end{sample}
+\begin{finale}
+    \begin{theorem}[Bolzano–Weierstra\ss 定理]
+        若实数数列$\curb{s_n}$有界, 则其有收敛子列.
+    \end{theorem}
+    \begin{theorem}[等价性]
+        Bolzano–Weierstra\ss 定理和上确界原理等价.
+    \end{theorem}
+\end{finale}
+\begin{figure}[h]
+    \centering
+    \incfig{6cm}{Cantor2BZ}
+    \caption{对无限点集构造闭区间套的过程}
+\end{figure}
+\begin{proof}[闭区间套原理蕴含Bolzano–Weierstra\ss 定理]
+    对于有界数列$\curb{s_n}$, 取一闭区间$I_0 = \brac{a_0,b_0}$包含之. 设$I_0$中点为$c_0$, 则$\brac{a_0, c_0}$与$\brac{c_0, b_0}$中必有一者包含无限多个$s_n$中的点, 选之作为$I_1$. 以此类推选出一列闭区间套$\curb{I_n}$.
+    \par
+    由闭区间套原理知$\curb{I_n}$有单点非空交. 由上述过程知最终这个点附近任意小的邻域都有无限多个$\curb{s_n}$中的点, 故其正是一收敛子列的极限.,
+\end{proof}
+\begin{proof}[Bolzano–Weierstra\ss 定理蕴含单调收敛定理]
+    直接按\cref{def:极限}证明单调数列的收敛子列的极限正好是这个单调数列的极限.\inlinehardlink{自行补全之.}
+\end{proof}
+
+% subsubsection b_w定理 (end)
+
+\subsubsection{Cauchy判准} % (fold)
+\label{ssub:cauchy判准}
+
+Cauchy判准是判断数列是否收敛的一种有力方法.
+\begin{definition}[Cauchy列]
+    一个数列谓Cauchy列, 如果对任意$\varepsilon>0$都存在$N$使得$n,m>N$时$\abs{a_n-a_m}<\epsilon$.
+\end{definition}
+\begin{finale}
+    \begin{theorem}[Cauchy判准]
+        若实数数列$\curb{a_n}$为Cauchy列, 则其收敛.
+    \end{theorem}
+    \begin{theorem}[等价性]
+        Cauchy判准和上确界原理等价.
+    \end{theorem}
+\end{finale}
+\begin{proof}[闭区间套原理蕴含Cauchy判准]
+    对于Cauchy列$\curb{a_n}$, 取$r_i=2^{-i}$, 则每个$r_i$都有相应的$N_i$使$n,m\ge N_i$时$\abs{a_n-a_m}<r_i$. 换言之, $a_{N_i}$之后的数都在$I_i = \brac{a_{N_i}-r_i,a_{N_i}+r_i}$内. 于是$\curb{I_i}$构成一闭区间套, 全体的交为单点$c$. 可证$c$就是极限. \inlinehardlink{自行补全之.}
+\end{proof}
+\begin{proof}[Cauchy判准蕴含Bolzano–Weierstra\ss 定理]
+    参考\cref{ssub:b_w定理}中「闭区间套原理蕴含 Bolzano–Weierstraß 定理」证明中构造的$\curb{I_n}$, 在每个$I_n$选取点可以得到子列$a_{n_i}$, 由构造过程它符合Cauchy判准, 故子列收敛.
+\end{proof}
+
+% subsubsection cauchy判准 (end)
+
+\subsubsection{应用} % (fold)
+\label{ssub:应用}
+
+与上确界原理等价的几个命题都已经证明了. {\color{red}它们在日后的重要性在任何程度上都不亚于上确界原理.} 现在列举几个应用.
+\begin{sample}
+    \begin{ex}
+        $\+bR$不可数. 换言之, 不存在任何方法给每个实数都用整数编号, 即不可能把实数写成$\curb{x_1, x_2, \cdots}$. 如果它可数, 设$I_1$是任一不包含$x_1$的非空闭区间, $I_2\subset I_1$是任一不包含$x_2$的非空闭区间, 以此类推选取一列闭区间套$\curb{I_n}$. 则由闭区间套原理, $\cap I_n$非空, 且不包含任何$x_n$, 故$\curb{x_n}$并未穷举所有实数.
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \centerline{
+    \xymatrix{
+        \frac{1}{1}\ar[r] & \frac{2}{1}\ar[ld] & \frac{3}{1}\ar[r] & \cdots\ar[dl] \\
+        \frac{1}{2}\ar[d] & \frac{3}{2}\ar[ur] & \frac{5}{2}\ar[ld] & \cdots \\
+        \frac{1}{3}\ar[ur] & \frac{2}{3}\ar[ld] & \frac{4}{3}\ar[ur] & \cdots \\
+        \vdots\ar[r] & \vdots\ar[ur] & \vdots & \vdots
+    }
+    }
+    \caption{给正有理数编号}
+    \label{fig:给正有理数编号}
+\end{figure}
+\begin{remark}
+    与之形成对比的是, $\+bZ$是可数的. $\curb{0, 1, -1, 2, -2, \cdots}$就是一种给每个整数编号的方式. $\+bQ$也是如此, 只不过编号的方式没那么显然, 如\cref{fig:给正有理数编号}.
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{4cm}{Monotone}
+    \caption{蓝线是$y=\sqrt{2+x}$的图像}
+    \label{fig:sqrt2的图像}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        设$x_0 = 1$, 证明$x_{n+1} = \sqrt{2+x_n}$定义的数列$\curb{x_n}$收敛.
+    \end{ex}
+    \begin{proof}
+        如\cref{fig:sqrt2的图像}, $x_n$构成有界单调递增数列, 由单调收敛定理知收敛.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        证明$S_0 = 0$, $S_n = S_{n-1} + 1/n^2$定义的数列$\curb{S_n}$收敛.
+    \end{ex}
+    \begin{proof}
+        考虑到
+        \[ \rec{n^2} < \rec{n-1} - \rec{n}, \]
+        于是对任意充分小的$\varepsilon>0$, 取$N$使得$\varepsilon>1/N$, 于是对任意$m,n>N$, 都有
+        \[ \rec{\pare{n+1}^2} + \cdots + \rec{m^2} < \rec{N} < \varepsilon. \]
+        由Cauchy判准知收敛.
+    \end{proof}
+\end{sample}
+
+% subsubsection 应用 (end)
+
+% subsection 上确界原理的等价 (end)
+
+% section 实数 (end)
+
+\end{document}

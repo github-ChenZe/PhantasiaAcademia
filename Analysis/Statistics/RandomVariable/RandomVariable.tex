@@ -1,0 +1,1252 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{随机变量} % (fold)
+\label{sec:随机变量}
+
+\begin{definition}[随机变量]
+    令$\Omega$为一样本空间, $X$是$\Omega$上一实函数, 若对于$\Omega$中任意点$\omega$总存在实数$X\pare{\omega}$与之对应则谓$X$一维随机变量.
+\end{definition}
+\begin{ex}[离散型随机变量]
+    抛硬币的结果及观测到的粒子数即为离散型随机变量.
+\end{ex}
+\begin{ex}[连续型随机变量]
+    收入及误差分布即为连续型随机变量.
+\end{ex}
+
+\subsection{离散型随机变量} % (fold)
+\label{sub:离散型随机变量}
+
+\begin{definition}[离散型随机变量]
+    设$X$为一随机变量, 若$X$仅取有限或可数多个值, 则谓之离散型随机变量.
+\end{definition}
+\begin{definition}[概率质量函数]
+    设$X$为一离散型随机变量, 其全部可能值为$\curb{a_1,\cdots,a_n}$, 则
+    \[ p_i = P\pare{X=a_i},\quad \pare{i = 1,2,\cdots}. \]
+    则谓$X$概率质量函数.
+\end{definition}
+在此定义下,
+\[ P\pare{X\in A} = \sum_{a_i\in A}P\pare{X=a_i} = \sum_{a_i\in A} p_i. \]
+概率质量函数应当满足如下性质:
+\begin{cenum}
+    \item 非负性: $p_i \ge 0$, $i = 1,2,\cdots$;
+    \item 规范性: $\displaystyle \sum p_i = 1$.
+\end{cenum}
+定义分布函数$F\pare{x} = \sum_{a_i\le x} p_i$, 则
+\[ p_i = P\pare{X=a_i} = F\pare{a_i} - F\pare{a_{i-1}}. \]
+
+\subsubsection{0-1分布} % (fold)
+\label{ssub:0_1分布}
+
+随机变量只取$0$, $1$两值则谓之服从Bernoulli分布. $P\pare{1} = p$, $P\pare{0} = 1-p$.
+
+% subsubsection 0_1分布 (end)
+
+\subsubsection{二项分布} % (fold)
+\label{ssub:二项分布}
+
+$n$次成功率$p$的Bernoulli试验中成功$A$发生的次数满足二项分布, 即
+\[ P\pare{X=k} = \binom{n}{k}p^k\pare{1-p}^{n-k}. \]
+须有$n$次试验独立重复且每次成功率相同.
+\begin{align*}
+    P\pare{X=k} &= P\pare{n\text{次试验中成功}k\text{次}} \\
+    &= P\pare{\frac{n!}{k!\pare{n-k}!}\text{种不同排法, 每种}k\text{个}A, n-k\text{个}A^c}\\
+    &= \binom{n}{k}p^k\pare{1-p}^{n-k}.
+\end{align*}
+\begin{lemma}[Bernoulli分布的规范性]
+    $\sum_i p_i = 1$.
+\end{lemma}
+\begin{proof}
+    $\displaystyle \sum_{k=0}^n \binom{n}{k} p^k\pare{1-p}^{n-k} = \pare{1}^{n}$.
+\end{proof}
+
+% subsubsection 二项分布 (end)
+
+\subsubsection{几何分布} % (fold)
+\label{ssub:几何分布}
+
+成功率$p$的Bernoulli试验中成功$A$首次发生的位置满足几何分布, 即
+\[ P\pare{X=k} = \pare{1-p}^{k-1}p. \]
+\begin{sample}
+    \begin{ex}
+        $n$把钥匙, 仅一把开门. 随机有放回选取开门, 求第$S$次才打开门的概率.
+    \end{ex}
+\end{sample}
+\begin{theorem}[几何分布的无记忆性]
+    正整数取值的几何分布随机变量$\xi$满足
+    \[ P\pare{\xi > m+n \vert \xi > m} = P\pare{\xi > n}. \]
+\end{theorem}
+\begin{proof}
+    记$G\pare{n} = P\pare{X>n}$, 则等价于证明
+    \[ G\pare{m+n} = G\pare{m}G\pare{n}. \]
+    即证明$G\pare{n} = G\pare{1}^n$.
+    但$G\pare{n} = q^n$, 由是立得.
+\end{proof}
+\begin{remark}
+    正整数取值的随机变量当且仅当其服从几何分布.
+\end{remark}
+
+% subsubsection 几何分布 (end)
+
+\subsubsection{Pascal分布(负二项分布)} % (fold)
+\label{ssub:pascal分布}
+
+成功率$p$的Bernoulli试验中成功$A$第$r$次发生的位置满足Pascal分布, 即
+\begin{align*}
+    P\pare{X_r = k} &= P\pare{\text{前}n-1\text{次恰有}r-1\text{次成功且第}k\text{次成功}} \\
+    &= P\pare{\text{前}n-1\text{次恰有}r-1\text{次成功}} P\pare{\text{第}k\text{次成功}} \\
+    &= \binom{k-1}{r-1}p^r \pare{1-q}^{k-r}.
+\end{align*}
+
+% subsubsection pascal分布 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+13, 20, 22.
+
+% paragraph 作业 (end)
+\begin{remark}
+    负二项分布可以视为$\displaystyle\binom{n-1}{r-1}$个几何分布的叠加.
+\end{remark}
+
+\begin{sample}
+    \begin{ex}[Banach火柴问题]
+        口袋中有两盒火柴, 每盒火柴装有$n$根. 每次随机取出一盒, 取出一根用掉. 若取出一盒时发现其已空, 求另一盒中还剩下$r$根火柴的概率.
+    \end{ex}
+    \begin{proof}
+        记$A$为「甲盒已空, 乙盒剩$r$根」的概率, 则题目所求概率为$2p\pare{A}$. 将取出甲视为成功, $p = \displaystyle\half$, 则$A$发生时意味着「第$n+1$次成功发生在第$2n+1-r$次」. 代入负二项分布的,
+        \[ p\pare{A} = \binom{2n-r}{n} \pare{\half}^{2n-r+1}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        在可列Bernoulli试验中, 求第$n$次成功发生在第$m$次失败之前的概率.
+    \end{ex}
+    \begin{proof}[解]
+        记$F_k$为第$n$次成功发生在第$k$次试验,
+        \[ E = \bigcup_{k=n}^{n+m-1} F_k, \]
+        而$F_k$两两互斥,
+        \[ P\pare{E} = \sum_{k=n}^{n+m-1}\binom{k-1}{n-1} p^n \pare{1-p}^{k-n}. \qedhere \]
+    \end{proof}
+\end{sample}
+
+\subsubsection{Poisson分布} % (fold)
+\label{ssub:poisson分布}
+
+\begin{ex}
+    设有区域$D\subset V$, 微生物出现在$D$中彼此独立, 微生物中有$x$个出现在$D$中的概率是
+    \[ P\pare{D} = \binom{N}{x}\pare{\frac{D}{V}}^x\pare{1-\frac{D}{V}}^{N-x}. \]
+    令$V$和$N$趋于无穷, 而密度$N/V=d$保持常数, 则有
+    \[ P\pare{D} = \frac{\pare{1-1/N}\pare{1-2/N}\cdots\pare{1-\pare{x-1}{N}}\pare{Dd}^x\pare{1-Dd/N}^{N-x}}{x!}. \]
+\end{ex}
+当$N$很大, $p$很小且$Np$趋于一个极限时, Poisson分布就是二项分布的一个很好的近似. $N$未知时, Poisson分布更加有用.
+\begin{theorem}
+    在$n$重Bernoulli试验中, 以$p_n$代表成功率, 若$np_n\rightarrow \lambda$, 则$n\rightarrow \infty$时,
+    \[ \binom{n}{k}p_n^k\pare{1-p_n}^{n-k} \rightarrow \frac{\lambda^k}{k!}e^{-\lambda}. \]
+\end{theorem}
+\begin{proof}
+    只需证明$\pare{1-p_n}^n = e^{-\lambda}$, 即
+    \[ \abs{\pare{1-p_n}^n - \pare{1-\frac{\lambda}{n}}^n} \le n\abs{\pare{1-p_n} - \pare{1-\frac{\lambda}{m}}} = \abs{\lambda - np_n}\rightarrow 0. \qedhere \]
+\end{proof}
+\inlinehardlink{通过这一思路将Poisson转化为事件对时间的发生率.}
+\begin{sample}
+    \begin{ex}
+        现在需要$100$个合格元件, 废品率$0.01$. 准备买$100+a$个元件, 要求至少有$100$个合格元件的概率不小于$0.95$, 应当采纳$a$如何.
+    \end{ex}
+    \begin{proof}[解]
+        这是$100+a$次Bernoulli试验, 合格品量$X\sim B\pare{100+a,0.01}$,
+        \[ P\pare{A} = P\pare{X\le a} = \sum_{i=0}^a \binom{100+a}{i}0.01^i0.99^{100+a-i} \ge 0.95. \]
+        考虑到$\pare{100+a}\times 0.01\sim 1$, 准用Poisson近似, 则
+        \[ P\pare{A} = e^{-1} \sum_{i=0}^a \rec{i!}, \]
+        当$a=3$时$P=0.981$第一次超过$0.95$, 故$a=3$.
+    \end{proof}
+\end{sample}
+\begin{pitfall}
+    Poisson近似仅当$p\ll 1$且$np\sim \const$时适用.
+\end{pitfall}
+谓$X$服从参数$\lambda$的Poisson分布, 如果
+\[ P\pare{X=k} = \frac{\lambda^k}{k!}e^{-\lambda},\quad k = 0,1,\cdots,\quad \lambda > 0. \]
+\begin{sample}
+    \begin{ex}
+        设一块放射性物质在单位时间内发射出$\alpha$离子数$\xi$服从Poisson分布. 每个发射出来的粒子被记录下的概率为$p$. 设粒子是否被记录是独立的, 求记录下的粒子数$\eta$的分布.
+    \end{ex}
+    \begin{proof}[解]
+        实际上, 结果仍为Poisson分布.
+        \begin{align*}
+            P\pare{\eta = k} &= \sum_{n=k}^\infty P\pare{n=k\vert \xi = n}P\pare{\xi = n} \\
+            &= \sum_{n=k}^\infty \binom{n}{k} p^k \pare{1-p}^{n-k} \cdot \frac{\lambda^n}{n!}e^{-\lambda} \\
+            &= \frac{\pare{\lambda p}^k}{k!}e^{-p\lambda} \sum_{n=k}^\infty \frac{\pare{\lambda p}^{n-k}}{\pare{n-k}!}e^{-q\lambda} \\
+            &= \frac{\pare{\lambda p}^k}{k!}e^{-\pare{1-p]}\lambda.}
+        \end{align*}
+        \inlinehardlink{对于复杂求和, 考虑转化为已知分布律求出其值.}
+    \end{proof}
+\end{sample}
+
+% subsubsection poisson分布 (end)
+
+% subsection 离散型随机变量 (end)
+
+\subsection{连续性随机变量} % (fold)
+\label{sub:连续性随机变量}
+
+若对连续随机变量$X$存在函数$f$满足
+\begin{cenum}
+    \item 对所有$-\infty < x < \infty$, 有$f\pare{x}\ge 0$;
+    \item $\displaystyle \int_{-\infty}^{+\infty}f\pare{x}\,\rd{x}  = 1$;
+    \item 对任意$-\infty < a \le b < \infty$, 有
+    \[ P\pare{a\le X \le b} = \int_a^b f\pare{x}\,\rd{x}; \]
+\end{cenum}
+则谓之$X$的概率密度函数. 对于连续性随机变量, 可取$\func{X}{\Omega}{\+vR}$, 满足
+\begin{cenum}
+    \item 值域为连续区间;
+    \item 为了定义$P\pare{X\in A}$, 可以采用思路;
+    \begin{cenum}
+        \item $P\pare{X\in A} = \displaystyle \int_A f\pare{x}\,\rd{x}$;
+        \item $\+bR$上的任一可测区间可通过$\lbr{a,b}$型的区间生成. 故可以定义$\lbr{-\infty, x}$上的概率函数
+\[ F\pare{x} = P\pare{X \le x}. \]
+    \end{cenum}
+\end{cenum}
+设$X$为一连续性随机变量, 则谓
+\[ F\pare{x} = \int_{-\infty}^x f\pare{u}\,\rd{u} \]
+谓其累积分布函数(CDF).
+\begin{remark}
+    CDF对离散型分布(以及任何类型的分布)都是适用的.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        对于离散型的分布, 例如六面体骰子, $F\pare{x} = \displaystyle \sum_{a_i \le x} p_i$, 则在$\pare{0,6}$内$f\pare{x} = \lfloor{x}\rfloor{}/6$, 否则为$0$或$1$.
+    \end{ex}
+\end{sample}
+对任意类型类型的随机变量, 设其CDF为$F$, 则对任意$A\subset R$有
+\[ P\pare{X\subset A} = \int_A \rd{F\pare{x}}. \]
+CDF应满足
+\[ F\pare{x} = P\pare{X\le x}. \]
+\begin{lemma}[CDF的性质]
+    设$F$为一CDF, 则
+    \begin{cenum}
+        \item $F$是非减的函数, 因为$F\pare{x_2} - F\pare{x_1} = P\pare{x_1 < X \le x_2}$;
+        \item $0\le F\pare{x} \le 1$, 且$\displaystyle \lim_{x\rightarrow -\infty} F\pare{x} = 0$, $\displaystyle \lim_{x\rightarrow\infty} F\pare{x} = 1$;
+        \item {\color{red}$F\pare{x}$右连续.}
+    \end{cenum}    
+\end{lemma}
+\begin{proof}
+    第三点需要用到\inlinehardlink{概率的连续性}.
+\end{proof}
+反过来, 满足这些性质的函数也可以作为CDF.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+27, 29, 32, 36, 39, 40.
+
+% paragraph 作业 (end)
+
+\paragraph{离散型随机变量} % (fold)
+\label{par:离散型随机变量}
+
+对于离散型随机变量,
+\[ F\pare{x} = \sum_{x_i \le x} p_i, \]
+此时CDF和PMF等价.
+
+% paragraph 离散型随机变量 (end)
+
+\paragraph{连续型随机变量} % (fold)
+\label{par:连续型随机变量}
+
+对于连续型随机变量,
+\[ F\pare{x} = \int_{-\infty}^x f\pare{t}\,\rd{t}. \]
+如果$f$是PDF, {\color{red}且在$x_0$处连续}, 则$F'\pare{x_0} = f\pare{x_0}$.
+
+% paragraph 连续型随机变量 (end)
+
+\subsubsection{正态分布} % (fold)
+\label{ssub:正态分布}
+
+若随机变量$X$具有概率密度函数
+\[ f\pare{x} = \rec{\sqrt{2\pi}\sigma} \exp\curb{-\frac{\pare{x-\mu}^2}{2\sigma^2}}, \]
+则谓之服从正态分布. $\mu = 0$, $\sigma=1$者谓标准正态分布, 以$\Phi\pare{x}$(CDF)或$\phi\pare{x}$(PDF)表示之.
+\begin{lemma}
+    若$X\sim N\pare{\mu,\sigma^2} = \displaystyle \frac{X - \mu}{\sigma} \sim N\pare{0,1}$.
+\end{lemma}
+\begin{proof}
+    证明二者CDF相同即可.
+\end{proof}
+这就意味着
+\[ P\pare{a\le X \le b} = \Phi\pare{\frac{b-\mu}{\sigma}} - \Phi\pare{\frac{a-\mu}{\sigma}}, \]
+故可以通过查标注正态分布表得到任何正态分布的数值值.
+
+% subsubsection 正态分布 (end)
+
+\subsubsection{指数分布} % (fold)
+\label{ssub:指数分布}
+
+若$X$具有概率密度函数
+\[ f\pare{x} = \begin{cases}
+    \lambda e^{-\lambda x},\quad x> 0,\\
+    x \le 0,
+\end{cases} \]
+则谓$X$服从参数为$\lambda$的指数分布. 其CDF为
+\begin{equation}
+    F\pare{x} = \begin{cases}
+    \label{eq:指数分布CDF}
+    1 - e^{-\lambda x},\quad x> 0,\\
+    0,\quad x\le 0.
+    \end{cases}
+\end{equation}
+令$X$表示某元件的寿命, 引入失效率
+\[ h\pare{x} = \lim_{\Delta x \rightarrow 0} \frac{P\pare{x \le X \le x+\Delta x \vert X>x}}{\Delta x}, \]
+即在时刻$x$仍工作的条件下, 在接下来$\Delta x$时间内失效的概率与$\Delta x$之比. 若$h\pare{x} = \lambda = \const$, 则$X$服从指数分布.
+\begin{proof}
+    由条件,
+    \[ \frac{P\pare{x<X\le x+\Delta}}{\Delta \cdot P\pare{X>x}} \rightarrow \lambda. \]
+    转换为用CDF表示, 则
+    \[ \frac{F\pare{x+\Delta} - F\pare{x}}{\Delta}\cdot \rec{1-F\pare{x}} = \lambda, \]
+    得到\eqref{eq:指数分布CDF}.
+\end{proof}
+\begin{remark}
+    若$h\pare{x} = \lambda x^\alpha$, 则可得到分布为Weibull分布.
+\end{remark}
+指数分布具有无记忆性, 即
+\[ P\pare{X>s+t \vert X>s} = P\pare{X>t}, \]
+这也等价于寿命是无老化的. 对于正值连续分布, 指数分布是唯一一种无记忆的分布. 记$\conj{F}\pare{x} = 1 - F\pare{x}$, 则谓之生存函数(即寿命大于$x$的概率). 在指数分布的情形, $\conj{F}\pare{x} = e^{-\lambda x}$.
+\begin{proof}
+    若$P\pare{X}$无记忆性, 则
+    \[ P\pare{X>s+t} = P\pare{X>s}P\pare{X>t} \Leftrightarrow \conj{F}\pare{s+t} = \conj{F}\pare{s}\conj{F}\pare{t}. \]
+    对于整数, 显然$\conj{F}\pare{n} = \conj{F}\pare{1}^n$. 对于有理数, 也类似得到$\displaystyle \conj{F}\pare{\frac{n}{m}} = \pare{F\pare{1}}^{n/m}$. 对于实数的情形, 取单调有理数列逼近之即可.
+\end{proof}
+
+% subsubsection 指数分布 (end)
+
+\subsubsection{均匀分布} % (fold)
+\label{ssub:均匀分布}
+
+若随机变量具有密度函数
+\[ f\pare{x} = \begin{cases}
+    \rec{b-a},\quad a\le x\le b,\\
+    0,\quad \mathrm{otherwise},
+\end{cases} \]
+则谓之服从$\brac{a,b}$上的均匀分布. 其CDF为
+\[ F\pare{x} = \begin{cases}
+    0,\quad x<a,\\
+    \frac{x-a}{b-a},\quad a\le x\le b,\\
+    1\quad x>b.
+\end{cases} \]
+
+% subsubsection 均匀分布 (end)
+
+% subsection 连续性随机变量 (end)
+
+\subsection{多维分布与边际分布} % (fold)
+\label{sub:多维分布与边际分布}
+
+多维随机变量$X$是样本空间到$\+bR^n$上的映射, 且对于任意$B\in \+cB_{\+bR^n}$, 都有$X^{-1}\pare{B}\in \+cF$.
+\begin{ex}
+    抽扑克牌需要花色和数字说明其属性.
+\end{ex}
+\begin{ex}
+    打靶有$\pare{x,y}$两个随机变量.
+\end{ex}
+设$X=\pare{X_1,\cdots, X_n}$, 其中每个$X_i$都是随机变量, 则$X$为$n$维随机变量(或随机向量). 若所有分量为离散则$X$离散, 若所有分量皆连续则$X$连续.
+\par
+假设已建立映射$\Omega\mapsto \+bR^n$, 则$\forall A \subset \+bR^n$,
+\[ P\pare{X\in A} = P\pare{\setcond{\omega \in \Omega}{X\pare{\omega}\in A}} \Rightarrow P\pare{X\in \+bR^n} = P\pare{\Omega}. \]
+设$X$离散, 设$\func{X_i}{\Omega}{\curb{a_{i_1}, a_{i_2}, \cdots}}$. 称
+\[ p\pare{j_1,\cdots,j_n} = P\pare{X_1 = a_{1j_1},\cdots, X_n = a_{nj_n}} \]
+为$n$维随机变量的概率密度函数. 显然其满足
+\begin{cenum}
+    \item $p\pare{j_1,\cdots,j_n} \ge 0$;
+    \item $\displaystyle \sum_{j_1,\cdots,j_n} p\pare{j_1,\cdots, j_n} = 1$.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        设$\pare{X,Y}$为二维离散型随机变量, 取值分别为$\curb{x_1,x_2,\cdots}$和$\curb{y_1,y_2,\cdots}$, 且
+        $P\pare{X=x_i,Y=y_i} = p_{ij}$, 则
+        \begin{cenum}
+            \item $p_{ij} \ge 0$;
+            \item $\displaystyle \sum_{i,j} p_{ij} = 1$;
+            \item $F\pare{x,y} = P\pare{X\le x, Y\le y} = \displaystyle \sum_{\substack{x_i\le x\\ y_j\le y}} p_{ij}$.
+        \end{cenum}
+        假设其CDF已知, 则
+        \begin{align*}
+            p_{ij} &= F\pare{x_i, y_j} - F\pare{x_{i-1},y_i} - F\pare{x_i, y_{i-1}} + F\pare{x_{i-1},y_{j-1}}.
+        \end{align*}
+        此外, 通过联合概率质量函数$p_{ij}$可得$x$的概率质量函数,
+        \begin{align*}
+            P\pare{X=x_i} &= P\pare{\bigcup_{j} \setcond{\omega}{X = x_i,\ Y = y_j}} \\
+            &= \sum_j P\pare{x = x_i, y = y_j} = \sum_j p_{ij} = p_{i+}.
+        \end{align*}
+    \end{ex}
+    \begin{proof}
+        对于第二点,
+        \begin{align*}
+            1 = P\pare{\Omega} &= P\pare{\bigcup_{i,j} \setcond{\omega}{\pare{X,Y}\pare{\omega} = \pare{x_i,y_j}}} \\
+            &= \sum_{i,j} P\pare{\setcond{\omega}{\pare{X,Y}\pare{\omega} = \pare{x_i,y_i}}} \\
+            &= \sum_{i,j} p_{i,j}.
+        \end{align*}
+        注意$\omega$被映射到不同的$\pare{x_i, y_j}$是互斥事件.
+    \end{proof}
+\end{sample}
+谓$X$与$Y$的pmf为边际分布率, 或边际概率质量函数(mpmf, marginal pmf). 而$p_{ij}$谓其联合概率质量函数(jpmf). 已知jpmf则可推知mpmf,但已知mpmf通常不能推知jpmf.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+37, 46, 52, 39
+
+% paragraph 作业 (end)
+
+\par
+对于多维随机变量, 可以定义分布函数
+\begin{align*}
+    F\pare{\+vx} &= P\pare{X_1 \le x_1, \cdots, X_n \le x_n}\\ &= P\pare{X\in B = \lbr{-\infty,x_1}\times\cdots\times\lbr{-\infty, x_n}}. 
+\end{align*}
+$\+cB_{\+bR^n}$中任意元素可以由$\lbr{-\infty,x_1}\times\cdots\times\lbr{-\infty, x_n}$的运算表示.
+\begin{sample}
+    \begin{ex}
+        设$A_1,\cdots,A_n$是某一试验下的完备事件群, 即其两两互斥且并为$\Omega$. 记$p_k=P\pare{A_k}$, 独立重复$N$次该实验, 以$X_i$表示$A_i$的出现次数, 则$X=\pare{X_1,\cdots,X_n}$为一离散型随机向量. 其分布率为多项分布, 记为$M\pare{N;p_1,\cdots,p_n}$.
+    \end{ex}
+    \begin{proof}[解]
+        $i_1$个$A_1$, $i_k$个$A_k$的所有可能排列数为$\displaystyle \frac{N!}{i_1 \cdots i_n}$, 故
+        \[ P\pare{X_i = i_1, \cdots, X_n = i_n} = \frac{N!}{i_1!\cdots i_n!} p_1^{i_1}\cdots p_n^{i_n}, \]
+        其中$i_1,\cdots,i_n\in \+bN, i_1 + \cdots + i_n = N$. 如果要求$X_i$的边缘分布, 则
+        \[ P\pare{X_i = k_i} = \binom{N}{k_i} p_i^{k_i}\pare{1-p_i}^{N-k_i}. \]
+        上述结论也可以直接对$P\pare{X_i = i_1, \cdots, X_n = i_n}$求和得到. 类似可求得
+        \[ \pare{X_i, X_j} \sim M\pare{N,p_i, p_j, 1-p_i-p_j}, \]
+        这是一个三项分布.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        一个有$5$黑球, $6$白球, $7$红球的罐子里抽取$4$个球, 设$X$是抽到的白球数目, $Y$是抽到的红球数目, 则$\pare{X,Y}$满足分布
+        \[ p\pare{x,y} = \frac{\binom{5}{4-x-y}\binom{6}{x}\binom{7}{y}}{\binom{5+6+7}{4}}. \]
+    \end{ex}
+\end{sample}
+设$X=\pare{X_1,\cdots,X_n}$为随机向量, 若存在非负的$f\pare{x_1,\cdots,x_n}$使得
+\[ P\pare{\curb{a_i \le X_i \le a_j}} = \int_{a_n}^{b_n}\cdots \int_{a_1}^{b_1} f\pare{x_1,\cdots,x_n}\,\rd{x_1}\cdots\,\rd{x_n}, \]
+则谓$f$为$X$的概率密度函数而$X$为连续型随机向量. pdf满足
+\begin{cenum}
+    \item $f\pare{\+vx} \ge 0$,\quad $\forall \+vx \in \+bR^n$;
+    \item $\displaystyle \int_{\+bR^n} f\pare{x}\,\rd{x} = 1$;
+    \item $X_1$的pdf为
+    \begin{align*}
+        F_1\pare{x_1} &= P\pare{X_1 \le x_1} \\
+        &= P\pare{X_1 \le x_1, \pare{X_2,\cdots, X_n} \in \+bR^{n-1}} \\
+        &= \int_{-\infty}^{x_1}\int_{\+bR^{n-1}} f\pare{t_1,u}\,\rd{u}\,\rd{t_1}.
+        f_1\pare{x} = \int_{\+bR^{n-1}} f\pare{x,u}\,\rd{u}.
+    \end{align*}
+    因此, 对连续型随机变量, 由jpdf可以得到mpdf.
+\end{cenum}
+\begin{remark}
+    对于高维离散型随机变量, 一般不使用cdf.
+\end{remark}
+若二维随机变量具有密度
+\[ f\pare{x_1,x_2} = \begin{cases}
+    1/\brac{\pare{b-a}\pare{d-c}},\quad a\le x_1 \le b,\ c\le x_2\le d,\\
+    0,\quad \mathrm{otherwise}.
+\end{cases} \]
+则谓之$\brac{a,b}\times\brac{c,d}$上的均匀分布. 此外还可以有二维正态分布.
+\begin{equation} \label{eq:二维正态分布} \rec{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}}\exp\curb{%
+    -\rec{2\pare{1-\rho^2}} \brac{%
+        \frac{\pare{x-a}^2}{\sigma_1^2}%
+         - 2\rho \frac{\pare{x-a}\pare{y-b}}{\sigma_1\sigma_2} +%
+        \frac{\pare{y-b^2}}{\sigma_2^2}%
+    }%
+}.
+\end{equation}
+利用一维正态分布积分为$1$可求得边缘分布.
+        \begin{figure}[ht]
+            \centering
+            \begin{subfigure}{.45\textwidth}
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    \diagbox{$\xi$}{$\eta$} & $0$ & $1$ \\
+                    \hline
+                    $0$ & $\frac{9}{25}$ & $\frac{6}{25}$ \\
+                    \hline
+                    $1$ & $\frac{6}{25}$ & $\frac{4}{25}$ \\
+                    \hline
+                \end{tabular}
+            \end{subfigure}
+            \begin{subfigure}{.45\textwidth}
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    \diagbox{$\xi$}{$\eta$} & $0$ & $1$ \\
+                    \hline
+                    $0$ & $\frac{6}{20}$ & $\frac{6}{20}$ \\
+                    \hline
+                    $1$ & $\frac{6}{20}$ & $\frac{2}{20}$ \\
+                    \hline
+                \end{tabular}
+            \end{subfigure}
+            \caption{\cref{ex:袋子取卡}的概率}
+            \label{fig:袋子取卡的概率}
+        \end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:袋子取卡}
+        袋中有$5$张卡片, 三张写$0$, 两张写$1$. 任取两张, 以$\xi$和$\eta$表示第一张和第二张卡片上的数字, 求放回和不放回时二者的联合分布率和边际分布率.
+    \end{ex}
+    \begin{proof}
+        两种情形的分布率分别如\cref{fig:袋子取卡的概率}所示, 二者的联合概率质量不相等, 但边缘概率质量相等.
+    \end{proof}
+\end{sample}
+\begin{remark}
+    不能从边际分布率得到联合分布率.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+4, 8, 11, 19, 12, 20
+
+% paragraph 作业 (end)
+
+\paragraph{部分分布} % (fold)
+\label{par:部分分布}
+
+通过cdf可得mcdf为
+\[ F_{X_1}\pare{x_1} = F\pare{x_1,+\infty,\cdots,+\infty}. \]
+对于离散型随机变量, jcdf $\Leftrightarrow$ jpmf. 对于连续型随机变量, jcdf $\Leftrightarrow$ jpdf. 后者有
+\[ f\pare{x_1,\cdots, x_n} =  \frac{\partial^n F}{\partial x_1\cdots \partial x_n}. \]
+\begin{sample}
+    \begin{ex}
+        考虑$p\pare{x,y} = x+y$, $q\pare{x,y} = \displaystyle\pare{x+\half}\pare{y+\half}$, 其中$\pare{x,y}\in \pare{0,1}^2$. 则边际概率密度都是
+        \[ f\pare{t}  = t + \half. \]
+    \end{ex}
+\end{sample}
+
+% paragraph 部分分布 (end)
+
+% subsection 多维分布与边际分布 (end)
+
+\subsection{条件分布和随机变量独立性} % (fold)
+\label{sub:条件分布和随机变量独立性}
+
+\subsubsection{条件分布} % (fold)
+\label{ssub:条件分布}
+
+\paragraph{离散型随机变量的条件分布} % (fold)
+\label{par:离散型随机变量的条件分布}
+
+设$\pare{X,Y}$为离散型随机变量, 其全部可能取值为$\curb{\pare{x_i, y_j}}$. 记其联合分布率为
+\[ p_{ij} = P\pare{X=x_i,Y=y_j}, \quad i,j = 1,2\cdots. \]
+对于给定的事件, $\curb{Y=y_j}$, 其概率$P\pare{Y=y_j}>0$, 则谓
+\[ P\pare{X=x_i\vert Y = y_j} = \frac{P\pare{X=x_i,Y=y_j}}{P\pare{Y=y_j}} = \frac{p_{ij}}{p_{\cdot j}} \]
+为条件概率分布, 其中
+\[ p_{\cdot j} = \sum_i p_{ij}. \]
+$P\pare{X=x_i\vert Y = y_j}$的非负性和规范性显然成立, 故构成一分布率. 可以定义条件cdf为
+\[ F\pare{x\vert Y = y_j} = P\pare{X\le x\vert Y = y_j}. \]
+从而
+\[ F\pare{x\vert Y = y_j} = \sum_{x_i\le x} P\pare{X=x_i \vert Y = y_j} = \sum_{x_i \le x} \frac{p_{ij}}{p_{\cdot j}}. \]
+因此, cond cdf $\Leftrightarrow$ conf pmf. 向右的箭头为
+\[ P\pare{X=x_i\vert Y = y_i} = F\pare{x_i\vert Y=y_j} - F\pare{x_{i-1}\vert Y = y_j}. \]
+\begin{sample}
+    \begin{ex}
+        设$\pare{X_1,X_2}$的联合分布率为
+        \[ \begin{array}{cccc}
+            X_1\backslash X_2 & -1 & 0 & 5 \\
+            1 & 0.17 & 0.05 & 0.21 \\
+            3 & 0.04 & 0.28 & 0.25
+        \end{array}. \]
+        在$X_2=0$的条件下, $X_1$的条件分布率为
+        \[ P\pare{X_1 = 1\vert X_2 = 0} = \frac{0.05}{0.33}, \quad P\pare{X_1 = 3\vert X_2 = 0} = \frac{0.28}{0.33}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X = \pare{X_1, \cdots, X_n}$满足多项分布$M\pare{N,p_1,\cdots,p_n}$. 求$X_1$在$X_2 = k$条件下的条件分布率.
+    \end{ex}
+    \begin{proof}[解]
+        可以强行套公式求和. 也可以转化为二项分布. 在已知第二类结果未发生的条件下, 其它结果发生的概率为$\displaystyle \frac{p_i}{1-p_2}$. 将其它结果划分为第一类和其它类, 得到
+        \[ X_1 \vert X_2 = k \sim B\pare{N-k, \frac{p_1}{1-p_2}}. \]
+        \par
+        或者, 利用二项分布的定义,
+        \[ \pare{X_1,X_2} \tilde M\pare{N, p_1, p_2, 1-p_1-p_2}. \]
+        而
+        \[ X_2 \tilde B\pare{N, p_2}. \]
+        从而得到
+        \begin{align*}
+            P\pare{X_1 = i\vert X_2 = k} &= \frac{P\pare{X_1 = i,X_2 = k}}{P\pare{X_2 = k}} \\ &= \binom{N-k}{N-k-i}\pare{\frac{p_1}{1-p_2}}^i\pare{1-\frac{p_1}{1-p_2}}^{N-k-i}. 
+        \end{align*}
+        两种方法的答案是一样的.
+    \end{proof}
+\end{sample}
+
+% paragraph 离散型随机变量的条件分布 (end)
+
+\paragraph{连续型随机变量的条件分布} % (fold)
+\label{par:连续型随机变量的条件分布}
+
+对于连续型随机变量, 相应的条件概率密度为
+\begin{align*}
+    P\pare{X\le x\vert y \le Y \le y+\epsilon} &= \frac{P\pare{X\le x, y\le Y\le y+\epsilon}}{P\pare{y\le Y \le y+\epsilon}} \\
+    &= \int_{-\infty}^x \int_y^{y+\epsilon} f\pare{u,v}\,\rd{v}\,\rd{u} /\int_y^{y+\epsilon} f_Y\pare{y}\,\rd{y} \\
+    &= \int_{-\infty}^x \frac{\int_y^{y+\epsilon} f\pare{u,v}\,\rd{v}}{\int_y^{y+\epsilon} f_Y\pare{y}\,\rd{y}}\,\rd{u}.
+\end{align*}
+两侧求导, 即得
+\[ f_{X\vert Y}\pare{x\vert y} = \frac{f\pare{x,y}}{f_Y\pare{y}},\quad f_Y\pare{y} > 0. \]
+容易验证$f_{X\vert Y}$满足非负性和规范性, 故构成一概率密度. 此时有cdf
+\[ F\pare{x\vert y} = \int_{-\infty}^x f\pare{u\vert y}\,\rd{u}. \]
+因此cond cdf $\Leftrightarrow$ cond pdf.
+\begin{pitfall}
+    $P\pare{X\in A\vert Y=y}$仅作为记号, 不可视为条件概率.
+\end{pitfall}
+假设已知$\pare{x,y}\sim f$, 欲求$P\pare{X\in A\vert Y=y}$, 则利用条件分布有
+\[ P\pare{X\in A\vert Y=y} = \int_A f\pare{x\vert y}\,\rd{x}. \]
+\begin{sample}
+    \begin{ex}
+        设$\pare{X,Y}$服从二元正态分布$N\pare{a,b,\sigma_1^2,\sigma_2^2,\rho}$, 试求$X\vert Y=y$的条件概率密度.
+    \end{ex}
+    \begin{proof}[解]
+        由定义,
+        \[ f\pare{x\vert y} = \frac{f\pare{x,y}}{f_Y\pare{y}} = \frac{\text{式}\eqref{eq:二维正态分布}}{\rec{\sqrt{2\pi}\sigma_2}\exp\brac{-\frac{\pare{y-b}^2}{2\sigma_2^2}}}. \]
+        于是
+        \[ X\vert Y=y \sim N\pare{a + \rho\sigma_1\sigma_2^{-1}\pare{y-b}, \sigma_1^2 \pare{1-\rho^2}}. \qedhere \]
+    \end{proof}
+\end{sample}
+条件概率可以推广到高维随机变量的情形. 设$\pare{X_1,\cdots, X_n}\sim f\pare{x_1,\cdots, x_n}$而$\pare{X_1,\cdots, X_k}\sim g\pare{x_1,\cdots, x_k}$, 则条件密度
+\[ h\pare{x_{k+1},\cdots,x_n\vert x_1,\cdots,x_k} = \frac{f\pare{x_1,\cdots, x_n}}{g\pare{x_1,\cdots,x_k}}. \]
+可以简记为
+\[ h\pare{\+vy\vert\+vx} = \frac{f\pare{\+vx, \+vy}}{g\pare{\+vx}}. \]
+
+% paragraph 连续型随机变量的条件分布 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+5, 9, 35, 36
+
+% paragraph 作业 (end)
+
+% subsubsection 条件分布 (end)
+
+\subsubsection{随机变量的独立性} % (fold)
+\label{ssub:随机变量的独立性}
+
+事件的独立性谓$P\pare{A\vert B} = P\pare{A}$, 即$B$发生与否对$A$发生的概率无影响, $P\pare{AB} = P\pare{A}P\pare{B}$. 对于随机变量类比之, 若$Y$取任何值对$X$的取值皆无影响, 则$X$与$Y$独立, 即
+\[ P\pare{X\in A\vert Y\in B} = P\pare{X\in A},\quad \forall\, B,A. \]
+这意味着
+\[ P\pare{X\in A,y\in B} = P\pare{X\in A}P\pare{Y\in B}. \]
+对于随机变量, 利用$\+bR$上集合的性质, 可只考虑$A = \lbr{-\infty,x}$, $B = \blr{-\infty,y}$, 即
+\[ P\pare{X\le x, Y\le y} = P\pare{X\le x}P\pare{Y\le y}. \]
+\begin{definition}[随机变量相互独立]
+    谓随机变量$X_1,\cdots, X_n$相互独立, 若对于任意实数区间$A_1,\cdots, A_n$都有
+    \[ P\pare{X_1 \in A_1,\cdots, X_n \in A_n} = P\pare{X_1\in A_1} \cdots P\pare{X_n \in A_n}. \]
+    用分布函数定义, 则
+    \[ F\pare{x_1,\cdots,x_n} = F\pare{x_1}\cdots F\pare{x_n}. \]
+\end{definition}
+两种定义是等价的. 对于二维离散分布情形, 设
+\[ F\pare{x,y} = F_1\pare{x}F_2\pare{y}. \]
+设$\pare{x,y}$的取值从小到大为$x_1,x_2,\cdots$. $y$的取值从小到大为$y_1,y_2,\cdots$. 则由独立性,
+\begin{align*}
+    P\pare{X=x_i,Y=y_j} &= F\pare{x_i,y_j} - F\pare{x_i,y_{j-1}} - F\pare{x_{i-1},y_j} + F\pare{x_{i-1},y_{j-1}} \\
+    &= F_1\pare{x_i} F_2\pare{y_j} - F_1\pare{x_i}F_2\pare{y_{j-1}} - F_1\pare{x_{i-1}} F_2\pare{y_j} + F_1\pare{x_{i-1}}F_2\pare{y_{j-1}} \\
+    &= P\pare{X=x_i}P\pare{Y=y_j}.
+\end{align*}
+反之
+\begin{align*}
+    F\pare{x,y} = P\pare{X\le x,Y\le y} &= \sum_{x_i \le x}\sum_{y_j\le y} P\pare{X=x_i,Y=y_j} \\
+    &= \sum_{x_i\le x}\sum_{y_j\le y} P\pare{X=x_i}P\pare{Y=y_i} \\
+    &= \pare{\sum_{x_i \le x}P\pare{x_i}} \pare{\sum_{y_j\le y}P\pare{y_j}} \\
+    &= F_1\pare{x}F_2\pare{y}.
+\end{align*}
+\begin{definition}
+    谓连续型随机变量相互独立, 如果
+    \[ f\pare{x_1,\cdots, x_n} = f_1\pare{x_1}\cdots f_n\pare{x_n},\quad \forall\,\pare{x_1,\cdots,x_n}\in\+bR^n. \]
+    用分布函数定义, 则
+    \[ F\pare{x_1,\cdots, x_n} = F_1\pare{x_1}\cdot F_n\pare{x_n},\quad \forall\,\pare{x_1,\cdots,x_n}\in\+bR^n. \]
+\end{definition}
+如果mpdf可分解, 则cdf可分解,
+\begin{align}
+    F\pare{x_1,\cdots,x_n} &= \int_{-\infty}^{x_1}\cdots \int_{-\infty}^{x_n} f\pare{u_1,\cdots,u_n}\, \rd{u_n}\cdots \rd{u_1} \\
+    &= \pare{\int_{-\infty}^{x_1}f_1\pare{u_1}\,\rd{u_1}} \cdots \pare{\int_{-\infty}^{x_n}f_n\pare{u_n}\,\rd{u_n}} \\
+    &= F_1\pare{x_1}\cdots F_n\pare{x_n}.
+\end{align}
+反之,
+\begin{align*}
+    f\pare{x_1,\cdots, x_n} &= \frac{\partial^n}{\partial x_1 \cdots \partial x_n} F\pare{x_1,\cdots, x_n} \\
+    &= \frac{\partial^n}{\partial x_1 \cdots \partial x_n} F_1\pare{x_1}\cdots F_n\pare{x_n}\\
+    &= \pare{\+D{x_1}D{F_1}} \cdot \pare{\+D{x_n}D{F_n}} \\
+    &= f_1\pare{x_1}\cdots f_n\pare{x_n}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        若随机变量$X_1,\cdots, X_n$相互独立, 则其中任一部分皆相互独立.
+    \end{ex}
+    \begin{proof}
+        若$X_1,\cdots,X_n$相互独立, 即$F\pare{x_1,\cdots, x_n} = \displaystyle \prod_{i=1}^n F_i\pare{x_i}$. 对于任意子集$\curb{X_{i_1},\cdots, X_{i_m}}\subset \curb{X_1,\cdots,X_n}$,
+        \begin{align*}
+            \tilde{F}\pare{x_{i_1},\cdots,x_{i_m}} &= \lim_{y_*\rightarrow +\infty} F\pare{x_{i_1},\cdots, x_{i_m},y_*} \\
+            &= \lim_{y_*\rightarrow \infty} F_{i_1}\pare{x_{i_1}}\cdots F_{i_m}\pare{x_{i_m}} \prod_* F_*\pare{y_*} \\
+            &= F_{i_1}\pare{x_{i_1}}\cdots F_{i_m}\pare{x_{i_m}}. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+独立随机变量之性质有
+\begin{cenum}
+    \item $\pare{X_1,\cdots,X_n}$为离散型, 则相互独立$\Leftrightarrow \mathrm{jpmf} = \displaystyle \prod_{i=1}^n \mathrm{mpmf}$;
+    \item $\pare{X_1,\cdots,X_n}$为连续型, 则相互独立$\Leftrightarrow \mathrm{jpdf} = \displaystyle \prod_{i=1}^n \mathrm{mpdf}$;
+    \item 对于任意子集$\curb{X_{i_1},\cdots, X_{i_m}}\subset \curb{X_1,\cdots,X_n}$皆相互独立;
+    \item 设$g_1\pare{x_1},\cdots,g_n\pare{x_n}$为随机变量, 则它们相互独立.
+\end{cenum}
+谓随机变量$X_1,\cdots,X_n$\emph{两两独立}, 如果其中任意两个随机变量都相互独立.
+\begin{pitfall}
+    相互独立蕴含两两独立, 惟两两独立不蕴含相互独立.
+\end{pitfall}
+\begin{sample}
+    \begin{ex}
+        若$\xi,\eta$相互独立, 都服从$\curb{-1,1}$两点的等可能分布. 设$\zeta = \xi\eta$, 则$\zeta$也服从$\curb{-1,1}$两点的等可能分布. $\zeta$, $\xi$, $\eta$两两独立, 例如
+        \begin{align*}
+            P\pare{\xi = -1, \zeta = -1} &= P\pare{\xi=-1, \eta = 1}\\ &= \half\times\half = P\pare{\xi = -1}\times P\pare{\zeta = -1}. 
+        \end{align*}
+        但三者不相互独立,
+        \[ P\pare{\zeta = -1, \xi = 1, \eta = 1} = 0 \neq P\pare{\zeta = -1}P\pare{\xi = 1}P\pare{\eta = 1}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\pare{X,Y} = N\pare{a,b,\sigma_1^2,\sigma_2^2,\rho}$, 则$X$和$Y$相互独立当且仅当$\rho = 0$.
+    \end{ex}
+    \begin{ex}
+        设$\pare{X,Y}$服从矩形上的均匀分布, 则$X$和$Y$相互独立.
+    \end{ex}
+    \begin{ex}
+        设$\pare{X,Y}$服从单位圆上的均匀分布, 则$X$和$Y$并非相互独立.
+        \begin{align*}
+            f_X\pare{x} &= \int_{\+bR} f\pare{x,y}\,\rd{y} \\
+            &= \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} \rec{\pi}\,\rd{y} \\
+            &= \frac{2}{\pi} \sqrt{1-x^2} I\pare{-1<x<1}. \\
+            f_Y\pare{y} &= \frac{2}{\pi} \sqrt{1-y^2} I\pare{-1<y<1}. \\
+            f\pare{x,y}\neq f_X\pare{x}f_Y\pare{y}.\qedhere
+        \end{align*}
+    \end{ex}
+    \begin{ex}
+        设有$n$个事件$A_1,\cdots,A_n$, 定义$X_i = I_{A_i}$当$A_i$发生时取$1$, 否则取$0$. 则$A_1,\cdots,A_n$独立当且仅当$X_1,\cdots,X_n$独立.
+    \end{ex}
+    \begin{proof}
+        由事件独立,
+        \[ P\pare{\tilde{A}_1\cdots\tilde{A}_n} = P\pare{\tilde{A}_1}\cdots P\pare{\tilde{A}_n}. \]
+        而$x_i$取值$0$或$1$, 故
+        \begin{align*}
+            P\pare{X_1=x_1, \cdots, X_n=x_n} &= P\pare{\tilde{A}_1\cdots\tilde{A}_n}\\ &= P\pare{X_1=x_1}\cdots P\pare{X_n=x_n}.\qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+
+% subsubsection 随机变量的独立性 (end)
+
+% subsection 条件分布和随机变量独立性 (end)
+
+\subsection{随机变量的函数的概率分布} % (fold)
+\label{sub:随机变量的函数的概率分布}
+
+设有多维随机变量$X=\pare{X_1,\cdots,X_n}$, 函数$\func{g}{\+bR^n}{\+bR^m}$, 则$Y = g\pare{X}$的分布应分为离散和连续两种情形考虑.
+\par
+对于离散型随机变量, 设$X$的取值为$\pare{x_1,\cdots,x_n,\cdots}$, $Y=g\pare{X}$的取值为$y_1,\cdots, y_m,\cdots$, 则$Y$的分布率为
+\[ P\pare{Y=y_j} = P\pare{g\pare{X} = y_j} = \sum_{g\pare{x_i} = y_j} p\pare{x_i}. \]
+\begin{sample}
+    \begin{ex}
+        设$X$有概率密度
+        \[ \begin{array}{ccccc}
+            X & -1 & 0 & 1 & 2 \\
+            P & 1/4 & 1/2 & 1/8 & 1/8
+        \end{array}, \]
+        则$Y=X^2$有分布率
+        \[ \begin{array}{cccc}
+            X & 0 & 1 &  4 \\
+            P & 1/2 & 1/4+1/8 & 1/8
+        \end{array}. \]
+    \end{ex}
+\end{sample}
+设多维随机变量$X$的分布率为$P\pare{X=x}$, $Y=g\pare{X}$的分布率为
+\[ P\pare{Y=y} = P\pare{g\pare{X} =y} = \sum_{g\pare{x} = y} P\pare{X,x}. \]
+设$\xi,\eta$是相互独立的非负整数值随机变量, $g\pare{\xi,\eta} = \xi+\eta$将二维随机变量变为一维随机变量, 则分布率为
+\[ P\pare{\xi + \eta = n} = \sum_{k=0}^n a_kb_{n-k}. \]
+此公式谓\emph{离散卷积公式}.
+\begin{sample}
+    \begin{ex}
+        设$X\sim B\pare{n,p}$, $Y\sim B\pare{m,p}$且$X$和$Y$相互独立, 则$X+Y\sim B\pare{n+m,p}$.
+        \begin{align*}
+            P\pare{x+y = k} &= \sum_{i=0}^k P\pare{X=i}P\pare{Y=k-i} \\
+            &= \sum_{i=0}^k \binom{n}{i}\binom{m}{k-i} p^ip^{k-1} q^{n-i}q^{m+k-i} \\
+            &= \sum_{i=0}^n \binom{n}{i}\binom{m}{k-i} p^k q^{n+m-k}.
+        \end{align*}
+        组合数的求和正好是$\pare{1+x}^n\pare{1+x}^m$中$x^k$的系数, 即
+        \[ \sum_{i=0}^n \binom{n}{i}\binom{m}{k-i} = \binom{n+m}{k}. \]
+        也可以通过二项分布的意义解释, $X$表示$n$次实验的成功次数, $Y$表示之后$m$次实验的成功次数. 由于实验彼此独立, $X+Y$即为$m+n$次实验中的成功次数.
+    \end{ex}
+\end{sample}
+二项分布的这一性质谓再生性, 可以推广至多项和, 即独立的$X_i \sim B\pare{n_i,p}$, 则
+\[ \sum X_i \sim B\pare{\sum n_i, p}. \]
+\begin{sample}
+    \begin{ex}
+        设$X\sim P\pare{\lambda}$, $Y\sim P\pare{\mu}$, 且$X$和$Y$独立, 则$X+Y \sim P\pare{\lambda + \mu}$. 故Poisson分布也具有再生性.
+        \begin{align*}
+            &\phantom{=} \, P\pare{x+y = n} \\
+            &= \sum_{k=0}^n P\pare{X=k} P\pare{y=n-k} \\
+            &= \sum_{k=0}^n \frac{\lambda^k}{k!}e^{-\lambda} \frac{\mu^{n-k}}{\pare{n-k}!}e^{-\mu} \\
+            &= \sum_{k=0}^n \frac{n!}{k!\pare{n-k}!} \pare{\frac{\lambda}{\lambda + \mu}}^k \pare{\frac{\mu}{\lambda+\mu}}^{n-k} e^{-\pare{\lambda+\mu}} \cdot \frac{\pare{\lambda+\mu}^n}{n!}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+46, 48, 54, 55
+
+% paragraph 作业 (end)
+
+\subsubsection{连续型随机变量的情形} % (fold)
+\label{ssub:连续型随机变量的情形}
+
+\begin{theorem}[密度变换公式]
+    设随机变量$X$有概率密度函数$f\pare{x}$, $x\in \pare{a,b}$. 而$y=g\pare{x}$是在$\pare{a,b}$上单调的连续函数, 存在唯一的反函数$x = h\pare{y}$, $y\in \pare{\alpha,\beta}$, 并且$h'\pare{y}$存在且连续, 则$Y=g\pare{X}$也是连续型随机变量并且有概率密度函数
+    \[ p\pare{y} = f\pare{h\pare{y}}\abs{h'\pare{y}},\quad y\in\pare{\alpha,\beta}. \]
+\end{theorem}
+\begin{proof}
+    设$X\sim f_X\pare{x}$, $Y = g\pare{X}$, 则$Y$的cdf(不妨设$g$单调递增)
+    \begin{align*}
+        P\pare{Y\le y} &= P\pare{g\pare{X} \le y} \\
+        &= P\pare{X \le g^{-1}\pare{y}} \\
+        &= \int_{-\infty}^{g^{-1}\pare{y}}f_X\pare{t}\,\rd{t} \\
+        &= \int_{-\infty}^y f_X\pare{g\pare{u}}g'\pare{u}\,\rd{u}.
+    \end{align*}
+    由于$f_X\pare{g\pare{u}}g'\pare{u}\ge 0$, $\forall u\in \+bR$, 由连续型随机变量的定义, $Y$也是连续型随机变量, 且$f_Y\pare{y} = f_X\pare{g^{-1}\pare{y}} = \pare{g^{-1}\pare{y}}'$.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        设$X\sim U\pare{-\pi/2,\pi/2}$, 求$Y=\tan X$的概率密度函数.
+    \end{ex}
+    \begin{proof}[解]
+        $y=\tan x$严格单调且可导, 而$x=\tan y$的导数为$\displaystyle \rec{1+y^2}$, 从而
+        \[ f_Y\pare{y} = f_X\pare{\arctan y}\abs{\pare{\arctan y}'} = \rec{\pi} \chi_{\arctan y \in \pare{-\pi/2,\pi/2}}\rec{1+y^2}. \]
+        也可以使用cdf,
+        \begin{align*}
+            P\pare{Y\le y} &= P\pare{\tan X \le y} \\
+            &= P\pare{X\le \arctan y} \\
+            &= \int_{-\pi/2}^{\arctan y}\rec{\pi}\,\rd{x} \\
+            &= \half + \rec{\pi}+\arctan y.
+        \end{align*}
+        pdf可通过对cdf求导得到, 故
+        \[ f_Y\pare{y} = \+dyd{F_y}. \qedhere \]
+    \end{proof}
+\end{sample}
+对于$g$并非在全区间上单调而是逐段单调时, 密度例如$Y=X^2$, 其中$X\sim N\pare{0,1}$, 求$y$的pdf, 则对于任意$y>0$, 有
+\begin{align*}
+    F_Y\pare{y} &= P\pare{Y\le y} = P\pare{X^2 \le y} \\
+    &= P\pare{-\sqrt{y} \le X \le \sqrt{Y}} \\
+    &= \int_{-\sqrt{y}}^{\sqrt{y}} \rec{\sqrt{2\pi}} e^{-t^2/2}\,\rd{t} \\
+    &= 2 \int_0^{\sqrt{y}} \rec{\sqrt{2\pi}}e^{-t^2/2}\,\rd{t} \\
+    &= 2 \int_0^y \rec{2\pi} e^{-u/2} \half u^{-1/2}\,\rd{u} \\
+    &= \int_{-\infty}^y \rec{\sqrt{2\pi}} u^{-1/2}e^{-u/2}I\pare{u\ge 0}\,\rd{u}.
+\end{align*}
+这个例子中, $y$的pdf恰好为
+\[ f_Y\pare{y} = f_X\pare{\sqrt{y}}\abs{\sqrt{y}'}I\pare{y>0} + f_X\pare{-\sqrt{y}}\abs{-\sqrt{y}'}I\pare{-\sqrt{y} < 0}. \]
+\begin{theorem}
+    设$R = \bigcup_j I_j$, $g$在$I_j$上严格单调, 则
+    \[ f_X\pare{x} = \sum_j f_X\pare{x} I\pare{x\in I_j}, \]
+    \[ f_Y\pare{y} = \sum_j f_X\pare{g^{-1}\pare{y}}\abs{g^{-1}\pare{y}'}I\pare{g^{-1}\pare{y}\in I_j}. \]
+\end{theorem}
+假设现在已知
+\[ \pare{X_1,X_2}\sim f_X\pare{x_1,x_2}, \]
+\[ \func{g_1}{\+bR^2}{\+bR},\quad \func{g}{\+bR^2}{\+bR}, \]
+\[ \begin{cases}
+    Y_1 = g_1\pare{X_1,X_2}, \\
+    Y_2 = g_2\pare{X_1,X_2}.
+\end{cases} \]
+欲求$\pare{Y_1,Y_2}$的pdf, 考虑
+\begin{align*}
+    F_Y\pare{y} &= P\pare{Y_1 \le y_1, Y_2 \le y_2} \\
+    &= P\pare{g_1\pare{x_1,x_2}\le y_1, g_2\pare{x_1,x_2}\le y_2} \\
+    &= \iint f_X\pare{x_1,x_2}\,\rd{x_1}\,\rd{x_2} \\
+    &= \int_{-\infty}^{y_1}\int_{-\infty}^{y_2} f_X\pare{h_1\pare{u_1,u_2},h_2\pare{u_1,u_2}} \begin{vmatrix}
+        \+D{u_1}D{h_1} & \+D{u_2}D{h_1} \\
+        \+D{u_1}D{h_2} & \+D{u_2}D{h_2} 
+    \end{vmatrix}\,\rd{u_1}\,\rd{u_2} \\
+    &\Rightarrow f_Y\pare{y_1,y_2} = f_X\pare{h_1\pare{y_1,y_2},h_2\pare{y_1,y_2}} \begin{vmatrix}
+        \+D{y_1}D{h_1} & \+D{y_2}D{h_1} \\
+        \+D{y_1}D{h_2} & \+D{y_2}D{h_2} 
+    \end{vmatrix}.
+\end{align*}
+\begin{remark}
+    行列式应当取绝对值.
+\end{remark}
+\begin{theorem}
+    设$\pare{\xi_1,\xi_2}$是2维连续随机变量, 具有联合密度函数$p\pare{x_1,x_2}$. 设$\zeta_j = f_j\pare{\xi_1,\xi_2}$, $j=1,2$与$\+v\xi$与$\+v\zeta$一一对应, 逆映射$\xi_j = h_j\pare{\zeta_1,\zeta_2}$, 且$h_j$具有一阶连续偏导数, 则$\pare{\zeta_1,\zeta_2}$也是连续型随机变量, 联合概率密度为
+    \[ q\pare{y_1,y_2} = \begin{cases}
+        p\pare{h_1\pare{y_1,y_2},h_2\pare{y_1,y_2}}\abs{J},\quad \pare{y_1,y_2}\in \+bD, \\
+        0,\quad \mathrm{otherwise}. \\
+    \end{cases} \]
+    其中$\+bD$是$\+v\zeta$的所有可能取值的集合, $J$是变换的Jacobi行列式,
+    \[ J = \begin{vmatrix}
+        \+D{y_1}D{h_1} & \+D{y_2}D{h_1} \\
+        \+D{y_1}D{h_2} & \+D{y_2}D{h_2} 
+    \end{vmatrix}. \]
+\end{theorem}
+\begin{theorem}
+    设$\+v\zeta$是$n$维连续型随机变量, 具有联合密度$p\pare{\+vx}$. 若存在向量函数
+    \[ \+vy = \+vf\pare{\+vx},\quad \+v\zeta = \+vf\pare{\+v\zeta}, \]
+    使得$\+v\xi$和$\+v\zeta$之间一一对应, 则
+    \[ q\pare{\+vy} = p\pare{\+vf^{-1}\pare{\+vy}}\abs{J\pare{\+vf^{-1}}}. \]
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        在直角坐标平面上随机选取一点$\pare{\xi,\eta}$, 两者相互独立且皆服从$N\pare{0,1}$, 试求其极坐标$\pare{\rho,\theta}$的分布.
+    \end{ex}
+    \begin{proof}[解]
+        $\func{\+vf^{-1}}{\rho,\theta}{\rho\cos\theta, \rho\sin\theta}$, 从而$J\pare{\+vf^{-1}} = r$,
+        \[ f_{\pare{\rho,\theta}}\pare{r,t} = f_{\pare{X,Y}}\pare{r\cos t, r\sin t}r = \frac{r}{2\pi}e^{-r^2/2}. \qedhere \]
+    \end{proof}
+\end{sample}
+对于不保持维数的映射,
+\[ \+vX\sim f_{\+vX}\pare{\+vx},\quad \func{g}{\+bR^n}{\+bR^m},\quad \+bY = g\pare{\+vX},\quad m\le n. \]
+求$\+vy$的pdf. 则
+\begin{align*}
+    F_{\+vY}\pare{\+vy} &= p\pare{g\pare{\+vX}\le \+vy} \\
+    &= \int\cdots\int f_{\+vX}\pare{\+vx}\,\rd{\+vx} \\
+    &= \int\cdots\int * \,\rd{\+vu}.
+\end{align*}
+另一方法谓补齐映射至$\+bR^n \mapsto \+bR^n$, 即
+\[ \begin{pmatrix}
+    Y \\
+    U
+\end{pmatrix} = \begin{pmatrix}
+    g\pare{X} \\
+    h\pare{X}
+\end{pmatrix}. \]
+其中$h$可根据实际需要选取. 则
+\begin{align*}
+    f_{Y,U}\pare{y,u} &= f_X\pare{\pare{g,h}^{-1}\pare{y,u}}\abs{J}, \\
+    f_Y\pare{y} &= \int_{\+vR^{n-m}} f_{Y,U}\pare{y,u}\,\rd{u}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        设$\pare{X,Y}\sim f\pare{x,y}$, 求$x+y$的pdf.
+    \end{ex}
+    \begin{proof}[解]
+        按概率密度函数的定义求解,
+        \begin{align*}
+            F_{X+Y}\pare{t} &= P\pare{X+Y\le t} \\
+            &= \iint_{x+y\le t} f\pare{x,y}\,\rd{x}\,\rd{y} \\
+            &= \int_{\+bR} \int_{-\infty}^{t-x} f\pare{x,y}\,\rd{y}\,\rd{x} \\
+            &= \int_{\+bR} \int_{-\infty}^t f\pare{x,u-x}\,\rd{u}\,\rd{x} \\
+            &= \int_{-\infty}^t \int_{\+bR} f\pare{x,u-x}\,\rd{x}\,\rd{u}.
+        \end{align*}
+        从而$f_{X+Y}\pare{t} = \displaystyle \int_{\+bR} f\pare{x,t-x}\,\rd{x}$. 也可以使用换元公式求解,
+        \[ \begin{cases}
+            z = x+y,\\
+            x=x
+        \end{cases}\Rightarrow J = \begin{vmatrix}
+            -1 & 0 \\
+            1 & 1
+        \end{vmatrix} = 1. \]
+        从而
+        \[ f_{X,Z}\pare{x,z} = f_{X,Y}\pare{x,z-x} \times 1. \]
+        \[ f_Z\pare{z} = \int_{\+bR} f_{X,Z}\pare{x,z}\,\rd{x}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X$服从期望为$2$的指数分布, $Y\sim U\pare{0,1}$, 且$X$和$Y$相互独立. 求$X-Y$的概率密度和$P\pare{X\le Y}$.
+    \end{ex}
+    \begin{proof}[解]
+        $-Y\sim U\pare{-1,0}$, 由卷积公式,
+        \begin{align*}
+            f_{X-Y}\pare{z} &= \int_{\+bR} f_X\pare{x} f_{-Y}\pare{z-x}\,\rd{x}\\
+            & = \int_\+bR \half e^{-x/2}I\pare{x>0}I\pare{-1<z-x<0}\,\rd{x}\\
+            &= \begin{cases}
+                e^{-z/2}\pare{1-e^{-1/2}},\quad z\ge 0,\\
+                1-e^{-1-1/z},\quad -1<z<0,\\
+                0,\quad z\le -1.
+            \end{cases}
+            \qedhere
+        \end{align*}
+    \end{proof}
+    \begin{proof}[使用分布函数]
+        考虑累积分布函数$P\pare{x-y\le z}$, 其中$z\le -1$时$P = 0$. 对任意$z > -1$有
+        \begin{align*}
+            P\pare{x-y\le z} &= \iint_{x-y\le z} f_X\pare{x} f_Y\pare{y}\,\rd{x}\,\rd{y}.
+        \end{align*}
+        若按此思路写下去, 则回到上一情形. 另一思路谓将联合密度写为条件密度, 
+        \begin{align*}
+            P\pare{x-y\le z} &= \iint_{x-y\le z} f_{X\vert Y}\pare{x\vert y} f_Y\pare{y}\,\rd{x}\,\rd{y} \\
+            &= \int_{0}^1 \,\rd{y}\cdot f_Y\pare{y} \int_{x\le y+z} f_{X\vert Y}\pare{x\vert y}\,\rd{x}
+        \end{align*}
+        注意对于独立随机变量, 条件密度等于无条件的情形,
+        \begin{align*}
+            P\pare{x-y\le z} &= \int_0^1 P\pare{X\le y+z}f_Y\pare{y}\,\rd{y} \\
+            &= \int_0^1 P\pare{X\le y+z}\,\rd{y} \\
+            &= \begin{cases}
+                \int_0^1 P\pare{x\le y+z}\,\rd{y},\quad z\ge 0,\\
+                \int_{-z}^1 P\pare{x\le y+z}\,\rd{y},\quad -1 < z < 0
+            \end{cases}\\
+            &= \begin{cases}
+                1 - 2e^{-z/2}\pare{1-e^{-1/2}},\quad z\ge 0,\\
+                z + 2e^{-\pare{z+1}/2} -1,\quad -1<z<0.
+            \end{cases}
+        \end{align*}
+        求导即可得到同样的结果.
+    \end{proof}
+\end{sample}
+\begin{remark}
+    密度函数需要在整个实数轴上定义, 不可略去不可能情形的值.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+50, 51, 58
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n\sim N\pare{0,1}$, 求$\displaystyle Y_n = \sum_{i=1}^n X_i^2$的分布.
+    \end{ex}
+    \begin{proof}[解]
+        $n=1$时$X_1^2$的pdf由密度变换公式得到, 记$\phi$为$N\pare{0,1}$的密度,
+        \begin{align*}
+            f_1\pare{z} &= \phi\pare{\sqrt{z}}\cdot\half z^{-1/2} I\pare{z>0} + \phi\pare{-\sqrt{z}}\abs{-\half z^{-1/2}}I\pare{z>0} \\
+            &= \rec{\sqrt{2\pi}}e^{-z/2}z^{-1/2}I\pare{z>0}.
+        \end{align*}
+        通过卷积公式计算前两个$X_i$的pdf, 则
+        \begin{align*}
+            & f_{2}\pare{z} = \int_{\+bR} f_1\pare{x}f_1\pare{z-x}\,\rd{x} \\
+            &= \int_{\+bR} \rec{\sqrt{2\pi}} x^{-1/2}e^{-x/2}I\pare{x>0}\cdot \rec{\sqrt{2\pi}} \pare{z-x}^{-1/2} e^{-\frac{z-x}{2}} I\pare{z>x}\,\rd{x} \\
+            &= \rec{2\pi}e^{-z/2}\int_0^z x^{-1/2}\pare{z-x}^{-1/2}\,\rd{x} \\
+            &= \half e^{-z/2}I\pare{z>0}.
+        \end{align*}
+        可猜测$X_1^2 + \cdots + X_n^2$的pdf有形式
+        \[ f_n\pare{z} \propto z^{n/2-1}e^{-z/2} I\pare{z>0}. \]
+        利用规范性可得系数, 故
+        \[ f_n\pare{z} = \rec{2^{n/2}\Gamma\pare{n/2}}z^{n/2-1}e^{-z/2}I\pare{z>0}. \]
+        归纳证明之, $n=1$之情形成立, 现在假设$n-1$时成立, 则由卷积公式,
+        \begin{align*}
+            f_n\pare{z} &= \int_{\+bR} f_{n-1}\pare{x}f_1\pare{z-x}\,\rd{x} \\
+            &= \rec{2^{n/2}\Gamma\pare{\frac{n-1}{2}}\Gamma\pare{\half}} \int_0^z x^{\frac{n-1}{2}-1}e^{-\frac{x}{2}}\cdot \pare{z-x}^{-\half} e^{-\frac{z-x}{2}}\,\rd{x} \\
+            &= \frac{z^{n/2-1}e^{-z/2}}{2^{n/2}\Gamma\pare{\frac{n-1}{2}}\Gamma\pare{\half}} \int_0^1 z^{\frac{n-1}{2} - 1}\pare{1-u}^{-\half}\,\rd{u} \\
+            &= \rec{2^{n/2}\Gamma\pare{\frac{n}{2}}}z^{n/2-1}e^{-z/2}I\pare{z>0}.
+        \end{align*}
+        这是自由度为$n$的$\chi^2$分布.
+    \end{proof}
+    $\chi^2$分布具有再生性, 即如果$X\sim \chi_n^2$, $Y\sim \chi_m^2$, 则$X+Y\sim \chi_{m+n}^2$. 此外, $X\sim \chi_n^2$, 则$\expc{X}=n$, $\sigma^2 X = 2n$.
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X\sim\pare{\mu_1,\sigma_1^2}$, $Y\sim\pare{\mu_2,\sigma^2}$的平方, 且$X$与$Y$相互独立, 则
+        \[ X+Y \sim N\pare{\mu_1+\mu_2, \sigma_1^2 + \sigma_2^2}. \]
+        更一般地, 设$X_i\sim N\pare{\mu_i,\sigma_i^2}$, $i=1,\cdots,n$, 诸$X_i$相互独立. 设
+        \[ X = \sum a_iX_i + b_i, \]
+        则
+        \[ X \sim N\pare{\mu,\sigma^2},\quad \mu = \sum_{i=1}^n a_i\mu_i + b_i,\quad \sigma^2 = \sum_{i=1}^n a_i^2 \sigma_i^2. \]
+    \end{ex}
+    \begin{remark}
+        独立性条件不可缺少. 例如$X$和$-X$都服从正态分布, 但其和显然不符合.
+    \end{remark}
+\end{sample}
+
+\paragraph{多维正态分布} % (fold)
+\label{par:多维正态分布}
+
+谓$\pare{X_1,\cdots,X_n}$服从$n$元正态分布, 如果其联合概率密度有形式
+\[ f\pare{\+vx} = \rec{\pare{2\pi}^{n/2}\abs{\Sigma}^2}\exp\curb{-\half\pare{\+vx-\+v\mu}^T \Sigma^{-1} \pare{\+vx - \+v\mu}}. \]
+其中$\Sigma$是一正定矩阵. 此时谓$X\sim N_n\pare{\+v\mu, \Sigma}$. 对于$n=2$的情形, 取
+\[ \+v\mu = \begin{pmatrix}
+    a\\
+    b
+\end{pmatrix},\quad \Sigma = \begin{pmatrix}
+    \sigma_1^2 & \rho\sigma_1\sigma_2 \\
+    \rho\sigma_1\sigma_2 & \sigma_2^2
+\end{pmatrix}, \]
+则$N_2\pare{\+v\mu,\Sigma} = N\pare{a,b,\sigma_1^2,\sigma_2^2,\rho}$. $n$元正态分布满足
+\begin{cenum}
+    \item 任意边际为正态.
+    \item $AX \sim N\pare{A\+v\mu, A\Sigma A^T}$, 其中$A\Sigma A^{-1}$正定.
+    \item 若$X\sim N_n\pare{\+v\mu,\Sigma}$, 则$a^T X\sim N\pare{a^T\+v\mu, a^T\Sigma a}$, 其中$a$不全为零.
+\end{cenum}
+
+% paragraph 多维正态分布 (end)
+
+如下分布都是具有再生性的:
+\begin{cenum}
+    \item 二项分布对试验次数;
+    \item Poisson分布对$\lambda$;
+    \item Pascal分布对$r$
+    \item 正态分布对两个参数;
+    \item $\chi^2$对$n$.
+\end{cenum}
+\begin{theorem}
+    如果$\pare{\xi,\eta}$是二维连续型随机向量, 其联合密度为$f\pare{x,y}$, 则其商$\xi/\eta$为连续型随机变量, 具有密度函数
+    \[ p_{\xi/\eta}\pare{x} = \int_{\+bR} \abs{t}f\pare{xt,t}\,\rd{t}. \]
+\end{theorem}
+\begin{proof}
+    第一种思路谓求出$F_z\pare{z}$后求导. 第二种思路谓考虑
+    \[ \begin{pmatrix}
+        Z\\
+        Y
+    \end{pmatrix} = \begin{pmatrix}
+        X/Y\\
+        Y
+    \end{pmatrix} \]
+    的pdf后边际化. 使用第二种思路,
+    \begin{align*}
+        J &= J\pare{\begin{cases}
+            x=zy,\\
+            y=y
+        \end{cases}} = \begin{vmatrix}
+            z & y \\
+            1 & 0
+        \end{vmatrix} = -y,\\
+        f_{Z,Y}\pare{z,y} &= f_{X,Y}\pare{zy,y}\abs{-y} \\
+        \Rightarrow f_Z\pare{z} &= \int_{\+bR} f_{Z,Y}\pare{z,y}\,\rd{y} = \int_{\+bR} f\pare{X,Y}\pare{zy,y}\abs{y}\,\rd{y}.
+    \end{align*}
+    若使用第一种思路, 则
+    \begin{align*}
+        F_Z\pare{z} &= P\pare{\frac{X}{Y}\le z} \\
+        &= \iint_{x/y \le z} f\pare{x,y}\,\rd{x}\,\rd{y} \\
+        &\xlongequal{t=x/y,y=y} \int_{-\infty}^z \int_{\+bR}\abs{y}f\pare{ty,y}\,\rd{y}\,\rd{t}.
+    \end{align*}
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        设$\xi$和$\eta$相互独立且同时服从$\lambda=1$的指数分布, 求$\xi/\eta$的密度函数.
+    \end{ex}
+    \begin{proof}[解]
+        先求出cdf,
+        \begin{align*}
+            F_{X/Y}\pare{z} &= P\pare{\frac{X}{Y}\le z} \\
+            &= \iint_{x/y\le z} e^{-x}I\pare{x>0} e^{-y} I\pare{y>0}\,\rd{x}\,\rd{y} \\
+            &= \int_0^{\infty}\int_0^{zy} e^{-x} \,\rd{x}e^{-y}\,\rd{y}.
+        \end{align*}
+        求导即可.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_1\sim N\pare{0,1}$, $X_2\sim \chi_n^2$, 两者相互独立, 求$\displaystyle Y = \frac{X_1}{\sqrt{X_2/n}}$的概率密度($Y\sim t_n$谓自由度为$n$的$t$分布).
+    \end{ex}
+    \begin{proof}[解]
+        记$Z = \sqrt{X_2/n}$, 则
+        \[ f_Z\pare{z} = f_n\pare{nz^2}\cdot 2nz I\pare{z>0}. \]
+        则$Y=\displaystyle \frac{X_1}{Z}$的pdf为
+        \begin{align*}
+            f_Y\pare{y} &= \int_{\+bR} \abs{t}\phi\pare{yt} f_Z\pare{t}\,\rd{t} \\
+            &= \int_0^{\infty} t\phi\pare{yt} f_Z\pare{t}\,\rd{t} \\
+            &= \rec{\sqrt{2\pi}} \frac{2n^{n/2}}{2^{n/2}\Gamma\pare{\frac{n}{2}}} \int_0^{\infty} t^n e^{-\pare{y^2+n}t^2/2}\,\rd{t} \\
+           x=\frac{\pare{n+y^2}t^2}{2} &\Rightarrow \rec{\sqrt{2\pi}} \frac{2n^{-n/2}}{2^{n/2}\Gamma\pare{\frac{n}{2}}}\int_0^\infty x^{\frac{n-1}{2}}e^{-x}\,\rd{x} \cdot \half \pare{\frac{2}{n+y^2}}^{\frac{n+1}{2}} \\
+           &= \frac{\Gamma\pare{\frac{n+1}{2}}}{\sqrt{n\pi}\Gamma\pare{\frac{n}{2}}} \pare{1+\frac{y^2}{n}}^{-\frac{n+1}{2}}.
+        \end{align*}
+        特别地, 当$y\rightarrow\infty$时收敛于$\phi\pare{y}$.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_1\sim \chi_n^2$, $X_2\sim \chi_m^2$, 且$X_1$与$X_2$相互独立, 求$Y = \displaystyle\frac{X_1/n}{X_2/m}$的概率密度函数. 此时$Y\sim F_{n,m}$谓自由度为$n,m$的$F$分布.
+    \end{ex}
+    \begin{proof}[解]
+        $\displaystyle f_Y\pare{y} = \frac{\Gamma\pare{\frac{n+m}{2}}}{\Gamma\pare{\frac{n}{2}}\Gamma\pare{\frac{m}{2}}}n^{n/2}m^{m/2}y^{n/2-1}\pare{ny+m}^{-\frac{n+m}{2}}$.
+    \end{proof}
+\end{sample}
+
+% subsubsection 连续型随机变量的情形 (end)
+
+\subsubsection{极小值和极大值的分布} % (fold)
+\label{ssub:极小值和极大值的分布}
+
+对于$n$个随机变量, 定义最大值和最小值
+\begin{align*}
+    X_{\pare{n}} &= \max\curb{X_1,\cdots,X_n}, \\
+    X_{\pare{1}} &= \min\curb{X_1,\cdots,X_n}.
+\end{align*}
+如此定义的$X_{\pare{n}}$与$X_{\pare{1}}$也是随机变量. 当$X_1,\cdots,X_n$相互独立时, 可以利用其分布函数$F_1,\cdots,F_n$求出$F_{X_{\pare{n}}}\pare{x}$和$F_{X_{\pare{1}}}\pare{x}$.
+\begin{ex}
+    投两个骰子, $X,Y\in \curb{1,2,3,4,5,6}$, 则
+    \begin{align*}
+        P\pare{Z=k} &= P\pare{\max\curb{X,Y} = k} \\
+        &= P\pare{X=k,Y\le k} + P\pare{X<k,Y=k} \\
+        &= P\pare{X=k}P\pare{y<k} + P\pare{X<k}P\pare{Y=k} \\
+        &= \rec{6}\cdot\frac{k}{6} + \frac{k-1}{6}\rec{6}.
+    \end{align*}
+\end{ex}
+考虑$X_{\pare{n}}$的cdf,
+\begin{align*}
+    F_{\pare{n}}\pare{x} &= P\pare{X_{\pare{n}}\le x} \\
+    &= P\pare{\max X_i \le X} \\
+    &= P\pare{X_1\le X,X_2\le X,\quad, X_n \le x} \\
+    &= F_1\pare{x} \cdot\cdots\cdot F_n\pare{x}.
+\end{align*}
+如果$X_i$的cdf都是$F$, 则$X_{\pare{n}}$的cdf和pdf为
+\[ F_{\pare{n}}\pare{x} = F_{\pare{n}}^n \pare{x},\quad f_{\pare{n}}\pare{x} = \+dxd{} F^n\pare{x} = nF^{n-1}\pare{x}f\pare{x}. \]
+$X_1$的cdf为
+\[ F_{\pare{1}}\pare{x} = 1-\pare{1-F\pare{x}}^n. \]
+
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n\sim U\pare{0,\theta}$, $\theta>0$, 求$X_{\pare{n}} = \max X_i$的密度函数.
+    \end{ex}
+    \begin{proof}[解]
+        根据上面的公式,
+        \begin{align*}
+            F_{\pare{n}}\pare{x} &= F^n\pare{x} = \int_{\infty}^x \rec{\theta} I\pare{0<u<\theta}\,\rd{u} \\
+            &= \frac{x^n}{\theta^n}I\pare{0<x<\theta}.
+        \end{align*}
+        当$x>\theta$时, $F\pare{x} = 1$.所求pdf为
+        \[ f_{\pare{n}}\pare{x} = \frac{nx^{n-1}}{\theta^n} I\pare{0<x<\theta}. \]
+        而$X_{\pare{1}}$的pdf为
+        \[ f_{\pare{1}}\pare{x} = n\brac{1-\frac{x}{\theta}}^{n-1}\rec{\theta} I\pare{0<x<\theta}. \qedhere \]
+    \end{proof}
+\end{sample}
+设$X_1,\cdots,X_n\sim f$, 求$X_{\pare{k}}$的pdf. 而$P_{\pare{k}}\pare{X_{\pare{k}}\le x}$相当于$X_1,\cdots,X_n$中至少$k$个$\le x$的概率, 即
+\begin{align*}
+    P_{\pare{k}}\pare{X_{\pare{k}}\le x} &= \sum_{r=k}^n P\pare{\text{$X_1,\cdots,X_n$中恰有$r$个$\le x$}} \\
+    &= \sum_{r=k}^n \binom{n}{r} P\pare{X_1\le x,\cdots,X_r\le x,X_{r+1}>x,\cdots,X_{n}\ge x} \\
+    &= \sum_{r=k}^n \binom{n}{r} F^r\pare{x} \pare{1-F\pare{x}}^{n-r}.
+\end{align*}
+另一种方法谓, 考虑到
+\[ f_{\pare{k}}\pare{x} = \lim_{h\rightarrow 0} \frac{F_{\pare{k}}\pare{x+h} - F_{\pare{k}}\pare{x}}{h}, \]
+当$h$充分小,
+\begin{align*}
+    &\phantom{=}\,P\pare{x<X_{\pare{k}} \le x+h}\\ &= P\pare{\text{$X_1,\cdots,X_n$中有$k-1$个$\le x$, 一个$\in\pare{x,x+h}$, $n-k$个$\ge x+h$}} \\
+    &= \frac{n!}{\pare{k-1}!1!\pare{n-k}!}\cdot \\ &\phantom{=}\, P\pare{X_1\le x,\cdots,X_{k-1}\le x,x<X_k<x+h,X_{k+1}>x+h,\cdots,X_n>X+h} \\
+    &= \frac{n!}{\pare{k-1}!\pare{n-k}!} F^{k-1}\pare{x}\brac{F\pare{x+h} - F\pare{x}}\brac{1-F\pare{x+h}}^{n-k}.
+\end{align*}
+从而
+\[ f_{\pare{k}}\pare{x} = \frac{n!}{\pare{k-1}!\pare{n-k}!}F^{k-1}\pare{x}f\pare{x}\brac{1-F\pare{x}}^{n-k}. \]
+类似的思路可证, $\pare{X_{\pare{i}}, X_{\pare{j}}}$的pdf为
+\[ f_{\pare{i,j}}\pare{u,v} = \lim_{h_1,h_2\rightarrow 0} \frac{P\pare{u<X_{\pare{i}}<u+h_1, {u<X_{\pare{j}}<u+h_2}}}{h_1h_2}.  \]
+\begin{align*}
+    P\pare{X_{\pare{1}}\in B_1,\cdots,X_{\pare{n}}\in B_n} &= P\pare{\text{$X_1,\cdots,X_n$各有$1$个在$B_i$中}} \\
+    &= n! P\pare{X_1\in B_1,\cdots,X_n \in B_n} \\
+    &= n! \prod_i P\pare{X_i\in B_i}. \\
+    f_{\pare{1,\cdots,n}}\pare{u_1,\cdots,u_n} &= \lim_{\delta\rightarrow 0} \frac{P\pare{X_{\pare{1}}\in B_1,\cdots, X_{\pare{n}}\in B_n}}{\delta_1 \cdots \delta_n} \\
+    &= \lim_{\delta\rightarrow 0} \brac{n! \prod_i \frac{P\pare{X_i\in B\pare{u_i}}}{\delta_i}} \\
+    &= n! f\pare{u_1}\cdots f\pare{u_n} I\pare{u_1<\cdots <u_n}.
+\end{align*}
+
+\begin{cenum}
+    \item $n$个独立$B\pare{1,p}$的$0$-$1$随机变量之和为$B\pare{n,p}$;
+    \item 有限个独立二项随机变量($p$相等)之和还是二项分布;
+    \item Poisson分布之和是Poisson, 参数相加;
+    \item $r$相同几何分布之和是参数为$r$和$p$的负二项分布;
+    \item 任意有限个独立正态随机变量的线性组合仍然服从正态分布.
+\end{cenum}
+
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$服从参数为$\lambda$的指数分布. 求$X_{\pare{1}}$和$\sum_i \pare{X_i - X\pare{i}}$的pdf, 且两者是否相互独立?
+    \end{ex}
+\end{sample}
+
+% subsubsection 极小值和极大值的分布 (end)
+
+% subsection 随机变量的函数的概率分布 (end)
+
+% section 随机变量 (end)
+
+\end{document}

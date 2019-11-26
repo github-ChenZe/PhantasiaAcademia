@@ -1,0 +1,71 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'MatrixRefr.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1219.28570605bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.58907874)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{MatrixRefr.pdf}}%
+    \put(0.21616872,0.30729618){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32161686\unitlength}\raggedright $\alpha$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{MatrixRefr.pdf}}%
+    \put(0.73421981,0.50312821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32161686\unitlength}\raggedright $\alpha'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{MatrixRefr.pdf}}%
+    \put(0.13777842,0.47021535){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32161686\unitlength}\raggedright $i$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{MatrixRefr.pdf}}%
+    \put(0.55184532,0.30799917){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32161686\unitlength}\raggedright $-\beta$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{MatrixRefr.pdf}}%
+    \put(0.89700515,0.40167405){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32161686\unitlength}\raggedright $i'$\end{minipage}}}%
+    \put(0.34094903,0.2598445){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32513181\unitlength}\raggedright $O$\end{minipage}}}%
+    \put(0.74607524,0.2598445){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32513181\unitlength}\raggedright $C$\end{minipage}}}%
+    \put(0.4112478,0.50589021){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32513181\unitlength}\raggedright $M$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{MatrixRefr.pdf}}%
+    \put(0.44731434,0.37440297){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32161686\unitlength}\raggedright $y=y'$\end{minipage}}}%
+    \put(0.58152794,0.25634472){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.32161686\unitlength}\raggedright $x$\end{minipage}}}%
+    \put(0.26411999,0.1532911){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12551455\unitlength}\raggedright $n$\end{minipage}}}%
+    \put(0.64687726,0.1532911){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.12551455\unitlength}\raggedright $n'$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

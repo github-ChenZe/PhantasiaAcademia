@@ -1,0 +1,52 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\Var}{Var}
+
+\begin{document}
+
+\begin{sample}
+    \begin{ex}
+        $EX = 2$, $DX = 2$, 则
+        \[ E\pare{X^2} = \pare{EX}^2 + DX = 6. \]
+    \end{ex}
+\end{sample}
+    \begin{theorem}
+        设$X_1,X_2,\cdots,X_n$ i.i.d. $F$, 则
+        \[ \frac{S_n}{n} \xrightarrow{p} = EX. \]
+        此外,
+        \[ \frac{\sqrt{n}\pare{\overbar{X} - EX}}{\sqrt{\Var\pare{X}}} \sim N\pare{0,1}. \]
+    \end{theorem}
+\begin{sample}
+    \begin{ex}
+        $X_1,\cdots,X_n$ i.i.d. $F_1$, $Y_1\vert X_1 = x \sim G_x$, 则
+        \[ EY_1 = \int_{\+bR}tg_x\pare{t}f\pare{x}\,\rd{x}\,\rd{t}. \]
+        由全期望公式
+        \[ EY_1 = E_x\pare{E\pare{Y\vert X}}. \]
+        %从而
+        %\[ EY = \sum_{j=1}^n \sum_{i=1}^n Y_i P\pare{Y_i\vert X_j}P\pare{X_j}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_n\xrightarrow{p} X$, $P\pare{X=c} = 1$, 欲证明$g\pare{X_n}\xrightarrow{p} g\pare{X}$.
+    \end{ex}
+    \begin{solution}
+        $\forall \epsilon>0$, $\forall \sigma>0$, $\exists N, n>N$,
+        \[ P\pare{\abs{X_n - \epsilon} > \epsilon} \rightarrow 0. \]
+        欲证明
+        \[ \forall \epsilon, \quad P\pare{\abs{g\pare{X_n} - g\pare{c}} \ge \epsilon} \rightarrow 0. \]
+        由$g$的连续性,
+        \[ \forall \epsilon>0, \exists \delta > 0, \forall x\in\pare{x_0 - \delta,x_0 + \delta}, \abs{g\pare{x} - g\pare{x_0}} < \epsilon. \]
+        由于
+        \[ \forall \epsilon, \exists \delta,\quad P\pare{\abs{g\pare{X_n} - g\pare{c}}\le c} \ge P\pare{\abs{X_n-c}\le \delta}, \]
+        取极限即可.
+    \end{solution}
+\end{sample}
+据估计可以利用多个矩作成, 例如
+\[ \hat\theta = \frac{EX^3}{EX^2}. \]
+设$EX = e^\theta \ln\theta = f\pare{\theta}$, $f\pare{\theta}$单调递增, 故这确实构成一有效的矩估计. 若补充条件$EX^2 = e^\theta \pare{\ln\theta}^2$, 则
+\[ \ln \theta = \frac{EX^2}{EX}, \]
+以之计算$\hat\theta$更加方便.
+
+\end{document}

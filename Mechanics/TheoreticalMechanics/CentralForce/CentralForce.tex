@@ -1,0 +1,429 @@
+\documentclass[../TheoreticalMechanics.tex]{subfiles}
+
+\begin{document}
+
+\section{中心力场} % (fold)
+\label{sec:中心力场}
+
+\subsection{一般中心力场} % (fold)
+\label{sub:一般中心力场}
+
+\subsubsection{转化为二体问题} % (fold)
+\label{ssub:转化为二体问题}
+
+\begin{finale}
+	\begin{lemma}[约化质量]
+		设质点分别具有质量$m_1$, $m_2$, 定义约化质量
+		\[ \mu = \frac{m_1 m_2}{m_1 + m_2},\quad \rec{\mu} = \rec{m_1} + \rec{m_2}. \]
+		记质心坐标为$\vR$, 则
+		\[ T = \half\pare{m_1 + m_2}\dot{\vR}^2 + \half\mu\dot{\vr}^2. \]
+	\end{lemma}
+\end{finale}
+\begin{theorem}[中心力场的角动量守恒]
+	设$U=U\pare{r}$, 则$\vL = \vr\times\vp$守恒.
+\end{theorem}
+\begin{corollary}[中心力场为平面运动]
+	设$U=U\pare{r}$, 则$\vr$在同一平面上.
+\end{corollary}
+\begin{remark}
+	这减少了一个运动自由度.
+\end{remark}
+\begin{lemma}[极坐标下的Lagrange量]
+	在$\vr$的平面上,
+	\[ L = T-V = \half m\pare{\dot{r}^2 + r^2\dot{\theta}^2} - U\pare{r}. \]
+\end{lemma}
+\begin{finale}
+	\begin{theorem}[中心力场的守恒量]
+		设$U=U\pare{r}$, 则
+		\begin{align*}
+			l &= p_\theta = mr^2\dot{\theta} = \const. \\
+			E &= \half m\pare{\dot{r}^2 + r^2\dot{\theta}^2} + V\pare{r} = \half m\dot{r}^2 + \half\frac{l^2}{mr^2} + V\pare{r} = \const.
+		\end{align*}
+	\end{theorem}
+\end{finale}
+\begin{theorem}[径向方程]
+	记$f\pare{r} = -\partial V/\partial r$, 则
+	\begin{equation}
+		\label{eq:径向微分方程}
+		m\ddot{r} - mr\dot{\theta}^2 = m\ddot{r} - \frac{l^2}{mr^3} = f\pare{r}.
+	\end{equation}
+\end{theorem}
+\begin{theorem}[径向积分]
+	设$U=U\pare{r}$, 则
+	\begin{equation}
+		\label{eq:径向积分得到时间}
+		\dot{r} = \sqrt{\frac{2}{m}\pare{E-U-\frac{l^2}{2mr^2}}} \quad\Longleftrightarrow\quad t = \int_{r_0}^r \frac{\rd{r}}{\sqrt{\frac{2}{m}\pare{E-U-\frac{l^2}{2mr^2}}}}.
+	\end{equation}
+\end{theorem}
+\begin{theorem}[角向积分]
+	设$U=U\pare{r}$, 则
+	\[ \theta = l\int_0^t \frac{\rd{t}}{mr^2\pare{t}}+\theta_0. \]
+\end{theorem}
+
+% subsubsection 转化为二体问题 (end)
+
+\subsubsection{约化为一维情形} % (fold)
+\label{ssub:约化为一维情形}
+
+\begin{finale}
+	\begin{theorem}[等效力场与势场]
+		设$U=U\pare{r}$, 对$r$约化为一维问题, 有等效的
+		\[ f' = f + \frac{l^2}{mr^2},\quad  U' = U + \half\frac{l^2}{mr^2},\quad E = \half m\dot{r}^2 + V'. \]
+	\end{theorem}
+\end{finale}
+\begin{ex}
+	\label{ex:平方反比力场}
+	$U=-\alpha/r$时, 相应的$U'$存在凹槽. 能量过高时运动无界,能量较低时会在槽内(拱点间)来回运动. 特别地,
+	\[ f' = 0 \quad\Longrightarrow\quad f\pare{r} = -\frac{l^2}{mr^3} = -mr\dot{\theta}^2, \]
+	此时构成圆周运动.
+\end{ex}
+\begin{ex}
+	$U=-\alpha/r^3$时, 相应的$U'$存在「凸槽」, 并且存在相似的结论, 且不会存在稳定值.
+\end{ex}
+\begin{ex}
+	$U=kr^2$会存在与\cref{ex:平方反比力场}类似的结论, 但运动总是有界的, 且$l\neq 0$时不会跨越原点. 容易看出, 此时运动轨迹是椭圆, 这是最简单的Lissajous图形, 球面摆正是这种情形.
+\end{ex}
+
+% subsubsection 约化为一维情形 (end)
+
+% subsection 一般中心力场 (end)
+
+\subsection{幂中心力场} % (fold)
+\label{sub:幂中心力场}
+
+\subsubsection{位力定理} % (fold)
+\label{ssub:位力定理}
+
+\begin{lemma}[位力]
+	对系统内所有粒子求和, 位力
+	\[ G = \sum_i \vp_i\cdot\vr_i\quad \Longrightarrow \quad \eddon{G}{t} = 2T + \sum_i \vF_i\cdot\vr_i. \]
+\end{lemma}
+\begin{theorem}[位力定理]
+	对时间平均, 有
+	\[ \expc{T} = -\half\sum_i\expc{\vF_i\cdot\vr_i}. \]
+\end{theorem}
+\begin{ex}
+	理想气体内气体有动能$T = \frac{3}{2}Nk_BT$, 单位面积上$\rd{\vF} = -P\vn\,\rd{A}$, 积分后即有$Nk_BT = PV$.
+\end{ex}
+\begin{finale}
+	\begin{corollary}[幂势的位力定理]
+        \label{coll:幂势的位力定理}
+		设$U = -ar^{n+1}$, 则
+		\[ \expc{T} = \frac{n+1}{2}\expc{V}. \]
+		特别地, 对于$U = \alpha/r$, 有
+		\[ \expc{T} = -\half\expc{V}. \]
+	\end{corollary}
+\end{finale}
+
+% subsubsection 位力定理 (end)
+
+\subsubsection{轨道方程} % (fold)
+\label{ssub:轨道方程}
+
+\begin{theorem}[径向的微分]
+	设$U=U\pare{r}$, 则
+	\[ \eddon{}{t} = \frac{l}{mr^2}\eddon{}{\theta}\quad\xRightarrow[]{\eqref{eq:径向微分方程}}\quad \rec{r^2}\eddon{}{\theta}\pare{\rec{mr^2}\eddon{r}{\theta}} - \frac{l^2}{mr^3} = f\pare{r}. \]
+\end{theorem}
+\begin{finale}
+	\begin{corollary}[Binet方程]
+		设$U=U\pare{r}$, $u=1/r$, 则
+		\[ \edddon{u}{\theta} + u = -\frac{m}{l^2}\eddon{}{u}V\pare{\rec{u}}. \]
+	\end{corollary}
+\end{finale}
+\begin{corollary}[轨道对称性]
+	任何拱点$\eddon{u}{\theta}$两侧的轨道是对称的.
+\end{corollary}
+\begin{corollary}[轨道方程]\label{coll:轨道方程}\quad
+	\[ \theta - \theta_0 = \int_{u}^{u_0} \frac{\rd{u}}{\sqrt{\frac{2mE}{l^2} - \frac{2mV}{l^2}-u^2}}\xRightarrow[]{V=ar^{n+1}}\int_{u}^{u_0} \frac{\rd{u}}{\sqrt{\frac{2mE}{l^2} - \frac{2ma}{l^2}u^{-n-1}-u^2}}. \]
+\end{corollary}
+\begin{remark}
+	只有$n=1,-2,3$的情形轨道可以用简单的函数表示.
+\end{remark}
+
+% subsubsection 轨道方程 (end)
+
+\subsubsection{闭合轨道条件} % (fold)
+\label{ssub:闭合轨道条件}
+
+\begin{remark}
+	参考\cref{ex:平方反比力场}, 吸引势总会存在恰好为圆形轨道的点.
+\end{remark}
+\begin{lemma}[稳定圆轨道的条件]
+	设$f = -kr^n$, 则稳定的圆轨道欲存在需有
+	\[ \edddon{V'}{r} > 0\quad\Longrightarrow\quad n>-3. \]
+\end{lemma}
+\begin{theorem}[圆轨道的小偏移]
+	若$u$对圆轨道的$u_0$发生微小偏移, 则近似有
+	\[ u = u_0 + a\cos\beta\theta,\quad \beta^2 = 3+\frac{r}{f}\subst{\eddon{f}{r}}{r=r_0}. \]
+\end{theorem}
+\begin{theorem}[封闭轨道条件]
+	只有当$\beta$是有理数, 且
+	\[ \eddon{\ln f}{\ln r} = \beta^2 - 3 \]
+	处处成立且$\beta$与$r$无关时, 轨道可能封闭. 此时
+	\[ f\pare{r} = -\frac{k}{r^{3-\beta^2}}. \]
+\end{theorem}
+\begin{theorem}[Betrand定理]
+	只有谐振子势$U=ar^2$和反比势能$U=-a/r$使所有有界轨道封闭.
+\end{theorem}
+\begin{remark}
+	天文观测得到的封闭轨道有力证明了引力为平方反比.
+\end{remark}
+
+% subsubsection 闭合轨道条件 (end)
+
+% subsection 幂中心力场 (end)
+
+\subsection{平方反比力场} % (fold)
+\label{sub:平方反比力场}
+
+\subsubsection{轨道方程} % (fold)
+\label{ssub:轨道方程}
+\begin{finale}
+	\begin{theorem}[圆锥曲线轨道方程]
+        \label{thm:圆锥曲线轨道方程}
+		设$V=-k/r$, 则轨道为
+		\[ \rec{r} = \frac{mk}{l^2}\pare{1+e\cos\pare{\theta-\theta'}},\quad  e = \sqrt{1+\frac{2El^2}{mk^2}}. \]		
+	\end{theorem}
+\end{finale}
+\begin{lemma}[拱点处的能量]
+	在拱点处有
+	\[ E - \frac{l^2}{2mr^2} + \frac{k}{r} = 0. \]
+\end{lemma}
+\begin{corollary}[能量-半长轴关系]\quad
+	\[ E = -\frac{k}{2a},\quad e = \sqrt{1-\frac{l^2}{mka}}. \]
+\end{corollary}
+\begin{corollary}[轨道的另一形式]\quad
+	\[ r = \frac{a\pare{1-e^2}}{1+e\cos\pare{\theta-\theta'}}. \]
+\end{corollary}
+\begin{corollary}[径向速度]
+	记$v_0=l/\pare{ma}$, 设$\theta'=0$, 则
+	\[ \dot{r} = \frac{ev_0\sin\theta}{1-e^2}. \]
+\end{corollary}
+
+% subsubsection 轨道方程 (end)
+
+\subsubsection{运动方程} % (fold)
+\label{ssub:运动方程}
+
+\begin{theorem}[时间对角度的方程]\quad
+	\[ t = \int \frac{mr^2}{l}\,\rd{\theta} = \frac{l^3}{mk^2}\int_{\theta_0}^\theta \frac{\rd{\theta}}{\brac{1+e\cos\pare{\theta-\theta'}^2}^2}. \]
+\end{theorem}
+\begin{corollary}[抛物线情形的时间方程]
+	若轨道为抛物线($e=1$), 设定$\theta' = 0$指向顶点, 则
+	\[ t = \frac{l^3}{2mk^2}\pare{\tan\frac{\theta}{2} + \rec{3}\tan^3\frac{\theta}{2}}. \]
+\end{corollary}
+\begin{definition}[偏近点角]
+	偏近点角$\psi$满足
+	\begin{equation}
+		\label{eq:偏近点角定义式}
+		r=a\pare{1-e\cos\psi}.
+	\end{equation}
+\end{definition}
+\begin{theorem}[时间的对偏近点角的方程]\quad
+	\[ t \xlongequal{\eqref{eq:径向积分得到时间}} \sqrt{\frac{ma^3}{k}}\int_0^\psi\pare{1-e\cos\psi}\,\rd{\psi}. \]
+\end{theorem}
+\begin{finale}
+	\begin{corollary}[Kepler第三定律]
+		设轨道周期为$T$, 则
+		\[ T = 2\pi a^{3/2}\sqrt{\frac{m}{k}}. \]
+	\end{corollary}
+\end{finale}
+\begin{remark}
+	相同的结论也可以由椭圆面积$A=\pi ab$和掠面速度推出.
+\end{remark}
+\begin{pitfall}
+	对于二体问题, $m$应当设定为约化质量.
+\end{pitfall}
+\begin{corollary}[Kepler方程]
+	引入偏近点角频率$\omega = 2\pi/T$, 有
+	\[ \omega t = \psi - e\sin\psi. \]
+\end{corollary}
+\begin{theorem}[偏近点角的确定]\quad
+	\[ 1+e\cos\theta \xlongequal{\eqref{eq:偏近点角定义式}} \frac{1-e^2}{1-e\cos\theta} \Longrightarrow \tan\frac{\theta}{2} = \sqrt{\frac{1+e}{1-e}}\tan\frac{\psi}{2}. \]
+\end{theorem}
+
+% subsubsection 运动方程 (end)
+
+\subsubsection{Laplace-Runge-Lenz矢量} % (fold)
+\label{ssub:laplace_runge_lenz矢量}
+
+\begin{lemma}[角动量乘速度]\quad
+	设$U=U\pare{r}$, 则
+	\[ \dot{\vp}\times\vL = \frac{mf\pare{r}}{r}\brac{\vr\pare{r\dot{r}} - r^2\dot{\vr}}. \]
+\end{lemma}
+\begin{finale}
+	\begin{theorem}[Laplace-Runge-Lenz矢量]
+		对于$U = -k/r$,
+		\[ \vA = \vp\times\vL - mk\hat{\vr}\quad\Longrightarrow\quad \eddon{\vA}{t} = 0. \]
+	\end{theorem}
+\end{finale}
+\begin{lemma}[Laplace-Runge-Lenz矢量的投影]
+	$\vA$在运动的平面内, 且
+	\[ \vA\cdot\vr = Ar\cos\theta = \vr\cdot\pare{\vp\times\vL} - mkr = l^2 - mkr. \]
+\end{lemma}
+\begin{corollary}[椭圆轨道]
+	$A = mke$, $A^2 = m^2k^2 = 2mEl^2$, 且
+	\[ \rec{r} = \frac{mk}{l^2}\pare{1+\frac{A}{mk}\cos\theta}. \]
+\end{corollary}
+\begin{remark}
+	可以认为Laplace-Runge-Lenz矢量源于$r$和$\theta$的周期相同导致的退化.
+\end{remark}
+
+% subsubsection laplace_runge_lenz矢量 (end)
+
+\subsubsection{三体问题} % (fold)
+\label{ssub:三体问题}
+
+\begin{lemma}[相对位矢]
+    引入$\+vs_i = \+vr_j - \+vr_k$, 则$\+vs_1 + \+vs_2 + \+vs_3 = 0$. 再引入
+    \[ \+vG = G\pare{\frac{\+vs_1}{s_1^3}+\frac{\+vs_2}{s_2^3}+\frac{\+vs_3}{s_3^3}},\quad m = m_1+m_2+m_3, \]
+    则有运动方程
+    \[ \ddot{\+vs}_i = -mG\frac{\+vs_i}{s_i^3}+m_i\+vG. \]
+\end{lemma}
+\begin{ex}[三体问题的Euler解]
+    一可行解为维持诸$\+vs_i$和$\+vr_i$共线, 同时$\+vr_i$皆在一椭圆上运动.
+\end{ex}
+\begin{ex}[三体问题的Lagrange解]
+    令三质点处于等边三角形之三顶点, 则$\+vG = 0$从而方程解耦, 将维持等边三角形.
+\end{ex}
+\begin{ex}[三体问题的微扰解]
+    考虑地月系统及随之旋转的参考系, 在该参考系内存在$5$个Lagrange点(势能平衡点), 原因在于势能项
+    \[ m\omega \rho^2 \dot{\theta} - \half m\rho^2\omega^2 + V \]
+    加入了Coriolis项和离心项.
+\end{ex}
+
+% subsubsection 三体问题 (end)
+
+% subsection 平方反比力场 (end)
+
+\subsection{散射} % (fold)
+\label{sub:散射}
+
+\subsubsection{中心质点系} % (fold)
+\label{ssub:中心质点系}
+
+\begin{definition}[散射截面]
+    散射截面$\sigma\pare{\Omega}$谓单位立体角内散射粒子的比率, 即
+    \[ \sigma\pare{\Omega}\rd{\Omega} = \frac{\mathrm{\#scattered\ into\ }\rd{\Omega}}{\mathrm{incident\ intensity}}. \]
+    其中
+    \[ \rd{\Omega} = 2\pi \sin\Theta \rd{\Theta}, \]
+    $\Theta$是相对入射方向的散射角.
+\end{definition}
+\begin{definition}[碰撞参数]
+    碰撞参数$s$谓粒子入射速度与散射中心的垂直距离.
+\end{definition}
+\begin{lemma}[碰撞参数与角动量]
+    \begin{equation}
+        \label{eq:碰撞参数与角动量}
+        l = mv_0s = s\sqrt{2mE}.
+    \end{equation}
+\end{lemma}
+\begin{lemma}[碰撞参数与散射角]
+    碰撞参数和散射角一一对应, 成立微分方程
+    \begin{equation}
+        \label{eq:碰撞参数与散射角}
+        2\pi I s\abs{\rd{s}} = 2\pi\sigma\pare{\Theta}I\sin\Theta\abs{\rd{\Theta}} \quad\Rightarrow\quad \sigma\pare{\Theta} = \frac{s}{\sin\Theta}\abs{\+d\Theta ds}.
+    \end{equation}
+\end{lemma}
+\begin{lemma}[散射渐近线与主轴夹角]
+    散射轨迹呈双曲形, 渐近线与主轴成
+    \[ \Phi \xlongequal{\text{\cref{coll:轨道方程}}} \int_{r_m}^\infty \frac{\rd{r}}{r^2\sqrt{\frac{2mE}{l^2} - \frac{2mV}{l^2}-\frac{1}{r^2}}}.  \]
+\end{lemma}
+\begin{lemma}[散射角]
+    引入碰撞参量后, 散射角为
+    \[ \Theta\pare{s} = \pi - 2\Phi \xlongequal{\eqref{eq:碰撞参数与角动量}} \pi - 2 \int_0^{u_m} \frac{s\,\rd{u}}{\sqrt{1-\frac{V}{E} - s^2u^2}}. \]
+\end{lemma}
+\begin{lemma}[散射角的解析式]
+    Gau\ss 单位制下, 设单位电荷$e$, 则离心率为
+    \[ \epsilon = \sqrt{1+\pare{\frac{2Es}{ZZ'e^2}}^2}. \]
+    由$\cos \Phi = 1/\epsilon$可知
+    \[ s = \frac{ZZ'e^2}{2E}\cot\frac{\Theta}{2}. \]
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[散射截面]
+        \[ \sigma\pare{\Theta} \xlongequal{\eqref{eq:碰撞参数与角动量}} \frac{1}{4}\pare{\frac{ZZ'e^2}{2E}}^2\csc^2\frac{\Theta}{2}. \]
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    对于Coulomb力, 总散射截面为$\infty$, 且$\Theta$对$s$单调递减. 而对于更一般的力可能并非如此.
+\end{remark}
+\begin{remark}
+    对于吸引势, 散射角可能大于$2\pi$, 原因在于入射粒子可能在不稳定平衡点处绕圈. 此外, 在这些不稳定平衡点附近可能存在发散的散射截面.
+\end{remark}
+
+% subsubsection 中心质点系 (end)
+
+\subsubsection{实验室参考系} % (fold)
+\label{ssub:实验室参考系}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.4\textwidth}
+        \centering
+        \incfig{6cm}{scatteringInTwoFrames}
+        \caption{$\vartheta$和$\Theta$的图示}
+    \end{subfigure}
+    \begin{subfigure}[b]{.4\textwidth}
+        \centering
+        \incfig{2cm}{scatteringInCOMF}
+        \caption{$\vartheta$和$\Theta$的图示}
+    \end{subfigure}
+    \caption{}
+    \label{fig:二参考系的散射}
+\end{figure}
+\begin{lemma}[速度与位置夹角相等]
+    如\cref{fig:二参考系的散射}, $\Theta$所表示如下二角度相等:\\
+    \centerline{
+    \begin{tabular}{ccc}
+        二质点初末位矢夹角 & $=$ & 质心系内散射角.
+    \end{tabular}}
+\end{lemma}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{velocityTriangle}
+    \caption{二参考系之速度关系}
+    \label{fig:二参考系之速度关系}
+\end{figure}
+\begin{lemma}[二参考系之速度关系]
+    设$\+vv_1$表示实验室系中速度, $\+vv'_1$表示质心系中速度,
+    \[ \+vV = \frac{\mu}{m_2} \+vv_0 \]
+    表示质心系相对实验室速度, 则成立\cref{fig:二参考系之速度关系}之关系.
+\end{lemma}
+\begin{lemma}[二角度之关系]
+    实验室系散射角$\vartheta$与质心系散射角$\Theta$之间有
+    \begin{equation}
+        \label{eq:二角度之关系}
+        \tan\vartheta = \frac{\sin\Theta}{\cos\Theta + \rho},\quad \cos\vartheta = \frac{\cos\Theta + \rho}{\sqrt{1+2\rho\cos\Theta+\rho^2}}.
+    \end{equation}
+    其中(设$v$为最终相对速度)
+    \[ \rho = \frac{\mu}{m_2}\frac{v_0}{v'_1} = \frac{m_1}{m_2}\frac{v_0}{v}. \]
+    特别地, 对于弹性碰撞, $\rho = m_1/m_2$.
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[二散射截面之关系]
+        设$\sigma'\pare{\vartheta}$表示实验室系之散射截面, 则
+        \begin{align*}
+            \sigma'\pare{\vartheta} &= \sigma\pare{\Theta}\frac{\sin\Theta}{\sin\vartheta}\abs{\+d\vartheta d\Theta} = \sigma\pare{\Theta}\abs{\+d{\cos\vartheta}d{\cos\Theta}} \\ &\xlongequal{\eqref{eq:二角度之关系}} \sigma\pare{\Theta}\frac{\pare{1+2\rho\cos\Theta+\rho^2}^{3/2}}{1+\rho\cos\Theta}.
+        \end{align*}
+    \end{theorem}
+\end{finale}
+\begin{remark}
+    $\sigma\pare{\Theta}$也是在实验室参考系中测量的, 只是角度变量为$\Theta$.
+\end{remark}
+\begin{lemma}[前后速度关系]
+    对\cref{fig:二参考系之速度关系}应用余弦定理, 有
+    \[ \frac{v_1^2}{v_2^2} = \pare{\frac{\mu}{m_2\rho}}^2\pare{1+2\rho\cos\Theta+\rho^2}. \]
+    对于弹性碰撞,
+    \[ \frac{E_1}{E_0} = \frac{1+2\rho\cos\Theta+\rho^2}{\pare{1+\rho}^2}. \]
+\end{lemma}
+\begin{corollary}[等质量弹性碰撞]
+    对于等质量的弹性碰撞, $\vartheta = \Theta/2$, $\sigma'\pare{\vartheta} = 4\cos\vartheta\cdot\sigma\pare{\Theta}$, $E_1/E_0 = \cos\vartheta$.
+\end{corollary}
+
+% subsubsection 实验室参考系 (end)
+
+% subsection 散射 (end)
+
+% section 中心力场 (end)
+
+\end{document}

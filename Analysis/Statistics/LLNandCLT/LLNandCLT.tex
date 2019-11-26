@@ -1,0 +1,132 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Pois}{Pois}
+
+\begin{document}
+
+\section{大数定律和中心极限定理} % (fold)
+\label{sec:大数定律和中心极限定理}
+
+\subsection{大数定律} % (fold)
+\label{sub:大数定律}
+
+如果对任何$\epsilon>0$, 都有
+\[ \lim_{n\rightarrow \infty} P\pare{\abs{\xi_n - \xi}\ge \epsilon} = 0, \]
+就称随机变量序列$\curb{\xi_n}$依概率收敛到随机变量$\xi$. 记为$\xi_n\xrightarrow{p} \xi$.
+\par
+设$\omega$为样本空间中的事件,
+\[ P\pare{\lim_{n\rightarrow\infty}\xi_n\pare{\omega} = \xi\pare{\omega}} = 1, \]
+则谓$\curb{\xi_n}$几乎处处收敛.
+\par
+若$\displaystyle \lim_{n\rightarrow\infty} \abs{\xi_n - \xi}^r = 0$, 则谓之$r$阶矩收敛.
+\par
+若$\displaystyle \lim_{n\rightarrow\infty} P\pare{\xi_n \le x} = P\pare{\xi \le x}$对任意连续点$x$成立, 则谓之依分布收敛.
+\par
+也可以将收敛定义为在某种距离下, $d\pare{\xi, \xi_n}\rightarrow 0$. 例如
+\[ d\pare{\xi, \xi_n} = \norm{\xi_n - \xi}, \]
+或者
+\[ d\pare{\xi, \xi_n} = E_{f_n}f_n\log \frac{f_n}{g}, \quad \xi_n \sim f_n,\quad \xi\sim g. \]
+\begin{theorem}
+    设$\curb{X_n}$是一列独立同分布的随机变量序列, 具有相同的数学期望$\mu$和方差$\sigma^2$, 则
+    \[ \overbar{X} = \rec{n} \sum_{k=1}^n X_k \xrightarrow{p} \mu. \]
+    即弱大数定律.
+\end{theorem}
+特别地, 如果以$\zeta_n$表示$n$重Bernoulli实验的成功次数, 则有
+\[ \frac{\zeta_n}{n} \xrightarrow{p} p. \]
+即频率(依概率)收敛到概率.
+\begin{lemma}[Chebyshev不等式]
+    设随机变量$X$的方差存在, 则
+    \[ P\pare{\abs{X-EX} \ge \epsilon} \le \frac{\Var\pare{X}}{\epsilon^2}. \]
+\end{lemma}
+\begin{proof}
+    \begin{align*}
+        P\pare{\abs{X-EX}\ge \epsilon} &= \int_{\abs{X-EX}\ge\epsilon} 1\,\rd{F_x} \\
+        & \le \int_{\+bR} \frac{\abs{X-EX}^2}{\epsilon^2}\,\rd{F} = \frac{\Var\pare{X}}{\epsilon^2}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{remark}
+    一般地, 有Markov不等式
+    \[ P\pare{\abs{X-EX}\ge \epsilon} \le \frac{E\abs{X-EX}^r}{\epsilon^r}. \]
+\end{remark}
+\begin{proof}[LLN的证明]
+    依概率收敛的定义, 即需证明对$\forall \epsilon>0$, 有
+    \[ P\pare{\abs{\rec{n} \sum^n X_i - EX}\ge \epsilon}\rightarrow 0. \]
+    由Chebyshev不等式, 有
+    \[ P\pare{\abs{\rec{n}\sum^n X_i - EX}\ge\epsilon} \le \frac{\Var\pare{\rec{n}\sum^n X_i}}{\epsilon^2} = \frac{\sigma^2}{n\epsilon^2}\rightarrow 0. \qedhere \]
+\end{proof}
+
+% subsection 大数定律 (end)
+
+\subsection{中心极限定理} % (fold)
+\label{sub:中心极限定理}
+
+\begin{theorem}
+    设$\curb{X_n}$为独立同分布的随机变量序列, 具有公共的数学期望$\mu$和方差$\sigma^2$, 则$X_1+\cdots+X_n$
+    的标准化形式$\displaystyle \rec{\sqrt{n\sigma}}\pare{X_1 + \cdots + X_n - n\mu}$满足中心极限定理. 即对于任意$x\in \+bR$, 有
+    \[ \lim_{n\rightarrow \infty} F_n\pare{x} = \Phi\pare{x}. \]
+    其中$F_n\pare{x}$为$\displaystyle \rec{\sqrt{n\sigma}}\pare{X_1 + \cdots + X_n - n\mu}$的分布函数, 而$\Phi\pare{x}$为$N\pare{0,1}$的分布函数. 记为
+    \[ \rec{\sqrt{n\sigma}}\pare{X_1 + \cdots + X_n - n\mu} \xrightarrow{d} N\pare{0,1}. \]
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        设$X\sim B\pare{10000, 0.3}$, 求$P\pare{X\ge 100}$.
+    \end{ex}
+    \begin{proof}
+        由于$X \xlongequal{d} \sum^{10000}X_i$, 其中$X_i \sim B\pare{1,0.3}$. 故
+        \begin{align*}
+            P\pare{X\ge 100} &= P\pare{\sum_1^{10000}X_i \ge 100} \\
+            &= P \pare{\frac{\sum^{1000}X_i - 10000\times 0.3}{\sqrt{10000\times 0.3 \times 0.7}} \ge \frac{100 - 3000}{\sqrt{*}}} \\
+            &= 1 - \Phi\pare{*}. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+\begin{proof}[中心极限定理的证明]
+    即$X_i - \mu$的特征函数为$g\pare{t} = Ee^{it\pare{X_i - \mu}}$, $i=1,\cdots, n$. 则Taylor展开后
+    \begin{align*}
+        g\pare{\frac{t}{\sigma\sqrt{n}}} &= g\pare{0} + \cancelto{0}{g'\pare{0}} \frac{t}{\sigma\sqrt{n}} + \half  \cancelto{-\sigma^2}{g''\pare{0}} \frac{t^2}{\sigma^2 n} + o\pare{\frac{t^2}{n}} \\
+        &= 1 - \half \frac{t^2}{n} + o\pare{\frac{t^2}{n}}.
+    \end{align*}
+    由于$\displaystyle \sum_{i=1}^n \brac{\frac{X_i - \mu}{\sqrt{n}\sigma}}$的特征函数为
+    \[ g^n\pare{\frac{t}{\sqrt{n}\sigma}}  = \pare{1 - \frac{t^2}{2n} + o\pare{\frac{t^3}{n}}}^n \rightarrow e^{-\frac{t^2}{2}}, \]
+    即收敛到$N\pare{0,1}$的特征函数, 故分布收敛到标准正态分布.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        $100$道考题的英语标准化考试, 每道题皆为二选一. 随机选择答案, 选对得一分, 选错不得分, 求最终得分$\ge 50$的概率.
+    \end{ex}
+    \begin{proof}
+        设$X\sim B\pare{100, 0.5}$, 则
+        \begin{align*}
+            P\pare{\sum_1^{100}X_i \ge 50} &= \sum\pare{\frac{\sum_1^{100}X_i - 50}{5}\ge 0} \approx 1 - \Phi\pare{0} = \half. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        每天$1000$个旅客随机选两列火车之一, 如果一列火车设置$s<n$个座位, 无法容纳多于$s$个旅客, 令事件发生的概率为$f\pare{s}$, 则CLT表明
+        \[ f\pare{s} \approx 1-\Phi{\frac{x - 500}{\sqrt{1000}}}, \]
+        即$s\ge 537$时能保证发生率小于$1\%$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求极限$\displaystyle \lim_{n\rightarrow} \sum_{k=1}^n \frac{n^k}{k!}e^{-n}$.
+    \end{ex}
+    \begin{proof}[解]
+        记$X_n \sim \Pois\pare{n}$, $Y_n \sim \Pois\pare{1}$, 则
+        \begin{align*}
+            & P\pare{X_n \le n} - e^{-n} \\
+            &= P\pare{\sum_{1}^n Y_i \le n} - e^{-n} \\
+            &= P\pare{\frac{\sum_{1}^n Y_i - n}{\sqrt{n}} \le 0} - e^{-n} \\
+            &\Rightarrow \Phi\pare{0} = \half. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+
+% subsection 中心极限定理 (end)
+
+% section 大数定律和中心极限定理 (end)
+
+\end{document}

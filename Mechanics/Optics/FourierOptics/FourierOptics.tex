@@ -1,0 +1,571 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{Fourier光学} % (fold)
+\label{sec:fourier光学}
+
+\subsection{衍射系统的屏函数和相因子判别法} % (fold)
+\label{sub:衍射系统的屏函数和相因子判别法}
+
+\subsubsection{衍射系统及其屏函数} % (fold)
+\label{ssub:衍射系统及其屏函数}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{Windows}
+    \caption{衍射屏前后的波}
+\end{figure}
+凡是能使波前振幅发生改变的物, 统称为衍射屏. 从前场的照明空间到后场的衍射空间存在波前振幅改变,
+\[ \tilde{U}_2\pare{x,y} = \tilde{t}\pare{x,y} \tilde{U}_1\pare{x,y}. \]
+从而经过衍射屏后, 波变为
+\begin{align*}
+    \tilde{U}\pare{x',y'} &= \frac{-i}{\lambda} \iint_{\Sigma_0} \tilde{t}\pare{x,y} \cdot \tilde{U}_1\pare{x,y} \frac{e^{ikr}}{r}\,\rd{x}\,\rd{y} \\
+    &\neq \frac{-i}{\lambda} \iint_{\Sigma_0} \tilde{U}_1\pare{x,y} \frac{e^{ikr}}{r}\,\rd{x}\,\rd{y}.
+\end{align*}
+对于振幅型的屏,
+\[ \tilde{t}\pare{x,y} = \begin{cases}
+    1, & \text{(透光)}, \\
+    0, & \text{(挡光)}.
+\end{cases} \]
+对于相位型的屏, 振幅调制为常量,
+\[ \tilde{t}\pare{x,y} = e^{i\varphi\pare{x,y}}. \]
+
+% subsubsection 衍射系统及其屏函数 (end)
+
+\subsubsection{相因子判断法} % (fold)
+\label{ssub:相因子判断法}
+
+知道了衍射屏的屏函数, 就可以确定衍射场, 进而完全确定接收场. 只要知道了屏函数的相位, 就可以通过研究波的相位改变来确定波场的变化, 谓相因子判断法.
+\par
+沿着$+\+uz$方向传播, 并在$\pare{x_0, y_0, z}$处汇聚的波, 其在$z=0$平面上有相因子
+\[ \exp\curb{-ik\pare{\frac{x^2+y^2}{2z} - \frac{xx_0+yy_0}{z}}}. \]
+对上式取特例,
+\begin{cenum}
+    \item 不作修改, 向$\pare{x_0, y_0, z}$汇聚的波, 有相因子
+    \[ \exp\curb{-ik\pare{\frac{x^2+y^2}{2z} - \frac{xx_0+yy_0}{z}}}. \]
+    \begin{itemize}
+        \item 设$x_0 = y_0 = 0$, 得到向轴上$z$处汇聚的波有相因子
+        \[ \exp\curb{-ik \frac{x^2+y^2}{2z}}. \]
+    \end{itemize}
+    \item 替换$z\mapsto -z$, 得到从$\pare{x_0, y_0, -z}$发出的波, 有相因子
+    \[ \exp\curb{ik\pare{\frac{x^2+y^2}{2z} - \frac{xx_0 + yy_0}{z}}}. \]
+    \begin{itemize}
+        \item 设$x_0 = y_0 = 0$, 得到从轴上$-z$处发出的波有相因子
+        \[ \exp\curb{ik \frac{x^2+y^2}{2z}}. \]
+    \end{itemize}
+    \item 取$z=\infty$, $x = \infty \times \sin \theta_1$, $y = \infty\times \sin\theta_2$, 得到与$yOz$平面成$\theta_1$, 与$zOx$平面成$\theta_2$的平面波有相因子
+    \[ \exp\curb{ik\pare{\sin\theta_1 x + \sin\theta_2 y}}. \]
+    \begin{itemize}
+        \item 设$\theta_1 = \theta_2$ = 0, 得到平行于$z$轴的平面波有相因子$1$.
+    \end{itemize}
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        平面波$\+vq = k\sin\theta_1\+ux + k\sin\theta_2\+uy$, 从而
+        \[ \tilde{U}\pare{x,y} = Ae^{ik\pare{\sin\theta_1 x + \sin\theta_2 y}}. \]
+        正入射的情形, $\theta_x = \theta_y = 0$, $\varphi = 0$.
+        \par
+        轴上物点的发散球面波满足
+        \[ r = \sqrt{z^2 + \rho^2} = z\pare{1+\half \frac{\rho^2}{z^2}}\Rightarrow e^{ikr} = e^{ikz}e^{ik \frac{x^2+y^2}{2z}}. \]
+        汇聚球面波满足(忽略全局相位)
+        \[ e^{ikr} = e^{-ik \frac{x^2+y^2}{2z}}. \]
+        轴外物点(发散)的球面波满足
+        \[ e^{ikr} = e^{ik\pare{r_0' + \frac{x^2+y^2}{2z} - \frac{xx_0+yy_0}{z}}}. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 相因子判断法 (end)
+
+\subsubsection{透镜的屏函数} % (fold)
+\label{ssub:透镜的屏函数}
+
+为了求出透镜的屏函数, 假设其有效口径为$D$并将透镜近似为相位型屏, 则有
+\[ \tilde{t}_L = \frac{A_2}{A_1} \exp\brac{i\pare{\varphi_2 - \varphi_1}} = \begin{cases}
+    e^{i\varphi\pare{x,y}},& r<D/2, \\
+    0,& r>D/2.
+\end{cases} \]
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{LensPhaseDiff}
+    \caption{透镜的相位变换}
+\end{figure}
+近似认为透镜中光波的波矢平行于光轴,
+\begin{align*}
+    \varphi_C\pare{x,y} &= \frac{2\pi}{\lambda} \pare{\Delta_1 + \Delta_2 + nd} \\
+    &= \frac{2\pi}{\lambda} \brac{\Delta_1 + \Delta_2 + n\pare{d_0 - \Delta_1 - \Delta_2}} \\
+    &= \frac{2\pi}{\lambda} nd_0 - \frac{2\pi}{\lambda} \pare{n-1}\pare{\Delta_1 + \Delta_2}. \\
+    \Delta_1 \pare{x,y} &= r_1 - \sqrt{r_1^2 - \pare{x^2+y^2}} \\
+    &= r_1 \pare{1-\sqrt{1-\frac{x^2+y^2}{r^2_1}}} \approx \frac{x^2+y^2}{2r_1}. \\
+    \Delta_2 &= -\frac{\pare{x^2+y^2}}{2r_2}. \\
+    \varphi_L \pare{x,y} &= \varphi_0 - \frac{2\pi}{\lambda} \frac{n-1}{2}\pare{x^2+y^2}\pare{\rec{r_1} - \rec{r_2}} \\
+    &= \varphi_0 - k \frac{x^2+y^2}{2F}, \\
+    F &= \frac{1}{\pare{n-1}\pare{\rec{r_1} - \rec{r_2}}}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        平行光正入射时,
+        \[ \tilde{U}_2 = \tilde{t}_1 \tilde{U}_1 = Ae^{i\varphi_0} e^{-ik \frac{x^2+y^2}{2F}}. \]
+        这正是向轴上$F$处汇聚的光.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        平行光斜入射时,
+        \begin{align*}
+            \tilde{U}_1 &= A_1 e^{ik \pare{x\sin\theta_1 + y\sin\theta_2}},\\
+            \tilde{U}_2 &= \tilde{t}_2 \tilde{U}_1 = A_1 e^{-ik\brac{\frac{x^2+y^2}{2F} - \pare{x\sin\theta_1 + y\sin\theta_2}}} \\
+            &= A_1 e^{-ik\brac{\frac{x^2+y^2}{2F} - \frac{xF\sin\theta_1 + y\sin\theta_2 F}{F}}}, \\
+            z&=F,\quad x_0 = F\sin\theta_1,\quad y_0 = F \sin\theta_2.
+        \end{align*}
+        得到聚焦于焦面非轴上点的波.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}[推导物像距公式]
+        \begin{align*}
+            \tilde{U}_1\pare{x,y} &= A_1 e^{ik \frac{x^2+y^2}{2s}}, \\
+            \tilde{U}_2\pare{x,y} &= A_1 e^{ik \frac{x^2+y^2}{2s}}e^{-ik \frac{x^2+y^2}{2F}} \\
+            &= A_1 e^{-ik \frac{x^2+y^2}{2s'}}.
+        \end{align*}
+        从而$\displaystyle s' = \frac{1}{1/F - 1/s}$, 即$\displaystyle \rec{s} + \rec{s'} = \rec{F}$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 透镜的屏函数 (end)
+
+\subsubsection{棱镜的屏函数} % (fold)
+\label{ssub:棱镜的屏函数}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ThinWedge}
+    \caption{薄楔形棱镜}
+    \label{fig:薄楔形棱镜}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        对于薄的楔形棱镜(\cref{fig:薄楔形棱镜}), 可以得到
+        \begin{align*}
+            \varphi_P\pare{x,y} &= \frac{2\pi}{\lambda}\pare{\Delta + nd} \\
+            &= \frac{2\pi}{\lambda}\pare{\Delta + nd_0 - n\Delta} \\
+            &= \varphi_0 - \frac{2\pi}{\lambda}\pare{n-1}\Delta. \\
+            \Delta &= x\alpha,\\
+            \varphi_P\pare{x,y} &= -k\pare{n-1}\alpha x, \\
+            \tilde{t}_P\pare{x,y} &= \exp \brac{-ik\pare{n-1}\pare{\alpha_1 x + \alpha_2 y}}.
+        \end{align*}
+        其中$\alpha_1$是垂直于$x$轴的界面的夹角, $\alpha_2$是垂直于$y$轴的界面的夹角.
+    \end{ex}
+    \begin{ex}
+        在Fresnel双棱镜中,
+        \begin{align*}
+            \tilde{U}_1 &= A_1 e^{ik \frac{x^2+y^2}{2s}}, \\
+            \tilde{U}_2 &= \tilde{U}_1 \tilde{t}_p = A_1 e^{ik \frac{x^2+y^2}{2s}}e^{-ik\pare{n-1}\alpha x} \\
+            &= A_1 e^{ik\brac{\frac{x^2+y^2}{2s} - \frac{\pare{n-1}\alpha sx}{s}}}.
+        \end{align*}
+        这是从$\pare{\pare{n-1}\alpha\cdot s, 0, s}$处发出的球面波.
+    \end{ex}
+\end{sample}
+
+% subsubsection 棱镜的屏函数 (end)
+
+% subsection 衍射系统的屏函数和相因子判别法 (end)
+
+\subsection{正弦光栅} % (fold)
+\label{sub:正弦光栅}
+
+\subsubsection{空间频率} % (fold)
+\label{ssub:空间频率}
+
+空间频率谓某一面内光场随空间位置的周期性变化频率$f=1/d$. 相应的空间圆频率为$q=2\pi f$.
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{PlanarWavePeriod}
+    \caption{平面波的基本量}
+    \label{fig:平面波的基本量}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        对于\cref{fig:平面波的基本量}中的平面波,
+        \begin{align*}
+            \+vq &= q_x \+ve_x + q_y \+ve_y \\
+            &= q\cos\theta \+ve_x + q\sin\theta \+ve_y. \\
+            d_x &= \frac{2\pi}{q_x} = \rec{f_x}, \\
+            d_y &= \frac{2\pi}{q_y} = \rec{f_y}. \\
+            \rec{d^2} &= \rec{d_x^2} + \rec{d_y^2}, \\
+            d &= \frac{2\pi}{\sqrt{q_x^2 + q_y^2}} = \rec{q}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 空间频率 (end)
+
+\subsubsection{正弦光栅} % (fold)
+\label{ssub:正弦光栅}
+
+正弦光栅的透过率是空间的正弦函数.
+\begin{align*}
+    t &= t_0 + t_1 \cos\pare{q_x\cdot x + q_y \cdot y + \varphi_0}.
+\end{align*}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{SinusoidalGrating}
+    \caption{正弦光栅的制备}
+    \label{fig:正弦光栅的制备}
+\end{figure}
+如\cref{fig:正弦光栅的制备}, 对于两列入射的平行光, 采用线性冲洗则有
+\[ t\pare{x,y} = t_0 + \beta I\pare{x,y} \]
+确实具有正弦光栅的形态. 几何量之计算如
+\begin{align*}
+    \varphi_1 &= k\sin\theta_1 x, \quad \varphi_2 = -k\sin\theta_2 x. \\
+    \varphi_1 - \varphi_2 &= x\cdot \frac{2\pi}{\lambda} \pare{\sin\theta_1 + \sin\theta_2} = j\cdot 2\pi. \\
+    &\Rightarrow x\pare{\sin\theta_1 + \sin\theta_2} = j\lambda. \\
+    d &= \frac{\lambda}{\sin\theta_1 + \sin\theta_2}.
+\end{align*}
+
+% subsubsection 正弦光栅 (end)
+
+\subsubsection{正弦光栅的衍射图样} % (fold)
+\label{ssub:正弦光栅的衍射图样}
+
+正弦光栅的衍射有
+\begin{align*}
+    \tilde{t}\pare{x} &= t_0 + t_1 \cos\pare{2\pi fx + \varphi_0}, \\
+    \tilde{U}_1\pare{x} &= A_1, \\
+    \tilde{U}_2\pare{x} &= \tilde{U}_1\pare{x} \tilde{t}\pare{x} = A_1 \brac{t_0 + t_1\cos\pare{2\pi f x + \varphi_0}} \\
+    &= A_1 t_0 + \half A_1 t_1 \pare{e^{i\pare{2\pi fx + \varphi_0}} + e^{-i\pare{2\pi fx + \varphi_0}}}. \\
+    \frac{k_x^{\pare{+1}}}{k^{\pare{+1}}} &= \sin \theta_x^{\pare{+1}} = \frac{2\pi f}{2\pi/\lambda} = f\lambda \Rightarrow \sin\theta_{\pm 1} = \pm f\lambda.
+\end{align*}
+因此出射者为$\pm 1$和$0$三束平行光.
+
+% subsubsection 正弦光栅的衍射图样 (end)
+
+\subsubsection{正弦光栅的组合} % (fold)
+\label{ssub:正弦光栅的组合}
+
+对于平行密接的正弦光栅,
+\begin{align*}
+    G_1: t\pare{x} &= t_0 + t_1 \cos 2\pi fx, \\
+    G'_1: t'\pare{x} &= t'_0 + t'_1 \cos 2\pi f' x, \\
+    \tilde{U}_2 &= \tilde{U}_0 t\pare{x} t'\pare{x} \\
+    &= A_1 \bigg[ t_0t_0' + t_0t_1'\cos 2\pi f'x + t_0' t_1 \cos 2\pi fx \\ & + \half t_1t_1'\cos 2\pi \pare{f-f'}x + \half t_1 t_1' \cos 2\pi \pare{f+f'}x \bigg].
+\end{align*}
+经过第一个光栅后分三级, 经过第二个光栅后再分三级, 从而得到$9$束光, 在$x$方向上展开.
+\par
+对于正交密接的正弦光栅,
+\begin{align*}
+    G_1: t\pare{x} &= t_0 + t_1 \cos 2\pi fx, \\
+    G'_1: t'\pare{y} &= t'_0 + t'_1 \cos 2\pi f' y, \\
+    \tilde{U}_2 &= \tilde{U}_0 t\pare{x} t'\pare{y} \\
+    &= A_1 \bigg[ t_0t_0' + t_0t_1'\cos 2\pi f'x + t_0' t_1 \cos 2\pi fy \\ & + \half t_1t_1'\cos 2\pi \pare{fx-f'y} + \half t_1 t_1' \cos 2\pi \pare{fx+f'y} \bigg].
+\end{align*}
+从而经过第一个光栅后分三级, 经过第二个光栅后再分三级, 从而得到$9$束光, 在两个方向上展开.
+\par
+对于两个周期叠加的光栅,
+\begin{align*}
+    t\pare{x} &= t_0 + t_1 \cos 2\pi fx + t'\cos 2\pi f'x,
+\end{align*}
+从而衍射结果就是两个光栅的衍射结果之和, 一束光变为五束.
+
+% subsubsection 正弦光栅的组合 (end)
+
+\subsubsection{正弦光栅的屏函数及其Fourier展开} % (fold)
+\label{ssub:正弦光栅的屏函数及其fourier展开}
+
+任意空间周期性函数都可以进行Fourier展开, 任意空间函数也可以进行Fourier积分展开. 例如黑白光栅
+\[ t\pare{x} = \begin{cases}
+    1, & \abs{x} < a/2, \\
+    0, & \abs{x} > a/2.
+\end{cases} \]
+又设$d$为周期(光栅常数). 则
+\begin{align*}
+    t_0 &= \rec{d} \int_{-a/2}^{a/2}\,\rd{x} = \frac{a}{d}. \\
+    \tilde{t}_n &= \rec{d} \int_{-a/2}^{a/2} e^{-2\pi i nfx}\,\rd{x} = \frac{a}{d}\frac{\sin\pare{n\pi a/d}}{n\pi a/d}. \\
+    \tilde{U}_1\pare{x} &= A_1,\\
+    \tilde{U}_2\pare{x} &= \tilde{U}_1\cdot\tilde{t} = A_1 t_0 + A_1 \sum_{n\neq 0} \tilde{t}_n e^{2\pi infx},\quad \sin\theta_n = \frac{n\lambda}{d}. \\
+    I_n &\propto \abs{t_n}^2 = \pare{\frac{a}{d}}^2\pare{\frac{\sin\alpha_n}{\alpha_n}}^2,\quad \alpha_n = \frac{n\pi a}{d}.
+\end{align*}
+这是展开式的$n$级对应的平面波.
+
+% subsubsection 正弦光栅的屏函数及其fourier展开 (end)
+
+\subsubsection{过高频信息产生衰逝波} % (fold)
+\label{ssub:过高频信息产生衰逝波}
+
+$\sin \theta = f\lambda >1$时,
+\[ k_z = \sqrt{k^2 - k_x^2 - k_y^2} = i\kappa\Rightarrow \kappa = \sqrt{\pare{f\lambda}^2 - 1}. \]
+此时$\tilde{U}\pare{x,y,z} = Ae^{-\kappa z}e^{2\pi i fx}$, 故存在指数衰减的波.
+
+\subsubsection{对Fraunhofer衍射的再认识} % (fold)
+\label{ssub:对fraunhofer衍射的再认识}
+
+通过Fraunhofer衍射, 一定空间频率的信息就被一对特定方向的平面衍射波输送出来, 经过透镜后打在后焦面上, 从而分频, 强度正比于Fourier系数$\tilde{t}_n$的平方, 故可得到作为光栅的图像在频域的(Fourier)展开. 后焦面谓\emph{Fourier频谱面}.
+
+% subsubsection 对fraunhofer衍射的再认识 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.52 1, 2, 3(p.293), p.67-69 3, 4, 7, 9(p.304).
+思考: 光学图像除了分解为点/正弦光栅, 还能按什么函数进行分解?
+
+% paragraph 作业 (end)
+
+% subsubsection 过高频信息产生衰逝波 (end)
+
+% subsection 正弦光栅 (end)
+
+\subsection{Abbe成像原理与相衬显微镜} % (fold)
+\label{sub:abbe成像原理与相衬显微镜}
+
+\subsubsection{Abbe成像原理} % (fold)
+\label{ssub:abbe成像原理}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{12cm}{AbbeImagingSystem}
+    \caption{Abbe成像}
+\end{figure}
+对于衍射屏的一般物, 可以用Fourier变换将其展开为Fourier级数或Fourier积分, 从而仅需考虑正弦光栅.
+\[ S_0: \tilde{A}_0 \propto A_1 t_0 e^{ikBS_0},\quad S_{\pm 1}: \tilde{A}_{\pm 1} \propto \half A_1 t_1 e^{ikBS_{\pm 1}}. \]
+像平面$\tilde{U}_I\pare{x',y'} = \tilde{U}_0 \pare{x',y'}  \pm \tilde{U}_{\pm 1}\pare{x',y'}$. 其中
+\begin{align*}
+    U\pare{x',y'} &= U\pare{x,y} e^{ikr}, \\
+    U_0\pare{x',y'} &= A_1 t_0 e^{ikBS_0}\cdot e^{ikS_0 B'}\cdot e^{ik \frac{x'^2 + y'^2}{2z}}. \\
+    &= A_1 t_0 e^{ikBS_0 B'} e^{ik \frac{x'^2+y'^2}{2z}}. \\
+    U_{\pm 1}\pare{x',y'} &= \tilde{A}_{\pm 1} e^{ikS_{\pm 1}B'} e^{ik\brac{\frac{x'^2+y'^2}{2z} - \sin\theta'_{\pm 1}x'}} \\
+    &= \half A_1 t_1 e^{ikBS_{\pm 1}B'} e^{-ik\sin\theta'_{\pm 1} x'}, \\
+    \sin\theta'_{\pm 1} &= \lambda / z = \tan \theta'_{\pm 1}. \\
+    BS_0 B' &= BS_{\pm 1}B' = BB', \\
+    \varphi_0 &= kBB' + k \frac{x'^2+y'^2}{2z}, \\
+    U_2 &= U_0 + U_{\pm 1} = A_1 e^{i\varphi_0} \pare{t_0 + \half t_1 \pare{e^{-ik\sin\theta'_{+1}\lambda}} + e^{-ik\sin\theta'_1 x'}}.
+\end{align*}
+Abbe正弦条件要求$ny\sin u = n'y'\sin u'$, 即
+\begin{align*}
+    \frac{\sin \theta'_{\pm 1}}{\sin\theta_{\pm 1}} &= \frac{y}{y'} = \rec{V}, \\
+    \sin \theta'_{\pm 1} &= \pm \frac{f\lambda}{V}. \\
+    U_I\pare{x',y'} &= A_1 e^{i\varphi_0} \brac{t_0 + t_1 \cos\pare{2\pi \frac{f}{V}x}}.
+\end{align*}
+即$f\mapsto f/V$, 或者$d\mapsto Vd$, 表示像的几何放大. 衬比度$\gamma_I = \gamma_0 = t_1/t_0$保持不变.
+
+% subsubsection abbe成像原理 (end)
+
+\subsubsection{空间滤波} % (fold)
+\label{ssub:空间滤波}
+
+由于$\sin \theta_{\pm n} = f_{\pm n} \lambda = \displaystyle \pm \frac{n}{d}\lambda$, $\displaystyle f = \rec{d}$, 可以通过空间滤波筛去图像中某些频率的部分.
+
+\begin{sample}
+    \begin{ex}
+        孔径为$D$的凸透镜, 能够收集的最大衍射角为$\displaystyle \sin\theta_M \approx \frac{D}{2F}$, 对应的最大空间频率
+        \[ f_M = \frac{\sin\theta_M}{\lambda} = \frac{D}{2F\lambda}. \]
+        如果波长为$\SI{600}{\nano\meter}$, $D/F = 1/3$,
+        \[ f_M = \rec{2\times 3 \times \SI{600}{\nano\meter}} = \SI{278}{\per\milli\meter}. \]
+        故$\Delta x < \Delta x_M = 1/f_M \approx \SI{3.6}{\micro\meter}$的信息被截止, 不能分辨.
+    \end{ex}
+\end{sample}
+
+% subsubsection 空间滤波 (end)
+
+\subsubsection{Abbe-Porter空间滤波实验} % (fold)
+\label{ssub:abbe_porter空间滤波实验}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{AbbePorterApparatus}
+    \caption{Abbe-Porter实验装置}
+\end{figure}
+以黑白光栅为物, 单色平行光照射, 在Fourier面上加一可调狭缝, 观察像的变化.
+\begin{cenum}
+    \item 狭缝仅令零级通过, 则仅有直流成分, 光屏均匀照明.
+    \item 狭缝令$0$和$\pm1$级通过, 则光屏上强度开始有振荡.
+    \item 若狭缝令更多级别通过, 则光屏上的强度由更多振荡构成.
+    \item 若将$0$级光挡住, 其它开放, 则仍然发生振荡, 惟衬比度变差.
+\end{cenum}
+
+% subsubsection abbe_porter空间滤波实验 (end)
+
+\paragraph{时间表} % (fold)
+\label{par:时间表}
+
+12月中旬首次答辩, 12月底最终答辩, 1月10日期末考试.
+
+% paragraph 时间表 (end)
+
+\paragraph{观察透明标本} % (fold)
+\label{par:观察透明标本}
+
+普通显微镜对透明标本之成像仅在不同部位存在相位差异, 非人眼所能分辨. 欲观察透明标本, 早期做法为将细胞染色. Zernike提出的相衬法则能将相位信息转化为强度信息.
+
+\par
+将样本视为一相位型光栅, 则透射场
+\begin{align*}
+    \tilde{U}_0\pare{x,y} &= A_1 e^{i\varphi\pare{x,y}} \\
+    &= A_1 \pare{1+i\varphi - \rec{2!}{\varphi}^{2} + \cdots}.
+\end{align*}
+直流成分在焦面中心, 从而可以通过相位板对$0$级分量加相位$\delta$, 得到
+\begin{align*}
+    \tilde{U}_I\pare{x',y'} &= A_1\pare{e^{i\delta} + i\varphi - \rec{2!}\varphi^2 + \cdots} \\
+    &= A_1\pare{e^{i\delta} - 1 + 1 + i\varphi + \cdots}. \\
+    I\pare{x',y'} &= \tilde{U}_I\pare{x',y'}\tilde{U}_I^*\pare{x',y'} \\
+    &= A_1^2 \brac{3 + 2\cos\pare{\varphi - \delta} - \cos\delta - \cos\varphi}.
+\end{align*}
+若有$\varphi \ll 1, \cos\varphi\approx 1, \sin\varphi\approx\varphi, \delta=\pi/2, \cos\delta \approx 0$, 则
+\[ I = A_1^2 \pare{1+2\pare{\sin\delta} \varphi\pare{x',y'}}. \]
+
+% paragraph 观察透明标本 (end)
+
+% subsection abbe成像原理与相衬显微镜 (end)
+
+\subsection{空间滤波和信息处理} % (fold)
+\label{sub:空间滤波和信息处理}
+
+\subsubsection{空间滤波的概念} % (fold)
+\label{ssub:空间滤波的概念}
+
+在透镜的像平面上(Fourier面上)有物的全部频谱信息, 在其上放置光阑可筛选不同频率物信息.
+\begin{ex}
+    通过低通滤波可以令边缘模糊, 通过高通滤波可以提取边缘.
+\end{ex}
+\begin{ex}
+    通过对网格产生的衍射图样滤波可以消除图片中的网格.
+\end{ex}
+\begin{ex}
+    滤去某一方向上的高频信号可以仅保留物在与其垂直之方向上的信息.
+\end{ex}
+
+% subsubsection 空间滤波的概念 (end)
+
+\subsubsection{相干光学图像处理系统} % (fold)
+\label{ssub:相干光学图像处理系统}
+
+\paragraph{4$F$波前系统} % (fold)
+\label{par:4f波前系统}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{4FSystem}
+    \caption{4$F$波前系统}
+    \label{fig:4F波前系统}
+\end{figure}
+
+如\cref{fig:4F波前系统}, 物场经过透镜的频谱$\tilde{U}_1\pare{\xi,\eta} = \+sF\curb{\tilde{U}_0\pare{x,y}}$. 若在$O$面上有周期$\pare{q_x,q_y}$满足$q_x = 1/d_x$, $q_y = 1/d_y$. 则$\xi = F\lambda d_x = F\sin\theta_x$.
+\[ \pare{\xi,\eta} = \curb{F\lambda q_x, F\lambda q_y}. \]
+在$T$面上$U_2\pare{\xi,\eta} = T\pare{\xi,\eta}U_1\pare{\xi,\eta}$. $L_2$对频谱反FT, 从而
+\[ \tilde{U}_I\pare{x',y'} = \+cF\curb{\tilde{U}_2\pare{x,y}}. \]
+$\pare{x',y'}$与变换平面上空间频率$\pare{q_\xi,q_\eta}$有关系
+\[ \pare{x',y'} = \curb{F\lambda q_\xi, F\lambda q_\eta}. \]
+总体看
+\[ U_I\pare{x',y'} = \+sF\curb{T\pare{\xi,\eta}\+sF\curb{\tilde{U}_0}}. \]
+当$T\pare{\xi,\eta} = 1$, $U_I\pare{x',y'} = U_O\pare{-x', -y'}$, 产生倒立的像, $V=-1$.
+\par
+定义相干光学传递函数OTF为
+\[ \frac{\+sF\curb{\tilde{U}_I}}{\+sF\curb{\tilde{U}_O}} = \frac{\tilde{U}_2\pare{\xi,\eta}}{\+sF\curb{\tilde{U}_O}} = \frac{\tilde{T}\cdot\tilde{U}_1}{\+sF\curb{\tilde{U}_O}} = \frac{\tilde{T}\cdot \+sF\curb{\tilde{U}_O}}{\+sF\curb{\tilde{U}_O}} = \+sT. \]
+\begin{sample}
+    \begin{ex}
+        若滤波系统为正弦光栅, 则产生$3$个像. 若移动光栅, Fourier相移定理表明
+        \begin{align*}
+            G\pare{f\pm f_0} & \leftrightarrow e^{2\pi if_0 x}g\pare{x}. \\
+            T\pare{\xi,\eta} &=  t_0 + t_1 \cos\brac{2\pi f_0 \pare{\epsilon - \Delta}},
+        \end{align*}
+        从而$\pm 1$级相移为$\pm 2\pi f_0\Delta$.
+    \end{ex}
+\end{sample}
+
+% paragraph 4f波前系统 (end)
+
+% subsubsection 相干光学图像处理系统 (end)
+
+\subsubsection{图像的加减与微分} % (fold)
+\label{ssub:图像的加减与微分}
+
+\paragraph{图像加减法} % (fold)
+\label{par:图像加减法}
+
+正弦光栅衍射后成$\brac{A_{+1},A_0,A_{-1}}$, $\brac{B_{+1},B_0,B_{-1}}$, 令$B_{-1}$对齐$A_{+1}$. 之后精密调节正弦光栅的位置可以在$B_{-1}$和$A_{+1}$之间制造相位差. $a = 2F\lambda f_0$, 相移$4\pi f_0 \Delta = 0$或$\pi$, 从而$\Delta = 0$或$d/4$时分别发生图像相加和相减.
+
+% paragraph 图像加减法 (end)
+
+\begin{sample}
+    \begin{ex}
+        有一正弦光栅, 空间频率$q_0 = \SI{50}{\per\milli\meter}$. 4$F$系统中取透镜焦距$F=\SI{200}{\milli\meter}$, 入射光波长$\lambda=\SI{600}{\nano\meter}$, 估算待处理图像的间隔和滤波器的特征位移量, 此时机械传动系统的位移精度式多少?
+    \end{ex}
+    \begin{solution}
+        待处理图像的间隔和允许的最大宽度均为$a_0 = q\lambda F = \SI{6}{\milli\meter}$, 滤波器的特征位移量为$\Delta\xi_0 = \rec{4\times 50} \SI{}{\milli\meter} = \SI{5}{\micro\meter}$, 传动系统的位移精度需要满足$\Delta \xi \ll \Delta \xi_0$.
+    \end{solution}
+\end{sample}
+
+\paragraph{图像微分} % (fold)
+\label{par:图像微分}
+
+对图像作微小位移后与原图像作差, 运算描述为
+\[ \Delta \tilde{t} = \tilde{t}\pare{x+\Delta x, y+\Delta y} - \tilde{t}\pare{x,y}. \]
+使用复合光栅,
+\[ T = t_0 + t_1 \cos 2\pi q\xi + t_1'\cos 2\pi q' a, \]
+这导致微小的位移
+\[ \Delta\varphi = 2\pi \Delta\pare{q'-q} = 2\pi \Delta q. \]
+之后精细平移复合光栅, 引起$A_{+1}$和$A'_{+1}$的不同相移量, 分别为
+\[ \Delta\varphi\pare{A_1} = -2\pi q\Delta\xi,\quad \Delta\varphi\pare{A'_1} = -2\pi q'\Delta \xi,\quad \delta = \Delta\varphi\pare{A_1} - \Delta\varphi\pare{A'_1}. \]
+为了实现两幅图像相减, 令$\delta = \pi$, 得到滤波器的特征位移量为
+\[ \Delta \xi_0 = \rec{2\Delta q}. \]
+
+% paragraph 图像微分 (end)
+
+\begin{sample}
+    \begin{ex}
+        有一复合正弦光栅, 其空间频率为$q=\SI{50}{\per\milli\meter}$和$q'=\SI{52}{\per\milli\meter}$. 4$F$系统中选用透镜焦距$F=\SI{200}{\milli\meter}$, 入射光波长$\lambda = \SI{600}{\nano\meter}$, 请估算待处理图像的间隔和滤波器的特征位移量, 此时是否满足微分条件? 机械传动系统的位移精度要求是多少?
+    \end{ex}
+    \begin{solution}
+        位移量$\Delta x = 600\times 200 \times \pare{52-50} = \SI{0.24}{\milli\meter}$. $x$方向允许的最大图像尺寸为$a_0 = 50\times 200\times 600 = \SI{6}{\milli\meter}$, $\Delta x \ll a_0$, 故可以微分. 滤波器的特征位移量为
+        \[ \Delta\xi_0 = \rec{2\Delta q} = \rec{2\times\pare{52-50}}\SI{}{\milli\meter} = \SI{0.25}{\milli\meter} = \SI{250}{\micro\meter}. \]
+        需要机械位移精度$\delta \xi$远小于$\Delta\xi_0$.
+    \end{solution}
+\end{sample}
+
+% subsubsection 图像的加减与微分 (end)
+
+\subsubsection{图像的色彩处理} % (fold)
+\label{ssub:图像的色彩处理}
+
+\paragraph{显色滤波} % (fold)
+\label{par:显色滤波}
+
+用白光照射物平面. 在Fourier面上, 不同波长的同一级频谱的空间位置不同, 因此可以通过空间滤波进行色彩选择, 从而得到彩色图像.
+
+\begin{cenum}
+    \item 拼接光栅在物平面处, 以白光照射.
+    \item 透光缝开在不同$\theta$角度处, 从而使不同波长的频谱通过.
+    \item 在Fourier面上进行$\theta$调制, 从而得到色彩光栅图像.
+\end{cenum}
+
+% paragraph 显色滤波 (end)
+
+\paragraph{黑白胶卷显示彩色图像} % (fold)
+\label{par:黑白胶卷显示彩色图像}
+
+显色滤波的色彩是主观决定的. 如欲客观决定, 可
+\begin{cenum}
+    \item 在照相底片之前放置一光栅片;
+    \item 光栅片内含三个不同取向的栅条$G_r$, $G_g$和$G_b$, 分别只允许透过三原色;
+    \item 底片上不同颜色的部位被烙上不同取向的栅条;
+    \item 在4$F$系统中进行与显色滤波相同的操作, 将滤波器置于$T$平面.
+\end{cenum}
+
+% paragraph 黑白胶卷显示彩色图像 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.127.2 (p.348), p.81.1,2(p.314), 小论文可选题: 对相干光场执行长寿命储存有何应用?
+
+% paragraph 作业 (end)
+
+% subsubsection 图像的色彩处理 (end)
+
+% subsection 空间滤波和信息处理 (end)
+
+% section fourier光学 (end)
+
+\end{document}

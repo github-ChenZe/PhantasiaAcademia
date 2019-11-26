@@ -1,0 +1,60 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ScatteringInAttract.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{880.98811593bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.8116083)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ScatteringInAttract.pdf}}%
+    \put(0.11867435,0.60109029){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$O$}}}%
+    \put(0.72236624,0.17971){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\theta$}}}%
+    \put(0.25626803,0.60453016){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi_0$}}}%
+    \put(0.06191709,0.53573338){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi_0$}}}%
+    \put(0.02751871,0.36389638){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$b$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ScatteringInAttract.pdf}}%
+  \end{picture}%
+\endgroup%

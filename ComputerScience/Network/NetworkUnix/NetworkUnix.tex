@@ -1,0 +1,253 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc, singleton, nova]{van-de-la-sehen}
+
+\newtcbox{\mylib}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
+  right=0mm,left=0.15mm,arc=1pt,boxsep=2pt,fontupper=\ttfamily,
+  colframe=gray,coltext=gray!25!black,colback=gray!10!white
+}
+
+\robustify{\mylib}
+\newcommand{\mcode}[1]{\ \mylib{#1} \ }
+
+\usepackage{makecell}
+\usepackage{float}
+
+\begin{document}
+
+\showtitle{Unix网络编程}
+
+\section{理论} % (fold)
+\label{sec:理论}
+
+\subsection{OSI模型} % (fold)
+\label{sub:osi模型}
+
+\subsubsection{七层协议} % (fold)
+\label{ssub:七层协议}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ccc}
+\hline
+ 7 & 应用层 & \+:r3{应用层} \\
+\cline{1-2}
+ 6 & 表示层 & \\
+\cline{1-2}
+ 5 & 会话层 & \\
+\Xhline{4\arrayrulewidth}
+ 4 & 传输层 & TCP, UDP \\
+\hline
+ 3 & 网络层 & IPv4, IPv6 \\
+\hline
+ 2 & 数据链路层 & 设备驱动 \\
+\cline{1-2}
+ 1 & 物理层 & 程序和硬件 \\
+\hline
+\end{tabular}
+\end{table}
+
+% subsubsection 七层协议 (end)
+
+% subsection osi模型 (end)
+
+% section 理论 (end)
+
+\section{套接字} % (fold)
+\label{sec:套接字}
+
+\subsection{一般步骤} % (fold)
+\label{sub:一般步骤}
+
+\subsubsection{客户端} % (fold)
+\label{ssub:客户端}
+
+\begin{cenum}
+    \item 创建套接字\mcode{sockfd = socket(...)};
+    \item 设定服务器地址
+    \begin{cenum}
+        \item 置零\mcode{bzero(...)};
+        \item 设定协议\mcode{serveraddr.sin\_family = ...,};
+        \item 设定端口\mcode{servaddr.sin\_port = ...};
+        \item 设定服务器IP\mcode{inet\_pton(...)};
+    \end{cenum}
+    \item 连接服务器\mcode{connect(...)};
+    \item 读取\mcode{n = read(...)};
+\end{cenum}
+
+% subsubsection 客户端 (end)
+
+\subsubsection{服务端} % (fold)
+\label{ssub:服务端}
+
+\begin{cenum}
+    \item 创建套接字\mcode{sockfd = socket(...)};
+    \item 设定服务器地址
+    \begin{cenum}
+        \item 置零\mcode{bzero(...)};
+        \item 设定协议\mcode{serveraddr.sin\_family = ...,};
+        \item 设定端口\mcode{servaddr.sin\_port = ...};
+        \item 设定接受IP\mcode{servaddr.sin\_addr.s\_addr = ...};
+    \end{cenum}
+    \item 配置为服务端
+    \begin{cenum}
+        \item 绑定\mcode{bind(...)};
+        \item 监听\mcode{listen(...)};
+    \end{cenum}
+    \item 接受\mcode{connfd = accept(...)};
+    \item 写\mcode{n = write(...)};
+\end{cenum}
+
+% subsubsection 服务端 (end)
+
+% subsection 一般步骤 (end)
+
+\subsection{套接字IO} % (fold)
+\label{sub:套接字io}
+
+\subsubsection{创建} % (fold)
+\label{ssub:创建}
+
+\begin{clst}
+/@\cinclude{sys/types.h}@/ /* 通常无需加入此头文件 */
+/@\cinclude{sys/socket.h}@/
+/* 创建一个套接字文件 */
+int socket(int domain, int type, int protocol);
+/* 成功时返回fd, 失败时返回-1 */
+/@\lhend @/
+if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    /* error */;
+\end{clst}
+
+% subsubsection 创建 (end)
+
+\subsubsection{连接} % (fold)
+\label{ssub:连接}
+
+\begin{clst}
+/@\cinclude{sys/types.h}@/ /* 通常无需加入此头文件 */
+/@\cinclude{sys/socket.h}@/
+/* 创建一个套接字文件 */
+int connect(int sockfd, const struct /@\+c{sockaddr}@/ *addr,
+    /@\+c{socklen\_t}@/ addrlen);
+/* 成功时返回0, 失败时返回-1 */
+/@\lhend @/
+#define SA struct /@\+c{sockaddr} @/
+if (connect(sockfd, (SA*) &servaddr, sizeof(servaddr)) < 0)
+    /* error */;
+\end{clst}
+
+% subsubsection 连接 (end)
+
+\subsubsection{绑定} % (fold)
+\label{ssub:绑定}
+
+\begin{clst}
+/@\cinclude{sys/types.h}@/ /* 通常无需加入此头文件 */
+/@\cinclude{sys/socket.h}@/
+/* 将fd绑定到地址 */
+int bind(int sockfd, const struct /@\+c{sockaddr}@/ *addr,
+    /@\+c{socklen\_t}@/ addrlen);
+/* 成功时返回0, 失败时返回-1 */
+/@\lhend @/
+#define SA struct /@\+c{sockaddr} @/
+if (bind(listenfd, (SA*)servaddr, sizeof(servaddr)) < 0)
+    /* error */;
+\end{clst}
+
+% subsubsection 绑定 (end)
+
+\subsubsection{监听} % (fold)
+\label{ssub:监听}
+
+\begin{clst}
+/@\cinclude{sys/types.h}@/ /* 通常无需加入此头文件 */
+/@\cinclude{sys/socket.h}@/
+/* 将fd转化为监听套接字 */
+int listen(int sockfd, int backlog);
+/* 成功时返回0, 失败时返回-1 */
+/@\lhend @/
+if (listen(listenfd, LISTENQ) < 0)
+    /* error */;
+\end{clst}
+
+% subsubsection 监听 (end)
+
+\subsubsection{接受} % (fold)
+\label{ssub:接受}
+
+\begin{clst}
+/@\cinclude{sys/types.h}@/ /* 通常无需加入此头文件 */
+/@\cinclude{sys/socket.h}@/
+/* 将fd转化为监听套接字 */
+int accept(int sockfd, struct /@\+c{sockaddr}@/ *addr, /@\+c{socklen\_t}@/ *addrlen);
+/* 成功时返回fd, 失败时返回-1 */
+/@\lhend @/
+#define SA struct /@\+c{sockaddr} @/
+if ((fd = accept(listenfd, (SA*) NULL, NULL)) < 0)
+    /* error */;
+\end{clst}
+
+% subsubsection 接受 (end)
+
+% subsection 套接字io (end)
+
+\subsection{格式转化} % (fold)
+\label{sub:格式转化}
+
+\subsubsection{置零} % (fold)
+\label{ssub:置零}
+
+\begin{clst}
+/@\cinclude{string.h}@/
+/* 置零*s指向的位置, 长度为n */
+void bzero(void *s, /@\+c{size\_t}@/ n);
+/@\lhend @/
+struct /@\+c{sockaddr\_in}@/ servaddr;
+bzero(servaddr, sizeof(servaddr));
+\end{clst}
+
+% subsubsection 置零 (end)
+
+\subsubsection{整数字节序} % (fold)
+\label{ssub:整数字节序}
+
+\begin{clst}
+/@\cinclude{arpa/inet.h}@/
+/* 主机到短整数: 修改大/小端顺序使适合网络顺序 */
+/@\+c{uint16\_t}@/ htons(/@\+c{uint16\_t}@/ hostshort);
+/@\lhend @/
+struct /@\+c{sockaddr\_in}@/ servaddr;
+servaddr.sin_port = htons(13);
+\end{clst}
+
+\begin{clst}
+/@\cinclude{arpa/inet.h}@/
+/* 主机到长整数: 修改大/小端顺序使适合网络顺序 */
+/@\+c{uint32\_t}@/ htonl(/@\+c{uint32\_t}@/ hostlong);
+/@\lhend @/
+servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+\end{clst}
+
+% subsubsection 整数字节序 (end)
+
+\subsubsection{字符串IP} % (fold)
+\label{ssub:字符串ip}
+
+\begin{clst}
+/@\cinclude{arpa/inet.h}@/
+/* 呈现形式到数值: 字符串到IP地址格式 */
+int inet_pton(int af, const char *src, void *dst);
+/* 成功时返回1, 出错时返回0或-1 */
+/@\lhend @/
+struct /@\+c{sockaddr\_in}@/ servaddr;
+if (inet_pton(AF_INET, argv[1], &servaddr) <= 0) /* error */;
+\end{clst}
+
+% subsubsection 字符串ip (end)
+
+% subsection 格式转化 (end)
+
+% section 套接字 (end)
+
+\end{document}

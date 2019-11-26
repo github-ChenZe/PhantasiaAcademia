@@ -1,0 +1,28 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+
+\begin{ex}
+    求$f\pare{x} = \sin x$在$\pare{\pi/2,3\pi/2}$上的反函数.
+\end{ex}
+\begin{proof}[解]
+    $\sin$在$\pare{-\pi/2,\pi/2}$上的反函数已知为$\arcsin$. 于是设法使题目中的三角函数用$\sin u$表示, 其中$u\in\pare{-\pi/2,\pi/2}$, 这是容易做到的.
+    \[ y = \sin x = -\sin \pare{x-\pi}, \]
+    \[ \Rightarrow -y = \sin \pare{x-\pi}, \]
+    \[ \Rightarrow \arcsin -y = x - \pi, \]
+    \[ \Rightarrow \pi - \arcsin y = x. \qedhere \]
+\end{proof}
+\begin{ex}
+    设$m,n\in \+bZ$而$p$为素数, 在假设$m^2 = pn^2$下是否必有$p\vert m$?
+\end{ex}
+\begin{proof}[解]
+    是的. 实际上素数有如下的性质: 设$a,b\in \+bZ$且$p$为素数, 则若$p\vert ab$时必定$p\vert a$和$p\vert b$中至少一者成立.
+\end{proof}
+\begin{pitfall}
+    上面的性质将素数替换为一般整数后不成立. 例如$4\divs 2^2$但$4\ndivs 2$.
+\end{pitfall}
+
+\end{document}

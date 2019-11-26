@@ -1,0 +1,74 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'MultipleTransRefl.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{815.57257705bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.74809464)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{MultipleTransRefl.pdf}}%
+    \put(0.78822795,1.64030698){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R_{j-1}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{MultipleTransRefl.pdf}}%
+    \put(0.21807641,1.39332886){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t_{j-1}$}}}%
+    \put(0.25748781,1.62191499){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_{j-1}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{MultipleTransRefl.pdf}}%
+    \put(0.29164436,1.07803768){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_{j}$}}}%
+    \put(0.33105577,1.30662378){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R_{j}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{MultipleTransRefl.pdf}}%
+    \put(0.73305204,1.07803768){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_{j-1}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{MultipleTransRefl.pdf}}%
+    \put(0.33105577,0.82843204){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R_{m-1}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{MultipleTransRefl.pdf}}%
+    \put(0.80399248,0.52102318){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t_{m-1}$}}}%
+    \put(0.78560053,0.83368694){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_{m-1}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{MultipleTransRefl.pdf}}%
+    \put(0.3836043,0.00867511){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_{m-1}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{MultipleTransRefl.pdf}}%
+    \put(0.72516967,0.14267372){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$t_{m}$}}}%
+    \put(0.70152288,0.32133882){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$r_{m}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{MultipleTransRefl.pdf}}%
+  \end{picture}%
+\endgroup%

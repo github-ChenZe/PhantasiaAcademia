@@ -1,0 +1,281 @@
+\documentclass[../TheoreticalMechanics.tex]{subfiles}
+
+\begin{document}
+
+\section{Hamilton表述} % (fold)
+\label{sec:hamilton表述}
+
+\subsection{与Lagrange表述的联系} % (fold)
+\label{sub:与lagrange表述的联系}
+
+\subsubsection{Hamilton方程} % (fold)
+\label{ssub:hamilton方程}
+
+\begin{lemma}[Legendre变换]
+    考虑具有全微分$\rd{f} = u\,\rd{x} + v\,\rd{y}$的$f$以及相应的$g = f-ux$, 则
+    \[ \rd{g} = v\,\rd{y} - x\,\rd{u}. \]
+\end{lemma}
+\begin{ex}
+    热力学中
+    \[ \rd{U} = T\,\rd{S} - p\,\rd{V}, \]
+    记$H = U + pV$, 则
+    \[ \rd{H} = T\,\rd{S} + V\,\rd{p}. \]
+\end{ex}
+\begin{finale}
+    \begin{theorem}[Hamilton方程]
+        在$p_i = \partial L/\partial q_i$下, 通过Legendre变换定义\footnote{下文适用Einstein求和约定.}
+        \[ H\pare{q, p, t} = \dot{q}_ip_i - L\pare{q,\dot{q},t}, \]
+        则有方程
+        \begin{equation}
+            \label{eq:Hamilton方程}
+            \dot{q}_i = \+D{p_i}DH,\quad -\dot{p}_i = \+D{q_i}DH. 
+        \end{equation}
+        \[ -\+DtDL = \+DtDH. \]
+    \end{theorem}
+\end{finale}
+\begin{lemma}[特殊形式的Hamilton量]
+    对于
+    \[ L = L_0\pare{q,t} + \braket{\dot{\+vq}}{\+va} + \half \bra{\dot{\+vq}}\+vT\ket{\dot{\+vq}}, \]
+    有相应的
+    \begin{equation}
+        \label{eq:Hamilton量用动量表示}
+        \+vp = \+vT\ket{\dot{\+vq}}+\+va,\quad H\pare{q,p,t} = \half\bra{\+vp-\+va}\+vT^{-1}\ket{\+vp-\+va} - L_0\pare{q,t}. 
+    \end{equation}
+\end{lemma}
+\begin{ex}
+    对于自由粒子, 在极坐标下
+    \[ H = \frac{m}{2}\pare{\dot{r}^2 + r^2\sin^2\theta\dot{\phi}^2 + r^2\dot{\theta}^2} = \rec{2m}\pare{p_r^2 + \frac{p_\theta^2}{r^2} + \frac{p_\phi^2}{r^2\sin^2\theta}}. \]
+\end{ex}
+\begin{pitfall}
+    $p_\theta$按照$\partial L/\partial \dot{\theta}$定义, 非谓$\+vp$的$\theta$分量.
+\end{pitfall}
+\begin{ex}
+    磁场中电荷有
+    \[ L = \half mv^2 - q\phi + q\+vA\cdot\+vv. \]
+    相应地, $\+vp = m\dot{\+vv} + q\+vA$, 由\eqref{eq:Hamilton量用动量表示}有
+    \[ H = \rec{2m}\pare{\+vp - q\+vA}^2 + q\phi. \]
+\end{ex}
+\begin{finale}
+    \begin{theorem}[辛形式方程]
+        设$\+v\eta = \begin{pmatrix}
+            q_1 & \cdots & q_n & p_1 & \cdots & p_n
+        \end{pmatrix}^T$,
+        \[ \+vJ = \begin{pmatrix}
+            \+v0 & \+vI\\
+            -\+vI & \+v0
+        \end{pmatrix}, \]
+        则Hamilton方程可写为
+        \begin{equation}
+            \label{eq:辛形式Hamilton方程}
+            \dot{\+v\eta} = \+vJ\+D{\+v\eta}DH. 
+        \end{equation}
+    \end{theorem}
+\end{finale}
+
+% subsubsection hamilton方程 (end)
+
+\subsubsection{守恒定律} % (fold)
+\label{ssub:守恒定律}
+
+\begin{lemma}[Hamilton量的循环坐标]
+    若$q_i$是$L$的循环坐标, 则也是$H$的循环坐标.
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[循环坐标动量守恒]
+        若$q_i$是$H$的循环坐标, 则相应的动量$p_i$守恒. 若$H$与$t$不显式相关, 则$H$守恒.
+    \end{theorem}
+\end{finale}
+\begin{theorem}[Hamilton量作为能量]
+    若$\+vr$至$q_i$的映射单纯与$q$有关, 则$H$为能量.
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{MassOnCart}
+    \caption{车上的弹簧}
+    \label{fig:车上的弹簧}
+\end{figure}
+\begin{ex}
+    考虑如\cref{fig:车上的弹簧}中的构型,
+    \[ L = \frac{m\dot{x}^2}{2} - \frac{k}{2}\pare{x - v_0t}^2. \]
+    立即有方程
+    \[ m\ddot{x}' = -kx'. \]
+    Hamilton量为
+    \[ H = \frac{p^2}{2m} + \frac{k}{2}\pare{x-v_0t}^2. \]
+    注意Hamilton量不是守恒的——外部能量干预使手推车匀速运动.
+    \par
+    若使用$x'$坐标, 则
+    \[ L = \half m\pare{\dot{x} + v_0}^2 - \half kx'^2. \]
+    \[ H = \frac{\pare{p' - mv_0}^2}{2m} + \half kx'^2 - \half mv_0^2. \]
+    这一Hamilton量是守恒的——单纯描述了粒子的机械能.
+\end{ex}
+\begin{pitfall}
+    含时的坐标改变可能导致$H$不再反映系统的能量.
+\end{pitfall}
+
+% subsubsection 守恒定律 (end)
+
+\subsubsection{Routh构造} % (fold)
+\label{ssub:routh构造}
+
+\begin{theorem}[Routh构造]
+    设$q_{s+1}, \cdots q_n$为循环坐标, 则相应的$p_i$为常值. 令
+    \begin{equation*}
+        R\pare{q_1,\cdots,q_n;\dot{q}_1,\cdots,\dot{q}_s;p_{s+1},\cdots,p_n;t}  = \sum_{i = s+1}^n p_i\dot{q}_i - L,
+    \end{equation*}
+    则对于不同的$i$分别成立Lagrange方程与Hamilton方程,
+    \begin{align*}
+        \+dtd{}\pare{\+D{\dot{q}_i}D{R}} - \+D{q_i}D{R} = 0,&\quad i = 1,\cdots,s,\\
+        \dot{q}_i = \+D{p_i}D{R},&\quad i = s+1,\cdots, n.
+    \end{align*}
+\end{theorem}
+\begin{ex}
+    对于中心力场$V\pare{r} = -k/r^n$, 有
+    \[ L = \frac{m}{2}\pare{\dot{r}^2 + r^2\dot{\theta}^2} + \frac{k}{r^n},\quad R\pare{r,\dot{r},p_\theta} = \frac{p_\theta^2}{2mr^2} - \half m\dot{r}^2 -\frac{k}{r^n}. \]
+    对$r$套用Lagrange方程而对$\theta$套用Hamilton方程, 则
+    \[ \ddot{r} - \frac{p_\theta^2}{mr^3} + \frac{nk}{r^{n+1}} = 0,\quad p_\theta = mr^2\dot{\theta} = \const. \]
+\end{ex}
+\begin{remark}
+    Routh构造自动消除了循环坐标——若列出两条Lagrange方程, 关于$r$的Lagrange方程中的$\dot{\theta}$项尚需手动消除.
+\end{remark}
+
+% subsubsection routh构造 (end)
+
+\subsubsection{相对论性Hamilton表述} % (fold)
+\label{ssub:相对论性hamilton表述}
+
+\begin{lemma}[相对论性动能]
+    相对论性粒子有动能(包含静能)
+    \[ T^2 = p^2c^2 + m^2c^4. \]
+\end{lemma}
+\begin{lemma}[电磁场中的力学量]
+    电磁场中粒子有Lagrange量
+    \[ L = -mc^2\sqrt{1-\beta^2} + q\+vA\cdot\+vv - q\phi. \]
+    正则动量为
+    \[ p^i = mu^i + qA^i. \]
+    相应的Hamilton量为
+    \[ H = T + q\phi. \]
+\end{lemma}
+\begin{lemma}[Hamilton量作为时间的动量]
+    引入独立参数$\theta$并以$\dot{x}$标记对$\theta$的求导, 则对$\theta$的Lagrange量
+    \[ \Lambda\pare{q,\dot{q},t,\dot{t}} = \dot{t}L\pare{q,\frac{\dot{q}}{\dot{t}},\dot{t}}, \]
+    相应的
+    \begin{equation}
+        \label{eq:Hamilton作为时间的共轭动量}
+        p_t = \+D{\dot{t}}D{\Lambda} = L + \dot{t}\+D{\dot{t}}DL = L - \frac{\dot{q}_i}{\dot{t}}\+D{\dot{q}_i}DL = -H. 
+    \end{equation}
+\end{lemma}
+\begin{lemma}[电磁场中协变力学量]
+    电磁场中粒子具有协变的Lagrange量
+    \[ \Lambda\pare{x^\mu, u^\mu} = \half mu_\mu u^\mu + qu^\mu A_\mu\pare{x_\lambda}. \]
+    正则动量为
+    \[ p_\mu = mu_\mu + qA\mu. \]
+    相应的Hamilton量为
+    \begin{equation}
+        \label{eq:电磁场中协变Hamilton量}
+        \+cH = \frac{\pare{p_\mu - qA_\mu}\pare{p^\mu - qA^\mu}}{2m}. 
+    \end{equation}
+\end{lemma}
+\begin{remark}
+    由\eqref{eq:电磁场中协变Hamilton量}定义的$\+cH$实际上为常数.
+\end{remark}
+\begin{ex}
+    \eqref{eq:电磁场中协变Hamilton量}的$H$相应的$0$分量的Hamilton方程为
+    \[ u^0 = \+D{p^0}D{\+cH} = \rec{m}\pare{p^0 - qA^0}\Rightarrow p^0 = \rec{c}\pare{T+q\phi} = \frac{H}{c}. \]
+    \[ \rec{\sqrt{1-\beta^2}}\+dtd{p^0} = -\rec{c}\+DtD{\+cH}\Rightarrow \+dtdH = \sqrt{1-\beta^2}\+DtD{\+cH}. \]
+\end{ex}
+\begin{pitfall}
+    $H$表示非协变的Hamilton量, $\+cH$表示协变的.
+\end{pitfall}
+
+% subsubsection 相对论性hamilton表述 (end)
+
+% subsection 与lagrange表述的联系 (end)
+
+\subsection{其他变分} % (fold)
+\label{sub:其他变分}
+
+\subsubsection{变分原理} % (fold)
+\label{ssub:变分原理}
+
+\begin{theorem}[由变分原理导出Hamilton方程]
+    对作用量
+    \[ I = \int_1^2 \pare{p_i\dot{q_i} - H\pare{p,q,t}}\,\rd{t} = \int_1^2 f\pare{q,\dot{q},p,\dot{p},t}\,\rd{t} = 0 \]
+    变分, 可得
+    \[ \+dtd{}\pare{\+D{\dot{q}_j}Df} - \+D{q_j}Df = 0 \Rightarrow \dot{p}_j + \+D{q_j}DH = 0, \]
+    \[ \+dtd{}\pare{\+D{\dot{p}_j}Df} - \+D{p_j}Df = 0 \Rightarrow \dot{q}_j - \+D{p_j}DH = 0. \]
+\end{theorem}
+\begin{remark}
+    在导出Euler-Lagrange方程时可能要求变分维持$p$和$q$的端点值不变, 但这实际上仅为了消除分部积分时的边界项. 边界项为
+    \[ \left.\+D{\dot{p}}Df\+d{\alpha}dp\right\vert_1^2, \]
+    由于$f$不显含$\dot{p}$, 可以忽略这一问题. 此外, 由于Hamilton表述中$p$和$q$地位等同, 故可以同时变分.
+\end{remark}
+
+% subsubsection 变分原理 (end)
+
+\subsubsection{最小作用量原理} % (fold)
+\label{ssub:最小作用量原理}
+
+\begin{lemma}[$\Delta$变分]
+    设路径有变分$q_i\pare{t,\alpha} = q_i\pare{t,0}+\alpha\eta_i\pare{t}$, 而$t_1$和$t_2$分别变为$t_1+\Delta t_1$与$t_2+\Delta t_2$, 则
+    \[ \Delta \int_{t_1}^{t_2} L\,\rd{t} = L\pare{t_2}\Delta t_2 - L\pare{t_1}\Delta t_1 + \int_{t_1}^{t_2} \delta L\,\rd{t}, \]
+    而分部积分可得
+    \[ \int_{t_1}^{t_2}\delta L\,\rd{t} = \int_{t_1}^{t_2}\brac{\+D{q_i}DL - \+dtd{}\pare{\+D{\dot{q}_i}DL}}\delta q_i\,\rd{t} + \left.\+D{\dot{q}_i}DL\delta q_i\right\vert_1^2. \]
+\end{lemma}
+\begin{lemma}[$\Delta$变分方程]
+    考虑$\delta q$和$\Delta t$后, $\Delta q_i = \delta q_i + \dot{q}_i\Delta t$, 则对于满足Lagrange方程的$L$,
+    \[ \Delta \int_{t_1}^{t_2} L\,\rd{t} = \left.\pare{L\Delta t + p_i\delta q_i}\right\vert_1^2 = \left.\pare{p_i\Delta q_i - H\Delta t}\right\vert_1^2. \]
+\end{lemma}
+\begin{lemma}[限制$\Delta$变分]
+    在原路径与变分后路径的$H$皆守恒且$\Delta q_i=0$之情形下,
+    \[ \Delta \int_{t_1}^{t_2}L\,\rd{t} = -H\pare{\Delta t_2 - \Delta t_1} \xlongequal{L = p_i\dot{q_i} - H} \Delta\int_{t_1}^{t_2}p_i\dot{q}_i\,\rd{t} - H\pare{\Delta t_2 - \Delta t_1}. \]
+\end{lemma}
+\begin{finale}
+    \begin{theorem}[Maupertuis原理]
+        \begin{equation}
+            \label{eq:Maupertuis原理}
+            \Delta \int_{t_1}^{t_2} p_i\,\rd{q_i} = 0. 
+        \end{equation}
+    \end{theorem}
+\end{finale}
+\begin{corollary}[齐次动能的Maupertuis原理]
+    \label{coll:齐次动能的Maupertuis原理}
+    由\cref{thm:动能的变换}, 对于坐标变换不含时的广义坐标, 
+    \begin{equation}
+        \label{eq:二次齐次动能}
+        2T = \bra{\dot{q}_j}\+vM\ket{\dot{q}_k},
+    \end{equation}
+    故$p_i\dot{q}_i=2T$, 从而\eqref{eq:Maupertuis原理}等价于
+    \begin{equation}
+        \label{eq:齐次动能的Maupertuis原理}
+        \Delta \int_{t_1}^{t_2} T\,\rd{t} = 0. 
+    \end{equation}
+\end{corollary}
+\begin{corollary}[动能恒定的Maupertuis原理]
+    对于$T$恒定的系统, \eqref{eq:Maupertuis原理}等价于
+    \[ \Delta\pare{t_2-t_1} = 0, \]
+    从而时间取最小值.
+\end{corollary}
+\begin{finale}
+    \begin{theorem}[Jacobi最小作用量原理]
+        在$q_i$空间中配置度规
+        \begin{equation}
+            \label{eq:广义坐标空间中的度规}
+            \pare{\rd{\rho}}^2 = \bra{\rd{q}_j}\+vM\ket{\rd{q}_k}, 
+        \end{equation}
+        其中$\+vM$之定义如\eqref{eq:二次齐次动能}, 则
+        \[ T = \half\pare{\+dtd\rho}^2. \]
+        从而\eqref{eq:齐次动能的Maupertuis原理}等价于
+        \[ \Delta\int_{\rho_1}^{\rho_2} \sqrt{H - V\pare{q}}\,\rd{\rho} = 0. \]
+    \end{theorem}
+\end{finale}
+\begin{corollary}[Hertz原理]
+    $T$恒定的物体在\eqref{eq:广义坐标空间中的度规}中的空间内之轨迹为测地线, 从而曲率取最小值.
+\end{corollary}
+
+% subsubsection 最小作用量原理 (end)
+
+% subsection 其他变分 (end)
+
+% section hamilton表述 (end)
+
+\end{document}

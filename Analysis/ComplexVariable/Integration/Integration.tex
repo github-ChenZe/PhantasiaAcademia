@@ -1,0 +1,603 @@
+\documentclass{ctexart}
+
+\usepackage[nea]{van-de-la-sehen}
+
+\begin{document}
+
+\headerstamp
+
+\section{解析函数的积分表示} % (fold)
+\label{sec:解析函数的积分表示}
+
+\subsection{复积分的定义} % (fold)
+\label{sub:复积分的定义}
+
+\subsubsection{实积分} % (fold)
+\label{ssub:实积分}
+
+\begin{definition}[外测度]
+    对于$A\subset \+bR$, 定义其外测度
+    \[ l\pare{A} = \inf\curb{\sum_{k\in I} \abs{I_k}\ \mathrm{where}\ A\subset \bigcup_{k\in I} I_k}. \]
+\end{definition}
+若不连续点集$A$有$l\pare{A} = 0$, 则函数在$A$上可积.
+
+% subsubsection 实积分 (end)
+
+\subsubsection{复积分} % (fold)
+\label{ssub:复积分}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{CurveOnComplex}
+    \caption{复平面上的曲线}
+    \label{fig:复平面上的曲线}
+\end{figure}
+设$\func{\gamma}{\brac{a,b}}{D}$是一条曲线, $\pi$为$\gamma$的一个剖分, 取$\xi_k$为曲线上$z_{k-1}$到$z_k$上的任何一点. 令$\Delta z_k = z_k - z_{k-1}$, 定义
+\[ \norm{\pi} = \max \abs{\Delta z_k}, \]
+如果
+\begin{equation}
+    \label{eq:复积分的定义}
+    \lim_{\norm{\pi}\rightarrow 0} \sum_{k=1}^n f\pare{\xi_k}\Delta z_k 
+\end{equation}
+存在(与$\xi_k$的选取无关), 则谓$f$沿$\gamma$可积, 记结果为$\displaystyle \int_\gamma f\pare{z}\,\rd{z}$.
+\begin{proposition}
+    设$f=u+iv$, $\rd{z} = \rd{x} + i\,\rd{y}$, 则
+    \begin{align*}
+        \int_\gamma f\pare{z}\,\rd{z} &= \int_\gamma \pare{u + iv}\pare{\rd{x} + i\,\rd{y}} \\
+        &= \int_\gamma u\,\rd{x} - v\,\rd{y} + i\int_\gamma v\,\rd{x} + u\,\rd{y}.
+    \end{align*}
+\end{proposition}
+\begin{proof}
+    在定义式\eqref{sub:复积分的定义}中, 注意$\Delta z_k = z_k - z_{k-1}$, 从而
+    \begin{align*}
+        &\lim_{\norm{\pi}\rightarrow 0} \sum_{k=1}^n f\pare{\xi_k}\pare{z_k - z_{k-1}} = \lim_{\norm{\pi}\rightarrow 0}\sum_{k=1}^n \pare{u\pare{\xi_k} + iv\pare{\xi_k}}\pare{\Delta x_k + i\Delta y_k} \\
+        &= \lim_{\norm{\pi}\rightarrow 0}\sum_{k=1}^n u\pare{\xi_k}\Delta x_k - v\pare{\xi_k}\Delta y_k + i\pare{v\pare{\xi_k}\Delta x_k + u\pare{\xi_k}\Delta y_k}.
+    \end{align*}
+    这正是第二型曲线积分的定义.
+\end{proof}
+特别地, 如果实部和虚部可积, 则$f\pare{z}$可积.
+\begin{proposition}
+    对第二类曲线积分成立的性质可移植至复积分,
+    \begin{cenum}
+        \item 若$\alpha,\beta$为复常数, 则$\displaystyle \int_\gamma \alpha f + \beta g = \alpha\int_\gamma f + \beta \int_\gamma g$;
+        \item 若$\gamma$方向调转, 则曲线积分值取反, 即$\displaystyle \int_{-\gamma} f = - \int_\gamma f$;
+        \item 对于由$\gamma_1$和$\gamma_2$连接而成的曲线, 有$\displaystyle \int_{\gamma_1 + \gamma} f = \int_{\gamma_1} f + \int_{\gamma_2} f$;
+        \item $\displaystyle \abs{\int_\gamma f\pare{z}\,\rd{z}}\le \int_\gamma \abs{f\pare{z}}\,\rd{z} = \int_\gamma\abs{f\pare{z}}\,\rd{s}$.
+    \end{cenum}
+\end{proposition}
+关于最后一条, 设曲线的弧长为$L$, $\abs{f}$在曲线上有上界$M$, 则
+\[ \abs{\int_\gamma f\pare{z}\,\rd{z}} \le ML. \]
+\begin{proposition}
+    设$\func{\gamma}{\brac{a,b}}{D}$, $\func{f}{D}{\+bC}$, $\gamma$光滑, 则
+    \[ \int_\gamma f\pare{z}\,\rd{z} = \int_a^b f\pare{\gamma\pare{t}}\gamma'\pare{t}\,\rd{t}. \]
+\end{proposition}
+\begin{sample}
+    \begin{ex}
+        \label{ex:基本曲线积分}
+        设$\func{\gamma}{\brac{a,b}}{D}$, 求$\displaystyle \int_\gamma\rd{z}$和$\displaystyle\int_\gamma z\,\rd{z}$.
+    \end{ex}
+    \begin{proof}[解]
+        若$\gamma$光滑, 对于第一个积分, $f=1$,
+        \[ \int_\gamma\rd{z} = \int_a^b \rd{\gamma\pare{t}} = \gamma\pare{b} - \gamma\pare{a}. \]
+        对于第二个积分,
+        \[ \int_\gamma z\,\rd{z} = \int_a^b \gamma\pare{t}\,\rd{\gamma\pare{t}} = \half\pare{\gamma^2\pare{b} - \gamma^2\pare{a}}. \]
+        对于不光滑的情况, 按照定义式\eqref{eq:复积分的定义},
+        \[ \int_\gamma \rd{z} = \lim_{\norm{\pi}\rightarrow 0}\sum_{k=1}^n f\pare{\xi_k}\pare{z_k - z_{k-1}} = \lim_{\norm{\pi}\rightarrow 0} \sum_{i=1}^n \pare{z_k - z_{k-1}} = z_n - z_0. \]
+        对于第二个积分,
+        \[ \int_\gamma z\,\rd{z} = \lim_{\norm{\pi}\rightarrow 0} \sum_{k=1}^n \xi_k \pare{z_k - z_{k-1}}. \]
+        由于已知极限存在, 分别取$\xi_k = x_k$和$\xi_k = x_{k-1}$. 两种选择得到相同极限, 故
+        \[ \int_\gamma z\,\rd{z} = \lim_{\norm{\pi}\rightarrow 0} \sum_{k=1}^n \frac{z_k+z_{k-1}}{2}\pare{z_k - z_{k-1}} = \frac{\gamma\pare{b}^2 - \gamma\pare{a}^2}{2}. \qedhere \] 
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\gamma$为$O$到$1+i$的线段, 求$\displaystyle \int_\gamma \Re z\,\rd{z}$.
+    \end{ex}
+    \begin{proof}[解]
+        设$\gamma\pare{t} = t+ti$, $t\in\brac{0,1}$, 则
+        \[ \int \Re z\,\rd{z} = \int_0^1 t\pare{1+i}\,\rd{t} = \frac{1+i}{t}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_\gamma \frac{\rd{z}}{\pare{z-a}^n}$, 其中$n\in \+bZ$, $\gamma$是圆$\abs{z-a}=R$, 逆时针方向.
+    \end{ex}
+    \begin{proof}[解]
+        令$\gamma\pare{\theta} = a+Re^{i\theta}$, 其中$0\le \theta < 2\pi$, 从而
+        \[ \gamma'\pare{\theta} = iRe^{i\theta}, \]
+        \[ \int_\gamma \frac{\rd{z}}{\pare{z-a}^n} = \int_0^{2\pi} \frac{iRe^{i\theta}\,\rd{\theta}}{\pare{Re^{i\theta}}^n} = iR^{1-n}\int_0^{2\pi} \frac{e^{i\theta}}{e^{in\theta}}\rd{\theta}. \]
+        可见当且仅当$n=1$时上述积分非零, 此时$\displaystyle \int_\gamma \frac{\rd{z}}{z-a} = 2\pi i$.
+    \end{proof}
+\end{sample}
+\begin{remark}
+    这个例子的$n$可以取正/负整数.
+\end{remark}
+\begin{remark}
+    对于圆周上的一段弧,
+    \begin{equation}
+        \label{eq:倒数的不完全积分}
+        \int_{\gamma\pare{\alpha}\rightarrow\gamma\pare{\beta}} \frac{\rd{z}}{z-\alpha} = \pare{\beta - \alpha} i. 
+    \end{equation}
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        若$f$在$\gamma_\rho$上连续, 且$\displaystyle \lim_{z\rightarrow \alpha} \pare{z-\alpha}f\pare{z} = k$, 则
+        \[ \lim_{\rho\rightarrow 0} \int_{\gamma_\rho} f\pare{z}\,\rd{z} = i\pare{\beta - \alpha} k. \]
+    \end{ex}
+    \begin{proof}
+        为了应用\eqref{eq:倒数的不完全积分},
+        \begin{align*}
+            \abs{\int_\gamma \pare{f\pare{z} - \frac{k}{z-a}}\,\rd{z}} &= \abs{\int_\gamma \frac{f\pare{z}\pare{z-a} - k}{z-a}\,\rd{z}} \\
+            &\le \int_\gamma \frac{\abs{f\pare{z}\pare{z-a} - k}}{\rho}\,\rd{s}. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+
+% subsubsection 复积分 (end)
+
+% subsection 复积分的定义 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.66 1(1)(3), 2(1)(3)
+
+% paragraph 作业 (end)
+
+\begin{theorem}[Green公式]
+    设$\Omega\in \+bR^2$谓分段光滑曲线围成的区域, $P$和$Q$为$\Omega$上有连续偏导数的函数, 则
+    \[ \oint_{\partial \Omega} P\,\rd{x} + Q\,\rd{y} = \iint_\Omega \pare{\+DxDQ - \+DyDP}\,\rd{x}\,\rd{y}. \]
+    特别地, $\Omega$的面积为
+    \[ \oint_{\partial\Omega} x\,\rd{y} = -\oint_{\partial\Omega}y\,\rd{x} = \half \oint_{\partial \Omega} x\,\rd{y} - y\,\rd{x}. \]
+\end{theorem}
+\begin{corollary}
+    若$\gamma$为分段光滑的闭曲线, 则$\gamma$内部的面积为
+    \[ S = \rec{2i}\oint_\gamma\conj{z}\,\rd{z}. \]
+\end{corollary}
+
+\subsection{Cauchy积分定理} % (fold)
+\label{sub:cauchy积分定理}
+
+\begin{theorem}[Cauchy-Goursat定理]
+    设$\func{f}{D}{\+bC}$解析, $D$为单连通区域, 则任意简单闭曲线$\gamma\subset D$有
+    \[ \oint_\gamma \,\rd{z} = 0. \]
+\end{theorem}
+\begin{remark}
+    谓$f$在某闭区域上解析, 如果它在包含这个闭区域的一个开区域内解析.
+\end{remark}
+\begin{proof}
+    设$f=u+iv$, $u$, $v$有连续偏导数, 则由Green公式,
+    \[ \oint_\gamma f\pare{z}\,\rd{z} = \iint_\Omega \pare{-\+DxDv - \+DyDu}\,\rd{x}\,\rd{y} + i\iint_\Omega \pare{\+DxDu - \+DyDv} \,\rd{x}\,\rd{y}. \]
+    由Cauchy-Riemann方程知上式为零.
+\end{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{ProofGoursat}
+    \caption{Goursat的证明思路}
+    \label{fig:Goursat的证明思路}
+\end{figure}
+由\cref{ex:基本曲线积分},
+\[ \oint\gamma\,\rd{z} = 0,\quad \oint z\,\rd{z} = 0, \]
+加上可导条件
+\[ f\pare{z} - f\pare{z_0} = f'\pare{z_0}\pare{z-z_0} + o\pare{\abs{z-z_0}}. \]
+如果$\gamma$足够小, 则
+\[ \oint_\gamma f\pare{z}\,\rd{z} = \oint_\gamma \pare{f\pare{z_0} + f'\pare{z_0}\pare{z-z_0}}\,\rd{z} = 0. \]
+此时将$\gamma$分解为小回路$\gamma_1 + \gamma_2 + \cdots + \gamma_n$, 则
+\[ \oint_\gamma f  = \oint_{\gamma_1} f + \cdots + \oint_{\gamma_2} f \rightarrow 0. \]
+实际上可以利用反证法, 假设
+\[ \oint_\gamma f \neq 0,\quad \abs{\oint_\gamma f} = M > 0. \]
+现在只需要证明当$\gamma$为三角形时成立, 之后通过将多边形分解为三角形回路即可, 对可求长曲线可以多边形逼近之. 此时将三角形按中位线四等份, 则必定有一个子三角形回路满足
+\[ \abs{\oint_{\gamma_1} f} \ge \frac{M}{4}\Rightarrow \abs{\oint_{\gamma_n} f} \ge \frac{M}{4^n} \propto MS\pare{\gamma_n}. \]
+考虑到$\gamma_n$最终收敛于某点$z_0$, 由前述可导条件,
+\[ \abs{\int_{\gamma_n} f} \le d\pare{\gamma_n}\cdot o\pare{d\pare{\gamma_n}} = o\pare{S\pare{\gamma_n}}, \]
+矛盾.
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{MultiConnected}
+    \caption{复连通域上的Cauchy-Goursat定理}
+    \label{fig:复连通域上的Cauchy-Goursat定理}
+\end{figure}
+\begin{theorem}
+    设$\func{f}{D}{\+bC}$解析, $D$有界且单连通, $f$在$\partial D$上连续, $\partial D$为可求长曲线, 则
+    \[ \oint_{\partial D} f\pare{z}\,\rd{z} = 0. \]
+\end{theorem}
+\begin{remark}
+    即使$D$并非单连通, 将$D$切开分为多个单连通域后, 每个$\gamma_n$的积分皆为零, 切开处的积分抵消, 故$\gamma$上的积分仍为零.
+\end{remark}
+\begin{remark}
+    设$D$由$\gamma$, $\gamma_1$, $\cdots$, $\gamma_n$围成, 类似的结论也是成立的. 注意内部的回路应当使用顺时针方向.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        设$\gamma$为简单闭曲线, 且$a\notin \gamma$, 求
+        \[ \oint_\gamma \frac{\rd{z}}{z-a}. \]
+    \end{ex}
+    \begin{proof}[解]
+        由Cauchy积分公式, 若$a$在$\gamma$内部, 则
+        \[ \oint_\gamma \frac{\rd{z}}{z-a} = \oint_{\abs{z-a} = R} = 2\pi i. \]
+        若$a$在$\gamma$外部, 显然积分为零.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\gamma$为简单闭曲线, $a\neq b$不在$\gamma$上, 求
+        \[ \oint_\gamma \frac{\rd{z}}{\pare{z-a}\pare{z-b}}. \]
+    \end{ex}
+    \begin{proof}[解]
+        部分分式分解, 则
+        \[ \oint_\gamma \frac{\rd{z}}{\pare{z-a}\pare{z-b}} = \rec{a-b}\oint\pare{\rec{z-a} - \rec{z-b}}\,\rd{z}, \]
+        再分四类讨论即可.
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_{\abs{z}=1} \pare{z+\rec{z}}^{2n}\frac{\rd{z}}{z}$, 由此证明
+        \[ \int_0^{2\pi} \cos^{2n} \theta\,\rd{\theta} = 2\pi \frac{\pare{2n-1}!!}{\pare{2n}!!}. \]
+    \end{ex}
+    \begin{proof}
+        展开后积分为
+        \[ \int_{\abs{z}=1} \sum_{k=0}^{2n} \binom{2n}{k}z^k z^{-2n +k-1} \,\rd{z}. \]
+        积分式中仅有一项非零, 即满足$k-2n+k-1=-1$, 即$k=n$者. 积分化为
+        \[ \int_{\abs{z}=1}\binom{2n}{n}z^{-1}\,\rd{z} = 2\pi i \binom{2n}{n}. \]
+        在积分中令$z=\cos\theta + i\sin\theta$, 则积分化为对$\cos^{2n}$的积分.
+    \end{proof}
+\end{sample}
+
+% subsection cauchy积分定理 (end)
+
+\subsection{原函数} % (fold)
+\label{sub:原函数}
+
+\begin{definition}[原函数]
+    设$\func{f}{D}{\+bC}$, 而$\func{F}{D}{\+bC}$. 若$F'\pare{z}=f\pare{z}$, 则$F$谓$f$的原函数.
+\end{definition}
+\begin{remark}
+    原函数不唯一. 若$F$为一原函数, 则$F+C$仍然为原函数, 其中$C$为常数.
+\end{remark}
+原函数并非对所有函数皆存在.
+\begin{ex}
+    设$f=1/z$, 并假设其原函数存在, 记为$F$, 则
+    \[ \int_{\abs{z}=1}f\pare{z}\,\rd{z} = \int_{\abs{z=1}}F'\pare{z}\,\rd{z} = F\pare{e^{2\pi i}} - F\pare{1} = 0, \]
+    矛盾.
+\end{ex}
+\begin{theorem}
+    \label{thm:原函数的存在性}
+    设$\func{f}{D}{\+bC}$连续, 并且对$D$内任意简单闭曲线$\gamma$有$\displaystyle \int_\gamma f\pare{z}\,\rd{z} = 0$, 则任取$z_0 \in D$, 定义
+    \[ F\pare{z} = \int_{z_0}^z f\pare{\xi}\,\rd{\xi}, \]
+    有$F$在$D$上解析且$F'\pare{z} = f\pare{z}$, 即$F$为$f$的原函数.
+\end{theorem}
+\begin{remark}
+    这并不要求$D$是单连通的.
+\end{remark}
+\begin{remark}
+    $\displaystyle \int_\gamma f\pare{z}\,\rd{z} = 0$对任意$\gamma$成立等价于积分与路径无关. 即设$\gamma_1$与$\gamma_2$是$z_1$到$z_2$的两条曲线, 则有
+    \[ \int_{\gamma_1} f\pare{z}\,\rd{z} = \int_{\gamma_2}f\pare{z}\,\rd{z}. \]
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{NewtonLeibniz}
+    \caption{Newton-Leibniz公式的证明}
+    \label{fig:Newton-Leibniz公式的证明}
+\end{figure}
+沿着如\cref{fig:Newton-Leibniz公式的证明}的路径积分,
+\begin{align*}
+    \frac{F\pare{z+\Delta z} - F\pare{z}}{\Delta z} &= \frac{\displaystyle \int_{z_0} ^{z+\Delta z} f\pare{\xi}\,\rd{\xi} - \int_{z_0}^z f\pare{\xi}\,\rd{\xi}}{\Delta z} \\
+    &= \frac{\displaystyle \int_z^{z+\Delta z}f\pare{\xi}\,\rd{\xi}}{\Delta z} \\
+    & \xrightarrow{\Delta z \rightarrow 0} \frac{\displaystyle \int_z^{z+\Delta z}f\pare{\xi}\,\rd{\xi}}{\Delta z}.
+\end{align*}
+可以放缩
+\[ \abs{\frac{\displaystyle \int_z^{z+\Delta z}f\pare{\xi}\,\rd{\xi}}{\Delta z} - \frac{\displaystyle \int_z^{z+\Delta z}f\pare{z}\,\rd{\xi}}{\Delta z}} \le {\max \abs{f\pare{\xi} - f\pare{z}}}, \]
+知极限于$f\pare{z}$.
+\begin{remark}
+    定理中对$f$的条件仅要求$f$连续且积分与路径无关.
+\end{remark}
+\begin{theorem}[Newton-Leibniz公式]
+    同\cref{thm:原函数的存在性}的条件, 设$F$为$f$的原函数, 则对于任意$z_1, z_2\in D$, 有
+    \[ \int_{z_1}^{z_2}f\pare{z}\,\rd{z} = F\pare{z_2} - F\pare{z_1}. \]
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        考虑到$\pare{z^{n+1}}' = \pare{n+1}z^n$,
+        \[ \int_{z_1}^{z_2} z^{n+1}\,\rd{z} = \left.\frac{z^{n+1}}{n+1}\right\vert_{z_1}^{z_2} = \frac{z_2^{n+1} - z_1^{n+1}}{n+1}. \]
+        考虑到$\pare{-\cos z}' = \sin z$, 有
+        \[ \int_{z_1}^{z_2}\sin z\,\rd{z} = \cos z_1 - \cos z_2. \]
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{RecInt}
+    \caption{$\displaystyle \rec{z}$的积分路径}
+    \label{fig:1/z的积分路径}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{RecInt2}
+    \caption{$\displaystyle \rec{z}$的绕原点积分路径}
+    \label{fig:1/z的绕原点积分路径}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{LnMultiple}
+    \caption{$\Ln$的多值性演示}
+    \label{fig:Ln的多值性演示}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        设$\func{f}{\+bC\backslash \curb{0}}{\+bC}$, $f\pare{z} =1/z$, 定义
+        \[ F\pare{z} = \int_1^z \rec{\xi}\,\rd{\xi}. \]
+        如\cref{fig:1/z的积分路径}, 第一种情形, 即$\gamma$未绕$0$转者,
+        \begin{align*}
+            F\pare{z} &= \int_\gamma \rec{\xi}\,\rd{\xi} = \int_{C_1} \rec{\xi}\,\rd{\xi} + \int_{C_2}\rec{\xi}\,\rd{\xi} \\
+            &= \int_1^{\abs{z}} \rec{x}\,\rd{x} + \int_{\stackrel{C_2}{\abs{\xi}=\abs{z}}} \rec{\xi}\,\rd{\xi} \\
+            &= \ln \abs{z} + i\arg z \\
+            &= \ln z.
+        \end{align*}
+        第二种情形, 如\cref{fig:1/z的绕原点积分路径}, 逆时针绕原点一周时
+        \[ \int_\gamma \rec{\xi}\,\rd{\xi} = \int_{C_1} \rec{\xi}\rd{\xi} + \int_{C_2} \rec{\xi}\,\rd{\xi} = \ln z + 2\pi i. \]
+        如果绕$k$圈, 则
+        \[ F\pare{z} = \int_\gamma \rec{\xi}\,\rd{\xi} = \ln z + 2ki\pi,\quad \begin{cases}
+            k>0,\quad \mathrm{counterclockwise},\\
+            k<0,\quad \mathrm{clockwise}.
+        \end{cases} \]
+        如\cref{fig:Ln的多值性演示}所示, 绕原点不同圈数可以得到$\Ln$的不同分支的值.
+    \end{ex}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.67 6(1), 9, 10
+
+% paragraph 作业 (end)
+
+% subsection 原函数 (end)
+
+\subsection{Cauchy积分公式} % (fold)
+\label{sub:cauchy积分公式}
+
+\begin{finale}
+    \begin{theorem}[Cauchy积分公式]
+        设$D$为有界域, $\partial D = \gamma$, $\func{f}{D}{\+bC}$解析, 且$f$在$\gamma$上连续, 则
+        \[ f\pare{z} = \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\xi - z} \rd{\xi}. \]
+    \end{theorem}
+\end{finale}
+\begin{figure}[hb]
+    \centering
+    \incfig{8cm}{CauchyIntFormula}
+    \caption{Cauchy积分公式的证明}
+\end{figure}
+\begin{proof}
+    $\displaystyle F\pare{\xi} = \frac{f\pare{\xi}}{\xi - z}$在$z$点外解析, 故
+    \[ \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\xi - z}\,\rd{z} = \rec{2\pi i}\int_{C_r} \frac{f\pare{\xi}}{\xi - z}\,\rd{\xi}. \]
+    又由
+    \[ f\pare{z} = \rec{2\pi i}\int_{C_r} \frac{f\pare{z}}{z - \xi}\,\rd{z}, \]
+    可知只需证明
+    \[ \rec{2\pi i} \int_{C_r} \frac{f\pare{z} - f\pare{\xi}}{\xi - z} \,\rd{\xi} = 0. \]
+    \begin{align*}
+        \abs{\rec{2\pi i} \int_{C_r} \frac{f\pare{z} - f\pare{\xi}}{\xi - z}\,\rd{\xi}} &\le \rec{2\pi i}\int_{C_r} \abs{\frac{f\pare{\xi} - f\pare{z}}{\xi - z}\,\rd{\xi}} \\
+        &\le \max\abs{f\pare{\xi} - f\pare{z}} \rec{2\pi} \int_{C_r} {\rec{\abs{\xi - z}}}\,\rd{s} \\
+        &= \max \abs{f\pare{\xi} - f\pare{z}} \rightarrow 0\quad \mathrm{as} \quad r\rightarrow 0. \qedhere
+    \end{align*}
+\end{proof}
+\begin{remark}
+    设$\func{f,g}{D}{\+bC}$, 而$f\vert_{\partial D} = g\vert_{\partial D}$则$D$中处处有$f=g$.
+\end{remark}
+\begin{theorem}[Cauchy积分公式求导]
+    对任何自然数$n$,
+    \[ f^{\pare{n}}\pare{z} = \frac{n!}{2\pi i}\int_{\partial D} \frac{f\pare{\xi}}{\pare{\xi - z}^{n+1}}\,\rd{z}. \]
+\end{theorem}
+\begin{remark}
+    Cauchy积分定理实际上等价于Cauchy积分公式. 从Cauchy积分公式推导Cauchy积分定理, 设$F$解析欲求证$\displaystyle \int_\gamma F\pare{z}\,\rd{z} = 0$, 只需令$f\pare{z} = zF\pare{z}$. 对$F$使用Cauchy积分公式,
+    \[ f\pare{z} = \int_\gamma \frac{\xi F\pare{\xi}}{\xi - z}\,\rd{\xi}. \]
+    令$z=0$即可. 惟$0$不在$D$内时需平移.
+\end{remark}
+\begin{remark}
+    特别地, 取$\gamma$为圆周,
+    \begin{align}
+        f\pare{z} &= \rec{2\pi i} \int_{\abs{\xi - z} = r} \frac{f\pare{\xi}}{\xi - z}\,\rd{\xi} \\
+        &= \rec{2\pi i} \int_0^{2\pi} \frac{f\pare{z+re^{i\theta}}}{re^{i\theta}}re^{i\theta}\cdot i\,\rd{\theta} \\
+        \label{eq:点值作为平均值}
+        &= \rec{2\pi} \int_0^{2\pi} f\pare{z+re^{i\theta}}\,\rd{\theta}.
+    \end{align}
+    即解析函数$f$在任意点的取值等于其在以$z$为圆心任意小半径上的圆周取值的平均.
+\end{remark}
+\begin{proof}[Cauchy积分公式求导的证明]
+    当$n=1$时, 需证明
+    \[ \lim_{z\rightarrow z_0} \frac{f\pare{z} - f\pare{z_0}}{z - z_0} = \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z_0}^2}\,\rd{\xi}. \]
+    由Cauchy积分公式,
+    \[ \frac{f\pare{z} - f\pare{z_0}}{z-z_0} = \frac{\displaystyle \rec{2\pi i}\int_\gamma \pare{\frac{f\pare{\xi}}{\xi - z} - \frac{f\pare{\xi}}{\xi - z_0}} \,\rd{\xi}}{z-z_0} = \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z}\pare{\xi - z_0}}\,\rd{\xi}. \]
+    与极限做差,
+    \begin{align*}
+        &\phantom{=}\,\rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z}\pare{\xi - z_0}}\,\rd{\xi} - \rec{2\pi i}\int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z}^2}\,\rd{\xi}\\
+        &= \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\xi - z} \pare{\rec{\xi - z_0} - \rec{\xi - z}}\,\rd{z} \\
+        &= \frac{z - z_0}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z}^2\pare{\xi - z_0}}\,\rd{\xi}.
+    \end{align*}
+    取绝对值, 并设$\abs{f\pare{z}} \le M$对任意$z\in D$成立, 又设$d = \int \abs{\xi - z_0}$, 并要求$\abs{z-z_0}<d/2$, 则
+    \begin{align*}
+        & \phantom{=}\, \abs{\frac{z - z_0}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z}^2\pare{\xi - z_0}}\,\rd{\xi}} \\
+        &= \frac{\abs{z-z_0}}{2\pi} \int_\gamma \frac{\abs{f\pare{\xi}}}{\abs{\xi - z}^2 \abs{\xi - z_0}}\,\rd{s}
+        &= \le \frac{\abs{z-z_0}}{2\pi} \frac{M}{\pare{d/2}^2 d}\int_\gamma \rd{s} \rightarrow 0.
+    \end{align*}
+    对于$n\neq 1$的情形, 假设$n=k$时已经正确, 则$n=k+1$时, 考虑到
+    \[ \rec{1-z} = 1+z+z^2+\cdots = \sum_{n=0}^\infty z^n \]
+    对于$\abs{z}<1$成立. 有
+    \[ \rec{\xi - z} = \rec{\xi - z_0} \sum_{j=0}^\infty  \pare{\frac{z-z_0}{\xi - z_0}}^j. \]
+    由归纳假设,
+    \begin{align*}
+        f^{\pare{k}}\pare{z} &= \frac{k!}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z}^{k+1}}\,\rd{\xi} \\
+        &= \frac{k!}{2\pi i} \int_\gamma f\pare{\xi} \brac{\rec{\xi - z_0} \pare{1+\frac{z-z_0}{\xi - z_0} + \pare{\frac{z-z_0}{\xi - z_0}}^2 + \cdots}}^{k+1}\,\rd{\xi} \\
+        &= \frac{k!}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z_0}^{k+1}} \brac{1+\pare{k+1}\frac{z-z_0}{\xi - z_0} + O\pare{\abs{z-z_0}^2}}\,\rd{\xi} \\
+        &= \frac{k!}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z_0}^{k+1}} \,\rd{\xi} + \frac{\pare{k+1}!}{2\pi i} \int_\gamma \frac{f\pare{\xi}\pare{z-z_0}}{\pare{\xi - z_0}^{k+2}} + O\pare{\abs{z-z_0}^2} \\
+        &= f^{\pare{k}}\pare{z_0} + \frac{\pare{k+1}!}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z_0}^{k+2}}\pare{z-z_0} + O\pare{\abs{z-z_0}^2}.
+    \end{align*}
+    由导数的定义立即得到
+    \[ \frac{\pare{k+1}!}{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z_0}^{k+2}} = f^{\pare{k+1}}\pare{z_0}. \qedhere \]
+\end{proof}
+\begin{corollary}[一次可导, 次次可导]
+    \label{coll:一次可导次次可导}
+    解析函数任意阶可导. 特别地, 若$f=u+iv$, 则$u$和$v$都是无穷次可导的实函数.
+\end{corollary}
+\begin{remark}
+    用类似的思路,
+    \begin{align*}
+        f\pare{z} &= \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\xi - z}\,\rd{\xi} \\
+        &= \rec{2\pi i} \int_\gamma \frac{f\pare{\xi}}{\xi - z_0} \sum_{n=0}^\infty \pare{\frac{z-z_0}{\xi - z_0}}^n\,\rd{\xi} \\
+        &= \sum_{n=0}^\infty \int_\gamma \frac{f\pare{\xi}}{\pare{\xi - z_0}^{n+1}}\,\rd{\xi} \cdot\pare{z-z_0}^n \\
+        &= \sum_{n=0}^\infty \frac{f^{\pare{n}}\pare{z_0}}{n!}\pare{z-z_0}^n.
+    \end{align*}
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.68 13 15
+
+% paragraph 作业 (end)
+
+\paragraph{Cauchy积分定理求解积分问题} % (fold)
+\label{par:cauchy积分定理求解积分问题}
+
+欲求$\displaystyle \int_\gamma g\pare{z}\,\rd{z}$, 若
+\begin{cenum}
+    \item $g\pare{z}$在$\gamma$内部解析, 则$\displaystyle \int_\gamma g\pare{z}\,\rd{z} = 0$;
+    \item $g\pare{z}$在$\gamma$内有限个点$z_1,\cdots,z_n$处无定义, 设$\gamma_i$是包含$z_i$的小围道, 则
+    \[ \int_\gamma g = \int_{\gamma_1} g + \cdots + \int_{\gamma_n} g. \]
+    \item 对于$1\le j\le n$, 用
+    \[ f^{\pare{n}}\pare{z} = \frac{n!}{2\pi i} \int_\gamma \frac{f\pare{z}}{\pare{\xi - z}^{n+1}}\,\rd{\xi} \]
+    求解.
+\end{cenum}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.75 2, 3, 4(1)(3)
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle \int_{\abs{z}=2} \frac{\rd{z}}{z^2\pare{z^2+16}}$.
+    \end{ex}
+    \begin{proof}[解]
+        $\displaystyle g\pare{z} = \frac{1}{z^2\pare{z^2+16}}$仅在$0$和$\pm 4i$处无定义. 在$\gamma$内部仅有$z=0$处无定义. 令$f\pare{z} = \displaystyle \rec{z^2+16}$, 由Cauchy积分公式,
+        \[ I = \int_{\abs{z} = 2} \frac{f\pare{z}}{z^2}\,\rd{z} = 2\pi i f'\pare{0} = 0. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{remark}
+    如果围道$\abs{z}=5$, 积分不便计算, 可以转化为足够大的围道积分得到$0$.
+\end{remark}
+\begin{remark}
+    将分母作部分和分解, 则
+    \[ \int_{\abs{z} = 2} \frac{\rd{z}}{z^2\pare{z^2+16}} = \rec{16} \brac{\int_{\abs{z}=2} \rec{z^2}\,\rd{z} - \int_{\abs{z}=2} \rec{z^2+16}\,\rd{z}} = 0. \]
+    这一方法也可以简化对$\gamma$为$\abs{z}=5$的情形的计算.
+\end{remark}
+\begin{figure}
+    \centering
+    \incfig{8cm}{ComplementaryLoop}
+    \caption{\cref{ex:补全围道示意}的补全围道}
+    \label{fig:补全围道1}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        \label{ex:补全围道示意}
+        求$\displaystyle \int_{\abs{z}=2} \frac{\rd{z}}{\pare{z^3-1}\pare{z+4}^2}$.
+    \end{ex}
+    \begin{proof}[解]
+        $\gamma$内的奇点为$1,\omega,\omega^2$, 其中$\omega = e^{2\pi i/3}$. 则
+        \begin{align*}
+            I &= \int_{\gamma_0} \frac{\rd{z}}{\pare{z^3-1}\pare{z+4}^2} + \int_{\gamma_1} \frac{\rd{z}}{\pare{z^3-1}\pare{z+4}^2} + \int_{\gamma_2} \frac{\rd{z}}{\pare{z^3-1}\pare{z+4}^2} \\
+            &= \int_{\gamma_0} \frac{\rec{\pare{z-\omega}\pare{z-\omega^2}\pare{z+4}^2}}{z-1}\,\rd{z} + \int_{\gamma_0} \frac{\rec{\pare{z-1}\pare{z-\omega}\pare{z+4}^2}}{z-\omega^2}\,\rd{z} \\ &\phantom{=}\, + \int_{\gamma_0} \frac{\rec{\pare{z-1}\pare{z-\omega}\pare{z+4}^2}}{z-1}\,\rd{z}.
+        \end{align*}
+        惟此方法过于复杂. 考虑\cref{fig:补全围道1}中的围道, 其中半径为$2$的圆盘取顺时针, 则$D$中仅有$z=4$处无定义. 从而令$f\pare{z} = \displaystyle \rec{z^3-1}$, 有
+        \begin{align*}
+            2\pi if'\pare{-4} &= \int_{\partial D_R} \frac{f\pare{z}}{\pare{z+4}^2}\,\rd{z} \\
+            &= \int_{\abs{z}=R} \frac{f\pare{z}}{\pare{z+4}^2}\,\rd{z} - \underbrace{\int_{\abs{z}=2} \frac{f\pare{z}}{\pare{z+4}^2}\,\rd{z}}_{I}.
+        \end{align*}
+        于是欲求积分
+        \begin{align*}
+            I &= -2\pi i \left.\pare{\rec{z^3-1}}'\right\vert_{z=-4} + \int_{\abs{z}=R} \rec{\pare{z^3-1}\pare{z+4}^2}\,\rd{z} \\
+            &= \frac{96\pi i}{4225} + \int_{\abs{z}=R} \rec{\pare{z^3-1}\pare{z+4}^2}\,\rd{z}.
+        \end{align*}
+        而当$R\rightarrow \infty$时,
+        \[ \int_{\abs{z}=R} \rec{\pare{z^3-1}\pare{z+4}^2}\,\rd{z} \le 2\pi R \cdot \rec{\pare{R^3-1}\pare{R-4}^2} \rightarrow 0. \qedhere \]
+    \end{proof}
+\end{sample}
+
+% paragraph cauchy积分定理求解积分问题 (end)
+
+% subsection cauchy积分公式 (end)
+
+\subsection{性质与应用} % (fold)
+\label{sub:性质与应用}
+
+\begin{ex}[Cauchy估计]
+    设$\func{f}{B_R\pare{a}}{\+bC}$, 且$\abs{f\pare{z}}$在$B_R\pare{a}$中有上界$M$, 则
+    \[ f^{\pare{n}}\pare{a} \le \frac{n!M}{R^n}. \]
+\end{ex}
+\begin{proof}
+    直接通过Cauchy积分公式估计导函数,
+    \begin{align*}
+        \abs{f^{\pare{n}}a} &= \abs{\frac{n!}{2\pi i} \int_{\abs{z-a}=R} \frac{f\pare{z}}{\pare{z-a}^{n+1}}\,\rd{z}} \\
+        &\le \frac{n!}{2\pi} \int_{\abs{z-a}=R} \frac{\abs{f\pare{z}}}{R^{n+1}}\,\rd{s} \\
+        &\le \frac{n!M}{2\pi R^{n+1}} \int_{\abs{z-a}=R}\,\rd{s}\\
+        &= \frac{n!M}{2\pi R^{n+1}}\cdot 2\pi R = \frac{n!M}{R^n}.
+    \end{align*}
+    惟若$f$在圆盘边界处不解析时, 只需考虑$r<R$的情形, 令$r\rightarrow R$即可.
+\end{proof}
+\begin{theorem}[Liouville定理]
+    如果整函数(在全$\+bC$上解析的函数)在整个平面上有界, 即对于任意$z$皆有$\abs{f\pare{z}}\le M$, 则$f\pare{z}$必定为常数.
+\end{theorem}
+\begin{remark}
+    从而(正次数的)多项式, 三角函数, 指数函数在$\+bC$上皆无界.
+\end{remark}
+\begin{proof}
+    只证$f'\pare{z}$处处为零. 在Cauchy估计中令$n=1, R\rightarrow\infty$即可.
+\end{proof}
+\begin{theorem}[代数基本定理]
+    设$p\pare{z} = a_nz^n + a_{n-1}z^{n-1} + \cdots + a_0$, 其中$n\ge 0$且$a_n\neq 0$, 则存在$z_0 = 0$使得$p\pare{z_0}$ = 0.
+\end{theorem}
+\begin{remark}
+    从而$p\pare{z}$必定有$n$个根(重根计重数), 即
+    \[ p\pare{z} = a_n \pare{z-z_1}\cdots \pare{z-z_n}. \]
+    如果设$c_1,\cdots,c_n$互异,
+    \[ p\pare{z} = a_n\pare{z-c_1}^{n_1}\cdots\pare{z-c_k}^{n_k},\quad n_1 + \cdots n_k = n. \]
+\end{remark}
+\begin{proof}
+    若任何$z$都有$p\pare{z}\neq 0$, 则$f\pare{z} = \displaystyle \rec{p\pare{z}}$有界, 从而为常数, 矛盾.
+\end{proof}
+\begin{theorem}[Morera定理]
+    设$f$为区域$D$上的连续函数且对$D$中沿任何简单闭曲线$\gamma$的积分$\displaystyle \int_\gamma f\pare{z}\,\rd{z}$为零, 则$f$解析.
+\end{theorem}
+\begin{proof}
+    由\cref{thm:原函数的存在性}(原函数存在)及\cref{coll:一次可导次次可导}(一次可导, 次次可导), $f$可导.
+\end{proof}
+\begin{corollary}
+    设$\func{f}{D}{\+bC}$且$D$单连通, 则$f$解析$\Leftrightarrow$ $f$连续且任何简单闭曲线$\gamma\subset D$都有$\displaystyle \int_\gamma f\pare{z}\,\rd{z} = 0$.
+\end{corollary}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{Maximal}
+    \caption{最大模原理证明示意}
+\end{figure}
+\begin{theorem}[最大模原理]
+    设$\func{f}{D}{\+bC}$解析且非常值, 则$\abs{f\pare{z}}$的最大值不能在$D$内取得.
+\end{theorem}
+\begin{corollary}
+    设$\func{f}{D}{\+bC}$解析且在$\partial D$处连续, 其中$D$为有界区域, 则$f\pare{z}$在$\partial D$上取得最大值.
+\end{corollary}
+\begin{remark}
+    如果$f\pare{z}$在$D$中有零点, 则$\abs{f\pare{z}}$在$D$中取得最小值. 如果$f$在$D$中无零点, 则$g=1/f$的最大模即为$f$的最小模, 从而$f\pare{z}$的最小模此时也不能在$D$内取得.
+\end{remark}
+\begin{proof}
+    如果$z_0\in D$处$\abs{f\pare{z_0}}=M = \displaystyle \max_{z\in D} \abs{f\pare{z}}$. 下面证明对于任何$z\in D$, 都有$\abs{f\pare{z}} = M$. 由\eqref{eq:点值作为平均值},
+    \[ \abs{f\pare{z_0}} \le \rec{2\pi}\int_0^{2\pi} \abs{f\pare{z_0+re^{i\theta}}}\,\rd{\theta} \le \rec{2\pi}\int_0^{2\pi} M\,\rd{\theta} = M. \]
+    所以对于足够小的$r$, 对任意$\theta$都有$\abs{f\pare{z_0 + re^{i\theta}}} = M$. 设满足$\abs{f\pare{z}}=M$之$z$构成集合$E$, 则同样的方法可以证明$E$是开集, 同时由$f$的连续性知$E$是闭集, 故$E=D$.
+\end{proof}
+\begin{proof}[代数基本定理的另一证明]
+    设对于任意$z$都有$p\pare{z}$非零. 取$R$使得$\abs{z}\ge R$时$\abs{p\pare{z}}>a_0$, 则(由最小模原理)$p\pare{z}$在$\abs{z} \le R$中的模的最小值要在$\abs{z} = R$上取得. 惟$\abs{p\pare{0}} = \abs{a_0}<\displaystyle \min_{\abs{z}=R}\abs{p\pare{z}}$, 矛盾.
+\end{proof}
+
+% subsection 性质与应用 (end)
+
+% section 解析函数的积分表示 (end)
+
+\end{document}

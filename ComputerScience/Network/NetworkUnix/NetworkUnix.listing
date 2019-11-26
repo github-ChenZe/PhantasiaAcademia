@@ -1,0 +1,7 @@
+/@\cinclude{arpa/inet.h}@/
+/* 呈现形式到数值: 字符串到IP地址格式 */
+int inet_pton(int af, const char *src, void *dst);
+/* 成功时返回1, 出错时返回0或-1 */
+/@\lhend @/
+struct /@\+c{sockaddr\_in}@/ servaddr;
+if (inet_pton(AF_INET, argv[1], &servaddr) <= 0) /* error */;

@@ -1,0 +1,46 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{假设检验} % (fold)
+\label{sec:假设检验}
+
+\subsection{基本概念} % (fold)
+\label{sub:基本概念}
+
+假设谓关于总体分布的概率性质的假定.
+
+\subsubsection{基本概念} % (fold)
+\label{ssub:基本概念}
+
+假设检验的问题是研究如何根据抽样后的样本来检验抽样前的假设是否合理.
+\begin{sample}
+    \begin{ex}
+        某厂产品出厂检验规定, 每批产品次品率$p$不超过$4\%$才能出厂. 现在从某批产品$10000$件中任意抽查$12$件发现$4$件次品, 问该批产品能否出厂? 若结果是$1$件呢?
+    \end{ex}
+    \begin{solution}
+        设$p$表示次品率, 假设$p\le 4\%$, 并记$Y$为$12$件中的次品数. 由于总产品数很大, 可认为$Y\sim B\pare{12,p}$. 当$p\le 0.04$,
+        \[ P\pare{Y=4} = \binom{12}{4} p^4\pare{1-q}^8 < 0.000913. \]
+        从而$p\le 0.04$, 抽样发生这一结果的概率过低, 故可怀疑假设$p\le 0.04$的正确性. 而
+        \[ P\pare{Y=1} \binom{12}{1}p^1\pare{1-p}^11 = 0.306, \]
+        从而$Y=1$并非小概率事件, 没有足够证据表明原假设不成立.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        某饮料厂在自动流水线上罐装饮料. 正常情况下, 每瓶饮料的容量$X$服从$N\pare{500,10^2}$. 抽取$9$件样品, 平均值$\overbar{X} = 492$, 问每瓶饮料的容量仍是$500$还是已经减小至$490$? 假设标准差仍为$10$.
+    \end{ex}
+\end{sample}
+统计假设为罐装饮料容量$X\sim N\pare{\mu,10^2}$. 问题为根据样本在$\mu=500$和$\mu=490$之间作判断. 前者谓原假设$H_0$, 后者谓备择假设或对立假设$H_1$或$H_a$. 检验就是要在
+\[ H_0: \mu=500 \leftrightarrow H_1: \mu = 490 \]
+中选择何者成立. 断言「$H_0$成立」则谓「不能拒绝$H_0$」. 断言「$H_0$不能成立」则谓「拒绝$H_0$」.
+
+% subsubsection 基本概念 (end)
+
+% subsection 基本概念 (end)
+
+% section 假设检验 (end)
+
+\end{document}

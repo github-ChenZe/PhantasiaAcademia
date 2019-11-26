@@ -1,0 +1,67 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'LloydMirror.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1480.81118126bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.5299332)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{LloydMirror.pdf}}%
+    \put(0.63113887,-0.72959488){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.73480083\unitlength}\raggedright \end{minipage}}}%
+    \put(0.49382297,0.23370711){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{M}}}%
+    \put(0.78340056,0.23370711){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{N}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{LloydMirror.pdf}}%
+    \put(0.91199663,-1.28280971){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.36097322\unitlength}\raggedright \end{minipage}}}%
+    \put(0.13630302,0.42867178){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$S=S_1$}}}%
+    \put(0.13051467,0.05821846){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17365\unitlength}\raggedright $S_2$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{LloydMirror.pdf}}%
+    \put(0.1168793,0.35255276){\color[rgb]{0,0,0}\makebox(0,0)[rb]{\smash{$a$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{LloydMirror.pdf}}%
+    \put(0.04597215,0.25687958){\color[rgb]{0,0,0}\makebox(0,0)[rb]{\smash{$d$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{LloydMirror.pdf}}%
+    \put(0.58831714,0.00370188){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{$D$}}}%
+  \end{picture}%
+\endgroup%

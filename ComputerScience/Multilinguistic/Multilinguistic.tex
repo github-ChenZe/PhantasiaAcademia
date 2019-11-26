@@ -1,75 +1,282 @@
+% !TEX options=--shell-escape
 \documentclass[hidelinks]{ctexart}
 
 \usepackage[margintoc, singleton, epu, nova]{van-de-la-sehen}
+\usepackage{ifplatform}
+
+\newtcbox{\mylib}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
+  right=0mm,left=0.15mm,arc=1pt,boxsep=2pt,fontupper=\ttfamily,
+  colframe=gray,coltext=gray!25!black,colback=gray!10!white
+}
+
+\robustify{\mylib}
 
 \begin{document}
 
 \showtitle{不同语言共有特性的对比}
 
+\section{语法} % (fold)
+\label{sec:语法}
+
+\subsection{函数} % (fold)
+\label{sub:函数}
+
+\subsubsection{函数的定义} % (fold)
+\label{ssub:函数的定义}
+
+\begin{pylst}
+def add(a: /@\+c{int}@/, b: /@\+c{int}@/) -> /@\+c{int}@/:
+    return a + b
+\end{pylst}
+\begin{javalst}
+int add(int a, int b) {
+    return a + b;
+}
+\end{javalst}
+\begin{jslst}
+function add(a, b) {
+    return a + b;
+}
+\end{jslst}
+\begin{cshlst}
+int add(int a, int b) {
+    return a + b;
+}
+\end{cshlst}
+\begin{shlst}
+add()
+{
+    echo $((/@\lstparam{1}@/+/@\lstparam{2}@/))
+}
+\end{shlst}
+
+% subsubsection 函数的定义 (end)
+
+% subsection 函数 (end)
+
+% section 语法 (end)
+
 \section{字符串处理} % (fold)
 \label{sec:字符串处理}
 
+\subsection{字符串IO} % (fold)
+\label{sub:字符串io}
+
+\subsubsection{命令行读取} % (fold)
+\label{ssub:命令行读取}
+
+\begin{pylst}
+line = input()
+\end{pylst}
+\begin{javalst}
+/@\javaimport{java.util.*;}@/
+/@\lhend @/
+try (/@\+c{Scanner}@/ scanner = new /@\+c{Scanner}@/(System.in)) {
+    /@\+c{String}@/ line = scanner.nextLine();
+}
+\end{javalst}
+\begin{nodejslst}
+/@\nodeimport{readline}{readline}@/
+/@\lhend @/
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+rl.question('', (line) => {
+    rl.close();
+});
+
+\end{nodejslst}
+\begin{cshlst}
+string line = /@\+c{Console}@/.ReadLine();
+\end{cshlst}
+\begin{shlst}
+read LINE
+\end{shlst}
+
+% subsubsection 命令行读取 (end)
+
+\subsubsection{格式化输出} % (fold)
+\label{ssub:格式化输出}
+
+\begin{pylst}
+num1 = 6
+num2 = 8
+print("Numbers are %d and %d."%(num1, num2))
+\end{pylst}
+\begin{javalst}
+int num1 = 6;
+int num2 = 8;
+System.out.format("Numbers are %d and %d.\n", num1, num2);
+\end{javalst}
+\begin{jslst}
+var num1 = 6;
+var num2 = 8;
+console.log("Numbers are ${num1} and ${num2}.");
+\end{jslst}
+\begin{cshlst}
+int num1 = 6;
+int num2 = 8;
+/@\+c{Console}@/.WriteLine($"Numbers are {num1} and {num2}.");
+\end{cshlst}
+\begin{shlst}
+NUM1=6
+NUM2=8
+echo "Numbers are $NUM1 and $NUM2."
+\end{shlst}
+{\shname} 使用双引号在字符串内插入变量, 单引号无法达到此效果.
+
+% subsubsection 格式化输出 (end)
+
+% subsection 字符串io (end)
+
+\subsection{简单处理} % (fold)
+\label{sub:简单处理}
+
+\subsubsection{子串} % (fold)
+\label{ssub:子串}
+
+\begin{longtable}{|c|c|c|c|c|c|}
+    \hline
+    语言 & \pyheader & \javaheader & \+:c2{c|}{\jsheader} & \cshheader \\
+    \hline
+    函数名 & \+`[]' & \+:c2{c|}{\+`substring'} & \+`substr' & \+`Substring' \\
+    \hline
+    单参数 & \+`[begin:]' & \+:c2{c|}{\+`(begin)'} & \+:c2{c|}{\+`(begin)'} \\
+    \hline
+    双参数 & \+`[begin: end]' & \+:c2{c|}{\+`(begin, end)'} & \+:c2{c|}{\+`(begin, length)'} \\
+    \hline
+\end{longtable}
+{\pyname} 使用切片访问子串, 例如\mylib{\lstinline[language=python]!"apple"[2:4]!}给出\mylib{\lstinline[language=python]!"pl"!}. 此外, {\jsname} 的子串函数有两种(长度和终止).
+
+% subsubsection 子串 (end)
+
+\subsubsection{字符串开头} % (fold)
+\label{ssub:字符串开头}
+
+\begin{longtable}{|c|c|c|c|c|}
+    \hline
+    语言 & \pyheader & \javaheader & \jsheader & \cshheader \\
+    \hline
+    函数名 & \+`startswith' & \+:c2{c|}{\+`startsWith'} & \+`StartsWith' \\
+    \hline
+\end{longtable}
+
+% subsubsection 字符串开头 (end)
+
+\subsubsection{字符串包含} % (fold)
+\label{ssub:字符串包含}
+
+\begin{longtable}{|c|c|c|c|c|}
+    \hline
+    语言 & \pyheader & \javaheader & \jsheader & \cshheader \\
+    \hline
+    函数名 & \+`in' & \+`contains' & \+`includes' & \+`Contains' \\
+    \hline
+\end{longtable}
+
+% subsubsection 字符串包含 (end)
+
+\subsubsection{字符串查找} % (fold)
+\label{ssub:字符串查找}
+
+\begin{longtable}{|c|c|c|c|c|c|}
+    \hline
+    语言 & \pyheader & \javaheader & \jsheader & \cshheader & \cheader \\
+    \hline
+    函数名 & \+`index' & \+:c2{c|}{\+`indexOf'} & \+`IndexOf' & \+`strcspn' \\
+    \hline
+    不存在时 & 异常 & \+:c3{c|}{\+`return -1;'} & \+`strlen(\lstparam{1})' \\
+    \hline
+\end{longtable}
+
+% subsubsection 字符串查找 (end)
+
+% subsection 简单处理 (end)
+
 \subsection{正则表达式} % (fold)
 \label{sub:正则表达式}
+
+\subsubsection{定义正则表达式} % (fold)
+\label{ssub:定义正则表达式}
+
+\begin{longtable}{|c|c|c|c|c|}
+    \hline
+    语言 & \pyheader & \javaheader & \jsheader \\
+    \hline
+    \+`regex' & \+`re.compile("re")' & \+`Pattern.compile("re")' & \+`/re/' \\
+    \hline
+    \+`matches/' & \+`re.finditer' & \+`pattern.matcher' & \\
+    \+`matcher' & \+`(regex, text)' & \+`(text)' & \\
+    \hline
+\end{longtable}
+
+% subsubsection 定义正则表达式 (end)
+
+\subsubsection{模式判定} % (fold)
+\label{ssub:模式判定}
+
+\begin{longtable}{|c|c|c|c|c|}
+    \hline
+    语言 & \pyheader & \javaheader & \jsheader & \cshheader \\
+    \hline
+    函数名 & \+`match' & \+`matches' & \+`test' & \+`Match' \\
+    \hline
+    前缀 & \+`\+c{Pattern}' & \+`\dstr{string}' & \+`\jsrstr{/\^{}re\$/}' & \+`\+c{Regex}' \\
+    \hline
+    参数 & \+`\dstr{string}' & \+`\dstr{re}' & \+`\dstr{string}' & \+`\dstr{string}, \cshrstr{\^{}re\$}' \\
+    \hline
+    正返回 & \+`\+c{Match}' & \+:c{3}{c|}{\+`\lsttrue'} \\
+    \hline
+    零返回 & \+`\pynone' & \+:c{3}{c|}{\+`\lstfalse'} \\
+    \hline
+\end{longtable}
+
+% subsubsection 模式判定 (end)
 
 \subsubsection{模式提取} % (fold)
 \label{ssub:模式提取}
 
 \begin{pylst}
-import re
-
-data = "id: 8, id: 42, id: 312"
+/@\pyimport{re}@/
+/@\lhend @/
+text = "id: 8, id: 42, id: 312"
 regex = re.compile("id: ([0-9]+)")
-
-it = re.finditer(regex, data)
-for match in it:
+matches = pattern.finditer(text)
+for match in matches:
     print match.group(1)
 \end{pylst}
 \begin{javalst}
-import java.util.regex.*;
-
-public class RegexMatch {
-    public static void main(String[] args) {
-        String s = "id: 8, id: 42, id: 312";
-        Pattern pattern = Pattern.compile("id: ([0-9]+)");
-        Matcher match = pattern.matcher(s);
-        while (match.find()) {
-            System.out.println(match.group(1));
-        }
-    }
+/@\javaimport{java.util.regex.*;}@/
+/@\lhend @/
+/@\+c{String}@/ text = "id: 8, id: 42, id: 312";
+/@\+c{Pattern}@/ regex = /@\+c{Pattern}@/.compile("id: ([0-9]+)");
+/@\+c{Matcher}@/ matcher = pattern.matcher(text);
+while (matcher.find()) {
+    System.out.println(matcher.group(1));
 }
 \end{javalst}
 \begin{jslst}
-var re = @</id: ([0-9]+)/g>@;
-var s = "id: 8, id: 42, id: 312";
-var m;
-
+var text = "id: 8, id: 42, id: 312";
+var regex = @</id: ([0-9]+)/g>@;
+var match;
 do {
-    m = re.exec(s);
-    if (m) {
-        console.log(m[1]);
+    match = regex.exec(text);
+    if (match) {
+        console.log(match[1]);
     }
-} while (m);
+} while (match);
 \end{jslst}
 \begin{cshlst}
-using System;
-using System.Text.RegularExpressions;
-
-namespace RegexTest
+/@\cshusing{System;}@/
+/@\cshusing{System.Text.RegularExpressions;}@/
+/@\lhend @/
+string text = "id: 8, id: 42, id: 312";
+string regex = "id: ([0-9]+)";
+/@\+c{MatchCollection}@/ matches = /@\+c{Regex}@/.Matches(text, regex);
+foreach (/@\+c{Match}@/ match in matches)
 {
-    class MainClass
-    {
-        public static void Main(string[] args)
-        {
-            string text = "id: 8, id: 42, id: 312";
-            string search = "id: ([0-9]+)";
-            MatchCollection matches = Regex.Matches(text, search);
-            foreach (Match m in matches)
-            {
-                Console.WriteLine(m.Groups[1]);
-            }
-        }
-    }
+    /@\+c{Console}@/.WriteLine(match.Groups[1]);
 }
 \end{cshlst}
 
@@ -78,5 +285,245 @@ namespace RegexTest
 % subsection 正则表达式 (end)
 
 % section 字符串处理 (end)
+
+\section{文件处理} % (fold)
+\label{sec:文件处理}
+
+\subsection{文件结构} % (fold)
+\label{sub:文件结构}
+
+\subsubsection{遍历文件夹} % (fold)
+\label{ssub:遍历文件夹}
+
+\begin{longtable}{|c|c|c|c|c|}
+    \hline
+    语言 & \pyheader & \javaheader & \nodejsheader & \cshheader \\
+    \hline
+    函数名 & \+`listdir' & \+`listFiles' & \+`readdirSync' & \+`GetFiles'  \\
+    \hline
+    前缀 & \+`os' & \+`\+c{File}' & \+`require(\sstr{fs})' & \+`\+c{DirectoryInfo}' \\
+    \hline
+    参数 & \+`\dstr{/usr}' & & \+`\dstr{/usr}' & \\
+    \hline
+    返回值 & \+`[\+c{str}]' & \+`\+c{File}[]' & \+`[\+c{str}]' & \+`\+c{FileInfo}[]' \\
+    \hline
+\end{longtable}
+
+% subsubsection 遍历文件夹 (end)
+
+% subsection 文件结构 (end)
+
+\subsection{文件读取} % (fold)
+\label{sub:文件读取}
+
+\subsubsection{逐行读取} % (fold)
+\label{ssub:逐行读取}
+
+\begin{pylst}
+/@file@/ = open('sampleInput')
+for line in /@file@/.readlines():
+    print(line)
+\end{pylst}
+\begin{javalst}
+/@\javaimport{java.io.*;}@/
+/@\lhend @/
+try (/@\lstvar @/ br = new /@\+c{BufferedReader}@/(new /@\+c{FileReader}@/(filename))) {
+    /@\+c{String}@/ line;
+    while ((line = br.readLine()) != null) {
+       System.out.println(line);
+    }
+}
+\end{javalst}
+\begin{nodejslst}
+var lineReader = require('readline').createInterface({
+    input: require('fs').createReadStream('file.in')
+});
+lineReader.on('line', function (line) {
+    console.log('Line from file:', line);
+});
+\end{nodejslst}
+\begin{cshlst}
+/@\cshusing{System.IO;}@/
+/@\lhend @/
+/@\lstvar @/ lines = /@\+c{File}@/.ReadLines(filename);
+foreach (var line in lines)
+    /@\+c{Console}@/.WriteLine(line);
+\end{cshlst}
+
+% subsubsection 逐行读取 (end)
+
+% subsection 文件读取 (end)
+
+\subsection{文件写入} % (fold)
+\label{sub:文件写入}
+
+\subsubsection{逐行写入} % (fold)
+\label{ssub:逐行写入}
+
+\begin{pylst}
+/@\pywith@/ open(filename, 'w') /@\pyas@/ myfile:
+    myfile.write("Stuff")
+\end{pylst}
+\begin{javalst}
+/@\javaimport {java.io.*;}@/
+/@\lhend @/
+try (/@\+c{PrintWriter}@/ pw = new /@\+c{BufferedReader}@/(filename)) {
+    br.println("Stuff");
+}
+\end{javalst}
+\begin{cshlst}
+/@\cshusing{System.IO;}@/
+/@\lhend@/
+using (/@\+c{StreamWriter}@/ file = new /@\+c{StreamWriter}@/(filename))
+{
+    file.WriteLine("Stuff");
+}
+\end{cshlst}
+
+% subsubsection 逐行写入 (end)
+
+% subsection 文件写入 (end)
+
+% section 文件处理 (end)
+
+\section{模版元编程} % (fold)
+\label{sec:模版元编程}
+
+\subsection{定义模版} % (fold)
+\label{sub:定义模版}
+
+\subsubsection{模版函数} % (fold)
+\label{ssub:模版函数}
+
+\begin{cpplst}
+template<typename T>
+int less_than(const T& v1, const T& v2)
+{
+    return v1 < v2;
+}
+\end{cpplst}
+
+% subsubsection 模版函数 (end)
+
+% subsection 定义模版 (end)
+
+% section 模版元编程 (end)
+
+\section{函数式编程} % (fold)
+\label{sec:函数式编程}
+
+\subsection{Lambda表达式} % (fold)
+\label{sub:lambda表达式}
+
+\subsubsection{Lambda表达式的声明} % (fold)
+\label{ssub:lambda表达式的声明}
+\begin{cpplst}
+std::/@\+c{function}@/<double (double)> f = 
+    [] (double x) { return x * x; };
+\end{cpplst}
+\begin{pylst}
+square = lambda x: x * x
+\end{pylst}
+\begin{javalst}
+/@\javaimport{java.util.function.Function;}@/
+/@\lhend @/
+/@\+c{Function}@/</@\+c{Double}@/, /@\+c{Double}@/> square = x -> x * x;
+\end{javalst}
+\begin{jslst}
+var square = x => x * x;
+\end{jslst}
+\begin{cshlst}
+/@\cshusing{System;}@/
+/@\lhend @/
+/@\+c{Func}@/<double, double> square = x => x * x;
+\end{cshlst}
+
+% subsubsection lambda表达式的声明 (end)
+
+% subsection lambda表达式 (end)
+
+% section 函数式编程 (end)
+
+\section{数学} % (fold)
+\label{sec:数学}
+
+\subsection{随机数} % (fold)
+\label{sub:随机数}
+
+\subsubsection{生成随机数} % (fold)
+\label{ssub:生成随机数}
+
+\begin{clst}
+/@\cinclude{stdlib.h}@/
+/@\lhend @/
+int randInt = rand() % (upper - lower) + lower;
+\end{clst}
+\begin{pylst}
+/@\pyimport{random}@/
+/@\lhend @/
+random.seed(seed);
+randInt = random.randrange(lower, upper);
+\end{pylst}
+\begin{javalst}
+/@\javaimport{java.util.Random;}@/
+/@\lhend @/
+/@\+c{Random}@/ random = new /@\+c{Random}@/(seed);
+int randInt = random.nextInt(upper - lower) + lower;
+\end{javalst}
+\begin{jslst}
+var randInt = Math.floor(Math.random() * (upper - lower)) + lower;
+\end{jslst}
+\begin{cshlst}
+/@\+c{Random}@/ random = new /@\+c{Random}@/(seed);
+int randInt = random.Next(lower, upper);
+\end{cshlst}
+\begin{phplst}
+$randInt = rand(min, max);
+\end{phplst}
+\begin{shlst}
+$RANOM=$$
+$RAND_INT=$(($RANDOM%($UPPER-$LOWER)+$LOWER))
+\end{shlst}
+
+% subsubsection 生成随机数 (end)
+
+% subsection 随机数 (end)
+
+% section 数学 (end)
+
+\section{安全} % (fold)
+\label{sec:安全}
+
+\subsection{资源管理} % (fold)
+\label{sub:资源管理}
+
+\subsubsection{安全释放} % (fold)
+\label{ssub:安全释放}
+
+\begin{pylst}
+/@\pywith@/ open(filename, 'w') /@\pyas@/ myfile:
+    myfile.write("Stuff")
+\end{pylst}
+\begin{javalst}
+/@\javaimport {java.io.*;}@/
+/@\lhend @/
+try (/@\+c{PrintWriter}@/ pw = new /@\+c{BufferedReader}@/(filename)) {
+    br.println("Stuff");
+}
+\end{javalst}
+\begin{cshlst}
+/@\cshusing{System.IO;}@/
+/@\lhend@/
+using (/@\+c{StreamWriter}@/ file = new /@\+c{StreamWriter}@/(filename))
+{
+    file.WriteLine("Stuff");
+}
+\end{cshlst}
+
+% subsubsection 安全释放 (end)
+
+% subsection 资源管理 (end)
+
+% section 安全 (end)
 
 \end{document}

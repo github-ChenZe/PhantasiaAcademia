@@ -1,0 +1,315 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\Var}{Var}
+
+\begin{document}
+
+\section{数理统计} % (fold)
+\label{sec:数理统计}
+
+\subsection{描述性统计} % (fold)
+\label{sub:描述性统计}
+
+描述之对象可为数据的「位置」或「中心」, 也可以是数据的波动. 测量的尺度可分为
+\begin{cenum}
+    \item 名义尺度(非顺序, 例如性别, 出生地);
+    \item 顺序尺度;
+    \item 区间尺度(例如海拔高度);
+    \item 比例尺度(可以加减乘除).
+\end{cenum}
+众数是样本数据中出现次数最多的点, 常用于名义尺度. 中位数谓样本数据的重点, 可消除极端数据的影响, 用于区间尺度或比例尺度. 样本平均值有很多良好的统计性质, 但对极端值敏感. $Q_1$和$Q_3$表示$1/4$分位数和$3/4$分位数.
+
+% subsection 描述性统计 (end)
+
+\subsection{若干基本概念} % (fold)
+\label{sub:若干基本概念}
+
+\subsubsection{总体和样本} % (fold)
+\label{ssub:总体和样本}
+
+\begin{sample}
+    \begin{ex}
+        $10000$件产品, 抽取$100$件检查. $10000$件谓总体, $100$件谓样本. 样本中个体数目谓样本容量. 抽取样本的行为谓抽样.
+    \end{ex}
+\end{sample}
+总体是与所研究问题有关的所有个体. 样本是总体中抽取的一部分个体. 总体中个体数目有限则谓有限总体, 否则谓无限总体. 使用数量指标下, 总体是所有个体上某种数量指标构成的集合. 因此它是数的集合.
+\begin{definition}
+    研究对象全体谓总体. 数理统计学中总体可以用一个随机变量及其概率分布来描述.
+\end{definition}
+在总体中抽取样本为相互独立同分布的大小为$n$的样本$X_1, \cdots, X_n$. 常记作
+\[ X_1,\cdots,X_n\quad \mathrm{i.i.d.} \quad \sim F. \]
+若$F$有密度$f$, 也可以记作
+\[ X_1,\cdots,X_n\quad \mathrm{i.i.d.} \quad \sim f. \]
+若总体用随机变量$X$表示时有分布函数$F$, 则$X_1, \cdots, X_n$可视为$X$的观察值.
+\[ X_1,\cdots,X_n\quad \mathrm{i.i.d.} \quad \sim X. \]
+
+% subsubsection 总体和样本 (end)
+
+\subsubsection{样本的两重性和简单随机样本} % (fold)
+\label{ssub:样本的两重性和简单随机样本}
+
+设$X = \pare{X_1, \cdots, X_n}$是总体中抽取的的一个样本, 则$X=\pare{X_1,\cdots,X_n}$的所有可能取值谓\emph{样本空间}, 记为$\+sX$.
+\begin{sample}
+    \begin{ex}
+        称重$5$次, 则样本空间为$\+sX = \setcond{\pare{x_1,\cdots,x_5}}{0<x_i<\infty}$, 也可以写为$\+sX = \setcond{\pare{x_1,\cdots,x_5}}{-\infty<x_i<\infty}$, 此时样本取负值之概率为零.
+    \end{ex}
+    \begin{ex}
+        打靶$3$次, 则样本空间
+        \[ \+sX = \setcond{\pare{x_1,x_2,x_3}}{x_i = 1,\cdots,10}. \]
+    \end{ex}
+\end{sample}
+样本的两重性谓样本既可以看成具体的数, 又可以看成随机变量.
+
+\paragraph{简单随机样本} % (fold)
+\label{par:简单随机样本}
+
+抽样是指从总体中按一定方式抽取样本的行为. \emph{简单随机抽样}谓每次抽样后分布不变者. 满足
+\begin{cenum}
+    \item 代表性: 每一个个体有同等机会被抽入样本.
+    \item 独立性: 样本中每一个体取任何值并不影响其它个体取值.
+\end{cenum}
+\begin{definition}
+    设有一总体$F$, $X_1,\cdots,X_n$为从$F$中抽取容量为$n$的样本, 若
+    \begin{cenum}
+        \item $X_1,\cdots,X_n$相互独立;
+        \item $X_1,\cdots,X_n\quad \mathrm{i.i.d.} \quad F$.
+    \end{cenum}
+    则谓$\pare{X_1,\cdots,X_n}$简单随机样本, 也作简单样本或随机样本.
+\end{definition}
+简单随机样本$X_1, \cdots, X_n$的联合分布为
+\[ F\pare{x_1}\cdot\cdots\cdot F\pare{x_n} = \prod_{i=1}^n F_i\pare{x_i}. \]
+联合密度为
+\[ f\pare{x_1}\cdot\cdots\cdot f\pare{x_n} = \prod_{i=1}^n f\pare{x_i}. \]
+有放回抽样/总体较大/样本容量较小时都可以认为是简单随机样本.
+
+% paragraph 简单随机样本 (end)
+
+\begin{sample}
+    \begin{ex}
+        产品有$N$个, 废品$M$个, $N$已知, $M$未知. 现在抽样检测废品.
+        \begin{cenum}
+            \item 使用放回抽样, 则
+            \[ P\pare{X_1= x_1,\cdots,X_n = x_n} = \pare{\frac{M}{N}}^a\pare{\frac{M-N}{N}}^{n-a}. \]
+            当$x_1,\cdots,x_n$都为$0$或$1$时如此, 且$\sum x_i = a$.
+            \item 若不放回抽样, 则
+            \[ P = \frac{M}{N}\cdot \frac{M-1}{N-1} \cdot\cdots\cdot \frac{M-a+1}{N-a+1}\cdot \frac{M-a}{N-a}\cdot \cdots  \cdot \frac{N-M-n+a+1}{M-n+1}. \]
+            当$x_1,\cdots,x_n$都为$0$或$1$时如此, 且$\sum x_i = a$.
+        \end{cenum}
+        若$N$足够小或$M$足够大, 则两种表达式相当.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于天平称重, 要定出$X_1,\cdots,X_n$的分布, 可以假设诸$X_i$独立且同分布. 为确定$X_1,\cdots,X_n$的联合分布, 只需考虑$X_1$的分布. 称重的误差由大量独立的随意误差叠加, 故近似服从正态分布. 故
+        \[ f\pare{x_1,\cdots,x_n} = \pare{\sqrt{2\pi}\sigma}^{-n}\exp{-\rec{2\sigma^2}\sum{\pare{x_i-a}^2}}. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 样本的两重性和简单随机样本 (end)
+
+\subsubsection{统计推断} % (fold)
+\label{ssub:统计推断}
+
+从总体中抽取一定大小的样本去推断总体的概率分布的方法谓统计推断. 若分布已知惟参数未知, 则谓参数统计推断. 参数统计推断之参数估计问题如推断$N\pare{a,\sigma^2}$中$a$和$\sigma$的取值.
+
+% subsubsection 统计推断 (end)
+
+% subsection 若干基本概念 (end)
+
+\subsection{统计量} % (fold)
+\label{sub:统计量}
+
+由样本算出的量谓\emph{统计量}, 或谓统计量是样本的函数. 统计量仅与样本有关, 不能包含未知的参数. 例如服从参数未知的正态分布的样本$X = \pare{X_1,\cdots,X_n}$, $\sum X_i$和$\sum X_i^2$都是统计量, 但$\sum\pare{X_i - a}$和$\sum X_i^2/\sigma^2$都不是统计量. 样本的两重性导致统计量也具有两重性.
+
+\subsubsection{常用统计量} % (fold)
+\label{ssub:常用统计量}
+
+样本均值
+\[ \overbar{X} = \rec{n} \sum_{i=1}^n X_i. \]
+从而$E\overbar{X} = \displaystyle \rec{n}\sum_{i=1}^n EX_i = \mu$.
+\par
+样本方差
+\[ S^2 = \rec{n-1}\sum_{i=1}^n \pare{X_i - \overbar{X}}^2. \]
+$ES^2 = \displaystyle \rec{n-1} E\brac{\sum_{i=1}^n X_i^2 - n\overbar{X}^2} = \rec{n-1} \sum_{i=1}^n \brac{\sigma^2 + \mu^2 - \pare{\frac{\sigma^2}{n} + \mu^2}} = \sigma^2$.
+\begin{remark}
+    考虑到$S^2 = \displaystyle \rec{n-1} X^T\brac{I - \rec{n}}X$, 中间矩阵的秩为$n-1$, 故相应的分母为$n-1$.
+\end{remark}
+其中$S$谓样本标准差. 样本原点矩
+\[ a_k = \rec{n} \sum_{i=1}^n X_i^k,\quad k=1,2,\cdots. \]
+样本中心矩
+\[ m_k = \rec{n} \sum_{i=1}^n \pare{X_i - \overbar{X}}^k. \]
+总体偏度系数
+\[ \frac{E\pare{X-\mu}^3}{\pare{\Var\pare{x}}^{3/2}}. \]
+样本偏度系数为$\displaystyle \frac{m_3}{m_2^{3/2}}$.
+\par
+设$X_1, \cdots, X_n$为从总体$F$中抽取的样本, 排序后$\pare{X_{\pare{1}},\cdots, X_{\pare{n}}}$谓次序统计量. 样本中位数
+\[ m_{1/2} = \begin{cases}
+    X_{\pare{\frac{n+1}{2}}}, & n \mathrm{\ odd}, \\
+    \brac{X_{\pare{\frac{n}{2}}} + X_{\pare{\frac{n}{2}+1}}}, & n \mathrm{\ even}.
+\end{cases} \]
+而$X_{\pare{n}}$和$X_{\pare{1}}$谓极值.
+\par
+$F_n\pare{x} = \#\curb{X_i \le x}/n$谓经验分布函数.
+\[ F_n\pare{x} = \rec{n}\sum_{i=1}^n I\pare{X_i \le x}. \]
+注意到$F\pare{x} = P\pare{X\le x} = EI\pare{X\le x}$, $F_n$可以作为$F$的逼近.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+7, 8, 9, 10
+
+% paragraph 作业 (end)
+
+% subsubsection 常用统计量 (end)
+
+\subsubsection{正态分布的样本均值和样本方差的分布} % (fold)
+\label{ssub:正态分布的样本均值和样本方差的分布}
+
+\inlinehardlink{多维正态分布的性质}
+若$X_1,\cdots,X_n$分别服从$N\pare{\mu_k,\sigma_k^2}$且相互独立, $\sum c_i X_i$服从$N\pare{\mu,\sigma^2}$, 其中$\mu = \sum c_i\mu_i$, $\sigma^2 = \sum c_i^2\sigma_i^2$.
+\par
+特别地, 取$c_1 = \cdots = c_n = 1/n$, 则得到$\overbar{X} \sim N\pare{a,\sigma^2/n}$. 此外$\pare{n-1}S^2/\sigma^2 \sim \chi_{n-1}^2$, 且$\overbar{X}$和$S^2$相互独立.
+\begin{proof}
+    欲求$\pare{\overbar{X}, S^2}$的分布, 将$S^2$打开为$\pare{Y_1,\cdots,Y_{n-1}}$, 注意
+    \begin{align*}
+        \pare{n-1}S^2 &= \sum \pare{X_i - \overbar{X}}^2 = \sum X_i^2 - n\overbar{X}^2 = X^TX - n\overbar{X}^2.
+    \end{align*}
+    令$Y = AX$, 则
+    \[ \pare{n-1}S^2 = X^T X - n\overbar{X}^2 = Y\pare{A^{-1}}^TA^{-1}Y - n\overbar{X}^2. \]
+    取正交阵
+    \[ \+vA = \begin{pmatrix}
+        \rec{\sqrt{n}} & \rec{\sqrt{n}} & \cdots & \rec{\sqrt{n}} \\
+        a_{21} & a_{22} & \cdots & a_{2n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{pmatrix}. \]
+    则$Y_1 = \sqrt{n}\overbar{X}$. 由$A$正交知
+    \[ X^TX = Y^TY,\quad \pare{n-1}S^2 = Y^TY - n\overbar{x}^2 = Y^TY - Y_1^2. \]
+    由于$X$服从正态分布, 故$Y$也服从正态分布,
+    \[ Y\sim N\pare{A \begin{pmatrix}
+        a \\ \vdots \\ a
+    \end{pmatrix}, A\pare{\sigma^2 I_n} A^{T}} = N\pare{\begin{pmatrix}
+        \sqrt{n}a \\ 0 \\ \cdots \\ 0
+    \end{pmatrix}, \sigma^2 I_n}. \]
+    故各个$Y$相互独立. 从而
+    \[ Y_1 \sim N\pare{\sqrt{n}a, \sigma^2},\quad Y_i \sim N\pare{0,\sigma^2}. \]
+    因此
+    \[ \frac{\pare{n-1}{S^2}}{\sigma^2} = \sum_{i=2}^n \pare{\frac{Y_i}{\sigma}}^2 \sim \chi_{n-1}^2. \]
+    由$\overbar{X}$仅仅与$Y_1$有关, $\S^2$仅仅与$Y_2,\cdots,Y_n$有关, 知二者独立.
+\end{proof}
+
+% subsubsection 正态分布的样本均值和样本方差的分布 (end)
+
+\subsubsection{推论} % (fold)
+\label{ssub:推论}
+
+\begin{corollary}
+    设$X_1,\cdots,X_n$独立同分布$N\pare{a,\sigma^2}$, 则
+    \[ T = \frac{\sqrt{n}\pare{\overbar X-a}}{S}\sim t_{n-1}. \]
+\end{corollary}
+\begin{corollary}
+    设$X_1,\cdots,X_m$独立同分布$N\pare{a_1,\sigma_1^2}$,$Y_1,\cdots,Y_n$独立同分布$N\pare{a_2,\sigma_2^2}$, 假设$\sigma_1^2 = \sigma_2^2 = \sigma^2$, 且$X$与$Y$独立, 则
+    \[ T = \frac{\pare{\overbar{X} - \overbar{Y}} - \pare{a_1 - a_2}}{S_w}\sqrt{\frac{mn}{n+m}}\sim t_{m+n-1}. \]
+    此处$\pare{n+m-2}S_w^2 = \pare{m-1}S_1^2 + \pare{n-1}S_2^2$,
+    \[ S_1^2 = \rec{m-1}\sum_{i=1}^m \pare{X_i - \overbar{X}}^2,\quad S_2^2 = \rec{n-1}\sum_{j=1}^n \pare{Y_j - \overbar{Y}}^2. \]
+\end{corollary}
+\begin{proof}
+    由$\overbar{X} - \overbar{Y} \sim N\pare{a_1 - a_2, \displaystyle \pare{\rec{m} + \rec{n}}\sigma^2}$.
+    \[ \frac{\pare{m-1}S_1^2}{\sigma^2} \sim \chi_{m-1}^2,\quad \frac{\pare{n-1}S_2^2}{\sigma^2}\sim \chi_{n-1}^2 \]
+    两者独立. 从而
+    \[ \frac{\pare{m-1}S_1^2}{\sigma^2} + \frac{\pare{n-1}S_2^2}{\sigma^2} \sim \chi_{n+m-2}^2. \qedhere \]
+\end{proof}
+\begin{corollary}
+    在上一推论中,
+    \[ F = \frac{S_1^2}{S_2^2} \frac{\sigma_2^2}{\sigma_1^2} \sim F_{m-1,n-1}. \]
+\end{corollary}
+\begin{corollary}
+    设$X_1,\cdots,X_n$独立同分布于$\exp\brac{\lambda}$, 则
+    \[ 2\lambda n\overbar{X} = 2\lambda \sum X_i \sim \chi_{2n}^2. \]
+\end{corollary}
+
+% subsubsection 推论 (end)
+
+\subsubsection{三大分布} % (fold)
+\label{ssub:三大分布}
+
+\paragraph{$\chi^2$-分布} % (fold)
+\label{par:chi_2分布}
+
+设$X_1,\cdots,X_n$独立同分布于$N\pare{0,1}$, 则谓
+\[ \xi = \sum_{i=1}^n X_i^2 \]
+是自由度为$n$的$\chi^2$变量, 记为$\xi = \chi_n^2$.
+\par
+设$\xi \sim \chi_n^2$, $c = \chi_n^2\pare{\alpha}$, 其中$P\pare{X>c}=\alpha$, 则谓$c=\chi_n^2\pare{\alpha}$为$\chi_n^2$分布的上侧$\alpha$分位数.
+
+\begin{corollary}[$\chi^2$-分布的性质]
+    \begin{cenum}
+        \item 若$\xi\sim\chi_n^2$, 则$\chi$有特征函数
+        \[ \varphi\pare{t} = \pare{1-2it}^{-n/2}. \]
+        \item $\xi$的均值和方差谓$E\xi = n$, $\Var\pare{\xi} = 2n$.
+        \item $Z_1\sim \chi_{n_1}^2, Z_2 \sim \chi_{n_2}^2$, 且$Z_1$和$Z_2$独立, 则$Z_1+Z_2 \sim \chi_{n_1+n_2}^2$.
+    \end{cenum}
+\end{corollary}
+
+% paragraph chi_2分布 (end)
+
+\paragraph{$t$-分布} % (fold)
+\label{par:t分布}
+
+若$X\sim Y\pare{0,1}$, $Y\sim \chi_n^2$且$X$和$Y$独立, 则谓
+\[ T = \frac{X}{\sqrt{Y/n}} \]
+自由度为$n$的$t$变量. 其分布谓自由度为$n$的$t$分布, $T \sim t_n$. 设$T\sim t_n$, $0<\alpha<1$, 令$P\pare{\abs{T}>c} = \alpha$, 则$c = t_n\pare{\alpha/2}$为自由度为$n$的$t$分布的双侧$\alpha$分位数.
+
+\begin{corollary}[$t$-分布的性质]
+    \begin{cenum}
+        \item 当$n=1$时$t$-分布就是Cauchy分布, $\displaystyle t_1\pare{x} = \rec{\pi \pare{1+x^2}}$.
+        \item 当$n\rightarrow \infty$, $t$变量有极限分布$N\pare{0,1}$.
+    \end{cenum}
+\end{corollary}
+\begin{remark}
+    $n\sim 30$时就已经与正态分布足够接近.
+\end{remark}
+
+% paragraph t分布 (end)
+
+\paragraph{$F$-分布} % (fold)
+\label{par:F分布}
+
+设$X\sim \chi_m^2$, $Y\sim \chi_n^2$, 且$X$和$Y$独立, 则谓
+\[ F = \frac{X/m}{Y/n} \]
+是自由度为$m$和$n$的$F$变量. 其分布谓自由度是$m$和$n$的$F$分布, $F\sim F_{m,n}$.
+
+\begin{corollary}[$F$-分布的性质]
+    \mbox{}
+    \begin{cenum}
+        \item 若$Z\sim F_{m,n}$, 则$\rec{Z} = F_{n,m}$.
+        \item 若$T\sim t_n$, 则$T^2 \sim F_{1,n}$.
+        \item $F_{m,n}\pare{1-\alpha} = 1/F_{n,m}\pare{\alpha}$.
+    \end{cenum}
+\end{corollary}
+\begin{proof}[第三条性质的证明]
+    \begin{align*}
+         \alpha &= P\pare{F>F_{n,m}\pare{\alpha}} \\
+         &= P\pare{\rec{F} < \rec{F_{n,m}\pare{\alpha}}}, \\
+         \Rightarrow 1-\alpha &= P\pare{\rec{F} > \rec{F_{n,m}\pare{\alpha}}}, \\
+         \Rightarrow \rec{F_{n,m}\pare{\alpha}} &= F_{m,n}\pare{1-\alpha}. \qedhere
+    \end{align*} 
+\end{proof}
+
+% paragraph F分布 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+6.16, 17, 20, 22
+
+% paragraph 作业 (end)
+
+% subsubsection 三大分布 (end)
+
+% subsection 统计量 (end)
+
+% section 数理统计 (end)
+
+\end{document}

@@ -1,19 +1,6 @@
-using System;
-using System.Text.RegularExpressions;
-
-namespace RegexTest
+/@\cshusing{System.IO;}@/
+/@\lhend@/
+using (/@\+c{StreamWriter}@/ file = new /@\+c{StreamWriter}@/(filename))
 {
-    class MainClass
-    {
-        public static void Main(string[] args)
-        {
-            string text = "id: 8, id: 42, id: 312";
-            string search = "id: ([0-9]+)";
-            MatchCollection matches = Regex.Matches(text, search);
-            foreach (Match m in matches)
-            {
-                Console.WriteLine(m.Groups[1]);
-            }
-        }
-    }
+    file.WriteLine("Stuff");
 }

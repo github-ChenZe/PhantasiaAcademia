@@ -1,0 +1,69 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'CoorTransform.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{905.15587514bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.82312864)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{CoorTransform.pdf}}%
+    \put(0.06116864,0.0341957){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.50425408\unitlength}\raggedright $O$\end{minipage}}}%
+    \put(0.64117943,0.0341957){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.50425408\unitlength}\raggedright $x$\end{minipage}}}%
+    \put(-0.0027507,0.68286063){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.50425408\unitlength}\raggedright $y$\end{minipage}}}%
+    \put(0.34288808,0.16676956){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.50425408\unitlength}\raggedright $O'$\end{minipage}}}%
+    \put(0.92289895,0.16676956){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.50425408\unitlength}\raggedright $x'$\end{minipage}}}%
+    \put(0.27896874,0.81543456){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.50425408\unitlength}\raggedright $y'$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{CoorTransform.pdf}}%
+    \put(0.25238168,0.33514993){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24857597\unitlength}\raggedright $\+vr$\end{minipage}}}%
+    \put(0.22559772,0.11418224){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24857597\unitlength}\raggedright $\+vR$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{CoorTransform.pdf}}%
+    \put(0.40207283,0.82727142){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24857597\unitlength}\raggedright $\+vu$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{CoorTransform.pdf}}%
+    \put(0.58606115,0.59299592){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24857597\unitlength}\raggedright $P$\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{CoorTransform.pdf}}%
+    \put(0.47000137,0.3569119){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24857597\unitlength}\raggedright $\+vr'$\end{minipage}}}%
+  \end{picture}%
+\endgroup%

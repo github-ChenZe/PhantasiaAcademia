@@ -1,0 +1,99 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{离散随机变量} % (fold)
+\label{sec:离散随机变量}
+
+\subsection{常见分布} % (fold)
+\label{sub:常见分布}
+
+\subsubsection{通论} % (fold)
+\label{ssub:通论}
+
+\begin{definition}[Bernoulli试验]
+    Bernoulli试验谓有且仅有二结果之试验. 谓随机变量$X$服从参数为$p$的Bernoulli分布,
+    若$X=1$之概率为$p$而$X=0$之概率为$1-p$. 通常谓$X=1$为成功, $X=0$为失败.
+\end{definition}
+
+% subsubsection 通论 (end)
+
+\subsubsection{二项分布} % (fold)
+\label{ssub:二项分布}
+
+\begin{definition}[二项随机变量与二项分布]
+    参数为$\pare{n,p}$二项随机变量, 谓服从二项分布
+    \[ P\pare{Y=y\vert n,p} = \binom{n}{y}p^y\pare{1-p}^{n-y} \]
+    的随机变量.
+\end{definition}
+\begin{lemma}[二项随机分布的诠释]
+    $P\pare{Y=y\vert n,p}$是在$n$次成功率$p$的Bernoulli试验中恰好出现$y$个成功的概率.
+\end{lemma}
+
+% subsubsection 二项分布 (end)
+
+\subsubsection{超几何分布} % (fold)
+\label{ssub:超几何分布}
+
+\begin{definition}[超几何分布]
+    谓$X$服从参数为$\pare{N,M,K}$的超几何分布, 如果
+    \[ P\pare{X=x\vert N,M,K} = \frac{\binom{M}{x}\binom{N-M}{K-x}}{\binom{N}{K}}. \]
+\end{definition}
+\begin{lemma}[超几何分布的诠释]
+    $P\pare{Y=y\vert N,M,K}$是在一个具有$N$个球, 其中$M$个红球, 剩余为绿球的缸中, 不放回取出$K$个后恰好有$y$个红球的概率.
+\end{lemma}
+\begin{pitfall}
+    区分超几何分布与二项分布: 若抽样不放回则为超几何分布, 若放回则为二项分布.
+\end{pitfall}
+
+% subsubsection 超几何分布 (end)
+
+\subsubsection{负二项分布} % (fold)
+\label{ssub:负二项分布}
+
+\begin{definition}[负二项分布]
+    谓$X$服从参数为$\pare{r,p}$的负二项分布, 如果
+    \[ P\pare{X=x\vert r,p} = \binom{x-1}{r-1}p^r\pare{1-p}^{x-r},\quad x = r, r+1, \cdots. \]
+\end{definition}
+\begin{lemma}[负二项分布的诠释]
+    $P\pare{X=x\vert r,p}$是成功率为$p$的Bernoulli试验第$r$次成功出现在第$x$次的概率.
+\end{lemma}
+
+% subsubsection 负二项分布 (end)
+
+\subsubsection{几何分布} % (fold)
+\label{ssub:几何分布}
+
+\begin{definition}[几何分布]
+    谓$X$服从参数为$p$的几何分布, 如果
+    \[ P\pare{X=x\vert p} = p\pare{1-p}^{x-1},\quad x = 1,2,\cdots \]
+\end{definition}
+\begin{lemma}[几何分布的诠释]
+    $P\pare{X=x\vert p}$是成功率为$p$的Bernoulli试验的第一次成功出现在第$x$次的概率.
+\end{lemma}
+
+% subsubsection 几何分布 (end)
+
+\subsubsection{Poisson分布} % (fold)
+\label{ssub:poisson分布}
+
+\begin{definition}[Poisson分布]
+    谓$X$服从参数为$\lambda$的Poisson分布, 如果
+    \[ P\pare{X=x\vert\lambda} = \frac{e^{-\lambda}\lambda^x}{x!},\quad x = 0, 1, \cdots. \]
+\end{definition}
+\begin{lemma}[Poisson分布的诠释]
+    设$\lambda$为单位时间内某事件平均发生次数, 则$P\pare{X=x\vert \lambda}$为单位时间内发生恰好$x$次的概率.
+\end{lemma}
+\begin{lemma}[Poisson近似]
+    成功率为$p$的Bernoulli试验$n$次出现$x$次成功的概率大约为$P\pare{X=x\vert\lambda}$, 其中$\lambda = np$.
+\end{lemma}
+
+% subsubsection poisson分布 (end)
+
+% subsection 常见分布 (end)
+
+% section 离散随机变量 (end)
+
+\end{document}

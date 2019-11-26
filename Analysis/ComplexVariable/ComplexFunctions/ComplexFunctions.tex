@@ -1,0 +1,388 @@
+\documentclass{ctexart}
+
+\usepackage[nea]{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+
+\DeclareMathOperator{\Ln}{Ln}
+
+\begin{document}
+
+\section{复变数函数} % (fold)
+\label{sec:复变数函数}
+
+\headerstamp
+
+\subsection{复变数函数} % (fold)
+\label{sub:复变数函数}
+
+\begin{ex}
+    $f\pare{z} = \Arg z$和$f\pare{z} = \sqrt[n]{z}$不是函数, 但为了方便而谓之多值函数.
+\end{ex}
+\begin{pitfall}
+    多值函数不是函数.
+\end{pitfall}
+一般对$\func{f}{A}{B}$记$f\pare{z} = u\pare{x,y} + iv\pare{x,y}$.
+\begin{sample}
+    \begin{ex}
+        $f\pare{z} = \Re z$, $u=x$, $v=0$.
+    \end{ex}
+    \begin{ex}
+        $f\pare{z} = \Im z$, $u=0$, $v=y$.
+    \end{ex}
+    \begin{ex}
+        $f\pare{z} = \conj{z}$, $u=x$, $v=-y$.
+    \end{ex}
+    \begin{ex}
+        $f\pare{z} = z^2,$ $u = x^2-y^2$, $v=2xy$.
+    \end{ex}
+    \begin{ex}
+        $f\pare{z} = \abs{z}$, $u = \sqrt{x^2+y^2}$, $v = 0$.
+    \end{ex}
+\end{sample}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{.47\textwidth}
+        \centering
+\begin{pspicture}(-2,-2)(2,2)
+\psaxes[labels=none,ticks=none]{->}(0,0)(-2,-2)(2,2)
+\multido{\iu=-3+1}{7}{%
+  \psplotImp[linecolor=red,linewidth=0.3pt,stepFactor=0.2,algebraic](-2,-2)(2,2){x^2-y^2+\iu}%
+  %\psplot[yMaxValue=2,yMinValue=-2,linewidth=0.3pt]{-2}{-0.2}{\iu/(2*x)}%
+  \psplotImp[linecolor=blue,linewidth=0.3pt,stepFactor=0.2,algebraic](-2,-2)(2,2){2*x*y+\iu}%
+}
+\psline[linecolor=white](-2,-2)(-2,2)%remove possible noise
+\psline[linecolor=white](-2,-2)(2,-2)%remove possible noise
+\end{pspicture}
+        \caption{$z^2$的实部和虚部等势面}
+    \end{subfigure}
+    \begin{subfigure}[b]{.47\textwidth}
+        \centering
+\begin{pspicture}(-2,-2)(2,2)
+\psaxes[labels=none,ticks=none]{->}(0,0)(-2,-2)(2,2)
+\multido{\iu=-3+1}{7}{%
+  \psplotImp[linecolor=red,linewidth=0.3pt,stepFactor=0.2,algebraic](-2,-2)(2,2){x/(x^2+y^2)+\iu/1.8}%
+  %\psplot[yMaxValue=2,yMinValue=-2,linewidth=0.3pt]{-2}{-0.2}{\iu/(2*x)}%
+  \psplotImp[linecolor=blue,linewidth=0.3pt,stepFactor=0.2,algebraic](-2,-2)(2,2){-y/(x^2+y^2)+\iu/1.8}%
+}
+\psline[linecolor=white](-2,-2)(-2,2)%remove possible noise
+\psline[linecolor=white](-2,-2)(2,-2)%remove possible noise
+\end{pspicture}
+        \caption{$1/z$的实部和虚部等势面}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+
+% subsection 复变数函数 (end)
+
+\subsection{函数极限与连续性} % (fold)
+\label{sub:函数极限与连续性}
+
+\begin{definition}[复变函数极限]
+    若$\forall \epsilon>0$, $\exists\, \delta$, 使得当$\abs{z-z_0} < \delta$且$z\in A$时有
+    \[ \abs{f\pare{z} - a} < \epsilon, \]
+    则谓
+    \[ \lim_{z\rightarrow z_0} f\pare{z} = a. \]
+\end{definition}
+\begin{definition}[复变函数连续]
+    若$\func{f}{A}{B}$, 对某$z_0 \in A$有
+    \[ \lim_{z\rightarrow z_0} f\pare{z} = f\pare{z_0}, \]
+    则谓之在$z_0$处连续. 若处处连续则谓之连续.
+\end{definition}
+\begin{theorem}[函数极限作为实部和虚部的极限]
+    设$f\pare{z} = u+iv$,
+    \[ \lim_{z\rightarrow z_0} f = a = u_0 + iv_0\Leftrightarrow \begin{cases}
+        \displaystyle \lim_{z \rightarrow z_0} u = u_0,\\
+        \displaystyle \lim_{z \rightarrow z_0} v = v_0.
+    \end{cases} \]
+    且$f$连续当且仅当$u$和$v$连续.
+\end{theorem}
+\begin{theorem}
+    设$\func{f}{E}{\+bC}$连续, $E$紧致, 则
+    \begin{cenum}
+        \item $f$在$E$上有界;
+        \item $\abs{f}$在$E$上有最大最小值;
+        \item $f$一致连续.
+    \end{cenum}
+\end{theorem}
+
+% subsection 函数极限与连续性 (end)
+
+\subsection{复变函数导数} % (fold)
+\label{sub:复变函数导数}
+
+\begin{definition}[导数]
+    设$\func{f}{D}{\+bC}$, 其中$D$为区域, 则$f$谓可导的, 如果
+    \[ \lim_{z\rightarrow z_0} \frac{f\pare{z} - f\pare{z_0}}{z-z_0} \]
+    存在. 此时以$f'\pare{z_0}$记上述极限.
+\end{definition}
+\begin{definition}[解析]
+    若$f$在$D$内处处可导, 则谓之解析(或全纯). 若在$z_0$附近处处可导, 即在$z_0$一邻域内解析, 则谓之在该点解析.
+\end{definition}
+\begin{pitfall}
+    不能认为$u$, $v$可导等价于$f$可导.
+\end{pitfall}
+\begin{ex}
+    $f\pare{z} = \conj{z}$, 则$u=x$, $v=-y$处处连续且可导, 但
+    \[ \lim_{z\rightarrow z_0} \frac{f\pare{z}-f\pare{z_0}}{z-z_0} = \lim_{\Delta z\rightarrow 0} \frac{\conj{\Delta z}}{\Delta z} \]
+    可以取任何单位圆上点, 极限不存在.
+\end{ex}
+\begin{remark}
+    以$C^r\brac{a,b}$表示$r$阶连续可导者, $C^0$表示连续者, $C^\omega\brac{a,b}$表示在其中解析者, $f$在其中有幂级数展开.
+    \[ C^0\brac{a,b} \supsetneq C^1\brac{a,b} \supsetneq \cdots \supsetneq C^r\brac{a,b} \supsetneq \cdots \supsetneq C^\omega\brac{a,b} \supsetneq \curb{\text{多项式}}. \]
+\end{remark}
+\begin{theorem}[Weierstra\ss 定理]
+    $\func{f}{\brac{a,b}}{\+bR}$连续, 则对于$\forall \epsilon > 0$, 存在多项式$P\pare{x}$使在$\brac{a,b}$内一致有
+    \[ \abs{f\pare{x} - P\pare{x}} < \epsilon. \]
+\end{theorem}
+
+% subsection 复变函数导数 (end)
+
+\subsection{Cauchy-Riemann方程} % (fold)
+\label{sub:cauchy_riemann方程}
+
+为了得到导数存在的条件, 取二特定方向,
+\[ \lim_{\Delta z \in \+bR,\ \Delta z\rightarrow 0} \frac{f\pare{z+\Delta z} - f\pare{z}}{\Delta z} = \lim_{\Delta z/i \in \+bR,\ \Delta z \rightarrow 0} \frac{f\pare{z+\Delta z} - f\pare{z}}{\Delta z}. \]
+左边为
+\[ \lim_{\Delta x\rightarrow 0} \frac{u\pare{x+\Delta x, y} - u\pare{x,y} + i\pare{v\pare{x+\Delta x, y} - v\pare{x,y}}}{\Delta x} = \+DxDu + i\+DxDv. \]
+右边为
+\[ \lim_{\Delta y\rightarrow 0} \frac{u\pare{x, y + \Delta y} - u\pare{x,y} + i\pare{v\pare{x, y + \Delta y} - v\pare{x,y}}}{i \Delta y} = \rec{i}\pare{\+DyDu + i\+DyDv}. \]
+从而
+\[ \+DxDu + i\+DxDv = \+DyDv - i\+DyDu. \]
+\begin{finale}
+    \begin{theorem}[Cauchy-Riemann方程]
+        $f\pare{z}$是可导的当且仅当$u$, $v$可微且
+        \[ \+DxDu = \+DyDv,\quad \+DuDy = -\+DxDv. \]
+    \end{theorem}
+\end{finale}
+\begin{proof}
+    $\displaystyle f\pare{z_0+\Delta z} - f\pare{z_0} = f'\pare{z_0}\Delta z + o\pare{\abs{\Delta z}}$, 记$f'\pare{z_0} = a+bi$, 则
+    \begin{align*}
+        &u\pare{x_0+\Delta x, y_0+\Delta y} + iv\pare{x_0+\Delta x, y_0+\Delta y} - u\pare{x_0, y_0} - iv\pare{x_0,y_0} \\&= \pare{a+bi}\pare{\Delta x + i\Delta y} + o\pare{\abs{\Delta z}}. 
+    \end{align*}
+    分别考虑实部和虚部, 有
+    \[ u\pare{x_0+\Delta x, y_0+\Delta y} - u\pare{x_0, y_0} = a\Delta x - b\Delta y + o\pare{\abs{\Delta z}}, \]
+    \[ v\pare{x_0+\Delta x, y_0+\Delta y} - v\pare{x_0, y_0} = b\Delta x - a\Delta y + o\pare{\abs{\Delta z}}, \]
+    这等价于要求$u$和$v$在该处可导且满足Cauchy-Riemann方程.
+\end{proof}
+\begin{remark}
+    $f$在$z_0$处满足Cauchy-Riemann方程不蕴含$f$可导. 例如$f\pare{z} = \sqrt{\abs{xy}}$在$0$处满足Cauchy-Riemann方程, 但它在零处不可导. 令$x=\alpha t$, $y = \beta t$, 则可导等价于要求
+    \[ \frac{f\pare{z} - f\pare{0}}{z-0} = \frac{f\pare{z}}{z} = \frac{\sqrt{\abs{\alpha\beta}}}{\alpha+i\beta}, \]
+    与$\alpha,\beta$二者有关.
+\end{remark}
+\begin{theorem}[导数的表达式]
+    若已知$f$可导, 则
+    \begin{align*}
+        f'\pare{z} &= \+DxDu + i\+DxDv = \+DyDv + i\+DxDv \\
+        &= \+DxDu - i\+DyDu = \+DyDv - i\+DyDu.
+    \end{align*}
+\end{theorem}
+\begin{sample}
+    \begin{ex}
+        $\func{f}{D}{\+bC}$解析, 若满足下列条件之一则为常值:
+        \begin{cenum}
+            \item $f'\pare{z} = 0$;
+            \item $\Re f = \const$;
+            \item $\Im f = \const$;
+            \item $\abs{f} = \const$;
+            \item $\arg\pare{f} = \const$.
+        \end{cenum}
+    \end{ex}
+    \begin{proof}
+        关于第一点, $f'\pare{z} = 0\Rightarrow u_x=u_y=v_x=v_y = 0$. 关于第二点, $u_x=u_y=0$从而由Cauchy-Riemann方程, $v_x=v_y=0$. \inlinehardlink{自行完成后两点的证明}
+    \end{proof}
+\end{sample}
+\begin{remark}
+    通过$z$和$\conj{z}$反解出$x$和$y$, 则
+    \[ \+DzDf = \half\pare{\+DxDf - i\+DyDf}, \]
+    \[ \+D{\conj{z}}Df = \+DxDf\+DzDx + \+DyDf \+D{\conj{z}}Dy = \half\pare{\+DxDf + i\+DyDf}. \]
+    则Cauchy-Riemann方程等价于$\displaystyle\+D{\conj{z}}Df = 0$. 因此, 若$f$中显式出现$\conj{z}$, 例如
+    \[ f\pare{z} = \conj{z},\quad f\pare{z} = \Re z = \frac{z+\conj{z}}{2}, \quad f\pare{z} = \Im z = \frac{z - \conj{z}}{2i}, \]
+    不是解析的.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        设$f\pare{z} = e^x\pare{\cos y + i\sin y}$, 由Cauchy-Riemann方程知可导, 且$f'\pare{z} = f\pare{z}$.
+    \end{ex}
+    \begin{ex}
+        设$f\pare{z} = z^n$, 求$f$的解析区域.
+    \end{ex}
+    \begin{proof}[解]
+        无需借助Cauchy-Riemann方程. 直接按定义即可.
+    \end{proof}
+    \begin{ex}
+        $f\pare{z} = e^{-\abs{z}^2}$, 有$u = e^{-x^2-y^2}$而$v=0$仅在原点满足Cauchy-Riemann方程, 故仅在零处可导.
+    \end{ex}
+    \begin{ex}
+        设$f = u+iv$解析, 则
+        \[ \abs{f'\pare{z}}^2 = \begin{vmatrix}
+            \partial_x u & \partial_y u \\
+            \partial_x v & \partial_y v
+        \end{vmatrix}. \]
+    \end{ex}
+\end{sample}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.47 2,3,4(3),5(2),10.
+
+% paragraph 作业 (end)
+
+% subsection cauchy_riemann方程 (end)
+
+\subsection{初等解析函数} % (fold)
+\label{sub:初等解析函数}
+
+初等函数谓幂函数及其反函数, 三角函数及其反函数, 指数函数及其反函数, 及其有限加减乘除及复合者.
+\begin{finale}
+    \begin{definition}[Euler公式]
+        对于$\theta\in\+bC$,
+        \[ e^{i\theta} = \cos\theta + i\sin\theta. \]
+        对任意复数$z$, 定义
+        \[ e^z = e^{x+iy} = e^x\pare{\cos x + i\sin y}. \]
+    \end{definition}
+\end{finale}
+从而可定义
+\[ \cos z = \frac{e^{iz} + e^{-iz}}{2},\quad \sin z = \frac{e^{iz} - e^{-iz}}{2}.  \]
+将$e^z$的反函数定义为$\log$, 则可定义
+\[ z^\alpha = e^{\alpha\ln z}. \]
+指数函数有性质
+\begin{cenum}
+    \item $e^z$是$\+bC\mapsto \+bC$的解析函数;
+    \item $e^z\neq 0$对任意$z\in\+bC$成立;
+    \item $e^{z_1+z_2} = e^{z_1}e^{z_2}$;
+    \item $z = x+iy = \abs{z}\pare{\cos\arg z + i\sin\arg z} = r\pare{\cos\theta + i\sin \theta} = re^{i\theta}$;
+    \item $e^z$以$2\pi i$为周期, $e^{z+2k\pi i} = e^z$. 故$e^z$为无穷对$1$的函数.
+\end{cenum}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{SingleSheetExp}
+    \caption{$\exp$的单叶示意}
+    \label{fig:exp的单叶示意}
+\end{figure}
+若$\func{f}{D}{\+bC}$在$E\subset D$为单射, 则谓$E$单叶的. $e^z$的单叶区域可如\cref{fig:exp的单叶示意}所示,
+\[ E = \setcond{z}{\Im z \in \pare{-\pi,\pi}}. \]
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.48 17, 18(3), 19(1)(3), 22
+
+% paragraph 作业 (end)
+
+对于$e^w = e^{u+iv} = z = re^{i\theta}$, 有
+\[ \begin{cases}
+    e^u = r,\\
+    v = \theta + 2k\pi,
+\end{cases}\Leftrightarrow \begin{cases}
+    u = \ln r,\\
+    v = \theta + 2k\pi.
+\end{cases} \]
+从而
+\[ w = \Ln z = \ln r + i\pare{\theta+2k\pi},\quad k\in\+bZ. \]
+即
+\[ w = \Ln z = \ln\abs{z} + i\Arg z. \]
+\begin{sample}
+    \begin{ex}
+        $\Ln \pare{-1} = \ln \abs{-1} + i\pare{\pi + 2k\pi} = i\pare{2k+1}\pi$. 而$\Ln \pare{i} = i\pare{\displaystyle \frac{\pi}{2} + 2k\pi} = i\pare{\displaystyle \half + 2k}\pi$.
+    \end{ex}
+\end{sample}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{Log}
+    \caption{$\ln$的示意}
+    \label{fig:ln的示意}
+\end{figure}
+定义对数的主值为
+\[ \ln z = \ln \abs{z} + i\arg z. \]
+在此定义下,
+\[ \Ln z = \ln\abs{z} + i\Arg z = \ln z + 2k\pi i. \]
+若定义$\ln_k z = \ln z + 2\pi i k$, 则
+\[ \Ln z  = \curb{\ln_k z}. \]
+\begin{sample}
+    \begin{ex}
+        $\ln\pare{-1} = i\pi$, $\ln i = i\displaystyle\frac{\pi}{2}$.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    将辐角主值定义在$\lbr{-\pi,\pi}$之间保障了正实轴上$\ln$的定义和原定义一致.
+\end{remark}
+\begin{proposition}[$\Ln$的古典性质]
+    \mbox{}
+    \begin{cenum}
+        \item $\Ln \pare{z_1\cdot z_2} = \Ln z_1 + \Ln z_2$;
+        \item $\Ln \pare{z_1/z_2} = \Ln z_1 - \Ln z_2$.
+    \end{cenum}
+\end{proposition}
+\begin{pitfall}
+    上揭性质对$\ln z$未必成立.
+\end{pitfall}
+在定义
+\[ \cos z = \half \pare{e^{iz} + e^{-iz}}, \quad \sin z = \rec{2i}\pare{e^{iz} - e^{-iz}} \]
+下, 成立
+\begin{cenum}
+    \item $\cos z$和$\sin z$解析;
+    \item $\sin' z = \cos z$, $\cos' z = -\sin z$;
+    \item $\sin$和$\cos$以$2\pi$为周期;
+    \item $\cos \pare{z_1+z_2}$与$\sin \pare{z_1+z_2}$之展开, 以及$\sin^2 z + \cos^2 z = 1$仍然成立;
+    \item $\cos z$和$\sin z$在$\+bC$上无界.
+\end{cenum}
+
+在复变函数中, 定义
+\[ z^\alpha = e^{\alpha \Ln z}. \]
+设$\alpha = a+ib$, 则
+\[ z^\alpha = \exp\curb{a\ln\abs{z} - b\Arg z} \exp i\curb{\Arg z + b\ln\abs{z}}. \]
+\begin{cenum}
+    \item $b\neq 0$, $w=z^\alpha$是一对无穷的多值函数;
+    \item $b = 0$,
+    \[ z^\alpha = \abs{z}^\alpha \exp i\curb{a\pare{\arg z + 2k\pi}}. \]
+    是否多值则取决于$a$是否为整数.
+    \begin{cenum}
+        \item $a$为整数, 则$w=z^n$为整数;
+        \item $a = p/q$为有理数, 则$w = z^{p/q}$为一对$q$值;
+        \item $a$为无理数, 则$w=z^\alpha$为一对无穷.
+    \end{cenum}
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        $i^i$ = $\exp i\Ln i = \exp \curb{-\pare{2k+\displaystyle\half}\pi}$. 而$2^i = \exp i\Ln i = \exp i\curb{\ln 2 + 2k\pi i} = \exp\curb{i\ln 2 - 2k\pi}$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $f\pare{z} = e^z$, $g\pare{z} = z^i$, 求$f\pare{i}$和$g\pare{e}$.
+    \end{ex}
+    \begin{proof}[解]
+        $f\pare{i} = e^i = \cos 1 + i \sin 1$. 而$g\pare{e} = \exp i\Ln e = e^{i-2k\pi}$.
+    \end{proof}
+\end{sample}
+\begin{remark}
+    约定$e^x$按照指数函数处理, 而$z^\alpha$按照幂函数处理.
+\end{remark}
+
+\subsubsection{Riemann面} % (fold)
+\label{ssub:riemann面}
+
+多值函数, 例如
+\[ z^{1/n} = \abs{z}^{1/n}e^{i\frac{\Arg z}{n}},\quad \Ln z = \ln \abs{z} + i\Arg z, \]
+不再是一一对应的. 特别有$\sqrt{z} = \pm \sqrt{\abs{z}}e^{i\theta/2}$.
+\begin{figure}[htbp]
+    \centering
+    \incfig{10cm}{Squared}
+    \caption{$\sqrt{z}$的Riemnann面}
+    \label{fig:sqrtz的Riemnann面}
+\end{figure}
+\begin{figure}[htbp]
+    \centering
+    \incfig{10cm}{RiemannLog}
+    \caption{$\Ln{z}$的Riemnann面}
+    \label{fig:lnz的Riemnann面}
+\end{figure}
+在$z$的负半轴将$\+bC$平面切开, 并将复平面复制若干份后将$+$端粘贴至$-$端, 则$\sqrt{z}$和$\Ln z$可以将所得的Riemann面映射至全平面$\+bC$上.
+
+% subsubsection riemann面 (end)
+
+% subsection 初等解析函数 (end)
+
+% section 复变数函数 (end)
+
+\end{document}

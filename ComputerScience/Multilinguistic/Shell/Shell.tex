@@ -1,0 +1,37 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc, singleton, epu, nova]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{Shell技巧}
+
+\section{文件管理} % (fold)
+\label{sec:文件管理}
+
+\subsection{文件结构} % (fold)
+\label{sub:文件结构}
+
+\subsubsection{重命名} % (fold)
+\label{ssub:重命名}
+
+\begin{shcommand}{rename}
+\ttfamily
+\begin{tabular}{@{$\bullet\quad$}ll}
+   -n/--just-print/--dry-run      & 不实际执行; \\
+   -v/--verbose & 显示完整步骤; \\
+\end{tabular} 
+\end{shcommand}
+\begin{shlst}
+rename 's/prefix([0-9])/file_$1' prefix*
+\end{shlst}
+
+
+
+% subsubsection 重命名 (end)
+
+% subsection 文件结构 (end)
+
+% section 文件管理 (end)
+
+\end{document}

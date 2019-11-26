@@ -1,0 +1,602 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Poisson}{Pois}
+\DeclareMathOperator{\StandardDeviation}{Sd}
+\newcommand{\ubar}[1]{\text{\b{$#1$}}}
+
+\begin{document}
+
+\section{参数估计} % (fold)
+\label{sec:参数估计}
+
+用样本的一个函数$T\pare{X_1,\cdots,X_n}$估计未知参数则谓点估计, 用区间估计未知参数则谓区间估计.
+
+\subsection{点估计} % (fold)
+\label{sub:点估计}
+
+使用样本$X_1,\cdots,X_n$估计$\theta$, 需构造适当的统计量$\hat\theta = \hat\theta\pare{X_1,\cdots,X_n}$. 有了$X_1,\cdots,X_n$的值后即可算出$\hat\theta$, 作为$\theta$的\emph{估计值}(Estimate). 为此构造的统计量$\hat\theta$谓$\theta$的\emph{估计量}(Estimator).
+\par
+\emph{估计的基本要求}包含
+\begin{cenum}
+    \item 相合性(Consistency): $\displaystyle \lim_{n\rightarrow}\hat\theta_n\pare{X_1,\cdots,X_n} = 0$依概率收敛, 即
+    \[ P\curb{\abs{\hat\theta_n\pare{X_1,\cdots,X_n} - \theta} > \epsilon} \rightarrow 0,\quad n\rightarrow\infty. \]
+    如果要求$\displaystyle P\pare{\lim_{n\rightarrow}\hat\theta_n\pare{\omega} = \theta} = 1$, 则谓\emph{强相合}. 还可以通过$\displaystyle \lim_{n\rightarrow\infty} E\abs{\hat\theta_n - \theta}^r = 0$定义另外的相合.
+\end{cenum}
+欲构造一相合估计$\hat\theta_n$, 即$\hat\theta_n\xrightarrow{p} \theta$. LLN表明$\displaystyle \rec{n} \sum_{1}^n X_i \xrightarrow{p} EX_1$. 从而可通过样本矩合总体矩之间的收敛关系来构造一估计, 因为从LLN可立即得出
+\[ a_r = \rec{n} \sum X_i^r \xrightarrow{p} EX^r = \alpha_k,\quad m_l = \rec{n} \sum \pare{X_i - \overbar{x}}^2 \xrightarrow{p} E\pare{X - EX}^r = \mu_k. \]
+其中$a$和$m$是样本矩, $\alpha$和$\mu$是总体矩.
+
+\subsubsection{矩估计方法} % (fold)
+\label{ssub:矩估计方法}
+
+\begin{proposition}
+    设$X_n \xrightarrow{p} X$可退化为数, $\func{g}{\+bR}{\+bR}$为连续函数, 则$g\pare{X_n}\xrightarrow{p}g\pare{X}$.
+\end{proposition}
+因此构造$\theta = g\pare{EX,\cdots,EX^c}$, $g$连续, 令$\hat\theta_n = g\pare{a_1,\cdots,a_k}$即可. 假设$\alpha_i = \alpha_i\pare{\theta_1,\cdots,\theta_k}$, 则可以反解$\theta_i = \theta_i \pare{\alpha_1,\cdots,\alpha_k}$, 将$\alpha$替换为$a$即可估计.
+\par
+矩估计之原则谓能用低阶矩则不用高阶矩.
+\begin{sample}
+    \begin{ex}
+        投掷一枚硬币, 独立投掷$n$次得到结果$X_1,\cdots,X_n$. 总体$X$的分布为$B\pare{1,p}$, $p$是感兴趣的量, $X_1,\cdots,X_n$为样本, 求$p$的矩估计量. 由$EX = p$, 样本均值$\overbar{X}$收敛到$EX$, 故$p$的一个矩估计量为$\hat p = \overbar{X}$.
+    \end{ex}
+\end{sample}
+\begin{ex}
+    若$X\sim \Poisson\pare{\lambda}$, 则$EX = \Var\pare{X} = \lambda$, 从而得到两个估计$\hat\lambda = \overbar{X}$, $\hat\lambda = S^2$, 两个估计不一定相等.
+\end{ex}
+\begin{sample}
+    \begin{ex}
+        某次考试的成绩可以用$N\pare{a,\sigma^2}$作为总体$X$的分布. 现在从中随机调查$n$人, 样本为$X_1,\cdots,X_n$, 试求参数$a,\sigma^2$的矩估计量. 由$EX = a, EX^2 = a^2 + \sigma^2$, 或者$EX = a$, $\Var\pare{x} = \sigma^2$, 则所求估计量分别为
+        \[ \begin{cases}
+            \hat{a} &= X, \\
+            \hat{\sigma}^2 &= a_2 - \overbar{X}^2 = \displaystyle \rec{n}\sum X_i^2 - \overbar{X}^2 = \rec{n} \sum\pare{X_i - \overbar{X}}^2 = m_2.
+        \end{cases} \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X\sim U\pare{0,\theta}$, 有样本$X_1,\cdots,X_n$, 求$\theta$的估计. 由$\displaystyle EX = \frac{\theta}{2}$, 故$\hat\theta = 2\overbar{X}$. 另一种估计方法为考虑到$X_{\pare{n}} = \max_{1\le i \le n} X_i$服从分布
+        \[ f_n\pare{x} = \frac{nx^{n-1}}{\theta^n} I\pare{0<x<\theta}\Rightarrow EX_{\pare{n}} = \int xf\pare{x}\,\rd{x} = \frac{n}{n+1}\theta. \]
+        故又得到估计$\displaystyle \theta = \frac{n+1}{n} X_{\pare{n}}$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 矩估计方法 (end)
+
+\subsubsection{最大似然估计} % (fold)
+\label{ssub:最大似然估计}
+
+设样本$X = \pare{X_1,\cdots,X_n}$有概率函数$f\pare{x;\theta} = f\pare{x;\theta_1,\cdots,\theta_k}$. 固定$x$, 将$f\pare{x;\theta}$视为$\theta$的函数, 谓\emph{似然函数}, 常记为$L\pare{x;\theta}$或$L\pare{\theta}$.
+\par
+若参数$\theta$固定, 则$f\pare{x;\theta}$就是样本得到观察值$x$的可能性. 当$\theta$变动时, 就得到在不同$\theta$下得到观察值$x$的可能性大小, 即$L\pare{x;\theta}$.
+\begin{ex}
+    设$X\sim \Poisson \pare{\lambda}$, 则
+    \[ P_\lambda \pare{X_1 = x_1,\cdots, X_n = x_n} = \prod_{i=1}^n \frac{\lambda^{x_i}}{x_i!}e^{-\lambda}. \]
+    这是在当前$\lambda$值下得到$x$值的概率.
+\end{ex}
+    \begin{ex}
+        设$X$以$f_0$作为pdf, 样本$X_1,\cdots,X_n$的值为$x_1,\cdots,x_n$, 则
+        \begin{align*}
+            P_\theta\pare{X_1 \in x_1\pm \Delta_1,\cdots,X_n\in x_n\pm\Delta_n} &= \prod P\pare{X_i \in x_i \pm \Delta_i} \\&= \prod \pare{F\pare{x_i + \Delta} - F\pare{x_i - \Delta}} \\&\approx \prod_{i=1}^n f_\theta\pare{x_i}\pare{2\Delta_i}. 
+        \end{align*}
+        这表示在当前$\theta$下观测到样本值$x_1,\cdots,x_n$的概率, 此与$\displaystyle \prod_{i=1}^n f_\theta\pare{x_i}$成比例.
+    \end{ex}
+最大似然估计在使用时不要求$X_i$是独立同分布, 只需要能写出联合分布即可.
+\par
+设$X = \pare{X_1,\cdots,X_n}$是从总体$f_\theta\pare{x}$中抽取的样本, 若给定$x$时, $\hat\theta = \hat\theta\pare{x}$满足
+\[ L\pare{\hat{\theta}} = \max_{\theta\in\Theta} L\pare{x;\theta}, \]
+则谓$\hat\theta$为参数$\theta$的最大似然估计值(MLE). 若待估计参数为$g\pare{\theta}$, 则$g\pare{\theta}$的最大似然估计量为$g\pare{\hat\theta}$.
+\par
+因此, 令$\displaystyle \+D\theta D{L\pare{\theta; x}} = 0$, 从中找出最大值点. 如果样本为独立同分布样本, 则由于取对数不改变极值点, 令$l\pare{\theta; x} = \log L\pare{\theta; x} = \displaystyle \sum_{i=1}^n \log f_\theta\pare{x_i}$, 则$\hat\theta\pare{x}$为使$l\pare{\theta,x}$最大者. $l$谓对数似然函数. 此时令$\displaystyle \+D\theta Dl = 0$得到最大值点.
+\begin{sample}
+    \begin{ex}
+        设$X_1, \cdots, X_n$是从总体$X\sim N\pare{a,\sigma^2}$抽取的样本, 求$a, \sigma^2$的最大似然估计.
+    \end{ex}
+    \begin{solution}
+        $\displaystyle L\pare{a,\sigma^2} = \prod_{i=1}^n \rec{\sqrt{2\pi}\sigma} e^{-\frac{\pare{x_i-a}^2}{2\sigma^2}}$, 取对数,
+        \begin{align*}
+            l\pare{a,\sigma^2} &\propto -n\log \sigma - \frac{\sum \pare{x_i - a}^2}{2\sigma^2} \\
+            \+DaDl &= 0 \Rightarrow \frac{\sum \pare{x_i - a}}{\sigma} = 0, \\
+            \+D{\sigma^2}Dl &= 0 \Rightarrow -\frac{n}{2\sigma^2} + \frac{\sum\pare{x_i - a}^2}{2\sigma^4} = 0. \\
+            &\Rightarrow \left\{\begin{aligned}
+                a &= \overbar{x}, \\
+                \sigma^2 &= \rec{n} \sum\pare{x_i-a}^2.
+            \end{aligned}\right.
+        \end{align*}
+        记$\pare{\hat{a}, \hat{\sigma}^2} = \displaystyle \pare{\overbar{x}, \rec{n} \sum\pare{x_i - \overbar{x}}^2}$. 易知其为最大值点,
+        \[ l\pare{\hat{a}, \hat{\sigma}^2} > \lim_{\sigma^2\rightarrow} l\pare{a,\sigma^2}. \]
+        故所求最大似然估计为$\pare{\hat{a}, \hat{\sigma}^2}$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X$服从$0,\theta$上的均匀分布, 求$\theta$的最大似然估计.
+    \end{ex}
+    \begin{solution}
+        由
+        \begin{align*}
+            L\pare{\theta} &= \prod_{i=1}^n f_\theta\pare{x_i} \\
+            &= \prod_{i=1}^n \rec{\theta} I\pare{0<x_i<\theta} \\
+            &= \rec{\theta} \prod_{i=1}^n I\pare{0<x_i<\theta} \\
+            &= \rec{\theta^n} I\pare{0 < x_{\pare{1}} < x_{\pare{n}} < \theta},
+        \end{align*}
+        这在$\theta>x_{\pare{n}}$上是严格单调的, 最大值发生在$\theta = x_{\pare{n}}$处. 故$\theta$的MLE为$\hat\theta = X_{\pare{n}}$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设总体有pdf
+        \[ f\pare{x;a,b} = \left\{\begin{aligned}
+            &\rec{b} \exp\curb{- \frac{x-a}{b}}, & x>a, \\
+            &0, & x \le a.
+        \end{aligned}\right. \]
+        求$a$和$b$的最大似然估计.
+    \end{ex}
+    \begin{solution}
+        \begin{align*}
+            L\pare{a,b} &= \displaystyle \rec{b^n} \exp\curb{-\sum_{i=1}^n \frac{x_i-a}{b}}\prod_{i=1}^n I\pare{x_i > a} \\
+            &= \rec{b^n}  \exp\curb{-\sum_{i=1}^n \frac{x_i-a}{b}} I\pare{x_{\pare{1}} > a}.
+        \end{align*}
+        $L\pare{a,b}$在固定$b$的条件下为$a$的严格单调函数, 最大值点发生在$a = x_{\pare{1}}$处. 固定$a$, 则令$\displaystyle \+DbD{\log L\pare{a,b}} = 0$, 即
+        \begin{align*}
+            \+DbD{} \pare{-n\log b - \frac{\sum \pare{x_i - a_i}}{b}} &= -\frac{n}{b} + \frac{\sum\pare{x_i - a}}{b^2} = 0 \\&\Rightarrow b = \rec{n}\sum\pare{x_i - a}.
+        \end{align*}
+        设$\pare{\hat{a},\hat{b}} = \pare{x_{\pare{1}}, \displaystyle \rec{n} \sum\pare{x_i - x_{\pare{i}}}}$, 则
+        \[ L\pare{\hat a, \hat b} > L\pare{a,\hat b} > \lim_{b\rightarrow \infty} L\pare{a,b}, \]
+        故为全局最大值, 故$\pare{\hat a, \hat b}$为最大似然估计.
+    \end{solution}
+\end{sample}
+\begin{pitfall}
+    写出$L$时务必保留区间特征函数$I$.
+\end{pitfall}
+\begin{sample}
+    \begin{ex}
+        设总体$X\sim B\pare{1,p}$, 求$p$的最大似然估计.
+    \end{ex}
+    \begin{solution}
+        \begin{align*}
+            L\pare{p} &= P\pare{X_1 = x_1,\cdots, X_n = x_n} \\
+            &= \prod_1^n P\pare{X_i = x_i} \\
+            &= p^{\sum x_i} \pare{1-p}^{n-\sum x_i}.\\
+            \+DpD{\log L\pare{p}} &= 0 \Rightarrow p = \overbar{X}. \qedhere
+        \end{align*}
+    \end{solution}
+\end{sample}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+Ch7: 4, 15, 17
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        设数据来自$X_i = aX_{i-1}+e_i$, $i = 1,\cdots,n$, $X_0 = 0$. $e_1,\cdots,e_n$独立同分布于$N\pare{0,\sigma^2}$. 求$a$和$\sigma^2$的MLE.
+    \end{ex}
+    \begin{solution}
+        由似然函数为$L\pare{0,\sigma^2} = f\pare{x_1,\cdots,x_n;a,\sigma^2}$. 由乘积公式,
+        \begin{align*}
+            L\pare{a,\sigma^2} &= f\pare{x_1,\cdots,x_n;a,\sigma^2} \\
+            &= f\pare{x_1} f\pare{x_2\vert x_1} \cdots f\pare{x_n\vert x_1,\cdots,x_{n-1}} \\
+            &= \rec{\sqrt{2\pi}\sigma} e^{-\frac{x_1^2}{2\sigma^2}} \cdot \rec{\sqrt{2\pi}\sigma}e^{- \frac{\pare{x_2 - ax_1}^2}{2\sigma^2}} \cdots \rec{\sqrt{2\pi}\sigma} e^{- \frac{\pare{x_n - ax_{n-1}}^2}{2\sigma^2}} \\
+            &= \rec{\pare{2\pi \sigma^2}^{n/2}}e^{-\rec{2\sigma^2}\sum_{i=1}^n \pare{x_i - ax_i}^2}.
+        \end{align*}
+        现在令
+        \[ \+DaD{\log L\pare{a,\sigma^2}} = 0,\quad \+D{\sigma^2}D{\log L\pare{a,\sigma^2}} = 0, \]
+        即可得到最大似然估计.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$是从如下分布中抽取的简单样本, 求$\theta$的最大似然估计, 其中$\displaystyle \theta\in\pare{0,\half}$.
+        \[ f\pare{x} = \rec{x!\pare{2-x}!} \brac{\theta^x \pare{1-\theta}^{2-x} + \theta^{2-x}\pare{1-\theta}^x},\quad x=0,1,2. \]
+    \end{ex}
+    \begin{solution}
+        似然函数
+        \begin{align*}
+            L\pare{\theta} &= \prod_{i=1}^n f\pare{x_i} \\
+            &= \brac{\frac{\theta^2 + \pare{1-\theta}^2}{2}}^{n_0} \pare{2\theta\pare{1-\theta}}^{n_1}\pare{\frac{\theta^2 + \pare{1-\theta}^2}{2}}^{n_2}.
+        \end{align*}
+        其中$n_i = \displaystyle \sum_{k=1}^n I\pare{X_k=i}$. 化简后可得
+        \[ L\pare{\theta} = \pare{\frac{\theta^2 + \pare{1-\theta}^2}{2}}^{n-n_1} \pare{2\theta\pare{1-\theta}}^{n_1}. \]
+        现在令
+        \[ \+D{\theta}D{\log L\pare{\theta}} = 0 \Rightarrow \frac{2}{\theta^2 + \pare{1-\theta}^2} = \frac{1-2\theta}{\theta-\theta^2}. \]
+    \end{solution}
+    \begin{proof}[另解]
+        记$\eta = 2\theta\pare{1-\theta}$, 则
+        \[ P\pare{X=0} = \frac{1-\eta}{2},\quad P\pare{X=1} = \eta,\quad P\pare{X=2} = \frac{1-\eta}{2}. \]
+        似然函数$L \propto \pare{1-\eta}^{n-n_1}\eta^{n_1}$. 令
+        \[ \+D{\eta}D{\log L\pare{\eta}} = 0 \Rightarrow \hat{\eta} = \frac{n_1}{n}. \]
+        实际上应当取$\hat\eta = \displaystyle \min\pare{\frac{n_1}{n}, \half}$. 由$\theta = \frac{1-\sqrt{1-2\eta}}{2}$知
+        \[ \hat\theta = \frac{1-\sqrt{1-2\hat\eta}}{2}. \qedhere \]
+    \end{proof}
+\end{sample}
+\begin{remark}
+    对于一般的离散分布问题, $X = i$由相应的概率$p_i$, 则
+    \[ L\pare{p_1,\cdots,p_k} = \prod_{i=1}^k \pare{p_i}^{n_i}. \]
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        从池塘中随机捕捞$500$条鱼, 做好记号后重新放回. 充分混合后捕捞$1000$条鱼, 结果发现其中$72$条有记号, 问池塘中最可能有多少条鱼.
+    \end{ex}
+    \begin{solution}
+        假设鱼是随机分布的. 记$N$为池中鱼的数目, 记$A$为事件「不放回地取$1000$条, 其中$72$条有记号」, 则似然函数$L\pare{N} = P_N\pare{A}$. 抽取结果构成一超几何分布,
+        \[ L\pare{N} = P_N\pare{A} = \frac{\binom{r}{x} \binom{N-r}{s-x}}{\binom{N}{s}}. \]
+        其中$s$为取出的数目, $x$为取出的鱼中有记号的数目, $r$为总共有记号的数目. 由
+        \[ \frac{L\pare{N}}{L\pare{N-1}} = \frac{\pare{N-s}\pare{N-r}}{N\pare{N-r-s+x}} = \frac{N^2 - N\pare{s+r} + rs}{N^2 - N\pare{s+r} + Nx}. \]
+        若$rs > Nx$, 则递增. 若$rs < Nx$, 则递减.从而最值发生在$rs=Nx$处, $\displaystyle \hat N = \left\lceil \frac{rs}{x} \right\rceil$. \inlinehardlink{笔误? 向下取整.}
+        代入$r=500$, $s=1000$, $x=72$,
+        \[ \hat N = \left\lceil \frac{500\times 1000}{72} \right\rceil = 6944. \qedhere \]
+    \end{solution}
+    \begin{remark}
+        设$X_i=1$表示取出的第$i$条鱼有记号, $X_i = 0$表示没有记号, $i = 1,\cdots,1000$. 因为抽取构成不放回抽取, 故似然函数为
+        \begin{align*}
+            & L\pare{N} = P_N\pare{X_1 = x_1,\cdots, X_{1000} = x_{1000}} \\
+            &= \frac{r}{N}\cdot \frac{r-1}{N-1}\cdot \cdots \cdot \frac{r-x}{N-x+1} \cdot \frac{N-r}{N-x} \cdot \cdots \cdot \frac{N-r-\pare{s-x}+1}{N-s+1}.
+        \end{align*}
+        将$L\pare{N}$最大化, 也可以得到同上的结果.
+    \end{remark}
+\end{sample}
+
+% subsubsection 最大似然估计 (end)
+
+\subsubsection{点估计的优良准则} % (fold)
+\label{ssub:点估计的优良准则}
+
+设总体分布依赖于参数$\theta_1,\cdots,\theta_k$, $g\pare{\theta_1,\cdots,\theta_k}$是待估计参数函数. 设$X_1,\cdots,X_n$是从该总体中抽取的样本, $T\pare{X_1,\cdots,X_n}$为$g$的一个估计量, 如果对于任何$\epsilon>0$和$\theta_1,\cdots,\theta_k$的一切可能值都有
+\[ \lim_{n\rightarrow \infty} P\pare{\abs{T-g}>\epsilon} = 0, \]
+则谓之弱相合估计.
+\par
+设$\hat{g}\pare{X_1,\cdots,X_n}$为待估计参数函数$g\pare{\theta}$的一个估计量, 若对于任意$\theta$都有
+\[ E\hat{g}\pare{X_1,\cdots,X_n} = g\pare{\theta}, \]
+则谓$\hat{g}\pare{X_1,\cdots,X_n}$谓$g\pare{\theta}$的无偏估计量.
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$独立同分布于$N\pare{a,\sigma^2}$, 求$a$和$\sigma^2$的MLE是否无偏.
+    \end{ex}
+    \begin{solution}
+        $\hat{a} = \overbar{X}$, $\hat\sigma^2 = \displaystyle \rec{n} \sum \pare{X_i - X}^2$. 则
+        \begin{align*}
+            E\hat{a} &= E\overbar{X} = a,\quad \forall a, \\
+            E\hat\sigma^2 &= \rec{n} \sum_{r=1}^n E\pare{X_i - \overbar{X}}^2 \\
+            &= \rec{n} \sum_{i=1}^n E\curb{X_i - a - \pare{\overbar{X} - a}}^2 \\
+            &= \rec{n} \sum \curb{\sigma^2 + \frac{\sigma^2}{n}} - 2 \frac{\sigma^2}{n} \\
+            &= \frac{n-1}{n}\sigma^2.
+        \end{align*}
+        也可以用另一种方法,
+        \begin{align*}
+            E\hat{\sigma}^2 &= \rec{n} E\sum \pare{X_i - \overbar{X}}^2 \\
+            &= \frac{\sigma^2}{n} E\curb{\frac{\pare{n-1}S^2}{\sigma^2}}\sim \chi_{n-1}^2 \\
+            &= \frac{n-1}{n}\sigma^2.
+        \end{align*}
+        将其纠正为无偏估计, 则
+        \[ \tilde{\sigma}^2 = \frac{n}{n-1} \hat{\sigma}^2. \]
+        这解释了为了样本标准差的分母为$n-1$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$独立同分布于$U\pare{0,\theta}$, 求$\theta$的MLE是否无偏.
+    \end{ex}
+    \begin{solution}
+        由$\theta$的MLE为$\hat\theta = X_{\pare{n}} = \max X_i$, 则
+        \[ E\hat{\theta} = EX_{\pare{n}} = \int_0^\theta x\cdot \frac{nx^{n-1}}{\theta^n}\,\rd{x} = \frac{n}{n+1}\theta. \]
+        故这并非一无偏估计. 但这构成一相合估计,
+        \begin{align*}
+            P\pare{\abs{X_{\pare{n}}-\theta}>\epsilon} &= P\pare{X_{\pare{n}} > \theta + \epsilon} + P\pare{X_{\pare{n}} < \theta-\epsilon} \\
+            &= 0 + \int_0^{\theta-\epsilon} \frac{nx^{n-1}}{\theta^n} \,\rd{x} \\
+            &= \frac{\pare{\theta-\epsilon}^n}{\theta^n} \\
+            &= \pare{1-\frac{\epsilon}{\theta}}^n \rightarrow 0. \qedhere
+        \end{align*}
+        将$n/\pare{n+1}$因子消去, 即$\pare{n+1}/n\cdot X_{\pare{n}}$构成一无偏估计.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$来自
+        \[ P\pare{X=0} = \frac{1-\eta}{2},\quad P\pare{X=1} = \eta,\quad P\pare{X=2} = \frac{1-\eta}{2}. \]
+        问$\eta$的MLE是否为无偏估计.
+    \end{ex}
+    \begin{proof}
+        由于$\eta$的MLE为$\displaystyle \hat\eta = \frac{n_1}{n}$, 而
+        \[ n_1 = \sum_{i=1}^n I\pare{X_i = 1}. \]
+        而$n_1\sim B\pare{n,\eta}$, 则$\displaystyle E\hat{\eta} = \frac{En_1}{n} = \eta$.
+    \end{proof}
+    \begin{remark}
+        如果算出$\displaystyle \hat\eta = \frac{n_1+2n_2}{n}$, 则$n_0$服从二项分布故
+        \[ E\hat\eta = \frac{En_0 + 2En_2}{n},\quad n_0 \sim B\pare{n, 1-3\eta/2},\quad n_2 \sim B\pare{n,\eta/2}. \]
+    \end{remark}
+\end{sample}
+设$\hat{g}_1\pare{X_1,\cdots,X_n}$和$\hat{g}_2\pare{X_1,\cdots,X_n}$为待估计参数函数的$g\pare{\theta}$的两个不同无偏估计量. 若对任意$\theta$都有
+\[ \Var\pare{\hat{g}_1\pare{X_1,\cdots,X_n}} \le \Var\pare{\hat{g}_2\pare{X_1,\cdots,X_n}}, \]
+且至少对一个$\theta_0$有不等式严格成立, 则谓$\hat{g}_1$比$\hat{g}_2$有效.
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$独立同分布于$U\pare{0,\theta}$, 问矩估计和MLE是否无偏? 若不是, 如何修正为无偏估计? 修正后谁更有效?
+    \end{ex}
+    \begin{solution}
+        $\hat{\theta}_1 = 2\overbar{X}$无偏, $\hat{\theta}_2 = \displaystyle \frac{n+1}{n}X_{\pare{n}}$无偏.
+        \begin{align*}
+            \Var\pare{\hat{\theta}_1} &= 4 \frac{\Var\pare{X_1}}{n} = \frac{\theta^2}{3n}, \\
+            \Var\pare{\hat{\theta}_2} &= \Var\pare{\frac{n+1}{n}X_{\pare{n}}} = E\pare{\frac{n+1}{n}X_{\pare{n}}}^2 - \theta^2 \\
+            &= \frac{\pare{n+1}^2}{n^2}\int_0^\theta x^2\cdot \frac{nx^{n-1}}{\theta^n}\,\rd{x} - \theta^2 \\
+            &= \frac{\pare{n+1}^2}{n^2} \cdot \frac{n}{n+2}\theta^2 - \theta^2 \\
+            &= \rec{n\pare{n+2}}\theta^2 \le \frac{\theta^2}{3n}.
+        \end{align*}
+        故$n>1$时$\displaystyle \frac{n+1}{n}X_{\pare{n}}$比矩估计$\hat{\theta}_1$更有效.
+    \end{solution}
+    \begin{remark}
+        $\displaystyle \frac{n+1}{n}X_{\pare{n}}$的方差收敛到零, 从而退化为点.
+    \end{remark}
+\end{sample}
+\begin{proposition}
+    若$\displaystyle \lim_{n\rightarrow\infty} \Var\pare{X_n} = 0$, 则
+    \begin{cenum}
+        \item $X_n$的极限分布退化为点, 即$\displaystyle \lim P\pare{\omega: \lim_{n\rightarrow\infty} X_n^{\pare{\omega}}=c}=1$.
+        \item $X_n$依概率收敛于某数, 即
+        \[ P\pare{\abs{X_n - c}>\epsilon} \le \rec{\epsilon^2}\Var\pare{X_n}\rightarrow 0. \]
+    \end{cenum}
+\end{proposition}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$均来自均值$\mu$, 方差$\sigma^2$的总体. $\omega_i$是非负权重, $\sum \omega_i = 1$, 试比较作为$\mu$的估计的$\overbar{X}$和$\sum \omega_iX_i$.
+    \end{ex}
+    \begin{proof}
+        $E\overbar{X} = E\sum \omega_i X_i = \sum \omega_i \mu = \mu$, 而
+        \[ \Var\pare{\overbar{X}} = \frac{\sigma^2}{n},\quad \Var\pare{\sum \omega_i X_i} = \sum_{i=1}^n \omega_i^2 \sigma^2 > \frac{\sigma^2}{n}. \qedhere \]
+    \end{proof}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+1, 2, 3, 6
+
+% paragraph 作业 (end)
+
+\begin{remark}
+    渐进正态性要求$\displaystyle \sqrt{n}\frac{\hat{\theta}_n - \theta}{\StandardDeviation\pare{\hat\theta_n}}\rightarrow N\pare{0,1}$.
+\end{remark}
+\begin{remark}
+    相合性和渐进正态性是大样本性质, 而无偏性和有效性是小样本性质.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        设从总体
+        \begin{align*}
+            & P\pare{X=0} = \theta/2,\quad P\pare{X=1} = \theta,\\ & P\pare{X=2} = 3\theta/2,\quad P\pare{X=3} = 1-3\theta
+        \end{align*}
+        中抽取样本$X_1,\cdots,X_{10}$的观察值为$\pare{0,3,1,1,0,2,0,0,3,0}$.
+        \begin{cenum}
+            \item 似然函数为
+            \begin{align*}
+                L\pare{\theta} &= P_\theta\pare{X_1=x_1,\cdots,X_n = x_n} \\
+                &= \prod_{i=1}^n P_\theta\pare{X_i = x_i} \\
+                &= \pare{\frac{\theta}{2}}^{n_0}\cdot\theta^{n_1}\cdot\pare{\frac{3\theta}{2}}^{n_2}\cdot\pare{1-3\theta}^{n_3} \\
+                &\propto \theta^{n-n_3}\pare{1-3\theta}^{n_3}. \\
+                \+d{\theta}d{\log L\pare{\theta}} &= 0 \Rightarrow \theta = \frac{n-n_3}{3n}.
+            \end{align*}
+            这必定是最大值点, 故$\hat\theta = \displaystyle \frac{n-n_3}{3n}$. 代入样本值$\displaystyle \hat\theta_L = \frac{10-2}{3\times 10} = \frac{4}{15}$.
+            \item 矩估计由
+            \[ EX = 0\cdot \frac{\theta}{2} + 1\cdot \theta + 2\cdot \frac{3\theta}{2} + 3\pare{1-3\theta} = 3-5\theta \]
+            知$EX = 3-5\theta$, $\theta = \pare{3-EX}/5$, $\hat\theta = \displaystyle \frac{3-\overbar{X}}{5}$. 代入样本值$\hat{\theta}_M = \displaystyle \frac{3-1}{5} = \frac{2}{5}$.
+            \item 矩估计是无偏的, 因为
+            \[ E\hat{\theta}_M = \frac{3-E\overbar{X}}{5} = \theta. \]
+            最大似然估计
+            \[ E\hat{\theta}_L = E\pare{\frac{n-n_3}{3n}} = \frac{n - En_3}{3n} = \frac{n - n\pare{1-3\theta}}{3n} = \theta, \]
+            故也是无偏的.
+            \item 矩估计的方差
+            \[ \Var\pare{\hat\theta_M} = \Var\pare{\frac{5-\overbar{X}}{5}} = \rec{n}\cdot\Var\pare{X_1}. \]
+            最大似然估计的方差
+            \begin{align*}
+                \Var\pare{\hat\theta_L} &= \Var\pare{\frac{n-n_3}{3n}} = \rec{9n^2}\Var\pare{n_3}\\ &= \rec{9n^2} \cdot 3n\pare{1-3\theta}\theta = \frac{\theta\pare{1-3\theta}}{3n}.
+            \end{align*}
+            判断$\Var\pare{\hat\theta_M}$与$\Var\pare{\hat\theta_L}$之间的大小关系即可.
+        \end{cenum}
+    \end{ex}
+\end{sample}
+
+% subsubsection 点估计的优良准则 (end)
+
+% subsection 点估计 (end)
+
+\subsection{区间估计} % (fold)
+\label{sub:区间估计}
+
+对于未知的参数$\theta$, 若除了给出点估计$\hat\theta$外还给出一个范围, 并知道这一范围包含$\theta$的真值的可信程度, 则谓区间估计.
+
+\subsubsection{置信区间} % (fold)
+\label{ssub:置信区间}
+
+\emph{置信区间}(Confidence Interval)之字面意义谓「对该区间包含未知参数$\theta$可置信到何种程度」. 区间估计要求寻找统计量$\ubar{\theta}<\overbar{\theta}$, 并要求
+\[ P_\theta\pare{\ubar{\theta} \le \theta \le \overbar{\theta}} = 1-\alpha \]
+尽可能大, 且估计的精度要尽可能高, 例如$\brac{\ubar{\theta},\overbar{\theta}}$尽可能短.
+\begin{remark}
+    Neyman准则表明应当优先保证可信度.
+\end{remark}
+\begin{definition}
+    设总体分布$F\pare{x,\theta}$含有一个或多个未知参数$\theta$, 对于给定的值$0<\alpha<1$, 由样本确定的统计量$\ubar{\theta}\pare{X_1,\cdots,X_n}$和$\overbar{\theta}\pare{X_1,\cdots,X_n}$满足
+    \[ P_\theta\pare{\ubar{\theta} \le \theta \le \overbar{\theta}} = 1-\alpha, \]
+    则谓$1-\alpha$谓置信系数或置信水平, $\brac{\ubar{\theta},\overbar{\theta}}$谓置信水平$1-\alpha$的置信区间.
+\end{definition}
+\begin{remark}
+    某置信系数的置信区间之意义谓区间包含$\theta$真值的概率, 不能谓其$\theta$落在该区间内的概率为该置信系数.
+\end{remark}
+谓了求出置信系数$1-\alpha$的置信区间$\theta\pm c$,
+\begin{cenum}
+    \item 先找$\theta$的估计$\hat\theta$;
+    \item 找区间$\hat\theta\pm c$使得$P\pare{\theta\in\hat\theta\pm c} = 1-\alpha$, 这相当于要求
+    \[ P\pare{-c \le \hat\theta - \theta \le c} = 1-\alpha. \]
+    若已知$\hat\theta - \theta$的分布则可得$c$.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots, X_n$独立同分布于$N\pare{\mu,1}$, 求$\mu$的$1-\alpha$置信区间.
+    \end{ex}
+    \begin{solution}
+        由$\mu$的估计$\overbar{X} \sim N\pare{\mu,\rec{n}}$, $\overbar{X} - \mu \sim N\pare{0,1/n}$. 故考虑区间$\overbar{X}\pm c$满足
+        \begin{align*}
+            & P\brac{\overbar{X}-c \le \mu \le \overbar{X}+c} = 1-\alpha \\
+            & \Leftrightarrow P\pare{-c \le \overbar{X}-\mu \le c} = 1-\alpha.
+        \end{align*}
+        也可以允许两个端点分开变化,
+        \[ P\pare{-c_1 \le \overbar{X} - \mu \le c_2} = 1-\alpha. \]
+        为了使区间长度尽可能短, 需$c_1 = c_2 = c$.
+        \begin{align*}
+            & P\pare{-\sqrt{n}c \le \sqrt{\overbar{X} - \mu} \le \sqrt{n}c} = 1-\alpha, \\
+            & \Phi\pare{\sqrt{n}c} - \Phi\pare{-\sqrt{n}c} = 1-\alpha, \\
+            & 2\Phi\pare{\sqrt{n}c} - 1 = 1-\alpha, \\
+            & \Phi\pare{\sqrt{n}c} = 1-\alpha/2.
+        \end{align*}
+        即$\sqrt{n}c$为$u_{\alpha/2}$, 即($N\pare{0,1}$的上$\alpha/2$分位数). $\displaystyle c = \frac{u_{\alpha/2}}{\sqrt{n}}$. 所求$1-\alpha$的置信区间为
+        \[ \overbar{X} \pm \rec{\sqrt{n}} u_{\alpha/2}. \qedhere \]
+    \end{solution}
+\end{sample}
+通过枢轴变量法作置信区间, 设待估参数为$g\pare{\theta}$, 则
+\begin{cenum}
+    \item 找一个于待估计参数$g\pare{\theta}$有关的统计量$T$, 一般是其良好的点估计.
+    \item 构造一个$T\pare{X}$和$\mu$的函数$\varphi\pare{T,\mu}$, 满足
+    \begin{cenum}
+        \item 其表达式与待估参数$\mu$有关,
+        \item 其分布与待估参数$\mu$无关. 此时谓$\varphi\pare{T,\mu}$谓\emph{枢轴变量}.
+    \end{cenum}
+    \item 对于给定的$\alpha$, 确定$a$和$b$使得
+    \[ P_\mu\pare{a\le \varphi\pare{T,\mu}\le b} = 1-\alpha, \]
+    反解出$a$和$b$即可.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$来自总体$N\pare{\mu,\sigma^2}$, 求参数$\mu$, $\sigma^2$的$1-\alpha$置信区间.
+    \end{ex}
+    \begin{solution}
+        $\displaystyle \sqrt{n} \frac{\overbar{X} - \mu}{s} = t_{n-1}$, 从而
+        \[ P\pare{\abs{\sqrt{n} \frac{\overbar{X} - \mu}{s}} \le c} = 1-\alpha \Rightarrow c = t_{\alpha/2,\pare{n-1}}. \]
+        为了求解$\sigma^2$的置信区间, 考虑$\displaystyle \frac{\pare{n-1}s^2}{\sigma^2} = \chi_{n-1}^2$, 从而
+        \[ P\pare{a\le \frac{\pare{n-1}s^2}{\sigma^2} \le b} = 1-\alpha. \]
+        最短区间需要经过数值计算得到, 过于复杂. 故实际应用总是按对称取,
+        \[ a = \chi^2_{1-\alpha/2, n-1},\quad b = \chi^2_{1-\alpha/2,n-1}. \]
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$来自总体$N\pare{\mu_0,\sigma^2}$, $\mu_0$已知, 求参数$\sigma^2$的$1-\alpha$置信区间.
+    \end{ex}
+    \begin{solution}
+        $\sigma^2$的MLE为
+        \[ \sigma^2 = \rec{n} \sum_{1}^n \pare{X_i - \mu_0}^2. \]
+        从而
+        \[ \frac{n\hat\sigma^2}{\sigma^2} = \sum_1^n \pare{\frac{X_i-\mu_0}{\sigma}}^2 \sim \chi_n^2. \]
+        故$\sigma^2$的$1-\alpha$置信区间为
+        \[ \chi_{1-\alpha/2,n}^2 \le \frac{n\hat\sigma^2}{\sigma^2} \le \chi_{\alpha/2,n}^2. \qedhere \]
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$是$N\pare{\mu_1,\sigma_1^2}$的样本, $Y_1,\cdots,Y_m$是从$N\pare{\mu_2,\sigma_2^2}$的样本, 两者相互独立, 求$\mu_1 - \mu_2$, $\sigma_1^2 / \sigma_2^2$的$1-\alpha$的置信区间.
+    \end{ex}
+    \begin{solution}
+        $\hat{\mu}_1 = \overbar{X} \sim N\pare{\mu_1, \sigma_1^2/n}$, $\hat\mu_2 = \overbar{Y} \sim N\pare{\mu_2,\sigma_2^2/m}$, $\mu_1 - \mu_2$的估计为$\overbar{X} - \overbar{Y}$, 且服从
+        \[ N\pare{\mu_1-\mu_2, \frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}}. \]
+        \begin{cenum}
+            \item 若$\sigma_1^2 = \sigma_2^2 = \sigma^2$已知, 则
+            \[ \overbar{X} - \overbar{Y} - \pare{\mu_1 - \mu_2} = N\pare{0, \frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}} \]
+            完全已知.
+            \item 若$\sigma_1^2 = \sigma_2^2 = \sigma^2$未知,
+            \begin{align*}
+                & \frac{\overbar{X} - \overbar{Y} - \pare{\mu_1 - \mu_2}}{\sqrt{1/n+1/m}}/\sqrt{\rec{n+m-2}\brac{\pare{n-1}s_x^2 + \pare{m-1}s_y^2}} \\ &\sim t_{n+m-2}. 
+            \end{align*}
+            \item 若$\sigma_1^2$和$\sigma_2^2$未知且可能不相等, 此时构成Behrens-Fisher问题.
+            \[ \frac{\overbar{X} - \overbar{Y} - \pare{\mu_1 - \mu_2}}{\sqrt{s_x^2/n + s_y^2/m}} \sim N\pare{0,1} \]
+            近似成立. 从而渐进水平$1-\alpha$的置信区间为
+            \[ \lim_{n,m\rightarrow\infty} P\pare{\abs{\frac{\overbar{X} - \overbar{Y} - \pare{\mu_1 - \mu_2}}{\sqrt{s_x^2/n + s_y^2/m}}} \le u_{\alpha/2}} = 1-\alpha. \]
+        \end{cenum}
+        下面求$\sigma_1^2/\sigma_2^2$的置信区间,
+        \begin{cenum}
+            \item 若$\mu_1$和$\mu_2$都未知,
+            \begin{align*}
+                & \frac{\pare{n-1}s_x^2}{\sigma_1^2} \sim \chi_{n-1}^2,\quad \frac{\pare{m-1}s_y^2}{\sigma_y^2} \sim \chi_{m-1}^2, \\
+                & \Rightarrow \frac{\rec{n-1}\frac{\pare{n-1}s_x^2}{\sigma_1^2}}{\rec{m-1}\frac{\pare{m-1}s_y^2}{\sigma_2^2}} = \frac{\sigma_2^2}{\sigma_1^2} \frac{s_x^2}{s_y^2} \sim F\pare{n-1,m-1}.
+            \end{align*}
+            \item 若$\mu_1$, $\mu_2$已知其一, 则替换相应样本的方差与自由度. \qedhere
+        \end{cenum}
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        某事件$A$在每次实验中发生的概率都是$p$, 做$n$次独立实验, 记$Y_n$为$A$发生的次数, 求$p$的$1-\alpha$置信区间.
+    \end{ex}
+    \begin{solution}
+        $Y_n\sim B\pare{n,p}$, 从而$\hat p = Y_n/n$. \\ \inlinehardlink{看课件, 以及Slutsky定理, 以及Wald置信区间}
+        \[ \frac{Y_n - np}{\sqrt{n\hat{p}\pare{1-\hat{p}}}} \xrightarrow{\+sL} N\pare{0,1}. \qedhere \]
+    \end{solution}
+\end{sample}
+
+\begin{remark}
+    重复使用置信区间的计算式, 即对于样本$x_1,\cdots,x_n$计算区间$\brac{\ubar{\theta},\overbar{\theta}}$, 令$I_k = I\pare{\theta\in\brac{\ubar{\theta},\overbar{\theta}}}$, 并重复取样, 则应有
+    \[ \rec{k} \sum_1^k I_k \approx 1-\alpha. \]
+    过高或过低皆不妥.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+63, 65, 71, 80
+
+% paragraph 作业 (end)
+
+% subsubsection 置信区间 (end)
+
+\subsubsection{置信界} % (fold)
+\label{ssub:置信界}
+
+设$F\pare{x,\theta}$含有未知参数$\theta\in\Theta$, 若有统计量$\overbar{\theta}$和$\ubar{\theta}$满足
+\[ P_\theta\pare{\theta \le \overbar{\theta}} \ge 1-\alpha, \]
+则谓$\overbar{\theta}$为$\theta$的一个置信系数$1-\alpha$的上界. 若
+\[ P_\theta\pare{\theta \ge \ubar{\theta}} \ge 1-\alpha, \]
+则谓$\ubar{\theta}$为$\theta$的一个置信系数$1-\alpha$的下界.
+\par
+置信界的估计方法仍为枢轴变量法.
+\begin{cenum}
+    \item 先找的$\theta$的MLE$\hat\theta$;
+    \item 找一个函数$S\pare{\theta,\hat\theta}$, 其分布完全已知;
+    \item 找到$a$使得
+    \[ P\pare{S\pare{\theta,\hat\theta} \ge a} \ge 1-\alpha, \]
+    求其等价不等式得到区间.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        设$X_1,\cdots,X_n$ i.i.d. $\sim N\pare{\mu,\sigma^2}$, 则$\mu$和$\sigma^2$有MLE
+        \[ \hat\mu = \overbar{X},\quad \hat\sigma^2 = \rec{n}\sum \pare{X_i - X}. \]
+        选择轴变量
+        \[ \frac{\sqrt{n}\pare{\overbar{X} - \mu}}{S} \sim t_{n-1},\quad \frac{\pare{n-1}^2S^2}{\sigma^2 \sim \chi_{n-1}^2}. \]
+        取$a$使得
+        \[ P\pare{a\le \frac{\sqrt{n}\pare{\overbar{X} - \mu}}{S}} = 1-\alpha \Rightarrow a = -t_\alpha\pare{n-1}. \]
+        以及
+        \[ P\pare{a \le \frac{\pare{n-1}S^2}{\sigma^2}} = 1-\alpha \Rightarrow a = \chi_{1-\alpha}^2\pare{n-1}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设某种成分含量服从正态分布$N\pare{\mu,\sigma^2}$, 而$\sigma^2$已知. 要求含$\mu$的$1-\alpha$置信区间长度不能长于$\omega$, 确定样本的大小.
+    \end{ex}
+    \begin{proof}
+        $\mu$的置信区间为
+        \[ \overbar{X}\pm \frac{\sigma}{\sqrt{n}} u_{\alpha/2}. \]
+        按要求,令
+        \[ \frac{2\sigma}{\pare{n}} u_{\alpha/2} \le w \Rightarrow n \ge \pare{\frac{2\sigma}{w}u_{\alpha/2}}^2. \qedhere
+         \]
+    \end{proof}
+\end{sample}
+\begin{remark}
+    通常区间长度会是随机变量, 在正态的特殊情形下变为数. 前者的情况使$E\brac{\overbar{\theta} - \ubar{\theta}}$小于给定值.
+\end{remark}
+
+% subsubsection 置信界 (end)
+
+% subsection 区间估计 (end)
+
+% section 参数估计 (end)
+
+\end{document}

@@ -1,0 +1,16 @@
+int length_of_longest_ascending_subsequence(int* arr, int n)
+{
+    int len_partial[n];
+    for (int i = 0; i < n; i++)
+        len_partial[i] = 1;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            if (arr[j] > arr[i]) continue;
+            len_partial[i] = max(len_partial[i],
+                len_partial[j] + 1);
+        }
+    }
+    return max_in(len_partial, n);
+}

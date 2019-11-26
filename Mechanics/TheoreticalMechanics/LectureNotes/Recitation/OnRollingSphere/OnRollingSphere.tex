@@ -1,0 +1,58 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\pagenumbering{gobble}
+\noindent
+\textit{球在平面$xOy$上无滑动滚动, 且不允许绕$z$轴转动, 试求确定其位形所需参量个数.}
+
+\begin{cenum}
+    \item 设球心在某一时刻处于位置$C\pare{x_0,y_0}$. 对于任意一平行于坐标轴的矩形路径\\
+    \centerline{\incfig{6cm}{Loop}}\\
+    下列条件成立:
+    \begin{cenum}
+        \item 这一路径让球心再次回到$C$;
+        \item 球在这一路径上滚动时可以无需绕$z$轴转动.
+    \end{cenum}
+    \item 在球心最开始处于$C$时, 在球的北极点处放置标记点$A$, 此时相对于球心的位矢为$\+vr_0 = \begin{pmatrix}
+        0 & 0 & 1
+    \end{pmatrix}$.
+    \item 球滚动的过程中, $\overrightarrow{CA}$会发生绕坐标轴的旋转. 具体的旋转矩阵为
+    \begin{align*}
+        \pare{x_0,y_0}\rightarrow \pare{x_0,y+\Delta y}&:\quad R_{\+ux}\pare{-\theta},\\
+        \pare{x_0,y+\Delta y}\rightarrow \pare{x_0+\Delta x,y+\Delta y}&:\quad R_{\+uy}\pare{\varphi},\\
+        \pare{x_0+\Delta x,y_0+\Delta y}\rightarrow \pare{x_0+\Delta x,y}&:\quad R_{\+ux}\pare{\theta},\\
+        \pare{x_0+\Delta x,y}\rightarrow \pare{x_0,y+\Delta y}&:\quad R_{\+uy}\pare{-\varphi},\\
+        \quad \theta = \frac{\Delta y}{R}&,\quad \quad \varphi = \frac{\Delta x}{R},
+    \end{align*}
+    其中$R_{\+un}\pare{\alpha}$表示绕$\+un$矢量旋转$\alpha$角度的矩阵.
+    \[ R_{\+ux}\pare{\theta} = \begin{pmatrix}
+        1 & 0 & 0\\
+        0 & \cos\theta & -\sin\theta \\
+        0 & \sin\theta & \cos\theta
+    \end{pmatrix},\quad R_{\+uy}\pare{\varphi} = \begin{pmatrix}
+        \cos\varphi & 0 & \sin\varphi\\
+        0 & 1 & 0 \\
+        -\sin\varphi & 0 & \cos\varphi
+    \end{pmatrix}. \]
+    \item 球绕矩形滚动一周后, $\overrightarrow{CA}$从$\+vr_0$变为
+    \begin{align*}
+        \+vr_1 &= R_{\+uy}\pare{-\varphi}R_{\+ux}\pare{\theta}R_{\+uy}\pare{\varphi}R_{\+ux}\pare{-\theta} \\&= \begin{pmatrix}
+        -\sin^2\theta \sin\varphi + \cos\theta \cos\varphi \sin\varphi - \cos^2\theta \cos\varphi\sin\varphi \\
+        \cos\theta\sin\theta - \cos\theta\cos\varphi\sin\theta \\
+        \cos\varphi\sin^2\theta + \cos^2\theta\cos^2\varphi + \cos\theta\sin^2\varphi
+    \end{pmatrix}.
+    \end{align*}
+    \item 对不同的$\pare{\theta,\varphi}$, $\+vr_1$之参数图如\cref{fig:r1的参数图}. 可以发现$\+vr_1$(即$\overrightarrow{CA}$的最终值)之所有可能性可覆盖整个球面.
+    \item 但是绕矩形路径滚动之后, 球心回到了初始的$C$处. 故在固定的初始条件下, 相同的球心坐标仍允许球的方向取任何值, 因此除了球心坐标之外仍然需要两个参量才能描述完整的系统位形.
+\end{cenum}
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.6\textwidth]{src/FinalMarker.pdf}
+    \caption{$\+vr_1$的参数图}
+    \label{fig:r1的参数图}
+\end{figure}
+
+\end{document}
