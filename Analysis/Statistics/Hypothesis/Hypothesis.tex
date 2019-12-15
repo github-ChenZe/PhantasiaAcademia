@@ -1,6 +1,4 @@
-\documentclass{ctexart}
-
-\usepackage{van-de-la-sehen}
+\documentclass[../Statistics.tex]{subfiles}
 
 \begin{document}
 
@@ -36,10 +34,737 @@
 统计假设为罐装饮料容量$X\sim N\pare{\mu,10^2}$. 问题为根据样本在$\mu=500$和$\mu=490$之间作判断. 前者谓原假设$H_0$, 后者谓备择假设或对立假设$H_1$或$H_a$. 检验就是要在
 \[ H_0: \mu=500 \leftrightarrow H_1: \mu = 490 \]
 中选择何者成立. 断言「$H_0$成立」则谓「不能拒绝$H_0$」. 断言「$H_0$不能成立」则谓「拒绝$H_0$」.
+\par
+为了检验假设, 需要通过样本$X_1,\cdots,X_n$构造极大似然估计$T=\overbar{X}$来估计$\mu$. 当$T$绝对值和$\mu$偏差过大时将不利于$H_0$, 从而应拒绝$H_0$. 实现取定常数$\tau$, 谓临界值, 当
+\[ W = \curb{\overbar{X} < \tau} \]
+时拒绝$H_0$, 谓$W$为拒绝域. 即样本取值落在$W$中就拒绝$H_0$, 反之不能拒绝.
+\par
+\begin{cenum}
+    \item 谓「实际上$H_0$成立但是被拒绝」为第I类错误(弃真);
+    \item 谓「实际上$H_0$不成立但是没有被拒绝」为第II类错误(存伪).
+\end{cenum}
+要让第I类错误概率小, 应该让$\tau$小; 要让第II类错误小, 则不能让$\tau$太小. 实用中应在控制第I类错误的基础上, 减少犯第II类错误的概率. 这种只限制第I类错误的原则下的检验方法, 谓显著性检验(Significance Test).
+\par
+给定一个允许犯第一类错误概率最大值的$\alpha$, 选择$\tau$使得$P_{H_0}\pare{T<\tau}\le \alpha$连续场合下, 等号可以达到. 这样的$\tau$可以通过在$T$在$H_0$下的分布及上式条件求得. $\alpha$谓显著性水平, 通常取$0.1,0.05,0.01$等.
+\par
+将问题一般化:
+\begin{cenum}
+    \item 提出假设检验问题
+    \[ H_0:\theta \in \Theta_0 \leftrightarrow H_1: \theta\in\Theta_1. \]
+    其中$H_0$谓零假设, $H_1$谓对立假设或或备择假设.
+    \item 根据参数估计的方法构造适当的\emph{检验统计量}$T = T\pare{X_1,\cdots,X_n}$, 其中$X_1,\cdots,X_n$是一个样本.
+    \item 根据对立假设的形状构造一检验的拒绝域$W = \curb{T\pare{X_1,\cdots,X_n}\in A}$, 其中$A$为一个集合, 通常是一个区间. 例如拒绝域可以取为
+    \[ T\pare{X_1,\cdots,X_n}>\tau, \]
+    谓$\tau$临界值.
+    \item 对任意$\theta\in\Theta_0$, 犯第I类错误的概率
+    \[ P_\theta\pare{T\pare{X_1,\cdots,X_n}\in A} \le \alpha, \]
+    则谓$\alpha$显著性水平.
+    \item 结合$T$在$H_0$下的分布定出$A$.
+\end{cenum}
+谓$\beta\pare{\theta} = P_\theta\pare{\text{$H_0$被拒绝}}$为检验的功效函数. 如果检验的显著性水平为$\alpha$, 则$\beta\pare{\theta}<\alpha$. 当$\theta\in\Theta_1$时, 功效值越大越好, 可以作为评价一个检验优劣的准则.
 
 % subsubsection 基本概念 (end)
 
+\subsubsection{原假设的提法} % (fold)
+\label{ssub:原假设的提法}
+
+将受保护的对象置为零假设. 这包括已存在的事实, 或者错误拒绝会带来严重后果的情形.
+\begin{ex}
+    无罪推定, 批准新药等. 后者零假设为「新药不比安慰剂效果好」.
+\end{ex}
+\par
+如果希望「证明」某命题, 则取相反解决或者其中一部分作为零假设.
+\par
+假设检验的「拒绝零假设」结果比「不能拒绝零假设」更有保证.
+
+% subsubsection 原假设的提法 (end)
+
+\subsubsection{检验统计量的选取及假设检验的步骤} % (fold)
+\label{ssub:检验统计量的选取及假设检验的步骤}
+
+\begin{sample}
+    \begin{ex}
+        能否在显著性水平$0.05$下认为饮料的平均容量确实减少到$490$毫升?
+    \end{ex}
+    \begin{solution}
+        根据问题, 考虑假设
+        \[ H_0: \mu = 500 \leftrightarrow H_1: \mu = 490. \]
+        由于$\overbar{X}$为$\mu$的无偏估计, 则合理的检验准则为$\overbar{X}<\tau$时$RH_0$, 否则不能$RH_0$. 第一类错误的概率为
+        \begin{align*}
+            & P\pare{\overbar{X}<\mu \vert \mu = 500} \le \alpha \\
+            &\Leftrightarrow P_{\mu = 500} \pare{\frac{\overbar{X}-500}{10} < 3\cdot \frac{\tau - 500}{10}} \le \alpha \\
+            &\Leftrightarrow 3\cdot \frac{\tau - 500}{10} \le -u_\alpha.
+        \end{align*}
+        取显著性水平为$0.05$, 则$u_{0.05}\approx 1.645$, $\overbar{X} = 492$, $n=9$, $T_1 = -2.4 < -1.645$, 故样本落在拒绝域中, 可以拒绝零假设.
+    \end{solution}
+\end{sample}
+几种常见的假设检验问题如
+\begin{cenum}
+    \item $H_0: \theta = \theta_0 \leftrightarrow H_1: \theta = \theta_1$;
+    \item $H_0: \theta = \theta_0 \leftrightarrow H_1: \theta \neq \theta_0$;
+    \item $H_0: \theta = \theta_0 \leftrightarrow H_1: \theta>\theta_0$, 或者$H_0: \theta \le \theta_0 \leftrightarrow H_1: \theta>\theta_0$.
+    \item $H_0: \theta = \theta_0 \leftrightarrow H_1: \theta<\theta_0$, 或者$H_0: \theta \ge \theta_0 \leftrightarrow H_1: \theta<\theta_0$.
+\end{cenum}
+第一种为简单假设, 第二种为双侧假设, 第三和第四种为单侧假设.
+\par
+显著性检验的一般步骤为
+\begin{cenum}
+    \item 求出未知参数的一个较优的点估计$\hat\theta = \hat\theta\pare{X_1,\cdots,X_n}$, 例如极大似然估计;
+    \item 以$\hat\theta$为基础, 寻找统计量
+    \[ T = t\pare{X_1,\cdots,X_n} \]
+    使得$\theta = t_0$时分布已知;
+    \item 以$T$为基础, 根据$H_1$的实际意义, 寻找拒绝域;
+    \item 当零假设成立时, 犯第I类错误的概率$\le \alpha$, 得到临界值;
+    \item 给定样本观测值, 给出检验统计量的样本观测值, 若落在拒绝域中则可拒绝零假设.
+\end{cenum}
+
+% subsubsection 检验统计量的选取及假设检验的步骤 (end)
+
 % subsection 基本概念 (end)
+
+\subsection{一样本和两样本的总体参数检验} % (fold)
+\label{sub:一样本和两样本的总体参数检验}
+
+\subsubsection{一样本正态总体参数检验} % (fold)
+\label{ssub:一样本正态总体参数检验}
+
+设总体$X\sim N\pare{\mu,\sigma^2}, -\infty<\mu<\infty, \sigma^2>0$, $X_1,\cdots,X_n$是$X$的一个样本, 取显著性水平为$\alpha$, 可以考虑参数$\mu$和$\sigma^2$.
+
+\paragraph{方差已知时的均值检验} % (fold)
+\label{par:方差已知时的均值检验}
+
+$X_1, \cdots, X_n$ i.i.d $\sim N\pare{\mu,\sigma^2}$, $\sigma^2$已知.
+\[ H_0: \mu = \mu_0 \leftrightarrow H_1: \mu\neq \mu_0. \]
+$\mu$的MLE为$\overbar{X}$, 且$X\sim N\pare{\mu, \displaystyle \frac{\sigma^2}{n}}$. 合理的检验为$\overbar{X} < c$或$\overbar{X}>d$时$RH_0$, 否则不能$RH_0$. 第I类错误的概率为
+\begin{align*}
+    &P_{\mu = \mu_0} \pare{\overbar{X}<c \ \text{或} \ \overbar{X}>d} \\
+    &= P_{\mu = \mu_0}\pare{\overbar{X}<c} + P_{\mu = \mu_0}\pare{\overbar{X}>d} \\
+    &= P_{\mu=\mu_0} P\pare{\sqrt{n} \frac{\overbar{X} - \mu_0}{\sigma} < \sqrt{n}\frac{c-\mu_0}{\sigma}} + P\pare{\sqrt{n} \frac{\overbar{X} - \mu_0}{\sigma} > \sqrt{n}\frac{d-\mu_0}{\sigma}} \\
+    &= \Phi\pare{\sqrt{n} \frac{c-\mu_0}{\sigma}} + \brac{1-\Phi\pare{\sqrt{n}\frac{d-\mu_0}{\sigma}}}.
+\end{align*}
+使其$\le \alpha$, 取
+\begin{align*}
+    \Phi\pare{\sqrt{n} \frac{c-\mu_0}{\sigma}} &= \alpha/2,\quad 1-\Phi\pare{\sqrt{n} \frac{d-\mu_0}{\sigma}} = \alpha/2, \\ \Rightarrow c &= \mu_0 - \frac{\sigma}{\sqrt{n}}u_{\alpha/2},\quad d = \mu_0 + \frac{\sigma}{\sqrt{n}}u_{\alpha/2}. 
+\end{align*}
+其中
+\[ Z = Z\pare{X_1,\cdots,X_n} = \sqrt{n} \frac{\overbar{X} - \mu_0}{\sigma}. \]
+\begin{remark}
+    这和置信区间估计的思路是类似的, 如果$p=0.95$确定$\mu$落在某个区间内, 而$\mu$未落在该区间内, 则可以在$\alpha=0.05$下拒绝之.
+\end{remark}
+\par
+对于右侧假设,
+\[ H_0: \mu = \mu_0\leftrightarrow H_1: \mu>\mu_0 \]
+或者
+\[ H_0: \mu \le \mu_0 \leftrightarrow H_1: \mu > \mu_0, \]
+构造相同的$Z$, 则拒绝域为$Z>u_\alpha$. 例如
+\begin{align*}
+    &P_{\mu\le \mu_0}\pare{\overbar{X} > d} \\
+    &= P_{\mu \le \mu_0} \pare{\sqrt{n}\frac{\overbar{X}-\mu}{\sigma} > \sqrt{n}\frac{d-\mu}{\sigma}}.
+\end{align*}
+欲使
+\[ \mu\le \mu_0 \Rightarrow 1-\Phi\pare{\sqrt{n}\frac{d-\mu}{\sigma}} \le \alpha, \]
+则由单调性,
+\[ 1-\Phi\pare{\sqrt{n} \frac{d-\mu_0}{\sigma}} = \alpha \Rightarrow d = \mu_0 + \frac{\sigma}{\sqrt{n}}u_\alpha. \]
+\begin{remark}
+    显著性水平越小, 零假设被保护得越好从而更不容易被拒绝.
+\end{remark}
+
+% paragraph 方差已知时的均值检验 (end)
+
+\begin{sample}
+    \begin{ex}
+        对正态总体$N\pare{\mu,\sigma^2}$(其中$\sigma^2$已知)下的假设检验问题
+        \[ H_0: \mu \ge \mu_0 \leftrightarrow H_1: \mu<\mu_0, \]
+        如果要求第II类错误的概率小于某$\beta > 0$, 应如何?
+    \end{ex}
+    \begin{solution}
+        $\beta\pare{\theta} = P_\theta\pare{RH_0}$, 而
+        \begin{align*}
+            P\pare{\text{犯第I型错误}} &= \begin{cases}
+                \beta\pare{\theta}, & H_0\text{为真},\\
+                0, & H_0\text{为伪}.
+            \end{cases} \\
+            P\pare{\text{犯第II型错误}} &= \begin{cases}
+                0, & H_1\text{为真}, \\
+                1-\beta\pare{\theta}, & H_1\text{为伪}.
+            \end{cases}
+        \end{align*}
+        第I类错误的约束要求$\beta\pare{\mu}\le \alpha$, 当$\mu\ge \mu_0$. 第II类错误的约束要求$1-\beta\pare{\mu} \ge \beta$, 当$\mu < \mu_0$. 由
+        \begin{align*}
+            \beta\pare{\mu} &= P_\mu \pare{T<-u_\alpha} \\
+            &= P_\mu \pare{\sqrt{n} \frac{\pare{\overbar{X} - \mu_0}}{\sigma} < -u_\alpha} \\
+            &= P_\mu \pare{\frac{\sqrt{n}\pare{\overbar{X} - \mu + \mu - \mu_0}}{\sigma} < -u_\alpha} \\
+            &= \Phi\pare{-u_\alpha + \sqrt{n} \frac{\mu_0 - \mu}{\sigma}}.
+        \end{align*}
+        这满足第I类错误的约束, 但对于第II类错误,
+        \[ \mu < \mu_0 \Rightarrow \Phi\pare{-u_\alpha + \sqrt{n}\frac{\mu_0 - \mu}{\sigma}} \ge 1-\beta. \]
+        当$\mu < \mu_0$, 而$\mu$接近$\mu_0$时, $\beta\pare{\mu} \approx \alpha$. 而一般$\alpha < 1-\beta$, 故这一要求难以达到.
+        \par
+        实际中要求会放松一些, 要求对某个指定的$\mu_1 < \mu_0$, 有
+        \[ \beta\pare{\mu} \ge 1-\beta,\quad \mu < \mu_1. \]
+        因为$\beta\pare{\mu}$为$\mu$的减函数, 因此等价于要求
+        \[ \beta\pare{\mu_1} \ge 1-\beta \Rightarrow \Phi\pare{\sqrt{n} \frac{\mu_0-\mu_1}{\sigma} - u_\alpha} \ge 1-\beta. \]
+        等价地得到
+        \[ n \ge \sigma^2 \pare{u_\alpha + u_\beta}^2 / \pare{\mu_0 - \mu_1}^2. \qedhere \]
+    \end{solution}
+\end{sample}
+
+\paragraph{方差未知时的均值检验} % (fold)
+\label{par:方差未知时的均值检验}
+
+考虑
+\[ H_0: \mu = \mu_0 \leftrightarrow \mu\neq \mu_0, \]
+由于方差未知, 可以在将$\overbar{X}$标准化的过程中用样本方差代替总体方差$\sigma^2$得检验统计量
+\[ T = \sqrt{n} \frac{\overbar{X} - \mu_0}{S}. \]
+在$H_0$下, $T\sim t_{n-1}$, 于是取拒绝域
+\[ \curb{\abs{T} > t_{n-1}\pare{\alpha/2}}. \]
+此检验谓$t$检验.
+
+% paragraph 方差未知时的均值检验 (end)
+
+\paragraph{方差的检验} % (fold)
+\label{par:方差的检验}
+
+考虑检验问题
+\[ H_0: \sigma^2 = \sigma_0^2 \leftrightarrow H_1: \sigma^2 \neq \sigma_0^2. \]
+对于均值已知的情形, $\sigma^2$有MLE
+\[ \hat\sigma^2 = \rec{n}\sum_{i=1}^n \pare{X_i - \mu}^2. \]
+可以构造检验统计量
+\[ \chi^2 = \rec{\sigma_0^2} \sum_{i=1}^n \pare{X_i - \mu}^2 = \frac{n\hat\sigma^2}{\sigma_0^2}. \]
+在$H_0$下, $\chi^2\sim \chi_n^2$, $\chi^2$的平均值为$n$, 而在$H_1$下$\displaystyle \chi^2 = \frac{\sigma^2}{\sigma_0^2}\frac{n\hat\sigma^2}{\sigma^2}$的均值为$\displaystyle \frac{\sigma^2}{\sigma_0^2}n \neq 0$. 因此当$\chi^2$的值偏离$n$过大时应$RH_0$, 于是拒绝域为
+\[ \curb{\chi^2 < \chi_n^2\pare{1-\alpha/2}\lor \chi^2 > \chi_n^2\pare{\alpha/2}}. \]
+\par
+对于均值未知的情形, 构造检验统计量
+\[ \chi^2 = \frac{\pare{n-1}S^2}{\sigma_0^2}, \]
+其中$S^2$为样本方差. 在$H_0$下$\chi^2\sim \chi_{n-1}^2$, 拒绝与为
+\[ \curb{\chi^2 < \chi_{n-1}^2\pare{1-\alpha/2}\lor \chi^2 > \chi_{n-1}^2\pare{\alpha/2}}. \]
+
+% paragraph 方差的检验 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+8.3, 24, 29, 30
+
+% paragraph 作业 (end)
+
+\par
+显著性检验之一般步骤谓
+\begin{cenum}
+    \item 构造基于$\eta$的MLE$\hat\eta = \pare{\hat\theta,\hat\xi}$.
+    \item 找一个量$S\pare{\theta,\hat\eta}$, 其分布在$H_0$下完全已知.
+    \item 根据对立假设的形式, 取恰当的拒绝域, 例如$S\pare{\theta,\hat{\theta}}\le a$.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        $X\sim N\pare{\mu,\sigma^2}$, $H_0:\mu\le \mu_0\leftrightarrow \mu > \mu_0$, 而$\pare{\mu,\sigma^2}$的MLE为$\pare{\overbar{X},\displaystyle \rec{n}\displaystyle \sum\pare{X_i - \overbar{X}}^2}$. 注意到
+        \[ \sqrt{n} \frac{\overbar{X} - \mu}{S} \sim t_{n-1}, \]
+        令$\displaystyle \frac{\sqrt{n}\pare{\overbar{X} - \mu_0}}{S} > a$,
+        \begin{align*}
+            \alpha &\ge P_{\mu\le\mu_0}\pare{\frac{\sqrt{n}\pare{\overbar{X} - \mu_0}}{S} > a} \\
+            &= P_{\mu\le\mu_0} \pare{\frac{\sqrt{n}\pare{\overbar{X}-\mu}}{S} > a + \sqrt{n} \frac{\mu_0-\mu}{S}}.
+        \end{align*}
+        但
+        \[ P_{\mu = \mu_0}\pare{\frac{\sqrt{n}\pare{\overbar{X} - \mu_0}}{S}> a} \le  P_{\mu \le \mu_0}\pare{\frac{\sqrt{n}\pare{\overbar{X} - \mu}}{S}> a} = \alpha, \]
+        只需令上式右侧$=\alpha$, 即$a=t_\alpha\pare{n-1}$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X\sim U\pare{0,\theta}$, $\theta>0$, $X_1,\cdots,X_n$为样本, 求
+        \[ H_0:\theta \le \theta_0 \leftrightarrow H_1:\theta > \theta_0 \]
+        的水平$\alpha$的检验.
+    \end{ex}
+    \begin{solution}
+        $\theta$的MLE为$\hat\theta = X_{\pare{n}}$, 且有pdf
+        \[ f_n\pare{x} = \frac{nx^{n-1}}{\theta^n}I\pare{0<x<\theta}. \]
+        故可得
+        \[ \frac{\hat\theta}{\theta} = \frac{X_{\pare{n}}}{\theta}. \]
+        其有pdf
+        \[ g_n\pare{t} = nt^{n-1} I\pare{0<t<1}. \]
+        对假设, 由$H_1$的形式知一个合理的检验区间拒绝域为$X_{\pare{n}}/\theta_0 > c$. 令
+        \begin{align*}
+            \alpha &\ge P_{\theta \le \theta_0}\pare{\frac{X_{\pare{n}}}{\theta_0}>c} \\
+            &= P_{\theta\le \theta_0}\pare{\frac{X_{\pare{n}}}{\theta} > \frac{c\theta_0}{\theta}}. \\
+            P_{\theta\le\theta_0}\pare{\frac{X_{\pare{n}}}{\theta} > c\frac{\theta_0}{\theta}}  &\le P_{\theta \le \theta_0}\pare{\frac{X_{\pare{n}}}{\theta} > c} \\
+            &= \int_c^1 g_n\pare{t}\,\rd{t} \\
+            &= 1-c^n.
+        \end{align*}
+        因此拒绝域取$c = \sqrt[n]{1-\alpha}$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$X\sim \Exp\pare{\lambda}$, $\lambda > 0$, 求
+        \[ H_0: \lambda \le \lambda_0 \leftrightarrow H_1: \lambda > \lambda_0 \]
+        的水平$\alpha$检验.
+    \end{ex}
+    \begin{solution}
+        $\lambda$的MLE为$\hat\lambda = 1/\overbar{X}$, 直观上合理的拒域为$\hat\lambda > c$.
+        \begin{align*}
+            \alpha &\ge P_{\lambda \le \lambda_0}\pare{\hat\lambda > c} \\
+            &= P_{\lambda \le \lambda_0} \pare{\rec{\overbar{X}} > c} \\
+            &= P_{\lambda \le \lambda_0} \pare{2n\lambda \overbar{X} < \rec{c}\cdot 2n\lambda} \\
+            &\le P_{\lambda \le \lambda_0}\pare{2n\lambda \overbar{X} < \rec{c}\cdot 2n\lambda_0} \\
+            \Rightarrow \alpha &= P_{\lambda\le \lambda_0} \pare{2n\lambda \overbar{X} < \rec{c}2n\lambda_0} \\
+            &\Rightarrow \rec{c} 2n\lambda_0 = \chi_{1-\alpha}^2\pare{2n}. \qedhere
+        \end{align*}
+    \end{solution}
+    \begin{remark}
+        $\lambda$的MLE通过
+        \[ L\pare{\lambda} = \lambda^n e^{-\lambda \sum x_i} \rightarrow n\log\lambda -\lambda \sum x_i \rightarrow \frac{n}{\lambda} = \sum x_i \]
+        求得.
+    \end{remark}
+\end{sample}
+假设检验时, 用一个检验统计量来度量之, 估计参数取值范围的偏离程度. 例如$w_0 = \lbr{-\infty,\theta_0}$, $d\pare{\hat\theta,w_0} = d\pare{\hat\theta,\theta_0}$.
+\par
+检验统计量的构造需要观察$\hat\theta$的形式得出. 采用MLE的原因在于MLE具有渐进正态性.
+
+% subsubsection 一样本正态总体参数检验 (end)
+
+\subsubsection{两样本正态总体的情形} % (fold)
+\label{ssub:两样本正态总体的情形}
+
+设总体$X\sim N\pare{\mu_1,\sigma_1^2}$, $Y\sim N\pare{\mu_2,\sigma_2^2}$, $-\infty<\mu_1,\mu_2<\infty$, $\sigma_1^2>0$, $\sigma_2^2>0$. $X_1,\cdots,X_n$是从总体$X$中抽取的一个样本, $Y_1,\cdots,Y_n$是从总体$Y$中抽取的一个样本. 设来自不同总体的样本相互独立. 下面考虑有关均值差$\mu_1 - \mu_2$和方差比$\sigma_1^2/\sigma_2^2$的检验, 取显著性水平为$\alpha$.
+\[ H_0: \mu_1 - \mu_2 \le \delta_0 \leftrightarrow H_1: \mu_1-\mu_2 > \delta_0. \]
+注意参数为$\mu_1,\mu_2,\sigma^2$, 则
+\begin{align*}
+    l\pare{\mu_1,\mu_2,\sigma^2} &\propto -\frac{n}{2}\log \sigma^2 + \rec{2\sigma^2}\sum\pare{X_i - \mu_1}^2 \\
+    &\phantom{\propto}\ -\frac{m}{2}\log\sigma^2 + \rec{2\sigma^2}\sum\pare{Y_j - \mu_2}^2 \\
+    &= -\frac{n+m}{2}\log \sigma^2 + \rec{2\sigma^2}\brac{\sum\pare{X_i - \mu_1}^2 + \sum\pare{Y_i - \mu_2}^2}. \\
+    & \+D{\mu_1}D{l} = 0,\quad \+D{\mu_2}D{l} = 0,\quad \+D{\sigma_2^2}D{l} = 0 \\
+    & \Rightarrow \hat\mu_1 = \overbar{X},\quad \hat\mu_2 = \overbar{Y},\quad \hat\sigma^2 = \rec{n+m} \brac{\sum\pare{X_i - \hat\mu_1}^2 + \sum\pare{Y_j- \hat\mu_2}^2}.
+\end{align*}
+一个直观上合理的拒绝域为$\hat\mu_1 - \hat\mu_2 > c$. 注意到
+\[ \hat\mu_1 - \hat\mu_2 = \overbar{X} - \overbar{Y} = N\pare{\mu_1 - \mu_2, \frac{\sigma^2}{n} + \frac{\sigma^2}{m}}. \]
+为使
+\begin{align*}
+    \alpha &\ge P_{\mu_1 - \mu_2 \le \delta_0} \pare{\hat\mu_1 - \hat\mu_2 > c} \\
+    &= P_{\mu_1 - \mu_2 \le \delta_0} \pare{\hat\mu_1 - \hat\mu_2 - \pare{\mu_1 - \mu_2} > c - \pare{\mu_1 - \mu_2}} \\
+    &\le P_{\mu_1 - \mu_2 \le \delta_0} \pare{\hat\mu_1 - \hat\mu_2 - \pare{\mu_1 - \mu_2} > c-\delta_0} \\
+    &= P_{\mu_1 - \mu_2 \le \delta_0}\pare{\frac{\hat\mu_1 - \hat\mu_2 - \pare{\mu_1 - \mu_2}}{\sqrt{\frac{\sigma^2}{n} + \frac{\sigma^2}{m}}} > \frac{c-\delta_0}{\sqrt{\frac{\sigma^2}{n} + \frac{\sigma^2}{m}}}} \quad \text{(分布仍未知)} \\
+    &= P_{\mu_1 - \mu_2 \le \delta_0} \pare{ \underbrace{\frac{\frac{\hat\mu_1 - \hat\mu_2 - \pare{\mu_1 - \mu_2}}{\sqrt{\frac{\sigma^2}{n} + \frac{\sigma^2}{m}}}}{\sqrt{\rec{n+m-2}\brac{\frac{\pare{n+m}\hat\sigma^2}{\sigma^2}}}} }_{\sim t_{n+m-2}} > \frac{ \frac{c-\delta_0}{\sqrt{\frac{\sigma^2}{n} + \frac{\sigma^2}{m}}} } {\sqrt{\rec{n+m-2}\brac{\frac{\pare{n+m}\hat\sigma^2}{\sigma^2}}}} } \\
+    &= P_{\mu_1 - \mu_2 \le \delta_0} \pare{T_{n+m-2} > \frac{ \frac{c-\delta_0}{\sqrt{\frac{\sigma^2}{n} + \frac{\sigma^2}{m}}} } {\sqrt{\rec{n+m-2}\brac{\frac{\pare{n+m}\hat\sigma^2}{\sigma^2}}}}}.
+\end{align*}
+利用$T$与$\sigma^2$的独立性, 可视不等式右边为常数. 代入原拒绝域中,
+\[ \hat\mu_1 - \hat\mu_2 > \delta_0 + \pare{\cdots} t_\alpha\pare{n+m-2}. \]
+\begin{sample}
+    \begin{ex}
+        检验磷肥的有效性.
+    \end{ex}
+    \begin{solution}
+        磷肥对玉米产量有效果等价于$\mu_1>\mu_2$, 故将其作为对立假设. 假设检验问题是
+        \[ H_0: \mu_1 \le \mu_2 \leftrightarrow H_1:\mu_1 > \mu_2. \]
+        构造
+        \[ T = \frac{\overbar{X} - \overbar{Y}}{S_w \sqrt{\rec{m} + \rec{n}}}, \]
+        若$H_0$成立则$T\sim t_{n+m-2}$, 拒绝域为
+        \[ \curb{T>t_{n+m-2}\pare{\alpha}}. \qedhere \]
+    \end{solution}
+\end{sample}
+为了检验方差的齐性
+\[ H_0: \frac{\sigma_1^2}{\sigma_2^2} \le \delta_0 \leftrightarrow H_1: \frac{\sigma_1^2}{\sigma_2^2} > \delta_0. \]
+考虑到$\mu_1$, $\mu_2$, $\sigma_1^2$, $\sigma_2^2$的MLE为
+\[ \hat{\mu}_1 = \overbar{X},\quad \hat{\mu}_2 = \overbar{Y},\quad \hat\sigma_1^2 = \rec{n}\sum\pare{X_i - \overbar{X}}^2,\quad \hat{\sigma}_2^2 = \rec{m} \sum\pare{Y_j - \overbar{Y}}^2. \]
+一个合理的拒绝域为$\hat\sigma_1^2 / \hat\sigma_2^2 > c$, 为使
+\begin{align*}
+    \alpha & \ge P_{\sigma_1^2/\sigma_2^2 \le \delta_0} \pare{\frac{\hat\sigma_1^2}{\hat\sigma_2^2} > c} \\
+    & P_{\sigma_1^2/\sigma_2^2 \le \delta_0} \pare{\frac{\rec{n-1}n\hat\sigma_1^2/\sigma_1^2}{\rec{m-1}m\hat\sigma_2^2/\sigma_2^2} > c\cdots \frac{\sigma_2^2}{\sigma_1^2}\times \cdots} \\
+    &\le P_{\sigma_1^2/\sigma_2^2\le \delta_0} \pare{* > \underbrace{c\cdot\rec{\delta_0} *}_{=F_\alpha\pare{n-1,m-1}}}.
+\end{align*}
+设
+\[ F = \frac{S_1^2}{S_2^2} = \frac{\pare{m-1}\hat\sigma_1^2 /m}{\pare{n-1}\hat\sigma_2^2 /n}, \]
+则拒绝域为
+\[ \curb{F < F_{m-1,n-1}\pare{\alpha/2}\lor F>F_{m-1,n-1}\pare{1-\alpha/2}}. \]
+
+% subsubsection 两样本正态总体的情形 (end)
+
+\subsubsection{成对数据} % (fold)
+\label{ssub:成对数据}
+
+对于成对数据
+\[ \curb{\pare{X_1,Y_1},\cdots,\pare{X_n,Y_n}}, \]
+数据对之间通常可认为独立, 但数据对内的两个观测通常不独立. 对数据内作差, 构造新总体$Z$和样本
+\[ Z_1 = X_1 - Y_1,\cdots,Z_n = X_n - Y_n. \]
+通常假设$Z$服从正态分布, 则假设检验转化为样本正态检验.
+\begin{remark}
+    T检验有多种类型, 例如单样本T检验用于方差未知时正态均值的假设检验; 二样本T检验用于方差未知时二正态总体均值之差的假设; 成对T检验用于连续数据对的检验.
+\end{remark}
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+35, 42, 49, 52
+
+% paragraph 作业 (end)
+
+% subsubsection 成对数据 (end)
+
+\begin{sample}
+\begin{ex}[截尾试验]
+    设$X\sim \Exp\pare{\lambda}$, 设计两种类型的样本:
+    \begin{cenum}
+        \item 试验进行至第$r$个失效即停止;
+        \item 实验进行至某个时刻$T_0$为止.
+    \end{cenum}
+    前者谓定数截尾, 后者谓定时截尾. 据此考虑假设
+    \[ H_0: \lambda \le \lambda_0 \leftrightarrow H_1: \lambda > \lambda_0. \]
+    \begin{cenum}
+        \item 对于定数截尾, 首先应当找到$\lambda$的似然估计, 设样本为$X_1,\cdots,X_n$, 排序后为
+        \[ X_{\pare{1}} \le X_{\pare{2}} \le\cdots \le X_{\pare{n}}. \]
+        实验进行到第$r$个失效, 故依据实验方式, $X_{\pare{1}},\cdots,X_{\pare{r}}$的值均有观测, 剩下的$X_{\pare{r+1}},\cdots,X_{\pare{n}}$并无具体值, 仅知道其皆$>X_{\pare{r}}$. 因此
+        \begin{align*}
+            & L\pare{\lambda} \\ &= P\pare{X_{\pare{1}} \in x_{\pare{1}}\pm\delta,\cdots,X_{\pare{r}}\in x_{\pare{r}}\pm\delta,X_{\pare{i}}>x_{\pare{r}}, r<i\le n} \\
+            &= \frac{n!}{1!\cdots 1!\pare{n-r}!}P\pare{X_1\in x_{\pare{1}}\pm\Delta,\cdots,X_r\in x_{\pare{r}}\pm \Delta, X_i \cdots} \\
+            &= \frac{n!}{\pare{n-r}!} \prod_{i=1}^r P\pare{X_i\in x_{\pare{i}}\pm \Delta_i} \prod_{j=r+1}^n P\pare{X_j \ge x_{\pare{r}} + \Delta_r} \\
+            &= \frac{n!}{\pare{n-r}!}\prod_{i=1}^r \brac{F\pare{x_{\pare{i}}+\Delta_i} - F\pare{x_{\pare{i}}-\Delta_i}}\cdot \\ &\phantom{=}\ \prod_{j=r+1}^n \brac{1-F\pare{x_{\pare{r}} + \Delta_r}} \\
+            &= \frac{n!}{\pare{n-r}!}\prod_{i=1}^r f\pare{x_{\pare{i}}}\pare{2\Delta_i}\brac{1-F\pare{x_{\pare{r}}+\Delta_r}}^{n-r}.
+        \end{align*}
+        故可以取似然函数
+        \begin{align*}
+            L\pare{\lambda} &= \prod_{i=1}^r f\pare{x_{\pare{i}}}\brac{1-F\pare{x_{\pare{r}}}}^{n-r} \\
+            &= \lambda^r \exp{-\lambda \brac{\sum_1^r x_{\pare{i}} + \pare{n-r}x_{\pare{r}}}} \\
+            &= \lambda^r e^{-\lambda T},\quad T = \sum_1^r x_{\pare{i}} + \pare{n-r}x_{\pare{r}}.
+        \end{align*}
+        于是MLE为$\hat\lambda = -r/T$. 对于假设, 合理的拒绝域为$T<c$. 由于
+        \[ 2\lambda T \sim \chi_{2r}^2, \]
+        为使
+        \begin{align*}
+            \alpha &\ge P_{\lambda\le \lambda_0}\pare{T<c} \\
+            &= P_{\lambda \le \lambda_0}\pare{2\lambda T \le 2\lambda c} \\
+            &\le P_{\lambda\le\lambda_0} \pare{2\lambda T < 2\lambda_0 c}.
+        \end{align*}
+        只需取$P_{\lambda\le\lambda_0} \pare{2\lambda T < 2\lambda_0 c} = \alpha$, 得到$c$即可.
+    \end{cenum}
+\end{ex}
+\end{sample}
+
+\subsubsection{\texorpdfstring{$0$-$1$}{0-1}分布中未知参数\texorpdfstring{$p$}{p}的假设检验} % (fold)
+\label{ssub:0_1分布中未知参数}
+
+设$\pare{X_1,\cdots,X_n}$是取自总体$X$的一个样本, 该总体服从$0$-$1$分布. 取$1$的概率为$p$. $X_1,\cdots,X_n$ i.i.d. $\sim B\pare{1,p}$, $p$的MLE为
+\[ \hat p \rec{n} \sum_1^n X_i \sim B\pare{n,p}. \]
+对于
+\[ H_0: p=p_0 \leftrightarrow H_1: p\neq p_0, \]
+合理的拒绝域为
+\[ \hat p < c_1 \lor \hat p \ge c_2 \quad \pare{\abs{\hat p - p_0} > c}. \]
+对于
+\[ H_0: p = p_0 \leftrightarrow H_1: p > p_0\quad\text{或}\quad H_0: p \le p_0 \leftrightarrow H_1: p > p_0. \]
+合理的拒绝域为
+\[ \hat p > c. \]
+对于
+\[ H_0: p = p_0 \leftrightarrow H_1: p < p_0\quad\text{或}\quad H_0: p \ge p_0 \leftrightarrow H_1: p < p_0. \]
+合理的拒绝域为
+\[ \hat p < c. \]
+对于第一种$H_0 \leftrightarrow H_1$, 为使
+\begin{align*}
+    \alpha &\ge P_{p_0} \pare{\hat p < c_1 \lor \hat p > c_2} \\
+    &= P_{p_0}\pare{\hat p < c_1} + P_{p_0}\pare{\hat p > c_2} \\
+    &= \sum_{k=0}^{nc_1-1} \binom{n}{k}p_0^kq_0^{n-k} + \sum_{k=nc_2+1}^n \binom{n}{k} p_0^{k}q_0^{n-k}.
+\end{align*}
+令两项概率同时$<\alpha/2$, 则
+\begin{align*}
+    \sum_{k=0}^{nc_1-1} \binom{n}{k}p_0^kq_0^{n-k} &\le \alpha/2, \\
+    \sum_{k=nc_2+1}^n \binom{n}{k} p_0^{k}q_0^{n-k} & \le \alpha/2.
+\end{align*}
+选取$c_1$为使不等式成立的最大的$c_1$, $c_2$为使不等式成立的最小的$c_2$.
+\par
+对于第二种$H_0 \leftrightarrow H_1$, 为使
+\begin{align*}
+    \alpha &\ge P_{p\le p_0} \pare{\hat p > c} \\
+    &= P_{p\le p_0} \pare{\sum_1^n X_i > nc} \\
+    &= \sum_{nc+1}^n \binom{n}{k}p^k q^{n-k},\quad \forall p\le p_0,\quad \text{且是$p$的增函数} \\
+    & \le \sum_{nc+1}^n \binom{n}{k}p_0^k q_0^{n-k}.
+\end{align*}
+若样本量$n$较大, 取显著性水平$\alpha$, 由于$p$的MLE为$\overbar{X}$, 则
+\[ T = \sqrt{n} \frac{\overbar{X} - p_0}{\sqrt{p_0 \pare{1-p_0}}}, \]
+其中$p_0$和$p_0\pare{1-p_0}/n$分别为$\overbar{X}$在零假设下的期望和方差. 当$H_0$成立, 由CLT近似成立$T\sim N\pare{0,1}$. 于是上述三种检验的拒绝域分别为
+\[ \curb{\abs{T} > u_{\alpha/2}},\quad \curb{T>u_\alpha},\quad \curb{T<-u_\alpha}. \]
+\begin{sample}
+    \begin{ex}
+        某产品不合格率通常为$0.05$. 原料产地改变后, 抽取$80$个样品检验, 发现$5$个不合格品. 在$\alpha = 0.1$下, 可得出什么结论?
+    \end{ex}
+    \begin{solution}
+        总体$X\sim B\pare{1,p}$, 其中$p$未知. 在显著性水平$\alpha=0.1$下,
+        \[ H_0:p=0.05 \leftrightarrow H_1:p\neq 0.05. \]
+        由$\overbar{x} =5/80$,
+        \[ T = \sqrt{n}\frac{\overbar{X} - p_0}{\sqrt{p_0\pare{1-p_0}}} = 0.513 < u_{0.05} = 1.645, \]
+        故不能拒绝$H_0$.
+    \end{solution}
+\end{sample}
+
+% subsubsection 0_1分布中未知参数 (end)
+
+\subsubsection{置信区间和假设检验之间的关系} % (fold)
+\label{ssub:置信区间和假设检验之间的关系}
+
+若要求参数$\theta$的$1-\alpha$置信区间为$\brac{\ubar{\theta}\le \theta\le \overbar{\theta}} \ge 1-\alpha$ 而对于
+\[ H_0: \theta = \theta_0\leftrightarrow H_1:\theta\neq \theta_0, \]
+在原假设下, 有
+\[ P\pare{\ubar{\theta}\le\theta_0\le\overbar{\theta}} \ge 1-\alpha \Leftrightarrow P\pare{\theta_0 > \ubar{\theta}} + P\pare{\theta_0 < \ubar{\theta}} \le \alpha. \]
+假设检验要求$\ubar{\theta}\le\theta_0\le\overbar{\theta}$则接受$H_0$, 否则就拒绝.
+\par
+因此, 为了求出参数$\theta$的$1-\alpha$置信区间, 可以先找到$\theta$的双边检验
+\[ H_0: \theta = \theta_0\leftrightarrow H_1:\theta\neq \theta_0 \]
+的检验函数, 其接受域即为$1-\alpha$置信区间. 反过来, 为了求
+\[ H_0: \theta = \theta_0\leftrightarrow H_1:\theta\neq \theta_0 \]
+的检验, 可以先求出参数$\theta$的$1-\alpha$置信区间, 即得到该假设的接受域.
+\par
+类似地, 置信水平为$1-\alpha$的单侧置信区间$\pare{\ubar{\theta},\infty}$或者$\pare{-\infty,\overbar{\theta}}$与显著性水平为$\alpha$的单边即检验问题有类似对应关系.
+
+\paragraph{LRT检验} % (fold)
+\label{par:lrt检验}
+
+设
+\[ H_0: \theta\in w_0\leftrightarrow \theta\in w-w_0, \]
+设$L\pare{\theta}$为似然函数, 一个合理的检验为对于
+\[ \Lambda = \frac{\max_{\theta\in w_0}L\pare{\theta}}{\max_{\theta \in w}L\pare{\theta}}, \]
+当$\Lambda<c$时拒绝之. 可以证明当$H_0$为真,
+\[ -2\log \Lambda \xrightarrow{d} \chi^2\+_{df}_. \]
+\begin{remark}
+    为了比较两种检验方法,
+    \begin{cenum}
+        \item 设均为水平$\alpha$的测试;
+        \item 比较第II型错误的概率, 更小的更好.
+    \end{cenum}
+    为了比较(在同一种检验方法下)两组样本支持$H_0$的证据强弱, 引入$p$值为$P\pare{\text{在$H_0$下出现像检验统计量的观测值那么糟糕或者更极端值的可能性}}$. 例如否定域的形式为$T>c$, 则$p=P_{H_0}\pare{T>T\+_obs_}$. 检验原则为$p\le\alpha$时$RH_0$, 且$p$值越小, 否定$H_0$的理由越充分.
+\end{remark}
+
+% paragraph lrt检验 (end)
+
+% subsubsection 置信区间和假设检验之间的关系 (end)
+
+% subsection 一样本和两样本的总体参数检验 (end)
+
+\subsection{拟合优度检验} % (fold)
+\label{sub:拟合优度检验}
+
+为了检验
+\[ H_0: \text{$X$服从某种分布$F$}, \]
+可以采用Karl Pearson提出的$\chi^2$拟合优度检验. 基本想法为基于样本得到$F$的估计$\hat F_n$, 计算某种偏差$D\pare{\hat F_n, F}$. 当$H_0$正确时, $\hat F_n$是$F$的相合估计, 偏差$D\pare{\hat F_n,F}$应该很小.
+
+\subsubsection{离散总体情形} % (fold)
+\label{ssub:离散总体情形}
+
+设总体$X$服从一个离散分布$P\pare{a_i} = p_i$, $i = 1,\cdots,k$. 现在取得样本量为$n$的样本, 落在$a_1,\cdots,a_k$的观测数分别为$n_1,\cdots,n_k$.
+\begin{cenum}
+    \item $p_i$有估计
+    \[ \hat p_i = \frac{n_i}{n},\quad n_i = \sum_{j=1}^n I\pare{X_j = i}. \]
+    \item 构造权重$w_i$, 使得
+    \[ \sum_{i} w_i\pare{\hat p_i - p_i}^2 \]
+    分布已知.
+\end{cenum}
+根据LLN, 在零假设成立时$n_i/n$依概率收敛于$p_i$, 故理论频数$np_i$与观测频数$n_i$接近. 通过检验统计量
+\[ T = \sum \frac{\pare{n_i - np_i}^2}{np_i} = \sum \frac{\pare{O-E}^2}{E}. \]
+若$H_0$成立, $T$的极限分布就是$\chi^2_{k-1}$. 从而有拒绝域$T>\chi_\alpha^2\pare{k-1}$.
+\begin{sample}
+    \begin{ex}
+        有人制造含$6$个面的骰子, 投掷$600$次, 六个面的频数分别为
+        \[ 97, 104, 82, 110, 93, 114, \]
+        在骰子均匀的零假设下
+        \[ T = \sum \frac{\pare{x_i - 100}^2}{100} = 6.94 < \chi_5^2\pare{0.2}\approx 7.29, \]
+        故不能拒绝零假设.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        Mendel的豌豆杂交实验在Mendel第一定律的假设下二代豌豆应该得到$75\%$黄色和$25\%$绿色. 观测值$n_1 = 6022$, $n_2 = 2001$, 这批数据是否支持Mendel第一定律?
+    \end{ex}
+    \begin{solution}
+        要检验的假设为
+        \[ H_0:\quad \pi_1 = 0.75,\quad \pi_2 = 0.25. \]
+        期望的$\mu_1 = n\pi_1 = 6017.25$, $\mu_2 = n\pi_2 = 2005.75$, 从而
+        \[ Z = \sum \frac{\pare{O-E}^2}{E} = 0.015. \]
+        自由度$\mathrm{df} = 1$, $p$值为$0.903$, 可以认为服从Mendel第一定律.
+    \end{solution}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+56, 57, 58
+
+% paragraph 作业 (end)
+
+\paragraph{存在未知参数的情形} % (fold)
+\label{par:存在未知参数的情形}
+
+若$p_i = p_i\pare{\theta}$, $\theta$未知, 则上文的$T$不可用. 令$\theta$的MLE为$\hat\theta$,
+\begin{align*}
+    L\pare{\theta} &= P\pare{X_1 = x_1,\cdots,X_n = x_n} \\
+    &= \prod_{i=1}^n P\pare{X_i = x_i},
+    \hat\theta = \arg\max L\pare{\theta}.
+\end{align*}
+从而$p_i = p_i\theta$的MLE为$\hat{p}_i = p_i\pare{\theta}$. 构造
+\[ \chi^2 = \sum_{i=1}^k \frac{\pare{n_i - n\hat{p}_i}^2}{n\hat{p}_i}, \]
+则这一变量是自由度为$k-1-r$的$\chi^2$变量, 其中$r$是独立参数的个数.
+
+% paragraph 存在未知参数的情形 (end)
+
+\begin{sample}
+    \begin{ex}
+        取$100$人的血液检测某位点的基因型, 假设仅有$A$和$a$两个等位基因, $AA$, $Aa$, $aa$的个数分别为$30$, $40$, $30$, 能否在$0.05$的水平下认为该群体此位点达到Hardy-Weinberg稳态?
+    \end{ex}
+    \begin{solution}
+        取$H_0$为稳态成立, 设$A$的基因频率为$p$, 则
+        \[ H_0: P\pare{AA} = p^2,\quad P\pare{Aa} = 2p\pare{1-p},\quad P\pare{aa} = \pare{1-p}^2. \]
+        在$H_0$下, 三个理论频数为$100\times\hat p^2, 100\times 2\times \hat p\pare{1-\hat p}, 100\times\pare{1-\hat p}^2$. 其中$\hat p$为估计的等位基因频率$0.5$, 从而$\chi^2 = 4$, 大于$\chi^2_{0.05}\pare{3-1-1} = 3.84$, 故可以在$0.05$的水平下未达到.
+    \end{solution}
+\end{sample}
+
+% subsubsection 离散总体情形 (end)
+
+\subsubsection{列表独立性与齐一性检验} % (fold)
+\label{ssub:列表独立性与齐一性检验}
+
+设属性$A$和$B$分别有分类$a_1,\cdots,a_k$与$b_1,\cdots,b_r$, 并在各个$a_i$下有各个$b_j$的数据. 将
+\[ \pare{a_1,b_1},\cdots,\pare{a_1,b_r},\cdots,\pare{a_k,b_r} \]
+的频数列出, 若$A$和$B$独立, 则应有
+\[ p_{11} = u_1v_1,\quad \cdots\quad p_{1r} = u_1v_r,\quad \cdots\quad p_{kr} = u_kv_r. \]
+记$\theta = \pare{u_1,\cdots,u_{k-1};v_1,\cdots,v_{k-1}}$, 则
+\[ p_{ij} = p_{ij}\pare{\theta}. \]
+在$H_0$下, $\theta$的似然函数为
+\begin{align*}
+    L\pare{\theta} &= \prod_{i=1}^k \prod_{j=1}^r p_{ij}^{n_{ij}} \xlongequal{H_0} \prod_{i=1}^k \prod{j=1}^r \pare{u_i v_j}^{n_{ij}} \\
+    &= P\pare{X_1 = x_1,\cdots,X_n = x_n} = \prod_{i=1}^n P\pare{X_i = x_i}.
+\end{align*}
+令$\displaystyle \+D{u_i}D{\ln L\pare{\theta}} = 0$, $\displaystyle \+D{v_j}D{\ln L\pare{\theta}} = 0$.
+\[ \sum_{i=1}^k \sum_{j=1}^r n_{ij}\brac{\ln\pare{u_i} + \ln\pare{v_j}} = \sum_{i=1}^k n_{i+}\ln u_i + \sum_{j=1}^r n_{+j}\ln v_j. \]
+考虑到$\sum u_i = 1$, $\sum v_j = 1$, 有
+\[ \left\{\begin{aligned}
+    \frac{n_{i+}}{u_i} - \frac{n_{k+}}{u_k} = 0, \\
+    \frac{n_{+j}}{v_j} - \frac{n_{+r}}{v_r} = 0
+\end{aligned}\right. \Rightarrow \left\{ \begin{aligned}
+    u_i = \frac{n_{i+}}{u}, \\
+    v_j = \frac{n_{+j}}{n}.
+\end{aligned} \right. \]
+由Pearson $\chi^2$检验,
+\begin{align*}
+    T &= \sum \frac{\pare{O-\hat E}^2}{\hat E^2} \\
+    &= \sum_{i=1}^k \sum_{j=1}^r \frac{\pare{n_{ij} - n\hat p_{ij}}^2}{n\hat p_{ij}} \\
+    &= \sum_{i=1}^k \sum_{j=1}^r \frac{\pare{n_{ij} - n_{i+}n_{+j}/n}^2}{\pare{n_{i+}n_{+j}/n}}.
+\end{align*}
+在$H_0$下, $\hat T \rightarrow \chi^2$, 有自由度
+\[ kr - 1 - \pare{k-1 + r - 1} = \pare{k-1}\pare{r-1}. \]
+从而$T$的极限分布是自由度$\pare{k-1}\pare{r-1}$的$\chi^2$分布. 特别地, 对于四格表, 自由度为$1$.
+
+\begin{sample}
+    \begin{ex}
+        调查收入$A$和文化支出$B$的关系.\\
+        \centerline{
+        \begin{tabular}{ccccc}
+            \toprule
+            \diagbox{B}{A} & $1$ & $2$ & $3$ & 和 \\
+            \midrule
+            $1$ & $63$ & $37$ & $60$ & $160$ \\
+            \midrule
+            $2$ & $16$ & $17$ & $8$ & $41$ \\
+            \midrule
+            和  & $79$ & $54$ & $68$ & $201$ \\
+            \bottomrule
+        \end{tabular}
+        }
+    \end{ex}
+    \begin{solution}
+        取$H_0$为$A$和$B$无关. 计算$T$中的各个项, 如第一个项为
+        \[ \frac{\pare{n_{11} - n_{1+}n_{+1}/n}^2}{n_{1+}n_{+1}/n} = \frac{\pare{63 - 160 \times 79/201}^2}{160\times 79 / 201} = 0.0002. \]
+        可得$T = 7.2078$, $p = 0.0207$.
+    \end{solution}
+\end{sample}
+\par
+齐一性检验要求检验属性$A$的各个水平对应属性$B$的分布是否相同. 此种假设检验不同于独立性检验. 例如下例中医院并非一随机变量. 实验中的个体数目在「医院」的每个水平下是固定的. 尽管如此, 检验的形式仍然是一样的. 齐一性要求
+\begin{align*}
+    P\pare{Y=1\vert X=1} &= P\pare{Y=1\vert X=2}, \\ P\pare{Y=2\vert X=1} &= P\pare{Y=2\vert X=2}.
+\end{align*}
+视$X$为随机变量, 则
+\begin{align*}
+    \frac{P\pare{Y=1,X=1}}{P\pare{X=1}} &= \frac{P\pare{Y=1,X=2}}{P\pare{X=2}} \\ \Leftrightarrow \frac{P\pare{X=1,Y=1}}{P\pare{X=1}} &= \frac{P\pare{X=2,Y=1}}{1-P\pare{X=1}}. \\
+    \Leftrightarrow P\pare{X=1,Y=1} &= P\pare{X=1}\brac{P\pare{X=2,Y=1} + P\pare{X=1,Y=1}} \\
+    \Leftrightarrow P\pare{X=1,Y=1} &= P\pare{X=1}P\pare{Y=1}.
+\end{align*}
+类似地,
+\[ P\pare{X=i,Y=j} = P\pare{X=i}P\pare{Y=j},\quad i,j = 1,2. \]
+\begin{sample}
+    \begin{ex}
+        两个医院的治疗效果如下. \\
+        \centerline{
+        \begin{tabular}{cccc}
+            \toprule
+            & 生存 & 死亡 & 合计 \\
+            \midrule
+            甲院 & $150$ & $88$ & $238$ \\
+            \midrule
+            乙院 & $36$ & $18$ & $54$ \\
+            \midrule
+            合计 & $186$ & $106$ & $292$ \\
+            \bottomrule
+        \end{tabular}
+        }
+    \end{ex}
+    \begin{solution}
+        治疗水平无差异相当于
+        \[ H_0: P\pare{\text{生存} \vert \text{甲院}} = P\pare{\text{生存} \vert \text{乙院}}. \qedhere \]
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设工厂生产质量如下. \\
+        \centerline{
+        \begin{tabular}{ccccc}
+            \toprule
+            \diagbox{质量}{工厂} & $1$ & $2$ & $3$ & 和 \\
+            \midrule
+            $1$ & $58$ & $38$ & $32$ & $138$ \\
+            \midrule
+            $2$ & $28$ & $44$ & $45$ & $117$ \\
+            \midrule
+            $3$ & $23$ & $18$ & $14$ & $55$ \\
+            \midrule
+            和  & $109$ & $100$ & $91$ & $300$ \\
+            \bottomrule
+        \end{tabular}
+        }
+    \end{ex}
+    \begin{solution}
+        可以证明, 各工厂产品生产质量一致等价于
+        \[ H_0: P\pare{X=i, Y = j} = P\pare{X=i}P\pare{Y=j},\quad i,j = 1,2,3. \qedhere \]
+    \end{solution}
+\end{sample}
+
+% subsubsection 列表独立性与齐一性检验 (end)
+
+\subsubsection{连续总体的情形} % (fold)
+\label{ssub:连续总体的情形}
+
+设有样本$X_1,\cdots,X_n$. 记$X$的分布函数为$F\pare{x}$, 要在显著性水平$\alpha$下检验
+\[ H_0: F\pare{x} = F_0\pare{x;\theta_1,\cdots,\theta_r}. \]
+可以先将总体分布离散化后用拟合优度的方法来检验. 把实数轴分为$k$个子区间$\lbr{a_{j-1},a_j}$, $j=1,\cdots,k$, 其中$a_0$可以取$-\infty$, $a_k$可以取$\infty$. 这构造了一个离散总体, 记
+\[ p_j = P_{H_0}\pare{a_{j-1} < X \le a_j} = F_0\pare{a_j;\theta} - F_0\pare{a_{j-1};\theta}. \]
+如果$H_0$成立, 则概率$p_j$应与数据落在$\blr{a_{j-1},a_j}$的频率$f_j = n_j/n$接近, 其中$n_j$表示相应的频数. 当$p_i$的取值不含未知参数, 取检验统计量
+\[ \chi^2 = \sum_{j=1}^k \frac{\pare{n_j - np_j}^2}{np_j}. \]
+否则取
+\[ \chi^2 = \sum_{j=1}^k \frac{\pare{n_j - n\hat p_j}^2}{n\hat p_j}, \]
+其中$\hat p_j$是$p_i$的估计. 拒绝域取
+\[ \curb{\chi^2 > \chi^2_{k-r-1}\pare{\alpha}}, \]
+其中$r$是未知参数的数目.
+\begin{sample}
+    \begin{ex}
+        从某个连续总体中抽取样本量为$100$的样本, 发现样本均值和样本标准差分别为$-0.225$和$1.282$, 频数如下. \\
+        \centerline{
+        \begin{tabular}{ccccccc}
+            \toprule
+            区间 & $\pare{-\infty,-1}$ & $\blr{-1,-0.5}$ & $\blr{-0.5,0}$ & $\blr{0,0.5}$ & $\blr{0.5,1}$ & $\blr{1,\infty}$ \\
+            \midrule
+            观测 & $25$ & $10$ & $18$ & $24$ & $10$ & $13$ \\
+            \midrule
+            理论 & $27$ & $14$ & $16$ & $14$ & $12$ & $17$ \\
+            \bottomrule
+        \end{tabular}
+        }
+    \end{ex}
+\end{sample}
+
+% subsubsection 连续总体的情形 (end)
+
+% subsection 拟合优度检验 (end)
 
 % section 假设检验 (end)
 

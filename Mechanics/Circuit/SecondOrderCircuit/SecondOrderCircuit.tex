@@ -1,0 +1,113 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{二阶电路} % (fold)
+\label{sec:二阶电路}
+
+\subsection{LC电路中的正弦振荡} % (fold)
+\label{sub:lc电路中的正弦振荡}
+
+包含一个电容和一个电感, 或两个电容, 或两个电感的动态电路谓二阶电路. 这类电路可以用一个二阶微分方程或两个联立的一阶微分方程描述.
+\par
+由电容和电感组成的电路谓LC电路. 满足微分方程
+\[ \frac{\rd{^2 u_C}}{\rd{t^2}} + u_C = 0. \]
+方程有解$u_C\pare{t} = \cos{t}$, $i_L\pare{t} = \sin t$, 储能
+\[ w\pare{t} = \half Li^2 + \half Cu^2 = \half \pare{\sin^2 t + \cos^2 t} = \half J. \]
+故能量是守恒的, 在两个元件之间传递.
+
+% subsection lc电路中的正弦振荡 (end)
+
+\subsection{RLC串联电路的零输入响应} % (fold)
+\label{sub:rlc串联电路的零输入响应}
+根据KVL,
+\[ LC\ddot{u}_C + RC\dot{u_C} + u_C = u_0\pare{t}. \]
+不妨设$u=e^{st}$, 则
+\[ s_{1,2} = -\frac{R}{2L} \pm \sqrt{\pare{\frac{R}{2L}}^2 - \rec{LC}}. \]
+\begin{cenum}
+    \item 若$\displaystyle R > 2\sqrt{\frac{L}{C}}$, $s_1$和$s_2$为不相等的负实数;
+    \begin{citem}
+        \item 此时波形图是非振荡型的, 发生指数衰减;
+    \end{citem}
+    \item 若$\displaystyle R = 2\sqrt{\frac{L}{C}}$, $s_1$和$s_2$为相等的负实数;
+    \begin{citem}
+        \item 此时波形图衰减最快;
+    \end{citem}
+    \item 若$\displaystyle R < 2\sqrt{\frac{L}{C}}$, $s_1$和$s_2$为共轭复数, 其实部为负数;
+    \begin{citem}
+        \item 此时波形在衰减时附带振荡.
+    \end{citem}
+\end{cenum}
+\par
+过阻尼的情形下,
+\[ u_C\pare{t} = K_1e^{s_1t} + K_2e^{s_2t}, \]
+则待定系数$s_1$和$s_2$可以按
+\[ u_C\pare{0} = K_1 + K_2,\quad u'_C\pare{0} = \frac{i_C\pare{0}}{C} = K_1s_1 + K_2s_2 \]
+求得.
+\par
+临界阻尼的情形下,
+\[ u_C\pare{t} = K_1e^{st} + K_2te^{st}, \]
+则待定系数$K_1$和$K_2$可以按
+\[ u_C\pare{0} = K_1,\quad u'_C\pare{0} = \frac{i_C\pare{0}}{C} = K_1s + K_2 \]
+求得.
+\par
+欠阻尼的情形下, 设
+\[ \alpha = \frac{R}{2L},\quad \omega_d = \sqrt{\omega_0^2 - \alpha^2},\quad \omega_0 = \rec{\sqrt{LC}}, \]
+则齐次方程的解可表示为
+\[ u_C\pare{t} = e^{-\alpha t} \pare{K_1\cos\omega_d t + K_2 \sin \omega_d t}. \]
+则待定系数$K_1$和$K_2$可以按
+\[ u_C\pare{0} = K_1,\quad u'_C\pare{0} = \frac{i_C\pare{0}}{C} = -\alpha K_1 + \omega_d K_2 \]
+求得.
+\par
+特别地, 当电路中电阻为零时,
+\[ s_{1,2} = \pm j \rec{\sqrt{LC}} \Rightarrow u_C\pare{t} = K_1 \cos \omega_0 t + K_2 \sin \omega_0 t. \]
+
+% subsection rlc串联电路的零输入响应 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+7. 2, 4, 5, 8
+
+% paragraph 作业 (end)
+
+\subsection{RLC串联电路的完全响应} % (fold)
+\label{sub:rlc串联电路的完全响应}
+
+设$u_{0C}\pare{t} = u_S$, $t\ge 0$, 则方程为
+\[ LC \frac{\rd{^2 u_C}}{\rd{t}} + RC \+dtd{u_C} + u_C = u_S. \]
+显然有一特解$u_C = u_S$.
+
+% subsection rlc串联电路的完全响应 (end)
+
+\subsection{GLC并联电路分析} % (fold)
+\label{sub:glc并联电路分析}
+
+GCL并联电路有方程
+\[ LC\frac{\rd{^2 i_L}}{\rd{t}} + GL \+dtd{i_L} + i_L = i_{SC}\pare{t},\quad t\ge 0. \]
+三种情况分别为
+\begin{cenum}
+    \item 过阻尼
+    \begin{align*}
+        \alpha_{1,2} &= \frac{G}{2C} \pm \sqrt{\pare{\frac{G}{2C}}^2 - \rec{LC}}.
+    \end{align*}
+    \item 临界阻尼
+    \begin{align*}
+        \alpha &= \frac{G}{2C}.
+    \end{align*}
+    \item 欠阻尼
+    \begin{align*}
+        i_L\pare{t} &= e^{-\alpha t}\pare{K_1 \cos \omega_d t + K_2 \sin \omega_d t}.
+    \end{align*}
+\end{cenum}
+\begin{remark}
+    即便电路并非RLC或GLC, 也可以使用回路法或节点法得到二阶方程, 类似求解即可.
+\end{remark}
+
+% subsection glc并联电路分析 (end)
+
+% section 二阶电路 (end)
+
+\end{document}

@@ -1,0 +1,58 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{量子存储} % (fold)
+\label{sec:量子存储}
+
+记忆体谓记录信息之介质. 人脑, 印刷品与磁带即为一例.
+\par
+经典的信息使用二进制编码, 用激光脉冲传输之.
+\par
+两个自旋态的叠加如
+\[ \ket{\rightarrow} = a\ket{\uparrow} + b\ket{\uparrow},\quad aa^* + bb^* = 1. \]
+纠缠态如
+\[ \ket{\uparrow}\ket{\uparrow} + \ket{\uparrow}\ket{\uparrow} \]
+或
+\[ \ket{\uparrow}\ket{\downarrow} - \ket{\downarrow}\ket{\uparrow}. \]
+两种状态分别对应「两个粒子必定反向」与「两个粒子必定同向」. 而
+\[ \pare{\ket{\uparrow} + \ket{\downarrow}}\ket{\uparrow} \]
+则不存在纠缠.
+\par
+量子信息由不可分且不可复制的单光子携带. 这是由物理机制保证的, 而不是计算复杂度.
+\begin{theorem}[不可复制定理]
+    无法对量子叠加态实施精确的克隆,
+    \[ a\ket{\uparrow} + b\ket{\downarrow} \mapsto \pare{a\ket{\uparrow} + b\ket{\downarrow}}\otimes\pare{a\ket{\uparrow} + b\ket{\downarrow}}. \]
+\end{theorem}
+这导致窃听发生时可以被立即发现而停止通信.
+\par
+困难在于
+\begin{cenum}
+    \item 光子在光纤中的指数衰减;
+    \item 无法复制也无法放大.
+\end{cenum}
+$\SI{1000}{\kilo\meter}$, 则$\SI{10}{\giga\hertz}$的信号会被衰减至$\SI{1e-10}{\hertz}$. 一种解决方案为中继纠缠.
+\par
+若干评价指标如
+\begin{cenum}
+    \item 保真度;
+    \item 速度;
+    \item 多模容量;
+    \item 寿命;
+    \item 效率.
+\end{cenum}
+
+\subsection{固态量子存储} % (fold)
+\label{sub:固态量子存储}
+
+用类似于光梳的思路. 或者利用偏振.
+\par
+高保真存储后, 需要提升容量. 
+
+% subsection 固态量子存储 (end)
+
+% section 量子存储 (end)
+
+\end{document}

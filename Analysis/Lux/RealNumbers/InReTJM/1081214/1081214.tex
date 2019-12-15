@@ -1,0 +1,42 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\noindent 11. 显然$f$在$\pare{0,0}$处连续且偏导数存在且$\displaystyle \+DxDf$和$\displaystyle \+DyDf$在$\pare{0,0}$处为零, 但对于$y=x$,
+\[ f\pare{x,y} = \frac{\abs{x}^3}{2x^2} \neq o\pare{\abs{x+y}}. \]
+\par
+\noindent 12.
+\begin{align*}
+    f\pare{x} &= \pare{1+\cos x}^2 \\
+    &= 1 + 2\cos x + \frac{1+\cos 2x}{2} \\
+    &= 1 + 2\pare{1 - \frac{x^2}{2} + o\pare{x^2}} + \half + \half\pare{1 - \half \pare{2x}^2 + o\pare{x^2}} \\
+    &= 4 - 2x^2 + o\pare{x^2}. \\
+    f''\pare{0} &= -4.
+\end{align*}
+\par
+\noindent 10. 这题表述很奇怪.
+\begin{align*}
+    & x^2 + 2y^2 + \rec{4}z^2 = 1 \Rightarrow 2x\,\rd{x} + 4y\,\rd{y} + \half z\,\rd{z} = 0\Rightarrow \+vn = \pare{2,4,\half}. \\
+    & \grad F = \pare{-\frac{2 y z}{x^3},\frac{z}{x^2},\frac{y}{x^2}} \Rightarrow \+vn\cdot\grad F = -\frac{4 y z}{x^3}+\frac{4 z}{x^2}+\frac{y}{2 x^2} = 1.
+\end{align*}
+\par
+\noindent 7. 表述很奇怪.
+\begin{align*}
+    & L\pare{x,y,z} = x^2 + y^2 + z^2,\quad f\pare{x,y,z} = \pare{x-y}^2+z^2-1=0. \\
+    & \+DxDL + \lambda \+DxDf = 2x + 2\lambda\pare{x-y} = 0. \\
+    & \+DyDL + \lambda \+DyDf = 2y - 2\lambda\pare{x-y} = 0. \\
+    & \+DzDL + \lambda \+DzDf = 2z + 2\lambda z = 0. \\
+    & \Rightarrow x = \pm \half, y = -x, z = 0 \Rightarrow \sqrt{L\+_min_} = \rec{\sqrt{2}}.
+\end{align*}
+\par
+\noindent 4.
+\begin{align*}
+    \int \sqrt{e^x - 2}\,\rd{x} &\xlongequal{t=e^x} \int \frac{\sqrt{t-2}}{t} \,\rd{t} \\
+    &\xlongequal{u=\sqrt{t-2}} \int \frac{2u^2}{u^2+2} \,\rd{u} \\
+    &= 2\pare{u-\sqrt{2}\arctan \frac{u}{\sqrt{2}}} \\
+    &= 2\pare{\sqrt{e^x-2} - \sqrt{2}\arctan \frac{\sqrt{e^x-2}}{\sqrt{2}}}.
+\end{align*}
+
+\end{document}

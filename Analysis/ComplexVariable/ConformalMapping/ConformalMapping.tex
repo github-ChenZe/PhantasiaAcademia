@@ -1,6 +1,4 @@
-\documentclass{ctexart}
-
-\usepackage{van-de-la-sehen}
+\documentclass[../ComplexVariable.tex]{subfiles}
 
 \begin{document}
 
@@ -289,17 +287,172 @@ p.184 5, 6(1), 7, 8
         \[ 1 = \abs{w} = \abs{\lambda \frac{z-a}{z-\conj{a}}} = \abs{\lambda}. \]
         故$\displaystyle w = M\pare{z} = \lambda \frac{z-a}{z-\conj{a}}$, 其中$\abs{\lambda} = 1$.
     \end{solution}
+    \begin{remark}
+        若将斜着的半平面映为圆, 则乘以旋转因子即可.
+    \end{remark}
+    \begin{remark}
+        欲将上半平面一点$a$映射为$w_0$, 则可类似考虑.
+    \end{remark}
 \end{sample}
 \begin{sample}
     \begin{ex}
         求$M$将单位圆映射为单位圆, 且$a\mapsto 0$.
     \end{ex}
     \begin{solution}
-        $a\mapsto 0$, $a^* \mapsto \infty$.
+        $a\mapsto 0$, $a^* = \displaystyle \rec{\conj{a}} \mapsto \infty$. 从而
+        \[ w = k \frac{z-a}{z-\rec{\conj{a}}}. \]
+        $\abs{z}=1$时$\abs{w} = 1$, 而
+        \[ w = k \frac{z-a}{z-\rec{\conj{a}}} = \conj{a} k \frac{z-a}{\conj{a}z - 1} = -\conj{a}k \cdot \frac{z-a}{1-\conj{a}z} = \lambda \frac{z-a}{1-\conj{a}z}. \]
+        由$\abs{z}=1$时$\displaystyle \abs{\frac{z-a}{1-\conj{a}z}} = 1$, 有
+        \[ \abs{\omega} = \abs{\lambda \cdot \frac{z-a}{1-\conj{a}z}} = \abs{\lambda} = 1 \Rightarrow w = \lambda \frac{z-a}{1-\conj{a}z},\quad \lambda = 1. \]
+        从而$\displaystyle e^{i\theta}\frac{z-a}{1-\conj{a}z} = e^{2\pi it} \frac{z-a}{1-\conj{a}z}$, $\theta\in\+bR$, $t\in \blr{0,1}$.
     \end{solution}
+    \begin{remark}
+        $z_0\mapsto w_0$的映射也可以类似构造.
+    \end{remark}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.184. 8, 9, 10(1)(5), 11(1)(3).
+
+% paragraph 作业 (end)
+
+%\begin{sample}
+    \begin{theorem}
+        若$z_1\neq z_2$, $0<\lambda \neq 1$, 则
+        \[ \abs{\frac{z-z_1}{z-z_2}} = \lambda \]
+        构成一圆(Apollonius圆), 圆心
+        \[ a = \frac{z_1 - \lambda^2 z_2}{1-\lambda^2},\quad R = \frac{\lambda \abs{z_1-z_2}}{\abs{1-\lambda^2}}. \]
+        \par
+        此时$z_1$和$z_2$关于$\displaystyle \abs{\frac{z-z_1}{z-z_2}} = \lambda > 0$对称.
+        \par
+        如果$z_1$和$z_2$关于$\gamma: \abs{z-a} = R$对称, 则$\gamma$可改写为
+        \[ \abs{\frac{z-z_1}{z-z_2}} = \lambda,\quad \lambda = \frac{R}{\abs{z_2-a}} = \frac{\abs{z_1-a}}{R}. \]
+        \par
+        设$z_1\neq z_2$, $\displaystyle w=M\pare{z} = \frac{az+b}{cz+d}$, 设$M\pare{z_1}, M\pare{z_2}\neq \infty$, 则
+        \[ \abs{\frac{z-z_1}{z-z_2}} = \lambda \xrightarrow{M} \abs{\frac{w-M\pare{z_1}}{w-M\pare{z_1}}} = \lambda \abs{\frac{cz_2+d}{cz_1+d}}. \]
+        特别地, $M$保对称点.
+    \end{theorem}
+%\end{sample}
+\begin{sample}
+    \begin{ex}
+        将$D = \setcond{z}{\abs{z}<1, \Im z>0}$映射为第一象限.
+    \end{ex}
+    \begin{solution}
+        $D$是一个无穷大圆和单位圆的交, 第一象限是两个无穷大圆的交, 故可以使用分式线性变换. 令$1\mapsto \infty$, $-1\mapsto 0$, 则
+        \[ w = k \frac{z+1}{z-1}, \]
+        不妨设$0\mapsto 1$, 则$k=-1$, 从而
+        \[ w = \frac{z+1}{1-z}. \qedhere \]
+    \end{solution}
+    \begin{solution}
+        也可以选择$-1\mapsto \infty$, $1\mapsto 0$, 则
+        \[ w = k\frac{z-1}{z+1}. \]
+        令$i\mapsto 1$, $\displaystyle 1 = k\frac{i-1}{i+1}$, 则
+        \[ w = \frac{i+1}{i-1}\frac{z-1}{z+1}. \qedhere \]
+    \end{solution}
+    \begin{remark}
+        前一种方法$-1\le z\le 1$被映射为正$x$轴, 而上半圆被映射为正$y$轴. 而后者恰好颠倒过来.
+    \end{remark}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求分式线性变换将$C_1: \abs{z-3} = 9$, $C_2: \abs{z-8} = 16$变换为$w: c<\abs{w}<1$.
+    \end{ex}
+    \begin{solution}
+        $0$和$\infty$皆是像的两个圆的对称点. 现在在$z$平面上找到这两个点的原像,
+        \[ \begin{cases}
+            \abs{z_1-3}\abs{z_2-3} = 9^2,\\
+            \abs{z_1-8}\abs{z_2-8} = 16^2.
+        \end{cases} \]
+        可以解得一对$z_1$, $z_2$, 分别映射到$0$, $\infty$.
+    \end{solution}
+    \begin{remark}
+        Riemann映射定理不保证非单连通区域之间存在保形映射, 故题目中的映射存在纯属巧合.
+    \end{remark}
 \end{sample}
 
 % subsection 分式线性变换 (end)
+
+\subsection{初等函数变换} % (fold)
+\label{sub:初等函数变换}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{5cm}{ConformalPow}\hspace{1cm}
+    \incfig{5cm}{ConformalExp}
+\end{figure}
+\begin{ex}
+    形如$w=z^{n/m}$的映射将以原点为顶点的夹角为$\alpha$的扇形映射为夹角为$n\alpha/m$的扇形.
+\end{ex}
+\begin{ex}
+    $e^z$将带状区域$t_1 \le \Im z \le t_2$映射为以原点为顶点的扇形.
+\end{ex}
+从而圆盘, 半平面, 扇形, 长条形之间都可以互相保形变换.
+\begin{sample}
+    \begin{ex}
+        求上半圆盘到上半平面的映射.
+    \end{ex}
+    \begin{solution}
+        先用$\displaystyle w_1 = \frac{z+1}{1-z}$将上半圆盘映射为第一象限, 再通过$w_2 = w_1^2$将第一象限映射为上半平面. 故$\displaystyle w_1 = \pare{\frac{z+1}{1-z}}^2$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        将$D = \setcond{z}{\abs{z}<1, \abs{z-1}<1}$映射为上半平面.
+    \end{ex}
+    \begin{solution}
+        前一题的上半圆实际上也是两个圆(其中一个为无穷大圆)的交. 令
+        \[ z_1 = \half - \frac{\sqrt{3}}{2}i \mapsto 0,\quad z_2 = \half + \frac{\sqrt{3}}{2}i \mapsto \infty, \]
+        再要求$1\mapsto 1$, 并注意到区域尖点的夹角为$2\pi/3$, 附加一映射$w_2 = w_1^{3/2}$即可.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求保形变换将$\+bC\backslash\curb{\pare{-\infty,-1} \cup \pare{1,+\infty}}$映射为上半平面.
+    \end{ex}
+    \begin{solution}
+        令$-1\mapsto 0$, $1\mapsto \infty$, 后令$w_2 = \pare{\sqrt{w_1}}_0 \cdot e^{i\pi/2}$.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设有连接$-a$和$a$的两端圆弧之间的月牙形区域$D$, 两个弧和$x$轴的夹角分别为$\alpha$, $\beta$, 将其映射为条形区域$0<\Im w < h$.
+    \end{ex}
+    \begin{solution}
+        令$-1\mapsto 0$, $a\mapsto \infty$, 若再要求$0\mapsto 1$, 考虑到夹角得到保持, $D$被映射为$\alpha < \arg w_1 < \beta$. 再令$w_2 = \ln w_1$, 变为条形$\alpha < \Im w_2 < \beta$. 平移并伸缩, $w_3 = \displaystyle \frac{h}{\beta - \alpha}\pare{w_2 - \alpha i}$即可,
+        \[ w=w_4 = \frac{h}{\beta-\alpha} \ln \frac{z+a}{a-z} - \frac{\alpha h}{\beta - \alpha}i. \qedhere \]
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        将$B\pare{0,1}$和$B\pare{i/2,1/2}$映射为上半平面.
+    \end{ex}
+    \begin{solution}
+        $\displaystyle w_1 = \frac{z+i}{z-i}$, 则图形被映射为$-1<\Re w<0$. 再令$w_2 = -iw_1$, 则区域被映射为为$0<\Im w_2 < 1$. 再令$w_3 = \pi w_2$, 则$0<\Im w_3<\pi$, 于是$w_4=e^{w_3}$映射到上半平面.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $D=\setcond{z}{-\pi/2 < \Re z < \pi/2, \Im z < 0}$映射为上半平面.
+    \end{ex}
+    \begin{solution}
+        $w_1 = -i z$将$D$映射为$\Re z < 0$, $-\pi/2<\Im z < \pi/2$, 再经过$w_2 = e^{w_1}$映射为右半单位圆, 便可映射为上半平面.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        将$\curb{\Re z > 0}\backslash \curb{B\pare{1/2,1}\cup B\pare{-1/2,1}}$映射为上半平面.
+    \end{ex}
+    \begin{solution}
+        先让$w_1 = 1/z$, 则图形被映射为
+        \[ D=\setcond{z}{-\pi/2 < \Re z < \pi/2, \Im z < 0}. \]
+        再通过$w_2 = \pi w_1/2$, 得到前一题的图形.
+    \end{solution}
+\end{sample}
+
+% subsection 初等函数变换 (end)
 
 % section 保形映射 (end)
 

@@ -1,11 +1,33 @@
 \documentclass{ctexart}
 
 \usepackage{van-de-la-sehen}
+\def\externallinksymbol{\raisebox{-.2\height}{\includegraphics[width=.9em]{externallink.eps}}}
+\let\oldhref\href
+\def\href{\externallinksymbol\oldhref}
 
 \begin{document}
 
 \section{全息照相} % (fold)
 \label{sec:全息照相}
+
+\subsection{全息照相过程} % (fold)
+\label{sub:全息照相过程}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{HolographRecord}
+    \caption{全息照相过程}
+\end{figure}
+全息记录的第一步即为记录参考光束与物光束的相干条纹. 这记录了物光波前上各点的所有信息, 包括振幅和相位.
+\par
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{HolographyReconstruct}
+    \caption{全息照相重现}
+\end{figure}
+欲再现全息图像, 只需将参考光束入射记录下的全息图, 即可重现被记录的物波前. 从不同角度观察可以有不同的图像, 从而得到物体逼真的立体记录.
+
+% subsection 全息照相过程 (end)
 
 \subsection{全息照相原理} % (fold)
 \label{sub:全息照相原理}
@@ -13,7 +35,7 @@
 \subsubsection{Huygens-Fresnel原理的实质} % (fold)
 \label{ssub:huygens_fresnel原理的实质}
 
-只需要再现物的波前就可以再现物的光波.
+只需要再现物的波前就可以再现物的光波, 即使物体已不复存在.
 
 % subsubsection huygens_fresnel原理的实质 (end)
 
@@ -24,22 +46,55 @@
 \[ I\pare{Q} = \pare{\tilde{U}_O + \tilde{U}_R}\pare{\tilde{U}_O + \tilde{U}_R}^* = A_R^2 + A_O^2 + \tilde{U}_O \tilde{U}_R^* \tilde{U}_R \tilde{U}_O ^*. \]
 冲洗有
 \[ t = t_0 + t_1 I = t_0 + \beta \pare{A_R^2 + A_O^2 + \tilde{U}_O \tilde{U}_R^* \tilde{U}_R \tilde{U}_O ^*}. \]
-再现时
-\begin{align*}
-    \tilde{U}_R' &= A_R' e^{i\varphi_R'}, \\
-    U_T &= U_R't = \pare{t_0 + \beta A_R^2 + \beta A_0^2} U_R' \\
-    &+ \beta U_R' U_R^* \tilde{U}_0 + \beta U_R' U_R \tilde{U}_0^*.
-\end{align*}
-\begin{remark}
-    Fresnel波带片可以拟制为平行光与轴上一点发出之球面波产生之干涉. 黑白光栅可以通过Fourier展开成为正弦光栅的叠加, 从而可视为点光源组合.
-\end{remark}
-\begin{remark}
-    通过多种颜色的参考光干涉可以得到彩色的全息像.
-\end{remark}
 
 % subsubsection 波前的全息记录 (end)
 
+\subsubsection{物光波前的再现} % (fold)
+\label{ssub:物光波前的再现}
+
+再现时, 用参考光波$R'$照射之,
+\begin{align*}
+    \tilde{U}_R' &= A_R' e^{i\varphi_R'}, \\
+    \tilde{U}_T &= \+tU_R't = \pare{t_0 + \beta A_R^2 + \beta A_0^2} \+tU_R' \\
+    &+ \beta \+tU_R' \+tU_R^* \+tU_0 + \beta \+tU_R' \+tU_R \+tU_0^*.
+\end{align*}
+第一项平面波中包含噪声, 但可忽略. 第二项可以写为
+\[  \beta A'_RA_R \exp\brac{i\pare{\varphi'_R - \varphi_R}}\+tU_O, \]
+这是$+1$级波, 是物的虚像. 第二项
+\[  \beta A'_RA_R \exp\brac{i\pare{\varphi'_R - \varphi_R}}\+tU_O^* \]
+是$+1$级波的共轭, 对应一实像.
+\par
+附加相因子$e^{i\Delta\varphi}$导致相的位置和大小变化. 去除相因子要求
+\begin{cenum}
+    \item $R$和$R'$都是正入射的平面波, 则$\varphi_R = \varphi'_R = 0$;
+    \item $R'$和$R$相同, 则$+1$级无附加相因子, $-1$级附加$e^{2i\varphi_R}$;
+    \item $R'$和$R$共轭, 则$-1$级无附加相因子, $+1$级附加$e^{-2i\varphi_R}$.
+\end{cenum}
+\begin{remark}
+    正弦光栅即为一全息图片的实例.
+\end{remark}
+\begin{remark}
+    正弦Fresnel波带片可以拟制为平行光与轴上一点发出之球面波产生之干涉. 其$\pm 1$级衍射分别为虚实焦点. 由于这里讨论的是正弦波带片, 故只有一对虚实焦点.
+\end{remark}
+\begin{remark}
+    黑白光栅可以通过Fourier展开成为正弦光栅的叠加, 从而可视为点光源组合的全息图像.
+\end{remark}
+通过多种颜色(RGB)的参考光干涉可以得到彩色的全息像.
+\begin{remark}
+    彩色的全息像和同一全息片上记录多个像的描述可以参考\href{https://science.howstuffworks.com/hologram11.htm}{How Holograms Work}. 其表明「Multiple exposures of the same plate can lead to other effects as well. You can expose the plate from two angles using two completely different images, creating one hologram that displays different images depending on viewing angle. Exposing the same plate using the exact same scene and red, green and blue lasers can create a full-color hologram. This process is tricky, though, and it's not usually used for mass-produced holograms. You can also expose the same scene before and after the subject has experienced some kind of stimulus, like a gust of wind or a vibration. This lets researchers see exactly how the stimulus changed the object.」
+\end{remark}
+
+% subsubsection 物光波前的再现 (end)
+
 % subsection 全息照相原理 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.157 1, 2, 3, 4(p.370). 可作为小论文选题：全息照相的应用? 照片和照片拼接的视频之外? 
+光场的含时全息存储(xyzt)是否有用? 超长寿命存储?
+
+% paragraph 作业 (end)
 
 % section 全息照相 (end)
 

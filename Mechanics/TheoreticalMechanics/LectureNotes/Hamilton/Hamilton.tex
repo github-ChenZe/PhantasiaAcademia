@@ -1,6 +1,7 @@
 \documentclass{ctexart}
 
 \usepackage{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
 
 \begin{document}
 
@@ -159,9 +160,11 @@ $H$谓Hamilton函数. 由运动方程, $\dot{p}_\alpha = \displaystyle \+D{q_\al
     L &= \half m\pare{\dot{r}^2 + r^2\dot{\varphi}^2} - V\pare{r}. \\
     p_r &= \+D{\dot{r}}DL = m\dot{r} \Rightarrow \dot{r} = \frac{p_r}{m}. \\
     p_\varphi &= \+D{\dot{\varphi}}DL = mr^2\dot{\varphi} \Rightarrow \dot{\varphi} = \frac{p_\varphi}{mr^2}. \\
-    H &= p_r\dot{r} + p_\varphi\dot{\varphi} - L = \frac{p_r^2}{2m} + \frac{p_\varphi^2}{2mr^2} + V\pare{r} = \frac{p_r^2}{2m} + V\+_eff_\pare{r}. \\
-    \dot{r} &= \+D{p_r}DH = \frac{p_r}{m},\quad \dot{p}_r = -\+DrD{H} = \frac{p_\varphi^2}{mr_3} - \+DrDV. \\
-    \dot{\varphi} &= \+D{p_\varphi}DH = \frac{p_\varphi}{mr^2},\quad \dot{p}_\varphi = -\+D\varphi DH = 0.
+    H &= p_r\dot{r} + p_\varphi\dot{\varphi} - L = \frac{p_r^2}{2m} + \frac{p_\varphi^2}{2mr^2} + V\pare{r}. \\
+    \dot{r} &= \+D{p_r}DH = \frac{p_r}{m},\quad \dot{p}_r = -\+DrD{H} = \frac{p_\varphi^2}{mr^3} - \+DrDV. \\
+    \dot{\varphi} &= \+D{p_\varphi}DH = \frac{p_\varphi}{mr^2},\quad \dot{p}_\varphi = -\+D\varphi DH = 0 \Rightarrow p_\varphi = J.\\
+    H &= \frac{p_r^2}{2m} + \frac{J^2}{2mr^2} = \frac{p_r^2}{2m} + V\+_eff_\pare{r}. \\
+    \dot{r} &= \+D{p_r}DH = \frac{p}{m},\quad \dot{p}_r = -\+DrDH = -\+drd{V\+_eff_} \Rightarrow m\ddot{r} = \frac{J^2}{mr^2} - \+drdV.
 \end{align*}
 Hamilton方法并未比Lagrange方法提供更多便利.
 
@@ -177,13 +180,1069 @@ Hamilton方法并未比Lagrange方法提供更多便利.
 \paragraph{Routh方法} % (fold)
 \label{par:routh方法}
 
-仅对循环坐标进行Legendre变换后列出Lagrange方程, 可方便消去循环坐标.
+仅对循环坐标进行Legendre变换后列出Lagrange方程, 可方便消去循环坐标. 设$q_1,\cdots,q_m,\pare{m<s}$为循环坐标,
+\begin{align*}
+    L &= L\pare{q_{m+1},\cdots,q_s,\dot{q}_1,\cdots,\dot{q}_m,\dot{q}_{m+1},\cdots,\dot{q}_s,t} \\ &\xlongrightarrow{\text{Legendre变换}} L\pare{q_1,\cdots,q_s,p_1,\cdots,p_m,\dot{q}_{m+1},\cdots,\dot{q}_s,t}. \\
+    R &= \sum_{\alpha=1}^m p_\alpha\dot{q}_\alpha - L,\quad p_\alpha = \+D{\dot{q}_\alpha}DL,\quad \alpha = 1,\cdots, m. \\
+    \xRightarrow{\text{反解}} \dot{q}_\alpha &= \dot{q}_\alpha\pare{q_{m+1},\cdots,q_s,p_1,\cdots,p_m,\dot{q}_{m+1},\cdots,\dot{q}_s,t}. \\
+    \rd{R} &= \sum_{\alpha=1}^m \pare{p_\alpha\,\rd{\dot{q}_\alpha}+\dot{q}_\alpha \rd{p_\alpha}} - \sum_{\alpha=1}^s \pare{\+D{q_\alpha}DL\,\rd{q_\alpha} + p_\alpha\,\rd{\dot{q}_\alpha}} - \+DtDL\,\rd{t} \\
+    &= \sum_{\alpha=1}^m \pare{\dot{q}_\alpha\,\rd{p_\alpha} - \+D{q_\alpha}DL \,\rd{q_\alpha}} - \sum_{\alpha=m+1}^s \pare{\+D{q_\alpha}DL \,\rd{q_\alpha} + p_\alpha \,\rd{\dot{q}_\alpha}} - \+DtDL. \\
+    &= \sum_{\alpha=1}^s \pare{-\+D{q_\alpha}DL\,\rd{q_\alpha}} + \sum_{\alpha=1}^m \dot{q}_\alpha\,\rd{p_\alpha} - \sum_{\alpha=m+1}^s p_\alpha\,\rd{\dot{q}_\alpha} - \+DtDL\,\rd{t}. \\
+    R &= R\pare{q_\alpha,p_1,\cdots,p_m,\dot{q}_{m+1},\cdots,\dot{q}_s,t}, \\
+    \+D{q_\alpha}DR &= -\+D{q_\alpha}DL \xRightarrow{\text{运动方程}} \dot{p}_\alpha = -\+D{q_\alpha}DR,\quad \alpha = 1,\cdots, s. \\
+    \dot{q}_\alpha &= \+D{p_\alpha}DR,\quad \alpha = 1,\cdots, m. \\
+    p_\alpha &= -\+D{\dot{q}_\alpha}DR,\quad \alpha = m+1,\cdots,s. \\
+    \+DtDR &= -\+DtDL. \\
+    \alpha &= 1,\cdots, m \Rightarrow \left\{ \begin{aligned}
+        \dot{q}_\alpha &= \+D{p_\alpha}DR, \\
+        \dot{p}_\alpha &= -\+D{q_\alpha}DR.
+    \end{aligned} \right. \Rightarrow \dot{q}_\alpha = \+D{p_\alpha}DR = 0 \Rightarrow p_\alpha = C_\alpha = \const. \\
+    \alpha &= m+1,\cdots,s \Rightarrow \left\{ \begin{aligned}
+        p_\alpha &= -\+D{\dot{q}_\alpha}DR, \\
+        \dot{p}_\alpha &= -\+D{q_\alpha}DR
+    \end{aligned} \right. \Rightarrow \+D{q_\alpha}DR - \+dtd{} \+D{\dot{q}_\alpha}DR = 0.\Rnode{RouthEquation}{} \\
+    \Rightarrow R&= R\pare{q_{m+1},\cdots,q_s,C_1,\cdots,C_m,\dot{q}_{m+1},\cdots,\dot{q}_s,t}.\Rnode{RouthConsts}{}
+\end{align*}
+\ncbar[linearc=.2,nodesep=2pt]{->}{RouthConsts}{RouthEquation}
+\begin{sample}
+    \begin{ex}
+        对于有心力问题,
+        \begin{align*}
+            R &= p_\varphi \dot{\varphi} - L = \frac{p_\varphi^2}{2mr^2} - \half m \dot{r}^2 + V\pare{r}, \\
+            \dot{\varphi} &= \+D{p_\varphi}DR = \frac{p_\varphi}{mr^2} = \frac{J}{mr^2}, \\
+            \dot{p}_\varphi &= -\+D\varphi DR = 0\Rightarrow p_\varphi = J. \\
+            R &= \frac{J^2}{2mr^2} - \half m\dot{r}^2 + V\pare{r} = -\brac{\half m\dot{r}^2 - V\+_eff_\pare{r}}, \\
+            & \+DrDR - \+dtd{}\+D{\dot{r}}DR = 0 \Rightarrow m\ddot{r} + \+DrD{V\+_eff_} = 0.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}[非相对论性带电粒子的Hamilton函数]
+        \begin{align*}
+            L &= \half mv^2 - e\brac{\varphi\pare{\+vr,t} - \+vv \cdot \+vA\pare{\+vr,t}},\quad \+vv = \+dtd{\+vr}. \\
+            \+vp &= \+D{\+vv}DL = m\+vv + e\+vA \Rightarrow \+vv = \frac{\+vp - e\+vA}{m}, \\
+            H &= \dot{p}\cdot \+vv - L = mv^2 + e\+vA \cdot \+vv - \half mv^2 + e\pare{\varphi - \+vv\cdot \+vA} \\
+            &= \half mv^2 + e\varphi = \frac{\pare{\+vp - e\+vA}^2}{2m} + e\varphi.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}[相对论性带电粒子的Hamilton函数]
+        \begin{align*}
+            L &= -m_0c^2 \sqrt{1-\frac{v^2}{c^2}} - e\pare{\varphi - \+vv\cdot\+vA}, \\
+            \+vp &= \+D{\+vv}DL = \frac{m_0\+vv}{\sqrt{1-\frac{v^2}{c^2}}} + e\+vA \Rightarrow \+vv = \+vv\pare{\+vp,\+vr,t}, \\
+            H &= \+vp \cdot\+vv - L \\
+            &= \sqrt{m_0^2 c^4 + \pare{\+vp - e\+vA}^2c^2} + e\varphi.
+        \end{align*}
+    \end{ex}
+\end{sample}
 
 % paragraph routh方法 (end)
 
 % subsubsection 循环坐标与routh方法 (end)
 
 % subsection hamilton正则方程 (end)
+
+\subsection{Poisson括号} % (fold)
+\label{sub:poisson括号}
+
+\subsubsection{定义与性质} % (fold)
+\label{ssub:定义与性质}
+
+\paragraph{引入} % (fold)
+\label{par:引入}
+
+设有物理量$f = f\pare{q_\alpha,p_\alpha,t}$. 在运动的过程中,
+\begin{align*}
+    \+dtdf &= \+DtDf + \sum_{\alpha=1}^s \pare{\+D{q_\alpha}Df \dot{q}_\alpha + \+D{p_\alpha}Df \dot{p}_\alpha} \\
+    &\xlongequal{\text{运动方程}} \+DtDf + \sum_{\alpha=1}^s \pare{\+D{q_\alpha}Df \+D{p_\alpha}DH - \+D{p_\alpha}Df \+D{q_\alpha}DH}.  
+\end{align*}
+定义Poisson括号$\brac{u,v}$为
+\[ \brac{u,v} = \sum_{\alpha=1}^s \pare{\+D{q_\alpha}Du \+D{p_\alpha}Dv - \+D{p_\alpha}Du\+D{q_\alpha}Dv}. \]
+则有$\displaystyle \+dtdf = \+DtDf + \brac{f,H}$.
+
+% paragraph 引入 (end)
+
+\begin{theorem}[Poisson括号的基本性质]
+    \mbox{}
+    \begin{cenum}
+        \item 反对称性: $\displaystyle \brac{u,v} = -\brac{v,u}$.
+        \item 偏导性质: $\displaystyle \+DxD{} \brac{u,v} = \brac{\+DxDu,v} + \brac{u,\+DxDv}$.
+        \item 分配律: $\displaystyle \brac{u,v+w} = \brac{u,v} + \brac{u,w}$.
+        \item 结合律: $\displaystyle \brac{u,vw} = \brac{uv}w + v\brac{u,w}$.
+        \item 广义坐标和广义动量是Poisson括号的基,
+        \begin{align*}
+            \brac{q_\alpha,q_\beta} &= 0,\quad \brac{p_\alpha,p_\beta} = 0,\quad \brac{q_\alpha,p_\beta} = \delta_{\alpha\beta}. \\
+            \brac{q_\alpha,f} &= \+D{p_\alpha}Df,\quad \brac{p_\alpha,f} = -\+D{q_\alpha}Df.
+        \end{align*}
+        \item Jacobi恒等式: $\displaystyle \brac{u,\brac{v,w}} + \brac{w,\brac{u,v}} + \brac{v,\brac{w,u}} = 0$.
+        \item 正则变换不变: 设$\pare{p_\alpha,q_\alpha}$被替换为另一组正则变量$\pare{P_\beta,Q_\beta}$时, $\displaystyle \brac{u,v}_{p,q} = \brac{u,v}_{P,Q}$.
+    \end{cenum}
+\end{theorem}
+
+% subsubsection 定义与性质 (end)
+
+\subsubsection{应用} % (fold)
+\label{ssub:应用}
+
+运动方程为$\+dtdf = \+DtDf + \brac{f,H}$, 且$\displaystyle \+DtDf = 0$, 则$\dot{f} = \brac{f,H}$. 特别地, 若$f$本身即为正则变量, 则
+\begin{align*}
+    \dot{q}_\alpha &= \brac{q_\alpha,H} = \sum_{\beta=1}^s \pare{\+D{q_\beta}D{q_\alpha}\+D{p_\beta}DH - \+D{p_\beta}D{q_\alpha}\+D{q_\beta}DH} = \sum_{\beta=1}^s \delta_{\alpha\beta}\+D{p_\beta}DH = \+D{p_\alpha}DH, \\
+    \dot{p}_\alpha &= \brac{p_\alpha,H} = \sum_{\beta=1}^s \pare{\+D{q_\beta}D{p_\alpha}\+D{p_\beta}DH - \+D{p_\beta}D{p_\alpha}\+D{q_\beta}DH} = -\sum_{\beta=1}^s \delta_{\alpha\beta}\+D{q_\beta}DH = -\+D{q_\alpha}DH.
+\end{align*}
+若$f$为运动积分, $\dot{f} = 0$, 则
+\[ \+DtDf = -\brac{f,H} = \brac{H,f}. \]
+若$\displaystyle \+DtDf = 0$, 则$\brac{f,H} = 0$.
+\begin{ex}
+    $\displaystyle \dot{H} = \+dtdH + \brac{H,H} = \+DtDH$, 从而若$H$不显含时间则$H$运动积分.
+\end{ex}
+\begin{ex}
+    若$\displaystyle \+D{p_\gamma}DH = 0$, 则
+    \[ \dot{p}_\gamma = \brac{p_\gamma,H} = -\+D{q_\gamma}DH = 0\Rightarrow p_\gamma = \const. \]
+\end{ex}
+\begin{theorem}[Poisson定理]
+    若$\dot{u} = 0$, $\dot{v} = 0$, 则
+    \[ \+dtd{}\brac{u,v} = 0. \]
+\end{theorem}
+\begin{proof}
+    $\dot{u} = 0,\dot{v} = 0 \Rightarrow \displaystyle \+DtDu = \brac{H,u},\+DtDv = \brac{H,v}$,
+    \begin{align*}
+        \brac{u,\brac{v,H}} + \brac{v,\brac{H,u}} + \brac{H,\brac{H,u}} + \brac{H,\brac{u,v}} &= 0 \\
+        \Rightarrow \brac{u, -\+DtDv} + \brac{v,\+DtDu} + \brac{H,\brac{u,v}} &= 0 \\
+        \Rightarrow \brac{\+DtDu, u} + \brac{v,\+DtDu} + \brac{H,\brac{u,v}} &= 0 \\
+        \Rightarrow \+DtD{}\brac{v,u} + \brac{H,\brac{u,v}} &= 0 \\
+        \Rightarrow -\+DtD{}\brac{u,v} - \brac{\brac{u,v},H} &= 0 \\
+        \Rightarrow -\+dtd{}\brac{u,v} &= 0. \qedhere
+    \end{align*}
+\end{proof}
+\begin{ex}
+    若$\displaystyle H = \frac{p^2}{2m}$, 则$H$和$p$都是运动积分, 但$\brac{p,H} = 0$, 故Poisson定理并非总能提供新的有用的守恒量.
+\end{ex}
+\begin{sample}
+    \begin{ex}
+        若一个直角坐标系中的例子有角动量$\+vJ = \pare{J_x,J_y,J_z}$,
+        \begin{cenum}
+            \item 计算$\brac{J_x,J_y}$, $\brac{J_x,J}$.
+        \end{cenum}
+    \end{ex}
+    \begin{solution}
+        $q_1 = x$, $q_2 = y$, $q_3 = z$, $p_1 = p_x$, $p_2 = p_y$, $p_3 = p_z$. 则
+        \begin{align*}
+            J_x &= q_2p_3 - q_3p_2,\quad J_y = q_3p_1 - q_1p_3,\quad J_z = q_1p_2 - q_2 p_1, \\
+            \brac{J_x,J_y} &= \brac{q_2p_3 - q_3p_2, q_3p_1 - q_1p_3} \\
+            &= \brac{q_2p_3,q_3p_1} - \brac{q_2p_3,q_1p_3} - \brac{q_3p_2,q_3p_1} + \brac{q_3p_2,q_1p_3}.
+        \end{align*}
+        运用结合律, 则
+        \begin{align*}
+            \brac{q_2p_3,q_3p_1} &= q_3\brac{q_2p_3,p_1} + \brac{q_2p_3,q_3}p_1 \\
+            &= q_3\pare{\brac{q_2,p_1}p_3 + q_2\brac{p_3,p_1}} + \pare{\brac{q_2,q_3}p_3 + q_2\brac{p_3,q_3}}p_1 \\
+            &= q_3\brac{q_2,q_1}p_3 + q_3q_2\brac{p_3,p_1} + \brac{q_2,q_3}p_3p_1 + q_2\brac{p_3,q_3}p_1 \\
+            &= q_2\brac{p_3,q_3}p_1.
+        \end{align*}
+        于是原来的表达式
+        \begin{align*}
+            J_x &= {\brac{q_2p_3,q_3p_1}} - \cancelto{0}{\brac{q_2p_3,q_1p_3}} - \cancelto{0}{\brac{q_3p_2,q_3p_1}} + {\brac{q_3p_2,q_1p_3}} \\
+            &= q_1p_2 - q_2p_1 = J_z.
+        \end{align*}
+        类似可证明$\brac{J_y,J_z} = J_x$, $\brac{J_z,J_x} = J_y$, 即
+        \[ \brac{J_i,J_j} = \sum_{k=1}^3 \epsilon_{ijk}J_k. \]
+        对于$\brac{J_x,J}$,
+        \begin{align*}
+            \brac{J_x,J^2} &= \brac{J_x,J_x^2,J_y^2,J_z^2} \\
+            &= \brac{J_x,J_x^2} + \brac{J_x,J_y^2} + \brac{J_x,J_z^2} \\
+            &= 2J_x\brac{J_x,J_x} + 2\brac{J_x,J_y}J_y + 2\brac{J_x,J_z}J_z \\
+            &= 2J_zJ_y - 2J_yJ_z = 0 \Rightarrow \brac{J_x,J^2} = 0 \Rightarrow \brac{J_x,J}J = 0\Rightarrow \brac{J_x,J} = 0.
+        \end{align*}
+        若选择$p_1=J_x$, $p_2=J_y$, 根据基本的Poisson括号, $\brac{p_1,p_2} = 0$, 但$\brac{J_x,J_y} = J_z\neq 0$, 故$J_x$和$J_y$不能同时成为系统的广义动量. 此外, 如果$J_x$和$J_y$是运动积分, 则$J_z$必然也是运动积分.
+    \end{solution}
+\end{sample}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+3.13, 同埋补充题.
+\begin{ex}
+    $L\pare{q_\alpha,\dot{q}_\alpha,t}$, $\displaystyle p_\alpha = \+D{\dot{q}_\alpha}DL$, 及$H\pare{q_\alpha,p_\alpha,t} = \displaystyle \sum_{\alpha}p_\alpha \dot{q}_\alpha - L$, 另有
+    \begin{align*}
+        L' &= L + \+dtd{} f\pare{q_\alpha,t}  = L'\pare{q_\alpha,\dot{q}_\alpha,t},
+    \end{align*}
+    求由$L'$导出的$p'_\alpha$和$H'$, 并求出相应的正则方程,
+\end{ex}
+
+% paragraph 作业 (end)
+
+\paragraph{Liouville可积系统} % (fold)
+\label{par:liouville可积系统}
+
+设系统有$s$个自由度, 有$s$个独立的运动积分$\varphi_\alpha$, $\alpha=1,\cdots,s$, 且
+\[ \brac{\varphi_\alpha,\varphi_\beta} = 0, \]
+即系统对和, 则谓之Liouville可积系统.
+\begin{ex}
+    有心力$\displaystyle H = \frac{p_x^2 + p_y^2 + p_z^2}{2m} + V\pare{r}$有独立运动积分$J_x$, $J_y$, $J_z$, $H$. 由$\displaystyle \+dtd{J_i} = 0$知$\brac{J_i,H} = 0$. 然而$\brac{J_i,J_j}$在一般情形下非零. 重新选择运动积分$H, J^2, J_z$, 有
+    \[ \brac{H,J_z} = 0,\quad \brac{H,J} = 0, \quad \brac{J_z,J} = 0. \]
+    因此这是一个Liouville可积系统.
+\end{ex}
+\begin{remark}
+    因此, 在量子力学中, 选取量子数标记$H, J^2, J_z$.
+\end{remark}
+
+% paragraph liouville可积系统 (end)
+
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle H = \frac{\brac{\+vp - e\+vA\pare{\+vr}}^2}{2m} + e\varphi\pare{\+vr,t}$, 从而
+        \begin{align*}
+            \dot{\+vr} &= \brac{\+vr,H} = \+D{\+vp}D{} H = \frac{\+vp-e\+vA}{m} + \+vv\pare{\+vr,\+vp,t}, \\
+            \dot{\+vv} &= \+DtD{\+vv} + \brac{\+vv,H} = -\frac{e}{m}\+DtD{\+vA} + \brac{\frac{\+vp-e\+vA}{m},H}, \\
+            mv_i &= -e\+DtD{A_i} + \brac{p_i - eA_i, \rec{2m}\sum_j \pare{p_j - eA_j}^2 + e\varphi} \\
+            &= -e\+DtD{A_i} + \sum_j \brac{p_i - eA_i,p_j - eA_j}\frac{p_j - eA_j}{m} + \brac{p_i - eA_i, e\varphi} \\
+            &= -e\+DtD{A_i} + \sum_j \curb{\brac{p_i,-eA_j} + \brac{-eA_i,p_j}}v_j + \brac{p_i,e\varphi} \\
+            &= -e\+DtD{A_i} + e\sum_j v_j \pare{\+D{x_i}D{A_j}- \+D{x_j}D{A_i}} - e\+D{x_i}D{\varphi} \\
+            &= e E_i + e\sum_j\pare{\sum_k \epsilon_{ijk} v_jB_k} \\
+            &= e E_i + e\pare{\+vv\times\+vB}_i. \\
+            \Rightarrow m\dot{\+vv} &= e\+vE + e\+vv\times\+vB = m\ddot{\+vr}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{remark}
+    例中
+    \begin{align*}
+        \+vE &= -\grad\varphi - \+DtD{\+vA},\quad E_i = -\+D{x_i}D{\varphi} - \+DtD{A_i}, \\
+        \+vB &= \curl \+vA,\quad B_k = \sum_{k,m}\epsilon_{klm}\+D{x_l}D{} A_m, \\
+        \sum_k \epsilon{ijk}B_k &= \sum_{klm} \epsilon_{ijk}\epsilon{klm}\+D{x_l}D{}A_m \\
+        &= \sum{lm}\pare{\delta{il}\delta{jm} - \delta{im}\delta_{jl}} \+D{x_l}D{}A_m \\
+        &= \+D{x_i}D{A_j} - \+D{x_j}D{A_i}. \\
+        \pare{\+vv\times\+vB}_i &= \sum_{jk}\epsilon{ijk} v_j B_k.
+    \end{align*}
+\end{remark}
+
+% subsubsection 应用 (end)
+
+\subsubsection{量子力学中的Poisson括号} % (fold)
+\label{ssub:量子力学中的poisson括号}
+
+假设括号仍满足Poisson括号的前五条性质,
+\begin{align*}
+    \brac{\+uu_1 \+uv_1, \+uu_2 \+uv_2} &= \brac{\+uu_1,\+uu_2\+uv_2}\+uv_1 + \+uu_1\brac{\+uv_1,\+uu_2\+uv_2} \\
+    &= \curb{\brac{\+uu_1,\+uu_2}\+uv_2 + \+uu_2\brac{\+uu_1,\+uv_2}}\+uv_1 + \+uu_1 \curb{\brac{\+uv_1,\+uu_2}\+uv_2 + \+uu_2\brac{\+uv_1,\+uv_2}} \\
+    &= \brac{\+uu_1,\+uu_2}\+uv_2\+uv_1 + \+uu_2 \brac{\+uu_1,\+uv_2}\+uv_1 + \+uu_1\brac{\+uv_1,\+uu_2}\+uv_2 + \+uu_1\+uu_2\brac{\+uv_1,\+uv_2}.
+\end{align*}
+类似地,
+\begin{align*}
+    \brac{\+uu_1 \+uv_1, \+uu_2 \+uv_2}
+    &= \brac{\+uu_1,\+uu_2}\+uv_1\+uv_2 + \+uu_2 \brac{\+uu_1,\+uv_2}\+uv_1 + \+uu_1\brac{\+uv_1,\+uu_2}\+uv_2 + \+uu_2\+uu_1\brac{\+uv_1,\+uv_2}.
+\end{align*}
+从而
+\begin{align*}
+    \brac{\+uu_1,\+uu_2}\+uv_2\+uv_1 + \+uu_1\+uu_2\brac{\+uv_1,\+uv_2} &= \brac{\+uu_1,\+uu_2}\+uv_1\+uv_2 + \+uu_2\+uu_1 \brac{\+uv_1,\+uv_2}, \\
+    \brac{\+uu_1,\+uu_2}\pare{\+uv_2\+uv_1 - \+uv_1\+uv_2} &= \pare{\+uu_1\+uu_2 - \+uu_2\+uu_1}\brac{\+uv_1,\+uv_2}
+\end{align*}
+恒成立. 故$\brac{\+uu,\+uv} \propto \+uu\+vv - \+uv\+uu$, 即对易子, 且$\hbar\rightarrow 0$时须$\+uu\+uv - \+uv\+uu\rightarrow 0$. 再由$\brac{\+uq,\+up} = 1$, 故设
+\[ \brac{\+uu,\+uv} = \frac{\+uu\+uv - \+uv\+uu}{i\hbar}. \]
+为了简化符号, 重新定义
+\[ \brac{\+uu,\+uv} = \+uu\+vv - \+uv\+uu. \]
+在新顶一下, $\brac{\+uq_\alpha,\+up_\beta} = i\hbar\delta_{\alpha\beta}$.
+
+% subsubsection 量子力学中的poisson括号 (end)
+
+% subsection poisson括号 (end)
+
+\subsection{正则变换} % (fold)
+\label{sub:正则变换}
+
+\subsubsection{正则变换方程} % (fold)
+\label{ssub:正则变换方程}
+
+在Lagrange表述中, 仅仅点变换$q_\alpha\mapsto \overbar{q}_\alpha\pare{q_\beta,t}$被允许. 在Hamilton表述中, 切变换
+\[ \pare{q_\alpha,p_\alpha} \mapsto \begin{cases}
+    Q_\alpha = Q_\alpha \pare{q_\beta,p_\beta,t}, \\
+    P_\alpha = P_\alpha\pare{q_\beta,p_\beta,t}
+\end{cases} \]
+被允许. 正则变换要求$\pare{q_\alpha,p_\alpha}\leftrightarrow \pare{Q_\alpha,P_\alpha}$且对于某$K$, 有
+\[ \left\{\begin{aligned}
+    \dot{q}_\alpha &= \+D{p_\alpha}DH, \\
+    \dot{p}_\alpha &= -\+D{q_\alpha}DH
+\end{aligned}\right. \leftrightarrow \left\{\begin{aligned}
+    \dot{Q}_\alpha &= \+D{p_\alpha}DK, \\
+    \dot{P}_\alpha &= -\+D{Q_\alpha}DK.
+\end{aligned}\right. \]
+变换后$K$与$H$等效, 这要求
+\[ \delta \int\pare{\sum_\alpha p_\alpha\dot{q}_\alpha - H}\,\rd{t} = 0 \leftrightarrow \delta \int\pare{\sum_\alpha P_\alpha\dot{Q_\alpha} - K}\,\rd{t} = 0. \]
+即两者的Lagrange函数之间相差一规范变换,
+\[ \sum_\alpha p_\alpha \dot{q}_\alpha - H = \sum_\alpha P_\alpha\dot{Q}_\alpha - K + \+dtd{}F\pare{q_\alpha,p_\alpha,Q_\alpha,P_\alpha,t}, \]
+其中$Q,P$依赖于$q,p,t$.
+\begin{cenum}
+    \item $F = F_1\pare{q,Q,t}$, 则
+    \begin{align*}
+        & \sum_{\alpha} \pare{p_\alpha\,\rd{q_\alpha} - P_\alpha \,\rd{Q_\alpha}} + \pare{K-H}\,\rd{t} = \rd{F} = \rd{F_1\pare{q,Q,t}}. \\
+        & p_\alpha = \+D{q_\alpha}D{F_1} \Rightarrow p_\alpha = p_\alpha\pare{q,Q,t} \Rightarrow Q_\alpha = Q_\alpha\pare{q_\beta,p_\beta,t}, \\
+        & P_\alpha = -\+D{Q_\alpha}D{F_1} \Rightarrow P_\alpha = P_\alpha\pare{q,Q,t} \Rightarrow P_\alpha = P_\alpha\pare{q_\beta,p_\beta,t} \\
+        &\Rightarrow q_\alpha = q_\alpha\pare{Q_\beta,P_\beta,t},\quad p_\alpha = p_\alpha\pare{Q_\beta,P_\beta,t}. \\
+        & K = H + \+DtD{F_1} \Rightarrow K = H\pare{q,p,t} + \+DtD{F_1\pare{q,Q,t}} = K\pare{Q,P,t}. \\
+        & \left.\+D{Q_\beta}D{P_\alpha}\right\vert_q = -\left.\+D{q_\alpha}D{p_\beta}\right\vert_Q.
+    \end{align*}
+    \item $F=F_2\pare{q,P,t}$, 则
+    \begin{align*}
+        & F_2\pare{q_1,P_1,t} = F_1\pare{q,Q,t} + \sum_\alpha P_\alpha Q_\alpha. \\
+        & \rd{F_2} = \rd{F_1} + \sum_\alpha \pare{P_\alpha\,\rd{Q_\alpha} + Q_\alpha\,\rd{P_\alpha}} \\
+        &= \sum_\alpha\pare{p_\alpha\,\rd{q_\alpha} - P_\alpha\,\rd{Q_\alpha}} + \pare{K-H}\,\rd{t} + \sum_\alpha\pare{P_\alpha\,\rd{Q}_\alpha + Q_\alpha\,\rd{P_\alpha}} \\
+        &= \sum_\alpha \pare{p_\alpha\,\rd{q_\alpha} + Q_\alpha\,\rd{P_\alpha}} + \pare{K-H}\,\rd{t}. \\
+        & p_\alpha = \+D{q_\alpha}D{F_2}, \quad Q_\alpha = \+D{P_\alpha}D{F_2}, \\
+        K &= H + \+DtD{F_2},\quad \left.\+D{p_\beta}D{P_\alpha}\right\vert_q = \left.\+D{q_\alpha}D{Q_\beta}\right\vert_P.
+    \end{align*}
+    \item $F=F_3\pare{p,Q,t}$, 则
+    \begin{align*}
+        & F_3\pare{p,Q,t} = F_1\pare{q,Q,t} - \sum_\alpha q_\alpha p_\alpha, \\
+        & \rd{F_3} = \rd{F_1} - \sum_\alpha\pare{q_\alpha\,\rd{p_\alpha} + p_\alpha\,\rd{q_\alpha}} \\
+        & = -\sum_\alpha \pare{q_\alpha\,\rd{P_\alpha} + P_\alpha\,\rd{Q_\alpha}} + \pare{K-H}\,\rd{t}. \\
+        & q_\alpha = -\+D{p_\alpha}D{F_3},\quad P_\alpha = -\+D{Q_\alpha}D{F_3}, \\
+        & K = H + \+DtD{F_3},\quad \left.\+D{Q_\beta}D{q_\alpha}\right\vert_P = \left.\+D{p_\alpha}D{P_\beta}\right\vert_Q.
+    \end{align*}
+    \item $F=F_4\pare{p,P,t}$, 则
+    \begin{align*}
+        & F_4\pare{p,P,t} = F_1\pare{q,Q,t} + \sum_\alpha\pare{P_\alpha Q_\alpha - p_\alpha q_\alpha}, \\
+        & \rd{F_4} = \rd{F_1} + \sum_\alpha\pare{p_\alpha\,\rd{Q_\alpha} + Q_\alpha\,\rd{P_\alpha} - p_\alpha\,\rd{q_\alpha} - q_\alpha\,\rd{p_\alpha}} \\
+        & = \sum_\alpha\pare{-q_\alpha\,\rd{P_\alpha}+ Q_\alpha\,\rd{P_\alpha}} + \pare{K-H}\,\rd{t}. \\
+        & q_\alpha = -\+D{p_\alpha}D{F_4},\quad Q_\alpha = \+D{p_\alpha}D{F_4},\\
+        & K = H + \+DtD{F_4},\quad \left.\+D{p_\beta}D{q_\alpha}\right\vert_p = -\left.\+D{p_\alpha}D{Q_\beta}\right\vert_P.
+    \end{align*}
+\end{cenum}
+
+% subsubsection 正则变换方程 (end)
+
+\subsubsection{举例} % (fold)
+\label{ssub:举例}
+
+\begin{cenum}
+    \item 恒等变换$F_2\pare{q,P,t} = \sum_\alpha q_\alpha P_\alpha$, 则
+    \begin{align*}
+        & p_\alpha = \+D{q_\alpha}D{F_2} = P_\alpha, \\
+        & Q_\alpha = \+D{p_\alpha}D{F_2} = q_\alpha, \\
+        & K = H.
+    \end{align*}
+    \item $F_1\pare{q,Q,t} = \sum_\alpha q_\alpha Q_\alpha$, 则
+    \begin{align*}
+        & p_\alpha = \+D{q_\alpha}D{F_1} = Q_\alpha, \\
+        & P_\alpha = -\+D{Q_\alpha}D{F_1} = -q_\alpha, \\
+        & K = K\pare{Q,P,t} = H\pare{q,p,t} = H\pare{-P,Q,t}.
+    \end{align*}
+    \item $F_3\pare{p,Q,t} = -\sum_\alpha p_\alpha Q_\alpha - f\pare{Q_\alpha,t}$, 则
+    \begin{align*}
+        & q_\alpha = -\+D{p_\alpha}D{F_3} = Q_\alpha, \\
+        & P_\alpha = -\+D{Q_\alpha}D{F_3} = P_\alpha + \+D{Q_\alpha}Df = p_\alpha + \+D{q_\alpha}Df. \\
+        & K = H + \+DtD{F_3} = H - \+DtDf \\
+        &= H\pare{q_\alpha,p_\alpha,t} - \+DtD{f\pare{Q_\alpha,t}} \\
+        &= H\pare{Q_\alpha, P_\alpha - \+D{Q_\alpha}Df,t} - \+DtD{f\pare{Q_\alpha,t}}.
+    \end{align*}
+\end{cenum}
+\begin{remark}
+    若在$L$中加入一规范项
+    \[ L \mapsto L' = L + \+dtd{f\pare{q,t}}, \]
+    则$H\mapsto K$具有第三个例子的形式, $Q=q$而$P=\displaystyle p+\+D{q}Df$, 从而在新的正则坐标下方程不变.
+\end{remark}
+
+% subsubsection 举例 (end)
+
+\subsubsection{无限小正则变换} % (fold)
+\label{ssub:无限小正则变换}
+
+对恒等变换$F_2\pare{q,P,t} = \sum_\alpha q_\alpha P_\alpha$引入无限小偏移,
+\begin{align*}
+    F_2\pare{q,P,t} &= \sum_\alpha q_\alpha P_\alpha + \epsilon G\pare{q,P,t}. \\
+    p_\alpha &= \+D{q_\alpha}D{F_2} = P_\alpha + \epsilon \+D{q_\alpha}DG, \\
+    Q_\alpha &= \+D{P_\alpha}D{F_2} = q_\alpha + \epsilon \+D{p_\alpha}DG. \\
+    K &= H + \epsilon \+DtDG. \\
+    P_\alpha &= p_\alpha - \epsilon \+D{q_\alpha}D{G\pare{q,P,t}} = p_\alpha - \epsilon \+D{q_\alpha}D{G\pare{q,P,t}} + O\pare{\epsilon^2}, \\
+    Q_\alpha &= q_\alpha + \epsilon \+D{P_\alpha}D{G\pare{q,P,t}} = q_\alpha + \epsilon \+D{p_\alpha}D{G\pare{q,p,t}} + O\pare{\epsilon^2}.
+\end{align*}
+若$\epsilon$与时间无关, 设有$U\pare{q,p,t}$, 则
+\begin{align*}
+    \Delta U &= U\pare{q+\Delta q,p+\Delta p, t} - U\pare{q,p,t} \\
+    &= \sum_\alpha \pare{\+D{q_\alpha}DU \Delta q_\alpha + \+D{p_\alpha}DU\Delta p_\alpha} \\
+    &= \epsilon \sum_\alpha \pare{\+D{q_\alpha}DU \+D{p_\alpha}DG - \+D{p_\alpha}DU \+D{q_\alpha}DG} \\
+    &= \epsilon\brac{u,G}.
+\end{align*}
+若$\epsilon = \Delta t$, 则
+\begin{align*}
+    \dot{q}_\alpha &= \frac{\Delta q_\alpha}{\Delta t} = \+D{p_\alpha}DG, \\
+    \dot{p}_\alpha &= \frac{\Delta p_\alpha}{\Delta t} = -\+D{q_\alpha}DG, \\
+    \Rightarrow G &= H\pare{q,P,t}. \\
+    \Delta U &= U\pare{q+\Delta q, p+\Delta p, t+\Delta t} - U\pare{q,p,t} \\
+    &= \Delta t \pare{\+DtDU + \brac{U,H}} = \Delta t \+dtdU, \\
+    Q_\alpha &= q_\alpha\pare{t+\Delta t}, \quad P_\alpha = P_\alpha\pare{t+\Delta t}. \\
+    \Delta q_\alpha &= Q_\alpha - q_\alpha = \epsilon \+D{p_\alpha}D{G\pare{q,p,t}} = \epsilon \brac{q_\alpha,G}, \\
+    \Delta p_\alpha &= P_\alpha - p_\alpha = -\epsilon \+D{q_\alpha}D{G\pare{q,p,t}} = \epsilon\brac{p_\alpha,G}.
+\end{align*}
+因此谓$G\pare{q,p,t}$为无限小正则变换的生成元,
+\[ \Delta H = K - H = \epsilon \+DtD{G\pare{q,p,t}}. \]
+在无穷小变换下, $H$的形式变化($\epsilon$与时间无关)
+\begin{align*}
+    \delta H &= K\pare{q,p,t} - H\pare{q,p,t}, \\
+    K\pare{Q,P,t} &= K\pare{q+\Delta q + p+\Delta p, t} \\ &= K\pare{q,p,t} + \epsilon\brac{K,G} \\
+    &= H\pare{q,p,t} + \epsilon \+DtD{G\pare{q,p,t}}. \\
+    \delta H &= \epsilon \+DtDG - \epsilon\brac{K,G} = \epsilon \+DtDG - \epsilon\brac{H,G} + O\pare{\epsilon^2} \\
+    &= \epsilon\pare{\+DtDG + \brac{G,H}} = \epsilon \+dtdG.
+\end{align*}
+因此$\displaystyle \delta H = \epsilon \+dtdG$. 若$\delta H = 0$, 即$\displaystyle \+dtdG = 0$, 故对称性蕴含守恒量.
+\begin{remark}
+    形式不变不意味着大小不变. 若通过正则变换使
+    \[ H = \frac{p^2}{2m} + \half kq^2 \leftrightarrow K = \half \frac{P^2}{2m} + \half kQ^2, \]
+    则形式不变但大小未必相等.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+3.14, 3.16, 3.17-3.21
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}
+        设$G_1 = \+vp\cdot\+vn$, $G_2 = \+vJ\cdot\+vn$, $\+vJ = \+vv\times\+vp$.
+        \begin{cenum}
+            \item 在$G_1$生成的变换下,
+            \begin{align*}
+                \Delta \+vp &= \epsilon\brac{\+vp,G_1} = 0, \\
+                \Delta x_i &= \epsilon\brac{x_i,G_1} = \epsilon\brac{x_i,\sum_j} \\
+                &= \epsilon \sum_j \delta_{ij}n_j = \epsilon n_i. \\
+                \Delta\+vr &= \epsilon \+vn. \\
+                \Rightarrow \+vp' &= \+vp,\quad \+vr' = \+vr+\Delta\+vr = \+vr + \epsilon \+vn.
+            \end{align*}
+            这表示一空间平移.
+            \item 在$G_2$生成的变换下,
+            \begin{align*}
+                \Delta \+vp &= \epsilon\brac{\+vp,G_2}, \\
+                \Delta p_i &= \epsilon\brac{p_i,G_2} = \epsilon\brac{p_i,\sum_j J_i n_i} = \epsilon \sum_j \brac{p_i,J_j}n_j \\
+                &= \epsilon \sum_{jlm} n_j\epsilon{jlm}\brac{p_i,x_l}p_m \\
+                &= \epsilon \sum_{jlm} n_j\epsilon{jlm}\pare{-\delta_{il}}p_m \\
+                &= -\epsilon \sum_{jm} n_j \epsilon{jim}p_m \\
+                &= \epsilon\sum_{jm}\epsilon_{ijm}n_j p_m \\
+                &= \epsilon\pare{\+vn\times\+vp}_i. \\
+                \Delta \+vp &= \epsilon \+vn\times \+vp \Rightarrow \+vp' = \+vp+\Delta \+vp = \+vp + \epsilon\+vn\times\+vp. \\
+                \Delta \+vr &= \epsilon\brac{\+vr,G_2} = \epsilon\+vn\times\+vr\Rightarrow \+vr' = \+vr + \Delta\+vr = \+vr + \epsilon\+vn\times\+vr.
+            \end{align*}
+            这表示一空间转动.
+        \end{cenum}
+    \end{ex}
+\end{sample}
+\begin{remark}
+    如果在$G$生成的变换下$H$不变则$G$为一守恒量.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        对于自由粒子, $\displaystyle H = \frac{p^2}{2m}$, 在$G_1$作用下
+        \begin{align*}
+            \+vp' &= \+vp,\quad K\pare{\+vr',\+vp'} = H + \epsilon \+DtD{G_1} = H = \frac{p^2}{2m} = \frac{p'^2}{2m}. \\
+            \Rightarrow \delta H &= 0,\quad \forall \+vn,\quad \dot{G}_1 = 0 
+            \Rightarrow \dot{\+vp} = 0.
+        \end{align*}
+        在$G_2$的作用下,
+        \begin{align*}
+            \+vp' &= \+vp + \epsilon \+vn\times\+vp,\quad \+vr' = \+vr + \epsilon\+vn\times\+vr, \\
+            K\pare{\+vr',\+vp'} &= H + \epsilon\+DtD{G_2} = H = \frac{p^2}{2m} \\
+            &= \frac{\pare{\+vp'-\epsilon\+vn\times\+vp}^2}{2m} \approx \frac{\pare{\+vp' - \epsilon\+vn\times\+vp}^2}{2m} \\
+            &= \rec{2m} \brac{\+vp'^2 - 2\epsilon \+vp'\cdot\pare{\+vn\times \+vp}} \\
+            &= \frac{\+vp'^2}{2m}, \\
+            \Rightarrow \delta H &= 0,\quad \forall \+vn,\quad \dot{G}_2 = 0 \Rightarrow \dot{\+vJ} = 0.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于有心力系统, $\displaystyle H = \frac{p^2}{2m} + V\pare{r}$, 在$G_1$的作用下
+        \begin{align*}
+            \+vp' &= \+vp,\quad \+vr' = \+vr + \epsilon\+vn, \\
+            K\pare{\+vr',\+vp'} &= H + \epsilon \+DtD{G_1} = H = \frac{p^2}{2m} + V\pare{r} \\
+            &= \frac{p'^2}{2m} + V\pare{\abs{\+vr' - \epsilon \+vn}} \\
+            &= \frac{p'^2}{2m} + V\pare{r'{-\frac{\epsilon\+vn\cdot \+vr'}{r'}}}.
+        \end{align*}
+        故$\Delta H \neq 0$, 因此空间平移不是对称变换, 故有心力系统中动量不守恒. 在$G_2$的作用下,
+        \begin{align*}
+            \+vp' &= \+vp + \epsilon \+vn\times\+vp,\quad \+vr' = \+vr + \epsilon\+vn\times\+vr, \\
+            K\pare{\+vr',\+vp'} &= H + \epsilon \+DtD{G_2} = \frac{p^2}{2m} + V\pare{r} \\
+            &= \frac{p'^2}{2m} + V\pare{\abs{\+vr' - \epsilon \+vn\times \+vr'}} \\
+            &= \frac{p'^2}{2m} + V\pare{r' - \frac{\epsilon \pare{\+vn\times \+vr'} \cdot \+vr'}{r'}} \\
+            &= \frac{p'^2}{2m} + V\pare{r'}, \\
+            \Rightarrow \delta H &= 0,\quad \forall \+vn,\quad \dot{G}_2 = 0\Rightarrow \dot{\+vJ} = 0.
+        \end{align*}
+    \end{ex}
+\end{sample}
+若在时间平移下,
+\begin{align*}
+    G &= H,\quad \Delta q_\alpha = \dot{q}_\alpha\Delta t,\quad \Delta p_\alpha = \dot{p}_\alpha \Delta t, \\
+    K\pare{Q,P,t} &= H\pare{q,p,t} + \epsilon \+DtDH,\\
+    \+DtDH &= 0 \Rightarrow K = H\pare{q,p} = H\pare{Q-\Delta q,P-\Delta p} \\
+    &= H\pare{Q,P} - \sum_\alpha \pare{\+D{q_\alpha}DH \Delta q_\alpha + \+D{p_\alpha}DH\Delta p_\alpha} \\
+    &= H\pare{Q,P} - \sum_\alpha \pare{\+D{q_\alpha}DH \dot{q}_\alpha + \+D{p_\alpha}DH\dot{p}_\alpha}\Delta t \\
+    &= H\pare{Q,P} \\
+    \Rightarrow \delta H &= 0,\quad \dot{H} = 0.
+\end{align*}
+因此上面对守恒量的讨论对$H$本身(时间平移不变性)亦适用.
+\begin{remark}
+    对于一般的$G$, 不能认为
+    \[ \rd{f} = \+DtDf\,\rd{t} + \sum_\alpha\pare{\+D{q_\alpha}Df \,\rd{q_\alpha} + \+D{p_\alpha}Df\,\rd{p_\alpha}}, \]
+    因为此种展开仅对时间平移变换成立.
+\end{remark}
+
+% subsubsection 无限小正则变换 (end)
+
+\subsubsection{正则变换的辛矩阵理论} % (fold)
+\label{ssub:正则变换的辛矩阵理论}
+
+在矩阵形式下,
+\begin{align*}
+    \eta &= \begin{pmatrix}
+        q \\ p
+    \end{pmatrix},\quad q = \begin{pmatrix}
+        q_1 \\ \vdots \\ q_s
+    \end{pmatrix},\quad p = \begin{pmatrix}
+        p_1 \\ \vdots \\ p_s
+    \end{pmatrix}. \\
+    \+DpDH &= \begin{pmatrix}
+        \+D{p_1}DH \\ \vdots \\ \+D{p_s}DH
+    \end{pmatrix},\quad \+DqDH = \begin{pmatrix}
+        \+D{q_1}DH \\ \vdots \\ \+D{q_s}DH
+    \end{pmatrix}. \\
+    \dot{\eta} &= \begin{pmatrix}
+        \dot{q} \\ \dot{p}
+    \end{pmatrix} = \begin{pmatrix}
+        \+DpDH \\ -\+DqDH
+    \end{pmatrix} = \underbrace{\begin{pmatrix}
+        0 & E_s \\
+        -E_s & 0
+    \end{pmatrix}}_{J} \begin{pmatrix}
+        \+DqDH \\ \+DpDH
+    \end{pmatrix} = J\+D\eta DH. \\
+    E_s &= \begin{pmatrix}
+        1 & & & \\
+        & 1 & & \\
+        & & \ddots & \\
+        & & & 1
+    \end{pmatrix}_{s\times s}. \\
+    \dot{\eta} &= J\+D\eta DH,\quad J^2 = -E_{2s},\quad J^{-1} = -J,\quad J^T = -J = J^{-1}, \quad \abs{J} = 1.
+\end{align*}
+在不含时的情形下, 变换
+\[ \eta \rightarrow \xi = \begin{pmatrix}
+    Q \\ P
+\end{pmatrix} \]
+为正则变换的条件为
+\begin{align*}
+    K\pare{Q,P,t} &= H\pare{q,p,t},\quad \dot{\eta} = \+D\eta DH,\quad \dot{\xi} = \+D\xi DK. \\
+    Q &= Q\pare{q,p},\quad P = P\pare{q,p}. \\
+    \dot{\xi} &= \begin{pmatrix}
+        \dot{Q} \\ \dot{P}
+    \end{pmatrix} = \begin{pmatrix}
+        \+DqDQ & \+DPDQ \\
+        \+DqDP & \+DpDP
+    \end{pmatrix}\begin{pmatrix}
+        \dot{q} \\ \dot{p}
+    \end{pmatrix} = \+D{\eta}D{\xi}\dot{\eta} = \+D\eta D\xi J\+D\eta DH. \\
+    H\pare{q,p,t} &= K\pare{Q,P,t} = K\brac{Q\pare{q,p}, P\pare{q,p},t}, \\
+    \+D{q_\alpha}DH &= \sum_\beta \pare{\+D{Q_\beta}DK \+D{q_\alpha}D{Q_\beta} + \+D{P_\beta}DK + \+D{q_\alpha}D{P_\beta}} \Rightarrow \+D\eta DH = \begin{pmatrix}
+        \+DqDH \\ \+DpDH
+    \end{pmatrix} = \pare{\+D\eta D\xi}^T \+D\xi DK. \\
+    \+D{\eta_\alpha}DH &= \sum_\beta \+D{\xi_\beta}DK \+D{\eta_\alpha}D{\xi_\beta}, \\
+    \Rightarrow \pare{\+D\eta DH}_\alpha &= \sum_\beta \pare{\+D\eta D\xi}_{\beta\alpha}\pare{\+D\xi DK}_\beta \\
+    &= \sum_\beta \pare{\+D\eta D\xi}^T_{\alpha\beta}\pare{\+D\xi DK} = \brac{\pare{\+D\eta D\xi}^T \+D\xi DK}_\alpha. \\
+    \Rightarrow \dot{\xi} &= \+D\eta D\xi J \+D\eta DH = \+D\eta D\xi J \pare{\+D\eta D\xi}^T \+D{\xi}DK = J\+D\xi DK\\
+    \Rightarrow MJM^T &= J,\quad M = \+D\eta D\xi.
+\end{align*}
+因此, 若变换为正则变换, 则$\displaystyle M=\+D\eta D\xi$为一辛矩阵. 反之, 若$\displaystyle M=\+D\eta D\xi$为一辛矩阵, $MJM^T = J$, 则
+\[ \dot{\xi} = \+D\eta D\xi \dot{\eta} = MJ\+D\eta DH = MJM^T \+D\xi DK = J\+D\xi DK. \]
+因此$\eta\mapsto \xi$构成一正则变换.
+\begin{theorem}[辛矩阵的性质]
+    \mbox{}
+    \begin{cenum}
+        \item $\pare{MJM^T}JM = J^2M = -M$, 故
+        \[ JM^TJM = -E_{2s} \Rightarrow M^TJM = -J^{-1} = J \Rightarrow MJM^T = M^TJM = J. \]
+        因此若$M$为辛矩阵, 则$M^T$亦为辛矩阵.
+        \item $\abs{J} = \abs{MJM^T} = \abs{M}\abs{J}\abs{M^T} = \abs{M}^2\abs{J}$, 因此$\abs{M} = \pm 1$. 考虑到正则变换可以分解为小的近似恒等变换的复合, $\abs{M} = 1$.
+        \item 若$M_1JM_1^T = J$, $M_2JM_2^T = J$, 则
+        \[ \pare{M_1M_2}J\pare{M_1M_2}^T = M_1\pare{M_2JM_2^T}M_1^T = M_1JM_1^T = J. \]
+        因此辛矩阵的复合仍然为辛矩阵, 故正则变换的复合也是正则变换. 类似可得辛矩阵的逆也是辛矩阵, 故正则变换的逆也是正则变换. 考虑到正则变换作为映射自动满足结合性, 故正则变换构成群.
+    \end{cenum}
+\end{theorem}
+对于含时变换, 设
+\begin{align*}
+    \xi_\alpha\pare{t_0} &= \xi_{0\alpha},\quad \alpha = 1,\cdots, 2s. \\
+    \xi &= \xi\pare{\xi_0,t},\quad \dot{\xi} = \+DtD\xi, \\
+    \dot{\xi} &= J\+D\xi DK,\quad M = \+D{\xi_0}D\xi, \\
+    \+dtd{}\pare{M^T JM} &= 0, \\
+    t&= t_0,\quad M_0^TJM_0 = J \Rightarrow M^T JM = J.
+\end{align*}
+因此$\xi_0\mapsto \xi$本身构成一正则变换. 对于变换$\eta\mapsto \xi\pare{\eta,t}$, 构造中间变换$\eta\mapsto \xi_0 = \xi\pare{t_0} \mapsto \xi\pare{t}$, 已知后者为正则变换, 故若前者(不含时变换)为正则变换, 则$\eta\mapsto \xi\pare{t}$为正则变换.
+
+% subsubsection 正则变换的辛矩阵理论 (end)
+
+\paragraph{Poisson括号不变性} % (fold)
+\label{par:poisson括号不变性}
+
+在正则变换后的坐标下,
+\begin{align*}
+    \+D\eta D\psi &= \pare{\+D\eta D\xi}^T \+D\xi D\psi = M^T \+D\xi D\psi, \\
+    \brac{\varphi,\psi}_\eta &= \sum_{\alpha = 1}^s \pare{\+D{q_\alpha}D{\varphi} \+D{p_\alpha}D\psi - \+D{p_\alpha}D\varphi \+D{q_\alpha}D{\psi}} = \pare{\+D\eta D\varphi}^T J \+D\eta D\psi \\
+    &= \pare{M^T \+D\xi D\varphi}^T JM^T\+D\xi D\psi \\
+    &= \pare{\+D\xi D\varphi}^T MJM^T \+D\xi D\psi \\
+    &= \pare{\+D\xi D\varphi}^T J \+D{\xi \psi}. \\
+    \brac{\varphi,\psi}_\xi &= \sum_{\alpha = 1}^s \pare{\+D{Q_\alpha}D{\varphi} \+D{P_\alpha}D\psi - \+D{P_\alpha}D\varphi \+D{Q_\alpha}D{\psi}} = \pare{\+D\xi D\varphi}^T J \+D\xi D\psi.
+\end{align*}
+因此正则变换下$\brac{\varphi,\psi}_\eta = \brac{\varphi,\psi}_\xi$.
+
+% paragraph poisson括号不变性 (end)
+
+\subsubsection{正则变换的判定} % (fold)
+\label{ssub:正则变换的判定}
+
+按定义有
+\[ \sum_\alpha \pare{p_\alpha\,\rd{q_\alpha} - P_\alpha\,\rd{Q_\alpha}} + \pare{K-H}\,\rd{t} = \rd{F}. \]
+若非$H$已知, 则无法借此判定.
+
+\paragraph{可积性} % (fold)
+\label{par:可积性}
+
+若变换不含时, 则变换前后$H$和$K$在数值上相等, 要求
+\[ \sum_\alpha \pare{p_\alpha\,\rd{q_\alpha} - P_\alpha\,\rd{Q_\alpha}} = \rd{F}. \]
+对于含时变换$\begin{cases}
+    Q = Q\pare{q,p,t}, \\
+    P = P\pare{q,p,t},
+\end{cases}$ 若对固定的$t_0$, 有$\pare{q,p}\mapsto \pare{Q_0,P_0}$是正则变换, 则由于$\pare{Q_0,P_0}\mapsto \pare{Q,P}$是正则变换, 总的变换自动为正则变换. 故仍然可以用
+\[ \sum_\alpha \pare{p_\alpha\,\rd{q_\alpha} - P_\alpha\,\rd{Q_\alpha}} = \rd{F} \]
+判定正则变换, 其中$\delta$不作用于$t$上.
+
+% paragraph 可积性 (end)
+
+\paragraph{Poisson括号不变性} % (fold)
+\label{par:poisson括号不变性}
+
+正则变换下$\brac{\varphi,\psi}_{q,p} = \brac{\varphi,\psi}_{Q,P}$. 特别地, 坐标变量的Poisson括号不变,
+\begin{align*}
+    \brac{Q_\alpha,Q_\beta}_{q,p} &= \brac{Q_\alpha,Q_\beta}_{Q,P} = 0, \\
+    \brac{P_\alpha,P_\beta}_{q,p} &= \brac{P_\alpha,P_\beta}_{Q,P} = 0, \\
+    \brac{Q_\alpha,P_\beta}_{q,p} &= \brac{Q_\alpha,P_\beta}_{Q,P} = \delta_{\alpha\beta}.
+\end{align*}
+反过来, 如果坐标变量的Poisson括号不变, 也可以推断$\pare{q,p}\mapsto\pare{Q,P}$是正则变换. 一共需要验证的Poisson括号仅有$s\pare{2s-1}$个.
+\begin{ex}
+    若$s=2$, 则需要证明
+    \begin{align*}
+        \brac{Q_1,Q_2} = 0,\quad \brac{P_1,P_2} = 0, \\
+        \brac{Q_1,P_1} = 1,\quad \brac{Q_1,P_2} = 0, \\
+        \brac{Q_2,P_1} = 0,\quad \brac{Q_2,P_2} = 1.
+    \end{align*}
+    一共$6$个Poisson括号.
+\end{ex}
+
+% paragraph poisson括号不变性 (end)
+
+\paragraph{辛条件} % (fold)
+\label{par:辛条件}
+
+设$\displaystyle M = \begin{pmatrix}
+    \+DqDQ & \+DpDQ \\
+    \+DqDP & \+DpDQ
+\end{pmatrix}$. 若$MJM^T = J$, 则变换是正则的.
+
+% paragraph 辛条件 (end)
+
+\begin{sample}
+    \begin{ex}
+        对于$\displaystyle Q = \ln \pare{\frac{\sin p}{q}}$, $P = q\cot p$, 有
+        \[ p\delta q - P\delta Q = \delta\brac{q\pare{p+\cot p}}, \]
+        故构成正则变换. 生成函数为
+        \begin{align*}
+            F_1\pare{q,Q,t} &= F = q\pare{p+\cot p} \\
+            &= q\pare{p+\cot p} = q\brac{\arcsin \pare{qe^Q} + \frac{\sqrt{1-q^2e^{2Q}}}{qe^Q}}.
+        \end{align*}
+    \end{ex}
+    \begin{remark}
+        若无需求出变换的生成函数, 则直接验证
+        \[ \brac{Q,P} = \+DqDQ \+DpDP - \+DpDQ\+DqDP = 1 \]
+        即可.
+    \end{remark}
+\end{sample}
+\begin{sample}
+    \begin{ex}[习题3.17]
+        正则变换
+        \begin{align*}
+            & Q_1 = \frac{\sqrt{3}}{2}q_1 - \half q_2,\quad Q_2 = \half q_1 + \frac{\sqrt{3}}{2}{q_2}, \\
+            & P_1 = \frac{\sqrt{3}}{2}p_1 - \half p_2,\quad P_2 = \half p_1 + \frac{\sqrt{3}}{2}p_2. \\
+            & p_1\delta q_1 + p_2 \delta q_2 - P_1 \delta Q_1 - P_2 \delta Q_2 = 0, \\
+            & F_1 = 0, \quad F_2\pare{q,P} = F_1 + \sum_\alpha P_\alpha Q_\alpha = P_1Q_1 + P_2Q_2 \\ &= \pare{\frac{\sqrt{3}}{2}q_1 - \half q_2}P_1 + \pare{\half q_1 + \frac{\sqrt{3}}{2}}P_2.
+        \end{align*}
+        若无需构造生成函数, 可以直接验证
+        \begin{align*}
+            & \brac{Q_1,Q_2} = \brac{\frac{\sqrt{3}}{2}q_1 - \half q_2, \half q_1 + \frac{\sqrt{3}}{2}q_2} = 0, \\
+            & \brac{P_1,P_2} = \brac{\frac{\sqrt{3}}{2}p_1 - \half p_2, \half p_1 + \frac{\sqrt{3}}{2}p_2} = 0, \\
+            & \brac{Q_1,P_1} = \brac{\frac{\sqrt{3}}{2}q_1 - \half q_2, \frac{\sqrt{3}}{2}p_1 - \half p_2} = \frac{3}{4}\brac{q_1,p_1} + \rec{4}\brac{q_1,p_2} = 1, \\
+            & \brac{Q_1,P_2} = 0,\quad \brac{Q_2,P_1} = 0,\quad \brac{Q_2,P_2} = 1.
+        \end{align*}
+        故坐标的Poisson括号满足正则条件.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$Q = \sqrt{2q}e^t \cos p$, $P = \sqrt{2q}e^{-t}\sin p$, 则
+        \[ \brac{Q,P} = 1 \]
+        故构成一正则变换. 或
+        \begin{align*}
+            p\delta q - P\delta Q &= p\delta q - \sqrt{2q}e^{-t}\sin p\delta\pare{\sqrt{2q}e^t \cos p} \\
+            &= p\delta q - \sqrt{2q}\sin p \delta\pare{\sqrt{2q}\cos p} \\
+            &= \delta \brac{q\pare{p - \sin p \cos p}}. \\
+            F_1\pare{q,Q,t} &= q\pare{p - \sin p \cos p} \\
+            &=q\pare{\arccos\pare{\frac{Q}{\sqrt{2q}} e^{-t}} - \frac{Q}{2q}e^{-t}\sqrt{1-\frac{Q^2}{2q}e^{-2t}}}.
+        \end{align*}
+        此时可以验证$\displaystyle p = \+DqD{F_1}$, $\displaystyle P = -\+D{Q}D{F_1}$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 正则变换的判定 (end)
+
+% subsection 正则变换 (end)
+
+\subsection{Hamilton-Jacobi方程} % (fold)
+\label{sub:hamilton_jacobi方程}
+
+\subsubsection{方程的建立} % (fold)
+\label{ssub:方程的建立}
+
+如果能构造正则变换, 使得
+\begin{align*}
+    \pare{q,p} &\leftrightarrow \pare{Q,P}, \\
+    H\pare{q,p,t} &\leftrightarrow K\pare{Q,P} = \const = 0,
+\end{align*}
+其中$K$和$\pare{Q,P}$完全无关. 此时
+\[ \dot{Q}_\alpha = \+D{P_\alpha}DK = 0,\quad \dot{P}_\alpha = - \+D{Q_\alpha}DK = 0 \Rightarrow Q_\alpha = \xi_\alpha = \const,\quad P_\alpha = \eta_\alpha = \const. \]
+
+\paragraph{第一类变换} % (fold)
+\label{par:第一类变换}
+
+设变换由$F_1\pare{q,Q,t}$生成, $K = H + \displaystyle \+DtD{F_1} = 0$, 则
+\[ p_\alpha = \+D{q_\alpha}D{F_1},\quad P_\alpha = -\+D{Q_\alpha}D{F_1},\quad H\pare{q_\alpha,\+D{q_\alpha}D{F_1},t} + \+DtD{F_1\pare{q_\alpha,\xi_\alpha,t}} = 0. \]
+
+% paragraph 第一类变换 (end)
+
+\paragraph{第二类变换} % (fold)
+\label{par:第二类变换}
+
+设变换由$F_2\pare{q,P,t}$生成, $K = H + \displaystyle \+DtD{F_2} = 0$, 则
+\[ p_\alpha = \+D{q_\alpha}D{F_2},\quad H\pare{q_\alpha,\+D{q_\alpha}D{F_1},t} + \+DtD{F_2\pare{q_\alpha,\eta_\alpha,t}} = 0. \]
+
+% paragraph 第二类变换 (end)
+
+\paragraph{第三类变换} % (fold)
+\label{par:第三类变换}
+
+设变换由$F_1\pare{p,Q,t}$生成, $K = H + \displaystyle \+DtD{F_3} = 0$, 则
+\[ q_\alpha = -\+D{p_\alpha}D{F_3},\quad H\pare{-\+D{p_\alpha}D{F_3},p_\alpha,t} + \+DtD{F_3\pare{p_\alpha,\xi_\alpha,t}} = 0. \]
+
+% paragraph 第三类变换 (end)
+
+\paragraph{第四类变换} % (fold)
+\label{par:第四类变换}
+
+设变换由$F_4\pare{p,P,t}$生成, $K = H + \displaystyle \+DtD{F_4} = 0$, 则
+\[ q_\alpha = -\+D{p_\alpha}D{F_4},\quad H\pare{-\+D{p_\alpha}D{F_4},p_\alpha,t} + \+DtD{F_4\pare{p_\alpha,\eta_\alpha,t}} = 0. \]
+
+% paragraph 第四类变换 (end)
+
+记$S = F_2\pare{q_\alpha,\eta_\alpha,t}$,
+\[ H\pare{q_\alpha,\+D{q_\alpha}DS,t} + \+DtD{S\pare{q_\alpha,\eta_\alpha,t}} = 0. \]
+其中$S\pare{q_\alpha,t}$谓Hamilton主函数. 解出$S$后即可得第二类正则变换的生成函数. 这一微分方程有$s+1$个独立的积分常数, 其中$s$个对应于$\eta_\alpha$, 还剩下一个相加常数, 取为$A$, 总有
+\[ \+D{q_\alpha}DS = \+D{q_\alpha}D{S+A},\quad \+DtDS = \+DtD{\pare{S+A}}, \]
+以后总设$A = 0$, $s$个非相加常数为$\eta_\alpha$.
+
+\paragraph{主函数的意义} % (fold)
+\label{par:主函数的意义}
+
+$S\pare{q_\alpha,t}$满足
+\begin{align*}
+    &\+DtDS = -H, \\
+    & \+dtdS = \+DtDS + \sum_{\alpha=1}^s \+D{q_\alpha}DS\dot{q}_\alpha \\
+    &= -H + \sum_{\alpha=1}^s p_\alpha\dot{q}_\alpha. \\
+    & S= \int \pare{\sum_\alpha p_\alpha\dot{q}_\alpha - H}\,\rd{t}.
+\end{align*}
+
+% paragraph 主函数的意义 (end)
+
+用Hamilton-Jacobi方程求解题目之一般步骤谓
+\begin{cenum}
+    \item 给定$H\pare{q_\alpha,p_\alpha,t}$,
+    \[ p_\alpha \mapsto \+D{q_\alpha}DS, \]
+    建立$\displaystyle H\pare{q_\alpha, \+D{q_\alpha}DS,t} + \+DtDS = 0$.
+    \item 求解$S = S\pare{q_\alpha,\eta_\alpha,t}$.
+    \item 代换$\eta_\alpha \mapsto P_\alpha$, $S\pare{q_\alpha,\eta_\alpha,t} = F_2\pare{q_\alpha,P_\alpha,t}$, 产生正则变换
+    \[ p_\alpha = \+D{q_\alpha}DS,\quad Q_\alpha = \+D{P_\alpha}DS = \+D{\eta_\alpha}DS. \]
+    \item 反解出
+    \[ q_\alpha = q_\alpha\pare{Q_\beta,P_\beta,t} = q_\alpha\pare{\xi_\beta,\eta_\beta,t}, \quad p_\alpha = p_\alpha\pare{Q_\beta,P_\beta,t} = p_\alpha\pare{\xi_\beta,\eta_\beta,t}. \]
+\end{cenum}
+
+\paragraph{Hamilton特征函数} % (fold)
+\label{par:hamilton特征函数}
+
+若$\+dtdH = 0$, 有$H\pare{q_\alpha,p_\alpha} = E = \const$. 分离变量后
+\begin{align*}
+    S\pare{q_\alpha,t} &= W\pare{q_\alpha} + f\pare{t}. \\
+    p_\alpha &= \+D{q_\alpha}DS = \+D{q_\alpha}DS,\quad \+DtDS = \dot{f}. \\
+    H\pare{q_\alpha,\+D{q_\alpha}DW} + \dot{f}\pare{t} &= 0 \Rightarrow H\pare{q_\alpha,\+D{q_\alpha}DW} = -\dot{f} = E = \const. \\
+    & \left\{\begin{aligned}
+        & H\pare{q_\alpha,\+D{q_\alpha}DW} = E, \\
+        & f = -Et + A
+    \end{aligned}\right. \\
+    S &= W\pare{q_\alpha,\eta_\alpha} - Et + A,
+\end{align*}
+导致$W$外有两个常数, 从而$W$内有$s-1$个非相加常数. 若包含$E$, 则产生$s$个非相加常数. $W\pare{q_\alpha,\eta_\alpha}$谓Hamilton特征函数. 对于$H$不显含时间的系统, 可以借助Hamilton特征函数求解之. 一般步骤谓
+\begin{cenum}
+    \item 给定$H\pare{q_\alpha,p_\alpha}$, 令$p_\alpha = \displaystyle \+D{q_\alpha}DW$, 建立
+    \[ H\pare{q_\alpha, \+D{q_\alpha}DW} = E. \]
+    \item 求解$W = W\pare{q_\alpha,\eta_\alpha}$, 其中$E = \eta_1$, 从而
+    \[ W = W\pare{q_\alpha,E,\eta_2,\cdots,\eta_s}. \]
+    \item 将$E$视为$P_1$, $\eta_\beta = P_\beta$, $\beta = 2,\cdots,s$
+    \item 在这一映射下, $S = W\pare{q_\alpha,E,\eta_\beta} - Et = F_2\pare{q_\alpha,P_\alpha,t}$, 产生正则变换.
+    \[ p_\alpha = \+D{q_\alpha}DS = \+D{q_\alpha}DW,\quad Q_\alpha = \+D{p_\alpha}DS = \left\{\begin{aligned}
+        &\+DEDW - t = \xi_1,\quad \alpha=1,\quad P_1 = E, \\
+        &\+D{\eta_\alpha}DW = \xi_\alpha,\quad \alpha = 2,\cdots, s.
+    \end{aligned}\right. \]
+    \item 反解得到$\displaystyle \begin{cases}
+        q_\alpha = q_\alpha\pare{\xi_\beta,\eta_\beta,t}, \\
+        p_\alpha = p_\alpha\pare{\xi_\beta,\eta_\beta,t}.
+    \end{cases}$
+\end{cenum}
+
+\begin{sample}
+    \begin{ex}
+        设$H\pare{q,p} = p + aq^2$, 由$H$不显含时间,
+        \begin{align*}
+            & p = \+DqDW = \+dqdW,\quad \+dqdW + aq^2 = E, \\
+            & W = \int\pare{E-aq^2}\,\rd{q} = Eq - \rec{3}aq^3 \\
+            & S = W-Et = E\pare{q-t} - \rec{3}aq^3. \\
+            & E=P\Rightarrow p = \+DqDS = E-aq^2. \\
+            & Q = \+DPDS = \+DEDS = q-t = \xi = \const\\
+            & \Rightarrow q = \xi + t,\quad p = E-aq^2 = E-a\pare{\xi+t}^2.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle H = \frac{p^2}{2m} + \half kq^2$,
+        \begin{align*}
+            & p = \+DqDW = \+dqdW, \\
+            & \rec{2m}\pare{\+dqdW}^2 + \half kq^2 = E, \\
+            & W = \pm \int \sqrt{2m\pare{E-\half kq^2}}\,\rd{q},\quad S = -Et+W, \quad E\mapsto P. \\
+            & p = \+DqDS = \+DqDW = \pm\sqrt{2m\pare{E - \half kq^2}}. \\
+            & Q = \+DpDS = \+DEDS = -t + \+DEDW \\
+            &= -t \pm \+DED{} \int\pare{2m\pare{E-\half kq^2}}\,\rd{q} \\
+            &= -t \pm \int \sqrt{\frac{m}{2E-kq^2}}\,\rd{q} \\
+            &= -t \pm \frac{m}{k}\arcsin\pare{\sqrt{\frac{k}{2E}}q} = \xi. \\
+            &\Rightarrow q = \pm \sqrt{\frac{2E}{k}}\sin\brac{\frac{k}{m}\pare{\xi + t}},\quad p = \pm\sqrt{2mE}\cos\brac{\sqrt{\frac{k}{m}}\pare{\xi + t}}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle H = \rec{2m}\pare{p_r^2 + \frac{p_\theta^2}{r^2}} - \frac{\alpha}{r}$,
+        \begin{align*}
+            & p_r = \+DrDW,\quad p_\theta = \+D\theta DW, \\
+            & H = \rec{2m}\brac{\pare{\+DrDW}^2 + \rec{r^2}\pare{\+D\theta DW}^2} - \frac{\alpha}{r} = E. \\
+            & \pare{\+D\theta DW}^2 = r^2\brac{2mE + \frac{2m\alpha}{r} - \pare{\+DrDW}^2}.\\
+            & \text{可设} W = W_r\pare{r} + W_\theta\pare{\theta}, \\
+            & \+DrDW = \+drd{W_r},\quad \+D\theta DW = \+d\theta d{W_\theta}, \\
+            & \pare{\+d\theta d{W_\theta}}^2 = r^2 \brac{2mE + \frac{2m\alpha}{r} - \pare{\+drd{W_r}}^2}. \\
+            & \Rightarrow \pare{\+d\theta d{W_\theta}}^2 = J^2,\quad \+d\theta d{W_\theta} = J,\quad W_\theta = J\theta. \\
+            & r^2 \brac{2mE + \frac{2m\alpha}{r} - \pare{\+drd{W_r}}^2} = J^2,\quad J^2 = \const. \\
+            & W_r = \int\sqrt{2mE + \frac{2m\alpha}{r} - \frac{J^2}{r^2}}\,\rd{r}. \\
+            & \text{可设} E\mapsto P_r,\quad J\mapsto P_\theta. \\
+            & S = W - Et = W_r + W_\theta - Et \\
+            &= \int \sqrt{2mE + \frac{2m\alpha}{r} - \frac{J^2}{r^2}}\,\rd{r} + J\theta - Et. \\
+            & p_r = \+DrDS = \sqrt{2mE + \frac{2m\alpha}{r} - \frac{J^2}{r^2}},\quad p_\theta = \+D\theta DS = J = \const. \\
+            & Q_r = \+D{p_r}DS = \+DEDS = -t + \+DED{}\int\sqrt{2mE + \frac{2m\alpha}{r} - \frac{J^2}{r^2}}\,\rd{r} \\
+            &= -t + \int \frac{m\,\rd{r}}{\sqrt{2mE + \frac{2m\alpha}{r} - \frac{J^2}{r^2}}} = \xi_r. \\
+            & Q_\theta = \+D{p_\theta}DS = \+DJDS = \theta + \+DJD{} \int = \theta - \int \frac{J\,\rd{r}}{r^2\sqrt{2mE + \frac{2m\alpha}{r} - \frac{J^2}{r^2}}} = \xi_\theta. \\
+            & r = \frac{J^2/\pare{m\alpha}}{1+\sqrt{1+\frac{2EJ^2}{m\alpha^2}}\cos\pare{\theta - \xi_\theta}}, \\
+            &= -t + \int \frac{m\,\rd{r}}{\sqrt{\cdots}} = \xi_r,
+        \end{align*}
+        从而可得$r\pare{t}$, $\theta\pare{t}$, 代回可得$p_r$和$p_\theta$.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    变量之分离与广义坐标的选取有关. 但循环坐标必定是可分离的. $p_\beta = \const$,
+    \[ \+D{q_\beta}DW = \const = c_\beta \Rightarrow W = c_\beta q_\beta + W'. \]
+\end{remark}
+
+% paragraph hamilton特征函数 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+3.23, 3.25, 3.26, 3.27, 同埋补充题
+\begin{ex}
+    $\displaystyle L = \half m\pare{\dot{x}^2 + \dot{y}^2} - \pare{\frac{e^2}{r_1} + \frac{e^2}{r^2}}$,
+    \[ r_1 = \sqrt{\pare{x+c}^2 + y^2},\quad r_2 = \sqrt{\pare{x-c}^2 + y^2}, \]
+    选取广义坐标$u = r_1 + r_2$, $v = r_1 - r_2$, 求$S$.\\
+    \centerline{\incfig{6cm}{Suppl}}
+\end{ex}
+
+% paragraph 作业 (end)
+
+\begin{sample}
+    \begin{ex}[习题3.22]
+        \begin{align*}
+            L &= \frac{m}{2}\pare{\dot{r}^2 + r^2\dot{\theta}^2 + r^2\sin^2\theta\dot{\varphi}^2} - \frac{a}{r^2} + \frac{b\cos\theta}{r^2}, \\
+            p_r &= m\dot{r},\quad p_\theta = mr^2\dot{\theta},\quad p_\varphi = mr^2\sin^2\theta\dot{\varphi}, \\H &= \rec{2m}\pare{p_r^2 + p_\theta^2 + \frac{p_\varphi^2}{r^2\sin^2\theta}} + \frac{a-b\cos\theta}{r^2}, \\
+            &\Rightarrow \rec{2m}\pare{\pare{\+DrDW}^2 + \rec{r^2}\pare{\+D\theta DW}^2 + \rec{r^2\sin^2\theta}\pare{\+D\varphi DW}^2} + \frac{a-b\cos\theta}{r^2} = E. \\
+            & \text{$\varphi$为循环坐标}\Rightarrow W\pare{r,\theta,\varphi} = W_{12}\pare{r,\theta} + W_3\pare{\varphi} = W_{12}\pare{r,\theta} + c_3\varphi. \\
+            & \rec{2m}\brac{\pare{\+DrD{W_{12}}}^2 + \rec{r^2}\pare{\+D\theta D{W_{12}}}^2 + \frac{c_3^2}{r^2\sin^2\theta}} + \frac{a-b\cos\theta}{r^2} = E. \\
+            & r^2 \pare{\+DrD{W_{12}}}^2 - 2mr^2E = -\pare{\+D\theta D{W_{12}}^2} - \frac{c_3^2}{\sin^2\theta} + 2m\pare{b\cos\theta - a}. \\
+            & \text{分离变量} W_{12}\pare{r,\theta} = W_1\pare{r} + W_2\pare{\theta}, \\
+            & r^2\brac{\pare{\+DrD{W_1}}^2 - 2mE} = -\pare{\+D\theta D{W_2}}^2 - \frac{c_3^2}{\sin^2\theta} + 2m\pare{2b\cos\theta - a} = -c_2. \\
+            & \left\{ \begin{aligned}
+                \+drd{W_1} &= \sqrt{2mE - \frac{c_2}{r^2}}, \\
+                \+d\theta d{W_2} &= \sqrt{c_2 - \frac{c_3^2}{\sin^2\theta} + 2m\pare{b\cos\theta - a}}, \\
+            \end{aligned} \right. \\
+            W &= W_1\pare{r} + W_2\pare{\theta} + W_3\pare{\varphi} \\
+            &= \int \sqrt{2mE - \frac{c_2}{r^2}}\,\rd{r} + \sqrt{c_2 - \frac{c_3^2}{\sin^2\theta} + 2m\pare{b\cos\theta - a}}\,\rd{\theta} + c_3\varphi, \\
+            S &= -Et + W. \\
+            E &\rightarrow P_1,\quad c_2 \rightarrow P_2,\quad c_3\rightarrow P_3, \\
+            p_r &= \+DrDS = \+DrDW = \+drd{W_1} = \sqrt{2mE - \frac{c_2}{r^2}}, \\
+            p_\theta &= \+D\theta DS = \+D\theta DW = \+d\theta d{W_2} = \sqrt{c_2 - \frac{c_3^2}{\sin^2\theta} + 2m\pare{b\cos\theta - a}}, \\
+            p_\varphi &= \+D\varphi DS = \+D\varphi DW = \+d\varphi d{W_3} = c_3, \\
+            Q_1 &= \+D{P_1}DS = \+DEDS = -t + \+DED{W_1} = -t + \int \frac{m\,\rd{r}}{\sqrt{2mE - \frac{c_2}{r^2}}} = \xi_1, \\
+            Q_2 &= \+D{P_2}DS = \+D{c_2}DS = \+D{c_2}D{W_1} + \+D{c_2}D{W_2} \\
+            &= -\half \int \frac{\rd{r}}{r^2\sqrt{2mE - \frac{c_2}{r^2}}} + \half \int \frac{\rd{\theta}}{\sqrt{c_2 - \frac{c_3^2}{\sin^2\theta} + 2m\pare{b\cos\theta - a}}} = \xi_2, \\
+            Q_3 &= \+D{P_3}DS = \+D{c_3}DW = \varphi + \+D{c_3}D{W_2} \\
+            &= \varphi - \int \frac{c_3\,\rd{\theta}}{\sin^2\theta\sqrt{c_2 - \frac{c_3^2}{\sin^2\theta} + 2m\pare{b\cos\theta - a}}} = \xi_3.
+        \end{align*}
+        可以得到$Q_1=\xi_1$作为$r\pare{t}$的函数, 从而可以反解出$r$. 类似由$Q_2$反解出$\theta\pare{r}$, 由$Q_3$反解出$\varphi\pare{\theta}$. 从而$p_r\pare{t}$, $p_\theta\pare{t}$, $p_\varphi\pare{t}$可以得到.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    考试时不会要求积出复杂的积分, 写出H-J方程和后续的表达式即可. 惟积分简单时不在此限.
+\end{remark}
+\begin{remark}
+    力学的若干表述(Newton, Lagrange, Hamilton, Hamilton-Jacobi)中, 只有Hamilton-Jacobi表述的方程是偏微分方程.
+\end{remark}
+
+\paragraph{H-J方程的意义} % (fold)
+\label{par:h_j方程的意义}
+
+H-J方程可作为经典力学到量子力学的过渡.
+\[ i\hbar \+DtD\Psi = \hat H \Psi = \pare{\frac{\+up^2}{2m} + V}\Psi = \pare{-\frac{\hbar^2 \laplacian}{2m} + V}\Psi. \]
+令$\displaystyle \Psi = \pare{\Psi_0 + \hbar \Psi_1} e^{iS/\hbar}$,
+\begin{align*}
+    \+DtD\Psi &= \pare{\+DtD{\Psi_0} + \hbar \+DtD{\Psi_1} + \cdots} e^{iS/\hbar} + \frac{i}{\hbar} \pare{\Psi_0 + \hbar \Psi_1} \+DtDS e^{iS/\hbar}. \\
+    \laplacian \Psi &= \pare{\laplacian \Psi_0 + \hbar\laplacian \Psi_1 + \cdots} e^{iS/\hbar} + \frac{2i}{\hbar}\pare{\grad \Psi_0 + \hbar \grad \Psi_1 + \cdots} \cdot \pare{\grad S} e^{iS/\hbar} \\
+    &+ \frac{i}{\hbar}\pare{\Psi_0 + \hbar\Psi_1 + \cdots} \laplacian S e^{iS/\hbar} - \rec{\hbar^2}\pare{\Psi_0 + \hbar\Psi_1 + \cdots}\pare{\grad S}^2 e^{iS/\hbar}. \\
+    \hbar & \rightarrow 0,\quad -\Psi_0 \+DtDS = \frac{\Psi_0}{2m}\pare{\grad S}^2 + V\Psi_0 \Rightarrow \frac{\pare{\grad S}^2}{2m} + V + \+DtDS = 0.
+\end{align*}
+这正是非相对论粒子的Hamilton主函数的Hamilton-Jacobi方程
+\[ H\pare{\+vr,\+D{\+vr}DS} + \+DtDS = 0,\quad H = \frac{\+vp^2}{2m} + V\pare{\+vr}. \]
+定态的Schr\"odinger方程
+\[ \pare{-\frac{\hbar^2\laplacian}{2m} + V}\Psi = E\Psi \]
+蕴含
+\[ \frac{\pare{\grad W}^2}{2m} + V = E,\quad H\pare{\+vr,\+D{\+vr}DS} = E. \]
+这是Hamilton特征函数的Hamilton-Jacobi方程.
+
+% paragraph h_j方程的意义 (end)
+
+% subsubsection 方程的建立 (end)
+
+% subsection hamilton_jacobi方程 (end)
+
+\subsection{经典力学的延伸} % (fold)
+\label{sub:经典力学的延伸}
+
+\subsubsection{Liouville定理} % (fold)
+\label{ssub:liouville定理}
+
+\paragraph{相点密度} % (fold)
+\label{par:相点密度}
+
+系统的状态$\pare{q_\alpha,p_\alpha}$谓相点, 相空间为$2s$维. $\pare{q_\alpha,p_\alpha}$在相空间中的轨道谓相轨道, 其演化遵守
+\[ \dot{q} = \+DpDH,\quad \dot{p} = -\+DqDH. \]
+不同条件下的相轨道不会相交, 否则在某处重合的相点构成新的初始条件, 导致轨道完全重合. 若允许时间无限长, 则相轨道可能汇聚于一点, 谓奇点.
+\begin{ex}
+    谐振子的Hamilton函数
+    \[ H = \frac{p^2}{2m} + \half kq^2 = E \Rightarrow \frac{p^2}{2mE} + \frac{q^2}{2E/k} = 1. \]
+    故其在相空间内的轨道为一椭圆, 不同的相轨道之间无交.
+\end{ex}
+对于多体系统, 相空间维数为$6N$, 当$N$充分大时只能考虑系统的统计性质. 在固定时刻, 系统之微观态有许多可能性, 可以定义相空间上的密度函数
+\[ \rho = \+dVdN, \]
+其中$V$是相空间内的体积, $N$是相点数目. 从而$\rd{V} = \rd{q_1}\cdots \rd{q_s}\rd{p_1}\cdots\rd{p_s}$,\quad $\rho = \rho\pare{q_\alpha,p_\alpha,t}$.
+
+% paragraph 相点密度 (end)
+
+\begin{figure}
+    \centering
+    \incfig{8cm}{LiouvilleEvolve}
+    \caption{相空间内的演化}
+    \label{fig:相空间内的演化}
+\end{figure}
+
+\paragraph{Liouville定理} % (fold)
+\label{par:liouville定理}
+
+考虑如\cref{fig:相空间内的演化}中的演化, 相点数守恒, 故
+\begin{align*}
+    & \rd{N\pare{t_1}} = \rd{N\pare{t_2}},\quad \rho_1 = \+d{V\pare{t_1}}d{N\pare{t_1}},\quad \rho_2 = \+d{V\pare{t_2}}d{N\pare{t_2}}, \\
+    & \rd{V\pare{t_1}} = \rd{q_1\pare{t_1}}\cdots \rd{q_s\pare{t_1}}\cdot \rd{p_1\pare{t_1}} \cdots \rd{p_s\pare{t_1}}, \\
+    & \rd{V\pare{t_2}} = \rd{q_1\pare{t_2}}\cdots \rd{q_s\pare{t_2}}\cdot \rd{p_1\pare{t_2}} \cdots \rd{p_s\pare{t_2}}, \\
+    &= \begin{vmatrix}
+        \partial q\pare{t_2}/\partial q\pare{t_1} & \partial p\pare{t_2}/\partial q\pare{t_1} \\
+        \partial q\pare{t_2}/\partial p\pare{t_1} & \partial p\pare{t_2}/\partial p\pare{t_1}
+    \end{vmatrix} \rd{q_1\pare{t_1}}\cdots \rd{q_s\pare{t_1}}\cdot \rd{p_1\pare{t_1}} \cdots \rd{p_s\pare{t_1}}.
+\end{align*}
+然而$\pare{q_\alpha\pare{t_1},p_\alpha\pare{t_1}}\mapsto \pare{q_\alpha\pare{t_2},p_\alpha\pare{t_2}}$是正则变换, 故上式中行列式为$1$. 从而
+\[ \+dtd\rho = 0,\quad \+DtD\rho + \brac{\rho,H} = 0. \]
+三维流体有连续性方程
+\[ \+DtD\rho + \div\pare{\rho\+vv} = 0. \]
+将相点类比于流体, 则上述方程等价于相点的连续性方程. 实际上其可以改写为
+\begin{align*}
+    & \+DtD\rho + \sum_{\alpha=1}^s \brac{\+D{q_\alpha}D{}\pare{\rho \dot{q}_\alpha} + \+D{p_\alpha}D{}\pare{\rho \dot{p}_\alpha}} = 0, \\
+    & \+DtD\rho + \sum_\alpha \brac{\+D{q_\alpha}D\rho \dot{q}_\alpha + \+D{p_\alpha}D\rho \dot{p}_\alpha + \rho\pare{\+D{q_\alpha}D{\dot{q}_\alpha} + \+D{p_\alpha}D{\dot{p}_\alpha}}} = 0, \\
+    & \+DtD\rho + \sum_\alpha \pare{\+D{q_\alpha}D\rho \+D{p_\alpha}DH - \+D{p_\alpha}DH \+D{q_\alpha}DH} + \rho \sum\alpha\cancelto{0}{\pare{\+D{q_\alpha}D{}\+D{p_\alpha}DH - \+D{p_\alpha}D{} \+D{q_\alpha}DH}} = 0. \\
+    & \+DtD\rho + \brac{\rho,H} = 0,\quad \+dtd\rho = 0.
+\end{align*}
+在统计平衡下, $\displaystyle \+DtD\rho = 0$, $\Rightarrow \brac{\rho,H} = 0$.
+
+% paragraph liouville定理 (end)
+
+% subsubsection liouville定理 (end)
+
+\subsubsection{位力定理} % (fold)
+\label{ssub:位力定理}
+
+\paragraph{导出} % (fold)
+\label{par:导出}
+
+在有界系统中, 所有时刻$\+vr$, $\+vp$皆有限. 定义
+\begin{align*}
+    & S = \sum_i \+vp_i \cdot \+vr_i,\quad \+vp_i = m_i \+vr_i. \\
+    & \+dtdS = \sum_i \pare{\+vp_i \cdot \dot{\+vr}_i + \dot{\+vp}_i\cdot \+vr_i} = \sum_i \pare{\+vF_i \cdot \+vr_i + m_i \dot{\+vr}_i^2} = \sum_i \+vF_i \cdot \+vr_i + 2T. \\
+    & \expc{\+dtdS} = \rec{\tau} \int_0^\tau \+dtdS \,\rd{t} = \frac{S\pare{\tau} - S\pare{0}}{\tau} \rightarrow 0,\quad \tau \rightarrow \infty. \\
+    & \expc{2T} = -\expc{\sum_i \+vF_i \cdot \+vr_i}, \quad \boxed{\expc{T} = -\half \expc{\sum_i \+vF_i \cdot \+vr_i}.}
+\end{align*}
+对于保守系,
+\[ \expc{T} = \half \expc{\sum_i \+vr_i \cdot \grad_i V}. \]
+若两体系统为有心力相互作用, 且$V = kr^{n+1}$, 则
+\[ \+vr\cdot\grad V = \pare{n+1}V,\quad \expc{T} = \frac{n+1}{2}\expc{V}. \]
+特别的, 对于平方反比的情形, $n=-2$, $\displaystyle \expc{T} = -\half \expc{V}$. 对于谐振子, $n=1$, $\expc{T} = \expc{V}$.
+\begin{remark}
+    位力定理的另一应用谓理想气体的状态方程.
+\end{remark}
+
+% paragraph 导出 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+3.28, 3.29.
+
+% paragraph 作业 (end)
+
+% subsubsection 位力定理 (end)
+
+% subsection 经典力学的延伸 (end)
 
 % section hamilton力学 (end)
 

@@ -1,0 +1,590 @@
+\documentclass[../ComplexVariable.tex]{subfiles}
+
+\begin{document}
+
+\section{Laplace变换} % (fold)
+\label{sec:laplace变换}
+
+\subsection{Hilbert空间} % (fold)
+\label{sub:hilbert空间}
+
+在$\+bR^n$上可以定义内积
+\[ \bra{a}\ket{b} = \sum_{k=1}^n a_k b_k,\quad a = \begin{pmatrix}
+    a_1 & \cdots & a_n
+\end{pmatrix}^T,\quad b = \begin{pmatrix}
+    b_1 & \cdots & b_n
+\end{pmatrix}^T. \]
+由内积可以导出范数
+\[ \norm{a} = \sqrt{\bra{a}\ket{a}} = \sqrt{a_1^2 + \cdots + a_n^2}. \]
+可以定义垂直$a\perp b \Leftrightarrow \bra{a}\ket{b} = 0$.
+\begin{remark}
+    在$\+bC^n$上内积应定义为
+    \[ \bra{a}\ket{b} = \sum_{k=1}^n a_k \conj{b}_k. \]
+\end{remark}
+设$\xi_1,\cdots,\xi_n$是$\+bR^n$的一组标准正交基, 即
+\[ \bra{\xi_i}\ket{\xi_j} = \begin{cases}
+    1, & i=j, \\
+    0, & i\neq j
+\end{cases} = \delta_{ij}. \]
+且$\forall \alpha\in\+bR^n$, $\alpha = a_1 \xi_1 + \cdots + a_n\xi_n$. 且对$1\le k \le n$,
+\[ \bra{\alpha}\ket{\xi_k} = \bra{a_1\xi_1 + \cdots + a_n\xi_n}\ket{\xi_k} = \bra{a_1\xi_k}\ket{\xi_k} = a_1\bra{\xi_k}\ket{\xi_k} = a_1. \]
+\begin{theorem}[Pythagorean定理, Parseval定理]
+    在$\+bR^n$内,
+    \[ \norm{\alpha}^2 = a_1^2 + \cdots + a_n^2. \]
+\end{theorem}
+对于可积且平方可积函数族
+\[ \+sL\brac{a,b} = \setcond{\func{f}{\brac{a,b}}{\+bC}}{f,\abs{f}^2\text{可积}}, \]
+可以定义内积
+\[ \bra{f}\ket{g} = \int_a^b f\pare{x}\conj{g\pare{x}}\,\rd{x}. \]
+以及范数
+\[ \norm{f} = \sqrt{\bra{f}\ket{f}} = \pare{\int_a^b \abs{f}^2\,\rd{x}}^{\half}. \]
+并定义两个函数垂直当且仅当$\bra{f}\ket{g} = 0$.
+\begin{remark}
+    $\brac{a,b}\mapsto \+bC$的函数可以视为$\+bC$上的无穷维向量.
+\end{remark}
+设$\xi_1,\cdots,\xi_n,\cdots$为$\+sL\brac{a,b}$的标准正交基, 其存在性由选择公理保证. $\bra{\xi_i,\xi_j} = \delta_{ij}$. 任意$f$皆可有展开
+\[ f = a_1\xi_1 + \cdots + a_n\xi_n + \cdots = \sum_{k=1}^\infty a_k\xi_k. \]
+此时$\bra{f}\ket{\xi_k}$谓Fourier系数, 上面的展开谓Fourier展开.
+\begin{theorem}[Bessel不等式, Parseval定理]
+    \[ \abs{a_1}^2 + \cdots + \abs{a_n}^2 \le \norm{f}^2. \]
+    取$n\rightarrow \infty$的极限,
+    \[ \abs{a}_1^2 + \cdots + \abs{a_n}^2 + \cdots = \norm{f}^2. \]
+\end{theorem}
+标准的Fourier级数是在$\brac{-\pi,\pi}$上按
+\[ \rec{\sqrt{2\pi}}, \frac{\cos x}{\sqrt{\pi}}, \frac{\sin x}{\sqrt{\pi}}, \frac{\cos 2x}{\sqrt{\pi}}, \frac{\sin 2x}{\sqrt{\pi}}, \cdots \]
+展开. 这是一组标准正交基. 此时展开式为
+\[ f = A_0\rec{\sqrt{2\pi}} + \sum_{k=1}^\infty \pare{A_n \frac{\cos nx}{\sqrt{\pi}} + B_n \frac{\sin nx}{\sqrt{\pi}}}. \]
+从而
+\[ A_n = \bra{f}\ket{\frac{\cos nx}{\sqrt{\pi}}} = \rec{\sqrt{\pi}}\int_{-\pi}^{\pi} f\pare{x} \cos nx\,\rd{x},\quad B_n = \bra{f}\ket{\frac{\sin nx}{\sqrt{\pi}}}. \]
+若采用指数形式,
+\[ \bra{e^{inx}}\ket{e^{imx}} = \int_{-\pi}^\pi e^{inx}\conj{e^{imx}}\,\rd{x} = \int_{-\pi}^{\pi} e^{inx - imx}\,\rd{x} = \begin{cases}
+    0, & n\neq m, \\
+    2\pi, & n=m.
+\end{cases} \]
+此时对于$\brac{-\pi,\pi}$上的函数可以有展开
+\[ f\pare{x} = \sum_{n=-\infty}^{+\infty} F_ne^{inx}, \]
+投影为
+\[ \bra{f}\ket{e^{inx}} = \bra{\sum_{k=-\infty}^{+\infty} F_ke^{ikx}}\ket{e^{inx}} = \bra{F_ne^{inx}}\ket{e^{inx}} = 2\pi F_n. \]
+从而
+\[ F_n = \rec{2\pi}\bra{f}\ket{e^{inx}} = \rec{2\pi} \int_{-\pi}^\pi f\pare{x}e^{-inx}\,\rd{x}. \]
+若$f$以$2l$为周期, 则
+\[ f\pare{x} = \sum_{n=\infty}^{\infty} F_n e^{in\frac{\pi}{l}x}, \]
+其中
+\[ F_n = \rec{2l}\int_{-l}^l f\pare{x} e^{-in\frac{\pi}{l}x}\,\rd{x}. \]
+将$F_n$的表达式代入,
+\begin{align*}
+    f\pare{x} &= \lim_{n\rightarrow\infty} \sum_{n=-\infty}^{+\infty} F_n e^{in\frac{\pi}{l}x} \\
+    &= \lim_{n\rightarrow\infty} \sum_{n=-\infty}^{+\infty} \brac{\rec{2l}\int_{-l}^l f\pare{x} e^{-in\frac{\pi}{l}x}\,\rd{x}} e^{in\frac{\pi}{l}x} \\
+    &\xlongequal{\lambda_n = {n\pi}/{l},\Delta\lambda = \pi/l} \rec{2\pi} \lim_{\Delta\lambda\rightarrow 0}\sum_{-\infty}^{+\infty} \brac{\int_{-\pi/\Delta\lambda}^{\pi/\Delta\lambda} f\pare{t}e^{-i\lambda_n t}\,\rd{t}\, e^{i\lambda_n x}}\Delta\lambda \\
+    &= \rec{2\pi} \int_{-\infty}^{+\infty} \brac{\int_{-\infty}^{+\infty} f\pare{t} e^{-i\lambda t}\,\rd{t}}e^{i\lambda x}\,\rd{\lambda}
+\end{align*}
+从而
+\[ f\pare{x} = \rec{2\pi} \int_{-\infty}^{+\infty} \brac{\int_{-\infty}^{+\infty} f\pare{t} e^{-i\lambda t}\,\rd{t}}e^{i\lambda x}\,\rd{\lambda}. \]
+定义Fourier变换及其逆变换
+\begin{align*}
+    \+sF\brac{f} &= \int_{-\infty}^{+\infty} f\pare{t} e^{-i\lambda t}\,\rd{t} = F,\\
+    f = \+sF^{-1}\brac{F} &= \rec{2\pi} \int_{-\infty}^{+\infty} F\pare{\lambda} e^{i\lambda x}\,\rd{\lambda}.
+\end{align*}
+\begin{remark}
+    若定义
+    \begin{align*}
+        \+sF\brac{f} &= \rec{\sqrt{2\pi}}\int_{-\infty}^{+\infty} f\pare{t} e^{-i\lambda t}\,\rd{t} = F,\\
+    f = \+sF^{-1}\brac{F} &= \rec{\sqrt{2\pi}} \int_{-\infty}^{+\infty} F\pare{\lambda} e^{i\lambda x}\,\rd{\lambda},
+    \end{align*}
+    则Fourier变换与逆变换具有更加对称的形式.
+\end{remark}
+
+% subsection hilbert空间 (end)
+
+\subsection{Laplace变换} % (fold)
+\label{sub:laplace变换}
+
+Fourier变换的缺点在于只能对$x\rightarrow \infty$时下降足够快的函数$f\pare{x}$有效. 若约定
+\[ \restr{f}{\pare{-\infty, 0}} = 0, \]
+且$f$在任何有限区间上都逐段光滑, 且存在某$c\ge 0$, $k>0$使得
+\begin{equation}
+    \label{eq:laplace速降条件}
+    \abs{f\pare{t}} \le ke^{ct},\quad \forall t\ge 0,
+\end{equation}
+则可以保证Laplace变换的积分式有意义.
+\begin{definition}[Laplace变换]
+    \[ L\pare{f} = \+sF\brac{fe^{-\sigma t}} = \int_0^\infty fe^{-\sigma t} e^{-i\lambda t}\,\rd{t} = \int_0^\infty f\cdot e^{-pt}\,\rd{t},\quad p = \sigma + it. \]
+\end{definition}
+\begin{proposition}
+    若\eqref{eq:laplace速降条件}满足, 则$F\pare{p}$在$\Re p > c$解析.
+\end{proposition}
+\begin{sample}
+    \begin{ex}
+        $L\brac{e^{at}} = \displaystyle \rec{p-a}$, 特别地, $L\brac{1} = \displaystyle \rec{p}$. 这里要求$\Re p > \Re a$. 因为
+        \begin{align*}
+            L\brac{e^{at}} &= \int_0^\infty e^{at}e^{-pt}\,\rd{t} = \int_0^\infty e^{\pare{a-p}t}\,\rd{t} \\
+            &= \rec{a-p}\int_0^\infty e^{\pare{a-p}t}\,\rd{e^{\pare{a-p}t}} \\
+            &= \rec{a-p}\brac{e^{\pare{a-p}t}}_0^\infty \\
+            &= \rec{a-p}\brac{0-1} \\
+            &= \rec{p-a}.
+        \end{align*}
+    \end{ex}
+    \begin{remark}
+        定义阶跃函数
+        \[ h\pare{t} = \begin{cases}
+            1, & t\ge 0,\\
+            0, & t<0.
+        \end{cases} \]
+        则$f=1$之特例应写作$L\brac{h} = 1/p$. 而所有$f\pare{t}$在变换中实际上都应写作$f\pare{t}h\pare{t}$.
+    \end{remark}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle L\brac{t^\alpha} = \frac{\int_0^\infty x^\alpha e^{-x}\,\rd{x}}{p^{\alpha+1}} = \frac{\Gamma\pare{\alpha+1}}{p^{\alpha+1}}$.
+        特别地,$\displaystyle L\brac{t^n} = \frac{n!}{p^{n+1}}$.
+    \end{ex}
+    \begin{proof}[幂函数的Laplace变换]
+        \begin{align*}
+            L\brac{t^n} &= \int_0^\infty t^n e^{-pt}\,\rd{t} \\ &= -\rec{p}\int_0^\infty t^n \,\rd{e^{-pt}} = -\rec{p}\brac{\left. t^n e^{-pt}\right\vert_0^\infty - \int_0^\infty e^{-pt}\,\rd{t^n}} \\
+            &= -\rec{p} \brac{0 - 0 - \int_0^\infty e^{-pt}nt^{n-1}\,\rd{t}} \\
+            &= \frac{n}{p}L\brac{t^{n-1}}. \\
+            & L\brac{t^n} = \frac{n}{p}L\brac{t^{n-1}} = \frac{n}{p}\frac{n-1}{p} L\brac{t^{n-2}} = \frac{n!}{p^n} L\brac{1} = \frac{n!}{p^{n+1}}. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+约定用小写字母表示原函数名, 大写字母表示变换后的函数名, $p$表示变换后的变量. 如
+\[ L\brac{f} = F\pare{p}. \]
+\begin{definition}
+    卷积谓
+    \[ f*g\pare{t} = \int_{-\infty}^{+\infty} f\pare{t-\xi}g\pare{\xi}\,\rd{\xi}. \]
+\end{definition}
+\begin{proposition}[卷积的性质]
+    \mbox{}
+    \begin{cenum}
+        \item $f*g = g*f$;
+        \item $f*\pare{g*h} = \pare{f*g}*h$;
+        \item $f*\pare{g+h} = f*g + f*h$;
+        \item $\+sF\brac{f*g} = \+sF\brac{f}\cdot\+sF\brac{g}$.
+    \end{cenum}
+\end{proposition}
+\begin{finale}
+\begin{theorem}[Laplace变换的性质]
+    \mbox{}
+    \begin{cenum}
+        \item 线性性:
+        \begin{align*}
+            L\brac{\alpha f + \beta g} &= \alpha L\brac{f} + \beta L\brac{g},\\ L^{-1}\brac{\alpha f + \beta g} &= \alpha L^{-1}\brac{f} + \beta L^{-1}\brac{g}.
+        \end{align*}
+        \item 相似性:
+        \[ L\brac{f\pare{at}} = \rec{a}F\pare{\frac{p}{a}},\quad a>0. \]
+        \item 微分法:
+        \begin{cenum}
+            \item 变换前微分:
+            \begin{align*}
+            L\brac{f'\pare{t}} &= pF\pare{p} - f\pare{0}. \\
+            L\brac{f^{\pare{n}}\pare{t}} &= p^n F\pare{p} - p^{n-1}f\pare{0} - p^{n-2}f'\pare{0} - \cdots \\ & \phantom{=}\  - tf^{\pare{n-2}}\pare{0} - f^{\pare{n-1}}\pare{0}.
+        \end{align*}
+            \item 变换后微分:
+            \begin{align*}
+                \+dpd{}L\brac{f\pare{t}} &= -L\brac{tf\pare{t}}, \\
+                \frac{\rd{^n}}{\rd{p^n}}L\brac{f\pare{t}} &= \pare{-1}^n L\brac{t^n f\pare{t}}.
+            \end{align*}
+        \end{cenum}
+        \item 积分法:
+        \begin{cenum}
+            \item 变换前积分:
+            \begin{align*}
+                L\brac{\int_0^t f\pare{t}\,\rd{t}} &= \frac{F\pare{p}}{p}, \\
+                L\brac{\underbrace{\int_0^t \cdots \int_0^t}_{n} f\pare{t}\,\rd{t}\cdots \,\rd{t}} &= \frac{F\pare{p}}{p}.
+            \end{align*}
+            \item 变换后积分:
+            \begin{align*}
+                \int_p^\infty F\pare{p}\,\rd{p} &= L\brac{\frac{f\pare{t}}{t}}, \\
+                \underbrace{\int_p^\infty \cdots \int_p^\infty F\pare{p}\,\rd{p}\cdots \,\rd{p}}_{n} &= L\brac{\frac{f\pare{t}}{t^n}}.
+            \end{align*}
+        \end{cenum}
+        \item 延迟性:
+        \begin{align*}
+            L\brac{f\pare{t-\tau}} &= e^{-p\tau} F\pare{p}.
+        \end{align*}
+        严格的写法应作
+        \begin{align*}
+            L\brac{f\pare{t-\tau}h\pare{t-\tau}} &= e^{-p\tau}L\brac{f\pare{t}}, \\
+            L^{-1}\brac{e^{-p\tau}F\pare{p}} &= f\pare{t-\tau} h\pare{t-\tau}.
+        \end{align*}
+        \item 位移定理:
+        \begin{align*}
+            L\brac{e^{\lambda t}f\pare{t}} &= F\pare{p-\lambda}.
+        \end{align*}
+        \item 若$f$以$T$为周期, 则
+        \[ L\brac{f} = \rec{1-e^{-pT}} \int_0^T f\pare{t}e^{-pt}\,\rd{t}. \]
+        \item 卷积公式:
+        \[ L\brac{f*g} = L\brac{f}\cdot L\brac{g}. \]
+    \end{cenum}
+\end{theorem}
+\end{finale}
+\begin{proof}[相似性的证明]
+    \begin{align*}
+        L\brac{f\pare{at}} &= \int_0^\infty f\pare{at}e^{-pt}\,\rd{t} \\
+        &\xlongequal{\xi = at} \int_0^\infty f\pare{\xi} e^{-p\xi /a}\rec{a}\,\rd{\xi} = \rec{a}F\pare{\frac{p}{a}}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[变换前微分法的证明]
+    \begin{align*}
+        L\brac{f'} &= \int_0^\infty f'\pare{t} e^{-pt}\,\rd{t} = \int_0^\infty e^{-pt}\,\rd{f\pare{t}} \\
+        &= \left. e^{-pt}f\pare{t}\right\vert_0^\infty - \int_0^\infty f\pare{t}\,\rd{e^{-pt}} \\
+        &= 0 - e^0 f\pare{0} + p\int_0^\infty f\pare{t} e^{-pt}\,\rd{t} \\
+        &= pL\brac{f} - f\pare{0}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[变换后微分法的证明]
+    \begin{align*}
+        \+dpd{}L\brac{f\pare{t}} &= \+dpd{} \int_0^\infty f\pare{t} e^{-pt}\,\rd{t} \\
+        &= \int_0^\infty f\pare{t}\+dpd{}e^{-pt}\,\rd{t} \\
+        &= \int_0^\infty f\pare{t}\pare{-t}e^{-pt}\,\rd{t} \\
+        &= -\int_0^\infty tf\pare{t}e^{-pt}\,\rd{t} = -L\brac{tf\pare{t}}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[变换前积分法的证明]
+    \begin{align*}
+        g\pare{t} &= \int_0^t f\pare{t}\,\rd{t},\quad g\pare{0} = 0,\quad g'\pare{t} = f\pare{t}, \\
+        L\brac{g'\pare{t}} &= pL\brac{g} - g\pare{0}, \\
+        L\brac{f\pare{t}} &= pL\brac{\int_0^t f\pare{t}\,\rd{t}} - 0, \\
+        L\brac{\int_0^t f\pare{t}\,\rd{t}} &= \frac{L\brac{f\pare{t}}}{p}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[变换后积分法的证明]
+    \begin{align*}
+        \int_p^\infty F\pare{p}\,\rd{p} &= \int_p^\infty \int_0^\infty f\pare{t}e^{-pt}\,\rd{t}\,\rd{p} \\
+        &= \int_0^\infty f\pare{t} \pare{\int_p^{\infty} e^{-pt}\,\rd{p}}\,\rd{t}.
+    \end{align*}
+\end{proof}
+\begin{proof}[延迟性的证明]
+    \begin{align*}
+        L\brac{f\pare{t-\tau}} &= \int_0^\infty f\pare{t-\tau} e^{-pt}\,\rd{t} \\
+        &= \int_\tau^\infty f\pare{t-\tau} e^{-pt}\,\rd{t} \\
+        &\xlongequal{\xi = t-\tau} \int_0^\infty f\pare{\xi} e^{-p\pare{\xi + \tau}}\,\rd{\xi} \\
+        &= e^{-p\tau}\int_0^\infty f\pare{\xi} e^{-p\xi}\,\rd{\xi} \\
+        &= e^{-p\tau} L\brac{f}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[位移定理的证明]
+    \begin{align*}
+        L\brac{e^{\lambda t}f\pare{t}} &= \int_0^\infty e^{\lambda t}f\pare{t} e^{-pt}\,\rd{t} \\
+        &= \int_0^\infty f\pare{t}e^{-\pare{p-\lambda}t}\,\rd{t} = F\pare{p-\lambda}. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[周期函数的Laplace变换]
+    \begin{align*}
+        L\brac{f} &= \int_0^\infty f\pare{t} e^{-pt}\,\rd{t} \\
+        &= \int_0^T + \int_T^{2T} + \int_{2T}^{3T} + \cdots. \qedhere
+    \end{align*}
+\end{proof}
+\begin{proof}[另证]
+    \begin{align*}
+        L\brac{f} &= \int_0^\infty f\pare{t} e^{-pt}\,\rd{t} \\ &= \int_0^T f\pare{t} e^{-pt}\,\rd{t} + \int_T^\infty f\pare{t}e^{-pt}\,\rd{t}
+         \\ &= \int_0^T + \int_0^\infty f\pare{\xi + t} e^{-p\pare{\xi + T}}\,\rd{\xi} \\
+        &= \int_0^T + e^{-pt}\int_0^\infty f\pare{\xi} e^{-p\xi}\,\rd{\xi}. \\
+        F\pare{p} &= \int_0^T + e^{-pt}F\pare{p}. \qedhere
+    \end{align*}
+\end{proof}
+Laplace变换中, 卷积
+\begin{align*}
+    f_1*f_2\pare{t} &= \int_{-\infty}^{+\infty} f_1\pare{t-\xi} f_2\pare{\xi}\,\rd{\xi} \\
+    &= \cancelto{0}{\int_{-\infty}^{0}} + \int_0^t + \cancelto{0}{\int_t^\infty} \\
+    &= \int_0^t f_1\pare{t-\xi} f_2\pare{\xi}\,\rd{\xi}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        线性性表明
+        \begin{align*}
+            L\brac{\cos\omega t} &= L\brac{\frac{e^{i\omega t} + e^{-i\omega t}}{2}} = \half L\brac{e^{i\omega t}} + \half L\brac{e^{-i\omega t}} \\ &= \half \brac{\rec{p- i\omega} + \rec{p+i\omega}} = \frac{p}{p^2+\omega^2}. \\
+            L\brac{\sin\omega t} &= \frac{\omega}{p^2+\omega^2}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle F\pare{p} = \frac{5p-1}{\pare{p+1}\pare{p-2}}$, 求$\displaystyle f\pare{t} = L^{-1}\brac{F\pare{p}}$.
+    \end{ex}
+    \begin{solution}
+        $\displaystyle F\pare{p} = 2\rec{p+1} + 3\rec{p-2}$, 从而
+        \[ f\pare{t} = L^{-1}\brac{F} = 2L^{-1}\brac{\rec{p+1}} + 3L^{-1}\brac{\rec{p-2}} = 2e^{-t} + 3e^{2t}. \qedhere \]
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求解微分方程$\displaystyle \begin{cases}
+            y''\pare{t} + \omega^2 y\pare{t} = 0, \\
+            y\pare{0} = 0,\quad y'\pare{0} = \omega.
+        \end{cases}$
+    \end{ex}
+    \begin{solution}
+        令$Y\pare{p} = L\brac{y\pare{t}}$, 对微分方程作Laplace变换,
+        \begin{align*}
+            & p^2Y\pare{p} - py\pare{0} - y'\pare{0} + \omega^2 Y\pare{p} = 0, \\
+            &\Rightarrow Y\pare{p} = \frac{\omega}{p^2 + \omega^2}. \\
+            &y\pare{t} = L^{-1}\brac{Y\pare{p}} = L^{-1}\pare{\frac{\omega}{p^2+\omega^2}} = \sin\omega t. \qedhere
+        \end{align*}
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        幂函数$f\pare{t} = t^n$的Laplace变换还可以通过
+        \begin{align*}
+            L\brac{f^{\pare{n}}\pare{t}} &= p^n L\brac{f\pare{t}} - p^{n-1}f\pare{0} - \cdots - f^{\pare{n-1}}\pare{0} = p^nL\brac{t^n}\\ &= L\brac{n!} = n!L\brac{1} = \frac{n!}{p}.\\
+            \Rightarrow L\brac{t^n} &= \frac{n!}{p^{n+1}}
+        \end{align*}
+        得到.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \begin{align*}
+            L\brac{t\sin\omega t} &= -\+dpd{}\pare{\frac{\omega}{p^2+\omega^2}} = \frac{2p\omega}{\pare{p^2+\omega^2}^2}. \\
+            L\brac{t^2\cos^2\omega t} &= \half L\brac{t^2 \pare{1+\cos 2t}} = \half \frac{\rd{^2}}{\rd{p^2}}\brac{\rec{p} + \frac{p^2}{p^2+4}} \\
+            &= \frac{2\pare{p^6 + 24p^2 + 32}}{p^3 \pare{p^2+4}^3}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        \begin{align*}
+            L\brac{\sin t} &= \rec{1+p^2}, \\
+            L\brac{\frac{\sin t}{t}} &= \int_p^\infty \rec{1+p^2}\,\rd{p} = \frac{\pi}{2} - \arctan p. \\
+            \int_0^\infty \frac{\sin t}{t} e^{-pt}\,\rd{t} &= \frac{\pi}{2} - \arctan p.
+        \end{align*}
+        特别地, 令$p = 0$, 则
+        \[ \int_0^\infty \frac{\sin t}{t}\,\rd{t} = \frac{\pi}{2}. \]
+    \end{ex}
+\end{sample}
+\begin{remark}
+    令$p=0$, 则有
+    \begin{align*}
+        \int_0^\infty f\pare{t}\,\rd{t} &= F\pare{0}, \\
+        \int_0^\infty tf\pare{t}\,\rd{t} &= -F'\pare{0}, \\
+        \int_0^\infty \frac{f\pare{t}}{t}\,\rd{t} &= \int_0^\infty F\pare{p}\,\rd{p}.
+    \end{align*}
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        为了计算
+        \[ \int_0^\infty \frac{e^{-at}- e^{-bt}}{t}\,\rd{t}, \]
+        考虑到
+        \begin{align*}
+            L\brac{e^{-at} - e^{-bt}} &= \rec{p+a} - \rec{p+b}, \\
+            \int_0^\infty \frac{e^{-at}- e^{-bt}}{t}\,\rd{t} &= \int_0^\infty \pare{\rec{p+a} - \rec{p+b}}\,\rd{p} = \left.\ln \frac{p+a}{p+b}\right\vert_0^\infty = \ln \frac{b}{a}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        为了计算
+        \[ \int_0^\infty e^{-3t}\cos 2t\,\rd{t}, \]
+        考虑到
+        \begin{align*}
+            L\brac{\cos 2t} &= \frac{p}{p^2+4}, \\
+        \int_0^\infty e^{-3t}\cos 2t\,\rd{t} &= \left. L\brac{\cos 2t}\right\vert_{p=3} = \left. \frac{p}{p^2+4}\right\vert_{p=3} = \frac{3}{13}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        为了计算
+        \[ \int_0^\infty \frac{1-\cos t}{t}e^{-t}\,\rd{t}, \]
+        考虑到
+        \begin{align*}
+            L\brac{\frac{1-\cos t}{t}} &= \int_p^\infty L\brac{1-\cos t}\,\rd{p} \\
+            &= \int_p^\infty \rec{p\pare{p^2+1}}\,\rd{p} \\
+            &= \left. \half\ln \frac{p^2}{p^2+1}\right\vert_p^\infty = \half \ln \frac{p^2+1}{p^2}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $f\pare{t} = \sin t$, 求$\displaystyle L\brac{f\pare{t-\frac{\pi}{2}}}$.
+    \end{ex}
+    \begin{solution}
+        \begin{align*}
+            L\brac{f\pare{t-\frac{\pi}{2}}} &= e^{-p\pi/2}L\brac{f\pare{t}} = e^{-p\pi/2}L\brac{\sin t} = e^{-p\pi/2} \rec{1+p^2}. \qedhere
+        \end{align*}
+    \end{solution}
+    \begin{remark}
+        $\displaystyle L\brac{\sin\pare{t - \frac{\pi}{2}}} = L\brac{-\cos t} = -\rec{p^2+1}$, 但$\displaystyle f\pare{t-\frac{\pi}{2}}$在$\displaystyle \pare{0,\frac{\pi}{2}}$的取值为零.
+    \end{remark}
+    \begin{remark}
+        采用严格写法, 则
+        \begin{align*}
+            L^{-1}\brac{\frac{e^{-p\pi/2}}{1+p^2}} &= \sin \pare{t-\frac{\pi}{2}} h\pare{t-\frac{\pi}{2}} \\
+            &= \begin{cases}
+                -\cos t, & t\ge \pi/2, \\
+                0, & t<\pi/2.
+            \end{cases}
+        \end{align*}
+    \end{remark}
+\end{sample}
+\begin{pitfall}
+    应用延迟性时应采用严格写法.
+\end{pitfall}
+\begin{sample}
+    \begin{ex}
+        \begin{align*}
+            L\brac{e^{\lambda t}t^n} &= \frac{n!}{\pare{p-\lambda}^{n+1}}, \\
+            L\brac{e^{\lambda t}\sin \omega t} &= \frac{\omega}{\pare{p-\lambda}^2 + \omega^2}, \\
+            L\brac{e^{\lambda t}\cos \omega t} &= \frac{p-\lambda}{\pare{p-\lambda}^2 + \omega^2}.
+        \end{align*}
+        任何一个有理函数都可以写成右侧三种有理函数的线性组合, 故借助这三条公式可以简化有理函数的积分.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $f_1\pare{t} = t$, $f_2\pare{t} = \sin t$,
+        \begin{align*}
+            f_1*f_2 &= \int_0^t \tau \sin \pare{t-\tau}\,\rd{\tau} \\
+            &= \left.\tau\cos\pare{t-\tau}\right\vert_0^t - \int_0^t \cos\pare{t-\tau}\,\rd{\tau} \\
+            &= t-\sin t.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle F\pare{p} = \frac{p^2}{\pare{p^2+1}^2}$, 求$f\pare{t} = L^{-1}\brac{F}$.
+    \end{ex}
+    \begin{solution}
+        \begin{align*}
+            f\pare{t} &= L^{-1}\brac{f} = L^{-1}\brac{\frac{p}{p^2+1}\cdot \frac{p}{p^2+1}} \\
+            &= L^{-1}\brac{\frac{p}{p^2+1}} * L^{-1}\brac{\frac{p}{p^2+1}} \\
+            &= \cos t * \cos t \\
+            &= \half \pare{t\cos t + \sin t}. \qedhere
+        \end{align*}
+    \end{solution}
+\end{sample}
+
+% subsection laplace变换 (end)
+
+\subsection{Laplace逆变换} % (fold)
+\label{sub:laplace逆变换}
+
+对于Fourier变换和逆变换, 有
+\[ \+sF\brac{f} = \int_{-\infty}^{+\infty} f\pare{t}e^{-i\sigma t}\,\rd{t},\quad \+sF^{-1}\brac{F} = \rec{2\pi} \int_{-\infty}^{\infty} F\pare{\sigma} e^{i\sigma x}\,\rd{\sigma}. \]
+设$p=\sigma + is$, 有
+\begin{align*}
+    L\brac{f} = F\pare{p} &= \int_{-\infty}^{+\infty} \pare{f\pare{t}h\pare{t}e^{-\sigma t}}e^{-ist}\,\rd{t}, \\
+    f\pare{t}h\pare{t}e^{-\sigma t} &= \rec{2\pi} \int_{-\infty}^{+\infty} F\pare{\sigma + is}e^{ist}\,\rd{s}.
+\end{align*}
+\begin{theorem}
+    取定$\sigma > c$, 在$f\pare{t}$连续处, 有
+    \[ f\pare{t} = \rec{2\pi i}\int_{\sigma - i\infty}^{\sigma + i\infty}F\pare{p} e^{-pt}\,\rd{p}. \]
+\end{theorem}
+\begin{theorem}
+    若$F\pare{p}$除在半平面$\Re p\le \sigma$有奇点$p_1,p_2,\cdots,p_n$外处处解析, $p\rightarrow\infty$时$F\pare{p}\rightarrow 0$, 且
+    \[ \int_{\sigma-i\infty}^{\sigma+i\infty} F\pare{p}\,\rd{p} \]
+    当$\sigma > c$时绝对收敛, 则
+    \begin{cenum}
+        \item $F\pare{p}$为
+        \[ f\pare{t} = \rec{2\pi i}\int_{\sigma-i\infty}^{\sigma+i\infty} F\pare{p}e^{pt}\,\rd{p} \]
+        的像函数;
+        \item $\displaystyle f\pare{t} = \sum_{k=1}^n \Residue\pare{F\pare{p}e^{pt},p_k}$, $t>0$.
+    \end{cenum}
+\end{theorem}
+\begin{proof}
+    设$p=\sigma+is$,
+    \begin{align*}
+        F\pare{p} &= \int_{-\infty}^{+\infty} \pare{f\pare{t}h\pare{t}e^{-\sigma t}} e^{-ist}\,\rd{t}, \\
+        f\pare{t}g\pare{t}e^{-\sigma t} &= \rec{2\pi}\int_{-\infty}^{+\infty}F\pare{p}e^{ist}\,\rd{s} \\
+        \Rightarrow f\pare{t} &= \rec{2\pi i} \int_{\sigma-i\infty}^{\sigma+i\infty} F\pare{p}e^{pt}\,\rd{p}. \qedhere
+    \end{align*}
+\end{proof}
+欲求
+\[ F\pare{p} = \frac{Q_m}{P_n} \]
+的Laplace逆变换, 对$P_n$求根后可得部分分式分解
+\[ F\pare{p} = \frac{Q_m}{P_n} = \sum c_j \rec{\pare{p-z_j}^{k_j}}. \]
+欲求得实系数的部分分式分解, 将$P_n$分解为一次或二次的实系数多项式即可. 再引用
+\begin{align*}
+            {e^{\lambda t}t^n} &= L^{-1}\brac{\frac{n!}{\pare{p-\lambda}^{n+1}}}, \\
+            {e^{\lambda t}\sin \omega t} &= L^{-1}\brac{\frac{\omega}{\pare{p-\lambda}^2 + \omega^2}}, \\
+            {e^{\lambda t}\cos \omega t} &= L^{-1}\brac{\frac{p-\lambda}{\pare{p-\lambda}^2 + \omega^2}}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        求$\displaystyle F\pare{p} = \rec{\pare{p-2}\pare{p-1}^2}$的Laplace逆变换.
+    \end{ex}
+    \begin{solution}
+        设$F\pare{p} = \frac{a_1}{p-2} + \frac{a_2}{p-1} + \frac{a_3}{\pare{p-1}^2}$, 通过代入$p$的特殊值求解待定系数可得
+        \begin{align*}
+            F\pare{p} &= \rec{p-2} - \rec{p-1} - \rec{\pare{p-1}^2}. \\
+            f\pare{t} &= L^{-1}\brac{\rec{p-2}} - L^{-1}\brac{\rec{p-1}} - L^{-1}\brac{\rec{\pare{p-1}^2}} \\
+            &= e^{2t} - e^t - te^t. \qedhere
+        \end{align*}
+    \end{solution}
+    \begin{proof}[第二种解法]
+        $\displaystyle F_1\pare{p} = \rec{p-2}$, $\displaystyle F_2\pare{p} = \rec{\pare{p-1}^2}$, 分别有逆变换$f_1\pare{t} = L^{-1}\brac{F_1} = e^{2t}$, $f_2\pare{t}=L^{-1}\brac{F_2}=te^t$, 故
+        \begin{align*}
+            f\pare{t} &= L^{-1}\brac{F_1\cdot F_2} = f_1 * f_2 \\
+            &= \int_0^t \tau e^\tau e^{2\pare{t-\tau}}\,\rd{\tau} \\
+            &= e^{2t} - e^t - te^t. \qedhere
+        \end{align*}
+    \end{proof}
+    \begin{proof}[第三种解法]
+        \begin{align*}
+            f\pare{t} &= \Residue\brac{F\pare{p}e^{pt},2} + \Residue\brac{F\pare{p}e^{pt}, 1} \\
+            &= \left.\frac{e^{pt}}{\pare{p-1}^2}\right\vert_{p=2} + \left.\pare{\frac{e^{pt}}{\pare{p-2}}}'\right\vert_{p=1} \\
+            &= e^{2t} - e^{t} - te^t. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求解$\displaystyle \begin{cases}
+            x''\pare{t} - 2x'\pare{t} + 2x\pare{t} = 2e^t\cos t, \\
+            x'\pare{0} = x\pare{0} = 0.
+        \end{cases}$
+    \end{ex}
+    \begin{solution}
+        令$X\pare{p} = L\brac{x\pare{t}}$,
+        \begin{align*}
+            & p^2X\pare{p} - 2pX\pare{p} + 2X\pare{p} = \frac{2\pare{p-1}}{\pare{p-1}^2 + 1}. \\
+            & X\pare{p} = \frac{2\pare{p-1}}{\brac{\pare{p-1}^2 + 1}^2}. \\
+            & x\pare{t} = L^{-1}\brac{X\pare{p}} = L^{-1}\brac{\frac{2\pare{p-1}}{\brac{\pare{p-1}^2+1}^2}} \\
+            &= e^t L^{-1}\brac{\frac{2p}{\pare{p^2+1}^2}} \\
+            &= e^t L^{-1}\brac{\+dpd{}\pare{\frac{-1}{p^2+1}}} \\
+            &= te^t L^{-1}\brac{\rec{p^2+1}} \\
+            &= te^t\sin t. \qedhere
+        \end{align*}
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求解$\displaystyle \begin{cases}
+            x'\pare{t} + x\pare{t} - y\pare{t} = e^t, \\
+            y'\pare{t} + 3x\pare{t} - 2y\pare{t} = 2e^t, \\
+            x\pare{0} = y\pare{0} = 1.
+        \end{cases}$
+    \end{ex}
+    \begin{proof}
+        令$X\pare{p} = L\brac{x\pare{t}}$, $Y\pare{p} = L\brac{y\pare{t}}$, 有
+        \begin{align*}
+            & \left\{ \begin{aligned}
+                pX\pare{p} - 1 + X\pare{p} - Y\pare{p} = \rec{p-1}, \\
+                pY\pare{p} - 1 + 3X\pare{p} - 2Y\pare{p} = \frac{2}{p-1}
+            \end{aligned} \right. \Rightarrow \left\{ \begin{aligned}
+                X\pare{p} = \rec{p-1}, \\
+                Y\pare{p} = \rec{p-1}.
+            \end{aligned} \right.\\
+            &\Rightarrow x\pare{t} = y\pare{t} = e^t. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        质量为$m$的物体静止在原点. 在$t=0$时受到$x$方向的力$F_0\delta\pare{t}$.
+    \end{ex}
+    \begin{solution}
+        $\displaystyle \begin{cases}
+            mx''\pare{t} = F_0\delta\pare{t}, \\
+            x\pare{0} = x'\pare{0} = 0.
+        \end{cases}$而$L\brac{\delta\pare{t}} = 1$, $F*\delta\pare{t} = F$.
+        \[ mpX\pare{p} = F_0 \Rightarrow X\pare{p} = \frac{F_0}{mp^2} \Rightarrow x\pare{t} = \frac{F_0}{m}t. \qedhere \]
+    \end{solution}
+\end{sample}
+
+% subsection laplace逆变换 (end)
+
+% section laplace变换 (end)
+
+\end{document}

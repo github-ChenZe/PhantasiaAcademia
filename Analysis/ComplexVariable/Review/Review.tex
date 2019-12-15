@@ -1,0 +1,109 @@
+\documentclass[../ComplexVariable.tex]{subfiles}
+
+\begin{document}
+
+\section{复习} % (fold)
+\label{sec:复习}
+
+\subsection{复数与平面点集} % (fold)
+\label{sub:复数与平面点集}
+
+$z=x+iy=r\pare{\cos\theta+i\sin\theta}=re^{i\theta}$, 其中$r=\abs{z}$, $\theta\in\Arg z$. 引入$\infty$后, 可以将$\+bC$补全为$\+bC_\infty = \+bC\cup\curb{\infty} \sim S^2$. 区域谓非空连通开集.
+
+% subsection 复数与平面点集 (end)
+
+\subsection{复变函数} % (fold)
+\label{sub:复变函数}
+
+$\func{f}{D\subset \+bC}{\+bC}$谓复变函数. 解析谓在一区域内可导. 可导意味着$u$和$v$皆可导且满足C-R方程.
+\par
+初等函数$e^{i\theta} = \cos\theta + i\sin\theta$, $e^z$, $\sin z$, $\cos z$, $\ln z$, $\Ln z$可定义.
+
+% subsection 复变函数 (end)
+
+\subsection{复积分} % (fold)
+\label{sub:复积分}
+
+$\displaystyle \int_\gamma f\pare{z}\,\rd{z} = \int_\gamma \pare{u+iv}\pare{\rd{x} + i\,\rd{y}}$. 有
+\[ \int_{\abs{z-z_0}} \frac{\rd{z}}{\pare{z-z_0}^n} = \begin{cases}
+    2\pi i, & n=1, \\
+    0, & n\neq 1.
+\end{cases} \]
+Cauchy定理和Cauchy积分公式表明
+\[ f^{\pare{n}}\pare{z_0} = \frac{n!}{2\pi i}\int_\gamma \frac{f\pare{z}\,\rd{z}}{\pare{z-z_0}^{n+1}}. \]
+\par
+原函数存在当且仅当积分与路径无关, 即$\int_\gamma f = 0$. 应用如
+\begin{cenum}
+    \item 平均值定理, $\displaystyle f\pare{z_0} = \int_0^{2\pi} f\pare{z_0+re^{i\theta}}\,\rd{\theta}/2\pi$.
+    \item 代数学基本定理.
+    \item 最大模原理.
+\end{cenum}
+
+% subsection 复积分 (end)
+
+\subsection{调和函数} % (fold)
+\label{sub:调和函数}
+
+若$u$和$v$使得$f=u+iv$解析, 则谓二者共轭调和函数. 由此引出调和函数的判定和性质.
+
+% subsection 调和函数 (end)
+
+\subsection{级数展开} % (fold)
+\label{sub:级数展开}
+
+在一致收敛的条件下,
+\[ \lim \sum = \sum \lim,\quad \int \sum = \sum \int,\quad \+dzd{} \sum = \sum \+dzd{}. \]
+此外还有关于级数收敛半径的Abel定理,
+\[ f=\sum_{n=0}^\infty a_n\pare{z-z_0}^n \Rightarrow R = \cdots. \]
+Taylor展开表明
+\[ f\pare{z} = \sum_{n=0}^\infty \frac{f^{\pare{n}}\pare{z_0}}{n!}\pare{z-z_0}^n, \]
+其求得可以用
+\begin{cenum}
+    \item 公式;
+    \item 用已知的$e^z$, $\sin z$, $\cos z$, $\displaystyle \rec{1-z}$, $\displaystyle \ln \pare{1+z}$等的展开式凑得;
+    \item 待定系数法.
+\end{cenum}
+应用如
+\begin{cenum}
+    \item 零点阶数$m$使$f\pare{z} = \pare{z-z_0}^mg\pare{z}$;
+    \item 辐角原理表明
+    \[ \rec{2\pi}\Delta\Arg f = \rec{2\pi i} \int \frac{f'\pare{z}}{f\pare{z}}\,\rd{z} = N - P. \]
+    \item Rouch\'e定理表明若$\abs{f-g} < \abs{f}$在边界上成立, 则$f$和$g$在区域内的零点个数相同.
+    \item 开映射定理以及$f'\pare{z}\neq 0$与$f$作为单叶解析映射的等价性.
+    \item 唯一性定理表明$f=g$在一收敛点列上成立则$f\equiv g$. 故
+    \[ \sin^2 x + \cos^2 x = 1 \Rightarrow \sin^2 z + \cos^2 z = 1. \]
+\end{cenum}
+
+% subsection 级数展开 (end)
+
+\subsection{Laurent展开} % (fold)
+\label{sub:laurent展开}
+
+Laurent展开之目的在于求$\int_\gamma f\,\rd{z}$.
+\par
+Laurent展开允许将函数展开为
+\[ f\pare{z} = \sum_{n=-\infty}^{+\infty} a_n\pare{z-z_n}^n, \]
+参考p.105习题.
+\par
+Laurent展开引出了解析函数的孤立奇点, 分为可去奇点, ($m$阶)极点, 本性奇点.
+\par
+留数定理表明, 为了计算$\int_\gamma f\,\rd{z}$, 若$\gamma$内部仅有有限多奇点$z_1,\cdots,z_n$, 则先计算出各奇点的留数后
+\[ \int_\gamma f\pare{z}\,\rd{z} = \sum_{k=1}^n \Residue{f,z_k}. \]
+其中计算留数时对可去奇点, 极点和本性奇点有不同策略.
+\par
+应用如计算
+\[ \int_0^{2\pi} R\pare{\cos\theta,\sin\theta}\,\rd{\theta},\quad \int_{-\infty}^{+\infty} f\pare{x}\,\rd{x} \]
+的积分.
+
+% subsection laurent展开 (end)
+
+\subsection{考试范围} % (fold)
+\label{sub:考试范围}
+
+cf. p.17.2, p.18.16, .17参考. 删除支点等部分. p.44双曲函数及反三角函数删除. p.48.14, 15删除. p.47.5, .6参考. p.49.23参考. Ch.3是重点, 参考课后习题中的每一题. Ch.4参考课后习题. p.74较少涉及. Ch.5.p.77掠过, Abel定理为重点, 参考课后习题. Ch.6作为重点, 但p.120-p.126删除. 辐交原理为重点, cf.p.128.Thm.5, cf. p.129.ex.15类型, ex.16排除. p.133.6(7)和7排除. p.133.10可排除. Ch.7第二小节删除. p.134第一小节参考唯一性定理, p.143.2, 3参考, 5, 6排除. Ch.8.p.160以下删除. 习题11(5)之后删除. Ch.9考试类型p.214.1, p.216.7, 8, 9, 10参考.
+
+% subsection 考试范围 (end)
+
+% section 复习 (end)
+
+\end{document}

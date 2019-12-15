@@ -1,0 +1,140 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{交流动态电路和相量法} % (fold)
+\label{sec:交流动态电路和相量法}
+
+\subsection{交流电路} % (fold)
+\label{sub:交流电路}
+
+若电路中所含电源为交流电源, 则谓之交流电路. 交流电压源的电压以及交流电流源的电流都是随时间周期性变化的. 如果这一变化方式按正弦规律变化, 则谓之正弦交流电源
+\par
+若交流电路中除电源外所含元件至少有一个动态元件, 则谓之动态交流电路.
+\par
+电力供电系统可以用交流动态电路作为模型. 通信及自动控制电路的周期信号通常不是按正弦方式变化的, 但通过Fourier级数可以将其展开谓正弦信号之和.
+
+% subsection 交流电路 (end)
+
+\subsection{周期电压和电流} % (fold)
+\label{sub:周期电压和电流}
+
+随时间变化的电压和电流谓时变电压和电流. 如果给出参考方向, 在任意时刻$t$, 电压或电流的数值可以由函数$u\pare{t}$或$i\pare{t}$确定. 根据电压或电流瞬时值的正负号结合参考方向, 可确定电压降或电流的真实方向.
+\par
+如果时变电压或电流时周期性的, 则谓之周期电压和周期电流, 此时$u\pare{t} = u\pare{t+kT}$. 单位时间内的循环数谓频率, $f = 1/T$.
+\par
+按正弦规律变化的信号, 有$u\pare{t} = U_m \cos \omega t$. 若时间起点并非恰好选在$u$取最大值的瞬间, 而是在最大值后$\theta$处, 则
+\[ u\pare{t} = U_m \cos\pare{\omega t + \theta} = U_m\cos\pare{2\pi ft + \theta} = U_m\cos\pare{\frac{2\pi t}{T}+\theta}. \]
+正弦波中$\omega t + \theta$谓其相位. 一个正弦波可以由振幅, 频率和初相完全确定.
+\par
+两个同频率的正弦波的初相之差谓两者的相位差. $\varphi_{12} = \theta_1 - \theta_2$表示$u_1$的相位超前$u_2$的角度, 一般取$\abs{\varphi_{12}}\le \pi$.
+\begin{cenum}
+    \item 若相位差为零, 两个正弦波同相位, 谓同相;
+    \item 若相位差$\pm \pi/2$, 谓正交;
+    \item 若相位差$\pi$, 谓反相.
+\end{cenum}
+
+% subsection 周期电压和电流 (end)
+
+\subsection{正弦RC电路分析} % (fold)
+\label{sub:正弦rc电路分析}
+
+设输入到RC电路的正弦电流为
+\[ i_s\pare{t} = I_{sm}\cos\pare{\omega t + \theta_i}. \]
+电路的微分方程为
+\[ C\+dtd{u_C} + \rec{R}u_C = I_{sm}\cos\pare{\omega t + \theta},\quad t\ge 0,\quad u_C\pare{0} = 0. \]
+通解和特解分别为
+\[ u_{Ch} = Ke^{-\rec{RC}t},\quad u_{Cp} = U_{Cm}\cos \pare{\omega t + \theta_u}. \]
+其中
+\[ U_{Cm} = \frac{I_{sm}}{\sqrt{\omega^2 C^2 + \rec{R}^2}},\quad \theta_u = \theta_i - \arctan \pare{\omega CR}. \]
+由初始条件, $K = -U_{Cm}\cos\theta_u$,
+\[ u_C\pare{t} = -U_{Cm}\cos\theta_u e^{-\frac{t}{RC}} + U_{Cm}\cos\pare{\omega t + \theta_u}. \]
+
+% subsection 正弦rc电路分析 (end)
+
+\subsection{相量} % (fold)
+\label{sub:相量}
+
+相量法用于求解微分方程的特解.
+\[ u\pare{t} = \Re U_m e^{j\pare{\omega t + \theta}} = \tilde{U}_m e^{j\omega t}. \]
+其中$\tilde{U}_m = U_m e^{j\theta} = U_m \angle \theta$. 其模长表示振幅, 辐角表示初相. 电流振幅相量记为$\tilde{I}_m$.
+
+% subsection 相量 (end)
+
+\subsection{有效值} % (fold)
+\label{sub:有效值}
+
+有效值相当于产生相同平均功率的直流值,
+\[ I = \sqrt{\rec{T}\int_0^T i^2\,\rd{t}},\quad U = \sqrt{\rec{T}\int_0^T u^2\,\rd{t}}. \]
+对于正弦输入,
+\[ I = \frac{I_m}{\sqrt{2}},\quad U = \frac{U_m}{\sqrt{2}}. \]
+电压有效值相量为
+\[ \tilde{U} = U\angle\theta,\quad \tilde{U}_m = \sqrt{2}\tilde{U}. \]
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+Ch.8. 5, 6, 19, 20
+
+% paragraph 作业 (end)
+
+\begin{pitfall}
+    通常相量指有效值相量, 记得转化之.
+\end{pitfall}
+
+% subsection 有效值 (end)
+
+\subsection{Kirchhoff定律的相量形式} % (fold)
+\label{sub:kirchhoff定律的相量形式}
+
+将Kirchhoff的形式套用至有效值相量仍然成立, 即对于节点和回路,
+\[ \sum \tilde{I}_k = 0,\quad \sum \tilde{U}_k = 0. \]
+
+% subsection kirchhoff定律的相量形式 (end)
+
+\subsection{基本元件的VCR的相量形式} % (fold)
+\label{sub:基本元件的vcr的相量形式}
+
+对于正弦波, 通过电阻时
+\[ \sqrt{2}U\cos\pare{\omega t + \theta_u} = R\times\sqrt{2}I\cos\pare{\omega t + \theta_i},\quad \tilde I = \tilde U / R. \]
+对于电容, 电流超前电压$90$度,
+\[ u\pare{t} = \sqrt{2}U\cos\pare{\omega t + \theta_u} \Rightarrow i\pare{t} = \sqrt{2}U\omega C\cos\pare{\omega t + \theta_u + \frac{pi}{2}}, \quad \tilde{I} = j\omega C \tilde U. \]
+对于电感, 电流滞后于电压$90$度. 从而
+\[ \tilde{U} = j\omega L\tilde I. \]
+
+% subsection 基本元件的vcr的相量形式 (end)
+
+\subsection{阻抗和导纳} % (fold)
+\label{sub:阻抗和导纳}
+
+在关联参考方向下, 三种基本元件的VCR分别为
+\[ \tilde{U} = R\tilde{I},\quad \tilde{U} = \rec{j\omega C}\tilde{I},\quad \tilde{U} = j\omega L\tilde{I}. \]
+如果将元件在正弦稳态下电压相量和电流向量之比定义为元件的阻抗,
+\[ \tilde{U} = Z\tilde{I}. \]
+因此
+\[ Z_R = R,\quad Z_C = \rec{j\omega C},\quad Z_L = j\omega L. \]
+阻抗之导数谓导纳,
+\[ Y = \rec{Z},\quad Y = \frac{\tilde{I}}{\tilde{U}}. \]
+三种基本元件的导纳分别为
+\[ Y_R = G,\quad Y_C = j\omega C,\quad Y_L = \rec{j\omega L}. \]
+
+% subsection 阻抗和导纳 (end)
+
+\subsection{相量模型的网孔分析法与节点分析法} % (fold)
+\label{sub:相量模型的网孔分析法与节点分析法}
+
+网孔分析与节点分析对于相量表述仍然适用.
+
+% subsection 相量模型的网孔分析法与节点分析法 (end)
+
+% section 交流动态电路和相量法 (end)
+
+\paragraph{大作业} % (fold)
+\label{par:大作业}
+自己出一套试卷或者整理一份笔记(一张纸).
+
+% paragraph 大作业 (end)
+
+\end{document}

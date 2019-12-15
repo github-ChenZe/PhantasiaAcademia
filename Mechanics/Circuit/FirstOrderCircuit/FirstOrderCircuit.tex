@@ -1,0 +1,286 @@
+\documentclass{ctexart}
+
+\usepackage[nova]{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+\usepackage{float}
+\newcommand*{\equal}{=}
+
+\begin{document}
+
+\section{一阶电路} % (fold)
+\label{sec:一阶电路}
+
+\begin{cenum}
+    \item 在动态电路中, KCL, KVL和元件的VCR仍然适用.
+    \item 只含一个动态元件的线性, 时不变电路可以用线性常系数一阶常微分方程描述.
+    \item 用一阶微分方程来描述的电路谓一阶电路.
+\end{cenum}
+
+\subsection{分解方法} % (fold)
+\label{sub:分解方法}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.9\textwidth}
+        \centering
+            \begin{circuitikz}
+        \draw (0,0) -- (2,0) -- (2,2) -- (0,2) -- cycle;
+        \draw (1,1) node[]{\parbox{4em}{\textit{含源电阻网络}}};
+        \draw [dashed] (4,2)--(4,0)--(6,0)--(6,2) -- cycle;
+        \draw (2,1.75) to[short,-o,i=$i$] (3,1.75) -- (5,1.75) to[capacitor,C=$C$] (5,0.25) to[short,-o] (3,0.25) -- (2,0.25);
+        \draw (3.25,0.25) to[open,v^<=$u_C$] (3.25,1.75);
+        \draw (1,0) node[below]{$N_1$};
+        \draw (5,0) node[below]{$N_2$};
+    \end{circuitikz}
+    \caption{}
+    \label{fig:一阶原电路}
+    \end{subfigure}
+    \begin{subfigure}{.9\textwidth}
+        \centering
+        \begin{circuitikz}
+        \draw (0,0) to[european voltage source,v<=$u_{0C}\pare{t}$] (0,2) to[resistor,v=$u_{R_0}\pare{t}$, R=$R_0$] (3,2) to[short,-o,i=$i\pare{t}$] (4,2) -- (5,2) to[capacitor,v=$u_C\pare{t}$,C=$C$] (5,0) to[short,-o] (4,0) -- (0,0);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:一阶Thevenin等效}
+    \end{subfigure}
+    \begin{subfigure}{.9\textwidth}
+        \centering
+        \begin{circuitikz}
+        \draw (0,0) to[european current source,i=$i_{SC}\pare{t}$] (0,2) -- (3,2) to[short,-o,i=$i\pare{t}$] (4,2) -- (5,2) to[capacitor,v=$u_C\pare{t}$,C=$C$] (5,0) to[short,-o] (4,0) -- (0,0);
+        \draw (2,0) to[resistor,R=$G_0$] (2,2);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:一阶Norton等效}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+\begin{cenum}
+    \item 一阶电路可视为两个单口网络组成. 其一含电源及电阻元件, 其二含动态元件.
+    \item 如\cref{fig:一阶原电路}, 对$N_1$使用Th\'evenin定理或Norton定理得到\cref{fig:一阶Thevenin等效}或\cref{fig:一阶Norton等效}的等效.
+    \item 从\cref{fig:一阶Thevenin等效}和\cref{fig:一阶Norton等效}出发可得到$u_C$.
+\end{cenum}
+
+含电容的电路应化为电压源串联电阻串联电感. 含电感的电路应化为电流源并联电阻并联电感. 两者分别有
+\begin{flalign*}
+    && u_{R_0}\pare{t} + u_C\pare{t} &= u_{0C}\pare{t},  & u_{R_0}\pare{t} + u_L\pare{t} &= u_{0C}\pare{t}, & \\
+    && i\pare{t} &= C\+dtd{u_C}, & u_L\pare{t} &= L\+dtd{i_L}, & \\
+    && \Rightarrow R_0C \+dtd{u_C}+u_C &= u_{0C}\pare{t}, & \Rightarrow L\+dtd{i_L} + R_0 i_L &= u_{0C}\pare{t}, & \\
+    &&C\+dtd{u_C} + G_0u_C &= i_{SC}\pare{t}, & G_0L\+dtd{i_L} + i_L &= i_{SC}\pare{t}. &
+\end{flalign*}
+{\color{red}电容电压与电感电流为电路的状态变量}, 故方程谓电路的状态方程. 以$x$泛指状态变量, $w$泛指输入, 则状态方程可归结为
+\[ \+dtdx = Ax + Bw. \]
+电容和电感的状态方程分别为
+\[ \+dtd{u_C} = -\rec{R_0C}u_C + \rec{R_0C}u_{0C},\quad \+dtd{i_L} = -\frac{R_0}{L}i_L + \frac{R_0}{L}i_{0C}\pare{t}. \]
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source,v<=$\stackrel{\displaystyle u_{S}\pare{t}}{t\ge t_0}\ $] (0,4) to[resistor,R=$R_0$] (3,4) to[short,-o,i=$i_C\pare{t}$] (4,4) -- (6,4) to[capacitor,v=$u_1\pare{t}$,C=$C$] (6,2) to[european voltage source,v=$u_C\pare{t_0}$] (6,0) to[short,-o] (4,0) -- (0,0);
+        \draw (4,0) to[open,v^<=$u_C\pare{t}$] (4,4);
+    \end{circuitikz}
+    \caption{}
+    \label{fig:RC电路有两个独立源}
+\end{figure}
+\par
+如\cref{fig:RC电路有两个独立源}, $t\ge t_0$时RC串联的等效电路中, 存在两个独立的电压源. 根据叠加原理可分别考虑两个源的效果.
+\begin{cenum}
+    \item 零输入响应: 仅由动态元件非零初始值作用引起的响应;
+    \item 零初始响应: 仅由电路输入所引起的响应.
+\end{cenum}
+
+% subsection 分解方法 (end)
+
+\subsection{零输入响应} % (fold)
+\label{sub:零输入响应}
+
+零输入响应仅仅是非零初始状态引起的. 若初始时刻储能谓零, 则这一响应为零.
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[battery,invert,l=$U_s \equal U_0$] (0,2) to[ospst=$S_1$] (3,2) to[capacitor,*-*,C=$C$,v=$u_C\pare{0}\equal U_0$] (3,0) -- (0,0);
+        \draw (3,2) to[cspst=$S_2$] (6,2) to[resistor,i=$i\pare{t}$,R=$R$] (6,0) -- (3,0);
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \draw[->] (-1,0) -- (5,0) node[right]{$t\pare{\SI{}{\second}}$};
+        \draw[->] (0,-1) -- (0,2.5) node[above]{$u_C\pare{\SI{}{\volt}}$};
+        \draw[domain=-1:0] plot[id=const] function{2};
+        \draw[domain=0:5] plot[id=nexp] function{2*exp(-x)};
+        \draw[domain=-0.1:1.1] plot[id=tangentzero] function {2-2*x};
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \draw[->] (-1,0) -- (5,0) node[right]{$t\pare{\SI{}{\second}}$};
+        \draw[->] (0,-1) -- (0,2.5) node[above]{$i_C\pare{\SI{}{\ampere}}$};
+        \draw[thick,domain=-1:0] plot[id=const2] function{0};
+        \draw[thick] (0,0) -- (0,2);
+        \draw[domain=0:5] plot[id=nexp] function{2*exp(-x)};
+    \end{tikzpicture}
+    \caption{}
+    \label{fig:电容电流和电压变化}
+\end{figure}
+\par
+若所关心者为$t>0$时电路的情况, 则电路的方程为
+\[ RC\+dtd{u_C} + u_C = 0,\quad t\ge 0. \]
+解为
+\[ u_C\pare{t} = Ke^{-\rec{RC}t},\quad u_C\pare{0} = K = U_0,\quad u_C\pare{t} = U_0e^{-\rec{RC}t}. \]
+如\cref{fig:电容电流和电压变化}, 电流在$t=0$时刻会发生跃变, 但电压是连续的. $\tau = RC$表示电压/电流衰减至初始值$1/e$的特征时间, 谓\emph{时间常数}.
+\par
+对于RL电路, 分析也是类似的.
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[european current source,i=$I \equal I_0$] (0,2) to[ospst=$S_1$, mirror, invert] (3,2) to[inductor,*-*,L=$L$,i^=$i_L\pare{0}\equal I_0$] (3,0) -- (0,0);
+        \draw (1.5,0) to[short,-o] (1.5,1.6);
+        \draw (3,2) to[cspst=$S_2$] (6,2) to[resistor,R=$R$] (6,0) -- (3,0);
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \draw[->] (-1,0) -- (5,0) node[right]{$t\pare{\SI{}{\second}}$};
+        \draw[->] (0,-1) -- (0,2.5) node[above]{$i_L\pare{\SI{}{\ampere}}$};
+        \draw[domain=-1:0] plot[id=const] function{2};
+        \draw[domain=0:5] plot[id=nexp] function{2*exp(-x)};
+        \draw[domain=-0.1:1.1] plot[id=tangentzero] function {2-2*x};
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \draw[->] (-1,0) -- (5,0) node[right]{$t\pare{\SI{}{\second}}$};
+        \draw[->] (0,-2.5) -- (0,1) node[above]{$u_L\pare{\SI{}{\volt}}$};
+        \draw[thick,domain=-1:0] plot[id=const2] function{0};
+        \draw[thick] (0,0) -- (0,-2);
+        \draw[domain=0:5] plot[id=negnexp] function{-2*exp(-x)};
+    \end{tikzpicture}
+    \caption{}
+    \label{fig:电感电流和电压变化}
+\end{figure}
+\par
+状态方程
+\[ L\+dtd{i_L} + Ri_L = 0, \quad i_L\pare{0} = I_0,\quad \Rightarrow i_L\pare{t} = I_0 e^{-t/\tau}.\]
+其中$\tau = L/R$谓\emph{时间常数}. 相应的电压为
+\[ u_L = L\+dtd{i_L} = -RI_0 e^{-t/\tau}. \]
+\begin{cenum}
+    \item 零输入响应求解时需要电容电压或者电感电流的初始值.
+    \item 此外, 零输入响应总是按指数衰减至零.
+    \item 时间常数在RC和RL电路中分别为$\tau = RC$和$\tau = L/R$.
+\end{cenum}
+
+% subsection 零输入响应 (end)
+
+\subsection{零状态响应} % (fold)
+\label{sub:零状态响应}
+
+零初始状态下, 由在初始时刻施加于电路的输入所产生的响应谓\emph{零状态响应}.
+\begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[european current source,i=$I_S$] (0,2) -- (2,2) to[ospst,invert,*-*] (2,0) -- (0,0);
+        \draw (2,2) -- (4,2) to[capacitor,C=$C$,v=$u_C\pare{t}$,*-*] (4,0) -- (2,0);
+        \draw (4,2) -- (6,2) to[resistor,R=$R$] (6,0) -- (4,0);
+    \end{circuitikz}
+\end{figure}
+开关打开前, 电流完全经过短路线. $t=0$时开关打开, 电流源与RC电路接通, R和C的电压相等, 故
+\[ C\+dtd{u_C} + \frac{u_C}{R} = I_S,\quad t\ge 0,\quad u_C\pare{0} = 0. \]
+初始时, 电容电压为零, 故相应的电阻电流为零, 电流完全流过电容. 而当电容两端存在一定电压后, 电阻开始分摊部分电流. 最终$u_C\approx RI_S$, 进入直流稳态. 方程有解
+\[ u_C\pare{t} = RI_S\pare{1-e^{-\frac{t}{RC}}},\quad t\ge 0. \]
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \draw[->] (-1,0) -- (5,0) node[right]{$t\pare{\SI{}{\second}}$};
+        \draw[->] (0,-1) -- (0,2.5) node[above]{$u_C\pare{\SI{}{\volt}}$};
+        \draw[dashed,domain=0:5] plot[id=consttop] function{2};
+        \draw[domain=0:5] plot[id=smoothascend] function{2*(1-exp(-x))};
+    \end{tikzpicture}
+\end{figure}
+$u_C$从零值开始上升趋向于稳态值$RI_S$, 时间常数$\tau = RC$.
+\par
+\begin{figure}[htbp]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source,v<=$U_S$] (0,2) to[cspst,invert] (2,2) to[resistor,R=$R$] (4,2) to[inductor,L=$L$,i=$i_L\pare{t}$] (4,0) -- (0,0);
+    \end{circuitikz}
+\end{figure}
+RL电路的零状态响应也可以类似分析, 注意初始时$i_L\pare{0} = 0$, 从而
+\[ L\+dtd{i_L} + Ri_L = U_S,\quad \Rightarrow i_L\pare{t} = \frac{U_S}{R}\pare{1-e^{-\frac{R}{L}t}},\quad t\ge 0. \]
+\begin{remark}
+    微分方程的解中的齐次方程解谓固有响应或暂态响应分量, 完全由电路本身决定. 特解谓强制响应分量. 如果强制响应为常量或周期函数, 则这一分量谓稳态响应分量.
+\end{remark}
+
+% subsection 零状态响应 (end)
+
+\subsection{线性动态电路的叠加原理} % (fold)
+\label{sub:线性动态电路的叠加原理}
+
+\begin{cenum}
+    \item 多个独立源作用于线性动态电路, 零状态响应为各个独立源单独作用时产生的零状态响应的代数和.
+    \item 初始状态和输入共同作用下的响应谓完全响应. 完全响应为零输入响应和零状态响应之和.
+\end{cenum}
+
+% subsection 线性动态电路的叠加原理 (end)
+
+\subsection{三要素法} % (fold)
+\label{sub:三要素法}
+
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{6cm}
+        \begin{circuitikz}
+            \draw (0,0) to[european voltage source, v<=$u_{0C}\pare{t}$] (0,2) to[resistor,R=$R_0$,v=$u_{R_0}\pare{t}$,i=$i\pare{t}$] (2,2) to[short,-o] (3,2) -- (4,2) to[capacitor,C=$C$,v=$u_C\pare{t}$] (4,0) to[short,-o] (3,0) -- (0,0);
+        \end{circuitikz}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}{6cm}
+        \begin{circuitikz}
+            \draw (0,0) to[european current source,i=$i_{SC}\pare{t}$] (0,2) -- (2,2) to[resistor,l_=$G_0$,*-*] (2,0) -- (0,0);
+            \draw (2,2) to[short,-o,i=$i\pare{t}$] (3,2) -- (4,2) to[capacitor,C=$C$,v=$u_C\pare{t}$] (4,0) to[short,-o] (3,0) -- (2,0);
+        \end{circuitikz}
+        \caption{}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+RC或RL电路中的电压或电流可表示为
+\begin{align*}
+    u_C\pare{t} &= \brac{u_C\pare{0} - u_C\pare{\infty}}e^{-t/\tau} + u_C\pare{\infty},\\ i_L\pare{t} &= \brac{i_L\pare{0} - i_L\pare{\infty}}e^{-t/\tau} + i_L\pare{\infty}.
+\end{align*}
+类似的表达式适用于任意支路. 即任意支路的电压或电流都有通式
+\[ f\pare{t} = \brac{f\pare{0} - f\pare{\infty}}e^{-t/\tau} + f\pare{\infty}. \]
+三要素法解题的一般步骤:
+\begin{cenum}
+    \item 用电压为$u_C\pare{0}$的直流电压源置换电容, 用电流为$i_L\pare{0}$的直流电流源置换电感, 得到$t=0$时的等效电路, 求任一电压或电流的初始值$u_{jk}\pare{0}$或$i_j\pare{0}$.
+    \item 用开路代替电容, 短路代替电感, 得到$t=\infty$的等效电路, 求得稳态值$u_{jk}\pare{\infty}$或$i_j\pare{\infty}$.
+    \item 求$N_1$的Th\'evenin或Norton等效, 计算$\tau = R_0C$或$\tau=L/R_0$.
+    \item 根据三要素法, $\displaystyle f\pare{t} = f\pare{\infty} + \brac{f\pare{0} - f\pare{\infty}} e^{-t/\tau}$.
+\end{cenum}
+其中
+\begin{cenum}
+    \item 求初始值时,
+    \begin{cenum}
+        \item 电容$u_C\pare{0_+} = u_C\pare{0_-}$, 电感$i_L\pare{0_+} = i_L\pare{0_-}$.
+        \item 作$t=0_+$的等效电路, 用电压为$u_C\pare{0}$的直流电压源置换电容, 用电流为$i_L\pare{0}$的直流电流源置换电感.
+        \item 求$t=0_+$时的等效电路的所需初始值$f\pare{0_+}$.
+    \end{cenum}
+    \item 求稳态值时,
+    \begin{cenum}
+        \item 作$t=\infty$的等效电路, 电容开路, 电感短路.
+        \item 在$t=\infty$的等效电路中求所需稳态值$f\pare{\infty}$.
+    \end{cenum}
+    \item 求时间常数$\tau$时,
+    \begin{cenum}
+        \item 先求出动态元件两端的Th\'evenin等效. 求$R_0$时
+        \begin{cenum}
+            \item 独立源若为零值, 则直接用电阻的串并联化简;
+            \item 独立源为零值, 外加电压$u$, 求输入端电流$j$, 等效电阻等于端钮上的电压与电流比;
+            \item 开路电压比短路电流(独立源保留).
+        \end{cenum}
+        \item 含受控源的电路只能用2, 3两种方法.
+        \item 电路的时间常数$\tau = R_0C$或$\tau = L/R_0$.
+    \end{cenum}
+    \item 代入三要素法的公式,
+    \[ f\pare{t} = f\pare{\infty} + \brac{f\pare{0_+} - f\pare{\infty}}e^{-t/\tau}. \]
+\end{cenum}
+
+% subsection 三要素法 (end)
+
+% section 一阶电路 (end)
+
+\end{document}
