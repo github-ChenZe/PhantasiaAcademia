@@ -1,0 +1,53 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+概念: 样本空间, 样本; 概率/条件概率; 独立性; \\
+随机变量$\rightarrow$分布函数$\rightarrow$连续/离散$\rightarrow$密度函数. \\
+期望, 方差$\leftrightarrow$二项, 几何, Poisson, 均匀, 指数, 正态, $\chi^2$, $T$, $F$.\\
+协方差.\\
+正态, $E\abs{X-\mu}$, $EX^2$, $EX$.\\
+二元: 条件分布$f\pare{X\vert Y}$, 边际分布$f\pare{x}$, $f\pare{y}$.\\
+条件期望, 边界期望, 协方差.\\
+
+\paragraph{$\chi^2$分布} % (fold)
+\label{par:分布}
+
+设$X_1, \cdots, X_n$ i.i.d. $\sim N\pare{0,1}$, 则
+\[ Y = X_1^2 + \cdots + X_n^2 \sim \chi_n^2. \]
+
+% paragraph 分布 (end)
+
+\paragraph{$t$分布} % (fold)
+\label{par:分布}
+
+$X\sim N\pare{0,1}$而$Y\sim \chi_n^2$且$X,Y$独立, 则
+\[ T = \frac{X}{\sqrt{Y/n}} \sim t_n. \]
+
+% paragraph 分布 (end)
+
+\paragraph{$F$分布} % (fold)
+\label{par:分布}
+
+$X\sim \chi_m^2$, $Y\sim \chi_n^2$, 则
+\[ F = \frac{X/m}{Y/n} \sim F_{m,n}. \]
+
+% paragraph 分布 (end)
+
+\par
+仅对于正态分布, 有$\cov \pare{X,Y} = 0 \Rightarrow X, Y$独立. 若$Z = N\pare{\mu,\Sigma}$, 且$X = \+va z$, $Y = \+vb z$, 则
+\[ \cov\pare{\+va z, \+vb z} = \+va^T \cov\pare{z,z}\+vb = \+va^T \Sigma \+vb. \]
+设$z_1, \cdots, z_4$ i.i.d. $\sim N\pare{0,1}$, 则
+\begin{align*}
+    X &= Z_1 + \cdots + Z_4 \sim N\pare{0,4}, \\
+    Y &= Z_1 + Z_2 - Z_3 - Z_4 \sim N\pare{0,4}.
+\end{align*}
+但$\pare{1,1,1,1}$和$\pare{1,1,-1,-1}$正交, 故$X$和$Y$无关.
+\begin{ex}
+    设$X/2$, $Y/2$, $Z/\sqrt{2}$都服从$N\pare{0,1}$, 则
+    \[ \frac{Z^2}{2} + \frac{Y^2}{4}\sim \chi_2^2,\quad \frac{X}{\sqrt{\frac{Z^2/2 + Y^2/4}{2}}}\sim t_{2}. \]
+\end{ex}
+
+\end{document}

@@ -1,0 +1,79 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{广义超几何函数} % (fold)
+\label{sec:广义超几何函数}
+
+对于给定的$a_1,\cdots,a_p$, $b_1,\cdots,b_q$, 取$\beta_0 = 1$而
+\[ \frac{\beta_{n+1}}{\beta_n} = \frac{\prod_{i=1}^p \pare{a_i + n}}{\prod_{i=1}^q\pare{b_i + n}}, \]
+记
+\[ {_pF_q} \pare{a_1,\cdots,a_p;b_1,\cdots,b_q;z} = {_pF_q}\brac{\begin{matrix}
+    a_1 & \cdots & a_p \\
+    b_1 & \cdots & b_q
+\end{matrix};z} = \sum_{n=0}^\infty \beta_n \frac{z^n}{n!} \]
+为广义超几何函数.
+\begin{remark}
+    按照上述定义, 当$p < q+1$时收敛半径为$\infty$, 当$p=q+1$时收敛半径为$1$, 其余情况收敛半径为$0$.
+\end{remark}
+\begin{ex}
+    ${_0F_0}\pare{;;z} = e^z$.
+\end{ex}
+\begin{ex}
+    ${_1F_0}\pare{a;;z} = \pare{1-z}^{-a}$.
+\end{ex}
+\begin{ex}
+    $z\cdot{_2F_1}\pare{1,1,;2;-z} = \ln\pare{1+z}$.
+\end{ex}
+\begin{ex}
+    $z\cdot{_2F_1}\pare{1/2,1/2;3/2;z^2} = \arcsin z$.
+\end{ex}
+
+\subsection{Bessel函数} % (fold)
+\label{sub:bessel函数}
+
+Bessel函数可用广义超几何函数表示,
+\[ J_\alpha\pare{x} = \frac{\pare{x/2}^\alpha}{\Gamma\pare{\alpha+1}}\cdot{_0F_1}\pare{;\alpha+1,-\rec{4}x^2}. \]
+
+% subsection bessel函数 (end)
+
+\subsection{Laguerre函数} % (fold)
+\label{sub:laguerre函数}
+
+Laguerre函数可用广义超几何函数表示,
+\[ L_n^{\pare{\alpha}}\pare{x} = \binom{n+\alpha}{n}{_1F_1}\pare{-n;\alpha+1;z}. \]
+
+% subsection laguerre函数 (end)
+
+\subsection{Legendre函数} % (fold)
+\label{sub:legendre函数}
+
+关联Legendre函数可用超几何函数表示,
+\[ P_{\nu}^\mu\pare{z} = \rec{\Gamma\pare{1-\mu}}\pare{\frac{z-1}{z+1}}^{\mu/2}{_2F_1}\pare{-\nu,\nu+1;1-\mu;\frac{1-z}{2}}. \]
+
+\subsubsection{球谐函数} % (fold)
+\label{ssub:球谐函数}
+
+球谐函数可用关联Legendre函数表示,
+\[ Y_l^m\pare{\theta,\varphi} = \sqrt{\frac{\pare{l-m}!}{\pare{l+m}!}\frac{2l+1}{4\pi}}P_l^m\pare{\cos\theta}e^{im\varphi}. \]
+
+% subsubsection 球谐函数 (end)
+
+% subsection legendre函数 (end)
+
+\subsection{多对数函数} % (fold)
+\label{sub:多对数函数}
+
+多对数函数可用超几何函数表示,
+\[ \Li_s\pare{z} = z\cdot{_{s+1}F_s}\brac{\begin{matrix}
+    1 & \cdots & 1 \\
+    2 & \cdots & 2
+\end{matrix};z}. \]
+
+% subsection 多对数函数 (end)
+
+% section 广义超几何函数 (end)
+
+\end{document}

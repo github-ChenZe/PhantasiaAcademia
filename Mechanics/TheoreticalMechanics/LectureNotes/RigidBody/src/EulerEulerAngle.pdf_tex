@@ -1,0 +1,65 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'EulerEulerAngle.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{673.66875115bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.11901612)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{EulerEulerAngle.pdf}}%
+    \put(0.00584614,0.06730152){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+ve'_x$}}}%
+    \put(1.02372665,0.42355971){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+ve'_y$}}}%
+    \put(0.40663659,1.08518204){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+ve'_z$}}}%
+    \put(0.73426686,0.06730152){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+ve_x$}}}%
+    \put(0.94420469,0.77663698){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+ve_y$}}}%
+    \put(-0.00369652,1.05337324){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+ve_z$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{EulerEulerAngle.pdf}}%
+    \put(0.25713541,0.30904799){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi$}}}%
+    \put(0.42254097,0.2804201){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\psi$}}}%
+    \put(0.26031628,0.69711493){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\theta$}}}%
+    \put(0.27622066,0.45536836){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$O$}}}%
+  \end{picture}%
+\endgroup%

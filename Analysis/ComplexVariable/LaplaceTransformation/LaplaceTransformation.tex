@@ -585,6 +585,63 @@ Laplace变换中, 卷积
 
 % subsection laplace逆变换 (end)
 
+\subsection{Mellin变换} % (fold)
+\label{sub:mellin变换}
+
+Mellin变换及其逆变换为
+\begin{align*}
+    \curb{\+cMf}\pare{s} &= \varphi\pare{s} = \int_0^\infty x^{s-1}f\pare{x}\,\rd{x},\\ \curb{\+cM^{-1}\varphi}\pare{x} &= f\pare{x} = \rec{2\pi i} \int_{c-i\infty}^{c+i\infty} x^{-s}\varphi\pare{s}\,\rd{s}.
+\end{align*}
+其与Fourier变换之间有联系
+\begin{align*}
+    \curb{\+sFf}\pare{-s} &= \curb{\+cMf\pare{-\ln x}}\pare{-is}, \\
+    \curb{\+cMf}\pare{s} &= \curb{\+sFf\pare{e^{-x}}}\pare{-is}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        记$f\pare{x} = e^{-x}$, 则
+        \[ \curb{\+cMf}\pare{s} = \int_0^\infty x^{s-1}e^{-x}\,\rd{x} = \Gamma\pare{s}. \]
+        采用$y^{-s}$的主支, 对$c>0$有
+        \[ e^{-y} = \rec{2\pi i} \int_{c-i\infty}^{c+i\infty}\Gamma\pare{s}y^{-s}\,\rd{s}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        记$f\pare{x} = e^{-px}$, 则
+        \[ \curb{\+cMf}\pare{s} = \int_0^\infty x^se^{-px}\,\frac{\rd{x}}{x} = \rec{p^s}\Gamma\pare{s}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        记$\displaystyle f\pare{x} = \rec{e^x-1}$, 则
+        \[ \curb{\+cMf}\pare{s} = \int_0^\infty x^{s-1}\rec{e^x-1}\,\rd{x} = \sum_{n=1}^\infty \rec{n^s}\Gamma\pare{s} = \Gamma\pare{s}\zeta\pare{z}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对微分方程
+        \[ \rec{r}\+DrD{}\pare{r\+DrDf} + \rec{r^2}\frac{\partial^2 f}{\partial\theta^2} = 0 \]
+        作Mellin变换$r\mapsto s$, 有
+        \[ s^2F + \frac{\partial^2 F}{\partial\theta^2} = 0. \]
+        这有通解
+        \[ F\pare{s,\theta} = C_1\pare{s}\cos\pare{s\theta} + C_2\pare{s}\sin\pare{s\theta}. \]
+        再作逆变换即可.
+    \end{ex}
+\end{sample}
+设有Dirichlet级数
+\[ g\pare{s} = \sum_{n=1}^\infty \frac{a\pare{n}}{n^s} = s\int_1^\infty A\pare{x}x^{-\pare{s+1}}\,\rd{x}, \]
+其中$\displaystyle A\pare{x} = \sideset{}{'}\sum_{n\le x} a\pare{n}$, 其中$\displaystyle \sideset{}{'}\sum$表示$n=x$的项取权重$1/2$. 由Mellin逆变换,
+\[ A\pare{x} = \sideset{}{'}\sum_{n\le x} a\pare{n} = \rec{2\pi i}\int_{c-i\infty}^{c+i\infty}g\pare{z} \frac{x^z}{z}\,\rd{z}. \]
+设$\Lambda\pare{n}$为von Mangoldt函数, 即若有某素数$p$满足$n=p^k$则$\Lambda\pare{n} = \log p$否则$\Lambda\pare{n} = 0$, 则
+\[ \frac{\zeta'\pare{s}}{\zeta\pare{s}} = -\sum_{n=1}^\infty \frac{\Lambda\pare{n}}{n^s}. \]
+从而
+\[ \sideset{}{'}\sum_{n\le x} \Lambda\pare{n} = \rec{2\pi i}\int_{c-i\infty}^{c+i\infty} \pare{-\frac{\zeta'\pare{z}}{\zeta\pare{z}}}\frac{x^z}{z}\,\rd{z}. \]
+$\zeta\pare{z}$在$\Re z = 1$上仅有$z=1$处有奇点且无零点之事实表明
+\[ \sideset{}{'}\sum_{n\le x} \Lambda\pare{x} \sim x. \]
+再由$\displaystyle \sideset{}{'}\sum_{n\le x} \Lambda\pare{x} \sim \pi\pare{x}\log x$, 可得$\displaystyle \pi\pare{x} \sim \frac{x}{\ln x}$, 即素数定理.
+
+% subsection mellin变换 (end)
+
 % section laplace变换 (end)
 
 \end{document}

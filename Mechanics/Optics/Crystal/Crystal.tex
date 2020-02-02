@@ -506,7 +506,7 @@ p.181 1,2,3 (p.390), p.187 1,2,3 (p.394)
 \subsubsection{Jones表述} % (fold)
 \label{ssub:jones表述}
 
-若$\ket{H}$用$\begin{pmatrix}
+参考\href{https://en.wikipedia.org/wiki/Jones_calculus}{Jones calculus}. 若$\ket{H}$用$\begin{pmatrix}
     0 & 1
 \end{pmatrix}^T$表示, $\ket{V}$用$\begin{pmatrix}
     1 & 0
@@ -766,6 +766,90 @@ p.214 1, 3, 4, 6 (p.413)
 % subsubsection kerr效应pockels效应 (end)
 
 % subsection 偏振光干涉及其应用 (end)
+
+\subsection{旋光} % (fold)
+\label{sub:旋光}
+
+\subsubsection{石英的旋光现象} % (fold)
+\label{ssub:石英的旋光现象}
+
+石英晶体中, 线偏光沿着光轴传播, 电矢量振动面旋转; 旋光方向只与晶体有关.
+\[ \theta = \alpha l,\quad \alpha = \alpha\pare{\lambda}, \]
+其中$\alpha$谓旋光率. 由于$\alpha$是$\lambda$的函数, 故旋光时可能发生旋光色散.
+\par
+同一种晶体若具有不同的旋光方向则谓之旋光异构体(手性晶体, 对映异构体). 石英有levo(左旋)和dextro(右旋)两种异构体. Pasteur发现酒石酸可能有旋光性, 也可能消旋.
+
+% subsubsection 石英的旋光现象 (end)
+
+\subsubsection{Fresnel对旋光性的解释} % (fold)
+\label{ssub:fresnel对旋光性的解释}
+
+线偏光可视为两列反方向旋转的圆偏光合成. 在晶体中, 左旋光和右旋光的折射率不同, 因而在晶体中经过一段距离后一列光比另一列的相位滞后, 从而导致线偏光的振动面旋转.
+\par
+设左旋光有折射率$n_L$, 右旋光有折射率$n_R$, 则在$t$时刻, 关于$z$点光的相位有
+\begin{align*}
+    & \varphi_R\pare{t,0} = \varphi_L\pare{t,0} = \varphi_0, \\
+    & \varphi_R\pare{t,z} = \varphi_0 - \frac{2\pi}{\lambda}n_R z, \\
+    & \varphi_L\pare{t,z} = \varphi_0 - \frac{2\pi}{\lambda}n_L z.
+\end{align*}
+出晶体后, 左右旋的速度恢复一致, 重新合成为线偏光, 转角为左右旋相位延迟差值的一半,
+\[ \varphi = \half\pare{\varphi_R - \varphi_L}. \]
+\par
+\inlinehardlink{Fresnel复合棱镜}
+设$R$晶体满足$n_R<n_L$, $L$晶体满足$n_L < n_R$.
+\begin{cenum}
+    \item 第一次入射: $R$石英$\rightarrow L$石英.
+    \begin{cenum}
+        \item 对于$R$光, $R\rightarrow L$, $n$由小变大, $\alpha_R < \alpha_0$.
+        \item 对于$L$光, $R\rightarrow L$, $n$由大变小, $\alpha_L > \alpha_0$.
+    \end{cenum}
+    \item 第二次入射:$L$石英$\rightarrow R$石英.
+    \begin{cenum}
+        \item 对于$R$光, $n$由大变小, $\alpha_{R}' > \alpha_R$.
+        \item 对于$L$光, $n$由小变大, $\alpha_{L}' < \alpha_L$.
+    \end{cenum}
+\end{cenum}
+
+% subsubsection fresnel对旋光性的解释 (end)
+
+\subsubsection{旋光晶体中的波面} % (fold)
+\label{ssub:旋光晶体中的波面}
+
+\inlinehardlink{旋光晶体中的波面}
+
+% subsubsection 旋光晶体中的波面 (end)
+
+\subsubsection{量糖术} % (fold)
+\label{ssub:量糖术}
+
+$\theta = \alpha\cdot N\cdot L$.
+
+% subsubsection 量糖术 (end)
+
+\subsubsection{磁致旋光} % (fold)
+\label{ssub:磁致旋光}
+
+线偏光通过处于磁场中的介质后, 电矢量的振动面发生旋转,
+\[ B = 0,\quad \theta = 0.\quad \theta = VBl. \]
+假设光沿着磁场方向传播时发生左旋, 则逆着磁场传播时发生右旋.
+\begin{remark}
+    这意味着让光通过一个磁致旋光晶体后反射再次经过, 偏振面仍然会有非零的旋转角.
+\end{remark}
+由磁致旋光可制成单通光闸, 放置反射光损害激光器. \inlinehardlink{S2}
+\begin{remark}
+    可以由此设计出自动控制溶液浓度的系统.
+\end{remark}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.226 1,2,6 (p.424), 补充题: 采用Faraday旋转镜设计一个两次通过样品的光路(垂直光轴入射, 单轴晶体), 往返光路为同一光路, 且样品要求入射光偏振为特定方向的线偏光.
+
+% paragraph 作业 (end)
+
+% subsubsection 磁致旋光 (end)
+
+% subsection 旋光 (end)
 
 % section 晶体偏振光学 (end)
 

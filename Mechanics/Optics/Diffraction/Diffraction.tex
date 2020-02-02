@@ -875,6 +875,80 @@ $2d\sin\theta = k\lambda$即Bragg条件.
 
 % subsection 三维光栅 (end)
 
+\subsection{严格的衍射理论} % (fold)
+\label{sub:严格的衍射理论}
+
+\paragraph{Kirchhoff积分定理} % (fold)
+\label{par:kirchhoff积分定理}
+
+假设$P$在闭合曲面$S$外, 则单色波在$P$处的微扰$\psi\pare{\+vr}$可以表达为
+\begin{align*}
+    \psi\pare{\+vr} &= \rec{4\pi} \oiint_S \brac{\psi\pare{\+vr'}\grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\grad_{\+vr'}\psi\pare{\+vr'}}\cdot\rd{\+vS'} \\
+    &= \rec{4\pi} \oiint_S \brac{\psi\pare{\+vr'}\+D{n'}D{}\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\+D{n'}D{}\psi\pare{\+vr'}}\,\rd{S'}.
+\end{align*}
+\begin{proof}
+    由Green第二恒等式, 对于二次连续可微的$\psi$和$\phi$,
+    \[ \iiint_V\pare{\psi\laplacian \phi - \phi \laplacian \psi}\,\rd{V} = \oiint_{S} \pare{\psi\grad\phi - \phi\grad\psi}\cdot\rd{\+vS}. \]
+    设函数$\psi\pare{\+vr}$满足Helmholtz方程
+    \[ \pare{\laplacian + k^2} \psi\pare{\+vr} = 0, \]
+    而$\phi\pare{\+vr,\+vr'} = \displaystyle \frac{e^{ik\rcurs}}{4\pi \rcurs}$是一种Green函数, 则
+    \[ \pare{\laplacian + k^2} \phi\pare{\+vr,\+vr'} = -\delta\pare{\+vr - \+vr'}. \]
+    将上述$\psi$和$\phi$代入Green第二恒等式, 则
+    \begin{align*}
+        &-\iiint_V \psi\pare{\+vr}\delta\pare{\+vr-\+vr'}\,\rd{V}\\ &= \rec{4\pi}\oiint_S \brac{\psi\pare{\+vr}\grad\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\grad\psi\pare{\+vr}}\cdot\rd{\+vS}.
+    \end{align*}
+    若对于场源点积分, 则应将积分变量替换为$\+vr'$, 从而
+    \begin{align*}
+        &-\iiint_V \psi\pare{\+vr'}\delta\pare{\+vr-\+vr'}\,\rd{V'}\\ &= \rec{4\pi}\oiint_S \brac{\psi\pare{\+vr'}\grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\grad_{\+vr'}\psi\pare{\+vr'}}\cdot\rd{\+vS'}.\\
+        &\Rightarrow \psi\pare{\+vr} = -\rec{4\pi}\oiint_S \brac{\psi\pare{\+vr'}\grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\grad_{\+vr'}\psi\pare{\+vr'}}\cdot\rd{\+vS'}.
+    \end{align*}
+    这是对于场点在波前面内部的情形. 实际情形应当为场点在波前面外部, 此时在曲面$S_1$外构造无限大曲面$S_2$, 若扰动在$r\rightarrow\infty$时为$o\pare{r^{-2}}$, 则$S_2$的贡献可略去, 仍有
+    \[ \psi\pare{\+vr} = -\rec{4\pi}\oiint_S \brac{\psi\pare{\+vr'}\grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\grad_{\+vr'}\psi\pare{\+vr'}}\cdot\rd{\+vS'}, \]
+    惟此时$\rd{\+vS'}$从曲面$S_1$向内指入. 若重新定向使得$\rd{\+vS'}$向外指出, 则
+    \[ \psi\pare{\+vr} = \rec{4\pi}\oiint_S \brac{\psi\pare{\+vr'}\grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\grad_{\+vr'}\psi\pare{\+vr'}}\cdot\rd{\+vS'}. \qedhere \]
+\end{proof}
+
+% paragraph kirchhoff积分定理 (end)
+
+\paragraph{Kirchhoff衍射公式} % (fold)
+\label{par:kirchhoff衍射公式}
+
+为了化简上述积分, 作假设$r'\gg \lambda$以及$\rcurs \gg \lambda$, 同时仅考虑由点波源$Q_0$发射的单频率波, 满足$\displaystyle \psi\pare{\+vr'} = \psi_0 \frac{e^{ikr'}}{r'}$, 则由Kirchhoff积分定理,
+\[ \psi\pare{\+vr'} = \frac{\psi_0}{4\pi}\oiint_S \brac{\pare{\frac{e^{ikr'}}{r'}}\grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} - \pare{\frac{e^{ik\rcurs}}{\rcurs}}\grad_{\+vr'}\pare{\frac{e^{ikr'}}{r'}}}\cdot\rd{\+vS'}. \]
+其中
+\begin{align*}
+    \grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} &= -\pare{\frac{e^{ik\rcurs}}{\rcurs}}\pare{ik - \rec{\rcurs}}\hrcurs, \\
+    \grad_{\+vr'}\pare{\frac{e^{ikr'}}{r'}} &= \pare{\frac{e^{ikr'}}{r'}}\pare{ik - \rec{r'}}\+ur'.
+\end{align*}
+由前述假定, $k\gg 1/R$, $k\gg 1/r'$, 从而上述公式近似为
+\begin{align*}
+    \grad_{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}} &= -ik\pare{\frac{e^{ik\rcurs}}{\rcurs}}\hrcurs, \\
+    \grad_{\+vr'}\pare{\frac{e^{ikr'}}{r'}} &= ik\pare{\frac{e^{ikr'}}{r'}}\+ur'.
+\end{align*}
+因此在$P$点的波扰为
+\begin{align*}
+    \psi\pare{\+vr} &= -\frac{i\varphi_0}{2\lambda} \oiint_S \pare{\frac{e^{ik\pare{r'+\rcurs}}}{r'\rcurs}}\pare{\+ur'\cdot\+un + \brcurs\cdot\+un}\,\rd{S'} \\
+    &= -\frac{i\varphi_0}{2\lambda} \oiint_S \pare{\frac{e^{ik\pare{r'+\rcurs}}}{r'\rcurs}}\pare{\cos\alpha + \cos\chi}\,\rd{S'}.
+\end{align*}
+其中$\alpha$和$\chi$分别是$\+ur'$和$\brcurs$和$\+un$之间的夹角. 如果取球面波前, 则倾斜因子为$\displaystyle \frac{1+\cos\chi}{2}$,
+\[ \psi\pare{\+vr} = \frac{-i}{\lambda}\oiint_S \psi\pare{\+vr'}\pare{\frac{e^{ik\rcurs}}{\rcurs}}\frac{1+\cos\chi}{2}\,\rd{S'}. \]
+
+% paragraph kirchhoff衍射公式 (end)
+
+\paragraph{Fresnel近似} % (fold)
+\label{par:fresnel近似}
+
+在傍轴条件下,
+\[ \rcurs = \sqrt{\pare{x-x'}^2 + \pare{y-y'}^2 + z^2} = \sqrt{\rho^2 + z^2} = z + \frac{\rho^2}{2z} - \frac{\rho^4}{8z^3} + \cdots. \]
+若$\displaystyle \frac{k\rho^4}{8z^3} \ll 2\pi$, 则高阶项可略去, 此时Fresnel近似
+\[ \rcurs \approx z + \frac{\rho^2}{2z} = z + \frac{\pare{x-x'}^2 + \pare{y-y'}^2}{2z} \]
+可生效. 假设波前经过孔径尺寸足够小, 使$\displaystyle \frac{1+\cos\chi}{2}\approx 1$, 且$x,y\ll z$使得$\rcurs \approx z$, 则$\pare{x,y,z}$处的波扰近似为
+\[ \psi\pare{x,y,z} = -\frac{ie^{ikz}}{\lambda z} \iint_S \psi\pare{x',y',0}e^{ik \frac{\pare{x-x'}^2+\pare{y-y'}^2}{2z}}\,\rd{x'}\,\rd{y'}. \]
+
+% paragraph fresnel近似 (end)
+
+% subsection 严格的衍射理论 (end)
+
 % section 衍射 (end)
 
 \end{document}

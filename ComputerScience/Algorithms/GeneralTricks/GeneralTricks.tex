@@ -143,7 +143,25 @@ int length_of_longest_ascending_subsequence(int* arr, int n)
 
 % subsubsection 最长上升子序列 (end)
 
+\subsubsection{三目等差数列计数} % (fold)
+\label{ssub:三目等差数列计数}
+
+给定$\curb{1,\cdots,n}$的一个子集$S$, 求其长度为$3$的等差数列的个数, \href{https://www.quora.com/How-can-you-count-the-number-of-3-term-arithmetic-progressions-in-a-subset-of-1-n-using-an-algorithm-which-runs-in-O-n-log-n-time/answer/Alon-Amit?ch=99&share=eebd96a1&srid=hX9A9}{可以用FFT解决}.
+\par
+这一问题转化为对$\curb{1,\cdots,n}$中的所有$a$求$x+y=2a$在$S$中的解的数目. 设$f\pare{k}\in \curb{0,1}$标记$k$是否在$S$中, 则问题转化为求卷积$\displaystyle \sum_k f\pare{k}f\pare{m-k}$, 其中$m$应取遍$\curb{1,\cdots,2n}$.
+\par
+构造$\displaystyle \pare{f\pare{1},\cdots,f\pare{n}, \underbrace{0,\cdots,0}_{n\text{个}}}$, 取其DFT$\displaystyle \pare{\hat f\pare{1},\cdots, \hat f\pare{2n}}$, 逐项平方, 得到$\displaystyle \pare{\hat f\pare{1}^2,\cdots, \hat f\pare{2n}^2}$, 取其逆DFT, 得到$\displaystyle \pare{g\pare{1},\cdots,g\pare{2n}}$, $g\pare{k}$即$x+y=k$在$S$中的解数. $\displaystyle \sum_{k\in S}\pare{g\pare{k}-1}$即为等差数列之数目.
+
+% subsubsection 三目等差数列计数 (end)
+
 % subsection 序列 (end)
+
+\subsection{集合} % (fold)
+\label{sub:集合}
+
+\href{https://en.wikipedia.org/wiki/Disjoint-set_data_structure}{并查集算法.}
+
+% subsection 集合 (end)
 
 % section 一般算法 (end)
 

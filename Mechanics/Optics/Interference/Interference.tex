@@ -699,6 +699,25 @@ FSR$= \displaystyle \frac{c}{2nh}$当$h$下降时会上升.
 
 % subsection fabry_perot干涉仪 (end)
 
+\subsection{Mach-Zehnder干涉仪} % (fold)
+\label{sub:mach_zehnder干涉仪}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=8cm]{src/MachZehnderInterferometer.png}
+    \caption{Mach-Zehnder干涉仪}
+    \label{fig:mach_zehnder干涉仪}
+\end{figure}
+如\cref{fig:mach_zehnder干涉仪}, 准直光束经过一个第一个分束器后分为两束, 其中一束经过样品, 后又经过一分束器合为一束. 相位损失可以如下计算:
+\begin{cenum}
+    \item 若波从空气中传播遇到镜子表面的镀膜, 则反射波相移动$\pi$, 因为镀膜的折射率较高.
+    \item 若波从镜子内部遇到薄膜后反射, 则不发生相移, 因为玻璃的折射率较高.
+    \item 如果通过镜子后的玻璃导致相移$k$, 则通过玻璃被膜反射再出来后有相移$2k$.
+\end{cenum}
+因此, 无样品时, 两束光到达右侧探测器时相位相同(两束光都发生$2\pi + k$相移动), 故相长. 到达上方探测器时反相位(右下光相移$\pi+2k$, 左上光相移$2\pi+2k$), 故相消. 放入样品后, 两个探测器的强度改变, 可以推算样品引发的相位差.
+
+% subsection mach_zehnder干涉仪 (end)
+
 % section 光的干涉 (end)
 
 \end{document}

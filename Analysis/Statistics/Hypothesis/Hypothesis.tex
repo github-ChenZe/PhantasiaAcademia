@@ -510,15 +510,29 @@ $\mu$的MLE为$\overbar{X}$, 且$X\sim N\pare{\mu, \displaystyle \frac{\sigma^2}
 \par
 类似地, 置信水平为$1-\alpha$的单侧置信区间$\pare{\ubar{\theta},\infty}$或者$\pare{-\infty,\overbar{\theta}}$与显著性水平为$\alpha$的单边即检验问题有类似对应关系.
 
-\paragraph{LRT检验} % (fold)
-\label{par:lrt检验}
+\paragraph{似然比检验} % (fold)
+\label{par:似然比检验}
 
 设
 \[ H_0: \theta\in w_0\leftrightarrow \theta\in w-w_0, \]
 设$L\pare{\theta}$为似然函数, 一个合理的检验为对于
-\[ \Lambda = \frac{\max_{\theta\in w_0}L\pare{\theta}}{\max_{\theta \in w}L\pare{\theta}}, \]
+\[ \Lambda = \frac{\sup_{\theta\in w_0}L\pare{\theta}}{\sup_{\theta \in w}L\pare{\theta}}, \]
 当$\Lambda<c$时拒绝之. 可以证明当$H_0$为真,
 \[ -2\log \Lambda \xrightarrow{d} \chi^2\+_{df}_. \]
+\begin{sample}
+    \begin{ex}
+        设有正态样本$X_1,\cdots,X_n$ i.i.d. $\sim N\pare{\mu,\sigma}$, 检验
+        \[ H_0: \mu = \mu_0 \leftrightarrow H_1: \mu \neq \mu_0. \]
+        似然函数
+        \[ L\pare{\mu,\sigma\vert x} = \rec{\pare{2\pi\sigma^2}}^{-n/2} \exp\pare{-\sum_{i=1}^n \frac{\pare{x_i - \mu}^2}{2\sigma^2}}. \]
+        可以证明
+        \[ \Lambda = \pare{1+\frac{t^2}{n-1}}^{-n/2}, \]
+        其中$t$是一个自由度为$n-1$的$t$分布随机变量.
+    \end{ex}
+\end{sample}
+
+% paragraph 似然比检验 (end)
+
 \begin{remark}
     为了比较两种检验方法,
     \begin{cenum}
@@ -527,8 +541,6 @@ $\mu$的MLE为$\overbar{X}$, 且$X\sim N\pare{\mu, \displaystyle \frac{\sigma^2}
     \end{cenum}
     为了比较(在同一种检验方法下)两组样本支持$H_0$的证据强弱, 引入$p$值为$P\pare{\text{在$H_0$下出现像检验统计量的观测值那么糟糕或者更极端值的可能性}}$. 例如否定域的形式为$T>c$, 则$p=P_{H_0}\pare{T>T\+_obs_}$. 检验原则为$p\le\alpha$时$RH_0$, 且$p$值越小, 否定$H_0$的理由越充分.
 \end{remark}
-
-% paragraph lrt检验 (end)
 
 % subsubsection 置信区间和假设检验之间的关系 (end)
 

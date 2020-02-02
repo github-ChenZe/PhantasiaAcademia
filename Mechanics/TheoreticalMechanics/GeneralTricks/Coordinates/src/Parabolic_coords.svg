@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Parabolic coordinates.
+	Coded by Incnis Mrsi 2008, GFDL, attribution required.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="768" height="392" style="shape-rendering:geometricPrecision;" viewBox="-192 -98 384 196" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .grid {stroke:#CCCCFF;stroke-width:1;fill:none;}
+    .pp {stroke:#CC0000;stroke-width:1;fill:none;}
+    .pm {stroke:#00CC00;stroke-width:1;fill:none;}
+   ]]>
+  </style>
+ </defs>
+ <g>
+<!-- cartesian grid -->
+ <line class="grid" x1="-192" y1="-96" x2="192" y2="-96"/>
+ <line class="grid" x1="-192" y1="-90" x2="192" y2="-90"/>
+ <line class="grid" x1="-192" y1="-84" x2="192" y2="-84"/>
+ <line class="grid" x1="-192" y1="-78" x2="192" y2="-78"/>
+ <line class="grid" x1="-192" y1="-72" x2="192" y2="-72"/>
+ <line class="grid" x1="-192" y1="-66" x2="192" y2="-66"/>
+ <line class="grid" x1="-192" y1="-60" x2="192" y2="-60"/>
+ <line class="grid" x1="-192" y1="-54" x2="192" y2="-54"/>
+ <line class="grid" x1="-192" y1="-48" x2="192" y2="-48"/>
+ <line class="grid" x1="-192" y1="-42" x2="192" y2="-42"/>
+ <line class="grid" x1="-192" y1="-36" x2="192" y2="-36"/>
+ <line class="grid" x1="-192" y1="-30" x2="192" y2="-30"/>
+ <line class="grid" x1="-192" y1="-24" x2="192" y2="-24"/>
+ <line class="grid" x1="-192" y1="-18" x2="192" y2="-18"/>
+ <line class="grid" x1="-192" y1="-12" x2="192" y2="-12"/>
+ <line class="grid" x1="-192" y1="-6" x2="192" y2="-6"/>
+ <line class="grid" x1="-192" y1="0" x2="192" y2="0"/>
+ <line class="grid" x1="-192" y1="6" x2="192" y2="6"/>
+ <line class="grid" x1="-192" y1="12" x2="192" y2="12"/>
+ <line class="grid" x1="-192" y1="18" x2="192" y2="18"/>
+ <line class="grid" x1="-192" y1="24" x2="192" y2="24"/>
+ <line class="grid" x1="-192" y1="30" x2="192" y2="30"/>
+ <line class="grid" x1="-192" y1="36" x2="192" y2="36"/>
+ <line class="grid" x1="-192" y1="42" x2="192" y2="42"/>
+ <line class="grid" x1="-192" y1="48" x2="192" y2="48"/>
+ <line class="grid" x1="-192" y1="54" x2="192" y2="54"/>
+ <line class="grid" x1="-192" y1="60" x2="192" y2="60"/>
+ <line class="grid" x1="-192" y1="66" x2="192" y2="66"/>
+ <line class="grid" x1="-192" y1="72" x2="192" y2="72"/>
+ <line class="grid" x1="-192" y1="78" x2="192" y2="78"/>
+ <line class="grid" x1="-192" y1="84" x2="192" y2="84"/>
+ <line class="grid" x1="-192" y1="90" x2="192" y2="90"/>
+ <line class="grid" x1="-192" y1="96" x2="192" y2="96"/>
+
+ <line class="grid" x1="-192" y1="-96" x2="-192" y2="96"/>
+ <line class="grid" x1="-186" y1="-96" x2="-186" y2="96"/>
+ <line class="grid" x1="-180" y1="-96" x2="-180" y2="96"/>
+ <line class="grid" x1="-174" y1="-96" x2="-174" y2="96"/>
+ <line class="grid" x1="-168" y1="-96" x2="-168" y2="96"/>
+ <line class="grid" x1="-162" y1="-96" x2="-162" y2="96"/>
+ <line class="grid" x1="-156" y1="-96" x2="-156" y2="96"/>
+ <line class="grid" x1="-150" y1="-96" x2="-150" y2="96"/>
+ <line class="grid" x1="-144" y1="-96" x2="-144" y2="96"/>
+ <line class="grid" x1="-138" y1="-96" x2="-138" y2="96"/>
+ <line class="grid" x1="-132" y1="-96" x2="-132" y2="96"/>
+ <line class="grid" x1="-126" y1="-96" x2="-126" y2="96"/>
+ <line class="grid" x1="-120" y1="-96" x2="-120" y2="96"/>
+ <line class="grid" x1="-114" y1="-96" x2="-114" y2="96"/>
+ <line class="grid" x1="-108" y1="-96" x2="-108" y2="96"/>
+ <line class="grid" x1="-102" y1="-96" x2="-102" y2="96"/>
+ <line class="grid" x1="-96" y1="-96" x2="-96" y2="96"/>
+ <line class="grid" x1="-90" y1="-96" x2="-90" y2="96"/>
+ <line class="grid" x1="-84" y1="-96" x2="-84" y2="96"/>
+ <line class="grid" x1="-78" y1="-96" x2="-78" y2="96"/>
+ <line class="grid" x1="-72" y1="-96" x2="-72" y2="96"/>
+ <line class="grid" x1="-66" y1="-96" x2="-66" y2="96"/>
+ <line class="grid" x1="-60" y1="-96" x2="-60" y2="96"/>
+ <line class="grid" x1="-54" y1="-96" x2="-54" y2="96"/>
+ <line class="grid" x1="-48" y1="-96" x2="-48" y2="96"/>
+ <line class="grid" x1="-42" y1="-96" x2="-42" y2="96"/>
+ <line class="grid" x1="-36" y1="-96" x2="-36" y2="96"/>
+ <line class="grid" x1="-30" y1="-96" x2="-30" y2="96"/>
+ <line class="grid" x1="-24" y1="-96" x2="-24" y2="96"/>
+ <line class="grid" x1="-18" y1="-96" x2="-18" y2="96"/>
+ <line class="grid" x1="-12" y1="-96" x2="-12" y2="96"/>
+ <line class="grid" x1="-6" y1="-96" x2="-6" y2="96"/>
+ <line class="grid" x1="0" y1="-96" x2="0" y2="96"/>
+ <line class="grid" x1="6" y1="-96" x2="6" y2="96"/>
+ <line class="grid" x1="12" y1="-96" x2="12" y2="96"/>
+ <line class="grid" x1="18" y1="-96" x2="18" y2="96"/>
+ <line class="grid" x1="24" y1="-96" x2="24" y2="96"/>
+ <line class="grid" x1="30" y1="-96" x2="30" y2="96"/>
+ <line class="grid" x1="36" y1="-96" x2="36" y2="96"/>
+ <line class="grid" x1="42" y1="-96" x2="42" y2="96"/>
+ <line class="grid" x1="48" y1="-96" x2="48" y2="96"/>
+ <line class="grid" x1="54" y1="-96" x2="54" y2="96"/>
+ <line class="grid" x1="60" y1="-96" x2="60" y2="96"/>
+ <line class="grid" x1="66" y1="-96" x2="66" y2="96"/>
+ <line class="grid" x1="72" y1="-96" x2="72" y2="96"/>
+ <line class="grid" x1="78" y1="-96" x2="78" y2="96"/>
+ <line class="grid" x1="84" y1="-96" x2="84" y2="96"/>
+ <line class="grid" x1="90" y1="-96" x2="90" y2="96"/>
+ <line class="grid" x1="96" y1="-96" x2="96" y2="96"/>
+ <line class="grid" x1="102" y1="-96" x2="102" y2="96"/>
+ <line class="grid" x1="108" y1="-96" x2="108" y2="96"/>
+ <line class="grid" x1="114" y1="-96" x2="114" y2="96"/>
+ <line class="grid" x1="120" y1="-96" x2="120" y2="96"/>
+ <line class="grid" x1="126" y1="-96" x2="126" y2="96"/>
+ <line class="grid" x1="132" y1="-96" x2="132" y2="96"/>
+ <line class="grid" x1="138" y1="-96" x2="138" y2="96"/>
+ <line class="grid" x1="144" y1="-96" x2="144" y2="96"/>
+ <line class="grid" x1="150" y1="-96" x2="150" y2="96"/>
+ <line class="grid" x1="156" y1="-96" x2="156" y2="96"/>
+ <line class="grid" x1="162" y1="-96" x2="162" y2="96"/>
+ <line class="grid" x1="168" y1="-96" x2="168" y2="96"/>
+ <line class="grid" x1="174" y1="-96" x2="174" y2="96"/>
+ <line class="grid" x1="180" y1="-96" x2="180" y2="96"/>
+ <line class="grid" x1="186" y1="-96" x2="186" y2="96"/>
+ <line class="grid" x1="192" y1="-96" x2="192" y2="96"/>
+
+<!-- parabolic -->
+<!-- degenerate parabolae, depicted as straight line segments -->
+ <line class="pp" x1="0" y1="0" x2="0" y2="96"/>
+ <line class="pm" x1="0" y1="0" x2="0" y2="-96"/>
+
+ <path class="pp" d="M-24,94.5 C-8,-33.5,8,-33.5,24,94.5"/>
+ <path class="pm" d="M-24,-94.5 C-8,33.5,8,33.5,24,-94.5"/>
+
+ <path class="pp" d="M-48,90 C-16,-38,16,-38,48,90"/>
+ <path class="pm" d="M-48,-90 C-16,38,16,38,48,-90"/>
+
+ <path class="pp" d="M-72,82.5 C-24,-45.5,24,-45.5,72,82.5"/>
+ <path class="pm" d="M-72,-82.5 C-24,45.5,24,45.5,72,-82.5"/>
+
+ <path class="pp" d="M-96,72 C-32,-56,32,-56,96,72"/>
+ <path class="pm" d="M-96,-72 C-32,56,32,56,96,-72"/>
+
+ <path class="pp" d="M-120,58.5 C-40,-69.5,40,-69.5,120,58.5"/>
+ <path class="pm" d="M-120,-58.5 C-40,69.5,40,69.5,120,-58.5"/>
+
+ <path class="pp" d="M-144,42 C-48,-86,48,-86,144,42"/>
+ <path class="pm" d="M-144,-42 C-48,86,48,86,144,-42"/>
+
+ <path class="pp" d="M-168,22.5 C-56,-105.5,56,-105.5,168,22.5"/>
+ <path class="pm" d="M-168,-22.5 C-56,105.5,56,105.5,168,-22.5"/>
+
+ <path class="pp" d="M-192,0 C-64,-128,64,-128,192,0"/>
+ <path class="pm" d="M-192,0 C-64,128,64,128,192,0"/>
+
+ </g>
+</svg>

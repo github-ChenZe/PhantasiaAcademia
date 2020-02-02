@@ -1,0 +1,57 @@
+\documentclass{ctexart}
+
+\usepackage[singleton, margintoc, nova]{van-de-la-sehen}
+
+\begin{document}
+
+\showtitle{奇技淫巧}
+
+\section{不等式} % (fold)
+\label{sec:不等式}
+
+\subsection{离散不等式} % (fold)
+\label{sub:离散不等式}
+
+\subsubsection{均值不等式} % (fold)
+\label{ssub:均值不等式}
+
+\paragraph{反向归纳法} % (fold)
+\label{par:反向归纳法}
+
+均值不等式可以通过Lagrange乘子法证明, 惟引入微分并未必须. 通过反向归纳法, 假设对于$n=2,2^2,\cdots,2^k$成立, 则
+\[ \pare{a_1\cdots a_{2^{k+1}}}^{\rec{2^{k+1}}} \le \frac{\pare{a_1\cdots a_{2^{k}}}^{\rec{2^{k}}} + \pare{a_{2^k+1}\cdots a_{2^{k+1}}}^{\rec{2^{k}}}}{2} \le \frac{a_1+\cdots + a_{2^{k+1}}}{2^{k+1}}.  \]
+故$n=2^{k+1}$之情形得证. 此时开始反向归纳, 若$n+1$之情形正确, 记$\displaystyle A = \frac{a_1+\cdots+a_n}{n}$, 则
+\begin{align*}
+    \frac{a_1+\cdots+a_n + A}{n+1} &\ge \pare{a_1\cdots a_nA}^{\rec{n+1}}, \\
+    A &\ge A^{\rec{n+1}} \cdot \pare{a_1\cdots a_n}^{\rec{n+1}}, \\
+    A &\ge \pare{a_1\cdots a_n}^{\rec{n}}.
+\end{align*}
+
+% paragraph 反向归纳法 (end)
+
+% subsubsection 均值不等式 (end)
+
+% subsection 离散不等式 (end)
+
+% section 不等式 (end)
+
+\section{极限} % (fold)
+\label{sec:极限}
+
+\subsection{存在性} % (fold)
+\label{sub:存在性}
+
+\subsubsection{\texorpdfstring{$e$}{e}} % (fold)
+\label{ssub:e}
+
+引入$\displaystyle a_n = \pare{1+\rec{n}}^{n+1}$, 由均值不等式有
+\[ \rec{a_n} = \pare{\frac{n}{n+1}}^{n+1} = \pare{\frac{1+\frac{n-1}{n}\cdot n}{n+1}}^{n+1} \ge \pare{\frac{n-1}{n}}^n = \rec{a_{n-1}}. \]
+从而$a_n\le a_{n-1}$, $a_n$单调递减恒正, 故极限存在.
+
+% subsubsection e (end)
+
+% subsection 存在性 (end)
+
+% section 极限 (end)
+
+\end{document}

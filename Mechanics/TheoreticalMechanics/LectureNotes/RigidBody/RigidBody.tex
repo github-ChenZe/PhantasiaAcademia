@@ -1,0 +1,1202 @@
+\documentclass[../LectureNotes.tex]{subfiles}
+
+\begin{document}
+
+\section{刚体的运动} % (fold)
+\label{sec:刚体的运动}
+
+\subsection{刚体运动的描述} % (fold)
+\label{sub:刚体运动的描述}
+
+\subsubsection{自由度与运动分类} % (fold)
+\label{ssub:自由度与运动分类}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{RigidBodyDegreeOfFreedom}
+    \caption{刚体的自由度}
+\end{figure}
+
+\paragraph{自由度} % (fold)
+\label{par:自由度}
+
+刚体的$N$个质点由$3N$个坐标确定, 约束$\abs{\+vr_i - \+vr_j} = r_{ij} = \const$共$\displaystyle \frac{N\pare{N-1}}{2}$个, 惟自由度并非$\displaystyle 3N - \frac{N\pare{N-1}}{2}$. 取不共线三点$\+vr_1$, $\+vr_2$, $\+vr_3$, 共有$9$个坐标, 对于任意$i$, 约束
+\[ \abs{\+vr_i - \+vr_1} = r_{i1},\quad \abs{\+vr_i - \+vr_2} = r_{i2},\quad \abs{\+vr_i - \+vr_3} = r_{i3} \]
+可唯一确定$\+vr_i$的位置. 再由
+\[ \abs{\+vr_1 - \+vr_2} = r_{12},\quad \abs{\+vr_2 - \+vr_3} = r_{23},\quad \abs{\+vr_3 - \+vr_1} = r_{31}, \]
+从而$s = 9 - 3 = 6$, 故刚体最大自由度为$6$.
+
+% paragraph 自由度 (end)
+
+\paragraph{确定刚体的位形} % (fold)
+\label{par:确定刚体的位形}
+
+基点$A\pare{x,y,z}$, 平动自由度为$3$, 相对于$A$点的取向有轴向$2$个自由度, 绕轴转动$1$个自由度, 故总共$6$个自由度.
+
+% paragraph 确定刚体的位形 (end)
+
+\paragraph{运动分类} % (fold)
+\label{par:运动分类}
+
+平动$s=3$, 定轴转动$s=1$, 平面平行运动$s=2+1 = 3$(平面平行运动和转动), 定点运动$s=3$, 一般情形$s=6$.
+
+% paragraph 运动分类 (end)
+
+\begin{remark}
+    平面平行运动意味着刚体在运动中有一截面始终在一固定平面上, 故其运动可归于$2$个自由度的平动和绕该平面法线的单自由度转动.
+\end{remark}
+
+% subsubsection 自由度与运动分类 (end)
+
+\subsubsection{刚体运动的Euler定理} % (fold)
+\label{ssub:刚体运动的euler定理}
+
+\paragraph{惯性坐标系与本体坐标系} % (fold)
+\label{par:惯性坐标系与本体坐标系}
+
+惯性坐标系相对于惯性观测者静止, $\dot{\+ve_i} = 0$可直接使用. 本体坐标系相对于刚体固定, 运动定律不可以直接使用, $\dot{\+ve_i}\neq 0$.
+
+% paragraph 惯性坐标系与本体坐标系 (end)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{FixedPointCoor}
+    \caption{定点运动的坐标系}
+\end{figure}
+
+对于定点运动, 建立本体坐标系$Oe_1e_2e_3$和惯性坐标系$Oe'_1e'_2e'_3$, 刚体上任意一点都可以写作
+\begin{align*}
+    \+vr\pare{t} &= \sum_i x'_i\pare{t} \+ve'_i = \sum_i x_i \+ve_i\pare{t}. \\
+    x_j &= \+vr\cdot\+ve_j = \pare{\sum_i x'_i \+ve'_i}\cdot\+ve_j = \sum_i x'_i\pare{\+ve'_i \cdot\+ve_j} = \sum_i A_{ji}\pare{t}x'_i. \\
+    \begin{pmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{pmatrix} &= A\pare{t} \begin{pmatrix}
+        x'_1\pare{t} \\ x'_2\pare{t} \\ x'_3\pare{t}
+    \end{pmatrix},\quad \sum_i x'^2_i = r^2 = \sum_i x_i^2 \Rightarrow A\pare{t} \in SO_3. \\
+    \begin{pmatrix}
+        x'_1 \\ x'_2 \\ x'_3
+    \end{pmatrix} &= A^{-1}\pare{t} \begin{pmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{pmatrix} = A^T\pare{t} \begin{pmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{pmatrix},\quad A_{ji} = \+ve_j \cdot \+ve'_i.
+\end{align*}
+实正交矩阵有$6$个独立约束, 从而有$3$个独立参数. 从而本体坐标系和惯性坐标系可相互转换.
+
+\begin{theorem}[Euler定理]
+    定点运动的刚体任一位移等效于绕该定点的某一轴的转动
+\end{theorem}
+\begin{proof}
+    任一位移,
+    \[ \begin{pmatrix}
+        x'\pare{t} \\ y'\pare{t} \\ z'\pare{t}
+    \end{pmatrix} = A^{-1}\pare{t} \begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix} = A^{-1}\pare{t} \begin{pmatrix}
+        x'\pare{t_0} \\ y'\pare{t_0} \\ z'\pare{t_0}
+    \end{pmatrix}. \]
+    需证明存在矢量$R$满足$A^{-1}\pare{t}R = R$, 即证明$A\pare{t}$存在本征值$1$.
+    \[ \abs{A - \lambda E}  = 0 \]
+    构成一$\lambda$的三次方程. 相似对角化后,
+    \begin{align*}
+        & \abs{C^{-1}AC} = \lambda_1 \lambda_2 \lambda_3 = 1, \\
+        & \abs{C^{-1}}\abs{A}\abs{C} = \abs{A} = 1, \\
+        & \pare{A-E} A^T = E- A^T = \pare{E-A}^T. \\
+        & \abs{A-E}\abs{A^T} = \abs{E-A^T} = \abs{E-A}. \\
+        & \Rightarrow\abs{A-E} = \abs{E-A} = -\abs{A-E}. \\
+        & \Rightarrow \abs{A-\lambda E} = 0,\quad \exists \, \lambda = 1.
+    \end{align*}
+    若$\lambda_1 = 1$, 则$\lambda_2\lambda_3 = 1$, 从而$\abs{\lambda_2}=\abs{\lambda_3}=1$, $\lambda_2 = \conj{\lambda_3}$, 故
+    \[ \lambda_2 = e^{i\Phi},\quad \lambda_3 = e^{-i\Phi}. \qedhere \]
+\end{proof}
+\begin{remark}
+    如果刚体分别绕$x$和$y$轴先后转动, 则运动最终仍可合称为绕某一第三轴的转动.
+\end{remark}
+\begin{pitfall}
+    角位移并非矢量(不可直接相加). 惟无限小的角位移可以直接相加.
+\end{pitfall}
+
+% subsubsection 刚体运动的euler定理 (end)
+
+\subsubsection{无限小转动与角速度} % (fold)
+\label{ssub:无限小转动与角速度}
+
+\paragraph{有限转动} % (fold)
+\label{par:有限转动}
+
+有限转动角位移并非矢量.
+\begin{align*}
+    & R\xrightarrow{\+v\varphi_1} R_1 = A_1 R \xrightarrow{\+v\varphi_2} R_{21} = A_2R_1 = A_2A_1 R, \\
+     & R\xrightarrow{\+v\varphi_2} R_2 = A_2 R \xrightarrow{\+v\varphi_1} R_{12} = A_1R_2 = A_1A_2 R.
+\end{align*}
+如果角位移是矢量, 则应有$A_{12} = A_{21}$, 惟一般情形下矩阵相乘不能交换顺序, 故不能成立.
+
+% paragraph 有限转动 (end)
+
+\paragraph{无限小转动} % (fold)
+\label{par:无限小转动}
+
+无限小转动满足$A = E\epsilon B$,
+\begin{align*}
+    & A_1 = E + \epsilon B_1,\quad A_2 = E + \epsilon B_2, \\
+    & A_1A_2 = E + \epsilon\pare{B_1+B_2},\quad A_2A_1 = E + \epsilon\pare{B_2+B_1}, \\
+    & \Rightarrow A_1 A_2 = A_2 A_1 \Rightarrow \+v\varphi_1 + \+v\varphi_2 = \+v\varphi_2 + \+v\varphi_1.
+\end{align*}
+现在定义角速度
+\[ \+v\omega = \frac{\Delta\+v\varphi}{\Delta t}. \]
+为了精确描述角速度的性质, 考虑
+\begin{align*}
+    &\begin{pmatrix}
+        x'\pare{t+\Delta t} \\ y'\pare{t+\Delta t} \\ z'\pare{t+\Delta t}
+    \end{pmatrix} = A^{-1}\pare{t+\Delta t}\begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix} \\
+    &= A^{-1}\pare{t+\Delta t}A\pare{t} \begin{pmatrix}
+        x'\pare{t} \\ y'\pare{t} \\ z'\pare{t}
+    \end{pmatrix}
+    = A\pare{A+\Delta t, t} \begin{pmatrix}
+        x'\pare{t} \\ y'\pare{t} \\ z'\pare{t}
+    \end{pmatrix}.
+\end{align*}
+其中$A\pare{t+\Delta t, t}\in SO_3$. 且对于某$\Omega\pare{t}\in M_{3\times 3}$有
+\begin{align*}
+    & A\pare{t+\Delta t} = E+\Omega\pare{t}\Delta t, \\
+    & A^T A = E \Rightarrow \pare{E+\Omega \Delta t}^T\pare{E + \Omega \Delta t} = E, \\
+    & \pare{E + \Omega^T \Delta t} \pare{E + \Omega \Delta t} = E \\
+    & \Rightarrow E + \pare{\Omega^T + \Omega} \Delta t = E. \\
+    & \Rightarrow \Omega^T + \Omega = 0 \Rightarrow \Omega^T = -\Omega, \\
+    & \Omega = \begin{pmatrix}
+        0 & \Omega_{12} & \Omega_{13} \\
+        -\Omega_{12} & 0 & \Omega_{23} \\
+        -\Omega_{13} & -\Omega_{23} & 0
+    \end{pmatrix}.
+\end{align*}
+故$\Omega$构成一实反对称矩阵, 有三个独立参数, 这和$SO_3$矩阵有三个独立参数之事实相符. 位移
+\begin{align*}
+    & \begin{pmatrix}
+        x'\pare{t+\Delta t} \\
+        y'\pare{t+\Delta t} \\
+        z'\pare{t+\Delta t}
+    \end{pmatrix} = \pare{E + \Omega\pare{t}\Delta t} \begin{pmatrix}
+        x'\pare{t} \\ y'\pare{t} \\ z'\pare{t}
+    \end{pmatrix} 
+    = \begin{pmatrix}
+        x'\pare{t} \\ y'\pare{t} \\ z'\pare{t}
+    \end{pmatrix} + \Omega\pare{t} \begin{pmatrix}
+        x'\pare{t} \\ y'\pare{t} \\ z'\pare{t}
+    \end{pmatrix}\Delta t. \\
+    & \Rightarrow \begin{pmatrix}
+        \Delta x' \\ \Delta y' \\ \Delta z'
+    \end{pmatrix} = \Omega \begin{pmatrix}
+        x' \\ y' \\ z'
+    \end{pmatrix}\Delta t 
+    \Rightarrow \begin{pmatrix}
+        \dot{x}' \\ \dot{y}' \\ \dot{z}'
+    \end{pmatrix} = \Omega\pare{t}\begin{pmatrix}
+        x' \\ y' \\ z'.
+    \end{pmatrix} \\
+    & \Rightarrow  \begin{pmatrix}
+        \dot{x}' \\ \dot{y}' \\ \dot{z}'
+    \end{pmatrix} = \begin{pmatrix}
+        \Omega_{12} y' + \Omega_{13} z' \\
+        -\Omega_{12}x' + \Omega_{23} z' \\
+        -\Omega{13} x' - \Omega_{23} y'
+    \end{pmatrix} = \begin{pmatrix}
+        \omega_y z' - \omega_z y' \\
+        \omega_z x' - \omega_x z' \\
+        \omega_x y' - \omega_y x'
+    \end{pmatrix} = \+v\omega\times\+vr.
+\end{align*}
+其中$\omega_x = -\Omega_{23}$, $\omega_y = \Omega_{13}$, $\omega_z = -\Omega_{12}$, 且
+\[ \+v\omega = \omega_x \+ve'_x + \omega_y \+ve'_y + \omega_z \+ve'_z. \]
+\begin{remark}
+    角速度矢量的起源与其它矢量的来源不同, 其本质为一二阶反对称张量, 惟作用在矢量上时可类比叉乘.
+\end{remark}
+若为一坐标变换, 亦可证明
+\[ \omega'_i = \sum_j c_{ij}\omega_j. \]
+惟在镜像作用下, 旋转物体的$\+v\omega$不变, 谓轴矢量. 而一般矢量(极矢量)在镜像下反向. $\+J = \+vr\times\+vv$, $\+vM = \+vr\times\+vF$皆为轴矢量.
+
+% paragraph 无限小转动 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+4.1, 4.2, 4.3
+
+% paragraph 作业 (end)
+
+% subsubsection 无限小转动与角速度 (end)
+
+\subsubsection{刚体上任一点的速度与加速度} % (fold)
+\label{ssub:刚体上任一点的速度与加速度}
+
+纯转动下, 
+\[ \Delta \+vr = \Delta\+v\varphi \times\+vr,\quad \+vv = \+v\omega\times\+vr,\quad \+va = \dot{\+v\omega}\times\+vv + \dot{\+v\omega}\times\pare{\+v\omega\times\+vr}. \]
+在一般情形下, 取任意点$C$为基点, 则对刚体上任一点$P$都有
+\begin{align*}
+    \+vr_P &= \+vr_C + \pare{\+vr_P - \+vr_C},\quad \+vr_P = \+vr_C + \+v\omega\times\pare{\+vr_P - \+vr_C}. \\
+    \+va_P &= \+va_C + \+v\omega\pare{\+vr_P - \+vr_C} + \+v\omega\times\pare{\+v\omega\times\pare{\+vr_P - \+vr_C}}.
+\end{align*}
+对于任意另一基点, 都有
+\[ \+vv_P = \+vv_{C'} + \+v\omega\pare{\+vr_P - \+vr_{C'}}. \]
+从而基点可以任意选取, $\+v\omega$都是相同的.
+
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{InstantaneousCenter}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{5cm}{InstantaneousCenterPara}
+    \end{subfigure}
+    \caption{瞬心的确定}
+\end{figure}
+
+\paragraph{瞬时转轴} % (fold)
+\label{par:瞬时转轴}
+
+由$\+vv_C = \+vv_{C'} + \+v\omega\pare{\+vr_P - \+vr_{C'}}$, 故某时刻总能找到点$C$使$\+vv_C = 0$, 此时谓$C$为转动顺心. 若以瞬心为基点,
+\[ \+vv_P = \+vv_C + \+v\omega \times\pare{\+vr_P - \+vr_C} = \+v\omega\times\pare{\+vr_P - \+vr_C}. \]
+注意该式仅瞬时成立. 满足$\+vr_Q - \+vr_C \parallelsum \+v\omega$的$Q$构成一直线, 且$\+vv_Q = \+v\omega\pare{\+vr_Q - \+vr_C} = 0$谓转动瞬轴.
+\begin{pitfall}
+    $\+vv_C = 0$仅瞬时成立且可能$\+va_C \neq 0$, 此时仍有
+    \[ \Delta \+vr = \Delta\+v\varphi \times\+vr,\quad \+vv = \+v\omega\times\+vr,\quad \+va = \dot{\+v\omega}\times\+vv + \dot{\+v\omega}\times\pare{\+v\omega\times\+vr}. \]
+\end{pitfall}
+对于平面平行运动的刚体, 任意取$A$, $B$, 若$\+vA$和$\+vB$不平行, 则其垂线的焦点为瞬心. 若$\+vA\parallelsum \+vB$, 则两者矢量端点的交点为瞬心.
+
+% paragraph 瞬时转轴 (end)
+
+% subsubsection 刚体上任一点的速度与加速度 (end)
+
+% subsection 刚体运动的描述 (end)
+
+\subsection{Euler运动学方程} % (fold)
+\label{sub:euler运动学方程}
+
+\subsubsection{Euler角} % (fold)
+\label{ssub:euler角}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{EulerAngles}
+\end{figure}
+
+静态定义要求$\+ve'_i$不变, $\+ve_i\pare{t}$随刚体运动. 设
+\[ \begin{pmatrix}
+    x \\ y \\ z
+\end{pmatrix} = A \begin{pmatrix}
+    x' \\ y' \\ z'
+\end{pmatrix}, \]
+则有$A_{ij} = \+ve_i\cdot\+ve'_j$, 可分解为
+\begin{cenum}
+    \item 进动$\displaystyle A_\varphi = \begin{pmatrix}
+        \cos\varphi & \sin\varphi & 0 \\
+        -\sin\varphi & \cos\varphi & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}$.
+    \item 章动$A_\theta = \displaystyle \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & \cos\theta & \sin\theta \\
+        0 & -\sin\theta & \cos\theta
+    \end{pmatrix}$.
+    \item 自转$\displaystyle A_\psi = \begin{pmatrix}
+        \cos\psi & \sin\psi & 0 \\
+        -\sin\psi & \cos\psi & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}$
+\end{cenum}
+其中$\varphi \in \lbr{0,2\pi}$, $\theta\in\lbr{0,\pi}$, $\psi\lbr{0,2\pi}$, 总的矩阵为
+\[ A = A_\psi A_\theta A_\varphi, \]
+于是$\pare{x'} = A^{-1}\pare{x}$. 其中
+\[ A^{-1} = A\varphi^{-1}A_\theta^{-1}A_\psi^{-1} = A\varphi^{T}A_\theta^{T}A_\psi^{T} = A^T. \]
+
+% subsubsection euler角 (end)
+
+\subsubsection{Euler的刚体运动学方程} % (fold)
+\label{ssub:euler的刚体运动学方程}
+
+设节线为$ON$, 单位矢量$\+un$, 则角速度具有可加性, 因为其对应转动为$\rd{t}$内的无穷小转动, 从而
+\[ \+v\omega = \dot\varphi\+ve'_z + \dot\theta\+un + \dot\psi\+ve_z. \]
+其中
+\begin{align*}
+    \+ve'_z &= \sin\theta \sin\psi \+ve_x + \sin\theta\cos\psi\+ve_y + \cos\theta\+ve_z, \\
+    \+vn &= \cos\psi \+ve_x - \sin\psi\+ve_y, \\
+    \+v\omega &= \dot\varphi\pare{\sin\theta \sin\psi \+ve_x + \sin\theta\cos\psi\+ve_y + \cos\theta\+ve_z} \\
+    & + \dot\theta\pare{\cos\psi\+ve_x - \sin\psi\+ve_y} + \dot\psi\+ve_z \\
+    &= \pare{\dot\varphi \sin\theta\sin\psi + \dot\theta\cos\psi} \+ve_x \\
+    &+ \pare{\dot\varphi \sin\theta\cos\psi - \dot\theta\sin\psi} \+ve_y \\
+    &+ \pare{\dot\varphi \cos\theta + \dot\psi}\+ve_z \\
+    &\Rightarrow \begin{cases}
+        \omega_x = \dot\varphi \sin\theta\sin\psi + \dot\theta\cos\psi, \\
+        \omega_y = \dot\varphi \sin\theta\cos\psi - \dot\theta\sin\psi, \\
+        \omega_z = \dot\varphi \cos\theta + \dot\varphi.
+    \end{cases}
+\end{align*}
+即得到Euler刚体运动学方程. 这是在本体坐标系中的分解. 若欲得到惯性坐标系中的分解, 由
+\begin{align*}
+    \+ve_z &= \sin\theta\cos\pare{\frac{\pi}{2} - \varphi}\+ve'_x + \sin\theta \cos\pare{\pi - \varphi} \+ve'_y + \cos\theta\+ve'_z, \\
+    &= \sin\theta\sin\varphi \+ve'_x - \sin\theta\cos\varphi\+ve'_y + \cos\theta\+ve'_z. \\
+    \+un &= \cos\varphi\+ve'_x + \sin\varphi\+ve'_y. \\
+    \+v\omega &= \dot{\varphi}\+ve'_z + \dot\theta\pare{\cos\varphi\+ve'_x + \sin\varphi\+ve'_y}\dot\psi\+ve_z \\
+    &\Rightarrow \begin{cases}
+        \omega_{x'} = \dot\theta\cos\varphi + \dot\psi\sin\theta\sin\varphi, \\
+        \omega_{y'} = \dot\theta\sin\varphi - \dot\psi\sin\theta\cos\varphi, \\
+        \omega_{z'} = \dot\varphi + \dot\psi\cos\theta.
+    \end{cases}
+\end{align*}
+这是惯性坐标系下的Euler运动学方程.
+\begin{remark}
+    也可以通过$-\psi$, $-\theta$, $-\varphi$的转动从本体坐标系得到惯性坐标系得到. 即
+    \[ \varphi\rightarrow -\psi,\quad \theta \rightarrow -\theta, \quad \psi\rightarrow -\varphi, \quad \omega \rightarrow -\omega. \]
+\end{remark}
+
+% subsubsection euler的刚体运动学方程 (end)
+
+% subsection euler运动学方程 (end)
+
+\subsection{转动惯量张量与惯量主轴} % (fold)
+\label{sub:转动惯量张量与惯量主轴}
+
+\subsubsection{转动惯量张量} % (fold)
+\label{ssub:转动惯量张量}
+
+对于定点运动,
+\begin{align*}
+    \+vv_\alpha &= \+v\omega\times\+vr_\alpha,\quad \alpha = 1,\cdots,N, \\
+    \+vJ &= \sum_\alpha \+vr_\alpha\times\pare{m_\alpha\+vv_\alpha} = \sum_\alpha m_\alpha\+vr_\alpha\times\pare{\omega\times\+vr_\alpha} \\
+    &= \sum_\alpha m_\alpha\brac{r_\alpha^2\+v\omega - \pare{\omega\cdot\+vr_\alpha}\+vr_\alpha}, \\
+    \+v\omega\cdot\+vr_\alpha &= \sum_{j=1}^3 \omega_j r_{\alpha j}, \\
+    J_i &= \sum_\alpha m_\alpha\brac{r_\alpha^2 \omega_i - \pare{\+v\omega \cdot\+vr_\alpha}r_{\alpha i}} \\
+    &= \sum_\alpha m_\alpha\brac{r_\alpha\omega_i - \sum_{j=1}^3 r_{\alpha,i}r_{\alpha,j}\omega_j}, \\
+    J_i &= \underbrace{\sum_{j=1}^3 \brac{\sum_\alpha m_\alpha \pare{r_\alpha^2 \delta_{ij} - r_{\alpha i}r_{\alpha j}}}}_{I_{ij}} \omega_j.
+\end{align*}
+转动惯量张量为
+\[ I_{ij} = \sum_\alpha m_\alpha\pare{r_\alpha^2\delta_{ij} - r_{\alpha,i}r_{\alpha,j}}, \]
+满足$I_{ij} = I_{ji}$以及$\+vI^T = \+vI$. 特别地, 对角元为
+\begin{align*}
+    I_{11} &= \sum_\alpha m_\alpha\pare{r_\alpha^2 - x_\alpha^2} \\
+    &= \sum_\alpha m_\alpha\pare{y_\alpha^2 + z_\alpha^2}, \\
+    I_{22} &= \sum_\alpha m_\alpha\pare{z_\alpha^2 + x_\alpha^2}, \\
+    I_{33} &= \sum_\alpha m_\alpha\pare{x_\alpha^2 + y_\alpha^2}.
+\end{align*}
+三个对角元分别是相对于三个轴的转动惯量.
+\begin{align*}
+    I_{12} = -\sum_\alpha m_\alpha x_\alpha y_\alpha = I_{21}, \\
+    I_{13} = -\sum_\alpha m_\alpha x_\alpha z_\alpha = I_{31}, \\
+    I_{23} = -\sum_\alpha m_\alpha y_\alpha z_\alpha = I_{32}.
+\end{align*}
+这是三个惯量积.
+\par
+对于连续介质,
+\begin{align*}
+    I_{ij} &= \int_V \rho\pare{r^2 \delta_{ij} - x_ix_j}\,\rd{V},\quad r^2 = \sum_{i=1}^3 x_i x_i.
+\end{align*}
+在一些情形下, 例如刚体是一个面/线, 则积分换为面积分/线积分, 密度换为面密度/线密度. 在这一定义下, 对于定点转动,
+\[ \begin{pmatrix}
+    J_1 \\ J_2 \\ J_3
+\end{pmatrix} = \+vI \begin{pmatrix}
+    \omega_1 \\ \omega_2 \\ \omega_3
+\end{pmatrix}\Rightarrow \+vJ = \+vI \+v\omega. \]
+定点转动情形下, 动能
+\begin{align*}
+    T &= \half \sum_\alpha m_\alpha v_\alpha^2 \\
+    &= \half \sum_\alpha m_\alpha \+vv_\alpha\cdot\pare{\+v\omega\times\+vr_\alpha} \\
+    &= \half\sum_\alpha m_\alpha \+v\omega \cdot\pare{\+vr_\alpha\times\+vv_\alpha} \\
+    &= \half \+v\omega\cdot\+vJ = \half \begin{pmatrix}
+        \omega_1 & \omega_2 & \omega_3
+    \end{pmatrix} \begin{pmatrix}
+        J_1 \\ J_2 \\ J_3
+    \end{pmatrix} = \half \+v\omega \cdot \+vI\cdot \+v\omega.
+\end{align*}
+一般运动下, 取质心为基点, 无论质心是否做惯性运动, 都有
+\begin{align*}
+    \+vJ &= \+vr_0 \times M\+vv_0 + \+vJ' = \+vJ_0 + \+vI\cdot\+v\Omega. \\
+    T &= T_0 + T' = T_0 + \half \+v\omega\cdot\+vI\cdot\+v\omega.
+\end{align*}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+4.4, 4.5, 4.6
+
+% paragraph 作业 (end)
+
+\begin{pitfall}
+    转动惯量张量皆为相对于某点而言.
+\end{pitfall}
+
+\paragraph{转动惯量张量的性质} % (fold)
+\label{par:转动惯量张量的性质}
+
+这是一个对称张量, $I_{ij} = I_{ji}$, 且具有广延性(即可分为各部分后相加), 并且满足平行轴定理
+\[ I_{ij}^Q = \underbrace{M\pare{a^2 \delta_{ij} - a_ia_j}}_{\text{质心相对$Q$}} + \underbrace{I_{ij}^C}_{\text{刚体相对质心}}. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{ParallelAxisP}
+    \caption{平行轴定理示意}
+\end{figure}
+这是因为
+\begin{align*}
+    I_{ij}^Q &= \sum_\alpha m_\alpha\pare{R_\alpha^2 \delta_{ij} - R_{\alpha,i}R_{\alpha,j}}, \\
+    I_{ij}^C &= \sum_\alpha m_\alpha\pare{r_\alpha^2 \delta_{ij} - r_{\alpha,i}r_{\alpha,j}}, \\
+    I_{ij}^Q - I_{ij}^C &= \sum_\alpha m_\alpha\brac{\pare{R_\alpha^2 - r_\alpha^2} \delta_{ij} + r_{\alpha,i}r_{\alpha,j} - R_{\alpha,i}R_{\alpha,j}} \\
+    &= \sum_\alpha m_\alpha \brac{\pare{a^2 + 2\+va\cdot\+vr_\alpha}\delta_{ij} - r_{\alpha,i}a_j - a_ir_{\alpha,j} - a_ia_j} \\
+    &= \sum_\alpha m_\alpha\pare{a^2\delta_{ij} - a_i a_j} + \cancelto{0}{\sum_\alpha m_\alpha \pare{2\+va \cdot \+vr_\alpha\delta_{ij} - r_{\alpha,i}a_j - r_{\alpha,j}a_i}} \\
+    &= M\pare{a^2\delta_{ij} - a_ia_j}.
+\end{align*}
+式中的消去由
+\begin{align*}
+    \+va &= \frac{\sum_\alpha m_\alpha \+vR_\alpha}{M},\quad M = \sum_\alpha m_\alpha, \\
+    \+vr_\alpha &= \+vR_\alpha - \+va \Rightarrow \sum_\alpha m_\alpha \+vr_\alpha = 0,\quad \sum_\alpha m_\alpha r_{\alpha,i} = 0
+\end{align*}
+保证.
+\begin{cenum}
+    \item $i=j$时, $I_{ii}^Q = I_{ii}^C + M\pare{a^2  -a_i^2}$;
+    \item $i\neq j$时, $I_{jj}^Q = I_{ij}^C - Ma_i a_j$.
+\end{cenum}
+
+% paragraph 转动惯量张量的性质 (end)
+
+\paragraph{空间转动下的变换} % (fold)
+\label{par:空间转动下的变换}
+
+$\+vJ = \+vI\+v\omega$, 在空间转动下
+\[ \+vx = \+vA \+vx',\quad \+vJ = \+vA\+vJ',\quad \+v\omega = \+vA\+v\omega'. \]
+其中$\+vA$满足$\+vA^T = \+vA^{-1}$. 从而
+\[ \left. \begin{array}{c}
+    \+vJ' = \+vI'\+v\omega' = \+vI'\+vA^{-1}\+v\omega, \\
+    \+vJ' = \+vA^{-1}\+vJ = \+vA^{-1}\+vI\+v\omega,
+\end{array} \right\} \Rightarrow \+vI'\+vA^{-1} = \+vA^{-1}\+vI. \]
+这对于任何$\+v\omega$都成立, 故
+\begin{align*}
+    \+vI' &= \+vA^{-1} \+vI \+vA = \+vA^T \+vI \+vA. \\
+    x_i &= \sum_j A_{ij}x'_j, \\
+    I'_{ij} &= \pare{\+vA^T \+vI \+vA}_{ij} = \sum_{kl}A^T_{ik} I_{kl} A_{lj} \\
+    &= \sum_{kl} A_{ki}A_{lj}I_{kl}.
+\end{align*}
+
+% paragraph 空间转动下的变换 (end)
+
+\begin{sample}
+    \begin{ex}
+        设一质点系由位于$\pare{a,-a,a}$, $\pare{-a,a,a}$和$\pare{a,a,a}$的质量分别为$4m$, $3m$和$2m$的质点组成, 求关于坐标原点的惯量张量, 并求过原点, 方向$\pare{1,1,0}$的轴的转动惯量.
+    \end{ex}
+    \begin{solution}
+        $r_1^2 = r_2^2 = r_3^2 = 3a^2$, $m_1 = 4m$, $m_2 = 3m$, $m_3 = 2m$,
+        \begin{align*}
+            r_{1,1} &= a,\quad r_{1,2} = -a,\quad r_{1,3} = a, \\
+            r_{2,1} &= -a,\quad r_{2,2} = a,\quad r_{2,3} = a, \\
+            r_{3,1} &= r_{3,2} = r_{3,3} = a. \\
+            I_{ij} &= \sum_{\alpha=1}^3 m_\alpha \pare{r_\alpha^2 \delta_{ij} - r_{\alpha,i}r_{\alpha,j}} = 3a^2 \cdot 9m \delta_{ij} - \sum_{\alpha=1}^3 m_\alpha r_{\alpha,i} r_{\alpha,j} \\
+            &= 27 ma^2 \delta_{ij} - 4mr_{1,i}r_{1,j} - 3mr_{2,i}r_{2,j} - 2mr_{3,i}r_{3,j}. \\
+            I_{11} &= 27ma^2 - 4ma^2 - 3ma^2 - 2ma^2 = 18ma^2 = I_{22} = I_{33}, \\
+            I_{12} &= 5ma^2,\quad I_{13} = -3ma^2,\quad I_{23} = -ma^2. \\
+            \+vI &= \begin{pmatrix}
+                18 & 5 & -3 \\
+                5 & 18 & -1 \\
+                -3 & -1 & 18
+            \end{pmatrix}ma^2. \qedhere
+        \end{align*}
+    \end{solution}
+    \begin{proof}[求轴上转动惯量]
+        作坐标变换
+        \begin{align*}
+            \begin{pmatrix}
+            x' \\ y' \\ z'
+        \end{pmatrix} &= \underbrace{\begin{pmatrix}
+            \cos \pi/4 & \sin \pi/4 & 0 \\
+            -\sin\pi/4 & \cos\pi/4 & 0 \\
+            0 & 0 & 1
+        \end{pmatrix}}_{\+vA^{-1} = \+vA^T}\begin{pmatrix}
+            x \\ y \\ z
+        \end{pmatrix}. \\
+        \+vA &= \begin{pmatrix}
+            \sqrt{2}/2 & -\sqrt{2}/2 & 0 \\
+            \sqrt{2}/2 & \sqrt{2}/2 & 0 \\
+            0 & 0 & 1
+        \end{pmatrix}.
+        \end{align*}
+        所求转动惯量即$I'_{11}$. 从而
+        \begin{align*}
+            I'_{11} &= \sum_{kl} A_{k1}A_{l1} I_{kl} \\
+            &= \sum_{k=1}^3 A_{k1}\pare{A_{11}I_{k1} + I_{21}I_{k2} + A_{31}I_{k3}} \\
+            &= A_{11}\pare{A_{11} I_{11} + A_{21}I_{12}} + A_{21}\pare{A_{11}I_{21} + A_{21}I_{22}} \\
+            &= A_{11}^2 I_{11} + 2A_{11}A_{21}I_{12} + A_{21}^2I_{22} \\
+            &= \half I_{11} + 2\cdot \half I_{12} + \half I_{22} \\
+            &= \half \pare{I_{11} + I_{12} + I_{21} + I_{22}} \\
+            &= 23ma^2. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        质量$M$, 半径$R$的匀质圆盘, 中心在$O$处且圆盘在$xOy$平面内,
+        \begin{align*}
+            I_{ij} &= \int \rho \pare{r^2\delta_{ij} - x_ix_j}\,\rd{V} \\
+            &= \frac{M}{\pi R^2} \int_0^R \int_0^{2\pi} \pare{r^2 \delta_{ij} - x_ix_j}r\,\rd{\varphi}\,\rd{r}. \\
+            x_1 &= r\cos\varphi,\quad x_2 = r\sin\varphi,\quad x_3 = 0. \\
+            I_{11} &= \frac{M}{\pi R^2} \int_0^R \int_0^{2\pi} \pare{r^2 - r^2\cos^2\varphi} r\,\rd\varphi \,\rd r \\
+            &= \frac{M}{\pi R^2} \int_0^R r^3\,\rd{r}\,\int_0^{2\pi} \sin^2 \varphi\,\rd\varphi \\
+            &= \frac{M}{\pi R^2} \cdot \rec{4} R^4 \pi = \rec{4}MR^2. \\
+            I_{22} &= I_{11} = \rec{4}MR^2. \\
+            I_{33} &= \frac{M}{\pi R^2} \int_0^R \int_{0}^{2\pi} r^3\,\rd\varphi \,\rd r = \half MR^2. \\
+            I_{12} &= -\frac{M}{\pi R^2} \int_0^R \int_0^{2\pi} r^2\cos\varphi\sin\varphi\,\rd{\varphi}\,\rd{r} = 0. \\
+            I_{13} &= 0,\quad I_{23} = 0. \\
+            \+vI &= \begin{pmatrix}
+                MR^2/4 & 0 & 0 \\
+                0 & MR^2/4 & 0 \\
+                0 & 0 & MR^2/2
+            \end{pmatrix}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 转动惯量张量 (end)
+
+\subsubsection{惯量主轴} % (fold)
+\label{ssub:惯量主轴}
+
+在惯性系中, $\dot{I}_{ij} \neq 0$, 但本体系中$\dot{I}_{ij} = 0$, 这是引入本体系的好处. 惟本体系并非唯一, 虽在一般本体系下$I_{ij}$的非对角元非零, 仍可重新选择本体系令$\+vI$对角化. 设有坐标变换
+\[ \tilde{\+vx} = \+vA^{-1}\+vx \]
+令$\tilde{\+vI} = \+vA^T \+vI \+vA$为对角矩阵, 则$\tilde{\+vx}$谓主轴系. 相应的坐标轴$\tilde{\+ve}_i$谓惯量主轴. 此时$I_1$, $I_2$, $I_3$谓主转动惯量.
+\par
+对$\abs{\+vI - \lambda\+vE} = 0$求根, 则三个根$\lambda_1$, $\lambda_2$, $\lambda_3$为本征值. 对本征矢量$\+vI X_i = \lambda_i X_i$正交归一化, 则
+\[ \+vA = \begin{pmatrix}
+    X_1 & X_2 & X_3
+\end{pmatrix} \]
+为过渡矩阵. 在新的坐标系下$\displaystyle \tilde{\+vI} = \begin{pmatrix}
+    I_1 & 0 & 0 \\
+    0 & I_2 & 0 \\
+    0 & 0 & I_3
+\end{pmatrix}$. 坐标变换
+\begin{align*}
+    \+vx &= \+vA\tilde{\+vx} \Rightarrow x_i = \sum_j A_{ij}\tilde{x}_j, \\
+    \+vr &= \sum_i x_i \+ve_i = \sum_j \tilde{x}_j \tilde{\+ve}_j, \\
+    x_i &= \+vr\cdot\+ve_i = \pare{\sum_j \tilde{x}_j\tilde{\+ve}_j}\cdot\+ve_i \\
+    &= \sum_j \pare{\+ve_i \cdot \tilde{\+ve}_j} \tilde{x}_j. \\
+    A_{ij} &= \+ve_i \cdot \tilde{\+ve}_j = \begin{pmatrix}
+        X_1 & X_2 & X_3
+    \end{pmatrix}_{ij}. \\
+    X_i &= \begin{pmatrix}
+        \+ve_1 \cdot \tilde{\+ve}_i \\
+        \+ve_2 \cdot \tilde{\+ve}_i \\
+        \+ve_3 \cdot \tilde{\+ve}_i
+    \end{pmatrix}.
+\end{align*}
+即$\+vA$的第$i$列为第$i$个主轴在原坐标系的坐标.
+\begin{sample}
+    \begin{ex}
+        立方体在一个顶点处的转动惯量为
+        \[ \+vI = \begin{pmatrix}
+            2/3 & -1/4 & -1/4 \\
+            -1/4 & 2/3 & -1/4 \\
+            -1/4 & -1/4 & 2/3
+        \end{pmatrix}ma^2. \]
+        为了求出对角化形式,
+        \[ \abs{\+vI - \lambda\+vE} = 0 \Rightarrow \lambda_1 = \lambda_2 = \frac{11}{12}ma^3,\quad \lambda_3 = \rec{6}ma^2. \]
+        \begin{cenum}
+            \item 单根: $\lambda_3 = I_3 = ma^2/6$,
+            \[ \begin{pmatrix}
+                1/4 & -1/4 & -1/4 \\
+                -1/4 & 1/2 & -1/4 \\
+                -1/4 & -1/4 & 1/2
+            \end{pmatrix}X_3 = 0 \Rightarrow X_3 = \pm\rec{\sqrt{3}} \begin{pmatrix}
+                1 \\ 1 \\ 1
+            \end{pmatrix}. \]
+            \item 重根: $\lambda_{1,2} = 11ma^2/12$,
+            \[ \begin{pmatrix}
+                1 & 1 & 1 \\
+                1 & 1 & 1 \\
+                1 & 1 & 1
+            \end{pmatrix}X_{1,2} = 0\Rightarrow x_1 + x_2 + x_3 = 0. \]
+            用Gram-Schmidt正交化方法, 取
+            \begin{align*}
+                X_1 &= \mu_1 \begin{pmatrix}
+                    1 \\ 1 \\ -2
+                \end{pmatrix} \Rightarrow X_1 = \pm\rec{\sqrt{6}} \begin{pmatrix}
+                    1 \\ 1 \\ -2
+                \end{pmatrix}. \\
+                a_2 &= \mu_2 \begin{pmatrix}
+                    2 \\ -1 \\ -1
+                \end{pmatrix} \Rightarrow X_2 = \mu_2 \brac{a - \pare{X_1^T a}X_1} = \pm \frac{\sqrt{2}}{3} \begin{pmatrix}
+                    3/2 \\ -3/2 \\ 0
+                \end{pmatrix}.
+            \end{align*}
+            为了不改变坐标的手性, 须$\abs{\+vA} = 1$. 取
+            \[ X_3 = \rec{\sqrt{3}}\begin{pmatrix}
+                1 \\ 1 \\ 1
+            \end{pmatrix},\quad X_1 = \rec{\sqrt{6}}\begin{pmatrix}
+                1 \\ 1 \\ -2
+            \end{pmatrix}  \Rightarrow  X_2 = -\frac{\sqrt{2}}{3}\begin{pmatrix}
+                3/2 \\ -3/2 \\ 0
+            \end{pmatrix}. \]
+        \end{cenum}
+        从而\let\oldrec\rec\def\rec{1/}
+            \[ \+vA = \begin{pmatrix}
+                X_1 & X_2 & X_3
+            \end{pmatrix} = \begin{pmatrix}
+                \rec{\sqrt{6}} & -\rec{\sqrt{2}} & \rec{\sqrt{3}} \\
+                \rec{\sqrt{6}} & \rec{\sqrt{2}} & \rec{\sqrt{3}} \\
+                -2/{\sqrt{6}}   & 0 & \rec{\sqrt{3}}
+            \end{pmatrix}. \]
+        \let\rec\oldrec
+        其中$X_3$就是立方体的对角线轴.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    主轴坐标系也并非唯一.
+\end{remark}
+主轴与主转动惯量之性质有
+\begin{cenum}
+    \item 主轴彼此垂直, 即$X_1$, $X_2$, $X_3$是正交归一的.
+    \item 非唯一性, 即在有多个特征值的情形下, 主轴有多种选择.
+    \item 匀质刚体的对称轴, 旋转对称轴一定是惯量主轴, 且刚体对称面的法线一定是惯量主轴.
+    \item $I_1 + I_2 \ge I_3$, 对于$xy$平面刚体必定$I_3 = I_1 + I_2$.
+\end{cenum}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+4.9-4.13.
+
+% paragraph 作业 (end)
+
+% subsubsection 惯量主轴 (end)
+
+\subsubsection{惯量椭球} % (fold)
+\label{ssub:惯量椭球}
+
+为求刚体对任一轴$OX=\pare{\alpha,\beta,\gamma}$的转动惯量, 作空间转动变换
+\[ X = A\tilde{X},\quad A = \begin{pmatrix}
+    \alpha & * & * \\
+    \beta & * & * \\
+    \gamma & * & *
+\end{pmatrix}. \]
+则$OX$为$\tilde{\+ve}_1$轴. 问题转化为求$\tilde{I}_{11} = I$, $\tilde{\+vI} = A^T \+vI A$.
+\begin{align*}
+    I &= I_{11} = \sum_{ij} A_{i1}A_{j1}I_{ij} = \sum_{i} A_{i1} \pare{A_{11}I_{i1} + A_{21}I_{i2} + A_{31}I_{i3}} \\
+    &= A_{11}\pare{A_{11}I_{11} + A_{21}I_{12} + A_{31}I_{13}} + A_{21}\pare{A_{11} I_{21} + A_{21}I_{22} + A_{31}I_{23}} \\
+    &+ A_{31}\pare{A_{11} I_{31} + A_{21}I_{32} + A_{31}I_{33}} \\
+    &= \alpha^2 I_{11} + \beta^2 I_{22} + \gamma^2 I_{33} + 2\alpha\beta I_{12} + 2\beta\gamma I_{23} + 2\gamma\alpha I_{31}.
+\end{align*}
+若原坐标系恰好为主轴坐标系, 则$I = \alpha^2 I_1 + \beta^2 I_2 + \gamma^2 I_3$.
+\par
+在$OX$上选取线段$OQ$, 使$OQ = 1/\sqrt{I}$. 则
+\[ Q\pare{\frac{\alpha}{\sqrt{I}}, \frac{\beta}{\sqrt{I}}, \frac{\gamma}{\sqrt{I}}} = Q\pare{x,y,z}. \]
+则$\pare{x,y,z}$满足一曲面方程
+\[ x^2 I_{11} + y^2 I_{22} + z^2 I_{33} + 2xy I_{12} + 2yz I_{23} + 2zx I_{31} = 1. \]
+在所有方向如此, 故所有的$Q$构成一椭球面, 谓惯量椭球. 惯量椭球面上总有
+\[ I_Q = \rec{OQ^2}, \]
+其中$I_Q$是$OQ$轴上的转动惯量. 若转动轴$\+v\omega$和惯量椭球有交点$Q\pare{x,y,z}$, $\+v\omega\parallelsum \+vr_Q$, 则$r_Q = OQ = 1/\sqrt{I}$.
+\begin{align*}
+    \+v\omega &= c \begin{pmatrix}
+        x & y & z
+    \end{pmatrix}^T, \\
+    \+vJ &= \+vI\+v\omega = c\+vI \begin{pmatrix}
+        x & y & z
+    \end{pmatrix}.
+\end{align*}
+椭球面方程
+\begin{align*}
+    F\pare{x,y,z} &= I_{11}x^2 + I_{22}y^2 + I_{33}z^2 + 2I_{12}xy + 2I_{23}yz + 2I_{31}zx - 1 = 0. \\
+    \grad F &= \begin{pmatrix}
+        \+DxDF \\
+        \+DyDF \\
+        \+DzDF
+    \end{pmatrix} = 2 \begin{pmatrix}
+        I_{11} x + I_{12}y + I_{13}z \\
+        I_{21} x + I_{22}y + I_{23}z \\
+        I_{31} x + I_{32}y + I_{33}z
+    \end{pmatrix} = 2\+vI \begin{pmatrix}
+        x \\ y \\ z
+    \end{pmatrix}. \\
+    \Rightarrow & J \parallelsum \grad F.
+\end{align*}
+$\+u\omega$和$\+ur_Q$是一致的, $\displaystyle \frac{\omega_i}{\omega} = \frac{x_i}{r_Q} = \sqrt{I}x_i$.
+\[ \omega_i = \sqrt{I}\omega x_i \Rightarrow \+u\omega = \sqrt{I}\omega \+ux. \]
+惯量椭球的椭球面方程为$\+vx^T \+vI\+vx = 1$. 加上角动量与动能和角速度的关系,
+\begin{align*}
+    \+vJ &= \+vI\+v\omega = \sqrt{I}\omega \+vI\+vx, \\
+    2T &= \+v\omega^T \+vI\+v\omega = \sqrt{I} \omega \+vx^T \+vI \pare{\sqrt{I}\omega\+vx} = I\omega^2 \+vx^T\+vI\+vx = I\omega^2. \\
+    \Rightarrow \+vJ &= \sqrt{2T}\+vI\+vx. \\
+    \grad F &= 2\+vI\+vx \Rightarrow \grad F = \sqrt{\frac{2}{T}}\+vJ.
+\end{align*}
+主轴系中椭球为$I_1x^2 + I_2 y^2 + I_3z^2 = 1$, 故三个坐标轴即椭球的三个对称轴.
+\par
+\begin{figure}[htbp]
+    \centering
+    \incfig{6cm}{EllipInertia}
+    \caption{惯量椭球和角速度与角动量的关系}
+\end{figure}
+若$\+v\omega$沿着某一主轴, 如$\+ve_z$, 则$\omega_z = \omega$, $\omega_x = \omega_y = 0$, 则在主轴坐标系中,
+\[ \+vJ = \+vI\+v\omega = \+vI\+v\omega = \begin{pmatrix}
+    I_1 & & \\
+    & I_2 & \\
+    & & I_3
+\end{pmatrix}\begin{pmatrix}
+    \omega_x \\ \omega_y \\ \omega_z
+\end{pmatrix} = \begin{pmatrix}
+    0 \\ 0 \\ I_3\omega
+\end{pmatrix} = I_3 \+v\omega. \]
+又如若$I_1 = I_2 = I_3 = I$, 则$\+vJ = \+vI\+v\omega = I\+v\omega$, 从而在任何情形下, $\+vJ\parallelsum \+v\omega$.
+
+% subsubsection 惯量椭球 (end)
+
+% subsection 转动惯量张量与惯量主轴 (end)
+
+\subsection{Euler动力学方程及其应用} % (fold)
+\label{sub:euler动力学方程及其应用}
+
+\subsubsection{Euler动力学方程的建立} % (fold)
+\label{ssub:euler动力学方程的建立}
+
+对于完整系的刚体, 定点运动的动能为$\displaystyle T = \half \+v\omega^T \+vI \+v\omega$. 在主轴系中为
+\[ T = \half \pare{I_1 \omega_x^2 + I_2\omega_y^2 + I_3\omega_z^2}. \]
+代入
+\begin{align*}
+    \omega_x &= \dot{\varphi}\sin\theta\sin\psi + \dot\theta\cos\psi, \\
+    \omega_y &= \dot\varphi\sin\theta\cos\psi - \dot\theta\sin\psi, \\
+    \omega_z &= \dot\varphi\cos\theta + \dot\psi. \\
+    T &= \half\bigg[\pare{I_1 - I_2}\pare{\dot\theta\cos\psi + \dot\varphi\sin\theta\sin\psi}^2 \\ &+ I_2\pare{\dot\theta^2 + \dot\varphi^2\sin^2\theta} + I_3\pare{\dot\psi + \dot\varphi\cos\theta}^2\bigg].
+\end{align*}
+其中$\pare{\varphi,\theta,\psi}$为广义坐标. Lagrange方程为
+\begin{align*}
+    & \+dtd{} \+D{\dot\psi}D{T} - \+D\psi DT = Q_\psi = N_z. \\
+    & \+D{\dot\psi}DT = I_3\omega_z \+D{\dot\psi}D{\omega_z} = I_3\omega_z. \\
+    & \+D\psi DT = I_1\omega_x \+D\psi D{\omega_x} + I_2\omega_y \+D\psi D{\omega_y} = I_1\omega_x\pare{\dot\varphi\sin\theta\cos\psi - \dot\theta\sin\psi} \\
+    &+ I_2\omega_y\pare{-\dot\varphi\sin\theta\sin\psi - \dot\theta\cos\psi} \\
+    &= I_1\omega_x \omega_y - I_2\omega_y\omega_x = \pare{I_1 - I_2}\omega_x \omega_y. \\
+    &\Rightarrow I_3 \dot{\omega}_z - \pare{I_1 - I_2}\omega_x\omega_y = N_z.
+\end{align*}
+可以直接作循环置换得到另外两个动力学方程.
+\begin{finale}
+    \begin{theorem}[Euler动力学方程]
+        \begin{align*}
+    I_1\dot{\omega}_x - \pare{I_2 - I_3}\omega_y\omega_z &= N_x, \\
+    I_2\dot{\omega}_y - \pare{I_3 - I_1}\omega_z\omega_x &= N_y, \\
+    I_3\dot{\omega}_z - \pare{I_1 - I_2}\omega_x\omega_y &= N_z.
+\end{align*}
+    \end{theorem}
+\end{finale}
+也可以使用Newton力学直接推导, 在主轴坐标系中
+\[ \+vJ = I_1\omega_x \+ve_x + I_2\omega_y\+ve_y + I_3\omega_z\+ve_z = \sum_i J_i\+ve_i = \sum_i I_i\omega_i\+ve_i. \]
+角动量定理表明,
+\begin{align*}
+    \+dtd{\+vJ} &= \+vN,\quad \+vN = \sum_i N_i \+ve_i,\quad \dot{\+ve_i}\neq 0. \\
+    \+dtd{\+vJ} &= \sum_i \pare{\dot{J}_i \+ve_i + J_i \dot{\+ve}_i} = \sum_i \pare{I_i \dot{\omega}_i \+ve_i + J_i \+v\omega\times\+ve_i}\\ &= \sum_i I_i\dot\omega_i\+ve_i + \+v\omega\times\+vJ = \sum_i \brac{I_i \dot{\omega}_i \pare{\+v\omega\times\+vJ}_i}\+ve_i \\
+    &= \sum_i \brac{I_i \dot\omega_i + \sum_{kj}\epsilon_{ijk}\omega_j J_k}\+ve_i \\
+    &= \sum_i \brac{I_i\dot\omega_i + \sum_{kj}\epsilon_{ijk}I_k\omega_j\omega_k}\+ve_i \\
+    &= \sum_i N_i \+ve_i. \\
+    & \Rightarrow I_i \dot\omega_i + \sum_{kj}\epsilon_{ijk}I_k\omega_j\omega_k = N_i. \\
+    i=1 & \Rightarrow I_1\dot\omega_x + I_3\omega_y\omega_z - I_2\omega_z\omega_y = N_x, \\
+    &\Rightarrow I_1\dot{\omega}_x - \pare{I_2 - I_3}\omega_y\omega_z = N_x.
+\end{align*}
+类似对于$i=2$和$i=3$得到上述Euler方程.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ObtainTorque}
+    \caption{}
+    \label{fig:求力矩}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:求力矩}, 在主轴系中, $\+ve_x$, $\+ve_z$, $\+v\omega$共面,
+        \begin{align*}
+            & I_3 = \half MR^2,\quad I_1 = I_2 = \rec{4}MR^2, \\
+            & \omega_z = \+v\omega\cdot\+ve_z = \omega\cos\theta,\quad \omega_y = 0, \\
+            & \omega_x = -\omega\sin\theta. \\
+            & \dot\omega_x = \dot\omega_y = \dot\omega_z = 0. \\
+            & N_x = \pare{I_3 - I_2}\omega_y\omega_z = 0, \\
+            & N_z = \pare{I_2 - I_1}\omega_x\omega_y = 0, \\
+            & N_y = \pare{I_1 - I_3}\omega_x\omega_z = \rec{4}MR^2\omega^2 \sin\theta\cos\theta, \\
+            &\+vN = N_y\+ve_y = \rec{4}MR^2\omega^2\sin\theta\cos\theta\+ve_y. \\
+            & F = \frac{\abs{\+vN}}{d} = \rec{4d}MR^2 \omega^2\sin\theta\cos\theta\+ve_y.
+        \end{align*}
+        其中$\+vN$的方向将随时间变化.
+    \end{ex}
+\end{sample}
+
+% subsubsection euler动力学方程的建立 (end)
+
+\subsubsection{Euler陀螺的一般解} % (fold)
+\label{ssub:euler陀螺的一般解}
+
+Euler陀螺谓$\+vN=0$的情形, 此时
+\begin{align*}
+    I_1\dot\omega_x &= \pare{I_2 - I_3}\omega_y \omega_z, \\
+    I_2\dot\omega_y &= \pare{I_3 - I_1}\omega_z \omega_x, \\
+    I_3\dot\omega_z &= \pare{I_1 - I_2}\omega_x \omega_y.
+\end{align*}
+由外力不做功, $\+vJ$与$T$皆为运动积分,
+\begin{align*}
+    J^2 &= I_1\omega_x^2 + I_2\omega_y^2 + I_3\omega_z^2 = \const, \\
+    T &= \half \pare{I_1\omega_x^2 + I_2\omega_y^2 + I_3\omega_z^2} = \const.
+\end{align*}
+从而
+\begin{align*}
+    \omega_x^2 &= \frac{I_3\pare{I_3 - I_2}\omega_z^2 + 2I_2T - J^2}{I_1\pare{I_2 - I_1}}, \\
+    \omega_y^2 &= \frac{I_3\pare{I_1 - I_3}\omega_z^2 + J^2 - 2I_1T}{I_2\pare{I_2 - I_1}}.
+\end{align*}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+4.16 -- 4.20
+
+% paragraph 作业 (end)
+
+\par
+对于自由刚体, $V = 0$,
+\begin{align*}
+    L &= T = \half\bigg[\pare{I_1 - I_2}\pare{\dot\theta\cos\psi + \dot\varphi\sin\theta\sin\psi}^2\\ & + I_2\pare{\dot\theta^2 + \dot\varphi^2\sin^2\theta} + I_3\pare{\dot\psi + \dot\varphi\cos\theta}^2\bigg]. \\
+    H &= T = \const,\quad p_\varphi = \+D{\dot\varphi}DL = J_{z'} = \const,\quad J_{y'} = \const,\quad J_{x'} = \const.
+\end{align*}
+在主轴系中, $J^2 = \const$. 但$J_x$, $J_y$, $J_z$不能保证.
+
+\begin{figure}[htb]
+    \centering
+    \incfig{6cm}{Poinsot}
+    \caption{Poinsot几何法示意}
+\end{figure}
+
+\paragraph{Poinsot几何法} % (fold)
+\label{par:poinsot几何法}
+
+在惯性系中取平面使$\+vJ$与之正交, $\+v\omega \parallelsum \+vr_Q$,
+\begin{align*}
+    \+vr_Q &= \rec{\sqrt{I}}\frac{\+v\omega}{\omega} = \frac{\+v\omega}{\sqrt{2T}},\quad T = \half \+v\omega\cdot J = \half I\omega^2. \\
+    R &= \abs{\+vr_Q \cdot \frac{\+vJ}{J}} = \abs{\frac{\+v\omega}{\sqrt{2T}}\cdot\frac{\+vJ}{J}} \\
+    &= \abs{\frac{2T}{\sqrt{2T}J}} = \frac{\sqrt{2T}}{J} = \const.
+\end{align*}
+$OQ$为刚体的转动瞬轴, $\+vv_Q = \+v\omega\times\+vr_Q = 0$, 故$Q$处瞬时速度为零, 从而惯量椭球作无滑动滚动.
+
+% paragraph poinsot几何法 (end)
+
+\paragraph{转动的稳定性} % (fold)
+\label{par:转动的稳定性}
+
+设$I_3 > I_2 > I_1$, 若$\+v\omega$沿着某一主轴, 例如$\+ve_x$, 则
+\begin{align*}
+    \+vJ &= I_1\omega_x = I_1\+v\omega, \\
+    \+vN &= 0,\quad \dot{\+vJ} = 0,\quad \+v\omega = 0, \\
+    \dot{\omega}_x &= 0,\quad \dot{\omega}_y = 0,\quad \dot{\+v\omega}_z = 0.
+\end{align*}
+其中
+\begin{align*}
+    \dot{\+v\omega} &= \dot{\omega}_i \+ve_i + \omega_i \dot{\+ve}_i \\
+    &= \dot{\omega}_i \+ve_i + \omega_i\pare{\+v\omega\times\+ve_i} \\
+    &= \dot{\omega}_i \+ve_i.
+\end{align*}
+在$\+v\omega$中引入微扰,
+\[ \+v\omega = \omega_x\+ve_x + \omega_y\+ve_y + \omega_z\+ve_z. \]
+\begin{cenum}
+    \item 当$\abs{\omega_y} , \abs{\omega_z} \ll \abs{\omega_x}$, 有
+\begin{align*}
+    I_1\dot{\omega}_x &= \pare{I_2 - I_3}\omega_y\omega_z \approx 0\Rightarrow \omega_x \approx \const. \\
+    I_2\dot{\omega}_y &= \pare{I_3 - I_1}\omega_z\omega_x \Rightarrow \dot{\omega}_y = \pare{\frac{I_3-I_1}{I_2}\omega_x}\omega_z, \\
+    I_3\dot{\omega}_z &= \pare{I_1 - I_2}\omega_x\omega_y \Rightarrow \dot{\omega}_z = \pare{\frac{I_1 - I_2}{I_3}\omega_x}\omega_y. \\
+    \ddot{\omega}_y &= \pare{\frac{I_3-I_1}{I_2}\omega_x}\pare{\frac{I_1-I_2}{I_3}\omega_x}\omega_y, \\
+    & \ddot{\omega}_y + \brac{\frac{\pare{I_3 - I_1}\pare{I_2-I_1}}{I_2I_3}\omega_x^2}\omega_y = 0, \\
+    & \ddot{\omega}_z + \brac{\frac{\pare{I_3 - I_1}\pare{I_2-I_1}}{I_2I_3}\omega_x^2}\omega_z = 0. \\
+    \Omega_1^2 &= \frac{\pare{I_3-I_1}\pare{I_2-I_1}}{I_2I_3}\omega_x^2 > 0. \\
+    \omega_{y,z} &= A_1\cos\Omega_1 t + B_1\sin\Omega_1 t.
+\end{align*}
+    \item 当$\abs{\omega_x} , \abs{\omega_y} \ll \abs{\omega_z}$, 有
+    \begin{align*}
+        & \omega_z \approx \const, \\
+        & \ddot{\omega}_{x,y} + \brac{\frac{\pare{I_3 - I_1}\pare{I_3 - I_2}}{I_1I_2}\omega_z^2}\omega_{x,y} = 0, \\
+        & \Omega^2_3 > 0 \Rightarrow \text{稳定}, \\
+        & \omega_{x,y} = A_3\cos\Omega_3 t + B_3\sin\Omega_3 t.
+    \end{align*}
+    \item 当$\abs{\omega_x} , \abs{\omega_z} \ll \abs{\omega_y}$, 有
+    \begin{align*}
+        & \omega_y \approx \const, \\
+        & \ddot{\omega}_{x,z} - \brac{\frac{\pare{I_2 - I_1}\pare{I_3 - I_2}}{I_1I_3}\omega_y^2}\omega_{x,z} = 0, \\
+        & \Omega_2^2 > 0, \\
+        & \omega_{x,z} = A_2e^{\Omega_2 t} + B_2 e^{-\Omega_2 t}.
+    \end{align*}
+\end{cenum}
+因此只有绕着主转动惯量最大或最小的主轴转动时, 平衡才是稳定的.
+
+% paragraph 转动的稳定性 (end)
+
+% subsubsection euler陀螺的一般解 (end)
+
+\subsubsection{对称Euler陀螺} % (fold)
+\label{ssub:对称euler陀螺}
+
+$\+vN = 0$时, $I_1 = I_2 \neq I_3$, 从而$\+ve_z$为对称轴,
+\begin{align*}
+    & \left\{ \begin{aligned}
+        &I_1\dot\omega_x = \pare{I_1 - I_3} \omega_y\omega_z, \\
+        &I_1\dot\omega_y = \pare{I_3 - I_1} \omega_z\omega_x, \\
+        &I_3\dot\omega_z = \pare{I_1 - I_2} \omega_x\omega_y = 0.
+    \end{aligned} \right. \Rightarrow \left\{ \begin{aligned}
+        &\dot\omega_x = \pare{\frac{I_1-I_3}{I_1}\omega_z} \omega_y, \\
+        &\dot\omega_y = \pare{\frac{I_3-I_1}{I_1}\omega_z} \omega_x, \\
+        &\omega_z = \const.
+    \end{aligned} \right. \\
+    & \ddot{\omega}_{x,y} + \pare{\frac{I_3-I_1}{I_1}\omega_z}^2 \omega_{x,y} = 0, \quad \Omega = \abs{\frac{I_3 - I_1}{I_1}\omega_z}, \\
+    & \omega_x = A\cos\pare{\Omega t + \phi_0}, \\
+    & \dot{\omega_x} = -\omega A\sin\pare{\Omega t + \phi_0}, \\
+    & \omega_y = \frac{\dot{\omega}_x}{\frac{I_1-I_3}{I_1}\omega_z} = \frac{\abs{\pare{I_3-I_1}\omega_z}}{\pare{I_3-I_1}\omega_z}A\sin\pare{\Omega t + \phi_0} \\
+    &= \begin{cases}
+        A\sin\pare{\Omega t + \phi_0},\quad \pare{I_3 -I_1}\omega_z > 0, \\
+        -A\sin\pare{\Omega t + \phi_0},\quad \pare{I_3 - I_1}\omega_z < 0.
+    \end{cases}
+\end{align*}
+解的物理意义为
+\begin{align*}
+    \omega &= \sqrt{\omega_x^2 + \omega_y^2 + \omega_z^2} = \sqrt{A^2 + \omega_z^2} = \const. \\
+    J &= \sqrt{J_x^2 + J_y^2 + J_z^2} = \sqrt{I_1^2A^2 + I_3^2\omega_z^2} = \const.
+\end{align*}
+\begin{figure}[ht]
+    \centering
+    \incfig{5cm}{EulerEulerAngle}
+    \caption{}
+\end{figure}
+在惯性系中, $\+vJ$守恒, 取$\+ve'_z$为其方向, $\+vJ = J\+ve'_z$. 主轴系中
+\begin{align*}
+    & J_x = J \sin\theta\sin\psi = I_1\omega_x = I_1 A\cos\pare{\Omega t + \phi_0}, \\
+    & J_y = J\sin\theta\cos\psi = I_1\omega_y = \pm I_1 A\sin\pare{\Omega t + \phi_0}, \\
+    & J_z = J\cos\theta = I_3\omega_z = \const \Rightarrow \cos\theta = \frac{I_3\omega_z}{J} = \const = \cos\theta_0. \\
+    & \omega_z = \dot\varphi\cos\theta+\dot\psi = \dot\varphi\cos\theta_0 \mp \Omega, \\
+    & \dot\varphi \cos\theta_0 = \omega_z \mp\Omega = \left\{ \begin{aligned}
+        &\omega_z + \frac{I_3-I_1}{I_1}\omega_z, && \pare{I_3 - I_1}\omega_z > 0, \\
+        &\omega_z - \pare{-\frac{I_3-I_1}{I_1}\omega_z}, && \pare{I_3-I_1}\omega_z < 0
+    \end{aligned} \right. = \frac{I_3}{I_1}\omega_z. \\
+    & \Rightarrow \left\{ \begin{aligned}
+        & \varphi = \frac{I_3\omega_z}{I_1\cos\theta_0} t + \const, \\
+        & \theta = \theta_0 = \const, \\
+        & \psi = \frac{\pi}{2} \mp \pare{\Omega t + \phi_0} = \frac{I_1-I_3}{I_1}\omega_z t + \const.
+    \end{aligned} \right.
+\end{align*}
+故章动角保持不变, 进动角和自转角匀速上升, 此种运动谓规则进动.
+
+\paragraph{本体极锥与空间极锥} % (fold)
+\label{par:本体极锥与空间极锥}
+
+若$I_3 > I_1$, 则$J = \sqrt{I_1^2 A^2 + I_3^2\omega_z^2} < \sqrt{I_3^2\pare{A^2 + \omega_z^2}} = I_3\omega$.
+\[ \frac{\+vJ}{J}\cdot \+ve_z = \frac{J_z}{J} = \frac{I_3\omega_z}{J} > \frac{I_3\omega_z}{I_3\omega} = \frac{\omega_z}{\omega} = \frac{\+v\omega}{\omega}\cdot \+vz. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{eJw}
+    \caption{$I_3 > I_1$时的本体极锥}
+\end{figure}
+可以证明$\pare{\+vJ\times\+v\omega}\cdot\+ve_z = 0$, 从而$\+vJ$, $\+v\omega$, $\+ve_z$共面且前二者与$\+ve_z$的夹角为常数. 由
+\[ \omega_x = A\cos\pare{\Omega t + \phi_0},\quad \omega_y = A\sin\pare{\Omega t + \phi_0}, \]
+$\+v\omega$在本体系中会逆时针旋转.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ewJ}
+    \caption{$I_3 < I_1$时的本体极锥}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{OmegaConeSpatial}
+    \caption{$I_3>I_1$时的空间极锥}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{OmegaConeSpatial2}
+    \caption{$I_3<I_1$时的空间极锥}
+\end{figure}
+当$I_3 < I_1$, 情况也是类似的, 惟
+\[ \frac{\+vJ}{J}\cdot \+ve_z < \frac{\+v\omega}{\omega}\+ve_z, \]
+且由
+\[ \omega_x = A\cos\pare{\Omega t + \phi_0},\quad \omega_y = -A\sin\pare{\Omega t + \phi_0}. \]
+知$\+v\omega$顺时针旋转.
+\par
+在惯性系中,
+\begin{align*}
+    \omega_{x'} &= \dot\psi\sin\theta\sin\varphi + \dot\theta\cos\varphi = \frac{I_1-I_3}{I_1}\omega_z \sin\theta_0 \sin\pare{\frac{I_3\omega_z}{I_1\cos\theta_0}t + \const}, \\
+    \omega_{y'} &= -\dot\psi\sin\theta\cos\varphi + \dot\theta\sin\varphi = -\frac{I_1-I_3}{I_1}\omega_z \sin\theta_0 \cos\pare{\frac{I_3\omega_z}{I_1\cos\theta_0}t + \const}, \\
+    \omega_{z'} &= \dot\psi\cos\theta + \dot\varphi = \frac{I_1\cos^2\theta_0 + I_3\sin^2\theta_0}{I_1\cos\theta_0}\omega_z.
+\end{align*}
+
+% paragraph 本体极锥与空间极锥 (end)
+
+% subsubsection 对称euler陀螺 (end)
+
+\subsubsection{Lagrange陀螺} % (fold)
+\label{ssub:lagrange陀螺}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{LagrangeTop}
+    \caption{Lagrange陀螺}
+\end{figure}
+
+关于$\+ve_z$对称, 即$I_1 = I_2$, 且在重力矩下运动的陀螺, 谓Lagrange陀螺.
+\begin{align*}
+    V &= mgl\cos\theta,\\
+    L &= T - V = \half\brac{I_1 \pare{\dot\theta^2 + \dot\varphi^2 \sin^2\theta} + I_3 \pare{\dot\psi + \dot\varphi\cos\theta}^2} - mgl\cos\theta. \\
+    \+D\varphi DL &= 0 \Rightarrow p_\varphi = \+D{\dot\varphi}DL = I_1\dot\varphi\sin^2\theta + I_3\cos\theta\pare{\dot\psi + \dot\varphi\cos\theta} = J_{z'} = \const. \\
+    \+D\psi DL &= 0 \Rightarrow p_\psi = \+D{\dot\psi}DL = I_3\pare{\dot\psi + \dot\varphi\cos\theta} = I_3\omega_z = J_z = \const. \\
+    \+DtDL &= 0 \Rightarrow H = p_\varphi\dot\varphi + p_\psi\dot\psi + p_\theta\dot\theta - L = T+V = E \\
+    &\Rightarrow \half I_1\pare{\dot\theta^2 + \dot\varphi^2\sin^2\theta} + \frac{J_z^2}{2I_3}+mgl\cos\theta = E = \const. \\
+    \dot\varphi &= \frac{J_{z'} - J_z\cos\theta}{I_1\sin^2\theta},\quad \dot\psi = \frac{J_z}{I_3} - \dot\varphi\cos\theta = \frac{J_z}{I_3} - \frac{J_{z'} - J_z\cos\theta}{I_1\sin^2\theta} \cos\theta. \\
+    E' &= E - \frac{J_z^2}{2I_3} = \half I_1\dot\theta^2 + \underbrace{\frac{\pare{J_{z'}-J_z\cos\theta}^2}{2I_1\sin^2\theta} + mgl\cos\theta}_{V\+_eff_\pare{\theta}}. \\
+    \half I_1\dot\theta^2 &= E' - V\+_eff_\pare{\theta} \ge 0 \Rightarrow \dot\theta = \+dtd\theta = \pm \sqrt{\frac{2}{I_1}\brac{E' - V\+_eff_\pare{\theta}}}. \\
+    t\pare{\theta} &= \pm \frac{\rd{\theta}}{\sqrt{\frac{2}{I_1}\brac{E' - V\+_eff_\pare{\theta}}}}.
+\end{align*}
+从而可以反解出$\theta\pare{\theta}$, 以及$\varphi\pare{t}$, $\psi\pare{t}$.
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{Thetas}
+    \caption{$V\+_eff_$和$\theta$的关系}
+\end{figure}
+\par
+章动角$\theta\in\brac{0,\pi}$, 在两端点处显然$V\+_eff_\rightarrow \infty$, 而极值点要求
+\begin{align*}
+    & \left.\+d\theta d{V\+_eff_} \right\vert_{\theta=\theta_0} = 0, \\
+    & \frac{J_{z'} - J_z\cos\theta_0}{I_1\sin\theta_0}J_z - \frac{\pare{J_{z'}-J_z\cos\theta_0}^2}{I_1\sin^3\theta_0} \cos\theta_0 - mgl\sin\theta_0 = 0, \\
+    & mgl\cos\theta_0 = \frac{\pare{J_{z'} - J_z\cos\theta_0}J_z\cos\theta_0}{I_1\sin^2\theta_0} - \frac{\pare{J_{z'} - J_z\cos\theta_0}^2\cos^2\theta_0}{I_1\sin^4\theta}, \\
+    & \pare{J_{z'} - J_z\cos\theta}^2 - \frac{J_z\sin^2\theta_0}{\cos\theta_0}\pare{J_{z'} - J_z\cos\theta_0} + \frac{mglI_1\sin^4\theta_0}{\cos\theta_0} = 0.
+\end{align*}
+极值点的存在性要求
+\[ \Delta = \frac{J_z^2\sin^4\theta_0}{\cos^2\theta_0} - \frac{4mglI_1\sin^4\theta_0}{\cos\theta_0} \ge 0,\quad J_z^2 \ge 4mglI_1\cos\theta_0. \]
+极值点处
+\begin{align*}
+    & \left.\frac{\rd{^2V\+_eff_}}{\rd\theta^2}\right\vert_{\theta=\theta_0}\\  &= \frac{J_z^2}{I_1} - \frac{4J_z\cos\theta_0\pare{J_{z'} - J_z\cos\theta_0}}{I_1\sin^2\theta_0} + \frac{\pare{4-3\sin^2\theta_0}\pare{J_{z'}-J_z\cos\theta_0}^2}{I_1\sin^4\theta_0} \\
+    &= \frac{J_z^2}{I_1} - 4J_z\cos\theta_0 \dot\varphi_0 + I_1\pare{4-3\sin^2\theta_0}\dot\varphi_0^2 \\
+    &= I_1 \brac{\pare{\frac{J_z}{I_1} - 2\dot\varphi_0\cos\theta_0}^2 + \dot\varphi_0^2\sin^2\theta_0} > 0.
+\end{align*}
+故极值点为极小值点且唯一.
+\par
+在$\theta_1$和$\theta_2$处, $\dot\theta = 0$, 且
+\[ \theta_1 \le \theta \le \theta_2,\quad \cos\theta_1 \ge \cos\theta \ge \cos\theta_2. \]
+从而进动角速度
+\[ \dot\varphi = \frac{J_{z'} - J_z\cos\theta}{I_1\sin^2\theta}. \]
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{3.9cm}
+        \centering
+        \incfig{3.5cm}{LagrangeA}
+        \caption{}
+        \label{fig:Lagrange陀螺A}
+    \end{subfigure}
+    \begin{subfigure}{3.9cm}
+        \centering
+        \incfig{3.5cm}{LagrangeB}
+        \caption{}
+        \label{fig:Lagrange陀螺B}
+    \end{subfigure}
+    \begin{subfigure}{3.9cm}
+        \centering
+        \incfig{3.5cm}{LagrangeC}
+        \caption{}
+        \label{fig:Lagrange陀螺C}
+    \end{subfigure}
+    \begin{subfigure}{3.9cm}
+        \centering
+        \incfig{3.5cm}{LagrangeD}
+        \caption{}
+        \label{fig:Lagrange陀螺D}
+    \end{subfigure}
+    \begin{subfigure}{3.9cm}
+        \centering
+        \incfig{3.5cm}{LagrangeE}
+        \caption{}
+        \label{fig:Lagrange陀螺E}
+    \end{subfigure}
+    \caption{}
+\end{figure}
+\begin{cenum}
+    \item $\displaystyle \arccos \frac{J_{z'}}{J_z} < \theta_1 < \theta_2$, $\displaystyle J_{z'}/J_z > \cos\theta_1 > \cos\theta_2$, 则
+    \[ J_{z'} > J_z\cos\theta,\quad \dot\varphi > 0. \]
+    此时运动如\cref{fig:Lagrange陀螺A}.
+    \item $\displaystyle \theta_1 < \theta_2 < \arccos \frac{J_{z'}}{J_z}$, $\displaystyle \cos\theta_1 > \cos\theta_2 > J_{z'}/J_z$, 则
+    \[ J_{z'} < J_z\cos\theta,\quad \dot\varphi < 0. \]
+    此时运动如\cref{fig:Lagrange陀螺B}.
+    \item $\displaystyle \arccos \frac{J_{z'}}{J_z} = \theta_1 < \theta_2$, $J_{z'} = J_z\cos\theta_1$, 则
+    \[ J_{z'} - J_z\cos\theta > 0,\quad \dot\varphi > 0,\quad \theta \neq \theta_1,\quad \dot\varphi = 0,\quad \theta = \theta_1. \]
+    此时运动如\cref{fig:Lagrange陀螺C}.
+    \item $\displaystyle \theta_1 < \theta_2 = \arccos \frac{J_{z'}}{J_z}$, $J_{z'} = J_z\cos\theta_2$, 则
+    \[ J_{z'} - J_z\cos\theta < 0,\quad \dot\varphi < 0,\quad \theta \neq \theta_2,\quad \dot\varphi = 0,\quad \theta = \theta_2. \]
+    此时运动如\cref{fig:Lagrange陀螺D}.
+    \item $\displaystyle \theta_1 <\arccos \frac{J_{z'}}{J_z}< \theta_2$, $\cos\theta_1 > J_{z'}/J_z > \cos\theta_2$, 则
+    \[ J_z \cos\theta_1 > J_{z'} > J_z\cos\theta_2, \dot\varphi < 0,\quad \theta=\theta_1, \quad \dot\varphi > 0, \quad \theta<\theta_2. \]
+    此时运动如\cref{fig:Lagrange陀螺E}.
+    \item $E' = V\+_eff_\pare{\theta}_0$, $\theta=\theta_0$, $\dot\theta = 0$,
+    \[ \dot\varphi = \frac{J_{z'} - J_z\cos\theta_0}{I_1\sin^2\theta_0} = \const,\quad \dot\psi = \frac{J_z}{I_3} - \dot\varphi\cos\theta_0 = \const. \]
+    此时陀螺发生稳定的规则进动.
+\end{cenum}
+由$V\+_eff_$的形式, 任何运动都是稳定的, 前提是
+\[ J_z^2 \ge 4mglI_1\cos\theta_0. \]
+
+\paragraph{快速陀螺} % (fold)
+\label{par:快速陀螺}
+
+初始时刻$\dot\theta_1 = \dot\varphi_1 = 0$, $\dot\psi_1$很大, 此时
+\begin{align*}
+    J_{z'} &= I_3\cos\theta_1\dot\psi_1,\quad J_z = I_3\dot\psi_1 = I_3\omega_z, \\
+    E' &= mgl\cos\theta_1.
+\end{align*}
+在另一边界
+\begin{align*}
+    \dot\theta_2 &= 0, \quad J_{z'} = I_1\dot\varphi_2\sin^2\theta_2 + I_3\cos\theta_2\pare{\dot\psi_2 + \dot\varphi_2\cos\theta_2}, \\
+    J_z &= I_3\pare{\dot\psi_2 + \dot\varphi_2 \cos\theta_2}, \\
+    E' &= \half I_1\dot\varphi^2\sin^2\theta_2 + mgl\cos\theta_2.
+\end{align*}
+由$J_{z'}$, $J_z$, $E$守恒, 消去$\dot\varphi_2$, $\dot\psi_2$,
+\begin{align*}
+    \sin^2\theta_2 &= \frac{I_3^2\psi_1^2}{2I_1mgl}\pare{\cos\theta_1 - \cos\theta_2} \\
+    &= p\pare{\cos\theta_1 - \cos\theta_2}. \\
+    p &\gg 1,\quad \epsilon = \cos\theta_1 - \cos\theta_2, \\
+    p\epsilon &= \sin^2\theta_2 = 1-\cos^2\theta_2 = 1-\pare{\cos\theta_1 - \epsilon}^2. \\
+    & \epsilon^2 + \pare{p - 2\cos\theta_1} \epsilon -\sin^2\theta_1 = 0.
+\end{align*}
+从而$\epsilon \ll 1$, $p \gg \abs{2\cos\theta_1}$,
+\begin{align*}
+    & \epsilon^2 + p\epsilon - \sin^2\theta_1 \approx 0. \\
+    & \epsilon = \frac{\sin^2\theta}{p} = \frac{2I_1mgl\sin^2\theta_1}{I_3^2\psi_1^2} \ll 1.
+\end{align*}
+从而$\dot\psi$越大, 章动越小.
+\begin{align*}
+    & E' = \half I_1\dot\theta^2 + \frac{\pare{J_z - J_{z'}\cos\theta}^2}{2I_1\sin^2\theta} + mgl\cos\theta = mgl\cos\theta_1. \\
+    & E' - mgl\cos\theta = \half I_1\dot\theta_1^2 + \frac{\pare{J_{z'}-J_z\cos\theta}^2}{2I_1\sin^2\theta},\quad J_{z'} = J_z\cos\theta_1. \\
+    & mgl\pare{\cos\theta_1 - \cos\theta} = \half I_1\dot\theta^2 + \frac{J_z^2}{2I_1\sin^2\theta}\pare{\cos\theta_1 - \cos\theta}^2. \\
+    & mgl\pare{\cos\theta_1 - \cos\theta} \sin^2\theta = \frac{I_1}{2} \pare{\+dtd{\cos\theta}}^2 + \frac{J_z^2}{2I_1}\pare{\cos\theta_1 - \cos\theta}^2.
+\end{align*}
+令$x = \cos\theta_1 - \cos\theta$, 则$x_1 = 0$, $x_2 = \epsilon$, $0 \le x \le \epsilon$.
+\begin{align*}
+    & mglx\sin^2\theta = \frac{I_1}{2}\dot x^2 + \frac{J_z^2}{2I_1}x^2, \\
+    & \approx mglx\sin^2\theta_1 \\
+    & \approx mglp\epsilon x = \frac{I_1}{2}\dot x^2 + \frac{J_z^2}{2I_1}x^2. \\
+    & \frac{I_1}{2}\dot x^2 + \frac{J_z^2}{2I_1}\pare{x-\frac{\epsilon}{2}}^2 = \frac{J_z^2}{2I_1} \cdot \frac{\epsilon^2}{4}. \\
+    & x = \frac{\epsilon}{2} \brac{1-\cos\pare{\frac{J_z}{I_1}t}}. \\
+    & \Rightarrow \dot\varphi = \frac{J_{z'} - J_z\cos\theta}{I_1\sin^2\theta} = \frac{J_z x}{I_1\sin^2\theta} \approx \frac{J_z x}{I_1\sin^2\theta_1} \\ &\approx \frac{I_3\dot\psi }{I_1\sin^2\theta_1} \cdot \frac{\epsilon}{2}\brac{1-\cos\pare{\frac{J_z}{I_1}t}}. \\
+    & \expc{\dot\varphi} = \frac{I_3\dot\varphi_1}{I_1\sin^2\theta_1}\cdot \frac{\epsilon}{2} = \frac{mgl}{I_3\dot\psi_1}.
+\end{align*}
+
+% paragraph 快速陀螺 (end)
+
+\paragraph{Larmor进动} % (fold)
+\label{par:larmor进动}
+
+均匀磁场中带电粒子系统
+\[ V = q\pare{\varphi - \+vv\cdot\+vA} = -e\pare{-\+vv\cdot\+vA} = e\+vv\cdot\+vA. \]
+其中$\displaystyle \+vA = \half\pare{\+vB\times\+vr}$, $\+vB = \curl \+vA$.
+\begin{align*}
+    V &= e\+vv \cdot \half\pare{\+vB\times\+vr} = \frac{e}{2}\+vB\cdot\pare{\+vr\times\+vv} = -\+vm\cdot \+vB. \\
+    \+vm &= -\frac{e}{2}\pare{\+vr\times\+vv} = -\frac{e}{2}\+vr\times\pare{\+v\omega\times\+vr} \\
+    &= \frac{e}{2}\pare{\+v\omega\cdot\+vr}\+vr - \frac{e}{2}r^2\+v\omega = -\frac{e}{2m}\+vJ.
+\end{align*}
+特别地, 若$\+v\omega\cdot\+vr = 0$, $\+vm = \displaystyle -\frac{e}{2}r^2\+v\omega$.
+\begin{align*}
+    V &= -\+vm\cdot\+vB = \half e\omega r^2 B\cos\theta \rightarrow mgl\cos\theta.
+\end{align*}
+因此磁矩的进动和陀螺在重力场中的进动形式一致.
+
+% paragraph larmor进动 (end)
+
+% subsubsection lagrange陀螺 (end)
+
+% subsection euler动力学方程及其应用 (end)
+
+% section 刚体的运动 (end)
+
+\end{document}

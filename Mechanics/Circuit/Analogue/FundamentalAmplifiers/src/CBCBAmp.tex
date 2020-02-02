@@ -1,0 +1,61 @@
+\documentclass{standalone}
+
+\usepackage{ctex}
+\usepackage{van-de-la-illinoise}
+\usepackage{van-le-trompe-loeil}
+
+\usetikzlibrary{calc}
+
+\def\equals{=}
+\newcommand{\ib}[2]{to[battery1,l=$ #1 $, invert, #2]}
+\newcommand{\ic}[2]{to[capacitor,C=$ #1 $, #2]}
+\newcommand{\ivs}[2]{to[european voltage source,v<=$ #1 $, #2]}
+\newcommand{\iis}[2]{to[european current source,i=$ #1 $, #2]}
+\newcommand{\ir}[2]{to[resistor,R=$ #1 $, #2]}
+\newcommand{\iso}[1]{to[short,-o,#1]}
+\newcommand{\ios}[1]{to[short,o-,#1]}
+\newcommand{\is}[1]{to[short,#1]}
+%\newcommand{\iu}[3]{\draw #1  #2}
+\newcommand{\iou}[3]{\draw ($#1!0.5!#2$) node {$ #3 $};
+\draw ($#1!0.12!#2$) node {$\scriptstyle +$};
+\draw ($#1!0.88!#2$) node {$\scriptstyle -$};}
+\newcommand{\iblock}[3]{\draw[thick] #1 |- #2 |- cycle;
+\draw ($#1!0.5!#2$) node {#3};}
+\newcommand{\tarray}[1]{$\displaystyle \begin{array}{>$c<$}
+    #1
+\end{array}$}
+
+\begin{document}
+
+\begin{tikzpicture}
+\draw
+    (0,0) \ivs{\+vU\+_s_}{}
+    (0,1) \ir{R\+_s_}{}
+    (0,2) \iso{}
+    (1,2) \is{i=$\+vI\+_b1_$}
+    (2,2) node[npn,yscale=-1,anchor=G,label=right:$\text{T}_1$] (T1) {}
+    (T1.C) \is{-*}
+    (T1.C|-0,0) \iso{}
+    (1,0) \is{}
+    (0,0)
+    (T1.E) \is{i=$\+vI\+_e1_\equals\+vI\+_e2_$}
+    ++(2,0) node[npn,rotate=90,yscale=-1,anchor=E,label=above:$\text{T}_2$](T2) {}
+    (T2.B) \is{i=$\+vI\+_b2_$,-*}
+    (T2.B|-0,0) node[ground](g){}
+    (g) \is{}
+    (T1.B|-0,0)
+    (T2.C) \is{-*,i=$\+vI\+_c2_$}
+    ++(0.5,0) node (Rcp) {}
+    (Rcp) \ir{R_c}{-*}
+    (Rcp|-0,0) \is{}
+    (g)
+    (Rcp) \iso{}
+    ++(2,0) node (RLp) {}
+    (RLp) \ir{R_L}{v=$\+vU_O$,-o}
+    (RLp|-0,0) \is{}
+    (Rcp|-0,0)
+    ;
+\iou{(1,2)}{(1,0)}{\+vU\+_i_}
+\end{tikzpicture}
+    
+\end{document}

@@ -1,0 +1,68 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'NPN_BJT.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{356.25bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.42105263)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{NPN_BJT.pdf}}%
+    \put(0.31542763,0.32647204){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{n-type}}}%
+    \put(0.49976151,0.32613487){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{p-type}}}%
+    \put(0.68384868,0.32613487){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{n-type}}}%
+    \put(0.31471217,0.26311266){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Emitter\\ region}}}%
+    \put(0.49976562,0.26311266){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Base\\ region}}}%
+    \put(0.68368832,0.26311266){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Collector\\ region}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{NPN_BJT.pdf}}%
+    \put(0.06770559,0.26736842){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Emitter\\ (E)}}}%
+    \put(0.55997533,0.10402961){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Base\\ (B)}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{NPN_BJT.pdf}}%
+    \put(0.93902961,0.26922697){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Collector\\ (C)}}}%
+    \put(0.28688322,0.0867722){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Emitter-Base\\ Junction\\ (EBJ)}}}%
+    \put(0.72191201,0.0871875){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Collector-Base\\ Junction\\ (CBJ)}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{NPN_BJT.pdf}}%
+  \end{picture}%
+\endgroup%

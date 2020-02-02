@@ -1,0 +1,112 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\sisetup{inter-unit-product =\cdot}
+
+\begin{document}
+
+\section{Bohr模型} % (fold)
+\label{sec:bohr模型}
+
+\subsection{背景知识} % (fold)
+\label{sub:背景知识}
+
+\paragraph{黑体辐射} % (fold)
+\label{par:黑体辐射}
+
+Planck指出, 黑体辐射具有能量密度分布
+\[ E\pare{\nu, T}\,\rd{\nu} = \frac{8\pi h\nu^3}{c^3} \frac{\rd{\nu}}{e^{h\nu/kT}-1},\quad E\pare{\lambda, T}\,\rd{\lambda} = \frac{8\pi hc}{\lambda^5}\frac{\rd{\lambda}}{e^{hc/kT\lambda}-1}. \]
+其中$h = \SI{6.626e-45}{\joule\second}$谓Planck常数. 并且可以导出Vien位移定律
+\[ \lambda\+_m_ T = \SI{0.2898}{\centi\meter\kelvin}. \]
+
+% paragraph 黑体辐射 (end)
+
+\paragraph{光电效应} % (fold)
+\label{par:光电效应}
+
+截止电压发生于$\displaystyle \half mv\+_m_^2 = eV_0$处, 且只取决于频率, 不取决于光强. 设金属的逸出功为$\phi$, 则$\displaystyle \half mv\+_m_^2 = h\nu - \varphi$.
+
+% paragraph 光电效应 (end)
+
+\paragraph{光谱} % (fold)
+\label{par:光谱}
+
+Rydberg公式表明, 氢原子的谱线可以表示为
+\[ k = \rec{\lambda} = R_H\brac{\rec{n^2} - \rec{n'^2}} = T\pare{n} - T\pare{n'},\quad T\pare{n} = \frac{R_H}{n^2}. \]
+$n=1$的谱线在紫外区, 谓Lyman系. $n=2$的谱线在可见光区, 谓Balmer系. $n=3,4,5$的谱线在红外区, 分别为Paschen系, Brackett系和Pfund系. 
+
+% paragraph 光谱 (end)
+
+% subsection 背景知识 (end)
+
+\subsection{Bohr模型} % (fold)
+\label{sub:bohr模型}
+
+Bohr模型中, Rydberg常量, 能量, 轨道半径分别有表达式
+\[ R = \frac{2\pi^2 e^4m_e}{\pare{4\pi\epsilon_0}^2\cdot ch^3}, \quad r_n = \frac{4\pi\epsilon_0 \hbar^2}{m_e e^2}\cdot n^2,\quad E_n = -\frac{m_ e^4}{\pare{4\pi\epsilon_0}^2\cdot 2\hbar^2 n^2}. \]
+若引入精细结构常量$\displaystyle \frac{e^2}{4\pi\epsilon_0\hbar c} = \alpha = \rec{137.036}$, 以及
+\begin{align*}
+    \hbar c &= \SI{197}{\femto\meter\mega\eV} = \SI{197}{\nano\meter\eV}, \\
+    \frac{e^2}{4\pi\epsilon_0} &= \SI{1.44}{\femto\meter\mega\eV} = \SI{1.44}{\nano\meter\eV}, \\
+    m_ec^2 &= \SI{0.511}{\mega\eV} = \SI{511}{\kilo\eV}.
+\end{align*}
+有
+\begin{align*}
+    E_n &= -\half m_ec^2\alpha^2 \cdot \rec{n^2},\quad E_1 = \SI{13.6}{\eV}. \\
+    v_n &= \frac{\alpha c}{n},\quad v_1 = \alpha c,\quad R = -\frac{E_1}{hc}.
+\end{align*}
+
+% subsection bohr模型 (end)
+
+\subsection{光谱验证} % (fold)
+\label{sub:光谱验证}
+
+考虑到原子核并非无限质量, 将$R$中的$m_e$替换为$\displaystyle m_\mu = \frac{m_em_p}{m_e+m_p}$, 修正前为$\SI{109737.315}{\per\centi\meter}$, 修正后为$\SI{109677.58}{\per\centi\meter}$, 符合极好. 且$r_n$不受这一修正影响.
+\par
+Bohr模型也可以用于正确描述类氢光谱. 只需替换$R\mapsto RZ^2$即可. 例如
+\[ \pare{\rec{\lambda}}_{\ce{He+}} = R_{\ce {He+}} Z^2 \pare{\rec{n^2} - \rec{n'^2}} = R_{\ce{He+}}\curb{\rec{\pare{\frac{n}{Z}}^2} - \rec{\pare{\frac{n'}{Z}}^2}}. \]
+下标$\ce{He+}$是考虑了原子核的质量修正.
+
+% subsection 光谱验证 (end)
+
+\subsection{Franck-Hertz实验} % (fold)
+\label{sub:franck_hertz实验}
+
+实验中电子被发出后先经过一电场加速, 后撞向(汞)蒸汽样品. 如果电子将能量传给了原子, 则电子无法抵达有减速电压的另一端的电流计, 从而电流减小. 实验发现了电流随加速电压的周期性振荡, 且振荡周期近似均匀($\SI{4.9}{\volt}$).
+\par
+这是因为汞原子中存在$\SI{4.9}{\volt}$的量子态, 电子能量一次性只能转移$\SI{4.9}{\volt}$. 能量小于这一值时, 电压越大, 相应的检测到的电流也就越大.
+\par
+实验装置还可以被改进, 例如将加速区与碰撞区分离, 使得电子被加速至更大能量从而观察到更多的量子态.
+
+% subsection franck_hertz实验 (end)
+
+\subsection{Bohr模型的推广} % (fold)
+\label{sub:bohr模型的推广}
+
+\paragraph{狭义相对论修正} % (fold)
+\label{par:狭义相对论修正}
+
+在Bohr模型中, 简单将动能替换为其狭义相对论修正, 并注意到$\displaystyle \sqrt{1-\beta^2} - 1 \approx -\brac{\half \beta^2 + \rec{8}\beta^2}$, 并维持$r_n$和$v_n$的表达式不变但是将$m$替换为相对论质量, 则
+\[ E_n = -\frac{m_0c^2}{2}\pare{\frac{Z\alpha}{n}}^2\brac{1+\rec{4}\pare{\frac{Z\alpha}{n}}^2}. \]
+
+% paragraph 狭义相对论修正 (end)
+
+\paragraph{碱金属光谱} % (fold)
+\label{par:碱金属光谱}
+
+将Balmer公式中$1/2^2$项谓固定项(低能), $1/n^2$项谓动项(高能), 则碱金属光谱特征为:
+\begin{cenum}
+    \item 四组谱线, 即四套动项(高能).
+    \item 三个终端, 即三套固定项(低能), 2S, 2P和3D.
+    \item 两个量子数, 有主量子数$n$和角量子数$n$.
+    \item 一条规则, 即两个能及的角动量量子数$\Delta l = \pm 1$.
+\end{cenum}
+$n$P$\mapsto 2$S谓主线系, $n$S$\mapsto 2$P谓锐线系, $n$D$\mapsto 2$P谓漫线系, $n$F$\mapsto 3$D谓基线系.
+
+% paragraph 碱金属光谱 (end)
+
+% subsection bohr模型的推广 (end)
+
+% section bohr模型 (end)
+
+\end{document}

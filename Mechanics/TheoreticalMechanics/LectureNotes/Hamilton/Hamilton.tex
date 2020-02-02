@@ -1,7 +1,4 @@
-\documentclass{ctexart}
-
-\usepackage{van-de-la-sehen}
-\usepackage{van-le-trompe-loeil}
+\documentclass[../LectureNotes.tex]{subfiles}
 
 \begin{document}
 
@@ -320,7 +317,7 @@ Hamilton方法并未比Lagrange方法提供更多便利.
 \end{ex}
 \begin{sample}
     \begin{ex}
-        若一个直角坐标系中的例子有角动量$\+vJ = \pare{J_x,J_y,J_z}$,
+        若一个直角坐标系中的粒子有角动量$\+vJ = \pare{J_x,J_y,J_z}$,
         \begin{cenum}
             \item 计算$\brac{J_x,J_y}$, $\brac{J_x,J}$.
         \end{cenum}
@@ -351,11 +348,23 @@ Hamilton方法并未比Lagrange方法提供更多便利.
             \brac{J_x,J^2} &= \brac{J_x,J_x^2,J_y^2,J_z^2} \\
             &= \brac{J_x,J_x^2} + \brac{J_x,J_y^2} + \brac{J_x,J_z^2} \\
             &= 2J_x\brac{J_x,J_x} + 2\brac{J_x,J_y}J_y + 2\brac{J_x,J_z}J_z \\
-            &= 2J_zJ_y - 2J_yJ_z = 0 \Rightarrow \brac{J_x,J^2} = 0 \Rightarrow \brac{J_x,J}J = 0\Rightarrow \brac{J_x,J} = 0.
+            &= 2J_zJ_y - 2J_yJ_z = 0 \Rightarrow \brac{J_x,J^2} = 0 \\ &\Rightarrow \brac{J_x,J}J = 0\Rightarrow \brac{J_x,J} = 0.
         \end{align*}
         若选择$p_1=J_x$, $p_2=J_y$, 根据基本的Poisson括号, $\brac{p_1,p_2} = 0$, 但$\brac{J_x,J_y} = J_z\neq 0$, 故$J_x$和$J_y$不能同时成为系统的广义动量. 此外, 如果$J_x$和$J_y$是运动积分, 则$J_z$必然也是运动积分.
     \end{solution}
 \end{sample}
+\begin{remark}
+    也可以用如下方法导出:
+    \begin{align*}
+        & M_i = \epsilon_{ijk}q_jp_k,\quad M_p = \epsilon_{pnm}q_np_m, \\
+        & \brac{M_i,M_p} = \+D{q_l}D{M_i}\+D{p_l}D{M_p} - \+D{p_l}D{M_i}\+D{q_l}D{M_p}, \\
+        & \+D{q_l}D{M_i}\+D{p_l}D{M_p} = \epsilon_{ijk}p_k\delta_{jl}\epsilon_{pnm}q_n\delta_{ml} = \epsilon_{ilk}p_k \epsilon_{pnl}q_n \\
+        & = -\epsilon_{lik}p_k \epsilon_{lpn}q_n = -\pare{\delta_{ip}\delta_{kn} - \delta_{in}\delta_{kp}}p_kq_n, \\
+        & \+D{p_l}D{M_i}\+D{q_l}D{M_p} = -\pare{\delta_{ip}\delta_{kn} - \delta_{pn}\delta_{ki}}p_kq_n. \quad \text{(直接互换前一步的$i$和$p$)} \\
+        & \+D{q_l}D{M_i}\+D{p_l}D{M_p} - \+D{p_l}D{M_i}\+D{q_l}D{M_p} = -\pare{\delta_{ip}\delta_{kn} - \delta_{in}\delta_{kp}}p_kq_n + \pare{\delta_{ip}\delta_{kn} - \delta_{pn}\delta_{ki}}p_kq_n \\
+        &= \pare{\delta_{in}\delta_{kp} - \delta_{pn}\delta_{ki}} p_kq_n = q_ip_p - p_iq_p.
+    \end{align*}
+\end{remark}
 
 \paragraph{作业} % (fold)
 \label{par:作业}

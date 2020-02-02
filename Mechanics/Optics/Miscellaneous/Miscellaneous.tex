@@ -1,0 +1,30 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\begin{theorem}[Compton效应]
+    以$\lambda$和$\lambda_0$标记光子和电子碰撞后和碰撞前的波长, $\theta$表示散射角, 则
+    \[ \lambda - \lambda_0 = \frac{h}{mc}\pare{1-\cos\theta}. \]
+\end{theorem}
+\begin{proof}
+    以$\+vv$表示电子碰撞后的速度, 则
+    \begin{align*}
+        p_0^2 + p^2 - 2p_0p\cos\theta &= \pare{\gamma m\+vv}^2 \\
+        &= \pare{\gamma mc}^2 - \pare{mc}^2 = \pare{p_0+mc-p}^2 - \pare{mc}^2 \\
+        &= \pare{p_0 - p}\pare{p_0 + 2mc - p} \\
+        &= p_0^2 + p^2 - 2p_0p + 2mc\pare{p_0 - p}.
+    \end{align*}
+    从而
+    \[ \frac{1-\cos\theta}{mc} = \frac{p_0-p}{p_0p} = \rec{p} - \rec{p_0} = \frac{\lambda}{h} - \frac{\lambda_0}{h}. \]
+    也就是
+    \[ \lambda - \lambda_0  = \frac{h}{mc}\pare{1-\cos\theta}. \qedhere \]
+\end{proof}
+
+\begin{theorem}[Kramers-Kronig关系]
+    若$\chi\pare{\omega} = \chi_1\pare{\omega} + \chi_2\pare{\omega}$在上半平面解析, 且当$\omega\rightarrow\infty$, $\abs{\chi\pare{\omega}} = O\pare{1/\abs{\omega}}$, 则$\chi\pare{\omega}$满足
+    \[ \chi_1\pare{\omega} = \rec{\pi} \mathrm{ P.V. }\int_{-\infty}^{\infty} \frac{\chi_2\pare{\omega'}}{\omega' - \omega}\,\rd{\omega'}. \]
+\end{theorem}
+
+\end{document}

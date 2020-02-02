@@ -1,0 +1,50 @@
+\documentclass{standalone}
+
+\usepackage{ctex}
+\usepackage{van-de-la-illinoise}
+\usepackage{van-le-trompe-loeil}
+
+\usetikzlibrary{calc}
+
+\def\equals{=}
+\newcommand{\ivs}[2]{to[european voltage source,v<=$ #1 $, #2]}
+\newcommand{\ir}[2]{to[resistor,R=$ #1 $, #2]}
+\newcommand{\iso}[1]{to[short,-o,#1]}
+\newcommand{\ios}[1]{to[short,o-,#1]}
+\newcommand{\is}[1]{to[short,#1]}
+%\newcommand{\iu}[3]{\draw #1  #2}
+\newcommand{\iou}[3]{\draw ($#1!0.5!#2$) node {$ #3 $};
+\draw ($#1!0.12!#2$) node {$\scriptstyle +$};
+\draw ($#1!0.88!#2$) node {$\scriptstyle -$};}
+\newcommand{\iblock}[3]{\draw[thick] #1 |- #2 |- cycle;
+\draw ($#1!0.5!#2$) node {#3};}
+
+\begin{document}
+
+\begin{tikzpicture}
+\draw 
+    (0,0) \ivs{\+vU_s}{}
+    (0,1) \ir{R_s}{}
+    (0,2) \iso{}
+    (1,2) \is{i=$\+vI\+_i_$}
+    (3,2) \ir{R\+_i_}{}
+    (3,0) \iso{}
+    (1,0) \is{}
+    (0,0);
+\draw
+    (6,0) \ivs{\+vU_o'}{}
+    (6,1) \ir{R_o}{}
+    (6,2) \iso{i=$\+vI_o$}
+    (9,2) \ir{R_L}{v=$\+vU_o$}
+    (9,0) \ios{}
+    (6,0);
+
+\iou{(1,2)}{(1,0)}{\+vU\+_i_}
+\iblock{(2.5,-0.5)}{(6.5,2.5)}{$\begin{array}{c}
+    \text{放大} \\
+    \text{电路}
+\end{array}$}
+
+\end{tikzpicture}
+    
+\end{document}

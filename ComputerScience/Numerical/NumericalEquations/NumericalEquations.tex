@@ -1,0 +1,390 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\cond}{cond}
+
+\begin{document}
+
+\section{求解方程} % (fold)
+\label{sec:求解方程}
+
+\subsection{一元方程} % (fold)
+\label{sub:一元方程}
+
+\subsubsection{二分法} % (fold)
+\label{ssub:二分法}
+
+从略.
+
+% subsubsection 二分法 (end)
+
+\subsubsection{不动点迭代} % (fold)
+\label{ssub:不动点迭代}
+
+\begin{definition}
+    设$e_i$表示迭代过程中第$i$步的误差, 如果
+    \[ \frac{e_{i+1}}{e_i} = S < 1, \]
+    则谓之满足线性收敛, 收敛速度为$S$.
+\end{definition}
+\begin{theorem}
+    设$g\in C^1$, $g\pare{r} = r$, $S = \abs{g'\pare{r}}<1$, 则对于与$r$足够接近的估计, 不动点迭代以速度$S$线性收敛到不动点$r$.
+\end{theorem}
+\begin{remark}
+    二分法可以保证线性收敛, 不动点迭代在局部收敛的情况下也能保证线性收敛.
+\end{remark}
+
+% subsubsection 不动点迭代 (end)
+
+\subsubsection{误差} % (fold)
+\label{ssub:误差}
+
+\begin{definition}
+    设$f$是一函数, $r$是其一根, $x_\alpha$是$r$的近似值, 则谓$\abs{\pare{f\pare{x_\alpha}}}$其后向误差, $\abs{r-x_\alpha}$其前向误差.
+\end{definition}
+在重根附近, 很小的后向误差也可能对应很大的前向误差.
+\begin{theorem}
+    设$r$是$f\pare{x}$的根, $r+\Delta r$是$f\pare{x}+\epsilon g\pare{x}$的根, 则$\epsilon \ll f'\pare{r}$时,
+    \[ \Delta r \approx -\frac{\epsilon g\pare{r}}{f'\pare{r}}. \]
+\end{theorem}
+\begin{definition}
+    $\displaystyle \text{误差放大因子} = \frac{\text{相对前向误差}}{\text{相对后向误差}}$. 对$f$作微扰时
+    \[ \text{误差放大因子} = \abs{\frac{\Delta r/r}{\epsilon}} = \frac{\abs{g\pare{r}}}{rf'\pare{r}}. \]
+\end{definition}
+\begin{remark}
+    误差放大因子标志有效数字丢位数.
+\end{remark}
+\begin{ex}
+    在Wilkinson多项式$\pare{x-1}\cdots\pare{x-20}$的求根中, 设$g\pare{x} = -1672280820x^{15}$, 则在$r=16$附近,
+    \[ \Delta r = \frac{16^{15}\times 1672280820\epsilon}{15!4!} = 6.1432\times 10^{13}\epsilon. \]
+    取机器精度$\epsilon = 2^{-52}$有$\Delta r\approx 0.0136$.
+\end{ex}
+\begin{definition}
+    条件数谓所有输入变化所造成的最大误差放大.
+\end{definition}
+条件数高的问题谓病态问题, 条件数在$1$量级的问题谓良态问题.
+
+% subsubsection 误差 (end)
+
+\subsubsection{Newton-Raphson方法} % (fold)
+\label{ssub:newton_raphson方法}
+
+\begin{definition}
+    求根迭代谓二次收敛的, 如果
+    \[ M = \lim_{i\rightarrow\infty} \frac{e_{i+1}}{e_i^2} < \infty. \]
+\end{definition}
+\begin{definition}
+    设$f\in C^2$, $f\pare{r} = 0$且$f'\pare{r}$, 则Newton法二阶收敛且
+    \[ M = \frac{f''\pare{r}}{2f'\pare{r}}. \]
+\end{definition}
+\begin{remark}
+    在$m$重根附近, Newton法转为线性收敛, 速率为$\displaystyle S = \frac{m-1}{m}$.
+\end{remark}
+\begin{theorem}
+    设$f\in C^{m+1}$, 且具有$m$重根, 则
+    \[ x_{i+1} = x_i - \frac{mf\pare{x_i}}{f'\pare{x_i}} \]
+    收敛到$r$且具有二次收敛速度.
+\end{theorem}
+
+% subsubsection newton_raphson方法 (end)
+
+\subsubsection{割线方法} % (fold)
+\label{ssub:割线方法}
+
+\begin{theorem}
+    割线方法的迭代式为
+    \[ x_{i+1} = x_i - \frac{f\pare{x_i}\pare{x_i - x_{i-1}}}{f\pare{x_i} - f\pare{x_{i-1}}}. \]
+    其中$x_0$和$x_1$给定.
+\end{theorem}
+割线方法的收敛速度为超线性.
+\begin{theorem}[Regula Falsi方法]
+    同样按照
+    \[ c = a - \frac{f\pare{a}\pare{a-b}}{f\pare{a} - f\pare{b}} = \frac{bf\pare{a} - af\pare{b}}{f\pare{a} - f\pare{b}} \]
+    迭代, 惟事先保证$f\pare{a}$与$f\pare{b}$异号. 此时再选择$a$, $b$中满足$f\pare{a}$或$f\pare{b}$与$f\pare{c}$异号者作下一轮迭代.
+\end{theorem}
+
+% subsubsection 割线方法 (end)
+
+% subsection 一元方程 (end)
+
+\subsection{方程组} % (fold)
+\label{sub:方程组}
+
+\subsubsection{\texorpdfstring{Gau\ss}{Gauss}消元法} % (fold)
+\label{ssub:gauss消元法}
+
+Gau\ss 消元法的消去操作次数为$2n^3/3$, 回代的操作次数为$n^2$.
+
+% subsubsection gauss消元法 (end)
+
+\subsubsection{LU分解} % (fold)
+\label{ssub:lu分解}
+
+Gau\ss 消元法等价于将矩阵分解为$A=LU$, 其中$L$为行变换矩阵(下三角), $U$为约化后矩阵(上三角).
+\par
+一旦完成LU分解, 就可以通过定义$c=Ux$, 求解$Lc=b$, 之后求解$Ux=c$.
+\par
+对于$Ax=b_1$, $Ax=b_2$, $\cdots$, $Ax=b_k$类型的问题, Gau\ss 消元法需要$2kn^3/3$次操作, 而LU分解需要$2n^3/3 + 2kn^2$次操作.
+\begin{ex}[并非所有矩阵都有LU分解]
+    $\displaystyle \begin{pmatrix}
+        0 & 1 \\ 1 & 1
+    \end{pmatrix}$不能LU分解.
+\end{ex}
+
+% subsubsection lu分解 (end)
+
+\subsubsection{误差来源} % (fold)
+\label{ssub:误差来源}
+
+\begin{definition}
+    向量$x = \pare{x_1,\cdots,x_n}$的无穷范数或最大范数为$\norm{x}_\infty = \max \abs{x_i}$.
+\end{definition}
+\begin{definition}
+    对于线性方程$Ax=b$的近似解$x_a$, 设$r = b-Ax_a$, 后向误差为$\norm{r}_\infty$, 前向误差为$\norm{x-x_a}_\infty$. 相对后向误差为$\displaystyle \frac{\norm{r}_\infty}{\norm{b}_\infty}$, 相对前向误差为$\displaystyle \frac{\norm{x-x_a}_\infty}{\norm{x}_\infty}$. $\displaystyle \text{误差放大因子} = \frac{\text{相对前向误差}}{\text{相对后向误差}}$.
+\end{definition}
+\begin{definition}
+    方阵$A$的条件数$\cond{A}$谓求解$Ax=b$时, 对于所有右侧向量$b$, 可能出现的最大误差放大因子.
+\end{definition}
+\begin{definition}
+    矩阵范数
+    $\norm{A} = \text{每行元素之和的最大值}$.
+\end{definition}
+\begin{theorem}
+    $\displaystyle \cond{A} = \norm{A}\cdot \norm{A^{-1}}$.
+\end{theorem}
+考虑到浮点储存本身可能引入$\epsilon\+_mach_$级别的相对误差, 若$\cond A \approx 10^k$, 则$x$将丢失$k$位精度.
+
+% subsubsection 误差来源 (end)
+
+\subsubsection{LUP分解} % (fold)
+\label{ssub:lup分解}
+
+\begin{definition}
+    部分主元谓消去时该列最大的将被消去的元素.
+\end{definition}
+\begin{theorem}
+    若$P$是对单位矩阵实施一组特定行交换后得到的置换矩阵, 则$PA$即为对$A$实施同样的行交换的结果.
+\end{theorem}
+\begin{ex}
+    找出矩阵$PA=LU$分解.
+    \[ A = \begin{pmatrix}
+        2 & 1 & 5 \\ 4 & 4 & -4 \\ 1 & 3 & 1
+    \end{pmatrix}. \]
+    选取第一列的部分主元, 需要交换第$1$行和第$2$行,
+    \begin{align*}
+        P &= \begin{pmatrix}
+            0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1
+        \end{pmatrix}, \\
+        \begin{pmatrix}
+            2 & 1 & 5 \\ 4 & 4 & -4 \\ 1 & 3 & 1
+        \end{pmatrix} &\xlongrightarrow{\text{交换$r_1$和$r_2$}} \begin{pmatrix}
+            4 & 4 & -4 \\ 2 & 1 & 5 \\ 1 & 3 & 1
+        \end{pmatrix}.
+    \end{align*}
+    用$P$记录行交换, 再进行两个行操作,
+    \begin{align*}
+        & \xlongrightarrow{\text{$r_2=r_2 - \half r_1$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\half} & -1 & 7 \\ 1 & 3 & 1
+        \end{pmatrix} \\
+        & \xlongrightarrow{\text{$r_2=r_2 - \half r_1$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\half} & -1 & 7 \\ \boxed{\rec{4}} & 2 & 2
+        \end{pmatrix}.
+    \end{align*}
+    选择第二个主元,
+    \begin{align*}
+        P &= \begin{pmatrix}
+            0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+        \end{pmatrix}, \\
+        \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\half} & -1 & 7 \\ \boxed{\rec{4}} & 2 & 2
+        \end{pmatrix} &\xlongrightarrow{\text{交换$r_2$和$r_3$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\rec{4}} & 2 & 2 \\ \boxed{\half} & -1 & 7 
+        \end{pmatrix}.
+    \end{align*}
+    最后一次消去,
+    \begin{align*}
+        & \xlongrightarrow{\text{$r_3=r_3 - \pare{-\half} r_2$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\rec{4}} & 2 & 2 \\ \boxed{\half} & \boxed{-\half} & 8
+        \end{pmatrix}.
+    \end{align*}
+    最终得到LUP分解
+    \[ \begin{array}{ccccc}
+        \begin{pmatrix}
+            0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+        \end{pmatrix}&\begin{pmatrix}
+            2 & 1 & 5 \\ 4 & 4 & -4 \\ 1 & 3 & 1
+        \end{pmatrix} &=& \begin{pmatrix}
+            1 & 0 & 0 \\ \rec{4} & 1 & 0 \\ \half & -\half & 1 \\
+        \end{pmatrix} & \begin{pmatrix}
+            4 & 4 & -4 \\ 0 & 2 & 2 \\ 0 & 0 & 8
+        \end{pmatrix}. \\
+        P & A & & L & U
+    \end{array} \]
+\end{ex}
+使用LUP分解求解方程时, 将$Ax=b$转化为$PAx=Pb$, 后通过$Lc=Lb$得到$c$再求解$Ux=c$.
+
+% subsubsection lup分解 (end)
+
+\subsubsection{迭代方法} % (fold)
+\label{ssub:迭代方法}
+
+\begin{ex}
+    对$3u+v=5$, $u=2v=5$使用Jacobi迭代, 即通过
+    \[ u = \frac{5-v}{3},\quad v = \frac{5-u}{2} \]
+    迭代.
+\end{ex}
+Jacobi方法不一定能成功得到解.
+\begin{definition}
+    $A$是严格对角占优的, 如果对于每个$i$,
+    \[ \abs{a_ii} > \sum_{j\neq i} \abs{a_{ij}}. \]
+\end{definition}
+\begin{theorem}
+    如果$A$是严格对角占优的, 则$A$是非奇艺矩阵, 且对于所有向量$b$和初始估计, Jacobi迭代可收敛到唯一解.
+\end{theorem}
+若$A=L+D+U$, 其中$D$是对角部分, $L$和$U$分别是下三角和上三角部分, 则Jacobi迭代即
+\[ x_{k+1} = D^{-1} \pare{b-\pare{L+U}x_k}. \]
+\par
+Gau\ss-Seidel方法是Jacobi方法的变体.
+\begin{ex}
+    对$3u+v=5$, $u=2v=5$使用Gau\ss-Seidel迭代,
+    \begin{align*}
+        \begin{pmatrix}
+            u_1 \\ v_1
+        \end{pmatrix} &= \begin{pmatrix}
+            \displaystyle \frac{5-v_0}{3} \\[1em] \displaystyle \frac{5-u_1}{2}
+        \end{pmatrix} = \begin{pmatrix}
+            \displaystyle \frac{5-0}{3} \\[1em] \displaystyle \frac{5-5/3}{2}
+        \end{pmatrix} = \begin{pmatrix}
+            \displaystyle \frac{5}{3} \\[1em] \displaystyle \frac{5}{3}
+        \end{pmatrix},
+    \end{align*}
+\end{ex}
+其迭代式为
+\[ x_{k+1} = D^{-1}\pare{b-Ux_k - Lx_{k+1}}. \]
+\par
+连续松弛方法改进了Gau\ss-Seidel方法, 使用过松弛加快收敛速度.
+\begin{ex}
+    Gau\ss-Seidel方法的迭代式为
+    \[ \begin{pmatrix}
+        3 & 1 & -1 \\ 2 & 4 & 1 \\ -1 & 2 & 5
+    \end{pmatrix}\begin{pmatrix}
+        u \\ v \\ w
+    \end{pmatrix} = \begin{pmatrix}
+        4 \\ 1 \\ 1
+    \end{pmatrix} \longrightarrow \begin{aligned}
+        u_{k+1} &= \frac{4-v_k+w_k}{3}, \\
+        v_{k+1} &= \frac{1-2u_{k+1} - w_k}{4}, \\
+        w_{k+1} &= \frac{1+u_{k+1}-2v_{k+1}}{5}.
+    \end{aligned} \]
+    而过松弛方法则设
+    \begin{align*}
+        u_{k+1} &= \pare{1-\omega}u_k + \omega\frac{4-v_k+w_k}{3}, \\
+        v_{k+1} &= \pare{1-\omega}v_k + \omega\frac{1-2u_{k+1} - w_k}{4}, \\
+        w_{k+1} &= \pare{1-\omega}w_k + \omega\frac{1+u_{k+1}-2v_{k+1}}{5}.
+    \end{align*}
+    其中$w$取$w=1.25$等值.
+\end{ex}
+相应的迭代式为
+\[ x_{k+1} = \pare{\omega L+D}^{-1}\brac{\pare{1-\omega}Dx_k-\omega Ux_k}+\omega\pare{D+\omega L}^{-1}b. \]
+迭代方法的主要优势在于
+\begin{cenum}
+    \item 修饰技术. 即$b$发生微小变化时, 可从之前的解出发迭代得到新解.
+    \item 稀疏矩阵. 即矩阵中有很多零元时, Gau\ss 消元法效率过低.
+\end{cenum}
+
+% subsubsection 迭代方法 (end)
+
+\subsubsection{用于对称正定矩阵的方法} % (fold)
+\label{ssub:用于对称正定矩阵的方法}
+
+Cholesky分解正定矩阵为$A=R^TR$可以通过如下算法作成. 其中$R$为上三角矩阵.
+\begin{matlablst}
+for k = 1, 2, ..., n
+    if/@$A_{kk}<0$@/ stop, end
+    /@$R_{kk}$@/ = /@$\sqrt{A_{kk}}$@/
+    /@$u^T$@/ = /@$\rec{R_{kk}}A_{k,k+1:n}$@/
+    /@$R_{k,k+1:n}$@/ = /@$u^T$@/
+    /@$A_{k+1:n,k+1:n}$@/ = /@$A_{k+1:n,k+1:n}$@/ - /@$uu^T$@/
+end
+\end{matlablst}
+共轭梯度法则用于稀疏矩阵.
+\begin{matlablst}
+/@$x_0$@/ = 初始估计
+/@$d_0$@/ = /@$r_0$@/ = /@$b-Ax_0$@/
+for k = 0, 1, 2, ..., n - 1
+    if /@$r_k$@/ = 0, stop, end
+    /@$\alpha_k$@/ = /@$\frac{\bra{r_k}\ket{r_k}}{\bra{d_k}A\ket{d_k}}$@/
+    /@$x_{k+1}$@/ = /@$x_k$@/ + /@$\alpha_kd_k$@/
+    /@$r_{k+1}$@/ = /@$r_k$@/ - /@$\alpha_kAd_k$@/
+    /@$\beta_k$@/ = /@$\frac{\bra{r_{k+1}}\ket{r_{k+1}}}{\bra{r_k}\ket{r_k}}$@/
+    /@$d_{k+1}$@/ = /@$r_{k+1}$@/ + /@$\beta_k d_k$@/
+end
+\end{matlablst}
+注意到$r_k$是每一个$x_k$对应的余项, 且$r_k$和之前的$r_0,\cdots,r_{k-1}$都正交, 故最终将得到零.
+
+\begin{theorem}
+    令$A$为对称正定的$n\times n$矩阵, $b\neq 0$是一个向量, 在共轭梯度方法中, 若$r_k\neq 0$, 其中$k<n$, 则对于任何$1\le k\le n$, 有
+    \begin{cenum}
+        \item $\expc{x_1,\cdots,x_k} = \expc{r_0,\cdots,r_{k-1}} = \expc{d_0,\cdots,d_{k-1}}$;
+        \item $\bra{r_k}\ket{r_j} = 0$, $j < k$;
+        \item $\bra{d_k}A\ket{d_j} = 0$, $j < k$.
+    \end{cenum}
+\end{theorem}
+
+\par
+为了减少矩阵$A$的条件数, 引入预条件子$M$将方程化为$M^{-1}Ax = M^{-1}b$. Jacobi预条件子为$M=D$, 即$A$的对角线部分. 而Gau\ss-Seidel预条件子则对应$M = \pare{I+\omega LD^{-1}}\pare{D+\omega U}$. $M$本身是$LU$形式, 从而$z=M^{-1}v$可直接回代求解.
+
+% subsubsection 用于对称正定矩阵的方法 (end)
+
+\subsubsection{非线性方程组} % (fold)
+\label{ssub:非线性方程组}
+
+对于
+\[ \begin{aligned}
+    f_1\pare{u,v,w} & = 0, \\
+    f_2\pare{u,v,w} & = 0, \\
+    f_3\pare{u,v,w} & = 0,
+\end{aligned}\quad DF\pare{x} = \left(\begin{aligned}
+    \+DuD{f_1} && \+DvD{f_1} && \+DwD{f_1} \\
+    \+DuD{f_2} && \+DvD{f_2} && \+DwD{f_2} \\
+    \+DuD{f_3} && \+DvD{f_3} && \+DwD{f_3} \\
+\end{aligned}\right). \]
+Newton迭代法为
+\[ x_{k+1} = x_k - \pare{DF\pare{x_k}}^{-1}F\pare{x_k}. \]
+为了避免求逆, 将迭代步骤换为求解
+\[ \begin{cases}
+    DF\pare{x_k}s = -F\pare{x_k},\\
+    x_{k+1} = x_k + s.
+\end{cases} \]
+为了避免求Jacobi矩阵, 设第$i$次递推式为
+\[ x_{i+1} = x_i - A_i^{-1}F\pare{x_i},\quad \delta_{i+1} = x_{i+1} - x_i,\quad \Delta_{i+1} = F\pare{x_{i+1}} - F\pare{x_i}, \]
+则
+\[ A_{i+1} = A_i + \frac{\pare{\Delta_{i+1} - A_i\Delta_i}\delta^T_{i+1}}{\delta_{i+1}^T\delta_{i+1}} \]
+满足$A_{i+1}\delta_{i+1} = \Delta_{i+1}$且对于与$\delta_{i+1}$正交的$w$, $A_{i+1}w = A_iw$. Broyden方法的伪代码如下.
+\begin{matlablst}
+/@$x_0$@/ = 初始向量
+/@$A_0$@/ = 初始矩阵
+for i = 0, 1, 2, ...
+    /@$x_{i+1}$@/ = /@$x_i$@/ + /@$A_i^{-1}F\pare{x_i}$@/
+    /@$A_{i+1}$@/ = /@$A_i$@/ + /@$\frac{\pare{\Delta_{i+1} - A_i\Delta_i}\delta^T_{i+1}}{\delta_{i+1}^T\delta_{i+1}}$@/
+end
+\end{matlablst}
+为了避免求解线性方程组, 引入$B_i=A_i^{-1}$, 要求
+\[ \delta_{i+1} = B_{i+1}\Delta_{i+1},\quad B_{i+1}A_iw = w. \]
+相应的迭代式为
+\[ B_{i+1} = B_i + \frac{\pare{\delta_{i+1} - B_i\Delta_{i+1}}\delta_{i+1}^TB_i}{\delta_{i+1}^TB_i\Delta_{i+1}}. \]
+\begin{matlablst}
+/@$x_0$@/ = 初始向量
+/@$A_0$@/ = 初始矩阵
+for i = 0, 1, 2, ...
+    /@$x_{i+1}$@/ = /@$x_i$@/ + /@$B_iF\pare{x_i}$@/
+    /@$B_{i+1}$@/ = /@$B_i$@/ + /@$\frac{\pare{\delta_{i+1} - B_i\Delta_{i+1}}\delta_{i+1}^TB_i}{\delta_{i+1}^TB_i\Delta_{i+1}}$@/
+end
+\end{matlablst}
+
+% subsubsection 非线性方程组 (end)
+
+% subsection 方程组 (end)
+
+% section 求解方程 (end)
+
+\end{document}

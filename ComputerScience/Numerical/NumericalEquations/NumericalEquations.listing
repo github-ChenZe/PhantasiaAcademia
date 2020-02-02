@@ -1,0 +1,6 @@
+/@$x_0$@/ = 初始向量
+/@$A_0$@/ = 初始矩阵
+for i = 0, 1, 2, ...
+    /@$x_{i+1}$@/ = /@$x_i$@/ + /@$B_iF\pare{x_i}$@/
+    /@$B_{i+1}$@/ = /@$B_i$@/ + /@$\frac{\pare{\delta_{i+1} - B_i\Delta_{i+1}}\delta_{i+1}^TB_i}{\delta_{i+1}^TB_i\Delta_{i+1}}$@/
+end

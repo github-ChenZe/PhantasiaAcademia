@@ -1,0 +1,110 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+
+\begin{document}
+
+\section{光的量子性} % (fold)
+\label{sec:光的量子性}
+
+\subsection{黑体辐射与Planck能量子假说} % (fold)
+\label{sub:黑体辐射与planck能量子假说}
+
+热辐射满足$T\nearrow$, 辐射能和短波成分$\nearrow$. 单色辐射本领$r\pare{\lambda,T}$谓
+\[ r\pare{\lambda,T} = \frac{\rd{E\pare{\lambda,T}}}{\rd{s}\,\rd{\lambda}}. \]
+总辐射本领谓
+\[ R\pare{\lambda} = \int_0^\infty r\pare{\lambda,T}\,\rd{\lambda}. \]
+单色吸收本领谓
+\[ \alpha\pare{\lambda,T} = \frac{\rd{E'\pare{\lambda,T}}}{\rd{E\pare{\lambda,T}}}. \]
+可认为$1-\text{反射} - \text{透射} - \text{散射} = \text{吸收}$.
+\par
+Kirchhoff辐射定律表明, $\displaystyle \frac{r\pare{\lambda,T}}{\alpha\pare{\lambda,T}} = f\pare{\lambda,T}$是波长和温度的普适函数, 与个别物体和性质无关. 能够在任何温度下全部吸收任何波长而无反射的绝对物体谓黑体, 即$\alpha_0 = 1$. 由Kirchhoff定律, 对黑体也应有$\displaystyle \frac{r_0\pare{\lambda,T}}{\alpha_0} = f\pare{\lambda,T}$. 即黑体的单色辐射本领与物体热辐射的普适函数有相同的形式.
+
+\subsubsection{实验规律} % (fold)
+\label{ssub:实验规律}
+
+Stefan-Boltzmann定律表明黑体辐射的总辐射本领$R$与绝对温度的四次方成正比, 即
+\[ R = \int_0^\infty r_0\pare{\lambda,T}\,\rd{\lambda} = \sigma T^4. \]
+Wien位移定律表明黑体辐射曲线在任何温度值下都有一个极大值, 满足
+\[ \lambda T = b. \]
+Wien假设了分子的辐射频率与分子热运动的动能成正比, Rayleigh-Jeans定律则由能量均分定理导出, 分别有
+\[ r_0\pare{\lambda,T} = \frac{ac^2}{\lambda^5}e^{-\beta c/\lambda T},\quad r_0\pare{\lambda,T} = \frac{2\pi c}{\lambda^4}kT. \]
+Planck公式表明,
+\[ r_0\pare{\nu,T} = \frac{2\pi h\nu^3}{c^2} \rec{e^{h\nu/kT}-1}. \]
+\begin{proof}
+    由$\displaystyle r_0\pare{\nu,T} = \frac{2\pi \nu^2}{c^3}\overbar{\epsilon}\pare{\nu,T}$, 其中$\overbar{\epsilon}$为相应温度平衡态下的平均能量. 满足分布$e^{-\epsilon/kT}$. 于是
+    \[ \overbar{\epsilon}\pare{\nu,T} = \frac{\int_0^\infty \epsilon e^{-\epsilon/kT}\,\rd{\epsilon}}{\int_0^\infty e^{-\epsilon/kT}\,\rd{\epsilon}} = kT. \]
+    于是$r_0\pare{\nu,T} = \displaystyle \frac{2\pi\nu^2}{c^2}kT$, 将发散. 惟若假设$\epsilon$仅取离散值, 即
+    \begin{align*}
+        \epsilon &= \epsilon_0,\quad 2\epsilon_0,\quad \cdots, \\
+        \overbar{\epsilon} &= \frac{\sum_0^\infty n\epsilon_0 e^{-n\epsilon_0/kT}}{\sum_0^\infty e^{-n\epsilon_0/kT}} \\
+        &= \+D{\beta}D{}\brac{\ln\pare{\underbrace{\sum_0^\infty e^{-n\ln\beta}}_{z}}},\quad \beta = \rec{kT} \\
+        z &= \rec{1-e^{-\epsilon_0/\beta}}. \\
+        \overbar{\epsilon} &= -\+D\beta D{} \ln z = \frac{\epsilon_0}{e^{\beta\epsilon_0}-1}. \\
+        r_0\pare{\nu,T} &= \frac{2\pi h\nu^3}{c^2}\rec{e^{h\nu/kT}-1}. \qedhere
+    \end{align*}
+\end{proof}
+
+% subsubsection 实验规律 (end)
+
+% subsection 黑体辐射与planck能量子假说 (end)
+
+\subsection{光电效应与Einstein的光量子论} % (fold)
+\label{sub:光电效应与einstein的光量子论}
+
+光电效应的实验规律为,
+\begin{cenum}
+    \item 同一波长下, 光电流随着电压的增大而增加, 但存在饱和光电流$I_m$.
+    \item 饱和光电流与入射光强$I$成正比.
+    \item 存在反向截止电压$U_0$, 与入射光强无关, 且说明光电子具有最大初动能$\displaystyle \half mV_0^2 = eU_0$.
+    \item 每种金属存在相应的截止频率$\nu_0$, 只有当入射光频率超过$\nu_0$时才可能产生光电效应.
+    \item 截止电压$U_0$与频率$\nu$有线性关系.
+    \item 光电效应是瞬时发生的.
+\end{cenum}
+金属内部有逸出功$A$, 电子从光场吸收能量$W$, 则
+\[ \half mv^2 = W - A \Rightarrow W = \half mv^2 + A,\quad \half mv^2 = eU_0. \]
+Einstein作出如下假设: 频率为$\nu$的光场为一系列能量为$h\nu$的光子组成.
+\[ eU_0 + A = h\nu. \]
+截止电压谓$A = 0$即$eU_0 = h\nu$者. $U_0/\nu = h/e$. 当$\nu<\nu_0$, 电子无法通过电场, 即存在截止频率. 光强表示光子流密度,
+\[ I_e \propto I_0 = nh\nu, \]
+最大电流为$\propto ne$, 故存在饱和电压. 且电子只能选择吸收一个或多个光子, $nh\nu$即为光子数.
+
+\subsubsection{Compton效应} % (fold)
+\label{ssub:compton效应}
+
+Kompton散射满足
+\begin{cenum}
+    \item 散射光中谱线$\lambda_0>\lambda$.
+    \item 散射波长的改变量随散射角$\theta$的增加而增加. 在同一散射角下$\Delta \lambda$相同, 与散射物质和入射光波长无关.
+    \item 散射光中$\lambda_0$的谱线强度随$\theta$增加而减弱, 随原子量的增加而增强, $\lambda$则相反.
+\end{cenum}
+将X射线视为一高能光子, 与自由电子发生弹性碰撞,
+\[ \begin{cases}
+    h\nu_0 + m_{e0}c^2 = h\nu mc^2, \\
+    h/\lambda_0 \cdot \+vk_0 = h/\lambda\cdot \+vk + m\+vv.
+\end{cases} \]
+由$mc^2 = h\nu - h\nu_0 - m_{e0}c^2$, 展开两条方程,
+\[ \begin{cases}
+    m^2c^4 = h^2\nu^2 + h^2\nu_0^2 - 2h^2\nu\nu_0 + m^2_{e0}c^4 + 2m_{e0}c^2h\pare{\nu_0 - \nu}, \\
+    \pare{mv}^2 = \pare{h\nu/c}^2 + \pare{h\nu_0/c}^2 - 2h^2\nu\nu_0/c^2\cdot\cos\theta.
+\end{cases} \]
+由$m = m_{e0}/\sqrt{1-v^2/c^2}$, 则
+\begin{align*}
+    h\nu\nu_0\pare{1-\cos\theta} &= m_{e0}c^2\pare{\nu_0 - \nu}, \\
+    \frac{h}{m_{e0}c}\pare{1-\cos\theta} &= \lambda - \lambda_0 = \Delta \lambda = \lambda_0\pare{1-\cos\theta} = \lambda_0\cdot 2\sin^2 \frac{\theta}{2}.
+\end{align*}
+
+% subsubsection compton效应 (end)
+
+\subsubsection{波粒二象性} % (fold)
+\label{ssub:波粒二象性}
+
+光子的速度$v=c$, 静止质量$m_0 = 0$, $mc^2 = h\nu$, 从而光子的质量$m = h\nu/c^2$. $E = h\nu = \hbar \omega$.
+
+% subsubsection 波粒二象性 (end)
+
+% subsection 光电效应与einstein的光量子论 (end)
+
+% section 光的量子性 (end)
+
+\end{document}

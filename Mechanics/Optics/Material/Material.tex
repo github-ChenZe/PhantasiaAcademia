@@ -1,0 +1,304 @@
+\documentclass{ctexart}
+
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\sinc}{sinc}
+
+\begin{document}
+
+\section{光与物质的相互作用} % (fold)
+\label{sec:光与物质的相互作用}
+
+\subsection{光的吸收} % (fold)
+\label{sub:光的吸收}
+
+\subsubsection{吸收的线性规律} % (fold)
+\label{ssub:吸收的线性规律}
+
+光强随穿入媒质的深度而减弱的现象谓媒质对光的吸收. 光的吸收的线性规律(Bouguer定律, Lambert定律)表明,
+\[ -\rd{I} = -\alpha \cdot I\,\rd{x},\quad -\frac{\rd{I}}{I} = \alpha\,\rd{x},\quad I=I_0 e^{\alpha L}. \]
+在溶液中, Beer定律表明
+\[ \alpha = AC, \]
+其中$A$为吸光度, $C$为浓度.
+
+% subsubsection 吸收的线性规律 (end)
+
+\subsubsection{复数折射率} % (fold)
+\label{ssub:复数折射率}
+
+折射率谓真空光速与媒质光速之比,
+\[ \tilde{E} = \tilde{E}_0 e^{-i\omega\pare{t-x/v}} = \tilde{E}_0 e^{-i\omega\pare{t-nx/c}}. \]
+用复折射率可同时表示折射和吸收: 实部表示折射(相位推进), 虚部表示吸收(强度衰减).
+\begin{align*}
+    & \tilde{n} = n\pare{1+i\kappa}, \\
+    & \tilde{E} = \tilde{E}_0 e^{-i\omega\pare{t-\tilde{n}x/c}} = \tilde{E}_0 e^{-n\kappa\omega x/c} e^{-i\omega\pare{t-nx/c}}, \\
+    & I = \abs{E_0}^2 e^{-2n\kappa \omega x/c}, \\
+    & \alpha = 2n\kappa\omega /c = 4\pi n\kappa/\lambda.
+\end{align*}
+
+% subsubsection 复数折射率 (end)
+
+\subsubsection{吸收与波长的关系} % (fold)
+\label{ssub:吸收与波长的关系}
+
+普遍吸收与波长无关, 选择吸收依赖于波长. 普遍吸收导致强度下降, 不改变颜色. 选择吸收导致强度下降, 颜色改变(彩色玻璃). 考虑所有电磁波段, 选择吸收最为普遍. 任何介质都有吸收限, 吸收限长波侧表现为普遍吸收, 短波侧表现为选择吸收.
+
+% subsubsection 吸收与波长的关系 (end)
+
+\subsubsection{吸收光谱} % (fold)
+\label{ssub:吸收光谱}
+
+吸收系数对$\lambda$有依赖关系, $\alpha = \alpha\pare{\lambda}$, 吸收峰对应于物质内的激发. Kirchhoff热辐射定律表明吸收光谱和发射光谱是严格对应的.
+\begin{remark}
+    当温度足够低, Boltzmann分布要求粒子聚集于基态, 故可以看到发射谱而难以看到吸收谱.
+\end{remark}
+\begin{remark}
+    为了测量精密吸收光谱, 使用连续可调节激光器扫描. 若欲达到$\SI{}{\kilo\hertz}$级别的精度, 则应使用AOM锁频.
+\end{remark}
+\begin{remark}
+    通过Fraunhofer线可以推断恒星中存在的元素.
+\end{remark}
+\begin{ex}
+    通过不同组织对X射线吸收不同之事实可以之成像. 不同组织的$\alpha$不同, 故透过的光强不同.
+\end{ex}
+\begin{ex}
+    造影术要求服用对X射线强吸收的碘, 可以令局部吸收增强.
+\end{ex}
+\begin{ex}
+    CT(Computed Tomography, 计算机X射线断层扫描术)解决了前后重叠的组织不可分辨的问题. 参考Radon变换.
+\end{ex}
+
+% subsubsection 吸收光谱 (end)
+
+% subsection 光的吸收 (end)
+
+\subsection{色散} % (fold)
+\label{sub:色散}
+
+\subsubsection{正常色散} % (fold)
+\label{ssub:正常色散}
+
+折射率对波长的依赖关系$n\pare{\lambda}$谓色散. 正常色散折射率随波长单调下降, 且下降率在短波侧更大, $\displaystyle \+d\lambda dn < 0$. Cauchy经验公式表明
+\[ n\pare{\lambda} = A + \frac{B}{\lambda^2} + \frac{C}{\lambda^4}. \]
+Kramers-Kronig关系表明折射率的实部和虚部之间并非独立.
+\par
+Cauchy经验公式在红外区不精确. Sellmeier公式改进之,
+\[ n^2\pare{\lambda} = 1 + \frac{B_1\lambda^2}{\lambda^2 - C_1} + \frac{B_2\lambda^2}{\lambda^2 - C_2} + \frac{B_3\lambda^2}{\lambda^2 - C_3}. \]
+
+% subsubsection 正常色散 (end)
+
+\subsubsection{反常色散} % (fold)
+\label{ssub:反常色散}
+
+反常色散折射率随波长单调上升. $\displaystyle \+d\lambda dn > 0$. 在吸收峰附近会发生反常色散. 此外, 高频电磁波皆有$n\rightarrow 1$.
+\par
+将电子模型化为单个振子的受迫振动, 则
+\begin{align*}
+    & m\ddot{r} + g\dot{r} + kr = -e E_0 e^{-i\omega t} \Rightarrow r = \frac{e E_0}{m}\rec{\omega^2 - \omega_0^2 + i\omega\gamma}e^{-i\omega t}. \\
+    & \tilde{P} = -NZer = -\frac{NZe^2}{m}\frac{\tilde{E}}{\omega^2 - \omega_0^2 + i\omega\gamma}. \\
+    & \tilde{\epsilon}_r = 1-\frac{NZe^2}{\epsilon_0 m}\rec{\omega^2 - \omega_0^2 + i\omega \gamma}.
+\end{align*}
+可推知短波极限下$n\rightarrow 1$.
+
+% subsubsection 反常色散 (end)
+
+\subsubsection{负折射率材料} % (fold)
+\label{ssub:负折射率材料}
+
+$\epsilon$和$\mu$可以同时取负号, 此时折射光在法线同侧, 且可以得到理想透镜.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.234 1, 2 (p.429), p.244 1, 3, 5 (p.437)
+
+% paragraph 作业 (end)
+
+% subsubsection 负折射率材料 (end)
+
+% subsection 色散 (end)
+
+\subsection{群速度} % (fold)
+\label{sub:群速度}
+
+
+某个频率下的光有$\omega_p = c/n$, $\displaystyle E = E_0 e^{-i\pare{\omega t-kz}}$, 等相位面$\varphi = \omega t - kz = 0$. 相速度$\displaystyle v_p = \+dtdz = \frac{\omega}{k}$.
+\par
+Michelson测定的\ce{CS2}的折射率表明
+\[ \pare{\frac{n_2}{n_1}}_{\theta} = 1.64,\quad \pare{\frac{n_2}{n_1}}_v = \frac{v_1}{v_2} = 1.758. \]
+两者不一致. Rayleigh解释为相速度本身无法作为Michelson干涉仪测定的速度.
+\par
+对于有色散的介质, 波包的推进速度不等于等相位面推进的速度. 假设入射波为方波,
+\begin{align*}
+    \tilde{U}\pare{x,t} &= \int_{k_0 - \Delta k}^{k_0 + \Delta k}a_0 e^{i\pare{kx - \omega t}}\,\rd{k}, \\
+    \omega\pare{k} &= \omega\pare{k_0} + \pare{\+dkd{\omega}}_{k_0}\cdot\pare{k-k_0} = \omega\pare{k_0} + \pare{\+dkd{\omega}}_{k_0}\cdot k'. \\
+    e^{-i\pare{\omega t - kx}} &= e^{-i\pare{\omega_0 t - k_0 x}} \cdot e^{-i\brac{\pare{\+dkd\omega}_{k_0} k'\cdot t - k' x}} . \\
+    \tilde{U}\pare{x,t} &= a_0 e^{i\pare{k_0 x - \omega_0 t}}\cdot \brac{\frac{\displaystyle \sin\brac{\pare{\pare{\+dkd\omega}_{k_0}k't - x}}\Delta k} {\displaystyle \pare{\+dkd\omega}_{k_0}t - x}}.
+\end{align*}
+包络线中心$\sinc\pare{0} = 1$. 令
+\[ \pare{\+dkd\omega}_{k_0} t - x  = 0 \Rightarrow v_g = \+dtdx = \+dkd\omega. \]
+宽度为
+\[ \sin \pm\pi = 0 \Rightarrow \Delta x = \pare{x_+ - x_-} = \frac{2\pi}{\Delta k}. \]
+故
+\begin{align*}
+    \Delta x &= c\Delta \tau,\quad \frac{\Delta\nu}{r_0} = \frac{\Delta k}{k_0},\quad k_0 = \frac{2\pi \nu_0}{c}. \\
+    \Delta\nu &= \frac{\nu_0\Delta k}{2\pi \nu_0} c = \frac{c\Delta k}{2\pi}. \\
+    \Delta \tau \cdot \delta \nu &= 1. 
+\end{align*}
+群速度和相速度之间有关系.
+\begin{align*}
+    & \begin{cases}
+        v_g = \rd{\omega}/\rd{k}, \\
+        v_p = \omega / k.
+    \end{cases} \\
+    & \omega = v_p \cdot k,\quad \rd{\omega} = v_p \,\rd{k} + k\,\rd{v_p}, \\
+    & \Rightarrow v_g = \+dkd\omega = v_p + \+dkd{v_p} \cdot k \\
+    & = v_p - \lambda \+d\lambda d{v_p} \\
+    & = v_p \pare{1 + \frac{\lambda}{n}\+d\lambda dn}.
+\end{align*}
+\begin{remark}
+    $v_g<v_p$是正常色散, $v_g>v_p$是反常色散, $v_g=v_p$无色散.
+\end{remark}
+
+\begin{ex}
+    钠黄光包含$\SI{589.0}{\nano\meter}$和$\SI{589.6}{\nano\meter}$两个波长, 近似有$n = 1,64$. 波包
+    \begin{align*}
+        {U}_1 + {U}_2 &= 2A \cos\pare{\frac{\Delta\omega t}{2} - \frac{\Delta k}{2}x}\cos\pare{\overbar{\omega}t - \overbar{k}x}. \\
+        v_g &= \frac{\Delta\omega}{\Delta k} = v_p + \+dkd{v_p}\cdot k, \\
+        v_1 &= \frac{c}{n\pare{\lambda_1}},\quad v_2 = \frac{c}{n\pare{\lambda_2}}, \\
+        \+dkd{v_p} &= \frac{\Delta v}{\Delta k} = \frac{v_1 - v_2}{k_1 - k_2}, \\
+        \Rightarrow \frac{v_g}{c} &= \frac{\overbar{v}_p}{c} + \frac{\Delta v}{c}\cdot \frac{\overbar{k}}{\Delta k} = \rec{1.758} < \frac{\overbar{v}}{c} = \rec{1.64}.
+    \end{align*}
+\end{ex}
+然而问题并未解决.
+\begin{ex}
+    $v_g = c/n_g$, $\displaystyle n_g = n + \omega\cdot\+d\omega dn$, 当$\displaystyle \+d\omega dn \ll 0$就有$n_g < 0$, 可能超光速.
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.234 1, 2(p,429), p.244 1,3,5 (p,437), p.249 2(p.440)
+
+% paragraph 作业 (end)
+
+% subsection 群速度 (end)
+
+\subsection{散射} % (fold)
+\label{sub:散射}
+
+\subsubsection{散射与媒介的不均匀性的关系} % (fold)
+\label{ssub:散射与媒介的不均匀性的关系}
+
+散射的分类:
+\begin{cenum}
+    \item 均匀介质(不均匀尺度远大于波长)内, 无散射.
+    \item 不均匀尺度在波长量级(胶体, 乳浊液, 延误, 灰尘), 发生Mie-Debye散射. 临界点上的媒质, 分子密度涨落极大, 出现临界乳光.
+    \item 不均匀尺度远小于波长, 发生Rayleigh散射.
+\end{cenum}
+Rayleigh散射对短波散射强, Mie-Debye散射偏向均匀.
+
+% subsubsection 散射与媒介的不均匀性的关系 (end)
+
+\subsubsection{Rayleigh散射} % (fold)
+\label{ssub:rayleigh散射}
+
+Rayleigh散射发生于分子尺度, 发生原因是偶极子在光场中的受迫振动发出新的同频率电磁波. 强度$\propto \displaystyle \omega^4 \propto \rec{\lambda^4}$.
+\begin{ex}
+    天空是蓝色的原因在于蓝光相比红光的散射率大了一个量级. 云是白色的原因在于发生了Mie-Debye散射, 散射几率与波长无关, 故散射光仍然为白色光.
+\end{ex}
+\begin{ex}
+    白天时, 阳光经过比较薄的大气层, 蓝色散射较少, 呈现白色太阳, 日出时, 阳光经过较厚的大气层, 蓝光散射较多, 呈现橙色太阳, 这也解释了为何日落时可以看到橙色的云.
+\end{ex}
+\begin{ex}
+    霾(smork)是干燥空气中的灰尘, 盐粒. 水滴等悬浮粒子构成, 将散射可见光, 颗粒大小与波长相当, 发生Mie-Debye散射, 使得天空不是蓝色.
+\end{ex}
+\begin{ex}
+    红外光受散射影响较小, 适合远距离照相.
+\end{ex}
+
+% subsubsection rayleigh散射 (end)
+
+\subsubsection{散射的角度分布和偏振态} % (fold)
+\label{ssub:散射的角度分布和偏振态}
+
+散射是偏振的, 且光强有一定的角度分布. \inlinehardlink{ppt图}
+\begin{align*}
+    \cos\Theta &= \cos\pare{\psi - \varphi}\sin\theta, \\
+    \delta' &= \psi - \varphi, \quad a = x\cos\delta', \quad b = \frac{x}{\sin \theta}, \\
+    c^2 &= y^2 + \pare{x\sin\delta'}^2 = b^2\cos^2\theta + x^2\sin^2\delta. \\
+    E &\propto \cos\delta = \frac{a^2+b^2-c^2}{2ab} = \cos\delta'\sin\theta = \cos\pare{\varphi - \psi}\sin\theta.
+\end{align*}
+线偏光入射和自然光入射分别有
+\begin{align*}
+    I_s & \propto \sin^2\Theta = 1-\sin^2\theta\cos^2\pare{\psi - \varphi}, \\
+    \overbar{I_s} & \propto \overbar{\sin^2\Theta} = \half \pare{1+\cos^2\theta}.
+\end{align*}
+线偏光经过散射仍然为线偏光. 自然光在$xy$平面内散射得到线偏光, 在$z$向散射得到自然光, 其它方向得到部分偏振光. \inlinehardlink{ppt图自然光散射}
+\begin{ex}
+    偏振太阳镜滤去水平偏振分量, 即滤去太阳光在大气中的散射分量.
+\end{ex}
+\begin{ex}
+    昆虫会感受大气中的偏光特性, 可利用偏振光导航.
+\end{ex}
+\begin{ex}
+    月全食时可能看到红色月亮, 原因在于太阳光经过地球大气时先被散射掉了蓝色分量, 故达到月球上后反射光只有红色.
+\end{ex}
+
+% subsubsection 散射的角度分布和偏振态 (end)
+
+\subsubsection{Raman散射} % (fold)
+\label{ssub:raman散射}
+
+Ramen散射可能会导致散射光的波长改变, 以$\omega_0$入射可发现$\omega_0 \pm \omega_j$的出射. 这一散射光的特点为
+\begin{cenum}
+    \item 强度非常弱, 是Rayleigh散射的$10^{-6}$量级.
+    \item 波长偏移的散射光成对出现.
+\end{cenum}
+$\omega_0 - \omega_j$谓Stokes线(红伴线), $\omega_0 + \omega_j$谓反Stokes线(蓝伴线).
+
+\paragraph{经典理论} % (fold)
+\label{par:经典理论}
+
+分子的极化率随时间固有振动, 
+\begin{align*}
+    \alpha &= \alpha_0 + \alpha_j \cos\omega_j t, \\
+    \tilde{p} &= \alpha\epsilon_0 E \cos\omega_0 t + \alpha_j \epsilon_0 E_0 \cos\omega_0 t \cos\omega_j t.
+\end{align*}
+这一理论预测$I_S = I_{AS}$, 但实验表明$I_{AS} < I_S$.
+
+\par
+若用量子理论解释, 则原因在于分子吸收光子之后, 能级上升, 但之后下降到的能级可能不同, 故释放不同频率的光子. S线源于低能级, 发射声子. AS线源于转动高能级, 布局少, 吸收声子. 这解释了S和AS的强度不同的原因.
+
+% paragraph 经典理论 (end)
+
+\par
+固体中还存在Brillouin散射, 与Raman散射不同, 后者吸收/发射光学(高频)声子, 前者吸收/发射(低频)声子.
+
+\par
+Raman-Heterodyne散射是发生于自旋能级的散射.
+
+\begin{remark}
+    Ramen位移$\Delta \omega_j$与$\omega_0$无关. 不同入射波长的偏移是一致的.
+\end{remark}
+
+% subsubsection raman散射 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.257. 1 (p.446)
+
+% paragraph 作业 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.289 1, 2, 3, 5, 7 (p.470)
+
+% paragraph 作业 (end)
+
+% subsection 散射 (end)
+
+% section 光与物质的相互作用 (end)
+
+\end{document}

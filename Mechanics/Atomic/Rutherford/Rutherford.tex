@@ -1,0 +1,107 @@
+\documentclass{ctexart}
+
+\usepackage[nova]{van-de-la-sehen}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!70!black,
+  filecolor=blue!70!black,
+  urlcolor=blue!70!black
+}
+\def\externallinksymbol{\raisebox{-.2\height}{\includegraphics[width=.9em]{externallink.eps}}}
+\let\oldhref\href
+\def\href{\externallinksymbol\oldhref}
+
+\DeclareSIUnit\eVperc{\eV\per\clight}
+\DeclareSIUnit\clight{\text{\ensuremath{c}}}
+
+\begin{document}
+
+\section{Rutherford模型} % (fold)
+\label{sec:rutherford模型}
+
+\subsection{基本量的测量} % (fold)
+\label{sub:基本量的测量}
+
+通过在阴极射线上附加电场和磁场使射线方向维持不变可测得阴极射线的速度$v=E/B$. 去掉电场后测量轨道半径可得$mv^2/r=Hev$, 从而可得
+\[ \frac{e}{m} = \SI{1.758820024e11}{\coulomb\per\kilo\gram}. \]
+通过油滴实验可得
+\[ e = \SI{1.602176487e-19}{\coulomb}. \]
+从而可以导出电子的质量
+\[ m_e = \SI{9.10938215e-31}{\kilo\gram} = \SI{0.510998910}{\mega\eVperc\squared}. \]
+由Faraday定律可知电解$\SI{1}{\mole}$所需电量, 可推算氢离子的$e/m_p$, 从而可以导出
+\begin{align*}
+    m_p/m_e &= \SI{1836.15267247}{}, \\
+    m_p &= \SI{1.672621637e-27}{\kilo\gram} = \SI{938.272013}{\mega\eVperc\squared}.
+\end{align*}
+Avogadro常量为$\SI{1}{\mole}$分子的分子数目, 以$\SI{12}{\gram}$的$\ce{^{12}C}$的碳原子数目为$\SI{1}{\mole}$. 假设原子的相对质量为$m_r$, 单原子单质的密度为$\rho$, 则估算得原子半径
+\[ r = \sqrt[3]{\frac{3A}{4\pi \rho N_A}}. \]
+
+% subsection 基本量的测量 (end)
+
+\subsection{Rutherford模型} % (fold)
+\label{sub:rutherford模型}
+
+Thomson模型表明原子的正电荷均匀分布于球体内, 最大电场发生于球体边缘. 对于$\alpha$粒子,
+\[ \frac{\Delta p}{p} \sim \frac{2FR/v}{m_\alpha v} = \frac{2Ze^2/\pare{2\pi\epsilon_0 R}}{\half m_\alpha v^2} = \frac{Z}{E_\alpha}\cdot \SI{3e-5}{\radian}. \]
+其中$E_\alpha$以$\SI{}{\mega\eV}$为单位. 负电荷能产生的作用不超过
+\[ \frac{\Delta p}{p} \sim \frac{2m_e}{m_\alpha} \sim \rec{4000}, \]
+从而最保守的估计下$\displaystyle \theta < 10^{-4} \frac{Z}{E_\alpha}$. 对于$\SI{5}{\mega\eV}$入射$\alpha$粒子, 产生$\SI{90}{\degree}$偏转的概率极小, 与实验不符.
+\par
+根据\href[page=22]{file:///Users/zechen/Documents/PhantasiaAcademia/Mechanics/TheoreticalMechanics/TheoreticalMechanics.pdf}{ Coulomb散射公式},
+\[ b = \frac{a}{2}\cot \frac{\theta}{2}, \]
+其中$\theta$为散射角, $\displaystyle a=\frac{Z_1Z_2e^2}{4\pi\epsilon_0 E}$. 注意到在实验室系中和惯性系中, $E$有所不同. 在实验室系中,
+\[ E_c = \half \mu v^2 = \frac{m'}{m+m'}E_L. \]
+其中$m'$为入射粒子质量, $m$为靶核质量.
+
+\begin{remark}
+    取$\displaystyle \frac{e^2}{4\pi\epsilon_0} = \SI{1.44}{\femto\meter\mega\eV}$, 并且取$E$以$\SI{}{\mega\eV}$为单位, 可简化计算.
+\end{remark}
+
+与上式相应的微分散射截面为
+\[ \sigma_C\pare{\theta} = \+d\Omega d{\sigma\pare{\theta}} = \pare{\frac{aZ_1Z_2}{4E}}^2{\csc^4\frac{\theta}{2}} = \frac{\rd{N'}}{Nnt\,\rd{\Omega}}. \]
+其中$\rd{N'}$为散射到$\rd{\Omega}$范围内的粒子数, $N$为入射总粒子数, $n$为金箔的原子数密度, $t$为金箔厚度.
+
+\begin{remark}
+    在实验室坐标系中微分截面为
+    \[ \sigma_L\pare{\theta_L} = \pare{\rec{4\pi\epsilon_0} \frac{Z_1Z_2e^2}{2E_L\sin^2\theta_L}}^2 \frac{\brac{\cos\theta_L + \sqrt{1-\pare{1-\pare{\frac{m_1}{m_2}\sin\theta_L}^2}^2}}^2}{\sqrt{1-\pare{\frac{m_1}{m_2}\sin\theta_L}^2}}. \]
+    令$m_1\ll m_2$即可退化为质心系中的形式.
+\end{remark}
+
+% subsection rutherford模型 (end)
+
+\subsection{实验验证} % (fold)
+\label{sub:实验验证}
+
+若Rutherford模型正确, 则可预期散射实验的结果满足
+\begin{cenum}
+    \item 在同一$\alpha$粒子源和同一散射体下, $\displaystyle \rd{N'}\propto \csc^4 \frac{\theta}{2}$.
+    \item 在同一$\alpha$粒子源和同一散射体下, 同一散射角, $\rd{N'}\propto t$.
+    \item 同一散射物, 同一散射角, $\rd{N'}\propto 1/E^2$.
+    \item 同一$\alpha$粒子源, 同一散射角, 同一$nt$, $\rd{N'}\propto Z^2$.
+\end{cenum}
+此外, 正对原子核入射时, 发生$\SI{180}{\degree}$反射, 此时最接近原子核处有距离
+\[ r_m = \rec{4\pi\epsilon_0} \frac{Z_1Z_2e^2}{E_c}. \]
+可以预期原子核的半径小于$r_m$.
+
+\begin{remark}
+    在$\theta\rightarrow 0$处, Rutherford散射公式不再成立. $\theta\rightarrow \SI{180}{\degree}$处亦会出现偏差.
+\end{remark}
+
+\begin{remark}
+    若原子绕核转动, 则
+    \begin{align*}
+        \frac{m_e v^2}{R} &= \rec{4\pi\epsilon_0} \frac{Ze^2}{R^2},\quad a = \frac{v^2}{R}.
+    \end{align*}
+    能量耗散速率
+    \[ P = \frac{2}{3}\rec{4\pi\epsilon_0} \frac{e^2}{c^3}a^2. \]
+    从而若在时间$\tau$内完全损耗其动能, 则
+    \[ \tau = \half \frac{m_ev^2}{P} = \frac{3}{4} \frac{R^3}{Zcr_e^2},\quad r_e = \frac{e^2}{4\pi\epsilon_0 m_ec^2}. \]
+    取$R\approx\SI{0.1}{\nano\meter}$, $Z=1$, 则可估计得$\tau\approx \SI{3.2e-10}{\second}$.
+\end{remark}
+
+% subsection 实验验证 (end)
+
+% section rutherford模型 (end)
+
+\end{document}

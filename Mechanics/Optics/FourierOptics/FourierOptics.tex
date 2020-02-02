@@ -349,6 +349,22 @@ Abbe正弦条件要求$ny\sin u = n'y'\sin u'$, 即
     U_I\pare{x',y'} &= A_1 e^{i\varphi_0} \brac{t_0 + t_1 \cos\pare{2\pi \frac{f}{V}x}}.
 \end{align*}
 即$f\mapsto f/V$, 或者$d\mapsto Vd$, 表示像的几何放大. 衬比度$\gamma_I = \gamma_0 = t_1/t_0$保持不变.
+\par
+更一般地, 设系统无相差(横向放大率处处相等), 物的屏函数
+\begin{align*}
+    x_i &= Mx_o,\quad y_i = My_o, \\
+    t\pare{x_o,y_o} &= \iint T\pare{k_x,k_y} e^{i\pare{k_x x_o + k_y y_o}}\,\rd{k_x}\,\rd{k_y} \\
+    &= \iint T\pare{k_x,k_y} e^{i\brac{\pare{k_x/M}\pare{Mx_o} + \pare{k_y/M}\pare{My_o}}}\,\rd{k_x}\,\rd{k_y}, \\
+    t'\pare{x_i,y_i} &= \iint T\pare{k_x,k_y} e^{i\brac{\pare{k_x/M}x_i + \pare{k_y/M}y_i}}\,\rd{k_x}\,\rd{k_y}.
+\end{align*}
+由Abbe正弦条件, 像的空间波数可表示为
+\[ k_x^i = \frac{k_x}{M},\quad k_y^i = \frac{k_y}{M}, \]
+从而屏函数
+\[ t'\pare{x_i,y_i} = M^2\iint T\pare{Mk_x^i,Mk_y^i}e^{i\pare{k_x^i x_i + k_y^i y_i}}\,\rd{k_x^i}\,\rd{k_y^i}. \]
+由于
+\[ k_x = k\sin\theta \cos\varphi,\quad k_y = k\sin\theta \sin\varphi, \]
+对于$\varphi = 0$, 有
+\[ k^i \sin\theta^i = k\frac{\sin\theta}{M}. \]
 
 % subsubsection abbe成像原理 (end)
 

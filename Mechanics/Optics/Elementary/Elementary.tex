@@ -22,7 +22,8 @@ Reference Principle of Optics. Born, Wolf.\\
 Prof. Zhou Zongquan zq\_zhou@ustc.edu.cn\\
 T.A. Qian Xing\\
 T.A. Jin Xing\\
-T.A. Jin Ming
+T.A. Jin Ming\\
+考试时间2020年1月10日14:30\textasciitilde 16:30在5103和5102.
 
 \centerline{
 \begin{tabular}{|c|c|}
@@ -458,7 +459,7 @@ p.22-24: 1,3,4,7,11,12(p.16), p.32-33: 1,4,5(p.23), p.38-39: 1,2(p.27), taking d
     \label{fig:齐明点}
 \end{figure}
 \begin{sample}
-    \begin{ex}[齐明点]如\cref{fig:齐明点}寻找球面折射的等光程点,
+    \begin{ex}[齐明点]\label{ex:齐明点}如\cref{fig:齐明点}寻找球面折射的等光程点,
         \[ QC = \frac{n'}{n}r,\quad Q'C = \frac{n}{n'}r \Rightarrow \bigtriangleup QMC \sim \bigtriangleup Q'MC, \]
         \[ \Rightarrow \frac{QM}{MQ'} = \frac{MC}{Q'C} = \frac{n'}{n}. \]
         \[ \boxed{n\pare{QM} - n'\pare{Q'M} = 0.} \]
@@ -1218,6 +1219,9 @@ Gauss公式与Newton公式和横向放大率公式
     \item \emph{畸变}谓横向放大率随$y$变化导致的放大率不一致;
     \item \emph{色差}谓折射率随频率改变导致不同颜色的光成像于不同地方且大小不同. 前者谓\emph{位置色差}, 后者谓\emph{放大率色差}.
 \end{cenum}
+\begin{ex}
+    举例而言, 对于平行于对称轴的光线, 抛物面反射镜可以将光线完美地汇聚在一个点上. 然而方向相对于对称轴产生任何轻微的偏离后, 成像会发生彗差.
+\end{ex}
 
 \subsubsection{正弦条件} % (fold)
 \label{ssub:正弦条件}
@@ -1253,6 +1257,9 @@ Gauss公式与Newton公式和横向放大率公式
 \begin{remark}
     Abbe正弦条件和\cref{thm:Helmholtz定理}(Helmholtz定理)不能同时成立.
 \end{remark}
+Abbe正弦条件可以理解为, 一个光学系统, 如果已经对轴上物点完美成像了, 那么想要对非常靠近光轴的物点也完美成像, 需要满足
+\[ ny\sin u = n'y'\sin u'. \]
+对于轴上点光源, 这要求光源发出的每一条傍轴光线都分别满足上面的式子. 对于平行光线, $y\sin u$正是其高度. 在这一条件下, 轻微偏离光轴的光线对于完美成像的偏离相对于这一条件不成立时是小量. \cref{ex:齐明点}中的齐明点满足这一条件. 事实上, 单一的球面折射面有三个齐明点, 另外两个分别为球心和球面上顶点.
 
 % paragraph abbe正弦条件 (end)
 
