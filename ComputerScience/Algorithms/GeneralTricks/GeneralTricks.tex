@@ -1,14 +1,6 @@
 \documentclass{ctexart}
 
 \usepackage[singleton, margintoc, nova]{van-de-la-sehen}
-\hypersetup{
-  colorlinks=true,
-  linkcolor=black,
-  urlcolor=blue!70!black
-}
-\def\externallinksymbol{\raisebox{-.2\height}{\includegraphics[width=.9em]{externallink.eps}}}
-\let\oldhref\href
-\def\href{\externallinksymbol\oldhref}
 
 \newtcbox{\codephrase}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
   right=0mm,left=0.15mm,arc=1pt,boxsep=2pt,fontupper=\ttfamily,
