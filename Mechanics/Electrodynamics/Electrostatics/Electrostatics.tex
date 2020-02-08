@@ -1,0 +1,27 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{静电学} % (fold)
+\label{sec:静电学}
+
+\subsection{Laplace方程} % (fold)
+\label{sub:laplace方程}
+
+\begin{theorem}[平均值定理]
+    设$\varphi$是一调和函数, 则
+    \[ \varphi\pare{\+vr} = \rec{4\pi R^2}\oiint_S \varphi\pare{\+vr'}\rd{S}, \]
+    其中$S$是半径为$R$的球面.
+\end{theorem}
+\begin{proof}
+	记$\displaystyle \psi = \rec{r}$, 则由Green第二恒等式,
+	\[ \oiint_{S+S'} \varphi\grad\psi\cdot\rd{\+vS} = \iiint_{V\cap V'} \pare{\varphi\cancelto{0}{\laplacian \psi} + \grad\psi\cdot\grad\varphi}\,\rd{V}. \]
+\end{proof}
+
+% subsection laplace方程 (end)
+
+% section 静电学 (end)
+
+\end{document}
