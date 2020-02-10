@@ -10,15 +10,44 @@
 \subsection{Laplace方程} % (fold)
 \label{sub:laplace方程}
 
+\subsubsection{调和函数} % (fold)
+\label{ssub:调和函数}
+
 \begin{theorem}[平均值定理]
     设$\varphi$是一调和函数, 则
     \[ \varphi\pare{\+vr} = \rec{4\pi R^2}\oiint_S \varphi\pare{\+vr'}\rd{S}, \]
     其中$S$是半径为$R$的球面.
 \end{theorem}
 \begin{proof}
-	记$\displaystyle \psi = \rec{r}$, 则由Green第二恒等式,
-	\[ \oiint_{S+S'} \varphi\grad\psi\cdot\rd{\+vS} = \iiint_{V\cap V'} \pare{\varphi\cancelto{0}{\laplacian \psi} + \grad\psi\cdot\grad\varphi}\,\rd{V}. \]
+    记$\displaystyle \psi = \rec{r}$, 则由Green第二恒等式,
+    \[ \iiint_{V\cap V'} \cancelto{0}{\pare{\psi\laplacian \varphi - \varphi\laplacian \psi}}\,\rd{V} = \oiint_{S\cup S'} \pare{\psi\+D{\+vn}D{\varphi} - \varphi\+D{\+vn}D{\psi}}\,\rd{S}. \]
+    右侧积分第一项
+    \begin{align*}
+        \oiint_{S\cup S'} \psi\+D{\+vn}D{\varphi}\,\rd{S} &= \rec{R} \oiint_{S} \grad\varphi\cdot\rd{\+vS} - \rec{R'} \oiint_{S'}\grad\varphi\cdot\rd{\+vS} \\ &= \rec{R} \iiint_{V} \laplacian \varphi\,\rd{V} - \rec{R'} \iiint_{V'} \laplacian \varphi\,\rd{V} = 0. 
+    \end{align*}
+    从而
+    \[ \oiint_{S\cup S'} \varphi\+D{\+vn}D{\psi}\,\rd{S} = \rec{R'^2} \oiint_{S'}\varphi\,\rd{S} - \rec{R^2}\oiint_{S} \varphi\,\rd{S} = 0. \]
+    即
+    \[ \rec{R^2}\oiint_{S} \varphi\,\rd{S} \]
+    和$R$无关.
 \end{proof}
+\begin{theorem}[唯一性定理]
+    设$\varphi$和$\psi$是调和函数, 且$\restr{\varphi}{S} = \restr{\psi}{S}$, 则
+    \[ \restr{\varphi}{V} \equiv \restr{\psi}{V}. \]
+\end{theorem}
+\begin{lemma}
+    设$\varphi$是一调和函数, 且$\restr{\varphi}{S} = 0$, 则
+    \[ \restr{\varphi}{V} \equiv 0. \]
+\end{lemma}
+\begin{proof}
+    由Green第一恒等式,
+    \[ \iiint_V \pare{\cancelto{0}{\varphi\laplacian \varphi} + \pare{\grad\varphi}^2}\,\rd{V} = \oiint_{S} {\varphi\+D{\+vn}D{\varphi}}\,\rd{S} = 0. \]
+    从而$\varphi$为常量, 必定为$0$.
+\end{proof}
+
+% subsubsection 调和函数 (end)
+
+
 
 % subsection laplace方程 (end)
 
