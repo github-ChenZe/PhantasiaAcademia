@@ -146,6 +146,15 @@ int length_of_longest_ascending_subsequence(int* arr, int n)
 
 % subsubsection 三目等差数列计数 (end)
 
+\subsubsection{马鞍查找} % (fold)
+\label{ssub:马鞍查找}
+
+若数组\codephrase{A[n][n]}各行各列皆为升序, 则可在$O\pare{r+s}$的时间内完成对所有$x$的查找, 其中$r$和$s$分别为\codephrase{A[0][:]}和\codephrase{A[:][0]}中小于$x$的元素的数目.
+\par
+从\codephrase{A[i][j] = A[0][r-1]}开始搜索, 搜索范围为\codephrase{A[:s][:r]}, 每次可以移除一行或一列, 从而\codephrase{i}或\codephrase{j}视\codephrase{A[i][j] <=> x}每次可步进\codephrase{1}.
+
+% subsubsection 马鞍查找 (end)
+
 % subsection 序列 (end)
 
 \subsection{集合} % (fold)
