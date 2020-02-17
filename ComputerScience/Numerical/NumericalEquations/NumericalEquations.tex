@@ -385,6 +385,190 @@ end
 
 % subsection 方程组 (end)
 
+\subsection{插值} % (fold)
+\label{sub:插值}
+
+\subsubsection{Lagrange与Newton插值} % (fold)
+\label{ssub:lagrange与newton插值}
+
+\begin{theorem}
+    过$\pare{x_1,y_1}$, $\cdots$, $\pare{x_n,y_n}$存在唯一的次数不超过$n-1$的多项式
+    \[ y_1L_1\pare{x} + y_2L_2\pare{x} + \cdots + y_nL_n\pare{x}, \]
+    其中
+    \[ L_k\pare{x} = \frac{\pare{x-x_1}\cdots\pare{x-x_{k-1}}\pare{x-x_{k+1}}\cdots\pare{x-x_n}}{\pare{x_k-x_1}\cdots\pare{x_k-x_{k-1}}\pare{x_k-x_{k+1}}\cdots\pare{x_k-x_n}}. \]
+\end{theorem}
+\begin{definition}
+    用$f\brac{x_1\cdots x_n}$表示唯一过$\pare{x_1,f\pare{x_1}}$, $\cdots$, $\pare{x_n,f\pare{x_n}}$的插值多项式的$x^{n-1}$的系数.
+\end{definition}
+\begin{theorem}
+    过$\pare{x_1,f\pare{x_1}}$, $\cdots$, $\pare{x_n,f\pare{x_n}}$有插值多项式
+    \begin{align*}
+        P\pare{x} &= f\brac{x_1} + f\brac{x_1\ x_2}\pare{x-x_1} + f\brac{x_1\ x_2\ x_3}\pare{x-x_1}\pare{x-x_2} \\
+        &\phantom{=\ } + f\brac{x_1\ x_2\ x_3\ x_4}\pare{x-x_1}\pare{x-x_2}\pare{x-x_3} \\
+        &\phantom{=\ } + \cdots + f\brac{x_1\cdots x_n}\pare{x-x_1}\cdots\pare{x-x_{n-1}}.
+    \end{align*}
+    其中各系数计算如下:
+    \begin{align*}
+        f\brac{x_k} &= f\pare{x_k}, \\
+        f\brac{x_k\ x_{k+1}} &= \frac{f\brac{x_{k+1}} - f\brac{x_k}}{x_{k+1} - x_{k}}, \\
+        f\brac{x_k\ x_{k+1}\ x_{k+2}} &= \frac{f\brac{x_{k+1}\ x_{k+2}} - f\brac{x_k\ x_{k+1}}}{x_{k+2} - x_{k}}, \\
+        f\brac{x_k\ x_{k+1}\ x_{k+2}\ x_{k+3}} &= \frac{f\brac{x_{k+1}\ x_{k+2}\ x_{k+3}} - f\brac{x_k\ x_{k+1}\ x_{k+2}}}{x_{k+3} - x_{k}}.
+    \end{align*}
+\end{theorem}
+
+\begin{matlablst}
+for j = 1, ..., n
+    /@$f\brac{x_j}$@/ = /@$y_j$@/
+end
+for i = 2, ..., n
+    for j = 1, ..., n + 1 - i
+        /@$f\brac{x_j\cdots x_{j+i-1}}$@/ = /@$\displaystyle  \frac{f\brac{x_{j+1}\cdots x_{j+i-1}} - f\brac{x_j\cdots x_{j+i-2}}}{x_{j+i-1} - x_j}$@/
+    end
+end
+/@$P\pare{x}$@/ = /@$\displaystyle \sum_{i=1}^n f\brac{x_1\cdots x_i}\pare{x-x_1}\cdots\pare{x-x_{i-1}}$@/
+\end{matlablst}
+
+计算系数时可列表如下:
+\[ \begin{array}{c|ccc}
+    x_1 & f\brac{x_1} \\
+    & & f\brac{x_1\ x_2} \\
+    x_2 & f\brac{x_2} & & f\brac{x_1\ x_2\ x_3}. \\
+    & & f\brac{x_2\ x_3} \\
+    x_3 & f\brac{x_3}
+\end{array} \]
+
+% subsubsection lagrange与newton插值 (end)
+
+\subsubsection{插值误差} % (fold)
+\label{ssub:插值误差}
+
+\begin{theorem}
+    设$P\pare{x}$是不超过$n-1$阶的过$\pare{x_1,y_1}$, $\cdots$, $\pare{x_n,y_n}$的插值多项式, 则
+    \[ f\pare{x} - P\pare{x} = \frac{\pare{x-x_1}\pare{x-x_2}\cdots\pare{x-x_n}}{n!}f^{\pare{n}}\pare{c}. \]
+    其中$c$在$x,x_1,\cdots,x_n$的最小值和最大值之间.
+\end{theorem}
+\begin{hardlink}
+    证明见Sauer(中文版)p.139.
+\end{hardlink}
+
+% subsubsection 插值误差 (end)
+
+\subsubsection{Chebyshev插值} % (fold)
+\label{ssub:chebyshev插值}
+
+\begin{theorem}
+    将插值点选为
+    \[ x_i = \cos \frac{\pare{2i-1}\pi}{2n},\quad i = 1,\cdots, n, \]
+    则
+    \[ \pare{x-x_1}\cdots\pare{x-x_n} = \rec{2^{n-1}}T_n\pare{x}, \]
+    其中$T$为Chebyshev多项式. 此时
+    \[ \max_{-1\le x\le 1}\abs{\pare{x-x_1}\cdots\pare{x-x_n}} = \rec{2^{n-1}} \]
+    具有最小值.
+\end{theorem}
+\begin{corollary}
+    对于一般的区间$\brac{a,b}$, 分点应选为
+    \[ x_i = \frac{a+b}{2} + \frac{b-a}{2} \cos \frac{\pare{2i-1}\pi}{2n}. \]
+    对于$i=1,\cdots,n$, 不等式
+    \[ \abs{\pare{x-x_1}\cdots\pare{x-x_n}} \le \frac{\displaystyle \pare{\frac{b-a}{2}}^2}{2^{n-1}} \]
+    成立.
+\end{corollary}
+
+% subsubsection chebyshev插值 (end)
+
+\subsubsection{样条} % (fold)
+\label{ssub:样条}
+
+给定$n$个点$\pare{x_1,y_1}$, $\cdots$, $\pare{x_n,y_n}$, 通过这些点的三次样条谓一组三次多项式
+\begin{align*}
+    S_1\pare{x} &= y_1 + b_1\pare{x-x_1} + c_1\pare{x-x_1}^2 + d_1\pare{x-x_1}^3,\quad x\in\brac{x_1,x_2}, \\
+    S_2\pare{x} &= y_2 + b_2\pare{x-x_2} + c_2\pare{x-x_2}^2 + d_2\pare{x-x_2}^3,\quad x\in\brac{x_2,x_3}, \\
+    &\vdots \\
+    S_{n-1}\pare{x} &= y_{n-1} + b_{n-1}\pare{x - x_{n-1}} + c_{n-1}\pare{x-x_{n-1}}^2 + d_{n-1}\pare{x-x_{n-1}}^3, \\ &\phantom{=\ } x\in\brac{x_{n-1},x_n}.
+\end{align*}
+并且满足如下性质:
+\begin{cenum}
+    \item $S_i\pare{x_i} = y_i$, $S_i\pare{x_{i+1}} = y_{i+1}$.
+    \item $S'_{i-1}\pare{x_i} = S'_i\pare{x_i}$.
+    \item $S''_{i-1}\pare{x_i} = S''_i\pare{x_i}$.
+\end{cenum}
+若满足$S''_1\pare{x_1} = 0$且$S''_{n-1}\pare{x_n} = 0$则谓自然样条.
+\par
+引入$c_n = S''_{n-1}\pare{x_n}/2$, 同时记$\delta_i = x_{i+1} - x_i$, $\Delta_i = y_{i+1} - y_i$, 则
+\begin{align}
+    & d_i = \frac{c_{i+1} - c_i}{3\delta_i},\quad b_i = \frac{\Delta_i}{\delta_i} - \frac{\delta_i}{3}\pare{2c_i + c_{i+1}}. \notag \\
+    & \begin{pmatrix}
+        1 & 0 & 0 \\
+        \delta_1 & 2\delta_1 + 2\delta_2 & \delta_2 & \ddots \\
+        0 & \delta_2 & 2\delta_2+2\delta_3 & \delta_3 \\
+        & \ddots & \ddots & \ddots & \ddots \\
+        & & & \delta_{n-2} & 2\delta_{n-2}+2\delta_{n-1} & \delta_{n-1} \\
+        & & & 0 & 0 & 1
+    \end{pmatrix} \begin{pmatrix}
+        c_1 \\ c_2 \\ \\ \vdots \\ \\ c_n
+    \end{pmatrix} \notag \\ \label{eq:自然三次样条c} &= \begin{pmatrix}
+        0 \\ \displaystyle 3\pare{\frac{\Delta_2}{\delta_2} - \frac{\Delta_1}{\delta_1}} \\ \vdots \\ \displaystyle 3\pare{\frac{\Delta_{n-1}}{\delta_{n-1}} - \frac{\Delta_{n-2}}{\delta_{n-2}}} \\ 0
+    \end{pmatrix}.
+\end{align}
+\begin{matlablst}
+for i = 1, ..., n - 1
+    /@$a_i$@/ = /@$y_i$@/
+    /@$\delta_i$@/ = /@$x_{i+1} - x_i$@/
+    /@$\Delta_i$@/ = /@$y_{i+1} - y_i$@/
+end
+/@求解\eqref{eq:自然三次样条c}得到$c_1,\cdots,c_n$@/
+for i = 1, ..., n - 1
+    /@$d_i$@/ = /@$\displaystyle \frac{c_{i+1}-c_i}{3\delta_i}$@/
+    /@$b_i$@/ = /@$\displaystyle \frac{\Delta_i}{\delta_i} - \displaystyle \frac{\delta_i}{3}\pare{2c_i+c_{i+1}}$@/
+end
+/@$S_i\pare{x}$@/ = /@$a_i + b_i\pare{x-x_i} + c_i\pare{x-x_i}^2 + d_i\pare{x-x_i}^3$@/
+\end{matlablst}
+还可以选择其它边界条件, 例如
+\begin{cenum}
+    \item 曲率调整三次样条: $S''_1\pare{x_1}$和$S''_2\pare{x_2}$由用户给定, 则
+    \[ 2c_1 = v_1, 2c_n = v_n, \]
+    其中$v_1$和$v_2$是用户给定值. 则矩阵应作替换$A_{11} = 2$, $r_1 = v_1$, $A_{nn} = 2$, $r_n = v_n$.
+    \item 钳制三次样条: $S'_1\pare{x_1}$和$S'_2\pare{x_2}$由用户给定, 则
+    \begin{align*}
+        & A_{11} = 2\delta_1, A_{12} = \delta_1,\quad A_{n,n-1} = \delta_{n-1},\quad A_{n,n} = 2\delta_{n-1}. \\ &r_1 = 3\pare{\frac{\Delta_1}{\delta_1} - v_1},\quad r_n = 3\pare{v_n - \frac{\Delta_{n-1}}{\delta_{n-1}}}.
+    \end{align*}
+    \item 抛物线端点三次样条: $d_1 = 0 = d_{n-1}$, 从而首位的多项式皆为二次. 此时
+    \[ A_{11} = A_{nn} = 1,\quad A_{12} = A_{n,n-1} = -1. \]
+    \item 非纽结三次样条: $d_1 = d_2$, $d_{n-2} = d_{n-1}$, 即$S'''_1\pare{x_2} = S'''_2\pare{x_2}$且$S'''_{n-2}\pare{x_{n-1}} = S'''_{n-1}\pare{x_{n-1}}$.
+    \begin{align*}
+        & A_{11} = \delta_2,\quad A_{12} = -\pare{\delta_1 + \delta_2},\quad A_{13} = \delta_1, \\
+        & A_{n-2,n} = \delta_{n-1},\quad A_{n-1,n} = -\pare{\delta_{n-2} + \delta_{n-1}},\quad A_{n,n} = \delta_{n-2}.
+    \end{align*}
+\end{cenum}
+\begin{theorem}
+    $n\ge 2$可得唯一自然/曲率调整/钳制三次样条, $n\ge 3$可得唯一抛物线端点三次样条, $n\ge 4$可得唯一非纽结三次样条.
+\end{theorem}
+
+% subsubsection 样条 (end)
+
+\subsubsection{B\texorpdfstring{\'e}{e}zier样条} % (fold)
+\label{ssub:Bezier样条}
+
+\begin{theorem}[B\'ezier曲线]
+    给定端点$\pare{x_1,y_1}$, $\pare{x_4,y_4}$和控制点$\pare{x_2,y_2}$, $\pare{x_3,y_3}$, 设
+    \begin{align*}
+        b_x &= 3\pare{x_2 - x_1}, \\
+        c_x &= 3\pare{x_3 - x_2} - b_x, \\
+        d_x &= x_4 - x_1 - b_x - c_x, \\
+        b_y &= 3\pare{y_2 - y_1}, \\
+        c_y &= 3\pare{y_3 - y_2} - b_y, \\
+        d_y &= y_4 - y_1 - b_y - c_y.
+    \end{align*}
+    则$t\in\brac{0,1}$上的B\'ezier样条为
+    \begin{align*}
+        x\pare{t} &= x_1 + b_x t + c_xt^2 + d_xt^3, \\
+        y\pare{t} &= y_1 + b_y t + c_yt^2 + d_yt^3.
+    \end{align*}
+\end{theorem}
+
+% subsubsection Bezier样条 (end)
+
+% subsection 插值 (end)
+
 % section 求解方程 (end)
 
 \end{document}

@@ -12,6 +12,24 @@
 \subsection{文件结构} % (fold)
 \label{sub:文件结构}
 
+\subsubsection{清单} % (fold)
+\label{ssub:清单}
+
+\begin{shcommand}{ls}
+\ttfamily
+\begin{tabular}{@{$\bullet\quad$}ll}
+   -a      & 显示隐藏文件('.'开头); \\
+   -l & 显示完整信息; \\
+\end{tabular} 
+\end{shcommand}
+\begin{shlst}
+ls -la
+\end{shlst}
+
+\texttt{ls}表示list.
+
+% subsubsection 清单 (end)
+
 \subsubsection{重命名} % (fold)
 \label{ssub:重命名}
 
@@ -26,12 +44,109 @@
 rename 's/prefix([0-9])/file_$1' prefix*
 \end{shlst}
 
-
-
 % subsubsection 重命名 (end)
 
 % subsection 文件结构 (end)
 
 % section 文件管理 (end)
+
+\section{网络} % (fold)
+\label{sec:网络}
+
+\subsection{配置} % (fold)
+\label{sub:配置}
+
+\subsubsection{网络参数} % (fold)
+\label{ssub:网络参数}
+
+\begin{shcommand}{ifconfig}
+\ttfamily
+\begin{tabular}{@{$\bullet\quad$}ll}
+    \underline{address}     & 显示该接口的参数; \\
+\end{tabular} 
+\end{shcommand}
+\begin{shlst}
+ifconfig
+ifconfig en0
+\end{shlst}
+\texttt{ifconfig}表示interface configuration.
+
+% subsubsection 网络参数 (end)
+
+% subsection 配置 (end)
+
+% section 网络 (end)
+
+\section{系统} % (fold)
+\label{sec:系统}
+
+\subsection{用户} % (fold)
+\label{sub:用户}
+
+\subsubsection{切换用户} % (fold)
+\label{ssub:切换用户}
+
+\begin{shcommand}{su}
+\ttfamily
+\begin{tabular}{@{$\bullet\quad$}ll}
+   -m      & 保持当前shell;
+\end{tabular} 
+\end{shcommand}
+\begin{shlst}
+su -m
+su -m cyan
+\end{shlst}
+\texttt{su}表示substitute user.
+
+% subsubsection 切换用户 (end)
+
+\subsubsection{超级权限} % (fold)
+\label{ssub:超级权限}
+
+\begin{shcommand}{sudo}
+\ttfamily
+\begin{tabular}{@{$\bullet\quad$}ll}
+   -A      & 从\texttt{\$SUDO\_ASK\_PASS}的\texttt{stdout}读密码, 需要\texttt{\textbackslash n};
+\end{tabular} 
+\end{shcommand}
+\begin{shlst}
+alias sudo="sudo -A"
+sudo ls
+\end{shlst}
+\texttt{sudo}表示super user do.
+
+% subsubsection 超级权限 (end)
+
+% subsection 用户 (end)
+
+\subsection{配置} % (fold)
+\label{sub:配置}
+
+\subsubsection{配置文件} % (fold)
+\label{ssub:配置文件}
+
+\begin{shlst}
+vim ~/.bashrc
+source ~/.bashrc
+\end{shlst}
+\texttt{rc}表示runtime configuration.
+
+% subsubsection 配置文件 (end)
+
+% subsection 配置 (end)
+
+\subsection{包安装} % (fold)
+\label{sub:包安装}
+
+\subsubsection{apt} % (fold)
+\label{ssub:apt}
+
+\texttt{apt}表示advanced package control.
+
+% subsubsection apt (end)
+
+% subsection 包安装 (end)
+
+% section 系统 (end)
 
 \end{document}

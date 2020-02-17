@@ -1,1 +1,2 @@
-rename 's/prefix([0-9])/file_$1' prefix*
+vim ~/.bashrc
+source ~/.bashrc
