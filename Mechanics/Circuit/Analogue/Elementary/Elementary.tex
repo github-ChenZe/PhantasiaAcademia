@@ -1,0 +1,115 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\subsubsection*{配置} % (fold)
+\label{ssub:配置}
+
+\noindent
+Wang Yonggang 63606499 wangyg@ustc.edu.cn\\
+Zhao Zelong, Zhang Jianfeng(13076063853)\\
+考核: 上课+作业(20\%$\sim$ 30\%)+期末考试(70\%$\sim$ 80\%)
+
+% subsubsection 配置 (end)
+
+\section{基础} % (fold)
+\label{sec:基础}
+
+\subsection{信号与系统} % (fold)
+\label{sub:信号与系统}
+
+电信号: 信号由电压或电流表示者. 电压和电流是电路中的两个基本变量. 基本属性由幅度, 频率和相位. 由这些基本属性表示信息.
+\par
+电路: 用来处理电信号的器件及其互联网络. 其目的在于在保证被处理信号所携带的信息不失真的前提下, 对信号进行正确的转换, 传输, 提取, 再现及其它深化处理.
+
+% subsection 信号与系统 (end)
+
+\subsection{模拟信号与数字信号} % (fold)
+\label{sub:模拟信号与数字信号}
+
+模拟电路处理模拟信号, 数字电路处理数字信号.
+\par
+模拟信号谓在时间和幅值上都连续的信号.
+\par
+数字信号谓在时间和幅值上都是离散的信号.
+\begin{ex}
+    麦克风信号是模拟信号. 自然界中几乎所有信息都是模拟信号.
+\end{ex}
+
+% subsection 模拟信号与数字信号 (end)
+
+\subsection{信号的频谱} % (fold)
+\label{sub:信号的频谱}
+
+线性电路可以通过Th\'evenin等效和Norton等效转化为电压源/电流源等效电路.
+\par
+信号的时间域表示是信号作为对时间的函数. 信号还可以在频率域表示, 相应的频谱.
+\par
+正弦波的三要素: 幅度, 角频率, 初相位.
+\begin{ex}
+    周期$T$, 幅度$V_s$的方波可展开为
+    \[ v\pare{t} = \frac{V_s}{2} + \frac{2V_s}{\pi} \pare{\sin\omega_0 t + \rec{3}\sin 3\omega_0 t + \rec{5}\sin 5\omega_0 t + \Lambda}. \]
+    其中$\omega_0 = 2\pi/T$, $V_s/2$为直流分量, $2V_s/\pi$谓基波分量, $2V_s/\pi \cdot 1/3$谓三次谐波分量.
+\end{ex}
+频谱谓信号在频率域的展开.
+\par
+周期信号FT后可得离散频率函数.
+\par
+非周期信号FT后可得连续频率函数.
+
+% subsection 信号的频谱 (end)
+
+\subsection{放大电路模型} % (fold)
+\label{sub:放大电路模型}
+
+信号放大后可处理.
+\par
+通过信号源的等效表示, 负载的等效表示, 得到放大电路的符号表示. 放大电路一般为有源器件.
+\par
+信号放大可有度量
+\begin{cenum}
+    \item 电压增益$A_v = v_o / v_i$;
+    \item 电流增益$A_i = i_o / i_i$;
+    \item 互阻增益$A_r = v_o / i_i\pare{\SI{}{\ohm}}$;
+    \item 互导增益$A_g = i_o / i_s\pare{\SI{}{\siemens}}$.
+\end{cenum}
+通常将负载等效为电阻.
+\paragraph{电压放大} % (fold)
+\label{par:电压放大}
+
+设$A_{vo}$为负载开路时的电压增益, $R_i$为输入电阻, $R_o$为输出电阻. 输出回路得
+\[ v_o = A_{vo}v_i \frac{R_L}{R_o + R_L},\quad A_v = \frac{v_o}{v_i} = \frac{R_L}{R_o+R_L}. \]
+为了减少负载的影响, 需要$R_o \ll R_L$. 减少输入回路的衰减, 需要$R_i \gg R_s$.
+
+% paragraph 电压放大 (end)
+
+\paragraph{电流放大} % (fold)
+\label{par:电流放大}
+
+设$A_{is}$为负载短路时的电流增益, 由输出回路,
+\[ i_o = A_{is}i_i \frac{R_o}{R_o + R_L},\quad A_i = \frac{i_o}{i_i} = A_{is}\frac{R_o}{R_o+R_L}. \]
+为了减少负载的影响, 需要$R_o \gg R_L$. 减少输入回路的衰减, 需要$R_i \ll R_s$.
+
+% paragraph 电流放大 (end)
+
+\paragraph{互阻/互导放大模型} % (fold)
+\label{par:互阻_互导放大模型}
+
+等效模型如何, 放大器本身输入阻抗与输出阻抗有何希望, 对信号源和负载有何希望?
+\par
+四种放大器模型可以相互转化. 即同一模型可用四种模型刻画. 例如大$R_i$小$R_o$的放大器宜用电压-电压放大模型刻画.
+\par
+隔离放大电路模型: 输入输出回路, 没有公共端.
+\begin{ex}
+    部份情况下输入和输出端口不应共地. 例如医疗仪器中, 为了防止漏电引发危险, 应当分离前后端.
+\end{ex}
+
+% paragraph 互阻/互导放大模型 (end)
+
+% subsection 放大电路模型 (end)
+
+% section 基础 (end)
+
+\end{document}
