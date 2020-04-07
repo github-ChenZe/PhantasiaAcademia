@@ -1,0 +1,201 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{原子的精细结构} % (fold)
+\label{sec:原子的精细结构}
+
+\subsection{电子磁矩} % (fold)
+\label{sub:电子磁矩}
+
+\subsubsection{经典情形} % (fold)
+\label{ssub:经典情形}
+
+线圈的磁矩可表示为
+\[ \+v\mu = iS\+ve_n = -\frac{e}{2m_e}\+vL,\quad \mu = -\gamma\+vL. \]
+其中$\gamma$谓磁旋比. Larmor进动表明
+\[ \+dtd{\+v\mu} = \+v\omega\times \+v\mu,\quad \+v\omega = \gamma \+vB. \]
+
+% subsubsection 经典情形 (end)
+
+\subsubsection{量子情形} % (fold)
+\label{ssub:量子情形}
+
+$\+v\mu = -\gamma\+vL$仍然成立. 惟$L$应量子化, $L = \sqrt{l\pare{l+1}}\hbar\gamma$. 取$\displaystyle \gamma = - \frac{e}{2m_e}$, 有
+\begin{align*}
+    \mu_l &= -\sqrt{l\pare{l+1}}\mu_B,\quad l = 0,1,2,\cdots,\\ \mu_{l,z} &= -m_l\mu_B,\quad m = 0,\pm 1,\cdots,\pm l.
+\end{align*}
+其中
+\[ \mu_B = \frac{e\hbar}{2m_e} = \half \frac{e^2}{\hbar c}\cdot \frac{\hbar^2}{m_e e^2}\cdot ec = \half \alpha c\pare{e a_1} = \SI{0.9274e-23}{\ampere\cdot\square\meter}. \]
+
+% subsubsection 量子情形 (end)
+
+% subsection 电子磁矩 (end)
+
+\subsection{Stern-Gerlach实验} % (fold)
+\label{sub:stern_gerlach实验}
+
+对于满足$\displaystyle \+DxD{B_z} = \+DyD{B_z} = 0$的磁场, 磁偶极子受力
+\[ F_z = \mu_z \+DzD{B_z}. \]
+对于气体分子, $mv^2 \sim 3kT$, 若经过宽度为$d$的磁场, 则偏角和相应的偏离线度为
+\begin{equation}
+    \label{eq:偏离线度}
+    \alpha = \arctan\pare{\frac{F_zd}{mv^2}},\quad z = \mu_z \+DzD{B_z}\cdot \frac{dD}{3kT}. 
+\end{equation}
+$\mu_z$的量子化和$\mu$的量子化仅允许奇数个离散的偏离线度(数目正比于$2l+1$). 尽管如此, 实验仅观察到两条分立线.
+
+% subsection stern_gerlach实验 (end)
+
+\subsection{电子自旋的假设} % (fold)
+\label{sub:电子自旋的假设}
+
+为了令$2l+1$为偶数, 角动量须为半整数. 电子自旋假设要求电子除了轨道角动量外, 还具有自旋角动量,
+\[ \abs{\+vs} = \sqrt{s\pare{s+1}}\hbar,\quad s = \half \Rightarrow s_z = \pm \half \hbar. \]
+引入$g$因子, 则磁矩为
+\[ \mu_j = -\sqrt{j\pare{j+1}}g_j \mu_B,\quad \mu_{j,z} = -m_j g_j\mu_B. \]
+轨道磁矩
+\[ \mu_l = -\sqrt{l\pare{l+1}}\mu_B,\quad \mu_{l,z} = -m_l\mu_B. \]
+自旋磁矩
+\[ \mu_s = -\sqrt{s\pare{s+1}}g_s\mu_B,\quad \mu_{s,z} = \pm \half g_s\mu_B. \]
+其中$g$谓电子的Land\'e因子.
+\par
+在弱场的情形下, $\+v\mu$可直接相加, 记$\hat x = \sqrt{x\pare{x+1}}$, 则
+\begin{align*}
+    \mu_j &= \mu_l \cos\expc{\+vl,\+vj} + \mu_s \cos\expc{\+vs, \+vj} \\
+    &= \pare{-g_l\hat l \mu_B} \frac{\hat j^2 + \hat l ^2 - \hat s^2}{2\hat j \hat l} + \pare{-g_s\hat s \mu_B} \frac{\hat j^2 + \hat s^2 - \hat l ^2}{2\hat j \hat s}.\\
+    \Rightarrow g_j &= g_l \frac{\hat j^2 + \hat l^2 - \hat s^2}{2\hat j^2} + g_s\frac{\hat j^2 + \hat s^2 - \hat l^2}{2\hat j^2} \\
+    &= \frac{g_l + g_s}{2} + \pare{\frac{g_l - g_s}{2}}\pare{\frac{\hat l^2 - \hat s^2}{\hat j^2}}.
+\end{align*}
+若$g_l = 1$且近似$g_s = 2$, 则
+\[ \boxed{g_j = \frac{3}{2} + \half \pare{\frac{\hat s^2 - \hat l^2}{\hat j^2}}.} \]
+对于未抵消的多电子自旋, 将$\hat s$替换为$\hat S$, $\hat l$替换为$\hat L$, $\hat j$替换为$\hat J$即可.
+\par
+碱金属和第一副族元素的基态状态都是\ce{^2S_{1/2}}. S表示单电子轨道角动量$l=0$. $j=1/2$标注于右下角. 左上角表示$2s+1$的数值, 对于单电子是$2$, 表示双重态.
+\begin{ex}
+    对于\ce{^2S_{1/2}}, 成立$g_j=2$.
+\end{ex}
+\begin{ex}
+    对于$l=1$相应的P态, $j=1/2,3/2$. 例如\ce{_{81}Tl}体系, 基态\ce{^2P_{1/2}}.
+\end{ex}
+\begin{ex}
+    对于$l=2$相应的P态, $l=3/2,5/2$.
+\end{ex}
+\begin{ex}
+    对于\ce{^2D_{5/2}}态, $g_j = 6/5$, $m_j$可以取$\pm 1/2, \pm 3/2, \pm 5/2$, 从而
+    \[ m_j g_j = \pm \frac{3}{5},\pm \frac{9}{5},\pm \frac{15}{5}. \]
+\end{ex}
+
+\paragraph{Stern-Gerlach实验的解释} % (fold)
+\label{par:stern_gerlach实验的解释}
+
+\eqref{eq:偏离线度}应写作
+\[ z_2 = -m_Jg_J\mu_B \+DzD{B_z} \frac{dD}{3kT}. \]
+$m_J$可以取$J,J-1,\cdots,-J$共$2J+1$个数值. 高温容器中射出的氢原子处于基态, $n=1$, $l=0$, $j=0+s = 1/2$, $\Rightarrow m_j = \pm 1/2$. 从而$m_jg_j = \pm 1$.
+\par
+碱金属的双线表明p轨道有能级分别. 即p分裂为$j = 1\pm 1/2$两个状态, 即\ce{^2P_{3/2}}和\ce{^2P_{1/2}}两个能级.
+
+% paragraph stern_gerlach实验的解释 (end)
+
+\paragraph{自旋-轨道作用} % (fold)
+\label{par:自旋_轨道作用}
+
+切换到质子的参考系, 将质子的运动视为电流环, 考虑Thomas修正后和$g_s$后, 在惯性系中引入了一势能差
+\[ U = \frac{1}{4\pi\epsilon_0} \frac{Ze^2}{2m_e^2c^2r^3}\+vs\cdot \+vl. \]
+其中$\+vs$和$\+vl$分别是轨道角动量和自旋角动量.
+\par
+对于单电子, $j = l\pm 1/2$, 从而
+\begin{align*}
+    \expc{\+vs \cdot \+vl} &= \half \expc{\+vj^2 - \+vs^2 - \+vl^2} \\
+    &= \half\brac{j\pare{j+1} - s\pare{s+1} - l\pare{l+1}}\hbar^2 \\
+    &= \left\{ \begin{aligned}
+        &\half l\hbar^2, && j = l+\half, \\
+        &-\half\pare{l+1} \hbar^2, && j = l-\half.
+    \end{aligned} \right. \\
+    \expc{\rec{r^3}} &= \frac{Z^3}{n^3l\pare{l+1/2}\pare{l+1}a_1^3}.
+\end{align*}
+得到自旋-轨道耦合引发的能级位移
+\[ U = \frac{\pare{\alpha Z}^4E_0}{4n^3} \frac{\displaystyle \brac{j\pare{j+1} - l\pare{l+1} - \frac{3}{4}}}{\displaystyle l\pare{l+\half}\pare{l+1}}. \]
+对于$\displaystyle j = l\pm\half$引发的位移, 有
+\[ \Delta U = \frac{\pare{\alpha Z}^4}{2n^3l\pare{l+1}}E_0,\quad \Delta U = \frac{Z^4}{n^3l\pare{l+1}}\times \SI{7.25e-4}{\eV}. \]
+\begin{remark}
+    $l=0$时不发生分裂.
+\end{remark}
+\begin{remark}
+    通过$\Delta U = 2\mu_B B$可以估算磁场大小.
+\end{remark}
+
+% paragraph 自旋_轨道作用 (end)
+
+% subsection 电子自旋的假设 (end)
+
+\subsection{Zeeman效应} % (fold)
+\label{sub:zeeman效应}
+
+Zeeman效应谓光源置于磁场内是谱线分裂的现象. 在磁场内能级位移
+\[ U = mg\mu_B B,\quad h\nu' = h\nu + \pare{m_2 - m_1}\mu_B B. \]
+根据跃迁的选择定则, $\Delta m = 0, \pm 1$. 当体系自旋为零, $g=1$,
+\[ h\nu' = h\nu + \begin{pmatrix}
+    \mu_B B \\ 0 \\ -\mu_B B
+\end{pmatrix}. \]
+\begin{ex}
+    镉的\ce{^1D_2}$\rightarrow$\ce{^1P_1}是五条到三条的跃迁. 但实际上仅有$\Delta m = -1, 0, 1$三条线($\sigma^-$, $\pi$和$\sigma^+$). 同样的$m$对应的能量差值是相同的.
+\end{ex}
+\begin{remark}
+    引入$\displaystyle \+sF = \frac{eB}{4\pi m_e} = 14B \pare{\SI{}{\tesla}}\SI{}{\giga\hertz}$, 则
+    \[ \nu' = \nu + \pare{m_2g_2 - m_1g_1}\+sF. \]
+\end{remark}
+
+\paragraph{Zeeman谱线的偏振特性} % (fold)
+\label{par:zeeman谱线的偏振特性}
+
+横向观察, 垂直于$B$的光有偏振一条和$B$平行的$\pi$以及两条和$B$垂直的$\sigma$. 平行于$B$的光有左右旋的$\sigma$. 左旋和右旋偏振分别对应角动量和传播方向同向和反向的光子. 对于$\pi$跃迁, 由于光子具有固定的角动量$\hbar$, 为了维持角动量守恒, 光子的角动量垂直于磁场.
+
+% paragraph zeeman谱线的偏振特性 (end)
+
+\paragraph{Grotrain图} % (fold)
+\label{par:grotrain图}
+
+例如为了画出$j=5/2$到$j=3/2$的跃迁, 在上方直线画出$-5/2,5/2$的六条$m$值, 在下方直线画出$-3/2,3/2$的四条$m$值. 相同的$m$应当水平位置相同. 只有垂直线, 左下斜线和右下斜线是允许的跃迁.
+
+% paragraph grotrain图 (end)
+
+\paragraph{Paschen-Back效应} % (fold)
+\label{par:paschen_back效应}
+
+当磁场足够强, $\+vS$和$\+vL$分别绕$\+vB$进动, 则
+\[ U = -\+v\mu\cdot\+vB = \frac{e}{2m_e}\pare{g_s\+vS+g_l\+vL}\cdot\+vB. \]
+在$g_l = 1$, $g_s = 2$下, 有
+\[ U = \frac{e\hbar B}{2m_e}\pare{2m_s+m_l}. \]
+此时$2m_s+m_l$可能引发简并. 强磁场下\ce{3P}$\rightarrow$\ce{3S}的Paschen-Back效应可退化为正常Zeeman效应(三线).
+
+% paragraph paschen_back效应 (end)
+
+\paragraph{Stark效应} % (fold)
+\label{par:stark效应}
+
+在外电场中, 原子的能级也会发生位移$U = - \+cE D_z$, 其中$D_z = -e\expc{z}$, $z$是电子的平均$z$位置. 此时需要引入新的量子数$n_1$, $n_2$, $\abs{m_l}$替代原有的$n$, $l$, $m_l$. 并且满足关系
+\[ n = n_1 + n_2 + \abs{m_l} + 1. \]
+其中$\abs{m_l} = 0,1,\cdots,\pare{n-1}$, $n_i = 0,1,\cdots,n-\abs{m_l} - 1$. $n_F=n_1 - n_2$也是量子化的, 能量分裂为
+\[ \Delta E = \SI{6.402e-5}{}\frac{\+cE nn_F}{Z}, \quad n_F = n-1,\dots,-\pare{n-1}. \]
+其中$\+cE$以$\SI{}{\volt\per\meter}$为单位.
+
+% paragraph stark效应 (end)
+
+% subsection Zeeman效应 (end)
+
+\subsection{氢原子能谱研究进展} % (fold)
+\label{sub:氢原子能谱研究进展}
+
+Dirac的氢原子能级表达式表明
+\[ T = \frac{R}{n^2} + \frac{R\alpha^2}{n^4}\pare{\frac{n}{\displaystyle j+\half} - \frac{3}{4}}. \]
+这意味着2\ce{^2S_{1/2}}和2\ce{^2P_{1/2}}应当重合. 然而实际上它们之间存在$\SI{4.37}{\micro\eV}$的差别, 即Lamb移位.
+\par
+此外, 虽然$\Delta l = 0$的跃迁禁止, 但仍然可能通过双光子跃迁达到.
+
+% subsection 氢原子能谱研究进展 (end)
+
+% section 原子的精细结构 (end)
+
+\end{document}

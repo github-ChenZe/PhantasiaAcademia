@@ -1,0 +1,384 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{分离变量法} % (fold)
+\label{sec:分离变量法}
+
+\begin{ex}
+    求解
+    \[ u_{tt} - u_{xx} = 0.\quad t > 0,\quad 0 < x < L. \]
+    边界条件$u\pare{t,x=0} = u\pare{t,x=L} = 0$, 初始条件
+    \[ u\pare{t=0,0\le x\le L} = \varphi\pare{x},\quad u_t\pare{t=0,0\le x\le L} = \psi\pare{x}. \]
+\end{ex}
+寻求$u\pare{t,x} = \displaystyle \sum_i T_i\pare{t}X_i\pare{x}$形式的解, 先找到$T\pare{t}X\pare{x}$形式的解, 线性叠加并代入边界条件.
+\[ 0 = u_{tt} - u_{xx} = T''X-TX''  \Rightarrow  \frac{T''}{T} = \frac{X''}{X} = -\lambda. \]
+从而
+\[ X'' + \lambda X = 0 = T'' + \lambda T. \]
+这是ODE边值问题,
+\[ X'' + \lambda X = 0,\quad X\pare{0} = 0 = X\pare{L}. \]
+若$\lambda = 0$, $X = Ax+B$, 有$X = Ax+B\Rightarrow X\equiv 0$. 这是零解. 须要率$\lambda \neq 0$的情形,
+\[ X = A\exp \pare{i\omega x} + B\exp\pare{-i\omega x},\quad \lambda = \omega^2. \]
+$X\pare{0} = 0 = A+B, X\pare{L} = 0 = 2iA\sin\pare{\omega L}$. 从而$A=0=X$, 或者$\omega L = \pi \+bZ$. 非零解要求
+\[ 0<\lambda = \frac{\pi^2n^2}{L^2}. \]
+\par
+这是一个特征值问题, $X'' = -\lambda_n X$. 特征值为$\displaystyle \lambda_n = \frac{\pi^2 n^2}{L^2}$, $n=1,2,\cdots$. 相应的特征向量
+\[ X_n = \sin \pare{\frac{n\pi x}{L}}, \]
+这是非简并的谱.
+\par
+$T$可以类似求解为
+\begin{align*}
+    T_n &= C_n \cos \pare{\frac{n\pi t}{L}} + D_n \sin\pare{\frac{n\pi t}{L}},\\
+    u &= \sum_{n=1}^\infty T_nX_n,\quad \omega_n = \frac{\pi n}{L},\\
+    &= \sum_{n=1}^\infty\brac{C_n \cos\pare{\omega_n t} + D_n\sin\pare{\omega_n t}} \sin\pare{\omega_n x}.
+\end{align*}
+再考虑初值条件
+\begin{align*}
+    \varphi\pare{x} &= u\pare{t=0,x} = \sum_{n=1}^\infty C_n\sin\pare{\omega_n x},\\
+    \psi\pare{x} &= u_t\pare{t=0,x} = \sum_{n=1}^\infty \omega_n D_n\sin\pare{\omega_n x}.
+\end{align*}
+求$C_n$和$D_n$等同于求Fourier展开系数,
+\begin{align*}
+    C_n &= \frac{2}{L} \int_0^L \sin\pare{\omega_n x} \varphi\pare{x}\,\rd{x},\\
+    D_n &= \frac{2}{\omega_n L} \int_0^L \sin\pare{\omega_n x}\psi\pare{x}\,\rd{x}.
+\end{align*}
+最终得到$u\pare{t,x}$.
+\begin{ex}
+    求解$\laplacian u = 0, r<a$, 边界$u\pare{r=a,\theta} = f\pare{\theta}$.
+\end{ex}
+采用极坐标,
+\[ \laplacian = \rec{r}\partial_r\pare{r\partial_r} + \rec{r^2}\partial_\theta^2. \]
+分离变量, $u=R\pare{r}\Theta\pare{\theta}$, 则
+\begin{align*}
+    \frac{\pare{rR'}'\Theta}{r} + \frac{R\Theta''}{r^2} &= 0, \\
+    \Theta'' + \lambda\Theta &= 0,\\
+    r\pare{rR'}' &= \lambda R.
+\end{align*}
+\begin{remark}
+    解题时要考虑清楚采纳何种坐标.
+\end{remark}
+\begin{ex}
+    选择有边值问题的变量作为本征值问题.
+\end{ex}
+如果$\lambda = 0$, 则ODE有解$\Theta = A+B\theta$. 注意周期性边界条件$\Theta\pare{\theta+2\pi} = \Theta\pare{\theta}$, 有$B=0$, $\Theta = A$, 此时非简并. 如果$\lambda \neq 0$., 则
+\[ \Theta = \alpha \exp\pare{i\omega \theta} + \alpha^* \exp\pare{-i\omega\theta}. \]
+其中$\omega^2 = \lambda$为特征值. 周期边界条件要求$\omega \in \+bZ$, 可以写为
+\[ \Theta = A\sin n\theta + B\cos n\theta. \]
+此时发生简并.
+\par
+$R$的方程可以写为
+\[ \pare{\pare{r\partial_r}^2 - n^2}R = \pare{\pare{\frac{\partial}{\partial \ln r}}^2 - n^2}R = 0. \]
+这是一个Euler-Cauchy ODE, 有
+\[ \begin{cases}
+    n=0, R_0 = C_0 + D_0 \ln r,\\
+    n\ge 1, R_n = C_nr^n + D_nr^{-n}.
+\end{cases} \]
+自然边界条件要求$R\pare{0} < \infty$, 故$D_n = 0$.
+\begin{align*}
+    u &= \sum_{n=1}^\infty u_n, \quad u_0 = \frac{A_0}{2},\\
+    u_{n\ge 1} &= \brac{A_n \cos n\theta + B_n \sin n\theta}\pare{\frac{r}{a}}^n,\\
+    f\pare{\theta} &= u\pare{r=a,0} = \frac{A_0}{2} + \sum_{n=1}^\infty \brac{A_n \cos n\theta + B_n\sin n\theta}.
+\end{align*}
+使用Fourier展开,
+\begin{align*}
+    A_n &= \rec{\pi} \int_0^{2\pi} f\pare{\phi}\cos n\phi \,\rd{\phi}, \\
+    B_n &= \rec{\pi} \int_0^{2\pi} f\pare{\phi}\sin n\phi \,\rd{\phi}, \\
+    u &= \rec{2\pi} \int_0^{2\pi} \frac{f\pare{\phi}}{2\pi} \curb{1+2\sum_{n=1}^\infty\pare{\cos n\phi \cos n\theta + \sin n\phi \sin n\theta}\frac{r^n}{a^n}}\,\rd{\phi} \\
+    &= \rec{2\pi} \int_0^{2\pi}\curb{1+2\sum_{n=1}^\infty \cos\brac{n\pare{\theta - \phi}}\pare{r/a}^n} f\pare{\phi}\,\rd{\phi}.
+\end{align*}
+注意到
+\[ 1+2\sum_{n=1}^\infty \cos\brac{n\pare{\theta - \phi}}\pare{r/a}^n = 1 + 2\Re \frac{e^{i\pare{\theta - \phi}}r/a}{1-e^{i\pare{\theta - \phi}}r/a}. \]
+引入$z=re^{i\theta}$, $w = ae^{i\phi}$, 则上式为
+\[ 1+\Re \frac{z/w}{1-z/w} = \frac{\abs{w}^2 - \abs{z}^2}{\abs{w-z}^2} = \frac{a^2-r^2}{a^2 - 2ar\cos\pare{\phi - \theta} + r^2}. \]
+得到Poisson核
+\[ u\pare{r,\theta} = \frac{a^2 - r^2}{2\pi} \int_0^{2\pi} \frac{f\pare{\phi}\,\rd{\phi}}{a^2 - 2ar\cos\pare{\phi - \theta}+r^2}. \]
+\begin{remark}
+    求解区域不同所用的系数也不同. 如果求解区域是$r>a$, 并且要求$\displaystyle \lim_{r\rightarrow \infty} u\pare{r,\theta} < \infty$, 则
+    \[ u = \frac{A_0}{2} + \sum_{n=1}^\infty \brac{A_n \cos n\theta + B_n \sin n\theta} \frac{a^n}{r^n}. \]
+    如果求解区域是$a_1 < r < a_2$, 两个边界都有条件
+    \[ u = \frac{C_0}{2} + \frac{D_0 \ln r}{2} + \sum_{n=1}^\infty \pare{C_n r^n + D_nr^{-n}}\curb{A_n \cos n\theta + B_n\sin n\theta}. \]
+\end{remark}
+
+\subsection*{分离变量总结} % (fold)
+\label{sub:分离变量总结}
+
+定解问题一般格式为
+\begin{align*}
+    \pare{L_t + L_x} u &= 0,\\
+    b_1 < x < b_2,\quad t &\ge t_0, \\
+    \alpha_i u - \beta_i u_x \vert^{x=b_i} &= 0, \\
+    u,u_t,\cdots \vert^{t=t_0} &= \cdots.
+\end{align*}
+设$u\pare{t,x} = T\pare{t}X\pare{x}$, 得$L_x X = -\lambda X$, $L_t T = \lambda T$. 可解特征值问题
+\[ L_x X + \lambda_X = 0,\quad b_1 < x < b_2,\quad \alpha_i u - \beta-i u_x \vert^{x=b_i} = 0, \]
+可得特征值$\lambda_n$, 以及特征向量$X_n$, 再解$L_t T_n = \lambda_n T_n$.
+\par
+之后设
+\[ u\pare{t,x} = \sum C_nT_n\pare{t}X_n\pare{x}, \]
+根据
+\[ u\pare{t_0,x} = \sum \lambda C_nT_n\pare{t_0}X_n\pare{x} \]
+求出$C_n$, 得到$u$.
+
+% subsection 分离变量总结 (end)
+
+\subsection{Strum-Liouville理论} % (fold)
+\label{sub:strum_liouville理论}
+
+考虑$\brac{b_1,b_2}$上带权$\rho$的$L^2$空间, 考虑
+\[ L = \frac{-D_x \pare{kD_x}+q}{\rho}, \]
+在Robin边界条件$\alpha_i f\pare{b_i} + \beta_i D_\perp f\pare{b_i}=0$下, 可以证明$L$是Hermitian的, 即
+\[ \bra{Lf}\ket{g} = \bra{f}\ket{Lg}, \]
+前提是$\pare{f,g}$构成的Wronskian在边界为零, 这一点由Robin边界条件保证. 还可以证明$L$的特征值皆非负.
+\par
+如果施加周期性的边界条件$f\pare{b_1} = f\pare{b_2}$, $D_x f\pare{b_1} = D_x f\pare{b_2}$, 则除了最低的特征值只对应一个独立的特征函数外, 其余每个对应两个正交的特征函数(简并).
+
+% subsection strum_liouville理论 (end)
+
+\subsection{例子} % (fold)
+\label{sub:例子}
+
+解题的关键在于判断用分离变量后以何者为本征值问题.
+\begin{sample}
+    \begin{ex}
+        考虑$\displaystyle \begin{cases}
+            u_t = u_{xx},\quad t>0,\quad 0<x<L,\\
+            u_x\vert^{x=0} = 0,\quad \pare{\partial_x + \gamma}u\vert^{x=L} = 0, \\
+            u\vert^{t=0} = \varphi\pare{x}.
+        \end{cases}$分离变量后
+        \begin{align*}
+            &u = \sum_n T_n\pare{t}X_n\pare{x}, \\
+            &T'_n = -\lambda_n T, \\
+            &X'' + \lambda X = 0,\quad 0 < x < L, \\
+            &X'\pare{0} = \pare{D_x + \gamma}X\pare{L} = 0.
+        \end{align*}
+        可见$X$的方程适于SL问题, 设$\lambda = \omega^2$,
+        \[ X = A \cos \omega x + B\sin \omega x \Rightarrow B=0,\quad \omega = \gamma \cot \omega L. \]
+        标记第$n$个点为$\omega_n$, 可以发现归一化
+        \[ u\pare{t} = \sum_{n=1}^\infty C_n\tau_n\pare{t}\ket{X_n} \Rightarrow C_n = \frac{\bra{X_n}\ket{\varphi}}{\bra{X_n}\ket{X_n}} = \frac{\displaystyle 2\int_0^L \rd{x}\ \varphi\pare{x}X_n\pare{x}}{\displaystyle 1+\frac{\gamma}{\omega_n^2 + \gamma^2}}. \]
+        可以发现
+        \[ \ket{u\pare{t}} = \hat{G}\pare{t}\ket{\varphi},\quad \hat{G}\pare{t} = \sum_{n=1}^\infty \tau_n\pare{t}\frac{\ket{X_n}\bra{X_n}}{\braket{X_n}{X_n}.}\quad \tau_n\pare{t} = e^{-\omega_n^2 t}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \begin{cases}
+            \laplacian u = 0,\quad 0 < x < a,\quad 0 < y < b, \\
+            u\pare{x=0} = e\pare{y},\quad u\pare{x=a} = f\pare{y}, \\
+            u_y\pare{y=0} = 0 = u_y\pare{y=b}.
+        \end{cases}$分离变量后
+        \begin{align*}
+            & u = X\pare{x}Y\pare{y}, \\
+            & Y'' - \lambda Y = 0 = X'' + \lambda X.
+        \end{align*}
+        选择具有齐次边界条件者作为边界条件, $Y'\pare{0} = Y'\pare{0} = 0$. $Y$的本征函数为
+        \[ \ket{Y_n} = A \cos k_n x,\quad k_n = \frac{n\pi}{b},\quad \lambda = -k_n^2. \]
+        归一化
+        \[ \braket{Y_0}{Y_0} = b,\quad \braket{Y_{n>0}}{Y_n} = \frac{b}{2}. \]
+        相应的$X''_n = k_n^2 X_n$, 从而
+        \[ X_n\pare{x} = C_nc_n\pare{x} + D_nd_n\pare{x}. \]
+        其中
+        \begin{align*}
+            & c_0 = \frac{a-x}{a},\quad d_0 = \frac{x}{a},\\ &c_{n>0}\pare{x} = \frac{\sinh k_n\pare{a-x}}{\sinh k_n a},\quad d_{n>0}\pare{x} = \frac{\sinh k_nx}{\sinh k_na}.
+        \end{align*}
+        边界
+        \[ c_n\pare{0} = 1 = d_n\pare{a},\quad c_n\pare{a} = 0 = d_n\pare{0}. \]
+        并且注意到$c$和$d$的对称性
+        \[ c_n\pare{x} = d_n\pare{a-x}. \]
+        从而
+        \[ \ket{u\pare{x}} = \sum_{n=0}^\infty X_n\pare{x}\ket{Y_n}, \]
+        边界
+        \begin{align*}
+            &\ket{u\pare{x=0}} = \sum_{n=0}^\infty X_n\pare{0}\ket{Y} = e\pare{y},\\
+            &\ket{u\pare{x=a}} = \sum_{n=0}^\infty X_n\pare{0}\ket{Y} = f\pare{y}.
+        \end{align*}
+        从而得到系数值. 最终解为
+        \begin{align*}
+            & \ket{u\pare{x}} = \hat{G}\pare{a-x}\ket{e} + \hat{G}\pare{x}\ket{f}, \\
+            & \hat{G}\pare{x} = \sum_{n=0}^\infty \frac{\ket{Y_n}d_n\pare{x}\bra{Y_n}}{\braket{Y_n}{Y_n}}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{remark}
+    如果所有方向的边界条件都是齐次的, 则$u=0$为平凡唯一解.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \begin{cases}
+            \laplacian u = 0,\quad 1 < r < e,\quad 0 < \theta < a, \\
+            u\pare{r=1} = u\pare{r=e} = 0, \\
+            u\pare{\theta=0} = e\pare{r},\quad u\pare{\theta=a} = f\pare{r}, \\
+            \displaystyle \laplacian = \rec{r}\partial_r\pare{r\partial_r} + \rec{r^2}\partial_\theta^2.
+        \end{cases}$选择$r$的方程作为SL问题,
+        \[ r^2R'' + rR' + \lambda R = 0,\quad R\pare{1} = R\pare{e} = 0,\quad -r\pare{rR'}' = \lambda R. \]
+        其中$k=1$, $q=0$, $\rho = 1/r$, $\Theta'' = \lambda \Theta$. 令$t=\ln r$, 则方程变为
+        \begin{align*}
+            & \partial_t^2 R + R = 0 \Rightarrow y\pare{0} = y_1 = 0,\\
+            & y = \sin\pare{k_n t},\quad k_n = n\pi,\quad n = 1,2,\cdots,\\
+            &= \ket{R_n} = \sin\pare{k_n \ln r}.
+        \end{align*}
+        选择$r$为自变量, 则$\rho = 1/r$,
+        \[ \bra{f}\ket{g} = \int_1^e \frac{\rd{r}}{r} f^*\pare{r}g\pare{r}\Rightarrow \braket{R_n}{R_n} = \half. \]
+        并定义$R_0 = 0$. 对应的$\Theta_n\pare{\theta} = C_nc_n\pare{\theta} + D_nd_n\pare{\theta}$. 
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \begin{cases}
+            \laplacian u = 0, \\
+            u_{yy}\pare{x=0} = u_{yy}\pare{x=L} = 0, \\
+            u_yy\not\equiv 0.
+        \end{cases}$令$u = X\pare{x}Y\pare{y}$,
+        \begin{align*}
+            &\frac{X''''}{X} + 2\frac{X''}{X}\frac{Y''}{Y} + \frac{Y''''}{Y} = 0, \\
+            &\Rightarrow 2\frac{X''}{X} + \pare{\frac{Y''''}{Y}}'/\pare{\frac{Y''}{Y}}' = 0,\\
+            &\Rightarrow X'' + \lambda X = 0, \\
+            &\Rightarrow X'''' = \lambda^2 X, \\
+            &\Rightarrow \begin{cases}
+                X'' = \lambda X = 0,\quad X'''' = \lambda^2 X, \\
+                Y'''' - 2\lambda Y'' + \lambda^2 Y = 0.
+            \end{cases}
+        \end{align*}
+        边界条件
+        \begin{align*}
+            & u_{yy} = XY'' \not\equiv 0 \Rightarrow Y'' \not\equiv 0 \Rightarrow u_{yy}\vert^{x=0,L} = 0. \\
+            & X\vert^{x=0,L} = 0,\quad X_n = \sin\pare{k_n x},\quad k_n = \frac{n\pi}{L},\quad n = 1,2,\cdots, \\
+            & Y_n = A_n\cosh\pare{k_n y} + B_n\sinh\pare{k_n y},\quad u = \sum_{n=1}^{\infty} X_nY_n.
+        \end{align*}
+    \end{ex}
+\end{sample}
+如果有多于一个非齐次边界条件, 则可以通过将边界条件约化为仅有一个非齐次的情形, 之后叠加即可.
+
+% subsection 例子 (end)
+
+\subsection{非齐次问题的一般思路与解法} % (fold)
+\label{sub:非齐次问题的一般思路与解法}
+
+一般的非齐次问题指的是边界条件(BC)和PDE本身包含非齐次项, 即令待求解函数不能恒等于零的部分. \hl{将非齐次项分解成若干部分, 根据叠加原理将待求解函数写成若干函数之和, 各自满足一部分非齐次项, 选择相应的方法求解.}
+\begin{cenum}
+    \item 判断以何种坐标系求解.
+    \item 分离变量.
+    \item 根据方程的类别和边界条件判断关于哪个坐标的方程是SL问题.
+    \item 选择如何处理非齐次项: 如果边界条件和初始条件都是齐次的, 则直接考虑使用冲量原理求解. 或者猜测一个满足非齐次PDE的解, 且保留足够多的齐次部分供SL定理使用.
+    \item 否则, 先将边界条件齐次化, 即找到一个函数在两边满足特定的条件.
+    \item 用冲量原理解非齐次的PDE.
+    \item 对于Poisson方程可以直接使用Fourier展开.
+\end{cenum}
+设$u\pare{t,x} = v+w$, 先猜出满足原PDE的解$v$, 得出$w$需要满足的边界条件, 再求满足条件和齐次PDE定解问题的$w$.
+\begin{ex}
+     为了得到解为$v=x^2\pare{x-1}$, 取PDE为$u_{tt} - u_{xx} = 2-6x$. 再加上边界条件$u\pare{t=0} = u_t\pare{t=0} = 0$, 此时还需要求解
+     \[ w_{tt} - w_{xx} = 0,\quad w\vert_{t=0} = -v = -x^2\pare{x-1}. \]
+\end{ex}
+
+\subsubsection{冲量法} % (fold)
+\label{ssub:冲量法}
+
+对于一般的$f\pare{t,x}$, 根据叠加原理非齐次的初始条件可以分开考虑最后再叠加. 需要求$w\pare{t,x;\tau}$, 满足
+\[ w_{tt} - w_{xx} = 0,\quad w\vert^{t=\tau} = 0,\quad w_t\vert^{t=\tau} = f\pare{x}. \]
+设$\displaystyle \ket{w\pare{t}} = \sum_{n=1}^\infty T_n\ket{X_n}$, 相应的本征值$\lambda_n = n^2$, $n = 1,2,\cdots$. $\ket{X_n} = \sin n^2 x$, $T_n = C_n \cos \pare{n\pare{t-\tau}} + D_n \sin\pare{n\pare{t-\tau}}$.
+\par
+考虑一般的初始条件
+\[ w\pare{t=\tau} = \displaystyle \sum_{n=1}^\infty C_n\ket{X_n},\quad w_t\pare{t=\tau} = \displaystyle \sum_{n=1}^\infty nD_n\ket{X_n}. \]
+将$C_n$和$D_n$代入$w$的展开式, 可得
+\begin{align*}
+    \ket{w\pare{t}} &= \sum_{n=1}^\infty \frac{\ket{X_n}\bra{X_n}}{\bra{X_n}\ket{X_n}}\pare{\cos n\pare{t-\tau}\ket{e} + \frac{\sin n\pare{t-\tau}}{n}\ket{f}} \\
+    &= \mathbf{G}\pare{t,\tau} \ket{e} + \int_\tau^t \rd{t'}\, \mathbf{G}\pare{t',\tau}\ket{f}.
+\end{align*}
+令$e=0$, 设$\ket{f\pare{\tau}} = f\pare{\tau,x}$, 则
+\[ \ket{w\pare{t;\tau}} = \int_\tau^t \rd{t'}\,\mathbf{G}\pare{\sigma,\tau}\ket{f\pare{\tau}}. \]
+根据Duhamel原理, 非齐次方程加上零初始条件的解为
+\[ \int_{t_0}^t \rd{\tau}\,\ket{w\pare{t;\tau}} = \int_{t_0}^t\rd{\tau} \int_\tau^t \rd{t'} \mathbf{G}\pare{t';\tau}\ket{f\pare{\tau}}. \]
+再叠加初始条件即得到完整解
+\[ \ket{u\pare{t}} = \mathbf{G}\pare{t,t_0}\ket{\varphi} + \int_{t_0}^t \rd{t'}\, \mathbf{G}\pare{t',t_0}\ket{\psi} + \int_{t_0}^t \rd{\tau}\int_\tau^t \rd{t'}\, \mathbf{G}\pare{t',\tau} \ket{f\pare{\tau}}. \]
+
+% subsubsection 冲量法 (end)
+
+\begin{sample}
+    \begin{ex}
+        $\begin{cases}
+            u_{tt} - u_{xx} = f\pare{t,x},\quad t\ge t_0,\quad 0<x<\pi,\\
+            u\vert^{t=t_0} = \varphi\pare{x},\quad u_t\vert^{t=t_0}=\psi\pare{x}.
+        \end{cases}$假设$x=0$和$x=\pi$处有Dirichlet边界条件, 这一问题可分为若干部分.
+    \end{ex}
+\end{sample}
+
+\subsubsection{非齐次边界条件的初值问题} % (fold)
+\label{ssub:非齐次边界条件的初值问题}
+
+如果边界条件也是非齐次, 则可以使用叠加原理$u=v+w$, 其中$v$只需满足边界条件, 然后解$w$满足的非齐次方程的齐次边界问题.
+\[ \begin{aligned}
+    & Lw = f - Lv,\\
+    & w\pare{t=0} = u\pare{t=0} - v\pare{t=0},\\
+    & w_t\pare{t=0} = u_t\pare{t=0} - v_t\pare{t=0}.
+\end{aligned} \]
+$v$的选择有相当自由度, 可以尽量化简问题. 
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \begin{cases}
+            u_{tt} - u_{xx} = 0,\quad t > 0,\quad 0<x<1,\\
+            u\vert^{x=0} = 0,\quad u\vert^{x=1} = \sin \omega t,\\
+            u\vert^{t=0} = \varphi\pare{x},\quad u_t\vert^{t=0} = \psi\pare{x}.
+        \end{cases}$
+        选取$v=A\pare{t}x + B\pare{t}$, 容易发现$v\pare{x=0} = B = 0$, $v\pare{x=1} = A = \sin \omega t$. 从而
+        \[ w = u - v = u - x\sin\omega t. \]
+        得到
+        \[ w_{tt} - w_{xx} = \omega^2 x\sin \omega t,\quad t>0,\quad 0<x<1. \]
+        相应的初始条件为
+        \[ w\vert^{x=0} = 0 = w\vert^{x=L},\quad w\vert^{t=0} = \varphi\pare{x},\quad w_t\vert^{t=0} = \psi\pare{x} - \omega x. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 非齐次边界条件的初值问题 (end)
+
+\subsubsection{用广义Fourier展开解非齐次PDE} % (fold)
+\label{ssub:用广义fourier展开解非齐次pde}
+
+PDE两侧用SL问题的基展开, 比较系数得到ODE. 这适用于
+\[ \pare{L_x+L_y}u\pare{x,y} = f\pare{x,y} \]
+等问题. 首先应当选择$x$或$y$中一者作为SL问题, 其后
+\begin{align*}
+    & u\pare{x,y} = \sum_n Y_n\pare{y}X_n\pare{x},\quad \ket{u\pare{y}} = \sum_n Y_n\pare{y}\ket{X_n}, \\
+    & f\pare{x,y} = \sum_n f_n\pare{y}X_n\pare{x},\quad \ket{f\pare{y}} = \sum_n f_n\pare{y}\ket{X_n}.
+\end{align*}
+这要求$X_n$构成一组完备的基,
+\[ L_x X_n + \lambda_n X_n = 0 \Rightarrow \sum_n\pare{L_y - \lambda_n} Y_n \ket{X_n} = f_n\ket{X_n},\quad \pare{L_y - \lambda_n} Y_n = f_n. \]
+\par
+非齐次的边界条件一样可以做Fourier展开,
+\begin{align*}
+    & u\pare{y=0} = \sum_n Y_n\pare{0}X_n = \varphi = \sum_n \varphi_n X_n \Rightarrow Y_n\pare{0} = \varphi_n, \\
+    & u_y\pare{y=0} = \sum_n Y_n'\pare{L}X_n = \psi = \sum_n \psi_n X_n \Rightarrow Y_n'\pare{L} = \varphi_n.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        考虑圆环上的Dirichlet问题,
+        \[ \laplacian u = \rec{r^2}\pare{\partial_{\ln r}^2 + \partial_\theta^2} u = -f,\quad a<r<b. \]
+        其中$u\pare{r=a,\theta} = g\pare{\theta}$, $u_r\pare{r=b,\theta} = h\pare{\theta}$. 对齐次部分分离变量, 考虑$\theta$的SL问题, $\ket{c_n} = \cos n\theta$, $\ket{s_n} = \sin n\theta$, 从而
+        \begin{align*}
+            & u\pare{r,\theta} = u_0\pare{r} + \sum_{n=1}^\infty \brac{u_n\pare{r} \cos n\theta + \tilde{u}_n\pare{r}\sin n\theta}.
+        \end{align*}
+        对$f$展开, 有
+        \[ \ket{f} = f_0\pare{r}\ket{c_0} + \sum_{n=1}^\infty \brac{f_n\pare{r}\ket{c_n} + \tilde{f_n}\pare{r}\ket{s_n}}. \]
+        代入PDE, 有
+        \[ \pare{\partial^2_{\ln r} - n^2}u_n = -r^2f_n. \]
+        展开边界条件,
+        \begin{align*}
+            & \ket{g} = g_0\ket{c_0} + \sum_{n=1}^\infty \brac{g_n\ket{c_n} + \tilde{g}_n\ket{s_n}},\\
+            & \ket{h} = h_0\ket{c_0} + \sum_{n=1}^\infty \brac{h_n\ket{c_n} + \tilde{h}_n\ket{s_n}}.
+        \end{align*}
+        将$u$的展开代入边界条件,
+        \begin{align*}
+            & u_n\pare{a} = g_n,\quad u_n'\pare{b} = h_n, \\
+            & \tilde{u}_n\pare{a} = \tilde{g}_n,\quad \tilde{u}_n'\pare{b} = \tilde{h}_n.
+        \end{align*}
+        可解出每一个$u_n$, $\tilde{u}_n$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 用广义fourier展开解非齐次pde (end)
+
+% subsection 非齐次问题的一般思路与解法 (end)
+
+% section 分离变量法 (end)
+
+\end{document}

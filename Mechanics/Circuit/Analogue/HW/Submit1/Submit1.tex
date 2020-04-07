@@ -1,0 +1,72 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{1.2.1(1)}%
+$U = \boxed{10\sin\pare{6.28\times 10^4t}\SI{}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$U = \boxed{311\sin\pare{314t}\SI{}{\volt}.}$
+\par
+\newprobheader{(3)}%
+$U = \boxed{50\sin\pare{6.28\times 10^3 t}\SI{}{\milli\volt}.}$
+\par
+\newprobheader{(4)}%
+$U = \boxed{0.125\sin\pare{1000 t}\SI{}{\volt}.}$
+\newprob{1.4.1}%
+$\displaystyle A\+_\mathnormal{v}s_ = A_o \cdot \frac{R\+_i_}{R\+_i_ + R\+_si_} \cdot \frac{R\+_L_}{R\+_L_ + R\+_o_}$.
+\par
+\newprobheader{(1)}%
+$\displaystyle A\+_\mathnormal{v}s_ = 10\cdot \frac{10}{11}\cdot \frac{10}{11} = \boxed{8.26.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle A\+_\mathnormal{v}s_ = 10\cdot \frac{1}{2}\cdot \frac{1}{2} = \boxed{2.5.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle A\+_\mathnormal{v}s_ = 10\cdot \frac{0.1}{1+0.1}\cdot \frac{0.1}{1+0.1} = \boxed{0.0826.}$
+\par
+\newprobheader{(4)}%
+$\displaystyle A\+_\mathnormal{v}s_ = 10\cdot \frac{10}{11}\cdot \frac{0.1}{1+0.1} = \boxed{0.826.}$
+\newprob{1.5.1}%
+$\displaystyle A\+_\mathnormal{v}_ = \frac{\SI{1}{\volt}}{\SI{5}{\milli\volt}} = \boxed{200} \xrightarrow{20\log \abs{*}} \boxed{\SI{46.0}{\decibel}.}$ \\
+$\displaystyle A\+_\mathnormal{i}_ = \frac{\SI{1}{\volt}/\SI{2}{\kilo\ohm}}{\SI{5}{\micro\ampere}} = \boxed{100} \xrightarrow{20\log \abs{*}} \boxed{\SI{40.0}{\decibel}.}$\\
+$\displaystyle A_p = A_v \cdot A_i = \boxed{2\times 10^{4}} \xrightarrow{10\log \abs{*}} \boxed{\SI{43.0}{\decibel}.}$
+\newprob{1.5.2}%
+$\displaystyle \frac{R\+_L_}{R\+_L_ + R\+_o_} = 1-20\% \Rightarrow R\+_o_ = R\+_L_/4 = \boxed{\SI{0.25}{\kilo\ohm}.}$
+\newprob{1.5.7}%
+$\displaystyle \frac{A\+_\mathnormal{v}h_}{A\+_\mathnormal{v}m_} = 10^{-3/20} = \boxed{0.7079.}$
+\newprob{1.5.8}%
+通频带内$\abs{A\+_\mathnormal{v}m_} = \SI{40}{\decibel} \xrightarrow{10^{*/20}} 100$.
+\par
+\newprobheader{(1)}%
+$f = \SI{2e3}{\hertz}$在通频带内$\Rightarrow$不发生频率失真. 输出峰值$\SI{10}{\milli\volt}\times 100 = \boxed{\SI{1}{\volt}}<\SI{3}{\volt}\Rightarrow$不发生非线性失真.
+\par
+\newprobheader{(2)}%
+$f = \SI{2e4}{\hertz}$达到上限频率$\Rightarrow$发生频率失真. 输出峰值$\SI{40}{\milli\volt}\times 100\times 0.707 = \boxed{\SI{2.83}{\volt}}<\SI{3}{\volt}\Rightarrow$不发生非线性失真.
+\par
+\newprobheader{(2)}%
+$f = \SI{4e4}{\hertz}$超过上限频率$\Rightarrow$发生频率失真. 输出峰值$\SI{10}{\milli\volt}\times 100 = \SI{1}{\volt}<\SI{3}{\volt}\Rightarrow$不发生非线性失真.
+
+\end{document}

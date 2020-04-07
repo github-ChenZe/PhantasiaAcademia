@@ -1,0 +1,165 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+%\usepackage{xcolor, soul}
+%\sethlcolor{emphgreen}
+
+\begin{document}
+
+\section{半导体} % (fold)
+\label{sec:半导体}
+
+\subsection{半导体基础知识} % (fold)
+\label{sub:半导体基础知识}
+
+\newpoint{}半导体有由 \ce{Si}, \ce{Ge}, \ce{GeAs}构成的. 半导体导电能力介于导体和绝缘体之间, 导电能力对外界光或热刺激敏感. 半导体中掺入杂志则导电能力增加很多.
+\newpoint{}\ce{Si}和 \ce{Ge}都是四价元素, 形成的半导体具有晶体结构, 相邻原子之间形成共价键.
+\newpoint{}\gloss{本征半导体}谓完全纯净的, 结构完整的晶体. 不像绝缘体束缚那样紧. \hl{室温下随机热运动会使价电子脱离束缚成为导电的自由电子}, 谓\gloss{本征激发}. 激发后产生自由电子-空穴对. 数量相等. \hl{空穴的运动是靠相邻共价键中的价电子依次填充空穴实现的.} 空穴可以被认为是带正电的粒子, 在外电场的作用下可以自由在晶体中运动.
+\newpoint{}\gloss{P型半导体}谓在本征半导体中\hl{掺入三价元素杂质}者. 这引入很多空穴. 除此之外原来的本征激发还有少量的空穴-电子对. P型半导体中空穴数量远大于自由电子数, 谓多子. 空穴容易俘获电子, 使杂质原子变为负离子. 三价杂质谓受主杂质, 或P型杂质.
+\newpoint{}\gloss{N型半导体}谓在本征半导体中\hl{掺入五价元素杂质}者. 这引入很多自由电子. 除此之外原来的本征激发还有少量的空穴-电子对. N型半导体中电子数量远大于空穴数, 谓多子. 三价杂质谓施主杂质, 或N型杂质.
+
+% subsection 半导体基础知识 (end)
+
+\subsection{PN结} % (fold)
+\label{sub:pn结}
+
+\newpoint{}\gloss{PN结}由P型和N型材料构成. P型材料: 带负电的受主离子 + 带正电的空穴 + 少量的电子. N型材料: 带正电的施主离子 + 带负电的电子 + 少量的空穴.
+\newpoint{}\gloss{扩散运动}: 载流子浓度差异产生运动, 从而各自的电中性遭到破坏.
+\newpoint{}\gloss{空间电荷区(耗尽层)}: 不能移动的带电离子, 聚集在PN交界处, 形成空间电荷区, 即PN结, 谓耗尽区(因为扩散后复合消失). 
+\newpoint{}空间电荷区域内形成内电场, 由N区指向P区, 阻碍扩散运动.
+\newpoint{}\gloss{漂移运动}: 内电场同时会使N区少子空穴向P区漂移, P区少子电子向N区漂移. 漂移运动和扩散运动的结果相反, 使空间电荷区变窄.
+\newpoint{}多子扩散: 空间电荷区加宽, 内电场增强. 少子漂移: 空间电荷区变窄, 内电场减弱. 空间电荷区又谓势垒区, 因为电子从N区到P区, 空穴从P区到N区需克服势垒.
+\newpoint{}PN结具有单向导电性. 外加电压使P区中电压高于N区中电压, 则谓之加正向电压, 简称\gloss{正偏}. 反之谓加反向电压, 简称\gloss{反偏}.
+\newpoint{}\hl{PN结正偏: 外界电场与内电场方向相反}$\Rightarrow $\hl{PN结变窄}$\Rightarrow $\hl{PN结势垒降低}$\Rightarrow $\hl{扩散电流增大.}
+\newpoint{}正向电流$I_F$: 正偏时扩散电流远大于漂移电流, 在外电路中形成流入P区的电流.
+\newpoint{}$V_F$少许变化会引起$I_F$的巨大变化, PN结表现为一个很小的电阻.
+\newpoint{}\hl{PN结反偏: 外界电场与内电场方向相同}$\Rightarrow $\hl{PN结变宽}$\Rightarrow $\hl{PN结势垒增大}$\Rightarrow $\hl{扩散电流趋于零, 漂移电流占支配地位.}
+\newpoint{}反向电流$I_R$: 由少子漂移形成, 很微弱.
+\newpoint{}在一定温度条件下, 由本征激发决定的少子的浓度是一定的. 故少子形成的漂移电流时恒定的, 基本与所加的反向电压大小无关. 谓反向饱和电流$I_S$.
+\newpoint{}$I_S$通常很小, 此时PN结呈很大电阻, 和温度有关, 不能忽略.
+\newpoint{}PN结正向电阻很小, 反向电阻很大.
+\[ i_D = I_S\pare{e^{v_D/V_T} - 1}. \]
+其中$i_D$是通过PN结电流, $I_S$是反向饱和电流, $V_D$是PN两端外加电压, $V_T$是温度的电压当量. 常温下
+\[ V_T = \frac{kT}{q} = \SI{26}{\milli\volt}. \]
+\newpoint{}PN结的\gloss{反向击穿}: 当PN结的反向电压增加到一定数值时, 反向电流突然快速增加, 发生反向击穿. 电击穿分为:
+\begin{cenum}
+    \item \gloss{雪崩击穿}: 反向电压增大时, 空间电荷区电场增强, 区内的电子和空穴能量增大, 足以引起和晶体原子碰撞形成碰撞电离, 如此倍增.
+    \item \gloss{Zener击穿}: 强电场本身就能破坏共价键将束缚电子分离出来, 造成电子空穴对, 形成较大的反向电流.
+\end{cenum}
+电击穿可逆, 热击穿(热功耗过大导致烧坏)不可逆.
+\newpoint{}PN结中存在\gloss{扩散电容}$C_D$: 扩散运动时多数载流子穿过PN结, 在对方区域PN结附近有高于正常情况时的电荷累积, 存储电荷量的大小取决于PN结上所加正向电压值的大小. 离结越远, 空穴与电子复合, 浓度随之减小. 若外加正向电压有增量$\Delta V$, 则相应的空穴/电子的扩散运动在结附近产生电荷增量$\Delta Q$, 二者之比$\Delta Q/\Delta V$即为扩散电容$C_D$.
+\newpoint{}正偏时扩散电容较大, 反偏时载流子数量很少, 扩散电容很小, 一般可以忽略.
+\newpoint{}PN结中存在\gloss{势垒电容}$C_B$: 当PN结处于反向偏置时, 势垒区的厚度随反偏电压的大小而变化, 即势垒区内储存的正负离子电荷数随反偏电压的变化而变化, 类似于平行板电容两极板上的电荷变化. 此时PN结呈现的电容谓势垒电容$C_B$.
+\newpoint{}势垒电容是非线性的. 正偏时结电容较大, 主要取决于扩散电容. 反偏时结电容较小, 主要取决于势垒电容.
+
+% subsection pn结 (end)
+
+\subsection{二极管} % (fold)
+\label{sub:二极管}
+
+\newpoint{}分为\gloss{点接触型结构}和\gloss{面接触型结构}.
+\newpoint{}点接触型结面积小, 结电容小, 适合检波和高频电路.
+\newpoint{}面接触型结面积大, 适合工频大电流整流电路.
+\newpoint{}硅二极管开启电压$V\+_th_ = \SI{0.5}{\volt}$, 导通电压$\SI{0.7}{\volt}$. 锗二极管开启电压$V\+_th_ = \SI{0.1}{\volt}$, 导通电压$\SI{0.2}{\volt}$. 一般硅管反向电流远小于硅管.
+\[ i\+_D_ = I\+_S_\pare{e^{v_D}/v_T - 1}. \]
+\newpoint{}反向电压过大时硅引发反向击穿.
+\newpoint{}\gloss{最大整流电流} $I\+_F_$谓允许通过的最大正向平均电流.
+\newpoint{}\gloss{反向击穿电压} $V\+_BR_$是反向击穿时的电压值.
+\newpoint{}\gloss{反向电流} $I\+_R_$是未击穿时的反向电流.
+\newpoint{}\gloss{极间电容} $C\+_d_$, $C\+_B_$和$C\+_D_$.
+\newpoint{}\gloss{反向恢复时间} $T\+_RR_$从正向导通到反向截止的弛豫时间.
+\newpoint{}二极管属于非线性元件, 只能通过Kirchhoff电压/电流定律求解.
+
+\begin{sample}
+    \begin{ex}
+        已知二极管的$V$-$I$特性曲线, 电源$V\+_DD_$和电阻$R$, 求二极管两端电压$v\+_D_$和流过二极管的电流$i\+_D_$.
+    \end{ex}
+    \begin{solution}
+        作出斜率$-1/R$的负载线, $\displaystyle i\+_D_ = \frac{V\+_DD_ - v\+_D_}{R}$, 求出与二极管$V$-$I$特性曲线的交点, 所得$\pare{V\+_D_, I\+_D_}$即为其工作点.
+    \end{solution}
+\end{sample}
+\begin{remark}
+    例子中的电阻谓限流电阻. 斜率为$-1/R$的那条直线谓负载线. $Q$点谓电路的工作点.
+\end{remark}
+
+\subsubsection{特性建模} % (fold)
+\label{ssub:特性建模}
+
+\newpoint{理想模型} 正向通, 反向断. 正向偏压取零.
+\newpoint{恒压降模型} 硅管$\SI{0.7}{\volt}$, 锗管$\SI{0.2}{\volt}$.
+\newpoint{折线模型} $r\+_D_\approx \SI{200}{\ohm}$, $V = V\+_th_$.
+\newpoint{小信号模型} 小信号模型下, $i\+_D_ = -\rec{R} v_D + \rec{R}\pare{V\+_DD_ + v_s}$. $Q$点处的微变电导/电阻
+\[ g\+_d_ \approx \frac{I\+_D_}{V_T},\quad r_d = \frac{V_T}{I\+_D_},\quad \text{室温}\ V_T = \SI{26}{\milli\volt}. \]
+交流通路二极管可等效为$r\+_d_$阻值的电阻.
+\begin{sample}
+    \begin{ex}
+        $V\+_DD_ = \SI{10}{\volt}$, $R = \SI{10}{\kilo\ohm}$, 则理想模型
+        \[ I\+_D_ = \frac{V\+_DD_}{R} = \SI{1}{\milli\volt}. \]
+        恒压模型
+        \[ I\+_D_ = \frac{V\+_DD_-V_D}{R} = \SI{0.93}{\milli\volt}. \]
+        折线模型
+        \[ I\+_D_ = \frac{V\+_DD_-V\+_th_}{R+r\+_D_} = \SI{0.931}{\milli\volt}. \]
+    \end{ex}
+\end{sample}
+\newpoint{}当电源电压远大于管压降, 用恒压降可获得准确结果, 否则需要用折线模型.
+\begin{sample}
+    \begin{ex}
+        限幅电路中取$R=\SI{1}{\kilo\volt}$, $V\+_REF_ = \SI{3}{\volt}$, 理想模型和恒压降模型分别给出$\SI{3}{\volt}$和$\SI{3.7}{\volt}$上限.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+    开关电路的真值表如下.\\[1em]
+        \centerline{\begin{tabular}{ccc}
+        $v\+_i1_$ & $v\+_i2_$ & $v\+_o_$ \\
+        $\SI{0}{\volt}$ & $\SI{0}{\volt}$ & $\SI{0}{\volt}$ \\
+        $\SI{0}{\volt}$ & $\SI{5}{\volt}$ & $\SI{0}{\volt}$ \\
+        $\SI{5}{\volt}$ & $\SI{0}{\volt}$ & $\SI{0}{\volt}$ \\
+        $\SI{5}{\volt}$ & $\SI{5}{\volt}$ & $\SI{5}{\volt}$
+    \end{tabular}}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        取$v\+_DD_ = \SI{5}{\volt}$, $R = \SI{5}{\kilo\volt}$, 恒压降模型的$V\+_D_ = \SI{0.7}{\volt}$, $v_s = 0.1\sin \omega t\,\SI{}{\volt}$, 则绘出直流通路和交流通路后
+        \[ v\+_O_ = V\+_o_ + v\+_o_ = 4.3 + 0.0994\sin\omega t\,\SI{}{\volt}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        如图, 若二极管截止, 则$A$处电压$\SI{-12}{\volt}$, 二极管必须导通.
+    \end{ex}
+\end{sample}
+
+% subsubsection 特性建模 (end)
+
+\subsubsection{稳压二极管} % (fold)
+\label{ssub:稳压二极管}
+
+\newpoint{}稳压二极管工作在反向点击穿状态.
+\newpoint{}\gloss{稳定电压} $V\+_Z_$: 在规定的稳压管的反向工作电流$I\+_Z_$下, 对应的反向工作电压.
+\newpoint{}\gloss{动态电阻} $r\+_Z_ = \Delta V\+_Z_ / \Delta I\+_Z_$.
+\newpoint{}\gloss{最大耗散功率} $P\+_ZM_$.
+\newpoint{}\gloss{最大稳定工作电流} $I\+_Zmax_$和最小稳定工作电流$I\+_Zmin_$.
+\begin{sample}
+    \begin{ex}
+        取$V\+_I_ = \SI{12}{\volt}\sim \SI{13.6}{\volt}$, 负载最大功率$\SI{0.5}{\watt}$, $V\+_Z_ = \SI{9}{\volt}$, $I\+_Z_ = \SI{5}{\milli\ampere}\sim \SI{56}{\milli\ampere}$, 最大耗散功率$\SI{1}{\watt}$, 求限流电阻, 并分析是否能正常工作.
+    \end{ex}
+    \begin{solution}
+        $I\+_L_ \le \SI{56}{\milli\volt}$. $\displaystyle \frac{V\+_Imin_ - \SI{9}{\volt}}{R} \ge \SI{56}{\milli\ampere} + \SI{5}{\milli\ampere}\Rightarrow R \le \SI{50}{\ohm}$.\\
+        设$R = \SI{51}{\ohm}$, 取$I\+_L_ = 0$, 此时有最大功率$P = I_RV_Z = \SI{0.81}{\watt} < \SI{1}{\watt}$, 未超过额定功率.\\
+        检查$R$的功率要求, $P_R = V_R^2/R$最大为$\SI{0.4}{\watt}$.\\
+        当$V\+_I_$最大, 空载时, 所有电流流过$D_Z$, 此时
+        \[ I\+_Zmax_ = \frac{V\+_Imax_ - V\+_Z_}{R} = \SI{88}{\milli\ampere}. \]
+        因此击穿范围不够, 需要选用$\SI{100}{\milli\ampere}$的稳压管.\\
+        设稳压管动态电阻$\SI{1}{\ohm}$, 则$I\+_Z_$的变化会导致$V\+_Z_$的波动, 波动量约为$\SI{88}{\milli\ampere}$, 则电压稳压系数为$\SI{0.088}{\volt}/\SI{9}{\volt} = 0.9\%$.
+    \end{solution}
+\end{sample}
+
+% subsubsection 稳压二极管 (end)
+
+% subsection 二极管 (end)
+
+% section 半导体 (end)
+
+\end{document}

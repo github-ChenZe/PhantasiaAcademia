@@ -1,0 +1,198 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+
+\begin{document}
+
+\newprob{1.3 (1)}%
+\mbox{$\displaystyle \frac{\displaystyle x\pare{x-\half }\pare{x-1}}{\displaystyle -1\pare{-1-\half }\pare{-1-1}}\times 3 + \frac{\displaystyle \pare{x+1}\pare{x-\half}\pare{x-1}}{\displaystyle \pare{0+1}\pare{0-\half}\pare{0-1}}\times \pare{-\half} + 0 + \frac{\displaystyle \pare{x+1}x\pare{x-\half}}{\displaystyle \pare{1+1}1\pare{1-\half}}\times 1$}\\
+$\displaystyle = \boxed{-{x\pare{x-\half}\pare{x-1}} - \pare{x+1}\pare{x-\half}\pare{x-1} + {\pare{x+1}x\pare{x-\half}}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \frac{\displaystyle x\pare{x-2}\pare{x-3}}{\displaystyle -1\pare{-1-2}\pare{-1-3}}\times 2 + 0 + \frac{\displaystyle \pare{x+1}x\pare{x-3}}{\displaystyle \pare{2+1}2\pare{2-3}}\times 1 + \frac{\displaystyle \pare{x+1}x\pare{x-2}}{\displaystyle \pare{3+1}3\pare{3-2}}\times 3$\\
+$\displaystyle = \boxed{-\rec{6}x\pare{x-2}\pare{x-3} - \rec{6}\pare{x+1}x\pare{x-3} + \rec{4}\pare{x+1}x\pare{x-2}.}$
+\newprob{1.5}%
+\mbox{$\displaystyle P = \frac{\pare{x-100}\pare{x-121}}{\pare{81-100}\pare{81-121}}\times 9 + \frac{\pare{x-81}\pare{x-121}}{\pare{100-81}\pare{100-121}}\times 10 + \frac{\pare{x-81}\pare{x-100}}{\pare{121-81}\pare{121-100}}\times 11$}\\
+$\displaystyle = \frac{9}{760}\pare{x-100}\pare{x-121} -\frac{10}{399}\pare{x-81}\pare{x-121} + \frac{11}{840}\pare{x-81}\pare{x-100}.$
+当$x=105$, 可得$\boxed{P = 10.24812.}$ 实际值$\sqrt{105} = 10.24695$, 实际误差$\boxed{1.17\times 10^{-3}.}$ 估计误差\\
+$\displaystyle R = \frac{f'''\pare{\xi}}{3!}\pare{x-x_0}\pare{x-x_1}\pare{x-x_2}$\\
+$\displaystyle = \frac{3}{8}\xi^{-5/2}\cdot \rec{6}\pare{105-81}\pare{105-100}\pare{105-121} = \boxed{-2.03\times 10^{-3}.}$
+\newprob{1.8}%
+$\abs{f''\pare{\xi}}$有上界$1$, $\displaystyle R = \frac{f''\pare{\xi}}{2!}\pare{x-x_{j}}\pare{x-x_{j+1}} \le \frac{h^2}{8}$. 要求$R \le 0.5\times 10^{-5}$, 有$h\le \boxed{6.32\times 10^{-3}.}$
+\newprob{1.9}%
+$\displaystyle f\brac{2^0,2^1} = \frac{f\pare{2}-f\pare{1}}{2-1} = \boxed{-2089.}$\\
+$\deg f = 7$, 故$\displaystyle f\brac{2^0,2^1,\cdots,2^7} = a_7 = \boxed{1.}$\\
+$\displaystyle f\brac{2^0,2^1,\cdots,2^8} = \boxed{0.}$
+\newprob{1.13}%
+设$s_0$, $s_1$, $s_2$和$\tilde{s}_2$是满足如下条件的三次多项式:
+\[ \begin{cases}
+    s_0\pare{0} = 1, \\
+    s_0\pare{1} = 0, \\
+    s_0\pare{3} = 0, \\
+    s'_0\pare{3} = 0,
+\end{cases}\quad \begin{cases}
+    s_1\pare{0} = 0, \\
+    s_1\pare{1} = 1, \\
+    s_1\pare{3} = 0, \\
+    s'_1\pare{3} = 0,
+\end{cases}\quad \begin{cases}
+    s_2\pare{0} = 0, \\
+    s_2\pare{1} = 0, \\
+    s_2\pare{3} = 1, \\
+    s'_2\pare{3} = 0,
+\end{cases}\quad \begin{cases}
+    \tilde{s}_2\pare{0} = 0, \\
+    \tilde{s}_2\pare{1} = 0, \\
+    \tilde{s}_2\pare{3} = 0, \\
+    \tilde{s}'_2\pare{3} = 1.
+\end{cases} \]
+从而
+\begin{align*}
+    & s_0\pare{x} = A_0\pare{x-1}\pare{x-3}^2 = -\rec{9}\pare{x-1}\pare{x-3}^2, \\
+    & s_1\pare{x} = A_1x\pare{x-3}^2 = \rec{4}x\pare{x-3}^2, \\
+    & s_2\pare{x} = x\pare{x-1}\pare{A_2x + B_2} = x\pare{x-1}\pare{-\frac{5x}{36} + \frac{7}{12}}, \\
+    & \tilde{s}_2\pare{x} = x\pare{x-1}\pare{\tilde{A}_2x + \tilde{B}_2} = x\pare{x-1}\pare{\frac{x}{6} - \rec{2}}.
+\end{align*}
+故
+\begin{equation*}
+    \boxed{p\pare{x} = \begin{cases}
+        \displaystyle -\rec{9}\pare{x-1}\pare{x-3}^2f\pare{0} \\[.5em]
+        \displaystyle +\rec{4}x\pare{x-3}^2f\pare{1} \\[.5em]
+        \displaystyle + x\pare{x-1}\pare{-\frac{5x}{36} + \frac{7}{12}} f\pare{3} \\[.5em]
+        \displaystyle + x\pare{x-1}\pare{\frac{x}{6} - \rec{2}} f'\pare{3}.
+    \end{cases}}
+\end{equation*}
+对于给定的$x\in \pare{0,3}$, $x\neq 1$, 记
+\[ g\pare{t} = f\pare{t} - p\pare{t} - \brac{f\pare{x} - g\pare{x}} \cdot \frac{{t}\pare{t-1}\pare{t-3}^2}{{x}\pare{x-1}\pare{x-3}^2}, \]
+则$g$在$\brac{0,3}$上有至少$\curb{0,1,3,x}$四个不同零点, $x=3$处为两重零点. 故$g'$在$\brac{0,3}$上有至少四个不同零点, 故存在某处$\xi$使$g''''\pare{\xi} = 0$. 此处$p''''\pare{\xi} = 0$, 故
+\[ 0 = f''''\pare{\xi} - \brac{f\pare{x} - g\pare{x}}\cdot \frac{4!}{x\pare{x-1}\pare{x-3}^2}. \]
+从而误差
+\[ \boxed{R\pare{x} = \frac{f''''\pare{\xi}}{4!}x\pare{x-1}\pare{x-3}^2.} \]
+\par
+\newprobheader{Newton}%
+差商表如下,
+\[ \begin{aligned}
+    & f\brac{x_0} && f\brac{x_0,x_1} && f\brac{x_0,x_1,x_2} && f\brac{x_0,x_1,x_2,x_3} \\
+    & f\pare{0} && f\pare{1} - f\pare{0} && \frac{f\pare{3}}{6} - \frac{f\pare{1}}{2} + \frac{f\pare{0}}{3} && \frac{f'\pare{3}}{6} - \frac{5f\pare{3}}{36}+\frac{f\pare{1}}{4} - \frac{f\pare{0}}{9}. \\
+    & f\pare{1} && \frac{f\pare{3} - f\pare{1}}{2} && \frac{f'\pare{3}}{2} - \frac{f\pare{3}}{4} + \frac{f\pare{1}}{4} \\
+    & f\pare{3} && f'\pare{3} \\
+    & f\pare{3}
+\end{aligned} \]
+故可构造多项式
+\[ p\pare{x} = \begin{cases}
+    \displaystyle f\pare{0} + \brac{f\pare{1} - f\pare{0}}x + \brac{\frac{f\pare{3}}{6} - \frac{f\pare{1}}{2} + \frac{f\pare{0}}{3}}x\pare{x-1} \\[.5em]
+    \displaystyle + \brac{\frac{f'\pare{3}}{6} - \frac{5f\pare{3}}{36}+\frac{f\pare{1}}{4} - \frac{f\pare{0}}{9}}x\pare{x-1}\pare{x-3}.
+\end{cases} \]
+\newprob{1.15}%
+设$s_0$, $s_1$, $\tilde{s}_0$,$\tilde{s}_1$和$\tilde{\tilde{s}}_1$是满足如下条件的四次多项式:
+\[ \begin{cases}
+    s_0\pare{1} = 1, \\
+    s_0\pare{2} = 0, \\
+    s'_0\pare{1} = 0, \\
+    s'_0\pare{2} = 0, \\
+    s''_0\pare{2} = 0,
+\end{cases}\quad \begin{cases}
+    s_1\pare{1} = 0, \\
+    s_1\pare{2} = 1, \\
+    s'_1\pare{1} = 0, \\
+    s'_1\pare{2} = 0, \\
+    s''_1\pare{2} = 0,
+\end{cases}\quad \begin{cases}
+    \tilde{s}_0\pare{1} = 0, \\
+    \tilde{s}_0\pare{2} = 0, \\
+    \tilde{s}'_0\pare{1} = 1, \\
+    \tilde{s}'_0\pare{2} = 0, \\
+    \tilde{s}''_0\pare{2} = 0,
+\end{cases}\quad \begin{cases}
+    \tilde{s}_1\pare{1} = 0, \\
+    \tilde{s}_1\pare{2} = 0, \\
+    \tilde{s}'_1\pare{1} = 0, \\
+    \tilde{s}'_1\pare{2} = 1, \\
+    \tilde{s}''_1\pare{2} = 0,
+\end{cases}\quad \begin{cases}
+    \tilde{\tilde{s}}_1\pare{1} = 0, \\
+    \tilde{\tilde{s}}_1\pare{2} = 0, \\
+    \tilde{\tilde{s}}'_1\pare{1} = 0, \\
+    \tilde{\tilde{s}}'_1\pare{2} = 0, \\
+    \tilde{\tilde{s}}''_1\pare{2} = 1.
+\end{cases} \]
+从而
+\begin{align*}
+    & s_0\pare{x} = -\pare{x-2}^3\pare{1+A_0\pare{x-1}} = -\pare{x-2}^3\brac{1+3\pare{x-1}}, \\
+    & s_1\pare{x} = \pare{x-1}^2\brac{1+\pare{x-1}\pare{A_1x+B_1}} = \pare{x-1}^2\brac{1+\pare{x-1}\pare{3x - 8}}, \\
+    & \tilde{s}_0\pare{x} = \tilde{A}_0\pare{x-2}^3\pare{x-1} = -\pare{x-2}^3\pare{x-1}, \\
+    & \tilde{s}_1\pare{x} = \pare{x-1}^2\pare{x-2}\pare{\tilde{A}_1 x + \tilde{B}_1} = \pare{x-1}^2\pare{x-2}\pare{-2 x + 5}, \\
+    & \tilde{\tilde{s}}_1 = \tilde{\tilde{A}}_1 \pare{x-1}^2\pare{x-2}^2 = \half \pare{x-1}^2\pare{x-2}^2.
+\end{align*}
+故所求
+\begin{equation*}
+    \boxed{p\pare{x} = \begin{cases}
+        \displaystyle -\half\pare{x-2}^3\brac{1+3\pare{x-1}} \\[.5em]
+        \displaystyle +\pare{x-1}^2\brac{1+\pare{x-1}\pare{3x - 8}} \\[.5em]
+        \displaystyle -\half \pare{x-2}^3\pare{x-1} \\[.5em]
+        \displaystyle -\pare{x-1}^2\pare{x-2}\pare{-2 x + 5} \\[.5em]
+        \displaystyle + \half \pare{x-1}^2\pare{x-2}^2.
+    \end{cases}}
+\end{equation*}
+对于给定的$x\in \pare{1,2}$, 记
+\[ g\pare{t} = f\pare{t} - p\pare{t} - \brac{f\pare{x} - g\pare{x}} \cdot \frac{\pare{t-1}^2\pare{t-2}^3}{\pare{x-1}^2\pare{x-2}^3}, \]
+则$g$在$\brac{0,3}$上有至少$\curb{1,2,x}$三个不同零点, $x=1$处为两重零点, $x=2$处为三重零点. 故$g'$在$\brac{1,2}$上有至少四个不同零点, 且$x=1$处为一重零点, $x=2$处为两重零点. 故$g''$在$\brac{1,2}$上有至少四个不同零点. 故存在某处$\xi$使$g'''''\pare{\xi} = 0$. 此处$p'''''\pare{\xi} = 0$, 故
+\[ 0 = f'''''\pare{\xi} - \brac{f\pare{x} - g\pare{x}}\cdot \frac{5!}{\pare{x-1}^2\pare{x-2}^3}. \]
+从而误差
+\[ \boxed{R\pare{x} = \frac{f'''''\pare{\xi}}{5!}\pare{x-1}^2\pare{x-3}^3.} \]
+\par
+\newprobheader{Newton}%
+差商表如下,
+\[ \begin{aligned}
+    & f\brac{x_0} && f\brac{x_0,x_1} && f\brac{x_0,x_1,x_2} && f\brac{x_0,x_1,x_2,x_3} && f\brac{x_0,x_1,x_2,x_3,x_4} \\
+    & f\pare{1} = \half && f'\pare{1} = \half && \half - \half = 0 && -\frac{3}{2} && 2+\frac{3}{2} = \frac{7}{2}. \\
+    & f\pare{1} && f\pare{2} - f\pare{1} = \half && -1-\half = -\frac{3}{2} && \half + \frac{3}{2} = 2 \\
+    & f\pare{2} = 1 && f'\pare{2} = -1 && \frac{f''\pare{2}}{2!} = \half && \\
+    & f\pare{2} && f'\pare{2}  \\
+    & f\pare{2}
+\end{aligned} \]
+故可构造多项式
+\[ p\pare{x} = \half + \half\pare{x-1} - \frac{3}{2}\pare{x-1}^2\pare{x-2} + \frac{7}{2}\pare{x-1}^2\pare{x-2}^2. \]
+
+\end{document}

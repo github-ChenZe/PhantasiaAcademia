@@ -1,0 +1,165 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\DeclareMathOperator{\fl}{fl}
+\usepackage{stmaryrd}
+
+\begin{document}
+
+\subsubsection*{配置} % (fold)
+\label{ssub:配置}
+
+\noindent
+张梦萍 63601855 mpzhang@ustc.edu.cn 管科楼1227\\
+40学时, 2学分, 每周五上午3, 4, 5.\\
+参考书张韵华《数值计算方法与算法》, 以及Numerical Analysis, Burden.
+
+% subsubsection 配置 (end)
+
+\section{计算机中实数的表示与误差} % (fold)
+\label{sec:计算机中实数的表示与误差}
+
+\subsection{计算机中实数的表示} % (fold)
+\label{sub:计算机中实数的表示}
+
+\newpoint{}由实数$y$可得到其计算机表示$\fl\pare{y}$. 对于64位精度者, 大约$10^{-308}$以下视为零, 大于$10^{308}$视为$\infty$.
+\newpoint{}实数的浮点表示可写为
+\[ \fl\pare{y} = 0.d_1d_2\cdots d_k\times 10^{n}. \]
+\newpoint{}实数转化为机器数可以使用截断法(chopping), 记作$\fl_c\pare{y}$, 或舍入法(rounding), 记作$\fl_r\pare{y}$.
+\begin{ex}
+    $\pi = 3.14159265\cdots$表示为
+    \[ \pi = 0.314159265\cdots\times 10^1. \]
+    在$5$个十进制位精度下,
+    \[ \fl_c\pare{\pi} = 0.31415 \times 10^1,\quad \fl_r\pare{\pi} = 0.31416 \times 10^1. \]
+\end{ex}
+\begin{remark}
+    $\fl$通常默认为$\fl_r$.
+\end{remark}
+
+% subsection 计算机中实数的表示 (end)
+
+\subsection{误差} % (fold)
+\label{sub:误差}
+
+舍入误差谓用实数的$k$位十进制浮点形式代替改实数导致的误差.
+\begin{definition}
+    若$p^*$是$p$的一个近似, 则其绝对误差为$\abs{p-p^*}$. 若$p\neq 0$, 则其相对误差为$\abs{p-p^*}/\abs{p}$.
+\end{definition}
+\begin{ex}
+    \label{ex:相对误差}
+    对于相同的相对误差, 绝对误差可以有很大变化.\\[1em]
+    \centerline{\begin{tabular}{|c|c|c|c|}
+        \hline
+        $p$ & $p^*$ & $\abs{p-p^*}$ & $\abs{p-p^*}/\abs{p}$ \\
+        \hline
+        $3 = 0.3000 \times 10^1$ & $0.3100\times 10^1$ & $0.1\times 10^0$ & $0.333\overbar{3}\times 10^{-1}$ \\
+        \hline
+        $0.0003 = 0.3000 \times 10^{-3}$ & $0.3100\times 10^{-3}$ & $0.1\times 10^{-3}$ & $0.333\overbar{3}\times 10^{-1}$ \\
+        \hline
+        $3000 = 0.3000 \times 10^{4}$ & $0.3100\times 10^{4}$ & $0.1\times 10^{3}$ & $0.333\overbar{3}\times 10^{-1}$ \\
+        \hline
+    \end{tabular}}
+\end{ex}
+\begin{definition}
+    若$t$是满足$\abs{p-p^*}/\abs{p} < 5\times 10^{-t}$的最大整数, 则$p^*$是$p$的$t$位有效数字近似.
+\end{definition}
+\begin{ex}
+    $\abs{p-p^*}/\abs{p} = 0.333\overbar{3}\times 10^{-1} < 5\times 10^{-2}$, 故\cref{ex:相对误差}中的$p^*$为两位有效数字近似,
+\end{ex}
+\newpoint{}实数$y$与其$k$位表示$\fl_k\pare{y}$之间的相对误差为
+\[ \frac{\abs{y - \fl_c\pare{y}}}{\abs{y}} = \abs{\frac{0.d_{k+1}\cdots \times 10^{-k}\times 10^n}{0.d_1\cdots d_k\cdots \times 10^n}} < 10^{1-k}. \]
+如果采用舍入法,
+\[ \frac{\abs{y - \fl_c\pare{y}}}{\abs{y}} < \frac{0.5\times 10^{-k}}{0.1} = 0.5\times 10^{1-k}. \]
+
+% subsection 误差 (end)
+
+\subsection{数值运算及其误差} % (fold)
+\label{sub:数值运算及其误差}
+
+计算机中的数值运算按照有限位数字运行,
+\begin{ex}
+    对于$x = 5/7 = 0.714285714\cdots$, $y = 1/3 = 0.333333\cdots$, 四则运算结果如下.\\[1em]
+    \centerline{\begin{tabular}{|c|c|c|c|c|}
+        \hline
+        运算 & 结果 & 精确值 & 绝对误差 & 相对误差 \\
+        \hline
+        $x\oplus y$ & $0.10476\times 10^1$ & $22/21$ & $0.190\times 10^{-4}$ & $0.182\times 10^{-4}$\\
+        \hline
+        $x\ominus y$ & $0.38095\times 10^0$ & $8/21$ & $0.238\times 10^{-5}$ & $0.625\times 10^{-5}$\\
+        \hline
+        $x\otimes y$ & $0.23809\times 10^0$ & $5/21$ & $0.524\times 10^{-5}$ & $0.220\times 10^{-4}$\\
+        \hline
+        $x\varoslash y$ & $0.21428\times 10^1$ & $15/21$ & $0.571\times 10^{-4}$ & $0.267\times 10^{-4}$\\
+        \hline
+    \end{tabular}}
+    令$u=0.714251$, $v = 98765.9$, $w = 0.111111\times 10^{-4}$, 其中$u$与$x$接近, $w$极小, $v$极大, 则部分运算结果如下.\\[1em]
+    \centerline{\begin{tabular}{|c|c|c|c|c|}
+        \hline
+        运算 & 结果 & 精确值 & 绝对误差 & 相对误差 \\
+        \hline
+        $x\ominus u$ & $0.30000\times 10^{-4}$ & $0.37417\times 10^{-4}$ & $0.471\times 10^{-4}$ & $0.136$\\
+        \hline
+        $\pare{x\ominus u}\varoslash w$ & $0.29629\times 10^1$ & $0.34285\times 10^1$ & $0.465$ & $0.136$\\
+        \hline
+        $\pare{x\ominus u}\otimes v$ & $0.29629\times 10^1$ & $0.34285\times 10^1$ & $0.465$ & $0.136$\\
+        \hline
+        $u\oplus v$ & $0.98765\times 10^5$ & $0.98766\times 10^5$ & $0.161\times 10^{1}$ & $0.163\times 10^{-4}$\\
+        \hline
+    \end{tabular}}
+\end{ex}
+\newpoint{}两个相近的数相减会引发大的相对误差.
+\newpoint{}除以一个绝对值小的数, 或乘以一个绝对值大的数, 会引发大的绝对误差和大的相对误差.
+\newpoint{}小数加大数会引发大的绝对误差.
+\begin{ex}
+    求$x^2+bx+c = 0$的根, 有$\displaystyle x_{1,2} = \frac{-b\pm \sqrt{b^2 - 4c}}{2}$, 取$b=62.10 = 0.621\times 10^2$, $c = 1 = 0.1\times 10^1$, $d=\sqrt{b^2 - 4c}$, 则有根
+    \[ x_1 = -0.0160723\cdots,\quad x_2 = -62.08390\cdots. \]
+    浮点计算之结果为
+    \[ \fl\pare{d} = \fl\pare{\sqrt{\fl\pare{\fl\pare{b}\fl\pare{b} - \fl\pare{4}\fl\pare{c}}}} = 0.6206\times 10^2. \]
+    从而
+    \[ \fl\pare{x_1} = \fl\pare{\frac{-0.6210\times 10^2 \pm 0.6206\times 10^2}{0.2000\times 10^2}} = \curb{0.2000\times 10^{-1}, -0.6210\times 10^2}. \]
+    相对误差为
+    \[ \abs{\frac{x_1 - \fl\pare{x_1}}{x_1}} \approx 2.4\times 10^{-1},\quad \abs{\frac{x_2 - \fl\pare{x_2}}{x_2}} \approx 3.4\times 10^{-4}. \]
+    $x_1$的大误差源于两个相近的数相减. 将$x_1$的公式修改为
+    \[ x_1 = \frac{-2c}{b + \sqrt{b^2 - 4c}}, \]
+    可得$\fl\pare{x_1} = -0.1610\times 10^{-1}$, 相对误差
+    \[ \abs{\frac{x_1 - \fl\pare{x_1}}{x_1}} \approx 4.489\times 10^{-4}. \]
+\end{ex}
+\begin{ex}
+    取$p = 0.54617$, $q = 0.54601$, $p-q = 0.00016$. 舍入法和截断法所得的绝对误差分别为
+    \begin{align*}
+        \abs{\frac{s - \fl_r\pare{s}}{s}} &= 0.25, \\
+        \abs{\frac{s - \fl_c\pare{s}}{s}} &= 0.375.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    分别用$3$为数字的舍入法与砍去法案下面函数$f\pare{x}$的两种形式计算$f\pare{4.71}$的近似值. 精确值$f\pare{4.71} = -14.263899$. \\[1em]
+    \centerline{
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        & $x$ & $x^2$ & $x^3$ & $6.1x^2$ & $3.2x$ \\
+        \hline
+        精确值 & 4.71 & 22.1841 & 104.48487111 & 135.32301 & 15.072 \\
+        \hline
+        截断 & 4.71 & 22.1 & 104. & 135. & 15.0 \\
+        \hline
+        舍入 & 4.71 & 22.2 & 105. & 135. & 15.1 \\
+        \hline
+    \end{tabular}
+    } 
+    $f\pare{x} = x^3 - 6.1x^2 + 3.2x + 1.5$, 可得$\fl_c = -14.5$, 相对误差$0.01655$, $\fl_r = -13.4$, 相对误差$0.006$.
+    \par
+    若使用$f\pare{x} = \pare{\pare{x-6.1}x + 3.2}x + 1.5$则可显著减少运算次数, $\fl_c = -14.2$, 相对误差$0.0045$, $\fl_r = -14.3$, 相对误差$0.0025$.
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+参考书2: p.28 13, 14, p.30 28
+
+% paragraph 作业 (end)
+
+% subsection 数值运算及其误差 (end)
+
+% section 计算机中实数的表示与误差 (end)
+
+\end{document}

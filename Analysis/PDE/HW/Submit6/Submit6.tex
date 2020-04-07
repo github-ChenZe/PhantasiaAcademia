@@ -1,0 +1,122 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{3.2}%
+设$\displaystyle y = x^\rho \sum_{n=0}^\infty a_n x^n$, 则$xy'' + \pare{1-x}y' + \lambda y = 0$蕴含
+\[ \begin{cases}
+    a_0 \rho^2 = 0, \\
+    a_1\pare{1+\rho}^2 = a_0\pare{\rho - \lambda}, \\
+    \displaystyle a_{n+1} = \frac{\rho + n - \lambda}{\pare{\rho + n + 1}^2} a_n
+\end{cases} \Rightarrow \begin{cases}
+    \rho = 0, \\
+    \displaystyle a_{n+1} = \frac{n-\lambda}{\pare{n+1}^2}a_n, & n = 0, 1, 2, \cdots.
+\end{cases} \]
+从而
+\[ \boxed{y = a_0 \sum_{n=0}^\infty \frac{\pare{n-1-\lambda} \cdots \pare{0-\lambda}}{\pare{n!}^2}x^n.\quad \text{($n=0$时系数为$a_0$)}} \]
+特别地, 当$\lambda = N \in \+bN$时, $y$为多项式. 此时
+\[ y = a_0 \sum_{n=0}^N \frac{\pare{-1}^n}{n!}\binom{N}{n} x^n. \]
+\newprob{3.3}%
+由奇偶性知$n$为偶数时$P'_{n}\pare{0} = 0$,\\
+若$n=2m-1$为奇数则
+\begin{align*}
+    P'_{n}\pare{0} &= \left.\rec{n!2^n} \+d{x^{n+1}}d{^{n+1}}\pare{x^2-1}^n\right\vert_{x=0} \\
+    &= \frac{\pare{n+1}!}{n!2^n}\pare{-1}^{m-1}\binom{n}{m} \\
+    &= \pare{-1}^{m-1} \frac{n!!}{\pare{n-1}!!}.
+\end{align*}
+故
+\[ \boxed{P'_{n}\pare{0} = \begin{cases}
+    0, & n = 2m, \\
+    \displaystyle \pare{-1}^{m} \frac{n!!}{\pare{n-1}!!}, & n=2m+1.
+\end{cases}} \]
+由$nP_{n}\pare{x} - xP'_n\pare{x} + P'_{n-1}\pare{x} = 0$知$\displaystyle P_n\pare{0} = -\frac{P'_{n-1}\pare{0}}{n}$.
+\[ \boxed{P_{n}\pare{0} = \begin{cases}
+    \displaystyle \pare{-1}^{m} \frac{\pare{n-1}!!}{n!!}, & n = 2m,\quad \text{(取$\pare{-1}!! = 1$)} \\
+    0, & n=2m+1.
+\end{cases}} \]
+\newprob{3.4 (1)}%
+记$\displaystyle I_{m,n} = \int_{-1}^1 x^m P_n\pare{x}\,\rd{x}$, 则
+\begin{align*}
+    \int_{-1}^1 x^m P_n\pare{x}\,\rd{x} &= \int_{-1}^1 x^m \cdot \frac{xP'_n\pare{x} - P'_{n-1}\pare{x}}{n}\,\rd{x} \\
+    &= -\int_{-1}^1 \frac{\pare{m+1}x^m P_n\pare{x} - mx^{m-1}P_{n-1}\pare{x}}{n}\,\rd{x},\\
+    \Rightarrow \frac{n+m+1}{n}I_{m,n} &= \frac{m}{n} I_{m-1,n-1}, \\
+    \Rightarrow I_{m,n} &= \frac{m}{n+m+1}I_{m-1,n-1}.
+\end{align*}
+若$m \ge n$, 且$m$和$n$的奇偶性相同, 则
+\[ I_{m,n} = \frac{m!}{\pare{m-n}!}\frac{\pare{m-n+1}!!}{\pare{m+n+1}!!} I_{m-n,0} = \boxed{\frac{2\pare{m!}}{\pare{m-n}!!\pare{m+n+1}!!}.} \]
+若$m<n$或$m$和$n$的奇偶性不同, 则$I_{m,n} = \boxed{0.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle I_{m,n} = \int_{-1}^1 xP_m\pare{x}P_n\pare{x}\,\rd{x} = \int_{-1}^1 \frac{\pare{n+1}P_{n+1}\pare{x} + nP_{n-1}\pare{x}}{2n+1}P_m\pare{x}\,\rd{x}$.\\
+若$n=m+1$, 则
+\[ I_{m,n} = \int_{-1}^1 \frac{nP_m^2\pare{x}}{\pare{2n+1}}\,\rd{x} = \frac{2n}{\pare{2n+1}\pare{2n-1}}. \]
+从而
+\[ I_{m,n} = \boxed{\begin{cases}
+    \displaystyle \frac{2n}{\pare{2n+1}\pare{2n-1}}, & n = m+1, \\[.5em]
+    \displaystyle \frac{2m}{\pare{2m+1}\pare{2m-1}}, & m = n+1, \\
+    \displaystyle 0, & \mathrm{otherwise}.
+\end{cases}.} \]
+\par
+\newprobheader{(3)}%
+$\displaystyle \int_{-1}^1 \pare{1-x^2}\brac{P'_n\pare{x}}^2\,\rd{x} = \int_{-1}^1 \pare{1-x^2}P'_n\pare{x}\,\rd{P_n\pare{x}}$\\[.5em]
+$\displaystyle = -\int_{-1}^1 P_n\pare{x}\brac{\pare{1-x^2}P'_n\pare{x}}'\,\rd{x} = \int_{-1}^1 P_n\pare{x} n\pare{n+1}P_n\pare{x}\,\rd{x} = \boxed{\frac{2n\pare{n+1}}{2n+1}.}$
+\newprob{3.5 (1)}
+$\displaystyle f\pare{x} = \frac{x}{2} + \frac{\abs{x}}{2}$, 从而由(3)的结论,
+\[ f\pare{x} = \boxed{\rec{4} + \frac{P_1\pare{x}}{2} + \sum_{n=2,4,\cdots}  \pare{-1}^{n/2+1} \frac{2n+1}{2} \frac{\pare{n-3}!!}{\pare{n+2}!!} P_n\pare{x}.}\quad \text{(其中$\pare{-1}!!=1$)} \]
+\par
+\newprobheader{(3)}%
+只需考虑偶数阶的展开, $\displaystyle \abs{x} = \sum_{n=0,2,4,\cdots} A_n P_n\pare{x}$. 对于满足$n\ge 2$的偶数$n$, 有
+\begin{align*}
+    \int_0^1 xP_n\pare{x}\,\rd{x} &= \rec{n+2}\int_0^1 P_{n-1}\pare{x}\,\rd{x} = \rec{n+2}\frac{P_{n-2}\pare{0} - P_n\pare{0}}{2n-1} \\
+    &= -\rec{\pare{n+2}\pare{2n-1}}\frac{2n-1}{n-1}P_n\pare{0}\\
+    & = -\rec{\pare{n+2}\pare{2n-1}}\frac{2n-1}{n-1}\pare{-1}^{n/2} \frac{\pare{n-1}!!}{n!!} \\
+    &= -\pare{-1}^{n/2}\frac{\pare{n-3}!!}{\pare{n+2}!!}.\\
+    A_n = \frac{\displaystyle \int_{-1}^1 \abs{x}P_n\pare{x}\,\rd{x}}{\displaystyle \int_{-1}^1 P_n\pare{x}P_n\pare{x}\,\rd{x}} &= -\pare{-1}^{n/2} \pare{2n+1} \frac{\pare{n-3}!!}{\pare{n+2}!!},\quad n \ge 2,\quad n = 2m,\\
+    A_0 = \frac{\displaystyle \int_{-1}^1 \abs{x}\,\rd{x}}{2} &= \half.
+\end{align*}
+故
+\[ f\pare{x} = \boxed{\half + \sum_{n=2,4,\cdots}  \pare{-1}^{n/2+1} \pare{2n+1} \frac{\pare{n-3}!!}{\pare{n+2}!!} P_n\pare{x}.}\quad \text{(其中$\pare{-1}!!=1$)} \]
+
+\end{document}

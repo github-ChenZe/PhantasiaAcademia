@@ -1,0 +1,130 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{1.7}%
+\vspace{-1.5\baselineskip}%
+\begin{flalign*}
+&\+D{t^2}D{^2 u} = a^2 \+D{x^2}D{^2 u}, && 0 < x < l,\quad t>0, && && \\
+&u\pare{t, 0} = u\pare{t,l} = 0, && && \\
+&u\pare{0,x} = h\pare{1-\abs{\frac{2x}{l} - 1}}, && 0 < x < l, && && \\
+&\left.\+D{t}D{u\pare{t,x}}\right\vert_{t=0} = 0, && 0 < x < l. && &&
+\end{flalign*}%
+\vspace{-1.5\baselineskip}%
+\newprob{1.12 (1)}%
+特征方程为\vspace{-\baselineskip}
+\begin{align*}
+    & \frac{\rd{x}}{y+z} = \frac{\rd{y}}{z+x} = \frac{\rd{z}}{x+y} \Rightarrow \begin{cases}
+    \pare{x+y}\displaystyle \+dzdx = y+z, \\[1em]
+    \pare{x+y}\displaystyle \+dzdy = x+z 
+    \end{cases} \xLongrightarrow{s=x+y} s\+dzds = s+2z \\
+    & \Rightarrow s^3\pare{1-\frac{2z}{s}}^2\pare{1+\frac{z}{s}} = \const \Rightarrow \pare{x+y-2z}^2\pare{x+y+z} = \const.
+\end{align*}
+\makebox[0pt][l]{故可以取}\centerline{ $\displaystyle \xi_1 = \pare{x+y-2z}^2\pare{x+y+z}.$ }
+\makebox[0pt][l]{同理(由轮换对称)取}\centerline{ $\xi_2 = \pare{z+x-2y}^2\pare{x+y+z}.$ }
+故(其中$\Phi$取任意一次可微函数)
+\[ u = u\pare{\xi_1,\xi_2} = \boxed{\Phi\brac{\pare{x+y-2z}^2\pare{x+y+z},\pare{z+x-2y}^2\pare{x+y+z}}.} \]
+\par
+\newprobheader{(2)}%
+\makebox[0pt][l]{特征方程为}\centerline{%
+$\displaystyle \frac{\rd{x}}{y} + \frac{\rd{y}}{x} = 0 \Rightarrow x^2 + y^2 = \const \Rightarrow \xi_1 = x^2 + y^2.$ }
+取$\displaystyle \xi_2 = x^2 - y^2$, 则原方程变为
+\[ 2\sqrt{\xi_1^2 - \xi_2^2}\+D{\xi_2}D{u} = \xi_2 \Rightarrow u = -\frac{\sqrt{\xi_1^2 - \xi_2^2}}{2} + \Phi\pare{\xi_1} = \boxed{-xy+\Phi\pare{x^2+y^2}.} \]
+其中$\Phi$是任意一次可微函数.
+\newprob{1.13 (1)}%
+特征方程为\vspace{-.5\baselineskip}
+\[ \frac{\rd{x}}{\sqrt{x}} = \frac{\rd{y}}{\sqrt{y}} = \frac{\rd{z}}{\sqrt{z}} \Rightarrow \begin{cases}
+    \sqrt{y} - \sqrt{x} = C_1, \\
+    \sqrt{z} - \sqrt{y} = C_2
+\end{cases} \Rightarrow u = \Phi\pare{\sqrt{y} - \sqrt{x},\sqrt{z} - \sqrt{y}}. \]
+代入$x=1$处的边界条件,
+\[ u\vert_{x=1} = y - z = \left. \brac{\pare{\sqrt{y}-\sqrt{x}+1}^2 - \pare{\sqrt{z} - \sqrt{y} + \sqrt{y}-\sqrt{x}+1}^2 }\right\vert_{x=1}. \]
+\makebox[0pt][l]{从而}\centerline{$\displaystyle \boxed{u = \pare{\sqrt{y}-\sqrt{x}+1}^2 - \pare{\sqrt{z} - \sqrt{x} + 1}^2.}$}
+
+\newprob{1.14 (1)}%
+直接对$t$积分即有$\displaystyle u = x^2 + \int_0^t x^2 \,\rd{t'} = \boxed{\pare{1+t}x^2.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle u_t - au_x = 0 \Rightarrow \xi = t + \frac{x}{a} \Rightarrow u = \Phi\pare{t+\frac{x}{a}} \xLongrightarrow{u|_{t=0} = x^2} \boxed{u=\pare{x+at}^2.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle u = F\pare{x+at} + G\pare{x-at}$,\\
+\makebox[0pt][r]{i.\ }%
+$\displaystyle \begin{array}[t]{ll}
+    x=0: & F\pare{at} + G\pare{-at} = f\pare{t}, \\
+    x=at: & G\pare{0} + F\pare{2x} = \varphi\pare{x},
+\end{array}$\vspace{-.5\baselineskip}
+\begin{flalign*}
+    \Rightarrow u &= \underbrace{F\pare{x+at} + G\pare{0}} + \underbrace{G\pare{x-at} + F\pare{at-x}} + \underbrace{-G\pare{0} - F\pare{at-x}} && \\
+    & = \boxed{\varphi\pare{\frac{x+at}{2}} + f\pare{t-\frac{x}{a}} - \varphi\pare{\frac{at-x}{2}}.} &&
+\end{flalign*}
+\makebox[0pt][r]{ii.\ }%
+$\displaystyle \begin{array}[t]{ll}
+    x=0: & F'\pare{at} + G'\pare{-at} = f\pare{t} \\ & \xLongrightarrow[\+sF\pare{t} = \int_0^t f\pare{t'}\,\rd{t'}]{\int_0^t \rd{t'}} F\pare{at} - G\pare{-at} - F\pare{0} + G\pare{0} = a\+sF\pare{t}, \\
+    x=at: & G\pare{0} + F\pare{2x} = \varphi\pare{x},
+\end{array}$\vspace{-.5\baselineskip}
+\begin{flalign*}
+    \Rightarrow u &= \underbrace{F\pare{x+at} + G\pare{0}} + 
+                     \underbrace{F\pare{at-x} + G\pare{0}} + \\
+                &\phantom{=\ }
+                     \underbrace{G\pare{x-at} + F\pare{at-x} + F\pare{0} - G\pare{0}} + 
+                     \underbrace{-F\pare{0} - G\pare{0}} && \\
+    &= \boxed{\varphi\pare{\frac{x+at}{2}} + \varphi\pare{\frac{at-x}{2}} - a\int_0^{t-\frac{x}{a}} f\pare{t'}\,\rd{t'} - \varphi\pare{0}.} &&
+\end{flalign*}
+\newprob{15}%
+对$\varphi$和$\psi$做奇延拓后即有$\displaystyle u = \frac{\varphi\pare{x-at}+\varphi\pare{x+at}}{2} + \rec{2a} \int_{x-at}^{x+at} \psi\pare{x'}\,\rd{x'}$.\\
+\makebox[0pt][r]{i.\ }%
+$\varphi\pare{x} = \sin x$, $\psi\pare{x} = kx$本身两者皆为奇函数, 从而
+\[ u = \frac{\sin\pare{x-at} + \sin\pare{x+at}}{2} + \rec{2a}\cdot k \cdot \frac{\pare{x+at}^2 - \pare{x-at}^2}{2} = \boxed{\sin x\cos at + kxt.} \]
+\makebox[0pt][r]{ii.\ }%
+$\varphi\pare{x} = \cos x$需要奇延拓为$\varphi\pare{x} = \cos^* x = \sgn x \cdot \cos x$, $\psi\pare{x} = kx$,
+\begin{align*}
+    u &= \frac{\cos^*\pare{x+at} + \cos^*\pare{x-at}}{2} + kxt \\
+      &= \boxed{\begin{cases}
+          \cos x \cos at + kxt, & x-at > 0, \\
+          -\sin x \sin at + kxt, & x-at < 0.
+      \end{cases}}
+\end{align*}
+\end{document}

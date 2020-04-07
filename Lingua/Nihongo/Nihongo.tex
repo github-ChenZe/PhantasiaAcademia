@@ -1,0 +1,256 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc,singleton,epu]{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usepackage{pxrubrica}
+
+\def\katanode#1#2#3#4#5#6{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#2) {\Large #3};
+    \draw (#2.corner 1) node[below left] {\small\textsf{\phantom{Hj}#4}};
+    \draw (#2.corner 2) node[below right] {\footnotesize\color{lightgray}\textit{#5}};
+    \draw (#2.side 3) node[above] {\footnotesize \color{lightgray} #6};
+}
+
+\def\hiranode#1#2#3#4#5#6{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=yellow!80!black, line width=0.4mm, fill=yellow!45!white, #1, inner sep=-2mm](#2) {\Large #3};
+    \draw (#2.corner 1) node[below left] {\small\textsf{\phantom{Hj}#4}};
+    \draw (#2.corner 2) node[below right] {\footnotesize\color{lightgray}\textit{#5}};
+    \draw (#2.side 3) node[above] {\footnotesize \color{lightgray} #6};
+}
+
+\begin{document}
+
+\showtitle{日本語·落書き}
+\newpoint{}シ(shi), ツ(tsu)
+\newpoint{}ソ(so), ン(n)
+\newpoint{}タ(ta), ク(ku), ケ(ke)
+\newpoint{}ワ(wa), ウ(u), フ(fu)
+\newpoint{}ハ(ha), ヘ(he)
+\newpoint{}レ(片仮名, re), し(平仮名, shi)
+\newpoint{}じょしゅ
+\newpoint{}である
+\newpoint{}ぜろ
+\newpoint{}ティーナも\ruby[g]{禁止}{きんし}
+\newpoint{}\ruby[g]{棄却}{ききゃく}
+\newpoint{}\ruby[g]{却下}{きゃっか}
+\newpoint{}\ruby[g]{意味}{いみ}
+\newpoint{}\ruby[g]{帰無仮説}{きむかせつ}
+\newpoint{}あーもう
+\newpoint{}ごめんなさい
+\newpoint{}すみません
+\newpoint{}\ruby[g]{違}{ちが}う
+\newpoint{}\ruby[g]{違}{ちが}い
+\newpoint{}である: to be
+\newpoint{}\ruby[g]{抱}{だ}っこ
+\newpoint{}\ruby[g]{別}{べつ}に
+\begin{figure}
+    \centering
+    \vspace{-2cm}
+    \begin{tikzpicture}
+        \katanode{}{kataA}{ア}{a}{阿}{アンペア};
+        \katanode{right=2mm of kataA}{kataI}{イ}{i}{伊}{イリノイ};
+        \katanode{right=2mm of kataI}{kataU}{ウ}{u}{宇}{ウィキ};
+        \katanode{right=2mm of kataU}{kataE}{エ}{e}{江}{エラー};
+        \katanode{right=2mm of kataE}{kataO}{オ}{o}{於}{オイラー};
+        %
+        \katanode{below=2mm of kataA}{kataKA}{カ}{ka}{加}{カルシウム};
+        \katanode{below=2mm of kataI}{kataKI}{キ}{ki}{機}{キログラム};
+        \katanode{below=2mm of kataU}{kataKU}{ク}{ku}{久}{クローム};
+        \katanode{below=2mm of kataE}{kataKE}{ケ}{ke}{介}{ケルビン};
+        \katanode{below=2mm of kataO}{kataKO}{コ}{ko}{己}{コーヒー};
+        \katanode{right=2mm of kataKO}{kataKYA}{キャ}{kya}{}{キャンベラ};
+        \katanode{right=2mm of kataKYA}{kataKYU}{キュ}{kyu}{}{キューバ};
+        \katanode{right=2mm of kataKYU}{kataKYO}{キョ}{kyo}{}{キョ県};
+        %
+        \katanode{below=2mm of kataKA}{kataSA}{サ}{sa}{散}{サンセリフ};
+        \katanode{below=2mm of kataKI}{kataSHI}{シ}{shi}{之}{シドニー};
+        \katanode{below=2mm of kataKU}{kataSU}{ス}{su}{須}{スーパー};
+        \katanode{below=2mm of kataKE}{kataSE}{セ}{se}{世}{セカント};
+        \katanode{below=2mm of kataKO}{kataSO}{ソ}{so}{曾}{ソフィスト};
+        \katanode{below=2mm of kataKYA}{kataSHA}{シャ}{sha}{}{シャープ};
+        \katanode{below=2mm of kataKYU}{kataSHU}{シュ}{shu}{}{シュメール};
+        \katanode{below=2mm of kataKYO}{kataSHO}{ショ}{sho}{}{ショック};
+        %
+        \katanode{below=2mm of kataSA}{kataTA}{タ}{ta}{多}{タイム};
+        \katanode{below=2mm of kataSHI}{kataCHI}{チ}{chi}{千}{チェコ};
+        \katanode{below=2mm of kataSU}{kataTSU}{ツ}{tsu}{川}{ツバル};
+        \katanode{below=2mm of kataSE}{kataTE}{テ}{te}{天}{テレビ};
+        \katanode{below=2mm of kataSO}{kataTO}{ト}{to}{止}{トルコ};
+        \katanode{below=2mm of kataSHA}{kataCHA}{チャ}{cha}{}{チャンネル};
+        \katanode{below=2mm of kataSHU}{kataCHU}{チュ}{chu}{}{チュニジア};
+        \katanode{below=2mm of kataSHO}{kataCHO}{チョ}{cho}{}{チョウ目};
+        %
+        \katanode{below=2mm of kataTA}{kataNA}{ナ}{na}{奈}{ナトリウム};
+        \katanode{below=2mm of kataCHI}{kataNI}{ニ}{ni}{仁}{ニコン};
+        \katanode{below=2mm of kataTSU}{kataNU}{ヌ}{nu}{奴}{ヌルハチ};
+        \katanode{below=2mm of kataTE}{kataNE}{ネ}{ne}{祢}{ネオン};
+        \katanode{below=2mm of kataTO}{kataNO}{ノ}{no}{乃}{ノルウェー};
+        \katanode{below=2mm of kataCHA}{kataNYA}{ニャ}{nya}{}{ニャン};
+        \katanode{below=2mm of kataCHU}{kataNYU}{ニュ}{nyu}{}{ニュー};
+        \katanode{below=2mm of kataCHO}{kataNYO}{ニョ}{nyo}{}{ニョルズ};
+        %
+        \katanode{below=2mm of kataNA}{kataHA}{ハ}{ha}{八}{ハンケル};
+        \katanode{below=2mm of kataNI}{kataHI}{ヒ}{hi}{比}{ヒルベルト};
+        \katanode{below=2mm of kataNU}{kataFU}{フ}{fu}{不}{フーリエ};
+        \katanode{below=2mm of kataNE}{kataHE}{ヘ}{he}{部}{ヘンリー};
+        \katanode{below=2mm of kataNO}{kataHO}{ホ}{ho}{保}{ホンコン};
+        \katanode{below=2mm of kataNYA}{kataHYA}{ヒャ}{hya}{}{ヒャルマル};
+        \katanode{below=2mm of kataNYU}{kataHYU}{ヒュ}{hyu}{}{ヒューマン};
+        \katanode{below=2mm of kataNYO}{kataHYO}{ヒョ}{hyo}{}{ヒョウタン};
+        %
+        \katanode{below=2mm of kataHA}{kataMA}{マ}{ma}{末}{マリア};
+        \katanode{below=2mm of kataHI}{kataMI}{ミ}{mi}{三}{ミシガン};
+        \katanode{below=2mm of kataFU}{kataMU}{ム}{mu}{牟}{ムンバイ};
+        \katanode{below=2mm of kataHE}{kataME}{メ}{me}{女}{メタン};
+        \katanode{below=2mm of kataHO}{kataMO}{モ}{mo}{毛}{モービル};
+        \katanode{below=2mm of kataHYA}{kataMYA}{ミャ}{mya}{}{ミャンマー};
+        \katanode{below=2mm of kataHYU}{kataMYU}{ミュ}{myu}{}{ミュンヘン};
+        \katanode{below=2mm of kataHYO}{kataMYO}{ミョ}{myo}{}{ミョウバン};
+        %
+        \katanode{below=2mm of kataMA}{kataYA}{ヤ}{ya}{也}{ヤコビ};
+        \katanode{below=2mm of kataMU}{kataYU}{ユ}{yu}{由}{ユダヤ人};
+        \katanode{below=2mm of kataMO}{kataYO}{ヨ}{yo}{與}{ヨーロッパ};
+        %
+        \katanode{below=2mm of kataYA}{kataRA}{ラ}{ra}{良}{ラジアン};
+        \katanode{right=2mm of kataRA}{kataRI}{リ}{ri}{利}{リチウム};
+        \katanode{right=2mm of kataRI}{kataRU}{ル}{ru}{流}{ルビー};
+        \katanode{right=2mm of kataRU}{kataRE}{レ}{re}{礼}{レバノン};
+        \katanode{right=2mm of kataRE}{kataRO}{ロ}{ro}{呂}{ローマ};
+        \katanode{right=2mm of kataRO}{kataRYA}{リャ}{rya}{}{リャネス};
+        \katanode{right=2mm of kataRYA}{kataRYU}{リュ}{ryu}{}{リュート};
+        \katanode{right=2mm of kataRYU}{kataRYO}{リョ}{ryo}{}{リョクトウ};
+        %
+        \katanode{below=2mm of kataRA}{kataWA}{ワ}{wa}{和}{ワシントン};
+        \katanode{below=2mm of kataRO}{kataWO}{ヲ}{wo}{乎}{ヲシテ};
+        %
+        \katanode{below=2mm of kataWA}{kataFA}{ファ}{fa}{}{ファティマ};
+        \katanode{right=2mm of kataFA}{kataFI}{フィ}{fi}{}{フィンガー};
+        \katanode{below=2mm of kataWO}{kataFO}{フォ}{fo}{}{フォアグラ};
+        \katanode{left=2mm of kataFO}{kataFE}{フェ}{fe}{}{フェイリス};
+        %
+        \katanode{below=2mm of kataFA}{kataTSA}{ツァ}{tsa}{}{ツァーリ};
+        \katanode{right=2mm of kataTSA}{kataTI}{ティ}{ti}{}{ティムール};
+        \katanode{right=2mm of kataTI}{kataTU}{トゥ}{tu}{}{トゥヴァ};
+        %
+        \katanode{below right=2mm of kataTU}{kataWE}{ウェ}{we}{}{ウェールズ};
+        \katanode{right=2mm of kataWE}{kataWO}{ウォ}{wo}{}{ウォッカ};
+        %
+        \katanode{below=22mm of kataTSA}{kataN}{ン}{n}{尓}{ンジャメナ};
+        %
+    \end{tikzpicture}
+\end{figure}
+\begin{figure}
+    \centering
+    \vspace{-2cm}
+    \begin{tikzpicture}
+        \hiranode{}{hiraA}{あ}{a}{阿}{あまね};
+        \hiranode{right=2mm of hiraA}{hiraI}{い}{i}{伊}{いたる};
+        \hiranode{right=2mm of hiraI}{hiraU}{う}{u}{宇}{うるしばら};
+        \hiranode{right=2mm of hiraU}{hiraE}{え}{e}{江}{えいち};
+        \hiranode{right=2mm of hiraE}{hiraO}{お}{o}{於}{おかべ};
+        %
+        \hiranode{below=2mm of hiraA}{hiraKA}{か}{ka}{加}{かんそく};
+        \hiranode{below=2mm of hiraI}{hiraKI}{き}{ki}{機}{きりゅ};
+        \hiranode{below=2mm of hiraU}{hiraKU}{く}{ku}{久}{くりす};
+        \hiranode{below=2mm of hiraE}{hiraKE}{け}{ke}{介}{けしき};
+        \hiranode{below=2mm of hiraO}{hiraKO}{コ}{ko}{己}{コーヒー};
+        \hiranode{right=2mm of hiraKO}{hiraKYA}{キャ}{kya}{}{キャンベラ};
+        \hiranode{right=2mm of hiraKYA}{hiraKYU}{キュ}{kyu}{}{キューバ};
+        \hiranode{right=2mm of hiraKYU}{hiraKYO}{きょ}{kyo}{}{きょうま};
+        %
+        \hiranode{below=2mm of hiraKA}{hiraSA}{サ}{sa}{散}{サンセリフ};
+        \hiranode{below=2mm of hiraKI}{hiraSHI}{し}{shi}{之}{しいな};
+        \hiranode{below=2mm of hiraKU}{hiraSU}{す}{su}{須}{すずは};
+        \hiranode{below=2mm of hiraKE}{hiraSE}{せ}{se}{世}{せかいせん};
+        \hiranode{below=2mm of hiraKO}{hiraSO}{ソ}{so}{曾}{ソフィスト};
+        \hiranode{below=2mm of hiraKYA}{hiraSHA}{シャ}{sha}{}{シャープ};
+        \hiranode{below=2mm of hiraKYU}{hiraSHU}{しゅ}{shu}{}{しゅうそく};
+        \hiranode{below=2mm of hiraKYO}{hiraSHO}{ショ}{sho}{}{ショック};
+        %
+        \hiranode{below=2mm of hiraSA}{hiraTA}{タ}{ta}{多}{タイム};
+        \hiranode{below=2mm of hiraSHI}{hiraCHI}{チ}{chi}{千}{チェコ};
+        \hiranode{below=2mm of hiraSU}{hiraTSU}{ツ}{tsu}{川}{ツバル};
+        \hiranode{below=2mm of hiraSE}{hiraTE}{て}{te}{天}{てんのうじ};
+        \hiranode{below=2mm of hiraSO}{hiraTO}{ト}{to}{止}{トルコ};
+        \hiranode{below=2mm of hiraSHA}{hiraCHA}{チャ}{cha}{}{チャンネル};
+        \hiranode{below=2mm of hiraSHU}{hiraCHU}{チュ}{chu}{}{チュニジア};
+        \hiranode{below=2mm of hiraSHO}{hiraCHO}{チョ}{cho}{}{チョウ目};
+        %
+        \hiranode{below=2mm of hiraTA}{hiraNA}{な}{na}{奈}{なえ};
+        \hiranode{below=2mm of hiraCHI}{hiraNI}{ニ}{ni}{仁}{ニコン};
+        \hiranode{below=2mm of hiraTSU}{hiraNU}{ぬ}{nu}{奴}{ぬるぽ};
+        \hiranode{below=2mm of hiraTE}{hiraNE}{ネ}{ne}{祢}{ネオン};
+        \hiranode{below=2mm of hiraTO}{hiraNO}{ノ}{no}{乃}{ノルウェー};
+        \hiranode{below=2mm of hiraCHA}{hiraNYA}{ニャ}{nya}{}{ニャン};
+        \hiranode{below=2mm of hiraCHU}{hiraNYU}{ニュ}{nyu}{}{ニュー};
+        \hiranode{below=2mm of hiraCHO}{hiraNYO}{ニョ}{nyo}{}{ニョルズ};
+        %
+        \hiranode{below=2mm of hiraNA}{hiraHA}{は}{ha}{八}{はしだ};
+        \hiranode{below=2mm of hiraNI}{hiraHI}{ヒ}{hi}{比}{ヒルベルト};
+        \hiranode{below=2mm of hiraNU}{hiraFU}{フ}{fu}{不}{フーリエ};
+        \hiranode{below=2mm of hiraNE}{hiraHE}{ヘ}{he}{部}{ヘンリー};
+        \hiranode{below=2mm of hiraNO}{hiraHO}{ほ}{ho}{保}{ほうおう};
+        \hiranode{below=2mm of hiraNYA}{hiraHYA}{ヒャ}{hya}{}{ヒャルマル};
+        \hiranode{below=2mm of hiraNYU}{hiraHYU}{ヒュ}{hyu}{}{ヒューマン};
+        \hiranode{below=2mm of hiraNYO}{hiraHYO}{ヒョ}{hyo}{}{ヒョウタン};
+        %
+        \hiranode{below=2mm of hiraHA}{hiraMA}{ま}{ma}{末}{まきせ};
+        \hiranode{below=2mm of hiraHI}{hiraMI}{ミ}{mi}{三}{ミシガン};
+        \hiranode{below=2mm of hiraFU}{hiraMU}{ム}{mu}{牟}{ムンバイ};
+        \hiranode{below=2mm of hiraHE}{hiraME}{メ}{me}{女}{メタン};
+        \hiranode{below=2mm of hiraHO}{hiraMO}{モ}{mo}{毛}{もえか};
+        \hiranode{below=2mm of hiraHYA}{hiraMYA}{ミャ}{mya}{}{ミャンマー};
+        \hiranode{below=2mm of hiraHYU}{hiraMYU}{ミュ}{myu}{}{ミュンヘン};
+        \hiranode{below=2mm of hiraHYO}{hiraMYO}{ミョ}{myo}{}{ミョウバン};
+        %
+        \hiranode{below=2mm of hiraMA}{hiraYA}{ヤ}{ya}{也}{ヤコビ};
+        \hiranode{below=2mm of hiraMU}{hiraYU}{ゆ}{yu}{由}{ゆうご};
+        \hiranode{below=2mm of hiraMO}{hiraYO}{ヨ}{yo}{與}{ヨーロッパ};
+        %
+        \hiranode{below=2mm of hiraYA}{hiraRA}{ラ}{ra}{良}{ラジアン};
+        \hiranode{right=2mm of hiraRA}{hiraRI}{り}{ri}{利}{りんたろう};
+        \hiranode{right=2mm of hiraRI}{hiraRU}{る}{ru}{流}{るか};
+        \hiranode{right=2mm of hiraRU}{hiraRE}{レ}{re}{礼}{レバノン};
+        \hiranode{right=2mm of hiraRE}{hiraRO}{ロ}{ro}{呂}{ローマ};
+        \hiranode{right=2mm of hiraRO}{hiraRYA}{リャ}{rya}{}{リャネス};
+        \hiranode{right=2mm of hiraRYA}{hiraRYU}{リュ}{ryu}{}{リュート};
+        \hiranode{right=2mm of hiraRYU}{hiraRYO}{リョ}{ryo}{}{リョクトウ};
+        %
+        \hiranode{below=2mm of hiraRA}{hiraWA}{ワ}{wa}{和}{ワシントン};
+        \hiranode{below=2mm of hiraRO}{hiraWO}{ヲ}{wo}{乎}{ヲシテ};
+        %
+        \hiranode{below=2mm of hiraWA}{hiraFA}{ファ}{fa}{}{ファティマ};
+        \hiranode{right=2mm of hiraFA}{hiraFI}{フィ}{fi}{}{フィンガー};
+        \hiranode{below=2mm of hiraWO}{hiraFO}{フォ}{fo}{}{フォアグラ};
+        \hiranode{left=2mm of hiraFO}{hiraFE}{フェ}{fe}{}{フェイリス};
+        %
+        \hiranode{below=2mm of hiraFA}{hiraTSA}{ツァ}{tsa}{}{ツァーリ};
+        \hiranode{right=2mm of hiraTSA}{hiraTI}{ティ}{ti}{}{ティムール};
+        \hiranode{right=2mm of hiraTI}{hiraTU}{トゥ}{tu}{}{トゥヴァ};
+        %
+        \hiranode{below right=2mm of hiraTU}{hiraWE}{ウェ}{we}{}{ウェールズ};
+        \hiranode{right=2mm of hiraWE}{hiraWO}{ウォ}{wo}{}{ウォッカ};
+        %
+        \hiranode{below=22mm of hiraTSA}{hiraN}{ン}{n}{尓}{ンジャメナ};
+        %
+    \end{tikzpicture}
+\end{figure}
+\newpoint{}ストラテジー(Strategy)
+\newpoint{}かいせきがくの『らりるれろ』
+\newpoint{}ら: Likewise
+\newpoint{}り: Leaving to the reader
+\newpoint{}る: Lebesgue (ルベーグ)
+\newpoint{}れ: Reference に
+\newpoint{}ろ: L'Hopital
+%解析学の『らりるれろ』
+%ら　likewise
+%り　leaving to the reader
+%る　ルベーグ
+%レ　reference に
+%ロ　ロビトル
+
+\end{document}

@@ -1,8 +1,11 @@
-\documentclass{ctexart}
+\documentclass[20pt]{extarticle}
 
-\usepackage[margintoc]{van-de-la-sehen}
+\usepackage[margin=1mm]{geometry}
+\usepackage{ctex}
+\usepackage{van-de-la-sehen}
 \DeclareMathOperator{\cond}{cond}
 \usepackage{arydshln}
+\pagenumbering{gobble}
 
 \begin{document}
 
@@ -901,63 +904,6 @@ end
 \end{matlablst}
 
 % subsubsection 广义最小余项 (end)
-
-\subsubsection{非线性最小二乘} % (fold)
-\label{ssub:非线性最小二乘}
-
-\paragraph{Gau\ss-Newton方法} % (fold)
-\label{par:gauss_newton方法}
-
-欲使
-\begin{align*}
-    r_1\pare{x_1,\cdots,x_n} &= 0, \\
-    & \vdots \\
-    r_m\pare{x_1,\cdots,x_n} &= 0.
-\end{align*}
-的误差平方和最小, 令$F\pare{x} = r\pare{x}^TDr\pare{x} = 0$即可. 为了使用Newton方法, 以$H_{r_i}$表示$r_i$的Hesse矩阵,
-\[ DF\pare{x}^T = \pare{Dr}^T \cdot Dr + \sum_{i=1}^m r_i H_{r_i}. \]
-扔掉部分项以得到Gau\ss-Newton方法.
-\begin{matlablst}
-/@$x_0$@/ = 初始向量
-for k = 0, 1, 2, ...
-    /@$A$@/ = /@$Dr\pare{x^k}$@/
-    /@$A^TAv^k$@/ = /@$-A^Tr\pare{x^k}$@/
-    /@$x^{k+1}$@/ = /@$x^k$@/ + /@$v^k$@/
-end
-\end{matlablst}
-
-% paragraph gauss_newton方法 (end)
-
-\paragraph{非线性参数模型} % (fold)
-\label{par:非线性参数模型}
-
-令$\pare{t_1,y_1}$, $\cdots$, $\pare{t_m,y_m}$为数据点, $y = f_c\pare{x}$是所欲拟合之函数, $c = \brac{c_1,\dots,c_p}$是参数, 最小化平方和
-\begin{align*}
-    r_1\pare{c} &= f_c\pare{t_1} - y_1, \\
-    & \vdots \\
-    r_m\pare{c} &= f_c\pare{t_m} - y_m.
-\end{align*}
-取Jacobi矩阵$\pare{Dr}_{ij} = \displaystyle \+D{c_j}D{r_i} = f_{c_j}\pare{t_i}$即可应用Gau\ss-Newton方法.
-
-% paragraph 非线性参数模型 (end)
-
-\paragraph{Levenberg-Marquardt方法} % (fold)
-\label{par:levenberg_marquardt方法}
-
-对于非线性问题, Levenberg-Marquardt方法通过「正则化项」修复了可能出现的病态矩阵引发的问题.
-\begin{matlablst}
-/@$x_0$@/ = 初始向量
-/@$\lambda$@/ = 常数
-for k = 0, 1, 2, ...
-    /@$A$@/ = /@$Dr\pare{x^k}$@/
-    /@$A^T A + \lambda \diag\pare{A^TA}v^k$@/ = /@$-A^Tr\pare{x^k}$@/
-    /@$x^{k+1}$@/ = /@$x^k$@/ + /@$v^k$@/
-end
-\end{matlablst}
-
-% paragraph levenberg_marquardt方法 (end)
-
-% subsubsection 非线性最小二乘 (end)
 
 % subsection 最小二乘 (end)
 

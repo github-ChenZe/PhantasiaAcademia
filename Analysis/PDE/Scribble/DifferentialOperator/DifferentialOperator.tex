@@ -1,0 +1,64 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{微分算子法} % (fold)
+\label{sec:微分算子法}
+
+\begin{ex}
+    $\displaystyle \+DtDu = \+D{x^2}D{u}$, $u\pare{x,0} = x^2$.
+\end{ex}
+\begin{solution}
+    $\displaystyle u\pare{x,t_0} = e^{t_0\+DtD{}}u\pare{x}\vert_{t=0} = \brac{1+t\pare{\+D{x^2}D{^2}} + \cdots} x^2 = \boxed{x^2 + 2t.}$
+\end{solution}
+\begin{ex}
+    $\displaystyle \+D{t^2}{D^2 u} = \+D{x^2}D{^2u}$, $u\pare{x,0} = x^2$, $u_t\pare{x,0} = 0$.
+\end{ex}
+\begin{solution}
+    令$\displaystyle v = \+DtDu$, $\displaystyle A = \begin{pmatrix}
+        0 & 1 \\
+        \displaystyle \+D{x^2}D{^2} & 0
+    \end{pmatrix}$, 则
+    \begin{align*}
+        & \+DtD{}\begin{pmatrix}
+            u \\ v
+        \end{pmatrix} = \begin{pmatrix}
+            0 & 1 \\
+            \displaystyle \+D{x^2}D{^2} & 0
+        \end{pmatrix}\begin{pmatrix}
+            u \\ v
+        \end{pmatrix} = A \begin{pmatrix}
+            u \\ v
+        \end{pmatrix}, \\
+        & \begin{pmatrix}
+            u \\ v
+        \end{pmatrix} = e^{tA}\begin{pmatrix}
+            u \\ v
+        \end{pmatrix}_{t=0} \\ &= \begin{pmatrix}
+            u \\ v
+        \end{pmatrix}_{t=0} + t\begin{pmatrix}
+            0 & 1 \\
+            \displaystyle \+D{x^2}D{^2} & 0
+        \end{pmatrix}\begin{pmatrix}
+            u \\ v
+        \end{pmatrix}_{t=0} + \frac{t^2}{2}\begin{pmatrix}
+            \displaystyle \+D{x^2}D{^2} & \\
+            & \displaystyle \+D{x^2}D{^2}
+        \end{pmatrix}\begin{pmatrix}
+            u \\ v
+        \end{pmatrix}_{t=0} + \cdots \\
+        &= \begin{pmatrix}
+            x^2 \\ *
+        \end{pmatrix} + t\begin{pmatrix}
+            0 \\ *
+        \end{pmatrix} + \frac{t^2}{2} \begin{pmatrix}
+            2 \\ *
+        \end{pmatrix} + \cdots = \boxed{x^2 + t^2.} \qedhere
+    \end{align*}
+\end{solution}
+
+% section 微分算子法 (end)
+
+\end{document}

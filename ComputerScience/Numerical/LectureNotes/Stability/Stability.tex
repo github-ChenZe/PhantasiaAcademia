@@ -1,0 +1,71 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{算法的收敛性与稳定性} % (fold)
+\label{sec:算法的收敛性与稳定性}
+
+\subsection{算法稳定性} % (fold)
+\label{sub:算法稳定性}
+
+\begin{ex}
+    给定$x_1, \cdots, x_N$, 设计求$\sum x_i$的算法.
+    \begin{matlablst}
+function s=summation(x, n)
+    s = 0
+    for i = 1:n
+        s += x(i);
+    end
+end
+    \end{matlablst}
+\end{ex}
+
+% subsection 算法稳定性 (end)
+
+\subsection{舍入误差与算法稳定性的关系} % (fold)
+\label{sub:舍入误差与算法稳定性的关系}
+
+设$E_0$表示初始误差, $E_n$表示$n$步后的误差.
+\newpoint{}若$E_n \sim c\cdot n\cdot E_0$, 且$c$是与$n$无关的常数, 则谓误差是线性增长的.
+\newpoint{}若$E_n \sim c^n \cdot E_0$, 且$c>0$与$n$无关, 则谓误差是指数增长的.
+\newpoint{}误差线性增长的方法是稳定的. 误差指数增长的方法是不稳定的.
+\begin{ex}
+    递归方程$p_n = 10p_{n-1}/3 - p_{n-2}$, $n = 2,3,\cdots$有精确解$p_n = \displaystyle c_1 \cdot \pare{\rec{3}}^n + c_2\cdot 3^n$. 若已知$p_0 = 1$, $p_1 = \displaystyle \rec{3}$, 可得$c_1 = 1$, $c_2 = 0$. 精确解为$\displaystyle p_n = \pare{\rec{3}}^n$.
+    \par
+    用五位舍入运算可得近似解. $\hat{p}_0 = 0.10000\times 10^1$, $\hat p_1 = 0.33333\times 10^0$, 有$\hat c_1 = 0.10000\times 10^1$, $\hat c_2 = 0.12500 \times 10^-5$. 可以发现
+    \[ p_n - \hat p_n = 0.12500\times 10^{-5}\cdot d^n. \]
+    故误差指数增长.
+\end{ex}
+
+% subsection 舍入误差与算法稳定性的关系 (end)
+
+\subsection{收敛速度} % (fold)
+\label{sub:收敛速度}
+
+\begin{definition}[序列的收敛速度]
+    设$\curb{\beta_n}\rightarrow 0$已知, $\curb{\alpha_n}\rightarrow \alpha$. 若存在$\kappa>0$, 且对于充分大的$n$有$\abs{\alpha_n - \alpha} < \kappa\abs{\beta_n}$, 则谓$\curb{\alpha_n}$收敛于$\alpha$的速度与$\curb{\beta_n}$收敛于零的速度相当. 或者$\curb{\alpha_n}$以$O\pare{\beta_n}$的速度收敛于$\alpha$, 记为$\alpha_n = \alpha + O\pare{\beta_n}$. 通常取$\beta = 1/n^p$, $p$越大则收敛速度越快.
+\end{definition}
+\begin{ex}
+    设$a_n = \pare{1+n}/n^2$, $\hat \alpha_n = \pare{3+n}/n^3$, 比较其收敛速度. 显然$\alpha_n = O\pare{1/n}$, $\hat \alpha_n = O\pare{1/n^2}$.
+\end{ex}
+\begin{definition}[函数的收敛速度]
+    设$\displaystyle \lim_{h\rightarrow 0} G\pare{h} = 0$, $\displaystyle \lim_{h\rightarrow 0} F\pare{h} = L$. 若存在$\kappa>0$使对于充分小的$h$有$\abs{F\pare{h} - L} < \kappa G\pare{h}$, 则为$F\pare{h}$收敛于$L$的速度与$G\pare{h}$收敛于零的速度相当, 记为$F\pare{h} = L + O\pare{G\pare{h}}$. 通常取$G\pare{h}  =h^p$, $p>0$, $p$越大收敛越快.
+\end{definition}
+\begin{ex}
+    $\cos h$收敛于1的速度为$O\pare{h^2}$, 而$\displaystyle \abs{\cos h - \pare{1-\frac{h^2}{2}}}$收敛到零的速度为$O\pare{h^4}$.
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+参考书2 p.37 1(a) p.38 6, 7
+
+% paragraph 作业 (end)
+
+% subsection 收敛速度 (end)
+
+% section 算法的收敛性与稳定性 (end)
+
+\end{document}

@@ -1,0 +1,42 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{1.5.4}%
+$\displaystyle I\+_i_ = \SI{1}{\micro\ampere}$, $U\+_i_ = I\+_i_R\+_i_ = \SI{10}{\milli\volt}$, $\displaystyle R\+_o_ = \frac{U\+_oo_}{I\+_os_} = \SI{1}{\kilo\ohm}$.\\
+$\displaystyle A_v = \frac{R\+_L_}{R\+_L_ + R\+_o_} \cdot \frac{U\+_oo_}{U\+_i_} = \frac{4}{4+1}\cdot \frac{10}{10\times 10^{-3}} = \boxed{800} \xlongrightarrow{20\log\abs{*}} \boxed{\SI{58.1}{\decibel}.}$\\
+$\displaystyle A_i = \frac{R\+_o_}{R\+_L_ + R\+_o_} \cdot \frac{I\+_os_}{I\+_i_} = \boxed{2\times 10^3} \xlongrightarrow{20\log\abs{*}} \boxed{\SI{66.0}{\decibel}.}$\\
+$\displaystyle A_p = A_u A_i = \boxed{1.6\times 10^6} \xlongrightarrow{10\log\abs{*}} \boxed{\SI{62.0}{\decibel}.}$
+\newprob{1.5.6}%
+$\displaystyle R_i = \frac{U\+_i_}{I\+_i_} = \frac{U\+_i_}{i_1 + i_2} = \frac{v\+_s_}{\pare{1+\beta}i_1} = \boxed{\frac{R_1}{1+\beta}}$.
+\newprob{3.2.1}%
+$\displaystyle v\+_D_ = nV_T\ln\pare{1+\frac{i_D}{I_S}} = \SI{26}{\milli\volt}\cdot \ln \pare{1+0.5\times 10^6} = \boxed{\SI{0.341}{\volt}.}$
+\newprob{3.2.2(1)}%
+$\displaystyle I\+_S_ = \displaystyle \frac{i_D}{e^{v\+_D_/\pare{nV_T}}-1} = \frac{\SI{1}{\milli\ampere}}{e^{\SI{0.7}{\volt}/\SI{26}{\milli\volt}}-1} = \boxed{\SI{2.0e-15}{\ampere}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \ln \displaystyle \frac{i\+_D_}{I\+_S_} \approx \frac{v\+_D_}{nV_T} \xLongrightarrow{i\+_D_ \rightarrow 10i\+_D_} v'\+_D_ =  v\+_D_ + nV_T\ln \frac{i'\+_D_}{i\+_D_} = \SI{0.7}{\volt} + \SI{26}{\milli\volt}\cdot \ln 10 = \boxed{\SI{0.76}{\volt}.}$
+
+\end{document}

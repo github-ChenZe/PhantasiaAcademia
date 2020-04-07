@@ -1,0 +1,150 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{1.11 (1)}%
+$\Delta = x^2y^2 - x^2y^2 = 0 \Rightarrow $抛物型. 特征
+\[ \+dxdy = \frac{a_{12}}{a_{11}} = \frac{xy}{x^2} = \frac{y}{x} \Rightarrow \xi = \frac{y}{x}. \]
+取$\eta = x$, 则可得
+\begin{align*}
+    A_{22} &= a_{11}\eta_x^2 + 2a_{12}\eta_x\eta_y + a_{22}\eta_y^2 = x^2 = \eta^2,\\
+    B_1    &= a_{11}\xi_{xx} + 2a_{12}\xi_{xy} + a_{22}\xi_{yy} + b_1\xi_x + b_2\xi_y = 0,\\
+    B_2    &= a_{11}\eta_{xx} + 2a_{12}\eta_{xy} + a_{22}\eta_{yy} + b_1\eta_x + b_2\eta_y = 0.
+\end{align*}
+故方程化为
+\[ \boxed{\+D{\eta^2}D{^2u} = 0,\quad \pare{\xi = \frac{y}{x},\quad \eta = x}.} \]
+\par
+\newprobheader{(2)}%
+$\Delta = -y^2x^2 < 0\Rightarrow $椭圆型. 特征
+\[ \+dxdy = \pm \frac{i\sqrt{y^2x^2}}{y^2} = \pm i \frac{x}{y} \Rightarrow y^2 \pm ix^2. \]
+取$\xi = x^2$, $\eta = y^2$, 则
+\begin{align*}
+    A_{11} &= a_{11}\xi_x^2 + 2a_{12}\xi_x\xi_y + a_{22}\xi_y^2 = 4x^2y^2,\\
+    A_{22} &= a_{11}\eta_x^2 + 2a_{12}\eta_x\eta_y + a_{22}\eta_y^2 = 4x^2y^2,\\
+    B_1    &= a_{11}\xi_{xx} + 2a_{12}\xi_{xy} + a_{22}\xi_{yy} + b_1\xi_x + b_2\xi_y = 2y^2,\\
+    B_2    &= a_{11}\eta_{xx} + 2a_{12}\eta_{xy} + a_{22}\eta_{yy} + b_1\eta_x + b_2\eta_y  = 2x^2.
+\end{align*}
+故方程化为
+\[ 4x^2y^2 u_{\xi\xi} + 4x^2y^2 u_{\eta\eta} + 2y^2 u_\xi + 2x^2 u_\eta = 0. \]
+\makebox[0pt][l]{即}\centerline{$\boxed{u_{\xi\xi}+u_{\eta\eta} + \rec{2\xi} u_\xi + \rec{2\eta}u_\eta = 0.}$}
+
+\newprob{1.12 (3)}%
+观察得$\displaystyle \partial_{xy} \brac{\pare{x-y}u} = u_y - u_x + \pare{x-y} u_{xy} = 0$. 从而
+\[ \boxed{u = \rec{x-y}\brac{\Phi\pare{x} + \Psi\pare{y}}.} \]
+其中$\Phi$和$\Psi$一阶可微.
+
+\newprob{1.13 (2)}%
+$\Delta = 4 > 0\Rightarrow $双曲型. 特征
+\[ \+dxdy = \frac{1\pm\sqrt{4}}{1} = \curb{3,-1}. \]
+取$\xi = y+x$, $\eta = y-3x$, 则
+\begin{align*}
+    A_{21} &= a_{11}\xi_x\eta_x + a_{12}\pare{\xi_x \eta_y + \xi_y\eta_x} + a_{22}\xi_y\eta_y = -6, \\
+    B_1    &= a_{11}\xi_{xx} + 2a_{12}\xi_{xy} + a_{22}\xi_{yy} + b_1\xi_x + b_2\xi_y = 0,\\
+    B_2    &= a_{11}\eta_{xx} + 2a_{12}\eta_{xy} + a_{22}\eta_{yy} + b_1\eta_x + b_2\eta_y = 0.
+\end{align*}
+故方程化为
+\[ \frac{\partial^2 u}{\partial \xi \partial \eta} = 0 \Rightarrow  u = \Phi\pare{\xi} + \Psi\pare{\eta} = \Phi\pare{x+y} + \Psi\pare{y-3x}. \]
+边界条件表明
+\[ \begin{cases}
+    \displaystyle \Phi\pare{x} + \Psi\pare{-3x} = 3x^2, \\
+    \displaystyle \Phi'\pare{x} + \Psi'\pare{-3x} = 0.
+\end{cases} \]
+不妨设$\Phi\pare{0} = \Psi\pare{0} = 0$, 则
+\begin{align*}
+    \int_0^x \brac{\Phi'\pare{x'} + \Psi'\pare{-3x'}}\,\rd{x'} &= \Phi\pare{x} - \Phi\pare{0} + \rec{3}\brac{\Psi\pare{0} - \Psi\pare{-3x}} = 0 \\ &\Rightarrow \Phi\pare{x} - \frac{\Psi\pare{-3x}}{3} = 0.
+\end{align*}
+可得
+\[ \begin{cases}
+    \displaystyle 4\Phi\pare{x} = 3x^2 \Rightarrow  \Phi\pare{\xi} = \frac{3}{4}\xi^2,\\[.5em] \displaystyle \frac{4}{3}\Psi\pare{-3x} = 3x^2 \Rightarrow  \Psi\pare{\eta} = \frac{\eta^2}{4}.
+\end{cases} \]
+\makebox[0pt][l]{故}\centerline{$\displaystyle u = \Phi\pare{\xi} + \Psi\pare{\eta} = \frac{3}{4}\xi^2 + \rec{4}\eta^2 = \frac{3}{4}\pare{x+y}^2 + \rec{4}\pare{y-3x}^2 = \boxed{3x^2+y^2.}$}
+\par
+\newprobheader{(3)}%
+$\Delta = 1 > 0\Rightarrow $双曲型. 特征
+\[ \+dxdy = \cos x \pm 1. \]
+取$\xi = y-\sin x + x$, $\eta = y-\sin x-x$, 则
+\begin{align*}
+    A_{21} &= a_{11}\xi_x\eta_x + a_{12}\pare{\xi_x \eta_y + \xi_y\eta_x} + a_{22}\xi_y\eta_y = -2, \\
+    B_1    &= a_{11}\xi_{xx} + 2a_{12}\xi_{xy} + a_{22}\xi_{yy} + b_1\xi_x + b_2\xi_y = 0,\\
+    B_2    &= a_{11}\eta_{xx} + 2a_{12}\eta_{xy} + a_{22}\eta_{yy} + b_1\eta_x + b_2\eta_y = 0.
+\end{align*}
+故方程化为
+\[ \frac{\partial^2 u}{\partial \xi \partial \eta} = 0 \Rightarrow  u = \Phi\pare{\xi} + \Psi\pare{\eta} = \Phi\pare{y-\sin x + x} + \Psi\pare{y-\sin x-x}. \]
+边界条件表明
+\[ \begin{cases}
+    \displaystyle \Phi\pare{x} + \Psi\pare{-x} = \varphi\pare{x}, \\
+    \displaystyle \Phi'\pare{x} + \Psi'\pare{-x} = \psi\pare{x}.
+\end{cases} \]
+不妨设$\displaystyle \Phi\pare{0} = \Psi\pare{0} = \frac{\varphi\pare{0}}{2}$, 则
+\begin{align*}
+    \int_0^x \brac{\Phi'\pare{x'} + \Psi'\pare{-x'}}\,\rd{x'} &= \Phi\pare{x} - \Phi\pare{0} + \Psi\pare{0} - \Psi\pare{-x} = 0 \\ &\Rightarrow \Phi\pare{x} - \Psi\pare{x} = \int_0^x\psi\pare{x'}\,\rd{x'}.
+\end{align*}
+可得
+\[ \begin{cases}
+    \displaystyle \Phi\pare{\xi} = \half\brac{\displaystyle \varphi\pare{\xi} + \int_0^\xi \psi\pare{x'}\,\rd{x'}},\\[1em] \displaystyle \Psi\pare{\eta} = \half\brac{\displaystyle \varphi\pare{-\eta} - \int_0^{-\eta}\psi\pare{x'}\,\rd{x'}}.
+\end{cases} \]
+\makebox[0pt][l]{故}\centerline{$\displaystyle \boxed{u = \half\brac{\displaystyle \varphi\pare{y-\sin x + x} + \varphi\pare{-y+\sin x + x} + \int_{-y+\sin x + x}^{y-\sin x + x}\psi\pare{x'}\,\rd{x'}}.}$}
+\newprob{1.14 (4)}%
+令$u\pare{x,y} = w\pare{x,y} = \cos x$, 则原方程化为
+\[ \begin{cases}
+    \displaystyle \frac{\partial^2 w}{\partial x^2} = \frac{\partial^2 w}{\partial y^2},\\[.5em] \cos x + \left.w\pare{x,y}\right\vert_{y=0} = 0,\\[.5em] \displaystyle \left.\+DyDw\right\vert_{y=0} = 4x.
+\end{cases} \]
+从而
+\begin{align*}
+    w\pare{x,y} &= \frac{-\cos\pare{x-y} - \cos\pare{x+y}}{2} + \half\int_{x-y}^{x+y}4x'\,\rd{x'} \\
+    &= -\cos x\cos y + 4xy.\\
+    \Rightarrow  u\pare{x,y} &= w\pare{x,y} + \cos x = \boxed{\pare{1-\cos y}\cos x + 4xy.}
+\end{align*}
+\par
+\newprobheader{(6)}%
+$\displaystyle u_{xy} = x^2y \Rightarrow  u_x = \frac{x^2y^2}{2} + \Phi\pare{x} \Rightarrow  u = \frac{x^3y^2}{6} + \Phi\pare{x} + \Psi\pare{y}$. 边界条件表明
+\[ \begin{cases}
+    \displaystyle u\pare{1,y} = \frac{y^2}{6} + \Phi\pare{1} + \Psi\pare{y} = \cos y, \\
+    \displaystyle u\pare{x,0} = \Phi\pare{x} + \Psi\pare{0}  =x^2.
+\end{cases} \]
+可得$\Phi\pare{x} = x^2$, $\displaystyle \Psi\pare{y} = \cos y - 1 - \frac{y^2}{6}$. 故
+\[ \boxed{u = \rec{6}\pare{x^3-1}y^2 + x^2-1+\cos y.} \]
+
+\end{document}

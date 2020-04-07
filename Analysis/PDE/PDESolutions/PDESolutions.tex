@@ -1,0 +1,101 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{PDE的定解} % (fold)
+\label{sec:pde的定解}
+
+\subsection{定解问题} % (fold)
+\label{sub:定解问题}
+
+\subsubsection{弦的运动方程} % (fold)
+\label{ssub:弦的运动方程}
+
+静力分解后可得
+\[ \rho \,\rd{x}\cdot \ddot{u} = Td\sin\theta + G + O\pare{\rd{x^2}}. \]
+从而
+\[ \tan \theta = u' \Rightarrow \theta' = u'' \cos^2\theta. \]
+假设$u'$足够小, 令$G = g\,\rd{x}$,
+\[ \rho \ddot{u} = T\pare{1+u'^2}^{-3/2}u'' + g \approx Tu''+g. \]
+若在边界处受一个方向张力$T$, 垂直方向外力$F$, 则
+\[ \rho \,\rd{x}\cdot \ddot{u} = -T\cos\theta + F + g\,\rd{x}. \]
+边界处
+\[ F_2 = \frac{Tu'}{\sqrt{1+u'^2}} \approx Tu'. \]
+
+% subsubsection 弦的运动方程 (end)
+
+\subsubsection{最小作用量原理} % (fold)
+\label{ssub:最小作用量原理}
+
+通过对作用量变分,
+\begin{align*}
+    S &= \int L\pare{\phi,\partial \phi}, \\
+    \delta S &= \int \delta \phi \+D{\phi}D{L} + \delta \partial_\mu \phi \pare{\frac{\partial L}{\partial \partial_\mu \phi}} \\
+    &= \int \delta\phi \brac{\frac{\partial L}{\partial \phi} - \partial_\mu \pare{\frac{\partial L}{\partial \partial_\mu \phi}}} + \text{边界项} = 0. \\
+    \Rightarrow \+D\phi DL &= \partial_\mu \pare{\frac{\partial L}{\partial \pare{\partial_\mu \phi}}}.
+\end{align*}
+还应当加上边界条件. 取
+\[ L = \half \brac{\pare{\partial \phi}^2 - m^2\phi^2} + \rho\phi \]
+可得位势, 波动等方程.
+
+% subsubsection 最小作用量原理 (end)
+
+\subsubsection{PDE和解的综述} % (fold)
+\label{ssub:pde和解的综述}
+
+$n$阶$k$个自变量的PDE为
+\[ E\pare{\+vx, u, p_{\mu_1}, \cdots, p_{\mu_1,\cdots,\mu_n}} = 0. \]
+$p_{\cdots}$表示$u$对相应下标的偏导.
+\par
+函数的自变量可视为向量的下标. 函数可以取函数为值, 从而若$M\pare{A,B}$表示$A\mapsto B$的函数空间, 则$M\pare{\+bR^k,\+bR}$中的每一个元素都可以看成是$M\pare{\+bR,M\pare{\+bR^{k-1},\+bR}}$中的一个函数, 反之亦然.
+\begin{remark}
+    参照函数式编程中的Curry化.
+\end{remark}
+对于PDE, 将一个变量提取出来, 视为ODE, 待求解函数的值域为无穷维线性空间$M\pare{\+bR^{k-1},\+bR}$, 而对其它变量之求导视为作用在$M\pare{\+bR^{k-1},\+bR}$上的算子.
+\begin{ex}
+    考虑$k=2$的PDE, $\partial_1 u = \partial_2 u$. 这里$\partial_2$视为作用在$M\pare{\+bR,\+bR}$上的算子, 这个方程因此就是$\dot{v}_i\pare{t} = H_j^i v^j$的推广.
+\end{ex}
+
+% subsubsection pde和解的综述 (end)
+
+\subsubsection{通解与特解} % (fold)
+\label{ssub:通解与特解}
+
+方程的解并不唯一. 欲求具体的解, $n$阶的ODE需要$n$个相互独立的待定参数. 通过定解条件确定这些参数才能得到解.
+\begin{ex}
+    Newton第二定律$m\ddot{x} = F\pare{x,t}$的初始条件是起点位置和速度或动量. 边界条件是起点和终点的位置.
+\end{ex}
+决定一个特解需要$n$个独立条件. 如果这是自变量取某值时该函数阶数小于$n$的导数则谓之初始条件. 若为某一区间两端及其导数的表达式则谓之边界条件. 通解的定义只要求有$n$个独立参数, 不意味着包含所有特解.
+\par
+边界条件分为
+\begin{cenum}
+    \item Dirichlet: $u\pare{x_1,\cdots}\vert_{x_1=\cdots} = \cdots$.
+    \item Neumann: $\brac{\partial_1 u\pare{x_1,\cdots}}\vert_{x_1=\cdots} = \cdots$.
+    \item Robin: $\brac{au\pare{x_1,\cdots} + \beta \partial_1 u\pare{x_1,\cdots}}\vert_{x_1= \cdots} = \cdots$.
+\end{cenum}
+
+% subsubsection 通解与特解 (end)
+
+% subsection 定解问题 (end)
+
+\subsection{一阶PDE} % (fold)
+\label{sub:一阶pde}
+
+\newpoint{}例如对于$au_x + bu_y + cu = f$, 其中$a,b,c,f$是$x,y$面上某区域$D$内定义的函数.
+\newpoint{}若$a=0$, 可设$b=1$. 将其转化为ODE, $u_y + cu = f$.
+考虑$e_y = ce \Rightarrow e = \exp \pare{\int \rd{y}\ c}$, 有
+\[ \partial_y \pare{eu} = e\partial_y u + \partial_y eu = e\pare{\partial_y u + cu} = ef. \]
+从而
+\[ eu = \int \rd{y}\pare{ef} \Rightarrow u = e^{-1} \int \rd{y} \pare{ef}. \]
+有
+\[ u\pare{y} = u\pare{y_0} \frac{e\pare{y_0}}{e\pare{y}} + e^{-1}\pare{y} \int_{y_0}^y \rd{\tilde{y}} \brac{e\pare{\tilde{y}}f\pare{\tilde{y}}}. \]
+\newpoint{}给定初始条件$u\pare{x,y_0}=g\pare{x}$后
+\[ u\pare{x,y} = \exp{-\int_{y_0}^y \rd{\alpha}\ c\pare{x,\alpha}} + \curb{g\pare{x} + \int_{y_0}^y \rd{\gamma} \brac{f\pare{x,\gamma} \exp\pare{\int_{y_0}^\gamma \rd{\beta\ c\pare{x,\beta}}}} }. \]
+
+% subsection 一阶pde (end)
+
+% section pde的定解 (end)
+
+\end{document}

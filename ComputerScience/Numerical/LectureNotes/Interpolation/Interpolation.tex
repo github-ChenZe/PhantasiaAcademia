@@ -1,0 +1,486 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{插值} % (fold)
+\label{sec:插值}
+
+\subsection{插值} % (fold)
+\label{sub:插值}
+
+\newpoint{}用给定的未知函数的若干点的函数值构造$f\pare{x}$的近似函数$\varphi\pare{x}$. 构造上述近似函数的过程谓\gloss{插值}. 最常用的插值函数是多项式.
+\newpoint{}多项式函数无限可导, 无限可积.
+\newpoint{}且满足Weierstra\ss 逼近定理.
+\begin{theorem}
+    对于任意函数$f\in C\brac{a,b}$, 以及任意小量$\epsilon$, 都可以找到一多项式$p_n\pare{x}$使得$\sup \abs{f\pare{x} - p_n\pare{x}} < \epsilon$.
+\end{theorem}
+\begin{theorem}[Taylor]
+    设$f\in C^{\pare{n}}\brac{a,b}$且在$\brac{a,b}$上$f^{\pare{n+1}}$存在. 对于给定的$x_0 \in \brac{a,b}$, 存在$x$和$x_0$之间的$\xi$, 使得
+    \[ f\pare{x} = p_n\pare{x} + R_n\pare{x}, \]
+    其中
+    \begin{align*}
+    & p_n\pare{x} = f\pare{x_0} + f'\pare{x_0}\pare{x-x_0} + \frac{f''\pare{x_0}}{2!}\pare{x-x_0}^2 + \cdots + \frac{f^{\pare{n}}\pare{x_0}}{n!}\pare{x-x_0}^n,\\
+    & R_n\pare{x} = \frac{f^{\pare{n+1}}\pare{\xi}}{\pare{n+1}!}\pare{x-x_0}^{n+1}.
+    \end{align*}
+\end{theorem}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[->] (-3,0) -- (3,0);
+        \draw[->] (0,0) -- (0,5);
+        \draw[color=red] plot[domain=-3:3] function{exp(x)/4};
+        \draw plot[domain=-3:3] function{(1+x)/4};
+        \draw plot[domain=-3:3] function{(1+x+x*x/2)/4};
+        \draw plot[domain=-3:3] function{(1+x+x*x/2+x*x*x/6)/4};
+    \end{tikzpicture}
+    \caption{$e^x$的多项式逼近}
+\end{figure}
+\begin{ex}
+    取$f\pare{x} = e^x$, 则
+    \[ p_0\pare{x} = 1,\quad p_1\pare{x} = 1+x,\quad p_2\pare{x} = 1+x+ \frac{x^2}{2},\quad p_3\pare{x} = 1+x+\frac{x^2}{2}+\frac{x^3}{6}+\cdots. \]
+\end{ex}
+\begin{ex}
+    取$f\pare{x} = 1/x$, 则在$x_0 = 1$处展开的多项式在$x=3$处不收敛.
+\end{ex}
+
+% subsection 插值 (end)
+
+\subsection{Lagrange插值} % (fold)
+\label{sub:lagrange插值}
+
+\subsubsection{最简单情形} % (fold)
+\label{ssub:最简单情形}
+
+确定通过两个不同点$\pare{x_0,y_0}$和$\pare{x_1,y_1}$的一阶插值多项式$p_1\pare{x}$, 其中$y_0$和$y_1$, 可列出
+\[ p_1\pare{x} = a_0 + a_1 x,\quad \begin{cases}
+    p_1\pare{x_0} = y_0, \\
+    p_1\pare{x_1} = y_1.
+\end{cases} \]
+可得
+\[ a_0 = \frac{y_0 x_1 - y_1 x_0}{x_1 - x_0},\quad a_1 = \frac{y_1 - y_0}{x_1 - x_0}. \]
+考虑到所有不超过一次的多项式集合构成一线性空间, 构造基
+\[ l_0\pare{x} = \frac{x - x_1}{x_0 - x_1},\quad l_1\pare{x} = \frac{x-x_0}{x_1 - x_0}. \]
+设$\tilde{p}_1\pare{x} = b_0l_0\pare{x} + b_1l_1\pare{x}$, 当$x=x_0$有$l_0\pare{x} = 1$, $l_1\pare{x} = 0$, 当$x=x_1$有$l_0\pare{x} = 0$, $l_1\pare{x} = 1$. 从而$b_0 = y_0$, $b_1 = y_1$. 可以发现这样算出的$p_1\pare{x} = \tilde{p}_1\pare{x}$.
+
+% subsubsection 最简单情形 (end)
+
+\subsubsection{一般情况} % (fold)
+\label{ssub:一般情况}
+
+设有$n+1$个不同点$x_0,\cdots,x_n$, 设$\+bP_n$为所有次数不超过$n$的多项式. 则\gloss{Lagrange基} $l_0\pare{x}, l_1\pare{x},\cdots,l_n\pare{x}\in \+bP_n$满足
+\[ l_j\pare{x_k} = \begin{cases}
+    1,  & j = k, \\
+    0,  & j \neq k.
+\end{cases} \]
+从而$\displaystyle p_n\pare{x} = \sum_{j=0}^n f\pare{x_j}l_j\pare{x}$. 显然
+\[ l_j\pare{x} = \frac{\pare{x-x_0}\cdots\pare{x-x_{j-1}}\pare{x-x_{j+1}}\cdot \pare{x-x_n}}{\pare{x_j-x_0}\cdots\pare{x_j-x_{j-1}}\pare{x_j-x_{j+1}}\cdot \pare{x_j-x_n}} \]
+满足这一条件.
+\begin{theorem}
+    若$x_0,\cdots,x_n$是$n+1$个不同点, $f$在这些点的值已知, 则满足$p_n\pare{x} = f\pare{x_k}$的不超过$n$次的多项式$p_n\pare{x}$存在且唯一,
+    \[ p_n\pare{x} = f\pare{x_0}l_0\pare{x} + \cdots + f\pare{x_n}l_n\pare{x}. \]
+\end{theorem}
+\begin{proof}[唯一性的证明]
+    若存在$p_n\pare{x}$和$q_n\pare{x}$同时满足条件, 则$p_n\pare{x} - q_n\pare{x}$是不超过$n$次的多项式在$\pare{n+1}$个不同点上为零, 故$p-q\equiv 0$. 也可以注意到
+    \[ A\+va = \+vy,\quad A = \begin{pmatrix}
+        1 & x_0 & \cdots & x_0^n \\
+        1 & x_1 & \cdots & x_1^n \\
+        \vdots & \vdot & \ddots & \vdots \\
+        1 & x_n & \cdots & x_n^n
+    \end{pmatrix}, \]
+    由Vandemonde行列式非退化知可解得唯一$\+va$.
+\end{proof}
+\begin{sample}
+    \begin{ex}
+        取$x_0 = 2$, $x_1 = 2.5$, $x_2 = 4$, 可得$f\pare{x} = 1/x$的二阶多项式插值
+        \begin{align*}
+            p_2 &= \frac{\pare{x-x_1}\pare{x-x_2}}{\pare{x_0-x_1}\pare{x_0-x_2}}y_0 + \frac{\pare{x-x_0}\pare{x-x_2}}{\pare{x_1-x_0}\pare{x_1-x_2}}y_1 + \frac{\pare{x-x_0}\pare{x-x_1}}{\pare{x_2-x_0}{x_2-x_1}}y_2 \\
+            &= \frac{\pare{x-2.5}\pare{x-4}}{\pare{2-2.5}\pare{2-4}}\rec{2} + \frac{\pare{x-2}\pare{x-4}}{\pare{2.5-2}\pare{2.5-4}}\rec{2.5} + \frac{\pare{x-2}\pare{x-2.5}}{\pare{4-2}\pare{4-2.5}}\rec{4}.
+        \end{align*}
+        可得$p_2\pare{3} \approx 0.325$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 一般情况 (end)
+
+\subsubsection{插值余项} % (fold)
+\label{ssub:插值余项}
+
+\begin{lemma}[广义Rolle定理]
+    设$f\in C^{\pare{n}}\brac{a,b}$, 且$f$在$\pare{a,b}$上$n$阶连续可导, 若有$n+1$个不同零点$x_0,\cdots, x_n \in \brac{a,b}$, 则存在$c\in\pare{a,b}$使得$f^{\pare{n}}\pare{c} = 0$.
+\end{lemma}
+\begin{theorem}
+    若$x_0,x_1,\cdots,x_n$是$n+1$个不同点, $f\in C^{\pare{m+1}}\brac{a,b}$, 则存在$x\in \brac{a,b}$, 以及$\xi\in \pare{a,b}$, 使得
+    \[ f\pare{x} = p_n\pare{x} + R_n\pare{x}, \]
+    其中$p_n\pare{x}$为$n$阶Lagrange多项式, $R_n\pare{x}$为插值余项,
+    \[ R_n\pare{x} = \frac{f^{\pare{n+1}}\pare{\xi}}{\pare{n+1}!}\pare{x-x_0}\cdots\pare{x-x_n}. \]
+\end{theorem}
+\begin{proof}
+    $x=x_k$之情形显然成立. 对于一般的$x$, 定义
+    \[ g\pare{t} = f\pare{t} - p_n\pare{t} - \pare{f\pare{x} - p_n\pare{x}}\frac{\pare{t-x_0}\cdots \pare{t-x_n}}{\pare{x-x_0}\cdots \pare{x-x_n}}. \]
+    从而$g\pare{t} \in C^{\pare{n+1}}\brac{a,b}$, 且有$n+2$个不同零点, 故存在$c$使得$g^{\pare{n+1}}\pare{c} = 0$. 此处
+    \[ 0 = f^{\pare{n+1}}\pare{c} - \pare{f\pare{x} - p_n\pare{x}}\frac{\pare{n+1}!}{\pare{x-x_0}\cdots \pare{x-x_n}}. \qedhere \]
+\end{proof}
+\begin{ex}
+    用插值方法求$\sqrt{7}$的近似值, 并给出误差估计. 取$x_0 = 4$, $x_1 = 9$, $x_2 = 6.25$, 则对应的$f\pare{x_0} = 2$, $f\pare{x_1} = 3$, $f\pare{x_2} = 2.5$. 取
+    \[ l_0\pare{x} = \frac{\pare{x-9}\pare{x-6.25}}{\pare{4-9}\pare{4-6.25}},\quad l_1 \pare{x} = \frac{\pare{x-4}\pare{x-6.25}}{\pare{9-4}\pare{9-6.25}},\quad l_2\pare{x} = \frac{\pare{x-4}\pare{x-9}}{\pare{6.5-4}\pare{6.5-9}}. \]
+    $p_2\pare{x} = \displaystyle l_0\pare{x}y_0 + l_1\pare{x}y_1 + l_2\pare{x}y_2$. 从而 $p_2\pare{7} = 2.64849$. 由
+    \[ \abs{f''\pare{\xi}} = \frac{3}{8} \xi^{-5/2} \le \frac{3}{8}\times 2^{-5}, \]
+    有余项
+    \[ \abs{R_2\pare{7}} \le \frac{f'''\pare{\xi}}{3!}\pare{x - x_0}\pare{x-x_1}\pare{x-x_2} = \frac{f'''\pare{\xi}}{3!}\pare{7 - 4}\pare{7-9}\pare{7-6.25} \sim 0.00879. \]
+\end{ex}
+\begin{ex}
+    为了做成$f\pare{x}=\sin\pare{x}$的函数表, 取均匀步长$h = x_{j} - x_{j-1}$,
+    \[ \abs{R_n\pare{x}} = \abs{\frac{f''\pare{\xi}}{2!}\pare{x-x_j}\pare{x-x_{j-1}}} \le \rec{8}h^2. \]
+    取$h\le 0.02$即有$R<0.5\times 10^{-4}$.
+\end{ex}
+
+% subsubsection 插值余项 (end)
+
+\subsubsection{误差事后估计} % (fold)
+\label{ssub:误差事后估计}
+
+若$x_0,\cdots, x_{n+1}$是$n+2$个不同的点, 且$f\in C^{\pare{n+1}}\brac{a,b}$, 而$p_n\pare{x}$是$f$关于$x_0,\cdots,x_{n}$的插值多项式, $\tilde{p}_n\pare{x}$是$f$关于$x_1,\cdots,x_{n+1}$的Lagrange多项式 则
+\begin{align*}
+    & f\pare{x} - p_n\pare{x} = \frac{f^{\pare{n+1}}\pare{\xi_1}}{\pare{n+1}!}\pare{x-x_0}\pare{x-x_1}\cdots \pare{x-x_n}, \\
+    & f\pare{x} - \tilde{p}_n\pare{x} = \frac{f^{\pare{n+1}}\pare{\xi_2}}{\pare{n+1}!}\pare{x-x_1}\pare{x-x_2}\cdots \pare{x-x_{n+1}}.
+\end{align*}
+若$f^{\pare{n+1}}\pare{x}$变化不大, 则有
+\begin{align*}
+    & \frac{f\pare{x} - \tilde{p}_n\pare{x}}{f\pare{x} - p_n\pare{x}} \approx \frac{x-x_0}{x-x_{n+1}}, \\
+    & \Rightarrow f\pare{x} - p_n\pare{x} = \frac{x-x_{n+1}}{x-x_0}\pare{p_n\pare{x} - \tilde{p}_n\pare{x}}.
+\end{align*}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+参考书1 p.45 3(2), 5
+
+% paragraph 作业 (end)
+
+% subsubsection 误差事后估计 (end)
+
+% subsection lagrange插值 (end)
+
+\subsection{插商} % (fold)
+\label{sub:插商}
+
+\subsubsection{插商} % (fold)
+\label{ssub:插商}
+
+考虑插值多项式的另一种形式$N_n\pare{x}$, 若将$N_n\pare{x}$写为
+\[ N_n\pare{x} = a_0 + a_1 \pare{x-x_0} + a_2\pare{x-x_0}\pare{x - x_1} + \cdots + a_n\pare{x-x_0}\cdots\pare{x-x_n} \]
+则新增插值节点后前面的计算结果依然可用. 此处$a_0, a_1,\cdots, a_n$由$f\pare{x_j} = N_n\pare{x_j}$, $j=0,1,\cdots,n$唯一确定.
+\begin{align*}
+    & a_0 = N_n\pare{x_0} = f\brac{x_0}, \\
+    & a_1 = \frac{f\brac{x_1} - f\brac{x_0}}{x_1 - x_0} = f\brac{x_0,x_1}, \\
+    & a_2 = \frac{f\brac{x_1,x_2} - f\brac{x_0,x_1}}{x_2 - x_0} = f\brac{x_0,x_2,x_2}.
+\end{align*}
+以此类推, 可得$a_n = f\brac{x_0,x_1,\cdots,x_n}$之定义.
+\begin{definition}
+    $f$关于$x_0,x_1,\cdots,x_k$的$k$阶差商为
+    \[ f\brac{x_0,x_1,\cdots,x_k} = \frac{f\brac{x_1,\cdots,x_k} - f\brac{x_0,x_1,\cdots,x_{k-1}}}{x_k - x_0}. \]
+\end{definition}
+由此可以导出Newton插值多项式.
+\begin{theorem}
+    如下的$N_n\pare{x}$对于任意$0\le i \le n$在$x_i$处取值$f\pare{x_i}$.
+    \begin{align*}
+        N_n\pare{x} &= f\brac{x_0} + f\brac{x_0,x_1}\pare{x_1 - x_0} + \cdots \\
+        & \phantom{=\,} + f\brac{x_0,x_1,\cdots,x_n}\pare{x-x_0}\cdots \pare{x-x_{n-1}}. 
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    若$f\brac{x_0}, f\brac{x_0,x_1},\cdots, f\brac{x_0,\cdots,x_n}$已知, 则$f\pare{x_0},\cdots,f\pare{x_n}$可唯一确定. 容易证明
+    \[ M_j\pare{x} = \pare{x-x_0}\cdots \pare{x-x_{j-1}} \]
+    满足
+    \[ \begin{cases}
+        M_j\brac{x_0} = 0,\\
+        \cdots,\\
+        M_j\brac{x_0,\cdots,x_{j-1}} = 0,\\
+        M_j\brac{x_0,\cdots,x_{j}}  = 1,\\
+        M_j\brac{x_0,\cdots,x_{j+1}}  = 0,\\
+        \cdots.
+    \end{cases} \]
+    $M_j\brac{x_0,\cdots,x_{j+1}}  = 0$及其之后的结论可以由\cref{lem:多次差分消除}得到. 由于$f\brac{\cdots}$对$f$是线性的, 叠加即知$N_n\pare{x}$为正解.
+\end{proof}
+\begin{lemma}
+    \label{lem:多次差分消除}
+    设$L_j\pare{x} = x^j$, 则对于任意$x_0,\cdots,x_j$, 有$L_j\brac{x_0,\cdots,x_j} = 1$. 从而对于任意$n>j$都有$L_j\brac{x_0,\cdots,x_n} = 0$.
+\end{lemma}
+\begin{proof}
+    $j=0$时显然成立. 假设$j=0,\cdots,J-1$时成立, 设
+    \[ M_J\pare{x} = \pare{x-x_0}\cdots \pare{x-x_{J-1}}, \]
+    则显然$M_j\brac{x_0,\cdots,x_J} = 1$. 但
+    \[ M_J\brac{x_0,\cdots,x_J} = L_j\brac{x_0,\cdots,x_J} + R_j\brac{x_0,\cdots,x_J}, \]
+    其中$R_j$是某小于$J$次的多项式, 根据归纳假设知$R_j\brac{x_0,\cdots,x_J} = 0$, 故
+    \[ L_j\brac{x_0,\cdots,x_J} = 1. \qedhere \]
+\end{proof}
+
+% subsubsection 插商 (end)
+
+\subsubsection{插商的主要性质} % (fold)
+\label{ssub:插商的主要性质}
+
+\begin{theorem}
+    \label{thm:插商中值定理}
+    设$f\in C^{\pare{n}}\brac{a,b}$, 且$x_0,x_1,\cdots,x_n\in \brac{a,b}$是$n+1$个不同的点, 则存在$\xi \in \pare{a,b}$使得$\displaystyle f\brac{x_0,x_1,\cdots,x_n} = \frac{f^{\pare{n}}\pare{\xi}}{n!}$.
+\end{theorem}
+\begin{proof}
+    直接对$N_n\pare{x}$之表达式应用广义Rolle定理即可, 注意到$f\pare{x} - N_n\pare{x}$有至少$n+1$个零点.
+\end{proof}
+\begin{theorem}
+    $f\brac{x_0,x_1,\cdots,x_k} = f\brac{\sigma\comp \pare{x_0,x_1,\cdots,x_k}}$, 其中$\sigma$是任意置换.
+\end{theorem}
+\begin{proof}
+    由$M_j\pare{x}$之置换不变性可得.
+\end{proof}
+\begin{theorem}
+    $\displaystyle f\brac{x_0,x_1,\cdots,x_k} = \sum_{j=0}^k \frac{f\pare{x_j}}{\pare{x_j - x_0}\cdots \pare{x_j - x_{j-1}} \pare{x_j - x_{j+1}}\cdots \pare{x_j - x_k}}$.
+\end{theorem}
+\begin{proof}
+    由叠加原理和置换不变性, 只需证明$f\pare{x_0} = \cdots = f_{x_{k-1}} = 0$之情形, 而这是显然成立的.
+\end{proof}
+
+% subsubsection 插商的主要性质 (end)
+
+\subsubsection{Newton插值多项式} % (fold)
+\label{ssub:newton插值多项式}
+
+\newpoint{}由插值多项式的唯一性, 其与Lagrange多项式必定完全相同.
+\newpoint{}Newtom插值多项式具有继承性, 新增的插值点仅对更高阶的初始条件有影响.
+\newpoint{}由\cref{thm:插商中值定理}可以得到误差
+\[ R_n\pare{x} = f\brac{x,x_0,\cdots,x_n}\pare{x-x_0}\cdots\pare{x-x_n} = \frac{f^{\pare{n}}\pare{\xi}}{n!}\pare{x-x_0}\cdots\pare{x-x_n}. \]
+
+% subsubsection newton插值多项式 (end)
+
+\subsubsection{例子} % (fold)
+\label{ssub:例子}
+
+\begin{ex}
+    设$f\pare{x} = x^3 - 100 x + 1$, 显然有
+    \[ f\brac{x_0,x_1,x_2,x_3} = 1,\quad f\brac{x_0,x_1,x_2,x_3,x_4} = 0. \]
+\end{ex}
+\begin{ex}
+    利用下面的数据, 构造Lagrange插值多项式和Newton插值多项式, 计算$p\pare{0.9}$.
+    \[ \begin{array}{ccccc}
+        x_i & x_0 = -2 & x_1 = 0 & x_2 = 1 & x_3 = 2 \\
+        f\pare{x_i} & 17 & 1 & 2 & 19.
+    \end{array} \]
+    按照下表的方法计算差商,
+    \[ \begin{array}{cccccc}
+        i & x_i & f\brac{x_i} & f\brac{x_{i-1}x_i} & f\brac{x_{i-2}\cdots x_i} & f\brac{x_{i-3}\cdots x_i} \\
+        0 & x_0 = -2 & 17 \\
+        1 & x_1 = 0 & 1 & \displaystyle \frac{1-17}{0-\pare{-2}} = -8 \\[.5em]
+        2 & x_2 = 1 & 2 & \displaystyle \frac{2-1}{1-0} = 1 & \displaystyle \frac{1-\pare{-8}}{1-\pare{-2}} = 3 \\[.5em]
+        3 & x_3 = 2 & 19 & \displaystyle \frac{19-2}{1} = 17 & \displaystyle \frac{17 - 1}{2 - 0} = 8 & \displaystyle \frac{8 - 3}{2-\pare{-2}} = \frac{5}{4}.
+    \end{array} \]
+    故可得
+    \[ N_3\pare{x} = 17 - 8\pare{x+2} + 3\pare{x+2}\pare{x-0} + \frac{5}{4}\pare{x+2}x\pare{x-1}. \]
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.45 8, 9
+
+% paragraph 作业 (end)
+
+% subsubsection 例子 (end)
+
+% subsection 插商 (end)
+
+\subsection{Hermite插值} % (fold)
+\label{sub:hermite插值}
+
+\subsubsection{密切插值} % (fold)
+\label{ssub:密切插值}
+
+\begin{definition}
+    设$\brac{a,b}$上有$n+1$个不同点$x_0,x_1,\cdots,x_n$, 而$m_0,m_1,\cdots,m_n$均为非负整数且$m = \max \curb{m_0,\cdots,m_n}$, $f\in C^m_{\brac{a,b}}$, 若多项式$p$满足
+    \[ \left.\+d{x^k}d{^kp\pare{x}}\right\vert_{x=x_j} = \left.\+d{x^k}d{^kp\pare{x}}\right\vert_{x=x_j},\quad j = 0,\cdots,n,\quad k = 0,1,\cdots,m_j, \]
+    其中$p$为不超过$M = n + \displaystyle \sum_{j=0}^n m_j$阶的多项式. 若$m_j \equiv 1$, 则谓之Hermite多项式, 记为$H\pare{x}$.
+\end{definition}
+
+% subsubsection 密切插值 (end)
+
+\subsubsection{最简单情形} % (fold)
+\label{ssub:最简单情形}
+
+若已知$f\pare{x_0} = y_0$, $f\pare{x_1} = y_1$, $f'\pare{x_0} = \tilde{y}_0$, $f'\pare{x_1} = \tilde{y}_1$, 且$x_0 \neq x_1$, 试构造$H\pare{x}$满足$H\pare{x_0} = y_0$
+\par
+可以找到不超过$M = 1+1+1 = 3$次的多项式满足上述条件. 可设
+\[ H\pare{x} = y_0 h_0\pare{x} + y_1 h_1\pare{x} + \tilde{y}_0 g_0\pare{x} + \tilde{y}_1 g_1\pare{x}, \]
+其中$h_0, h_1, g_0, g_1$都是三次多项式, 且满足
+\[ \begin{cases}
+    h_0 \pare{x_0} = 1, \\
+    h_0 \pare{x_1} = 0, \\
+    h'_0 \pare{x_0} = 0, \\
+    h'_0 \pare{x_1} = 0,
+\end{cases}\quad \begin{cases}
+    h_1 \pare{x_0} = 0, \\
+    h_1 \pare{x_1} = 1, \\
+    h'_1 \pare{x_0} = 0, \\
+    h'_1 \pare{x_1} = 0,
+\end{cases}\quad \begin{cases}
+    g_0 \pare{x_0} = 0, \\
+    g_0 \pare{x_1} = 0, \\
+    g'_0 \pare{x_0} = 1, \\
+    g'_0 \pare{x_1} = 0,
+\end{cases}\quad \begin{cases}
+    g_1 \pare{x_0} = 0, \\
+    g_1 \pare{x_1} = 0, \\
+    g'_1 \pare{x_0} = 0, \\
+    g'_1 \pare{x_1} = 1.
+\end{cases} \]
+设$\displaystyle h_0\pare{x} = \pare{x-x_0}^2 \pare{\alpha_0 + \alpha_1 x}$, 可得
+\[ h_0\pare{x} = \pare{1+2\frac{x-x_0}{x_1-x_0}}\pare{\frac{x-x_1}{x_0-x_1}}^2. \]
+类似有
+\[ h_1\pare{x} = \pare{1+2\frac{x-x_0}{x_0-x_1}}\pare{\frac{x-x_0}{x_1-x_0}}^2. \]
+设$g_0\pare{x} = \gamma_1 \pare{x-x_0}\pare{x-x_1}^2$, 可得
+\[ g_0\pare{x} = \pare{x-x_0}\pare{\frac{x-x_1}{x_0-x_1}}^2. \]
+类似有
+\[ g_1\pare{x} = \pare{x-x_1}\pare{\frac{x-x_0}{x_1-x_0}}^2. \]
+若$f\in C^{\pare{4}}\brac{a,b}$, 则
+\[ R\pare{x} = f\pare{x} - H\pare{x} = \frac{f^{\pare{4}}\pare{\xi}}{4!}\pare{x-x_0}^2\pare{x-x_1}^2. \]
+\begin{proof}
+    设
+    \[ g\pare{t} = f\pare{t} - H\pare{t} - \pare{f\pare{x} - H\pare{x}} \frac{\pare{t-x_0}^2\pare{t-x_1}^2}{\pare{x-x_0}^2\pare{x-x_1}^2}. \]
+    $g$的零点至少有$\curb{x_0,x_1,x_2}$, 从而$g'$的零点至少有$\curb{x_0,*,*,x_1}$. 故必定有某处$g^{\pare{4}}\pare{\xi} = 0$, 此处
+    \[ f^{\pare{4}}\pare{\xi} = \pare{f\pare{x} - H\pare{x}}\frac{4!}{\pare{x-x_0}^2\pare{x-x_1}^2}. \qedhere \]
+\end{proof}
+
+% subsubsection 最简单情形 (end)
+
+\subsubsection{一般情形} % (fold)
+\label{ssub:一般情形}
+
+\begin{theorem}
+    若$f\in C^{\pare{1}}\brac{a,b}$, 则在$x_0,x_1,\cdots,x_n$上有不超过$2n+1$阶的多项式
+    \[ H_{2n+1}\pare{x} = \sum_{j=0}^n f\pare{x_j}h_j\pare{x} + \sum_{j=0}^n f'\pare{x_j}\tilde{h}_j\pare{x} \]
+    满足在这些点处$f=H_{2n+1}$, $f'=H'_{2n+1}$, 其中
+    \[ h_j\pare{x} = \pare{1-2\pare{x-x_j}l'_j\pare{x_j}}l_j^2\pare{x},\quad \tilde{h}_j\pare{x} = \pare{x-x_j}l_j^2\pare{x}, \]
+    且
+    \[ l_j\pare{x} = \prod_{\stackrel{\scriptstyle k=0}{k\neq j}}^n \frac{x-x_k}{x_j - x_k}. \]
+    此外, 若$f\in C^{\pare{2n+2}}\brac{a,b}$, 则有
+    \[ f\pare{x} = H_{2n+1}\pare{x} + \frac{f^{\pare{2n+2}}\pare{\xi}}{\pare{2n+2}!}\pare{x-x_0}^2 \cdots \pare{x-x_n}^2. \]
+\end{theorem}
+\begin{proof}
+    注意到$\displaystyle l_j\pare{x_k} = \begin{cases}
+        0, & j \neq k, \\
+        1, & j = k.
+    \end{cases}$ 且
+    \[ \left.\+dxd{l_j\pare{x}}\right\vert_{x-x_j} = \sum_{\stackrel{\scriptstyle k=0}{k\neq j}} \rec{x_j - x_k}. \]
+    则$l$和$l'$显然是相应齐次边界条件的响应.
+\end{proof}
+\begin{proof}[误差的证明]
+    设
+    \[ g\pare{t} = f\pare{t} - H_{2n+1}\pare{t} - \pare{f\pare{x} - H_{2n+1}\pare{x}}\frac{\pare{t-x_0}^2\cdots \pare{t-x_n}^2}{\pare{x-x_0}^2\cdots \pare{x-x_n}^2}. \]
+    从而$g'$有$2n+2$个互不相同的零点, 故存在某点满足$g^{\pare{2n+2}}\pare{\xi} = 0$.
+\end{proof}
+\begin{theorem}
+    满足上述条件的$H_{2n+1}$是唯一的.
+\end{theorem}
+\begin{proof}
+    否则令$D\pare{x} = H_{2n+1}\pare{x} - P_{2n+1}\pare{x}$, 则$D\pare{x}$不超过$2n+1$阶且满足
+    \[ D\pare{x_0} = \cdots = D\pare{x_n} = 0, \quad D'\pare{x_0} = \cdots = D'\pare{x_n} = 0. \]
+    从而$\pare{x-x_0}^2\cdots\pare{x-x_n}^2\divs D\pare{x}$.
+\end{proof}
+\begin{ex}
+    设$f\pare{-1} = 0$, $f\pare{1} = 4$, $f'\pare{-1} = 2$, $f'\pare{1} = 0$. 构造相应的Hermite多项式.
+\end{ex}
+\begin{ex}
+    设$f\pare{x_0} = y_0$, $f\pare{x_1} = y_1$, $f'\pare{x_0} = \tilde{y}_0$, 且$x_0 \neq x_1$. 构造二次插值多项式满足上述条件, 并确定其误差.
+\end{ex}
+\begin{solution}
+    可设
+    \[ p\pare{x} = y_0 s_0\pare{x} + y_1 s_1\pare{x} + \tilde{y}_0 \tilde{s}_0\pare{x}. \]
+    其中
+    \[ \begin{cases}
+        s_0\pare{x_0} = 1, \\
+        s_0\pare{x_1} = 0, \\
+        s'_0\pare{x_0} = 0,
+    \end{cases}\quad \begin{cases}
+        s_1\pare{x_0} = 0, \\
+        s_1\pare{x_1} = 1, \\
+        s'_1\pare{x_0} = 0,
+    \end{cases}\quad \begin{cases}
+        \tilde{s}_0\pare{x_0} = 0, \\
+        \tilde{s}_0\pare{x_1} = 0, \\
+        \tilde{s}'_0\pare{x_0} = 1.
+    \end{cases} \]
+    可得
+    \begin{align*}
+        & s_0\pare{x} = \frac{\pare{2x_0 - x_1 - x}\pare{x-x_1}}{\pare{x_0 - x_1}^2}, \\
+        & s_1\pare{x} = \pare{\frac{x-x_0}{x_1-x_0}}^2, \\
+        & \tilde{s}_0\pare{x} = \frac{\pare{x-x_0}\pare{x-x_1}}{x_0 - x_1}.
+    \end{align*}
+    唯一性容易证明. 对于误差有
+    \[ R\pare{x} = f\pare{x} - P\pare{x} = \frac{f'''\pare{\xi}}{3!}\pare{x-x_0}^2\pare{x-x_1}. \]
+    这可以通过定义
+    \[ g\pare{t} = f\pare{t} - P\pare{t} - \pare{f\pare{x} - P\pare{x}}\frac{\pare{t-x_0}^2\pare{t-x_0}}{\pare{x-x_0}^2\pare{x-x_1}}. \qedhere \]
+\end{solution}
+
+% subsubsection 一般情形 (end)
+
+% subsection hermite插值 (end)
+
+\subsection{用Newton插值构造Hermite插值} % (fold)
+\label{sub:用newton插值构造hermite插值}
+
+对$\pare{x_0,f\pare{x_0},f'\pare{x_0}}, \pare{x_1,f\pare{x_1},f'\pare{x_1}},\cdots, \pare{x_n, f\pare{x_n}, f'\pare{x_n}}$定义
+\[ z_0 = z_1 = x_0,\cdots,z_{2n} = z_{2n+1} = x_n, \]
+有
+\[ \lim_{z_1\rightarrow z_0} f\brac{z_0,z_1} = f'\pare{x_0},\cdots \lim_{z_{2n+1}\rightarrow z_{2n}}f\brac{z_{2n},z_{2n+1}} = f'\pare{z_{2n}} = f'\pare{x_n}. \]
+用$f'\pare{x_0},\cdots,f'\pare{x_n}$替换$f\brac{z_0,z_1},\cdots,f\brac{z_{2n},z_{2n+1}}$再用Newton插值多项式可得Hermite多项式
+\[ H_{2n+1}\pare{x} = f\brac{z_0} + \sum_{k=0}^{2n+1} f\brac{z_0,\cdots,z_k}\pare{x-z_0}\cdots \pare{x-z_{k-1}}. \]
+\begin{ex}
+    已知$f\pare{x_0} = y_0$, $f\pare{x_1} = y_1$, $f'\pare{x_0} = \tilde{y}_0$. 试通过Newton插值多项式构造Hermite插值多项式$H\pare{x}$. 定义$z_0 = z_1 = x_0$, $z_2 = x_1$. 定义
+    \[ \lim_{y_1\rightarrow y_0} f\brac{y_1,y_0} = f'\pare{y_0}. \]
+    则Newton插值多项式为
+    \begin{align*}
+        p\pare{x} &= f\brac{z_0} + f\brac{z_0,z_1}\pare{x-z_0} + f\brac{z_0,z_1,z_2}\pare{x-z_0}\pare{x-z_1},\\
+        f\brac{z_0} &= y_0,\quad f\brac{z_0,z_1} = \tilde{y}_0,\\
+        f\brac{z_0,z_1,z_2} &= \frac{f\brac{z_1,z_2} - f\pare{z_0,z_1}}{z_2 - z_0} = \frac{\displaystyle \frac{f\pare{z_2} - f\pare{z_1}}{z_2 - z_1} + \tilde{y}_0}{x_1 - x_0} = \frac{\displaystyle \frac{y_1 - y_0}{z_2 - z_1} + \tilde{y}_0}{x_1 - x_0}.
+    \end{align*}
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.45 13(两种方法, 构造以及Newton, 并证明误差), p.46 15(证明误差, 尝试Newton构造)
+
+% paragraph 作业 (end)
+
+% subsection 用newton插值构造hermite插值 (end)
+
+\subsection{分段插值} % (fold)
+\label{sub:分段插值}
+
+\subsubsection{Runge现象} % (fold)
+\label{ssub:runge现象}
+
+\begin{ex}
+    对于$\displaystyle f\pare{x} = \rec{1+25x^2}$, $x\in \brac{-1,1}$, 可以构造$10$阶的插值多项式$L_{10}$逼近之. 在$x=0$附近$L_{10}$逼近较好, 而$x = \pm 1$附近有振荡. 这是由于高阶多项式不稳定, 导致舍入误差在计算过程中被放大和扩散.
+\end{ex}
+
+% subsubsection runge现象 (end)
+
+\subsubsection{分段插值} % (fold)
+\label{ssub:分段插值}
+
+将计算区域分为若干小区间, 每个小区间上用低阶多项式逼近, 最常用的是线性分段插值. 相应的误差为
+\[ \abs{f\pare{x} - P\pare{x}} = \abs{\frac{f''\pare{\xi}}{2!}\pare{x-x_i}\pare{x-x_{i+1}}}. \]
+\begin{ex}
+    在$\brac{0,1}$内分段插值逼近$f=e^x$, 设步长$h$, 则由
+    \[ R = \frac{e^\xi}{2}\abs{\pare{x-jh}\pare{x-\pare{j+1}h}} \le \rec{8}eh^2 \le 10^{-6} \]
+    可反解出$h$.
+\end{ex}
+
+% subsubsection 分段插值 (end)
+
+% subsection 分段插值 (end)
+
+% section 插值 (end)
+
+\end{document}

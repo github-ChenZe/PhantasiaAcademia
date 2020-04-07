@@ -1,0 +1,66 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'UniVelocQ.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{233.82829321bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,2.24864323)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{UniVelocQ.pdf}}%
+    \put(-0.1197685,0.91163554){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+vv$}}}%
+    \put(-0.07440786,0.70427253){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$e$}}}%
+    \put(-0.15799776,0.33490738){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$vt$}}}%
+    \put(-0.04718493,0.34138737){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{UniVelocQ.pdf}}%
+    \put(0.52954332,0.66539204){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+vr$}}}%
+    \put(1.04147056,1.55316461){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\rho,t$}}}%
+    \put(0.12636327,2.15028122){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{UniVelocQ.pdf}}%
+    \put(0.14580356,1.06186286){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\theta$}}}%
+    \put(0.14580356,1.06186286){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\theta$}}}%
+    \put(0.40698418,1.31846129){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+v{\+gr}$}}}%
+  \end{picture}%
+\endgroup%

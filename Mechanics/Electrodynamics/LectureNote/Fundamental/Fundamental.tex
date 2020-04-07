@@ -1,0 +1,811 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+
+\begin{document}
+
+\section{电磁场的基本规律} % (fold)
+\label{sec:电磁场的基本规律}
+
+\subsection{电荷守恒} % (fold)
+\label{sub:电荷守恒}
+
+\subsubsection{电荷量的分布} % (fold)
+\label{ssub:电荷量的分布}
+
+可以引入体/面/线电荷分布,
+\[ Q\pare{t} = \iiint\rd{V}\ \rho\pare{\+vr,t},\quad \iint \rd{S}\ \sigma\pare{\+vr,t},\quad \int \rd{l}\ \lambda\pare{\+vr,t}. \]
+\begin{cenum}
+    \item $\sigma = \rho d_\perp$, $\lambda = \rho S_\perp$.
+    \item $\displaystyle \rho\pare{\+vr,t} = \sum_k q_k \delta\pare{\+vr - \+vr_k\pare{t}}$.
+\end{cenum}
+
+% subsubsection 电荷量的分布 (end)
+
+\subsubsection{电流分布} % (fold)
+\label{ssub:电流分布}
+
+$I\pare{t}$总是指通过某一个平面的电流强度.
+\[ I\pare{t} = \iint_\Sigma \rd{\+v\sigma}\cdot \+vj\pare{\+vr,t} = \int \rd{\+vl} \cdot \pare{\+v\kappa\times \+vn}. \]
+后者对面电流适用,
+\[ d_\perp \Delta l \cdot j\cos\theta = j d_\perp \Delta l_\perp = \kappa \Delta l_\perp = \Delta l \cdot \pare{\+v\kappa \times \+vn}. \]
+考虑到载流子则有
+\[ \+vj = \sum q \+vv,\quad \+v\kappa = \sum \sigma \+vv,\quad I = \lambda \+vv. \]
+
+% subsubsection 电流分布 (end)
+
+\subsubsection{电荷守恒} % (fold)
+\label{ssub:电荷守恒}
+
+电荷守恒要求
+\begin{align*}
+    -\+dtdQ &= I \\ \Rightarrow-\+dtd{}\iint\rd{V}\rho\pare{\+vr,t} &= -\iiint\rd{V}\ \+DtD{}\rho\pare{\+vr,t} = \oiint_{\partial V}\rd{\+v\sigma} \cdot \+vj = \iiint\rd{V}\ \div \+vj \\
+    \Rightarrow \div \+vj\pare{\+vr,t} &= -\+DtD{}\rho\pare{\+vr,t}.
+\end{align*}
+
+% subsubsection 电荷守恒 (end)
+
+% subsection 电荷守恒 (end)
+
+\subsection{真空中的Maxwell方程组} % (fold)
+\label{sub:真空中的maxwell方程组}
+
+\subsubsection{实物粒子的动力学方程} % (fold)
+\label{ssub:实物粒子的动力学方程}
+
+$\displaystyle \+vF = \+dtd{\+vp}$, 其中$\displaystyle \+vp = \gamma m\+vv = \frac{m\+vv}{\sqrt{1-\beta^2}}, \beta = \frac{\+vv}{c}$. 因此
+\begin{align*}
+    \+vF &= \+dtd{}\pare{\gamma m \+vv} = \gamma m\+dtd{\+vv} + \+dtd{\gamma}m\+vv,\\
+    \+dtd{}\rec{\gamma^2} &= -\frac{2}{\gamma^3} \+dtd{\gamma} = \+dtd{}\pare{1-\frac{\+vv\cdot \+vv}{c^2}} = -\frac{2\+vv\cdot \+va}{c^2},\\
+    \Rightarrow \+dtd{\gamma} &= \gamma^3 \frac{\+vv\cdot \+va}{c^2}. \\
+    \+vF &=  \gamma m\brac{\+va + \gamma^2 \pare{\+v\beta \cdot \+va}\+v\beta}.
+\end{align*}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{DeltaGDecomp}
+\end{figure}
+任何变化率都可分解为垂直于矢量和平行于矢量的两部分, 平行部分
+\[ \+vG \cdot \+dtd{\+vG} = G\+dtdG, \]
+垂直部分
+\[ \+dtd{\+vG} = \+v\omega \times \+vG. \]
+\begin{cenum}
+    \item 若$\+vF\perp \+vv$, 则$\+vF = \gamma m\+va$.
+    \item 如$\+vF\parallelsum \+vv$, 则$\+vF = \gamma^3 m\+va$, 因为
+    \[ \+vF = \gamma^3 m\brac{\rec{\gamma^2} \+va + \beta^2 \+va}. \]
+    \item 相对论能量$\displaystyle \+cE = \gamma mc^2 \frac{mc^2}{\sqrt{1-\beta^2}}$, $\+vp = \gamma m\+vv$,
+\[ \+vv = \frac{c^2 \+vp}{\+cE},\quad \+cE^2 = p^2c^2 + m^2c^4,\quad 2\+cE\+dtd{\+cE} = 2c^2 \+vp\cdot \+dtd{\+vp} = 2\+cE\+vv\cdot \+vF. \]
+    \item $\displaystyle \+vF \cdot \+vv = \+dtd{\+cE} = \+dtd{T}$, $T = \+cE-mc^2$.
+\end{cenum}
+
+% subsubsection 实物粒子的动力学方程 (end)
+
+\subsubsection{Lorentz力} % (fold)
+\label{ssub:lorentz力}
+
+$\displaystyle \+vF = q\+vE + q\+vv\times \+vB = \iiint \rd{V}\ \+vf$. 力密度
+\[ \+vf = \rho \+vE + \+vj\times \+vB. \]
+
+% subsubsection lorentz力 (end)
+
+\subsubsection{Maxwell方程组(场的动力学)} % (fold)
+\label{ssub:maxwell方程组}
+
+\vspace{-\baselineskip}
+\[ \displaystyle \begin{array}{lcclc}
+    \displaystyle \div \+vE = \frac{\rho}{\epsilon_0} & \text{(EG)} &&\displaystyle  \curl \+vE = -\+DtD{\+vB} & \text{(F)} \\
+    \displaystyle \div \+vB = 0 & \text{(BG)} &&\displaystyle  \curl \+vB = \mu_0 \+vj + \mu_0\epsilon_0 \+DtD{\+vE} & \text{(A/M)}
+\end{array} \]
+\begin{cenum}
+    \item 位移电流密度$\displaystyle \+vj_d = \epsilon_0 \+DtD{\+vE}$.
+    \item 真空中的光速$\displaystyle c = \rec{\sqrt{\epsilon_0\mu_0}}$.
+\end{cenum}
+\begin{ex}
+    证明电荷守恒,
+    \begin{align*}
+        0 = \div\pare{\curl \+vB} &= \mu_0 \div \+vj + \mu_0 \epsilon_0 \+DtD{}\pare{\div \+vE} \\
+        &\xlongequal{\text{(EG)}} \mu_0 \div \+vj + \mu_0 \+DtD{\rho}.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    若在某区域处有面电荷$\sigma$和体电荷$\rho$, 但是无面电荷和点电荷. 则
+    \[ \rho\pare{\+vr,t} = \rho_{\text{上}} \pare{\+vr,t} \Theta\pare{z} + \rho_{\text{下}} \pare{\+vr,t} \Theta\pare{-z} + \sigma\pare{\+vr,t} \delta\pare{z}. \]
+    电场为
+    \[ \+vE\pare{\+vr,t} = \+vE_{\text{上}}\pare{\+vr,t} \Theta\pare{z} + \+vE_{\text{下}}\pare{\+vr,t}\Theta\pare{-z}. \]
+    磁场为
+    \[ \+vB\pare{\+vr,t} = \+vB_{\text{上}}\pare{\+vr,t} \Theta\pare{z} + \+vB_{\text{下}}\pare{\+vr,t}\Theta\pare{-z}. \]
+    将散度展开,
+    \begin{align*}
+        \div\brac{\+vf\pare{\+vr}\Theta\pare{z}} &= \pare{\div \+vf} \Theta\pare{z} + \underbrace{\brac{\grad \Theta\pare{z}}}_{\+uz \delta \pare{z}}\cdot \+vf\pare{\+vr}. \\
+        \div\brac{\+vf\pare{\+vr}\Theta\pare{-z}} &= \pare{\div \+vf} \Theta\pare{-z} + \underbrace{\brac{\grad \Theta\pare{-z}}}_{-\+uz\delta\pare{-z}}\cdot \+vf\pare{\+vr}. \\
+        \div\brac{\+vf\Theta\pare{\pm z}} &= \pare{\div \+vf} \Theta\pare{\pm z} \pm \+uz\cdot \+vf \delta\pare{\+vz}, \\
+        \curl\brac{\+vf\Theta\pare{\pm z}} &= \pare{\curl \+vf} \Theta\pare{\pm z} \pm \+uz\times \+vf\delta\pare{z}. \\
+        \div \+vE &= \pare{\div \+vE_{\text{上}}}\Theta\pare{z} + \pare{\div \+vE_{\text{下}}}\Theta\pare{-z} + \+uz\cdot\brac{\+vE_{\text{上}} - \+vE_{\text{下}}}\delta\pare{z}\\
+        &= \frac{\rho}{\epsilon_0} = \frac{\rho_{\text{上}}}{\epsilon_0} \pare{\+vr,t} \Theta\pare{z} + \frac{\rho_{\text{下}}}{\epsilon_0} \pare{\+vr,t} \Theta\pare{-z} + \frac{\sigma}{\epsilon_0}\pare{\+vr,t} \delta\pare{z}.\\
+        \Rightarrow \+uz\cdot \pare{\+vE_{\text{上}} - \+vE_{\text{下}}} &= \frac{\sigma}{\epsilon_0}.\\
+        \curl \+vE &=  \pare{\curl \+vE_{\text{上}}}\Theta\pare{z} + \pare{\curl \+vE_{\text{下}}}\Theta\pare{-z} + \cancelto{0}{\+uz\times\brac{\+vE_{\text{上}} - \+vE_{\text{下}}}\delta\pare{z}}\\
+        &= -\+DtD{\+vB} = \pare{-\+DtD{\+vB_{\text{上}}}}\Theta\pare{z} + \pare{-\+DtD{\+vB_{\text{下}}}} \Theta\pare{-z}, \\
+        \Rightarrow \+uz\times\pare{\+vE_{\text{上}} - \+vE_{\text{下}}} &= 0.
+    \end{align*}
+\end{ex}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{BoundaryCond}
+\end{figure}
+边值关系为
+\[ \begin{cases}
+    \displaystyle \+un\cdot\pare{\+vE_2 - \+vE_1} = \frac{\sigma}{\epsilon_0},\quad \+un\times \pare{\+vE_2 - \+vE_1} = 0, \\[1em]
+    \+un\cdot\pare{\+vB_2 - \+vB_1} = 0,\quad \+un\times \pare{\+vB_2 - \+vB_1} = \mu_0 \+v\kappa.
+\end{cases} \]
+有法则
+\begin{resume}
+    \begin{cenum}
+    \item $\grad \rightarrow \+un_{1\rightarrow 2}$, $\+vF\rightarrow \+vF_2 - \+vF_1$,
+    \item 其余场$\rightarrow 0$, 其余源将体密度转化为面密度.
+    \end{cenum}
+\end{resume}
+\begin{ex}
+    $\displaystyle \div \+vj = -\+DtD\rho \Rightarrow \+vn\cdot\pare{\+vj_2 - \+vj_1} = -\+DtD{\sigma}$.
+\end{ex}
+
+% subsubsection maxwell方程组 (end)
+
+% subsection 真空中的maxwell方程组 (end)
+
+\subsection{介质中的Maxwell方程组} % (fold)
+\label{sub:介质中的maxwell方程组}
+
+\subsubsection{电极化强度} % (fold)
+\label{ssub:电极化强度}
+
+$\+vP = \sum \+vp_{\text{分子}}/\Delta V = n\+vp = nq\+vl$. 其中
+\[ n = \frac{\Delta N}{\Delta V},\quad \+vp = \sum \+vp_{\text{分子}}/\Delta N. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{DipoleBound}
+\end{figure}
+极化电荷$\displaystyle Q' = -\oiint_{\partial V} \rd{\+v\sigma}\cdot \+vP$,
+\[ \rho'_P = -\div \+vP,\quad \sigma'_P \+un\cdot \pare{\+vP_1 - \+vP_2}. \]
+注意到边缘偶极子的在外侧的电荷为
+\[ nq\+vl\cdot \rd{\+v\sigma} = \+vP\cdot \rd{\+v\sigma}. \]
+极化电流为
+\[ I_P = \+dtd{} \iint_{\Sigma} \+vP\cdot\rd{\+v\sigma} = \iint_\Sigma \rd{\+v\sigma}\cdot \+DtD{\+vP} \Rightarrow \+vj_p = \+DtD{\+vP}. \]
+
+% subsubsection 电极化强度 (end)
+
+\subsubsection{磁化强度} % (fold)
+\label{ssub:磁化强度}
+
+$\+vM = \sum \+vm_{\text{分子}}/\Delta V = n\+vm = nI\+vS$.
+\begin{figure}
+    \centering
+    \incfig{6cm}{MagDipoleBound}
+\end{figure}
+磁化电流
+\[ I_M = \oint_{\partial \Sigma} \rd{\+vl}\cdot \+vM, \]
+从而
+\[ \+vj_M = \curl \+vM,\quad \kappa_M = \+vn\times \pare{\+vM_2 - \+vM_1}. \]
+注意到边缘偶极子贡献的电流为
+\[ nI\+vS\cdot \rd{\+vl} = \+v\mu \cdot \+vl. \]
+从而Maxwell方程组应写为
+\begin{align*}
+    \epsilon_0 \div \+vE &= \rho = \underbrace{\rho_0}_{\text{自由}} + \underbrace{\rho'}_{\text{束缚}} = \rho_0 - \div \+vP. \\
+    &\Rightarrow \div \pare{\epsilon_0\+vE + \+vP} = \rho_0.
+\end{align*}
+磁场的相应方程为
+\begin{align*}
+    \rec{\mu_0}\curl \+vB &= \+vj + \epsilon_0 \+DtD{\+vE} = \underbrace{\+vj_0}_{\text{自由}} + \underbrace{\+vj_M}_{\text{磁化}} + \underbrace{\+vj_P}_{\text{极化}} + \epsilon_0 \+DtD{\+vE} \\
+    &= \+vj_0 + \curl \+vM + \+DtD{\+vP} + \epsilon_0 \+DtD{\+vE}. \\
+    & \Rightarrow \curl \+vH = \mu_j \+vJ_0 + \+DtD{\+vD}.
+\end{align*}
+
+% subsubsection 磁化强度 (end)
+
+\subsubsection{物质中的Maxwell方程组} % (fold)
+\label{ssub:物质中的maxwell方程组}
+
+\vspace{-\baselineskip}
+\[ \displaystyle \begin{array}{lcclc}
+    \displaystyle \div \+vD = \frac{\rho_0}{\epsilon_0} & \text{(EG)} &&\displaystyle  \curl \+vE = -\+DtD{\+vB} & \text{(F)} \\
+    \displaystyle \div \+vB = 0 & \text{(BG)} &&\displaystyle  \curl \+vH = \mu_0 \+vj_0 + \mu_0\epsilon_0 \+DtD{\+vD} & \text{(A/M)}
+\end{array} \]
+\begin{cenum}
+    \item 辅助矢量:
+    \begin{cenum}
+        \item 电位移矢量$\+vD = \epsilon_0 \+vE + \+vP$,
+        \item $\+vH$矢量, $\displaystyle \+vH = \frac{\+vB}{\mu_0} - \+v\mu$.
+    \end{cenum}
+    \item 位移电流: $\displaystyle \+vj_D = \+DtD{\+vD} = \epsilon_0 \+DtD{\+vE} + \+DtD{\+vP}$.
+\end{cenum}
+物质中的场并非实际的微观场, 而是小区域内的平均值.
+\par
+A/M蕴含自由电荷和束缚电荷守恒(不考虑电离与复合),
+\begin{align*}
+    &0 = \div\pare{\curl \+vH} = \div \+vj_0 + \partial_t \div \+vD = \div \+vj_0 + \partial_t \rho_0. \\
+    &\rho' = -\div \+vP,\quad \+vj = \+vj_M + \+vj_P = \curl \+vM + \partial_t \+vP. \\
+    &\div \+vj' = \div\pare{\curl \+vM} + \partial_t \div \+vP = 0 - \partial_t \rho'.
+\end{align*}
+还有边值关系
+\begin{resume}
+    \[ \begin{aligned}
+        &\+un \cdot \pare{\+vD_2 - \+vD_1} = \sigma_0, && \+un\times\pare{\+vE_2 - \+vE_1} = 0, \\
+        &\+un \cdot \pare{\+vB_2 - \+vB_1} = 0,&& \+un\times\pare{\+vH_2 - \+vH_1} = \+v\kappa.
+    \end{aligned} \]
+\end{resume}
+
+% subsubsection 物质中的maxwell方程组 (end)
+
+\subsubsection{电磁性能方程} % (fold)
+\label{ssub:电磁性能方程}
+
+$\+vD = \+vD\curb{\+vE,\+vB}$, $\+vH = \+vH\curb{\+vE,\+vB}$. 假定介质非铁磁性, 且介质静止. 设
+\[ \+vD_i\pare{\+vr,\omega} = \epsilon_{ij}^{\pare{1}}\pare{\+vr,\omega} \+vE_j\pare{\+vr,\omega} + \epsilon_{ijk}^{\pare{2}}\pare{\+vr,\omega} \+vE_j\pare{\+vr,\omega} \+vE_k\pare{\+vr,\omega}. \]
+若$\epsilon$和$\+vr$有关, 则谓之非均匀介质. 若$\epsilon$并非迷向张量(标量), 则谓之非各向同性介质. 若存在$E$的二阶或以上的项, 则谓之非线性介质. 若$\epsilon$与$\omega$有关, 则谓之色散介质.
+\par
+简单介质(静止)满足
+\begin{cenum}
+    \item 静态场: $\+vD\pare{\+vr} = \+v\epsilon\pare{\+vr} \+vE\pare{\+vr}$, $\+vB\pare{\+vr} = \mu\pare{\+vr} \+vH\pare{\+vr}$.
+    \item 时谐场: $\+vD\pare{\+vr,\omega} = \epsilon\pare{\+vr,\omega} \+vE\pare{\+vr,\omega}$.
+\end{cenum}
+
+% subsubsection 电磁性能方程 (end)
+
+\subsubsection{导电介质} % (fold)
+\label{ssub:导电介质}
+
+Ohm定律表明, $\+vj_0 = \sigma \+vf$, 其中$\+vf$为单位电荷受力. 可写为$\+vj_0 = \sigma \+vE$. 对于均匀的导体,
+\[ \div \+vj_0 = \sigma \div \+vE = \frac{\sigma}{\epsilon_0} \div \+vD = \frac{\sigma}{\epsilon}\rho_0 = -\partial_t\rho_0. \]
+从而$\rho_0\pare{\+vr,t} = \rho_0\pare{\+vr,0}e^{-t/\tau}$, $t=\epsilon/\sigma$. 故理想导体中无静电荷存在. 理想导体内部
+\[ \sigma = \infty,\quad \+vE_{\text{内}} = \frac{\+vj_0}{\sigma} = 0, \]
+从而
+\[ 0 = \curl \+vE_{\text{内}} = -\partial_t \+vB_{\text{内}}\Rightarrow \+vB_{\text{内}}\pare{\+vr,t} = \+vB_{\text{内}}\pare{\+vr,t=0}. \]
+从而$\+vB\pare{\+vr,t}$被冻结. A/M方程表明
+\[ \+vj_0 = \curl \+vH - \partial_t \+vD. \]
+若初始时$\+vB = 0$, 则一直有$\+vH = 0$, 电流只能存在于导体表面.
+
+% subsubsection 导电介质 (end)
+
+% subsection 介质中的maxwell方程组 (end)
+
+\subsection{电磁势} % (fold)
+\label{sub:电磁势}
+
+\subsubsection{定义} % (fold)
+\label{ssub:定义}
+
+在Maxwell方程组
+\[ \div \+vE = \rho/\epsilon_0,\quad \curl \+vE = -\partial_t \+vB,\quad \div \+vB = 0,\quad \curl \+vH = \mu_0 \+vj + \rec{c^2}\partial_t \+vE \]
+中引入$\+vB = \curl \+vA$, 则F表明
+\[ 0 = \curl \+vE + \partial_t \+vB = \curl\pare{\+vE + \partial_t \+vA} = -\grad \varphi. \]
+故定义
+\[ \resumath{\+vE = -\grad \varphi - \partial_t \+vA,\quad \+vB = \curl \+vA.} \]
+\begin{cenum}
+    \item 不确定性: 若$\curl \+vA' = \+vB = \curl \+vA, -\grad \varphi' - \partial_t \+vA' = \+vE = -\grad \varphi - \partial_t \+vA$, 则有
+    \[ \curl \pare{\+vA - \+vA'} = 0 \Rightarrow \+vA' - \+vA = \grad \psi', \]
+    以及
+    \[ \grad\pare{\varphi' - \varphi + \partial_t \psi'} = 0\Rightarrow \varphi' - \varphi = -\partial_t \psi. \]
+    从而相应的规范变换为
+    \[ \begin{cases}
+        \varphi' = \varphi - \partial_t \psi,\\
+        \+vA' = \+vA + \grad \psi.
+    \end{cases} \]
+    此种变换谓规范变换, $\psi$谓规范函数.
+\end{cenum}
+\par
+常用规范有
+\begin{cenum}
+    \item Coulomb规范: $\div \+vA = 0$.
+    \item Lorentz规范: $\displaystyle \div \+vA + \rec{c^2}\partial_t \varphi = 0$.
+\end{cenum}
+$\displaystyle \oint_C \+vA\cdot \rd{\+vl}$是规范不变的,
+\[ \oint_C \+vA'\cdot \rd{\+vl} = \oint_C \+vA\cdot \rd{\+vl} + \oint_C \grad \psi \cdot \rd{\+vl}. \]
+% subsubsection 定义 (end)
+
+\subsubsection{势方程} % (fold)
+\label{ssub:势方程}
+
+\vspace{-1.5\baselineskip}
+\begin{align*}
+    \frac{\rho}{\epsilon_0} &= \div \+vE = \div\pare{-\grad \varphi - \partial_t \+vA} = -\laplacian \varphi - \partial_t \div \+vA, \\
+    \mu_0 \+vj &= \curl \+vB - c^2 \partial_t \+vE = \curl\pare{\curl \+vA} - \rec{c^2}\partial_t\pare{-\grad\varphi -\partial_t \+vA} \\
+    &= \grad\pare{\div \+vA} - \laplacian \+vA + \rec{c^2}\grad \partial_t \varphi + \rec{c^2}\partial_t^2 \+vA.
+\end{align*}
+Maxwell方程可改写为
+\[ \begin{aligned}
+    & \laplacian \varphi && && +\partial_t \div \+vA && = -\frac{\rho}{\epsilon_0},\\
+    & \laplacian \+vA && -\rec{c^2}\partial_t^2 \+vA && -\grad\pare{\div \+vA + \rec{c^2}\partial_t\varphi} && = -\mu_0 \+vj.
+\end{aligned} \]
+可以凑成匹配Lorentz规范的形式,
+\[ \begin{aligned}
+    & \laplacian \varphi && -\rec{c^2}\partial_t^2 \varphi && +\partial_t \pare{\div \+vA + \rec{c^2}\partial_t \varphi} && = -\frac{\rho}{\epsilon_0},\\
+    & \laplacian \+vA && -\rec{c^2}\partial_t^2 \+vA && -\grad\pare{\div \+vA + \rec{c^2}\partial_t\varphi} && = -\mu_0 \+vj.
+\end{aligned} \]
+引入$\displaystyle \resumath{L = \div \+vA + \rec{c^2}\partial_t \varphi,\quad \Box = \grad^2 - \rec{c^2}\partial_t^2}$后则方程化为
+\[ \begin{cases}
+    \Box \varphi + \partial_t L = -\rho/\epsilon_0,\\
+    \Box \+vA - \grad \+vL = \mu_0 \+vJ.
+\end{cases} \]
+Coulomb规范下
+\[ \begin{cases}
+    \laplacian \varphi\pare{\+vr,t} = -\rho\pare{\+vr,t}/\epsilon_0,\\
+    \displaystyle \laplacian \+vA - \rec{c^2}\partial_t^2 \+vA = -\mu_0 \+vj + \rec{c^2}\grad \partial_t \varphi.
+\end{cases} \]
+此时$\varphi$可以直接解出,
+\[ \varphi\pare{\+vr,t} = \rec{4\pi\epsilon_0} \iiint\rd{V'} \frac{\rho\pare{\+vr,t}}{\+gr}. \]
+\begin{remark}
+    此处的超距作用只是表面的. 增加了$\+vA$的效应后, 电场仍然不会发生超距作用.
+\end{remark}
+第二式的右侧可写为
+\begin{align*}
+    &-\mu_0 \brac{\underbrace{-\grad \rec{4\pi}\iiint\rd{V'} \frac{\grad'\+v\cdot \+vj\pare{\+vr,t}}{\+gr}}_{\+vj_\parallel} + \underbrace{\curl \rec{4\pi} \iiint \rd{V'} \frac{\grad'\times \+vj\pare{\+vr,t}}{\+gr}}_{\+vj_\perp}}\\ &+ \rec{4\pi\epsilon_0 c^2} \grad \iiint \rd{V'} \frac{\partial_t \rho\pare{\+vr,t}}{\+gr}\pare{=\frac{\mu_0}{4\pi} \grad \iiint\rd{V'}\frac{-\grad'\+v\cdot \+vJ}{\+gr}}.
+\end{align*}
+故第二条方程可写为
+\[ \laplacian \+vA - \rec{c^2}\partial_t^2 \+vA = \Box \+vA = -\mu_0 \+vj_\perp. \]
+例如对于稳恒电流, $\div \+vj = 0$, $\laplacian \+vA = -\mu_0 \+vj$,
+\[ \+vA\pare{\+vr} = \frac{\mu_0}{4\pi} \iiint\rd{V'} \frac{\+vj\pare{\+vr'}}{\+gr}. \]
+Lorentz规范下, $\displaystyle L = \div \+vA + \rec{c^2}\partial_t \varphi = 0$, Maxwell方程组变为
+\[ \resumath{\Box \varphi = -\rho/\epsilon_0,\quad \Box \+vA = -\mu_0 \+vj.} \]
+\begin{figure}[ht]
+    \centering
+    \incfig{2.2cm}{UniVelocQ}
+\end{figure}
+\begin{ex}
+    对于匀速运动的点电荷,
+    \[ \rho\pare{\+vr,t} = e\delta\pare{x}\delta\pare{y}\delta\pare{z-vt},\quad \+vj\pare{\+vr,t} = \rho \+vv = ev\delta\pare{x}\delta\pare{y}\delta\pare{z-vt}\+uz. \]
+    不妨设
+    \[ \varphi = \varphi\pare{x,y,z-vt},\quad \+vA = \+vA\pare{x,y,z-vt}\+uz. \]
+    令$\xi = z-vt$, 有
+    \begin{align*}
+        \Box \varphi &= \+D{x^2}D{^2\varphi} + \+D{y^2}D{^2\varphi} + \+D{z^2}D{^2\varphi} - \rec{c^2}\+D{t^2}D{^2\varphi} \\
+        &= \+D{x^2}D{^2\varphi} + \+D{y^2}D{^2\varphi} + \rec{\gamma^2} \+D{\xi^2}D{^2\varphi}\\
+        &= -\rho/\epsilon_0 = -\frac{e}{\epsilon_0} \delta\pare{x}\delta\pare{y}\delta\pare{\xi}.
+    \end{align*}
+    类似有$\+vA$的方程, 故
+    \[ \begin{cases}
+        \Box \varphi = -\rho/\epsilon_0 = -e/\epsilon_0 \cdot \delta\pare{x}\delta\pare{y}\delta\pare{z}, \\
+        \Box \+vA = -\mu_0 \+vj = -\mu_0 ev \delta\pare{x}\delta\pare{y}\delta\pare{z-vt}\+uz.
+    \end{cases} \]
+    则$\+vA = \+vv/c^2\cdot \varphi$. 令$z' = \gamma \xi$, 则$\+vr' = \pare{x',y',z'} = \pare{x,y,\gamma,\xi}$, 则$\varphi$的方程可写作
+    \begin{align*}
+        \+D{x^2}D{^2\varphi} + \+D{y^2}D{^2\varphi} + \+D{z'^2}D{^2\varphi} = -\frac{\gamma e}{\epsilon_0} \delta\pare{x}\delta\pare{y}\delta\pare{z'}.
+    \end{align*}
+    立刻得到
+    \[ \varphi = \frac{\gamma e}{4\pi\epsilon_0 r'} = \frac{\gamma e}{4\pi\epsilon_0} \rec{\sqrt{x^2+y^2+\gamma^2\pare{z-vt}^2}},\quad \+vA = \frac{\+vv}{c^2}\varphi. \]
+    从而电磁场为
+    \begin{align*}
+        \+vE &= -\grad \varphi - \partial_t \+vA = -\+DxD{\varphi}\+ux - \+DyD{\varphi} \+uy - \pare{\+DzD\varphi + \frac{v}{c^2} \+DtD\varphi} \+uz. \\
+        \+vB &= \curl \+vA = \curl \frac{\+vv\varphi}{c^2} = \grad \varphi \times \frac{\+vv}{c^2} = \frac{\+vv}{c^2}\pare{-\grad \varphi - \partial_t \+vA}.\\
+        &= \frac{\+vv\times \+vE}{c^2}.\\
+        \+vE &= \frac{e\+v{\+gr}}{4\pi\epsilon_0 \+gr^3} \frac{1-\beta^2}{\pare{1-\beta^2\sin^2\theta}^{3/2}}.
+    \end{align*}
+\end{ex}
+
+% subsubsection 势方程 (end)
+
+% subsection 电磁势 (end)
+
+\subsection{能量守恒} % (fold)
+\label{sub:能量守恒}
+
+\subsubsection{定义} % (fold)
+\label{ssub:定义}
+
+典型的守恒方程如电荷守恒,
+\[ \iiint_V \rd{V}\ \brac{\partial_t \rho + \div \+vj} = 0 \Leftrightarrow \+dtd{}\iiint_V \rd{V}\ \rho + \oiint_{\partial V} \rd{\+vr}\cdot \+vj = 0. \]
+电磁场的\gloss{能量密度}记作$w$, \gloss{能流密度}记作$\+vS$. 可以认为有守恒律
+\[ -\partial_t w = \div \+vS + \+dtdu \Leftrightarrow -\+dtd{} \iiint_V \rd{V}\ w - \iiint_V \rd{V}\ \div \+vS = \+dtdU. \]
+其中$u$表示机械能密度, $U$表示机械能.
+\begin{align*}
+    \+dtdU &= \iiint_V \rd{V}\ \+vf\cdot \+vv = \iiint_V \rd{V} \ \pare{\rho \+vE + \+vj\times \+vB} \cdot \+vv \\
+    &= \iiint \rd{V} \rho \+vE\cdot \+vv = \iiint_V \+vE\cdot \+vJ \\
+    &\xlongequal{\mathrm{(A/M)}} \rec{\mu_0} \iiint_V \rd{V}\ \+vE\cdot \pare{\curl \+vB} - \epsilon_0 \iiint_V \rd{V}\ \+vE \cdot \partial_t \+vE \\
+    &= \rec{\mu_0} \iiint_V \rd{V}\ \brac{-\div\pare{\+vE\cdot \+vB} + \pare{\curl \+vE} \cdot \+vB} - \epsilon_0 \iiint_V \rd{V} \ \partial_t \pare{\half E^2} \\
+    &= \rec{\mu_0} \iiint_V \rd{V}\ \brac{-\div\pare{\+vE\cdot \+vB} - \pare{\partial_t \+vB} \cdot \+vB} - \epsilon_0 \iiint_V \rd{V} \ \partial_t \pare{\half E^2} \\
+    &= - \iiint_V \rd{V}\ \div\pare{\rec{\mu_0}\+vE\times \+vB} - \+dtd{} \iiint_V \rd{V}\ \brac{\half \epsilon_0 E^2 + \frac{B^2}{2\mu_0}}
+\end{align*}
+
+% subsubsection 定义 (end)
+
+\subsubsection{Poynting定理} % (fold)
+\label{ssub:poynting定理}
+
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{flalign*}
+    &\text{电磁场能量密度} && w = \half \epsilon_0 E^2 + \rec{2\mu_0} B^2, && \\
+    &\text{电磁场能流密度} && \+vS = \rec{\mu_0} \+vE\times \+vB. && \\
+    &\text{Poynting定理}  && \+dtdU = -\+dtdW - \oiint_{\partial V} \rd{\+v\sigma}\cdot \+vS, \\
+    & && \+vE\cdot \+vj = -\partial_t w - \div \+vS. \\
+    & && \+dtd{\pare{U+W}} = -\oiint_{\partial V} \rd{\+v\sigma}\cdot \+vS.
+\end{flalign*}
+\end{resume}
+特别地, 当无穷远处$S=o\pare{1/r^2}$时, 总体能量将守恒. 然而在电磁辐射存在时这一前提可能不成立.
+\par
+当区域内有电磁场存在时,
+\[ \iiint \rd{V} \frac{\+vj^2}{\sigma} + \+dtdW = -\oiint_{\partial V} \rd{\+v\sigma}\cdot \+vS. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{3cm}{Cable}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        通电导线内部$\displaystyle \+vE = \frac{I}{\pi a^2 \sigma} \+uz$, 表面$\displaystyle \+vB = \frac{\mu_0 I}{2\pi a} \+u\phi$. 则
+        \[ \+vS = \rec{\mu_0} \+vE\times \+vB = \frac{I^2}{2\pi^2a^3\sigma}\pare{-\+us}. \]
+        积分得
+        \[ -\oiint \rd{\+v\sigma}\cdot \+vS = \frac{I^2}{2\pi^2 a^3\sigma} \cdot 2\pi aL = I^2 \frac{L}{\pi a^2 \sigma} = I^2R.  \]
+    \end{ex}
+\end{sample}
+\begin{ex}[思考题]
+    以均匀带电球作为电子模型, 取$w_E = mc^2$, 电子运动时$\displaystyle w_B = \half mv^2$. 假设$v\ll c$, 求此时的动质量.
+\end{ex}
+
+% subsubsection poynting定理 (end)
+
+\subsubsection{Maxwell方程组的完备性} % (fold)
+\label{ssub:maxwell方程组的完备性}
+
+假设$\+vE\vert_{t=0}$和$\+vB\vert_{t=0}$给定, 边界条件给定, $\rho\pare{\+vr,t}$和$\+vj\pare{\+vr,t}$给定. 若有两组解, 则令$\+vE = \+vE_1 - \+vE_2$, $\+vB = \+vB_1 - \+vB_2$. 从而$\+vE$和$\+vB$满足无源的Maxwell方程组, 以及齐次的初始条件与边界条件.
+\begin{align*}
+    & -\+dtd{} \iiint_V \rd{V}\ \half \epsilon_0 \pare{E^2 + c^2B^2} = \rec{\mu_0}\oiint_{\partial V}\rd{\+v\sigma}\cdot \pare{\+vE\times \+vB}\\
+    &= \rec{\mu_0}\oiint_{\partial V}\rd{\sigma}\ \+un \cdot \pare{\+vE\times \+vB} \\
+    &= \rec{\mu_0}\oiint_{\partial V}\rd{\sigma}\ \+vB \cdot \pare{\+un \times \+vE} = \rec{\mu_0}\oiint_{\partial V}\rd{\sigma}\ \+vE \cdot \pare{\+vB \times \+un}.
+\end{align*}
+\begin{theorem}
+    若已知$\rho$及$\+vj$, 且$\+vE$和$\+vB$的初值给定, 则只需再给定边界的$\+vE_\tau$或$\+vB_\tau$即可唯一确定体积内的电磁场.
+\end{theorem}
+
+% subsubsection maxwell方程组的完备性 (end)
+
+\subsubsection{\texorpdfstring{$w$}{w}与\texorpdfstring{$S$}{S}的不确定性} % (fold)
+\label{ssub:w与s的不确定性}
+
+由$\displaystyle -\partial_t w - \div \+vS = \+vE\cdot \+vj = -\partial_t w' - \div \+vS'$. 从而只要
+\[ \partial_t \underbrace{\pare{w' - w}_\alpha} + \div \underbrace{\pare{\+vS' - \+vS}_\beta} = 0 = \partial_t \alpha + \div \beta \]
+即可保证新的$w$和$\+vS$仍为有效的能量和能流密度. 例如$\+vS$可任意添加一$\curl \+v\Phi$.
+
+% subsubsection w与s的不确定性 (end)
+
+% subsection 能量守恒 (end)
+
+\subsection{动量守恒} % (fold)
+\label{sub:动量守恒}
+
+\subsubsection{定义} % (fold)
+\label{ssub:定义}
+
+以$\+vp$表示力学动量, 则
+\begin{align*}
+    \+dtd{\+vp} &= \+vF = \iiint \rd{V}\ \+vf = \iiint_V \rd{V}\ \pare{\rho \+vE + \+vj\times \+vB} \\
+    &\xlongequal[\mathrm{A/M}]{\mathrm{EG}} \iiint_V \rd{V}\brac{\epsilon_0 \pare{\div \+vE} \+vE + \rec{\mu_0} \pare{\curl \+vB}\times \+vB - \epsilon_0 \pare{\partial_t \+vE}\times \+vB}.
+\end{align*}
+注意到
+\begin{align*}
+    -\epsilon_0 \pare{\partial_t \+vE}\times \+vB &= -\epsilon_0 \partial_t \pare{\+vE\times \+vB} + \epsilon_0 \+vE \times \partial_t \+vB\\ &= -\epsilon_0 \partial_t \pare{\+vE\times \+vB} - \epsilon_0 \+vE\times \pare{\curl \+vE}. 
+\end{align*}
+从而
+\begin{align*}
+    \+dtd{\+vp} &= -\epsilon_0 \+dtd{} \iiint_V \rd{V}\pare{\+vE\times \+vB} + \iiint_V \rd{V}\ \epsilon_0 \brac{\pare{\div \+vE} \+vE + \pare{\curl \+vE}\times \+vE} \\
+    &\phantom{= -\epsilon_0 \+dtd{} \iiint_V \rd{V}\pare{\+vE\times \+vB}\ } + \iiint_V \rd{V}\ \rec{\mu_0} \brac{\pare{\div \+vB} \+vB + \pare{\curl \+vB}\times \+vB}.
+\end{align*}
+再注意到
+\begin{align*}
+    \pare{\div \+vE}\+vE + \pare{\curl \+vE}\times \+vE &= \pare{\div \+vE} \+vE + \+vE\+v\cdot \grad \+vE - \half \grad \pare{\+vE\cdot \+vE} \\
+    &= \div \pare{\+vE\+vE - \half E^2 \tensor{I}}.
+\end{align*}
+可得
+\begin{align*}
+    \+dtd{\+vp} &= \iiint_V \rd{V}\ \+vf \\ &= -\+dtd{} \iiint_V \rd{V}\pare{\epsilon_0 \+vE\times \+vB} \\
+    &\phantom{= \ } - \iiint_V \rd{V}\ \div\brac{\pare{\half \epsilon_0 E^2 + \rec{2\mu_0}B^2}\tensor{I} - \pare{\epsilon_0 \+vE\+vE + \rec{\mu_0}\+vB\+vB}}.
+\end{align*}
+
+% subsubsection 定义 (end)
+
+\subsubsection{动量守恒} % (fold)
+\label{ssub:动量守恒}
+
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{flalign*}
+    &\text{电磁场动量密度} && \+vg = \epsilon_0 \+vE\times \+vB = \+vS/c^2, && \\
+    &\text{电磁场动量流密度} && \tensor{T} = \half \epsilon_0 \pare{E^2 + c^2B^2}\tensor{I} - \epsilon_0 \pare{\+vE\+vE + c^2 \+vB\+vB}. && \\
+    &\text{动量守恒}  && \+dtd{\+vp} = -\+dtd{\+vG} - \oiint_{\partial V}\rd{\+v\sigma}\cdot\tensor{T}, \\
+    & && -\partial_t \+vg = \div \tensor{T} + \+vf. \\
+    & && \+dtd{\pare{\+vp + \+vG}} = -\oiint_{\partial V}\rd{\+v\sigma}\cdot \tensor{T}.
+\end{flalign*}
+\end{resume}
+
+% subsubsection 动量守恒 (end)
+
+\subsubsection{\texorpdfstring{$T$}{T}的物理含义} % (fold)
+\label{ssub:t的物理含义}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{3cm}{TTensor}
+\end{figure}
+\begin{cenum}
+    \item $\rd{\sigma}\cdot \tensor{T}$表示由$\rd{\sigma}$流出去的动量.
+    \[ T_{ij} = \+ux_i \cdot \tensor{T}\cdot \+ux_j \begin{cases}
+        i=j: & \text{压力}, \\
+        i\neq j: & \text{剪切力.}
+    \end{cases} \]
+    \item $\displaystyle \+vF = \oiint \rd{\+v\sigma}\cdot\tensor{T} - \cancelto{0}{\underbrace{\+dtd{\+vG}}_{\text{稳恒}}}$. 故$-\+vT$谓\gloss{Maxwell应力张量}.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        $\+vE\pare{\+vr}$已知, 求应力.
+        \begin{align*}
+            \tensor{T} &= -\half \epsilon_0 E^2 \tensor{I} - \epsilon_0 \+vE\+vE. \\
+            \+vf_n &= -\+un\cdot \+vT = -\+un\cdot \half \epsilon_0 E^2 \pare{\tensor{I} - 2\+uE\+uE} \\
+            &= w\brac{2\pare{\+un\cdot \+uE} \+uE - \+un}. \\
+            \+vE &= E\+ux_3 \Rightarrow \+vf_n = w\brac{n_3 \+ux_3 - n_1\+ux_1 - n_2\+ux_2}. \\
+            \+vf_{\pm 3} &= \pm w\+ux_3, \\
+            \+vf_{\pm 1} &= \mp w\+ux_1, \\
+            \+vf_{\pm 2} &= \mp w\+ux_2.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于均匀带电球$\pare{Q,a}$, 求北半球受到的静电力.
+    \end{ex}
+    \begin{proof}[方法一]
+        $\displaystyle \+vF  = \iiint \+vE\,\rd{q}$, $\displaystyle \+vE = \frac{Q\+vr}{4\pi\epsilon_0 a^3}$, 只需计算$\+uz$方向的力,
+        \begin{align*}
+            \+vF &= \frac{Q}{4\pi\epsilon_0 a^3} \frac{Q}{4\pi a^3/3} \int_0^a r^3\,\rd{r}\ \int_0^{\pi/2} \sin\theta\cos\theta\,\rd{\theta}\ \int_0^{2\pi}\rd{\phi} \\
+            &= \frac{3Q^2}{64\pi\epsilon_0 a^2} = \frac{3}{16} \frac{Q^2}{4\pi\epsilon_0 a^2}. \qedhere
+        \end{align*}
+    \end{proof}
+    \begin{proof}[方法二]
+        $\displaystyle -\rd{\+v\sigma} \cdot \tensor{T}\cdot \+uz = -\rd{\sigma}\, \+un \cdot {\half \epsilon_0 E^2} \pare{\tensor{\+vI} - 2\+ur\+ur}\cdot \+uz$. 球面上
+        \begin{align*}
+            & E_1 = \frac{Q}{4\pi\epsilon_0 a^2}\Rightarrow w_1 = \half \epsilon_0 E^2 = \frac{Q^2}{32\pi\epsilon_0 a^4},\quad \+un_1 = \+ur. \\
+            & -\rd{\+v\sigma} \cdot \tensor{T}\cdot \+uz = -a^2\sin\theta\,\rd{\theta}\,\rd{\phi}\cdot w_1 \+ur\cdot\pare{\tensor{I} - 2\+ur\+ur}\cdot \+uz. \\
+            & F_1 = -\iint_{S_1} \rd{\+v\sigma}\cdot \tensor{T} \cdot \+uz = \rec{8} \frac{Q^2}{4\pi\epsilon_0 a^2}.
+        \end{align*}
+        圆盘上
+        \begin{align*}
+            & E_2 = \frac{Qr}{4\pi\epsilon_0 a^3} = \frac{r}{a}E_1 \Rightarrow  w_2 = \frac{r^2}{a^2}w_1,\quad \+un_2 = -\+uz. \\
+            & -\rd{\+v\sigma}\cdot \tensor{T} \cdot \+uz = -r\,\rd{r}\,\rd{\phi} \cdot \pare{-\+uz}\cdot w_2 \pare{\tensor{I} - 2\+ur\+ur}\cdot \+uz = w_1\cdot \frac{r^3}{a^2}\,\rd{r}\,\rd{\phi}. \\
+            &F_2 = -\int \rd{\sigma}\tensor{T}\cdot \+uz = w_1 \int_0^1 \frac{r^3}{a^2}\,\rd{r} \cdot 2\pi = w_1 \half \pi a^2 = \half F_1. \\
+            & F = F_1 + \half F_1 = \frac{3}{16} \frac{Q^2}{4\pi\epsilon_0 a^2}. \qedhere
+        \end{align*}
+    \end{proof}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        点电荷$e$在$\+vB\pare{\+vr}$中运动, $v \ll c$, 则
+        \begin{align*}
+            \+vG &= \epsilon_0 \iiint \rd{V}\ \+vE\times \+vB = \epsilon_0 \iiint \rd{V} \+vE\times \pare{\curl \+vA} = \epsilon_0 \iiint \rd{V} \+vE\times \pare{\curl \+vA} \\
+            &= \epsilon_0 \iiint \rd{V}\brac{\pare{\grad \+vA}\cdot \+vE - \+vE\+v\cdot \grad \+vA}.
+        \end{align*}
+        考虑到$\+vE\times \pare{\curl \+vA} = \grad\pare{\+vA\cdot \+vE} - \div\pare{\+vE\+vA} - \pare{\grad \+vE}\cdot \+vA + \pare{\div \+vE}\+vA$, 其中
+        \begin{align*}
+            -\pare{\grad \+vE}\cdot \+vA &=  -\+vA\+v\cdot \grad \+vE = -\div\pare{\+vA\+vE} + \pare{\div \+vA} \+vE.
+        \end{align*}
+        在Coulomb规范下,
+        \begin{align*}
+            \+vG &= \epsilon_0 \cancelto{0}{\iiint \rd{V}}\ \brac{\grad\pare{\+vA\cdot \+vE} - \div\pare{\+vE\+vA + \+vA\+vE}} + \epsilon_0 \iiint \rd{V}\pare{\div \+vE}\+vA\\
+            & = \epsilon_0 \iiint \rd{V} \ \pare{\div \+vE} \+vA = e\+vA\pare{\+vr_0}.
+        \end{align*}
+        相应的广义动量为
+        \[ \+vp = m\+v_0 + e\+vA. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection t的物理含义 (end)
+
+\subsubsection{能量与动量中心} % (fold)
+\label{ssub:能量与动量中心}
+
+可以参照动量中心以定义能量中心,
+\begin{align*}
+    & \begin{cases}
+    \partial_t w + \div \+vS = -\+vf\cdot \+vv,\\
+    \partial_t \+vg + \div \tensor{T} = -\+vf.
+\end{cases} \\
+    & \+vR_\varepsilon = \frac{\displaystyle \iiint \rd{V}\ w\+vr + \sum \varepsilon_i \+vr_i}{\displaystyle \iiint \rd{V}\ w + \sum \varepsilon_i}.
+\end{align*}
+注意到
+\[ \pare{\div \+vS} \+vr = \div\pare{\+vS \+vr} - \+vS\cdot\grad{\+vr}. \]
+从而
+\begin{align*}
+    &\partial_t \pare{w\+vr} + \div\pare{\+vS\+vr} = c^2 \+vg - \+vf\cdot \+vv \+vr, \\
+    &\partial_t \pare{\+vg c^2t} + \div\pare{\tensor{T}c^2 t} = c^2 \+vg - \+vfc^2t. \\
+    &\+dtd{} \iiint \rd{V} \pare{w \+vr - \+vgc^2t} = -\iiint \rd{V} \ \brac{\pare{\+vf\cdot \+vv}\+vr - \+vfc^2t} \\
+    &= \+dtd{} \iiint \rd{V}\ w\+vr - c^2t \+dtd{\+vG} - c^2\+vG = -\sum_i \pare{\+vF_i \cdot \+vv_i} \+vr_i + c^2 t\+dtd{\+vp}. \\
+    & \+dtd{} \iiint \rd{V}\ w\+vr - \cancelto{}{c^2t \+dtd{\+vG}} - c^2\+vG = -\+dtd{}\sum_i \varepsilon_i \+vr_i + \sum_i \varepsilon_i \+vv_i + \cancelto{}{c^2t\+dtd{\+vp}}.
+\end{align*}
+从而
+\[ \+dtd{}\pare{\iiint \rd{V}\ w\+vr + \sum \epsilon_i \+vr_i} = c^2 \+vG + \sum_i \varepsilon_i \+vv_i. \]
+能量中心相应的运动速度为
+\[ \+vv_\varepsilon = \frac{c^2 \+vp\+_tot_}{U\+_tot_}. \]
+与相对论中的$\displaystyle \+vv = \frac{c^2\+vp}{\varepsilon}$一致.
+
+% subsubsection 能量与动量中心 (end)
+
+\subsubsection{隐藏的动量} % (fold)
+\label{ssub:隐藏的动量}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{4cm}{HiddenMomentum}
+\end{figure}
+对于稳恒情况,
+\begin{align*}
+    &\div \+vj = 0, \quad \pare{-\partial_t \rho = \div \+vj},\\
+    &\Rightarrow \begin{cases}
+        \div \pare{\+vj\+vr} = \pare{\div \+vj} \+vr + \+vj\div \+vr = \+vj, \\
+        \div\pare{\+vj\+vr\+vr} = \pare{\div \+vj}\+vr\+vr + \+vj\+v\cdot\pare{\grad \+vr}\+vr + \+vr\+vj\+v\cdot \grad \+vr = \+vj \+vr + \+vr\+vj.
+    \end{cases}\\
+    &\Rightarrow \iiint\rd{V}\ \+vj = 0,\quad \iiint\rd{V}\ \pare{\+vr\+vj + \+vj\+vr} =0. \\
+    &\iiint\rd{V}\ \+vr\+vj = \half \iiint \rd{V}\ \tensor{I}\cdot\pare{\+vr\+vj - \+vj\+vr} + \half \iiint \rd{V}\ \pare{\+vr\+vj + \+vj\+vr} \\
+    &= \half \iiint\rd{V}\ \+ux_i \+ux_i \cdot \pare{\+vr\+vj - \+vj\+vr} \\
+    &= \half \iiint\rd{V}\ \+ux_i \+ux_i\times \pare{\+vj\times \+vr} \\
+    &= -\tensor{I} \times \underbrace{\half \iiint \rd{V}\ \pare{\+vr\times \+vj}}_{\+vm}.
+\end{align*}
+\begin{resume}
+    对于稳恒电流, 成立
+    \[ \iiint \rd{V}\ \+vj = 0,\quad \iiint \rd{V}\ \+vr\+vj = -\tensor{I}\times \+vm,\quad \+vm = \half \iiint \rd{V}\ \+vr\times \+vj. \]
+\end{resume}
+电磁场的总动量为
+\begin{align*}
+    \+vG &= \epsilon_0 \iiint \rd{V}\ \+vE\times \+vB = \epsilon_0 \iiint\rd{V}\ \grad \varphi \times \+vB \\
+    &= -\epsilon_0 \cancelto{0}{\iint \rd{V} \curl\pare{\varphi\+vB}} + \epsilon_0 \iiint\rd{V} \ \varphi\curl \+vB \\
+    &= \rec{c^2}\iiint\rd{V}\varphi \+vj.
+\end{align*}
+对于由电荷$Q$和电流$\+vj$构成的系统, 电流处$\varphi\pare{\+vr} = \varphi_0 - \+vE_0 \cdot \+vr$,
+\begin{align*}
+    \+vG &= \frac{\varphi_0}{c^2} \iiint \rd{V}\ \+vj - \rec{c^2} \+vE_0\cdot \iiint \rd{V}\ \+vr\+vj \\
+    &= 0 - \rec{c^2} \+vE_0 \cdot \pare{-\tensor{I}\times \+vm} \\
+    &= -\rec{c^2}\+vE_0 \cdot \tensor{I}\times \+vm. \\
+    \+vG &= \frac{\+vE_0 \times \+vm}{c^2}.
+\end{align*}
+假设所有载流子相同, 载流子的质量都是$m$, 电量$q$, 则实物总动量
+\begin{align*}
+    \sum_k m\+v_k &= \frac{m}{q}\sum_k q \+vv_k = \frac{m}{q} \iiint \rd{V}\ \+vj = 0.
+\end{align*}
+因此实物粒子的总动量为零.
+\par
+考虑相对论效应后, 假设所有载流子都具有相同的能量$\varepsilon$,
+\begin{align*}
+    & \gamma_k mc^2 + q\varphi = \varepsilon. \\
+    & \+vp = \sum_k \gamma_k m \+vv_k = \frac{\+vv_k}{c^2}\pare{\varepsilon - q\varphi} \\
+    &= \frac{\varepsilon}{c^2}\sum_k \+vv_k - \frac{q}{c^2}\sum_k \varphi \+vv_k \\
+    &= \frac{\varepsilon}{qc^2} \sum_k q\+vv_k - \rec{c^2}\sum_k \varphi q \+vv_k \\
+    &= \cancelto{0}{\frac{\varepsilon}{qc^2}\iiint\rd{V}\ \+vj} - \rec{c^2} \iiint\rd{V}\ \varphi\+vj \\
+    &= -\+vG.
+\end{align*}
+可以发现两者恰好抵消.
+
+% subsubsection 隐藏的动量 (end)
+
+% subsection 动量守恒 (end)
+
+\subsection{角动量} % (fold)
+\label{sub:角动量}
+
+$-\partial_t \+vg = \div \tensor{T} + \+vf$, 从而$-\+vr\times \partial_t \+vg = \+vr\times \div \tensor{T} + \+vr\times \+vf$, 即(由Leibniz法则与结合律)
+\[ -\partial_t \pare{\+vr\times \+vg} = -\div \pare{\tensor{T}\times \+vr} + \+vr\times \+vf = -\div \pare{\tensor{T}\times \+vr} + \+v\tau. \]
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{flalign*}
+    &\text{电磁场角动量密度} && \+vl\+_em_ = \+vr\times \+vg, && \\
+    &\text{电磁场角动量流密度} && \tensor{R} = -\tensor{T}\times \+vr. && \\
+    &\text{角动量守恒} && -\partial_t \+vl\+_em_ = \div \tensor{R}+ \+vr\times \+vf, \\
+    & && -\+dtd{\pare{\+vL\+_em_}} = -\oiint_{\partial V}\rd{\+v\sigma}\cdot \tensor{\+vR} + \tau.
+\end{flalign*}
+\end{resume}
+\begin{sample}
+    \begin{ex}
+        均匀磁化介质球$\pare{\+vM,a}$, 表面均匀带电$Q$, 电荷均匀分布于表面, 电场只存在于球外,
+        \[ \begin{cases}
+            \displaystyle \+vE = 0,\quad \+vB = \frac{2}{3}\mu_0 \+vM, & r<a, \\
+            \displaystyle \+vE = \frac{Q\+ur}{4\pi\epsilon_0 r^2}, \quad \+vB = \frac{\mu_0}{4\pi r^3}\brac{3\pare{\+vm\cdot \+ur}\+ur - \+vm}, & r>a.
+        \end{cases} \]
+        从而$r>a$时, $\displaystyle \+vB = \frac{\mu_0 M a^3}{3r^3} \brac{3\pare{\+uz \cdot \+ur}\+ur - \+uz}$. 球外
+        \begin{align*}
+            \+vg &= \epsilon_0 \+vE\times \+vB = \frac{\mu_0 QM a^3}{12\pi r^5} \sin\theta \+u\phi \Rightarrow L = L\+uz. \\
+            \+uz\cdot \+vl\+_em_ &= \+uz\cdot\brac{\+vr\times \+vg} = r\pare{\+vz\times \+vr}\cdot \+vg = \frac{\mu_0 Q Ma^3}{12\pi r^4}\sin^2\theta. \\
+            \+vL &= \+vz \frac{\mu_0 QMa^3}{12\pi} \frac{\displaystyle \int_a^\infty \frac{\rd{r}}{r^2}\int_0^\pi \sin^3\theta\,\rd{\theta}\int_0^{2\pi}\rd{\phi}}{\displaystyle \rec{a}\cdot \frac{4}{3}\cdot 2\pi}\\
+            &= \+uz \frac{2}{9}\mu_0 QMa^2 = \frac{2}{9}\mu_0 Qa^2\+vM.
+        \end{align*}
+        若对其缓慢去磁, 有
+        \begin{align*}
+            & \oint_{\partial \Sigma} \+vE'\cdot \rd{\+vl} = -\+dtd{} \iint_\Sigma \+vB\cdot \rd{\+v\sigma}, \\
+            & \+vE' = E'\pare{a,\theta}\+u\phi.
+        \end{align*}
+        可以发现这产生一个力矩, 恰好抵消电磁场角动量的减小率.
+    \end{ex}
+\end{sample}
+
+% subsection 角动量 (end)
+
+\subsection{物质中的守恒定理} % (fold)
+\label{sub:物质中的守恒定理}
+
+\subsubsection{功率密度} % (fold)
+\label{ssub:功率密度}
+
+通过物质中的Maxwell方程组,
+\begin{align*}
+    \+vE\cdot \+vj_0 &= \+vE\cdot \pare{\curl \+vH} - \+vE\cdot \partial_t \+vD \\
+    &= -\div\pare{\+vE\times \+vH} + \pare{\curl \+vE}\cdot \+vH - \+vE\cdot \partial_t \+vD \\
+    &= -\div\pare{\+vE\times \+vH} - \pare{\+vE\cdot \partial_t \+vD + \+vH\cdot \partial_t \+vB}
+\end{align*}
+线性, 无色散介质$\+vD\pare{\+vr,t} = \tensor{\epsilon}\pare{\+vr}\cdot \+vE\pare{\+vr,t}$, 则
+\[ \+vE\cdot \partial_t \+vD = \+vE\cdot \tensor{\epsilon}\cdot \partial_t \+vE = \+vD\cdot \partial_t \+vE = \partial_t \pare{\half \+vD\cdot \+vE}. \]
+对磁场也有类似的结论. 从而
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{align*}
+    \+vE\cdot \+vj_0 &= -\div \+vS - \partial_t w,\\
+    \+vS &= \+vE\times \+vH,\quad w = \half \+vD\cdot \+vE + \half \+vB\cdot \+vH.
+\end{align*}
+\end{resume}
+力密度
+\begin{align*}
+    \+vf_0 &= \rho_0 \+vE + \+vj_0\times \+vB = \pare{\div \+vD}\+vE + \pare{\curl \+vH}\times \+vB - \pare{\partial_t \+vD}\times \+vB \\
+    &= -\partial_t \pare{\+vD\times \+vB} + \pare{\div \+vD}\+vE + \pare{\curl \+vE}\times \+vD + \pare{\div \+vB} \+vH + \pare{\curl \+vH}\times \+vB.
+\end{align*}
+其中
+\begin{align*}
+    \pare{\div \+vD}\+vE + \pare{\curl \+vE}\times \+vD &= \pare{\div \+vD}\+vE + \pare{\+vD\+v\cdot \grad}\+vE - \pare{\grad \+vE}\cdot \+vD \\
+    &= \div\pare{\+vD\+vE} - \pare{\grad\+vE}\cdot \+vD.
+\end{align*}
+\begin{pitfall}
+    $\+vD\cdot \+vE\grad_E = \pare{\grad \+vE}\cdot \+vD \neq \+vD \+v\cdot \+vE$.
+\end{pitfall}
+从而
+\begin{equation*}
+    \resumath{\+vf_0 = -\partial_t \pare{\+vD\times \+vB} + \div\pare{\+vD\+vE + \+vB\+vH} - \brac{\pare{\grad \+vE}\cdot \+vD + \pare{\grad \+vH}\cdot \+vB}.}
+\end{equation*}
+对于线性均匀介质(可以有色散), $\+vD\pare{\+vr,t} = \tensor{\epsilon}\pare{t}\cdot \+vE\pare{\+vr,t}$.
+\begin{align*}
+    \pare{\grad \+vE}\cdot \+vD &= \pare{\grad \+vE}\cdot \tensor{\epsilon}\cdot \+vE = \brac{\grad\pare{\+vE\cdot \tensor{\epsilon}}}\cdot \+vE = \pare{\grad \+vD}\cdot \+vE \\
+    &= \grad\pare{\half \+vD\cdot \+vE} = \div\brac{\pare{\half \+vD\cdot \+vE}\tensor{I}}.\\
+    \pare{\grad \+vH}\cdot \+vB &= \div\brac{\pare{\half \+vB\cdot \+vH}\tensor{I}}.
+\end{align*}
+从而
+\[ \resumath{\+vf_0 = -\partial_t\underbrace{\pare{\+vD\times \+vB}}_{\displaystyle \+vg} - \div\underbrace{\brac{\pare{\half \+vD\cdot \+vE + \half \+vB\cdot \+vH}\tensor{I} - \pare{\+vD\+vE + \+vB\+vH}}}_{\tensor{T}}.} \]
+有
+\[ \+vf_0 = -\partial_t \+vg - \div \+vT. \]
+对于线性, 各向同性的介质, $\+vD = \epsilon \+vE$, $\+vB = \mu \+vH$, 其中$\epsilon = \epsilon\pare{\+vr}$, $\mu = \mu\pare{\+vr}$, 则
+\begin{align*}
+    &\pare{\grad \+vE}\cdot \+vD = \pare{\grad \+vE}\cdot \epsilon \+vE = \pare{\grad \+vD}\cdot \+vE - \pare{\grad\epsilon}\+vE\cdot \+vE, \\
+    &\Rightarrow \pare{\grad\+vE}\cdot \+vD = \half \brac{\pare{\grad \+vE}\cdot \+vD + \pare{\grad \+vD}\cdot \+vE - E^2\grad \epsilon} \\
+    &= \half \grad\pare{\+vD\cdot \+vE} - \half  E^2\grad \epsilon. \\
+    & \+vf_0 - \half E^2\grad \epsilon - \half H^2\grad \mu = -\partial_t \+vg - \div \tensor{T}.
+\end{align*}
+定义\gloss{Minkowski力密度}
+\[ \+vf_\mu = \+vf_0 - \half E^2 \grad \epsilon - \half H^2\grad \mu. \]
+则
+\[ \+vf_\mu = -\partial_t \+vg - \div \tensor{T}. \]
+在两个介质的交界处, 有
+\[ \+d\sigma d{\+vF} = -\+un\cdot\pare{\tensor{T}_2 - \tensor{T}_1} \Rightarrow p = \+un\cdot \+d\sigma d{\+vF} = \+un\cdot\pare{\tensor{T}_1 - \tensor{T}_2\cdot\+un}. \]
+\par
+为了得到角动量流,
+\begin{align*}
+    \+vf_0 &= - \div\tensor{T} - \partial_t \+vg, \\
+    \+vr\times \+vf_0 &= -\div\pare{-\tensor{T}\times \+vr} - \partial_t \pare{\+vr\times \+vg}, \\
+    \+v\tau_0 &= -\div \+vR - \partial_t \+vl\+_em_.
+\end{align*}
+
+% subsubsection 功率密度 (end)
+
+% subsection 物质中的守恒定理 (end)
+
+% section 电磁场的基本规律 (end)
+
+\end{document}

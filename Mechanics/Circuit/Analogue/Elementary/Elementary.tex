@@ -20,20 +20,18 @@ Zhao Zelong, Zhang Jianfeng(13076063853)\\
 \subsection{信号与系统} % (fold)
 \label{sub:信号与系统}
 
-电信号: 信号由电压或电流表示者. 电压和电流是电路中的两个基本变量. 基本属性由幅度, 频率和相位. 由这些基本属性表示信息.
+\newpoint{电信号} 信号由电压或电流表示者. 电压和电流是电路中的两个基本变量. 基本属性由幅度, 频率和相位. 由这些基本属性表示信息.
 \par
-电路: 用来处理电信号的器件及其互联网络. 其目的在于在保证被处理信号所携带的信息不失真的前提下, 对信号进行正确的转换, 传输, 提取, 再现及其它深化处理.
+\newpoint{电路} 用来处理电信号的器件及其互联网络. 其目的在于在保证被处理信号所携带的信息不失真的前提下, 对信号进行正确的转换, 传输, 提取, 再现及其它深化处理.
 
 % subsection 信号与系统 (end)
 
 \subsection{模拟信号与数字信号} % (fold)
 \label{sub:模拟信号与数字信号}
 
-模拟电路处理模拟信号, 数字电路处理数字信号.
-\par
-模拟信号谓在时间和幅值上都连续的信号.
-\par
-数字信号谓在时间和幅值上都是离散的信号.
+\newpoint{}模拟电路处理模拟信号, 数字电路处理数字信号.
+\newpoint{}\gloss{模拟信号}谓在时间和幅值上都连续的信号.
+\newpoint{}\gloss{数字信号}谓在时间和幅值上都是离散的信号.
 \begin{ex}
     麦克风信号是模拟信号. 自然界中几乎所有信息都是模拟信号.
 \end{ex}
@@ -43,39 +41,33 @@ Zhao Zelong, Zhang Jianfeng(13076063853)\\
 \subsection{信号的频谱} % (fold)
 \label{sub:信号的频谱}
 
-线性电路可以通过Th\'evenin等效和Norton等效转化为电压源/电流源等效电路.
-\par
-信号的时间域表示是信号作为对时间的函数. 信号还可以在频率域表示, 相应的频谱.
-\par
-正弦波的三要素: 幅度, 角频率, 初相位.
+\newpoint{}线性电路可以通过Th\'evenin等效和Norton等效转化为电压源/电流源等效电路.
+\newpoint{}信号的时间域表示是信号作为对时间的函数. 信号还可以在频率域表示, 相应表示谓频谱.
+\newpoint{正弦波的三要素} 幅度, 角频率, 初相位.
 \begin{ex}
     周期$T$, 幅度$V_s$的方波可展开为
     \[ v\pare{t} = \frac{V_s}{2} + \frac{2V_s}{\pi} \pare{\sin\omega_0 t + \rec{3}\sin 3\omega_0 t + \rec{5}\sin 5\omega_0 t + \Lambda}. \]
     其中$\omega_0 = 2\pi/T$, $V_s/2$为直流分量, $2V_s/\pi$谓基波分量, $2V_s/\pi \cdot 1/3$谓三次谐波分量.
 \end{ex}
-频谱谓信号在频率域的展开.
-\par
-周期信号FT后可得离散频率函数.
-\par
-非周期信号FT后可得连续频率函数.
+\newpoint{}频谱谓信号在频率域的展开.
+\newpoint{}周期信号FT后可得离散频率函数.
+\newpoint{}非周期信号FT后可得连续频率函数.
 
 % subsection 信号的频谱 (end)
 
 \subsection{放大电路模型} % (fold)
 \label{sub:放大电路模型}
 
-信号放大后可处理.
-\par
-通过信号源的等效表示, 负载的等效表示, 得到放大电路的符号表示. 放大电路一般为有源器件.
-\par
-信号放大可有度量
+\newpoint{}信号放大后可处理.
+\newpoint{}通过信号源的等效表示, 负载的等效表示, 得到放大电路的符号表示. 放大电路一般为有源器件.
+\newpoint{}信号放大可有度量
 \begin{cenum}
     \item 电压增益$A_v = v_o / v_i$;
     \item 电流增益$A_i = i_o / i_i$;
     \item 互阻增益$A_r = v_o / i_i\pare{\SI{}{\ohm}}$;
     \item 互导增益$A_g = i_o / i_s\pare{\SI{}{\siemens}}$.
 \end{cenum}
-通常将负载等效为电阻.
+\newpoint{}通常将负载等效为电阻.
 \paragraph{电压放大} % (fold)
 \label{par:电压放大}
 
@@ -98,10 +90,8 @@ Zhao Zelong, Zhang Jianfeng(13076063853)\\
 \label{par:互阻_互导放大模型}
 
 等效模型如何, 放大器本身输入阻抗与输出阻抗有何希望, 对信号源和负载有何希望?
-\par
-四种放大器模型可以相互转化. 即同一模型可用四种模型刻画. 例如大$R_i$小$R_o$的放大器宜用电压-电压放大模型刻画.
-\par
-隔离放大电路模型: 输入输出回路, 没有公共端.
+\newpoint{}四种放大器模型可以相互转化. 即同一模型可用四种模型刻画. 例如大$R_i$小$R_o$的放大器宜用电压-电压放大模型刻画.
+\newpoint{}隔离放大电路模型: 输入输出回路, 没有公共端.
 \begin{ex}
     部份情况下输入和输出端口不应共地. 例如医疗仪器中, 为了防止漏电引发危险, 应当分离前后端.
 \end{ex}
@@ -109,6 +99,36 @@ Zhao Zelong, Zhang Jianfeng(13076063853)\\
 % paragraph 互阻/互导放大模型 (end)
 
 % subsection 放大电路模型 (end)
+
+\subsection{放大电路的主要性能指标} % (fold)
+\label{sub:放大电路的主要性能指标}
+
+\newpoint{}\gloss{输入阻抗}$\displaystyle R_i = \frac{v_t}{i_t}$. \gloss{输出阻抗}为
+\[ R_o = \left.\frac{v_t}{i_t}\right\vert_{v_s = 0,R_L=\infty}. \]
+计算输出阻抗时, 输入信号源置零, 保留信号源内阻.
+\newpoint{}输入和输出阻抗可能是频率的函数(直流阻抗, 交流阻抗).
+\newpoint{}增益描述输出电压, 电流或功率与输入电压, 电流或功率之间的比例关系.
+\[ A_v = \frac{v_0}{v_o},\quad A_i = \frac{i_o}{i_i},\quad A_r = \frac{v_o}{i_i},\quad A_g = \frac{i_o}{v_i},\quad A_p = \frac{P_o}{P_i}. \]
+\newpoint{}增益常用分贝表示,
+\[ \text{电压增益} = 20\log\abs{A_v},\quad \text{电流增益} = 20\log\abs{A_i},\quad \text{功率增益} = 10\log A_P. \]
+可以将乘法转化为加法. 增益可能有量纲.
+\newpoint{}放大电路的增益是频率的函数时, 写作
+\[ \tilde{A}_v\pare{\omega} = A_v\pare{\omega}\angle\varphi\pare{\omega}, \]
+其中$\displaystyle \abs{\frac{V_o\pare{j\omega}}{V_i\pare{j\omega}}}$谓幅频相应, $\angle \varphi\pare{\omega} = \varphi_o\pare{\omega} - \varphi_i\pare{\omega}$谓相频相应.
+\newpoint{}输入正弦信号的情况下, 输出随输入信号频率连续变化的稳态响应, 谓放大电路的频率响应.
+\newpoint{}\gloss{放大器带宽}$f_{BW} = f_H - f_L$, $f_H \gg f_L$时$f_{BW}\approx f_H$. 当放大倍数与中频相比$\SI{-3}{\decibel}$时得到$f_L$和$f_H$. $\SI{-3}{\decibel}$正好对应功率下降至一般的点. 通常的带宽都按这种方法定义, 谓$\SI{3}{\decibel}$带宽.
+\begin{remark}
+    直流放大电路不适用之.
+\end{remark}
+\begin{remark}
+    若输入固定频率的正弦波, 无论频率如何皆不会发生失真, 仅增益变小.
+\end{remark}
+\newpoint{}\gloss{线性失真}分为\gloss{幅度失真}: 对不同频率的信号增益不同产生的失真. \gloss{相位失真}: 对不同频率的信号相移不同产生的失真.
+\newpoint{}\gloss{非线性失真}谓由元件非线性特性引起的失真. 输入设定频率的正弦波, 理想输出应当是同频率, 幅度正比的完美正弦波. 但实际输出是变形的正弦波, 频率上有多余的高次谐波. \gloss{非线性失真系数}定义为
+\[ \gamma = \frac{\sqrt{\displaystyle \sum_{k=2}^\infty V_{ok}^2}}{V_{o1}}\times 100\%. \]
+其中$v_{o1}$是输入电压基波分量的有效值. $V_{ok}$是高次谐波分量的有效值, $k$是正整数.
+
+% subsection 放大电路的主要性能指标 (end)
 
 % section 基础 (end)
 

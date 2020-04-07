@@ -1,0 +1,65 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+
+\begin{document}
+
+\newpoint{}当$\grad$作用在$\+vF$时, $\grad\mapsto \+vn_{12}$, $\+vF\mapsto \+vF_2 - \+vF_1$, 其它场$\mapsto 0$, 源$\mapsto$场.
+$\div \+vj + \partial_t \rho = 0$. $\+un_{12}\cdot \pare{\+vj_2 - \+vj_1} =\partial_t \sigma$.\\
+$\div \+vE \rho/\epsilon_0 \Rightarrow \+un_{12}\cdot \pare{\+vE_2 - \+vE_1} = \sigma/\epsilon_0$.\\
+$\div \+vB = 0 \Rightarrow \+un_{12}\cdot\pare{\+vB_2 - \+vB_1} = 0$.\\
+$\displaystyle \div \+vE = -\partial_t \+vB \Rightarrow \+un_{12}\times \pare{\+vE_2 - \+vE_1} = 0$.\\
+$\displaystyle \curl \+vB = \mu_0 \+vj + \mu_0 \epsilon_0 \partial_t \+vE \Rightarrow \+un_{12} \times \pare{\+vB_2 - \+vB_1} = \mu_0\+v\kappa$.\\
+引入磁化电流$\curl \+vM$, 极化电流$\partial_t \+vP$, 位移电流$\epsilon_0 \partial_t \+vE$, 又引入
+\[ \+vD = \epsilon_0 \+vE + \+vP,\quad \+vH = \frac{\+vB}{\mu_0} - \+vM, \]
+有物质中的方程
+\[ \begin{cases}
+    \div \+vB = 0, \\
+    \curl \+vE = -\partial_t \+vB, \\
+    \epsilon_0 \div \+vE = \rho_0 + \rho' = \rho_0 - \div \+vP \Rightarrow \div \+vD = \rho_0,\quad \+un_{12}\cdot\pare{\+vD_2 - \+vD_1} = \sigma_0, \\
+    \displaystyle \rec{\mu_0}\curl \+vB = \+vj_0 + \curl \+vM + \partial_t \+vP + \epsilon_0 \partial_t \+vE \Rightarrow \curl \+vH = \+vj_0 + \partial_t \+vD,\quad \+un_{12}\times\pare{\+vH_2 - \+vH_1} = \+v\kappa_0.
+\end{cases} \]
+能量, 动量, 角动量密度分别为
+\[ \begin{aligned}
+    &\partial_t w + \div \+vS = -\+vE\cdot \+vj, && w = \frac{\epsilon_0}{2}\pare{E^2 + c^2B^2}, && \+vS = \rec{\mu_0}\+vE\times \+vB, \\
+    &\partial_t \+vg + \div \tensor{T} = -\+vf, && \+vg = \epsilon_0 \+vE\times \+vB = \frac{\+vS}{c^2}, && \tensor{T} = w\tensor{I} - \epsilon_0 \pare{\+vE\+vE - c^2 \+vB\+vB}, \\
+    &\partial_t \+vl + \div \tensor{R} = -\+vr\times \+vf, && \+vl = \+vr\times \+vg, && \tensor{R} = -\tensor{T}\times \+vr.
+\end{aligned} \]
+
+\newpoint{量纲检查} 一维$\Delta$函数的量纲为$\brac{L}^{-1}$. 三维$\Delta$函数的量纲为$\brac{L}^{-3}$
+\newpoint{阶数检查} $\+va$时一阶的, $\+va\+vb$是二阶的, $\+va\cdot\+vb$是零阶的, $\+va\times \+vb$是一阶的. 从而\hl{点乘降两阶, 叉乘降一阶}.
+\newpoint{双点乘歧义} $\tensor{F}:\tensor{G} = F_{ij}G_{ij}$, $\tensor{F}\mathbin{\cdot\cdot} \tensor{G} = F_{ij}G_{ji}$. 如果$\tensor{F} = \+va\+vb$, $\tensor{G} = \+vc\+vd$, 则两种缩并分别给出
+\[ \pare{\+va\+vb}:\pare{\+vc\+vd} = \pare{\+va\cdot \+vc}\pare{\+vb\cdot \+vd},\quad \tensor{F}\mathbin{\cdot\cdot}\tensor{G} = \pare{\+vb\cdot \+vc}\pare{\+va\cdot \+vd}. \]
+\begin{ex}
+    在圆盘上均匀分布的电荷, 其电荷密度应为
+    \[ \rho\pare{r,\theta} = \frac{q}{\pi a^2r} \Theta\pare{a-r}\delta\pare{\cos\theta}. \]
+\end{ex}
+\begin{ex}
+    从BS定律出发证明Ampere定理,
+    \begin{align*}
+        \curl \+vB &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\ \curl \pare{\frac{\+vj\pare{\+vr'}\times \+uR}{R^2}} \\
+        &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\ \brac{\+vj\pare{\+vr'}\div \frac{\+uR}{R^2} - \+vj\pare{\+vr'}\+v\cdot \grad \frac{\+uR}{R^2}} \\
+        &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\ \+vj\pare{\+vr'} 4\pi\delta\pare{\+vr - \+vr'} + \frac{\mu_0}{4\pi}\iiint \rd{V'}\ \+vj\pare{\+vr'} \+v\cdot \grad' \frac{\+uR}{R^2} \\
+        &= \mu_0 \+vj\pare{\+vr} + \frac{\mu_0}{4\pi} \iiint \rd{V'}\ \brac{\grad'\cdot \pare{\frac{\+vj\+uR}{R^2}} - \frac{\+uR}{R^2}\cancelto{0}{\grad'\cdot \+vj\pare{\+vr'}}} \\
+        &= \mu_0 \+vj\pare{\+vr}.
+    \end{align*}
+\end{ex}
+\[ \curl \+vF = \rec{r^2\sin\theta} \begin{vmatrix}
+    \+ur & r\+u\theta & r\sin\theta \+u\phi \\
+    \partial_r & \partial_\theta & \partial_\phi \\
+    F_r & rF_\theta & r\sin\theta F_\phi
+\end{vmatrix}. \]
+
+\end{document}

@@ -1,0 +1,190 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{1.5}%
+\vspace{-1.8\baselineskip}%
+\begin{align*}
+    \div\brac{\+vB\times \pare{\curl \+vA}} &= \pare{\curl \+vA} \cdot \pare{\curl \+vB} - \+vB \cdot \brac{\curl\pare{\curl \+vA}}, \\
+    \makebox[0pt][r]{$-$\quad}\div\brac{\+vA\times \pare{\curl \+vB}} &= \pare{\curl \+vB} \cdot \pare{\curl \+vA} - \+vA \cdot \brac{\curl\pare{\curl \+vB}},\\[.3em]
+    \Xhline{0.1pt}
+\end{align*}
+\vspace{-3.5\baselineskip}
+\begin{align*}
+    & \div\brac{\+vB \times \pare{\curl \+vA} - \+vA\times \pare{\curl \+vB}} = \+vA\cdot \brac{\curl\pare{\curl \+vB}} - \+vB\cdot \brac{\curl\pare{\curl \+vA}}. \\
+    & \Rightarrow \oiint \brac{\+vB \times \pare{\curl \+vA} - \+vA\times \pare{\curl \+vB}} = \iiint \div\brac{\+vB \times \pare{\curl \+vA} - \+vA\times \pare{\curl \+vB}}\,\rd{V} \\
+    & = \iiint \curb{\+vA\cdot \brac{\curl\pare{\curl \+vB}} - \+vB\cdot \brac{\curl\pare{\curl \+vA}}}\,\rd{V}.
+\end{align*}
+\vspace{-2\baselineskip}
+\newprob{1.7}%
+$\displaystyle \oiint \rd{\+v\sigma}\ \cdot \+vj\+vr = \iiint \rd{V}\ \div\pare{\+vj \+vr} = \iiint \rd{V}\ \curb{\cancelto{0}{\div\pare{\+vj}}\+vr + \pare{\+vj\+v\cdot \grad} \+vr} = \iiint \rd{V}\ \+vj$.
+\newprob{1.8}$x^2 - 11x+24$有两个零点, 分别在$x=3$和$x=8$, 相应的导函数值为$\pm 5$, 从而
+\[ \int_{-\infty}^{+\infty} x\delta\pare{x^2 - 11x + 24}\,\rd{x} = \rec{5}\pare{3+8} = \boxed{\frac{11}{5}.} \]
+\vspace{-2\baselineskip}%
+\newprob{1.9}%
+$\displaystyle f\pare{\+vr_0} = \iiint f\pare{\+vr}\delta\pare{\+vr - \+vr_0} \,\rd{V}$\\$\displaystyle = \iiint f\pare{\+vr} \delta\pare{\+vr - \+vr_0} H\,\rd{u}\,\rd{v}\,\rd{w}$\\$\displaystyle = \iiint f\pare{\+vr} \delta\pare{u-u_0}\delta\pare{v-v_0}\delta\pare{w-w_0}\,\rd{u}\,\rd{v}\,\rd{w}.$\\[1em]
+从而$\delta\pare{\+vr - \+vr_0} = \delta\pare{u-u_0}\delta\pare{v-v_0}\delta\pare{w-w_0}/H$.
+\newprob{1.10 (1)}%
+采用球坐标系, $\rho\pare{\+vr} = \rho^* \delta\pare{r-r_0}$, 由对称性知$\rho^*$为常数, 满足
+\[ \iiint \rho^* \delta \pare{r-a} \,\rd{V} = \iiint \rho^* \delta \pare{r-a} r^2\sin\theta \,\rd{r}\,\rd{\theta}\,\rd{\phi} = 4\pi r^2 \rho^* = q, \]
+$\displaystyle \Rightarrow \rho^* = \frac{q}{4\pi a^2} \Rightarrow \rho\pare{\+vr} = \boxed{\frac{q}{4\pi a^2}\delta\pare{r-a}.}$
+\par
+\newprobheader{(2)}%
+采用柱坐标系, $\rho\pare{\+vr} = \rho^* \delta\pare{s-s_0}$, 由对称性知$\rho^*$为常数, 满足
+\[ \iint \rho^*\delta \pare{s-a} s\,\rd{s}\,\rd{\phi} = 2\pi a \rho^* = \lambda, \]
+$\displaystyle \Rightarrow \rho^* = \frac{\lambda}{2\pi a} \Rightarrow \rho\pare{\+vr} = \boxed{\frac{\lambda}{2\pi a}\delta\pare{s-a}.}$
+\par
+\newprobheader{(3)}%
+采用柱坐标系, $\rho\pare{\+vr} = \rho^* \delta\pare{z}$满足
+\[ \iiint_{\text{小区域}} \rho^* \cdot s\,\rd{s}\,\rd{\phi}\cdot\delta\pare{z}\,\rd{z} = \rho^* \cdot s\,\rd{s}\,\rd{\phi} = Q\pare{s\sim s+\rd{s},\phi \sim \phi + \rd{\phi}}, \]
+$\displaystyle \Rightarrow \rho^* = \frac{q}{\pi a^2}\Theta\pare{a-s} \Rightarrow \rho\pare{\+vr} = \boxed{\frac{q}{\pi a^2} \delta\pare{z}\Theta\pare{a-s}.}$\\
+采用球坐标系, $\displaystyle \rho\pare{\+vr} = \rho^* \delta\pare{\theta - \frac{\pi}{2}}$满足
+\[ \iiint_{\text{小区域}} \rho^* \cdot r^2\sin\theta\,\rd{r}\,\rd{\phi}\cdot \delta\pare{\theta}\,\rd{\theta} = \rho^* \cdot r^2 \,\rd{r}\,\rd{\phi} = Q\pare{r\sim r+\rd{r}, \phi\sim \phi + \rd{\phi}}, \]
+$\displaystyle \Rightarrow \rho^* = \frac{q}{\pi a^2 r}\Theta\pare{a-r} \Rightarrow \rho\pare{\+vr} = \boxed{\frac{q}{\pi a^2 r}\Theta\pare{a-r}\delta\pare{\theta - \frac{\pi}{2}}.}$
+\newprob{Pr 1}%
+$\displaystyle \oiint_{\partial V} \rd{\+v\sigma} = \oiint_{\partial V} \rd{\+v\sigma} \cdot \tensor{I} = \iiint_V \rd{V}\ \div\tensor{I} = 0$.\\
+$\displaystyle \rec{3} \oiint_{\partial V} \rd{\+v\sigma} \cdot \+vr = \rec{3}\iiint_V \rd{V}\ \div \+vr = \iiint_V \rd{V} = V$.
+\newprob{Pr 2 (1)}%
+$\displaystyle \iiint_V \rd{V}\ \div \+vF = \iiint_V\ \div\brac{\+vf \times \pare{\curl \+vg}} = $\\
+$\displaystyle \iiint_V \rd{V}\ \brac{-\+vf\cdot\pare{\curl\pare{\curl \+vg}} + \pare{\curl \+vg} \cdot \pare{\curl \+vf}} = \oiint_{\partial V}\rd{\+v\sigma}\cdot \brac{\+vf \times \pare{\curl \+vg}}.$
+\par
+\newprobheader{(2)}%
+$\displaystyle \iiint_V \rd{V}\ \brac{\+vg\cdot\pare{\curl\pare{\curl \+vf}}-\+vf\cdot\pare{\curl\pare{\curl \+vg}}}$\\
+$\displaystyle = \oiint_{\partial V}\rd{\+v\sigma}\cdot \brac{\+vf \times \pare{\curl \+vg} - \+vg \times \pare{\curl \+vf}}.$
+\par
+\newprobheader{(3)}%
+$\displaystyle \iiint_V \rd{V}\ \brac{-\+vf\cdot\pare{\curl\pare{\curl \+vf}} + \pare{\curl \+vf}^2} = \oiint_{\partial V} \rd{\+v\sigma}\cdot \brac{\+vf\times\pare{\curl \+vf}}$.
+\newprob{Pr 3}%
+$\displaystyle \curl \+vv = \curl \pare{\+uz \ln s} = -\+uz \times\grad \ln s = -\frac{\+u\varphi}{s} \Rightarrow \+vF = -\+uz \ln s \times \frac{\+u\varphi}{s} = \frac{\+us}{s}\ln s$.\\
+$\displaystyle \div \+vF = \div\pare{\frac{\+us}{h_\varphi h_z}\ln s}= \frac{\+us}{h_\varphi h_z} \cdot \+DsD{\ln s}\+us = \boxed{\rec{s^2}.}$\\[1em]
+或者由$\+vF$关于$z$轴的旋转对称性, 取区域$V=\curb{z'\in\pare{0,1}, s'\in\pare{s,s+\rd{s}}}$,
+\[ \iiint_V \rd{V}\ \div\+vF = 2\pi s\,\rd{s}\div \+vF = \oiint \+vF\cdot \rd{\+v\sigma} = \rd{\pare{\frac{\ln s}{s}\cdot 2\pi s}} = 2\pi \pare{\rec{s}}\,\rd{s}, \]
+也可以得到$\displaystyle \div \+vF = \rec{s^2}$.\\[1em]
+$\displaystyle \curl \+vF = \curl\pare{\frac{\+us}{s}\ln s} = \grad\pare{\frac{\ln s}{s}}\times \+us = \boxed{0.}$\\
+或者直接由$\displaystyle \+vF = \half \grad{\pare{\ln s}^2}$得到$\curl \+vF = 0$.
+\newprob{Pr 4 (1)}%
+引入$\displaystyle \varphi = \rec{4\pi\epsilon_0}\iiint \rho\pare{\+vr'} \rec{R} \,\rd{V'}$, 则
+\[ -\grad \varphi = -\rec{4\pi\epsilon_0} \iiint \rho \pare{\+vr'} \grad{\rec{R}}\,\rd{V'} = \rec{4\pi\epsilon_0} \iiint \rho \pare{\+vr'} \frac{\+uR}{R^2}\,\rd{V'} = \+vE. \]
+从而自动有$\curl \+vE = 0$.
+\[ \div \+vE = -\laplacian \varphi = -\iiint \frac{\rho\pare{\+vr'}}{4\pi\epsilon_0} \laplacian{\rec{R}}\,\rd{V'} = \iiint \frac{\rho\pare{\+vr'}}{4\pi\epsilon_0}  \cdot 4\pi\delta\pare{\+vR}\,\rd{V'} = \frac{\rho\pare{\+vr}}{\epsilon_0}. \]
+\newprobheader{(2)}%
+引入$\displaystyle \+vA = \frac{\mu_0}{4\pi} \iiint \+vj\pare{\+vr'}\rec{R}\,\rd{V'}$, 则
+\[ \curl \+vA = \frac{\mu_0}{4\pi} = \iiint \curl \frac{\+vj\pare{\+vr'}}{R} \, \rd{V} = \frac{\mu_0}{4\pi} \iiint \brac{\pare{\grad \rec{R}}\times \+vj\pare{\+vr'}}\,\rd{V'} = \+vB. \]
+从而自动有$\div \+vB = 0$.
+\begin{align*}
+    \grad\pare{\div \+vA} &\propto \grad \iiint \grad\pare{\rec{R}}\cdot \+vj\pare{\+vr'}\,\rd{V'} = \iiint \pare{\+vj\pare{\+vr'} \+v\cdot \grad}\pare{\grad \rec{R}}\,\rd{V'} \\
+    &= \iiint \div\brac{\+vj\pare{\+vr'}\pare{\grad \rec{R}}}\,\rd{V} = \oiint \rd{\+v\sigma}\cdot \+vj\pare{\grad \rec{R}} \rightarrow 0. \\
+    \laplacian \+vA &= \frac{\mu_0}{4\pi} \iiint \+vj\pare{\+vr'}\laplacian \rec{R}\,\rd{V'} = -\mu_0 \iiint \+vj\pare{\+vr'}\delta\pare{\+vR}\,\rd{V'} = -\mu_0 \+vj\pare{\+vr}.\\
+    \curl \+vB &= \curl\pare{\curl \+vA} = \grad\pare{\div \+vA} - \laplacian \+vA = \mu_0 \+vj\pare{\+vr}.
+\end{align*}
+\vspace{-2\baselineskip}
+\newprob{Pr 5}%
+$\displaystyle \div \pare{f_1 \+uu_1} = \div\pare{f_1h_2h_3\cdot \frac{\+uu_1}{h_2h_3}} = \grad \pare{f_1h_2h_3} \cdot \frac{\+uu_1}{h_2h_3} = \rec{H}\+D{u_1}D{}\pare{f_1h_2h_3},$\\
+$\displaystyle \Rightarrow \div \+vF = \rec{H}\brac{\+D{u_1}D{}\pare{f_1h_2h_3} + \+D{u_2}D{}\pare{f_2h_1h_3} + \+D{u_3}D{}\pare{f_3h_1h_2}}.$\\
+\begin{wrapfigure}{r}{3cm}
+    \centering
+    \incfig{3cm}{DivDV}
+    \vspace{-3cm}
+\end{wrapfigure}
+或者由散度定理, 在如右图所示的体微元中对$\div \+vF$积分, 有
+\begin{align*}
+    & \iiint_{V} \div\+vF\,\rd{V} = \pare{\div \+vF}H \,\rd{u_1}\,\rd{u_2}\,\rd{u_3} = \oiint_{\partial V} \rd{\+v\sigma}\cdot \+vF  \\
+    &= \left.\pare{F_1 h_2h_3\,\rd{u_2}\rd{u_3}}\right\vert_{u_1}^{u_1+\rd{u_1}} + \left.\pare{F_2 h_1h_3\,\rd{u_1}\rd{u_3}}\right\vert_{u_2}^{u_2+\rd{u_2}} \\
+    &\phantom{=\,} + \left.\pare{F_3 h_1h_2\,\rd{u_1}\rd{u_2}}\right\vert_{u_3}^{u_3+\rd{u_3}} \\
+    &= \brac{\+D{u_1}D{}\pare{f_1h_2h_3} + \+D{u_2}D{}\pare{f_2h_1h_3} + \+D{u_3}D{}\pare{f_3h_1h_2}}\,\rd{u_1}\,\rd{u_2}\,\rd{u_3}.
+\end{align*}
+也可以得到相同的结论.
+\par
+\vspace{1em}
+$\displaystyle \curl \pare{f_1 \+uu_1} = \curl \pare{f_1h_1 \frac{\+uu_1}{h_1}} = \grad\pare{f_1h_1}\times \frac{\+uu_1}{h_1} = -\frac{\+uu_3}{h_1h_2} \+D{u_2}D{\pare{f_1h_1}} + \frac{\+uu_2}{h_1h_3}\+D{u_3}D{\pare{f_1h_1}},$
+\begin{wrapfigure}{r}{3cm}
+    \centering
+    \vspace{-1.8cm}
+    \incfig{3cm}{CurlDS}
+    \vspace{-3cm}
+\end{wrapfigure}
+$\displaystyle \Rightarrow \curl \+vF = \left\{ \begin{aligned}
+    &&& \displaystyle \frac{\+uu_1}{h_2h_3}\brac{\+D{u_2}D{\pare{f_3h_3}} - \+D{u_3}D{\pare{f_2h_2}}} \\
+    + &&& \displaystyle \frac{\+uu_2}{h_1h_3}\brac{\+D{u_3}D{\pare{f_1h_1}} - \+D{u_1}D{\pare{f_3h_3}}} \\
+    + &&& \displaystyle \frac{\+uu_3}{h_1h_2}\brac{\+D{u_1}D{\pare{f_2h_2}} - \+D{u_2}D{\pare{f_1h_1}}}.
+\end{aligned} \right.$\\[1em]
+或者由旋度定理, 在如右图所示的面微元中对$\curl \+vF$积分, 有(不求和)
+\begin{align*}
+    & \iint_{S} \rd{\sigma}\cdot\pare{\curl \+vF} = \pare{\curl \+vF}\cdot \+un h_ih_j\,\rd{u_i}\,\rd{u_j} = \epsilon_{ijk} \pare{\curl \+vF}\cdot \+uu_k h_ih_j\,\rd{u_i}\,\rd{u_j} \\
+    & = \oint_{\partial S} \rd{\+vl}\cdot \+vF = \left.\pare{f_i h_i\,\rd{u_i}}\right\vert_{u_j + \rd{u_j}}^{u_j} + \left.\pare{f_j h_j\,\rd{u_j}}\right\vert_{u_i}^{u_i + \rd{u_i}} = \brac{\+D{u_i}D{\pare{f_jh_j}} - \+D{u_j}D{\pare{f_ih_i}}}\,\rd{u_i}\,\rd{u_j} \\
+    &\Rightarrow \pare{\curl \+vF}_k = \frac{\epsilon_{ijk}}{h_ih_j} \brac{\+D{u_i}D{\pare{f_jh_j}} - \+D{u_j}D{\pare{f_ih_i}}}.
+\end{align*}
+也可以得到相同的结论.
+\par
+圆柱坐标系下, $h_s = h_z = 1$, $h_\phi = s$, $H = s$,
+\begin{align*}
+    \div \+vF &= \rec{s}\brac{\+D{s}D{}\pare{f_s s} + \+D{\phi}D{}\pare{f_\phi} + \+D{z}D{}\pare{f_z s}} = \rec{s}\+DsD{\pare{sf_s}} + \rec{s}\+D{\phi}D{f_\phi} + \+D{z}D{f_z}. \\
+    \curl \+vF &= \left\{ \begin{aligned}
+    &&& \displaystyle \frac{\+us}{s}\brac{\+D{\phi}D{{f_z}} - \+D{z}D{\pare{sf_\phi}}} \\
+    + &&& \displaystyle \+u\phi\brac{\+D{z}D{{f_s}} - \+D{s}D{{f_z}}} \\
+    + &&& \displaystyle \frac{\+uz}{s}\brac{\+D{s}D{\pare{s f_\phi}} - \+D{\phi}D{{f_s}}}
+\end{aligned} \right. = \left\{ \begin{aligned}
+    &&& \displaystyle \+us\brac{\rec{s}\+D{\phi}D{{f_z}} - \+D{z}D{{f_\phi}}} \\
+    + &&& \displaystyle \+u\phi\brac{\+D{z}D{{f_s}} - \+D{s}D{{f_z}}} \\
+    + &&& \displaystyle \frac{\+uz}{s}\brac{\+D{s}D{\pare{s f_\phi}} - \+D{\phi}D{{f_s}}}.
+\end{aligned} \right.
+\end{align*}
+球坐标系下, $h_r = 1$, $h_\theta = r$, $h_\phi = r\sin\theta$, $H = r^2\sin\theta$,
+\begin{align*}
+    \div \+vF &= \rec{r^2\sin\theta}\brac{\+D{r}D{}\pare{f_r r^2\sin\theta} + \+D{\theta}D{}\pare{f_\theta r\sin\theta} + \+D{\phi}D{}\pare{f_\phi r}} \\
+    &= \rec{r^2} \+DrD{\pare{r^2 f_r}} + \rec{r\sin\theta} \+D{\theta}D{\pare{\sin\theta f_\theta}} + \rec{r\sin\theta} \+D{\phi}D{f_\phi}. \\
+    \curl \+vF &= \left\{ \begin{aligned}
+    &&& \displaystyle \frac{\+ur}{r^2\sin\theta}\brac{\+D{\theta}D{\pare{f_\phi r\sin\theta}} - \+D{\phi}D{\pare{f_\theta r}}} \\
+    + &&& \displaystyle \frac{\+u\theta}{r\sin\theta}\brac{\+D{\phi}D{f_r} - \+D{r}D{\pare{f_\phi r\sin\theta}}} \\
+    + &&& \displaystyle \frac{\+u\phi}{r}\brac{\+D{r}D{\pare{f_\theta r}} - \+D{\theta}D{f_r}}
+\end{aligned} \right. = \left\{ \begin{aligned}
+    &&& \displaystyle \frac{\+ur}{r\sin\theta}\brac{\+D{\theta}D{\pare{f_\phi \sin\theta}} - \+D{\phi}D{f_\theta}} \\
+    + &&& \displaystyle \frac{\+u\theta}{r}\brac{\rec{\sin\theta}\+D{\phi}D{f_r} - \+D{r}D{\pare{r f_\phi}}} \\
+    + &&& \displaystyle \frac{\+u\phi}{r}\brac{\+D{r}D{\pare{r f_\theta}} - \+D{\theta}D{f_r}}.
+\end{aligned} \right.
+\end{align*}
+
+\end{document}

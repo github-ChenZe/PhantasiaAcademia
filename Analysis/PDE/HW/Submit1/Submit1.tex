@@ -1,0 +1,81 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{1.1(1)}%
+$\displaystyle x\+DxDu - y\+DyDu = xyf'\pare{xy} - yxf'\pare{xy} = 0$.
+\par
+\newprobheader{(2)}%
+$\displaystyle \lambda_1\lambda_2 \frac{\partial^2 u}{\partial x^2} - \pare{\lambda_1 + \lambda_2} \frac{\partial^2 u}{\partial x \partial y} + \frac{\partial^2 u}{\partial y^2}$\\
+$\displaystyle = \lambda_1\lambda_2 \pare{F'' + G''} - \pare{\lambda_1 + \lambda_2}\pare{\lambda_1 F'' + \lambda_2 G''} + \lambda_1^2 F'' + \lambda_2^2 G'' = 0$.
+\par
+\newprobheader{(3)}%
+$\displaystyle \+DxDu = \frac{e^{-\frac{x^2}{4a^2 t}}}{2a\sqrt{\pi t}} \pare{-\frac{x}{2a^2t}}$,\\
+$\displaystyle \frac{\partial^2u}{\partial x^2} = -\frac{e^{-\frac{x^2}{4a^2t}}}{4a^3\sqrt{\pi}t^{3/2}} + \frac{e^{-\frac{x^2}{4a^2 t}}}{2a\sqrt{\pi t}}\cdot \frac{x^2}{4a^4t^2}$. \\
+$\displaystyle \+DtDu = -\frac{e^{-\frac{x^2}{4a^2t}}}{4a\sqrt{\pi}t^{3/2}} + \frac{e^{-\frac{x^2}{4a^2 t}}}{2a\sqrt{\pi t}}\cdot \frac{x^2}{4a^2t^2}$.\\
+$\displaystyle \Rightarrow \+DtDu=a^2\frac{\partial^2u}{\partial x^2}$.\\
+$\displaystyle \lim_{t\rightarrow 0} u\pare{t,x} = \lim_{t\rightarrow 0} \frac{e^{-\frac{x^2}{4a^2t}}}{2a\sqrt{\pi t}} \xlongequal{s=1/t} \lim_{s\rightarrow \infty} \frac{\sqrt{s}e^{-\frac{x^2s}{4a}}}{2a\sqrt{\pi}} = 0,\quad x\neq 0$.
+
+\newprob{1.5}%
+\vspace{-\baselineskip}
+\begin{wrapfigure}{r}{3cm}%
+        \centering%
+        \incfig{3cm}{StringTense}%
+\end{wrapfigure}%
+设绳具有线密度$\rho$, 则略去小量有
+\begin{align*}
+    \rho \frac{\partial^2 u}{\partial t^2} \,\rd{x} &= \brac{\+vT\pare{x+\rd{x}} - \+vT\pare{x}}\cdot \+uu \\
+    &\approx T\pare{x+\rd{x}}\+DxD{u\pare{x+\rd{x}}} - T\pare{x}\+DxD{u\pare{x}} \\
+    \Rightarrow \rho \frac{\partial^2 u}{\partial t^2} &= \+DxD{}\brac{T\pare{x}\+DxDu}.
+\end{align*}
+$T$和下段绳的重力近似相等, $T \approx \rho g\pare{l-x}$,
+\[ \Rightarrow \boxed{\rho \frac{\partial^2 u}{\partial t^2} = g\+DxD{}\brac{\pare{l-x}\+DxDu}.} \]
+
+\newprob{1.9}%
+$\displaystyle c\rho \+DtD{u\pare{r,t}} = k\laplacian u\pare{r,t} = \frac{k}{r^2}\+DrD{}\pare{r^2\+DrD{u\pare{r,t}}},\quad r<R$.\\
+$\displaystyle \brac{hu\pare{r,t} + k\+DrD{u\pare{r,t}}}_{r=R} = h\theta\pare{t}$.\\
+$\displaystyle u\pare{r,0} = \varphi\pare{r},\quad r<R$.
+
+\end{document}

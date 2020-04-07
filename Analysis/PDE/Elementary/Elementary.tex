@@ -1,0 +1,41 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{引论} % (fold)
+\label{sec:引论}
+
+\paragraph{偏微分方程} % (fold)
+\label{par:偏微分方程}
+
+场是刻画时空上自由度的函数, 例如$\+vE$, $\+vB$, $\varphi$. 物理定律描述场沿时空各个方向变化间的关系, 例如
+\begin{cenum}
+    \item Klein-Gordon方程, $\displaystyle \partial_{tt}^2\phi - \laplacian \phi + m^2\phi = 0$.
+    \item Schr\"odinger方程, $\displaystyle \partial_t \psi = \pare{-\frac{\laplacian}{2m}+V}\psi$.
+    \item 热方程, $\displaystyle \partial_t u = k \laplacian u + Q$.
+    \item Laplace/Poisson方程, $\displaystyle \laplacian \varphi = -\rho$.
+    \item Hamilton-Jacobi方程: $\displaystyle \partial_t S + H\pare{p,\+DqDS,t} = 0.$
+\end{cenum}
+
+% paragraph 偏微分方程 (end)
+
+
+\paragraph{主要思想} % (fold)
+\label{par:主要思想}
+
+围绕如何解线性PDE$L\phi = \rho$. 其中$\rho$已知而$L$未知. $\rho$是无穷维向量, $L$是线性微分算子. 现在需要求$L$的逆$L^{-1}$使$\phi = L^{-1}\rho$.
+\begin{cenum}
+    \item 分离变量, 将PDE化为ODE;
+    \item 将ODE写成Sturm-Liouville标准形式.
+    \item SL的解是特殊函数, 用于构造将偏微分算子对角化的基.
+    \item 将函数视为向量, 用不同的基表示是积分变换.
+    \item 可求得$L^{-1}$, 即$L$的Green函数, 即基本解.
+\end{cenum}
+
+% paragraph 主要思想 (end)
+
+% section 引论 (end)
+
+\end{document}

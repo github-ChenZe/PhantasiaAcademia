@@ -1,0 +1,421 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+\def\rD{\mathrm{D}}
+\newcommand{\mathmin}[2]{(#1+#2)/2-abs(#1-#2)/2}
+\newcommand{\mathmax}[2]{(#1+#2)/2+abs(#1-#2)/2}
+
+\begin{document}
+
+\newprob{5.3.9 (1)}%
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BEQ_}{R\+_b_} = \frac{\SI{12}{\volt} - \SI{0.7}{\volt}}{\SI{300}{\kilo\ohm}} = \boxed{\SI{0.0377}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = \boxed{\SI{1.88}{\milli\ampere}.}$\\
+$\displaystyle U\+_CQ_ = V\+_CC_ - R\+_c_I\+_CQ_ = \boxed{\SI{4.47}{\volt}.}$
+\par
+\newprobheader{(2)}%
+\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (1,2) to[short,o-*]
+        (2,2) to[resistor,R=$R\+_b_$]
+        (2,0) to[short,*-o]
+        (1,0)
+        (2,2) to[short,i_=$i\+_b_$]
+        (4,2) to[resistor,R=$r\+_be_$,-*]
+        (4,0) node[rground] {}
+        (6,0) to[european controlled current source,i_<=$\beta i\+_b_$,*-]
+        (6,2) to[short]
+        %(8,2) to[resistor,R=$R\+_b1_$,*-*]
+        %(8,0)
+        (6,2) to[short]
+        (8,2) to[resistor,R=$R\+_c_$,*-*]
+        (8,0)
+        (8,2) to[short,-o]
+        (10,2) node[below] {$+$}
+        (8,0) to[short,-o]
+        (10,0) node[above] {$-$}
+        (10,1) node {$v\+_o_$}
+        (1,0) node[above] {$-$}
+        (1,2) node[below] {$+$}
+        (1,1) node {$v\+_i_$}
+        (1,0) -- (10,0)
+        (-1,2) to[resistor,R=$R\+_si_$,o-]
+        (1,2)
+        (-1,0) to[short,o-] (1,0)
+        (-1,0) node[above] {$-$}
+        (-1,2) node[below] {$+$}
+        (-1,1) node {$v\+_s_$}
+        ;
+\end{tikzpicture}
+\par
+\newprobheader{(3)}%
+$\displaystyle r\+_be_ = r\+_bb_ + \pare{1+\beta}\frac{V_T}{I\+_E_} \approx \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.0377}{\milli\ampere}} = \boxed{\SI{890}{\ohm}.}$
+\par
+\newprobheader{(4)}%
+$\displaystyle A_v = \frac{-\beta \pare{R\+_c_\parallelsum R\+_L_}}{r\+_be_} = \frac{-50 \pare{4\parallelsum 4}}{0.89} = \boxed{-112.}$\\
+$\displaystyle A\+_\mathnormal{v}s_ = \frac{v\+_i_}{v\+_s_}A_v = \frac{R\+_b_\parallelsum r\+_be_}{R\+_si_ + R\+_b_\parallelsum r\+_be_}A_v = \boxed{-85.2.}$
+\newprob{5.3.11 (1)}%
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BEQ_}{R\+_b_} = -\frac{\SI{12}{\volt} - \SI{0.7}{\volt}}{\SI{300}{\kilo\ohm}} = \boxed{\SI{-0.0377}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = \boxed{\SI{-3.77}{\milli\ampere}.}$\\
+$\displaystyle U\+_CEQ_ = V\+_CC_ - R\+_c_I\+_CQ_ = \boxed{\SI{-4.47}{\volt}.}$
+\par
+\newprobheader{(2)}%
+\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (1,2) to[short,o-*]
+        (2,2) to[resistor,R=$R\+_b_$]
+        (2,0) to[short,*-o]
+        (1,0)
+        (2,2) to[short,i_<=$i\+_b_$]
+        (4,2) to[resistor,R=$r\+_be_$,-*]
+        (4,0) node[rground] {}
+        (6,0) to[european controlled current source,i_=$\beta i\+_b_$,*-]
+        (6,2) to[short]
+        %(8,2) to[resistor,R=$R\+_b1_$,*-*]
+        %(8,0)
+        (6,2) to[short]
+        (8,2) to[resistor,R=$R\+_c_$,*-*]
+        (8,0)
+        (8,2) to[short,-o]
+        (12,2) node[below] {$+$}
+        (8,0) to[short,-o]
+        (12,0) node[above] {$-$}
+        (12,1) node {$v\+_o_$}
+        (10,2) to[resistor,R=$R\+_L_$,*-*]
+        (10,0)
+        (1,0) node[above] {$-$}
+        (1,2) node[below] {$+$}
+        (1,1) node {$v\+_i_$}
+        (1,0) -- (10,0)
+        (-1,2) to[resistor,R=$R\+_si_$,o-]
+        (1,2)
+        (-1,0) to[short,o-] (1,0)
+        (-1,0) node[above] {$-$}
+        (-1,2) node[below] {$+$}
+        (-1,1) node {$v\+_s_$}
+        ;
+\end{tikzpicture}
+\par
+\newprobheader{(3)}%
+$\displaystyle r\+_be_ = r\+_bb_ + \pare{1+\beta}\frac{V_T}{I\+_E_} \approx \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.0377}{\milli\ampere}} = \SI{890}{\ohm}.$\\
+$\displaystyle A_v = \frac{-\beta \pare{R\+_c_\parallelsum R\+_L_}}{r\+_be_} = \frac{-100 \pare{4\parallelsum 2}}{300\parallelsum 0.89} = \boxed{-150.}$\\
+$R\+_i_ = R\+_b_ \parallelsum r\+_be_ = \boxed{\SI{887}{\ohm}.}$\\
+$R\+_o_ = R\+_c_ = \boxed{\SI{2}{\kilo\ohm}.}$
+\par
+\newprobheader{(4)}%
+PNP管$v\+_o_$底部失真故为截止失真, $\abs{I\+_CQ_}$过低所致, 可减小$R\+_b_$.
+\newprob{5.3.12 (1)}%
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BEQ_}{R_1}.$\quad $\displaystyle I\+_CQ_ = \beta \frac{V\+_CC_ - V\+_BEQ_}{R_1}.$\\
+$\displaystyle V\+_CEQ_ = V\+_CC_ - \beta \pare{R_3+R_2}\cdot \frac{V\+_CC_ - V\+_BEQ_}{R_1}.$
+\par
+\newprobheader{(2)}%
+交流通路中$R_3$不存在, $\displaystyle A_v = \frac{-\beta \pare{R_2 \parallelsum R\+_L_}}{r\+_be_}$, $\displaystyle R\+_i_ = R_1 \parallelsum r\+_be_$, $\displaystyle R\+_o_ = R_2$.
+\par
+\newprobheader{(3)}%
+直流通路无影响. 交流通路中$R_2 \mapsto R_2 + R_3$, $\abs{A_v}\uparrow$, $R_o \uparrow$.
+\newprob{5.4.1 (1)}%
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BEQ_}{R\+_b_} = \frac{\SI{12}{\volt} - \SI{0.7}{\volt}}{\SI{750}{\kilo\ohm}} = \boxed{\SI{0.0151}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = 60 \times \SI{0.0151}{\milli\ampere} = \boxed{\SI{0.904}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = V\+_CC_ - R\+_c_I\+_CQ_ = \boxed{\SI{5.85}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle V\+_BEQ_ = \SI{0.7}{\volt} - \pare{75-25} \times \SI{2}{\milli\volt} = \SI{0.6}{\volt}$.\\
+$\displaystyle \beta = 60 \times \brac{1+0.5\%\times \pare{75-25}} = 75$.\\
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BEQ_}{R\+_b_} = \frac{\SI{12}{\volt} - \SI{0.7}{\volt}}{\SI{750}{\kilo\ohm}} = \boxed{\SI{0.0152}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = 75 \times \SI{0.0151}{\milli\ampere} = \boxed{\SI{1.14}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = V\+_CC_ - R\+_c_I\+_CQ_ = \boxed{\SI{4.25}{\volt}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BEQ_}{R\+_b_} = \frac{\SI{12}{\volt} - \SI{0.7}{\volt}}{\SI{750}{\kilo\ohm}} = \boxed{\SI{0.0151}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = 115 \times \SI{0.0151}{\milli\ampere} = \boxed{\SI{1.73}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = V\+_CC_ - R\+_c_I\+_CQ_ = \boxed{\SI{0.218}{\volt}.}$\\
+此时工作在饱和区.
+\newprob{5.4.3 (1)}%
+$\displaystyle V\+_BQ_ \approx \frac{V\+_CC_ R\+_b2_}{R\+_b1_ + R\+_b2_} = \SI{4}{\volt}$.\\
+$\displaystyle I\+_BQ_ = \frac{V\+_BQ_ - V\+_BEQ_}{\pare{1+\beta} R\+_e_} = \boxed{\SI{0.0270}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = \boxed{\SI{1.62}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = V\+_CC_ - R\+_c_I\+_CQ_ -\pare{V\+_BQ_ - V\+_BEQ_} = \boxed{\SI{7.84}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.0270}{\milli\ampere}} = \boxed{\SI{1.16}{\kilo\ohm}.}$
+\par
+\newprobheader{(3)}%
+\\[-.5\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (-2,2) to[short,o-*]
+        (2,2) to[resistor,R=$R\+_b2_$]
+        (2,0) to[short,*-o]
+        (-2,0)
+        (2,2) to[short,i_=$\beta i\+_b_$]
+        (4,2) to[resistor,R=$r\+_be_$,-*]
+        (4,0) node[rground] {}
+        (6,0) to[european controlled current source,i_<=$\beta i\+_b_$,*-]
+        (6,2) to[short]
+        (8,2) to[resistor,R=$R\+_c_$,*-*]
+        (8,0)
+        (8,2) to[short]
+        (10,2) to[resistor,R=$R\+_L_$,*-*]
+        (10,0)
+        (10,2) to[short,-o]
+        (12,2) node[below] {$+$}
+        (10,0) to[short,-o]
+        (12,0) node[above] {$-$}
+        (12,1) node {$v\+_o_$}
+        (-2,0) node[above] {$-$}
+        (-2,2) node[below] {$+$}
+        (-2,1) node {$v\+_i_$}
+        (-2,0) -- (10,0)
+        (0,2) to[resistor,R=$R\+_b1_$,*-*]
+        (0,0)
+        ;
+\end{tikzpicture}\\
+$\displaystyle A_v = \frac{-\beta \pare{R\+_c_\parallel R\+_L_}}{r\+_be_} = \frac{-60\times \pare{6\parallel 3}}{1.16} = \boxed{-103.}$
+\par
+\newprobheader{(4)}%
+$\displaystyle V\+_CEQ_ = V\+_CC_ - R\+_c_I\+_CQ_ -\pare{V\+_BQ_ - V\+_BEQ_} = V\+_CC_ - R\+_c_\beta \frac{V\+_BQ_ - V\+_BEQ_}{\pare{1+\beta} R\+_e_} -\pare{V\+_BQ_ - V\+_BEQ_}$\\
+$= \SI{16}{\volt} - 2.48 \pare{V\+_BQ_ - \SI{0.7}{\volt}} = \SI{4}{\volt} \Rightarrow V\+_BQ_ = \SI{5.54}{\volt}$.\\
+$\displaystyle \frac{V\+_CC_ R\+_b2_}{R\+_b1_ + R\+_b2_} \approx V\+_BQ_ \Rightarrow R\+_b1_ = \boxed{\SI{37.8}{\kilo\ohm}.}$
+\newprob{5.4.4 (1)}%
+\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        %(-3,4) to[short,o-*]
+         (-1,4) to[short]
+        (1,4) to[resistor,R=$R\+_b2_$,*-]
+        (1,0) to[short,*-o]
+        (-4,0)
+        (1,4) to[short,-]
+        (2,4) to[resistor,R=$r\+_be_$,i<=$i\+_b_$]
+        (2,2) to[short,-*]
+        (3,2) to[resistor,R=$R\+_e1_$]
+        (3,0) node[rground] {}
+        (3,2) --
+        (4,2) to[european controlled current source,i_=$\beta i\+_b_$]
+        (4,4) to[short,-*]
+        (5,4) to[resistor,R=$R\+_c_$]
+        (5,0)
+        (5,4) to[short,-*]
+        (6,4) to[resistor,R=$R\+_L_$]
+        (6,0)
+         (-1,4) to[resistor,R=$R\+_b1_$,*-*]
+         (-1,0)
+         (-1,0) to[short,-o]
+        (-2,0) node[above] {$-$}
+         (-1,4) to[short,-o]
+        (-2,4) node[below] {$+$}
+        (-2,2) node {$v\+_i_$}
+        (1,0) to[short,-*]
+        (3,0) to[short,-*]
+        (5,0) to[short,-*]
+        (6,0)
+        (6,4) to[short,-o]
+        (7.5,4) node[below] {$+$}
+        (6,0) to[short,-o]
+        (7.5,0) node[above] {$-$}
+        (7.5,2) node {$v\+_o_$}
+        (-4,0) node[above] {$-$}
+        (-4,4) node[below] {$+$}
+        (-4,2) node {$v\+_s_$}
+        (-4,4) to[resistor,R=$R\+_si_$,o-]
+        (-2,4)
+        ;
+\end{tikzpicture}
+\par
+\newprobheader{(2)}%
+$\displaystyle V\+_BQ_ = \frac{V\+_CC_ R\+_b2_}{R\+_b1_ + R\+_b2_} = -\frac{12\times 10}{10+33} = \SI{-2.79}{\volt}.$\\
+$\displaystyle I\+_BQ_ = \rec{\pare{1+\beta}} \frac{V\+_BQ_ - V\+_BEQ_}{R\+_e1_ + R\+_e2_} = \rec{51}\times \frac{\SI{-2.79}{\volt}+\SI{0.2}{\volt}}{\SI{0.2}{\kilo\ohm} + \SI{1.3}{\kilo\ohm}} = \SI{-0.0339}{\milli\ampere}$.\\
+$\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{\abs{I\+_EQ_}} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.0339}{\milli\ampere}} = \SI{968}{\ohm}.$\\
+$\displaystyle R\+_i_ = R\+_b1_ \parallelsum R\+_b2_ \parallelsum \pare{r\+_be_ + \pare{1+\beta} R\+_e1_} = \boxed{\SI{4.55}{\kilo\ohm}.}$\\
+$\displaystyle R\+_o_\approx R\+_c_ = \boxed{\SI{3.3}{\kilo\ohm}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle \frac{v\+_o_}{v\+_i_} = -\frac{\beta\pare{R\+_c_ \parallelsum R\+_L_}}{r\+_be_ + \pare{1+\beta}R\+_e1_} = -8.97$.\\
+$\displaystyle \frac{v\+_i_}{v\+_s_} = \frac{R\+_i_}{R\+_si_ + R\+_i_} = 0.883$.\\
+$\displaystyle v\+_o_ = v\+_s_\cdot \frac{v\+_i_}{v\+_s_}\cdot \frac{v\+_o_}{v\+_i_} = \boxed{-\SI{119}{\milli\volt}.}$
+\newprob{5.4.6 (1)}%
+$\displaystyle V\+_EE_ = R\+_b_I\+_BQ_ + V\+_BEQ_ + \pare{1+\beta}\pare{R\+_e1_+R\+_e2_}I\+_BQ_$.\\
+$\displaystyle I\+_BQ_ = \frac{V\+_EE_ - V\+_BEQ_}{R\+_b_ + \pare{1+\beta}\pare{R\+_e1_ + R\+_e2_}} = \boxed{\SI{0.0127}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = \boxed{\SI{1.27}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = \pare{V\+_CC_ + V\+_EE_} - R\+_c_I\+_CQ_ - \pare{R\+_e1_ + R\+_e2_} I\+_EQ_ = \boxed{\SI{4.27}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.0127}{\milli\ampere}} = \SI{2.25}{\kilo\ohm}.$\\
+$\displaystyle A_v =  \frac{v\+_o_}{v\+_i_} = -\frac{\beta\pare{R\+_c_ \parallelsum R\+_L_}}{r\+_be_ + \pare{1+\beta}R\+_e1_} = \boxed{-27.2.}$\\
+$\displaystyle R\+_i_ = R\+_b_ \parallelsum \pare{r\+_be_ + \pare{1+\beta} R\+_e1_} = \boxed{\SI{15.5}{\kilo\ohm}.}$\\
+$\displaystyle R\+_o_\approx R\+_c_ = \boxed{\SI{10}{\kilo\ohm}.}$
+\newprob{5.4.8 (1)}%
+$\displaystyle I\+_BQ_ = \frac{I\+_EQ_}{1+\beta} = \frac{\SI{1}{\milli\ampere}}{101} = \boxed{\SI{9.9}{\micro\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \frac{\beta}{1+\beta} I\+_EQ_ = \boxed{\SI{0.99}{\milli\ampere}.}$\\
+$\displaystyle V\+_CQ_ = V'\+_CC_ - R'\+_L_I\+_CQ_ = V\+_CC_\cdot \frac{R\+_L_}{R\+_L_ + R\+_c_} - \pare{R\+_L_\parallelsum R\+_c_} I\+_CQ_ = \SI{1.05}{\volt}$.\\
+$\displaystyle I\+_L_ = \frac{V\+_CQ_}{R\+_L_} = \boxed{\SI{0.105}{\milli\ampere}.}$\\
+$\displaystyle I\+_c_ = \frac{V\+_CC_ - V\+_CQ_}{R\+_c_} = \boxed{\SI{1.10}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = V\+_CQ_ + R\+_b_I\+_BQ_ + V\+_BEQ_ = \boxed{\SI{2.74}{\volt}.}$
+\par
+\newprobheader{(2)}%
+\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (1,2) to[short,o-*]
+        (2,2) to[resistor,R=$R\+_b_$]
+        (2,0) to[short,*-o]
+        (1,0)
+        (2,2) to[short,i_=$i\+_b_$]
+        (4,2) to[resistor,R=$r\+_be_$,-*]
+        (4,0) node[rground] {}
+        (6,0) to[european controlled current source,i_<=$\beta i\+_b_$,*-]
+        (6,2) to[short]
+        %(8,2) to[resistor,R=$R\+_b1_$,*-*]
+        %(8,0)
+        (6,2) to[short]
+        (8,2) to[resistor,R=$R\+_c_$,*-*]
+        (8,0)
+        (8,2) to[short,-o]
+        (12,2) node[below] {$+$}
+        (8,0) to[short,-o]
+        (12,0) node[above] {$-$}
+        (12,1) node {$v\+_o_$}
+        (10,2) to[resistor,R=$R\+_L_$,*-*]
+        (10,0)
+        (1,0) node[above] {$-$}
+        (1,2) node[below] {$+$}
+        (1,1) node {$v\+_i_$}
+        (1,0) -- (10,0)
+        (-1,2) to[resistor,R=$R\+_si_$,o-]
+        (1,2)
+        (-1,0) to[short,o-] (1,0)
+        (-1,0) node[above] {$-$}
+        (-1,2) node[below] {$+$}
+        (-1,1) node {$v\+_s_$}
+        ;
+\end{tikzpicture}
+\par
+\newprobheader{(3)}%
+$\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{9.9}{\micro\ampere}} = \SI{2.83}{\kilo\ohm}.$\\
+$\displaystyle A_v =  \frac{v\+_o_}{v\+_i_} = -\frac{\beta\pare{R\+_c_ \parallelsum R\+_L_}}{r\+_be_} = \boxed{-177.}$\\
+$\displaystyle R\+_i_ = R\+_b_ \parallelsum r\+_be_ = \boxed{\SI{2.76}{\kilo\ohm}.}$\\
+$\displaystyle R\+_o_ = R\+_c_ = \boxed{\SI{10}{\kilo\ohm}.}$
+\newprob{5.5.2 (1)}%
+$\displaystyle V\+_EE_ = R\+_b_I\+_BQ_ + V\+_EBQ_ + \pare{1+\beta}R\+_e_ I\+_BQ_$,\\
+$\displaystyle I\+_BQ_ = \frac{V\+_EE_ - V\+_EBQ_}{R\+_b_ + \pare{1+\beta} R\+_e_} = \boxed{\SI{0.0217}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ_ = \beta I\+_BQ_ = \boxed{\SI{1.09}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = -R\+_b_I\+_BQ_ - V\+_EBQ_ = \boxed{-\SI{6.35}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$r\+_be_ = \displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.0217}{\milli\ampere}} = \SI{1.40}{\kilo\ohm}$\\
+$\displaystyle A_v = \frac{\pare{1+\beta}\pare{R\+_e_\parallelsum R\+_L_}}{r\+_be_ + \pare{1+\beta}\pare{R\+_e_\parallelsum R\+_L_}} = \boxed{0.989.}$\\
+$\displaystyle R\+_i_ = R\+_b_\parallelsum\brac{r\+_be_ + \pare{1+\beta}\pare{R\+_e_\parallelsum R\+_L_}} = \boxed{\SI{87.3}{\kilo\ohm}.}$\\
+$\displaystyle R\+_o_ = R\+_e_\parallelsum\frac{r\+_be_ + R\+_si_\parallelsum R\+_b_}{1+\beta} = \boxed{\SI{37.0}{\ohm}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle v\+_o_ = v\+_s_ \cdot \frac{R\+_i_}{R\+_si_ + R\+_i_}\cdot A_v = \boxed{\SI{197}{\milli\volt}.}$
+\newprob{5.5.3 (1)}%
+$\displaystyle V\+_BQ_ = V\+_CC_\cdot \frac{R\+_b2_}{R\+_b1_ + R\+_b2_} = \boxed{\SI{4.29}{\volt}.}$\\
+$\displaystyle I\+_BQ_ = \rec{1+\beta} \frac{V\+_BQ_ - V\+_BEQ_}{R\+_e_} = \boxed{\SI{0.0178}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ_ = V\+_CC_ - R\+_c_I\+_CQ_ - R\+_e_I\+_EQ_ = \boxed{\SI{2.84}{\volt}.}$
+\par
+\newprobheader{(2)}%
+\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        %(-3,4) to[short,o-*]
+         (-1,4) to[short]
+        (1,4) to[resistor,R=$R\+_b2_$,*-]
+        (1,0) to[short,*-o]
+        (-4,0)
+        (1,4) to[short,-]
+        (2,4) to[resistor,R=$r\+_be_$,i=$i\+_b_$]
+        (2,2) to[short,-*]
+        (3,2) to[resistor,R=$R\+_e1_$]
+        (3,0) node[rground] {}
+        (3,2) --
+        (4,2) to[european controlled current source,i_<=$\beta i\+_b_$]
+        (4,4) to[short]
+        %(5,4) to[resistor,R=$R\+_c_$]
+        %(5,0)
+        (5,4) to[short,-*]
+        (6,4) to[resistor,R=$R\+_c_$]
+        (6,0)
+         (-1,4) to[resistor,R=$R\+_b1_$,*-*]
+         (-1,0)
+         (-1,0) to[short,-o]
+        (-2,0) node[above] {$-$}
+         (-1,4) to[short,-o]
+        (-2,4) node[below] {$+$}
+        (-2,2) node {$v\+_i_$}
+        (1,0) to[short,-*]
+        (3,0) to[short,-o]
+        (5,0) to[short,-*]
+        (6,0)
+        (4,2) to[short,-o]
+        (5,2) node[below] {$+$}
+        (5,0) node[above] {$-$}
+        (5,1) node {$v\+_o2_$}
+        (6,4) to[short,-o]
+        (7.5,4) node[below] {$+$}
+        (6,0) to[short,-o]
+        (7.5,0) node[above] {$-$}
+        (7.5,2) node {$v\+_o1_$}
+        (-4,0) node[above] {$-$}
+        (-4,4) node[below] {$+$}
+        (-4,2) node {$v\+_s_$}
+        (-4,4) to[resistor,R=$R\+_si_$,o-]
+        (-2,4)
+        ;
+\end{tikzpicture}\\
+$\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.0178}{\milli\ampere}} = \SI{1.66}{\kilo\ohm}.$\\
+$\displaystyle R\+_i_ = R\+_b1_ \parallelsum R\+_b2_ \parallelsum \brac{r\+_be_ + \pare{1+\beta}R\+_e1_} = \boxed{\SI{8.23}{\kilo\ohm}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle A_{v\mathrm{o}1} =  -\frac{\beta R\+_c_}{r\+_be_ + \pare{1+\beta}R\+_e_} = -0.982$, $\displaystyle A\+_v1_ = \frac{R\+_i_}{R\+_si_ + R\+_i_}\cdot A_{v\mathrm{o}1} = \boxed{-0.790.}$\\
+$\displaystyle A_{v\mathrm{o}2} = \frac{\pare{1+\beta}R\+_e_}{r\+_be_ + \pare{1+\beta}R\+_e_} = 0.992$, $A\+_v2_ = \frac{R\+_i_}{R\+_si_ + R\+_i_}\cdot A_{v\mathrm{o}2} = \boxed{0.798.}$
+\par
+\newprobheader{(4)}%
+$\displaystyle R\+_o1_ \approx R\+_c_ = \boxed{\SI{2}{\kilo\ohm}.}$\\
+$\displaystyle R\+_o2_ = R\+_e_\parallelsum\frac{r\+_be_ + R\+_si_\parallelsum R\+_b1_\parallelsum R\+_b2_}{1+\beta} \parallelsum \frac{\beta R_c}{1+\beta} = \boxed{\SI{31.4}{\ohm}.}$
+\newprob{5.5.4}%
+$\displaystyle I\+_BQ_ = \frac{I\+_CQ_}{1+\beta} = \SI{0.01}{\milli\ampere}.$\\
+$\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.01}{\milli\ampere}} = \SI{2.8}{\kilo\ohm}.$\\
+$\displaystyle R\+_i_ = \frac{r\+_be_}{1+\beta} = \boxed{\SI{27.7}{\ohm}.}$\\
+$\displaystyle A_v = \frac{\beta R\+_c_}{r\+_be_} = \boxed{268.}$\\
+$\displaystyle R\+_o_ \approx R\+_c_ = \boxed{\SI{7.5}{\kilo\ohm}.}$
+\newprob{5.5.6 (1)}%
+$\displaystyle V\+_BQ_ = -R\+_b_\cdot \frac{I\+_E_}{1+\beta} = \boxed{\SI{-0.099}{\volt}.}$\\
+$\displaystyle V\+_EQ_ = V\+_BQ_ - V\+_BEQ_ = \boxed{\SI{-0.79}{\volt}.}$\\
+$\displaystyle V\+_CQ_ = V\+_CC_ - R\+_c_I\+_CQ_ = \boxed{\SI{2.08}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{200}{\ohm} + 101\times\frac{\SI{26}{\milli\volt}}{\SI{1}{\milli\ampere}} = \boxed{\SI{2.83}{\kilo\ohm}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle A\+_vs_ = \frac{R\+_b_\parallelsum r\+_be_}{R\+_si_ + R\+_b_\parallelsum r\+_be_}\cdot \frac{-\beta \pare{R\+_c_\parallelsum R\+_L_}}{r\+_be_} = \boxed{-28.4.}$
+\par
+\newprobheader{(4)}%
+$\displaystyle A\+_vs_ = \frac{r\+_be_/\pare{1+\beta}}{R\+_si_ + r\+_be_/\pare{1+\beta}}\cdot \frac{\beta\pare{R\+_c_ \parallelsum R\+_L_}}{r\+_be_} = \boxed{19.3.}$
+\par
+\newprobheader{(5)}%
+$\displaystyle A\+_vs_ = \frac{R\+_b_\parallelsum \brac{r\+_be_ + \pare{1+\beta} R\+_L_}}{R\+_si_ + R\+_b_\parallelsum\brac{r\+_be_ + \pare{1+\beta} R\+_L_}}\cdot \frac{\pare{1+\beta} R\+_L_}{r\+_be_ + \pare{1+\beta} R\+_L_} = \boxed{0.962.}$
+
+\end{document}

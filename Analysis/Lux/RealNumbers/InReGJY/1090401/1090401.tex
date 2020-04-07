@@ -1,0 +1,25 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{tikz,pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+
+\begin{document}
+
+\begin{tikzpicture}
+    \begin{axis}[axis lines=left,thick,smooth,no markers,xlabel=$x$,ylabel=$y$,xtick={0,1},ytick={0,1}]
+        \addplot+[name path=A,black,domain=0:1] {x};
+        \addplot+[name path=B,black,domain=0:1] {x^3};
+        \addplot[blue!20] fill between[of=A and B];
+    \end{axis}
+\end{tikzpicture}
+\begin{align*}
+    I &= \int_0^1 \rd{y}\,\int_y^{\sqrt[3]{y}} e^{x^2}\,\rd{x} \\
+    &= \int_0^1 \rd{x}\, e^{x^2} \int_{x^3}^x \,\rd{y} \\
+    &= \int_0^1 \rd{x}\, \pare{x - x^3}e^{x^2} \\
+    &= \half e - 1.
+\end{align*}
+
+\end{document}

@@ -1,0 +1,43 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+
+\begin{document}
+
+$\grad$具有矢量的性质, 张量积\hl{不可随意交换},
+\begin{align*}
+    \grad\pare{\+va\times \+vr} &= \grad_a \pare{\+va\times \+vr} + \grad_r \pare{\+va\times \+vr} \\
+    &=\grad_r \pare{\+va\times\+vr} = - \grad_r\pare{\+vr\times \+va} = -\tensor{I}\times \+va = -\+va\times \tensor{I}.
+\end{align*}
+注意到$\resumath{\+vI \times \+va = \+va\times \tensor{I}.}$
+\par
+$\displaystyle \grad\brac{\+vr\times\pare{\+va\times \+vr}} = 2\+vr\+va - \+va\+vr - \pare{\+vr\cdot \+va}\tensor{I}$中的张量积不可交换. 先做化简
+\[ \+vr\times\pare{\+va\times \+vr} = \+vr\cdot \pare{\+vr\+va - \+va\+vr}, \]
+再展开点乘的梯度. 对于$\div\brac{\+vr\times\pare{\+va\times \+vr}}$, 可以直接缩并$\grad\brac{\+vr\times\pare{\+va\times \+vr}}$.
+\begin{align*}
+    \grad\brac{\+vr\times \+vf\pare{r}} &= \grad_r\brac{\+vr\times \+vf\pare{r}} + \grad_f \brac{\+vr\times \+vf\pare{r}} \\
+    &= \tensor{I}\times \+vf\pare{r} - \grad_f\pare{\+vf\times \+vr} \\
+    &= \tensor{I} \times \+vf\pare{r} - \pare{\+ur \+vf'}\times \+vr.
+\end{align*}
+\[ \pare{\curl \+va} \times \+vb = \pare{\+vb\+v\cdot\grad}\+va - \pare{\grad \+va}\cdot \+vb. \]
+注意到$\partial_i f_j - \partial_j f_i = \epsilon_{ijk} \pare{\curl \+vf}_k$,
+\begin{align*}
+    \div\brac{\pare{\grad \+vg}\cdot \+vf} &= \grad_g \+v\cdot \brac{\pare{\grad \+vg}\cdot \+vf} + \grad_f\+v\cdot\brac{\pare{\grad \+vg}\cdot \+vf}\\
+    &= \pare{\laplacian \+vg}\cdot \+vf + \pare{\partial_i g_j}\pare{\partial_i f_j} \\
+    &= \pare{\laplacian \+vg}\cdot \+vf + \pare{\partial_i g_j}\pare{\partial_i f_j - \partial_j f_i} + \pare{\partial_i g_j}\pare{\partial_j f_i} \\
+    &= \pare{\laplacian \+vg}\cdot \+vf + \pare{\curl \+vg}\cdot \pare{\curl \+vf} + \pare{\grad \+vg}:\pare{\grad \+vf}.
+\end{align*}
+
+\end{document}

@@ -1,11 +1,7 @@
-for i = 1, ..., n - 1
-    /@$a_i$@/ = /@$y_i$@/
-    /@$\delta_i$@/ = /@$x_{i+1} - x_i$@/
-    /@$\Delta_i$@/ = /@$y_{i+1} - y_i$@/
+/@$x_0$@/ = 初始向量
+/@$\lambda$@/ = 常数
+for k = 0, 1, 2, ...
+    /@$A$@/ = /@$Dr\pare{x^k}$@/
+    /@$A^T A + \lambda \diag\pare{A^TA}v^k$@/ = /@$-A^Tr\pare{x^k}$@/
+    /@$x^{k+1}$@/ = /@$x^k$@/ + /@$v^k$@/
 end
-/@求解\eqref{eq:自然三次样条c}得到$c_1,\cdots,c_n$@/
-for i = 1, ..., n - 1
-    /@$d_i$@/ = /@$\displaystyle \frac{c_{i+1}-c_i}{3\delta_i}$@/
-    /@$b_i$@/ = /@$\displaystyle \frac{\Delta_i}{\delta_i} - \displaystyle \frac{\delta_i}{3}\pare{2c_i+c_{i+1}}$@/
-end
-/@$S_i\pare{x}$@/ = /@$a_i + b_i\pare{x-x_i} + c_i\pare{x-x_i}^2 + d_i\pare{x-x_i}^3$@/

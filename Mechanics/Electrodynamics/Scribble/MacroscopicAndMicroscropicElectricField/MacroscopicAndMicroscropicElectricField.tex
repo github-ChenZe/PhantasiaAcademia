@@ -1,0 +1,90 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{宏观与微观电场} % (fold)
+\label{sec:宏观与微观电场}
+
+\subsection{Griffiths的论证} % (fold)
+\label{sub:griffiths的论证}
+
+\begin{theorem}
+    球外电荷分布在球内产生的平均电场等于球心处电场值.
+\end{theorem}
+\begin{theorem}
+    球内电荷分布在球内产生的平均电场为
+    \[ \+vE\+_ave_ = -\rec{4\pi\epsilon_0}\frac{\+vp}{R^3}. \]
+    其中$\+vp$是球内电荷的偶极矩.
+\end{theorem}
+\begin{proof}
+    $\+vr_0$处单电荷产生的平均电场为
+    \[ \+vE\+_ave0_ = \rec{\displaystyle \frac{4}{3}\pi R^3}\frac{q}{4\pi\epsilon_0}\iiint_V \frac{\+u{\+gr}}{\+gr^2}\, \rd{V}. \]
+    而将$-q$均匀分布在球内后在$\+vr_0$处产生的电场为
+    \[ \+vE_{r_0} = \frac{-q}{4\pi\epsilon_0} \rec{\displaystyle \frac{4}{3}\pi R^3} \iiint_V \frac{-\+u{\+gr}}{\+gr}\, \rd{V}. \]
+    故$\displaystyle \+vE\+_ave0_ = \+vE_{r_0} = -\rec{4\pi\epsilon_0}\frac{q\+vr}{R^3}$. 引用叠加原理推广至一般电荷分布.
+\end{proof}
+在介质中, 微观尺度上的电场相当复杂. 但在恰当尺度下(即可以平均微观电场以产生稳定电场, 且极化率变化足够小), 在球体中的平均电场可以写作
+\[ \+vE = \+vE\+_out_ + \+vE\+_in_, \]
+分别对应外部偶极子和内部偶极子的贡献. 外部贡献势能为
+\[ V\+_out_ = \rec{4\pi\epsilon_0} \iiint\+_outside_ \frac{\+u{\+gr}\cdot\+vP\pare{\+vr'}}{\+gr^2}\,\rd{V}. \]
+其中目标点为球心. 内部对平均场的贡献
+\[ \+vE\+_in_ = -\rec{4\pi\epsilon_0} \frac{\+vp}{R^3} = -\rec{3\epsilon_0}\+vP. \]
+这正好是$\+vP$均匀极化球在球内产生的电场. 故
+\[ V\pare{\+vr} = V\+_out_ + V\+_in_ = \rec{4\pi\epsilon_0} \iiint \frac{\+u{\+gr}\cdot\+vP\pare{\+vr'}}{\+gr^2}\,\rd{V}. \]
+从而宏观场可以安全地视为偶极矩产生的场.
+
+% subsection griffiths的论证 (end)
+
+\subsection{Ashcroft的论证} % (fold)
+\label{sub:ashcroft的论证}
+
+关于微观场有严格成立的Maxwell方程(Gau\ss 单位制)
+\[ \div \+vE\+_micro_\pare{\+vr} = 4\pi \rho\+_micro_\pare{\+vr}. \]
+在没有自由电荷的情形下, $\div \+vD\pare{\+vr} = 0$, 从而宏观场的方程为
+\[ \div \+vE\pare{\+vr} = -4\pi \div\+vP\pare{\+vr}. \]
+\begin{proof}
+    引入密度权重函数$f\pare{\+vr}$, 则宏观场表示为
+    \begin{align*}
+        \+vE\pare{\+vr} &= \int \+vE\+_micro_\pare{\+vr - \+vr'}f\pare{\+vr'}\,\rd{\+vr'} = \pare{f*\+vE\+_micro_}\\
+        \Rightarrow \div \+vE\pare{\+vr} &= 4\pi\pare{f*\rho\+_micro_}.
+    \end{align*}
+    用指标$j$表示固体中各个粒子, 则$\displaystyle \rho\+_micro_\pare{\+vr} = \sum_j \rho_j\pare{\+vr - \+vr_j}$. 则
+    \[ \div \+vE\pare{\+vr} = 4\pi \sum_j \pare{f*\rho_j}\pare{\+vr - \+vr_j} = 4\pi \sum_j \pare{f*\rho_j}\pare{\+vr - \+vr_j^0 - \+v\Delta_j}. \]
+    其中$\+vr_j^0$表示平衡位置而$\+v\Delta_j = \+vr_j - \+vr_j^0$. 将$f$在$\pare{\+vr - \+vr_j^0}$处展开后保留至一阶,
+    \[ \div\+vE\pare{\+vr} = 4\pi\brac{\sum_j e_jf\pare{\+vr - \+vr_j^0} - \sum_j \pare{\+vp_j + e_j\+v\Delta_j}\cdot \grad f\pare{\+vr - \+vr_j^0}}. \]
+    如果每个粒子贡献的净电荷为零, 则
+    \[ \div \+vE\pare{\+vr} = - 4\pi \div\sum_{\+vR}f\pare{\+vr - \+vR}\+vp\pare{\+vR}. \]
+    从而欲使宏观场的方程成立, 须
+    \[ \+vP\pare{\+vr} = \sum_{\+vR} f\pare{\+vr - \+vR} \+vp\pare{\+vR}. \]
+    即$\+vP$应作为$\+vp$的体密度.
+\end{proof}
+对于微观粒子, 作用在其上引发其移动和变形的力应等于该电的微观场减去这一粒子自身引发的场. 这一有效场写作$\+vE\+_loc_$. 有
+\[ \+vE\+_loc_\pare{\+vr} = \+vE\+_loc_^{\text{near}}\pare{\+vr} + \+vE\+_micro_^{\text{far}}\pare{\+vr} = \+vE\+_loc_^{\text{near}}\pare{r} + \+vE\+_macro_^{\text{far}}\pare{\+vr}. \]
+而宏观平均场
+\[ \+vE\pare{\+vr} = \+vE\+_macro_^{\text{near}}\pare{\+vr} + \+vE\+_macro_^{\text{far}}\pare{\+vr}. \]
+从而
+\[ \+vE\+_loc_\pare{\+vr} = \+vE\pare{\+vr} + \+vE\+_loc_^{\text{near}}\pare{\+vr} - \+vE\+_macro_^{\text{near}}\pare{\+vr}. \]
+假设挖去球形小区域, 有
+\[ \+vE\+_loc_\pare{\+vr} = \+vE\pare{\+vr} + \+vE\+_loc_^{\text{near}}\pare{\+vr} + \frac{4\pi \+vP\pare{\+vr}}{3}. \]
+若略去$\displaystyle \+vE\+_loc_^{\text{near}}\pare{\+vr}$项(例如由对称性), 则
+\[ \+vE\+_loc_\pare{\+vr} = \+vE\pare{\+vr} + \frac{4\pi \+vP\pare{\+vr}}{3} = \frac{\epsilon_r + 2}{3}\+vE\pare{\+vr}. \]
+若引入极化率$\alpha$满足
+\[ \+vp\pare{\+vR+\+vd} + e\+vu\pare{\+vR+\+vd} = \alpha\pare{\+vd} \left.\+vE\+_loc_\pare{\+vr}\right\vert_{\+vr\approx \+vR}. \]
+由$\displaystyle \+vp\pare{\+vR+\+vd} + e\+vu\pare{\+vR+\+vd}$, 有$\displaystyle \+vP\pare{\+vr} = \frac{\alpha}{v}\+vE\+_loc_\pare{\+vr}$. 即
+\[ \frac{\epsilon - 1}{\epsilon + 2} = \frac{4\pi\alpha}{3v}. \]
+得到Clausius-Mossotti关系, 或Lorentz-Lorenz关系.
+
+% subsection ashcroft的论证 (end)
+
+\subsection{Born的论证} % (fold)
+\label{sub:born的论证}
+
+同Ashcroft, 或使用Ewald-Oseen消光定理.
+
+% subsection born的论证 (end)
+
+% section 宏观与微观电场 (end)
+
+\end{document}

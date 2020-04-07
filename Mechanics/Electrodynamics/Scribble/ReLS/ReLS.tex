@@ -1,0 +1,28 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+举例而言, 欲计算
+\[ \grad\pare{\+vf \cdot \+vg}, \]
+定义一个新的函数$U = U\pare{\+vf, \+vg} = \+vf \cdot \+vg$, 上式变为$\grad U$.
+\[ \grad{U} = \+D{\+vr}D{\+vf}\cdot \+D{\+vf}D{U} + \+D{\+vr}D{\+vg}\cdot \+D{\+vg}D{U}. \]
+左边就是$\grad\pare{\+vf \cdot \+vg}$, 右边第一项就是$\grad_f \pare{\+vf\cdot \+vg}$, 第二项就是$\grad_g \pare{\+vf\cdot \+vg}$. 所以$\grad_f$的意义实际上是
+\[ \grad_f = \+D{\+vr}D{\+vf}\cdot \+D{\+vf}D{}. \]
+特别有
+\begin{align*}
+    \grad_f \+vf &= \pare{\+D{\+vr}D{\+vf}\cdot\+D{\+vf}D{}} \+vf = \grad \+vf,\\
+    \grad_f \+v\cdot \+vf &= \pare{\+D{\+vr}D{\+vf}\cdot\+D{\+vf}D{}}\cdot \+vf = \div \+vf,\\
+    \grad_f \+v\times \+vf &= \pare{\+D{\+vr}D{\+vf}\cdot\+D{\+vf}D{}}\times \+vf = \curl \+vf.
+\end{align*}
+\par
+$\grad U$第一步可以化简为
+\[ \grad{U} = \+D{\+vr}D{\+vf}\cdot \+vg + \+D{\+vr}D{\+vg}\cdot \+vf = \pare{\grad_f \+vf}\cdot \+vg + \pare{\grad_g \+vg} \cdot \+vf. \]
+凑出的交叉项
+\[ \pare{\grad_f \+vf - \+vf\grad_f}\cdot \+vg \]
+的意义实际上是
+\[ \brac{\pare{\+D{\+vr}D{\+vf}\cdot \+D{\+vf}D{}} \+vf - \+vf\pare{\+D{\+vr}D{\+vf}\cdot \+D{\+vf}D{}}}\cdot \+vg. \]
+
+
+\end{document}

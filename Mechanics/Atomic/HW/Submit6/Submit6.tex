@@ -1,0 +1,74 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{I}%
+$n=3$的简并度为$n^2 = \boxed{9.}$\\
+$l=2$的$L = \sqrt{l\pare{l+1}}\hbar = \boxed{\sqrt{6}\hbar = \SI{2.58e-34}{\joule\second}.}$\\
+$l=2$有$2l+1 = \boxed{5}$个可能的取向.
+\newprob{II}%
+\\[-\baselineskip]
+\centerline{\begin{tabular}{|c|c|c|}
+    \hline
+    & 初态 & 末态 \\
+    \hline
+    3s$\rightarrow$2p & $m=0$ & $m=-1$ \\
+    &  & $m=0$ \\
+    &  & $m=1$ \\
+    \hline
+    3p$\rightarrow$2s & $m=-1$ & $m=0$ \\
+    & $m=0$ & $m=0$ \\
+    & $m=1$ & $m=0$ \\
+    \hline
+    3d$\rightarrow$2p & $m=-2$ & $m=-1$ \\
+    & $m=-1$ & $m=-1$ \\
+    &  & $m=0$ \\
+    & $m=0$ & $m=-1$ \\
+    &  & $m=0$ \\
+    &  & $m=1$ \\
+    & $m=1$ & $m=0$ \\
+    &  & $m=1$ \\
+    & $m=2$ & $m=1$ \\
+    \hline
+\end{tabular}}
+\newprob{3.1}%
+基态轨道角动量为零, 故两个基态都有$\boxed{\mu = 0.}$
+\newprob{3.2}%
+$\displaystyle v_z = \frac{F}{m}\frac{d_1}{v_\parallel} = \frac{\mu\+_B_ \partial_z B}{m}\frac{d_1}{v_\parallel} = \SI{16.8}{\meter\per\second}.$\\
+$\displaystyle \Delta z = 2v_z \cdot \frac{d_1/2+d_2}{v_\parallel} = \boxed{\SI{0.67}{\milli\meter}.}$
+\newprob{3.3 (a)}%
+若$\displaystyle \+DzD{B_z}>0$, 则粒子束向$+z$偏转. 反之向$-z$偏转.
+\par
+\newprobheader{(b)}%
+若$\displaystyle \+DzD{B_z}<0$, 则粒子束向$-z$偏转. 反之向$+z$偏转.
+\par
+\newprobheader{(c)}%
+若$\displaystyle \+DyD{B_y} \rightarrow 0$, 则不偏转.
+\par
+\newprobheader{(d)}%
+不偏转.
+
+\end{document}

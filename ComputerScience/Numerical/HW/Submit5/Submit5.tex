@@ -1,0 +1,310 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\DeclareMathOperator{\fl}{fl}
+\def\flcontent{%
+$\displaystyle \thisfl\pare{a} = \fla, \thisfl\pare{b} = \flb, \thisfl\pare{c} = \flc$,\\
+$\displaystyle \Delta_{\thisfl} = \thisfl\curb{\thisfl\pare{b}^2 - \thisfl\brac{4\times \thisfl\pare{\thisfl\pare{a}\times\thisfl\pare{c}}}}$\\
+$\displaystyle  = \thisfl\curb{\thisfl\brac{{\flb^2}} - \thisfl\brac{4\times \thisfl\pare{\fla \times\flc}}}$\\
+$\displaystyle  = \thisfl\curb{\flbb - \thisfl\brac{4\times \flac}}$\\
+$\displaystyle  = \thisfl\curb{\flbb - \flyonac}$,\\
+$\displaystyle  = \fld$.\\
+$\displaystyle x_{1\thisfl} = \thisfl\frac{\displaystyle \thisfl\brac{-\thisfl\pare{b} \sig \thisfl\pare{\sqrt{\Delta_{\thisfl}}}}}{\thisfl\brac{2\times \thisfl\pare{\fla}}} = \thisfl\frac{\displaystyle \thisfl\brac{-\flb \sig \flsd}}{\flnia}$\\
+$\displaystyle  = \thisfl\frac{\fldenom}{\flnia} = \boxed{\flxichi.}$\\
+$\displaystyle x_{2\thisfl} = \thisfl \curb{\frac{\thisfl\brac{2\times \thisfl\pare{c}}}{\displaystyle \thisfl\brac{-\thisfl\pare{b} \sig \thisfl\pare{\sqrt{\Delta_{\thisfl}}}}}} = \thisfl \curb{\frac{\thisfl\brac{2\times \flc}}{\fldenom}}$\\
+$=\boxed{\flxni.}$\\
+精确解为$\displaystyle x_1 \approx \xichi$, $\displaystyle x_2 \approx \xni$,\\
+绝对误差$\displaystyle e_1 = \abs{x_1 - x_{1\thisfl}} = \boxed{\xichierr,}$ $\displaystyle e_2 = \abs{x_2 - x_{2\thisfl}} = \boxed{\xnierr.}$\\
+相对误差$\displaystyle \abs{\frac{e_1}{x_1}} = \boxed{\xichirerr,}$ $\displaystyle \abs{\frac{e_2}{x_2}} = \boxed{\xnirerr.}$}
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+
+\begin{document}
+\let\oldboxed\boxed%
+\let\boxed\tmpresumath%
+\newprob{1.2.13 (a)}\def\thisfl{\fl_r}%
+\def\sig{+}%
+\def\fla{\pare{0.3333}}%
+\def\flnia{\pare{0.6666}}%
+\def\flb{\pare{-30.75}}%
+\def\flbb{\pare{945.6}}%
+\def\flc{\pare{0.1667}}%
+\def\flac{\pare{0.05556}}%
+\def\flyonac{\pare{0.2222}}%
+\def\fld{\pare{945.4}}%
+\def\flsd{\pare{30.75}}%
+\def\fldenom{\pare{61.50}}%
+\def\flxichi{92.26}%
+\def\flxni{0.005421}%
+\def\xichi{92.2446}%
+\def\xni{0.00542037}%
+\def\xichierr{1.5\times 10^{-2}}%
+\def\xnierr{6.3\times 10^{-7}}%
+\def\xichirerr{1.7\times 10^{-4}}%
+\def\xnirerr{1.2\times 10^{-4}}%
+\flcontent
+\par
+\newprobheader{(b)}\def\thisfl{\fl_r}%
+\def\sig{-}%
+\def\fla{\pare{0.3333}}%
+\def\flnia{\pare{0.6666}}%
+\def\flb{\pare{30.75}}%
+\def\flbb{\pare{945.6}}%
+\def\flc{\pare{-0.1667}}%
+\def\flac{\pare{-0.05556}}%
+\def\flyonac{\pare{-0.2222}}%
+\def\fld{\pare{945.8}}%
+\def\flsd{\pare{30.75}}%
+\def\fldenom{\pare{-61.50}}%
+\def\flxichi{-92.26}%
+\def\flxni{0.005421}%
+\def\xichi{92.2554}%
+\def\xni{0.00541974}%
+\def\xichierr{4.6\times 10^{-3}}%
+\def\xnierr{1.3\times 10^{-6}}%
+\def\xichirerr{5.0\times 10^{-5}}%
+\def\xnirerr{2.3\times 10^{-4}}%
+\flcontent
+\par
+\newprobheader{(c)}\def\thisfl{\fl_r}%
+\def\sig{+}%
+\def\fla{\pare{1.002}}%
+\def\flnia{\pare{2.004}}%
+\def\flb{\pare{-11.01}}%
+\def\flbb{\pare{121.2}}%
+\def\flc{\pare{0.01265}}%
+\def\flac{\pare{0.01268}}%
+\def\flyonac{\pare{0.05072}}%
+\def\fld{\pare{121.1}}%
+\def\flsd{\pare{11.00}}%
+\def\fldenom{\pare{22.01}}%
+\def\flxichi{10.98}%
+\def\flxni{0.001149}%
+\def\xichi{10.9869}%
+\def\xni{0.00114908}%
+\def\xichierr{6.9\times 10^{-3}}%
+\def\xnierr{7.6\times 10^{-8}}%
+\def\xichirerr{6.3\times 10^{-4}}%
+\def\xnirerr{6.6\times 10^{-5}}%
+\flcontent
+\par
+\newprobheader{(d)}\def\thisfl{\fl_r}%
+\def\sig{-}%
+\def\fla{\pare{1.002}}%
+\def\flnia{\pare{2.004}}%
+\def\flb{\pare{11.01}}%
+\def\flbb{\pare{121.2}}%
+\def\flc{\pare{0.01265}}%
+\def\flac{\pare{0.01268}}%
+\def\flyonac{\pare{0.05072}}%
+\def\fld{\pare{121.1}}%
+\def\flsd{\pare{11.00}}%
+\def\fldenom{\pare{-22.01}}%
+\def\flxichi{-10.98}%
+\def\flxni{-0.001149}%
+\def\xichi{-10.9869}%
+\def\xni{-0.00114908}%
+\def\xichierr{6.9\times 10^{-3}}%
+\def\xnierr{7.6\times 10^{-8}}%
+\def\xichirerr{6.3\times 10^{-4}}%
+\def\xnirerr{6.6\times 10^{-5}}%
+\flcontent
+%
+%
+%
+%
+%
+%
+%
+%
+\newprob{1.2.14 (a)}\def\thisfl{\fl_c}%
+\def\sig{+}%
+\def\fla{\pare{0.3333}}%
+\def\flnia{\pare{0.6666}}%
+\def\flb{\pare{-30.75}}%
+\def\flbb{\pare{945.5}}%
+\def\flc{\pare{0.1666}}%
+\def\flac{\pare{0.05552}}%
+\def\flyonac{\pare{0.2220}}%
+\def\fld{\pare{945.2}}%
+\def\flsd{\pare{30.74}}%
+\def\fldenom{\pare{61.49}}%
+\def\flxichi{92.24}%
+\def\flxni{0.005418}%
+\def\xichi{92.2446}%
+\def\xni{0.00542037}%
+\def\xichierr{4.6\times 10^{-3}}%
+\def\xnierr{2.4\times 10^{-6}}%
+\def\xichirerr{5.0\times 10^{-5}}%
+\def\xnirerr{4.4\times 10^{-4}}%
+\flcontent
+\par
+\newprobheader{(b)}\def\thisfl{\fl_c}%
+\def\sig{-}%
+\def\fla{\pare{0.3333}}%
+\def\flnia{\pare{0.6666}}%
+\def\flb{\pare{30.75}}%
+\def\flbb{\pare{945.5}}%
+\def\flc{\pare{-0.1666}}%
+\def\flac{\pare{-0.05552}}%
+\def\flyonac{\pare{-0.2220}}%
+\def\fld{\pare{945.7}}%
+\def\flsd{\pare{30.75}}%
+\def\fldenom{\pare{-61.50}}%
+\def\flxichi{-92.25}%
+\def\flxni{0.005417}%
+\def\xichi{92.2554}%
+\def\xni{0.00541974}%
+\def\xichierr{5.4\times 10^{-3}}%
+\def\xnierr{2.7\times 10^{-6}}%
+\def\xichirerr{5.9\times 10^{-5}}%
+\def\xnirerr{5.1\times 10^{-4}}%
+\flcontent
+\par
+\newprobheader{(c)}\def\thisfl{\fl_c}%
+\def\sig{+}%
+\def\fla{\pare{1.002}}%
+\def\flnia{\pare{2.004}}%
+\def\flb{\pare{-11.01}}%
+\def\flbb{\pare{121.2}}%
+\def\flc{\pare{0.01265}}%
+\def\flac{\pare{0.01267}}%
+\def\flyonac{\pare{0.05068}}%
+\def\fld{\pare{121.1}}%
+\def\flsd{\pare{11.00}}%
+\def\fldenom{\pare{22.01}}%
+\def\flxichi{10.98}%
+\def\flxni{0.001149}%
+\def\xichi{10.9869}%
+\def\xni{0.00114908}%
+\def\xichierr{6.9\times 10^{-3}}%
+\def\xnierr{7.6\times 10^{-8}}%
+\def\xichirerr{6.3\times 10^{-4}}%
+\def\xnirerr{6.6\times 10^{-5}}%
+\flcontent
+\par
+\newprobheader{(d)}\def\thisfl{\fl_c}%
+\def\sig{-}%
+\def\fla{\pare{1.002}}%
+\def\flnia{\pare{2.004}}%
+\def\flb{\pare{11.01}}%
+\def\flbb{\pare{121.2}}%
+\def\flc{\pare{0.01265}}%
+\def\flac{\pare{0.01267}}%
+\def\flyonac{\pare{0.05068}}%
+\def\fld{\pare{121.1}}%
+\def\flsd{\pare{11.00}}%
+\def\fldenom{\pare{-22.01}}%
+\def\flxichi{-10.98}%
+\def\flxni{-0.001149}%
+\def\xichi{-10.9869}%
+\def\xni{-0.00114908}%
+\def\xichierr{6.9\times 10^{-3}}%
+\def\xnierr{7.6\times 10^{-8}}%
+\def\xichirerr{6.3\times 10^{-4}}%
+\def\xnirerr{6.6\times 10^{-5}}%
+\flcontent
+%
+%
+%
+%
+%
+%
+%
+%
+%
+\newprob{1.2.28}%
+$\displaystyle T\+_max_ = \frac{\pare{\SI{1.00}{} + \SI{0.005}{}}\times \pare{\SI{0.100}{} + \SI{0.0005}{}}}{\pare{\SI{0.00420}{} - \SI{0.000005}{}}\times \pare{\SI{0.08206}{} - \SI{0.000005}{}}} = \SI{293.42}{\kelvin} = \SI{20.27}{\celsius} ~>~ \SI{19}{\celsius}$.\\
+$\displaystyle T\+_min_ = \frac{\pare{\SI{1.00}{} - \SI{0.005}{}}\times \pare{\SI{0.100}{} - \SI{0.0005}{}}}{\pare{\SI{0.00420}{} + \SI{0.000005}{}}\times \pare{\SI{0.08206}{} + \SI{0.000005}{}}} = \SI{286.89}{\kelvin} = \SI{13.74}{\celsius} ~<~ \SI{15}{\celsius}$.
+\newprob{1.3.1 (a)}%
+精确值$1.54977$, 倒序相加精度更高.\\[1em]
+\centerline{\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    $次序$ & \+:c2{c|}{顺序} &  \+:c2{c|}{倒序}\\
+    \hline
+    & 部分和 & 增量 & 部分和 & 增量 \\
+    \hline
+    1 & 1.00 & 1.00 & 0.0100 & 0.0100 \\
+    \hline
+    2 & 1.25 & 0.250 & 0.0223  & 0.0123 \\
+    \hline
+    3 & 1.36 & 0.111 & 0.0379 & 0.0156 \\
+    \hline
+    4 & 1.42 & 0.0625 & 0.0583 & 0.0204 \\
+    \hline
+    5 & 1.46 & 0.0400 & 0.0860 & 0.0277 \\
+    \hline
+    6 & 1.48 & 0.0277 & 0.123 & 0.0400 \\
+    \hline
+    7 & 1.50 & 0.0204 & 0.188 & 0.0625 \\
+    \hline
+    8 & 1.51 & 0.0156 & 0.299 & 0.111 \\
+    \hline
+    9 & 1.52 & 0.0123 & 0.549 & 0.250 \\
+    \hline
+    10 & $\boxed{1.53}$ & 0.0100 & $\boxed{1.54}$ & 1.00 \\
+    \hline
+\end{tabular}}
+\newprob{1.3.6 (a)}\let\boxed\oldboxed%
+$x\rightarrow 0$时, $\displaystyle \sin x \sim x$, 故$\displaystyle \sin \rec{n} = \boxed{O\pare{\rec{n}}.}$
+\par
+\newprobheader{(b)}%
+$x\rightarrow 0$时, $\displaystyle \sin x \sim x$, 故$\displaystyle \sin \rec{n^2} = \boxed{O\pare{\rec{n^2}}.}$
+\par
+\newprobheader{(c)}%
+$x\rightarrow 0$时, $\displaystyle \sin x \sim x$, 故$\displaystyle \pare{\sin \rec{n}}^2 = \boxed{O\pare{\rec{n^2}}.}$
+\par
+\newprobheader{(c)}%
+$x\rightarrow 0$时, $\displaystyle \ln\pare{1+x} \sim x$, 故$\displaystyle \ln\pare{n+1} - \ln n = \ln \pare{1+\rec{n}} = \boxed{O\pare{\rec{n}}.}$
+\newprob{1.3.7 (a)}%
+$x\rightarrow 0$时, $\displaystyle \frac{\sin x}{x} = 1 - \frac{x^2}{6} + o\pare{x^2}$, 故$\displaystyle \frac{\sin h}{h} = \boxed{1 + O\pare{h^2}.}$
+\par
+\newprobheader{(b)}%
+$x\rightarrow 0$时, $\displaystyle \frac{1-\cos h}{h} = \frac{x}{2} + o\pare{x}$, 故$\displaystyle \frac{1 - \cos h}{h} = \boxed{O\pare{h}.}$
+\par
+\newprobheader{(c)}%
+$x\rightarrow 0$时, $\displaystyle \frac{\sin x-x\cos x}{x} = \frac{x^2}{2} - \frac{x^2}{6} + o\pare{x^2}$, 故$\displaystyle \frac{\sin h-h\cos h}{h} = \boxed{O\pare{h^2}.}$
+\par
+\newprobheader{(d)}%
+$x\rightarrow 0$时, $\displaystyle \frac{1-e^x}{x} = -1 - \frac{x}{2} + o\pare{x}$, 故$\displaystyle \frac{1 - e^h}{h} = \boxed{-1+O\pare{h}.}$
+
+\end{document}

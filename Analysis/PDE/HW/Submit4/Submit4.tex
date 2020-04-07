@@ -1,0 +1,187 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{2.1 (2)}%
+$\displaystyle \begin{cases}
+    y'' + \lambda y = 0, \\
+    y\pare{0} = 0
+\end{cases} \xLongrightarrow{\omega^2=\lambda} y = \sin \omega x$.\\
+$\displaystyle y'\pare{l} + hy\pare{l} = 0 \Rightarrow \omega \cos\omega l + h \sin \omega l = 0 \Rightarrow \tan \omega l = -\frac{\omega}{h}$.\\
+因此本征函数和本征值为($\omega_n$取正根)
+\[ \boxed{y_n\pare{x} = \sin \omega_n x,\quad \tan \omega_n l = -\frac{\omega_n}{h},\quad \lambda_n = \omega_n^2.} \]
+\newprob{2.2 (1)}%
+$y'' - 2ay' + \lambda y = 0$有特征方程$r^2 - 2ar + \lambda = 0$和相应的解$\displaystyle r = a \pm \sqrt{a^2 - \lambda}$. \\
+若$r\in \+bR$, 则$y = Ae^{r_1x} + Be^{r_2 x}$无法满足$y\pare{0} = y\pare{1} = 0$.\\
+有两个相同实根时$y = Ae^{r x} + Bxe^{rx}$也无法满足.\\
+从而本征函数必定对应复根, $y_n\pare{x} = e^{at}\pare{A\cos\omega_n x + B\sin \omega_n x}$. 边界条件要求$A=0$, $\omega_n = n\pi$, 从而
+\[ \boxed{y_n\pare{x} = e^{at} \sin {n\pi x},\quad \lambda_n = a^2 + \pare{{n\pi}}^2.} \]
+\par
+\newprobheader{(2)}%
+令$S\pare{r} = rR\pare{r}$, 则
+\[ \pare{r^2 R'}' + \lambda r^2 R = \brac{r\pare{\pare{rR}' - R}}' + \lambda r^2 R = \pare{rS' - S}' + \lambda rS = rS'' + \lambda rS = 0. \]
+可得$S_n = A \cos \omega_n x + B \sin \omega_n x$, $\lambda_n = \omega_n^2$, 相应的
+\[ R_n = \frac{A}{x} \cos \omega_n x + \frac{B}{x} \sin \omega_n x \xLongrightarrow{R\pare{0}<\infty} R_n = \rec{x} \sin \omega_n x \xLongrightarrow{R\pare{a} = 0} R_n = \rec{x}\sin \frac{n\pi x}{a}. \]
+从而本征函数和特征值分别为
+\[ \boxed{R_n\pare{x} = \rec{x}\sin \frac{n\pi x}{a},\quad \lambda_n = \pare{\frac{n\pi}{a}}^2.} \]
+\newprob{2.3}%
+\\[-\baselineskip]
+$\displaystyle \begin{cases}
+    \displaystyle \+D{t^2}D{^2u} = a^2 \+D{x^2}D{^2u}, \\[1em]
+    u\vert_{t=0} = \varphi\pare{x} = \begin{cases}
+        \displaystyle \frac{hx}{b},& 0<x<b, \\[1em]
+        \displaystyle \frac{h\pare{l-x}}{l-b}, & b < x < l
+    \end{cases}\\
+    u_t\vert_{t=0} = 0, \\
+    u\vert_{x=0} = u\vert_{x=l} = 0.
+\end{cases} \xLongrightarrow{u=XT} \begin{cases}
+    \displaystyle \frac{X''}{X} = \frac{T''}{a^2T} = -\omega^2.\\
+    \Downarrow \scriptstyle X\pare{0} = X\pare{l} = 0 \\
+    \displaystyle X_n = \sin \frac{n\pi x}{l}, \\
+    \Downarrow \scriptstyle T_t\vert_{t=0} = 0 \\
+    \displaystyle T_n = \cos \frac{an\pi t}{l}.
+\end{cases}$\\
+$\displaystyle u = \sum_{n=1}^\infty A_n \sin \frac{n\pi x}{l} \cos\frac{an\pi t}{l}$, \\
+$\displaystyle A_n = \frac{\braket{X_n}{\varphi}}{\braket{X_n}{X_n}} = \frac{2}{l} \int_0^l \varphi\pare{x}\sin \frac{n\pi x}{l}\,\rd{x}$\\
+$\displaystyle = \frac{2}{l}\brac{\int_0^b \frac{hx}{b}\sin \frac{n\pi x}{l}\,\rd{x} + \int_b^l \frac{h\pare{l-x}}{l-b}\sin \frac{n\pi x}{l}\,\rd{x}} = \frac{2hl^2}{b\pare{l-b}n^2\pi^2} \sin \frac{n\pi b}{l}.$\\
+$\displaystyle \boxed{u = \sum_{n=1}^\infty \frac{2hl^2}{b\pare{l-b}n^2\pi^2} \sin \frac{n\pi b}{l} \sin \frac{n\pi x}{l} \cos\frac{an\pi t}{l}.}$
+\newprob{2.4}%
+\\[-\baselineskip]
+$\displaystyle \begin{cases}
+    \displaystyle \+D{t}D{u} = a^2 \+D{x^2}D{^2u}, \\
+    u\vert_{t=0} = \varphi\pare{x}, \\
+    u\vert_{x=0} = 0, \\
+    \displaystyle \left.\pare{\+DxDu + h u}\right\vert_{x=l} = 0.
+\end{cases} \xLongrightarrow{u=XT} \begin{cases}
+    \displaystyle \frac{X''}{X} = \frac{T'}{a^2T} = -\omega^2.\\
+    \Downarrow \scriptstyle X\pare{0} = 0,\left.\pare{\+DxDX + h X}\right\vert_{x=l} = 0 \\
+    \begin{cases}
+        \displaystyle X_n = \sin \omega_n x, \\
+        \displaystyle \omega_n \cos \omega_n l + h\sin \omega_n l = 0, \\
+        \Downarrow \\
+        \displaystyle \tan \omega_n l = -\frac{\omega_n}{h},
+    \end{cases} \\
+    \Downarrow  \\
+    \displaystyle T_n = e^{-a^2\omega_n^2 t}.
+\end{cases}$\\
+$\displaystyle \boxed{u = \sum_{n=1}^\infty A_n \sin \omega_n x e^{-a^2\omega^2 t},\quad \tan \omega_n l = -\frac{\omega_n}{h},\quad \omega_n\text{取正根.}}$\\
+$\displaystyle \braket{X_n}{X_n} = \int_0^l \sin^2\omega_n x\,\rd{x} = \half \brac{l + \frac{h}{h^2 + \omega_n^2}}$.\\
+$\displaystyle A_n = \frac{\braket{X_n}{\varphi}}{\braket{X_n}{X_n}} \Rightarrow \boxed{A_n = \frac{2}{\displaystyle l + \frac{h}{h^2 + \omega_n^2}} \int_0^l \varphi\pare{x} \sin \omega_n x\,\rd{x}.}$
+\newprob{2.5}%
+\\[-\baselineskip]
+$\displaystyle \begin{cases}
+    \displaystyle \+D{t}D{u} = a^2 \+D{x^2}D{^2u}, \\
+    u\vert_{t=0} = u_0, \\
+    u_x\vert_{x=0} = 0, \\
+    \displaystyle \left.\pare{\+DxDu + \gamma u}\right\vert_{x=l} = 0.
+\end{cases} \xLongrightarrow{u=XT} \begin{cases}
+    \displaystyle \frac{X''}{X} = \frac{T'}{a^2T} = -\omega^2.\\
+    \Downarrow \scriptstyle \+DxDX\pare{0} = 0,\left.\pare{\+DxDX + \gamma X}\right\vert_{x=l} = 0 \\
+    \begin{cases}
+        \displaystyle X_n = \cos \omega_n x, \\
+        \displaystyle -\omega_n \sin \omega_n l + \gamma \sin \omega_n l = 0, \\
+        \Downarrow \\
+        \displaystyle \tan \omega_n l = \frac{\gamma}{\omega_n},
+    \end{cases} \\
+    \Downarrow  \\
+    \displaystyle T_n = e^{-a^2\omega_n^2 t}.
+\end{cases}$\\
+$\displaystyle \boxed{u = \sum_{n=1}^\infty A_n \cos \omega_n x e^{-a^2\omega_n^2 t},\quad \tan \omega_n l = \frac{\gamma}{\omega_n},\quad \omega_n\text{取正根.}}$\\
+$\displaystyle \braket{X_n}{X_n} = \int_0^l \sin^2\omega_n x\,\rd{x} = \half \brac{l + \frac{\gamma}{\gamma^2 + \omega_n^2}}$.\\
+$\displaystyle A_n = \frac{\braket{X_n}{\varphi}}{\braket{X_n}{X_n}} \Rightarrow \boxed{A_n = \frac{2}{\displaystyle l + \frac{\gamma}{\gamma^2 + \omega_n^2}} \frac{u_0}{\omega_n}\sin \omega_n l.}$
+\newprob{2.9 (2)}%
+$\displaystyle u = TX \Rightarrow \frac{T'}{T} = x^2 \frac{X''}{X} + 3x\frac{X'}{X} - 2 = -\lambda \Rightarrow x^3 X'' + 3x^2 X' - 2xX + \lambda xX = 0$.\\
+$\displaystyle \Rightarrow x\brac{x\pare{xX}'}' - 3xX + \lambda xX = 0$.\\
+令$v = \ln x$, $V\pare{v} = xX\pare{x}$, 则\\
+$\displaystyle V'' - 3V + \lambda V = 0,\quad V\pare{0} = V\pare{1} = 0$,\\
+$\displaystyle \Rightarrow V_n = \sin {n\pi v},\quad \lambda_n = 3+\pare{n\pi}^2 \Rightarrow X_n = \rec{x}\sin \pare{n\pi \ln x},\quad T_n = e^{-\brac{3+\pare{n\pi}^2}t}$, \\
+$\displaystyle u = \sum_{n=1}^\infty A_n e^{-\brac{3+\pare{n\pi}^2}t} \rec{x}\sin \pare{n\pi \ln x}$.\\
+和$u\vert_{t=0}$比较得
+\[ \boxed{u = \rec{x}\brac{\sin \pare{\pi \ln x}e^{-\pare{3+\pi^2}t} - \sin\pare{2\pi \ln x}e^{-\pare{3+4\pi^2}t}}.} \]
+\newprob{2.11}%
+$\displaystyle u_t = a^2\pare{\+D{x^2}D{^2 u} + \+D{y^2}D{^2u}} \xLongrightarrow{u=XYT} \frac{T'}{T} = a^2 \pare{\frac{X''}{X} + \frac{Y''}{Y}} = -\lambda$.\\
+设$\displaystyle \frac{X''}{X} = \mu,\frac{Y''}{Y} = \nu$, 则$\mu + \nu < 0$, $\lambda = -a^2\pare{\mu+\nu}$.\\
+\makebox[0pt][r]{i.\ }$\mu < 0$且$\nu < 0$, 则设$\mu = -\alpha^2$, $\nu = -\beta^2$, 有
+\[ \boxed{u = TXY = e^{-a^2\pare{\alpha^2 + \beta^2}t}\left\{ \begin{aligned}
+    \cos \alpha x \\
+    \sin \alpha x
+\end{aligned} \right\}\left\{ \begin{aligned}
+    \cos \beta y \\
+    \sin \beta y
+\end{aligned} \right\}.} \]
+\makebox[0pt][r]{ii.\ }$\mu < 0$且$\nu = 0$, 则设$\mu = -\alpha^2$, 有
+\[ \boxed{u = TXY = e^{-a^2\alpha^2t}\left\{ \begin{aligned}
+    \cos \alpha x \\
+    \sin \alpha x
+\end{aligned} \right\}\left\{ \begin{aligned}
+    1 \\
+    y
+\end{aligned} \right\}.} \]
+\makebox[0pt][r]{iii.\ }$\mu < 0$且$\nu > 0$, 则设$\mu = -\alpha^2$, $\nu = \beta^2$, 有
+\[ \boxed{u = TXY = e^{-a^2\pare{\alpha^2-\beta^2}t}\left\{ \begin{aligned}
+    \cos \alpha x \\
+    \sin \alpha x
+\end{aligned} \right\}\left\{ \begin{aligned}
+    e^{\beta y} \\
+    e^{-\beta y}
+\end{aligned} \right\},\quad \abs{\beta} < \abs{\alpha}.} \]
+\makebox[0pt][r]{iv.\ }$\mu = 0$且$\nu < 0$, 则设$\nu = -\beta^2$, 有
+\[ \boxed{u = TXY = e^{-a^2\beta^2t}\left\{ \begin{aligned}
+    1 \\
+    x
+\end{aligned} \right\}\left\{ \begin{aligned}
+    \cos \beta y \\
+    \sin \beta y
+\end{aligned} \right\}.} \]
+\makebox[0pt][r]{v.\ }$\mu > 0$且$\nu < 0$, 则设$\mu = \alpha^2$, $\nu = -\beta^2$, 有
+\[ \boxed{u = TXY = e^{-a^2\pare{-\alpha^2+\beta^2}t}\left\{ \begin{aligned}
+    e^{\alpha x} \\
+    e^{-\alpha x}
+\end{aligned} \right\}\left\{ \begin{aligned}
+    \cos \beta y \\
+    \sin \beta y
+\end{aligned} \right\},\quad \abs{\alpha} < \abs{\beta}.} \]
+
+\end{document}

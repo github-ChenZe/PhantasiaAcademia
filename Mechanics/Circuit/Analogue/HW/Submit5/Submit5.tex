@@ -1,0 +1,305 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+\def\rD{\mathrm{D}}
+\newcommand{\mathmin}[2]{(#1+#2)/2-abs(#1-#2)/2}
+\newcommand{\mathmax}[2]{(#1+#2)/2+abs(#1-#2)/2}
+
+\begin{document}
+
+\newprob{5.2.1 (a)}%
+\underline{无放大作用}, 基集, 输入极正极与$V\+_CC_$负极短接.
+\par
+\newprobheader{(b)}%
+\underline{有放大作用}. $C\+_b1_$对直流电开路, 故$V\+_CC_$经过$R\+_b_$可为三极管提供稳定的$U\+_BEQ_$和$I\+_BQ_$. $C\+_b1_$对交流电短路, 故$v\+_i_$直接反映为$v\+_b_$和$i\+_b_$的变化, 经过三极管放大后转化为$i\+_c_$的变化, 通过$R\+_c_$即可转化为$v\+_ce_$的变化. $C\+_b2_$对直流电开路, 对交流电短路, 故$v\+_o_$为放大后的交流分量.
+\par
+\newprobheader{(c)}%
+\underline{无放大作用}. 直流通路中$C\+_b1_$的负极接地, 而电流必定从$C\+_b1_$的正极流入$C\+_b1_$, 从而$C\+_b1_$的正极电位不小于零, 无法提供令发射结正偏的静态电位.
+\par
+\newprobheader{(d)}%
+\underline{无放大作用}. $V\+_CC_$在C极提供的电位为负, 无法令集电结反偏.
+\newprob{5.2.2 (A)}%
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BE_}{R\+_b_} = \frac{\SI{12}{\volt} - \SI{0.6}{\volt}}{\SI{40}{\kilo\ohm}} = \SI{0.285}{\milli\ampere}$.\\
+$V\+_CC_ - \beta I\+_B_ R\+_c_ = \SI{12}{\volt} - 80\times \SI{0.285}{\milli\ampere}\times \SI{4}{\kilo\ohm} = \SI{-79.2}{\volt} < 0$, 故处于饱和区,\\
+$\displaystyle I\+_C_ \approx \frac{V\+_CC_}{R\+_c_} = \boxed{\SI{3}{\milli\ampere}.}$
+\par
+\newprobheader{(B)}%
+$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BE_}{R\+_b_} = \frac{\SI{12}{\volt} - \SI{0.6}{\volt}}{\SI{500}{\kilo\ohm}} = \SI{0.0228}{\milli\ampere}$.\\
+$V\+_CC_ - \beta I\+_B_ R\+_c_ = \SI{12}{\volt} - 80\times \SI{0.0228}{\milli\ampere}\times \SI{4}{\kilo\ohm} = \SI{4.704}{\volt} > 0$, 故处于放大区,\\
+$\displaystyle I\+_C_ = \beta I\+_B_ = \boxed{\SI{1.82}{\milli\ampere}.}$
+\par
+\newprobheader{(C)}%
+$V\+_BB_$提供的电压不可能令BE正偏, 故处于截止区, $\boxed{I\+_C_ = \SI{0}{\milli\ampere}.}$
+\newprob{5.3.2}\\[-\baselineskip]
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=left,xlabel=$v\+_CE_/\SI{}{\volt}$,
+        ylabel=$i\+_C_/\SI{}{\milli\ampere}$,xmin=0,xmax=17,ymin=0,ymax=24,xtick={0,5,10,15},xticklabels={\mbox{},5,10,\mbox{}},ytick={0,10,20}, minor tick num=4,%
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=west,
+        left=2em,
+        above=-.5em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=-90,
+        right=3.5em
+        },clip=false]
+    \addplot[mark={},domain=0:16,samples=200] function{2.1*2/pi*atan(32*3*x)};
+    \addplot[mark={},domain=0:15.9,samples=200] function{2.1*4/pi*atan(32*3/2*x)} node[right] {$I\+_B_ = \SI{20}{\micro\ampere}$};
+    \addplot[mark={},domain=0:15.8,samples=200] function{2.1*6/pi*atan(32*3/3*x)};
+    \addplot[mark={},domain=0:15.7,samples=200] function{2.1*8/pi*atan(32*3/4*x)};
+    \addplot[mark={},domain=0:15.6,samples=200] function{2.1*10/pi*atan(32*3/5*x)};
+    \addplot[mark={},domain=0:15.5,samples=200] function{2.1*12/pi*atan(32*3/6*x)};
+    \addplot[mark={},domain=0:15.4,samples=200] function{2.1*14/pi*atan(32*3/7*x)};
+    \addplot[mark={},domain=0:15.3,samples=200] function{2.1*16/pi*atan(32*3/8*x)};
+    \addplot[mark={},domain=0:15.2,samples=200] function{2.1*18/pi*atan(32*3/9*x)};
+    \addplot[mark={},domain=0:15.1,samples=200] function{2.1*20/pi*atan(32*3/10*x)};
+    \addplot[mark={},domain=0:15,samples=200] function{10-2*x/3} node[above right] {$V\+_CC_ = \SI{15}{\volt}, R\+_c_ = \SI{1.5}{\kilo\ohm}.$};
+    \addplot[mark=*,id=intersection] coordinates{(8.70959,4.1936)} node[above right] {$Q$};
+    \end{axis}
+    \draw (8,5) node[right] {$\boxed{\begin{cases}
+        v\+_CEQ_ \approx \SI{9}{\volt},\\
+        I\+_CQ_\approx\SI{4}{\milli\ampere}.
+    \end{cases}}$};
+\end{tikzpicture}
+\newprob{5.3.3}%
+$\displaystyle I\+_BQ_ = \frac{V\+_BB_ - V\+_BEQ_}{R\+_b_} = \frac{\SI{2.2}{\volt} - \SI{0.7}{\volt}}{\SI{50}{\kilo\ohm}} = \SI{30}{\micro\ampere}.$\\
+$\beta \approx 200 \Rightarrow I\+_CQ_ \approx \SI{6}{\milli\ampere}.$\\
+$V\+_CEQ_ = V\+_CC_ - I\+_CQ_R\+_c_ \approx \SI{6}{\volt}.$\\
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=left,xlabel=$v\+_CE_/\SI{}{\volt}$,
+        ylabel=$i\+_C_/\SI{}{\milli\ampere}$,xmin=0,xmax=17,ymin=0,ymax=24,xtick={0,5,10,15},xticklabels={\mbox{},5,10,\mbox{}},ytick={0,10,20}, minor tick num=4,%
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=west,
+        left=2em,
+        above=-.5em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=-90,
+        right=3.5em
+        },clip=false]
+    \addplot[mark={},domain=0:16,samples=200] function{2.1*2/pi*atan(32*3*x)};
+    \addplot[mark={},domain=0:15.9,samples=200] function{2.1*4/pi*atan(32*3/2*x)};
+    \addplot[mark={},domain=0:15.8,samples=200] function{2.1*6/pi*atan(32*3/3*x)}node[right] {$I\+_B_ = \SI{30}{\micro\ampere}$};
+    \addplot[mark={},domain=0:15.7,samples=200] function{2.1*8/pi*atan(32*3/4*x)};
+    \addplot[mark={},domain=0:15.6,samples=200] function{2.1*10/pi*atan(32*3/5*x)};
+    \addplot[mark={},domain=0:15.5,samples=200] function{2.1*12/pi*atan(32*3/6*x)};
+    \addplot[mark={},domain=0:15.4,samples=200] function{2.1*14/pi*atan(32*3/7*x)};
+    \addplot[mark={},domain=0:15.3,samples=200] function{2.1*16/pi*atan(32*3/8*x)};
+    \addplot[mark={},domain=0:15.2,samples=200] function{2.1*18/pi*atan(32*3/9*x)};
+    \addplot[mark={},domain=0:15.1,samples=200] function{2.1*20/pi*atan(32*3/10*x)};
+    \addplot[mark={},domain=0:12,samples=200] function{12-x} node[above right] {$V\+_CC_ = \SI{12}{\volt}, R\+_c_ = \SI{1}{\kilo\ohm}.$};
+    \addplot[mark=*,id=intersection] coordinates{(5.7219,6.2781)} node[above right] {$Q$};
+    \end{axis}
+    \draw (8,5) node[right] {$\boxed{\begin{cases}
+        I\+_BQ_ = \SI{30}{\micro\ampere},\\
+        v\+_CEQ_ \approx \SI{6}{\volt},\\
+        I\+_CQ_\approx\SI{6}{\milli\ampere}.
+    \end{cases}}$};
+\end{tikzpicture}
+\newprob{5.3.4}%
+$\displaystyle I\+_BQ_ = \frac{V\+_BB_ - V\+_BEQ_}{R\+_b_} = \frac{\SI{3.2}{\volt} - \SI{0.7}{\volt}}{\SI{20}{\kilo\ohm}} = \SI{0.125}{\milli\ampere}.$\\
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=left,xlabel=$v\+_CE_/\SI{}{\volt}$,
+        ylabel=$i\+_C_/\SI{}{\milli\ampere}$,xmin=0,xmax=17,ymin=0,ymax=34,xtick={0,5,10,15},xticklabels={\mbox{},5,10,\mbox{}},ytick={0,10,20,30}, minor tick num=4,%
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=west,
+        left=2em,
+        above=-.5em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=-90,
+        right=3.5em
+        },clip=false]
+    \addplot[mark={},domain=0:6,samples=200] function{2.1*2/pi*atan(32*3*x)};
+    \addplot[mark={},domain=0:15.9,samples=200] function{2.1*4/pi*atan(32*3/2*x)};
+    \addplot[mark={},domain=0:15.8,samples=200] function{2.1*6/pi*atan(32*3/3*x)};
+    \addplot[mark={},domain=0:15.7,samples=200] function{2.1*8/pi*atan(32*3/4*x)};
+    \addplot[mark={},domain=0:15.6,samples=200] function{2.1*10/pi*atan(32*3/5*x)};
+    \addplot[mark={},domain=0:15.5,samples=200] function{2.1*12/pi*atan(32*3/6*x)};
+    \addplot[mark={},domain=0:15.4,samples=200] function{2.1*14/pi*atan(32*3/7*x)};
+    \addplot[mark={},domain=0:15.3,samples=200] function{2.1*16/pi*atan(32*3/8*x)};
+    \addplot[mark={},domain=0:15.2,samples=200] function{2.1*18/pi*atan(32*3/9*x)};
+    \addplot[mark={},domain=0:15.1,samples=200] function{2.1*20/pi*atan(32*3/10*x)};
+    \addplot[mark={},domain=0:14.5,samples=200,dashed] function{2.1*25/pi*atan(32*3/12.5*x)};
+    \addplot[mark={},domain=0:6,samples=200] function{30-5*x} node[above right] {$V\+_CC_ = \SI{6}{\volt}, R\+_c_ = \SI{0.2}{\kilo\ohm}.$};
+    \addplot[mark=*,id=intersection] coordinates{(1.13257,24.3372)} node[right] {$Q$};
+    \end{axis}
+    \draw (8,5) node[right] {$\boxed{\begin{cases}
+        I\+_BQ_ = \SI{0.125}{\milli\ampere},\\
+        v\+_CEQ_ \approx \SI{1}{\volt},\\
+        I\+_CQ_\approx\SI{25}{\milli\ampere}.
+    \end{cases}}$};
+\end{tikzpicture}
+\newprob{5.3.5 (1)}%
+$\displaystyle \boxed{V\+_CC_ = \SI{6}{\volt}, I\+_BQ_ = \SI{20}{\micro\ampere}, I\+_CQ_ = \SI{1}{\milli\ampere}, V\+_CEQ_ = \SI{3}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle R\+_b_ = \frac{V\+_CC_ - V\+_BEQ_}{I\+_BQ_} = \frac{\SI{6}{\volt} - \SI{0.7}{\volt}}{\SI{20}{\micro\ampere}} = \boxed{\SI{265}{\kilo\ohm}.}$\\
+$\displaystyle R\+_c_ = \frac{V\+_CC_}{I\+_CS_} = \frac{\SI{6}{\volt}}{\SI{2}{\milli\ampere}} = \boxed{\SI{3}{\kilo\ohm}.}$
+\par
+\newprobheader{(3)}%
+观察交流负载线可得$v\+_CE_ = \SI{4.5}{\volt}$时截止, $v\+_CE_\approx{1}{\volt}$时饱和. 故最大不失真幅度$v\+_OM_ = \SI{4.5}{\volt} - \SI{3}{\volt} = \boxed{\SI{1.5}{\volt}.}$
+\par
+\newprobheader{(4)}%
+须防止截止失真, 故$i\+_B_ > 0$, 最大幅值$i\+_BO_ = \boxed{\SI{20}{\micro\ampere}.}$
+\newprob{5.3.6}%
+取$V\+_CES_ = \SI{1}{\volt}$,
+\[ R\+_e_I\+_E_ + V\+_CES_ + R\+_c_I\+_C_ \le V\+_EE_ + V\+_CC_ \Rightarrow 0 \le I\+_EE_ \lessapprox \frac{\SI{20}{\volt} - \SI{1}{\volt}}{\SI{10}{\kilo\ohm} + \SI{5}{\kilo\ohm}} = \SI{1.267}{\milli\ampere}, \]
+相应的$\displaystyle V\+_B_ = V\+_EE_ - R\+_e_I\+_E_ - \abs{V\+_BE_} = \SI{9.3}{\volt} - \SI{10}{\kilo\ohm}\cdot I\+_E_ \in \boxed{\pare{\SI{9.3}{\volt},\SI{-3.4}{\volt}}.}$
+\newprob{5.3.8 (a)}\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (0,4) to[short,o-*]
+        (1,4) to[resistor,R=$R\+_b2_$]
+        (1,0) to[short,*-o]
+        (0,0)
+        (1,4) to[short,-*]
+        (2,4) to[resistor,R=$r\+_be_$,i<=$i\+_b_$]
+        (2,2) to[short,-*]
+        (3,2) to[resistor,R=$R\+_e_$]
+        (3,0) node[rground] {}
+        (3,2) --
+        (4,2) to[european controlled current source,-*,i_=$\beta i\+_b_$]
+        (4,4) to[short,-*]
+        (5,4) to[resistor,R=$R\+_c_$]
+        (5,0)
+        (5,4) to[short,-*]
+        (6,4) to[resistor,R=$R\+_L_$]
+        (6,0)
+        (2,4) to[resistor,R=$R\+_b1_$]
+        (4,4)
+        (1,0) to[short,-*]
+        (3,0) to[short,-*]
+        (5,0) to[short,-*]
+        (6,0)
+        (6,4) to[short,-o]
+        (7.5,4) node[below] {$+$}
+        (6,0) to[short,-o]
+        (7.5,0) node[above] {$-$}
+        (7.5,2) node {$v\+_o_$}
+        (0,0) node[above] {$-$}
+        (0,4) node[below] {$+$}
+        (0,2) node {$v\+_i_$}
+        ;
+\end{tikzpicture}
+\par
+\newprobheader{(b)}\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (0,2) to[short,o-*]
+        (2,2) to[resistor,R=$R\+_b2_$]
+        (2,0) to[short,*-o]
+        (0,0)
+        (2,2) to[short,i_=$\beta i\+_b_$]
+        (4,2) to[resistor,R=$r\+_be_$]
+        (4,0) node[rground] {}
+        (6,0) to[european controlled current source,i_<=$\beta i\+_b_$,*-]
+        (6,2) to[short]
+        (8,2) to[resistor,R=$R\+_b1_$,*-*]
+        (8,0)
+        (8,2) to[short]
+        (10,2) to[resistor,R=$R\+_c_$,*-*]
+        (10,0)
+        (10,2) to[short,-o]
+        (12,2) node[below] {$+$}
+        (10,0) to[short,-o]
+        (12,0) node[above] {$-$}
+        (12,1) node {$v\+_o_$}
+        (0,0) node[above] {$-$}
+        (0,2) node[below] {$+$}
+        (0,1) node {$v\+_i_$}
+        (0,0) -- (10,0)
+        ;
+\end{tikzpicture}
+\par
+\newprobheader{(c)}\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (0,4) to[short,o-*]
+        (2,4) to[resistor,R=$R\+_b3_$]
+        (2,2) to[short,*-]
+        (1,2) to[resistor,R=$R\+_b1_$,-*]
+        (1,0)
+        (2,2) to[short]
+        (3,2) to[resistor,R=$R\+_b2_$,-*]
+        (3,0) --
+        (0,0)
+        (0,0) node[above] {$-$}
+        (0,4) node[below] {$+$}
+        (0,2) node {$v\+_i_$}
+        (2,4) to[resistor,R=$r\+_be_$,i=$i\+_b_$]
+        (4,4) --
+        (5,4) to[resistor,R=$R\+_e1_$, *-*]
+        (5,0) node[rground] {} --
+        (3,0)
+        (4,0) to[european controlled current source,*-*,i_=$\beta i\+_b_$]
+        (4,4)
+        (5,4) to[short,-o]
+        (6.5,4) node[below] {$+$}
+        (5,0) to[short,-o]
+        (6.5,0) node[above] {$-$}
+        (6.5,2) node {$v\+_o_$}
+        ;
+\end{tikzpicture}
+\par
+\newprobheader{(d)}\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+        (0,4) to[short,o-*]
+        (1,4) to[resistor,R=$R\+_e_$]
+        (1,0) to[short,*-]
+        (0,0)
+        (0,0) node[above] {$-$}
+        (0,4) node[below] {$+$}
+        (0,2) node {$v\+_i_$}
+        (1,4) to[short]
+        (2,4) to[resistor,R=$r\+_be_$,*-*,i<=$i\+_b_$]
+        %(2,0) to[resistor,R=$R\+_b1_$,-*]
+        (2,0) node[rground] {} --
+        (1,0)
+        (2,4) to[european controlled current source,i_<=$\beta i\+_b_$,-*]
+        (4,4) to[resistor,R=$R\+_c_$,-*]
+        (4,0) --
+        (2,0)
+        (4,4) to[short,-o]
+        (5.5,4) node[below] {$+$}
+        (4,0) to[short,-o]
+        (5.5,0) node[above] {$-$}
+        (5.5,2) node {$v\+_o_$}
+        ;
+\end{tikzpicture}
+
+\end{document}
