@@ -1,0 +1,175 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\definecolor{graybg}{RGB}{228,235,243}
+\definecolor{titlepurple}{RGB}{150,131,104}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\def\bili#1#2{#2}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\begin{document}
+
+\begin{multicols*}{3}[\centerline{\titlefont 水素様原子ノ概要}]
+\raggedcolumns%
+\newheader{\bili{}{言葉}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Lyman} && n = 1 && \mathitem{s} && l = 0 \\
+        & \mathitem{Balmer} && n = 2 && \mathitem{p} && l = 1 \\
+        & \mathitem{$H_\alpha$} &&  n=3\mapsto n=2 && \mathitem{d} && l = 2 \\
+        & \mathitem{Paschen} && n = 3 && \mathitem{f} && l = 3
+    \end{flalign*}
+\end{cheatresume}
+\newheader{Rutherford\bili{}{散乱}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathheadcomment{ここで} && D = \rec{4\pi\epsilon_0}\frac{Z'Ze^2}{E} && \\
+        & \mathitem{散乱角} && \cot \frac{\theta}{2} = \frac{2b}{D} && \\
+        & \mathitem{断面積} && \+d\Omega d\sigma = \frac{D^2}{16}\rec{\sin^4 \pare{\theta/2}} && \\
+        & \mathitem{比率} && \frac{\rd{n}}{n\,\rd{\Omega}} = \frac{NtD^2}{16}\rec{\sin^4\pare{\theta/2}} && \\
+        & && n\pare{\theta_1\sim\theta_2} = Nnt\pi \frac{D^2}{4}\pare{\cot^2 \frac{\theta_2}{4} - \cot^2 \frac{\theta_1}{2}} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{\bili{}{量子力学}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Schr\"odinger} && \brac{-\frac{\hbar^2}{2m}\laplacian + V}u = Eu && \\
+        & \mathitem{確率流} && j = \frac{\hbar k}{m}\abs{A}^2 && \\
+        & \+:c3{l}{$\mathitem{井戸型}\quad\displaystyle  T \approx 16\frac{E}{V_0}\pare{1-\frac{E}{V_0}}\exp\pare{-\frac{2a}{\hbar}\sqrt{2m\pare{V_0 - E}}}$} && \\
+        & \mathitem{期待値} && \expc{Q} = \int \psi^*\cdot \hat Q \cdot \psi \,\rd{\tau} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{角運動量} && \hat L^2 Y_{ml} = l\pare{l+1}\hbar^2 Y_{ml} && \\
+        & && \hat L_z Y_{ml} = m\hbar Y_{ml} && \\
+        & \mathitem{結合} && \+vJ = \+vL + \+vS && \\
+        & && \quad J = \abs{L-S},\cdots,L+S,\quad M = -J,\cdots, J && \\
+        & \mathitem{内積} && \+vS\cdot \+vL = \frac{\hbar^2}{2}\brac{j\pare{j+1} - s\pare{s+1} - l\pare{l+1}} &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{Bohr\bili{}{原子模型}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{軌道半径} && r_n = \frac{4\pi\epsilon_0 \hbar^2}{Ze^2 m_\mu}n^2 && \\
+        & \mathitem{周回速度} && v = \sqrt{\frac{Ze^2}{4\pi\epsilon_0 m_\mu r}} && \\
+        & \mathitem{エネルギー} && E_n = -\half m_\mu c^2 \alpha^2 \frac{Z^2}{n^2} && \\
+        & \mathitem{波数} && \tilde{\nu} = Z^2R\pare{\rec{n^2} - \rec{m^2}} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{\bili{}{光学}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{de Broglie} && \lambda = \frac{h}{p} = \begin{cases}
+            \displaystyle \frac{hc}{\sqrt{2mc^2E}}, & v \ll c \\
+            \displaystyle \frac{hc}{E}, & v \sim c
+        \end{cases} &&  \\
+        & \mathitem{光子} && E = h\nu = \frac{hc}{\lambda}\quad p = \frac{E}{c} = \frac{h}{\lambda}, && \\
+        & \mathitem{Compton} && \lambda_s - \lambda_0 = \frac{h}{m_e c}\pare{1 - \cos\varphi} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{表面回折} && d \sin\theta = n\lambda && \mathitem{Bragg} && 2d\sin\theta = n\lambda &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{不確定性原理} && \Delta p_x \Delta x \ge \frac{\hbar}{2},\quad \Delta E \Delta t \ge \frac{\hbar}{2} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{\bili{}{常用定数}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & && \frac{e^2}{4\pi\epsilon_0} = \SI{1.44}{\eV} && hc = \SI[inter-unit-product = \ensuremath{{}\cdot{}}]{1.24}{\nano\meter\kilo\eV} && \\
+        & && m_e c^2 = \SI{0.511}{\mega\eV} && \hbar c = \SI[inter-unit-product = \ensuremath{{}\cdot{}}]{197}{\eV}{\nano\meter} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{\bili{}{黒体放射}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Stefan} && R = \sigma T^4,\quad \sigma = \SI[inter-unit-product = \ensuremath{{}\cdot{}}]{5.6703e-8}{\watt\per\square\meter\per\kelvin\tothe{4}} && \\
+        & \mathitem{Wien} && \lambda\+_m_T = \SI{2.898e-3}{\meter\kelvin} && \\
+        & \mathitem{Planck} && u\pare{\lambda} = \frac{8\pi hc}{\lambda^5}\rec{e^{h\nu/k_BT} - 1} &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{Millikan\bili{}{油滴実験}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{油滴の半径} && r = \sqrt{\frac{9\eta v_g}{2\pare{\rho - \rho_0 g}}} && \\
+        & \mathitem{電荷量} && e_k = \frac{4\pi \eta rl}{V}\pare{v_e + v_g} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{\bili{}{水素原子ノ波動関数}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{動径方向} && R_{nl}\pare{r} \propto e^{-\rho/2}\rho^l L_{n+1}^{2l+1}\pare{\rho},\quad \rho = \sqrt{-\frac{8mE}{\hbar^2}}r && \\
+        & && R_{10}\pare{r} = 2\pare{\frac{Z}{a_0}}^{3/2}e^{-Ze/a_0} && \\
+        & \mathitem{波動関数} && u = R_{nl}\pare{r}Y_{lm}\pare{\theta,\varphi} && \\
+        & && n \ge 1,\quad l = 0,\cdots, n - 1, \quad m = -l,\cdots,+l &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{\bili{}{水素原子ノ微細構造}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{選択率} && \Delta n = \forall,\quad \Delta l = \pm 1,\quad \Delta m = 0, \pm 1 && \\
+        & \mathitem{Bohr磁子} && \mu\+_B_ = \frac{e\hbar}{2m_e} && \\
+        & \mathitem{軌道磁気} && \+v\mu_l = -\mu\+_B_ \frac{\+vL}{\hbar},\quad \mu_{lz} = -m_l\mu\+_B_ && \\
+        & \mathitem{スピン磁気} && \+v\mu_s = -g_s \mu\+_B_ \frac{\+vS}{\hbar},\quad \mu_{sz} = -g_sm_s\mu\+_B_ &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{スピン軌道項} &&  -E_n \frac{\alpha^2 Z^2}{n^2} \frac{n}{\displaystyle 2\pare{l+\half}\pare{l+1}}, j = l + \half && \\
+        & \begin{array}{l}
+        \mathheadcomment{ここで}\\
+        \color{lightgray}E_n<0 \\
+        \color{lightgray}l\neq 0
+        \end{array} && +E_n \frac{\alpha^2 Z^2}{n^2} \frac{n}{\displaystyle 2l\pare{l+\half}}, \quad j = l - \half && \\
+        & \mathitem{運動エネルギー} && -E_n\frac{\alpha^2Z^2}{n^2}\pare{\frac{3}{4} - \frac{n}{\displaystyle l+1/2}} && \\
+        & \mathitem{Darwin}\mathcomment{l=0} && -E_n \frac{\alpha^2Z^2}{n} && \\
+        & \mathitem{全補正} && -E_n \frac{\alpha^2Z^2}{n^2}\pare{\frac{3}{4} - \frac{n}{j+1/2}} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+
+\end{document}

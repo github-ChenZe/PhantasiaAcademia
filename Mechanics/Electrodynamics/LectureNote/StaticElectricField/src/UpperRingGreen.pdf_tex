@@ -1,0 +1,66 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'UpperRingGreen.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{563.7463427bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.69438494)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{UpperRingGreen.pdf}}%
+    \put(0.05682982,0.02564002){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\varphi=0$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{UpperRingGreen.pdf}}%
+    \put(0.38878366,0.26051715){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$V_0$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{UpperRingGreen.pdf}}%
+    \put(0.56989942,0.59045849){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{UpperRingGreen.pdf}}%
+    \put(0.69913686,0.27306647){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$a$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{UpperRingGreen.pdf}}%
+    \put(0.94917439,0.68952286){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+vr\pare{s,0,z}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{UpperRingGreen.pdf}}%
+    \put(0.58229172,0.09283466){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\+vr'\pare{s'\cos\phi',s'\sin\phi',z'=0}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{UpperRingGreen.pdf}}%
+  \end{picture}%
+\endgroup%

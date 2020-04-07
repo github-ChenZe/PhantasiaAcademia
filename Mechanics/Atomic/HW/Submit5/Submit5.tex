@@ -1,0 +1,80 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{2.15}%
+$\bullet\quad E<0$: 无解. 令$\displaystyle k_1 = \frac{\sqrt{-2mE}}{\hbar}$, $\displaystyle k_2 = \frac{\sqrt{-2m\pare{E+V_0}}}{\hbar}$, 则$\displaystyle u\pare{x} = \begin{cases}
+    Ae^{k_1 x}, & x < 0,\\
+    Be^{-k_2 x}, & x > 0.
+\end{cases}$无法得到$u\pare{0^-} = u\pare{0^+}$且$u'\pare{0^-} = u'\pare{0^+}$的解.\\
+$\bullet\quad 0<E<V_0$: 令$\displaystyle k_1 = \frac{\sqrt{2mE}}{\hbar}$, $\displaystyle k_2 = \frac{\sqrt{2m\pare{V_0-E}}}{\hbar}$, 有\\
+$\displaystyle u\pare{x} = \begin{cases}
+    Ae^{i k_1 x} + Be^{-i k_1 x}, & x < 0,\\
+    Ce^{-k_2 x}, & x > 0.
+\end{cases}$ 无法归一化. 连续性$\begin{cases}
+    A + B = C, \\
+    iAk_1 - iBk_1 = -Ck_2
+\end{cases}$
+$\Rightarrow \begin{cases}
+    \displaystyle \frac{A}{C} = \half + \frac{k_2}{2k_1}i,\\[1em]
+    \displaystyle \frac{B}{C} = \half - \frac{k_2}{2k_1}i.
+\end{cases}\Rightarrow \abs{A}^2 = \abs{B}^2$. 故$\boxed{T=0,R=1.}$\\
+$\bullet\quad E>V_0$: 令$\displaystyle k_1 = \frac{\sqrt{2mE}}{\hbar}$, $\displaystyle k_2 = \frac{\sqrt{2m\pare{E-V_0}}}{\hbar}$, 有\\
+$\displaystyle u\pare{x} = \begin{cases}
+    Ae^{i k_1 x} + Be^{-i k_1 x}, & x < 0,\\
+    Ce^{i k_2 x}, & x > 0.
+\end{cases}$ 无法归一化. 连续性$\begin{cases}
+    A + B = C, \\
+    iAk_1 - iBk_1 = iCk_2
+\end{cases}$
+$\Rightarrow \begin{cases}
+    \displaystyle \frac{A}{C} = \half + \frac{k_2}{2k_1},\\[1em]
+    \displaystyle \frac{B}{C} = \half - \frac{k_2}{2k_1}.
+\end{cases}\Rightarrow \begin{cases}
+    \displaystyle \frac{B^2}{A^2} = \frac{\pare{k_1-k_2}^2}{\pare{k_1+k_2}^2},\\
+    \displaystyle \frac{k_2C^2}{k_2A^2} = \frac{4k_1k_2}{\pare{k_1+k_2}^2}.
+\end{cases}$. 故$\displaystyle \boxed{T=\frac{4k_1k_2}{\pare{k_1+k_2}^2},R=\frac{\pare{k_1-k_2}^2}{\pare{k_1+k_2}^2}.}$
+\newprob{2.16}%
+$\displaystyle T \approx 16\cdot\frac{E}{V_0}\pare{1-\frac{E}{V_0}} \exp\curb{-\frac{2a}{\hbar}\sqrt{2m\pare{V_0 - E}}} = 4\cdot \exp\curb{-2a\cdot \SI{5.13}{\per\nano\meter}} = 10^{-3} \Rightarrow a = \boxed{\SI{0.808}{\nano\meter}.}$
+\newprob{2.17}%
+$m_e \ll m_p$, 考虑电子的贡献即可. 取$a=\SI{e-15}{\meter}$的一维无限深方势阱, 有$\displaystyle E_1 = \frac{\pi^2\pare{\hbar c}^2}{2\pare{mc^2}a^2} = \frac{\pi^2 \pare{\SI{197}{\eV\cdot\nano\meter}}^2}{2\times\SI{0.511}{\mega\eV}\times\pare{\SI{1}{\femto\meter}}^2} = \boxed{\SI{0.37}{\tera\eV}.}$ 忽略电子间的Coulomb能($\SI{}{\femto\meter}$尺度下为$\SI{}{\mega\eV}$量级), 考虑到Pauli不相容, 有$\displaystyle E \sim E_1\pare{1^2 +2^2 + \cdots + \pare{Z/2}^2}$.
+故不可能将电子束缚在原子核内.
+\newprob{2.18 (a)}%
+$\displaystyle R_{1,0} = 2\pare{\rec{a_0}}^{3/2} e^{-r/a_0}, Y_{0,0} = \rec{\pare{4\pi}^{1/2}}$, 故$\displaystyle \boxed{\Phi_{1,0,0} = \rec{\sqrt{\pi a_0^3}} e^{-r/a_0}.}$
+\par
+\newprobheader{(b)}%
+$\displaystyle \expc{r} = \int_0^\infty r\cdot \Phi^2\cdot 4\pi r^2\,\rd{r} = 4a_0 \int_0^\infty t^3 e^{-2t}\,\rd{t} = \boxed{\frac{3}{2}a_0.}$
+\par
+\newprobheader{(c)}%
+使$\displaystyle 4\pi r^2 \Phi^2$取最大值要求$\displaystyle \+drd{}\pare{r^2 e^{-2r/a_0}} = 2e^{-2r/a_0}\pare{r - \frac{r^2}{a_0}} \Rightarrow \boxed{r=a_0.}$
+\par
+\newprobheader{(d)}%
+$\displaystyle \expc{\rec{r}} = \int_0^\infty \frac{\Phi^2}{r} \cdot 4\pi r^2\,\rd{r} = \frac{4}{a_0} \int_0^\infty t e^{-2t}\,\rd{t} = \rec{a_0}$, $\displaystyle \expc{V} = -\frac{e^2}{4\pi\epsilon_0}\expc{\rec{r}} = \boxed{-\frac{e^2}{4\pi\epsilon_0 a_0}.}$
+\par
+\newprobheader{(e)}%
+$\displaystyle \expc{T} = \expc{H} - \expc{V} = E_1 - \expc{V} = \boxed{\frac{e^2}{8\pi \epsilon_0 a_0}.}$
+
+\end{document}

@@ -1,0 +1,939 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+\definecolor{emphgreen}{RGB}{238,255,207}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+
+\begin{document}
+
+\subsubsection*{配置} % (fold)
+\label{ssub:配置}
+
+\noindent
+PHJ, phj@ustc.edu.cn, 13956942923\\
+Zhou Zihan, ustczzh@mail.ustc.edu.cn, 18912971991\\
+Li Hongchao, lhcwgzg@mail.ustc.edu.cn, 17398385291\\
+Zhang Haoran, haoranzhang@mail.ustc.edu.cn, 17355185085\\
+参考文献: 胡友秋, 曹昌祺, Griffiths, Jackson, Feynman, Landau.\\
+PHJ纸上推导过的下课应当自行重现. \\
+\begin{cenum}
+    \item 积分问题: 已知场源求场, 例如多极展开.
+    \item 介质问题: 边值问题, Laplace方程与Green函数.
+    \item 场对介质的作用: 谐场单粒子.
+    \item 场的物质性, 守恒定律, 以及波动性.
+    \item Maxwell方程组的完备性, Lorentz不变性.
+\end{cenum}
+
+% subsubsection 配置 (end)
+
+\section{数学预备} % (fold)
+\label{sec:数学预备}
+
+\subsection{坐标变换} % (fold)
+\label{sub:坐标变换}
+
+\subsubsection{求和约定} % (fold)
+\label{ssub:求和约定}
+
+若某指标在一个单项式中重复出现, 则默认对其求和. 故指标有两类, 求和指标(哑指标)和其它指标(自由指标).
+\begin{ex}
+    若$\+vA$, $\+vB$为$3$阶矩阵, 则
+    \[ \pare{AB}_{ij} = \sum_{k=1}^3 A_{ik}B_{kj} = A_{ik}B{kj}. \]
+    哑指标和自由指标可以随意替换,
+    \[ \pare{AB}_{ij} = A_{ik}B_{kj} = A_{im}B_{mj},\quad \pare{AB}_{mn} = A_{mk}B_{kn}. \]
+\end{ex}
+
+% subsubsection 求和约定 (end)
+
+\subsubsection{Kronecker符号与Levi-Civita符号} % (fold)
+\label{ssub:kronecker符号与levi_civita符号}
+
+$\displaystyle \delta_{ij} = \begin{cases}
+    1,\quad i = j, \\
+    0,\quad i\neq j.
+\end{cases}$ 满足$\delta_{ii} = 3$, 相当于单位矩阵.
+\begin{cenum}
+    \item $A_{ik}\delta_{kj} = A_{ij}$.
+    \item $A_{ik}\delta_{kj} = A_{ik}$.
+    \item $A_{ik}\delta_{ki} = A_{ii}$.
+\end{cenum}
+$\displaystyle \epsilon_{ijk} = \begin{cases}
+    +1,\quad \pare{i,j,k}\text{是偶排列}, \\
+    -1,\quad \pare{i,j,k}\text{是奇排列}, \\
+    0, \quad \text{otherwise.}
+\end{cases} = \begin{vmatrix}
+    \delta_{i1} & \delta_{i2} & \delta_{i3} \\
+    \delta_{j1} & \delta_{j2} & \delta_{j3} \\
+    \delta_{k1} & \delta_{k2} & \delta_{k3}
+\end{vmatrix}$.
+\begin{cenum}
+    \item 完全反对称, $\epsilon_{ijk} = \epsilon_{kij} = \epsilon_{jki} = -\epsilon_{jik} = -\epsilon_{ikj} = -\epsilon_{kji}$.
+    \item $\det A = \epsilon_{ijk} A_{i1}A_{j2}A_{k3} = \epsilon_{ijk}A_{1i}A_{2j}A_{3k}$, 且
+    \[ \epsilon_{lmn}\det A = \epsilon_{ijk} A_{il}A_{jm}A_{kn}. \]
+    \item $\displaystyle \resumath{\epsilon_{ijk}\epsilon_{mnk} = \delta_{im}\delta_{jn} - \delta_{in}\delta_{jm}.}$
+    再次求和可得
+    \begin{align*}
+        \epsilon_{ijk}\epsilon_{mjk} &= \delta_{im}\delta_{jj} - \delta_{ij}\delta_{jm} = 2\delta_{im}. \\
+        \epsilon_{ijk}\epsilon_{ijk} &= 2\delta_{ii} = 6.
+    \end{align*}
+
+\end{cenum}
+
+% subsubsection kronecker符号与levi_civita符号 (end)
+
+\subsubsection{直角坐标系与位矢} % (fold)
+\label{ssub:直角坐标系与位矢}
+
+基矢为$\+ux_i$, 满足$\+ux_i \cdot \+ux_j = \delta_{ij}$. 右手坐标系满足$\+ux_i\times\+ux_j = \epsilon_{ijk}\+ux_k$.
+\par
+位矢即$\+vr = x_i\+ux_i$, $x_i = \+vr \cdot \+ux_i$. 可以标记$\+vr = \pare{\+vr\cdot\+ux_i}\cdot\+ux_i$.
+
+% subsubsection 直角坐标系与位矢 (end)
+
+\subsubsection{坐标变换} % (fold)
+\label{ssub:坐标变换}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{CoorTrans}
+\end{figure}
+
+在如右图所示的坐标变换下, 有
+\begin{align*}
+    \+ux'_i &= \pare{\+ux'_i\cdot\+ux_j}\+ux_j = \lambda_{ij}\+ux_j,\quad \pare{\lambda_{ij} = \+ux'_i\cdot\+ux_j}, \\
+    \+ux_i &= \pare{\+ux'_i\cdot\+ux'_j} \+ux'_j = \lambda_{ji} = \+ux'_j. \\
+    x'_i &= \+vr \cdot \+ux'_i = x_j\+ux_j\cdot\+ux'_i = \lambda_{ij}x_j. \\
+    x_i &= \lambda_{ji}x'_j.
+\end{align*}
+由$\delta_{ij} = \+ux'_i\cdot\+ux'_j = \pare{\lambda_{ik}\+ux_k}\cdot\pare{\lambda_{jl}\+ux_l} = \lambda_{ik}\lambda_{jl}\lambda_{kl} = \lambda_{ik}\lambda_{jk}$. 即
+\[ \pare{I}_{ij} = \pare{\lambda \lambda^T}_{ij}. \]
+\begin{cenum}
+    \item $\lambda$是正交变换, 即$\lambda \lambda^T = I$.
+    \item $\+vx'_i \+ux'_i = \+vx_i \+ux_i = \+vr$. 因为$\pare{\lambda_{ik}x_k}\pare{\lambda_{il}\+ux_l} = \lambda_{kl}x_k\+ux_k$.
+    \item 若以线性变换保持空间中任意两点距离不变,  即
+    \[ \rd{l^2} = \delta_{ij}\rd{x_i}\rd{x_j} = \rd{l'^2} = \delta_{ij}\rd{x'_i}\rd{x'_j}. \]
+    则$\lambda \lambda^T = I$.
+\end{cenum}
+\begin{ex}
+    思考题: 对于一般可逆(不一定线性)变换, 若$\rd{l^2} = \rd{l'^2}$, 且$x'_i\pare{0,0,0} = 0$, 则是否能认为它是正交变换?
+\end{ex}
+
+% subsubsection 坐标变换 (end)
+
+% subsection 坐标变换 (end)
+
+\subsection{张量代数} % (fold)
+\label{sub:张量代数}
+
+\subsubsection{张量定义} % (fold)
+\label{ssub:张量定义}
+
+若有一物理量$T$, 满足在任意给定坐标系下皆有$3^n$个分量$T_{i_1,\cdots,i_n}$描述, 且在正交变换$x'_i = \lambda_{ij}x_j$下满足
+\[ T'_{i_1,\cdots,i_n} = \lambda_{i_1j_1}\cdots\lambda_{i_nj_n}T_{j_1,\cdots,j_n}, \]
+则谓之$3$维Euclid空间中的$n$阶张量.
+\begin{cenum}
+    \item 标量是$0$阶张量, 记作$\phi$, 则$\phi' = \phi$. 例如$\rd{l}$, $\rd{t}$, $\rd{v}$, 人数, $m$, $Q$.
+    \item 矢量是$1$阶张量, 记作$\+vf$, 则$f'_i = \lambda_{ij} f_j$. 例如$\+vr$, $\rd{\+vr}$, 在自身坐标系下
+    \[ \+ux_1 \leftrightarrow \pare{1,0,0},\quad \+ux_2 \leftrightarrow \pare{0,1,0}, \quad \+ux_3 \leftrightarrow \pare{0,0,1}, \quad \pare{\hat x_i}_j = \delta_{ij}. \]
+    \item 二阶张量$\tensor{T}$满足$T'_{ij} = \lambda_{ik} \lambda_{jl}T_{kl}$, 即$T' = \lambda T\lambda^T$. 例如$\tensor{T} = \+vf\+vg$, 即$T_{ij} = f_ig_j$(并矢).
+    \begin{cenum}
+        \item 通常$\+vf\+vg\neq \+vg\+vf$, 除非$\+vf\times\+vg = 0$.
+        \item $\+ux_i\+ux_j$满足$\pare{\+ux_i\+ux_j}_{kl} = \delta_{ik}\delta_{jl}$.
+    \end{cenum}
+\end{cenum}
+\begin{ex}
+    单位张量$\tensor{I}$满足$I_{ij} = \delta_{ij}$. 且
+    \[ \lambda_{ik} \lambda_{ji} I_{kl} = \lambda_{ik}\lambda_{jk} = \delta_{ij} = I_{ij}. \]
+\end{ex}
+\begin{ex}
+    对称张量满足$T_{ij} = T_{ji}$. 反对称张量满足$T_{ij} = -T_{ji}$. 两条性质和坐标系无关.
+\end{ex}
+\begin{ex}
+    任何二阶张量都可以写成对称与反对称张量之和.
+\end{ex}
+\begin{ex}
+    设$T_{ij} = T_{ji}$, $S_{ij} = -S_{ji}$, 则
+    \[ T_{ij}S_{ij} = T_{ji}S_{ij} = -T_{ji}S_{ji} = 0. \]
+\end{ex}
+
+% subsubsection 张量定义 (end)
+
+\subsubsection{张量基本运算} % (fold)
+\label{ssub:张量基本运算}
+
+\begin{cenum}
+    \item 线性组合: 两个$n$阶张量数乘相加可得$n$阶张量(加法和数乘).
+    \begin{cenum}
+        \item $n$维张量集合成一$3^n$维线性空间.
+        \item 矢量基$\+ux_i$, 则二阶张量可用基$\+ux_i\+ux_j$展开. 即$\+vf = f_i\+ux_i$, $\tensor{T} = T_{ij}\+ux_i\+ux_j$.
+    \end{cenum}
+    \item 张量积: $n$阶张量和$m$阶张量$\mapsto$ $n+m$阶层张量. 记作$T=R\otimes S$,
+    \[ T_{i_n,\cdots,i_n,j_1,\cdots,j_n} = \pare{R\otimes S}_{i_n,\cdots,i_n,j_1,\cdots,j_n} = R_{i_1,\cdots,i_n} S_{j_1,\cdots,j_n}. \]
+    \begin{cenum}
+        \item 结合律: $\pare{R\otimes S}\otimes T = R\otimes\pare{S\otimes T} = R\otimes S\otimes T$.
+        \item 通常不满足交换律.
+    \end{cenum}
+    \item 缩并: $n$阶张量$\mapsto$ $n-2$阶张量.
+\end{cenum}
+\begin{ex}
+    考虑到$\+vv$是矢量, 由线性性$\+vF = m\+va$也是矢量.
+\end{ex}
+\begin{ex}
+    缩并的一个例子为$T_{ij} \mapsto \phi = T_ii$. 可见$\phi' = T'_{ii}$是一个标量, 因为在新的坐标系下
+    \[ \phi' = T'_{ii} = \lambda_{ik}\lambda_{il}T_{kl} = \delta_{kl}T_{kl} = T_{kk} = \varphi. \]
+\end{ex}
+\begin{ex}
+    对于三阶张量$T_{ijk}$, 可以有三种不同缩并. $X_i = T_{ikk}$, $Y_i = T_{kik}$, $Z_i = T_{kki}$彼此通常互不相同.
+\end{ex}
+
+% subsubsection 张量基本运算 (end)
+
+\subsubsection{矢量运算} % (fold)
+\label{ssub:矢量运算}
+
+\begin{cenum}
+    \item 点乘: $\+vf \cdot \+vg = f_i g_i$.
+    \begin{cenum}
+        \item 交换律: $\+vf \cdot \+vg = \+vg \cdot \+vf$.
+    \end{cenum}
+    \item 叉乘: $\+vf\times \+vg = \pare{\epsilon_{ijk}f_jg_k}\+ux_i$.
+    \begin{cenum}
+        \item 反交换律: $\+vf\times \+vg=-\+vg\times \+vf$.
+        \item 不满足结合律.
+    \end{cenum}
+    \item 混合积: $\pare{\+vf\times \+vg}\cdot\+vh = \+vf\cdot\pare{\+vg\times \+vh}$.
+        \[ \resumath{\+vf\times \pare{\+vg \times \+vh} = \pare{\+vf\cdot \+vh} \+vg - \pare{\+vf\cdot \+vg}\+vh = \pare{\+vh\times \+vg} \times \+vf.} \]
+        即「舍近求远」. 可以视为
+        \[ \resumath{\+vf\times\pare{\+vg \times \+vh} = \+vf\cdot\pare{\+vh\+vg - \+vg\+vh} = \pare{\+vg\+vh - \+vh\+vg}\cdot \+vf.} \]
+\end{cenum}
+叉乘中$\epsilon_{ijk}f_jg_k$应当视为一个五阶张量的两次缩并.
+
+% subsubsection 矢量运算 (end)
+
+\subsubsection{点乘} % (fold)
+\label{ssub:点乘}
+
+\begin{cenum}
+    \item $\+vf\cdot \tensor{T} = \pare{f_iT_{ij}}\+ux_i$. $\tensor{T}\cdot \+vf = \pare{T_{ik}f_k}\+ux_i$.
+    \begin{cenum}
+        \item 就近点乘:
+        \begin{align*}
+            \+vf\cdot \tensor{T} &= \pare{f_i\+ux_i}\cdot\pare{T_{jk}\+ux_j\+ux_k} = \pare{f_iT_{jk}}\brac{\+ux_i\cdot \+ux_j \+ux_k} \\
+            &= \pare{f_iT_{jk}}\brac{\+ux_i\cdot \+ux_j\+ux_k} = \pare{f_i T_{ik}}\+ux_k.
+        \end{align*}
+        \item 一般不满足交换律. 除非$\tensor{T}$是对称张量, 此时$\+vf \cdot \tensor{T} = \tensor{T}\cdot \+vf$. 特别地, $\+vf \cdot \tensor{I} = \tensor{I}\cdot \+vf$.
+    \end{cenum}
+    \item $\tensor{T}\cdot\tensor{S} = \pare{T_{ik}S_{kj}}\+ux_i\+ux_j$.
+    \begin{cenum}
+        \item 就近点乘:
+        \begin{align*}
+            \tensor{T}\cdot\tensor{S} &= \pare{T_{ij}\+ux_i\+ux_j}\cdot \pare{S_{kl}\+ux_k\+ux_l} \\
+            &= \pare{T_{ij}S_{jl}}\+ux_i\delta_{jk}\+ux_l = \pare{T_{ij}S_{jl}}\+ux_i\+ux_l.
+        \end{align*}
+        \item $\tensor{T}\cdot\tensor{I} = \tensor{T} = \tensor{I}\cdot\tensor{I}$.
+    \end{cenum}
+    \item $\tensor{T}\cddot\tensor{S} = T_{ik}S_{ki} = \trace{\pare{TS}} = \tensor{S}\cddot\tensor{T}$.
+\end{cenum}
+\begin{ex}
+    $\tensor{T}\cddot\tensor{I} = \trace{\tensor{T}}$. 以及$\pare{\+vf\+vg}\cddot\tensor{I} = \+vf \cdot \+vg$.
+\end{ex}
+
+% subsubsection 点乘 (end)
+
+\subsubsection{叉乘} % (fold)
+\label{ssub:叉乘}
+
+\[ \begin{cases}
+    \+vf\times\tensor{T} = \pare{\epsilon_{ikl}f_kT_{lj}}\+ux_i\+ux_j, \\
+    \tensor{T}\times \+vf = \pare{T_{ik}f_l\epsilon_{klj}}\+ux_i\+ux_j.
+\end{cases} \]
+就近叉乘:
+\begin{align*}
+    \+vf\times\tensor{T} &= \pare{f_i\+ux_i}\times\pare{T_{jk}\+ux_j\+ux_k} = \pare{f_iT_{jk}}\brac{\+ux_i\times\+ux_j\+ux_k} \\
+    &= \pare{\epsilon_{ijl}f_iT_{jk}}\+ux_l\+ux_k.
+\end{align*}
+通常不满足交换律. 但是
+\begin{align*}
+    \+vf\times \tensor{I} &= \pare{f_i\+ux_i}\times\pare{\+ux_j\+ux_j} \\
+    &= \epsilon_{ijk}f_i\+ux_k\+ux_j. \\
+    \tensor{I}\times\+vf &= \pare{\+ux_j\+ux_j}\times\pare{f_i\+ux_i} = \epsilon_{jik}f_i\+ux_j\+ux_k \\
+    &= \epsilon_{ijk}f_i\+ux_k\+ux_j.
+\end{align*}
+
+% subsubsection 叉乘 (end)
+
+\subsubsection{混合积} % (fold)
+\label{ssub:混合积}
+
+\begin{cenum}
+    \item $\pare{\+vf\cdot\tensor{T}}\cdot \+vg = \+vf\cdot\pare{\tensor{T}\cdot\+vg} = \+vf\cdot\tensor{T}\cdot \+vg$.
+    \item $\pare{\+vf\cdot\tensor{T}}\times\+vg = \+vf\cdot\pare{\tensor{T}\times\+vg} = \+vf\cdot\tensor{T}\times\+vg$.
+    \item $\pare{\+vf\times\tensor{T}}\times\+vg = \+vf\times\pare{\tensor{T}\times \+vg} = \+vf\times \tensor{T}\times \+vg$.
+\end{cenum}
+\begin{align*}
+    \pare{\+vf\times\tensor{T}}\times\+vg &= \brac{\pare{f_i\+ux_i}\times \pare{T_{jk}\+ux_j\+ux_k}}\times \pare{g_l\+ux_l} = \pare{f_iT_{jk}g_l}\pare{\+ux_i\times\+ux_j\+ux_k\times\+ux_l}. \\
+    \+vf\times\pare{\tensor{T}\times \+vg} &= \pare{f_i\+ux_i}\times\brac{\pare{T_{jk}\+ux_j\+ux_k}\times\pare{\+vg_l\+ux_l}} = \pare{f_iT_{ij}g_l}\pare{\+ux_i\times\+ux_j\+ux_k\times\+ux_l}.
+\end{align*}
+
+% subsubsection 混合积 (end)
+
+% subsection 张量代数 (end)
+
+\subsection{场的微分} % (fold)
+\label{sub:场的微分}
+
+\subsubsection{梯度算子(直角坐标系)} % (fold)
+\label{ssub:梯度算子}
+
+$\nabla = \displaystyle \+ux_i \+D{x_i}D{} = \+ux_i\partial_i$. 它作用在场上是满足矢量运算的相应性质. 这构成一个
+\begin{cenum}
+    \item 一阶微分算子. 特别地, 它满足
+    \begin{cenum}
+        \item Leibniz法则.
+        \item 链式法则.
+    \end{cenum}
+    \item 矢量算子. 即$\partial'_i = \lambda_{ij}\partial_j$.
+    \[ \+D{x'_i}D{} = \+D{x'_i}D{x_j}\+D{x_j}D{} = \lambda_{ij}\+D{x_j}D{}. \]
+\end{cenum}
+
+% subsubsection 梯度算子 (end)
+
+\subsubsection{一阶微分} % (fold)
+\label{ssub:一阶微分}
+
+\noindent
+\begin{tabular}{lll}
+    标量场 & 梯度 & $\displaystyle \grad \varphi = \pare{\partial_i \varphi}\+ux_i.$ \\
+    矢量场 & 梯度 & $\displaystyle \grad \+vF = \pare{\partial_i F_j} \+ux_i\+ux_j.$ \\
+    & 散度 & $\displaystyle \div \+vF = \partial_i F_i.$ \\
+    & 旋度 & $\displaystyle \curl \+vF = \epsilon_{ijk}\partial_j F_k \+ux_i.$ \\
+    张量场 & 散度 & $\displaystyle \div\tensor{T} = \pare{\partial k T_{ki}}\+ux_i.$
+\end{tabular}
+\par
+注意到
+\begin{align*}
+    \div\tensor{T} &= \pare{\+ux_i \partial_i}\cdot \pare{T_{ji}\+ux_j\+ux_k} \\
+    &= \pare{\partial_iT_{jk}}\+ux_i \cdot \+ux_j\+ux_k \\
+    &= \pare{\partial_iT_{ik}}\+ux_k.
+\end{align*}
+\begin{ex}
+    $\resumath{\grad \+vr = \+vI, \div\+vr = 3, \curl \+vr = 0, \grad r = \+ur.}$
+\end{ex}
+\begin{resume}
+\begin{tabular}{ll}
+梯度-标积 & $\displaystyle \grad\pare{\varphi\psi} = \pare{\grad\varphi}\psi + \varphi\pare{\grad{\psi}}$. \\
+梯度-点乘 & \+:r2{$\displaystyle \begin{aligned}[t]
+        & \grad \pare{\+vf\cdot \+vg} = \pare{\grad\+vf}\cdot\+vg + \pare{\grad \+vg}\cdot \+vf \\
+        & = \pare{\+vf\cdot\grad}\+vg + \pare{\+vg\cdot\grad}\+vf + \+vf \times \pare{\curl \+vg} + \+vg\times \pare{\curl \+vf}.
+    \end{aligned}$} \\
+& \\
+$\grad * \pare{\varphi \+vf}$ & \\
+梯度-数乘 & $\displaystyle \grad{\varphi \+vf} = \pare{\grad\varphi}\+vf + \varphi \grad \+vf$. \\
+散度-数乘 & $\displaystyle \div\pare{\varphi\+vf} = \varphi\pare{\div \+vf} + \pare{\grad \varphi}\cdot \+vf$. \\
+旋度-数乘 & $\displaystyle \curl\pare{\varphi\+vf} = \varphi\pare{\curl \+vf} + \pare{\grad\varphi}\times \+vf$. \\
+$\grad * \pare{\+vf \times \+vg}$ & \\
+梯度-叉乘 & $\displaystyle \grad \pare{\+vf\times \+vg} = \pare{\grad \+vf}\times \+vg - \pare{\grad \+vg} \times \+vf$. \\
+散度-叉乘 & $\displaystyle \div \pare{\+vf\times \+vg} = \+vg\cdot\pare{\curl \+vf} - \+vf\cdot\pare{\curl \+vg}$. \\
+旋度-叉乘 & \+:r2{$\displaystyle \begin{aligned}[t]
+    & \curl \pare{\+vf\times \+vg} = \div\pare{\+vg\+vf - \+vf\+vg}\\
+    & = \pare{\+vg\cdot \grad + \div \+vg}\+vf - \pare{\+vf\cdot \grad + \div \+vf}\+vg.
+\end{aligned}$} \\
+& \\
+张量散度 & \\
+散度-直积 & $\div\pare{\+vf \+vg} = \pare{\div \+vf} \+vg + \+vf\cdot \grad \+vg$. \\
+散度-数乘 & $\div\pare{\varphi \tensor{T}} = \pare{\grad\varphi}\cdot\tensor{T} + \varphi \div\tensor{T}$.
+\end{tabular}
+\end{resume}
+\begin{ex}
+    证明$\div\pare{\+vf\+vg} = \pare{\div\+vf}\+vg + \+vf\cdot \grad \+vg$, 用下标法有
+    \begin{align*}
+        \brac{\div\pare{\+vf\+vg}}_i &= \partial_k\pare{f_kg_i} \\
+        &= \pare{\partial_k f_k} g_i + f_k\partial_k g_i \\
+        &= \brac{\pare{\div \+vf}\+vg + \pare{\+vf\cdot\grad}\+vg}_i.
+    \end{align*}
+    用符号法有
+    \begin{align*}
+        \div\pare{\+vf\+vg} &= \grad_f\+v\cdot\pare{\+vf\+vg} + \grad_g\+v\cdot\pare{\+vf\+vg} \\
+        &= \pare{\grad_f\+v\cdot\+vf}\+vg + \pare{\grad_g\+v\cdot\+vf}\+vg \\
+        &= \pare{\grad_f\+v\cdot\+vf}\+vg + \pare{\+vf\cdot \grad_g}\+vg \\
+        &= \pare{\div\+vf}\+vg + \pare{\+vf\cdot\grad}\+vg.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    三阶张量的散度可以定义为
+    \begin{align*}
+        \div\pare{\+vf\+vg\+vh} &= \grad_f\+v\cdot\pare{\+vf\+vg\+vh} + \grad_g\+v\cdot\pare{\+vf\+vg\+vh} + \grad_h\+v\cdot\pare{\+vf\+vg\+vh} \\
+        &= \grad_f\+v\cdot \+vf\+vg\+vh + \grad_g\+v\cdot\+vf\+vg\+vh + \grad_h\+v\cdot\+vf\+vg\+vh \\
+        &= {\pare{\grad_f\+v\cdot \+vf}\+vg\+vh} + {\pare{\+vf\cdot\grad_g\+vg}\+vh} + {\+vg\+vf\cdot\grad_h\+vh} \\
+        &= \pare{\div\+vf}\+vg\+vh + \pare{\+vf\cdot\grad\+vg}\+vh + \+vg\pare{\+vf\cdot\grad}\+vh.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    散度-叉乘恒等式,
+    \begin{align*}
+        \div\pare{\+vf\times\+vg} &= \grad_f\+v\cdot\pare{\+vf\times\+vg} + \grad_g\+v\cdot\pare{\+vf\times\+vg} \\
+        &= \pare{\grad_f\times\+vf}\cdot\+vg - \pare{\grad_g\times\+vg}\cdot\+vf \\
+        &= \pare{\curl \+vf}\cdot \+vg - \pare{\curl \+vg} \cdot \+vf.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    旋度-叉乘恒等式,
+    \begin{align*}
+        \curl\pare{\+vf\times \+vg} &= \div\pare{\+vg\+vf - \+vf\+vg} \\
+        &= \pare{\div \+vg + \+vg\cdot\grad}\+vf - \pare{\div \+vf + \+vf\cdot\grad} \+vg.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    梯度-点乘恒等式,
+    \begin{align*}
+        \grad\pare{\+vf\cdot \+vg} &= \pare{\grad_f \+vf} \cdot \+vg + \pare{\grad_g \+vg} \cdot \+vf \\
+        &= \pare{\grad_f \+vf - \+vf \grad_f} \cdot \+vg + \pare{\grad_g \+vg - \+vg\grad_g}\cdot \+vf + \+vf\grad_f \cdot \+vg + \+vg\grad_g\cdot\+vf \\
+        &= -\pare{\curl\+vf}\times \+vg - \pare{\curl \+vg} \+vf + \pare{\+vg \cdot \grad_f}\+vf + \pare{\+vf\cdot \grad_g}\+vg \\
+        &= \+vg\times\pare{\curl \+vf} + \+vf \times \pare{\curl \+vg} + \pare{\+vg\cdot \grad} \+vf + \pare{\+vf \cdot \grad} \+vg.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    计算行列式$\det\pare{\tensor{I} + \+vf\+vg}$.
+    \begin{align*}
+        \det\pare{\+vI+\+vf\+vg} &= \epsilon_{ijk} \pare{\delta_{1i} + f_1g_i}\pare{\delta_{2j}+f_2g_j}\pare{\delta_{3k} + f_3g_k} \\
+        &= \epsilon_{ijk}\delta{1i}\delta{2j}\delta{3k} \rightarrow \epsilon_{123} = 1 \\
+        &\phantom{=\ } +\epsilon_{ijk}\delta{1_i} \delta{2j}f_3g_k + \cdots \rightarrow \epsilon_{12k} f_3g_k + \cdots = f_3g_3 + \dots \\
+        &\phantom{=\ } +\epsilon_{ijk}\delta{1_i} f_2g_jf_3g_k + \cdots \rightarrow 0 \\
+        &\phantom{=\ } +\epsilon_{ijk}f_1g_i f_2g_jf_3g_k + \cdots \rightarrow 0 \\
+        &= 1+\+vf\cdot \+vg.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    旋度-叉乘恒等式,
+\begin{align*}
+    \curl\pare{\+vf\times \+vg} &= \pare{\grad_f\+v\cdot \+vg}\+vg - \pare{\grad_f \+v\cdot \+vf}\+vg + \pare{\grad_g \+v\cdot \+vf}\+vf - \pare{\grad_g \+v\cdot \+vf}\+vg \\
+    &= \+vg\cdot \grad \+vf - \pare{\div \+vf} \+vg + \pare{\div \+vg}\+vf - \pare{\+vf\cdot \grad} \+vg.
+\end{align*}
+\end{ex}
+\begin{ex}
+    梯度-点乘恒等式,
+\begin{align*}
+    \grad{\+vf\cdot \+vg} &= \pare{\grad_f \+vf}\+v\cdot \+vg + \pare{\grad_g \+vg}\+v\cdot \+vf \\
+    &= \pare{\grad_f \+vf - \+vf\grad_f}\+v\cdot \+vg + \+vf\grad_f\+v\cdot \+vg + \pare{\grad_g \+vg - \+vg \grad_g}\+v\cdot \+vf + \+vg \grad_g \+v\cdot \+vf \\
+    &= \+vg\times\pare{\curl \+vf} + \pare{\+vg\+v\cdot\grad} \+vf + \+vf\times\pare{\curl \+vg} + \pare{\+vf\+v\cdot \grad}\+vg.
+\end{align*}
+\end{ex}
+\begin{ex}
+    叉乘-旋度恒等式,
+\begin{align*}
+    \+vf\times\pare{\curl \+vf} &= \half \grad f^2 - \pare{\+vf\+v\cdot\grad}\+vf.
+\end{align*}
+也可以直接从bac-cab得到, 但应当注意$\grad$仅作用在其中一个$\+vf$.
+\end{ex}
+\begin{ex}
+    散度-标乘张量恒等式,
+    \begin{align*}
+        \div \pare{\varphi \tensor{T}} &= \grad_\varphi \cdot \varphi \tensor{T} + \grad_T\cdot \varphi \tensor{T} = \grad\varphi \cdot \tensor{T} + \varphi\div\tensor{T}. \\
+        \tensor{T} = \tensor{I} &\Rightarrow \resumath{\grad\varphi = \div\pare{\varphi \tensor{I}}.}
+    \end{align*}
+\end{ex}
+\begin{ex}
+    $\tensor{T}$对称, 则$\+vr\times\pare{\div\tensor{T}} = -\div\pare{\tensor{T}\times \+vr}$.
+    \begin{align*}
+        \div\pare{\tensor{T}\times \+vr} &= \pare{\+ux_i \partial_i}\cdot \pare{T_{jk}\+ux_j\+ux_k\times x_l\+ux_l} \\
+        &= \brac{\partial_i\pare{T_{jk}x_l}}\pare{\+ux_i\cdot \+ux_j\+ux_k\times\+ux_l} \\
+        &= \pare{\partial T_{ik}} x_l \+ux_k \times \+ux_l + \cancelto{0}{T_{ik}\delta_{il}\+ux_k\times\+ux_l} \\
+        &= \pare{\div \tensor{T}} \times \+vr = -\+vr\times\pare{\div\tensor{T}}.
+    \end{align*}
+\end{ex}
+
+\paragraph{链式法则} % (fold)
+\label{par:链式法则}
+
+设$t_r$为$\+vr$的函数, 即$t_r = t_r\pare{\+vr}$, 而$\varphi = \varphi\pare{t_r}$, $\+vA = \+vA\pare{t_r}$. 若记$\displaystyle \dot{\varphi} = \rd{\varphi}/\rd{t_r}$, $\dot{\+vA} = \rd{\+vA}/\rd{t_r}$. 有
+\begin{align*}
+    \grad \varphi\pare{t_r} &= \pare{\grad t_r} \dot\varphi = \dot\varphi\grad t_r. \\
+    \grad \+vA\pare{t_r} &= \pare{\grad t_r} \dot{\+vA} \neq \dot{\+vA}\grad t_r. \\
+    \div \+vA\pare{t_r} &= \pare{\grad t_r} \cdot\dot{\+vA} = \dot{\+vA}\cdot\grad t_r. \\
+    \curl \+vA\pare{t_r} &= \pare{\grad t_r} \times\dot{\+vA} = -\dot{\+vA}\times\grad t_r.
+\end{align*}
+\begin{ex}
+    $\displaystyle \grad\varphi\pare{r} = \pare{\grad r} \varphi'\pare{r} = \varphi'\pare{r} \+ur$.
+\end{ex}
+\begin{ex}
+    $\displaystyle \curl\brac{\varphi\pare{r}\+ur} = 0$.
+\end{ex}
+
+% paragraph 链式法则 (end)
+
+% subsubsection 一阶微分 (end)
+
+\subsubsection{二阶微分} % (fold)
+\label{ssub:二阶微分}
+
+\begin{tabular}{ll}
+两个恒等式 & $\displaystyle \curl\grad\varphi = 0,\quad \div\pare{\curl\+vA} = 0$. \\
+Laplace算子 & $\displaystyle \laplacian = \partial_i\partial_i$, \\
+& $\displaystyle \laplacian \varphi = \partial_i \partial_i \varphi,\quad \laplacian \+vA = \partial_i \partial_i A_j$. \\
+\end{tabular}
+
+% subsubsection 二阶微分 (end)
+
+\subsubsection{Taylor展开} % (fold)
+\label{ssub:taylor展开}
+
+假设光滑性足够,
+\begin{align*}
+    \varphi\pare{x+\epsilon} &= \varphi\pare{x} + \epsilon \+dxd{\varphi\pare{x}} + \rec{2!}\epsilon^2 \frac{\rd{^2\varphi\pare{x}}}{\rd{x^2}} + \cdots  \\
+    &= \brac{1+\epsilon \+dxd{} + \rec{2!}\epsilon^2\frac{\rd{^2}}{\rd{x^2}}}\varphi\pare{x} \\
+    &= \brac{\sum_{n=0}^\infty \frac{\epsilon^n}{n!} \frac{\rd{^n}}{\rd{x^n}}}\varphi\pare{x}.
+\end{align*}
+从而
+\[ \resumath{\varphi\pare{x+\epsilon} = \exp\pare{\epsilon \+dxd{}} \varphi\pare{x}.} \]
+对于$\+vr$的函数, 可以有
+\[ \varphi\pare{\+vr+\+v\epsilon} = \exp\pare{\epsilon_x \partial_x + \epsilon_y \partial_y + \epsilon_z \partial_z}\varphi\pare{\+vr} = e^{\+v\epsilon\cdot\grad}\varphi\pare{\+vr}. \]
+特别地, 截断有
+\[ \varphi\pare{\+vr+\+v\epsilon} = \brac{1+\+v\epsilon\cdot\grad + \rec{2!} \+v\epsilon\epsilon:\grad\grad + \cdots }\varphi\pare{\+vr}. \]
+对于向量函数也有
+\[ \+vf\pare{\+vr+\+v\epsilon} = e^{\+v\epsilon\cdot\grad}\+vf\pare{\+vr}. \]
+
+% subsubsection taylor展开 (end)
+
+\subsubsection{相对位矢} % (fold)
+\label{ssub:相对位矢}
+
+引入$\+v{\+gr} = \+vr - \+vr'$. $\+vr'$为源点, $\+vr$为场点. 特别地, $\grad r = \+ur$, $\grad \+vr = \tensor{I}$.
+\begin{cenum}
+    \item $\grad \+gr = \+u{\+gr}$, 且
+    \begin{cenum}
+        \item $\grad\varphi\pare{\+gr} = \varphi'\pare{\+gr} \+u{\+gr}$.
+        \item $\grad \+vf\pare{\+gr} = \+u{\+gr}\+vf'\pare{\+gr}$.
+        \item $\div \+vf\pare{\+gr} = \+u{\+gr}\cdot\+vf'\pare{\+gr}$.
+        \item $\curl \+vf\pare{\+gr} = \+u{\+gr}\times\+vf'\pare{\+gr}$.
+    \end{cenum}
+    \item $\grad \+v{\+gr} = \tensor{I} = -\grad' \+v{\+gr}$. $\grad \varphi\pare{\+v{\+gr}} = -\grad'\varphi\pare{\+v{\+gr}}$.
+    \item $\displaystyle \rec{\+gr} = \rec{\abs{\+vr - \+vr'}} = e^{-\+vr'\cdot\grad} \rec{r} = \pare{1-\+vr'\cdot\grad + \rec{2!}\+vr\+vr:\grad\grad+\cdots}\rec{r}$.
+\end{cenum}
+
+% subsubsection 相对位矢 (end)
+
+% subsection 场的微分 (end)
+
+\subsection{场的积分} % (fold)
+\label{sub:场的积分}
+
+\subsubsection{梯度算子} % (fold)
+\label{ssub:梯度算子}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{3cm}{DivGeo}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{3cm}{CurlGeo}
+    \end{subfigure}
+\end{figure}
+\begin{cenum}
+    \item 梯度算子可以坐标无关地定义为
+\[ \rd{\varphi\pare{\+vr}} = \varphi\pare{\+vr+ \rd{\+vl}} - \varphi\pare{\+vr} = \grad\varphi \cdot \rd{\+vl}. \]
+    \item 散度算子可以坐标无关地定义为
+    \[ \div\+vF = \lim_{V\rightarrow 0} \rec{V} \oiint_{\partial V} \+vF\cdot\rd{\+v\sigma}. \]
+    闭曲面以外法向为正向.
+    \item 旋度算子可以坐标无关地定义为
+    \[ \pare{\curl \+vF}\cdot \+un = \lim_{\Sigma\rightarrow 0} \rec{\Sigma}\oint_{\partial \Sigma} \+vF\cdot\+rd{\+vl}. \]
+\end{cenum}
+\par
+从而梯度的线积分可以化为
+\[ \int_1^2 \+dxdf\,\rd{x} = \int_1^2 \rd{f} = f\pare{2} - f\pare{1}. \]
+注意到$1\longrightarrow 2$的边界为$\curb{1,2}$.
+\par
+散度的线积分可以化为
+\[ \iiint_V \rd{V}\ \div\+vF = \oiint_{\partial V} \rd{\+v\sigma}\cdot \+vF. \]
+设$\+vF = \varphi \+vc$, 则
+\[ \iiint_V \rd{V}\ \grad \varphi \cdot \+vc = \oiint_{\partial V}\rd{\+v\sigma}\ \varphi\cdot \+vc \Rightarrow \iiint_V \rd{V}\grad\varphi = \oiint_{\partial V}\rd{\+v\sigma}\ \varphi. \]
+设$\+vF = \+vA\times \+vc$, 则
+\[ \iiint_V \pare{\rd{V}\ \curl \+vA} \cdot c = \pare{\oiint_{\partial V}\rd{\+v\sigma}\times \+vA}\cdot \+vc \Rightarrow \iiint_V\ \curl\+vA = \oiint_{\partial V}\rd{\+v\sigma}\times \+vA. \]
+设$\+vF = \tensor{T}\times \+vc$, 则
+\[ \iiint_V \rd{V}\ \div\tensor{T} \cdot c = \oiint_{\partial V} \rd{\+v\sigma}\cdot \tensor{T}\cdot \+vc \Rightarrow \iiint_V \rd{V}\ \div\tensor{T} = \oiint_{\partial V} \rd{\+v\sigma}\cdot \tensor{T}. \]
+从而
+\[ \resumath{\iiint_V\ \rd{V} \grad * = \oiint_{\partial V}\rd{\+v\sigma} *.} \]
+设$\+vF = \varphi\grad\psi$, $\varphi \grad\psi - \psi\grad\varphi$, $\varphi\grad\varphi$, 则分别有
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{flalign*}
+\text{Green第一等式} & && \iiint_V \rd{V}\brac{\varphi \laplacian \psi + \grad \varphi \cdot \grad \psi} = \oiint_{\partial V} \varphi \+D{\+vn}D{\psi}\,\rd{\sigma}. && \\
+\text{Green第二等式} & && \iiint_V \rd{V}\brac{\varphi\laplacian\psi - \psi\laplacian\varphi} = \oiint_{\partial V} \rd{\+v\sigma}\cdot \pare{\varphi \grad\psi - \psi\grad\varphi}. && \\
+ & && \iiint_V \rd{V}\brac{\varphi\laplacian \varphi + \pare{\grad\varphi}^2} = \oiint_{\partial V}\rd{\+v\sigma} \cdot \varphi\grad\varphi. &&
+\end{flalign*}
+\end{resume}
+\par
+对于旋度的积分也有
+\[ \iint_{\Sigma} \rd{\+v\sigma} \cdot\pare{\curl\+vF} = \oint_{\partial\Sigma} \rd{\+vl}\cdot \+vF. \]
+右侧可以写为$\displaystyle \iint_{\Sigma} \pare{\rd{\+v\sigma}\times \grad}\+v\cdot \+vF$. 从而
+\[ \resumath{\iint_{\Sigma}\pare{\rd{\+v\sigma}\times\grad} * = \oint_{\rd{\Sigma}}\rd{\+vl} *.} \]
+\begin{ex}
+    $\displaystyle \iint_{\Sigma} \pare{\rd{\+vr}\times\grad}\times\+vF = \oint_{\partial \Sigma} \rd{\+vl}\times \+vF$.
+    \begin{align*}
+        \iint_{\Sigma} \brac{\pare{\rd{\+v\sigma}\times\grad}\times \+vF}\cdot \+vc &= \iint_{\Sigma} \pare{\rd{\+v\sigma}\times \grad} \cdot \pare{\+vF\times \+vc} \\
+        &= \iint_{\Sigma} \rd{\+v\sigma} \cdot \brac{\curl\pare{\+vF\times \+vc}} \\
+        &= \oint_{\partial \Sigma} \rd{\+v\sigma}\cdot\pare{\+vF\times \+vc} \\
+        &= \oint_{\partial \Sigma}\pare{\rd{\+v\sigma}\times \+vF} \cdot \+vc.
+    \end{align*}
+\end{ex}
+
+% subsubsection 梯度算子 (end)
+
+% subsection 场的积分 (end)
+
+\subsection{正交曲线坐标系} % (fold)
+\label{sub:正交曲线坐标系}
+
+\subsubsection{定义} % (fold)
+\label{ssub:定义}
+
+\begin{pitfall}
+    本节不适用求和约定.
+\end{pitfall}
+引入图册$\pare{u_1,u_2,u_3}$,
+\begin{align*}
+    \+vr &= \+vr\pare{u_1,u_2,u_3} = \sum_i x_i\pare{u_1,u_2,u_3}\+ux_i. \\
+    \rd{\+vr} &= \rd{\+vl} = \sum_{a=1}^3 \+D{u_a}D{\+vr} \rd{u_a}.
+\end{align*}
+\begin{cenum}
+    \item Lame系数: $\displaystyle h_a = \abs{\+D{u_a}Dr}.\quad H = h_1h_2h_3.$
+    \item 基矢: $\displaystyle \left.\+uu_a = \+D{u_a}D{\+vr}\right/\abs{\+D{u_a}D{\+vr}}$, 右手正交坐标系要求
+    \[ \+uu_i \cdot \+uu_j = \delta_{ij},\quad \+uu_i\times \+uu_j = \epsilon_{ijk}. \]
+\end{cenum}
+在球坐标系和柱坐标系下,
+\begin{align*}
+    \+vv &= \dot{r}\+ur + r\dot{\theta}\+u\theta + r\sin\theta\dot{\varphi}\+u\varphi \\
+    &= \dot{s}\+us + s\dot\phi \+u\phi + \dot{z}\+uz. \\
+    \rd{\+vr} &= \+ur \,\rd{r} + r\+u\theta\,\rd{\theta} + r\sin \varphi \+u\varphi\,\rd{\varphi} \\
+    &= \+us \,\rd{s} + s\+u\varphi \,\rd{\varphi} + \+uz\,\rd{z}.
+\end{align*}
+从而球坐标系和柱坐标系的Lame系数为
+\begin{flalign*}
+\text{球坐标} && & h_r = 1,\quad h_\theta = r,\quad h_\varphi = r\sin\theta,\quad H = r^2\sin\theta. && \\
+\text{柱坐标} && & h_s = 1,\quad h_\varphi = s,\quad h_z = 1,\quad H =s.  &&
+\end{flalign*}
+梯度表达式为
+\begin{align*}
+    \rd{\varphi} &= \grad\varphi\cdot\rd{\+vl}, \\
+    \sum_a \+D{u_a}D\varphi \,\rd{u_a} &= \sum_a \pare{\grad \varphi}_a h_a\,\rd{u_a}, \\
+    \+D{u_a}D{\varphi} &= \pare{\grad \varphi}_a h_a \Rightarrow \pare{\grad \varphi}_a = \rec{h_a} \+D{u_a}D{\varphi}.
+\end{align*}
+从而
+\[ \resumath{\grad \varphi = \sum_a \frac{\+uu_a}{h_a}\+D{u_a}D{\varphi}}. \]
+\begin{ex}
+    散度需要考虑基矢量和位置的相关性.
+    \begin{align*}
+        \div\+vF &= \sum_a \div\pare{F_a\+uu_a} = \sum_a\brac{\pare{\grad F_a}\cdot \+uu_a + F_a\div\+uu_a} \\
+        &= \sum_a \+uu_a \cdot \sum_b \frac{\+uu_b}{h_b} \+D{u_b}D{F_a} + \sum_a F_a\div \+uu_a \\
+        &= \sum_a \rec{h_a} \+D{u_a}D{F_a} + \cdots.
+    \end{align*}
+\end{ex}
+通过
+\[ \grad u_a = \frac{\+uu_a}{h_a} \Rightarrow \curl \frac{\+uu_a}{h_a} = 0. \]
+以及
+\[ \grad u_1 \times \grad u_2 = \frac{\+uu_1 \times \+uu_2}{h_1h_2} = \frac{h_3 \+uu_3}{H}. \]
+左边可化为
+\[ \curl\pare{u_1\grad u_2} - u_1\curl\grad u_2 = \curl\pare{u_1\grad u_2}. \]
+从而
+\[ \div \frac{h_3 \+uu_3}{H} = 0. \]
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{flalign*}
+\text{三剑客} && & \grad u_a = \frac{\+uu_a}{h_a}, && \curl \frac{\+uu_a}{h_a} = 0, && \div \frac{h_a \+uu_a}{H} = 0. &&
+\end{flalign*}
+\end{resume}
+\begin{ex}
+    对于$\+vF = \+u\varphi \ln s$, 有
+    \begin{align*}
+        & \div\+u\varphi = 0,\quad \curl \frac{\+u\varphi}{s} = 0, \\
+        & \div \+vF = \div{\+u\varphi \ln s} = \pare{\div \+u\varphi}\ln s \cdot \grad \ln s = 0.\\
+        & \curl \+vF = \curl\pare{\+u\varphi\ln s} = \curl\pare{\frac{\+u\varphi}{s} s\ln s} \\
+        & = \grad{s \ln s} \times \frac{\+u\varphi}{s} = \pare{\ln s + 1}\+us\times \frac{\+u\varphi}{s} = \frac{\ln s + 1}{s}\+uz.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    在正交坐标系下, 求$\laplacian \varphi$.
+    \begin{align*}
+        \laplacian \varphi &= \div\grad\varphi = \sum_a \div\pare{\frac{\+uu_a}{h_a}\+D{u_a}D\varphi} \\
+        &= \sum_a \div\pare{\frac{h_a \+uu_a}{H} \frac{H}{h_a^2} \+D{u_a}D{\varphi}} \\
+        &= \sum_a \frac{h_a \+uu_a}{H}\cdot \grad\pare{\frac{H}{h_a^2}\+D{u_a}D\varphi} \\
+        &= \sum_a \frac{h_a\+uu_a}{H}\cdot \sum_b \frac{\+uu_b}{h_b} \+D{u_b}D{}\pare{\frac{H}{h_a^2}\+D{u_a}D\varphi} \\
+        &= \sum_{a,b} \frac{h_a\+uu_a\cdot \+uu_b}{Hh_b} \+D{u_b}D{} \pare{\frac{H}{h_a^2}\+D{u_a}D\varphi} \\
+        &= \sum_a \rec{H} \+D{u_a}D{}\pare{\frac{H}{h_a^2} \+D{u_a}D{\varphi}}.
+    \end{align*}
+\end{ex}
+\begin{resume}
+球坐标系下的Laplacian为
+\[ \laplacian \varphi = \rec{r^2}\+DrD{}\pare{r^2\+DrD\varphi} + \rec{r^2\sin\theta}\+D\theta D{}\pare{\sin \theta \+D\theta D\varphi} + \rec{r^2\sin^2\theta} \frac{\partial^2\varphi}{\partial\varphi^2}. \]
+\end{resume}
+\begin{ex}
+    求$\displaystyle \+vF = \frac{\+ur}{r^2}$的散度和旋度. 通过$\displaystyle \curl \hat r = 0$, 以及$\displaystyle \div \frac{\+ur}{r^2\sin\theta} = 0$.
+    \begin{cenum}
+        \item $\displaystyle \curl \frac{\+ur}{r^2} = \pare{\grad\rec{r^2}}\times\+ur + \rec{r^2}\cancelto{0}{\curl \+ur} = 0$. 也可以这样说明: 任选一个开曲面, 绕其边界的积分为
+        \[ \iint \rd{\+v\sigma} \cdot \pare{\curl \frac{\+ur}{r^2}} = \oint_{\partial \Sigma} \rd{\+vl} \cdot \frac{\+ur}{r^2} = \oint_{\partial \Sigma} \frac{\+vr\cdot\rd{\+vr}}{r^3} = \oint_{\partial \Sigma} \frac{\rd{r}}{r^2} = 0. \]
+        \item $\displaystyle \div \frac{\+ur}{r^2} = \div\brac{\frac{\+ur}{r^2\sin\theta}\sin\theta} = \frac{\+ur}{r^2\sin\theta}\cdot \grad \sin\theta = 0$. 或者直接套公式,
+        \[ \div\pare{F\+ur} = \rec{r^2}\+DrD{}\pare{r^2 F} = 0. \]
+        也可以这样说明: 任取一闭曲面, 以$\rd{\Omega}$标记微面元相对原点的立体角,
+        \[ \iiint_V \div \frac{\+ur}{r^2} = \oint_{\partial V}\rd{\+vr}\cdot \frac{\+ur}{r^2} = \oint_{\partial V} \rd{\Omega} = \begin{cases}
+            4\pi,\quad O\in V,\\
+            0,\quad O \notin V.
+        \end{cases} \]
+        注意到原点处存在奇点. $\displaystyle \frac{\+ur}{r^2} = 4\pi \delta\pare{\+vr}$.
+    \end{cenum}
+\end{ex}
+
+% subsubsection 定义 (end)
+
+% subsection 正交曲线坐标系 (end)
+
+\subsection{Dirac-\texorpdfstring{$\delta$}{Delta}函数} % (fold)
+\label{sub:dirac_delta函数}
+
+\subsubsection{一维Dirac-\texorpdfstring{$delta$}{Delta}函数} % (fold)
+\label{ssub:一维dirac_delta函数}
+
+$\delta$-函数谓满足
+\[ \int_{-\infty}^{+\infty}f\pare{x} \delta\pare{x-x_0} \rd{x} = f\pare{x_0},\quad \forall f\in C\pare{a,b} \]
+者. 积分区间也可以弱化为$\pare{a,b} \ni x_0$.
+\par
+其它定义有如
+\begin{cenum}
+    \item $\delta\pare{x-x_0} = 0,\quad \pare{x\neq x_0}$且$\displaystyle \int_{x_0 - \epsilon}^{x_0+\epsilon} \delta\pare{x-x_0} \rd{x} = 1$. 现在
+    \[ \int_{-\infty}^{+\infty} f\pare{x}\delta\pare{x-x_0}\,\rd{x} = f\pare{x_0} \]
+    仍然成立.
+    \item 作为普通函数的极限, 如
+    \begin{cenum}
+        \item $\displaystyle \delta\pare{x} = \lim_{\epsilon\rightarrow 0} \frac{\epsilon}{\pi\pare{x^2+\epsilon^2}}$,
+        \item $\displaystyle \delta\pare{x} = \lim_{n\rightarrow \infty}f_n\pare{x},\quad f_n\pare{x} = \begin{cases}
+            \displaystyle n,\quad \abs{x} \le \rec{2n}, \\[1em]
+            \displaystyle 0,\quad \abs{x} > \rec{2n}.
+        \end{cases}$
+        \item $\displaystyle f\pare{x} = \lim_{n\rightarrow \infty} \frac{n}{\sqrt{\pi}}e^{-n^2x^2}$.
+        \item $\displaystyle f\pare{x} = \lim_{n\rightarrow \infty} \frac{\sin nx}{\pi x}$.
+    \end{cenum}
+    \item $\displaystyle \delta\pare{x} = \+dxd{\Theta\pare{x}}$, 其中$\Theta$是Heaviside阶跃函数,
+    \[ \Theta\pare{x} = \begin{cases}
+        1,\quad x>0,\\
+        0,\quad x<0.
+    \end{cases} \]
+    可以发现
+    \[ \Theta\pare{x} = \int_{-\infty}^{x} \delta\pare{y} \,\rd{y}. \]
+    特别有
+    \[ \int_{-\infty}^{+\infty}\delta\pare{y}\,\rd{y} = 1. \]
+\end{cenum}
+\begin{remark}
+    符号函数$\displaystyle \sgn x = 2\Theta\pare{x} - 1$.
+\end{remark}
+\begin{remark}
+    $\delta$函数是函数空间的对偶空间的基.
+\end{remark}
+$\delta$函数的性质包含
+\begin{cenum}
+    \item $\displaystyle \delta\pare{ax} = \rec{\abs{a}} \delta\pare{x}$,
+    \[ \int_{-\infty}^{+\infty} f\pare{x} \delta\pare{ax} \,\rd{x} = \rec{\abs{a}}f\pare{0} = \rec{\abs{a}} \int_{-\infty}^{+\infty} f\pare{x}\delta\pare{x}\,\rd{x}. \]
+    \item $\delta\pare{x}$是偶函数, $\delta\pare{-x} = \delta\pare{x}$.
+    \item $\displaystyle \delta\pare{f\pare{x}} = \sum_k \frac{\delta\pare{x-x_k}}{\abs{f'\pare{x_k}}}$, 其中$f\pare{x}$仅有简单零点且$\curb{x_k}$是其全体.
+    \item 量纲$\displaystyle \brac{\delta\pare{x}} = \rec{\brac{x}}$.
+\end{cenum}
+\begin{ex}
+    对于$f = x^2 - 1$, $x_k = \pm 1$, 相应的$f' = \pm 2$. 从而
+    \[ \delta\pare{x^2 - 1} = \half \brac{\delta\pare{x-1} + \delta\pare{x+1}}. \]
+\end{ex}
+\begin{remark}
+    不定义$f$存在高阶零点的情形.
+\end{remark}
+
+% subsubsection 一维dirac_delta函数 (end)
+
+\subsubsection{三维dirac-\texorpdfstring{$\delta$}{delta}函数} % (fold)
+\label{ssub:三维dirac_delta函数}
+
+三维Dirac-$\delta$函数谓满足
+\[ \iiint_V \rd{V} f\pare{\+vr} \delta\pare{\+vr - \+vr'} = \begin{cases}
+    f\pare{\+vr'},\quad \+vr'\in V,\\
+    0,\quad \+vr' \notin V
+\end{cases} \]
+者.
+\begin{ex}
+    点电荷$\rho\pare{\+vr} = q\delta\pare{\+vr}$.
+\end{ex}
+\begin{ex}
+    $z$轴上的线电荷$\rho = \lambda \delta\pare{x}\lambda\pare{y}$.
+\end{ex}
+\begin{ex}
+    $z=0$上的面电荷$\rho = \sigma\pare{x,y} \delta\pare{z}$.
+\end{ex}
+其性质有
+\begin{cenum}
+    \item 量纲$\displaystyle \brac{\delta\pare{\+vr - \+vr'}} = \rec{L^3}$.
+    \item 直角坐标系下$\displaystyle \delta\pare{\+vr - \+vr'} = \delta\pare{x-x'}\delta\pare{y-y'}\delta\pare{z-z'}$.
+    \item 正交曲线坐标系下
+    \begin{align*}
+        &\iiint \rd{V}\,f\pare{\+vr}\delta\pare{\+vr - \+vr'} = f\pare{\+vr'} = f\pare{u'_1,u'_2,u'_3} \\ &= \iiint f\pare{u_1,u_2,u_3}\delta\pare{u_1-u'_1}\delta\pare{u_2-u'_2}\delta\pare{u_3-u'_3}\,\rd{^3u} \\
+        &= \iiint f\pare{u_1,u_2,u_3}\delta\pare{\+vr - \+vr'} h_1h_2h_3 \,\rd{^3u}.
+    \end{align*}
+    从而
+    \[ \delta\pare{\+vr - \+vr'} = \rec{h_1h_2h_3} \delta\pare{u_1 - u'_1}\delta\pare{u_2 - u'_2}\delta\pare{u_3 - u'_3}. \]
+\end{cenum}
+\begin{ex}
+    在球坐标系下,
+    \[ \delta\pare{\+vr - \+vr'} = \rec{r^2\sin\theta}\delta\pare{r-r'}\delta\pare{\theta - \theta'}\delta\pare{\varphi - \varphi'}. \]
+    柱坐标系下
+    \[ \delta\pare{\+vr - \+vr'} = \rec{s} \delta\pare{s-s'}\delta\pare{\varphi - \varphi'}\delta\pare{z-z'}. \]
+\end{ex}
+一些重要关系有
+\begin{cenum}
+    \item $\displaystyle \div \frac{\+ur}{r^2} = 4\pi \delta\pare{\+vr}$, 从而$\displaystyle \laplacian \rec{r} = -4\pi \delta\pare{\+vr}$.
+    \item $\displaystyle \div \frac{\+u{\+gr}}{\+gr^2} = 4\pi\delta\pare{\+v{\+gr}}$, 从而$\displaystyle \laplacian \rec{\+gr} = -4\pi \delta\pare{\+v{\+gr}}$.
+\end{cenum}
+\begin{ex}
+    静磁场$\displaystyle \+vB\pare{\+vr} = \frac{\mu_0}{4\pi} \iiint \rd{V'} \frac{\+vf\pare{\+vr' \times \+u{\+gr}}}{\+gr^2}$. 从而
+    \begin{align*}
+        \div \+vB\pare{\+vr} &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\, \div\brac{\+vj\pare{\+vr} \times \frac{\+u{\+gr}}{\+gr^2}} \\ &= -\frac{\mu_0}{4\pi} \iiint \rd{V'}\, \div \frac{\+u{\+gr}}{\+gr^2} \times \+vj\pare{\+vr} = 0.
+    \end{align*}
+    以及
+    \begin{align*}
+        \curl \+vB\pare{\+vr} &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\, \curl\brac{\+vj\pare{\+vr'}\times \frac{\+u{\+gr}}{\+gr^2}} \\
+        &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\, \brac{\pare{\div \frac{\+u{\+gr}}{\+gr^2}}\+vj\pare{\+vr} - \+vj\pare{\+vr}\cdot \grad \frac{\+u{\+gr}}{\+gr^2}} \\
+        &= \mu_0 \+vj\pare{\+vr} + \frac{\mu_0}{4\pi} \iiint \rd{V'}\brac{\grad'\cdot\brac{\+vj\pare{\+vr'}\frac{\+u{\+gr}}{\+gr^2}} -\frac{\+u{\+gr}}{\+gr^2} \grad'\cdot \cancelto{0}{\+vj\pare{\+vr'}}} \\
+        &= \mu_0 \+vj\pare{\+vr} + \frac{\mu_0}{4\pi} \oiint \rd{\+v\sigma}\cdot \+vj\pare{\+vr'} \frac{\+u{\+gr}}{\+gr^2} \\
+        &= \mu_0 \+vj\pare{\+vr}.
+    \end{align*}
+\end{ex}
+
+% subsubsection 三维dirac_delta函数 (end)
+
+% subsection dirac_delta函数 (end)
+
+\subsection{Helmholtz定理} % (fold)
+\label{sub:helmholtz定理}
+
+\subsubsection{无旋场} % (fold)
+\label{ssub:无旋场}
+
+若$\displaystyle \oint_{C}\rd{\+vl} \cdot \+vF = 0$对任意比曲线成立, 即$\displaystyle \int_1^2 \rd{\+vl}\cdot \+vF$仅由起点和终点决定, 则谓之无旋场. 从而可以引入势函数$\varphi$使得
+\[ \int_1^2 \rd{\+vl}\cdot \+vF = \varphi\pare{1} - \varphi\pare{2}. \]
+即$\+vF = -\grad \varphi$.
+\par
+这一定义蕴含$\curl \+vF\pare{\+vr} = 0$, 但这不蕴含$\+vF$是无旋的, 除非区域是单连通的.
+\par
+此外, 这一定义下, $\varphi$存在不确定性. $\varphi'\pare{\+vr} = \varphi\pare{\+vr} + C$也可以作为势函数.
+
+% subsubsection 无旋场 (end)
+
+\subsubsection{无源场} % (fold)
+\label{ssub:无源场}
+
+若$\displaystyle \oiint_{S}\rd{\+v\sigma}\cdot \+vF = 0$对任意闭曲面成立, 即$\displaystyle \int_{\Sigma} \rd{\+v\sigma} \cdot \+vF$仅由场的边界决定, 和曲面的具体形状无关. 可以引入新的矢量场$\+vA$满足
+\[ \oiint_{\Sigma} \rd{\Sigma}\cdot \+vF = \oint_{\partial \Sigma}\rd{\+vl}\cdot \+vA. \]
+这蕴含$\div \+vF = 0$, 以及$\+vF = \curl \+vA$.
+\par
+同样, 这要求区域是单连通的.
+\par
+$\+vA$存在一不确定性. $\+vA' = \+vA + \grad \psi$也可以作为矢量势.
+
+% subsubsection 无源场 (end)
+
+\subsubsection{分解定理} % (fold)
+\label{ssub:分解定理}
+
+任意给定的矢量场$\+vF\pare{\+vr}$都可以如下分解,
+\[ \+vF = \underbrace{\+vF_{\parallel}}_{\text{无源}} + \underbrace{\+vF_{\perp}}_{\text{无旋}} = -\grad\varphi + \curl \+vA. \]
+这可以通过
+\[ \begin{cases}
+    \curl \+vF_{\parallel} = 0, \\
+    \div \+vF_{\parallel} = D
+\end{cases} \Rightarrow \+vF_{\parallel} = -\grad\varphi \Rightarrow \laplacian \varphi = -D \]
+以及
+\[ \begin{cases}
+    \div \+vF_{\perp} = 0, \\
+    \curl \+vF_\perp = \+vC
+\end{cases} \begin{aligned}
+    &\Rightarrow \+vF_\perp = \curl A \\ &\Rightarrow \curl\pare{\curl \+vA} = \grad\pare{\cancelto{0}{\div \+vA}} - \laplacian \+vA = \+vC.
+\end{aligned} \]
+确定.
+
+% subsubsection 分解定理 (end)
+
+\subsubsection{Helmholtz定理} % (fold)
+\label{ssub:helmholtz定理}
+
+设矢量场$\+vF\pare{\+vr}$的散度$D\pare{\+vr}$和旋度$\+vC\pare{\+vr}$已知, 且在远处有$\+vF\rightarrow 0$(实际要求$rF\rightarrow 0$), $r^2 D\rightarrow 0$, $r^2\+vC \rightarrow 0$, 则矢量场$\+vF$唯一确定, 总可表示为
+\begin{align*}
+    \+vF &= -\grad\varphi + \curl \+vA \\ &= -\grad \rec{4\pi} \iiint \rd{V'}\, \frac{\grad'\cdot \+vF\pare{\+vr'}}{\+gr} + \curl \rec{4\pi} \iiint \rd{V'}\, \frac{\grad'\times \+vF\pare{\+vr'}}{\+gr}.
+\end{align*}
+\begin{proof}[唯一性的证明]
+    假设$\+vF_1$和$\+vF_2$同时满足题目中的条件, 则$\div\+vF = 0$, $\curl\+vF = 0$, 此时
+    \[ \curl \pare{\curl \+vF} = \grad\pare{\cancelto{0}{\div \+vF}} - \laplacian \+vF = 0.  \]
+    从而$\+vF$的每一个分量都为零. 令$\varphi = F_i$(直角坐标分量), 则
+    \[ \iiint \rd{V}\ \brac{\cancelto{0}{\varphi\laplacian \varphi} + \pare{\div\varphi}^2} = \oiint \rd{\+v\sigma}\cdot \underbrace{\varphi\grad \varphi}_{O\pare{r^{-1}\cdot r^{-2}}} = 0.  \]
+    从而$\Rightarrow \grad\varphi = 0 \Rightarrow F_i = \const = F\pare{\infty} = 0$.
+\end{proof}
+\begin{proof}[存在性]
+    注意到$\displaystyle \frac{\+u{\+gr}}{\+gr^2} = 4\pi\delta\pare{\+v{\+gr}} = -\laplacian \rec{\+gr}$. 故
+    \begin{align*}
+        \+vF\pare{\+vr} &= \iiint \rd{V'}\ \+vF\pare{\+vr'}\delta\pare{\+vr - \+vr'} = -\rec{4\pi} \iiint \rd{V'}\ \+vF\pare{\+vr'} \laplacian \rec{\+gr} \\
+        &= -\rec{4\pi} \iiint \rd{V'}\ \grad\brac{\div \frac{\+vF\pare{\+vr'}}{\+gr}} + \rec{4\pi} \iiint \rd{V'}\ \curl\brac{\curl \frac{\+vF\pare{\+vr'}}{\+gr}} \\
+        &= -\grad \rec{4\pi} \iiint \rd{V'}\ \frac{\grad'\+v\cdot \+vF\pare{\+vr'}}{\+gr} + \grad \rec{4\pi} \iiint \rd{V'}\ \grad'\+v\cdot \frac{\+vF\pare{\+vr'}}{\+gr} \\
+        &\phantom{=\ } + \curl \rec{4\pi} \iiint \rd{V'} \frac{\grad'\times \+vF\pare{\+vr'}}{\+gr} - \curl \rec{4\pi}\iiint\ \grad'\times \frac{\+vF\pare{\+vr'}}{\+gr} \\
+        &= -\grad \rec{4\pi} \iiint\rd{V'}\ \frac{D\pare{\+vr'}}{\+gr} + \grad \rec{4\pi} \oiint \rd{\+v\sigma} \cdot \frac{\+vF\pare{\+vr'}}{\+gr} \\
+        &\phantom{=\ } + \curl\rec{4\pi}\iiint \rd{V'} \frac{\+vC\pare{\+vr'}}{\+gr} - \curl \rec{4\pi} \oiint \rd{\+v\sigma} \times \frac{\+vF\pare{\+vr'}}{\+gr}.
+    \end{align*}
+    注意到$\+vF = o\pare{1/r}$, 两个面积分可消去.
+\end{proof}
+\begin{ex}
+    $\div \+vB\pare{\+vr} = 0$, $\curl \+vB\pare{\+vr} = \mu_0 \+vj\pare{\+vr}$, $\+vj$局域分布. 此时
+    \begin{align*}
+        \+vB\pare{\+vr} &= -\grad \rec{4\pi} \iiint \rd{V'} \frac{\grad'\+v\cdot \+vB\pare{\+vr'}}{\+gr} + \curl \rec{4\pi} \iiint \rd{V'} \frac{\grad'\times \+vB\pare{\+vr'}}{\+gr} \\
+        &= 0 + \curl \frac{\mu_0}{4\pi} \iiint \rd{V'} \frac{\+vj\pare{\+vr'}}{\+gr} \\
+        &= \frac{\mu_0}{4\pi}\iiint \rd{V'} \frac{\+vj\pare{\+vr'}\times \+ur}{\+gr^2}.
+    \end{align*}
+    这正是BSL.
+\end{ex}
+
+% subsubsection helmholtz定理 (end)
+
+% subsection helmholtz定理 (end)
+
+\subsection*{小结} % (fold)
+\label{sub:小结}
+
+\begin{cenum}
+    \item 张量场:
+    \begin{cenum}
+        \item 代数: 就近点乘/叉乘, 交换律, 结合律.
+        \item 导数: Leibniz法则, 链式法则.
+        \item 积分: Stokes定理, $\displaystyle \begin{cases}
+            \displaystyle \iiint_V \rd{V}\ \grad = \oiint_{\partial V}\rd{\+v\sigma}, \\[1em]
+            \displaystyle \iint_\Sigma \pare{\rd{\+v\sigma}\times \grad} = \oiint_{\partial \Sigma} \rd{\+vl}.
+        \end{cases}$
+        \item 坐标: $\grad u_a$, $\displaystyle \curl \frac{\+uu_a}{h_a} = 0$, $\displaystyle \div \frac{h_a \+uu_a}{H} = 0$.
+        \item $\delta$函数: $\displaystyle \div \frac{\+u{\+gr}}{\+gr^2} = 4\pi\delta\pare{\+gr}$. $\displaystyle \laplacian \rec{\+gr} = -4\pi\delta\pare{\+v{\+gr}}$.
+    \end{cenum}
+\end{cenum}
+
+% subsection 小结 (end)
+
+% section 数学预备 (end)
+
+\end{document}

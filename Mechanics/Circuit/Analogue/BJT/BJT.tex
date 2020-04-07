@@ -1,0 +1,316 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{双极结型三极管} % (fold)
+\label{sec:双极结型三极管}
+
+\subsection{基本概念} % (fold)
+\label{sub:基本概念}
+
+\newpoint{}三极管内有两种载流子参与导电, 故谓\gloss{双极型三极管}或BJT(Bipolar Junction Transistor).
+\newpoint{}有\gloss{NPN型}和\gloss{PNP型}两种.
+\newpoint{NPN型} 发射区和集电区都是N型半导体, 但发射区的掺杂浓度高. P型基区非常薄$\SI{}{\micro\meter}$级别. 发射区掺杂浓度远高于基区掺杂浓度.
+\newpoint{}符号中的箭头总是发射结的正偏方向.
+\newpoint{}发射区发射载流子, 集电区收集载流子, 基区传送控制载流子.
+
+\subsubsection{工作原理} % (fold)
+\label{ssub:工作原理}
+
+\newpoint{}BJT工作前提条件: \hl{发射结正偏, 集电结反偏.} \\
+此时发射结势壁减小. 集电结势垒加大, 变厚.\\
+发射区多子(电子)源源不断扩散到基区, 形成发射极电流(方向与电子方向相反), 同时基区空穴也扩散到发射区. $I\+_E_ = I\+_EN_ + I\+_EP_ \approx I\+_EN_$.
+发射区掺杂浓度远高于基区, 且基区厚度小, 导致:
+\newpoint{}发射极的电流主要是发射区的扩散电流.
+\newpoint{}基区中的电子浓度由发射结向集电结逐渐减小. 一方面电子会和基区进来的空穴复合, 形成基极电流$I\+_BN_$, 但大部分电子会集电区, 形成集电极电流$I\+_CN_$.
+\newpoint{}由于CB之间反偏, 会存在漂移电流$I\+_CBO_$.
+\newpoint{}因此, 集电极的电流包含$I\+_CN_$和$I\+_CBO_$(小)两部分. 发射极的电流包含$I\+_EN_$和$I\+_EP_$(小)两部分. 基区电流是$I\+_E_ - I\+_C_$.
+
+% subsubsection 工作原理 (end)
+
+\subsubsection{电流分配} % (fold)
+\label{ssub:电流分配}
+
+\newpoint{}集电结反偏形成$I\+_CN_$. 反偏时由集电区到基区的反向漂移电流形成反向饱和电流$I\+_C_ = I\+_CN_ + I\+_CBO_$.
+\[ \begin{cases}
+    I\+_E_ = I\+_EN_ + I\+_EP_ \approx I\+_EN_,\\
+    I\+_C_ = I\+_CN_ + I\+_CBO_,\\
+    I\+_B_ = I\+_E_ - I\+_C_.
+\end{cases} \]
+其中$\displaystyle I\+_E_ = I\+_ES_\pare{e^{\frac{v\+_BE_}{v_T}} - 1}$.\\
+设$\displaystyle \alpha = \frac{I\+_CN_}{I_E}$, 即扩散电流在C区和B区的分配关系, 谓\hl{电流放大系数}, 和管子结构和掺杂浓度有关, 和外界电压无关.\\
+通常$I\+_C_ \gg I\+_CBO_$, 故$\displaystyle \alpha \approx \frac{I\+_C_}{I\+_E_}$.
+又设$\displaystyle \beta = \frac{\alpha}{1-\alpha}$, 根据$I\+_E_ = I\+_B_ + I\+_C_$, $I\+_C_ = I\+_CN_ + I\+_CBO_$, 有$\displaystyle \alpha = \frac{I\+_CN_}{I\+_E_}$. 令$I\+_CEO_ = \pare{1+\beta}I\+_CBO_$, 则$\displaystyle \beta = \frac{I\+_C_ - I\+_CEO_}{I\+_B_}$. 当$I\+_C_ \gg I\+_CEO_$时, $\displaystyle \beta \approx \frac{I\+_C_}{I\+_B_}$. $\beta$是另一个\gloss{电流放大系数}. 只与管的结构尺寸和浓度有关, 与外加电压无关.
+
+% subsubsection 电流分配 (end)
+
+\subsubsection{放大电路} % (fold)
+\label{ssub:放大电路}
+
+\newpoint{共基} 基极作为公共电极.
+\begin{sample}
+    \begin{ex}
+        对于共基极放大电路, 若$\Delta v\+_I_=\SI{20}{\milli\volt}$, 使$\Delta i\+_E_ = \SI{1}{\milli\ampere}$. 当$\alpha = 0.98$, 有$i\+_C_ = \SI{-0.98}{\milli\volt}$, 从而$\Delta v\+_O_ = -\Delta i\+_C_\cdot R\+_L_ = \SI{0.98}{\volt}$. 从而电压放大倍数$\displaystyle A_v = \frac{\Delta v\+_O_}{\Delta v\+_I_} = 49$.
+    \end{ex}
+\end{sample}
+共集放大电路有电压放大而无电压放大. 需要驱动源有较大功率.
+\newpoint{共射} 射极作为公共电极.
+\begin{sample}
+    \begin{ex}
+        若$\Delta v\+_I_$使$\Delta i\+_B_ = \SI{20}{\micro\ampere}$. 设$\alpha = 0.98$, 则
+        \[ \Delta i\+_C_ = \beta \cdot \Delta i\+_B_ = \frac{\alpha}{1-\alpha} = \SI{0.98}{\milli\ampere}. \]
+        $\Delta v\+_O_ = -\Delta i\+_C_ \cdot R\+_L_ = \SI{-0.98}{\volt}$, 电压放大倍数
+        \[ A_v  = \frac{\Delta v\+_O_}{\Delta v\+_I_} = -49. \]
+    \end{ex}
+\end{sample}
+有电压放大和电流放大. 不要求驱动源有较大输出功率.
+\newpoint{共集} 集极作为公共电极.
+
+% subsubsection 放大电路 (end)
+
+% subsection 基本概念 (end)
+
+\subsection{特性曲线} % (fold)
+\label{sub:特性曲线}
+
+\newpoint{输入特性} $v\+_CE_$固定时, 输入回路中$v\+_BE_$和$i\+_B_$之间的关系.
+\[ i\+_B_ = f\pare{v\+_BE_}\vert_{v\+_CE_ = \const}. \]
+$v\+_CE_$增大时, 曲线右移. 但$v\+_CE_ > \SI{1}{\volt}$后几乎和$v\+_CE_ = \SI{1}{\volt}$相同.
+\par
+当$v\+_CE_>\SI{1}{\volt}$时, 集电结进入反偏状态, 开始收集电子. 基区复合减少, 同样$v\+_BE_$下的$I\+_B_$减少, 特性曲线右移.
+\newpoint{输出特性} 在$i\+_B_$一定的条件下, 共射极输出回路电压$v\+_CE_$和电流$i\+_C_$之间的关系曲线.
+\[ i\+_C_ = f\pare{v\+_CE_}\vert_{i\+_B_ = \const}. \]
+\newpoint{}$v\+_CE_<\SI{1}{\volt}$, 上升很陡, 因为$v\+_CE_$拉入电子的能力在增强.
+\newpoint{}$v\+_CE_>\SI{1}{\volt}$, 平坦上升, 由于极电极的电场已经足够强, 可以将发射极大部分电子拉出.
+\newpoint{}上升倾斜的原因时$v\+_CE_$增大导致集电极的厚度加宽, 基区有效宽度减少, 电子复合机会减少,  $\beta$相对变大. 因此$i\+_C_$和$v\+_CE_$增大时仍有\gloss{上升-基区宽度的调制效应}.
+\newpoint{}输出特性曲线右三个区域:
+\newpoint{饱和区} $i\+_C_$明显受$v\+_CE_$控制的区域, 该区域内一般$v\+_CE_ < \SI{0.7}{\volt}$. 此时发射结正偏, 集电结正偏或者反偏电压很小. 例如$V\+_BE_ = \SI{0.7}{\volt}$, $V\+_CE_ = \SI{0.3}{\volt}$.
+\newpoint{截止区} $i\+_C_$接近零的区域, 相当于$i\+_B_ = 0$曲线下方, 此时$V\+_BE_$小于死区电压. 例如$V\+_BE_ = \SI{0.5}{\volt}$, BE零偏或反偏, BC反偏.
+\newpoint{放大区} $i\+_C_$近似平行于$v\+_CE_$轴. 发射结正偏, 集电结反偏. 例如$V\+_BE_ = \SI{0.7}{\volt}$.
+
+% subsection 特性曲线 (end)
+
+\subsection{主要性能参数} % (fold)
+\label{sub:主要性能参数}
+
+\newpoint{共射直流电流放大系数} $\displaystyle \conj{\beta} = \frac{I\+_C_ - I\+_CEO_}{I\+_B_} \approx \frac{I\+_C_}{I\+_B_}$.
+\newpoint{共射交流电流放大系数} $\displaystyle {\beta} =  \frac{\Delta i\+_C_}{\Delta i\+_B_}$.
+\newpoint{共基直流电流放大系数} $\displaystyle \conj{\alpha} = \frac{I\+_C_ - I\+_CBO_}{I\+_E_} \approx \frac{I\+_C_}{I\+_E_}$. \\
+\newpoint{共基交流电流放大系数} $\displaystyle \alpha = \frac{\Delta i\+_C_}{\Delta i\+_E_}$. \\
+\newpoint{} 当$I\+_CBO_$和$I\+_CEO_$很小, $\conj{\alpha} \approx \alpha$, $\conj{\beta} \approx \beta$.
+\newpoint{集-基反向饱和电流} $I\+_CBO_$.
+\newpoint{集-射反向饱和电流} $I\+_CEO_$.\\
+\[ I\+_CEO_ = \pare{1+\conj{\beta}} I\+_CBO_. \]
+\newpoint{}集电结反偏电流$I\+_CBO_$是唯一到达B和E到达B载流子复合的电流.
+
+\subsubsection{极限参数} % (fold)
+\label{ssub:极限参数}
+
+\newpoint{} 集电极允许最大电流$I\+_CM_$.
+\newpoint{} 集电极最大允许功耗$P\+_CM_$.
+\newpoint{} 反向击穿电压: 发射极开路时集电结反向击穿电压$V\+_(BR)CBO_$. 集电极开路时发射结反向击穿电压$V\+_(BR)EBO_$. 基极开路时集电集和发射极间的反向击穿电压$V\+_(BR)CEO_$.
+\[ V\+_(BR)CBO_ > V\+_(BR)CEO_ > V\+_(BR)EBO_. \]
+
+% subsubsection 极限参数 (end)
+
+% subsection 主要性能参数 (end)
+
+\subsection{基本共射放大电路} % (fold)
+\label{sub:基本共射放大电路}
+
+\newpoint{静态} 直流工作态, 即$v\+_i_ = 0$时放大电路的工作状态,
+\[ I\+_BQ_ = \frac{V\+_BB_ - V\+_BEQ_}{R\+_b_},\quad I\+_CQ_ = \beta I\+_BQ_ + I\+_CEO_ \approx \beta I\+_BQ_,\quad V\+_CEQ_ = V\+_CC_ - I\+_CQ_R\+_c_. \]
+电容的作用时同交流, 阻直流.
+\newpoint{动态} 输入正弦信号$v\+_s_$后, 电路将处于动态工作情况, 此时BJT各极电流及电压都将在静态工作值的基础上随输入信号作相应变化.
+\begin{remark}
+    静态大写, 交变小写.
+\end{remark}
+\newpoint{直流通路} 交流电源置零, 电容开路.
+\newpoint{交流通路} 直流电源置零, 电容短路.
+
+\subsubsection{图解分析} % (fold)
+\label{ssub:图解分析}
+
+\newpoint{静态工作点的分析} 步骤如下:
+\begin{cenum}
+    \item 画出直流通路.
+    \item 列输入回路方程$v\+_BE_ = V\+_BB_ - i\+_B_ R\+_b_$.
+    \item $i\+_B_$曲线作图, $I\+_BQ_$映射至$i\+_C_$曲线得到静态工作点.
+\end{cenum}
+\newpoint{动态分析} 步骤如下:
+\begin{cenum}
+    \item 在$i\+_B_$图的直线中引入相应的偏离, 得到两端$i\+_B_$.
+    \item 在$i\+_C_$图中找到两端$i\+_B_$对应的$i\+_C_$曲线, $V\+_CC_$直线无需偏移即可直接得到$i\+_C_$的两端.
+\end{cenum}
+\begin{pitfall}
+    $v\+_i_$, $i\+_b_$, $i\+_c_$同相而$u\+_ce_$与之反相.
+\end{pitfall}
+静态工作点不适合会导致波形失真, 截止或饱和失真.
+\newpoint{直流负载线} $\pare{V\+_CC_,R\+_c_}$对应的直线为直流负载线.
+\newpoint{交流负载线} $\pare{I\+_CQ_,R\+_c_\parallelsum R\+_L_}$对应的直线为交流负载线.
+\newpoint{}根据失真的情况可将$Q$点置于交流负载线的中点.
+
+% subsubsection 图解分析 (end)
+
+\subsubsection{放大器小信号模型} % (fold)
+\label{ssub:放大器小信号模型}
+
+\newpoint{BJT的线性化模型} 在$Q$点附近可对非线性器件做线性化处理.
+\newpoint{$H$参数小信号模型} 根据$\displaystyle \begin{cases}
+    v\+_be_ = h\+_ie_ i\+_b_ + h\+_re_ v\+_ce_, \\
+    i\+_c_  = h\+_fe_ i\+_b_ + h\+_oe_ v\+_ce_.
+\end{cases}$
+$h$参数的数量级通常为
+\[ \begin{pmatrix}
+    h\+_ie_ & h\+_re_ \\
+    h\+_fe_ & h\+_oe_
+\end{pmatrix} = \begin{pmatrix}
+    \SI{e3}{\ohm} & 10^{-3} \\
+    10^2 & \SI{e-5}{\siemens}
+\end{pmatrix}. \]
+从而$h\+_re_$和$h\+_oe_$项可忽略不计. 简化为
+\[ v\+_be_ = h\+_ie_ i\+_b_,\quad i\+_c_ = h\+_fe_ i\+_b_. \]
+$r\+_ce_$值较大, 通常可忽略, 但可能导致输出回路方程组无解, 此时须加上$r\+_ce_$.
+\newpoint{$r\+_be_$的估算} 由$\displaystyle r\+_be_ = r\+_bb'_ + r\+_e_ = r\+_bb'_ + V\+_T_/I\+_b_ \Rightarrow \resumath{r\+_be_ = r\+_bb'_ + \pare{1+\beta} \frac{\SI{26}{\milli\volt}}{I\+_EQ_}.}$
+
+% subsubsection 放大器小信号模型 (end)
+
+\subsubsection{小信号模型分析} % (fold)
+\label{ssub:小信号模型分析}
+
+\newpoint{求$Q$点的一般步骤}
+\begin{cenum}
+    \item $\displaystyle I\+_B_ = \frac{V\+_BB_ - V\+_BE_}{R\+_b_}$.
+    \item $\displaystyle I\+_C_ = \beta I\+_B_$.
+    \item $\displaystyle V\+_CE_ = \pare{\frac{V\+_CC_ - V\+_CE_}{R\+_c_} - I\+_C_}R\+_L_$.
+\end{cenum}
+\newpoint{指标分析} $v\+_i_ = i\+_b_ \cdot \pare{R\+_b_ + r\+_be_}$, $i\+_c_ = \beta i\+_b_$, $v\+_o_ = -i\+_c_\cdot \pare{R\+_c_\parallelsum R\+_L_}$,
+\[ A\+_v_ = \frac{v\+_o_}{v\+_i_} = \frac{-i\+_c_\pare{R\+_c_\parallelsum R\+_L_}}{i\+_b_\pare{R\+_b_ + r\+_be_}} = - \frac{\beta\cdot \pare{R\+_c_ \parallelsum R\+_L_}}{R\+_b_ + r\+_be_}. \]
+输入阻抗$R\+_i_ = R\+_b_ + r\+_be_$. 输出阻抗置零$v\+_s_$后可得$R\+_o_ = R\+_c_$.
+\newpoint{自偏指标分析} $\displaystyle A_v = -\beta \frac{\dot{R}_L}{r\+_be_}$, 输入阻抗$R\+_i_ = R\+_b_\parallel r\+_be_$, 输出阻抗$R\+_o_ = R\+_c_$.
+
+% subsubsection 小信号模型分析 (end)
+
+\subsubsection{温度的影响} % (fold)
+\label{ssub:温度的影响}
+
+\newpoint{输入特性曲线} 温度上升, 特性曲线左移.
+\newpoint{输出特性曲线} 温度上升, 特性曲线上移.
+\newpoint{对$\beta$的影响} 温度上升, $\beta$上升.
+\newpoint{$\Rightarrow $} 温度上升, $I\+_C_$上升.
+
+% subsubsection 温度的影响 (end)
+
+\subsubsection{射极偏置电路} % (fold)
+\label{ssub:射极偏置电路}
+
+\newpoint{基极分压式射极偏置电路} $T\uparrow \Rightarrow I\+_C_ \uparrow \Rightarrow I\+_E_\uparrow \Rightarrow V\+_E_\uparrow \Rightarrow V\+_BE_\downarrow \Rightarrow I\+_B_\downarrow \Rightarrow I\+_C_\downarrow$.\\[-1em]
+\newpoint{静态工作点} $\displaystyle V\+_BQ_ = \frac{R\+_b2_}{R\+_b1_ + R\+_b2_}\cdot V\+_CC_$, $\displaystyle I\+_CQ_ \approx I\+_EQ_ = \frac{V\+_BQ_ - V\+_BEQ_}{R\+_e_}$,\\
+$V\+_CEQ_ = V\+_CC_ - I\+_CQ_ R\+_c_ - I\+_EQ_R\+_c_ \approx V\+_CC_ - I\+_CQ_\pare{R\+_c_ + R\+_e_}$, $\displaystyle I\+_BQ_ = \+/I\+_CQ_/\beta/$.
+\newpoint{电压增益} $\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta} \frac{\SI{26}{\milli\volt}}{I\+_EQ_}$, $v\+_o_ = -\beta \cdot i\+_b_\pare{R\+_c_\parallelsum R\+_L_}$,\\
+$v\+_i_ = i\+_b_ r\+_be_ + i\+_e_ R\+_e_ = i\+_b_r\+_be_ + i\+_b_\pare{1+\beta}R\+_e_$,\\
+$\displaystyle A\+_v_ = \frac{v\+_o_}{v\+_i_} = -\frac{\beta\cdot \pare{R\+_c_\parallelsum R\+_L_}}{r\+_be_ + \pare{1+\beta} R\+_e_}$.\\
+$\displaystyle R\+_i_ = \frac{v\+_i_}{i\+_i_} = R\+_b1_\parallelsum R\+_b2_ \parallelsum \brac{r\+_be_ + \pare{1+\beta}R\+_e_}$.
+\newpoint{输出阻抗} $\displaystyle \begin{cases}
+    i\+_b_\pare{r\+_be_ + R'\+_s_} + \pare{i\+_b_ + i\+_c_}R\+_c_ = 0, \\
+    v\+_t_ - \pare{i\+_c_ - \beta i\+_b_}r\+_ce_ - \pare{i\+_c_ + i\+_b_}R\+_e_ = 0.
+\end{cases}$ $R'\+_s_ = R\+_s_ \parallelsum R\+_b1_ \parallelsum R\+_b2_$.\\
+$\displaystyle R'\+_o_ = \frac{v\+_t_}{i\+_c_} = r\+_ce_\pare{1+\frac{\beta \cdot R\+_c_}{r\+_be_ + R\+_s_' + R\+_c_}}$, 输出电阻$R\+_o_ = R\+_c_ \parallelsum R\+_o_'$. 当$R'\+_o_ \gg R\+_c_$, $R\+_o_\approx R\+_c_$.
+\newpoint{}通常$R'\+_o_ > r\+_ce_ \gg R\+_c_$.
+\newpoint{}可以在$R\+_e_$处串联一电容, 以消除交流通路中的$R\+_e_$.
+
+% subsubsection 射极偏置电路 (end)
+
+\subsubsection{共集放大电路} % (fold)
+\label{ssub:共集放大电路}
+
+\inlinehardlink{各种放大电路特点(待补充), 性能集合}
+\newpoint{$Q$点计算} $\displaystyle \begin{cases}
+    V\+_CC_ = I\+_BQ_ R\+_b_ + V\+_BEQ_ + I\+_EQ_ R\+_e_, \\
+    I\+_EQ_ = \pare{1+\beta}I\+_BQ_.
+\end{cases}$ 可得$\displaystyle I\+_BQ_ = \frac{V\+_CC_ - V\+_BEQ_}{R\+_b_ + \pare{1+\beta}R\+_e_}$, $I\+_CQ_ = \beta\cdot I\+_BQ_$, $V\+_CEQ_ = V\+_CC_ - I\+_EQ_ R\+_e_ \approx V\+_CC_ - I\+_CQ_ R\+_e_$.
+\begin{remark}
+    电压增益接近$1$, $v\+_o_$和$v\+_i_$同相, 输入电阻大, 输出电阻小. 作为射极电压跟随器.
+\end{remark}
+\newpoint{电压增益} $\displaystyle v\+_i_ = i\+_b_r\+_be_ + i\+_b_\pare{1+\beta}R'\+_L_$, $v\+_o_ = i\+_b_\pare{1+\beta} R'\+_L_$, 可得\\
+$\displaystyle A_v = \frac{\beta\cdot R'\+_L_}{r\+_be_ + \pare{1+\beta}R'\+_L_} < 1$. 当$\beta R'\+_L_ \gg r\+_be_$, $A\+_v_\approx 1$.
+\newpoint{输入电阻} $\displaystyle R\+_i_ = \frac{v\+_i_}{i\+_i_} = R\+_b_\parallel \brac{r\+_be_ + \pare{1+\beta} R\+_L_'}$. 从而$R\+_i_ \approx \beta R'\+_L_$.
+\newpoint{输出电阻} $\displaystyle R\+_o_ = R\+_e_ \parallel \frac{R'\+_s_ + r\+_be_}{1+\beta}$, 从而$\displaystyle R\+_o_ \approx \frac{R'\+_s_ + r\+_be_}{\beta}$.
+
+% subsubsection 共集放大电路 (end)
+
+\subsubsection{共基极放大电路} % (fold)
+\label{ssub:共基极放大电路}
+
+\newpoint{电压增益} $\displaystyle v\+_i_ = -i\+_b_ r\+_be_$, 输出回路$v\+_o_ = -\beta i\+_b_ R\+_L_'$, 电压增益$\displaystyle A\+_v_ = \frac{v\+_o_}{v\+_i_} = \frac{\beta R'\+_L_}{r\+_be_}$.
+\newpoint{输入电阻} $i\+_i_ = i\+_{R\+_c_}_ - i\+_c_ = i\+_{R\+_c_}_ - \pare{1+\beta}i\+_b_$, $i\+_{R\+_c_}_ = v\+_i_/R\+_c_$, $i\+_b_ = -v\+_i_R\+_be_$. 从而$\displaystyle R\+_i_ = R\+_e_\parallelsum \frac{r\+_be_}{1+\beta}$.
+\newpoint{输出电阻} $R\+_o_ \approx R\+_c_$.
+\begin{remark}
+    电流放大倍数接近$1$, 输入阻抗小, 输出阻抗大.
+\end{remark}
+
+% subsubsection 共基极放大电路 (end)
+
+\subsubsection{共射-共基组合放大电路} % (fold)
+\label{ssub:共射_共基组合放大电路}
+
+\newpoint{}总电压增益等于各级单管放大电路的电压增益的乘积.
+\newpoint{}前一级的输出电压是后一集的输入电压, 后一集的输入电阻是前一集的负载电阻.
+\newpoint{}电压增益
+\[ A_v = \frac{v\+_o_}{v\+_i_} = \frac{v\+_o1_}{v\+_i_}\frac{v\+_o_}{v\+_o1_} = A_{v1}\cdot A_{v2}. \]
+其中
+\begin{align*}
+    A_{v1} &= -\frac{\beta_1 R'\+_L_}{r\+_be1_} = -\frac{\beta_1 r\+_be2_}{r\+_be1_\pare{1+\beta_2}}, \\
+    A_{v2} &= \frac{\beta_2 R'\+_{I2}_}{r\+_be2_} = \frac{\beta_2 \pare{R\+_c2_\parallel R\+_L_}}{r\+_be2_}. \\
+    \beta_2 \gg 1 \Rightarrow A_v &= -\frac{\beta_1 \pare{R\+_c2_\parallelsum R\+_L_}}{r\+_be1_}.
+\end{align*}
+\newpoint{}输入阻抗$\displaystyle R\+_i_ = \frac{v\+_i_}{i\+_i_} = R\+_b_\parallelsum r\+_be1_ = R\+_b1_ \parallelsum R\+_b2_ \parallelsum r\+_be1_$.
+\newpoint{}输出阻抗$\displaystyle R\+_o_ = R\+_c2_$.
+
+% subsubsection 共射_共基组合放大电路 (end)
+
+\subsubsection{共基-共基组合放大电路} % (fold)
+\label{ssub:共基_共基组合放大电路}
+
+两个BJT可复合为一个BJT, $\beta \approx \beta_1 \beta_2$.
+
+% subsubsection 共基_共基组合放大电路 (end)
+
+% subsection 基本共射放大电路 (end)
+
+\subsection{放大电路的频率响应} % (fold)
+\label{sub:放大电路的频率响应}
+
+\newpoint{}截止频率为$\displaystyle f=\rec{2\pi RC}$.
+\newpoint{}$C\+_b'e_$表示发射结电容, $C\+_b'c_$表示集电结电容.
+\newpoint{}高频特性受限于$C\+_b'e_$(低通). $C\+_b'c_$同样起通低频阻高频的作用.
+
+\subsubsection{低频限制} % (fold)
+\label{ssub:低频限制}
+
+\newpoint{}基极分压式偏置电路, $C\+_e_$折合到输入端, $C\+_e_/\pare{1+\beta}$, 和$C\+_b1_$串联构成$C_1$,
+\[ C_1= \frac{C\+_b1_C\+_e_}{\pare{1+\beta}C\+_b1_ + C\+_e_}. \]
+\newpoint{}$C_1$和$C\+_b2_$会构成两个转折频率. 较大者为下限频率.
+\[ f\+_L1_ = \rec{2\pi C_1\pare{R\+_s_ + r\+_be_}},\quad f\+_L2_ = \rec{2\pi C\+_b2_\pare{R\+_c_ + R\+_L_}}. \]
+
+% subsubsection 低频限制 (end)
+
+\subsubsection{多极放大电路的频率响应} % (fold)
+\label{ssub:多极放大电路的频率响应}
+
+\newpoint{}每一级增益都是频率的函数.
+\newpoint{}前一级的开路电压是下一级的信号源电压.
+\newpoint{}前一级的输出阻抗是下一级的信号源阻抗.
+\newpoint{}下一级的输入阻抗是前一级的负载.
+\newpoint{}多级放大电路的通频带比其任何一级都窄.
+\newpoint{}当两级增益的频带均相同, 但级的上下限频率处的增益为$0.707^2 = 0.5$. 故两级带宽小于单级带宽.
+
+% subsubsection 多极放大电路的频率响应 (end)
+
+% subsection 放大电路的频率响应 (end)
+
+% section 双极结型三极管 (end)
+
+\end{document}

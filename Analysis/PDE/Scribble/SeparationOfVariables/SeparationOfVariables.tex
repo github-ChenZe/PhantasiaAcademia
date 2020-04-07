@@ -1,0 +1,156 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\begin{document}
+
+\begin{multicols*}{3}[\centerline{\titlefont 第二章总结}]
+\raggedcolumns%
+\newheader{混合边界条件}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{方程} && X'' = -\omega^2 X,\quad 0 \le x \le l && \\
+        & \mathitem{条件} && X\pare{0} = 0,\quad \left.\pare{\+DxDx + hX}\right\vert_{x=l} = 0 && \\
+        & \mathitem{解} && X = \sin \omega_n x,\quad \tan \omega_n l = -\frac{\omega_n}{h} &&\\
+        & \mathitem{归一化} && \norm{X_n}^2 = \half \brac{l + \frac{h}{h^2 + \omega_n^2}} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{倍角公式} && \sin 2t = \frac{2\tan t}{1+\tan^2 t} \mathcomment{归一化时用到} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{非齐次方程\wdiv 观察法}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{方程} && \laplacian_2 u = 1 && \\
+        & \mathitem{边界} && u\vert_{r=1} = \cdots,\quad u\vert_{r=2} = \cdots \\
+        & \mathitem{代换} && u = v + \frac{r^2}{4} && \\
+        & \mathitem{新方程} && \laplacian_2 v = 0 &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{非齐次方程\wdiv Fourier}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{方程} && u_t = a^2u_{xx} + A\pare{1-\frac{x}{l}}e^{-ht},\quad t>0 && \\
+        & \mathitem{边界} && u\pare{t,0} = u\pare{t,l} = 0 \\
+        & && u\pare{0,x} = 0 && \\
+        & \mathitem{展开} && u\pare{t,x} = \sum_{n=1}^\infty A_n\pare{t}\sin \frac{n\pi x}{l} && \\
+        & && A\pare{1-\frac{x}{l}}e^{-ht} = e^{-ht}\sum_{n=1}^\infty B_n \sin\frac{n\pi x}{l} && \\
+        & \mathitem{代回} && A'_n\pare{t} + \pare{\frac{an\pi}{l}}^2A_n\pare{t} = e^{-ht}B_n && \\
+        & && A_n\pare{0} = 0 \mathcomment{可求解$A_n$} &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{非齐次方程\wdiv Duhamuel}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{方程} && u_t = a^2u_{xx} + A\pare{1-\frac{x}{l}}e^{-ht},\quad t>0 && \\
+        & \mathitem{边界} && u\pare{t,0} = u\pare{t,l} = 0 \\
+        & && u\pare{0,x} = 0 && \\
+        & \mathitem{新方程} && w = a^2w_{xx},\quad t>\tau && \\
+        & \mathitem{新边界} && w\pare{t,0;\tau} = w\pare{t,l;\tau} = 0 \\
+        & && w\pare{\tau,x;\tau} = A\pare{1-\frac{x}{l}}e^{-h\tau} \\
+        & \mathitem{代回} && u\pare{t,x} = \int_{0}^t w\pare{t,x;\tau} \,\rd{\tau}
+    \end{flalign*}
+\end{cheatresume}
+\newheader{非齐次边界\wdiv 观察法}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{方程} && u_{tt} = a^2u_{xx},\quad t>0 && \\
+        & \mathitem{边界} && u_x\pare{t,0} = 1,\quad u\pare{t,1} = 0 \\
+        & && u\pare{0,x} = 0,\quad u_t{0,x} = 0 && \\
+        & \mathitem{代换} && u = v + \pare{x-1} && \\
+        & \mathitem{新边界} && v_x\pare{t,0} = 0,\quad v\pare{t,1} = 0 \\
+        & && v\pare{0,x} = 1-x,\quad u_t{0,x} = 0 &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{Euler方程}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{形式} && x^2 \+d{x^2}d{^2y} + ax\+dxdy + by = 0 && \\
+        & \mathitem{换元} && t = \ln x,\quad \varphi\pare{t} = y\pare{x} && \\
+        & \mathitem{约化} && \+d{t^2}d{^2\varphi} + \pare{a-1}\+dtd\varphi + b\varphi = 0 &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{常用解}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \begin{array}{l}
+            \laplacian u = 0 \\
+            \mathcomment{极坐标}
+        \end{array} && \left\{ \begin{array}{c}
+            1 \\
+            \ln s
+        \end{array} \right\} + \sum_{n=1}^\infty \left\{ \begin{array}{c}
+            s^n \\
+            s^{-n}
+        \end{array} \right\}\left\{ \begin{array}{c}
+            \cos n\theta \\
+            \sin n\theta
+        \end{array} \right\} && \\ 
+        & \begin{array}{l}
+            u_t = a^2 u_{xx} \\
+            \mathcomment{齐次边界}
+        \end{array} && \sum_{n=0}^\infty e^{-\pare{a\omega_n}^2 t} \left\{ \begin{array}{c}
+            \cos \omega_n x \\
+            \sin \omega_n y
+        \end{array} \right\} && \\
+        & \begin{array}{l}
+            u_{tt} = a^2 u_{xx} \\
+            \mathcomment{齐次边界}
+        \end{array} && \sum_{n=0}^\infty \left\{ \begin{array}{c}
+            \cos a\omega_n t \\
+            \sin a\omega_n t
+        \end{array} \right\}\left\{ \begin{array}{c}
+            \cos \omega_n x \\
+            \sin \omega_n y
+        \end{array} \right\} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

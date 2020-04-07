@@ -1,0 +1,123 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{2.1 (1)}%
+室温$\displaystyle T=\SI{300}{\kelvin}$下$\displaystyle E_k = \frac{3}{2} kT = \SI{38.8}{\milli\eV}.$\\
+$\displaystyle \lambda\+_e_ = \frac{hc}{\sqrt{2mc^2E}} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\sqrt{2\times \SI{0.511}{\mega\eV}\times \SI{38.8}{\milli\eV}}} = \boxed{\SI{6.23}{\nano\meter}.}$\\
+$\displaystyle \lambda\+_n_ = \frac{hc}{\sqrt{2mc^2E}} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\sqrt{2\times \SI{939.6}{\mega\eV}\times \SI{38.8}{\milli\eV}}} = \boxed{\SI{0.145}{\nano\meter}.}$\\
+$\displaystyle \lambda\+_He_ = \frac{hc}{\sqrt{2mc^2E}} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\sqrt{2\times 4\times \SI{931.5}{\mega\eV}\times \SI{38.8}{\milli\eV}}} = \boxed{\SI{0.0729}{\nano\meter}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle E_\gamma = \frac{hc}{\lambda} = \frac{\SI{1240}{\nano\meter\eV}}{\SI{0.1}{\nano\meter}} = \boxed{\SI{12.4}{\kilo\eV}.}$\\
+$\displaystyle E\+_e_ = \frac{\pare{hc}^2/\lambda^2}{2mc^2} = \frac{\pare{\SI{1240}{\nano\meter\eV}}^2/\pare{\SI{0.1}{\nano\meter}}^2}{2\times \SI{0.511}{\mega\eV}} = \boxed{\SI{150.5}{\eV}.}$\\
+$\displaystyle E\+_n_ = \frac{\pare{hc}^2/\lambda^2}{2mc^2} = \frac{\pare{\SI{1240}{\nano\meter\eV}}^2/\pare{\SI{0.1}{\nano\meter}}^2}{2\times \SI{939.6}{\mega\eV}} = \boxed{\SI{0.0818}{\eV}.}$\\
+$\displaystyle E\+_He_ = \frac{\pare{hc}^2/\lambda^2}{2mc^2} = \frac{\pare{\SI{1240}{\nano\meter\eV}}^2/\pare{\SI{0.1}{\nano\meter}}^2}{2\times 4\times  \SI{931.5}{\mega\eV}} = \boxed{\SI{0.0206}{\eV}.}$
+\newprob{2.2 (1)}%
+$\displaystyle \lambda\+_e_ = \frac{hc}{\sqrt{2mc^2E}} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\sqrt{2\times \SI{0.511}{\mega\eV}\times \SI{10}{\kilo\eV}}} = \boxed{\SI{0.0123}{\nano\meter}.}$\\
+$\displaystyle \lambda\+_p_ = \frac{hc}{\sqrt{2mc^2E}} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\sqrt{2\times \SI{938.3}{\mega\eV}\times \SI{10}{\kilo\eV}}} = \boxed{\SI{2.86e-4}{\nano\meter}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \lambda = \frac{h}{p} = \frac{h}{eBR} = \boxed{\SI{0.180}{\nano\meter}.}$
+\par
+\newprobheader{(3)}%
+$\SI{50}{\giga\eV}\gg \SI{0.511}{\mega\volt}$, $\displaystyle \displaystyle \lambda\+_e_ \approx \frac{hc}{E} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\SI{50}{\giga\eV}} = \boxed{\SI{0.025}{\femto\meter}.}$
+\newprob{2.3}%
+$d\sin\theta = n\lambda$, 当$n\ge 2$时$d>2\lambda$. $d = \SI{0.215}{\nano\meter}$, $T=\SI{54}{\eV}$时$\lambda = \SI{0.167}{\nano\meter}$, 故不会有更高级的衍射.\\
+$\displaystyle \lambda = \half d\sin\theta = \half\times \SI{0.215}{\nano\meter} \times \sin\SI{50}{\degree} = \SI{0.08235}{\nano\meter}.$\\
+$\displaystyle E\+_e_ = \frac{\pare{hc}^2/\lambda^2}{2mc^2} = \frac{\pare{\SI{1240}{\nano\meter\eV}}^2/\pare{\SI{0.08235}{\nano\meter}}^2}{2\times \SI{0.511}{\mega\eV}} = \SI{222}{\eV}.$ 故加速电压$\boxed{\SI{222}{\volt}.}$
+\newprob{2.4}%
+$\displaystyle \lambda\+_e_ = \frac{hc}{\sqrt{2mc^2E}} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\sqrt{2\times \SI{0.511}{\mega\eV}\times \SI{10}{\kilo\eV}}} = \SI{0.0123}{\nano\meter}.$\\
+$\displaystyle \lambda_\gamma = \frac{hc}{E} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\SI{10}{\kilo\eV}} = \SI{0.124}{\nano\meter}.$\\[1em]
+\centerline{
+\begin{tabular}{c|c|c}
+    & 一级 & 二级 \\
+    \hline
+    电子 & $\displaystyle \sin\theta = \frac{n\lambda}{2d} = \frac{0.0392}{2},\quad \pi - 2\theta = \boxed{\SI{177.75}{\degree}.}$ & $\displaystyle \sin\theta = \frac{n\lambda}{d} = \frac{0.0783}{2},\quad \pi - 2\theta = \boxed{\SI{175.51}{\degree}.}$ \\[1em]
+    光子 & $\displaystyle \sin\theta = \frac{n\lambda}{2d} = \frac{0.395}{2},\quad \pi - 2\theta = \boxed{\SI{157.22}{\degree}.}$ & $\displaystyle \sin\theta = \frac{n\lambda}{2d} = \frac{0.790}{2},\quad \pi - 2\theta = \boxed{\SI{133.45}{\degree}.}$
+\end{tabular}
+}
+\newprob{2.5}%
+取$T=\SI{0.025}{\eV}$, $\displaystyle \lambda\+_n_ = \frac{hc}{\sqrt{2mc^2E}} = \frac{\SI{1240}{\nano\meter\cdot\eV}}{\sqrt{2\times \SI{939.6}{\mega\eV}\times \SI{25}{\milli\eV}}} = \SI{0.181}{\nano\meter}$,\\
+$\displaystyle d = \frac{n \lambda}{2\sin\theta} = \frac{\SI{0.181}{\nano\meter}}{2\times 0.5} = \boxed{\SI{0.181}{\nano\meter}.}$
+\newprob{2.6}%
+$\displaystyle \lambda\+_p_ = \displaystyle \lambda\+_n_ = \frac{h}{mv} = \SI{0.990}{\nano\meter}.$\\
+$\displaystyle d = \frac{\lambda D}{x} = \frac{\SI{0.990}{\nano\meter}\times \SI{5}{\meter}}{\SI{2e-4}{\meter}} = \boxed{\SI{24.75}{\micro\meter}.}$
+\newprob{2.9 (1)}%
+$\displaystyle E = \frac{p^2}{2\mu} - \frac{Ze^2}{4\pi\epsilon_0 r}$. 设$\Delta r \sim r$, $\Delta p \sim p$, 不确定关系$r\cdot p = \hbar$.\\
+代入得$\displaystyle E = \frac{p^2}{2\mu} - \frac{Ze^2p}{4\pi\epsilon_0 \hbar}$. 最小值为$\displaystyle \boxed{E\+_min_ = -\frac{Z^2\mu e^4}{2\cdot \pare{4\pi\epsilon_0}^2\hbar^2}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle E = \sqrt{p^2c^2 + \mu^2c^4} - \frac{Ze^2}{4\pi\epsilon_0 r}$. 设$\Delta r \sim r$, $\Delta p \sim p$, 不确定关系$r\cdot p = \hbar$.\\
+代入得$\displaystyle E = \sqrt{p^2c^2 + \mu^2c^4} - \frac{Ze^2 p}{4\pi\epsilon_0 \hbar}$. 为了求出最小值, 设$\displaystyle p=\mu c \sinh q$, 则
+\[ E = \mu c^2 \cosh q - \pare{\frac{Ze^2}{4\pi\epsilon_0 \hbar}}\mu c\sinh q \Rightarrow \boxed{E\+_min_ = \sqrt{\pare{\mu c^2}^2 - \pare{\frac{Ze^2}{4\pi\epsilon_0 \hbar}}^2\mu^2c^2}.} \]
+若扣除静能, 则
+\[ {E'\+_min_ = \mu c^2 \brac{\sqrt{1 - \pare{\frac{Ze^2}{4\pi\epsilon_0 \hbar c}}^2}-1}.} \]
+特别地, 当$Z$足够小时, 近似有
+\[ E'\+_min_ = \mu c^2 \pare{-\half}\cdot \pare{\frac{Ze^2}{4\pi\epsilon_0 \hbar c}}^2 = -\frac{\mu}{2}\pare{\frac{Ze^2}{4\pi\epsilon_0 \hbar}}^2. \]
+这正是(1)的结果. 当$\displaystyle Z > \frac{4\pi\epsilon_0 c_0}{e^2} = \rec{\alpha} \approx 137$, 根式无意义, 故上述公式并非对所有$Z$皆成立.
+\par
+\newprobheader{(3)}%
+入射后粒子的动量减小为满足$\displaystyle p'^2 = p_0^2 - 2mV_0$. 设$\pare{\Delta p'}^2 = 2mV_0$, $\Delta x'$为贯穿深度, 则
+\[ \Delta p' \Delta x' \sim \hbar \Rightarrow \Delta x' \sim \boxed{\frac{\hbar}{\sqrt{2mV_0}}.} \]
+\newprob{2.11}%
+记$L=\SI{1}{\meter}$是两条缝之间的距离, 则有不确定关系$\displaystyle p \sin \theta_0 \sim \frac{h}{d}$. 为了达到最佳准直, 须$\sin \theta_0 \sim \frac{d}{2L}$, 相应的
+\[ d = \sqrt{\frac{2Lh}{p}} = \sqrt{\frac{2Lh}{\sqrt{2m_e e}}} = \boxed{\SI{4.95e-5}{\meter}.} \]
+\newprob{2.12 (1)}%
+$\displaystyle E_n \propto n^2\Rightarrow E_2 = 4E_1 = 4\times \SI{38}{\eV} = \boxed{\SI{152}{\eV}.}$
+\par
+\newprobheader{(2)}%
+设电子有动量$p$, 则$\displaystyle F = \frac{2p}{T} = \frac{4mv}{2a/v} = \frac{2E}{a} = \boxed{\SI{1.22e-7}{\newton}.}$
+\newprob{2.13 (1)}%
+势阱中$\displaystyle -\frac{\hbar^2}{2m}\laplacian \Psi = E\Psi$, 设$\Psi\pare{x,y,z} = X\pare{x}Y\pare{z}Z\pare{z}$, 分离变量后
+\[ X'' = -\lambda^2 X,\quad Y'' = -\mu^2 Y,\quad Z'' = -\nu^2 Z,\quad E = \frac{\hbar^2}{2m}\pare{\lambda^2 + \mu^2 + \nu^2}. \]
+边界条件要求$X\pare{0} = X\pare{a} = 0$, $Y\pare{0} = Y\pare{b} = 0$, $Z\pare{0} = Z\pare{c} = 0$. 从而
+\[ X = \sqrt{\frac{2}{a}}\sin \frac{l\pi x}{a},\quad Y = \sqrt{\frac{2}{b}}\sin \frac{m\pi y}{b},\quad Z = \sqrt{\frac{2}{c}}\sin \frac{n\pi z}{c},\quad l,m,n\in \+bN_+. \]
+\makebox[0pt][l]{故波函数为}
+\centerline{$\displaystyle \boxed{\Psi_{l,m,n}\pare{x,y,z} = \sqrt{\frac{8}{abc}}\sin \frac{l\pi x}{a}\sin \frac{m\pi y}{b}\sin \frac{n\pi z}{c}.}$}\\
+\makebox[0pt][l]{对应的能量}
+\centerline{$\displaystyle \boxed{E_{l,m,n} = \frac{\hbar^2 \pi^2}{2m}\brac{\pare{\frac{l}{a}}^2 + \pare{\frac{m}{b}}^2 + \pare{\frac{n}{c}}^2}.}$}
+\par
+\newprobheader{(2)}%
+$a=b=c$时, $\displaystyle E_{2,1,1} - E_{1,1,1} = \frac{\hbar^2 \pi^2}{2ma^2}\times 3 = \boxed{\SI{28.2}{\eV}.}$
+\newprob{2.14}%
+$x<0$时$\Psi\pare{x} = 0$,\\
+$0\le x \le a$时有$\displaystyle -\frac{\hbar^2}{2m}\+d{x^2}d{^2}\Psi = E\Psi$, $\Psi\pare{0} = 0$, 从而$\displaystyle \Psi\pare{x} = A \sin \pare{\frac{\sqrt{2mE}}{\hbar} x}$.\\
+$x>a$时有$\displaystyle -\frac{\hbar^2}{2m}\+d{x^2}d{^2}\Psi = \pare{E-V_0}\Psi$, 束缚态$E-V_0<0$, 有物理意义的解为$\displaystyle \Psi\pare{x} = B \exp\pare{-\frac{\sqrt{2m\pare{V_0-E}}}{\hbar}x}$. 连续性条件要求
+\begin{align*}
+    & \Psi\pare{a^-} = \Psi\pare{a^+} \Rightarrow A \sin \pare{\frac{\sqrt{2mE}}{\hbar} a} = B \exp\pare{-\frac{\sqrt{2m\pare{V_0-E}}}{\hbar}a}, \\
+    & \Psi'\pare{a^-} = \Psi'\pare{a^+} \Rightarrow\\& A\cdot \frac{\sqrt{2mE}}{\hbar} \cos \pare{\frac{\sqrt{2mE}}{\hbar} a} = B\cdot\pare{-\frac{\sqrt{2m\pare{V_0-E}}}{\hbar}} \exp\pare{-\frac{\sqrt{2m\pare{V_0-E}}}{\hbar}a},\\
+    &\xLongrightarrow{\text{相除}} \tan \pare{\frac{\sqrt{2mE}}{\hbar} a} = -\sqrt{\frac{E}{V_0 - E}}.
+\end{align*}
+基态波函数如右.
+\begin{tikzpicture}[baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+    \draw[->] (-3,0) -- (6.2,0);
+    \draw[->] (0,-1) -- (0,1.2);
+    \draw[domain=0:0.75*pi] plot function{sin(x)};
+    \draw[domain=0.75*pi:6] plot function{sqrt(2)/2*exp(-(x-0.75*pi))};
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,158 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paper=a4paper,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\definecolor{graybg}{RGB}{241,243,245}
+\definecolor{titlepurple}{RGB}{116,95,181}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{170,170,170}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+
+\setlength{\parindent}{0pt}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\mathitem{\quad \texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\begin{document}
+
+\begin{multicols*}{3}\raggedcolumns
+
+\newheader{狭义相对论}
+\begin{cheatresume}
+    \begin{flalign*}
+        &\mathitem{Lorentz因子} && \gamma = \rec{\sqrt{1-v^2}} && \\
+        &\mathitem{Lorentz变换} && \color{itemgray}\left\{\color{mathnormalblack}\begin{aligned}
+            t' &= \gamma t - \gamma vx, \\
+            x' &= -\gamma vt + \gamma x, \\
+            y' &= y, \\
+            z' &= z
+        \end{aligned}\right. && \\
+        &\mathitem{速度叠加} && w = \frac{u+v}{1+uv} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{四维矢量}
+\begin{cheatresume}
+    \begin{flalign*}
+        &\mathitem{四维矢量变换} && v^{\alpha'} = \tensor{\Lambda}{^{\alpha'}_\beta} v^\beta && \\
+        &\mathitem{四维基变换} && \vec{e}_\alpha = \tensor{\Lambda}{^{\beta'}_\alpha} \vec{e}_{\beta'} && \\
+        &\mathitem{逆变换} && \tensor{\Lambda}{^\nu_{\beta'}}\pare{-\+vv}\tensor{\Lambda}{^{\beta'}_\alpha}\pare{\+vv} = \tensor{\delta}{^\nu_\alpha} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        &\mathitem{四维速度} && \vec{U} = \+d{\tau}d{\vec{x}} && \\
+        & && \phantom{\vec{U}} = \vec{e}_{0'}\mathcomment{静止参考系} \\
+        &\mathitem{四维动量} && \vec{p} = m\vec{U} && \\
+        &\mathitem{能量} && -\vec{p}\cdot \vec{U}\+_obs_ = E' &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        &\mathitem{度规张量} && g_{\alpha\beta} = \vec{e}_\alpha\cdot\vec{e}_\beta && \\
+        &\mathitem{标量积} && \vec{A}\cdot \vec{B} = g_{\alpha\beta}A^\alpha B^\beta
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{协变导数}
+\begin{cheatresume}
+    \begin{flalign*}
+        &\mathitem{协变导数} && \tensor{V}{^\alpha_{;\beta}} = \tensor{V}{^\alpha_{;\beta}} + V^\mu \tensor{\Gamma}{^\alpha_{\mu\beta}} && \\
+        & && \tensor{V}{_\alpha_{;\beta}} = \tensor{V}{_\alpha_{;\beta}} - V_\mu \tensor{\Gamma}{^\mu_{\alpha\beta}} && \\
+        &\mathitem{协变散度} && \tensor{V}{^\alpha_{;\alpha}} = -\rec{\sqrt{-g}}\pare{\sqrt{-g}V^\alpha}_{,\alpha} \\
+        &\mathitem{联络系数} && \tensor{\Gamma}{^\gamma_{\beta\mu}} = \half g^{\alpha\gamma}\pare{g_{\alpha\beta,\mu} + g_{\alpha\mu,\beta} - g_{\beta\mu,\alpha}} \\
+        & && \tensor{\Gamma}{^\alpha_{\mu\alpha}} = \pare{\sqrt{-g}}_{,\mu}/\sqrt{-g}
+    \end{flalign*}
+\end{cheatresume}
+\newheader{测地线}
+\begin{cheatresume}
+    \begin{flalign*}
+        &\mathitem{测地线方程} && \+d{\lambda}d{}\pare{\+d\lambda d{x^\alpha}} + \tensor{\Gamma}{^\alpha_{\mu\beta}}\+d\lambda d{x^\mu}\+d{\lambda}d{x^\beta} = 0 &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{曲率张量}
+\begin{cheatresume}
+    \begin{flalign*}
+        &\mathitem{曲率张量} && \tensor{R}{^\alpha_{\beta\nu\mu}} = \tensor{\Gamma}{^\alpha_{\beta\nu,\mu}} - \tensor{\Gamma}{^\alpha_{\beta\mu,\nu}} && \\
+        & && \phantom{\tensor{R}{^\alpha_{\beta\nu\mu}} = } + \tensor{\Gamma}{^\alpha_{\sigma\mu}}\tensor{\Gamma}{^\sigma_{\beta\nu}} - \tensor{\Gamma}{^\alpha_{\sigma\nu}}\tensor{\Gamma}{^\sigma_{\beta\mu}} \\
+        & && \tensor{R}{_{\alpha\beta\nu\mu}} = \half\pare{g_{\alpha\nu,\beta\mu} - g_{\alpha\mu,\beta\nu} + g_{\beta\mu,\alpha\nu} - g_{\beta\nu,\alpha\mu}} && \\
+        & \mathitem{对称性} && R_{\alpha\beta\mu\nu} = -R_{\beta\alpha\mu\nu} = -R_{\alpha\beta\nu\mu} = R_{\mu\nu\alpha\beta} && \\
+        & && R_{\alpha\beta\mu\nu} + R_{\alpha\nu\beta\mu} + R_{\alpha\mu\nu\beta} = 0 && \\
+        & \mathitem{Bianchi} && R_{\alpha\beta\mu\nu;\lambda} + R_{\alpha\beta\lambda\mu;\nu} + R_{\alpha\beta\nu\lambda;\mu} = 0 &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        &\mathitem{Ricci张量} && R_{\alpha\beta} = \tensor{R}{^\mu_{\sigma\mu\beta}} = R_{\beta\alpha} && \\
+        &\mathitem{Ricci标量} && R = g^{\mu\nu}R_{\mu\nu} &&    
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        &\mathitem{导数交换} && \brac{\grad_\alpha,\grad_\beta} V^{\mu} = \tensor{R}{^\mu_{\nu\alpha\beta}}V^\nu && \\
+        &\mathitem{测地导数} && \grad_V\grad_V \xi^\alpha = \tensor{R}{^\alpha_{\mu\nu\beta}}V^\mu V^\nu \xi^\beta &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{Einstein场方程}
+\begin{cheatresume}
+    \begin{flalign*}
+        &\mathitem{Einstein张量} && G^{\alpha\beta} = R^{\alpha\beta} - \half g^{\alpha\beta}R && \\
+        &\mathitem{无源性} && \tensor{G}{^{\alpha\beta}_{;\beta}} = 0 && \\
+        &\mathitem{场方程} && G^{\alpha\beta} + \Lambda g^{\alpha\beta} = 8\pi T^{\alpha\beta}
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        &\mathitem{弱场方程} && \Box \conj{h}^{\mu\nu} = -16\pi T^{\mu\nu} && \\
+        & && \conj{h}^{\alpha\beta} = h^{\alpha\beta} - \half \eta^{\alpha\beta}h,\quad h = \tensor{h}{^\alpha_\alpha} \\
+        & && g_{\alpha\beta} = \eta_{\alpha\beta}h_{\alpha\beta}
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        &\mathitem{测地线} && m\+d\tau d{p_\beta} = \half g_{\nu\alpha,\beta}p^\nu p^\alpha &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{度规}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{近似平直} && \color{itemgray}\left\{\color{mathnormalblack}\begin{aligned}
+            g_{tt} &= -\pare{1+2\phi}\\
+            g_{xx} &= g_{yy} = g_{zz} = 1-2\phi
+        \end{aligned}\right. && \\
+        & \mathitem{Schwarzschild} && \color{itemgray}\left\{\color{mathnormalblack}\begin{aligned}
+            g_{tt} &= -\pare{1-\frac{2M}{r}} \\
+            g_{rr} &= \pare{1-\frac{2M}{r}}^{-1} \\
+            g_{\Omega\Omega} &= r^2
+        \end{aligned}\right. && \\
+        & \mathitem{Robertson-Walker} && \color{itemgray}\left\{\color{mathnormalblack}\begin{aligned}
+            g_{tt} &= -1 \\
+            g_{rr} &= \frac{R^2\pare{t}}{1-kr^2} \\
+            g_{\theta\theta} &= R^2\pare{t}r^2 \\
+            g_{\phi\phi} &= R^2\pare{t}r^2\sin^2\theta
+        \end{aligned}\right. &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

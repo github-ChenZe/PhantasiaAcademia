@@ -1,0 +1,91 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{I (1)}$\displaystyle \lambda\+_m_ = \frac{\SI{2.898e-3}{\meter\kelvin}}{\SI{310}{\kelvin}} = \boxed{\SI{9.35}{\micro\meter}.}$
+\par
+\newprobheader{(2)}$\displaystyle R = \sigma T^4 = \SI{5.6703e-8}{}\times 310^4 = \boxed{\SI{523.7}{\watt\per\square\meter}.}$
+\par
+\newprobheader{(3)}$\displaystyle P = AR = 1.8\times 523.7 = \boxed{\SI{942.6}{\watt}.}$
+\newprob{II (1)}%
+$\displaystyle \phi = \frac{hc}{\lambda_0} = \frac{\SI{1.24}{\nano\meter\kilo\volt}}{\SI{558}{\nano\meter}} = \boxed{\SI{2.22}{\eV}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle eV_0 = \frac{hc}{\lambda_1} - \frac{hc}{\lambda_0} = 3.1 - 2.22 = \SI{0.88}{\eV} \Rightarrow  V_0 = \boxed{\SI{0.88}{\volt}.}$
+\newprob{III}%
+由$\lambda_S - \lambda_0 = \lambda_C\pare{1-\cos\varphi}$知$\varphi = \SI{180}{\degree}$时电子获得最大能量
+\[ E\+_m_ = \frac{hc}{\lambda_0} - \frac{hc}{\lambda_0 + 2\lambda_C}. \]
+\par
+\newprobheader{(1)}%
+X射线入射, $\displaystyle E\+_m_ = \frac{\SI{1.24}{\nano\meter\kilo\volt}}{\SI{0.05}{\nano\meter}} - \frac{\SI{1.24}{\nano\meter\kilo\volt}}{\SI{0.05486}{\nano\meter}} = \boxed{\SI{2.20}{\kilo\eV}.}$
+\par
+\newprobheader{(2)}%
+可见光入射, $\displaystyle E\+_m_ = \frac{\SI{1.24}{\nano\meter\kilo\volt}}{\SI{500}{\nano\meter}} - \frac{\SI{1.24}{\nano\meter\kilo\volt}}{\SI{500.00486}{\nano\meter}} = \boxed{\SI{24.1}{\micro\eV}.}$
+\vskip1em\relax
+因此需要用高频电磁波才能使散射后的电子有可观的能量.
+\newprob{1.11}%
+$\displaystyle E_1 = \SI{13.6}{\eV}$, $\displaystyle \lambda = \frac{hc}{E} = \frac{\SI{1.24}{\nano\meter\kilo\eV}}{E}$,\\[1em]
+\centerline{
+\begin{tabular}{ccc}
+    & 最短 & 最长 \\
+    \hline
+\+:r4{Lyman} & \+:r2{$\displaystyle E = E_1 = \SI{13.6}{\eV}$} & \+:r2{$\displaystyle E = E_1\pare{1-\rec{2^2}} = \SI{10.2}{\eV}$} \\
+    &   &   \\
+    & $\displaystyle \lambda = \frac{1.24\times 10^3}{13.6} = \boxed{\SI{91.2}{\nano\meter} \in \text{紫外}.}$  & $\displaystyle \lambda = \frac{1.24\times 10^3}{10.2} = \boxed{\SI{121.6}{\nano\meter} \in \text{紫外}.}$ \\
+    & & \\
+    \hline
+\+:r4{Balmer} & \+:r2{$\displaystyle E = E_1\cdot\rec{2^2} = \SI{3.4}{\eV}$} & \+:r2{$\displaystyle E = E_1\pare{\rec{2^2}-\rec{3^2}} = \SI{1.89}{\eV}$} \\
+    &   &   \\
+    & $\displaystyle \lambda = \frac{1.24\times 10^3}{3.4} = \boxed{\SI{364.7}{\nano\meter} \in \text{紫外}.}$  & $\displaystyle \lambda = \frac{1.24\times 10^3}{1.89} = \boxed{\SI{656.5}{\nano\meter} \in \text{可见}.}$ \\
+    & & \\
+    \hline
+\+:r4{Paschen} & \+:r2{$\displaystyle E = E_1\cdot\rec{3^2} = \SI{1.51}{\eV}$} & \+:r2{$\displaystyle E = E_1\pare{\rec{3^2}-\rec{4^2}} = \SI{0.661}{\eV}$} \\
+    &   &   \\
+    & $\displaystyle \lambda = \frac{1.24\times 10^3}{1.51} = \boxed{\SI{820.6}{\nano\meter} \in \text{红外}.}$  & $\displaystyle \lambda = \frac{1.24\times 10^3}{0.661} = \boxed{\SI{1875.6}{\nano\meter} \in \text{红外}.}$ \\
+    & & \\
+    \hline
+\end{tabular}
+}
+\newprob{1.12}%
+$E\+_ion_^{\pare{\ce{He}}} = Z^2 E\+_ion_^{\pare{\ce{H}}} = 4\times 13.6 = \boxed{\SI{54.4}{\eV}.}$\\
+$\displaystyle E\+_1\rightarrow 2_^{\pare{\ce{He}}} = E\+_ion_^{\pare{\ce{He}}} \pare{1-\rec{2^2}} = \boxed{\SI{40.8}{\eV}.}$\\
+$\displaystyle E\+_1\rightarrow 3_^{\pare{\ce{He}}} = E\+_ion_^{\pare{\ce{He}}} \pare{1-\rec{3^2}} = \boxed{\SI{48.4}{\eV}.}$\\
+$\displaystyle \lambda\+_1\rightarrow 2_^{\pare{\ce{He}}} = \frac{hc}{E\+_1\rightarrow 2_^{\pare{\ce{He}}}} = \boxed{\SI{30.4}{\nano\meter}.}$\\
+$\displaystyle \lambda\+_2\rightarrow \infty_^{\pare{\ce{He}}} = \frac{hc}{E\+_2\rightarrow \infty_^{\pare{\ce{He}}}} = \boxed{\SI{91.2}{\nano\meter}.}$\\
+$\displaystyle r_1^{\pare{\ce{He}}} = \frac{r_1^{\pare{\ce{H}}}}{Z} = \frac{a_0}{2} = \boxed{\SI{0.265}{\angstrom}.}$
+\newprob{1.13 (1)}%
+氢原子的\ce{H_{$\alpha$}}线源于$3\rightarrow 2$的跃迁, 而从而 \ce{He+}的光谱中与该谱线接近者满足
+\[ R\+_H_\pare{\rec{2^2} - \rec{3^2}} \approx Z^2 R\+_H_\pare{\rec{m^2} - \rec{n^2}},\quad Z = 2. \]
+容易发现$m=4$, $n=6$, 从而该谱线对应$\boxed{6\rightarrow 4}$的跃迁.
+\par
+\newprobheader{(2)}%
+$\displaystyle R\+_\ce{He+}_ = \frac{m_\mu^{\pare{\ce{He+}}}}{m_e} R_\infty = \frac{m_\mu^{\pare{\ce{He+}}}}{m_e}\cdot \frac{m_e}{m_\mu^{\pare{\ce{H}}}} R\+_H_ = \frac{1+m_e/m\+_\ce{H+}_}{1+m_e/m\+_\ce{He++}_} \cdot R_H$ \\
+$\displaystyle = \frac{1+0.511/938.272}{1+0.511/3726.356}R_H = \boxed{\SI{1.0972227e7}{\per\meter}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle R' = R_\infty = \frac{m_e}{m_\mu^{\pare{\ce{H}}}} R\+_H_ = \pare{1+0.511/938.272}R_H = \boxed{\SI{1.0973731e7}{\per\meter}.}$
+
+\end{document}

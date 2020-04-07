@@ -1,0 +1,195 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{量子力学导论} % (fold)
+\label{sec:量子力学导论}
+
+\subsection{波粒二象性} % (fold)
+\label{sub:波粒二象性}
+
+对于立方晶格, 若晶格常数为$a$, 相邻Bragg面的间距为$d=a \sin \alpha$, 则散射的干涉极大要求
+\[ n\lambda = a\sin\theta,\quad \theta = 2\alpha. \]
+若入射波为粒子, 则$\lambda$取相应的de Broglie波长
+\[ \lambda = \frac{h}{p} = \frac{hc}{\sqrt{2mc^2 E_k}}. \]
+若将de Broglie关系用于氢原子, 则$\displaystyle \lambda = \frac{h}{mv}$对应的波须在转动$2\pi$后重合,
+\[ 2\pi r = n\frac{h}{mv} \Rightarrow mvr = n\frac{h}{2\pi} \Rightarrow L = n\hbar. \]
+在一维势阱中运动的粒子, 则满足
+\[ n\frac{\lambda}{2} = d, \]
+$d$为势阱的宽度. 相应的
+\[ p = \frac{nh}{2d},\quad E_k = \frac{n^2\pi^2\hbar^2}{2md^2}. \]
+考虑到势阱内一个周期的长度为$2d$, 对应到氢原子有$2d = 2\pi r$,  则氢原子相应的
+\[ E_k = \frac{\hbar^2}{2mr^2},\quad E = \frac{\hbar^2}{2mr^2} - \frac{e^2}{4\pi\epsilon_0 r}. \]
+能量最小的半径为
+\[ a_1 = \frac{4\pi\epsilon_0\hbar^2}{me^2},\quad E = -\frac{me^4}{\pare{4\pi\epsilon_0}^2\cdot 2\hbar^2} = \SI{-13.6}{\eV}. \]
+
+% subsection 波粒二象性 (end)
+
+\subsection{不确定关系} % (fold)
+\label{sub:不确定关系}
+
+不确定性原理包括
+\[ \boxed{\Delta x \Delta p \ge \frac{\hbar}{2},\quad \Delta t \Delta E \ge \frac{\hbar}{2}.} \]
+后者表明若粒子在一个能量状态$E$停留$\Delta t$的时间, 则在此时间内粒子的能量状态并非完全确定, 而是有$\Delta E$的弥散.
+\par
+从$\Delta x \Delta \lambda \ge \lambda^2$出发, $\displaystyle \Delta\lambda = \frac{h}{p^2}\Delta p$, 则
+\[ \Delta x \Delta p \ge h. \]
+若从$\Delta t \Delta \nu \ge 1$出发, 使用$\nu = E/h$, 则可以得到
+\[ \Delta t \Delta E \ge h. \]
+从而近似导出不确定性原理.
+\begin{ex}
+    若原子中某激发态的寿命为$\Delta t = \SI{e-8}{\second}$, 相应的
+    \[ \Delta E \ge \frac{\hbar}{2\Delta t} = \SI{3.3e-8}{\eV}. \]
+\end{ex}
+从不确定性原理出发, 得到散射角度弥散
+\[ \pare{\Delta\theta}^2\+_min_ = \lambda \abs{\+dbd\theta}, \]
+对于Coulomb势, $\displaystyle b = \frac{a}{2}\cot \frac{\theta}{2}$, 在小角度处
+\[ \pare{\Delta\theta}^2\+_min_ < \theta \Rightarrow \kappa \frac{2\abs{Z_1Z_2}v_1}{v} > 1,\quad v_1 = \frac{e^2}{4\pi\epsilon \hbar}. \]
+此外, 考虑到核外电子屏蔽, 有效是能须改变. 导致
+\[ \theta < \frac{\lambda}{p} \]
+范围内经典的散射截面不适用.
+
+% subsection 不确定关系 (end)
+
+\subsection{波函数及其统计诠释} % (fold)
+\label{sub:波函数及其统计诠释}
+
+以$w_{if} = \abs{\braket{f}{i}}^2$标记从$i$态到$f$态跃迁的概率.
+\begin{cenum}
+    \item $\displaystyle \braket{f}{i} = \sum_n \braket{f}{i}_n$, 其中求和对所有可能发生跃迁的方式进行.
+    \item 若$f$标记若干可能末态之集合, 则$\displaystyle \abs{\braket{f}{i}}^2 = \sum_n \abs{\braket{f}{i}_n}^2$, 其中求和对所有可能的末态进行.
+    \item 若$i\rightarrow f$必定经过$v$, 则$\braket{f}{i} = \braket{f}{v}\braket{v}{i}$.
+    \item 二独立微观粒子分别跃迁$f\rightarrow i$和$F\rightarrow I$的概率为$\displaystyle \braket{fF}{iI} = \braket{f}{i} \braket{F}{I}$.
+\end{cenum}
+对于电子双缝干涉,
+\begin{cenum}
+    \item 只有缝$1$打开, $\braket{x}{S}_1 = \braket{x}{1}\braket{1}{S}$, $I_1\pare{x} = \abs{\braket{x}{S}_1}^2$.
+    \item 只有缝$2$打开, $\braket{x}{S}_2 = \braket{x}{2}\braket{2}{S}$, $I_2\pare{x} = \abs{\braket{x}{S}_2}^2$.
+    \item 两个缝都打开, $\braket{x}{S} = \braket{x}{1}\braket{1}{S} + \braket{x}{2}\braket{2}{S}$,
+    \[ I_{12}\pare{x} = \abs{\braket{x}{S}}^2 = I_1\pare{x} + I_2\pare{x} + 2 \Re \braket{x}{S}_1 \braket{x}{S}_2^*. \]
+    \item 开启光子源和光子探测器, 定义
+    \[ \braket{x}{1}\braket{1}{S} = \varphi_1,\quad \braket{x}{2}\braket{2}{S} = \varphi_2. \]
+    并设
+    \[ \braket{D_1}{1}\braket{1}{P} = \braket{D_2}{2}\braket{2}{P} = \psi_1,\quad \braket{D_2}{1}\braket{1}{P} = \braket{D_1}{2}\braket{2}{P} = \psi_2. \]
+    有
+    \[ \braket{xD_1}{SP} = \varphi_1\psi_1 + \varphi_2\psi_2,\quad \braket{xD_2}{SP} = \varphi_1\psi_2 + \varphi_2\psi_1. \]
+    叠加后
+    \[ \abs{\braket{x}{S}}^2 = \pare{\abs{\varphi_1}^2 + \abs{\varphi_2}^2}\pare{\abs{\psi_1}^2 + \abs{\psi_2}^2} + 4\Re\varphi_1\varphi_2^*\Re\psi_1\psi_2^*. \]
+    \begin{cenum}
+        \item 若光子和电子相互作用微弱, 则光子随机散射, $\varphi_2\neq 0$, 干涉存在.
+        \item 若光子和电子相互作用强, 则$\varphi_2 = 0$, 干涉消失.
+    \end{cenum}
+\end{cenum}
+
+% subsection 波函数及其统计诠释 (end)
+
+\subsection{\texorpdfstring{Schr\"odinger}{Schrodinger}方程} % (fold)
+\label{sub:schrodinger方程}
+
+波函数$\Psi$满足
+\[ \brac{-\frac{\hbar^2}{2m}\laplacian + V\pare{r}}\Psi\pare{\+vr,t} = i\hbar\+DtD{} \Psi\pare{\+vr,t}. \]
+能量和动量算符分别为
+\[ E = i\hbar\+DtD{},\quad \+vp = -i\hbar\grad. \]
+定态下, Schr\"odinger方程变为
+\[ \brac{-\frac{\hbar^2}{2m}\laplacian + V\pare{r}}\psi = E\psi. \]
+\begin{ex}
+    势能为$\displaystyle V\pare{x} = \begin{cases}
+        0, \quad x<x_1,\quad x>x_2,\\
+        V_0,\quad x_1<x<x_2,
+    \end{cases}$ 则相应的Schr\"odinger方程的解为
+    \[ \begin{cases}
+        \varphi\+_I_ = A_1\sin\pare{k_1x+\varphi_1},\\ \varphi\+_II_ = A_2e^{-k_2x} + B_2e^{k_2x},\\ \varphi\+_III_ = A_3\sin\pare{k_1x+\varphi_3}.
+    \end{cases} \]
+    可以得到穿透概率
+    \[ P = e^{-\frac{2}{\hbar}\sqrt{2m\pare{V_0-E}}\pare{x_2-x_1}}. \]
+\end{ex}
+\begin{ex}
+    一维谐振子的能级为
+    \[ E_n = \pare{n+\half}\hbar\omega,\quad n = 0,1,\cdots. \]
+    相应的波函数为
+    \[ \psi_n\pare{x} = \sqrt{\frac{\alpha}{2^nn!\sqrt{\pi}}}e^{-\alpha^2x^2/2}H_n\pare{y}. \]
+\end{ex}
+
+% subsection schrodinger方程 (end)
+
+\subsection{平均值与算符} % (fold)
+\label{sub:平均值与算符}
+
+能量, 动量, 角动量算符分别为
+\begin{align*}
+    E &= i\hbar\+DtD{},\quad \+up = -i\hbar\grad. \\
+    L_x &= \hat y \hat p_z - \hat z \hat p_y = -i\hbar\pare{y\+DzD{} - z\+DyD{}} = i\hbar\pare{\sin\phi\+D\theta D{} + \cot\theta\cos\phi\+D\phi D{}}, \\
+    L_y &= \hat z \hat p_x - \hat x \hat p_z = -i\hbar\pare{z\+DxD{} - x\+DzD{}} = -i\hbar\pare{\cos\phi\+D\theta D{} - \cot\theta\sin\phi\+D\phi D{}}, \\
+    L_y &= \hat x \hat p_y - \hat y \hat p_x = -i\hbar\pare{x\+DyD{} - y\+DxD{}} = -i\hbar\pare{\+D\phi D{}}, \\
+    \hat L^2 &= \hat L_x^2 + \hat L_y^2 + \hat L_z^2 = -\hbar^2\brac{\rec{\sin\theta}\+D\theta D{}\pare{\sin\theta\+D\theta D{}} + \rec{\sin^2\theta}\frac{\partial^2}{\partial\phi^2}}.
+\end{align*}
+相应的对易关系为
+\[ \brac{\hat x_i, \hat p_j} = i\hbar\delta_{ij},\quad \brac{\hat L_x,\hat L_y} = i\hbar\hat L_z,\quad \brac{\hat L^2, L_i} = 0. \]
+
+% subsection 平均值与算符 (end)
+
+\subsection{氢原子的波函数} % (fold)
+\label{sub:氢原子的波函数}
+
+对于一般中心势能, 引入约化质量$m_\mu$, Schr\"odinger方程写作
+\[ -\frac{\hbar^2}{2m_\mu}\brac{\rec{r^2}\+DrD{}r^2\+DrD{}}\psi + \frac{\hat L^2}{2m_\mu r^2}\psi + V\pare{r}\psi = E\psi. \]
+分离变量后, 对于常数$l$, 有
+\[ \hat L^2 Y\pare{\theta,\phi} = l\pare{l+1}\hbar^2 Y\pare{\theta,\phi}, \]
+以及
+\[ \brac{-\frac{\hbar^2}{2m_\mu r^2}\+drd{}\pare{r^2\+drd{}} + \frac{l\pare{l+1}\hbar^2}{2m_\mu r^2} + V\pare{r}}R\pare{r} = ER\pare{r}. \]
+得到
+\[ Y_{l,m}\pare{\theta,\phi} \propto P_l^{\abs{m}}\pare{\cos\theta}e^{im\phi},\quad L^2 = l\pare{l+1}\hbar^2,\quad L_z = m\hbar. \]
+而径向方程的解为
+\[ R_{n,l}\pare{r} \propto \exp\pare{-\frac{Zr}{na_1}}\pare{\frac{2Zr}{na_1}}^lL^{2l+1}_{n+1}\pare{\frac{2Zr}{na_1}}. \]
+
+% subsection 氢原子的波函数 (end)
+
+\subsection{Einstein \texorpdfstring{$A$}{A}, \texorpdfstring{$B$}{B}系数} % (fold)
+\label{sub:einsteintexorpdfstring_a_b系数}
+
+设$E_j > E_i$. 对于自发发射,
+\[ \+dtd{n_j} = -\+dtd{n_i} = -A_{ji}n_j. \]
+对于受激发射,
+\[ \+dtd{n_j} = -\+dtd{n_i} = -B_{ji}n_ju\pare{\nu_{ji},T}. \]
+其中$u$表示辐射场在单位频率内的能量密度. 对于吸收,
+\[ \+dtd{n_j} = -\+dtd{n_i} = C_{ij}n_iu\pare{\nu_{ji},T}. \]
+相加可得
+\[ -\+dtd{n_j} = \+dtd{n_i} = A_{ji}n_j + B{ji}n_j u - C_{ij}n_iu = P_E n_j - P_A n_i. \]
+其中
+\[ P_E = A_{ji} + B_{ji}u,\quad P_A = C_{ij} u. \]
+在稳态, 有
+\[ \frac{P_A}{P_E} = \frac{n_j}{n_i} = \frac{C_{ij}u}{A_{ji} + B_{ji}u},\quad \frac{n_j}{n_i} = \frac{G_j}{G_i}e^{-\pare{E_j - E_i}/kT}. \]
+取简合度$G_i=G_j=1$, 联立并考虑Wien定律和Rayleigh-Jeans定律, 有
+\[ B_{ji} = C_{ij},\quad \frac{A_{ij}}{B_{ji}} = \frac{8\pi h\nu_{ji}^3}{c^3}. \]
+
+% subsection einsteintexorpdfstring_a_b系数 (end)
+
+\subsection{跃迁的选择规则} % (fold)
+\label{sub:跃迁的选择规则}
+
+由$\displaystyle B_{ji} = \frac{4\pi^2e^2}{3\hbar^2}\abs{\expc{\+vr_{ij}}}^2$, 为了使其非零, 即
+\[ \iiint \psi_j^* \+vr \psi_i\,\rd{\tau}\neq 0, \]
+由关联Laguerre多项式的正交性, 知须$\Delta m = \pm 1, 0$,\quad $\Delta l = \pm 1$.
+
+% subsection 跃迁的选择规则 (end)
+
+\subsection{激光原理} % (fold)
+\label{sub:激光原理}
+
+单位时间单位体积内原子受激吸收的总能量为
+\[ C_{12}u\pare{\nu_{21}}N_1h\nu_{21}, \]
+受激发射的总能量为
+\[ B_{21}u\pare{\nu_{21}}N_2h\nu_{21}. \]
+净发射能量
+\[ B_{21}u\pare{\nu_{21}}N_2h\nu_{21} - C_{12}u\pare{\nu_{21}}N_1h\nu_{21} = \pare{N_2 - N_1}B_{21}u\pare{\nu_{21}}h\nu_{21}. \]
+如果能有$N_2>N_1$, 再令光讯号再谐振腔中来回振荡, 不断放大, 就可以得到相同频率, 相位, 偏振态的光子束.
+\par
+通过放电激励或光激励可以实现布居反转.
+
+% subsection 激光原理 (end)
+
+% section 量子力学导论 (end)
+
+\end{document}

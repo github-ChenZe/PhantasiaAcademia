@@ -1,0 +1,167 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\pgfplotsset{compat=newest}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+\def\rD{\mathrm{D}}
+\newcommand{\mathmin}[2]{(#1+#2)/2-abs(#1-#2)/2}
+\newcommand{\mathmax}[2]{(#1+#2)/2+abs(#1-#2)/2}
+
+\begin{document}
+
+\newprob{5.7.1}%
+$\displaystyle R\+_i_ = R\+_i1_ = \boxed{R\+_b11_ \parallel R\+_b12_ \parallel r\+_be1_.}$\\
+$\displaystyle R\+_o1_ = R\+_c1_.$\\
+$\displaystyle R\+_i2_ = R\+_b21_ \parallel R\+_b22_ \parallel r\+_be2_.$\\
+$\displaystyle R\+_o_ = R\+_o2_ \approx \boxed{R\+_c2_.}$\\
+$\displaystyle A_{v1} = -\frac{\beta_1\pare{R\+_c1_\parallel R\+_i2_}}{r\+_be1_} = -\frac{\beta_1\pare{R\+_c1_\parallel R\+_b21_ \parallel R\+_b22_ \parallel r\+_be2_}}{r\+_be1_}.$\\
+$\displaystyle A_{v2} = -\frac{\beta_2\pare{R\+_c2_\parallel R\+_L_}}{r\+_be2_}.$\\
+$\displaystyle A_v = A_{v1}\cdot A_{v2} = \boxed{\frac{\beta_1\beta_2\pare{R\+_c1_\parallel R\+_b21_ \parallel R\+_b22_ \parallel r\+_be2_}\pare{R\+_c2_\parallel R\+_L_}}{r\+_be1_r\+_be2_}% \approx -\frac{\beta_1 \beta_2 \pare{R\+_c2_\parallel R\+_L_}}{r\+_be1_}
+.}$
+\newprob{5.7.2 (1)}%
+$\displaystyle I\+_CQ1_ = \frac{\beta}{\beta+1}I\+_EQ1_ = \boxed{\SI{10.1}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ2_ = \frac{\beta}{\beta+1}I\+_EQ2_ = \boxed{\SI{10.0}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ1_ = V\+_BB_ - V\+_BEQ_ + V\+_BEQ_ = \boxed{\SI{6}{\volt}.}$\\
+$\displaystyle V\+_CEQ2_ = V\+_CC_ - R\+_c2_I\+_CQ2_ - V\+_BB_ + V\+_BEQ_ = \boxed{\SI{5}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\mathrm{T}_1$共射, $\mathrm{T}_2$共基.
+\par
+\newprobheader{(3)}%
+$\displaystyle R\+_i_ = R\+_i1_ = r\+_be1_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ1_} = \boxed{\SI{457}{\ohm}.}$\\
+$\displaystyle R\+_i2_ = r\+_be2_/\pare{1+\beta} = r\+_bb'_\pare{1+\beta} + \frac{V_T}{I\+_EQ2_} = \SI{4.55}{\ohm}.$\\
+$\displaystyle R\+_o_ = R\+_o2_ \approx R\+_c_ = \boxed{\SI{470}{\ohm}.}$\\
+$\displaystyle A_{v1} = -\frac{\beta R\+_i2_}{r\+_be1_} = \boxed{-0.996.}$\\
+$\displaystyle A_{v2} = \frac{\beta R\+_c2_}{r\+_be2_} = \boxed{102.}$\\
+$\displaystyle A_v = A_{v1}A_{v2} = \boxed{-102.}$
+\newprob{5.7.3 (1)}%
+\\[-\baselineskip]
+\begin{tikzpicture}
+    \draw
+    (0,2) node[below] {$v\+_i_$} to[resistor,R=$r\+_be1_$,i=$i\+_b1_$,o-]
+    (2,2)
+    (2,0) to[european controlled current source,i_=$\beta i\+_b1_$,-*]
+    (2,2)
+    (2,2) -- (4,2)
+    (2,0) -- (4,0)
+    (4,0) to[resistor,R=$R\+_e_$,*-*]
+    (4,2)
+    (4,2) -- (6,2)
+    (4,0) -- (6,0)
+    (6,0) to[resistor,R=$r\+_be2_$,i=$i\+_b2_$,*-*]
+    (6,2)
+    (6,0) -- (9,0)
+    (9,2) to[european controlled current source,i_=$\beta i\+_b2_$,*-*]
+    (6,2)
+    (9,2) to[resistor,R=$R\+_c_$]
+    (9,0)
+    (9,2) to[short,-o]
+    (10,2) node[below] {$v\+_o_$}
+    (4,0) node[rground] {};
+\end{tikzpicture}\\
+$\mathrm{T}_1$共集, $\mathrm{T}_2$共基.
+\par
+\newprobheader{(2)}%
+$\displaystyle I\+_EQ1_ = I\+_EQ2_ = \half \frac{V\+_EE_ - V\+_BEQ_}{R\+_e_} = \SI{1.33}{\milli\ampere}.$\\
+$\displaystyle I\+_CQ1_ = I\+_CQ2_ = \frac{\beta}{1+\beta}I\+_EQ_ = \boxed{\SI{1.30}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ1_ = V\+_CC_ + V\+_BEQ_ = \boxed{\SI{6.7}{\volt}.}$\\
+$\displaystyle V\+_CEQ2_ = V\+_CC_ - R\+_c_\cdot \frac{\beta}{1+\beta} I\+_CQ2_ + V\+_BEQ_ = \boxed{\SI{3.90}{\volt}.}$\\
+\par
+\newprobheader{(3)}%
+$\displaystyle r\+_be1_ = r\+_be2_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ_} = \SI{1.2}{\kilo\ohm}.$\\
+$\displaystyle R\+_i_ = r\+_be1_ + \pare{1+\beta}\brac{R\+_e_ \parallel \pare{r\+_be2_/\pare{1+\beta}}} = \boxed{\SI{2.39}{\kilo\ohm}.}$\\
+$\displaystyle R\+_o_ \approx R\+_c_ = \boxed{\SI{2.2}{\kilo\ohm}.}$\\
+$\displaystyle A_{v1} = \frac{\pare{1+\beta}\brac{R\+_e_ \parallel \pare{r\+_be2_/\pare{1+\beta}}}}{r\+_be1_ + \pare{1+\beta}\brac{R\+_e_ \parallel \pare{r\+_be2_/\pare{1+\beta}}}} = 0.501.$\\
+$\displaystyle A_{v2} = \frac{\beta R\+_c_}{r\+_be2_} = 91.7$.\\
+$\displaystyle A_v = A_{v1}A_{v2} = \boxed{45.9.}$
+\newprob{5.7.4 (1)}%
+$\displaystyle V\+_BQ1_ = \frac{R\+_b1_}{R\+_b1_ + R\+_b2_}V\+_CC_ = \SI{2.22}{\volt}.$\\
+$\displaystyle I\+_BQ1_ = \rec{1+\beta}\frac{V\+_BQ1_ - V\+_BEQ_}{R\+_e1_} = \boxed{\SI{7.53}{\micro\ampere}.}$\\
+$\displaystyle I\+_CQ1_ = \beta I\+_BQ1_ = \boxed{\SI{0.753}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ1_ \approx V\+_CC_ - R\+_c1_I\+_CQ1_ - \pare{V\+_BQ1_ - V\+_BEQ_} = \boxed{\SI{6.64}{\volt}.}$\\
+$\displaystyle V\+_BQ2_ \approx V\+_CC_ - R\+_c1_I\+_CQ1_ = \SI{8.16}{\volt}.$\\
+$\displaystyle I\+_BQ2_ = \rec{1+\beta}\frac{V\+_BQ2_ - V\+_BEQ_}{R\+_e2_} = \boxed{\SI{0.0224}{\milli\ampere}.}$\\
+$\displaystyle I\+_CQ2_ = \beta I\+_BQ2_ = \boxed{\SI{2.24}{\milli\ampere}.}$\\
+$\displaystyle V\+_CEQ2_ = V\+_CC_ - I\+_EQ2_R\+_e2_ = \boxed{\SI{4.54}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle r\+_be1_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ1_} = \SI{3.65}{\kilo\ohm}.$\\
+$\displaystyle r\+_be2_ = r\+_bb'_ + \pare{1+\beta}\frac{V_T}{I\+_EQ2_} = \SI{1.36}{\kilo\ohm}.$\\
+$\displaystyle R\+_i_ = R\+_i1_ = R\+_b1_\parallel R\+_b2_ \parallel r\+_be1_ = \boxed{\SI{2.29}{\kilo\ohm}.}$\\
+$\displaystyle R\+_o1_ = R\+_c1_ = \SI{5.1}{\kilo\ohm}$.\\
+$R\+_i2_ = r\+_be2_ + \pare{1+\beta}\pare{R\+_e2_\parallel R\+_L_} = \SI{197}{\kilo\ohm}.$\\
+$\displaystyle R\+_o_ = R\+_o2_ = R\+_e2_ \parallel \frac{r\+_be2_ + R\+_o1_}{1+\beta} = \boxed{\SI{62.7}{\ohm}.}$\\
+$\displaystyle A_{v1} = -\frac{\beta R\+_c1_\parallel R\+_i2_}{r\+_be1_} = -136.$\\
+$\displaystyle A_{v2} = \frac{R\+_e2_\parallelsum R\+_L_}{R\+_e2_\parallelsum R\+_L_ + r\+_be2_/\pare{1+\beta}} = 0.993.$\\
+$\displaystyle A_v = A_{v1}A_{v2} = \boxed{-135.}$
+\newprob{6.1.1 (1)}%
+$\abs{\dot{A}\+_\mathnormal{v}M_} = \boxed{\SI{60}{\decibel}.}$\\
+$f\+_H_ = \boxed{\SI{e8}{\hertz}.}$\\
+$f\+_L_ = \boxed{\SI{e2}{\hertz}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle 60 - 3 = \boxed{\SI{57}{\decibel}.}$
+\newprob{6.1.3}%
+$\displaystyle \dot{A}_v = 10 \cdot \frac{\+vjf/10}{1+\+vjf/10}\cdot \rec{1+\+vjf/10^6}$.\\
+$\displaystyle A\+_\mathnormal{v}M_ = \boxed{10.}$\\
+$\displaystyle f\+_L_ = \boxed{\SI{10}{\hertz}.}$\\
+$\displaystyle f\+_H_ = \boxed{\SI{e6}{\hertz}.}$\\
+$\displaystyle f = 10f\+_H_ = \boxed{\SI{e7}{\hertz}}$或$\displaystyle f = f\+_L_/10 = \boxed{\SI{1}{\hertz}}$时增益下降为$1$.
+\begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        axis lines=left,xlabel=$f/\SI{}{\hertz}$,
+        ylabel=$20\log\abs{\dot{A}_v}/\SI{}{\decibel}$,xmin=0,xmax=36,ymin=0,ymax=24,xtick={0,4,8,12,16,20,24,28},xticklabels={$1^{\phantom{0}}$,$10^{\phantom{0}}$,$10^2$,$10^3$,$10^4$,$10^5$,$10^6$,$10^7$},ytick={0,10,20}, %
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=north,
+        %left=2em,
+        %above=-.5em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=-90,
+        %right=3.5em
+        },clip=false,height=5cm,width=8cm]
+    \addplot[mark={},domain=0:4,samples=200] function{5*x};
+    \addplot[mark={},domain=4:24,samples=200] function{20};
+    \addplot[mark={},domain=24:28,samples=200] function{5*(28-x)};
+    \draw[dashed] (4,0) -- (4,20);
+    \draw[dashed] (24,0) -- (24,20);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+\newprob{6.2.2}%
+$\displaystyle \dot{A}_u = \frac{R_2}{R_1 + R_2 + 1/\pare{\+vj\omega C}} \Rightarrow f\+_L_ = \rec{2\pi \pare{R_1+R_2}C} = \SI{20}{\hertz} \Rightarrow C = \boxed{\SI{0.995}{\micro\farad}.}$
+\newprob{6.2.3 (1)}%
+\underline{低通}.
+\par
+\newprobheader{(2)}%
+$\displaystyle \dot{A}_u = \frac{R_2 \parallel \pare{1/\+vj\omega C}}{R_1 + R_2 \parallel \pare{1/\+vj\omega C}} = \boxed{\frac{R_2 / \pare{R_1 + R_2}}{\displaystyle 1 + \+vj\cdot 2\pi f \pare{R_1\parallel R_2}C}.}$\\
+最大值为$R_2/\pare{R_1 + R_2} = \boxed{0.909.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle f\+_L_ = \rec{2\pi \pare{R_1\parallel R_2}C} = \boxed{\SI{58.4}{\mega\hertz}.}$
+
+\end{document}

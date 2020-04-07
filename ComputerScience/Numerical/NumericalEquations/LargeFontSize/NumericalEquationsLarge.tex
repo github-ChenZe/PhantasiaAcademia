@@ -1,0 +1,912 @@
+\documentclass[20pt]{extarticle}
+
+\usepackage[margin=1mm]{geometry}
+\usepackage{ctex}
+\usepackage{van-de-la-sehen}
+\DeclareMathOperator{\cond}{cond}
+\usepackage{arydshln}
+\pagenumbering{gobble}
+
+\begin{document}
+
+\section{求解方程} % (fold)
+\label{sec:求解方程}
+
+\subsection{一元方程} % (fold)
+\label{sub:一元方程}
+
+\subsubsection{二分法} % (fold)
+\label{ssub:二分法}
+
+从略.
+
+% subsubsection 二分法 (end)
+
+\subsubsection{不动点迭代} % (fold)
+\label{ssub:不动点迭代}
+
+\begin{definition}
+    设$e_i$表示迭代过程中第$i$步的误差, 如果
+    \[ \frac{e_{i+1}}{e_i} = S < 1, \]
+    则谓之满足线性收敛, 收敛速度为$S$.
+\end{definition}
+\begin{theorem}
+    设$g\in C^1$, $g\pare{r} = r$, $S = \abs{g'\pare{r}}<1$, 则对于与$r$足够接近的估计, 不动点迭代以速度$S$线性收敛到不动点$r$.
+\end{theorem}
+\begin{remark}
+    二分法可以保证线性收敛, 不动点迭代在局部收敛的情况下也能保证线性收敛.
+\end{remark}
+
+% subsubsection 不动点迭代 (end)
+
+\subsubsection{误差} % (fold)
+\label{ssub:误差}
+
+\begin{definition}
+    设$f$是一函数, $r$是其一根, $x_\alpha$是$r$的近似值, 则谓$\abs{\pare{f\pare{x_\alpha}}}$其后向误差, $\abs{r-x_\alpha}$其前向误差.
+\end{definition}
+在重根附近, 很小的后向误差也可能对应很大的前向误差.
+\begin{theorem}
+    设$r$是$f\pare{x}$的根, $r+\Delta r$是$f\pare{x}+\epsilon g\pare{x}$的根, 则$\epsilon \ll f'\pare{r}$时,
+    \[ \Delta r \approx -\frac{\epsilon g\pare{r}}{f'\pare{r}}. \]
+\end{theorem}
+\begin{definition}
+    $\displaystyle \text{误差放大因子} = \frac{\text{相对前向误差}}{\text{相对后向误差}}$. 对$f$作微扰时
+    \[ \text{误差放大因子} = \abs{\frac{\Delta r/r}{\epsilon}} = \frac{\abs{g\pare{r}}}{rf'\pare{r}}. \]
+\end{definition}
+\begin{remark}
+    误差放大因子标志有效数字丢位数.
+\end{remark}
+\begin{ex}
+    在Wilkinson多项式$\pare{x-1}\cdots\pare{x-20}$的求根中, 设$g\pare{x} = -1672280820x^{15}$, 则在$r=16$附近,
+    \[ \Delta r = \frac{16^{15}\times 1672280820\epsilon}{15!4!} = 6.1432\times 10^{13}\epsilon. \]
+    取机器精度$\epsilon = 2^{-52}$有$\Delta r\approx 0.0136$.
+\end{ex}
+\begin{definition}
+    条件数谓所有输入变化所造成的最大误差放大.
+\end{definition}
+条件数高的问题谓病态问题, 条件数在$1$量级的问题谓良态问题.
+
+% subsubsection 误差 (end)
+
+\subsubsection{Newton-Raphson方法} % (fold)
+\label{ssub:newton_raphson方法}
+
+\begin{definition}
+    求根迭代谓二次收敛的, 如果
+    \[ M = \lim_{i\rightarrow\infty} \frac{e_{i+1}}{e_i^2} < \infty. \]
+\end{definition}
+\begin{definition}
+    设$f\in C^2$, $f\pare{r} = 0$且$f'\pare{r}$, 则Newton法二阶收敛且
+    \[ M = \frac{f''\pare{r}}{2f'\pare{r}}. \]
+\end{definition}
+\begin{remark}
+    在$m$重根附近, Newton法转为线性收敛, 速率为$\displaystyle S = \frac{m-1}{m}$.
+\end{remark}
+\begin{theorem}
+    设$f\in C^{m+1}$, 且具有$m$重根, 则
+    \[ x_{i+1} = x_i - \frac{mf\pare{x_i}}{f'\pare{x_i}} \]
+    收敛到$r$且具有二次收敛速度.
+\end{theorem}
+
+% subsubsection newton_raphson方法 (end)
+
+\subsubsection{割线方法} % (fold)
+\label{ssub:割线方法}
+
+\begin{theorem}
+    割线方法的迭代式为
+    \[ x_{i+1} = x_i - \frac{f\pare{x_i}\pare{x_i - x_{i-1}}}{f\pare{x_i} - f\pare{x_{i-1}}}. \]
+    其中$x_0$和$x_1$给定.
+\end{theorem}
+割线方法的收敛速度为超线性.
+\begin{theorem}[Regula Falsi方法]
+    同样按照
+    \[ c = a - \frac{f\pare{a}\pare{a-b}}{f\pare{a} - f\pare{b}} = \frac{bf\pare{a} - af\pare{b}}{f\pare{a} - f\pare{b}} \]
+    迭代, 惟事先保证$f\pare{a}$与$f\pare{b}$异号. 此时再选择$a$, $b$中满足$f\pare{a}$或$f\pare{b}$与$f\pare{c}$异号者作下一轮迭代.
+\end{theorem}
+
+% subsubsection 割线方法 (end)
+
+% subsection 一元方程 (end)
+
+\subsection{方程组} % (fold)
+\label{sub:方程组}
+
+\subsubsection{\texorpdfstring{Gau\ss}{Gauss}消元法} % (fold)
+\label{ssub:gauss消元法}
+
+Gau\ss 消元法的消去操作次数为$2n^3/3$, 回代的操作次数为$n^2$.
+
+% subsubsection gauss消元法 (end)
+
+\subsubsection{LU分解} % (fold)
+\label{ssub:lu分解}
+
+Gau\ss 消元法等价于将矩阵分解为$A=LU$, 其中$L$为行变换矩阵(下三角), $U$为约化后矩阵(上三角).
+\par
+一旦完成LU分解, 就可以通过定义$c=Ux$, 求解$Lc=b$, 之后求解$Ux=c$.
+\par
+对于$Ax=b_1$, $Ax=b_2$, $\cdots$, $Ax=b_k$类型的问题, Gau\ss 消元法需要$2kn^3/3$次操作, 而LU分解需要$2n^3/3 + 2kn^2$次操作.
+\begin{ex}[并非所有矩阵都有LU分解]
+    $\displaystyle \begin{pmatrix}
+        0 & 1 \\ 1 & 1
+    \end{pmatrix}$不能LU分解.
+\end{ex}
+
+% subsubsection lu分解 (end)
+
+\subsubsection{误差来源} % (fold)
+\label{ssub:误差来源}
+
+\begin{definition}
+    向量$x = \pare{x_1,\cdots,x_n}$的无穷范数或最大范数为$\norm{x}_\infty = \max \abs{x_i}$.
+\end{definition}
+\begin{definition}
+    对于线性方程$Ax=b$的近似解$x_a$, 设$r = b-Ax_a$, 后向误差为$\norm{r}_\infty$, 前向误差为$\norm{x-x_a}_\infty$. 相对后向误差为$\displaystyle \frac{\norm{r}_\infty}{\norm{b}_\infty}$, 相对前向误差为$\displaystyle \frac{\norm{x-x_a}_\infty}{\norm{x}_\infty}$. $\displaystyle \text{误差放大因子} = \frac{\text{相对前向误差}}{\text{相对后向误差}}$.
+\end{definition}
+\begin{definition}
+    方阵$A$的条件数$\cond{A}$谓求解$Ax=b$时, 对于所有右侧向量$b$, 可能出现的最大误差放大因子.
+\end{definition}
+\begin{definition}
+    矩阵范数
+    $\norm{A} = \text{每行元素之和的最大值}$.
+\end{definition}
+\begin{theorem}
+    $\displaystyle \cond{A} = \norm{A}\cdot \norm{A^{-1}}$.
+\end{theorem}
+考虑到浮点储存本身可能引入$\epsilon\+_mach_$级别的相对误差, 若$\cond A \approx 10^k$, 则$x$将丢失$k$位精度.
+
+% subsubsection 误差来源 (end)
+
+\subsubsection{LUP分解} % (fold)
+\label{ssub:lup分解}
+
+\begin{definition}
+    部分主元谓消去时该列最大的将被消去的元素.
+\end{definition}
+\begin{theorem}
+    若$P$是对单位矩阵实施一组特定行交换后得到的置换矩阵, 则$PA$即为对$A$实施同样的行交换的结果.
+\end{theorem}
+\begin{ex}
+    找出矩阵$PA=LU$分解.
+    \[ A = \begin{pmatrix}
+        2 & 1 & 5 \\ 4 & 4 & -4 \\ 1 & 3 & 1
+    \end{pmatrix}. \]
+    选取第一列的部分主元, 需要交换第$1$行和第$2$行,
+    \begin{align*}
+        P &= \begin{pmatrix}
+            0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1
+        \end{pmatrix}, \\
+        \begin{pmatrix}
+            2 & 1 & 5 \\ 4 & 4 & -4 \\ 1 & 3 & 1
+        \end{pmatrix} &\xlongrightarrow{\text{交换$r_1$和$r_2$}} \begin{pmatrix}
+            4 & 4 & -4 \\ 2 & 1 & 5 \\ 1 & 3 & 1
+        \end{pmatrix}.
+    \end{align*}
+    用$P$记录行交换, 再进行两个行操作,
+    \begin{align*}
+        & \xlongrightarrow{\text{$r_2=r_2 - \half r_1$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\half} & -1 & 7 \\ 1 & 3 & 1
+        \end{pmatrix} \\
+        & \xlongrightarrow{\text{$r_2=r_2 - \half r_1$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\half} & -1 & 7 \\ \boxed{\rec{4}} & 2 & 2
+        \end{pmatrix}.
+    \end{align*}
+    选择第二个主元,
+    \begin{align*}
+        P &= \begin{pmatrix}
+            0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+        \end{pmatrix}, \\
+        \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\half} & -1 & 7 \\ \boxed{\rec{4}} & 2 & 2
+        \end{pmatrix} &\xlongrightarrow{\text{交换$r_2$和$r_3$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\rec{4}} & 2 & 2 \\ \boxed{\half} & -1 & 7 
+        \end{pmatrix}.
+    \end{align*}
+    最后一次消去,
+    \begin{align*}
+        & \xlongrightarrow{\text{$r_3=r_3 - \pare{-\half} r_2$}} \begin{pmatrix}
+            4 & 4 & -4 \\ \boxed{\rec{4}} & 2 & 2 \\ \boxed{\half} & \boxed{-\half} & 8
+        \end{pmatrix}.
+    \end{align*}
+    最终得到LUP分解
+    \[ \begin{array}{ccccc}
+        \begin{pmatrix}
+            0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0
+        \end{pmatrix}&\begin{pmatrix}
+            2 & 1 & 5 \\ 4 & 4 & -4 \\ 1 & 3 & 1
+        \end{pmatrix} &=& \begin{pmatrix}
+            1 & 0 & 0 \\ \rec{4} & 1 & 0 \\ \half & -\half & 1 \\
+        \end{pmatrix} & \begin{pmatrix}
+            4 & 4 & -4 \\ 0 & 2 & 2 \\ 0 & 0 & 8
+        \end{pmatrix}. \\
+        P & A & & L & U
+    \end{array} \]
+\end{ex}
+使用LUP分解求解方程时, 将$Ax=b$转化为$PAx=Pb$, 后通过$Lc=Lb$得到$c$再求解$Ux=c$.
+
+% subsubsection lup分解 (end)
+
+\subsubsection{迭代方法} % (fold)
+\label{ssub:迭代方法}
+
+\begin{ex}
+    对$3u+v=5$, $u=2v=5$使用Jacobi迭代, 即通过
+    \[ u = \frac{5-v}{3},\quad v = \frac{5-u}{2} \]
+    迭代.
+\end{ex}
+Jacobi方法不一定能成功得到解.
+\begin{definition}
+    $A$是严格对角占优的, 如果对于每个$i$,
+    \[ \abs{a_ii} > \sum_{j\neq i} \abs{a_{ij}}. \]
+\end{definition}
+\begin{theorem}
+    如果$A$是严格对角占优的, 则$A$是非奇异矩阵, 且对于所有向量$b$和初始估计, Jacobi迭代可收敛到唯一解.
+\end{theorem}
+若$A=L+D+U$, 其中$D$是对角部分, $L$和$U$分别是下三角和上三角部分, 则Jacobi迭代即
+\[ x_{k+1} = D^{-1} \pare{b-\pare{L+U}x_k}. \]
+\par
+Gau\ss-Seidel方法是Jacobi方法的变体.
+\begin{ex}
+    对$3u+v=5$, $u=2v=5$使用Gau\ss-Seidel迭代,
+    \begin{align*}
+        \begin{pmatrix}
+            u_1 \\ v_1
+        \end{pmatrix} &= \begin{pmatrix}
+            \displaystyle \frac{5-v_0}{3} \\[1em] \displaystyle \frac{5-u_1}{2}
+        \end{pmatrix} = \begin{pmatrix}
+            \displaystyle \frac{5-0}{3} \\[1em] \displaystyle \frac{5-5/3}{2}
+        \end{pmatrix} = \begin{pmatrix}
+            \displaystyle \frac{5}{3} \\[1em] \displaystyle \frac{5}{3}
+        \end{pmatrix},
+    \end{align*}
+\end{ex}
+其迭代式为
+\[ x_{k+1} = D^{-1}\pare{b-Ux_k - Lx_{k+1}}. \]
+\par
+连续松弛方法改进了Gau\ss-Seidel方法, 使用过松弛加快收敛速度.
+\begin{ex}
+    Gau\ss-Seidel方法的迭代式为
+    \[ \begin{pmatrix}
+        3 & 1 & -1 \\ 2 & 4 & 1 \\ -1 & 2 & 5
+    \end{pmatrix}\begin{pmatrix}
+        u \\ v \\ w
+    \end{pmatrix} = \begin{pmatrix}
+        4 \\ 1 \\ 1
+    \end{pmatrix} \longrightarrow \begin{aligned}
+        u_{k+1} &= \frac{4-v_k+w_k}{3}, \\
+        v_{k+1} &= \frac{1-2u_{k+1} - w_k}{4}, \\
+        w_{k+1} &= \frac{1+u_{k+1}-2v_{k+1}}{5}.
+    \end{aligned} \]
+    而过松弛方法则设
+    \begin{align*}
+        u_{k+1} &= \pare{1-\omega}u_k + \omega\frac{4-v_k+w_k}{3}, \\
+        v_{k+1} &= \pare{1-\omega}v_k + \omega\frac{1-2u_{k+1} - w_k}{4}, \\
+        w_{k+1} &= \pare{1-\omega}w_k + \omega\frac{1+u_{k+1}-2v_{k+1}}{5}.
+    \end{align*}
+    其中$w$取$w=1.25$等值.
+\end{ex}
+相应的迭代式为
+\[ x_{k+1} = \pare{\omega L+D}^{-1}\brac{\pare{1-\omega}Dx_k-\omega Ux_k}+\omega\pare{D+\omega L}^{-1}b. \]
+迭代方法的主要优势在于
+\begin{cenum}
+    \item 修饰技术. 即$b$发生微小变化时, 可从之前的解出发迭代得到新解.
+    \item 稀疏矩阵. 即矩阵中有很多零元时, Gau\ss 消元法效率过低.
+\end{cenum}
+
+% subsubsection 迭代方法 (end)
+
+\subsubsection{用于对称正定矩阵的方法} % (fold)
+\label{ssub:用于对称正定矩阵的方法}
+
+Cholesky分解正定矩阵为$A=R^TR$可以通过如下算法作成. 其中$R$为上三角矩阵.
+\begin{matlablst}
+for k = 1, 2, ..., n
+    if /@$A_{kk}<0$@/ stop, end
+    /@$R_{kk}$@/ = /@$\sqrt{A_{kk}}$@/
+    /@$u^T$@/ = /@$\rec{R_{kk}}A_{k,k+1:n}$@/
+    /@$R_{k,k+1:n}$@/ = /@$u^T$@/
+    /@$A_{k+1:n,k+1:n}$@/ = /@$A_{k+1:n,k+1:n}$@/ - /@$uu^T$@/
+end
+\end{matlablst}
+共轭梯度法则用于稀疏矩阵.
+\begin{matlablst}
+/@$x_0$@/ = 初始估计
+/@$d_0$@/ = /@$r_0$@/ = /@$b-Ax_0$@/
+for k = 0, 1, 2, ..., n - 1
+    if /@$r_k$@/ = 0, stop, end
+    /@$\alpha_k$@/ = /@$\frac{\bra{r_k}\ket{r_k}}{\bra{d_k}A\ket{d_k}}$@/
+    /@$x_{k+1}$@/ = /@$x_k$@/ + /@$\alpha_kd_k$@/
+    /@$r_{k+1}$@/ = /@$r_k$@/ - /@$\alpha_kAd_k$@/
+    /@$\beta_k$@/ = /@$\frac{\bra{r_{k+1}}\ket{r_{k+1}}}{\bra{r_k}\ket{r_k}}$@/
+    /@$d_{k+1}$@/ = /@$r_{k+1}$@/ + /@$\beta_k d_k$@/
+end
+\end{matlablst}
+注意到$r_k$是每一个$x_k$对应的余项, 且$r_k$和之前的$r_0,\cdots,r_{k-1}$都正交, 故最终将得到零.
+
+\begin{theorem}
+    令$A$为对称正定的$n\times n$矩阵, $b\neq 0$是一个向量, 在共轭梯度方法中, 若$r_k\neq 0$, 其中$k<n$, 则对于任何$1\le k\le n$, 有
+    \begin{cenum}
+        \item $\expc{x_1,\cdots,x_k} = \expc{r_0,\cdots,r_{k-1}} = \expc{d_0,\cdots,d_{k-1}}$;
+        \item $\bra{r_k}\ket{r_j} = 0$, $j < k$;
+        \item $\bra{d_k}A\ket{d_j} = 0$, $j < k$.
+    \end{cenum}
+\end{theorem}
+
+\par
+为了减少矩阵$A$的条件数, 引入预条件子$M$将方程化为$M^{-1}Ax = M^{-1}b$. Jacobi预条件子为$M=D$, 即$A$的对角线部分. 而Gau\ss-Seidel预条件子则对应$M = \pare{I+\omega LD^{-1}}\pare{D+\omega U}$. $M$本身是$LU$形式, 从而$z=M^{-1}v$可直接回代求解.
+
+% subsubsection 用于对称正定矩阵的方法 (end)
+
+\subsubsection{非线性方程组} % (fold)
+\label{ssub:非线性方程组}
+
+对于
+\[ \begin{aligned}
+    f_1\pare{u,v,w} & = 0, \\
+    f_2\pare{u,v,w} & = 0, \\
+    f_3\pare{u,v,w} & = 0,
+\end{aligned}\quad DF\pare{x} = \left(\begin{aligned}
+    \+DuD{f_1} && \+DvD{f_1} && \+DwD{f_1} \\
+    \+DuD{f_2} && \+DvD{f_2} && \+DwD{f_2} \\
+    \+DuD{f_3} && \+DvD{f_3} && \+DwD{f_3} \\
+\end{aligned}\right). \]
+Newton迭代法为
+\[ x_{k+1} = x_k - \pare{DF\pare{x_k}}^{-1}F\pare{x_k}. \]
+为了避免求逆, 将迭代步骤换为求解
+\[ \begin{cases}
+    DF\pare{x_k}s = -F\pare{x_k},\\
+    x_{k+1} = x_k + s.
+\end{cases} \]
+为了避免求Jacobi矩阵, 设第$i$次递推式为
+\[ x_{i+1} = x_i - A_i^{-1}F\pare{x_i},\quad \delta_{i+1} = x_{i+1} - x_i,\quad \Delta_{i+1} = F\pare{x_{i+1}} - F\pare{x_i}, \]
+则
+\[ A_{i+1} = A_i + \frac{\pare{\Delta_{i+1} - A_i\Delta_i}\delta^T_{i+1}}{\delta_{i+1}^T\delta_{i+1}} \]
+满足$A_{i+1}\delta_{i+1} = \Delta_{i+1}$且对于与$\delta_{i+1}$正交的$w$, $A_{i+1}w = A_iw$. Broyden方法的伪代码如下.
+\begin{matlablst}
+/@$x_0$@/ = 初始向量
+/@$A_0$@/ = 初始矩阵
+for i = 0, 1, 2, ...
+    /@$x_{i+1}$@/ = /@$x_i$@/ + /@$A_i^{-1}F\pare{x_i}$@/
+    /@$A_{i+1}$@/ = /@$A_i$@/ + /@$\frac{\pare{\Delta_{i+1} - A_i\Delta_i}\delta^T_{i+1}}{\delta_{i+1}^T\delta_{i+1}}$@/
+end
+\end{matlablst}
+为了避免求解线性方程组, 引入$B_i=A_i^{-1}$, 要求
+\[ \delta_{i+1} = B_{i+1}\Delta_{i+1},\quad B_{i+1}A_iw = w. \]
+相应的迭代式为
+\[ B_{i+1} = B_i + \frac{\pare{\delta_{i+1} - B_i\Delta_{i+1}}\delta_{i+1}^TB_i}{\delta_{i+1}^TB_i\Delta_{i+1}}. \]
+\begin{matlablst}
+/@$x_0$@/ = 初始向量
+/@$A_0$@/ = 初始矩阵
+for i = 0, 1, 2, ...
+    /@$x_{i+1}$@/ = /@$x_i$@/ + /@$B_iF\pare{x_i}$@/
+    /@$B_{i+1}$@/ = /@$B_i$@/ + /@$\frac{\pare{\delta_{i+1} - B_i\Delta_{i+1}}\delta_{i+1}^TB_i}{\delta_{i+1}^TB_i\Delta_{i+1}}$@/
+end
+\end{matlablst}
+
+% subsubsection 非线性方程组 (end)
+
+% subsection 方程组 (end)
+
+\subsection{插值} % (fold)
+\label{sub:插值}
+
+\subsubsection[Lagrange与Newton]{Lagrange与Newton插值} % (fold)
+\label{ssub:lagrange与newton插值}
+
+\begin{theorem}
+    过$\pare{x_1,y_1}$, $\cdots$, $\pare{x_n,y_n}$存在唯一的次数不超过$n-1$的多项式
+    \[ y_1L_1\pare{x} + y_2L_2\pare{x} + \cdots + y_nL_n\pare{x}, \]
+    其中
+    \[ L_k\pare{x} = \frac{\pare{x-x_1}\cdots\pare{x-x_{k-1}}\pare{x-x_{k+1}}\cdots\pare{x-x_n}}{\pare{x_k-x_1}\cdots\pare{x_k-x_{k-1}}\pare{x_k-x_{k+1}}\cdots\pare{x_k-x_n}}. \]
+\end{theorem}
+\begin{definition}
+    用$f\brac{x_1\cdots x_n}$表示唯一过$\pare{x_1,f\pare{x_1}}$, $\cdots$, $\pare{x_n,f\pare{x_n}}$的插值多项式的$x^{n-1}$的系数.
+\end{definition}
+\begin{theorem}
+    过$\pare{x_1,f\pare{x_1}}$, $\cdots$, $\pare{x_n,f\pare{x_n}}$有插值多项式
+    \begin{align*}
+        P\pare{x} &= f\brac{x_1} + f\brac{x_1\ x_2}\pare{x-x_1} + f\brac{x_1\ x_2\ x_3}\pare{x-x_1}\pare{x-x_2} \\
+        &\phantom{=\ } + f\brac{x_1\ x_2\ x_3\ x_4}\pare{x-x_1}\pare{x-x_2}\pare{x-x_3} \\
+        &\phantom{=\ } + \cdots + f\brac{x_1\cdots x_n}\pare{x-x_1}\cdots\pare{x-x_{n-1}}.
+    \end{align*}
+    其中各系数计算如下:
+    \begin{align*}
+        f\brac{x_k} &= f\pare{x_k}, \\
+        f\brac{x_k\ x_{k+1}} &= \frac{f\brac{x_{k+1}} - f\brac{x_k}}{x_{k+1} - x_{k}}, \\
+        f\brac{x_k\ x_{k+1}\ x_{k+2}} &= \frac{f\brac{x_{k+1}\ x_{k+2}} - f\brac{x_k\ x_{k+1}}}{x_{k+2} - x_{k}}, \\
+        f\brac{x_k\ x_{k+1}\ x_{k+2}\ x_{k+3}} &= \frac{f\brac{x_{k+1}\ x_{k+2}\ x_{k+3}} - f\brac{x_k\ x_{k+1}\ x_{k+2}}}{x_{k+3} - x_{k}}.
+    \end{align*}
+\end{theorem}
+
+\begin{matlablst}
+for j = 1, ..., n
+    /@$f\brac{x_j}$@/ = /@$y_j$@/
+end
+for i = 2, ..., n
+    for j = 1, ..., n + 1 - i
+        /@$f\brac{x_j\cdots x_{j+i-1}}$@/ = /@$\displaystyle  \frac{f\brac{x_{j+1}\cdots x_{j+i-1}} - f\brac{x_j\cdots x_{j+i-2}}}{x_{j+i-1} - x_j}$@/
+    end
+end
+/@$P\pare{x}$@/ = /@$\displaystyle \sum_{i=1}^n f\brac{x_1\cdots x_i}\pare{x-x_1}\cdots\pare{x-x_{i-1}}$@/
+\end{matlablst}
+
+计算系数时可列表如下:
+\[ \begin{array}{c|ccc}
+    x_1 & f\brac{x_1} \\
+    & & f\brac{x_1\ x_2} \\
+    x_2 & f\brac{x_2} & & f\brac{x_1\ x_2\ x_3}. \\
+    & & f\brac{x_2\ x_3} \\
+    x_3 & f\brac{x_3}
+\end{array} \]
+
+% subsubsection lagrange与newton插值 (end)
+
+\subsubsection{插值误差} % (fold)
+\label{ssub:插值误差}
+
+\begin{theorem}
+    设$P\pare{x}$是不超过$n-1$阶的过$\pare{x_1,y_1}$, $\cdots$, $\pare{x_n,y_n}$的插值多项式, 则
+    \[ f\pare{x} - P\pare{x} = \frac{\pare{x-x_1}\pare{x-x_2}\cdots\pare{x-x_n}}{n!}f^{\pare{n}}\pare{c}. \]
+    其中$c$在$x,x_1,\cdots,x_n$的最小值和最大值之间.
+\end{theorem}
+\begin{hardlink}
+    证明见Sauer(中文版)p.139.
+\end{hardlink}
+
+% subsubsection 插值误差 (end)
+
+\subsubsection{Chebyshev插值} % (fold)
+\label{ssub:chebyshev插值}
+
+\begin{theorem}
+    将插值点选为
+    \[ x_i = \cos \frac{\pare{2i-1}\pi}{2n},\quad i = 1,\cdots, n, \]
+    则
+    \[ \pare{x-x_1}\cdots\pare{x-x_n} = \rec{2^{n-1}}T_n\pare{x}, \]
+    其中$T$为Chebyshev多项式. 此时
+    \[ \max_{-1\le x\le 1}\abs{\pare{x-x_1}\cdots\pare{x-x_n}} = \rec{2^{n-1}} \]
+    具有最小值.
+\end{theorem}
+\begin{corollary}
+    对于一般的区间$\brac{a,b}$, 分点应选为
+    \[ x_i = \frac{a+b}{2} + \frac{b-a}{2} \cos \frac{\pare{2i-1}\pi}{2n}. \]
+    对于$i=1,\cdots,n$, 不等式
+    \[ \abs{\pare{x-x_1}\cdots\pare{x-x_n}} \le \frac{\displaystyle \pare{\frac{b-a}{2}}^2}{2^{n-1}} \]
+    成立.
+\end{corollary}
+
+% subsubsection chebyshev插值 (end)
+
+\subsubsection{样条} % (fold)
+\label{ssub:样条}
+
+给定$n$个点$\pare{x_1,y_1}$, $\cdots$, $\pare{x_n,y_n}$, 通过这些点的三次样条谓一组三次多项式
+\begin{align*}
+    S_1\pare{x} &= y_1 + b_1\pare{x-x_1} + c_1\pare{x-x_1}^2 + d_1\pare{x-x_1}^3,\quad x\in\brac{x_1,x_2}, \\
+    S_2\pare{x} &= y_2 + b_2\pare{x-x_2} + c_2\pare{x-x_2}^2 + d_2\pare{x-x_2}^3,\quad x\in\brac{x_2,x_3}, \\
+    &\vdots \\
+    S_{n-1}\pare{x} &= y_{n-1} + b_{n-1}\pare{x - x_{n-1}} + c_{n-1}\pare{x-x_{n-1}}^2 + d_{n-1}\pare{x-x_{n-1}}^3, \\ &\phantom{=\ } x\in\brac{x_{n-1},x_n}.
+\end{align*}
+并且满足如下性质:
+\begin{cenum}
+    \item $S_i\pare{x_i} = y_i$, $S_i\pare{x_{i+1}} = y_{i+1}$.
+    \item $S'_{i-1}\pare{x_i} = S'_i\pare{x_i}$.
+    \item $S''_{i-1}\pare{x_i} = S''_i\pare{x_i}$.
+\end{cenum}
+若满足$S''_1\pare{x_1} = 0$且$S''_{n-1}\pare{x_n} = 0$则谓自然样条.
+\par
+引入$c_n = S''_{n-1}\pare{x_n}/2$, 同时记$\delta_i = x_{i+1} - x_i$, $\Delta_i = y_{i+1} - y_i$, 则
+\begin{align}
+    & d_i = \frac{c_{i+1} - c_i}{3\delta_i},\quad b_i = \frac{\Delta_i}{\delta_i} - \frac{\delta_i}{3}\pare{2c_i + c_{i+1}}. \notag \\
+    & \begin{pmatrix}
+        1 & 0 & 0 \\
+        \delta_1 & 2\delta_1 + 2\delta_2 & \delta_2 & \ddots \\
+        0 & \delta_2 & 2\delta_2+2\delta_3 & \delta_3 \\
+        & \ddots & \ddots & \ddots & \ddots \\
+        & & & \delta_{n-2} & 2\delta_{n-2}+2\delta_{n-1} & \delta_{n-1} \\
+        & & & 0 & 0 & 1
+    \end{pmatrix} \begin{pmatrix}
+        c_1 \\ c_2 \\ \\ \vdots \\ \\ c_n
+    \end{pmatrix} \notag \\ \label{eq:自然三次样条c} &= \begin{pmatrix}
+        0 \\ \displaystyle 3\pare{\frac{\Delta_2}{\delta_2} - \frac{\Delta_1}{\delta_1}} \\ \vdots \\ \displaystyle 3\pare{\frac{\Delta_{n-1}}{\delta_{n-1}} - \frac{\Delta_{n-2}}{\delta_{n-2}}} \\ 0
+    \end{pmatrix}.
+\end{align}
+\begin{matlablst}
+for i = 1, ..., n - 1
+    /@$a_i$@/ = /@$y_i$@/
+    /@$\delta_i$@/ = /@$x_{i+1} - x_i$@/
+    /@$\Delta_i$@/ = /@$y_{i+1} - y_i$@/
+end
+/@求解\eqref{eq:自然三次样条c}得到$c_1,\cdots,c_n$@/
+for i = 1, ..., n - 1
+    /@$d_i$@/ = /@$\displaystyle \frac{c_{i+1}-c_i}{3\delta_i}$@/
+    /@$b_i$@/ = /@$\displaystyle \frac{\Delta_i}{\delta_i} - \displaystyle \frac{\delta_i}{3}\pare{2c_i+c_{i+1}}$@/
+end
+/@$S_i\pare{x}$@/ = /@$a_i + b_i\pare{x-x_i} + c_i\pare{x-x_i}^2 + d_i\pare{x-x_i}^3$@/
+\end{matlablst}
+还可以选择其它边界条件, 例如
+\begin{cenum}
+    \item 曲率调整三次样条: $S''_1\pare{x_1}$和$S''_2\pare{x_2}$由用户给定, 则
+    \[ 2c_1 = v_1, 2c_n = v_n, \]
+    其中$v_1$和$v_2$是用户给定值. 则矩阵应作替换$A_{11} = 2$, $r_1 = v_1$, $A_{nn} = 2$, $r_n = v_n$.
+    \item 钳制三次样条: $S'_1\pare{x_1}$和$S'_2\pare{x_2}$由用户给定, 则
+    \begin{align*}
+        & A_{11} = 2\delta_1, A_{12} = \delta_1,\quad A_{n,n-1} = \delta_{n-1},\quad A_{n,n} = 2\delta_{n-1}. \\ &r_1 = 3\pare{\frac{\Delta_1}{\delta_1} - v_1},\quad r_n = 3\pare{v_n - \frac{\Delta_{n-1}}{\delta_{n-1}}}.
+    \end{align*}
+    \item 抛物线端点三次样条: $d_1 = 0 = d_{n-1}$, 从而首位的多项式皆为二次. 此时
+    \[ A_{11} = A_{nn} = 1,\quad A_{12} = A_{n,n-1} = -1. \]
+    \item 非纽结三次样条: $d_1 = d_2$, $d_{n-2} = d_{n-1}$, 即$S'''_1\pare{x_2} = S'''_2\pare{x_2}$且$S'''_{n-2}\pare{x_{n-1}} = S'''_{n-1}\pare{x_{n-1}}$.
+    \begin{align*}
+        & A_{11} = \delta_2,\quad A_{12} = -\pare{\delta_1 + \delta_2},\quad A_{13} = \delta_1, \\
+        & A_{n-2,n} = \delta_{n-1},\quad A_{n-1,n} = -\pare{\delta_{n-2} + \delta_{n-1}},\quad A_{n,n} = \delta_{n-2}.
+    \end{align*}
+\end{cenum}
+\begin{theorem}
+    $n\ge 2$可得唯一自然/曲率调整/钳制三次样条, $n\ge 3$可得唯一抛物线端点三次样条, $n\ge 4$可得唯一非纽结三次样条.
+\end{theorem}
+
+% subsubsection 样条 (end)
+
+\subsubsection{B\texorpdfstring{\'e}{e}zier样条} % (fold)
+\label{ssub:Bezier样条}
+
+\begin{theorem}[B\'ezier曲线]
+    给定端点$\pare{x_1,y_1}$, $\pare{x_4,y_4}$和控制点$\pare{x_2,y_2}$, $\pare{x_3,y_3}$, 设
+    \begin{align*}
+        b_x &= 3\pare{x_2 - x_1}, \\
+        c_x &= 3\pare{x_3 - x_2} - b_x, \\
+        d_x &= x_4 - x_1 - b_x - c_x, \\
+        b_y &= 3\pare{y_2 - y_1}, \\
+        c_y &= 3\pare{y_3 - y_2} - b_y, \\
+        d_y &= y_4 - y_1 - b_y - c_y.
+    \end{align*}
+    则$t\in\brac{0,1}$上的B\'ezier样条为
+    \begin{align*}
+        x\pare{t} &= x_1 + b_x t + c_xt^2 + d_xt^3, \\
+        y\pare{t} &= y_1 + b_y t + c_yt^2 + d_yt^3.
+    \end{align*}
+\end{theorem}
+
+% subsubsection Bezier样条 (end)
+
+% subsection 插值 (end)
+
+\subsection{最小二乘} % (fold)
+\label{sub:最小二乘}
+
+\subsubsection{法线方程} % (fold)
+\label{ssub:法线方程}
+
+对于超定方程$Ax = b$, 通过要求$\pare{b-A\overbar{x}}\perp \setcond{Ax}{x\in \+bR^n}$得到误差最小的解. 从而
+\[ x^T A^T \pare{b-A\overbar{x}} = 0,\quad \forall x\in\+bR^n. \]
+这要求$A^T\pare{b-A\overbar{x}} = 0$, 即
+\[ A^TA\overbar{x} = A^T b. \]
+谓\emph{法线方程}.
+\begin{theorem}[最小二乘的法线方程]
+    对于超定方程$Ax=b$, 求解
+    \[ A^T A\overbar{x} = A^T b \]
+    所得$\overbar{x}$即为最小二乘解, 可以最小化余项$r=b-Ax$的Euclid长度.
+\end{theorem}
+为了度量误差, 引入Euclid长度(\emph{$2$-范数})
+\[ \norm{r}_2 = \sqrt{r_1^2+\cdots+r_m^2}. \]
+\emph{平方误差}
+\[ \mathrm{SE} = r_1^2 + \cdots + r_m^2. \]
+以及\emph{均方根误差}
+\[ \mathrm{RMSE} = \sqrt{\mathrm{SE}/m} = \sqrt{\pare{r_1^2 + \cdots + r_m^2}/m}. \]
+
+\paragraph{数据的拟合模型} % (fold)
+\label{par:数据的拟合模型}
+
+对于数据$\pare{x_1,y_1}$, $\cdots$, $\pare{x_m,y_m}$, 选择模型$y = c_1 + c_2 x$拟合之, 有超定方程
+\[ Ac=b,\quad A = \begin{pmatrix}
+    1 & x_1 \\ 1 & x_2 \\ \vdots & \vdots \\ 1 & x_m
+\end{pmatrix},\quad c = \begin{pmatrix}
+    c_1 \\ c_2
+\end{pmatrix},\quad b = \begin{pmatrix}
+    y_1 \\ y_2 \\ \vdots \\ y_m
+\end{pmatrix}. \]
+法线方程仍为
+\[ A^T A\overbar{x} = A^T b. \]
+若将模型选择为$y = c_1 + c_2t + c_3t^2$, 则相应的超定方程为
+\[ Ac=b,\quad A = \begin{pmatrix}
+    1 & x_1 & x_1^2 \\
+    1 & x_2 & x_2^2 \\
+    \vdots & \vdots & \vdots \\
+    1 & x_m & x_m^2
+\end{pmatrix},\quad c = \begin{pmatrix}
+    c_1 \\ c_2 \\ c_3
+\end{pmatrix},\quad b = \begin{pmatrix}
+    y_1 \\ y_2 \\ \vdots \\ y_m
+\end{pmatrix}. \]
+
+\begin{remark}
+    法线方程中计算$A^TA$容易导致条件数过大, 引发较大的前向误差.
+\end{remark}
+
+% paragraph 数据的拟合模型 (end)
+
+% subsubsection 法线方程 (end)
+
+\subsubsection{模型概述} % (fold)
+\label{ssub:模型概述}
+
+\paragraph{周期数据} % (fold)
+\label{par:周期数据}
+
+对于周期数据, 例如一日的温度, 使用$y = c_1 + c_2\cos 2\pi t + c_3\sin 2\pi t$拟合之. 取
+\[ A = \begin{pmatrix}
+    1 & \cos 0 & \sin 0 \\
+    1 & \cos 2\pi/n & \sin 2\pi/n \\
+    1 & \cos 2\cdot 2\pi/n & \sin 2\cdot 2\pi/n \\
+    \vdots & \vdots & \vdots \\
+    1 & \cos \pare{n-1}\cdot 2\pi/n & \sin \pare{n-1}\cdot 2\pi/n
+\end{pmatrix},\quad b = \begin{pmatrix}
+    y_1 \\ y_2 \\ y_3 \\ \vdots \\ y_n
+\end{pmatrix}. \]
+此时$A^TA$是对角矩阵.
+
+% paragraph 周期数据 (end)
+
+\paragraph{数据线性化} % (fold)
+\label{par:数据线性化}
+
+指数模型$y=c_1e^{c_2t}$不能直接进行最小二乘拟合, 因为$c_2$不是在模型方程中并非线性. 取对数可解决这一问题.
+\begin{remark}
+    取对数后所得最小二乘解和直接最小化误差的指数模型所得$c_1$, $c_2$不一定相同.
+\end{remark}
+取对数后, 记$c'_1 = \ln c_1$, 则模型为$\ln y = c'_1 + c_2t$, 这可以最小二乘拟合.
+\par
+对于幂模型, $y = c_1t^{c_2}$, 类似的方法依然适用. 记$c'_1 = \ln c_1$, 则拟合模型为$\ln y = c'_1 + c_2\ln t$.
+\par
+对于$y=c_1te^{c_2 t}$, 模型可以线性化为$\ln y = \ln c_1 + \ln t + c_2 t$. 或者$c'_1 + c_2 t = \ln y - \ln t$, 即可最小二乘拟合.
+
+% paragraph 数据线性化 (end)
+
+% subsubsection 模型概述 (end)
+
+\subsubsection{QR分解} % (fold)
+\label{ssub:qr分解}
+
+对$A$的列作Gram-Schmidt正交化, 可得其(消减)QR分解
+\[ \begin{pmatrix}
+    A_1 & \cdots & A_n
+\end{pmatrix} = \begin{pmatrix}
+    q_1 & \cdots & q_n
+\end{pmatrix}\begin{pmatrix}
+    r_{11} & r_{12} & \cdots & r_{1n} \\
+    & r_{22} & \cdots & r_{2n} \\
+    & & \ddots & \vdots \\
+    & & & r_{nn}
+\end{pmatrix} = QR. \]
+由$\curb{A_j}$线性无关之假设可得$r_{jj}$非零.
+\begin{ex}
+    非方阵亦可如是分解,
+    \[ A = \begin{pmatrix}
+        1 & -4 \\
+        2 & 3 \\
+        2 & 2
+    \end{pmatrix} = \begin{pmatrix}
+        1/3 & -14/15 \\
+        2/3 & 1/3 \\
+        2/3 & 2/15
+    \end{pmatrix} \begin{pmatrix}
+        3 & 2 \\
+        0 & 5
+    \end{pmatrix} = QR. \]
+\end{ex}
+\begin{matlablst}
+/@$A_1$@/, ..., /@$A_n$@/为线性无关向量.
+for j = 1, 2, ..., n
+    /@$y$@/ = /@$A_j$@/
+    for i = 1, 2, ..., j - 1
+        /@$r_{ij}$@/ = /@$q_i^T A_j$@/
+        /@$y$@/ = /@$y - r_{ij}q_i$@/
+    end
+    /@$r_{jj}$@/ = /@$\norm{y}_2$@/
+    /@$q_j$@/ = /@$y/r_{jj}$@/
+end
+\end{matlablst}
+为了填满单位正交向量的矩阵, 得到完整的$\+bR^m$的基, 实现完全的QR分解, 可以在$A_j$中加上$m-n$个额外向量, 得到
+\[ \begin{pmatrix}
+    A_1 & \cdots & A_n
+\end{pmatrix} = \begin{pmatrix}
+    q_1 & \cdots & q_m
+\end{pmatrix}\begin{pmatrix}
+    r_{11} & r_{12} & \cdots & r_{1n} \\
+    & r_{22} & \cdots & r_{2n} \\
+    & & \ddots & \vdots \\
+    & & & r_{nn} \\
+    0 & \cdots & \cdots & 0 \\
+    \vdots & & & \vdots \\
+    0 & \cdots & \cdots & 0
+\end{pmatrix} = QR. \]
+QR分解可直接应用于线性方程之求解, 如
+\[ Ax = b \xlongrightarrow{A=QR} QRx = b \Rightarrow Rx = Q^Tb. \]
+应用于最小二乘, 欲使$\norm{QRx-b}_2$最小, 即$\norm{Rx-Q^Tb}_2$最小, 即
+\[ \begin{pmatrix}
+    e_1 \\ \vdots \\ e_n \\\hdashline e_{n+1} \\ \vdots \\ e_m
+\end{pmatrix} = \begin{pmatrix}
+    r_{11} & r_{12} & \cdots & r_{1n} \\
+    & r_{22} & \cdots & r_{2n} \\
+    & & \ddots & \vdots \\
+    & & & r_{nn} \\
+    \hdashline
+    0 & \cdots & \cdots & 0 \\
+    \vdots & & & \vdots \\
+    0 & \cdots & \cdots & 0
+\end{pmatrix}\begin{pmatrix}
+    x_1 \\ \vdots \\ x_n
+\end{pmatrix} - \begin{pmatrix}
+    d_1 \\ \vdots \\ d_n \\ \hdashline d_{n+1} \\ \vdots \\d_{m}
+\end{pmatrix},\quad d = Q^Tb. \]
+选取$x$令$e$的虚线以上为零, 虚线以下和$x$无关, 则此时具有最小误差. $\norm{e}_2^2 = d_{n+1}^2 + \cdots + d_{m}^2$.
+\begin{theorem}
+    给定$m\times n$的超定系统$Ax = b$, $A = QR$, 零$\hat R$为$R$的上$n\times n$子矩阵, $\hat d = d = Q^Tb$为$d$上方$n$个元素, 则$\hat R\overbar x = \hat d$求解可得最小二乘解$\overbar{x}$.
+\end{theorem}
+Gram-Schmidt正交化算法可以改进, 使之更稳定.
+\begin{matlablst}
+/@$A_1$@/, ..., /@$A_n$@/为线性无关向量.
+for j = 1, 2, ..., n
+    /@$y$@/ = /@$A_j$@/
+    for i = 1, 2, ..., j - 1
+        /@$r_{ij}$@/ = /@$q_i^T y$@/
+        /@$y$@/ = /@$y - r_{ij}q_i$@/
+    end
+    /@$r_{jj}$@/ = /@$\norm{y}_2$@/
+    /@$q_j$@/ = /@$y/r_{jj}$@/
+end
+\end{matlablst}
+
+\paragraph{Householder反射子} % (fold)
+\label{par:householder反射子}
+
+\begin{lemma}
+    若$x$和$w$具有相同长度, 则$w+x$和$w-x$正交.
+\end{lemma}
+投影矩阵谓满足$P^2=P$者. 对于向量$v = w-x$,
+\[ P = \frac{v v^T}{v^T v} \]
+构成一投影矩阵. $Pu$是$u$在$v$上之投影. 令$H = I-2P$, 则$Hx = w$. $H$谓Householder反射子, 对称并正交.
+
+\begin{theorem}[Householder反射子]
+    对于模长相同的向量$x$和$w$, 定义$v = w-x$, 则$H = I - 2v v^T/v^Tv$是对称并正交的矩阵, 且$Hx=w$.
+\end{theorem}
+从矩阵$A$开始, 令$x_1$是$A$的第一列, $w = \pare{\norm{x_1}_2, 0,\cdots, 0}$是第一个坐标轴上的向量, 则
+\[ H_1 A = H_1 \begin{pmatrix}
+    * & * & * \\
+    * & * & * \\
+    * & * & * \\
+    * & * & *
+\end{pmatrix} = \begin{pmatrix}
+    * & * & * \\
+    0 & * & * \\
+    0 & * & * \\
+    0 & * & *
+\end{pmatrix}. \]
+之后将包含$H_1A$第二列下方$m-1$个元素的$\pare{m-1}$维向量移动到$\pare{\norm{x_2}_2,0,\cdots,0}$, 即
+\[ \pare{\begin{array}{c:ccc}
+    1 & 0 & 0 & 0 \\
+    \hdashline
+    0 & & & \\
+    0 & & \hat H_2 & \\
+    0 & & &
+\end{array}} \pare{\begin{array}{c:cc}
+    * & * & * \\
+    \hdashline
+    0 & * & * \\
+    0 & * & * \\
+    0 & * & *
+\end{array}} = \pare{\begin{array}{c:cc}
+    * & * & * \\
+    \hdashline
+    0 & * & * \\
+    0 & 0 & * \\
+    0 & 0 & *
+\end{array}}. \]
+最后,
+\[ \pare{\begin{array}{cc:cc}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    \hdashline
+    0 & 0 & \+:m22{c}{$\hat H_3$} \\
+    0 & 0 & &
+\end{array}} \pare{\begin{array}{cc:c}
+    * & * & * \\
+    0 & * & * \\
+    \hdashline
+    0 & 0 & * \\
+    0 & 0 & *
+\end{array}} = \pare{\begin{array}{cc:c}
+    * & * & * \\
+    0 & * & * \\
+    \hdashline
+    0 & 0 & * \\
+    0 & 0 & 0
+\end{array}}. \]
+最终
+\[ H_3H_2H_1A = R \Rightarrow A = H_1H_2H_3R = QR, \]
+因为$H$对称正交.
+\begin{remark}
+    QR分解并不唯一. 例如$QR = QDDR$, 其中$D$是$\pm 1$构成的对角矩阵.
+\end{remark}
+
+% paragraph householder反射子 (end)
+
+% subsubsection qr分解 (end)
+
+\subsubsection[GMRES]{广义最小余项(GMRES)方法} % (fold)
+\label{ssub:广义最小余项}
+
+GMRES属于\emph{Krylov方法}, 依赖于对\emph{Krylov空间}的计算. 该空间是向量$\curb{r, Ar, \cdots, A^k r}$所张成的空间, 其中$r = b-Ax_0$是初始估计的余项. GMRES可以求解大规模稀疏非对称线性方程组$Ax=b$.
+\begin{matlablst}
+/@$x_0$@/ = 初始估计
+/@$r$@/ = /@$b - Ax_0$@/
+/@$q_1$@/ = /@$r/\norm{r}_2$@/
+for k = 1, 2, ..., m
+    /@$y$@/ = /@$Aq_k$@/
+    for j = 1, 2, ..., k
+        /@$h_{jk}$@/ = /@$q_j^T y$@/
+        /@$y$@/ = /@$y - h_{jk}q_j$@/
+    end
+    /@$h_{k+1,k}$@/ = /@$\norm{y}_2$@/ (若/@$h_{k+1,k} = 0$@/, 则跳过下一行并在底端终止)
+    /@$q_{k+1}$@/ = /@$y/h_{k+1,k}$@/
+    最小化/@$\norm{Hc_k - \brac{\norm{r}_2,0,0,\cdots,0}^T}_2$@/得到/@$c_k$@/
+    /@$x_k$@/ = /@$Q_kc_k$@/ + /@$x_0$@/
+end
+\end{matlablst}
+代码的内层循环保证
+\[ A \underbrace{\begin{pmatrix}
+    q_1 & \cdots & q_k
+\end{pmatrix}}_{Q_k} = \underbrace{\begin{pmatrix}
+    q_1 & \cdots & q_k & q_{k+1}
+\end{pmatrix}}_{Q_{k+1}} \begin{pmatrix}
+    h_{11} & h_{12} & \cdots & h_{1k} \\
+    h_{21} & h_{22} & \cdots & h_{2k} \\
+           & h_{32} & \cdots & h_{3k} \\
+           &        & \ddots & \vdots \\
+           &        &        & h_{k+1, k}
+\end{pmatrix}. \]
+$Q_k$的列张成$k$维的Krylov空间, 在该空间中搜索$x\+_add_$改进$x_0$. 记$x\+_add_ = Q_k c$, 则所欲最小化模长者为
+\[ b - A\pare{x_0 + x\+_add_} = r_0 - Ax\+_add_. \]
+即最小化
+\[ \norm{Ax\+_add_ - r}_2 = \norm{AQ_k c - r}_2 = \norm{Q_{k+1}H_kc-r}_2 = \norm{H_k c - Q_{k+1}^T r}_2. \]
+注意到$Q_{k+1}^Tr = \brac{\norm{r}_2, 0, \cdots, 0}^T$, 现在最小二乘问题变为
+\[ \begin{pmatrix}
+    h_{11} & h_{12} & \cdots & h_{1k} \\
+    h_{21} & h_{22} & \cdots & h_{2k} \\
+           & h_{32} & \cdots & h_{3k} \\
+           &        & \ddots & \vdots \\
+           &        &        & h_{k+1, k}
+\end{pmatrix}\begin{pmatrix}
+    c_1 \\ c_2 \\ \vdots \\ c_k
+\end{pmatrix} = \begin{pmatrix}
+    \norm{r}_2 \\ 0 \\ \vdots \\ 0
+\end{pmatrix}. \]
+通常GMRES的后向误差$\norm{b-Ax_k}_2$随$k$单调下降. 理论上算法在$n$步后将终止, 只要$A$非奇异即可求解$x$. $Q_k$可能并非稀疏矩阵, 故内存会限制迭代次数. \emph{重启GMRES}在迭代一定次数后丢弃$Q_k$重新开始迭代, 使用当前最优估计$x_k$作为新的$x_0$.
+\par
+预条件GMRES引入了预条件子$M$, 将问题转化为$M^{-1}Ax = M^{-1}b$.
+\begin{matlablst}
+/@$x_0$@/ = 初始估计
+/@$r$@/ = /@$M^{-1}\pare{b - Ax_0}$@/
+/@$q_1$@/ = /@$r/\norm{r}_2$@/
+for k = 1, 2, ..., m
+    /@$w$@/ = /@$M^{-1}Aq_k$@/
+    for j = 1, 2, ..., k
+        /@$h_{jk}$@/ = /@$w^T q_j$@/
+        /@$w$@/ = /@$w - h_{jk}q_j$@/
+    end
+    /@$h_{k+1,k}$@/ = /@$\norm{w}_2$@/ (若/@$h_{k+1,k} = 0$@/, 则跳过下一行并在底端终止)
+    /@$q_{k+1}$@/ = /@$w/h_{k+1,k}$@/
+    最小化/@$\norm{Hc_k - \brac{\norm{r}_2,0,0,\cdots,0}^T}_2$@/得到/@$c_k$@/
+    /@$x_k$@/ = /@$Q_kc_k$@/ + /@$x_0$@/
+end
+\end{matlablst}
+
+% subsubsection 广义最小余项 (end)
+
+% subsection 最小二乘 (end)
+
+% section 求解方程 (end)
+
+\end{document}

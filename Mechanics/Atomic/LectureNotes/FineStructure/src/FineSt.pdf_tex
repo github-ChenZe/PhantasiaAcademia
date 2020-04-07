@@ -1,0 +1,65 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'FineSt.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{1069.49707031bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.56827126)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{FineSt.pdf}}%
+    \put(-0.00232842,0.47182397){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n=3$}}}%
+    \put(-0.00232842,0.02101129){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n=2$}}}%
+    \put(0.13191358,0.46280771){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{3^2S_{1/2}}$}}}%
+    \put(0.41943189,0.46280771){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{3^2P_{1/2}}$}}}%
+    \put(0.41943189,0.50488354){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{3^2P_{3/2}}$}}}%
+    \put(0.71296103,0.50488354){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{3^2D_{3/2}}$}}}%
+    \put(0.71296103,0.54695941){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{3^2D_{5/2}}$}}}%
+    \put(0.13191358,0.01226137){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{2^2S_{1/2}}$}}}%
+    \put(0.41951739,0.01226137){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{2^2P_{1/2}}$}}}%
+    \put(0.41951739,0.08238786){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ce{2^2P_{3/2}}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{FineSt.pdf}}%
+  \end{picture}%
+\endgroup%

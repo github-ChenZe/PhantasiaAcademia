@@ -1,0 +1,137 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{2.7 (3)}%
+柱坐标下$s<a$内的Laplace方程有解
+\[ u\pare{s,\theta} = A_0 + \sum_{n=1}^\infty s^n \pare{A_n \cos n\theta + B_n \sin n\theta}, \]
+与边界条件$\displaystyle u\vert_{r=a} = \sin 2\theta \cos\theta = \frac{\sin 3\theta}{2} + \frac{\sin\theta}{2}$对照得
+\[ u\pare{s,\theta} = \boxed{\half \pare{\frac{s}{a}} \sin \theta + \half \pare{\frac{s}{a}}^3 \sin 3\theta.} \]
+\newprob{2.9 (3)}%
+设$u=T\pare{t}X\pare{x}$, 分离变量有
+\[ \frac{T''}{T} + 2h\frac{T'}{T} = a^2\frac{X''}{X} = -a^2\lambda^2, \]
+由$u\pare{t,0} = u\pare{t,l} = 0$知$\displaystyle \lambda_n = \frac{n\pi}{l}$, $\displaystyle X\pare{x} = \sin \frac{n\pi x}{l}$, 相应的$T$满足
+\[ T_n'' + 2hT_n' + a^2\lambda_n^2 = 0 \xLongrightarrow{h<a\lambda_1} \begin{cases}
+    \displaystyle T_n = e^{-ht}\pare{A_n \cos \omega_n t + B_n \sin \omega_n t},\\ \displaystyle \boxed{\omega_n = \sqrt{\pare{\frac{a\pi n}{l}}^2 - h^2}.}
+\end{cases} \]
+从而
+\[ \boxed{u = \sum_{n=1}^\infty e^{-ht} \sin \frac{n\pi x}{l} \pare{A_n \cos \omega_n t + B_n \sin \omega_n t}.} \]
+由边界条件
+\begin{align*}
+    & u\vert_{t=0} = \sum_{n=1}^\infty A_n \sin \frac{n\pi x}{l} \Rightarrow \boxed{A_n = \frac{2}{l}\int_0^l \varphi\pare{x} \sin \frac{n\pi x}{l}\,\rd{x},} \\
+    & u_t\vert_{t=0} = \sum_{n=1}^\infty \brac{-hA_n + \omega_n B_n} \sin \frac{n\pi x}{l} \\
+    & \Rightarrow \boxed{B_n = \rec{\omega_n} \brac{\frac{2}{l}\int_0^l \psi\pare{x} \sin \frac{n\pi x}{l}\,\rd{x} + hA_n}.}
+\end{align*}
+\newprob{2.10 (1)}%
+令$\displaystyle u = v + \frac{r^2}{4}$, 则问题转化为
+\[ \begin{cases}
+    \laplacian v = 0, \\
+    \displaystyle v\vert_{r=1} = 1 + \cos^2 \theta = \frac{3}{2} + \half \cos 2\theta, \\
+    \displaystyle v\vert_{r=2} = \sin^2\theta = \half - \half \cos 2\theta,
+\end{cases} \Rightarrow \begin{cases}
+    \displaystyle v = B_0 \ln \frac{r}{r_0}\\
+    \displaystyle + \pare{A_2 r^2 + \frac{B_2}{r^2}} \cos 2\theta.
+\end{cases} \]
+从而
+\[ v = \log_2 \frac{2\sqrt{2}}{r} + \pare{-\rec{6}r^2 + \frac{2}{3r^2}}\cos 2\theta. \]
+故
+\[ \boxed{u = \log_2 \frac{2\sqrt{2}}{r} + \pare{-\rec{6}r^2 + \frac{2}{3r^2}}\cos 2\theta + \frac{r^2}{4}.} \]
+\newprob{2.12 (3)}%
+由Duhamel原理, 问题转化为
+\[ \begin{cases}
+    w_t - a^2 w_{xx} = 0, \\
+    w\pare{t,0;\tau} = w\pare{t,l;\tau} = 0, \\
+    \displaystyle w\pare{\tau,x;\tau} = \frac{A}{h} \pare{1-\frac{x}{l}}e^{-h\tau}.
+\end{cases} \Rightarrow w\pare{x,t;\tau} = \begin{cases}
+    \displaystyle \sum_{n=1}^\infty e^{-a^2\omega_n^2\pare{t-\tau}} A_n \sin \omega_n x,\\ 
+    \displaystyle \omega_n = \frac{n\pi}{l}.
+\end{cases} \]
+其中
+\[ A_n = \frac{2}{l}\int_0^l A\pare{1-\frac{x}{l}} e^{-h\tau}\,\rd{x} = \frac{2Ae^{-h\tau}}{n\pi}, \]
+得到
+\[ w = \frac{2A e^{-h\tau}}{\pi} \sum_{n=1}^\infty e^{-a\omega_n^2 \pare{t-\tau}}\frac{\sin \omega_n x}{n}. \]
+积分得
+\[ u\pare{t,x} = \int_0^t w\pare{t,x;\tau}\,\rd{\tau} = \boxed{\frac{2A}{\pi} \sum_{n=1}^\infty \frac{e^{-ht} - e^{-\pare{\frac{a\pi n}{l}}^2 t}}{\displaystyle \pare{\frac{a\pi n}{l}}^2 - h} \cdot \rec{n}\sin \frac{n\pi x}{l}.} \]
+\newprob{2.13 (1)}%
+设$u = v+\pare{x-1}$, 则问题转化为
+\[ \begin{cases}
+    v_{tt} = a^2 v_{xx}, \\
+    v\pare{0,x} = 1 - x,\\
+    v_x\pare{t,0} = 0,\\
+    v\pare{t,1} = 0,\\
+    v_t\pare{0,x} = 0,
+\end{cases} \xLongrightarrow{v=TX} \begin{cases}
+    X'' + \lambda^2 X = 0, \\
+    X'\pare{0} = 0,\\
+    X\pare{1} = 0,\\
+    T'' + a^2\lambda^2 T = 0,\\
+    T'\pare{0} = 0,
+\end{cases} \Rightarrow \begin{cases}
+    \displaystyle X = \cos \pare{n+\half} \pi x, \\
+    \displaystyle T = A_n \cos a\pare{n+\half} \pi t.
+\end{cases} \]
+得到
+\[ v = \sum_{n=0}^\infty A_n \cos \brac{\pare{n+\half}\pi x}\cos \brac{a\pare{n+\half} \pi t}, \]
+其中
+\[ A_n = 2\int_0^1 \pare{1-x}\cos\brac{\pare{n+\half}\pi x}\,\rd{x} = \frac{8}{\pare{2n+1}^2\pi^2}. \]
+代入得
+\[ \boxed{u = \sum_{n=0}^\infty \frac{8}{\pare{2n+1}^2\pi^2} \cos \brac{\pare{n+\half}\pi x} \cos \brac{a\pare{n+\half} \pi t} + \pare{x-1}.} \]
+\newprob{3.1 (1)}%
+柱坐标下Laplace方程为
+\[ \rec{s}\+DsD{}\pare{s\+DsD\varphi} + \rec{s^2}\+D{\phi^2}D{^2\varphi} + \+D{z^2}D{^2 \varphi} = 0. \]
+令$\varphi = R\pare{s}\Phi\pare{\phi}Z\pare{z}$, 有
+\[ \rec{R\pare{s}s}\+DsD{}\pare{s\+DsD{R\pare{s}}} + \rec{\Phi\pare{\phi}s^2}\+D{\phi^2}D{^2\Phi\pare{\phi}} + \rec{Z\pare{z}}\+D{z^2}D{^2 Z\pare{z}} = 0. \]
+故有
+\begin{align*}
+    & \boxed{\+d{z^2}d{^2Z} = \lambda Z,} \\
+    & \frac{s}{R}\+dsd{}\pare{s\+dsdR} + \rec{\Phi}\+d{\phi^2}d{^2\Phi} = -\lambda s^2.
+\end{align*}
+从而
+\begin{align*}
+    & \boxed{\+d{\phi^2}d{^2\Phi} = -m^2\Phi,}\\
+    & \boxed{s\+dsd{}\pare{s\+dsdR} + \pare{\lambda s^2 - m^2}R = 0.}
+\end{align*}
+
+\end{document}

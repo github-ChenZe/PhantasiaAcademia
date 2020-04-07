@@ -1,0 +1,166 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{1.11}%
+$\displaystyle \div \+vE = 0 \xLongrightarrow{E_z = 0} \partial_x E_{0x} + \partial_y E_{0y} = 0$.\quad (i)\\
+$\displaystyle \div \+vB = 0 \xLongrightarrow{B_z = 0} \partial_x B_{0x} + \partial_y E_{0y} = 0$.\quad (ii)\\
+$\displaystyle \curl \+vE = -\partial_t \+vB \xLongrightarrow[B_z = 0]{E_z = 0} \begin{cases}
+    -kE_{0y} = \omega B_{0x}, & (\mathrm{I})\\
+    kE_{0x} = \omega B_{0y}, & (\mathrm{II}) \\
+    \partial_x E_{0y} - \partial_y E_{0x} = 0. & (\mathrm{iii})
+\end{cases}$\\
+$\displaystyle \curl \+vB = \rec{c^2} \partial_t \+vE \xLongrightarrow[B_z = 0]{E_z = 0} \begin{cases}
+    -kB_{0y} = -c^2 E_{0x}, & (\mathrm{III})\\
+    kB_{0x} = c^2 E_{0y}, & (\mathrm{IV})\\
+    \partial_x B_{0y} - \partial_y B_{0x} = 0. & (\mathrm{iv})
+\end{cases}$\\
+由(I)(II)(III)(IV)可得
+\[ \boxed{\omega/k = c,\quad \+vE_0 = c\+vB_0\times \+uz.} \]
+(i) $\xLongrightarrow{E_{0z} = 0} \partial_x E_{0x} + \partial_y E_{0y} + \partial_z E_{0z} = \boxed{\div \+vE_0 = 0.}$\\
+(ii) $\xLongrightarrow{B_{0z} = 0} \partial_x B_{0x} + \partial_y B_{0y} + \partial_z B_{0z} = \boxed{\div \+vB_0 = 0.}$\\
+(iii) $\xLongrightarrow[\partial_z \+vE_0 = 0]{E_{0z} = 0} \begin{vmatrix}
+    \+ux & \+uy & \+uz \\
+    \partial_x & \partial_y & \cancel{\partial_z} \\
+    E_{0x} & E_{0y} & \cancelto{0}{E_{0z}}
+\end{vmatrix} = \+uz\pare{\partial_x E_{0y} - \partial_y E_{0x}} = \boxed{\curl \+vE_0=0.}$\\
+(iv) $\xLongrightarrow[\partial_z \+vB_0 = 0]{B_{0z} = 0} \begin{vmatrix}
+    \+ux & \+uy & \+uz \\
+    \partial_x & \partial_y & \cancel{\partial_z} \\
+    B_{0x} & B_{0y} & \cancelto{0}{B_{0z}}
+\end{vmatrix} = \+uz\pare{\partial_x B_{0y} - \partial_y B_{0x}} = \boxed{\curl \+vB_0=0.}$
+\newprob{1.12}%
+对于线性介质且表面附近$\+vE = 0$的情形, 两侧电场确实连续. 然而若$\+vE \neq 0$, 则存在束缚电荷, 此时即使表面无自由电荷且$\div \+vE$两边皆为零, 在表面处仍有$\div \+vE = \sigma\+_b_ \delta\pare{z}/\epsilon_0 \neq 0$. 故两侧电场不连续, 但$\+vD$场在无自由电荷时连续.
+\newprob{1.13}%
+$\displaystyle \+vE_\parallel^{\pare{1}} =\+vE_\parallel^{\pare{2}}, \epsilon_1 E_\perp^{\pare{1}} = \epsilon_2 E_\perp^{\pare{2}} \Rightarrow \frac{\tan \theta_2}{\tan \theta_1} = \frac{E_\parallel^{\pare{2}}/E_\perp^{\pare{2}}}{E_\parallel^{\pare{1}}/E_\perp^{\pare{1}}} = \frac{\epsilon_2}{\epsilon_1} \Rightarrow \epsilon_1 \tan\theta_2 = \epsilon_2 \tan\theta_1$.\\
+$\displaystyle \sigma' = \epsilon_0\pare{E_\perp^{\pare{2}} - E_\perp^{\pare{1}}} = \boxed{\epsilon_0 \pare{\frac{D_n}{\epsilon_2} - \frac{D_n}{\epsilon_1}}.}$
+\newprob{1.14}%
+$\displaystyle \sigma_1 E_1 = \sigma_2 E_2 = j_n$, $\displaystyle \sigma_0 = \epsilon_2 E_2 - \epsilon_1 E_1 = \boxed{\pare{\frac{\epsilon_2}{\sigma_2} - \frac{\epsilon_1}{\sigma_1}}j_n.}$\\
+$\displaystyle \sigma = \epsilon_0 E_2 - \epsilon_0 E_1$, $\displaystyle \sigma' = \sigma - \sigma_0 = \boxed{\pare{\frac{\epsilon_0 - \epsilon_2}{\sigma_2} - \frac{\epsilon_0 - \epsilon_1}{\sigma_1}}j_n.}$
+\newprob{Pr 1}%
+$\displaystyle \begin{pmatrix}
+    \+vE' \\ c\+vB'
+\end{pmatrix} = \begin{pmatrix}
+    \cos \theta & \sin \theta \\
+    -\sin\theta & \cos \theta
+\end{pmatrix} \begin{pmatrix}
+    \+vE \\ c\+vB
+\end{pmatrix}$. Maxwell方程组表明
+\[ \div \begin{pmatrix}
+    \+vE \\ c\+vB
+\end{pmatrix} = 0,\quad \begin{pmatrix}
+    \curl & \displaystyle \+D{\pare{ct}}D{} \\
+    \displaystyle -\+D{\pare{ct}}D{} & \curl
+\end{pmatrix} \begin{pmatrix}
+    \+vE \\ c\+vB
+\end{pmatrix} = 0. \]
+从而
+\[ \div \begin{pmatrix}
+    \+vE' \\ c\+vB'
+\end{pmatrix} = \div \begin{pmatrix}
+    \cos \theta & \sin \theta \\
+    -\sin\theta & \cos \theta
+\end{pmatrix} \begin{pmatrix}
+    \+vE \\ c\+vB
+\end{pmatrix} = \begin{pmatrix}
+    \cos \theta & \sin \theta \\
+    -\sin\theta & \cos \theta
+\end{pmatrix} \div \begin{pmatrix}
+    \+vE \\ c\+vB
+\end{pmatrix} = 0, \]
+故$\+vE'$和$\+vB'$的Gauss定律成立.
+\begin{align*}
+    & \begin{pmatrix}
+        \curl & \displaystyle \+D{\pare{ct}}D{} \\
+        \displaystyle -\+D{\pare{ct}}D{} & \curl
+    \end{pmatrix}\begin{pmatrix}
+        \+vE' \\ c\+vB'
+    \end{pmatrix} = \begin{pmatrix}
+        \curl & \displaystyle \+D{\pare{ct}}D{} \\
+        \displaystyle -\+D{\pare{ct}}D{} & \curl
+    \end{pmatrix}\begin{pmatrix}
+    \cos \theta & \sin \theta \\
+    -\sin\theta & \cos \theta
+\end{pmatrix}\begin{pmatrix}
+        \+vE \\ c\+vB
+    \end{pmatrix} \\
+    &= \cos\theta \begin{pmatrix}
+        \curl & \displaystyle \+D{\pare{ct}}D{} \\
+        \displaystyle -\+D{\pare{ct}}D{} & \curl
+    \end{pmatrix} \begin{pmatrix}
+        \+vE \\ c\+vB
+    \end{pmatrix} + \sin\theta \begin{pmatrix}
+        \displaystyle -\+D{\pare{ct}}D{} & \curl \\
+        -\curl & -\displaystyle \+D{\pare{ct}}D{}
+    \end{pmatrix} \begin{pmatrix}
+        \+vE \\ c\+vB
+    \end{pmatrix} = 0.
+\end{align*}
+从而$\+vE'$和$\+vB'$的Faraday定律和Amp\`ere-Maxwell定律成立.
+\newprob{Pr 3 (1)}%
+$-\grad \varphi = \grad \pare{\+vr\cdot \+vE} = \pare{\+vE\+v\cdot \grad}\+vr = \+vE$.\\
+$\displaystyle \curl \+vA = -\half \curl\pare{\+vr\times \+vB} = -\half \brac{\pare{\+vB\+v\cdot \grad} \+vr-\+vB\pare{\div \+vr}} = \+vB$.
+\par
+\newprobheader{(2)}%
+$\displaystyle \+d{\lambda}d{} \+vF\pare{\lambda \+vr} = \+d{\lambda}d{\pare{\lambda \+vr}} \+d{\pare{\lambda \+vr}}d{\+vF\pare{\lambda \+vr}} = \rec{\lambda}\pare{\+vr\+v\cdot\grad}\+vF\pare{\lambda \+vr}$.\\
+%
+\makebox[0pt][r]{i.\ }$\displaystyle \curl \+vA = -\int_0^1 \curl\brac{\lambda \+vr\times \+vB\pare{\lambda \+vr,t}}\,\rd{\lambda}$\\
+$\displaystyle \xlongequal{\+vr' = \lambda \+vr} -\int_0^1 \lambda\brac{ {\pare{\+vB\pare{\+vr'}\+v\cdot \grad'} \+vr' - \pare{\+vr'\+v\cdot\grad'}\+vB\pare{\+vr'}} - \+vB\pare{\+vr'}\pare{\div \+vr'} }\,\rd{\lambda}$\\
+$\displaystyle = \int_0^1 \brac{\lambda \pare{\+vr'\+v\cdot\grad'}\+vB\pare{\+vr'} + 2\lambda \+vB\pare{\+vr'}}\,\rd{\lambda} = \int_0^1 \brac{\pare{\lambda \+vr\+v\cdot\grad}\+vB\pare{\lambda \+vr} + 2\lambda \+vB\pare{\lambda \+vr}}\,\rd{\lambda}$\\
+$\displaystyle = \int_0^1 \brac{\lambda^2 \+d\lambda d{}\+vB\pare{\lambda \+vr,t} + 2\lambda \+vB\pare{\lambda \+vr}}\,\rd{\lambda} = \int_0^1 \+d\lambda d{} \brac{\lambda^2 \+vB\pare{\lambda \+vr,t}}\,\rd{\lambda} = \+vB\pare{\+vr,t}$.\\
+%
+\makebox[0pt][r]{ii.\ }$\displaystyle -\grad \varphi - \+DtD{\+vA} = \grad\pare{\+vr\cdot \int_0^1 \+vE\pare{\lambda\+vr,t}\,\rd{\lambda}}  - \+DtD{\+vA}$\\
+$\displaystyle = \pare{\+vr\+v\cdot\grad}\int_0^1 \+vE\pare{\lambda\+vr,t}\,\rd{\lambda} + \int_0^1 \+vE\pare{\lambda \+vr,t}\,\rd{\lambda} + \+vr\times\curb{\curl{\brac{\int_0^1 \+vE\pare{\lambda\+vr,t}\,\rd{\lambda}}}}- \+DtD{\+vA}$\\
+$\displaystyle = \int_0^1 \lambda \+d{\lambda}d{} \+vE\pare{\lambda\+vr,t}\,\rd{\lambda} + \int_0^1 \+vE\pare{\lambda\+vr,t}\,\rd{\lambda} + \+vr\times\curb{-\+DtD{}{\brac{\int_0^1 \lambda\+vB\pare{\lambda\+vr,t}\,\rd{\lambda}}}}- \+DtD{\+vA}$\\
+$\displaystyle  = \int_0^1 \+d\lambda d{} \brac{\lambda\+vE\pare{\lambda\+vr,t}}\,\rd{\lambda} + \+DtD{\+vA} - \+DtD{\+vA} = \+vE\pare{\+vr,t}.$
+\newprob{Pr 4}%
+由$\displaystyle \curl \+vA_\parallel = 0 \Leftrightarrow \+vA_\parallel = \grad \Phi$, $\displaystyle \div \+vA_\perp = 0 \Leftrightarrow \+vA_\perp = \curl \+v\Psi$, 有
+\[ \+vB = \+sF\pare{\+vA} = \+sF\pare{\+vA_\parallel,\+vA_\perp} = \+sF\pare{\grad \Phi, \curl \+v\Psi}. \]
+在规范变换下, $\+vA \mapsto \+vA + \grad \phi$, 从而$\Phi \mapsto \Phi + \phi$且$\+v\Psi$不变. 故
+\[ \+vB = \+sF\pare{\grad \Phi, \curl \+v\Psi} \mapsto \+sF\pare{\grad \Phi + \grad \phi, \curl \+v\Psi} \]
+不变, 因此$\+sF$和第一个变量$\grad \Phi$无关, 只能和第二个变量$\+vA_\perp = \curl \+v\Psi$有关.
+
+\end{document}

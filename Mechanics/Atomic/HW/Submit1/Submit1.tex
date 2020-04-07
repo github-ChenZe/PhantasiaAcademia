@@ -1,0 +1,84 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{1.4}%
+取$\rho_0 = \SI{1.2}{\kilo\gram\per\cubic\meter}$, 则
+\begin{align*}
+    r &= \sqrt{\frac{9\eta}{2\pare{\rho - \rho_0}g}} = \sqrt{\frac{9\times 1.80\times 10^{-5}\times 2.26\times 10^{-4}}{2\times\pare{900-1.2}\times 9.8}} = \boxed{\SI{1.442}{\micro\meter}.} \\
+    e_k &= \frac{6\pi\eta rl}{V}\pare{v_e + v_g} = \frac{6\pi \times 1.80\times 10^{-5}\times 1.442\times 5\times 10^{-9}}{1600}\\ &= \boxed{\SI{4.831e-19}{\coulomb} \approx 3e.}
+\end{align*}%
+\newprob{1.5(1)}%
+此时原子内的电场为
+\[ \+vE\pare{r} = -\frac{\rho \+vr}{3\epsilon_0}, \]
+电子每个分量的运动方程为
+\[ m_e \ddot{x}_i = -\frac{e \rho x_i}{3\epsilon_0}, \]
+故做角频率为$\displaystyle \omega = \sqrt{\frac{e \rho}{3\epsilon_0 m_e}}$的简谐振动.
+\par
+\newprobheader{(2)}%
+\centerline{$\displaystyle k = \frac{e^2}{4\pi\epsilon_0 R^3} = \frac{\pare{1.60\times 10^{-19}}^2}{4\pi\times 8.85\times 10^{-12}\times \pare{1\times 10^{-10}}^3} = \boxed{\SI{231}{\newton\per\meter}.}$}
+\begin{align*}
+    \omega &= \sqrt{\frac{e^2}{4\pi \epsilon_0 R^3m_e}} = \frac{c}{R} \sqrt{\frac{\SI{1.44}{\femto\meter\cdot\mega\eV}}{\SI{1}{\angstrom}\times\SI{0.511}{\mega\eV}}} = \SI{1.59e16}{\radian\per\second}, \\
+    \Rightarrow \nu &= \frac{\omega}{2\pi} = \boxed{\SI{2.53e15}{\hertz}.}
+\end{align*}%
+\newprob{1.6(1)} \centerline{$\displaystyle D = \frac{e^2}{4\pi\epsilon_0}\frac{Z_1Z_2}{E} = \SI{1.44}{\femto\meter\cdot\mega\eV} \times \frac{2\times 79}{\SI{5.3}{\mega\eV}} = \SI{42.93}{\femto\meter}$.}
+\[ \cot \frac{\theta}{2} = \frac{2b}{D} \Rightarrow b = \frac{D}{2} = \frac{\SI{42.93}{\femto\meter}}{2} = \boxed{\SI{21.46}{\femto\meter}.} \]
+\par
+\newprobheader{(2)} \centerline{$\displaystyle \left\{\begin{aligned}
+    & r\+_m_v\+_m_ = bv_0, \\
+    & \frac{e^2}{4\pi\epsilon_0} \frac{Z_1Z_2}{r\+_m_} = E_0 - \half mv\+_m_^2
+\end{aligned}\right. \Rightarrow r\+_m_ = \frac{-D \pm \sqrt{\pare{D^2 + 4b^2}}}{2b^2}$.}
+\[ \xLongrightarrow{D=2b} r\+_m_ = \frac{b}{\sqrt{2}-1} = \SI{21.46}{\femto\meter}\pare{1+\sqrt{2}} = \boxed{\SI{51.81}{\femto\meter}.} \]
+\par
+\newprobheader{(3)}%
+此时$b = 0$, $r\+_m_ = D = \boxed{\SI{42.93}{\femto\meter}.}$
+\newprob{1.7(1)}%
+{$\displaystyle D = D = \frac{e^2}{4\pi\epsilon_0}\frac{Z_1Z_2}{E} = \SI{1.44}{\femto\meter\cdot\mega\eV} \times \frac{1\times 79}{\SI{1.5}{\mega\eV}} = \SI{75.84}{\femto\meter}$,}
+\begin{flalign*}
+    &\displaystyle N = \frac{\SI{1.932e4}{\kilo\gram\per\cubic\meter}}{\SI{197}{\gram\per\mole}}\times \SI{6.022e23}{\per\mole} = \SI{5.91e28}{\per\cubic\meter}, &\\
+    &Nt\pi \frac{D^2}{4} = 5.91\times 10^{28} \cdot 1\times 10^{-6} \times \pi \times \frac{\pare{75.84\times 10^{-15}}^2}{4} = 2.67\times 10^{-4}. &\\
+    &\Rightarrow \frac{\Delta n\pare{\SI{90}{\degree}\sim}}{n} = Nt\pi \frac{D^2}{4} \left.\cot^2 \frac{\theta}{2}\right|_{\theta=\SI{180}{\degree}}^{\theta=\SI{90}{\degree}}= \boxed{2.67\times 10^{-4} = 0.0267\%.} &
+\end{flalign*}
+\par
+\newprobheader{(2)}%
+这几个角度的质子数的比例即为$\displaystyle \frac{\sin\theta}{\sin^4\pare{\theta/2}}$的比例.
+\begin{align*}
+&\frac{\sin \SI{30}{\degree}}{\sin^4 \pare{\SI{30}{\degree}/2}} : \frac{\sin \SI{90}{\degree}}{\sin^4 \pare{\SI{90}{\degree}/2}} : \frac{\sin \SI{150}{\degree}}{\sin^4 \pare{\SI{150}{\degree}/2}} \\
+&= 111.43 : 4 : 0.5744 = \boxed{1 : 0.0359 : 0.00515.}
+\end{align*}
+\par
+\newprobheader{(3)} $\displaystyle \frac{\Delta n\pare{\SI{149}{\degree}\sim\SI{151}{\degree}}}{n} = Nt\pi \frac{D^2}{4} \left.\cot^2 \frac{\theta}{2}\right|_{\theta=\SI{151}{\degree}}^{\theta=\SI{149}{\degree}}= 2.677\times 10^{-6}$.
+\begin{flalign*}
+& I\pare{\SI{149}{\degree}\sim\SI{151}{\degree}} = I\cdot \frac{\Delta n\pare{\SI{149}{\degree}\sim\SI{151}{\degree}}}{n} = \SI{2.677e-14}{\ampere}, & \\
+& \+cN\pare{\SI{149}{\degree}\sim\SI{151}{\degree}} = I\pare{\SI{149}{\degree}\sim\SI{151}{\degree}}T/e = \boxed{1\times 10^8.} &
+\end{flalign*}
+\par
+\newprobheader{(4)} $\displaystyle \+d{\Omega}d{\sigma} = \frac{D^2}{16}\rec{\sin^4\pare{\theta/2}} = \SI{8.01e4}{\square\femto\meter} = \boxed{\SI{8.01e-22}{\square\centi\meter}.}$
+\newprob{1.10}%
+万有引力$\displaystyle F_G = G\frac{m_pm_e}{a_0^2} = \boxed{\SI{3.63e-47}{\newton},}$\\
+Coulomb力$\displaystyle F_E = \frac{e^2}{4\pi\epsilon_0} \rec{a_0^2} = \boxed{\SI{8.24e-8}{\newton},}$\\
+比值$\displaystyle \frac{F_G}{F_E} = \boxed{4.41\times 10^{-40}.}$
+
+\end{document}

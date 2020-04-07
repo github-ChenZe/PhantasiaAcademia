@@ -1,0 +1,172 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\definecolor{graybg}{RGB}{241,243,245}
+\definecolor{titlepurple}{RGB}{116,95,181}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{170,170,170}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\mathitem{\quad \texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\begin{document}
+
+\begin{multicols*}{3}[\centerline{\titlefont 第一章总结}]
+\raggedcolumns%
+\newheader{一阶线性方程\wdiv 二元}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{形式} && a\pare{x,y}\+DxDu + b\pare{x,y}\+DyDu + c\pare{x,y}u = f\pare{x,y} && \\
+        & \mathitem{特征} && \frac{\rd{x}}{a\pare{x,y}} = \frac{\rd{y}}{b\pare{x,y}} \Rightarrow \xi = \varphi\pare{x,y} = \const && \\
+        & && \eta = \psi\pare{x,y} \mathcomment{巧取} && \\
+        & \mathitem{约化} && \pare{a\+DxD\psi + b\+DyD\psi}\+D\eta Du + cu=f &&
+    \end{flalign*}   
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{特例} && c\pare{x,y} = f\pare{x,y} = 0 \Rightarrow u = g\pare{\xi}.  &&   
+    \end{flalign*} 
+\end{cheatresume}
+\newheader{一阶线性方程\wdiv 多元}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{形式} && b_1\+D{x_1}Du + \cdots + b_n\+D{x_n}Du + cu = f && \\
+        & \mathitem{特征} && \frac{\rd{x_1}}{b_1} = \cdots = \frac{\rd{x_n}}{b_n} \Leftrightarrow \+dtd{x_j} = b_j && \\
+        & && \xi_1 = \varphi_1\pare{x_1,\cdots,x_n} = \const,\\
+        & && \xi_{n-1} = \varphi_{n-1}\pare{x_1,\cdots,x_n} = \const && \\
+        & && \eta = \psi\pare{x_1,\cdots,x_n} \mathcomment{巧取} && \\
+        & \mathitem{约化} && \pare{b_1 \+D{x_1}D{\varphi_1} + \cdots + b_n\+D{x_n} D\psi}\+D\eta Du + cu=f &&
+    \end{flalign*}   
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{特例} && c = f = 0 \Rightarrow u = g\pare{\xi_1,\cdots,\xi_{n-1}}.  &&   
+    \end{flalign*} 
+\end{cheatresume}
+\newheader{一维波动方程\wdiv 基本}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{形式} && u_{tt} = a^2 u_{xx} && \\
+        & \mathitem{通解} && u = f\pare{x-at} + g\pare{x+at} && \\
+        & \mathitem{D'Alembert} && u = \half\brac{\varphi\pare{x-at} + \varphi\pare{x+at}} && \\
+        & && \phantom{u = \ } + \rec{2a} \int_{x-at}^{x+at}\psi\pare{\xi}\,\rd{\xi} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{中心对称球面波} && u\pare{t,r} = \rec{r}\brac{f\pare{r-at}+g\pare{r+at}} &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{一维波动方程\wdiv 骚操作}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Goursat} && u\vert_{x-at} = \varphi\pare{x},\  u\vert_{x+at}=\psi\pare{x},\  \varphi\pare{0} = \psi\pare{0} && \\
+        & \mathitem{代入} && f\pare{0} + g\pare{2x} = \varphi\pare{x},\ f\pare{2x} + g\pare{0} = \psi\pare{x} && \\
+        & \mathitem{凑配} && u = f\pare{x-at} + g\pare{x+at} && \\
+        & && \phantom{u} = \underbrace{f\pare{x-at} + g\pare{0}} + \underbrace{g\pare{x+at} + f\pare{0}} && \\
+        & && \phantom{u = \ } -\underbrace{\brac{f\pare{0} + g\pare{0}}} \\
+        & \mathitem{消去} && u = \varphi \pare{\frac{x+at}{2}} + \psi\pare{\frac{x-at}{2}} - \varphi\pare{0} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{延拓法} && u\pare{t,0} = 0,\ u\pare{0,x} = \varphi\pare{x},\ u_t\pare{0,x} = \psi\pare{x}&& \\
+        & \mathitem{奇延拓} && \varphi^*\pare{x} = \begin{cases}
+            \varphi\pare{x}, \\
+            -\varphi\pare{-x}, 
+        \end{cases} \psi^*\pare{x} = \begin{cases}
+            \psi\pare{x}, \\
+            -\psi\pare{-x}
+        \end{cases} && 
+    \end{flalign*}
+\end{cheatresume}
+\newheader{二阶线性方程\wdiv 双曲型}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{特征} && \+dxdy = \frac{a_{12} + \sqrt{\Delta}}{a_{11}} \Rightarrow \xi = \varphi\pare{x,y} = \const \\
+        & && \+dxdy = \frac{a_{12} - \sqrt{\Delta}}{a_{11}} \Rightarrow \eta = \psi\pare{x,y} = \const \\
+        & \mathitem{标准形} && \frac{\partial^2 u}{\partial \xi \partial \eta} + \rec{2A_{12}}\pare{B_1 u_\xi + B_2 u_\eta + Cu} = 0
+    \end{flalign*}
+\end{cheatresume}
+\newheader{二阶线性方程\wdiv 椭圆型}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{特征} && \+dxdy = \frac{a_{12} \pm i\sqrt{-\Delta}}{a_{11}} \\
+        & && \Rightarrow \varphi\pare{x,y} \pm i\psi\pare{x,y} = \const \\
+        & && \xi = \varphi\pare{x,y},\quad \eta = \psi\pare{x,y} \\
+        & \mathitem{标准形} && \+D{\xi^2}D{^2u} + \+D{\eta^2}D{^2u} + \rec{A_{11}} \pare{B_1 \+D\xi Du + B_2 \+D\eta Du + Cu} = 0
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{二阶线性方程\wdiv 二元}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{形式} && a_{11}u_{xx} + 2a_{12}u_{xy} + a_{22}u_{yy} + b_1u_x + b_2u_y + cu = f && \\
+        & \mathitem{特征} && a_{11}\pare{\rd{y}}^2 - 2a_{12}\,\rd{x}\,\rd{y} + a_{22}\pare{\rd{x}}^2 = 0 && \\
+        & \mathitem{分类} && \Delta = a_{12}^2 - a_{11}a_{22} = \begin{cases}
+            \text{\mathtextfont 双曲型}, & \Delta > 0 \\
+            \text{\mathtextfont 抛物型}, & \Delta = 0 \\
+            \text{\mathtextfont 椭圆型}, & \Delta < 0
+        \end{cases}\\
+        & \mathitem{变换} && A_{11} = a_{11}\xi_x^2 + 2a_{12}\xi_x\xi_y + a_{22}\xi_y^2\\
+        & && A_{22} = a_{11}\eta_x^2 + 2a_{12}\eta_x\eta_y + a_{22}\eta_y^2\\
+        & && A_{12} = a_{11}\xi_x\eta_x + a_{12}\pare{\xi_x \eta_y + \xi_y\eta_x} + a_{22}\xi_y\eta_y \\
+        & && B_1 = a_{11}\xi_{xx} + 2a_{12}\xi_{xy} + a_{22}\xi_{yy} + b_1\xi_x + b_2\xi_y\\
+        & && B_2 = a_{11}\eta_{xx} + 2a_{12}\eta_{xy} + a_{22}\eta_{yy} + b_1\eta_x + b_2\eta_y
+    \end{flalign*}
+\end{cheatresume}
+\newheader{二阶线性方程\wdiv 抛物型}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{特征} && \+dxdy = \frac{a_{12}}{a_{11}} \Rightarrow \xi = \varphi\pare{x,y} = \const \\
+        & &&\eta = \psi\pare{x,y} \mathcomment{巧取} \\
+        & \mathitem{标准形} && \frac{\partial^2 u}{\partial \eta^2} + \rec{2A_{12}}\pare{B_1 u_\xi + B_2 u_\eta + Cu} = 0
+    \end{flalign*}
+\end{cheatresume}
+\newheader{冲量原理}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{原型} && \+D{t^m}D{^m u} - Lu = f\pare{t,\+vx},\quad \deg_t L < m \\
+        & && u\vert_{t=0} = \left.\+DtDu\right\vert_{t=0} = \cdots \left.\+D{t^{m-1}}D{^{m-1}u}\right\vert_{t=0} = 0 \\
+        & \mathitem{转化} && \+D{t^m}D{^m w} - Lw = 0 \\
+        & && w\vert_{t=\tau} = \left.\+DtDu\right\vert_{t=\tau} = \cdots \left.\+D{t^{m-2}}D{^{m-2}w}\right\vert_{t=\tau} = 0 \\
+        & && \left.\+D{t^{m-1}}D{^{m-1}w}\right\vert_{t=\tau} = f\pare{\tau, \+vx}\\
+        & \mathitem{代回} && u\pare{t,\+vx} = \int_0^t w\pare{t,\+vx;\tau}\,\rd{\tau}
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

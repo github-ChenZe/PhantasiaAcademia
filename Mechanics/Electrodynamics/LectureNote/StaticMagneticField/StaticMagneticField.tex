@@ -1,0 +1,73 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{静磁场} % (fold)
+\label{sec:静磁场}
+
+\subsection{静磁场的基本规律} % (fold)
+\label{sub:静磁场的基本规律}
+
+\subsubsection{基本方程} % (fold)
+\label{ssub:基本方程}
+
+\[ \div \+vB\pare{\+vr} = 0,\quad \curl \+vB\pare{\+vr} = \mu_0 \+vj\pare{\+vr}. \]
+这要求$\div \+vj\pare{\+vr} = 0$, 恰好为稳恒电流的条件.
+\begin{cenum}
+    \item 边值关系:
+    \[ \+un\cdot \pare{\+vB_2 - \+vB_1} = 0,\quad \+un\times \pare{\+vB_2 - \+vB_1} = \mu_0 \+v\kappa. \]
+    从而
+    \[ \+vB_2 = \pare{\+un\cdot \+vB_2}\+un + \pare{\+un\times \+vB_2}\times \+un = \+vB_1 + \mu_0 \+v\kappa\times \+un. \]
+    \item BSL定律:
+    \begin{align*}
+        \+vB\pare{\+vr} &= -\grad \rec{4\pi}\iiint \rd{V'}\, \cancelto{0}{\frac{\grad' \+v\cdot \+vB\pare{\+vr'}}{\+gr}} + \curl \rec{4\pi}\iiint \rd{V'}\,\frac{\grad'\times \+vB\pare{\+vr'}}{\+gr}, \\
+        \curl \frac{\+vj\pare{\+vr'}}{\+gr} &= \grad\rec{\+gr}\times \+vj\pare{\+vr'} = -\frac{\+u{\+gr}}{\+gr^2}\+vj\pare{\+vr'}, \\
+        \Rightarrow \+vB\pare{\+vr} &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\, \frac{\+vj\pare{\+vr'}\times \+v{\+gr}}{\+gr^2}.
+    \end{align*}
+    \item $\+vB$为赝矢量, $B'_i = \pare{\det\lambda} \cdot \lambda_{ij}B_j$. 若$z=0$为平面电流分布的对称平面, 则在对称平面上, 在变换
+    \begin{align*}
+        & \pare{x'_1,x'_2,x'_3} = \pare{x_1,x_2,-x_3}, \\
+        & \pare{j'_1,j'_2,j'_3} = \pare{j_1,j_2,-j_3}
+    \end{align*}
+    下,
+    \[ \pare{B'_1,B'_2,B'_3} = -\pare{B_1,B_2,-B_3} = \pare{-B_1,-B_2,B_3} \]
+    不发生变化, 故此时对称平面上的磁场沿着$\+uz$方向.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        对于(截面形状任意)的无限长螺线管, 每一水平面都是$\+v\kappa$的对称平面,
+        \begin{align*}
+            & \+vB = \frac{\mu_0}{4\pi}\iint \rd{\sigma'} \frac{\+v\kappa\times \+u{\+gr}}{\+gr^2} \\
+            & = \frac{\mu_0 \kappa}{4\pi} \int_{-\infty}^{+\infty}\rd{z} \oint_{C} \frac{\rd{\+vl\times \pare{-\+v{\+gr} - z\+uz}}}{\+gr^3} \\
+            & = \frac{\mu_0\kappa}{4\pi} \oint_{C_0} \tilde{\+v{\+gr}}\times \,\rd{\tilde{\+v{\+gr}}} \int_{-\infty}^{+\infty}\frac{\rd{z}}{\pare{z^2+{\tilde{\+gr}}^2}^{3/2}} \\
+            & = \frac{\mu_0\kappa}{2\pi}\oint_{C_0}\frac{\tilde{\+v{\+gr}}\times \rd{\tilde{\+v{\+gr}}}}{\tilde{\+gr}^2}.
+        \end{align*}
+        其中$\tilde{\+v{\+gr}}$表示$\+v{\+gr}$在平面上的投影. 注意到$\displaystyle \abs{\frac{\tilde{\+v{\+gr}}\times \rd{\tilde{\+v{\+gr}}}}{\tilde{\+gr}^2}} = \abs{\rd{\theta}} \Rightarrow \frac{\tilde{\+v{\+gr}}\times \rd{\tilde{\+v{\+gr}}}}{\tilde{\+gr}^2} = \rd{\theta}$. 从而
+        \[ \+vB = \+uz \frac{\mu_0 \kappa}{2\pi}\oint \rd{\theta} = \begin{cases}
+            0, & \text{($P$在管外)}, \\
+            \mu_0 \kappa \+uz, & \text{($P$在管内)}.
+        \end{cases} \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        半径$a$的无限长直导线带有均匀电流$I$, 则
+        \[ B\cdot 2\pi s = \begin{cases}
+            \displaystyle \mu_0 I, & s>a, \\
+            \displaystyle \mu_0 I \frac{s^2}{a^2}, & s<a
+        \end{cases} \Rightarrow \+vB = \begin{cases}
+            \displaystyle \frac{\mu_0 I}{2\pi s}\+u\phi, & s>a \\[.5em]
+            \displaystyle \frac{\mu_0 Is}{2\pi a^2}\+u\phi, & s<a.
+        \end{cases} \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 基本方程 (end)
+
+% subsection 静磁场的基本规律 (end)
+
+% section 静磁场 (end)
+
+\end{document}

@@ -1,0 +1,112 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+\psset{nodesep=3pt,offset=1.2pt}
+\newprob{1.1}%
+\vspace{-\baselineskip}%
+\begin{flalign*}
+    &\left\{ \begin{aligned}
+    & \div\pare{r\+ve_r} = \div \+vr = \Rnode{eq1rhs}{3} \\
+    & = \+ve_r\cdot\grad r + r\div \+ve_r = \Rnode{eq2rhs}{1 + r\div\+ve_r}
+\end{aligned} \right\} \Rightarrow \div \+ve_r = \frac{2}{r}. &
+\end{flalign*}%
+\ncline[linewidth=.4pt]{eq2rhs}{eq1rhs}%
+\ncline[linewidth=.4pt]{eq1rhs}{eq2rhs}%
+\vspace{-1\baselineskip}%
+\newprob{1.2}%
+$\grad\pare{\+vA\cdot \+vB} = \pare{\grad_A \+vA} \cdot \+vB + \pare{\grad_B \+vB} \cdot \+vA$ \\
+$= \pare{\grad_A \+vA - \+vA \grad_A} \cdot \+vB + \pare{\grad_B \+vB - \+vB\grad_B}\cdot \+vA + \+vA\grad_A \cdot \+vB + \+vB\grad_B\cdot\+vA$ \\
+$= -\pare{\curl\+vA}\times \+vB - \pare{\curl \+vB} \+vA + \pare{\+vB \cdot \grad_A}\+vA + \pare{\+vA\cdot \grad_B}\+vB$ \\
+$= \+vB\times\pare{\curl \+vA} + \+vA \times \pare{\curl \+vB} + \pare{\+vB\cdot \grad} \+vA + \pare{\+vA \cdot \grad} \+vB$.
+\newprob{1.3}$\div\pare{\+vB\+vB} - \pare{\div\+vB}\+vB = \pare{\div\+vB}\+vB + \pare{\+vB\cdot \grad}\+vB - \pare{\div\+vB}\+vB = \pare{\+vB\cdot \grad}\+vB.$\\
+$\displaystyle \half \div\pare{B^2\tensor{I}} = \half \grad{B^2} \xlongequal{1.2} \+vB\times\pare{\curl \+vB} + \pare{\+vB\cdot\grad}\+vB$.\\
+$\displaystyle \Rightarrow \div\pare{\+vB\+vB - \half B^2\tensor{I}} - \pare{\div\+vB}\+vB = -\+vB\times\pare{\curl\+vB} = \pare{\curl\+vB}\times \+vB$.
+\newprob{1.4}$\div\pare{\tensor{T}\cdot \+vr} = \pare{\tensor{T}\cdot \grad}\cdot \+vr + \pare{\div \tensor{T}}\cdot \+vr = \trace \tensor{T} + \pare{\div \tensor T}\cdot \+vr$.\\
+$\displaystyle \tensor{T} = \+vB\+vB - \half B^2\tensor{I}\Rightarrow \trace \tensor{T} = -\frac{B^2}{2}$.\\
+$\displaystyle \xLongrightarrow[\div \+vB = 0]{1.3} \brac{\pare{\curl \+vB}\times \+vB}\cdot \+vr = \pare{\div \tensor{T}} \cdot \+vr = \div\pare{\tensor{T}\cdot \+vr} - \trace\tensor{T} = \div\pare{\tensor{T}\cdot \+vr} + \frac{B^2}{2}$.
+\newprob{Pr 1}%
+$\displaystyle \grad = \grad \pare{R} \+dRd{} = \+uR\+dRd{}$.\\
+$\displaystyle \grad \varphi\pare{R} = \+uR\+dRd{\varphi\pare{R}} = \boxed{\+uR\varphi'\pare{R}.}$\\
+$\displaystyle \grad \+vf\pare{R} = \+uR\+dRd{\+vf\pare{R}} = \boxed{\+uR\+vf'\pare{R}.}$\\
+$\displaystyle \div \+vf\pare{R} = \pare{\+uR \+dRd{}}\cdot \+vf\pare{R} = \boxed{\+uR\cdot\+vf'\pare{R}.}$\\
+$\displaystyle \curl \+vf\pare{R} = \pare{\+uR \+dRd{}}\times \+vf\pare{R} = \boxed{\+uR\times \+vf'\pare{R}.}$
+\newprob{Pr 2 (1)}%
+$\displaystyle \grad\brac{\pare{\+va\cdot \+vr}\+vb} = \grad\pare{\+va\cdot \+vr}\+vb = \boxed{\+va\+vb.}$\\
+$\displaystyle \div\brac{\pare{\+va\cdot \+vr}\+vb} = \+vb\cdot \grad\pare{\+va\cdot \+vr} = \boxed{\+va\cdot \+vb.}$\\
+$\displaystyle \curl\brac{\pare{\+va\cdot \+vr}\+vb} = \grad\pare{\+va\cdot \+vr}\times \+vb = \boxed{\+va\times \+vb.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \grad\brac{\pare{\+va\cdot \+vr}\+vr} = \grad{\+va\cdot \+vr}+\pare{\+va\cdot \+vr}\grad \+vr = \boxed{\+va\+vr + \pare{\+va\cdot\+vr}\tensor{I}.}$\\
+$\displaystyle \div\brac{\pare{\+va\cdot \+vr}\+vr} = \grad\pare{\+va\cdot \+vr}\cdot \+vr + \pare{\+va\cdot \+vr}\div \+vr = \boxed{4\+va\cdot\+vr.}$\\
+$\displaystyle \curl\brac{\pare{\+va\cdot \+vr}\+vr} = \grad\pare{\+va\cdot \+vr}\times \+vr = \boxed{\+va\times \+vr.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle \grad{\+va\times \+vr} = -\grad{\+vr}\times \+va = \boxed{-\tensor{I}\times \+va.}$\\
+$\displaystyle \div\pare{\+va\times \+vr} = \boxed{0.}$\\
+$\displaystyle \curl\pare{\+va\times \+vr} = \pare{\div \+vr}\+va - \pare{\+va\cdot \grad}\+vr = \boxed{2\+va.}$
+\par
+\newprobheader{(4)}%
+$\displaystyle \+vr\times\pare{\+va\times \+vr} = r^2\+va - \pare{\+vr\cdot \+va}\+vr$.\\
+$\displaystyle \grad\brac{r^2\+va - \pare{\+vr\cdot \+va}\+vr} = 2\+vr\+va - \+va\+vr - \pare{\+va\cdot \+vr}\tensor{I} = \boxed{2\+vr\+va - \+va\+vr - \pare{\+va\cdot \+vr}\tensor{I}.}$\\
+$\displaystyle \div\brac{r^2\+va - \pare{\+vr\cdot \+va}\+vr}= 2\+va\cdot \+vr - 4\+va\cdot \+vr = \boxed{-2\+va\cdot \+vr.}$\\
+$\displaystyle \curl\brac{r^2\+va - \pare{\+vr\cdot \+va}\+vr} = 2\+vr\times \+va - \+va\times \+vr = \boxed{3\+vr\times \+va.}$
+\par
+\newprobheader{(5)}%
+$\displaystyle \grad\brac{\varphi\pare{r}\pare{\+va\times \+vr}} = \grad\varphi\pare{r}\pare{\+va\times \+vr} + \varphi\pare{r}\grad\pare{\+va\times \+vr} = \boxed{\varphi'\pare{r}\+ur\pare{\+va\times \+vr} - \varphi\pare{r}\tensor{I}\times \+va.}$\\
+$\displaystyle \div\brac{\varphi\pare{r}\pare{\+va\times \+vr}} = \grad\varphi\pare{r}\cdot \pare{\+va\times \+vr} = \boxed{0.}$\\
+$\displaystyle \curl\brac{\varphi\pare{r}\pare{\+va\times \+vr}} = \grad\varphi\pare{r}\times\pare{\+va\times \+vr} + \varphi\pare{r}\curl\pare{\+va\times\+vr} = \boxed{\varphi'\pare{r}\brac{r\+va - \pare{\+vr\cdot \+va}\+ur}+2\varphi\pare{r}\+va.}$
+\par
+\newprobheader{(6)}%
+$\displaystyle \grad\brac{\varphi\pare{r}\+vf\pare{r}} = \pare{\grad \varphi\pare{r}}\+vf\pare{r} + \varphi\pare{r}\grad \+vf\pare{r} = \boxed{\varphi'\pare{r}\+ur \+vf\pare{r} + \varphi\pare{r}\+ur \+vf'\pare{r}.}$\\
+$\displaystyle \div\brac{\varphi\pare{r}\+vf\pare{r}} = \pare{\grad \varphi\pare{r}}\cdot\+vf\pare{r} + \varphi\pare{r}\div \+vf\pare{r} = \boxed{\varphi'\pare{r}\+ur\cdot\+vf\pare{r} + \varphi\pare{r}\+ur\cdot\+vf'\pare{r}.}$\\
+$\displaystyle \curl\brac{\varphi\pare{r}\+vf\pare{r}} = \pare{\grad \varphi\pare{r}}\times\+vf\pare{r} + \varphi\pare{r}\curl \+vf\pare{r} = \boxed{\varphi'\pare{r}\+ur\times\+vf\pare{r} + \varphi\pare{r}\+ur\times\+vf'\pare{r}.}$
+\par
+\newprobheader{(7)}%
+$\displaystyle \grad\brac{\+vr\times \+vf\pare{r}} = \pare{\grad \+vr}\times \+vf\pare{r} - \pare{\grad \+vf\pare{r}}\times \+vr = \boxed{\tensor{I}\times \+vf\pare{r} - \+ur\+vf'\pare{r}\times \+vr.}$\\
+$\displaystyle \div\brac{\+vr\times \+vf\pare{r}} = -\+vr\cdot\pare{\+ur\times \+vf\pare{r}} = \boxed{0.}$\\
+$\displaystyle \curl\brac{\+vr\times \+vf\pare{r}} = \pare{\+vf\pare{r}\cdot \grad} \+vr - \pare{\div \+vr}\+vf\pare{r} - \pare{\+vr\cdot \grad} \+vf\pare{r} + \pare{\div \+vf\pare{r}}\+vr$\\
+$\displaystyle \phantom{\displaystyle \curl\brac{\+vr\times \+vf\pare{r}} }= \boxed{-2\+vf\pare{r} + \pare{\+ur\cdot \+vf'\pare{r}}\+vr - r\+vf'\pare{r}.}$
+
+\end{document}

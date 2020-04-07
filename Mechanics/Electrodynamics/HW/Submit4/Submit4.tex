@@ -1,0 +1,122 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{1.15}%
+$\displaystyle \+vG = \iiint \frac{\+vE\times \+vH}{c^2}\,\rd{V} = -\iiint \frac{\pare{\grad \varphi}\times \+vH}{c^2}\,\rd{V} = -\rec{c^2}\iiint \rd{V}\,\brac{\curl\pare{\varphi \+vH} - \varphi \curl \+vH}$ \\
+$\displaystyle = \rec{c^2} \brac{-\cancelto{0}{\oiint \rd{\sigma}\times \pare{\varphi \+vH}} + \iiint \rd{V}\, \pare{\varphi \curl \+vH}} = \rec{c^2} \iiint \rd{V}\,\varphi \+vj$.\\
+其中$\displaystyle \abs{\varphi \+vH} = o\pare{1/r^2}$.
+\newprob{1.17}%
+$\+vL = \displaystyle \iiint \rd{V}\, \frac{\+vr\times\pare{\+vE\times \+vB}}{c^2\mu_0} = \iiint \frac{\+vr\times \pare{-\+u\phi \cdot \sin\theta}BE}{c^2\mu_0}\,\rd{V} = \iiint \frac{rBE\sin\theta \+u\theta}{c^2\mu_0}\,\rd{V}$\\
+$\displaystyle = -\+uz \iiint \frac{rBE\sin^2\theta}{c^2\mu_0}\,\rd{V} = -\+uz\frac{QB_0}{c^2\mu_0\cdot 4\pi\epsilon_0}\iiint \frac{r\sin^2\theta}{r^2}$\\
+$\displaystyle =-\+uz\frac{QB_0}{c^2\mu_0\cdot 4\pi\epsilon_0} \cdot 2\pi \int_0^\pi \sin^3\theta\,\rd{\theta} \int_{a_1}^{a_2} r\,\rd{r}$\\
+$\displaystyle = -\+uz\frac{QB_0}{3}\pare{a_2^2 - a_1^2}.$\\
+$\displaystyle \boxed{\omega = -\+uz\frac{QB_0}{3I}\pare{a_2^2 - a_1^2}.}$方向与$\+vB$相反.
+\newprob{Pr 1}%
+$\displaystyle \abs{\+vG} = \abs{\iiint \rd{V}\, \frac{\+vE\times \+vB}{c^2\mu_0}} \le \iiint \rd{V}\, \abs{\frac{\+vE\times \+vB}{c^2\mu_0}} \le \iiint \rd{V}\, \frac{EB}{c^2\mu_0}$\\
+$\displaystyle = \iiint \rd{V}\, \frac{\epsilon_0 EcB}{c^3\epsilon_0\mu_0} \le \iiint \rd{V}\, \frac{\displaystyle \half\epsilon_0\pare{E^2 +  c^2B^2}}{c} = \frac{W}{c}$.\\
+为了取得等号, $\+vE$和$\+vB$为常量且$\+vE\perp \+vB$且$E=cB$.
+\newprob{Pr 2}%
+设两个电荷分别在$\pare{0,0,-a}$和$\pare{0,0,a}$处, 取赤道面$z=0$为区域边界, 计算下方电荷的受力. 面元向量为$\rd{\+v\sigma} = \+uz\,\rd{\sigma}$,\\
+赤道面上电场为$\displaystyle \+vE = \frac{2Q}{4\pi\epsilon_0 \pare{a^2+s^2}^2} \cdot \frac{\+vs}{\sqrt{a^2+s^2}}$,\\
+$\displaystyle \rd{\sigma}\cdot \tensor{T} = \rd{\sigma}\, \+uz \cdot \pare{\half \epsilon_0 E^2\tensor{I} - \epsilon_0 \+vE\+vE} = \half \epsilon_0 E^2 \+uz$.\\
+$\displaystyle \+vF_{-a} = -\iint \rd{\+v\sigma} \cdot \tensor{T} = -\iint \rd{\+v\sigma}\cdot \frac{\epsilon_0}{2} \cdot \frac{4Q^2}{\pare{4\pi \epsilon_0}^2 \pare{a^2+s^2}^2} \cdot \frac{s^2}{a^2+s^2}$\\
+$\displaystyle = -\+uz \cdot 2\pi\cdot \frac{\epsilon_0}{2}\cdot \frac{4Q^2}{\pare{4\pi\epsilon_0}^2} \int_0^\infty \rd{s}\, \frac{s^3}{\pare{a^2+s^2}^3}$
+$\displaystyle = \boxed{-\frac{Q^2}{4\pi\epsilon_0}\cdot \frac{\+uz}{\pare{2a}^2}.}$\\
+类似可求得上方电荷受力为$\displaystyle \+vF_a = \frac{Q^2}{4\pi\epsilon_0}\cdot \frac{\+uz}{\pare{2a}^2}.$
+\newprob{Pr 3 (1)}%
+以$\+v{\+gr} = \+vr - \+vr'$表示源点到场点的位矢,\\
+$\displaystyle \+vA\pare{\+vr} = \frac{\mu_0}{4\pi} \oiint \frac{\+v\kappa\pare{\+vr'}}{\+gr}\,\rd{\sigma'} = \frac{\mu_0}{4\pi}\oiint \frac{\sigma_0\+v\omega\times \+vr'}{\+gr}\,\rd{\sigma'} = \frac{\mu_0 \sigma_0 a}{4\pi}\+v\omega \times \oiint \frac{\rd{\+v\sigma'}}{\+gr}$\\
+$\displaystyle = \frac{\mu_0 \sigma_0 a}{4\pi}\+v\omega\times \iiint\rd{V}\,\frac{\+u{\+gr}}{\+gr^2} = \boxed{\begin{cases}
+    \displaystyle \frac{\mu_0\sigma_0 a\+v\omega\times \+vr}{3}, & r < a,\\
+    \displaystyle \frac{\mu_0\sigma_0 a^4\+v\omega}{3}\times \frac{\+ur}{r^2}, & r>a.
+\end{cases}}$
+\par
+\newprobheader{(2)}%
+$r<a$, $\displaystyle \+vB = \curl \pare{\frac{\mu_0\sigma_0 a\+v\omega\times \+vr}{3}} = \frac{\mu_0\sigma_0 a}{3}\brac{\pare{\div \+vr}\+v\omega - \+v\omega\+v\cdot\grad \+vr} = \boxed{\frac{2}{3}\mu_0\sigma_0 a\+v\omega.}$\\
+$r>a$, $\displaystyle \+vB = \curl \pare{\frac{\mu_0\sigma_0 a^4\+v\omega}{3}\times \frac{\+ur}{r^2}} = \frac{\mu_0 \sigma_0 a^4}{3}\brac{\div\pare{\frac{\+ur}{r^2}}\+v\omega - \+v\omega\+v\cdot\grad\frac{\+ur}{r^2}}$\\
+$\displaystyle = \frac{\mu_0 \sigma_0 a^4}{3}\pare{-\+v\omega}\cdot\brac{\grad\pare{\rec{r^3}}\+vr + \frac{\grad \+vr}{r^3}} = \boxed{\frac{\mu_0 \sigma_0 a^4}{3r^3}\brac{3\pare{\+v\omega\cdot\+ur}\+ur - \+v\omega}.}$
+\par
+\newprobheader{(3)}%
+外部$\displaystyle \+vB = \frac{\mu_0\sigma_0 a^4\omega}{3r^3}\pare{2\cos\theta\+ur + \sin\theta\+u\theta}$, 从而北半球表面\\
+$\displaystyle \mu_0\,\rd{F_1} = \+uz\cdot \pare{\rd{\+v\sigma}\cdot \+vB\+vB} = \rd{\sigma}\, \pare{\frac{\mu_0\sigma_0 a \omega}{3}}^2\cdot \pare{2\cos\theta}\pare{2\cos^2\theta - \sin^2\theta},$\\
+$\displaystyle F_1 = \iint \rd{F_1} = 2\pi \mu_0 \pare{\frac{\sigma_0 a^2\omega}{3}}^2 \int_0^{\pi/2} {2\cos\theta}\pare{2\cos^2\theta - \sin^2\theta}\sin\theta\,\rd{\theta} = \pi \mu_0\pare{\frac{\sigma_0 a^2\omega}{3}}^2.$ \\
+$\displaystyle \mu_0\,\rd{F_2} = \+uz \cdot \pare{\rd{\+v\sigma}\cdot \frac{\tensor{I}}{2}B^2} = \rd{\sigma}\, \cos\theta \cdot \half \cdot \pare{\frac{\mu_0\sigma_0a^2\omega}{3}}^2 \cdot \pare{3\cos^2\theta + 1}.$ \\
+$\displaystyle F_2 = \iint \rd{F_2} = 2\pi \cdot \half \mu_0 \pare{\frac{\sigma_0 a^2\omega}{3}}^2 \int_0^{\pi/2} \pare{3\cos^2\theta+1}\cos\theta\sin\theta\,\rd{\theta} = \frac{5}{4}\pi \mu_0\pare{\frac{\sigma_0 a^2\omega}{3}}^2.$ \\
+内部$\displaystyle \+vB = \frac{2\mu_0\sigma_0 a\omega\+uz}{3}$, 从而赤道面$r<a$部分\\
+$\displaystyle \mu_0\, \rd{F_3} = \+uz\cdot\brac{\rd{\+v\sigma}\cdot \pare{\frac{\tensor{I}}{2}B^2 - \+vB\+vB}} = 2\cdot \pare{\frac{\mu_0\sigma_0 a\omega}{3}}^2.$\\
+$\displaystyle F_3 = \iiint \rd{F_3} = 2\pi \mu_0 \pare{\frac{\sigma_0 a^2\omega}{3}}^2.$\\
+总和
+$\displaystyle F = -\pare{F_2 - F_1} - F_3 = \boxed{-\pi \mu_0 \pare{\frac{\sigma_0 a^2\omega}{2}}^2.}$ 相互吸引.
+\newprob{Pr 4 (a)}%
+\\[-\baselineskip]
+$\displaystyle \+vB = \begin{cases}
+    \displaystyle \frac{2}{3}\mu_0 \sigma a \omega\+uz, & r < a, \\
+    \displaystyle \frac{\mu_0 a^4\sigma \omega}{3r^3}\pare{2\cos\theta \+ur + \sin\theta \+u\theta}, & r > a.
+\end{cases}\quad \+vE = \begin{cases}
+    \displaystyle 0, & r < a, \\
+    \displaystyle \frac{a^2\sigma}{\epsilon_0 r^2}\+ur, & r > a.
+\end{cases}$\\
+$\displaystyle W_B^{\pare{\mathrm{in}}} = \frac{B^2}{2\mu_0} \cdot \frac{4}{3}\pi a^3 = \rec{2\mu_0} \cdot \pare{\frac{2}{3}\mu_0\sigma a\omega}^2 \cdot \frac{4}{3}\pi a^3$.\\
+$\displaystyle W_B^{\pare{\mathrm{out}}} = \iiint \rec{2\mu_0} B^2 = \iiint \rec{2\mu_0} \pare{\frac{\mu_0 a^4\sigma\omega}{3}}^2 \cdot \rec{r^6} \cdot \pare{3\cos^2\theta + 1}$\\
+$\displaystyle = \frac{2\pi}{2\mu_0} \pare{\frac{\mu_0 a^4\sigma\omega}{3}}^2 \int_0^\pi \sin\theta\pare{3\cos^2\theta + 1}\,\rd{\theta} \int_a^\infty \frac{r^2}{r^6}\,\rd{r}$\\
+$\displaystyle = \rec{2\mu_0} \cdot \pare{\frac{2}{3}\mu_0 a\sigma \omega}^2\cdot \frac{2}{3}\pi a^3$.\\
+$\displaystyle W_B = W_B^{\pare{\mathrm{in}}} + W_B^{\pare{\mathrm{out}}} = \pare{\frac{2}{3}\sigma\omega}^2\mu_0\pi a^5$.\\
+$\displaystyle W_E = \frac{e\varphi}{2} = \frac{e^2}{8\pi\epsilon_0 a}$.\\
+$\displaystyle W = W_E + W_B \xlongequal{e = 4\pi a^2\sigma} \boxed{\frac{\omega^2 e^2\mu_0 a}{36\pi} + \frac{e^2}{8\pi\epsilon_0 a}.}$
+\par
+\newprobheader{(b)}%
+角动量沿$\+uz$方向, 并且只有$r>a$的空间有贡献,\\
+$\displaystyle l_z = \+uz\cdot \brac{\epsilon_0 \+vr\times \pare{\+vE\times \+vB}} = \+uz \cdot \brac{\epsilon_0 \+vr\times \pare{\frac{a^2\sigma}{\epsilon_0}\cdot\rec{r^2}\cdot \frac{\mu_0 a^4\sigma\omega}{3r^3} \sin\theta \+u\phi}} = \frac{\mu_0\sigma^2 a^6\omega}{3r^4}\sin^2\theta$.\\
+$\displaystyle \+vL = \+uz \iiint \rd{V}\, \displaystyle l_z = \+uz \cdot 2\pi \cdot \frac{\mu_0 \sigma^2 a^6\omega}{3}\int_0^\pi \sin^3\theta\,\rd{\theta}\int_a^\infty \frac{r^2}{r^4}\,\rd{r} = \boxed{\frac{\mu_0 e^2\omega a}{18\pi}\+uz.}$
+\par
+\newprobheader{(c)}%
+$\displaystyle Wa = \pare{\frac{3\hbar}{2e}}^2 \frac{\pi}{\mu_0} + \frac{e^2}{8\pi \epsilon_0} \Rightarrow a = \rec{m_e c^2} \brac{\pare{\frac{3\hbar}{2e}}^2 \frac{\pi}{\mu_0} + \frac{e^2}{8\pi\epsilon_0}} = \boxed{\SI{2.98e-11}{\meter}.}$\\
+$\displaystyle \omega a = \frac{9\pi \hbar}{\mu_0 e^2} = \boxed{\SI{9.24e10}{\meter\per\second}.}$\\
+$\displaystyle \omega = \frac{9\pi \hbar m_e c^2}{\displaystyle \pare{\frac{3\hbar}{2}}^2\pi + \frac{\mu_0 e^4}{8\pi \epsilon_0}} = \boxed{\SI{3.11e21}{\radian\per\second}.}$\\
+模型不合理, $\omega a > c$且$a$已经是氢原子半径量级.
+
+\end{document}

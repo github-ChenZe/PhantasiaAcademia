@@ -1,0 +1,29 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\newtcbox{\codephrase}{enhanced,nobeforeafter,tcbox raise base,boxrule=0.4pt,top=0mm,bottom=0mm,
+  right=0mm,left=0.15mm,arc=1pt,boxsep=2pt,fontupper=\ttfamily,
+  colframe=gray,coltext=gray!25!black,colback=gray!10!white
+}
+
+\robustify{\codephrase}
+
+\begin{document}
+
+\paragraph{栈混洗} % (fold)
+\label{par:栈混洗}
+
+用尖括号和方括号分别表示栈顶和栈底, 设有栈\codephrase{A},\\ 
+\centerline{\codephrase{A = < a\textsubscript{1}, a\textsubscript{2}, ..., a\textsubscript{n} ]}},
+\codephrase{B}和\codephrase{S}, 其中\codephrase{B}和\codephrase{S}初始为空, 每次允许\\
+\centerline{\codephrase{S.push(A.pop())}}
+或\\
+\centerline{\codephrase{B.push(S.pop())},}
+最终将\codephrase{A}和\codephrase{S}皆清空, \codephrase{A}中的元素悉数转移至\codephrase{B}, 得到\\
+\centerline{\codephrase{B = [ a\textsubscript{k1}, a\textsubscript{k2}, ..., a\textsubscript{kn} >}},
+谓该序列为原序列之栈混洗.
+
+% paragraph 栈混洗 (end)
+
+\end{document}

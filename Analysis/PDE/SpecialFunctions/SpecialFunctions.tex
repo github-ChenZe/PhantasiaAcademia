@@ -1,0 +1,940 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{特殊函数} % (fold)
+\label{sec:特殊函数}
+
+\subsection{Helmholtz方程} % (fold)
+\label{sub:helmholtz方程}
+
+高维的波动方程可初步分离,
+\[ \pare{\partial_{tt} - \laplacian} T\pare{t}v\pare{\+vx} = 0 \Rightarrow \begin{cases}
+    \ddot{T} + k^2 T = 0, \\
+    \laplacian v + k^2 v.
+\end{cases} \]
+\begin{remark}
+    Helmholtz方程来自任意维的Laplace算子的固有值问题, 以及热方程分离变量后的固有值.
+\end{remark}
+
+% subsection helmholtz方程 (end)
+
+\subsection{直积空间的函数空间的正交基} % (fold)
+\label{sub:直积空间的函数空间的正交基}
+
+$M\pare{I_1\times I_2\times\cdots, \+vR}$上有一组基, $\curb{\ket{X_{i;n}}}$表示$X_{i;n}\pare{x^i}$是$\brac{a_i,b_i}$上加权$\rho_i\pare{x^i}$的正交基, 则$\ket{X_{i_1;n}}\otimes \ket{X_{i_2;n}}$是$\brac{a_{i_1},b_{i_1}}\times \brac{a_{i_2},b_{i_2}}$上权重$\rho_1\rho_2$的一组基.
+\begin{ex}
+    考虑$\laplacian u = \rho\pare{x,y,z}$, 其中$x,y,z\in \pare{0,\pi}$,
+    \[ 0 = u\pare{x=0} = u_x\pare{x=\pi} = u_y\pare{y=0} = u\pare{y=\pi}. \]
+    相应的本征函数为$\ket{m,n} = \sin mx \cos ny$, 其中$\displaystyle m,n = \half, \frac{3}{2},\cdots$.
+    解为
+    \[ \ket{u\pare{z}} = \sum_{m,n} u_{m,n}\pare{z} \ket{m,n},\quad \ket{u\pare{z=0}} = \ket{\phi},\quad \ket{u\pare{z=\pi}} \ket{\psi}. \]
+    将RHS同样展开,
+    \begin{align*}
+        \ket{\rho\pare{z}} &= \sum_{m,n} \rho_{m,n}\pare{z} \ket{m,n}, \\
+        \ket{\phi} &= \sum_{m,n} \phi_{m,n}\ket{m,n}, \\
+        \ket{\psi} &= \sum_{m,n} \psi_{m,n}\ket{m,n}, \\
+        u''_{m,n} &- \pare{m^2+n^2}u_{m,n} = \rho_{m,n}, \\
+        u_{m,n}\pare{0} &= \phi_{m,n},\quad u_{m,n}\pare{\pi} = \psi_{m,n}.
+    \end{align*}
+\end{ex}
+
+% subsection 直积空间的函数空间的正交基 (end)
+
+\subsection{任意坐标系下的Laplace算子} % (fold)
+\label{sub:任意坐标系下的laplace算子}
+
+在一般曲线坐标下,
+\[ \laplacian f = \frac{\partial_\mu\pare{\sqrt{g}g^{\mu\nu}\partial_\nu f}}{\sqrt{g}}. \]
+\begin{ex}
+    在极坐标下
+    \[ \laplacian = \rec{r}\partial_r\pare{r\partial_r} + \rec{r^2}\partial^2_\theta. \]
+\end{ex}
+\begin{ex}
+    柱坐标下
+    \[ \laplacian = \rec{r}\partial_r\pare{r\partial_r} + \rec{r^2}\partial^2_\theta + \partial_z^2. \]
+\end{ex}
+\begin{ex}
+    球坐标下
+    \[ \laplacian = \rec{r^2} \curb{\partial_r \pare{r^2\partial_r} + \rec{\sin^2\theta} \brac{\pare{\sin\theta \partial_\theta}^2 + \partial_\theta^2} }. \]
+\end{ex}
+
+% subsection 任意坐标系下的laplace算子 (end)
+
+\subsection{柱坐标下的分离变量} % (fold)
+\label{sub:柱坐标下的分离变量}
+
+\newpoint{第一步} $u = W\pare{r,\theta} Z\pare{z}$, 则
+\begin{align*}
+    & \pare{\laplacian + k^2} u = 0 \Rightarrow r^{-2}\brac{\pare{r\partial_r}^2 + \partial_\theta^2} W/W + Z''/Z + k = 0, \\
+    & \Rightarrow \begin{cases}
+        Z'' + \mu Z = 0, \\
+        \brac{\pare{r\partial_r}^2 + \partial_\theta^2}W/W + \pare{k^2-\mu}r^2 = 0.
+    \end{cases}
+\end{align*}
+\newpoint{第二步} $W = R\pare{r}\Theta\pare{\theta}$, $\lambda = k^2 - \mu$, 则
+\begin{align*}
+    & \laplacian_2 W + \lambda W = 0, \\
+    & r\pare{rR'}'/R + \lambda r^2 + \Theta''/\Theta = 0,\\
+    & \Rightarrow  \begin{cases}
+        \Theta'' + \sigma \Theta = 0, \\
+        \pare{rR'}' + \pare{\lambda r - \sigma/r} R = 0.
+    \end{cases}
+\end{align*}
+$\lambda$是$-\laplacian_2$的特征值, 令$x = \sqrt{\lambda}r$, $y\pare{x} = R\pare{r} = R\pare{x/\sqrt{\lambda}}$, 则$R$的方程变为
+\[ \resumath{x^2y'' + xy' + \pare{x^2 - \nu^2} y = 0,\quad \nu^2 = \sigma.} \]
+这是$\nu$-阶Bessel方程的标准形式.
+
+% subsection 柱坐标下的分离变量 (end)
+
+\subsection{球坐标的分离变量} % (fold)
+\label{sub:球坐标的分离变量}
+
+\newpoint{第一步} $u = R\pare{r} Y\pare{\theta,\phi}$, 则
+\begin{align*}
+    & \pare{r^2R'}'/R + k^2r^2 + \rec{\sin^2\theta}\brac{\pare{\sin\theta\partial_\theta}^2+\partial_\phi^2} Y = 0, \\
+    & \Rightarrow \begin{cases}
+        \displaystyle \rec{\sin^2\theta}\brac{\pare{\sin\theta\partial_\theta}^2 + \partial_\phi^2} + \lambda Y = 0, \\
+        \pare{r^2R'}' + \pare{k^2r^2 - \lambda}R = 0.
+    \end{cases}
+\end{align*}
+\newpoint{第二步} $W = \Theta\pare{\theta}\Phi\pare{\phi}$, 则
+\begin{align*}
+    & \pare{\sin\theta\partial_\theta}^2 \Theta/\Theta + \lambda \sin^2\theta + \Phi''/\Phi = 0, \\
+    & \begin{cases}
+        \Phi'' + \mu \Phi = 0, \\
+        \pare{\sin\theta\Theta'}' + \pare{\lambda \sin\theta - \mu/\sin\theta} \Theta = 0.
+    \end{cases}
+\end{align*}
+若令$y\pare{x} = \Theta\pare{\theta}$, $x=\cos\theta$, 则$\Theta$的方程化为
+\[ \brac{\pare{1-x^2}y'}' + \brac{\lambda - m^2/\pare{1-x^2}}y = 0,\quad m^2=\mu. \]
+这是$m$阶Legendre方程, $x=\pm 1$为奇点. $m=0$时谓Legendre方程.
+
+% subsection 球坐标的分离变量 (end)
+
+\subsection{ODE解法回顾} % (fold)
+\label{sub:ode解法回顾}
+
+如何解$\pare{L_t - \lambda_n}T_n = f_n$? 考虑一般的$N$阶非齐次ODE, 则
+\[ Ly = g,\quad L = \sum_{m=0}^N c_m\pare{t}D_t^m,\quad C_N \neq 0. \]
+设有$N$个线性独立的解$y_i$, $i=1,\cdots,N$, 非齐次ODE的解为$y = a^i\pare{t}y_i\pare{t}$, 即常数变易法.
+\par
+要求
+\[ \pare{D_t^m y_i}\dot{a}^i = 0,\quad m = 0,\cdots, N-2. \]
+可以得到如下结论:
+\[ \begin{cases}
+    D_t^m y = \pare{D_t^m y_i} a^i, & m = 0,\cdots,N-1,\\
+    D_t^N y = \pare{D_t^N y_k}a^k + \pare{D_t^{N-1}y_k}\dot{a}^k.
+\end{cases} \]
+因此
+\begin{align*}
+    Lu &= \sum_{m=0}^N c_m D_t^m \pare{y_i a^i} \\
+    &= \sum_{m=0}^N \pare{c_m D_t^m y_i} a^i + c_N\pare{D_t^{N-1}y_i}\dot{a}^i \\
+    &= \pare{Ly_i}a^i + c_N\pare{D_t^{N-1}y_i}\dot{a}^i \\
+    &= c_N\pare{D_t^{N-1}y_i}\dot{a}^i = g.
+\end{align*}
+故$a^i$需要满足$1$阶ODE.
+\newpoint{基本矩阵} 即Wronskian,
+\[ W = \begin{pmatrix}
+    y_1 & \cdots & y_N \\
+    \dot{y}_1 & \cdots & \dot{y}_N \\
+    \vdots & \ddots & \vdots \\
+    D_t^{N-1}y_1 & \cdots D_t^{N-1}y_N
+\end{pmatrix}. \]
+ODE的解唯一, $y_i$线性独立, 从而$W$可逆. 设$\+va = \begin{pmatrix}
+    a^1 & \cdots & a^N
+\end{pmatrix}^T$, 则常数变易法将方程转化为
+\[ W\+va = \begin{pmatrix}
+    0 \\ \vdots \\ 0 \\ g/c_N
+\end{pmatrix} \Rightarrow \dot{\+va} = \frac{W^{-1}}{c_N} \begin{pmatrix}
+    0 \\ \vdots \\ 0 \\ g
+\end{pmatrix}. \]
+即可得方程的解.
+\par
+对$\dot{\+va}$积分得到$\+va$和$y$, $y$的初始条件可转化为$a$的初始条件. 也可以用Duhamel原理解释,
+\begin{align*}
+    y &= \int^t\rd{\tau}\,w\pare{t;\tau}, \\
+    Lw &= 0, \\
+    D_t^{m<N-1} w\pare{t=\tau;\tau} &= 0, \\
+    D_t^{N-1}w\pare{t=\tau;\tau} &= g/c_N.
+\end{align*}
+由于$w$满足齐次ODE, $w\pare{t;\tau} = y_i\pare{t}b^i\pare{\tau}$. 定义$\+vb = \begin{pmatrix}
+    b^1 & \cdots & b^N
+\end{pmatrix}^T$, 以及$\+v{\partial}_t w\pare{t;\tau} = \begin{pmatrix}
+    w\pare{t;\tau} & w_t\pare{t;\tau} & \cdots & \partial_t^{N-1}w\pare{t;\tau}
+\end{pmatrix}^T$. 则
+\begin{align*}
+    & D_t^m w = D_t^m y_i\pare{t}b^i\pare{\tau} \Rightarrow \+v{\partial}_t w\pare{t;\tau} = W\pare{t} \+vb\pare{\tau}, \\
+    & W\pare{\tau}\+vb\pare{\tau} = \+v\partial_t w\pare{\tau;\tau} = \begin{pmatrix}
+        0 \\ \vdots \\ 0 \\ g\pare{\tau}/c_N\pare{\tau}
+    \end{pmatrix}. 
+\end{align*}
+可以发现常数变易法和Duhamel原理都可以得到
+\[ \+vb = \frac{W^{-1}}{c_N}\begin{pmatrix}
+    0 \\ \vdots \\ 0 \\ g
+\end{pmatrix}. \]
+积分后结果一致, $b^i = \dot{a}^i$.
+\begin{ex}
+    对于二阶方程,
+    \begin{align*}
+        W = \begin{pmatrix}
+            y_1 & y_2 \\
+            \dot{y_1} & \dot{y}_2
+        \end{pmatrix},
+    \end{align*}
+    可以得到二阶方程的特解.
+\end{ex}
+
+% subsection ode解法回顾 (end)
+
+\subsection{Abel等式} % (fold)
+\label{sub:abel等式}
+
+设$y'' + py' + qy = 0$, 令$z = cy$, 则为了求得另一个解,
+\begin{align*}
+    0 &= z'' + pz' + qz \\
+    &= c\pare{y''+py'+qy} + 2c'y' + c''y + pc'y \\
+    &= \brac{\pare{c'y^2}' + p\pare{c'y^2}}/y \Rightarrow \pare{c'y^2}' = -p\pare{c'y^2} \\
+    & \Rightarrow  c'y^2 = \exp \pare{-\int p}.
+\end{align*}
+从而
+\[ z\pare{x} = y\pare{x} \int^x \rd{t}\curb{y^{-2}\pare{t}\exp\brac{-\int^t \rd{\tau}\,p\pare{\tau}}} \]
+也是ODE的解, 通常与$y$线性独立.
+\newpoint{Liouville公式} $\det \begin{pmatrix}
+    y & z \\
+    y' & z'
+\end{pmatrix} = \det \begin{pmatrix}
+    y & 0 \\
+    y' & c'y
+\end{pmatrix} = c'y^2$. 且
+\[ \pare{\det W\pare{y,z}}' = p\pare{\det W\pare{y,z}}. \]
+这一公式可推广, 可将一$N$阶线性ODE写为$N$元一阶线性ODE组, 定义$\+vv$的分量为$y$的$0$到$N-1$阶层导数, 则方程组可写为
+\[ \dot{\+vv} = A\+vv. \]
+推广的公式表明,
+\[ \dot{W} = AW. \]
+可通过积分得到
+\begin{align*}
+    & W = \+vT \exp \pare{\int \rd{t}\, A} W_0, \\
+    & \det W = \det \pare{\+vT \exp \pare{\int \rd{t}\, A}}\det W_0, \\
+    & \det \brac{\+vT\exp\pare{\int \rd{t}\, A}} = \exp\pare{\int \rd{t}\,\tr A}.
+\end{align*}
+即有
+\[ D_t \det W = \tr A \det W. \]
+
+% subsection abel等式 (end)
+
+\subsection{二阶线性ODE} % (fold)
+\label{sub:二阶线性ode}
+
+对于$w''\pare{z} + p\pare{z} w'\pare{z} + q\pare{z}w\pare{z} = 0$, 且考虑Cauchy定解条件$w\pare{z_0} = a_0$, $w'\pare{z_0} = a_1$. 如果$p,q$在求解区域内解析, 则$w$有解并解析.
+\par
+考虑复平面上的二阶线性ODE, 允许$p$, $q$存在极点, 则
+\begin{cenum}
+    \item $p$, $q$都解析的点, 谓\gloss{常点}.
+    \item $p$, $q$分别有(最多)一级和二级极点的点, 谓\gloss{常规奇点}.
+\end{cenum}
+\begin{theorem}[Cauchy]
+    在常规区域内, 初值问题$y\pare{z_0} = a_0$, $y'\pare{z_0} = a_1$有且仅有唯一解, 同时$y$是解析函数. 故$y$可展开为
+    \[ y = \sum_{n=0}^\infty a_n\pare{z-z_0}^n. \]
+\end{theorem}
+\begin{theorem}[Fuchs]
+    在常规起点$z_0$附近的常规区域内有两个线性独立特解
+    \begin{align*}
+        y_1 &= \pare{z-z_1}^{\rho_1} f\pare{z}, \\
+        y_2 &= \alpha y_1 \ln\pare{z-z_0} + \pare{z-z_0}^{\rho_2} g\pare{z}.
+    \end{align*}
+    其中$f$, $g$在区域内解析, 且$f\pare{z_0} \neq 0 \neq g\pare{z_0}$.
+\end{theorem}
+因此在$z=z_0$附近都有幂级数展开.
+\newpoint{}这种情况下, 解一般是多值函数.
+\newpoint{}可以在常规点和常规奇点附近用幂级数法求解ODE.
+\begin{ex}
+    Legendre方程有标准形式
+    \[ \brac{\pare{1-x^2}y'}' + \lambda y = 0 \Leftrightarrow \pare{1-x^2}y'' - 2xy' + \lambda y = 0. \]
+    代入$\displaystyle y = \sum_{n=0}^\infty a_n x^n$, 有
+    \[ \sum_{n=0}^\infty \brac{\pare{n+2}\pare{n+1}a_{n+2} - n\pare{n-1}a_n}x^n = \sum_{n=0}^\infty \pare{2n-\lambda} a_n x^n. \]
+    得到
+    \[ a_{n+2} = \frac{\pare{n-l}\pare{n+1+1}}{\pare{n+1}\pare{n+2}} a_n. \]
+    令$\lambda = l\pare{l+1}$. 注意到$\displaystyle \lim_{n\rightarrow \infty} a_{n+2}/a_n = 1$, 有收敛半径为$1$. 若$x=\pm 1$处有界, 则级数需截断为多项式. 若$l$非整数,
+    \begin{align*}
+        y_0 &= a_0 \sum_{k=0}^\infty \frac{2^{2k}\Gamma\pare{k-\frac{l}{2}} \Gamma\pare{k+\frac{1+l}{2}}}{\pare{2k}! \Gamma\pare{-\frac{l}{2}}\Gamma\pare{\frac{1+l}{2}}}x^k, \\
+        y_1 &= a_1 \sum_{k=0}^\infty \frac{2^{2k}\Gamma\pare{k+\frac{1-l}{2}} \Gamma\pare{k+1+\frac{l}{2}}}{\pare{2k+1}! \Gamma\pare{\frac{1-l}{2}} \Gamma\pare{1+\frac{l}{2}}}x^k.
+    \end{align*}
+    若$l$为整数, 当且仅当$l=n\in \+bZ_+$时, $y_0$或$y_1$退化为多项式, 谓Legendre多项式,
+    \[ P_n\pare{x} = \sum_{k=0}^{\lfloor n/2\rfloor} \frac{\pare{-1}^k \pare{2n-2k}!x^{n-2k}}{2^n k! \pare{n-k}! \pare{n-2k}!}. \]
+    可以用Abel等式得到另一个解,
+    \begin{align*}
+        Q_n = P_n \int \frac{\rd{x}}{\pare{1-x}^2 P_n^2} = \frac{P_n}{2}\ln \frac{1+x}{1-x} - \sum_{k=1}^{\lfloor \pare{n+1}/2\rfloor} \frac{2n+3-4k}{\pare{2k-1}\pare{n+1-k}}P_{n+1-2k}.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    Bessel方程为
+    \[ \pare{rR'}' + \pare{\lambda r - \frac{\nu^2}{r}}R = 0,\quad \nu^2 = \sigma. \]
+    相应的$\Theta$方程为$\Theta'' + \nu^2\Theta = 0$. 当$\Theta$满足周期条件时$\nu$为整数, $\lambda$可被吸收,
+    \begin{align*}
+        & x = \sqrt{\lambda}r,\quad y\pare{x} = R\pare{r} = R\pare{\frac{x}{\sqrt{\lambda}}},\\
+        & x^2 y'' + xy' + \pare{x^2 - \nu^2}y = 0.
+    \end{align*}
+    这是$\nu$阶Bessel方程标准形式. $x=0$是常规奇点, $\displaystyle y = x^\rho \sum_{n=0}^\infty a_n x^n$,
+    \begin{align*}
+        & x^\rho \sum_n a_n\curb{\brac{\pare{n+\rho}^2 - \nu^2}x^n + x^{n+2}} = 0, \\
+        & a_n \brac{\pare{n+\rho}^2 - \nu^2} + a_{n-2} = 0, \\
+        & \text{指标方程} \rho^2 = \nu^2 \Rightarrow \rho = \pm \nu.
+    \end{align*}
+    取$\rho_1 = \nu \ge 0$, 有
+    \[ a_{2k} = -\frac{a_{2k-2}}{4k\pare{k+\nu}}. \]
+    对于\gloss{第一类Bessel函数}, 设$\displaystyle a_0 = \frac{2^{-\nu}}{\Gamma\pare{\nu+1}}$,
+    \begin{align*}
+        & a_{2k} = \frac{\pare{-1}^k \Gamma\pare{\nu+1} a_0}{4^k k!\Gamma\pare{k+\nu + 1}}, \\
+        & y = J_\nu = \sum_{k=0}^\infty \frac{\pare{-1}^k \pare{x/2}^{2k+\nu}}{k!\Gamma\pare{k+\nu + 1}}.
+    \end{align*}
+    如果选取$\rho_2 = -\nu$, 此时若$\nu \in \+bZ$, 有$a_0 = a_2 = \cdots = 0$, 不自洽. 故须假设$\nu \notin \+bZ$, 设$\displaystyle a_0 = \frac{2^\nu}{\Gamma\pare{1-\nu}}$,
+    \begin{align*}
+        & a_{2k} = \frac{\pare{-1}^k \Gamma\pare{1-\nu}a_0}{4^k k!\Gamma\pare{k-\nu + 1}}, \\
+        & y = \sum_{k=0}^\infty \frac{\pare{-1}^k \pare{x/2}^{2k-\nu}}{k!\Gamma\pare{k-\nu + 1}} = J_{-\nu}.
+    \end{align*}
+    这一公式对于整数的$\nu$可得
+    \[ \lim_{\nu \rightarrow -m}J_{-\nu} = \pare{-1}^m J_m. \]
+    需要寻找另一个线性独立的解,
+    \begin{align*}
+        & N_\nu = \frac{\cos \nu\pi J_\nu - J_{-\nu}}{\sin \nu \pi},\\
+        & \lim_{\nu \rightarrow -m}N_\nu = \frac{\cos \nu\pi \partial_\nu J_\nu - \pi \sin \nu\pi J_\nu - \partial_{\nu}J_{-\nu}}{\pi \cos\nu\pi} \\
+        &= \rec{\pi} \pare{\partial_\nu J_\nu - \pare{-1}^m \partial_\nu J_{-\nu}}\vert^{\nu = m}.
+    \end{align*}
+    得到Neumann函数.
+    \begin{align*}
+        N_m &= \frac{2}{\pi}\pare{\ln \frac{x}{2} + \gamma} J_m \\
+        &\phantom{=\,} - \rec{\pi}\sum_{k=0}^{m-1}\frac{\pare{m-k-1}!}{k!}\pare{\frac{x}{2}}^{2k-m} \\
+        &\phantom{=\,} - \rec{\pi}\sum_{k=0}^{\infty} \frac{\pare{-1}^k}{k!\pare{m+k}!}\pare{\frac{x}{2}}^{2k+m}\pare{H_k + H_{m+k}}.\\
+        & H_k = \sum_{n=1}^k \rec{n}.
+    \end{align*}
+    $x=0$时$J_0 = 1$, $J_{\nu>0} = 0$, $J_{\nu<0} = \infty$, $N_\nu$无界. 且特别有
+    \begin{align*}
+        & J_{1/2} = \sqrt{\frac{2}{\pi x}}\sin x,\quad J_{-1/2} = \sqrt{\frac{2}{\pi x}} \cos x, \\
+        & N_{1/2} = -J_{-1/2} = -\sqrt{\frac{2}{\pi x}}\cos x,\quad N_{-1/2} = J_{1/2} = \sqrt{\frac{2}{\pi x}}\sin x.
+    \end{align*}
+\end{ex}
+
+% subsection 二阶线性ode (end)
+
+\subsection{Legendre函数} % (fold)
+\label{sub:legendre函数}
+
+Rodrigues微分公式表明
+\begin{align*}
+    D_x^n\brac{\pare{x^2 - 1}^n} &= D_x^n \sum_{k=0}^n \pare{-1}^k \binom{n}{k} x^{2n-2k} \\
+    &= D_x^n \sum_{k=0}^{\lfloor n/2\rfloor} \pare{-1}^k \binom{n}{k} x^{2n-2k} \\
+    &= \sum_{k=0}^{\lfloor n/2 \rfloor} \pare{-1}^k \binom{n}{k} x^{2n-2k-n}\pare{2n-k}\pare{2n-2k-1}\cdots\pare{2n-2k-n+1} \\
+    &= n!\sum_{k=0}^{\lfloor n/2 \rfloor} \frac{\pare{-1}^k \pare{2n-2k}!}{k!\pare{n-k}!\pare{n-2k}!}\\
+    &= 2^n n!P_n\pare{x}.
+    \Rightarrow P_n\pare{x} &= \frac{D_x^n\brac{\pare{x^2-1}^n}}{2^n n!}.
+\end{align*}
+可得Schlafli公式
+\begin{align*}
+    P_n\pare{x} &= \frac{2^{-n}}{2\pi i}\oint_C \rd{z}\, \frac{\pare{z^2 - 1}^n}{\pare{z-x}^{n+1}}.
+\end{align*}
+选择路径
+\[ z = e^{i\theta}\sqrt{1-x^2} + x,\quad -\pi\le \theta \le \pi, \]
+可得Laplace公式
+\begin{align*}
+    P_n\pare{x} &= \rec{2\pi}\int_{-\pi}^\pi \rd{\theta}\,\pare{2e^{i\theta}\sqrt{1-x^2}}^{-n} \\
+    &\phantom{=\,} \brac{2x e^{i\theta} \sqrt{1-x^2} + e^{2i\theta}\pare{1-x^2} + x^2 -1}^{n}\\
+    &= \pi^{-1} \int_0^\pi \rd{\theta}\,\pare{x+i\cos\theta \sqrt{1-x^2}}^n.
+\end{align*}
+\par
+三维空间中$\+vr$处的点源产生的势在位置$\+vr$为
+\[ \rec{\abs{\+vr- \+vr'}} = \rec{\sqrt{r^2 + r'^2 - 2rr'\cos\theta}}. \]
+其中$\theta$为$\+vr$和$\+vr'$间的夹角. 作为$\+vr$的函数满足$\+vr\neq \+vr'$处的Laplace方程. 若$r>r'$可展开
+\[ \rec{r\sqrt{1-2\cos\theta\pare{r'/r} + \pare{r'/r}^2}} = \sum_{n=0}^\infty p_n\pare{\cos\theta}\frac{r'^n}{r^{n+1}}. \]
+这里要求参数$r'/r<1$.
+\par
+若$r<r'$也有类似的展开,
+\[ \rec{r'}{\sqrt{1-2\cos\theta\pare{r/r'}+\pare{r/r'}^2}} = \sum_{n=0}^\infty p_n\pare{\cos\theta} \frac{r^n}{r'^{n+1}}. \]
+两个级数中的每一项都是$R\pare{r}\Theta\pare{\theta}$的分离变量形式. 而$1/r^{n+1}$和$r^n$都满足
+\[ \pare{r^2R'}' - n\pare{n+1}R = 0. \]
+因此$p_n\pare{\cos\theta}$是Legendre方程的解, 是某种$n$阶Legendre函数. 由于它在$\cos\theta = \pm 1$时有界, 正比于$P_n$.
+\par
+考虑隐函数变量代换$z\mapsto t$, 满足
+\begin{align*}
+    & 1-2xt + t^2 = \pare{1-tz}^2, \\
+    & \Rightarrow t\pare{z^2 - 1}+ 2\pare{x-z} = 0, \\
+    & \Rightarrow \begin{cases}
+        \pare{z^2-1}/\pare{z-x} = 2/t,\\
+        \pare{z^2-1}\,\rd{t} = 2\pare{1-tz}\,\rd{z},
+    \end{cases}\\
+    & \Rightarrow \pare{\frac{z^2-1}{z-x}}^{n+1} \frac{\rd{z}}{z^2-1} = \frac{\pare{2/t}^{n+1}\,\rd{t}}{2\sqrt{1-2xt+t^2}}.
+\end{align*}
+从而
+\begin{align*}
+    P_n\pare{x} &= \rec{2\pi i}\oint_C \rd{t}\, t^{-n-1}/\sqrt{1-2xt + t^2} \\
+    &= \left.D_t\pare{1-2xt + t^2}^{-1/2}/n!\right\vert^{t=0}. \\
+    \Rightarrow & \begin{cases}
+        \displaystyle \sum_{n=0}^\infty P_n\pare{x}t^n = 1/\sqrt{1-2xt + t^2}, & \abs{t}<1,\\
+        \displaystyle \sum_{n=0}^\infty P_n\pare{x}t^{-n} = t/\sqrt{1-2xt+t^2}, & \abs{t}>1.
+    \end{cases}\\
+    \Rightarrow p_n\pare{x} &= P_n\pare{x}.
+\end{align*}
+从而对于距离反比势场,
+\begin{align*}
+    \rec{\sqrt{\+vr-\+vr'}} &= \rec{\sqrt{r^2 + r'^2 - 2rr'\cos\theta}} \\
+    &= \rec{r \sqrt{1-2\cos\theta\pare{r'/r} + \pare{r'/r}^2}} \\
+    &= \sum_{n=0}^\infty P_n\pare{\cos\theta} \frac{r'^n}{r^{n+1}} \\
+    &= \rec{r'\sqrt{1-2\cos\theta\pare{r/r'} + \pare{r/r'}^2}} \\
+    &= \sum_{n=0}^\infty P_n\pare{\cos\theta} \frac{r^n}{r'^{n+1}}.
+\end{align*}
+
+\paragraph{多极展开} % (fold)
+\label{par:多极展开}
+
+若电荷在空间一小区域内分布, 则
+\[ \phi\pare{\+vr} = \iiint \rd{\+vr'} \, \frac{\rho\pare{\+vr'}}{\abs{\+vr - \+vr'}} = \sum_{n=0}^\infty \frac{Q_n}{r^{n+1}}. \]
+其中
+\begin{align*}
+    Q_n &= \iiint \rd{\+vr'} \rho\pare{\+vr'}P_n\pare{\cos\theta} r'^n \\
+    &= \int \rd{r'}\, r'^{n+2} \int\rd{\theta}\,\sin\theta P_n\pare{\cos\theta} \int\rd{\phi}\rho\pare{r',\theta,\phi}.
+\end{align*}
+$Q_0$是总电荷, $Q_1$是总偶极子. $Q_n$能完全概括电荷分布对点势的影响, 但依赖于$\+vr$.
+
+% paragraph 多极展开 (end)
+
+\subsubsection{递推公式} % (fold)
+\label{ssub:递推公式}
+
+生成函数对$t$求导,
+\begin{align*}
+    \sum_{n=0}^\infty nP_n\pare{x} t^{n-1} &= D_t \pare{\rec{\sqrt{1-2xt + t^2}}} \\
+    &= \frac{x-t}{\pare{1-2xt+t^2}^{3/2}} \\
+    &= \frac{x-t}{1-2xt+t^2}\sum_{n=0}^\infty P_n t^n.\\
+    \Rightarrow \pare{1-2xt + t^2}\sum_{n=0}^\infty nP_n t^{n-1} &= \pare{x-t}\sum_{n=0}^\infty P_n t^n, \\
+    \Rightarrow \pare{n+1}P_{n+1} + nP_{n-1} &= \pare{2n+1}xP_n.
+\end{align*}
+对$x$求导,
+\begin{align*}
+    \sum_{n=0}^\infty P'_n\pare{x} t^n &= D_x\pare{\rec{\sqrt{1-2xt+t^2}}} \\
+    &= \frac{t}{\pare{1-2xt+t^2}^{3/2}} \\
+    \Rightarrow \pare{1-2xt+t^2}\sum_{n=0}^\infty P'_n\pare{x}t^n &= t\sum_{n=0}^\infty P_n\pare{x}t^n \\
+    \Rightarrow P_n &= P'_{n+1} - 2xP'_n + P'_{n-1} \\
+    &= \pare{P'_{n+1} - 2xP'_n + P_{n-1}}' + 2P_n'\\
+    &= -\pare{P_{n+1} - 2xP_n + P_{n-1}}'.
+\end{align*}
+再使用Bonnet公式,
+\begin{align*}
+    & \Rightarrow \begin{cases}
+        nP_n = xP'_n - P'_{n-1}, \\
+        \pare{n+1}P_n = P'_{n+1} - xP'_n,
+    \end{cases}\\
+    & \Rightarrow  \pare{2n+1}P_n = P'_{n+1} - P'_{n-1}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        由
+        \begin{align*}
+            &\pare{x^{m+1}P_n - x^mP_{n-1}}' \\
+            &= \pare{m+1} x^m P_n - mx^{m-1} P_{n-1} + x^m\pare{xP'_n - P'_{n-1}} \\
+            &= \pare{m+n+1} x^m P_n - mx^{m-1}P_{n-1} \\
+            \Rightarrow &\, \int\rd{x}\,\brac{\pare{m+n+1}x^m P_n - mx^{m-1}P_{n-1}} = x^{m+1}P_n - x^mP_{n-1}.
+        \end{align*}
+        考虑$m=1$之特例,
+        \[ \pare{n+1}\int\rd{x}\, P_n = xP_n - P_{n-1}. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 递推公式 (end)
+
+\subsubsection{特殊值} % (fold)
+\label{ssub:特殊值}
+
+由生成函数可得
+\[ x = \pm 1,\quad \sum_{n=0}^\infty P_n\pare{\pm 1}t^n = 1/\pare{1\mp t} \Rightarrow P_n\pare{\pm 1} = \pare{\pm 1}^n. \]
+在$x=0$处, $\displaystyle \sum_{n=0}^\infty P_n\pare{0} t^n = \rec{\sqrt{1+t^2}}$,
+\[ \Rightarrow P_n\pare{0} = \begin{cases}
+    1, & n=0, \\
+    0, & n=1,3,5,\cdots,\\
+    \displaystyle \frac{\pare{2m-1}!!}{\pare{-1}^m \pare{2m}!!}, & n=2m = 2,\cdots.
+\end{cases} \]
+\begin{sample}
+    \begin{ex}
+        由
+        \begin{align*}
+            1 &= \pare{1-2xt+t^2}/\pare{1-2xt+t^2} \\
+            &= \pare{1-2xt + t^2}\pare{\sum_{m=0}^\infty P_m t^m}^2 \\
+            &= \pare{1-2xt+t^2} \sum_{m=0}^\infty t^m \int_{k=0}^m P_kP_{m-k}, \\
+            \Rightarrow &\, 2x \sum_{k=0}^m P_kP_{m-k}\\
+            &= \sum_{k=0}^{m+1}P_kP_{m+1-k} + \sum_{k=0}^{m-1}P_kP_{m-1-k}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 特殊值 (end)
+
+% subsection legendre函数 (end)
+
+\subsection{含常规奇点的SL问题} % (fold)
+\label{sub:含常规奇点的sl问题}
+
+\newpoint{}如果定义域的区间任何一遍有常规奇点, 边界条件改为有界条件, 定理依然成立.
+\begin{ex}
+    Legendre方程$\brac{\pare{1-x^2}y'}' + \lambda y = 0$, $-1\le x\le 1$. 要求$y$在$x=\pm 1$有界, $\lambda = n\pare{n+1}$, $y=P_n$, 用$\ket{P_n}$表示, 有$\curb{\ket{P_n}}$构成$C\brac{-1,1}$的正交基.
+\end{ex}
+\begin{align*}
+    \sum_{n=0}^\infty \norm{P_n}^2 t^{2n} &= \int_{-1}^1\rd{x}\,\pare{1-2xt+t^2}^{-1}\\
+    &= \left.\frac{\ln \pare{1-2xt+t^2}}{2t}\right\vert^{x=-1}_{x=1} \\
+    &= \frac{\ln \pare{1+t} - \ln\pare{1-t}}{t} = \sum_{n=0}^\infty \frac{2t^{2n}}{2n+1}.
+    \Rightarrow \norm{P_n}^2 = \frac{2}{2n+1}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        设$\displaystyle \ket{f} = f\pare{x} = \begin{cases}
+            0, & x\in \blr{-1,\alpha}, \\
+            1, & x\in \lbr{\alpha,1}.
+        \end{cases}$ 设有展开$\ket{f} = \displaystyle \sum_n f_n\ket{P_n}$, 则
+        \begin{align*}
+            f_0 &= \frac{\braket{P_0}{f}}{\braket{P_0}{P_0}} = \half \int_\alpha^1 \rd{x}P_0 = \frac{1-\alpha}{2}, \\
+            f_n &= \frac{\braket{P_n}{f}}{\braket{P_0}{P_0}} = \frac{2n+1}{2}\int_\alpha^1\rd{x}P_n \\
+            &= \half \brac{P_{n-1}\pare{\alpha} - P_{n+1}\pare{\alpha}},\quad n>1.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求$x^2$的展开. 多项式$P_n$的幂次为$n$, 奇偶性和$n$相同, 只需考虑
+        \[ P_0 = 1,\quad P_2 = \frac{3x^2-1}{2}. \]
+        观察可得
+        \[ x^2 = \frac{P_0}{3} + \frac{2P_2}{3}. \]
+    \end{ex}
+\end{sample}
+
+% subsection 含常规奇点的sl问题 (end)
+
+\subsection{轴对称问题} % (fold)
+\label{sub:轴对称问题}
+
+\newpoint{}解球几何的定解问题, 使用球坐标.
+\newpoint{}如果Laplace算子的本征值为零, 则分离变量后$R$满足Euler方程, 而不是球Bessel方程.
+\newpoint{}这要求旋转对称性, 即解不依赖于$\phi$, 即在分离变量中有$\mu = 0 = m$.
+\begin{ex}
+    对于球坐标的Laplace方程, 设$x=\cos\theta$, $y = R\pare{r}y\pare{x}$, 分离变量后
+    \begin{align*}
+        & \pare{r^2R'}' - \lambda R = 0, \\
+        & \brac{\pare{1-x^2}y'}' + \lambda y = 0, \\
+        & y\pare{\pm 1} < \infty, \\
+        & \Rightarrow \lambda = n\pare{n+1},\quad y = P_n.
+    \end{align*}
+\end{ex}
+\newpoint{}使用$y\pare{x}$作SL问题.
+\newpoint{}$\ket{u\pare{r}}$表示$u\pare{r,\theta}$.
+\newpoint{}此时有$\displaystyle \ket{\pare{u\pare{r}}} = \sum_{n=0}^\infty \pare{C_n r^n D_n r^{-n-1}}\ket{P_n}$.
+\newpoint{}球内$D_n = 0$.
+\newpoint{}球外须考虑物理条件. 如果电荷分布在原点附近则有$C_n = 0$.
+\newpoint{}如果内外都有电荷分布则$C_n$和$D_n$都需要考虑.
+\begin{sample}
+    \begin{ex}
+        对于半径$a$的接地金属球, 球内$P$放置电荷$q$, 令$z$轴经过$P$点则问题具备球对称. $U = u_0 + u_1$, 其中$u_0$和$u_1$分别是$P$点电荷和球表面的感应电荷的贡献.
+        \begin{align*}
+            & \+vb = \overrightarrow{OP},\quad u_0\pare{r,\theta} = \frac{q}{\abs{\+vr - \+vb}} = \frac{q}{\sqrt{r^2+b^2 - 2rb\cos\theta}}, \\
+            & \laplacian u_1 = 0,\quad \abs{u_1\pare{r<a}} < \infty, \\
+            & u_1\pare{a,\theta} = -u_0\pare{a,\theta} = \frac{q}{a} \sum_{n=0}^\infty P_n\pare{\cos\theta} \frac{b^n}{a^n}. \\
+            & u_1\pare{r,\theta} = \sum_{n=0}^\infty C_n r^n \ket{P_n}, \\
+            & u_1\vert_{r=a} = \sum_{n=0}^\infty C_n a^n \ket{P_n} = -\frac{q}{a} \sum_{n=0}^\infty \frac{b^n}{a_n}\ket{P_n}, \\
+            & \Rightarrow C_n = \frac{-qb^n}{a^{2n+1}} \Rightarrow u_1\pare{r,\theta} = -\frac{q}{a} \sum_{n=0}^\infty \pare{\frac{rb}{a^2}}^n P_n\pare{\cos\theta},\\
+            & \Rightarrow u_1\pare{r,\theta} = -\frac{qa}{b}\rec{\sqrt{a^4/b^2 - 2ra^2/b\cos\theta + r^2}} = \frac{q'}{\rho}.
+        \end{align*}
+        这可以视为镜像电荷产生的势,
+        \[ q' = -\frac{qa}{b},\quad \rho'^2 = \pare{\frac{a^2}{b}}^2 - 2\frac{ra^2}{b}\cos\theta + r^2. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        均匀电场内的导体球, 由叠加原理可以写成$U = u_0 + u$, $u_0 = c-E_0 r\cos\theta$来自均匀电场, $u$来自感应电荷, $\laplacian u = 0$, $\displaystyle \lim_{r\rightarrow \infty} u\pare{r} = 0$,
+        \[ u\pare{r,\theta} = \sum_{n=0}^\infty D_n r^{-n-1}P_n\pare{\cos\theta}, \]
+        而$U\pare{r=a,\theta} = \phi_0$.
+        \begin{align*}
+            & u\pare{r=a,\theta} = \phi_0 - u_0\pare{r=a,\theta} = \pare{\phi_0 - c}P_0 + aE_0 P_1, \\
+            & \Rightarrow D_0 = a\pare{\phi_0 - c},\quad D_1 = a^3 E_0.
+        \end{align*}
+        由总电荷条件, $\displaystyle U = c+\pare{\phi_0 - c}\frac{a}{r} + E_0\pare{\frac{a^3}{r^2}-r}\cos\theta$. $u_0$无电荷贡献, 总电荷贡献来自于$u$. $\displaystyle u = \pare{\phi_0 - c}\frac{a}{r} + E_0 \frac{a^3}{r^2}\cos\theta$, 能贡献电荷的只有$a/r$, 从而总电荷为$\phi_0  - c$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        半球内的Laplace方程满足边界条件$u\pare{r=a,\theta,\phi} = u_0\pare{\theta,\phi}$者, 求解区域$0\le \theta \le \pi/2$, 且设$u\pare{\theta = \pi/2} = 0$. 自然边界条件$x=1$和边界条件$x=0$意味着SL问题为
+        \[ \brac{\pare{1-x^2}y'}' + \lambda y = 0,\quad 0\le x=\cos\theta \le 1. \]
+        故$y$为奇数阶Legendre多项式. 故
+        \begin{align*}
+            & u = \sum_{n=0}^\infty A_n r^{2n+1}P_{2n+1},\\
+            & u\vert_{r=a} = \sum_{n=0}^\infty A_n a^{2n+1}P_{2n+1} = u_0, \\
+            & \Rightarrow A_{2n+1} = \frac{\braket{P_{2n+1}}{u_0}}{a^{2n+1}\norm{P_{2n+1}}^2}, \\
+            & \Rightarrow A_{2n+1} = \pare{4n+1}a^{-2-1}\int_0^1 \rd{x} P_{2n+1}\pare{x}u\pare{x}.
+        \end{align*}
+        注意到内积在$\pare{0,1}$上.]对于常数$u_0$, 可得
+        \begin{align*}
+            & A_n = \frac{\pare{4n+3}u_0}{a^{2n+1}} \int_0^1 \rd{x}\, P_{2n+1}\pare{x} = \pare{-1}^n u_0 \frac{\pare{2n-1}!!\pare{4n+3}!!}{\pare{2n+2}!!a^{2n+1}}.\\
+            & u = u_0 \sum_{n=0}^\infty \frac{\pare{4n+3}\pare{2n-1}!!}{\pare{-1}^n \pare{2n+2}!!}\pare{\frac{r}{a}}^{2n+1}P_{2n+1}\pare{\cos\theta}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsection 轴对称问题 (end)
+
+\subsection{不假设轴对称} % (fold)
+\label{sub:不假设轴对称}
+
+考虑更一般的情况,
+\[ \laplacian = \rec{r^2}\curb{\partial_r \pare{r^2\partial_r} + \rec{\sin^2\theta}\brac{\pare{\sin\theta \partial_\theta}^2 + \partial_\phi^2}}. \]
+若设$u = R\pare{r} Y\pare{\theta,\phi}$, $\pare{\laplacian + k^2} u = 0$, 则有
+\[ \begin{cases}
+    \displaystyle \frac{\pare{r^2R'}'}{R} + \pare{k^2 r^2 - \lambda} R = 0, \\
+    \laplacian Y + \lambda Y = 0.
+\end{cases} \]
+进一步分离变量, 引入$\Phi'' + m^2\Phi = 0$, 得到
+\[ \brac{\pare{1-x^2}y'}' + \brac{\lambda - \frac{m^2}{1-x^2}}y = 0. \]
+若设$y = \pare{1-x^2}^{m/2} u\pare{x}$, 则
+\[ \brac{\pare{1-x^2}d_x^2 - 2\pare{m+1}x\,d_x + \lambda - m\pare{m+1}}u = 0. \]
+而Legendre方程为$\brac{\pare{1-x^2}z'}' + \lambda z=  0$, 有
+\[ \brac{\pare{1-x^2}d_x^2 - 2\pare{m+1}x\,d_x + \lambda - m\pare{m+1}}z^{\pare{m}} = 0. \]
+
+\subsubsection{伴随Legendre函数} % (fold)
+\label{ssub:伴随legendre函数}
+
+$\lambda = n\pare{n+1}$, $P_n^m$是三角多项式
+\begin{align*}
+    P_n^m = \pare{1-x^2}^{m/2}P_n^{\pare{m}}, \\
+    Q_n^m = \pare{1-x^2}^{m/2}Q_n^{\pare{m}}.
+\end{align*}
+由Rodrigues公式,
+\[ P_n^m = \frac{\pare{1-x^2}^{m/2}}{2^n n!}\brac{\pare{x^2-1}^n}^{\pare{n+m}}. \]
+对于固定的$m$, $P_{n\ge m}^m$构成$L^2\brac{-1,1}$的一组正交基. 也可以证明
+\[ \norm{P_n^m}^2 = \frac{2\pare{n+m}!}{\pare{2n+1}\pare{n-m}!}. \]
+乘以$e^{im\phi}$后构成$L^2\pare{S^2}$的正交基. 定义
+\begin{align*}
+    & P_n^{-m} = \frac{\brac{\pare{x^2-1}^n}^{\pare{n-m}}}{2^n n!\pare{1-x^2}^{m/2}} = \pare{-1}^m \frac{\pare{n-m}!}{\pare{n+m}!}P_n^{-m}, \\
+    & Y_{n,m} = \sqrt{\frac{\pare{2n+1}\pare{n-m}!}{4\pi\pare{n-m}!}} P_n^m\pare{\cos\theta} e^{im\phi}, \\
+    & \braket{Y_{n',m'}}{Y_{n,m}} = \delta_{n,n'}\delta_{m,m'},\\
+    & Y_{n,m}\pare{0,\phi} = \delta_{m,0},\quad Y_{n,m}\pare{\pi\phi} = \delta_{m,0}\pare{-1}^n.
+\end{align*}
+也可以将指数函数替换为三角函数得到球函数.
+
+% subsubsection 伴随legendre函数 (end)
+
+\subsubsection{球函数} % (fold)
+\label{ssub:球函数}
+
+定义域为$S^2$者谓球函数, 满足$F\pare{\theta,\phi+2\pi} = F\pare{\theta,\phi}$且$F\pare{0,\phi}$和$F\pare{\pi,\phi}$为常数. 定义
+\[ \braket{F_1}{F_2} = \iint \rd{\phi}\,\rd{\phi}\, \sin\theta F^*_1\pare{\theta,\phi} F_2\pare{\theta,\phi}, \]
+则可以使用球谐函数展开
+\[ F = \sum_{l=0}^\infty \sum_{m=-l}^l F_{l,m}Y_{l,m}. \]
+
+% subsubsection 球函数 (end)
+
+% subsection 不假设轴对称 (end)
+
+\subsection{对称与旋转} % (fold)
+\label{sub:对称与旋转}
+
+\newpoint{}绕原点的旋转$\pare{\theta,\phi} \rightarrow \pare{\theta',\phi'}$.
+\newpoint{}$r$, $\partial_r$和$\laplacian$都是旋转不变的.
+\newpoint{}$\laplacian_{S^2} = r^2\laplacian - \partial_r\pare{r^2\partial_r}$也是旋转不变的.
+\newpoint{}因此$\laplacian_{S^2}$的本征值$\lambda = l\pare{l+1}$不受旋转影响.
+\newpoint{}在旋转作用下$Y_{l,m}\pare{\theta,\phi} \rightarrow Y_{l,m}\pare{\theta',\phi'}$是$Y_{l,m'}\pare{\theta,\phi}$, $m' = -l,\cdots,+l$的线性组合.
+\newpoint{}$\ket{Y_{l,m=-l,\cdots,l}}$生成$\laplacian_{S^2}$的特征子空间.
+\newpoint{}由旋转不变性知这构成旋转对称的$2l+1$维表示.
+
+\subsubsection{角动量} % (fold)
+\label{ssub:角动量}
+
+\newpoint{}$\laplacian_{S^2}$恰为角动量的平方.
+\newpoint{}角动量的大小视为$l$, $m$为角动量的$z$分量.
+\newpoint{}$m$的意义为, 考虑投影算子$\displaystyle \hat \pi_l = \sum_{m=-l}^l = \ket{Y_{l,m}}\bra{Y_{l,m}}$. 投影算子$\hat \pi_l\ket{F}$得到$\ket{F}$的角动量$l$部分.
+\newpoint{}其作用表现为积分变换
+\begin{align*}
+    F\pare{\theta,\phi} \mapsto \iint \rd{\theta'}\,\rd{\phi'}\, \pi_l\pare{\theta,\phi;\theta',\phi'} F\pare{\theta',\phi'}, \\
+    \pi_l\pare{\theta,\phi;\theta',\phi'} = \sum_{m=-l}^l Y^*_{l,m}\pare{\theta,\phi}Y_{l,m}\pare{\theta',\phi'}.
+\end{align*}
+
+% subsubsection 角动量 (end)
+
+\subsubsection{旋转不变性} % (fold)
+\label{ssub:旋转不变性}
+
+\newpoint{}$\hat \pi_l$是旋转不变的, 因此核$\pi_l$可以写成$\pare{\theta,\phi}$和$\pare{\theta',\phi'}$间唯一旋转不变量$\gamma$的函数. 设$\gamma$是$\pare{\theta,\phi}$和$\pare{\theta',\phi'}$之间的夹角.
+\newpoint{}要计算具体的$\pi_l\pare{\theta,\phi;\theta,\phi'}$时, 先将坐标系旋转使$\pare{\theta,\phi}$和$+z$方程重合, 再旋转到$\phi = 0$. 这是$\theta = 0$, $\theta' = \gamma$, $\phi$无意义. 故$\pi_l$仅依赖于$\gamma$.
+\newpoint{}$P_n\pare{\cos\gamma}$, $n=0,1,\cdots$时$\cos\gamma$的函数所在空间的完备基, 故$\pi_l\pare{\theta,\phi;\theta',\phi'}$是其线性组合.
+
+% subsubsection 旋转不变性 (end)
+
+\subsubsection{级数简化成单项} % (fold)
+\label{ssub:级数简化成单项}
+
+设$F\pare{\theta',\phi'}$集中在球面上的某个点. 选择坐标系使该点在$+z$轴上, 此时$\theta' = 0$, $\theta = \gamma$, 故积分同时是$P_n\pare{\cos\theta}$, $n=0,1,\cdots$和$Y_{l,m}\pare{\theta,\phi}$, $m=-l,\cdots,+l$的线性组合. 唯一的交集是$n=l, m = 0$. 从而
+\[ \sum_{m=-l}^{+l} Y^*_{l,m}\pare{\theta,\phi}Y_{l,m}\pare{\theta',\phi'}\propto P_l\pare{\gamma}. \]
+
+% subsubsection 级数简化成单项 (end)
+
+\subsubsection{加法定理} % (fold)
+\label{ssub:加法定理}
+
+若$\theta = 0$, 且$\theta' = \gamma$, 则
+\begin{align*}
+    &\sum_{m=-l}^l Y^*_{l,m}\pare{0,\phi} Y_{l,m}\pare{\theta',\phi'} \\
+    &= \sqrt{\frac{2l+1}{4\pi}}Y_{l,0}\pare{\theta',\phi'} = \frac{2l+1}{4\pi}P_l\pare{\cos\gamma}, \\
+    & \Rightarrow \sum_{m=-l}^{l} Y^*_{l,m}\pare{\theta,\phi}Y_{l,m}\pare{\theta',\phi'} = \frac{2l+1}{4\pi} P_l\pare{\cos\gamma}, \\
+    & \cos\gamma = \cos\theta \cos\theta' + \sin\theta \sin\theta' \cos\pare{\phi - \phi'}.
+\end{align*}
+从而可得$P_l$展开为$P_l^m$的复杂表达式.
+
+% subsubsection 加法定理 (end)
+
+\subsubsection{多极子展开} % (fold)
+\label{ssub:多极子展开}
+
+利用加法定理,
+\begin{align*}
+    \rec{\abs{\+vr-\+vr'}} &= \rec{r_> \sqrt{1-2\cos\theta\pare{r_< / r_>} + \pare{r_</r_>}^2}} \\
+    &= \sum_{l=0}^\infty P_l\pare{\cos\gamma} \frac{r_<^l}{r_>^{l+1}} \\
+    &= \sum_{l=0}^\infty \frac{4\pi r^l_<}{\pare{2l+1}r_>^{l+1}} \sum_{m=-l}^{+l} Y^*_{l,m}\pare{\theta,\phi}Y_{l,m}\pare{\theta',\phi'}. \\
+    \phi\pare{\+vr} &= \iiint \rd{\+vr'}\, \frac{\rho\pare{\+vr'}}{\abs{\+vr - \+vr'}} \\
+    &= \sum_{l=0}^\infty \frac{4\pi}{\pare{2l+1}r^{l+1}}\sum_{m=-l}^l Q_{l,m} Y_{l,m}\pare{\theta,\phi}, \\
+    Q_{l,m} &= \iiint \rd{\+vr'} \, r'^l Y^*_{l,m}\pare{\theta',\phi'}\rho\pare{\+vr'}.
+\end{align*}
+\newpoint{}从而多极矩概括了电荷分布对电势的影响.
+\newpoint{}测外部电势无法区别多极矩一样的电荷分布.
+\newpoint{}外部电势不能确定内部电荷分布.
+\newpoint{}可以用于按角动量分解, 例如部分波和原子轨道.
+
+% subsubsection 多极子展开 (end)
+
+% subsection 对称与旋转 (end)
+
+\begin{sample}
+    \begin{ex}
+        对于一般的球内电势, $u_r\pare{r=a,\theta,\phi} = f\pare{\theta,\phi}$, 选择$L^2\pare{S^2}$Hilbert空间, 则
+        \begin{align*}
+            & u = \sum_{l=0}^\infty \sum_{m=-l}^l u_{l,m}\pare{r} Y_{l,m}, \\
+            & u_{l,m} = C_{l,m}r^l + D_{l,m}r^{-l-1},\quad D_{l,m} = 0. \\
+            & u_r\vert_{r=a} = \sum{l=1}^\infty la^{l-1}\sum_{m=-l}^l C_{l,m}Y_{l,m}, \\
+            & f = \sum_{l=0}^\infty \sum_{m=-l}^l f_{l,m}Y_{l,m}.
+        \end{align*}
+        若$f_{0,0}\neq 0$则无解. 否则$C_{0,0}$任意, 解不唯一.
+        \[ C_{l,m} = \frac{a^{1-l}\braket{Y_{l,m}}{f}}{l\braket{Y_{l,m}}{Y_{l,m}}}. \]
+    \end{ex}
+\end{sample}
+
+% section 特殊函数 (end)
+
+\subsection{Bessel方程} % (fold)
+\label{sub:bessel方程}
+
+\newpoint{}在球几何中解Helmholtz方程需要Bessel函数.
+\newpoint{}在柱坐标下,
+\[ W = R\pare{r}\Theta\pare{\theta},\quad \laplacian_2 W + \lambda W = 0, \]
+从而
+\begin{align*}
+    & \frac{r\pare{rR'}'}{R} + \lambda r^2 + \frac{\Theta''}{\Theta} = 0, \\
+    & \begin{cases}
+        \Theta'' + \nu^2 \Theta = 0, \\
+        \displaystyle \pare{rR'}' + \pare{\lambda r - \frac{\nu^2}{r}}R = 0,\quad \nu^2 = \sigma.
+    \end{cases}
+\end{align*}
+\newpoint{}可得两个SL形式. $\Theta$满足周期性条件时, $\nu$为整数.
+\newpoint{}令$x=\sqrt{\lambda}r$, 可得$\nu$阶柱Bessel方程的标准形式,
+\begin{align*}
+    & x = \sqrt{\lambda r},\quad y\pare{x} = R\pare{r} = R\pare{\frac{x}{\sqrt{\lambda}}}, \\
+    & xy'' + xy' + \pare{x^2 - \nu^2} y = 0.
+\end{align*}
+\newpoint{}第一类Bessel函数
+\[ J_\nu = \sum_{k=0}^\infty \frac{\pare{-1}^k\pare{x/2}^{2k+\nu}}{k!\Gamma\pare{k+\nu + 1}}. \]
+\newpoint{}第二类Bessel函数
+\[ N_\nu = \frac{\cos \nu\pi J_\nu - J_{-\nu}}{\sin \nu\pi}. \]
+都是柱函数, 满足如下递推关系:
+\begin{resume}
+    \vspace{-\baselineskip}
+    \begin{align*}
+        & \brac{\pare{\frac{x}{2}}^\nu J_\nu}' = \pare{\frac{x}{2}}^{\nu} J_{\nu - 1}, \\
+        & \brac{\pare{\frac{x}{2}}^{-\nu} J_\nu}' = -\pare{\frac{x}{2}}^{-\nu} J_{\nu + 1}, \\
+        & xJ'_\nu + \nu J_\nu = xJ_{\nu - 1}, \\
+        & xJ'_\nu - \nu J_\nu = -xJ_{\nu + 1}, \\
+        & J_{\nu - 1} - J_{\nu + 1} = 2J'_\nu, \\
+        & J_{\nu - 1} + J_{\nu + 1} = 2\nu J_\nu/x.
+    \end{align*}
+\end{resume}
+因此从$J_0$出发可以算出所有$J\nu$.
+\[ J_1 = -J'_0,\quad J_2 = J_0 - 2J'_1 = J_0 + 2J''_0 = -J_0 + 2J_1/x = -J_0 - 2J'_0/x. \]
+对于非整数阶也可以类似操作. 令$z = x^2/2$, 定义
+\begin{align*}
+    & K_\nu\pare{z} = x^\nu J_\nu\pare{x}, \\
+    & \tilde{K}_\nu\pare{z} = x^{-\nu}J_\nu\pare{x}, \\
+    & \Rightarrow K_{\nu - n} = d_z^n K_\nu,\quad \tilde{K}_{\nu + n} = \pare{-1}^n d_z^n \tilde{K}_\nu, \\
+    & \Rightarrow J_{\nu - n} = x^{-\nu + n}\pare{x^{-1}d_x}^n \pare{x^\nu J_\nu}, \\
+    & J_{\nu + n} = x^{\nu + n}\pare{-x^{-1}d_x}^n \pare{x^{-\nu}J_\nu}.
+\end{align*}
+由
+\[ J_{1/2} = \sqrt{\frac{2}{\pi x}} \sin x = N_{-1/2}, \quad J_{-1/2} = \sqrt{\frac{2}{\pi x}}\cos x = -N_{1/2} \]
+知半整数阶的Bessel函数都和三角函数有关.
+\begin{remark}
+    满足上述递推关系的函数系必定为柱函数. Hankel函数同样满足之.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        由
+        \begin{align*}
+            & \begin{cases}
+                x^\nu J_{\nu - 1} = d_x\pare{x^\nu J_\nu}, \\
+                x^{-\nu}J_{\nu + 1} = -d_x \pare{x^{-\nu}J_\nu},
+            \end{cases} \\
+            & \Rightarrow \begin{cases}
+                x^{\nu + 1}J_\nu = d_x\pare{x^{\nu + 1}J_{\nu + 1}}, \\
+                x^{-\nu + 1}J_\nu = -d_x\pare{x^{-\nu + 1}J_{\nu - 1}}, \\
+                x^{\nu + 1}J_{-\nu} = -d_x\pare{x^{\nu+1}J_{-\nu - 1}},
+            \end{cases}\\
+            & \Rightarrow \int x^{n+m}J_n = \int x^{m-1}x^{n+1}J_n \\
+            & = \int x^{m-1} \pare{x^{n+1}J_{n+1}}' \\
+            &= x^{n+m}J_{n+1} - \pare{m-1} \int x^{n+m-1}J_{n+1}.
+        \end{align*}
+        如果$-n\le m < 0$, 则$\displaystyle \int x^{n+m}J_n$可以用$J_{2n+m}$的不定积分和$J_n$, $J_{n+1}$, $\cdots$, $J_{2n+m}$来表达.
+        \par
+        特别地, 对于$m=1$的情形, $\displaystyle \int x^{n+1}J_n = x^{n+1}J_{n+1}$. 且如果$m=2k+1$, $\displaystyle \int x^{n+m}J_n$可以经过$k$步转化为用$J_n,J_{n+1},\cdots,J_{n+k}$表达. 如果$m=2k$, 则$\displaystyle \int x^{n+m}J_n$可以经过$k$步转化为用$x^{n+k}J_{n+k}$的不定积分和$J_n,\cdots,J_{n+k}$表达.
+        \par
+        对于$m=0$的情形,
+        \begin{align*}
+            & \int x^n J_n = \int x^{-1}x^{n+1}J_n = \int x^{-1}\pare{x^{n+1}J_{n+1}}' \\
+            & = x^n J_{n+1} + \int x^{n+1}J_{n+1} = \cdots.
+        \end{align*}
+        可以经过$n$步转化为用$J_{2n}$的不定积分和$J_n,\cdots,J_{2n}$表达. 由
+        \[ \int J_{k+2} = -2J_{k+1} + \int J_k \]
+        以及$J_1 = -J_0'$可以将$\displaystyle \int J_k$转化为用$J_0$的不定积分和$J_0,\cdots,J_k$表达. 因此整数阶的Bessel函数的矩都可以用$J_0$的不定积分和整数阶的Bessel函数表达.
+    \end{ex}
+\end{sample}
+
+\subsubsection{生成函数} % (fold)
+\label{ssub:生成函数}
+
+\newpoint{}将$\displaystyle \sum_{n=-\infty}^{\infty} J_n\pare{x} \pare{2\tau/x}^n$代入$J_n$的Taylor展开, 得到
+\[ \sum_{n=-\infty}^\infty \sum_{k=0}^\infty \frac{\pare{-1}^k\pare{x/2}^{2k}\tau^n}{k!\pare{k+n}!} = \sum_{n,k = 0}^\infty \frac{\pare{-1}^k \pare{x/2}^{2k}\tau^{n-k}}{k!n!} = \exp\pare{\tau - \frac{x^2}{4\tau}}. \]
+将$\tau$换成$tx/2$, 得到
+\[ \resumath{\sum_{n=-\infty}^\infty J_n\pare{x}t^n = \exp\brac{\frac{x}{2}\pare{t-\rec{t}}}.} \]
+\newpoint{}由Cauchy公式,
+\[ J_n\pare{x} = \rec{2\pi i}\oint \rd{z} \frac{\exp\brac{\pare{z-\rec{z}}\frac{x}{2}}}{z^{n+1}}, \]
+其中回路环绕原点. 选择单位圆路径, 有
+\[ \resumath{J_n\pare{x} = \rec{\pi}\int_0^\pi \rd{\theta}\,\cos\pare{x\sin\theta - n\theta}.} \]
+\begin{sample}
+    \begin{ex}[加法公式]
+        由
+        \begin{align*}
+            & \sum_{n=-\infty}^{\infty}J_n\pare{x}t^n = \exp\brac{\pare{t-\rec{t}}\frac{x}{2}} \\
+            & \Rightarrow \sum_{n=-\infty}^{\infty} J_n\pare{x+y}t^n  = \exp\brac{\pare{t - \rec{t}}\frac{x}{2}} \exp\brac{\pare{t-\rec{t}}\frac{y}{2}} \\
+            &= \sum_{n=-\infty}^\infty t^n J_n\pare{x} \sum_{k=-\infty}^\infty t^k J_k\pare{y} \\
+            &= \sum_{n=-\infty}^\infty t^n \sum_{k=-\infty}^\infty J_k\pare{x}J_{n-k}\pare{y}.
+        \end{align*}
+        故
+        \[ J_n\pare{x+y} = \sum_{k=-\infty}^\infty J_k\pare{x}J_{n-k}\pare{y}. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 生成函数 (end)
+
+\subsubsection{Jacobi-Anger展开} % (fold)
+\label{ssub:jacobi_anger展开}
+
+设$t=e^{i\theta}$, 则由生成函数得
+\[ e^{ix\sin\theta} = \sum_{n\in \+bZ} J_n\pare{x} e^{in\theta}, \]
+从而
+\begin{align*}
+    & \cos\pare{x\sin\theta} = \sum_{n\in\+bZ} J_n\pare{x}\cos\pare{n\theta} \\
+    & = J_0\pare{x} + 2\sum_{n=1}^\infty J_{2n}\pare{x}\cos \pare{2n\theta}, \\
+    & \sin\pare{x\sin\theta} = \sum_{n\in\+bZ} J_n\pare{x}\sin\pare{n\theta} \\
+    &= 2\sum_{n=1}^\infty J_{2n-1}\pare{x}\sin\brac{\pare{2n-1}\theta}.
+\end{align*}
+设$\omega$表示载波频率, $\gamma$表示信号频率, $A$表示信号振幅, 则调幅对应
+\[ E = A \cos\gamma t \sin \omega t = A \cdot \half \brac{\sin \pare{\omega - \gamma}t + \sin\pare{\omega - \gamma} t}. \]
+调频对应
+\[ E = \exp\brac{i\pare{\omega t + A\sin\gamma t}} = 2\sum_{n\in \+bZ}J_n\pare{A} \exp \brac{i\pare{\omega+n\gamma}t}. \]
+调频的特点为需要更多带宽但信噪比高.
+
+% subsubsection jacobi_anger展开 (end)
+
+\subsection{Strum-Liouville问题} % (fold)
+\label{sub:strum_liouville问题}
+
+\newpoint{}Helmholtz方程中Laplace算子本征值为$-k^2$. 其中$\partial^2_z$的本征值为$\mu$而$-\partial_\phi^2$的本征值为$\sigma = \nu^2$.
+\newpoint{}Bessel方程对应的SL问题的本征值为$\lambda = k^2 - \mu = \omega^2$.
+\newpoint{}Bessel方程的SL形式为
+\[ \pare{rR'}' + \pare{\lambda r - \frac{\nu^2}{r}}R = 0, \]
+标准形式中$x = \sqrt{\lambda}r$,
+\[ x^2 y'' + xy' + \pare{x^2 - \nu^2} y = 0. \]
+\newpoint{}当$\lambda = \omega^2 > 0$, 本征函数为$y\pare{\omega r}$. 本征值作为自变量的系数出现.
+\newpoint{}这一SL问题在正实轴上, $r\ge 0$.
+\newpoint{}具体的解由边界条件决定. 对于自然边界条件, $y\pare{0}$有界, 此时第一类叠加Bessel函数即可.
+\newpoint{}$\lambda$即$\omega$由另一端的边值条件决定. Dirichlet边界条件为$R\pare{a} = 0$, $\omega$由$x = \omega a$是$J_\nu\pare{x}$的正根决定.
+\newpoint{}Robin边界条件$\alpha R\pare{a} + \beta R'\pare{a} = 0$. 对应的$\omega$由$x=\omega a$作为$\alpha J_\nu\pare{x} + \beta \omega J'_\nu\pare{x}$的正根决定.
+\newpoint{}用$\omega_n$表示第$n$个正根.
+\newpoint{}定义内积具有密度函数$r$,
+\[ \braket{R_1}{R_2} = \int_a^b r\,\rd{r}\,R_1^* R_2. \]
+
+\subsubsection{特殊情形} % (fold)
+\label{ssub:特殊情形}
+
+\newpoint{}对于$\lambda = 0$, 必须给定Neumann条件$R'\pare{a} = 0$, 并且要求$\nu = 0$. 此时$\omega_0 = 0$对应的固有函数是常数.
+\newpoint{}其它固有值$\omega_{n>0}$由$x = a\omega_n$是$J'_\nu\pare{x}$的第$n$个正根决定.
+\newpoint{}如果$R\pare{r}$不用做SL问题, $\lambda = k^2 - \mu$ 由别的坐标的SL问题决定. $\lambda = 0$时$\partial_{\ln r}^2 R = \nu^2 R$是Euler而非Bessel方程, 解为
+\[ \begin{cases}
+    Cr^\nu + Dr^{-\nu}, & \nu \neq 0, \\
+    C + D\ln r, & \nu = 0.
+\end{cases} \]
+
+% subsubsection 特殊情形 (end)
+
+\subsubsection{Bessel函数的根} % (fold)
+\label{ssub:bessel函数的根}
+
+\newpoint{}Bessel函数的根决定了SL问题的本征值.
+\newpoint{}由ODE的理论可得本征函数的实零点是离散无穷的.
+\newpoint{}由$J$的表达式可得
+\begin{cenum}
+    \item $J_{\nu > -1}\pare{x}$的零点是实数, 关于原点对称.
+    \item $\alpha J_\nu\pare{x} + xJ'_\nu\pare{x}$在实轴上有无穷多零点.
+    \item $J_\nu\pare{x}$和$J_{\nu+1}\pare{x}$的零点交替出现. $J_\nu\pare{x}$的零点先出现.
+\end{cenum}
+
+% subsubsection bessel函数的根 (end)
+
+\subsubsection{归一化} % (fold)
+\label{ssub:归一化}
+
+\newpoint{}可以用Bessel方程本身计算,
+\begin{align*}
+    & \pare{rR'}' + \pare{\omega^2 r \frac{\nu^2}{r}}R = 0 \\
+    & \Rightarrow 0 = \int_b^a rR'\brac{\pare{rR'}' + \pare{\omega^2 r - \frac{\nu^2}{r}}R}, \\
+    & 2\omega^2 \braket{R}{R} = \left.\brac{r^2R'^2 = \pare{\omega^2 r^2 - \nu^2}R^2}\right\vert_{r=b}^{r=a}.
+\end{align*}
+若$b=0$则$R\pare{r} = J_{\nu\ge 0}\pare{\omega r}$, 由
+\[ \left.r^2 R'^2 + \pare{\omega r^2 - \nu^2}R^2\right\vert_{r=0} = 0 \Rightarrow J_{\nu>0}\pare{0} = 0 \]
+可得
+\begin{align*}
+    \braket{R}{R} &= \frac{\omega^2 a^2 J'^2_\nu\pare{\omega^2 a^2 J'^2_\nu\pare{\omega a}} + \pare{\omega^2 a^2 - \nu^2}J_\nu^2\pare{\omega a}}{2\omega^2} \\
+    &= \frac{a^2\brac{J_\nu^2\pare{\omega a} - J_{\nu - 1}\pare{\omega a}J_{\nu+1}\pare{\omega a}}}{2} \\
+    &= \frac{aJ_{\nu - 1}\pare{\omega a}J_{\nu + 1}\pare{\omega a}/\omega^2 + J_\nu^2 \pare{\omega a}}{2}.
+\end{align*}
+
+\begin{sample}
+    \begin{ex}
+        设$0\le r\le 1$, $\ket{f}$表示$\abs{f\pare{0}} < \infty$而$f\pare{1} = 0$者. 设$x = \omega_n$是$J_0\pare{x}$的第$n$个正根, $\ket{J_0^n}$表示$J_0\pare{\omega_n r}$, 则由$xJ_0 = \pare{xJ_1}'$及$J_2 = 2J_1/x - J_0$可得
+        \begin{align*}
+            & \ket{f} = \sum_{n=1}^\infty C_n \ket{J_n} \\
+            & \Rightarrow 1-r^2 = \sum_{n=1}^\infty C_n J_0\pare{\omega_n r} \\
+            & \Rightarrow C_n = \frac{\braket{J_0^n}{f}}{\braket{J_0^n}{J_0^n}} = \frac{\int_0^1r\,\rd{r}\,\pare{1-r^2}J_0\pare{\omega_n r}}{\braket{J_0^n}{J_0^n}}. \\
+            &\Rightarrow  C_n = \frac{\pare{1-r^2}rJ_1\pare{\omega_1 r}\vert_0^1 + 2\int_0^1\rd{x}\,r^2 J_1\pare{\omega_n r}}{\omega_n \braket{J_0\pare{\omega_n r}}{J_0\pare{\omega r}}} \\
+            & =  \frac{2\pare{\omega_n r}^2J_2\pare{\omega_n r}\vert_0^1}{\omega_n^4 \braket{J_0\pare{\omega_n r}{J_0\pare{\omega_n r}}}}\\
+            & = \frac{4J_2\pare{\omega_n}}{\omega_n^2\brac{J_0^2\pare{\omega_n}+J_1^2\pare{\omega_n}}} = \frac{8}{\omega_n^3 J_1\pare{\omega_n}}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 归一化 (end)
+
+% subsection strum_liouville问题 (end)
+
+% subsection bessel方程 (end)
+
+\end{document}

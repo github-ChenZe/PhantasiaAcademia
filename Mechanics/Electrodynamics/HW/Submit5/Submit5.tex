@@ -1,0 +1,62 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{2.1}%
+$\displaystyle \left.\+DnDE\right\vert_{r=R} = \left.\+DnD{\pare{\sqrt{E_n^2 + E_\parallel^2}}}\right\vert_{r=R} = \left. \rec{\sqrt{E_n^2 + {E_\parallel^2}}}\pare{E_n \+DnD{E_n} + {E_\parallel}\+DnD{E_\parallel}} \right\vert_{r=R} = \left.\+DnD{E_n}\right|_{r=R}$.\\
+$\displaystyle \left.\laplacian \varphi\right\vert_{r=R} = \left.\rec{r^2}\+DrD{}\pare{r^2\+DrD{\varphi}} + \rec{r^2\sin\theta}\+D\theta D{}\pare{\sin\theta\+D\theta D\varphi} + \rec{r^2\sin^2\theta} \+D{\phi^2}D{^2\varphi}\right|_{r=R} = 0$.\\
+但$r=R$时$\varphi=\const$, 故对$\theta$和$\phi$的偏导数为零, 从而\\
+$\displaystyle \left.\rec{r^2}\+DrD{}\pare{r^2\+DrD{\varphi}}\right|_{r=R} = \left.\frac{2}{r}\+DrD{\varphi} + \+D{r^2}D{^2\varphi}\right|_{r=R} = \left.\frac{2E_r}{R} + \+DrD{E_r}\right\vert_{r=R} = 0 \Rightarrow  \rec{E}\+DnD{E} = -\frac{2}{R}$.
+\newprob{2.2}%
+假设电荷$\pm q$分别位于$\+vr_1$和$\+vr_2$, 则$\rho\pare{\+vr} = q\delta\pare{\+vr-\+vr_1} - q\delta\pare{\+vr - \+vr_2}$.\\
+令$\+vr_1 \rightarrow \+vr_0$, $\+vr_2 \rightarrow \+vr_0$, 从而$\+vr_2 - \+vr_1 \rightarrow 0$, 则有($\+v{\+gr}$表示源点到场点的位矢)\\
+$\displaystyle \rho\pare{\+vr} = q\pare{\+vr_1 - \+vr_2}\+v\cdot \grad_0\delta\pare{\+vr - \+vr_0} = -q\pare{\+vr_1 - \+vr_2}\+v\cdot \grad\delta\pare{\+vr-\+vr_0} = -\+vp\+v\cdot \grad\delta\pare{\+vr-\+vr_0}$.\\
+$\displaystyle \varphi = \rec{4\pi\epsilon_0} \iiint \frac{\rho}{\+gr}\,\rd{V} = \frac{-\+vp}{4\pi\epsilon_0} \cdot \iiint \frac{\grad'\delta\pare{\+vr' - \+vr_0}}{\+gr}\,\rd{V}$\\
+$\displaystyle = \frac{-\+vp}{4\pi\epsilon_0} \cdot \iiint \pare{\grad' \frac{\delta\pare{\+vr' - \+vr_0}}{\+gr} - \delta\pare{\+vr' - \+vr_0}\grad'\rec{\+gr}}\,\rd{V}$\\
+$\displaystyle = \frac{-\+vp}{4\pi\epsilon_0} \cdot \brac{ \oiint \rd{\+v\sigma}\, \frac{\delta\pare{\+vr' - \+vr_0}}{\+gr} -\iiint \delta\pare{\+vr' - \+vr_0}\grad'\rec{\+gr}\,\rd{V}}$\\
+$\displaystyle = \frac{\+vp}{4\pi\epsilon_0}\grad_0 \rec{\abs{\+vr - \+vr_0}} = \boxed{\frac{\+vp}{4\pi\epsilon_0} \cdot \frac{\+u{\+gr}}{\+gr^2}.}$
+
+\end{document}

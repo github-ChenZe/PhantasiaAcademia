@@ -1,0 +1,154 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{2.10 (1)}%
+\\[-2.75\baselineskip]
+\begin{flalign*}
+    & \+vp = \sum q_k \+vr_k = \boxed{q l_1 \+ux + q l_2 \+uy.} && \\
+    & \tensor{D} = \sum q_k\pare{\+vr_k\+vr_k - r_k^2 \tensor{I}} && \\
+    & q\brac{3 \begin{pmatrix}
+    l_1^2 &  &  \\
+    & 0 & \\
+    & & 0
+\end{pmatrix} - \begin{pmatrix}
+    l_1^2 & & \\
+    & l_1^2 & \\
+    & & l_1^2
+\end{pmatrix}} + q \brac{3 \begin{pmatrix}
+    0 &  &  \\
+    & l_2^2 & \\
+    & & 0
+\end{pmatrix} - \begin{pmatrix}
+    l_2^2 & & \\
+    & l_2^2 & \\
+    & & l_2^2
+\end{pmatrix}} \\
+    & = \boxed{q \begin{pmatrix}
+    2l_1^2 - l_2^2 & & \\
+    & 2l_2^2 - l_1^2 & \\
+    & & -l_1^2 - l_2^2
+\end{pmatrix}.} \\
+    & \varphi \approx \frac{\+vp\cdot \+vr}{4\pi\epsilon_0 r^3} = \boxed{\frac{q\pare{l_1 x + l_2 y}}{4\pi\epsilon_0 r^3}.}
+\end{flalign*}
+\par
+\newprobheader{(2)}%
+\\[-2.75\baselineskip]
+\begin{flalign*}
+    & \+vp = \sum q_k \+vr_k = \boxed{2q l_1 \+ux + q l_2 \+uy.} && \\
+    & \tensor{D} = \sum q_k\pare{\+vr_k\+vr_k - r_k^2 \tensor{I}} && \\
+    & q\brac{3 \begin{pmatrix}
+    l_1^2 &  &  \\
+    & 0 & \\
+    & & 0
+\end{pmatrix} - \begin{pmatrix}
+    l_1^2 & & \\
+    & l_1^2 & \\
+    & & l_1^2
+\end{pmatrix}} + q \brac{3 \begin{pmatrix}
+    l_1^2 & l_1l_2 &  \\
+    l_1l_2 & l_2^2 & \\
+    & & 0
+\end{pmatrix} - \begin{pmatrix}
+    l_1^2 + l_2^2 & & \\
+    & l_1^2 + l_2^2 & \\
+    & & l_1^2 + l_2^2
+\end{pmatrix}} \\
+    & = \boxed{q \begin{pmatrix}
+    4l_1^2 - l_2^2 & 3l_1l_2 & \\
+    3l_1l_2 & 2l_2^2 - 2l_1^2 & \\
+    & & -2l_1^2 - l_2^2
+\end{pmatrix}.} \\
+    & \varphi \approx \frac{\+vp\cdot \+vr}{4\pi\epsilon_0 r^3} = \boxed{\frac{q\pare{2l_1 x + l_2 y}}{4\pi\epsilon_0 r^3}.}
+\end{flalign*}
+\newprob{2.11}%
+三个轴皆为主轴. $\displaystyle D_{33} = \sum q_k \pare{-a^2} = -Qa^2$. \\
+$\displaystyle D_11 + D_22 = \sum q_k \pare{3a^2-2a^2} = Qa^2 \Rightarrow D_{11} = D_{22} = \frac{Qa^2}{2}.$ \\
+$\displaystyle \tensor{D} = \begin{pmatrix}
+    \displaystyle \frac{Qa^2}{2} & & \\
+    & \displaystyle \frac{Qa^2}{2} & \\
+    & & -Qa^2
+\end{pmatrix} = \boxed{\frac{Qa^2}{2}\pare{\tensor{I} - 3\+uz\+uz}.}$ \\
+$\displaystyle \varphi = \frac{\+ur\cdot \tensor{D}\cdot \+ur}{8\pi\epsilon_0 r^3} = \frac{Qa^2}{16\pi\epsilon_0 r^3}\pare{\+ur\cdot \tensor{I}\cdot \+ur - 3\pare{\+ur\cdot \+uz}\pare{\+uz\cdot \+ur}} = \boxed{\frac{Qa^2}{16\pi\epsilon_0 r^3}\pare{1-3\cos^2\theta}.}$
+\newprob{2.12}%
+$\displaystyle \+vD = \int_0^a \frac{Q}{\pi a^2}\cdot 2\pi r\,\rd{r} \cdot \frac{r^2}{2}\pare{\tensor{I} - 3\+uz\+uz} = \boxed{\frac{Qa^2}{4}\pare{\tensor{I} - 3\+uz\+uz}.}$\\
+$\displaystyle \varphi = \frac{\+ur\cdot \tensor{D}\cdot \+ur}{8\pi\epsilon_0 r^3} = \frac{Qa^2}{32\pi\epsilon_0 r^3}\pare{\+ur\cdot \tensor{I}\cdot \+ur - 3\pare{\+ur\cdot \+uz}\pare{\+uz\cdot \+ur}} = \boxed{\frac{Qa^2}{32\pi\epsilon_0 r^3}\pare{1-3\cos^2\theta}.}$
+\newprob{2.13}%
+$\displaystyle \pare{\+vr+\frac{\+vd}{2}}\pare{\+vr+\frac{\+vd}{2}} - \pare{\+vr-\frac{\+vd}{2}}\pare{\+vr-\frac{\+vd}{2}} = \+vr\+vd + \+vd\+vr$. \\
+$\displaystyle \tensor{D}' = \sum_i q_i \brac{\pare{\+vr+\frac{\+vd}{2}}\pare{\+vr+\frac{\+vd}{2}} - \pare{\+vr-\frac{\+vd}{2}}\pare{\+vr-\frac{\+vd}{2}}}$\\
+$\displaystyle  = \sum_i q_i \pare{\+vr\+vd + \+vd\+vr} = \sum_i \pare{\+vr_i \+vp_i + \+vp_i \+vr_i}.$
+\newprob{3.1}%
+令$\displaystyle \boxed{\+vA = \half \+vB\times \+vr}$, 有\\
+$\displaystyle \curl \+vA = \half \brac{\+vB \div \+vr - \+vr \cancelto{0}{\div \+vB} + \+vr\+v\cdot \cancelto{0}{\grad \+vB} - \+vB\+v\cdot \grad \+vr} = \+vB$. \\
+$\displaystyle \div \+vA = -\half \+vB \cdot \pare{\curl \+vr} = 0$. \\
+设$\varphi$满足$\laplacian \varphi = 0$, 则
+\[ \curl \pare{\+vA + \grad \varphi} = \curl \+vA = \+vB,\quad \div \pare{\+vA + \grad \varphi} = \div \+vA + \laplacian \varphi= 0. \]
+故$\+vA' = \+vA + \varphi$是同样满足条件的矢势. 例如取$\displaystyle \varphi = \half\pare{x^2 - y^2}$, 有\\
+$\displaystyle \boxed{\+vA' = \half \+vB\times \+vr + x\+ux - y\+uy.}$ 两者之差的旋度为
+\[ \curl \pare{x\+ux - y\+uy} = \begin{vmatrix}
+    \+ux & \+uy & \+uz \\
+    \partial_x & \partial_y & \partial_z \\
+    x & -y & 0
+\end{vmatrix} = 0. \]
+\newprob{3.2}%
+设$\+v{\+gr} = \+vr - \+vr'$, 则
+\[ \iiint_{B\pare{0,a}} \frac{\+u{\+gr}}{\+gr^2}\,\rd{V} = \begin{cases}
+    \displaystyle V\cdot \frac{-\+ur'}{r'^2}, & r' > a, \\
+    \displaystyle V\cdot \frac{-\+vr'}{a^3}, & r'< a.
+\end{cases} \]
+从而
+\[ V\,\rd{\expc{\+vB}} = \rd{V'}\, \frac{\mu_0}{4\pi}\iiint \rd{V}\, \frac{\+vJ\pare{\+vr'}\times \+u{\+gr}}{\+gr^2} = \+vJ\pare{\+vr'}\,\rd{V'}\,\frac{\mu_0}{4\pi} \times \begin{cases}
+    \displaystyle V\cdot \frac{-\+ur'}{r'^2}, & r' > a, \\
+    \displaystyle V\cdot \frac{-\+vr'}{a^3}, & r'< a.
+\end{cases}  \]
+故
+\[ V\expc{\+vB} = V\iiint \rd{\expc{\+vB}} = \begin{cases}
+    \displaystyle r>a: & \displaystyle V\cdot \frac{\mu_0}{4\pi} \iiint \+vJ\pare{\+vr'}\times \frac{-\+ur'}{r'^2}\,\rd{V'} = V\cdot \+vB\vert_{r=0}. \\
+    \displaystyle r<a: & \displaystyle \frac{\mu_0}{4\pi} \iiint \+vJ\pare{\+vr'}\times \frac{-\+vr'}{a^3}\,\rd{V'} = V\cdot \frac{\mu_0}{4\pi} \cdot 2\cdot \rec{a^3} \+vm = \frac{2\mu_0 \+vm}{3}.
+\end{cases} \]
+
+\end{document}

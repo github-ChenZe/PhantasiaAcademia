@@ -1,0 +1,93 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\begin{document}
+
+\newprob{1.14 (1)}%
+$\displaystyle E_n = -\frac{m_\mu Z^2\alpha^2c^2}{2n^2}$, 当$m_\mu = m_e, Z=1$时$E_1 = \SI{13.606}{\eV}$. 由$\displaystyle m_\mu = \frac{m_e}{1 + m_e/\pare{Am_u}}$,\\
+\centerline{\begin{tabular}{clc|c|}% syntax for siunitx v2; for v1 use "tabformat"
+\cline{4-4}
+ & \+:c1{c}{$m_\mu/m_e$} & $Z^2$ & $E_1$ \\
+ \ce{^1H} & 0.9994517 & $1$ & $\SI{13.5982}{\eV}$ \\
+ \ce{^2H} & 0.9997258 & $1$ & $\SI{13.6019}{\eV}$ \\
+ \ce{^3He^+} & 0.9998172 & $4$ & $\SI{54.4129}{\eV}$ \\
+ \ce{^4He^+} & 0.9998629 & $4$ & $\SI{54.4153}{\eV}$ \\
+ \ce{^6Li^{2+}} & 0.9999086 & $9$ & $\SI{122.4401}{\eV}$ \\
+ \ce{^7Li^{2+}} & 0.9999216 & $9$ & $\SI{122.4417}{\eV}.$ \\
+ \cline{4-4}
+\end{tabular}}
+\par
+\newprobheader{(2)}%
+电压逐渐增大, 则最低的第一激发能的谱线首先出现. $\displaystyle \Delta E\+_min_ = E\+_\mathnormal{1}min_ \pare{1-\rec{4}} = \SI{13.598}{\eV}\times \frac{3}{4} = \SI{10.20}{\eV}$. 相应的波长为$\displaystyle \lambda = \frac{hc}{E} = \boxed{\SI{121.57}{\nano\meter}.}$
+\newprob{1.15 (1)}%
+最高被激发到$\displaystyle n^2 \le \frac{E_1}{E_1 - E\+_in_} = \frac{13.6}{13.6 - 12.9} = 19.4 \Rightarrow n \le 4$. 可能的谱线有,\\
+\centerline{\begin{tabular}{cc|r|}
+\cline{3-3}
+    $4\rightarrow 1$ & $\displaystyle E = 13.60 \times \pare{1 - \rec{4^2}} = \SI{12.75}{\eV}\Rightarrow $ & $\SI{97.25}{\nano\meter}$ \\
+    $4\rightarrow 2$ & $\displaystyle E = 13.60 \times \pare{\rec{2^2} - \rec{4^2}} = \SI{2.55}{\eV}\Rightarrow $ & $\SI{486.27}{\nano\meter}$ \\
+    $4\rightarrow 3$ & $\displaystyle E = 13.60 \times \pare{\rec{3^2} - \rec{4^2}} = \SI{0.661}{\eV}\Rightarrow $ & $\SI{1875.95}{\nano\meter}$ \\
+    $3\rightarrow 1$ & $\displaystyle E = 13.60 \times \pare{1 - \rec{3^2}} = \SI{12.09}{\eV}\Rightarrow $ & $\SI{102.56}{\nano\meter}$ \\
+    $3\rightarrow 2$ & $\displaystyle E = 13.60 \times \pare{\rec{2^2} - \rec{3^2}} = \SI{1.89}{\eV}\Rightarrow $ & $\SI{656.08}{\nano\meter}$ \\
+    $2\rightarrow 1$ & $\displaystyle E = 13.60 \times \pare{1 - \rec{2^2}} = \SI{10.20}{\eV}\Rightarrow $ & $\SI{121.57}{\nano\meter}.$\\
+\cline{3-3}
+\end{tabular}}
+\par
+\newprobheader{(2)}%
+$p_\gamma = E/c = E_{3\rightarrow 1}/c$, $p\+_H_ = p_\gamma$, $\displaystyle E\+_H_ =\frac{E_{3\rightarrow 1}^2}{2m\+_H_c^2} = \frac{{\pare{\SI{12.09}{\eV}}^2}}{2\times \SI{938.8}{\mega\eV}} = \boxed{\SI{77.8}{\nano\eV}.}$\\
+$\displaystyle v\+_H_ = \frac{p_\gamma}{m\+_H_} = \frac{E_{3\rightarrow 1} c}{m\+_H_c^2} = 1.29\times 10^{-8}c = \boxed{\SI{3.86}{\meter\per\second}.}$
+\newprob{1.16}%
+$\displaystyle E_{1}^{\pare{\mathrm{H}_\mu}} = \frac{m_\mu^{\pare{\mathrm{H}_\mu}}}{m_e} E_1^{\pare{\infty}} = \frac{105.66\times 938.27}{105.66+938.27} \times \frac{13.606}{0.511} = \boxed{\SI{2528.6}{\eV}.}$\\
+$\displaystyle E_{3\rightarrow 2}^{\pare{\mathrm{H}_\mu}} = E_{1}^{\pare{\mathrm{H}_\mu}}\times \pare{\rec{2^2} - \rec{3^2}} = \boxed{\SI{351.2}{\eV}.}$\\
+中性锂$\mu$子所处半径极小, 可视为消去原子核一单位电荷, 故化学性质类似 \ce{He}.\\
+基态结合能为$\displaystyle E = Z^2\times \frac{m_\mu^{\pare{\mathrm{Li}}}}{m_e}\times E_1^{\pare{\infty}} = 3^2\times \frac{106 \times 7\times 939}{106 + 7\times 939}\times \frac{13.6}{0.511} = \boxed{\SI{24.9}{\kilo\eV}.}$
+%相应$\displaystyle \lambda = \frac{hc}{E} = \boxed{\SI{3.53}{\nano\meter}.}$
+\newprob{1.17 (1)}%
+$\displaystyle E \approx Z^2 \times \frac{m_\pi}{m_e} \times \frac{E_1^{\pare{\infty}}}{n^2} = \boxed{\begin{cases}
+    \SI{-9.29}{\mega\eV},\quad n = 1, \\
+    \SI{-2.32}{\mega\eV},\quad n = 2.
+\end{cases}.}$\\
+$\displaystyle r_n = \rec{Z}\times \frac{m_e}{m\mu} n^2 a_0 = \boxed{\begin{cases}
+    \SI{3.86}{\femto\meter},\quad n = 1, \\
+    \SI{15.5}{\femto\meter},\quad n = 2.
+\end{cases}.}$\\
+$\displaystyle E_{2\rightarrow 1} = \abs{E_2 - E_1} = 9.29 - 2.32 = \boxed{\SI{6.97}{\mega\eV}.}$\\
+$\displaystyle E\+_ion_ = \boxed{\begin{cases}
+    \SI{9.29}{\mega\eV},\quad n = 1, \\
+    \SI{2.32}{\mega\eV},\quad n = 2.
+\end{cases}.}$
+\par
+\newprobheader{(2)}%
+基态电离能大约为氢原子的$6.8\times 10^5$倍, 而半径则为原子核尺度.
+\newprob{1.18(1)}%
+$\displaystyle r^{{\mathrm{Na}_{\pare{\mathrm{R}}}}}_{100} = n^2 \times \frac{m_e}{m_\mu^{\mathrm{Na}_{\pare{\mathrm{R}}}}} a_0 = n^2\pare{1+\frac{m_e}{Am_u}} a_0 = \boxed{\SI{529.2}{\nano\meter}.}$\\
+$\displaystyle E^{{\mathrm{Na}_{\pare{\mathrm{R}}}}}_{100} = \frac{m_\mu^{\mathrm{Na}_{\pare{\mathrm{R}}}}}{m_e} \frac{E_1^{\pare{\infty}}}{n^2} = \pare{1+\frac{m_e}{Am_u}}^{-1} \frac{E_1^{\pare{\infty}}}{n^2} = \boxed{\SI{1.3605}{\milli\eV}.}$\\
+$\displaystyle E^{{\mathrm{Na}_{\pare{\mathrm{R}}}}}_{101\rightarrow 100} = \frac{m_\mu^{\mathrm{Na}_{\pare{\mathrm{R}}}}}{m_e} E_1^{\pare{\infty}}\pare{\rec{n_1^2} - \rec{n_2^2}} = \pare{1+\frac{m_e}{Am_u}}^{-1} E_1^{\pare{\infty}}\pare{\rec{n_1^2} - \rec{n_2^2}} = \boxed{\SI{0.0268}{\milli\eV}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle r^{\pare{\mathrm{H}}}_{100} = n^2 \times \frac{m_e}{m_\mu^{\pare{\mathrm{H}}}} a_0 = n^2\pare{1+\frac{m_e}{Am_u}} a_0 = \boxed{\SI{529.47}{\nano\meter}.}$\\
+$\displaystyle E^{\pare{\mathrm{H}}}_{100} = \frac{m_\mu^{\pare{\mathrm{H}}}}{m_e} \frac{E_1^{\pare{\infty}}}{n^2} = \pare{1+\frac{m_e}{Am_u}}^{-1} \frac{E_1^{\pare{\infty}}}{n^2} = \boxed{\SI{1.3598}{\milli\eV}.}$\\
+$\displaystyle E^{\pare{\mathrm{H}}}_{101\rightarrow 100} = \frac{m_\mu^{\pare{\mathrm{H}}}}{m_e} E_1^{\pare{\infty}}\pare{\rec{n_1^2} - \rec{n_2^2}} = \pare{1+\frac{m_e}{Am_u}}^{-1} E_1^{\pare{\infty}}\pare{\rec{n_1^2} - \rec{n_2^2}} = \boxed{\SI{0.0268}{\milli\eV}.}$
+
+\end{document}
