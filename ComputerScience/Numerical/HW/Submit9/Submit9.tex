@@ -1,0 +1,179 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+
+\begin{document}
+
+\newprob{2.4}%
+$\displaystyle \begin{array}[t]{cccccc}
+    x_i & -3 & -2 & -1 & 2 & 4 \\
+    x_i^2 & 9 & 4 & 1 & 4 & 16 \\
+    y_i & 14.3 & 8.3 & 4.7 & 8.3 & 22.7.
+\end{array}$\\
+对于$y_i = a + bx_i^2$, 矛盾方程组为\\
+$\displaystyle \begin{pmatrix}
+    1 & 9 \\
+    1 & 4 \\
+    1 & 1 \\
+    1 & 4 \\
+    1 & 16
+\end{pmatrix} \begin{pmatrix}
+    a \\ b
+\end{pmatrix} = \begin{pmatrix}
+    14.3 \\
+    8.3 \\
+    4.7 \\
+    8.3 \\
+    22.7
+\end{pmatrix} \Rightarrow A^TA \begin{pmatrix}
+    a \\ b
+\end{pmatrix} = \begin{pmatrix}
+    5 & 34 \\ 34 & 370
+\end{pmatrix}\begin{pmatrix}
+    a \\ b
+\end{pmatrix} = A^TY = \begin{pmatrix}
+    58.3 \\ 563
+\end{pmatrix}$ \\
+$\Rightarrow {\begin{cases}
+    a = 3.5, \\
+    b = 1.2.
+\end{cases}} \Rightarrow \boxed{y=3.5+1.2x^2.}$
+\newprob{2.5}%
+$\displaystyle \begin{array}[t]{ccccc}
+    x_i & 0.20 & 0.25 & 0.30 & 0.50  \\
+    \sin x_i & 0.198669 & 0.247404 & 0.299520 & 0.479426 \\
+    \cos x_i & 0.980067 & 0.968912 & 0.955336 & 0.877583 \\
+    y_i & 1.36 & 1.20 & 1.02 & 0.32.
+\end{array}$\\
+对于$y_i = a \cos x_i + b \sin x_i$, 矛盾方程组为\\
+$\displaystyle \begin{pmatrix}
+    0.980067 & 0.198669 \\
+    0.986912 & 0.247404 \\
+    0.955336 & 0.299520 \\
+    0.877583 & 0.479426
+\end{pmatrix} \begin{pmatrix}
+    a \\ b
+\end{pmatrix} = \begin{pmatrix}
+    1.36 \\ 1.20 \\ 1.02 \\ 0.32
+\end{pmatrix}$\\
+$\Rightarrow A^TA \begin{pmatrix}
+    a \\ b
+\end{pmatrix} = \begin{pmatrix}
+    3.58214 & 1.13748 \\ 1.13748 & 0.417859
+\end{pmatrix}\begin{pmatrix}
+    a \\ b
+\end{pmatrix} = A^TY = \begin{pmatrix}
+    3.75086 \\ 1.02192
+\end{pmatrix}$ \\
+$\Rightarrow {\begin{cases}
+    a = 1.99492, \\
+    b = -2.98488.
+\end{cases}} \Rightarrow \boxed{y=1.99492\cos x-2.98488\sin x.}$
+\newprob{2.7}%
+$\displaystyle \begin{array}[t]{ccccc}
+    x_i & 2.1 & 2.5 & 2.8 & 3.2  \\
+    x_i^{-1} & 0.476190 & 0.400000 & 0.357143 & 0.312500 \\
+    y_i & 0.6087 & 0.6849 & 0.7368 & 0.8111 \\
+    y_i^{-1} & 1.64285 & 1.46007 & 1.35722 & 1.23289.
+\end{array}$\\
+对于$y_i^{-1} = a x_i^{-1}+b$, 矛盾方程组为\\
+$\displaystyle \begin{pmatrix}
+    0.476190 & 1 \\
+    0.400000 & 1 \\
+    0.357143 & 1 \\
+    0.312500 & 1
+\end{pmatrix} \begin{pmatrix}
+    a \\ b
+\end{pmatrix} = \begin{pmatrix}
+    1.64285 \\ 1.46007 \\ 1.35722 \\ 1.23289
+\end{pmatrix}$\\
+$\Rightarrow A^TA \begin{pmatrix}
+    a \\ b
+\end{pmatrix} = \begin{pmatrix}
+    0.611965 & 1.54583 \\ 1.54583 & 4.00000
+\end{pmatrix}\begin{pmatrix}
+    a \\ b
+\end{pmatrix} = A^TY = \begin{pmatrix}
+    1.08043 \\ 2.84150
+\end{pmatrix}$ \\
+$\Rightarrow {\begin{cases}
+    a = 2.48670 \\
+    b = 0.462251
+\end{cases}} \Rightarrow \boxed{y=\frac{x}{2.48670 + 0.462251 x}.}$
+\newprob{6.13}%
+$\displaystyle \begin{array}[t]{ccccc}
+    h & 0.01 & 0.02 & 0.03 & 0.04 \\
+    \displaystyle \frac{f\pare{0.1+h} - f\pare{0.1-h}}{2h} & 0.412350 & 0.412425 & 0.412633& 0.412888 \\
+    \displaystyle {D\pare{h} - D\pare{h/2}} & & 0.000075 & & 0.000463. \\
+\end{array}$\\
+故$\boxed{h = 0.02}$是合适的步长.
+\newprob{6.15}%
+通过$x=\curb{-h,0,2h}$的值可构造插值多项式\\
+$\displaystyle p\pare{x} = \frac{ x\pare{x-2h} }{ \pare{-h}\pare{-h-2h} }f\pare{-h} + \frac{ \pare{x+h}\pare{x-2h} }{ \pare{h}\pare{-2h} }f\pare{0} + \frac{ \pare{x+h}x }{ \pare{2h+h}2h }f\pare{2h}. $\\
+从而\\
+$\displaystyle f'\pare{0}\approx p'\pare{0} = \boxed{\rec{h}\brac{-\frac{2}{3} f\pare{-h} + \half f\pare{0} + \rec{6} f\pare{2h}}.}$\\
+$\displaystyle f''\pare{0} \approx p''\pare{0} = \boxed{\rec{h^2}\brac{ \frac{2}{3}f\pare{-h} - f\pare{0} + \rec{3} f\pare{2h} }.}$
+\newprob{6.1 (1)}%
+$\displaystyle \int_a^b f\pare{x}\,\rd{x} - f\pare{a}\pare{b-a} = \int_a^b \brac{f\pare{x} - f\pare{a}}\,\rd{x} = \int_a^b f'\pare{\eta}\pare{x-a}\,\rd{x}$\\
+$\displaystyle = \boxed{\frac{f'\pare{\xi}}{2}\pare{b-a}^2.}$
+\newprob{6.2}%
+不妨取$a = 0$, $b = 3$, $h = 1$, $x_1 = 1$, $x_2 = b = 3$, $f = x^n$, 则
+\[ \int_a^b f\pare{x}\,\rd{x} = \frac{3^{n+1}}{n+1},\quad \frac{9}{4}hf\pare{x_1} + \frac{3}{4}hf\pare{x_2} = \frac{9}{4} + \frac{3}{4}\cdot 3^n. \]
+有
+\[ \begin{array}{ccccc}
+    n & 0 & 1 & 2 & 3 \\[.5em]
+    \displaystyle \int_a^b f\pare{x}\,\rd{x} & 3 & 9/2 & 9 & 81/4 \\[1em]
+    \displaystyle \frac{9}{4} + \frac{3}{4}\cdot 3^n & 3 & 9/2 & 9 & 45/2.
+\end{array} \]
+故代数精度为\underline{$2$阶}.
+\newprob{6.3}%
+通过$x=\curb{-h,0,2h}$的值可构造插值多项式\\
+$\displaystyle p\pare{x} = \frac{ x\pare{x-2h} }{ \pare{-h}\pare{-h-2h} }f\pare{-h} + \frac{ \pare{x+h}\pare{x-2h} }{ \pare{h}\pare{-2h} }f\pare{0} + \frac{ \pare{x+h}x }{ \pare{2h+h}2h }f\pare{2h}. $\\
+$\displaystyle \int_{-h}^{2h} \frac{ x\pare{x-2h} }{ \pare{-h}\pare{-h-2h} } \,\rd{x} = 0.$\\
+$\displaystyle \int_{-h}^{2h} \frac{ \pare{x+h}\pare{x-2h} }{ \pare{h}\pare{-2h} } \,\rd{x} = \frac{9h}{4}.$\\
+$\displaystyle \int_{-h}^{2h} \frac{ \pare{x+h}x }{ \pare{2h+h}2h } \,\rd{x} = \frac{3h}{4}.$\\
+从而
+$\displaystyle \int_{-h}^{2h} f\pare{x}\,\rd{x} = \boxed{\frac{9h}{4} f\pare{0} + \frac{3h}{4} f\pare{2h}.}$
+
+\end{document}

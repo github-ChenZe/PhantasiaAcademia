@@ -1,0 +1,67 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{反馈} % (fold)
+\label{sec:反馈}
+
+\newpoint{}反馈量以电压直接相加者谓串联反馈.
+\newpoint{}反馈量以电流直接相加者谓并联反馈.
+\newpoint{电压反馈} 反馈信号$x\+_f_$与输出电压成比例.
+\newpoint{电流反馈} 反馈信号$x\+_f_$与输出电流成比例.
+\newpoint{} 电压负反馈
+\[ R\+_L_\downarrow \Rightarrow v\+_o_\downarrow \Rightarrow x\+_f_\downarrow \Rightarrow x\+_id_\uparrow \Rightarrow v\+_o_\uparrow. \]
+可生成稳定的输出.
+\newpoint{} 电流负反馈可形成稳定的输出电流.
+\newpoint{} 将负载短路, 反馈量为零, 则为电压反馈.
+\newpoint{} 将负载短路, 反馈量仍然存在, 则为电流反馈.
+
+\subsection{基本组态} % (fold)
+\label{sub:基本组态}
+
+\subsubsection{电压串联负反馈} % (fold)
+\label{ssub:电压串联负反馈}
+
+% subsubsection 电压串联负反馈 (end)
+
+\subsubsection{电压并联负反馈} % (fold)
+\label{ssub:电压并联负反馈}
+
+% subsubsection 电压并联负反馈 (end)
+
+\subsubsection{电流串联负反馈} % (fold)
+\label{ssub:电流串联负反馈}
+
+% subsubsection 电流串联负反馈 (end)
+
+\subsubsection{电流并联负反馈} % (fold)
+\label{ssub:电流并联负反馈}
+
+% subsubsection 电流并联负反馈 (end)
+
+% subsection 基本组态 (end)
+
+\subsection{增益的一般表达式} % (fold)
+\label{sub:增益的一般表达式}
+
+\newpoint{}$\displaystyle A = \frac{x\+_o_}{x\+_id_}$谓开环增益.
+\newpoint{}$\displaystyle F = \frac{x\+_f_}{x\+_o_}$谓反馈系数.
+\newpoint{}$\displaystyle A\+_f_ = \frac{x\+_o_}{x\+_i_}$谓闭环增益.
+\newpoint{}$x\+_id_ = x\+_i_ - x\+_f_ \Rightarrow x\+_i_ = x\+_id_ + x\+_f_\Rightarrow$ 
+\[ A\+_f_ = \frac{x\+_o_}{x\+_id_ + x\+_f_} = \resumath{\frac{A}{1+AF}.} \]
+\newpoint{}$F$随反馈类型的不同具有不同的量纲.
+\newpoint{}$1+AF$谓\gloss{反馈深度}.
+\begin{cenum}
+    \item $\abs{1+\tilde{A}\tilde{F}} > 1$谓一般负反馈.
+    \item $\abs{1+\tilde{A}\tilde{F}} \gg 1$谓深度负反馈.
+    \item $\abs{1+\tilde{A}\tilde{F}} < 1$谓正反馈.
+    \item $\abs{1+\tilde{A}\tilde{F}} = 0$发生自激振荡.
+\end{cenum}
+
+% subsection 增益的一般表达式 (end)
+
+% section 反馈 (end)
+
+\end{document}

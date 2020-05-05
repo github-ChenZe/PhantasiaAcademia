@@ -1,0 +1,150 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\pgfplotsset{compat=newest}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+\def\rD{\mathrm{D}}
+\newcommand{\mathmin}[2]{(#1+#2)/2-abs(#1-#2)/2}
+\newcommand{\mathmax}[2]{(#1+#2)/2+abs(#1-#2)/2}
+
+\begin{document}
+
+\newprob{7.1.5}%
+$\displaystyle I\+_O_ \approx \frac{V\+_CC_+V\+_EE_-V\+_BE_}{R} = \boxed{\SI{1.93}{\milli\ampere}.}$\\
+$\displaystyle R\+_e3_ = \frac{V\+_EE_ - V\+_BE_}{I\+_O_} = \boxed{\SI{4.82}{\kilo\ohm}.}$\\
+区别在于使用电流源可以获得更大的动态交流电阻, 并让$I\+_CQ_$(从而静态工作点)随环境变换更小.
+
+\newprob{7.1.7}%
+$\displaystyle I\+_REF_ = \frac{V\+_CC_ + V\+_EE_ - V\+_BE_ - V\+_BE_}{R_5} = \boxed{\SI{0.738}{\milli\ampere}.}$\\
+$\displaystyle I\+_C10_$满足$\displaystyle I\+_C10_ \approx \frac{V\+_T_}{R\+_3_}\ln \frac{I\+_REF_}{I\+_C10_} \Rightarrow I\+_C10_ = \boxed{\SI{19}{\micro\ampere}.}$\\
+$\displaystyle I\+_E9_ \approx I\+_C19_ = \boxed{\SI{19}{\micro\ampere}.}$\\
+$\displaystyle I\+_C12_ = I\+_REF_ = \boxed{\SI{0.738}{\milli\ampere}.}$\\
+$\displaystyle I\+_C13B_ = \frac{3}{4}I\+_C12_ = \boxed{\SI{0.554}{\milli\ampere}.}$\\
+$\displaystyle I\+_C13A_ = \frac{3}{4}I\+_C12_ = \boxed{\SI{0.185}{\milli\ampere}.}$
+
+\newprob{7.2.1 (1)}%
+$\displaystyle I\+_D1_ = I\+_D2_ = \frac{I\+_REF_}{2} = \boxed{\SI{0.2}{\milli\ampere}.}$\\
+$\displaystyle K\+_n_ = \half K'\+_n_\pare{\frac{W}{L}} = \SI{2}{\milli\ampere\per\square\volt}$.\\
+$\displaystyle I\+_D1_ = K\+_n_\pare{V\+_GS1_ - V\+_T1_}^2 = 2\pare{V\+_GS_-\SI{0.5}{\volt}}^2 \Rightarrow V\+_S_ = \boxed{\SI{-0.816}{\volt}.}$\\
+$\displaystyle V\+_D1_ = V\+_D2_ = V\+_DD_ = \boxed{\SI{1.0}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle I\+_D1_ = I\+_D2_ = \frac{I\+_REF_}{2} = \boxed{\SI{0.2}{\milli\ampere}.}$\\
+$V\+_S_$电位直接平移$\SI{0.2}{\volt}$, $\displaystyle V\+_S_ = \boxed{\SI{-0.616}{\volt}.}$\\
+$I\+_D_$不变, 仍有$\displaystyle V\+_D1_ = \boxed{\SI{1.0}{\volt}.}$\\
+$\displaystyle V\+_DS1_ = \boxed{\SI{1.616}{\volt}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle g = \sqrt{2K'\+_n_\pare{\frac{W}{L}}I\+_D_} = \SI{1.26}{\milli\siemens}.$\\
+$\displaystyle A\+_\mathnormal{v}d_ = -g\+_m_R\+_d_ = \boxed{-3.16.}$\\
+$\displaystyle A\+_\mathnormal{v}d1_ = \frac{A\+_\mathnormal{v}d_}{2} = \boxed{-1.58.}$\\
+$\displaystyle A\+_\mathnormal{v}c_ = -\frac{g\+_m_R\+_d_}{1+2r\+_o3_g\+_m_} = \boxed{\SI{-e-3}{}.}$\\
+$\displaystyle K\+_CMR_ = \frac{A\+_\mathnormal{v}c1_}{A\+_\mathnormal{v}c_} = \boxed{1580.}$
+\def\avd{A\+_\mathnormal{v}d_}%
+\def\avdhito{A\+_\mathnormal{v}d1_}%
+\def\avdfuta{A\+_\mathnormal{v}d2_}%
+\def\avc{A\+_\mathnormal{v}c_}%
+\def\avchito{A\+_\mathnormal{v}c1_}%
+\def\avcfuta{A\+_\mathnormal{v}c2_}%
+\def\denatsu#1{\SI{#1}{\volt}}
+\def\mdenatsu#1{\SI{#1}{\milli\volt}}
+\def\denryuu#1{\SI{#1}{\milli\ampere}}
+\def\mdenryuu#1{\SI{#1}{\micro\ampere}}
+\def\teiou#1{\SI{#1}{\ohm}}
+\def\teikou#1{\SI{#1}{\kilo\ohm}}
+\def\mteikou#1{\SI{#1}{\mega\ohm}}
+\def\teisuu#1{\SI{#1}{}}
+
+\newprob{7.2.5 (1)}%
+$\displaystyle \avdfuta = \frac{g\+_m_\pare{R\+_d_\parallel R\+_L_}}{2} = \boxed{14.1.}$\\
+$\displaystyle \avcfuta = -\frac{g\+_m_\pare{R\+_d_\parallel R\+_L_}}{1+2R\+_AB_g\+_m_} = \boxed{\teisuu{-4.74e-3}.}$\\
+$\displaystyle K\+_CMR_ = \frac{\avdfuta}{\avcfuta} = \boxed{2976.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle v\+_o2_ = \avdfuta\pare{v\+_i1_ - v\+_i2_} + \avcfuta\cdot \half\pare{v\+_i1_ + v\+_i2_} = \boxed{\mdenatsu{141}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle R\+_id_ \rightarrow \boxed{\infty.}$\\
+$\displaystyle R\+_ic_ \rightarrow \boxed{\infty.}$\\
+$\displaystyle R\+_o2_ = R\+_d2_ = \boxed{\teikou{40}.}$
+
+\newprob{7.2.6 (1)}%
+$\displaystyle I\+_C_ = \frac{I\+_O_}{2} = \boxed{\denryuu{0.5}.}$\\
+$\displaystyle V\+_E_ = 0 - V\+_BE_ = \boxed{\denatsu{-0.7}.}$\\
+$\displaystyle V\+_CE1_ = V\+_CE2_ = V\+_BE_ + V\+_CC_ - R\+_c_I\+_C_ = \boxed{\denatsu{5.7}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \avd = -\frac{\beta R\+_c_}{r\+_be_} = \boxed{-189.}$\\
+$\displaystyle \avdhito = \half \avd = \boxed{-94.3.}$\\
+$\displaystyle \avchito = -\frac{R\+_c_}{2r\+_O_} = \boxed{-0.2.}$\\
+$\displaystyle K\+_CMR_ = \frac{\avchito}{\avdhito} = \boxed{472.}$
+
+\newprob{7.2.7 (1)}%
+$\displaystyle I\+_E_ = \denryuu{1}$.\\
+$\displaystyle r\+_be_ = r\+_bb'_ + \frac{V\+_T_}{I\+_E_}\pare{1+\beta} = \boxed{\teikou{2.83}.}$\\
+$\displaystyle \avd = -\frac{\beta R\+_c1_}{r\+_be_+\pare{1+\beta}R\+_e1_} = -43.3.$\\
+$\displaystyle v\+_o_ = \avd v\+_id_ = \boxed{\denatsu{-0.866}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \avd = -\frac{\beta \pare{R\+_c1_\parallel \frac{R\+_L_}{2}}}{r\+_be_+\pare{1+\beta}R\+_e1_} = -14.4.$ 
+$\displaystyle v\+_o_ = \avd v\+_id_ = \boxed{\denatsu{-0.289}.}$
+\par
+\newprobheader{(3)}%
+$\displaystyle v\+_o_ = \half v\+_o1_ = \boxed{\denatsu{0.433}.}$\\
+$\displaystyle \avdfuta = -\frac{\avd}{2} = \boxed{21.7.}$\\
+$\displaystyle \avcfuta = -\frac{R\+_c_}{2r\+_o_ + R\+_e_} = \boxed{-0.028.}$\\
+$\displaystyle K\+_CMR_ = \frac{\avdfuta}{\avcfuta} = \boxed{775.}$\\
+\par
+\newprobheader{(4)}%
+$\displaystyle R\+_id_ = 2\pare{r\+_be_ + \pare{1+\beta}R\+_e_} = \boxed{\teikou{25.9}.}$\\
+$\displaystyle R\+_ic_ = \half r\+_be_ + \pare{1+\beta}\pare{R\+_e1_ + r\+_o_} = \boxed{\mteikou{10.1}.}$\\
+$\displaystyle R\+_O_ = R\+_c_ = \boxed{\teikou{5.6}.}$
+
+\newprob{7.2.8}%
+$\displaystyle I\+_EQ_ = \frac{V\+_EE_ - V\+_BE1_ - V\+_BE3_}{2R\+_E_} = \SI{0.05}{\milli\ampere}$.\\
+$\displaystyle I\+_E1Q_ = \frac{I\+_EQ_}{1+\beta_3} = \SI{0.495}{\micro\ampere}$.\\
+$\displaystyle r\+_be1_ = r\+_bb'_ + \frac{V\+_T_}{I\+_E1Q_}\pare{1+\beta_1} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.495}{\micro\ampere}}\pare{1+30} = \SI{1628.5}{\kilo\ohm}$.\\
+$\displaystyle r\+_be3_ = r\+_bb'_ + \frac{V\+_T_}{I\+_EQ_}\pare{1+\beta_3} = \SI{200}{\ohm} + \frac{\SI{26}{\milli\volt}}{\SI{0.05}{\milli\ampere}}\pare{1+100} = \SI{52.72}{\kilo\ohm}$.\\
+$\displaystyle R\+_id_ = 2\pare{r\+_be1_ + \pare{1+\beta_1}r\+_be3_} = \boxed{\SI{6516}{\kilo\ohm}}$.\\
+$\displaystyle A\+_\mathnormal{v}d1_ \approx -\frac{\beta_1\beta_3 R\+_c1_}{2\pare{r\+_be1_ + \pare{1+\beta_1}r\+_be3_}} = \boxed{\SI{-2.85}{}.}$\\
+$\displaystyle A\+_\mathnormal{v}c1_ \approx -\frac{R\+_c_}{2R\+_e_} = \boxed{-0.0660.}$\\
+$\displaystyle K\+_CMR_ = \frac{A\+_\mathnormal{v}d1_}{A\+_\mathnormal{v}c1_} = \boxed{43.2.}$
+
+\newprob{7.2.9}%
+$\displaystyle R\+_e3_I\+_e3_+V\+_BE_ \approx \frac{R_2}{R_1+R_2} \Rightarrow I\+_E3_ = \denryuu{1.02}$.\\
+$\displaystyle r\+_be1_ = r\+_be2_ = r\+_bb'_ + \frac{V\+_T_}{I\+_E_}\pare{1+\beta} = \teikou{1.5}$.\\
+$\displaystyle R\+_id_ = 2\pare{r\+_be1_ + \pare{1+\beta}R\+_e2_} = \boxed{\teikou{13.2}.}$\\
+$\displaystyle \avdfuta = \frac{\beta\pare{R\+_c2_\parallel R\+_L_}}{2\pare{r\+_be1_ + \pare{1+\beta}R\+_e2_}} = \boxed{12.1.}$\\
+$\displaystyle \avcfuta = \frac{R\+_c_\parallel R\+_L_}{2R\+_O_} = {\teisuu{5e-4}.}$\\
+$\displaystyle K\+_CMR_ = \frac{\avdfuta}{\avcfuta} = \boxed{\teisuu{2.4e4}.}$\\
+$\displaystyle R\+_o_ \approx R\+_c2_ = \boxed{\teikou{4.7}.}$
+
+\newprob{7.2.10 (1)}%
+$\displaystyle V\+_BE_ + I\+_B_ R\+_b1_ + R\+_e_\times 2\pare{1+\beta}I\+_B_ = \SI{6}{\volt} \Rightarrow \boxed{I\+_B_ = \SI{0.01}{\milli\ampere}.}$\\
+$\displaystyle V\+_CE_ = V\+_CC_ - I\+_C_R\+_c1_ + I\+_b1_R\+_b1_ + V\+_BE_ = \boxed{\SI{4.25}{\volt}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle v\+_o_ = -\frac{\beta R'\+_L_}{r\+_be_}v\+_i_ = 3.27v\+_i_ = \SI{100}{\micro\ampere}\times\SI{2}{\kilo\ohm} = \SI{0.2}{\volt} \Rightarrow \boxed{v\+_d_ = \SI{0.0612}{\volt}.}$\\
+$v\+_i1_ = \SI{0.0306}{\volt}$, $v\+_i2_ = \SI{-0.0306}{\volt}$.
+
+\end{document}

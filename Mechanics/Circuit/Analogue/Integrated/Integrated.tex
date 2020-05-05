@@ -1,0 +1,146 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{模拟集成电路} % (fold)
+\label{sec:模拟集成电路}
+
+\newpoint{}集成电路将整个电路中的元件制作在一块硅基片上, 构成特定功能的电子电路.
+\newpoint{}元件性能对称性好.
+\newpoint{}多采用复合管结构.
+\newpoint{}常用有源头器件代替无源器件, 大电阻制作困难, 大电容困难, 电感困难.
+\newpoint{}多级间采用直流耦合技术.
+\newpoint{}常用BJT发射结用作二极管.
+
+\subsection{集成电路中的电流源} % (fold)
+\label{sub:集成电路中的电流源}
+
+\newpoint{BJT镜像电流源} $\mathrm{T}_1$和$\mathrm{T}_2$的参数全同, 即$\beta_1 = \beta_2$, $I\+_CEO1_ = I\+_CEO2_$, 有$V\+_BE1_$ = $V\+_BE2_$, $I\+_E2_ = I\+_E1_$, $I\+_C2_ = I\+_C1_$. 当BJT的$\beta$较大, 基极电流$I\+_B_$可以忽略.
+\[ I\+_o_ = I\+_C2_ \approx I\+_REF_ = \frac{V\+_CC_ - V\+_BE_ - \pare{-V\+_EE_}}{R} \approx \frac{V\+_CC_ + V\+_EE_}{R}. \]
+\newpoint{动态电阻} $\displaystyle r\+_o_ = \left.\pare{\+D{v\+_CE2_}D{i\+_C2_}}\right\vert_{I\+_B2_} = r\+_ce_$.
+\newpoint{}交流输出阻抗特别大. 电流变化率等于电源电压变化率,
+\[ \frac{\Delta I\+_c2_}{I\+_c2_} = \frac{\Delta V\+_CC_}{V\+_CC_}. \]
+\newpoint{}通过带缓冲级的镜像电流源可以减小$I\+_B_$的分流效应, 增加$\mathrm{T}_3$, $R\+_e3_$的作用是增加$I\+_e3_$的大小.
+\newpoint{}多级电流源.
+\newpoint{微电流源(Widlar电流源)} $\displaystyle I\+_O_ = I\+_C2_ \approx I\+_E2_ = \frac{V\+_BE1_ - V\+_BE2_}{R\+_e2_} = \frac{\Delta V\+_BE_}{R\+_e2_}$.
+\newpoint{}因为$\Delta V\+_BE_$足够小, 所以$I\+_C2_$也足够小.
+\newpoint{}电源电压波动对$I\+_C2_$影响不大.
+\newpoint{}$\displaystyle r\+_o_ = r\+_ce2_\pare{1+\frac{\beta R\+_e2_}{r\+_be2_ + r\+_e2_}}.$
+
+\subsubsection{电流源作为有源负载} % (fold)
+\label{ssub:电流源作为有源负载}
+
+\newpoint{}电流源直流电阻小, 交流电阻大.
+\newpoint{}广泛用作有源负载.
+\newpoint{}恒流源作为共射电路的负载时, 共射电路中交流阻抗很大, 从而放大倍数也会很大.
+
+% subsubsection 电流源作为有源负载 (end)
+
+% subsection 集成电路中的电流源 (end)
+
+\subsection{差分式放大电路} % (fold)
+\label{sub:差分式放大电路}
+
+\subsubsection{差模信号与共模信号} % (fold)
+\label{ssub:差模信号与共模信号}
+
+\newpoint{}信号关心的是两个信号的差值, $v\+_id_ = v\+_i1_ - v\+_i2_$.
+\newpoint{}为使放大器能有最佳性能(如抑制零漂, 抗共模噪声), 希望讲改电压差值变换为相位相反的一对电压信号, 即定义差模信号和共模信号
+\[ \begin{cases}
+    \displaystyle v\+_id_ = v\+_i1_ - v\+_i2_, \\
+    \displaystyle \pare{v\+_i1_ + v\+_i2_}/2.
+\end{cases} \Rightarrow \begin{cases}
+    v\+_i1_ = v\+_ic_ + v\+_id_/2, \\
+    v\+_i2_ = v\+_ic_ - v\+_id_/2.
+\end{cases} \]
+\newpoint{}共模信号大小相等, 相位相同; 差模信号大小相等, 相位相反.
+\newpoint{}这样, 放大器的增益分为差模增益和共模增益.
+\[ A\+_\mathnormal{v}d_ = \frac{v'\+_o_}{v\+_id_},\quad A\+_\mathnormal{v}c_ = \frac{v''\+_o_}{v\+_ic_}. \]
+总输出电压
+\[ v\+_o_ = v'\+_o_ + v''\+_o_ = A\+_\mathnormal{v}d_ v\+_id_ + A\+_\mathnormal{v}c_v\+_ic_.\]
+\newpoint{}这样就要求放大器只放大差模信号, 抑制共模信号. \gloss{共模抑制比}
+\[ K\+_CMR_ = \abs{\frac{A\+_\mathnormal{v}d_}{A\+_\mathnormal{v}c_}}. \]
+
+% subsubsection 差模信号与共模信号 (end)
+
+\newpoint{静态工作点分析} $\displaystyle I\+_C1_ = I\+_C2_ = I\+_C_ = \half I\+_O_$.
+\[ V\+_CE1_ = V\+_CE2_ = V\+_CC_ - I\+_C_R\+_c2_ - V\+_E_ = V\+_CC_ - I\+_C_R\+_c2_ - \pare{-\SI{0.7}{\volt}},\quad I\+_B1_ = I\+_B2_ = \frac{I\+_C_}{\beta}. \]
+\newpoint{}对差模和共模信号有不同行为. 对于差模信号, $I\+_O_$不变, $v\+_e_$不变, 恒流源不参与放大倍数的计算. 而共模信号的放大受制于$I\+_O_$的等效大电阻.
+\newpoint{}当温度上升, $i\+_C1_$和$i\+_C2_$同时上升, 故$v\+_E_$上升(恒流源等效为大电阻), 导致$v\+_BE1_$和$v\+_BE2_$下降, $i\+_B1_$和$i\+_B2_$下降, 故$i\+_C1_$和$i\+_C2_$下降.
+
+\subsubsection{双入双出} % (fold)
+\label{ssub:双入双出}
+
+\newpoint{}$\displaystyle A\+_\mathnormal{v}d_ = \frac{v\+_o_}{v\+_id_} = \frac{2v\+_o1_}{2v\+_i1_} = -\frac{\beta \pare{R\+_c_} \parallel \pare{R\+_L_/2}}{r\+_be_}$.
+\newpoint{}$A\+_vc_ \approx 0$.
+
+% subsubsection 双入双出 (end)
+
+\subsection{双入单出} % (fold)
+\label{sub:双入单出}
+
+\newpoint{}$\displaystyle A\+_\mathnormal{v}d_ = \frac{v\+_o_}{v\+_id_} = \frac{v\+_o1_}{2v\+_i1_} = -\frac{\beta \pare{R\+_c_} \parallel \pare{R\+_L_}}{2r\+_be_}$.
+
+% subsection 双入单出 (end)
+
+\subsubsection{单入} % (fold)
+\label{ssub:单入}
+
+\newpoint{}由于$r\+_o_ \gg r\+_e_$, 等效于双端输入, 其增益和双入双出, 双入单出相同.
+
+% subsubsection 单入 (end)
+
+\subsubsection{单出} % (fold)
+\label{ssub:单出}
+
+\newpoint{}$\displaystyle A\+_\mathnormal{v}c1_ = \frac{v\+_oc1_}{v\+_ic_} = -\frac{\beta R\+_c_}{r\+_be_ + \pare{1+\beta}2r_0} \approx -\frac{R\+_c_}{2r\+_o_}$.
+\newpoint{}$r\+_o_$越大, 抑制能力越强.
+\newpoint{}$\displaystyle K\+_CMR_ = \abs{\frac{A\+_\mathnormal{v}d1_}{A\+_\mathnormal{v}c1_}}\approx \frac{\beta r\+_o_}{r\+_be_}$.
+\newpoint{}单端输出时的总输出电压$\displaystyle v\+_o1_ = A\+_\mathnormal{v}d1_v\+_id_\pare{1+\frac{v\+_ic_}{K\+_CMR_ v\+_id_}}.$
+
+% subsubsection 单出 (end)
+
+% subsection 差分式放大电路 (end)
+
+\subsection{集成运放及其主要性能参数} % (fold)
+\label{sub:集成运放及其主要性能参数}
+
+\newpoint{}集成运放应满足电压增益高, 输入电阻大, 输出电阻小, (并假设带宽无限).
+\newpoint{输入失调电压$V\+_IO_$} 在室温及标准电源电压下, 输入电压为零时, 为了使集成运放的输出电压为零在输入端应加的补偿电压.
+\newpoint{}通常为$\SI{1}{\milli\volt}\sim\SI{10}{\milli\volt}$. 超低失调运放为$\SI{1}{\micro\volt}\sim\SI{10}{\micro\volt}$.
+\newpoint{输入偏置电流$I\+_IB_$} 集成运放两个输入端静态电流的平均值, BJT为$\SI{10}{\nano\ampere}\sim \SI{1}{\micro\ampere}$, MOSFET运放在$\SI{}{\pico\ampere}$量级,
+\[ I\+_IB_ = \half\pare{I\+_BN_} + I\+_BP_. \]
+\newpoint{输入失调电流$I\+_IO_$} 当输入电压为零时流入放大器两输入端的静态基极电流之差, 即$I\+_IO_ = \abs{I\+_BN_ - I\+_BP_}$.
+\newpoint{温度漂移} 输入失调电压温漂$\Delta V\+_IO_/\Delta T$. 输入失调电流温漂$\Delta V\+_IO_/\Delta T$.
+
+\subsubsection{差模特性} % (fold)
+\label{ssub:差模特性}
+
+\newpoint{开环差模电压增益$A\+_\mathnormal{v}o_$}.
+\newpoint{开环带宽增益$f\+_BW_$}.
+\newpoint{单位增益带宽$f\+_T_$}. 带宽-增益积为常数.
+\newpoint{差模输入电阻$r\+_id_$} BJT通常为几百$\SI{}{\kilo\ohm}$到数$\SI{}{\mega\ohm}$. MOSFET输入级运放在$\SI{e12}{\ohm}$以上.
+\newpoint{输出电阻$r\+_o_$}. 一般运放$r\+_o_ < \SI{200}{\ohm}$.
+\newpoint{最大差模输入电压$V\+_idmax_$}.
+\newpoint{共模抑制比$K\+_CMR_$和共模输入电阻$r\+_ic_$}.
+\newpoint{最大共模输入电压$V\+_icmax_$}.
+
+% subsubsection 差模特性 (end)
+
+\subsubsection{大信号放大特性} % (fold)
+\label{ssub:大信号放大特性}
+
+\newpoint{转换速率$S\+_R_$} 闭环状态下, 输入为大信号时, 输出电压对时间的最大变化速率.
+\[ S\+_R_ = \left.\+dtd{v\+_o_\pare{t}}\right\vert\+_max_. \]
+若信号为$v\+_i_ = V\+_im_\sin 2\pi ft$, 则需要有$S\+_R_ > 2\pi f\+_max_V\+_om_$.
+\newpoint{全功率带宽$f\+_P_$} $\displaystyle f\+_p_ = \frac{S\+_R_}{2\pi V\+_om_}$.
+
+% subsubsection 大信号放大特性 (end)
+
+% subsection 集成运放及其主要性能参数 (end)
+
+% section 模拟集成电路 (end)
+
+\end{document}

@@ -1,0 +1,496 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{cmbright}
+\usepackage{van-de-la-illinoise}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\newcommand{\emphbox}[1]{\colorbox{lightgray!20}{$\displaystyle #1$}}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\mitensor#1{\stackon[-0.1ex]{\+v#1}{\boldsymbol{\leftrightharpoonup{#1}}} }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+:}%
+\definecolor{emphgreen}{RGB}{238,255,207}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+
+\usetikzlibrary{calc}
+
+\def\equals{=}
+\newcommand{\ib}[2]{to[battery1,l=$ #1 $, invert, #2]}
+\newcommand{\ic}[2]{to[capacitor,C=$ #1 $, #2]}
+\newcommand{\ivs}[2]{to[european voltage source,v<=$ #1 $, #2]}
+\newcommand{\iis}[2]{to[european current source,i=$ #1 $, #2]}
+\newcommand{\ir}[2]{to[resistor,R=$ #1 $, #2]}
+\newcommand{\iso}[1]{to[short,-o,#1]}
+\newcommand{\ios}[1]{to[short,o-,#1]}
+\newcommand{\is}[1]{to[short,#1]}
+%\newcommand{\iu}[3]{\draw #1  #2}
+\newcommand{\iou}[3]{\draw ($#1!0.5!#2$) node {$ #3 $};
+\draw ($#1!0.12!#2$) node {$\scriptstyle +$};
+\draw ($#1!0.88!#2$) node {$\scriptstyle -$};}
+\newcommand{\iblock}[3]{\draw[thick] #1 |- #2 |- cycle;
+\draw ($#1!0.5!#2$) node {#3};}
+
+\def\lefthandwidth{3cm}%
+\newtcolorbox{cheatresumefuta}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}, sidebyside, lefthand width=\lefthandwidth, sidebyside align=top, lower separated=false}%
+
+\pgfplotsset{compat=newest}
+
+\begin{document}
+\centerline{\titlefont バイポーラトランジスタ}
+\vspace{.5em}
+\newheader{トランジスタ基本回路}
+\begin{cheatresume}
+\begin{tabular}{c>{\centering\arraybackslash}p{8cm}>{\centering\arraybackslash}p{8cm}>{\centering\arraybackslash}p{8cm}}
+    & \+:c1c{\color{titlepurple}エミッタ接地} & \+:c1c{\color{titlepurple}コレクタ接地} & \+:c1c{\color{titlepurple}ベース接地} \\
+    \begin{tikzpicture}[yscale=0.8]
+        \draw (0,0) node {}
+        (0,2.5) node{\mathitem{基本回路}};
+    \end{tikzpicture} & \begin{tikzpicture}[yscale=0.8]
+\draw
+    (0,0) \ib{V\+_BB_}{}
+    (0,1) \ivs{U\+_i_}{}
+    (0,2) \ir{R\+_b_}{}
+    (2,2) node[npn,anchor=G,label=right:T](T) {}
+    (T.S) \is{-*}
+    (T.S|-0,0) node[rground] (g) {}
+    (0,0) \is{}
+    (g) \is{}
+    (5,0) \ib{V\+_CC_}{}
+    (5,5) \is{}
+    (T.D|-5,5) \ir{R\+_c_}{}
+    (T.D) \iso{}
+    ($(T.D) + (0.7,0)$)
+    ;
+\iou{($(T.D) + (0.7,0)$)}{($(g) + (0.7,0)$)}{u\+_o_}
+\end{tikzpicture} & \begin{tikzpicture}[yscale=1.26]
+\draw
+    (0,0) \ib{V\+_BB_}{}
+    (0,1) \ivs{U\+_i_}{}
+    (0,2) \ir{R\+_b_}{}
+    (2,2) node[npn,anchor=G,label=right:T](T) {}
+    (T.S) to[resistor,l_=$R\+_e_$,-*]
+    (T.S|-0,0) node[rground] (g) {}
+    (0,0) \is{}
+    (g) \is{}
+    (5,0) \ib{V\+_CC_}{}
+    (5,3.125) -|
+    (T.D) 
+    (T.S) \iso{*-o}
+    ($(T.S) + (0.7,0)$)
+    ;
+\iou{($(T.S) + (0.7,0)$)}{($(g) + (0.7,0)$)}{u\+_o_}
+\end{tikzpicture} & \begin{tikzpicture}[yscale=1.6]
+    \draw (0,0) \ib{V\+_BB_}{invert}
+    (0,1) \ivs{U\+_i_}{}
+    (0,2) \ir{R\+_e_}{}
+    (2,2) node[npn,anchor=S,label=above:T,rotate=-90,xscale=-1](T) {}
+    (T.G) -- (T.G|-0,0) node[rground] (g){}
+    (0,0) to[short,-*]
+    (g) to[short,-*] (4,0)
+    to[resistor,R=$R\+_c_$,-*]
+    (4,2) to[short] (T.D)
+    (4,2) \iso{}
+    (4.7,2)
+    (4,0) \iso{}
+    (4.7,0)
+    ;
+    \iou{($(4,0) + (0.7,0)$)}{($(4,2) + (0.7,0)$)}{u\+_o_}
+    ;
+\end{tikzpicture} \\
+    \begin{tikzpicture}
+        \draw (0,0) node {}
+        (0,1) node{\mathitem{微小信号等価回路}};
+    \end{tikzpicture} & \begin{tikzpicture}[xscale=0.7]
+    \draw
+        (0,2) to[short,o-*]
+        (2,2) to[resistor,R=$R\+_b_$]
+        (2,0) to[short,*-o]
+        (0,0)
+        (2,2) to[short,i_=$\beta i\+_b_$]
+        (4,2) to[resistor,R=$r\+_be_$,-*]
+        (4,0) node[rground] {}
+        (6,0) to[european controlled current source,i_<=$\beta i\+_b_$,*-]
+        (6,2) to[short]
+        (8,2) to[resistor,l_=$R\+_c_$,*-*]
+        (8,0)
+        (8,2) to[short]
+        (10,2) to[resistor,l_=$R\+_L_$,*-*]
+        (10,0)
+        (10,2) to[short,-o]
+        (11,2) node[below] {$+$}
+        (10,0) to[short,-o]
+        (11,0) node[above] {$-$}
+        (11,1) node {$v\+_o_$}
+        (0,0) node[above] {$-$}
+        (0,2) node[below] {$+$}
+        (0,1) node {$v\+_i_$}
+        (0,0) -- (10,0)
+        ;
+    \end{tikzpicture} &
+    \begin{tikzpicture}[yscale=0.5]
+    \draw
+        (1,4) to[short,o-*]
+        (2,4) to[resistor,R=$R\+_b_$,-*]
+        (2,0)
+        (3,0) to[short,-o]
+        (1,0)
+        (1,0) node[above] {$-$}
+        (1,4) node[below] {$+$}
+        (1,2) node {$v\+_i_$}
+        (2,4) to[resistor,R=$r\+_be_$,i=$i\+_b_$]
+        (4,4) --
+        (5,4) to[resistor,R=$R\+_e_$, *-*]
+        (5,0) node[rground] {} --
+        (3,0)
+        (4,0) to[european controlled current source,*-*,i_=$\beta i\+_b_$]
+        (4,4)
+        (5,4) to[short,-o]
+        (8.5,4) node[below] {$+$}
+        (5,0) to[short,-o]
+        (8.5,0) node[above] {$-$}
+        (8.5,2) node {$v\+_o_$}
+        (7,0) to[resistor, R=$R\+_L_$,*-*]
+        (7,4)
+        ;
+    \end{tikzpicture} &
+    \begin{tikzpicture}
+    \draw
+    (4,0) to[open,o-o]
+    (4,2)
+    (4,0) node[above] {$-$}
+    (4,2) node[below] {$+$}
+    (4,1) node {$v\+_i_$}
+    (4,2) to[resistor,R=$R\+_e_$]
+    (6,2)
+    (4,0) -- (6,0)
+    (6,0) to[resistor,R=$r\+_be_$,i=$i\+_b_$,*-*]
+    (6,2)
+    (6,0) -- (9,0)
+    (9,2) to[european controlled current source,i_=$\beta i\+_b_$,*-*]
+    (6,2)
+    (9,2) to[resistor,l_=$R\+_c_$,-*]
+    (9,0)
+    (9,2) --
+    (10.5,2) to[resistor,l_=$R\+_L_$,*-*]
+    (10.5,0) --
+    (9,0)
+    (10.5,2) to[short,-o]
+    (11,2) node[below] {$+$}
+    (10.5,0) to[short,-o]
+    (11,0) node[above] {$-$}
+    (11,1) node {$v\+_o_$}
+    (6,0) node[rground] {};
+    \end{tikzpicture} \\
+    \mathitem{入力インピーダンス} & $\displaystyle R\+_in_ = R\+_b_ \parallel r\+_be_$ & $\displaystyle R\+_in_ = R\+_b_ \parallel \brac{r\+_be_ + \pare{1+\beta} R'\+_L_}$ & $\displaystyle R\+_in_ = R\+_e_ + \frac{r\+_be_}{1+\beta}$ \\
+    & & $\displaystyle r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V\+_T_}{I\+_EQ_}$ & \\
+    \mathitem{電圧増幅率} & $\displaystyle A_v = \frac{-\beta R'\+_L_}{r\+_be_}$ & $\displaystyle A_v = \frac{\pare{1+\beta}R'\+_L_}{r\+_be_ + \pare{1+\beta}R'\+_L_}$ & $\displaystyle A_v = \frac{\beta R'\+_L_}{r\+_be_}$ \\[.5em]
+    \mathitem{出力インピーダンス} & $\displaystyle R\+_o_ = R\+_c_$ & $\displaystyle R\+_o_ = R\+_e_ \parallel \frac{R'\+_s_ + r\+_be_}{1+\beta}$ & $\displaystyle R\+_o_ \approx R\+_c_$ \\[.3em]
+    & & \mathheadcomment{エミッタホロワとも呼ぶ} & \mathheadcomment{電流ゲインは約1倍です} \\
+\end{tabular}
+\end{cheatresume}
+
+\def\deleteall#1{}
+
+\begin{multicols*}{2}
+\raggedcolumns
+\def\lefthandwidth{6.5cm}%
+\newheader{バイアスを安定化する}
+\begin{cheatresumefuta}
+\begin{tikzpicture}[baseline={(current bounding box.north)},outer sep=0pt,inner sep=0pt]
+\draw
+    (0,2) \ic{C_1}{o-*}
+    (1.5,2) -- (2,2) node[npn,anchor=G,label=right:T](T){}
+    (1.5,2) \ir{R\+_b2_}{}
+    (1.5,4.5) \is{-*}
+    (T.D|-5,4.5) \ir{R\+_c_}{-*}
+    (T.D)
+    (T.D|-5,4.5) \iso{}
+    ($(T.D|-5,4.5) + (0.5,0)$) node[label=right:$+V\+_CC_$]{}
+    (T.S) \is{-*}
+    (T.S|-1.5,1.5) \ir{R\+_e_}{-*}
+    (T.S|-0,0) node[rground](g) {}
+    (1.5,2) \ir{R\+_b1_}{-*}
+    (1.5,0)
+    (0,0) \is{o-}
+    (g) \is{-*}
+    (4.5,0) \ic{C_e}{v<=\mbox{}}
+    (4.5,1.5) \is{}
+    (g|-1.5,1.5)
+    ($(4.5,1.5)!0.5!(g|-1.5,1.5)$) node[above] {$P$}
+    (4.5,0) \iso{}
+    (6,0) \ir{R_L}{v<=$u_O$,-o}
+    (6,0|-T.D) \ic{C_2}{v<=\mbox{}}
+    (T.D)
+    ;
+\iou{(0,2)}{(0,0)}{u\+_I_}
+\end{tikzpicture}
+\tcblower
+\begin{flalign*}
+    & \mathitem{直流解析} && U\+_BQ_ = \frac{R\+_b1_}{R\+_b1_ + R\+_b2_}\cdot V\+_CC_ && \\
+    & && I\+_EQ_ = \frac{U\+_BQ_ - U\+_BEQ_}{R\+_e_} && \\
+    & \mathitem{入力抵抗} && R\+_in_ = R\+_b1_ \parallel R\+_b2_ \parallel && \\
+    & && \phantom{R\+_in_ =\ }\brac{r\+_be_ + \pare{1+\beta}R\+_e_} && \\
+    & \mathitem{電圧増幅率} && A_v = \frac{-\beta R'\+_L_}{r\+_be_ + \pare{1+\beta} R\+_e_} && \\
+    & \mathitem{出力抵抗} && R\+_o_ = R\+_c_ &&
+\end{flalign*}
+\end{cheatresumefuta}
+\columnbreak
+\begin{multicols*}{2}
+\raggedcolumns
+\newheader{作図による解}
+\begin{cheatresume}
+\begin{tikzpicture}[scale=0.8]
+    \begin{axis}[
+        axis lines=left,xlabel=$v\+_CE_$,
+        ylabel=$i\+_C_$,xmin=0,xmax=17,ymin=0,ymax=24,xtick={0,5,10,15},xticklabels={\mbox{},5,10,\mbox{}},ytick={0,10,20}, minor tick num=4,%
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=north,
+        right=2.3em,
+        below=.15em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=east,
+        rotate=-90,
+        above=2.3em,
+        left=.3em
+        },clip=false]
+    \addplot[mark={},domain=0:13,samples=200] function{2.1*2/pi*atan(32*3*x)};
+    \addplot[mark={},domain=0:12.9,samples=200] function{2.1*4/pi*atan(32*3/2*x)} node[right] {$I\+_B_ = \const$};
+    \addplot[mark={},domain=0:12.8,samples=200] function{2.1*6/pi*atan(32*3/3*x)};
+    \addplot[mark={},domain=0:12.7,samples=200] function{2.1*8/pi*atan(32*3/4*x)};
+    \addplot[mark={},domain=0:12.6,samples=200] function{2.1*10/pi*atan(32*3/5*x)};
+    \addplot[mark={},domain=0:12.5,samples=200] function{2.1*12/pi*atan(32*3/6*x)};
+    \addplot[mark={},domain=0:12.4,samples=200] function{2.1*14/pi*atan(32*3/7*x)};
+    \addplot[mark={},domain=0:12.3,samples=200] function{2.1*16/pi*atan(32*3/8*x)};
+    \addplot[mark={},domain=0:12.2,samples=200] function{2.1*18/pi*atan(32*3/9*x)};
+    \addplot[mark={},domain=0:12.1,samples=200] function{2.1*20/pi*atan(32*3/10*x)};
+    \addplot[mark={},domain=0:12,samples=200] function{12-x} node[above right] {$\pare{V\+_CC_, R\+_c_}$} node[below] {$V\+_CC_$};
+    \addplot[mark={},domain=0:8.33981,samples=200] function{20-2.39814*x} node[above left] {$\pare{Q, R'\+_L_}$};
+    \addplot[mark=*,id=intersection] coordinates{(5.7219,6.2781)} node[above right] (Q) {$Q$};
+    \draw[dashed] ($(5.7219,6.2781) + (4,-4)$) -- ($(Q) + (6,5)$) node[right] {\mathheadcomment{直流負荷線}};
+    \draw[dashed] ($(5.7219,6.2781) + (-2,4.79628)$) -- ($(Q) + (6,9)$) node[right] {\mathheadcomment{交流負荷線}};
+    \draw[dashed] ($(0.3,19.2806)$) -- ($(Q) + (6,13)$) node[right] {\mathheadcomment{上部が切れた}};
+    \draw[dashed] ($(8.039807,0.719441)$) -- ($(Q) + (6,1)$) node[right] {\mathheadcomment{下部が切れた}};
+    \end{axis}
+\end{tikzpicture}
+\end{cheatresume}
+\columnbreak
+\newheader{接続}
+\begin{cheatresume}
+\begin{center}
+\begin{tikzpicture}
+    \draw
+        (0,0) node[npn,label=right:$\mathrm{T}_1$](T1) {}
+        (T1.S) node[npn,anchor=G,label=right:$\mathrm{T}_2$](T2) {}
+        (T2.D) |- (T1.D)
+        (T2.D|-T1.D) to[short,*-] ++(0,0.5);
+\end{tikzpicture}
+\begin{flalign*}
+    & \mathitem{等価的な} && V\+_BE_ = V\+_BE1_ + V\+_BE2_ && \\
+    & && \beta = \beta_1 \beta_2 && \\
+    & && r\+_be_ = r\+_be1_ + \pare{1+\beta_1}r\+_be2_ &&
+\end{flalign*}
+\end{center}
+
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{multicols*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%
+%
+%
+%
+%
+
+\deleteall{
+\newheader{エミッタ接地}
+\begin{cheatresume}
+\begin{tikzpicture}[xscale=0.7]
+    \draw
+        (0,2) to[short,o-*]
+        (2,2) to[resistor,R=$R\+_b_$]
+        (2,0) to[short,*-o]
+        (0,0)
+        (2,2) to[short,i_=$\beta i\+_b_$]
+        (4,2) to[resistor,R=$r\+_be_$]
+        (4,0) node[rground] {}
+        (6,0) to[european controlled current source,i_<=$\beta i\+_b_$,*-]
+        (6,2) to[short]
+        (8,2) to[resistor,R=$R\+_c_$,*-*]
+        (8,0)
+        (8,2) to[short]
+        (10,2) to[resistor,R=$R\+_L_$,*-*]
+        (10,0)
+        (10,2) to[short,-o]
+        (12,2) node[below] {$+$}
+        (10,0) to[short,-o]
+        (12,0) node[above] {$-$}
+        (12,1) node {$v\+_o_$}
+        (0,0) node[above] {$-$}
+        (0,2) node[below] {$+$}
+        (0,1) node {$v\+_i_$}
+        (0,0) -- (10,0)
+        ;
+\end{tikzpicture}
+\begin{flalign*}
+    & \mathitem{入力インピーダンス} && R\+_in_ = R\+_b_ \parallel r\+_be_ && \\
+    & && r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V\+_T_}{I\+_EQ_} && \\
+    & \mathitem{電圧増幅率} && A_v = \frac{-\beta R'\+_L_}{r\+_be_} && \\
+    & \mathitem{出力インピーダンス} && R\+_o_ = R\+_c_ &&
+\end{flalign*}
+\end{cheatresume}
+\newheader{コレクタ接地}
+\begin{cheatresume}
+\begin{tikzpicture}[yscale=0.5]
+    \draw
+        (0,4) to[short,o-*]
+        (2,4) to[resistor,R=$R\+_b_$]
+        (2,0)
+        (3,0) to[short,-o]
+        (0,0)
+        (0,0) node[above] {$-$}
+        (0,4) node[below] {$+$}
+        (0,2) node {$v\+_i_$}
+        (2,4) to[resistor,R=$r\+_be_$,i=$i\+_b_$]
+        (4,4) --
+        (5,4) to[resistor,R=$R\+_e_$, *-*]
+        (5,0) node[rground] {} --
+        (3,0)
+        (4,0) to[european controlled current source,*-*,i_=$\beta i\+_b_$]
+        (4,4)
+        (5,4) to[short,-o]
+        (8.5,4) node[below] {$+$}
+        (5,0) to[short,-o]
+        (8.5,0) node[above] {$-$}
+        (8.5,2) node {$v\+_o_$}
+        (7,0) to[resistor, R=$R\+_L_$]
+        (7,4)
+        ;
+\end{tikzpicture}
+\begin{flalign*}
+    & \mathitem{入力インピーダンス} && R\+_in_ = R\+_b_ \parallel \brac{r\+_be_ + \pare{1+\beta} R'\+_L_} && \\
+    & && r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V\+_T_}{I\+_EQ_} && \\
+    & \mathitem{電圧増幅率} && A_v = \frac{\pare{1+\beta}R'\+_L_}{r\+_be_ + \pare{1+\beta}R'\+_L_} && \\
+    & \mathitem{出力インピーダンス} && R\+_o_ = R\+_e_ \parallel \frac{R'\+_s_ + r\+_be_}{1+\beta} && \\
+    \+:c{4}{l}{\mathheadcomment{エミッタホロワとも呼ぶ}}
+\end{flalign*}
+\end{cheatresume}
+\newheader{ベース接地}
+\begin{cheatresume}
+\begin{tikzpicture}
+    \draw
+    (4,0) to[open,o-o]
+    (4,2)
+    (4,0) node[above] {$-$}
+    (4,2) node[below] {$+$}
+    (4,1) node {$v\+_i_$}
+    (4,2) --
+    (6,2)
+    (5,0) to[resistor,R=$R\+_e_$,*-*]
+    (5,2)
+    (4,0) -- (6,0)
+    (6,0) to[resistor,R=$r\+_b2_$,i=$i\+_b_$,*-*]
+    (6,2)
+    (6,0) -- (9,0)
+    (9,2) to[european controlled current source,i_=$\beta i\+_b_$,*-*]
+    (6,2)
+    (9,2) to[resistor,R=$R\+_c_$,-*]
+    (9,0)
+    (9,2) --
+    (10.5,2) to[resistor,R=$R\+_L_$,*-*]
+    (10.5,0) --
+    (9,0)
+    (10.5,2) to[short,-o]
+    (12,2) node[below] {$+$}
+    (10.5,0) to[short,-o]
+    (12,0) node[above] {$-$}
+    (12,1) node {$v\+_o_$}
+    (6,0) node[rground] {};
+\end{tikzpicture}
+\begin{flalign*}
+    & \mathitem{入力インピーダンス} && R\+_in_ = R\+_e_ \parallel \frac{r\+_be_}{1+\beta} && \\
+    & && r\+_be_ = r\+_bb'_ + \pare{1+\beta}\frac{V\+_T_}{I\+_EQ_} && \\
+    & \mathitem{電圧増幅率} && A_v = \frac{\beta R'\+_L_}{r\+_be_} && \\
+    & \mathitem{出力インピーダンス} && R\+_o_ \approx R\+_c_ && \\
+    \+:c{4}{l}{\mathheadcomment{電流ゲインは約1倍です}}
+\end{flalign*}
+\end{cheatresume}
+}
+
+\end{document}

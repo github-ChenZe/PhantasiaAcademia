@@ -1,0 +1,202 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{曲线的最小二乘拟合} % (fold)
+\label{sec:曲线的最小二乘拟合}
+
+\subsection{拟合函数} % (fold)
+\label{sub:拟合函数}
+
+已知一组数据$\pare{x_j, y_j = f\pare{x_i}}$, $j = 1,\cdots,m$. 假设拟合函数为$\varphi\pare{x}$. 令
+\[ Q = \pare{\varphi\pare{x_1},\cdots,\varphi\pare{x_m}}^T,\quad Y = \pare{y_1,\cdots,y_m}^T. \]
+$Q$与$Y$之间有不同的误差定义, 常见的有
+\begin{cenum}
+    \item $L_1$模: $\displaystyle R_1 = \sum_{j=1}^m \abs{\varphi\pare{x_j} - y_j}$.
+    \item $L_\infty$模: $\displaystyle R_\infty = \max_{1\le j\le m} \abs{\varphi\pare{x_j} - y_j}$.
+    \item $L_2$模: $\displaystyle R_2 = \sum_{j=1}^m \brac{\varphi\pare{x_j} - y_j}^2$.
+\end{cenum}
+
+% subsection 拟合函数 (end)
+
+\subsection{线性拟合} % (fold)
+\label{sub:线性拟合}
+
+对于给定的数据$\pare{x_i,y_i=f\pare{x_j}}$, $j=1,\cdots,m$, 以线性函数$p\pare{x} = a_0 + a_1 x$拟合之. 方差为
+\[ S\pare{a_0,a_1} = \sum_{j=1}^m \pare{p\pare{x_j} - y_j}^2 = \sum_{j=1}^m \pare{a_0+a_1 x_j - y_j}^2. \]
+最小值处要求
+\[ \begin{cases}
+    \displaystyle \+D{a_0}D{S\pare{a_0,a_1}} = 0, \\
+    \displaystyle \+D{a_1}D{S\pare{a_0,a_1}} = 1,
+\end{cases} \Rightarrow \begin{cases}
+    \displaystyle \sum_{j=1}^m \pare{a_0 + a_1 x_j - y_j} = 0, \\
+    \displaystyle \sum_{j=1}^m  \pare{a_0 + a_1 x_j - y_j}x_j = 0.
+\end{cases} \]
+即
+\[ \begin{cases}
+    \displaystyle ma_0 + \pare{\sum_{j=1}^m x_j} a_1 = \sum_{j=1}^m y_j, \\
+    \displaystyle \pare{\sum_{j=1}^m x_j}a_0 + \pare{\sum_{j=1}^m x_j^2}a_1 = \sum_{j=1}^m x_jy_j.
+\end{cases} \]
+可解得
+\[ a_0 = \frac{\displaystyle \sum_{k=1}^n x_k^2 \sum_{k=1}^n y_k - \sum_{k=1}^n x_ky_k \sum_{k=1}^n x_k}{\displaystyle n\sum_{k=1}^n x_k^2 - \pare{\sum_{k=1}^n x_k}^2},\quad a_1 = \frac{\displaystyle n\sum_{k=1}^n x_ky_k - \sum_{k=1}^n x_k \sum_{k=1}^n y_k}{\displaystyle n\sum_{k=1}^n x_k^2 - \pare{\sum_{k=1}^n x_k}^2}. \]
+
+% subsection 线性拟合 (end)
+
+\subsection{多项式拟合} % (fold)
+\label{sub:多项式拟合}
+
+用$p\pare{x} = a_0+a_1x+\cdots+a_nx^n$拟合, 则误差$\displaystyle S\pare{a_0,a_1,\cdots,a_n} = \sum_{j=1}^m \pare{p\pare{x_j} - y_j}^2$最小要求
+\[ \+D{a_0}DS = \+D{a_1}DS = \cdots = \+D{a_n}DS = 0. \]
+可得方程
+\[ \begin{pmatrix}
+    \displaystyle m & \displaystyle \sum_{j=1}^m x_j & \cdots & \displaystyle \sum_{j=1}^m x_j^n \\
+    \displaystyle \sum_{j=1}^m x_j & \displaystyle \sum_{j=1}^m x_j^2 & \cdots & \displaystyle \sum_{j=1}^m x_j^{n+1} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \displaystyle \sum_{j=1}^m x_j^n & \displaystyle \sum_{j=1}^m x_j^{n+1} & \cdots & \displaystyle \sum_{j=1}^m x_j^{2n}
+\end{pmatrix} \begin{pmatrix}
+    a_0 \\ a_1 \\ \vdots \\ a_n
+\end{pmatrix} = \begin{pmatrix}
+    \displaystyle \sum_{j=1}^m y_j \\
+    \displaystyle \sum_{j=1}^m x_jy_j \\
+    \vdots \\
+    \displaystyle \sum_{j=1}^m x_j^ny_j
+\end{pmatrix}. \]
+从而可以解出$\pare{a_0,\cdots,a_n}$.
+
+% subsection 多项式拟合 (end)
+
+\subsection{最小二乘法解矛盾方程组} % (fold)
+\label{sub:最小二乘法解矛盾方程组}
+
+线性方程组
+\[ AX = Y,\quad A = \pare{a_{ij}}_{m\times n},\quad X = \pare{x_1,\cdots,x_n}^T,\quad Y = \pare{y_1,\cdots,y_m}^T \]
+若$\rank \pare{A,Y}\neq \rank{A}$则无解, 谓矛盾方程组.
+\begin{theorem}
+    若$A = \pare{a_{ij}}_{m\times n}$, $m>n$, 且$\rank\pare{A} = n$, 则$A^TAX = A^TY$谓矛盾方程组$AX=Y$之法方程组. 法方程组恒有唯一解.
+\end{theorem}
+\begin{proof}
+    通过初等变换$PA$将$A$化为$\begin{pmatrix}
+        I_n & 0
+    \end{pmatrix}^T$的形式. 故$\rank A^TA = n$.
+\end{proof}
+\begin{theorem}
+    $X$是$\min \norm{AX-Y}_2^2$意义下的解当且仅当$A^TAX = A^T Y$.
+\end{theorem}
+\begin{proof}
+    设$Z=X+e$,
+    \begin{align*}
+        \norm{AZ-Y}_2^2 &= \pare{AX-Y}^T\pare{AX-Y} + \pare{AX-Y}^TAe + \\
+        &\phantom{=\ } \pare{Ae}^T\pare{AX-Y} + \pare{Ae}^T\pare{Ae} \\
+        &= \norm{AX-Y}_2^2 + \norm{Ae}_e^2.
+    \end{align*}
+    其中$\pare{Ae}^T\pare{AX-Y} = e^TA^T\pare{AX-Y} = 0$, 同样$\pare{AX-Y}^TAe = 0$.
+\end{proof}
+\begin{ex}
+    解矛盾方程组
+    \[ AX = \begin{pmatrix}
+        1 & 1 & 1 \\
+        1 & 3 & -1 \\
+        2 & 5 & 2 \\
+        3 & -1 & 5
+    \end{pmatrix} \begin{pmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{pmatrix} = \begin{pmatrix}
+        2 \\ -1 \\ 1 \\ -2
+    \end{pmatrix}. \]
+    检验可得$\rank A = 3$, 法方程
+    \[ A^TA X = \begin{pmatrix}
+        15 & 11 & 19 \\
+        11 & 36 & 3 \\
+        19 & 3 & 31
+    \end{pmatrix} \begin{pmatrix}
+        x_1 \\ x_2 \\ x_3
+    \end{pmatrix} = \begin{pmatrix}
+        -1 \\ 6 \\ -5
+    \end{pmatrix}. \]
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.59 8 (2)
+
+% paragraph 作业 (end)
+
+% subsection 最小二乘法解矛盾方程组 (end)
+
+\subsection{矛盾方程组与多项式拟合} % (fold)
+\label{sub:矛盾方程组与多项式拟合}
+
+\begin{theorem}
+    解矛盾方程组
+    \[ \begin{pmatrix}
+        1 & x_1 & \cdots & x_1^n \\
+        \cdots & \cdots & \cdots & \cdots \\
+        1 & x_m & \cdots & x_m^n
+    \end{pmatrix} \begin{pmatrix}
+        a_0 \\ \vdots \\ a_n
+    \end{pmatrix} = \begin{pmatrix}
+        y_1 \\ \vdots \\ y_n
+    \end{pmatrix} \]
+    等价于多项式拟合.
+\end{theorem}
+法方程为
+\[ \begin{pmatrix}
+    \displaystyle m & \displaystyle \sum_{j=1}^m x_j & \cdots & \displaystyle \sum_{j=1}^m x_j^n \\
+    \displaystyle \sum_{j=1}^m x_j & \displaystyle \sum_{j=1}^m x_j^2 & \cdots & \displaystyle \sum_{j=1}^m x_j^{n+1} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    \displaystyle \sum_{j=1}^m x_j^n & \displaystyle \sum_{j=1}^m x_j^{n+1} & \cdots & \displaystyle \sum_{j=1}^m x_j^{2n}
+\end{pmatrix} \begin{pmatrix}
+    a_0 \\ a_1 \\ \vdots \\ a_n
+\end{pmatrix} = \begin{pmatrix}
+    \displaystyle \sum_{j=1}^m y_j \\
+    \displaystyle \sum_{j=1}^m x_jy_j \\
+    \vdots \\
+    \displaystyle \sum_{j=1}^m x_j^ny_j
+\end{pmatrix}. \]
+正好是拟合的方程.
+
+% subsection 矛盾方程组与多项式拟合 (end)
+
+\subsection{可转化为线性拟合的情形} % (fold)
+\label{sub:可转化为线性拟合的情形}
+
+对于$y=ae^{bx}$的曲线拟合, 可转化为
+\[ \ln y = \ln a + bx \Rightarrow z = \alpha + bx. \]
+\begin{ex}
+    将
+    \[ \begin{array}{lllllllll}
+        x_i & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+        y_i & 15.3 & 20.5 & 27.4 & 36.6 & 49.1 & 65.6 & 87.8 & 117.6
+    \end{array} \]
+    按$ae^{bx}$拟合. 可转化为
+    \[ \ln y_i = \ln a + bx_i. \]
+\end{ex}
+对于$y=a+bx^3$, 令$z = x^3$, 则拟合转化为
+\[ y = a+bz. \]
+\begin{ex}
+    将
+    \[ \begin{array}{llllll}
+        x_i & -3 & -2 & -1 & 2 & 4 \\
+        y_i & 14.3 & 8.3 & 4.7 & -8.3 & -22.7 \\
+        x_i^3 & -9 & -8 & -1 & 8 & 64
+    \end{array} \]
+    按$y = a+bx^3$拟合.
+\end{ex}
+对于$\displaystyle y = \rec{a+bx}$, 令$\displaystyle z = \rec{y}$, 则拟合转化为
+\[ z = a+bx. \]
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.59 4, 5, 7
+
+% paragraph 作业 (end)
+
+% subsection 可转化为线性拟合的情形 (end)
+
+% section 曲线的最小二乘拟合 (end)
+
+\end{document}

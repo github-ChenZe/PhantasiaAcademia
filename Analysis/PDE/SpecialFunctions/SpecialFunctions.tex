@@ -933,7 +933,188 @@ $\lambda = n\pare{n+1}$, $P_n^m$是三角多项式
 
 % subsubsection 归一化 (end)
 
+\subsubsection{虚变量Bessel方程} % (fold)
+\label{ssub:虚变量bessel方程}
+
+\subsubsection{零阶变形Bessel方程} % (fold)
+\label{ssub:零阶变形bessel方程}
+
+零阶变形Bessel方程为
+\[ \pare{rR'}' - \lambda rR = 0. \]
+设$x = \sqrt{\lambda}r$, $y\pare{x} = R\pare{r}$, 则
+\[ x^2y'' + xy' - x^2y = 0. \]
+
+% subsubsection 零阶变形bessel方程 (end)
+
+\subsubsection{一般情形} % (fold)
+\label{ssub:一般情形}
+
+$\nu$阶变形Bessel方程为
+\[ \pare{rR'}' - \pare{\lambda r + \frac{\nu^2}{r}}R = 0. \]
+设$x = \sqrt{\lambda}r$, $y\pare{x} = R\pare{r}$, 则
+\[ x^2y'' + xy' - \pare{x^2+\nu^2} y = 0. \]
+通解
+\[ \begin{cases}
+    \displaystyle y\pare{x} = AI_\nu\pare{x} + BK_\nu\pare{x}, \\
+    \displaystyle I_\nu\pare{x} = i^{-\nu} J_0\pare{ix}, \\
+    \displaystyle K_\nu\pare{x} = \pi e^{i\pare{\nu+1}\pi/2}\frac{J_\nu\pare{ix} + iN_\nu\pare{ix}}{2} \\
+    \displaystyle = \frac{\pi\pare{I_{-\nu}\pare{x} - I_\nu\pare{x}}}{2\sin \nu\pi}.
+\end{cases} \]
+$I_\nu\pare{x\rightarrow 0}$有界, $K_\nu\pare{x\rightarrow 0}$无界. $I_\nu\pare{x\rightarrow \infty}\rightarrow \infty$, $K_\nu\pare{x\rightarrow \infty}\rightarrow 0$. 
+
+% subsubsection 一般情形 (end)
+
+% subsubsection 虚变量bessel方程 (end)
+
 % subsection strum_liouville问题 (end)
+
+\subsection{求解PDE} % (fold)
+\label{sub:求解pde}
+
+\begin{sample}
+    \begin{ex}
+        求解
+        \[ \begin{cases}
+            u_t = \laplacian u, \quad r<a, t\ge 0, \\
+            u\pare{r=a} = 0,\\
+            u\pare{t=0} = \phi\pare{r,\theta}
+        \end{cases}\xLongrightarrow{u=T\pare{t}W\pare{r,\theta}} \dot{T} + \omega^2 T = 0 = \laplacian W + \omega^2 W. \]
+        $T$作为发展方程ODE作为初值问题的解, $W$作为本征值问题的解.
+        \par
+        设$W = R\pare{r}\Theta\pare{\theta}$, 有
+        \[ \pare{rR'}' + \pare{\omega^2 r - \frac{m^2}{r}}R = 0 = \Theta'' + m^2\Theta. \]
+        自然边界条件要求$\abs{R\pare{\theta}} < \infty$, $R\pare{a} = 0$. $\Theta\pare{\theta+2\pi} = \Theta\pare{\theta} = 0$. $\Theta$的本征值$m^2$决定了Bessel方程的阶数, Bessel方程的固有值$\omega^2$同时是$\laplacian$的固有值.
+        \par
+        设$x = \omega_{m;n}a$为$J_m\pare{x}$的第$n$个正根, 对于每一个固定的$m$,
+        \[ J_{m;n}\pare{\omega_{m;n}r},\quad n = 1,2,\cdots \]
+        构成$L^2\pare{\brac{0,a}}$的一组规范正交基. 在同一组基内$m$是固定的. $\phi$在圆上的正交基是$\ket{\+ve_m}$代表的$\exp im\theta$.
+        \par
+        圆盘上的$L^2$空间的完备基由关于$\Theta$和$R$的固有函数的乘积构成, 即
+        \[ \curb{ \begin{array}{c}
+            \cos m\theta \\
+            \sin m\theta
+        \end{array} } \cdot J_m\pare{\omega_{m;n}r}. \]
+        当$r=0$是结果不应依赖于$\Theta$. $J_{\nu > 0}$正好满足这一要求. 当恰好是$m\neq 0$时对应的$\Theta$. 分离变量可得
+        \begin{align*}
+            & u\pare{t} = \sum_{n=1}^\infty e^{-\omega_{0;n}^2 t}C_{0n} J_0\pare{\omega_{m;n}r} \\
+            & + \sum_{m=1}^\infty e^{-\omega_{m;n}^2 t}\brac{C_{m;n} \cos m\theta J_m\pare{\omega_{m;n}r} + S_{m;n} \sin m\theta J_m\pare{\omega_{m;n}r}}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求解
+        \[ \begin{cases}
+            \laplacian u = 0,\quad r\le a,\quad 0\le z\le h, \\
+            u_r\pare{r=a} = 0, \\
+            u\pare{z=0} = 0, \\
+            u\pare{z=h} = f\pare{r}.
+        \end{cases} \]
+        由对称性, $u$和$\theta$无关, $\Theta$的固有值为零, 故$R$的特征函数为$J_0\pare{\omega_n r}$.
+        \[ Z'' - \omega^2 Z = 0 = \pare{rR'}' + \omega^2 rR. \]
+        注意$\omega = 0$的情形不构成Bessel方程, 解为$R = A+B\ln r$. 此时分离变量对应的解为
+        \[ Z = \rec{h}\brac{C_0 \pare{h-z} + D_0 z}. \]
+        对于其他的$\omega^2\neq 0$的情形, 设$x=\omega_n a$是$J_0'$的第$n$个正根, $\ket{J_{0;n}}$代表$J_{\omega_{0;n}}\pare{r}$, $n=0,1,\cdots$. 分离变量对应的
+        \[ Z= \rec{\sinh \omega_n h}\brac{C_n \sinh \omega_n \pare{h-z} + S_n \sinh \omega_n z}. \]
+        代入两侧的边界条件有$C_n = 0$, 而
+        \[ f = f_0 + \sum_{n=1}^\infty f_nJ\pare{\omega_n r} \Rightarrow S_n = f_n. \]
+        其中
+        \[ f_n = \frac{\braket{J_{0;n}}{f}}{\braket{J_{0;n}}{J_{0;n}}}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求解
+        \[ \begin{cases}
+            \laplacian v = 0, \quad r\le a,\quad 0\le z\le h, \\
+            v_r\pare{r=a} = q, \\
+            v\pare{z=0} = 0, \\
+            v\pare{z=h} = f\pare{r}.
+        \end{cases} \]
+        设$u=v+w$, 其中$w$满足前一个例子的方程, 则$v$满足
+        \[ \begin{cases}
+            \laplacian v = 0,\quad r\le a,\quad 0\le z\le h, \\
+            v_r\pare{r=a} = q,\\
+            v\pare{z=0} = 0,\\
+            v\pare{z=h} = 0.
+        \end{cases} \]
+        此时应当将$z$作为SL问题, $R\pare{r}$作为一般ODE. 此时$\laplacian$的固有值为零, 是$R\pare{r}$和$Z\pare{z}$的固有之之和. 因此两者固有值必定异号.
+        \par
+        此处$Z$是SL问题, 故$\omega^2 \le 0$. 定义$\lambda = -\omega^2$, 分离变量后
+        \[ \begin{cases}
+            \pare{rR'}' = \lambda rR, \\
+            Z'' + \lambda Z = 0, \\
+            Z\pare{0} = Z\pare{h} = 0
+        \end{cases} \Rightarrow \begin{cases}
+            \displaystyle \lambda_n = \pare{\frac{n\pi}{h}}^2, \\[0.5em]
+            \displaystyle Z_n\pare{z} = \sin \frac{n\pi z}{h}.
+        \end{cases} \]
+        由自然边界条件选择$I$展开, 由
+        \[ v\pare{r} = \sum_{n=1}^\infty C_n I_0\pare{\frac{n\pi r}{h}}Z_n\pare{z}. \]
+        代入边界条件$q = v_r\pare{r=a,z}$,
+        \[ q = \sum_{n=1}^\infty C_n \frac{n\pi}{h} I'_0\pare{\frac{n\pi a}{h}}\sin \pare{\frac{n\pi z}{h}}. \]
+    \end{ex}
+\end{sample}
+
+\subsubsection{球坐标Helmholtz方程} % (fold)
+\label{ssub:球坐标helmholtz方程}
+
+\newpoint{}$\pare{\laplacian+k^2}u = 0$, 其中
+\[ u = R\pare{r} Y\pare{\theta,\phi}. \]
+其中$Y$为球函数, 满足$\laplacian_{S^2}Y + l\pare{l+1} Y = 0$. 而
+\[ \pare{r^2R'}' + \pare{k^2r^2 - l\pare{l+1}}R = 0. \]
+\newpoint{}$l$阶球Bessel方程的SL形式具有权函数$r^2$. 设$x=kr$, $y\pare{x} = R\pare{r}$, 则
+\[ x^2y'' + 2xy' + \brac{x^2 - l\pare{l+1}}y = 0. \]
+设$z\pare{x} = \sqrt{x}y\pare{x}$, 则
+\[ x^2 z'' + xz' + \brac{x^2 - \pare{l+\half}^2}z = 0. \]
+上面方程的通解为
+\[ z\pare{x} = CJ_{l+1/2}\pare{x} + DN_{l+1/2}\pare{x}. \]
+定义
+\begin{resume}
+    \vspace{-\baselineskip}
+    \begin{flalign*}
+        & \text{球Bessel函数} && j_l\pare{x} = \sqrt{\frac{\pi}{2x}}J_{l+1/2}\pare{x}, && \\
+        & \text{球Neumann函数} && n_l\pare{x} = \sqrt{\frac{\pi}{2x}}N_{l+1/2}\pare{x}. &&
+    \end{flalign*}
+\end{resume}
+则$l$阶球Bessel的SL型问题的固有函数为
+\[ R\pare{r} = y\pare{k_n r}. \]
+$C$, $D$和$n$的选择取决于边界条件. 例如求解区域在球内时, 由自然边界条件选择$y\propto j_l$. 固有值$k_n^2$由$x=k_n r$是$\alpha y\pare{x} + \beta k_n y'\pare{x}$的第$n$个正根决定.
+\begin{sample}
+    \begin{ex}
+        求解
+        \[ \begin{cases}
+            u_t = \laplacian u,\quad r\le r_0,\quad t\ge 0, \\
+            u\pare{r=r_0} = u_0, \\
+            u\pare{t=0} = 0.
+        \end{cases} \]
+        设$u=u_0 + v$, 则$v$满足
+        \[ \begin{cases}
+            v_t = \laplacian v,\quad r\le r_0,\quad t\ge 0, \\
+            v\pare{r=r_0} = 0, \\
+            v\pare{t=0} = -u_0.
+        \end{cases} \]
+        分离变量后
+        \[ \begin{cases}
+            \dot{T} + \lambda T = 0, \\
+            \pare{r^2R'}' + \lambda r^2 R = 0, \\
+            \abs{R\pare{0}}<\infty,\quad R\pare{r_0} = 0.
+        \end{cases} \]
+        用$R$做SL问题, 球对称要求解为$0$阶Bessel函数,
+        \[ j_0\pare{k_n r} = \sqrt{\frac{\pi}{2kr}} J_{1/2}\pare{kr} = \frac{\sin kr}{kr}. \]
+        固有值$\lambda_n = k_n^2$由$x=k_n r_0$是$j_0\pare{x}$的第$n$个正根决定.
+        \begin{align*}
+            & k_m = \frac{n\pi}{r_0}, \\
+            & T\pare{t} = e^{-\lambda_n t}, \\
+            & v = \sum_{n=1}^\infty C_n \exp\pare{-\lambda_n t}j_0\pare{k_n r_n}, \\
+            & \Rightarrow -u_0 = v\pare{t=0} = \sum_{n=1}^\infty \frac{C_nr_0}{n\pi r}\sin \frac{n\pi r}{r_0}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 球坐标helmholtz方程 (end)
+
+% subsection 求解pde (end)
 
 % subsection bessel方程 (end)
 

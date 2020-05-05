@@ -1,0 +1,142 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+\usepackage{colortbl}
+
+\definecolor{graybg}{RGB}{228,235,243}
+\definecolor{titlepurple}{RGB}{150,131,104}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\def\bili#1#2{#2}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\newlongheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=0,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\begin{document}
+
+\begin{multicols*}{3}[\centerline{\titlefont 第4章ノ概要}]
+\raggedcolumns%
+\newheader{Fourier変換}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{定義} && \hat f\pare{p} = F\brac{f\pare{x}} = \int_{-\infty}^\infty \rd{x}\, e^{-ipx}f\pare{x} && \\
+        & \mathitem{逆変換} && f\pare{x} = F^{-1}\brac{\hat f\pare{p}} = \rec{2\pi} \int_{-\infty}^\infty \rd{p}\, e^{ipx} \hat f\pare{p} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{線型性} && F\brac{af\pare{x} + bg\pare{x}} = a\hat f\pare{p} + b\hat g\pare{p} && \\
+        & \mathitem{平行移動} && F\brac{f\pare{x-x_0}} = e^{-i x_0 p}\hat f\pare{p} && \\
+        & \mathitem{変調} && F\brac{e^{ix p_0} f\pare{x}} = \hat f\pare{p - p_0} && \\
+        & \mathitem{定数倍} && F\brac{f\pare{ax}} = \rec{\abs{a}}\hat f\pare{\frac{p}{a}} && \\
+        & \mathitem{畳み込み} && F\brac{f*g\pare{x}} = \hat f\pare{p}\hat g\pare{p} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{微分} && F\brac{f^{\pare{n}}\pare{x}} = \pare{ip}^n \hat f\pare{p} && \\
+        & && F^{-1}\brac{\hat f^{\pare{n}}\pare{p}} = \pare{-ix}^n f\pare{x} && \\
+        & \mathitem{積分} && F\brac{\int_{-\infty}^x \rd{y}\, f\pare{x}} = \frac{\hat f\pare{p}}{ip} && \\
+        & && F^{-1}\brac{\int_{-\infty}^p \rd{q}\, \hat f\pare{p}} = \frac{f\pare{x}}{-ix} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        && 1 & \mapsto 2\pi\delta\pare{p} & x^n & \mapsto 2\pi i^n \delta^{\pare{n}}\pare{p} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\columnbreak
+
+\newheader{Laplace変換}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{定義} && \tilde{f}\pare{p} = L\brac{f\pare{x}} = \int_0^\infty \rd{t}\, e^{-pt}f\pare{t} && \\
+        & \mathitem{逆変換} && f\pare{t} = L^{-1}\brac{\tilde{f}\pare{p}} = \rec{2\pi i}\int_{q-i\infty}^{q+i\infty} \rd{p}\, e^{pt}\tilde{f}\pare{p} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{線型性} && L\brac{af\pare{t} + bg\pare{t}} = a\tilde f\pare{t} + b\tilde g\pare{t} && \\
+        & \mathitem{平行移動} && L\brac{f\pare{t-t_0}} = e^{-pt_0}\tilde f\pare{p} && \\
+        & \mathitem{変調} && L\brac{e^{p_0 t} f\pare{t}} = \tilde f\pare{p - p_0} && \\
+        & \mathitem{定数倍} && L\brac{f\pare{at}} = \rec{a}\tilde f\pare{\frac{p}{a}} && \\
+        & \mathitem{畳み込み} && L\brac{f*g\pare{t}} = \tilde f\pare{p}\tilde g\pare{p} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{微分} && L\brac{f^{\pare{n}}\pare{t}} = p^n\tilde{f}\pare{p} - p^{n-1}f\pare{0} - \cdots - f^{\pare{n-1}}\pare{0} && \\
+        & && F^{-1}\brac{\tilde{f}^{\pare{n}}\pare{p}} = \pare{-t}^n f\pare{t} && \\
+        & \mathitem{積分} && F\brac{\int_0^t \,\rd{\tau}\,f\pare{\tau}} = \frac{\tilde f\pare{p}}{p} && \\
+        & && F^{-1}\brac{\int_{p}^\infty \rd{q}\, \tilde f\pare{p}} = \frac{f\pare{t}}{t} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        1 & \mapsto \rec{p} & t^n & \mapsto \frac{n!}{p^{n+1}} \\
+        \sinh \omega t & \mapsto \frac{\omega}{p^2 - \omega^2} & \cosh \omega t &\mapsto \frac{p}{p^2 - \omega^2} \\
+        e^{\lambda t}\sin\omega t & \mapsto \frac{\omega}{\pare{p-\lambda}^2 + \omega^2} & e^{\lambda t}\cos\omega t & \mapsto \frac{p-\lambda}{\pare{p-\lambda}^2 + \omega^2}
+    \end{flalign*}
+\end{cheatresume}
+
+\columnbreak
+
+\newheader{正弦\wdiv 余弦変換}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{正弦変換} && \hat f_s\pare{p} = F_s\brac{f\pare{x}} = \int_{0}^\infty \rd{x}\, \sin px f\pare{x} && \\
+        & \mathitem{逆変換} && f\pare{x} = F^{-1}_s\brac{\hat f_s\pare{p}} = \frac{2}{\pi} \int_{0}^\infty \rd{p}\, \sin px \hat f\pare{p} && \\
+        & \mathitem{余弦変換} && \hat f_c\pare{p} = F_c\brac{f\pare{x}} = \int_{0}^\infty \rd{x}\, \cos px f\pare{x} && \\
+        & \mathitem{逆変換} && f\pare{x} = F^{-1}_c\brac{\hat f_c\pare{p}} = \frac{2}{\pi} \int_{0}^\infty \rd{p}\, \cos px \hat f\pare{p} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \displaystyle \begin{array}[t]{@{}l!{\color{lightgray}\vrule}l}%
+         \mathitem{微分}\quad F_s\brac{f'} = -p\hat f_c\pare{p} & F_s\brac{f''} = -p^2 \hat f_s\pare{p} + pf\pare{0}  \\%
+         \quad F_c\brac{f'} = p\hat f_s\pare{p} - f\pare{0} & F_c\brac{f''} = -p^2 \hat f_c\pare{p} - f'\pare{0} \end{array} && \\
+         &\mathheadcomment{\ Dirichlet境界条件の場合は正弦変換を使う} && \\ % 選ぶ
+         &\mathheadcomment{\ Neumannは余弦変換を使う} && \\
+         &\mathheadcomment{\ Robinはその線型結合を作る} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

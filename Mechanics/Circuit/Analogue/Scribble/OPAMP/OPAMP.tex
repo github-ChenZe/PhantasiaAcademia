@@ -1,0 +1,226 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{cmbright}
+\usepackage{van-de-la-illinoise}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\newcommand{\emphbox}[1]{\colorbox{lightgray!20}{$\displaystyle #1$}}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\mitensor#1{\stackon[-0.1ex]{\+v#1}{\boldsymbol{\leftrightharpoonup{#1}}} }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+:}%
+\definecolor{emphgreen}{RGB}{238,255,207}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+
+\usetikzlibrary{calc}
+
+\def\equals{=}
+\newcommand{\ib}[2]{to[battery1,l=$ #1 $, invert, #2]}
+\newcommand{\ic}[2]{to[capacitor,C=$ #1 $, #2]}
+\newcommand{\ivs}[2]{to[european voltage source,v<=$ #1 $, #2]}
+\newcommand{\iis}[2]{to[european current source,i=$ #1 $, #2]}
+\newcommand{\ir}[2]{to[resistor,R=$ #1 $, #2]}
+\newcommand{\iso}[1]{to[short,-o,#1]}
+\newcommand{\ios}[1]{to[short,o-,#1]}
+\newcommand{\is}[1]{to[short,#1]}
+%\newcommand{\iu}[3]{\draw #1  #2}
+\newcommand{\iou}[3]{\draw ($#1!0.5!#2$) node {$ #3 $};
+\draw ($#1!0.12!#2$) node {$\scriptstyle +$};
+\draw ($#1!0.88!#2$) node {$\scriptstyle -$};}
+\newcommand{\iblock}[3]{\draw[thick] #1 |- #2 |- cycle;
+\draw ($#1!0.5!#2$) node {#3};}
+
+\def\lefthandwidth{3cm}%
+\newtcolorbox{cheatresumefuta}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}, sidebyside, lefthand width=\lefthandwidth, sidebyside align=top, lower separated=false}%
+
+\pgfplotsset{compat=newest}
+\usepackage{vwcol}  
+
+\begin{document}
+\begin{multicols*}{2}[\centerline{\titlefont オペアンプ}]
+\raggedcolumns%
+\newheader{差動増幅回路}
+\begin{cheatresume}
+\begin{tabular}{c>{\centering\arraybackslash}p{5.6cm}>{\centering\arraybackslash}p{5.6cm}}
+ & \+:c1c{\color{titlepurple}2つの出力} & \+:c1c{\color{titlepurple}単一出力} \\
+\begin{tikzpicture}[yscale=0.85]
+        \draw (0,0) node {}
+        (0,4) node{\mathitem{基本回路}};
+    \end{tikzpicture} & \begin{tikzpicture}[yscale=0.85,xscale=0.75]
+        \draw 
+            (0,1) node(EE) {}
+            (-2,3) node(C1) {}
+            (2,3) node(C2) {}
+            (0,5) node(CC) {}
+            (C1) node[npn,anchor=D] (T1) {}
+            (C2) node[npn,anchor=D,xscale=-1] (T2) {}
+            (T1.S) -- (T1.S|-EE) to[short,-*] (EE)
+            (T2.S) -- (T2.S|-EE) to[short] (EE)
+            (EE) to[european current source,i_=$I\+_O_$,-o]
+            ++ (0,-2) node[right] {$-V\+_EE_$}
+            (T1.D) to[short,*-o]
+            (T1.D-|-1,0) to[resistor,R=$R\+_L_$,v=$v\+_o_$]
+            (T2.D-|1,0) to[short,o-*]
+            (T2.D)
+            (T1.D) to[resistor,R=$R\+_c1_$]
+            (T1.D|-CC) to[short,-*]
+            (CC) --
+            (T2.D|-CC) to[resistor,R=$R\+_c2_$]
+            (T2.D)
+            (CC) to[short,-o]
+            ++(0,1) node[right] {$+V\+_CC_$}
+            (T1.G) to[open,o-o]
+            ++ (0,-2) to[short] ++ (0,-0.06) node[rground] (g1) {}
+            (T2.G) to[open,o-o]
+            ++ (0,-2) to[short] ++ (0,-0.06) node[rground] (g2) {}
+            (T1.G) node[below] {$+$}
+            (g1) node[above] {$-$}
+            (T2.G) node[below] {$+$}
+            (g2) node[above] {$-$}
+            ($(T1.G)!0.5!(g1)$) node {$v\+_i1_$}
+            ($(T2.G)!0.5!(g2)$) node {$v\+_i2_$}
+            ;
+    \end{tikzpicture} & \begin{tikzpicture}[yscale=0.85,xscale=0.75]
+        \draw 
+            (0,1) node(EE) {}
+            (-2,3) node(C1) {}
+            (2,3) node(C2) {}
+            (0,5) node(CC) {}
+            (C1) node[npn,anchor=D] (T1) {}
+            (C2) node[npn,anchor=D,xscale=-1] (T2) {}
+            (T1.S) -- (T1.S|-EE) to[short,-*] (EE)
+            (T2.S) -- (T2.S|-EE) to[short] (EE)
+            (EE) to[european current source,i_=$I\+_O_$,-o]
+            ++ (0,-2) node[right] {$-V\+_EE_$}
+            (T1.D) to[short,*-o]
+            (T1.D-|-1,0) to[resistor,R=$R\+_L_$,v=$v\+_o1_$,-o]
+            ++ (2,0) -- ++(0,-1) node[rground] {}
+            (T1.D) to[resistor,R=$R\+_c1_$]
+            (T1.D|-CC) to[short,-*]
+            (CC) --
+            (T2.D|-CC) to[resistor,R=$R\+_c2_$]
+            (T2.D)
+            (CC) to[short,-o]
+            ++(0,1) node[right] {$+V\+_CC_$}
+            (T1.G) to[open,o-o]
+            ++ (0,-2) to[short] ++ (0,-0.06) node[rground] (g1) {}
+            (T2.G) to[open,o-o]
+            ++ (0,-2) to[short] ++ (0,-0.06) node[rground] (g2) {}
+            (T1.G) node[below] {$+$}
+            (g1) node[above] {$-$}
+            (T2.G) node[below] {$+$}
+            (g2) node[above] {$-$}
+            ($(T1.G)!0.5!(g1)$) node {$v\+_i1_$}
+            ($(T2.G)!0.5!(g2)$) node {$v\+_i2_$}
+            ;
+    \end{tikzpicture}\\
+    \mathitem{差動利得} & $\displaystyle A\+_\mathnormal{v}d_ = \frac{v\+_o_}{v\+_id_} = -\frac{\displaystyle \beta\pare{R\+_c_\parallel \frac{R\+_L_}{2}}}{r\+_be_}$ & $\hspace{-.3cm}\displaystyle A\+_\mathnormal{v}d1_ = \frac{v\+_o1_}{v\+_id_} = -\frac{v\+_o2_}{v\+_id_} = -\frac{\displaystyle \beta\pare{R\+_c_\parallel {R\+_L_}}}{2r\+_be_}$ \\
+    \mathitem{同相利得} & $\displaystyle A\+_\mathnormal{v}c_ \rightarrow 0$ & $\displaystyle A\+_\mathnormal{v}c1_ \approx -\frac{R\+_c_\parallel R\+_L_}{2r\+_O_}$ \\
+    \mathitem{差動抵抗} & \+:c2c{$R\+_id_ = 2r\+_be_$} \\
+    \mathitem{同相抵抗} & \+:c2c{$\displaystyle \half r\+_be_ + \pare{1+\beta}r\+_O_$} \\
+    \mathitem{出力抵抗} & $R\+_o_ = 2R\+_c_$ & $R\+_o_ = R\+_c_$ \\
+    \mathitem{注意} & & \+:c1l{\mathheadcomment{$\mathrm{C_1}$出力と$\mathrm{C_2}$出力の場合には、}} \\
+    & & \+:c1l{\mathcomment{$v\+_o_$の符号が反対である}}
+\end{tabular}
+\end{cheatresume}
+\columnbreak
+
+\begin{multicols*}{2}
+\raggedcolumns\def\lefthandwidth{1.5cm}%%
+\newheader{Wildar電流源}
+\begin{cheatresumefuta}
+    \begin{center}
+        \begin{tikzpicture}[yscale=0.7]
+            \draw
+                (0,0) node (BB) {}
+                (BB) node[npn,anchor=G,xscale=-1,label={[label distance=.35cm]-75:{$\mathrm{T}_1$}}] (T1) {}
+                (BB) node[npn,anchor=G,label={[label distance=.35cm]255:{$\mathrm{T}_2$}}] (T2) {}
+                (0,0) to[short,*-]
+                (0,0|-T1.D) to[short,-*]
+                (T1.D) to[resistor,l_=$R$,-o]
+                ++ (0,2) node[right] {$V\+_CC_$}
+                (T2.S) to[resistor,l_=$R\+_e2_$]
+                ++ (0,-2) node(E1) {}
+                (T1.S) to[short]
+                ++ (0,-2) node(E2) {}
+                (E1) to[short,-*]
+                ($(E1)!0.5!(E2)$) node[rground] {}
+                (E2) to[short]
+                ($(E1)!0.5!(E2)$)
+                (0,0)
+                (T2.D) to[short,i<=$I\+_O_$]
+                ++ (0,1)
+                ;
+        \end{tikzpicture}
+    \end{center}
+    \tcblower
+    \begin{flalign*}
+        & \mathitem{交流抵抗} && \\
+        & r\+_o_ = r\+_ce_\pare{1+\frac{\beta R\+_e2_}{r\+_be2_ + R\+_e2_}} && \\
+        & \mathitem{出力電流} && \\
+        & I\+_C_ \approx \frac{V\+_T_}{R\+_e_}\ln \frac{I\+_R_}{I\+_C_} &&
+    \end{flalign*}
+\end{cheatresumefuta}
+\columnbreak
+\newheader{More}
+\end{multicols*}
+
+\end{multicols*} 
+
+\end{document}

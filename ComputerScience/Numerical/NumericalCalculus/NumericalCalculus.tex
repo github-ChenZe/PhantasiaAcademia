@@ -1,0 +1,257 @@
+\documentclass{ctexart}
+
+\usepackage[margintoc]{van-de-la-sehen}
+\DeclareMathOperator{\cond}{cond}
+\usepackage{arydshln}
+
+\begin{document}
+
+\section{数值微积分} % (fold)
+\label{sec:数值微积分}
+
+\subsection{数值微分和积分} % (fold)
+\label{sub:数值微分和积分}
+
+\subsubsection{数值微分} % (fold)
+\label{ssub:数值微分}
+
+\begin{theorem}[二点前向差分公式]
+    $\displaystyle f'\pare{x} = \frac{f\pare{x+h}-f\pare{x}}{h} - \frac{h}{2}f''\pare{c}$, 其中$c$在$x$和$x+h$之间.
+\end{theorem}
+\begin{theorem}[推广的中值定理]
+    设$f\in C\brac{a,b}$, $x_1,\cdots,x_n \in \brac{a,b}$, $a_1,\cdots,a_n > 0$, 则存在$c\in\brac{a,b}$满足
+    \[ \pare{a_1+\cdots+a_n}f\pare{c} = a_1f\pare{x_1} + \cdots + a_nf\pare{x_n}. \]
+\end{theorem}
+由Taylor公式出发,
+\begin{align*}
+    f\pare{x+h} &= f\pare{x} + hf'\pare{x} + \frac{h^2}{2}f''\pare{x} + \frac{h^3}{6}f'''\pare{c_1}, \\
+    f\pare{x-h} &= f\pare{x} - hf'\pare{x} + \frac{h^2}{2}f''\pare{x} - \frac{h^3}{6}f'''\pare{c_2},
+\end{align*}
+作差可得$f'\pare{x}$的表达式.
+\begin{theorem}[三点中心差分公式]
+    $\displaystyle f'\pare{x} = \frac{f\pare{x+h}-f\pare{x-h}}{2h} - \frac{h^2}{6}f'''\pare{c}$, 其中$x-h<c<x+h$.
+\end{theorem}
+\begin{theorem}[二阶导数的三点中心差分公式]
+    存在$c\in\brac{x-c,x+c}$满足
+    \[ f''\pare{x} = \frac{f\pare{x-h} - 2f\pare{x} + f\pare{x+h}}{h^2} - \frac{h^2}{12}f^{\pare{4}}\pare{c}. \] 
+\end{theorem}
+浮点舍入将导致舍入误差, 对于三点中心差分公式, 总误差上界为
+\[ E\pare{h} = \frac{h^2}{6}f'''\pare{c} + \frac{\epsilon\+_mach_}{h}, \]
+当$h=\pare{3\epsilon\+_mach_/M}^{1/3}$这一上界具有最小值.
+
+\paragraph{外推} % (fold)
+\label{par:外推}
+
+设$Q \approx F\pare{h} + Kh^n$, 例如$Q=f'\pare{x}$的步长$h$的差分近似, 有
+\[ Q - F\pare{\frac{h}{2}} \approx \rec{2^n}\pare{Q-F\pare{h}}. \]
+\begin{theorem}[$n$阶公式的外推]
+    若$F_n\pare{h}$具有$O\pare{h^n}$的误差, 则
+    \[ F_{n+1}\pare{h}\approx \frac{2^nF_n\pare{h/2} - F_n\pare{h}}{2^n-1} \]
+    具有$O\pare{h^{n+1}}$的误差.
+\end{theorem}
+\begin{ex}
+    从三点前向差分公式
+    \[ f'\pare{x} = \frac{f\pare{x+h}-f\pare{x-h}}{2h} - \frac{h^2}{6}f'''\pare{c} \]
+    出发, 应用一次外推, 则
+    \[ F_4\pare{x} = \frac{2^2 F_2\pare{h/2}}{2^2-1} = \frac{f\pare{x-h} - 8\pare{x-h/2} + 8f\pare{x+h/2} - f\pare{x+h}}{6h}, \]
+    且至多具有$O\pare{h^3}$的误差, 而实际上误差为$O\pare{h^4}$.
+\end{ex}
+
+% paragraph 外推 (end)
+
+% subsubsection 数值微分 (end)
+
+\subsubsection[Newton-Cotes公式]{数值积分的Newton-Cotes公式} % (fold)
+\label{ssub:数值积分的newton_cotes公式}
+
+给定$f\pare{x}$在$x_0$和$x_1$处的值$y_0$和$y_1$, 由Lagrange插值公式,
+\[ f\pare{x} = y_0 \frac{x-x_1}{x_0 - x_1} + y_1 \frac{x-x_0}{x_1-x_0} + \frac{\pare{x-x_0}\pare{x-x_1}}{2!}f''\pare{c_x} = P\pare{x} + E\pare{x}. \]
+主项的积分为
+\[ \int_{x_0}^{x_1} P\pare{x}\,\rd{x} = h\cdot \frac{y_0+y_1}{2}. \]
+误差项为
+\begin{align*}
+    \int_{x_0}^{x_1} E\pare{x}\,\rd{x} &= \rec{2!}\int_{x_0}^{x_1}\pare{x-x_0}\pare{x-x_1}f''\pare{c\pare{x}}\,\rd{x}\\
+    &= \frac{f''\pare{c}}{2}\int_{x_0}^{x_1} \pare{x-x_0}\pare{x-x_1}\,\rd{x} = -\frac{h^3}{12}f''\pare{c}.
+\end{align*}
+\begin{theorem}[梯形法则]
+    存在$c\in\brac{x_0,x_1}$满足
+    \[ \int_{x_0}^{x_1} f\pare{x}\,\rd{x} = \frac{h}{2}\pare{y_0+y_1} - \frac{h^3}{12}f''\pare{c}. \]
+\end{theorem}
+如果改用抛物插值, 并设$x_1 - x_0 = x_2 - x_1 = h$, 则
+\begin{align*}
+    f\pare{x} &= y_0 \frac{\pare{x-x_1}\pare{x-x_2}}{\pare{x_0-x_1}\pare{x_0-x_2}} + y_1 \frac{\pare{x-x_0}\pare{x-x_2}}{\pare{x_1-x_0}\pare{x_1-x_2}} \\
+    &\phantom{= } + y_2\frac{\pare{x-x_0}\pare{x-x_1}}{\pare{x_2-x_0}\pare{x_2-x_1}} + \frac{\pare{x-x_0}\pare{x-x_1}\pare{x-x_2}}{3!}f'''\pare{c_x} \\
+    &= P\pare{x} + E\pare{x}.
+\end{align*}
+主项积分为
+\[ \int_{x_0}^{x_2}f\pare{x}\,\rd{x} = \frac{h}{3}\pare{y_0 + 4y_1 + y_2}, \]
+误差项为
+\begin{align*}
+    \int_{x_0}^{x_2} E\pare{x}\,\rd{x} &= -\frac{h^5}{90}f^{\pare{4}}\pare{c}.
+\end{align*}
+%这可以通过
+%\begin{align*}
+%    \int_{-h}^h f\pare{x}\,\rd{x} &= \int_{-h}^h f\pare{0}\,\rd{x} + \half f''\pare{0}\int_{-h}^h x^2\,\rd{x} + \rec{24}\int_{-h}^h f^{\pare{4}}\pare{\xi\pare{x}}x^4\,\rd{x} \\
+%    &= 2hf\pare{0} + \frac{1}{3}h^3f''\pare{0} + \frac{h^5}{60}f^{\pare{4}}\pare{\xi_3},\\
+%    f''\pare{0} &= \frac{f\pare{-h} - 2f\pare{0} + f\pare{h}}{h^2} - \frac{h^2}{12}f^{\pare{4}}\pare{c}
+%\end{align*}
+%得到.
+\begin{remark}
+    The proof via Taylor's expansion was flawed. \href{https://math.stackexchange.com/questions/1768667/combining-error-terms-in-simpsons-rule/1770264#1770264}{cf.}
+\end{remark}
+\begin{theorem}[Simpson法则]
+    存在$c\in\brac{x_0,x_2}$满足
+    \[ \int_{x_0}^{x_1} f\pare{x}\,\rd{x} = \frac{h}{3}\pare{y_0 + 4y_1 + y_2} - \frac{h^5}{90}f^{\pare{4}}\pare{c}. \]
+\end{theorem}
+\begin{definition}[精度]
+    数值积分方法的精度谓使得积分公式对$k$阶或以下的多项式积分精确成立之最大整数$k$.
+\end{definition}
+\begin{remark}
+    Simpson公式具有三阶精度之几何解释为等距的抛物插值和三次样条具有相同积分值.
+\end{remark}
+\begin{ex}[Simpson 3/8公式]
+    3阶Newton-Cotes公式为
+    \[ \int_{x_0}^{x_3}f\pare{x}\,\rd{x} = \frac{3h}{8}\pare{y_0 + 3y_1 + 3y_2 + y_3}. \]
+\end{ex}
+
+% subsubsection 数值积分的newton_cotes公式 (end)
+
+\subsubsection[复合公式]{复合Newton-Cotes公式} % (fold)
+\label{ssub:复合newton_cotes公式}
+
+梯形法则的复合须以步长$h$划分区间, 分为$m$个区间.
+\begin{theorem}[复合梯形法则]
+    存在$c\in\brac{a,b}$满足
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{2}\pare{y_0 + y_m + 2\sum_{i=1}^{m-1}y_i} - \frac{\pare{b-a}h^2}{12}f''\pare{c}. \]
+\end{theorem}
+
+Simpson法则的复合同样以步长$h$划分区间, 分为$2m$个区间, 每隔$2h$应用一次Simpson法则后求和.
+\begin{theorem}[复合Simpson法则]
+    存在$c\in\brac{a,b}$满足
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{3}\brac{y_0 + y_{2m} + 4\sum_{i=1}^m y_{2i-1} + 2\sum_{i=1}^{m-1} y_{2i}} - \frac{\pare{b-a}h^4}{180}f^{\pare{4}}\pare{c}. \]
+\end{theorem}
+
+% subsubsection 复合newton_cotes公式 (end)
+
+\subsubsection[开区间上积分]{开Newton-Cotes方法} % (fold)
+\label{ssub:开newton_cotes方法}
+
+\begin{theorem}[中点法则]
+    设$\displaystyle h = x_1 - x_0$, $\displaystyle w = x_0 + \frac{h}{2}$, 则存在$c\in\brac{x_0,x_1}$满足
+    \[ \int_{x_0}^{x_1}f\pare{x}\,\rd{x} = hf\pare{w} + \frac{h^3}{24}f''\pare{c}. \]
+\end{theorem}
+将$\brac{a,b}$划分为$m$个相等的子区间, 可得复合的中点法则.
+\begin{theorem}[复合中点法则]
+    设$w_i$是各个子区间的中点, 则存在$c\in\brac{a,b}$满足
+    \[ \int_a^b f\pare{x}\,\rd{x} = h\sum_{i=1}^m f\pare{w_i} + \frac{\pare{b-a}h^2}{24}f''\pare{c}. \]
+\end{theorem}
+具有3阶精度的Newton-Cotes法则为
+\[ \int_{x_0}^{x_4} f\pare{x}\,\rd{x} = \frac{4h}{3}\brac{2f\pare{x_1} - f\pare{x_2} + 2f\pare{x_3}} + \frac{14h^5}{45}f^{\pare{4}}\pare{c}. \]
+
+% subsubsection 开newton_cotes方法 (end)
+
+\subsubsection{Romberg积分} % (fold)
+\label{ssub:romberg积分}
+
+对于梯形法则,
+\[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{2}\pare{y_0 + y_m + 2\sum_{i=1}^{m-1}y_i} + c_2h^2 + c_4h^4 + c_6h^6 + \cdots. \]
+注意到误差仅含$h$的偶次项, 故每次外推精度阶数增加$2$. 每次将步长减半, $h_1 = b-a$, $h_2 = \pare{b-a}/2$, $\cdots$, $h_j = \pare{b-a}/a^{j-1}$, 可得
+\begin{align*}
+    R_{11} &= \frac{h_1}{2}\brac{f\pare{a} + f\pare{b}}, \\
+    R_{21} &= \frac{h_2}{2}\brac{f\pare{a} + f\pare{b} + 2f\pare{\frac{a+b}{2}}} = \half R_{11} + h_2 f\pare{\frac{a+b}{2}}, \\
+    \vdots & \\
+    R_{j1} &= \half R_{j-1,1} + h_j \sum_{i=1}^{2^{j-2}} f\pare{a+\pare{2i-1}h}.
+\end{align*}
+如下的外推
+\[ \begin{matrix}
+    R_{11} & & & & \\
+    R_{21} & R_{22} \\
+    R_{31} & R_{32} & R_{33} \\
+    R_{41} & R_{42} & R_{43} & R_{44} \\
+    \vdots & & & & \ddots
+\end{matrix} \]
+需要递推式
+\begin{align*}
+    R_{22} &= \frac{2^2 R_{21} - R_{11}}{2^2-1}, \\
+    R_{32} &= \frac{2^2 R_{31} - R_{21}}{2^2-1}, \\
+    R_{42} &= \frac{2^2 R_{41} - R_{31}}{2^2-1}, \\
+\end{align*}
+以及
+\begin{align*}
+    R_{33} &= \frac{2^4 R_{21} - R_{11}}{2^4-1}, \\
+    R_{43} &= \frac{2^4 R_{31} - R_{21}}{2^4-1}, \\
+    R_{53} &= \frac{2^4 R_{41} - R_{31}}{2^4-1}. \\
+\end{align*}
+一般的递推式为
+\[ R_{jk} = \frac{4^{k-1}R_{j,k-1} - R_{j-1,k-1}}{4^{k-1}-1}. \]
+\begin{matlablst}
+/@$R_{11}$@/ = /@$\displaystyle \pare{b-a}\frac{f\pare{a}+f\pare{b}}{2}$@/
+for j = 2, 3, ...
+    /@$h_j$@/ = /@$\displaystyle \frac{b-a}{2^{j-1}}$@/
+    /@$R_{j1}$@/ = /@$\displaystyle \half R_{j-1,1} + h_j \sum_{i=1}^{2^{j-2}} f\pare{a+\pare{2i-1}h_j}$@/
+    for k = 2, ... j
+        /@$R_{jk}$@/ = /@$\displaystyle \frac{4^{k-1}R_{j,k-1} - R_{j-1,k-1}}{4^{k-1}-1}$@/
+    end
+end
+\end{matlablst}
+
+% subsubsection romberg积分 (end)
+
+\subsubsection{自适应积分} % (fold)
+\label{ssub:自适应积分}
+
+梯形法则满足
+\[ \int_a^b f\pare{x}\,\rd{x} = S_{\brac{a,b}} - h^3 \frac{f''\pare{c_0}}{12}, \]
+其中$h=b-a$. 设$c$为$a,b$之中点, 则有
+\[ \int_a^b f\pare{x}\,\rd{x} = S_{\brac{a,c}} + S_{\brac{c,b}} - \frac{h^3}{4}\frac{f''\pare{c_3}}{12}. \]
+故
+\[ S_{\brac{a,b}} - \pare{S_{\brac{a,c}} + S_{\brac{c,b}}} \approx \frac{3}{4}h^3 \frac{f''\pare{c_3}}{12}. \]
+从而通过确定此式的值是否小于$3\times \mathrm{TOL}$, 即可确定第二次积分的误差是否小于$\mathrm{TOL}$.
+\begin{matlablst}
+对给定容差TOL近似/@$\displaystyle \int_a^b f\pare{x}\,\rd{x}$@/
+/@$c$@/ = /@$\displaystyle \frac{a+b}{2}$@/
+/@$S_{\brac{a,b}}$@/ = /@$\displaystyle \pare{b-a}\frac{f\pare{a} + f\pare{b}}{2}$@/
+if /@$\displaystyle \abs{S_{\brac{a,b}} - S_{\brac{a,c}} - S_{\brac{c,b}}} < 3\times \mathrm{TOL} \times \frac{b-a}{b\+_orig_ - a\+_orig_}$@/
+    接受/@$S_{\brac{a,c}} - S_{\brac{c,b}}$@/作为区间/@$\brac{a,b}$@/上的近似
+else
+    对于区间/@$\brac{a,c}$@/和/@$\brac{c,b}$@/递归重复上面的步骤
+end
+\end{matlablst}
+如果使用Simpson法则, 则相应的公式替换为
+\[ \int_a^b f\pare{x}\,\rd{x} = S_{\brac{a,b}} - \frac{h^5}{90} f^{\pare{4}}\pare{c_0}, \]
+将区间二分可得
+\[ \int_a^b f\pare{x}\,\rd{x} = S_{\brac{a,c}} + S_{\brac{c,b}} - \frac{h^5}{16}\frac{f^{\pare{4}}\pare{c_3}}{90}, \]
+从而
+\[ S_{\brac{a,b}} - \pare{S_{\brac{a,c}} + S_{\brac{c,b}}} \approx \frac{15}{16}h^5 \frac{f^{\pare{4}}\pare{c_3}}{90}. \]
+相应的标准应修改为
+\[ \abs{S_{\brac{a,b}} - \pare{S_{\brac{a,c}} + S_{\brac{c,b}}}} < 15\times \mathrm{TOL}. \]
+
+% subsubsection 自适应积分 (end)
+
+\subsubsection{\texorpdfstring{Gauss积分}{Gau\ss 积分}} % (fold)
+\label{ssub:gauss_积分}
+
+\begin{theorem}[Gau\ss 积分]
+    设$\curb{x_i}$是$P_n\pare{x}$的根, 并设$f\pare{x}$过点$\curb{x_i}$的Lagrange插值多项式为
+    \[ Q\pare{x} = \sum_{i=1}^n L_i\pare{x}f\pare{x_i}, \]
+    则
+    \[ \int_{-1}^1 f\pare{x}\,\rd{x} \approx \sum_{i=1}^n c_i f\pare{x_i}, \]
+    其中
+    \[ c_i = \int_{-1}^1 L_i\pare{x}\,\rd{x},\quad i = 1,\cdots,n. \]
+    系数$c_i$须查表确定. 使用$n$阶的Legendre多项式时具有$2n-1$阶代数精度.
+\end{theorem}
+\begin{proof}
+    使用多项式长除, 有
+    \[ P\pare{x} = S\pare{x}P_n\pare{x} + R\pare{x}, \]
+    其中$S$和$R$都是小于$n$阶的多项式. 注意到Gau\ss 积分对$R\pare{x}$精确成立, 且$R\pare{x}$和$P\pare{x}$的Gau\ss 积分相等, 且
+    \[ \int_{-1}^1 P\pare{x}\,\rd{x} = \int_{-1}^1 S\pare{x}p_n\pare{x}\,\rd{x} + \int_{-1}^1 R\pare{x}\,\rd{x} = \int_{-1}^1 R\pare{x}\,\rd{x} \]
+    即$P\pare{x}$的精确积分和$R\pare{x}$的精确积分相等, 故Gau\ss 积分对$P\pare{x}$精确成立.
+\end{proof}
+
+% subsubsection gauss_积分 (end)
+
+% subsection 数值微分和积分 (end)
+
+% section 求解方程 (end)
+
+\end{document}

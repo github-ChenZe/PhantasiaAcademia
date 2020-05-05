@@ -1,0 +1,520 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{bbm}
+
+\begin{document}
+
+\section{Green函数} % (fold)
+\label{sec:green函数}
+
+\subsection{点源} % (fold)
+\label{sub:点源}
+
+\newpoint{}点电荷的静电势可以用来求得任意电荷产生的电势.
+\newpoint{}点电荷符合条件
+\[ \int_V \delta\pare{\+vx-\+va} = \begin{cases}
+    1, & \+va\in V, \\
+    0, & \+va\notin V.
+\end{cases} \]
+\newpoint{}一维情形有逼近
+\[ \rho\pare{x} = \rec{2\epsilon}\chi\pare{\abs{x-a}\le \epsilon}. \]
+
+% subsection 点源 (end)
+
+\subsection{和点源解的关系} % (fold)
+\label{sub:和点源解的关系}
+
+高维空间仍有
+\[ \int_V f\pare{\+vx} \delta\pare{\+vx-\+va} = \int_V f\pare{\+va}\delta\pare{\+vx-\+va}. \]
+以及
+\[ f\pare{\+vx} \delta\pare{\+vx - \+va} = f\pare{\+va}\delta\pare{\+vx-\+va}. \]
+Laplace方程的点源形式为
+\[ \laplacian_D G\pare{\+vx-\+va} = \delta\pare{\+vx-\+va}. \]
+
+% subsection 和点源解的关系 (end)
+
+\subsection{推广} % (fold)
+\label{sub:推广}
+
+可以设
+\[ G\propto \begin{cases}
+    \abs{\+vx-\+va}^{2-D}, & D\neq 2, \\
+    \ln \abs{\+vx - \+va}, & n=2.
+\end{cases} \]
+这里的$G$谓$\laplacian_D$的Green函数. 这一概念可以推广到任意的线性微分算子$L_{\+vx}$. 若已知
+\[ L_{\+vx}G\pare{\+vx,\+va} = \delta\pare{\+vx-\+va}, \]
+而PDE为
+\[ L_{\+vx}\phi = f\pare{\+vx}, \]
+则一般非齐次项的解为
+\[ \phi\pare{\+vx} = \int \rd{\+va}\, G\pare{\+vx,\+va}f\pare{\+va}, \]
+因为
+\[ f\pare{\+vx} = \int \rd{\+va}\, \delta\pare{\+vx,\+va}f\pare{\+vx}. \]
+高维的情形同样有
+\[ \delta\pare{\+vx,\+va} = \delta\pare{\+vx - \+va, 0} = \delta\pare{\+vx-\+va}. \]
+另外可以看出$\delta\pare{\+vx} = 0$, 如果$\+vx\neq 0$.
+
+% subsection 推广 (end)
+
+\subsection{\texorpdfstring{$\delta$}{delta}函数作为基} % (fold)
+\label{sub:texorpdfstring_delta函数作为基}
+
+将任意函数$\+vf$视为无穷维向量, 有
+\[ \+vf\pare{\+vx} = \int \rd{\+vx}\, \delta\pare{\+vx-\+va}f\pare{\+va}. \]
+故标准基为$\delta$函数.
+
+% subsection texorpdfstring_delta函数作为基 (end)
+
+\subsection{一般SL问题} % (fold)
+\label{sub:一般sl问题}
+
+\newpoint{}假设内积是
+\[ \braket{f}{g} = \int \rho^{x}\pare{x}\,\rd{x}\, \conj{f}\pare{x}g\pare{x}. \]
+\newpoint{}设SL问题提供一组正交基
+\[ \ket{e_n} = e_n\pare{x},\quad \braket{e_m}{e_n} = \abs{\ket{e_n}}^2 \delta_{m,n}. \]
+\newpoint{}空间中的任意函数可以展开成
+\[ \ket{\psi} = \sum_n \psi_e^n \ket{e_n}. \]
+
+% subsection 一般sl问题 (end)
+
+\subsection{线性代数和泛函观点} % (fold)
+\label{sub:线性代数和泛函观点}
+
+\newpoint{}引入Dirac符号,
+\begin{align*}
+    & \abs{\ket{e_n}}^2 = \braket{e_n}{\psi} = \int \rho^x\pare{a}\,\rd{a}\, \conj{e}^n\pare{a}\psi\pare{a}, \\
+    & \ket{\psi} = \sum_n \frac{\braket{e_n}{\psi}}{\abs{\ket{e_n}}^2} \ket{e_n} = \sum_n \frac{\ket{e_n}\bra{e_n}}{\braket{e_n}{e_n}}\ket{\psi}.
+\end{align*}
+\newpoint{}用函数的形式可见$\delta$函数,
+\begin{align*}
+    \psi\pare{x} &= \sum_n \frac{e_n\pare{x}}{\abs{\ket{e_n}}^2} \int \rho^x \pare{a}\,\rd{a}\, \conj{e}_n\pare{a}\psi\pare{a} \\
+    &= \int \rd{a}\,\psi\pare{a}\rho^x\pare{a} \sum_n \frac{\conj{e}_n\pare{a}e_n\pare{x}}{\abs{\ket{e_n}}^2}.
+\end{align*}
+
+% subsection 线性代数和泛函观点 (end)
+
+\subsection{从正交基到\texorpdfstring{$\delta$}{delta}函数} % (fold)
+\label{sub:从正交基到函数}
+
+\newpoint{}对于所有$\psi$都成立有
+\[ \rho^x\pare{x} \sum_n \frac{\conj{e}_n\pare{a}e_n\pare{x}}{\abs{\ket{e_n}}^2} = \delta\pare{x-a}. \]
+\begin{ex}
+    在$L^2\pare{\brac{0,\pi}}$上,
+    \begin{align*}
+        \delta\pare{x-a} &= \frac{2}{\pi}\sum_{n=1}^\infty \sin \pare{na}\sin \pare{nx} = \frac{2}{\pi} \sum_{n=0}^\infty\cos\pare{na}\cos\pare{nx} \\
+        &= \frac{2}{\pi}\sum_{n=1}^\infty\sin\brac{\pare{n+\half} a}\sin\brac{\pare{n+\half}x}.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    在$L^2\pare{S^1\sim \blr{0,2\pi}}$上,
+    \begin{align*}
+        \delta\pare{x-a} &= \rec{2\pi}\sum_{n=-\infty}^\infty e^{in\pare{a-x}} \\
+        &= \rec{\pi}\pare{1+\sum_{n=1}^\infty \cos\brac{n\pare{x-a}}}.
+    \end{align*}
+\end{ex}
+\begin{ex}
+    在$L_r^2\pare{\brac{0,1}}$上,
+    \[ \delta\pare{r-r'} = r\sum_{n=1}^\infty \frac{J_\nu\pare{\omega_n r'}J_\nu\pare{\omega_n r}}{\abs{\ket{J_{\nu,n}}}^2}. \]
+\end{ex}
+\begin{ex}
+    在$L^2\pare{\brac{-1,1}}$上,
+    \[ \delta\pare{x-a} = \sum_{n=m}^\infty \frac{\pare{2n+1}\pare{n-m}!}{2\pare{n+m}!}P_n^m\pare{a}P_n^m\pare{x}. \]
+\end{ex}
+\begin{ex}
+    在$L^2\pare{\brac{0,1}}$上,
+    \[ \delta\pare{x-a} = \sum_{n=0}^\infty \pare{4n+3} P_{2n+1}\pare{a}P_{2n+1}\pare{x}. \]
+\end{ex}
+\begin{ex}
+    在$L^2\pare{S^2}$上,
+    \begin{align*}
+        \delta\pare{\theta-\theta'}\delta\pare{\phi-\phi'} &= \sin\pare{\theta}\sum_{l=0}^\infty \sum_{m=-l}^{+l}Y_{l,m}\pare{\theta,\phi}Y_{l,m}^* \pare{\theta'\phi'} \\
+        &= \frac{\sin \theta}{4\pi} \sum_{l=0}^\infty \pare{2l+1}P_l\pare{\cos\gamma}.
+    \end{align*}
+\end{ex}
+
+% subsection 从正交基到函数 (end)
+
+\subsection{从积分变换开始} % (fold)
+\label{sub:从积分变换开始}
+
+\newpoint{}将一个$L^2_{\rho^x}$空间中的函数用$\psi_x\pare{x}$表示, 考虑变换
+\[ \psi_p\pare{p} = \int \rd{x}\, \sigma_{p,x}\pare{p,x} \psi_x\pare{x}. \]
+利用逆变换恢复之,
+\[ \psi_x\pare{x} = \int \rd{p}\, \sigma_{x,p}\pare{x,p} \psi_p\pare{p}. \]
+\newpoint{}正反变换可以表示为
+\begin{align*}
+    & \psi_x\pare{x} = \int \rd{p}\,\sigma_{x,p}\pare{x,p} \int\rd{a}\,\sigma_{p,x}\pare{p,a}\psi_x\pare{a}, \\
+    & \Rightarrow \int \rd{p}\,\sigma_{x,p}\pare{x,p} \sigma_{p,x}\pare{p,a} = \delta\pare{x-a}. \\
+    & \psi_p\pare{p} = \int \rd{x}\,\sigma_{p,x}\pare{p,x} \int\rd{q}\,\sigma_{x,p}\pare{x,p}\psi_p\pare{q}, \\
+    & \Rightarrow \int \rd{x}\,\sigma_{p,x}\pare{p,x} \sigma_{x,p}\pare{x,q} = \delta\pare{p-q}.
+\end{align*}
+\newpoint{}课本中出现过的变换如下.
+\begin{center}
+    \begin{tabular}{ccc}
+        变换 & $\sigma_{x,p}\pare{x,p}$ & $\sigma_{p,x}\pare{p,x}$ \\
+        \hline
+        Fourier & $e^{ipx}/2\pi$ & $e^{-ipx}$ \\
+        正弦 & $\displaystyle \frac{2}{\pi} \sin p x$ & $\sin px$ \\[.5em]
+        正弦 & $\displaystyle \frac{2}{\pi} \cos p x$ & $\cos px$
+    \end{tabular}
+\end{center}
+\newpoint{}考虑一般的Hilbert空间$H$. 设其有基$\curb{\ket{e_n}}$, 将任意向量$\psi$展开,
+\[ \psi = \sum_n \psi_e^n e_n. \]
+\newpoint{}$n$既可以有离散的部分也可以有连续的部分.
+\newpoint{}如果$\curl{e_n}$是正交基,
+\[ \braket{e_m}{e_n} = \abs{\ket{e_n}}^2 \delta_{m,n} \Rightarrow \braket{e_m}{\psi} = \abs{\ket{e_n}}^2 \psi_e^n. \]
+\newpoint{}代入$\psi$的展开立刻有
+\begin{align*}
+    \psi &= \sum_{n} \frac{\ket{e_n}\braket{e_n}{\psi}}{\braket{e_n}{e_n}} \\
+    &\Rightarrow \resumath{\sum_n \frac{\ket{e_n}\bra{e_n}}{\braket{e_n}{e_n}} = \mathbbm{1}.}
+\end{align*}
+
+% subsection 从积分变换开始 (end)
+
+\subsection{正交基的来源} % (fold)
+\label{sub:正交基的来源}
+
+\newpoint{}可观测量构成Hermitian算子, 其固有向量构成正交基.
+\begin{ex}
+    动量算子$\hat p$的固有向量是$e^{ipx}$, 位置算子的固有向量是$\delta\pare{x-a}$.
+    \begin{align*}
+        & \hat p = -i\partial_x,\quad \hat p e^{ipx} = pe^{ipx}, \\
+        & \hat x = x,\quad \hat x\delta\pare{x-a} = a\delta\pare{x-a}.
+    \end{align*}
+\end{ex}
+
+% subsection 正交基的来源 (end)
+
+\subsection{用任意正交基表示内积} % (fold)
+\label{sub:用任意正交基表示内积}
+
+\newpoint{}$H$的内积可以展开,
+\begin{align*}
+    \braket{\phi}{\psi} &= \bra{\phi}\mathbbm{1}\ket{\psi} = \sum_n \frac{\braket{\phi}{e_n}\braket{e_n}{\psi}}{\braket{e_n}{e_n}} \\
+    &= \sum_n \conj{\phi}_e^n \psi_e^n \abs{\ket{e_n}}^2 = \sum_n \braket{\phi_e^n e_n}{\psi_e^n e_n}.
+\end{align*}
+\newpoint{}用$\ket{\hat x=x}$表示$\+ux$的固有向量, 则$\curb{\ket{\hat x=x}}$构成一组固有正交基,
+\[ \braket{\hat x=x_1}{\hat x=x_2} = \rho^x\pare{x}\delta\pare{x_1-x_2}. \]
+\newpoint{}$\braket{\hat x = x}{\hat x = x} = \infty$. 离散时$\delta_{m,n}$项的系数为$\abs{\ket{e_n}}^2$, 这里定义$\delta\pare{x_1-x_2}$的系数为$\rho^x\pare{x}$.
+
+% subsection 用任意正交基表示内积 (end)
+
+\subsection{量子力学的图像} % (fold)
+\label{sub:量子力学的图像}
+
+\newpoint{}$\ket{\psi}$对这组基的展开为
+\[ \int \rd{x}\,\psi_x\pare{x}\ket{\hat x=x}. \]
+\newpoint{}用波函数$\psi_x\pare{x}$代表态$\ket{\psi}$则谓Schr\"odinger绘景.
+\newpoint{}用$\psi_p\pare{p}$代表$\ket{\psi}$谓Heisenberg绘景.
+\newpoint{}故$\delta\pare{x-a}$是$\ket{\+ux=a}$的图像.
+\newpoint{}内积可展开为积分形式
+\[ \braket{\psi}{\phi} = \int \rd{x}\, \rho^x\pare{x}\conj{\psi}_x\pare{x}\phi_x\pare{x}. \]
+\newpoint{}因此$\rho^x\pare{x}$就是以$x$为变量$L^2$空间的密度函数.
+\newpoint{}有
+\[ \braket{\hat x = x_1}{\hat x = x_2} = \rho^x\pare{x}\delta\pare{x_1-x_2}. \]
+
+% subsection 量子力学的图像 (end)
+
+\subsection{基变换} % (fold)
+\label{sub:基变换}
+
+\newpoint{}从$\curb{\ket{f_n}}$变换为$\curb{\ket{e_n}} = \displaystyle \sum_m \sigma_n^m \ket{f_m}$, 有
+\[ \ket{\phi} = \sum_n \phi_e^n \ket{e_n} = \sum_{m,n} \phi_e^n \sigma_n^m \ket{f_m} = \sum_{m}\phi_f^m \ket{f_m}. \]
+其中
+\[ \phi_f^m = \sum_n \phi_e^n \sigma_n^m \]
+是展开系数变换.
+\newpoint{}反变换用到$\sigma_n^m$的逆,
+\[ \ket{f_m} = \sum_n \pare{\sigma^{-1}}_m^n \ket{e_n}. \]
+\newpoint{}对于连续统基,
+\begin{align*}
+    & \ket{\hat x=x} = \int \rd{p}\,\ket{\hat p = p}\sigma_{p,x}\pare{p,x}, \\
+    & \ket{\psi} = \int \rd{p}\, \psi_p\pare{p}\ket{\hat p = p} = \int \rd{x}\,\psi_x\pare{x}\ket{\hat x = x} \\
+    &= \int \rd{x}\, \psi_x\pare{x} \int \rd{p}\, \sigma_{p,x}\pare{p,x}\ket{\hat p = p} \\
+    & \Rightarrow \psi_p\pare{p} = \int \rd{x}\, \sigma_{p,x}\pare{p,x}\psi_x\pare{x}.
+\end{align*}
+
+% subsection 基变换 (end)
+
+\subsection{正交基} % (fold)
+\label{sub:正交基}
+
+\newpoint{}正交基之间的正反变换不难计算,
+\begin{align*}
+    & \braket{f_m}{e_n} = \sigma_n^m \abs{\ket{f_m}}^2, \\
+    & \braket{e_n}{f_m} = \pare{\sigma^{-1}}_m^n\abs{\ket{e_n}}^2, \\
+    & \pare{\sigma^{-1}}_m^n = \frac{\braket{e_n}{f_m}}{\abs{\ket{e_n}}^2} = \sigma^{*m}_n \frac{\abs{\ket{f_m}}^2}{\abs{\ket{e_n}}^2}. \\
+    & \braket{\hat p = p}{\hat x = x} = \rho^p\pare{p}\sigma_{p,x}\pare{p,x}, \\
+    & \braket{\hat x = x}{\hat p = p} = \rho^x\pare{x}\sigma_{x,p}\pare{x,p}, \\
+    & \Rightarrow \rho^x\pare{x} \sigma_{x,p}\pare{x,p} = \rho^p\pare{p}\sigma^*_{p,x}\pare{p,x}. 
+\end{align*}
+\newpoint{}利用自反性有
+\begin{align*}
+    & \int \rd{p}\, \rho^p\pare{p} \sigma^*_{p,x}\pare{p,x}\sigma_{p,x}\pare{p,y} = \rho^x\pare{x}\delta\pare{x-y}, \\
+    & \int \frac{\rd{x}}{\rho^x\pare{x}}\,\sigma_{p,x}\pare{q,x}\sigma^*_{p,x}\pare{p,x} = \frac{\delta\pare{q-p}}{\rho^p\pare{p}}.
+\end{align*}
+
+% subsection 正交基 (end)
+
+\subsection{Dirac记号} % (fold)
+\label{sub:dirac记号}
+
+\newpoint{}考虑一图像$\hat x$, 则线性算子$\hat G$的作用在该图像中为
+\[ \pare{G\psi}_{\hat x}\pare{x} = \int \rd{y}\,G\pare{x,y}\psi_{\hat x}\pare{y}. \]
+\newpoint{}$G\pare{x,y}$谓$G$的核.
+\newpoint{}算子$\displaystyle \sum_k \ket{\alpha^k}\bra{\beta^k}$对向量$\psi$的作用为
+\begin{align*}
+    \ket{\psi} &\mapsto \sum_k \ket{\alpha^k}\braket{\beta^k}{\psi}, \\
+    \psi_{\hat x}\pare{x} &\mapsto \sum_k \alpha_{\hat x}^k\pare{x} \int \rho^{x}\pare{y}\,\rd{y}\, \conj{\beta}^k\pare{y}\psi\pare{y},
+\end{align*}
+对应的核为
+\[ \rho^x\pare{y}\sum_k \alpha_{\hat x}^k\pare{x} \conj{\beta}^k\pare{y}. \]
+\newpoint{}连续统下恒等运算可分解为
+\[ \mathbbm{1} = \int \rd{x}\, \frac{\ket{\hat x = x}\bra{\hat x = x}}{\rho^{x}\pare{x}}. \]
+\newpoint{}可以从矩阵成分得到$G$的核,
+\begin{align*}
+    \pare{G\psi}_{\hat x}\pare{x} &= \frac{\braket{\hat x=x}{G\psi}}{\rho^{x}\pare{x}} \\
+    &= \int \rd{y}\, \frac{\bra{\hat x=x}G\ket{\hat x=y}\braket{\hat x=y}{\psi}}{\rho^x\pare{x}\rho^y\pare{y}} \\
+    &= \int \rd{y}\, \bra{\hat x=x}G\ket{\hat x=y} \frac{\psi_{\hat x}\pare{x}}{\rho^{x}\pare{x}}. \\
+    \Rightarrow G\pare{x,y} &= \frac{\bra{\hat x=x}G\ket{\hat x=y}}{\rho^{x}\pare{x}}.
+\end{align*}
+特别地, $\mathbbm{1}$的核就是$\delta\pare{x-y}$.
+
+% subsection dirac记号 (end)
+
+\subsection{线性泛函} % (fold)
+\label{sub:线性泛函}
+
+\newpoint{}广义函数为良好的普通函数的线性泛函
+\[ \func{f}{\phi}{\braket{f}{\phi}}. \]
+\newpoint{}普通函数通过内积自动成为广义函数.
+\newpoint{}但广义函数不必是普通函数, 可以具有奇异性.
+
+% subsection 线性泛函 (end)
+
+\subsection{泛函观点} % (fold)
+\label{sub:泛函观点}
+
+\newpoint{}广义函数是作用在普通函数上的连续线性泛函.
+\newpoint{}广义函数总涉及两个函数空间, 基本函数空间极其连续对偶广义函数空间.
+\newpoint{}物理上广义函数是荷密度分布的抽象化, 因此也叫分布.
+
+% subsection 泛函观点 (end)
+
+\subsection{常用的基本和广义函数空间} % (fold)
+\label{sub:常用的基本和广义函数空间}
+
+\newpoint{}不同基本函数空间的广义函数空间也不同.
+\newpoint{}普通函数性质和空间拓扑决定广义函数空间.
+\newpoint{}经常要求基本函数光滑并且由紧支撑.
+
+% subsection 常用的基本和广义函数空间 (end)
+
+\subsection{弱收敛} % (fold)
+\label{sub:弱收敛}
+
+\newpoint{}作为线性泛函的一个序列$\curb{f_n}$的极限谓弱极限,
+\[ \braket{\lim_{n\rightarrow \infty} f_n}{\phi} = \lim_{n\rightarrow \infty}\braket{f_n}{\phi}. \]
+\newpoint{}但这不一定是一个广义函数, 因为极限不一定存在, 存在也不一定连续.
+\newpoint{}如果存在且连续, 就通过线性泛函作用定义广义函数的收敛与极限. 若$\exists f$满足
+\[ \braket{f}{\phi} = \lim_{n\rightarrow \infty}\braket{f_n}{\phi},\quad \forall \phi, \]
+则谓$\braket{f_n}$弱收敛于$f$.
+\newpoint{}一个普通函数的序列可能在普通空间里没有极限函数, 但在广义函数空间里有奇异广义函数的极限.
+\newpoint{}$\delta$函数作为普通函数的弱极限即为一例.
+\begin{ex}
+    在弱收敛意义下,
+    \begin{align*}
+        \delta\pare{x} &= \lim_{t\rightarrow 0} \frac{e^{-x^2/2t^2}}{t\sqrt{2\pi}} \\
+        &= \lim_{t\rightarrow 0} \frac{t}{\pi\pare{x^2 + t^2}} \\
+        &= \lim_{N\rightarrow \infty} \frac{\sin Nx}{\pi x}.
+    \end{align*}
+\end{ex}
+
+% subsection 弱收敛 (end)
+
+\subsection{广义函数的微积分} % (fold)
+\label{sub:广义函数的微积分}
+
+\newpoint{}用分布积分公式的形式成立定义广义函数的导数.
+\newpoint{}$\displaystyle \resumath{ \braket{f^{\pare{n}}}{\phi} = \int f^{\pare{n}}\phi = \pare{-1}^n \braket{f}{\phi^{\pare{n}}}. }$
+\newpoint{}这要求边界项可以忽略. 所以$\phi$需要满足一定的速降或紧支撑条件.
+\newpoint{}反导数$\displaystyle \int_{-\infty}^x \rd{y}\,\delta\pare{y} = H\pare{x}$.
+
+% subsection 广义函数的微积分 (end)
+
+\subsection{卷积} % (fold)
+\label{sub:卷积}
+
+\newpoint{}对于一般函数, 有
+\[ f*g\pare{x} = \braket{f\pare{x-y}}{g\pare{y}}_y = \braket{f\pare{y}}{g\pare{y}}_y. \]
+对于广义函数, 有
+\begin{align*}
+    & \braket{f*g\pare{x}}{\phi\pare{x}}_x = \iint \rd{x}\,\rd{y}\, f\pare{y}g\pare{x-y}\phi\pare{x} \\
+    &= \bra{f\pare{y}}\ket{\braket{g\pare{x-y}}{\phi\pare{x}}_x}_y = \braket{f\pare{x-y}}{\braket{g\pare{y}}{\phi\pare{x}}_x}_y \\
+    &= \iint \rd{y}\,\rd{x} \,f\pare{y}g\pare{x}\phi\pare{x+y} = \braket{f\pare{y}}{\braket{g\pare{x}}{\phi\pare{x+y}}_x}_y \\
+    &= \resumath{\braket{g\pare{x}}{\braket{f\pare{y}}{\phi\pare{x+y}}_y}_x.}
+\end{align*}
+\newpoint{}$\displaystyle \resumath{\delta\pare{x-a}*g\pare{x} = g\pare{x-a}.}$
+\newpoint{}$\displaystyle \resumath{\begin{cases}
+    f^{\pare{n}}*g = \pare{f*g}^{\pare{n}} = f*g^{\pare{n}}, \\
+    \delta^{\pare{n}}*f = \pare{\delta * f}^{\pare{n}} = f^{\pare{n}}.
+\end{cases}}$
+
+% subsection 卷积 (end)
+
+\subsection{微分算子和卷积} % (fold)
+\label{sub:微分算子和卷积}
+
+\newpoint{}$\displaystyle \resumath{L\pare{f*g} = \pare{Lf}*g = f*\pare{Lg}.}$
+\newpoint{}可以定义正常函数和广义函数的乘积$\braket{f\psi}{\phi} = \braket{f}{\psi\phi}$, 但无法一般地定义两个广义函数的乘积.
+
+% subsection 微分算子和卷积 (end)
+
+\subsection{积分变换} % (fold)
+\label{sub:积分变换}
+
+\newpoint{}定义$\displaystyle \pare{f,\phi} = \int f\phi$, 对于普通广义函数,
+\begin{align*}
+    K\brac{f}\pare{x} &= \int \rd{y}\, K\pare{x,y} f\pare{y}, \\
+    \pare{K\brac{f},\phi} &= \int \rd{x}\int\rd{y}\, K\pare{x,y}f\pare{y}\phi\pare{x} \\
+    &= \int \rd{y}\int \rd{x}\, f\pare{y} K\pare{x,y}\phi\pare{x} \\
+    &= \pare{f,K^T\brac{\phi}}.
+\end{align*}
+\newpoint{}$K^T$表示$K$的转置, $K^T\pare{x,y} = K\pare{y,x}$.
+\newpoint{}对于奇艺的广义函数, 这是积分变换的定义.
+\newpoint{}对于Fourier变换,
+\begin{align*}
+    & F\pare{p,x} = e^{-ipx} = F\pare{x,p} = F^T\pare{x,p}, \\
+    & F = F^T \Rightarrow \begin{cases}
+        \pare{F\brac{f},\phi} = \pare{f,F\brac{\phi}}, \\
+        \pare{F^{-1}\brac{f},\phi} = \pare{f,F^{-1}\brac{\phi}}.
+    \end{cases}
+\end{align*}
+\newpoint{}$\displaystyle F\brac{\delta\pare{\+vx-\+va}} = \int \rd{x}\, e^{-i\+vp\cdot \+vx} \delta\pare{\+vx-\+va} = e^{-i\+vp\cdot \+va}$.
+\newpoint{}由之前的积分变换公式,
+\begin{align*}
+    & \int \frac{\rd{\+vx}}{\pare{2\pi}^D} e^{i\pare{\+vq-\+vp}\cdot \+vx} = \delta\pare{\+vq - \+vp} \\
+    & \Rightarrow F\brac{e^{i\+vq\cdot \+vx}} = \pare{2\pi}^D \delta\pare{\+vx-\+vp}.
+\end{align*}
+\newpoint{}取$D=1$,
+\begin{equation*}
+    \resumath{\begin{cases}
+        F\brac{\cos px} = \pi\brac{\delta\pare{q+p} + \delta\pare{q-p}}, \\
+        F\brac{\sin px} = i\pi\brac{\delta\pare{q+p} - \delta\pare{q-p}}.
+    \end{cases}}
+\end{equation*}
+
+% subsection 积分变换 (end)
+
+\subsection{解PDE的线性代数观点} % (fold)
+\label{sub:解pde的线性代数观点}
+
+\newpoint{}解线性方程时,
+\[ Ax = y,\quad A^{-1}A = \mathbbm{1} \Rightarrow x = A^{-1}y. \]
+\newpoint{}解微分方程时,
+\[ L_{\+vx}u\pare{\+vx} = f\pare{\+vx},\quad L_{\+vx}G\pare{\+vx,\+vy} = \delta\pare{\+vx-\+vy}. \]
+\newpoint{}用Green函数,
+\begin{align*}
+    f\pare{\+vx} &= \int \rd{\+vy}\, \delta\pare{\+vx,\+vy} f\pare{\+vy} \\
+    &= \int \rd{\+vy}\, L_{\+vx}G\pare{\+vx,\+vy}f\pare{\+vy} \\
+    &= L_{\+vx}\int \rd{\+vy}\,G\pare{\+vx,\+vy}f\pare{\+vy}.
+\end{align*}
+故解为
+\[ u = \int \rd{\+vy}\, G\pare{\+vx,\+vy}f\pare{\+vy}. \]
+\newpoint{}可写为
+\[ LG = \mathbbm{1},\quad Gf = u,\quad Lu = L\pare{Gf} = \pare{LG}f = \mathbbm{1}f = f. \]
+\newpoint{}通过叠加原理可以从点源解获得任意源的解.
+\newpoint{}一般情况的点源解必须在给定的边界条件下求.
+
+% subsection 解pde的线性代数观点 (end)
+
+\subsection{物理直观解释} % (fold)
+\label{sub:物理直观解释}
+
+\newpoint{}Green函数是点源的解, $LG = \mathbbm{1}$.
+\newpoint{}任意源是点源的线性叠加, $\mathbbm{1} f = f$.
+\newpoint{}其解是对应的Green函数的线性叠加, $L\pare{Gf} = \pare{LG}f = \mathbbm{1}f = f$, $\Rightarrow u = Gf$.
+
+% subsection 物理直观解释 (end)
+
+\subsection{基本解与Green函数} % (fold)
+\label{sub:基本解与green函数}
+
+\newpoint{}Green函数由$L$和边界条件共同决定.
+\newpoint{}全空间里的Green函数称为对应算子$L$的基本解.
+\newpoint{}静电学里$L$是Laplace算子, 基本解是真空中点电荷的电势, Green函数是在给定边界条件下点电荷产生的电势.
+\newpoint{}带边界的Green函数应当视为由电源和感应电荷的场叠加而成.
+\newpoint{}当$L$是常系数微分算子, 基本解具有平移对称性,
+\begin{align*}
+    & L_{\+vx}u\pare{\+vx} = f\pare{\+vx}, \\
+    & \Rightarrow f\pare{\+vx - \+va} = L_{\+vx-\+va}u\pare{\+vx-\+va} = L_{\+vx}u\pare{\+vx-\+va}, \\
+    & L_{\+vx}G\pare{\+vx} = \delta\pare{\+vx} \Rightarrow L_{\+vx}G\pare{\+vx-\+va} = \delta\pare{\+vx-\+va} \Rightarrow G\pare{\+vx,\+vy} = G\pare{\+vx-\+vy}, \\
+    & \Rightarrow u = \int \rd{\+vy}\, G\pare{\+vx-\+vy}f\pare{\+vy} = G*f, \\
+    & \Rightarrow L\pare{G*f} = \pare{LG}*f = \delta*f = f.
+\end{align*}
+
+\begin{sample}
+    \begin{ex}
+        最简单的微分算子$d_x$的基本解$H$满足$U'\pare{x} = \delta\pare{x}$, 故
+        \[ U\pare{x} = H\pare{x} + \const, \]
+        而
+        \begin{align*}
+            & f\pare{x} = d_x \int_{-\infty}^x \rd{y}\,f\pare{y} \\
+            &= d_x \brac{\int \rd{y}\, \pare{H\pare{x-y} + \const}f\pare{y}}.
+        \end{align*}
+        再考虑
+        \[ y' + ay = e^{-ax}\pare{e^{ax}y}', \]
+        有$e^{-ax}\pare{H\pare{x} + \const}$是算子$d_x + a$的基本解. 从而$y' + ay = f\pare{x}$的通解为
+        \[ y\pare{x} = \int \rd{z}\,e^{-az}\pare{H\pare{z} + \const}f\pare{x-z}. \]
+    \end{ex}
+\end{sample}
+
+% subsection 基本解与green函数 (end)
+
+\subsection{Green函数的一般特征函数展开} % (fold)
+\label{sub:green函数的一般特征函数展开}
+
+\newpoint{}设有一可对角化算子
+\[ L = \sum_i \lambda_i \frac{\ket{e_i}\bra{e_i}}{\abs{e_i}^2} = \int \rd{p}\, \lambda\pare{p} \frac{\ket{\sigma_p}\bra{\sigma_p}}{\rho^\sigma\pare{p}}. \]
+满足本征值方程
+\[ L\ket{e_i} = \lambda_i \ket{e_i},\quad L\ket{E_p} = \lambda\pare{p}\ket{E_p}. \]
+\newpoint{}可对角化的算子有逆
+\[ L^{-1} = \sum_i \frac{\ket{e_i}\bra{e_i}}{\lambda_i \abs{e_i}^2} = \int \rd{p}\,\frac{\ket{\sigma_p}\bra{\sigma_p}}{\lambda\pare{p}\rho^\sigma\pare{p}}. \]
+从而
+\begin{align*}
+    G\pare{a,b} &= \bra{\delta\pare{x-a}}L^{-1}\ket{\delta\pare{x-b}} \\
+    &= \sum_i \frac{e_i\pare{a}e_i\pare{b}}{\lambda_i\abs{e_i}^2} \\
+    &= \int \rd{p}\, \frac{\sigma_p\pare{a}\sigma_p\pare{b}}{\lambda\pare{p}\rho^\sigma\pare{p}}.
+\end{align*}
+这是用$L$的固有向量做的展开的积分变换.
+\begin{sample}
+    \begin{ex}
+        将Laplace算子推广, 由于$\laplacian_D$的固有函数为$e^{i\+vp\cdot \+vx}$, 用Fourier变换解
+        \[ \laplacian_D G\pare{\+vx,\+va} = \delta\pare{\+vx - \+va}. \]
+        由平移对称性, $G\pare{\+vx,\+va} = G\pare{\+vx-\+va}$. 只需要解
+        \[ \laplacian_D G\pare{\+vx} = \delta\pare{\+vx}. \]
+        有
+        \[ F\brac{\laplacian_D} = -p^2 F\brac{G} \Rightarrow F\brac{\delta} = 1 \Rightarrow F\brac{G} = -p^{-2}. \]
+        从而
+        \[ G\pare{\+vx} = \int \rd{\+vp}\, \frac{-\abs{\+vp}^2}{\pare{2\pi}^D}e^{i\+vp\cdot \+vx}. \]
+        用$D$维球坐标积分, 被积式仅依赖于$\theta$和$p = \abs{\+vp}$. 假设$D$维单位球的表面积为$A_D$, 积分微元为$A_{D-2} \,\rd{p}\, p^{D-1}\,\rd{\theta}\,\sin^{D-2}\theta$.
+        \begin{align*}
+            G\pare{\+vx} &= A_{D-2}\int_0^\infty \rd{p}\, \frac{p^{D-1}}{-p^2} \int_0^\pi\, e^{ip\abs{x}\cos\theta}\pare{\sin\theta}^{D-2} \\
+            &= \frac{A_{D-2}C_D}{-\abs{x}^{D-2}},\quad A_{D-1} = \frac{2\pi^{D/2}}{\Gamma\pare{D/2}}. \\
+            C_D &= \int_0^\infty \rd{p}\, p^{D-3}\int_0^\pi \rd{\theta}\, e^{ip\cos\theta}\sin^{D-2}\theta.
+        \end{align*}
+        可用物理方法得到最终表达式, 记$\+vE = \grad G$, 则
+        \[ \grad \rec{\abs{\+vx}^n} = -\frac{n\+ux}{\abs{\+vx}^{n+1}}. \]
+        由Green公式,
+        \begin{align*}
+            & \oint_{\partial V} \rd{\+vS}\cdot \+vE = \int_V \div \+vE = 1, \\
+            & \oint_{\partial V} \rd{\+vS} \cdot \grad \rec{\abs{\+vx}^{D-2}} = -\pare{D-2}A_{D-1} \\
+            & \Rightarrow G\pare{x} = -\rec{\pare{D-2}A_{D-1}\abs{\+vx}^{D-2}}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsection green函数的一般特征函数展开 (end)
+
+% section green函数 (end)
+
+\end{document}

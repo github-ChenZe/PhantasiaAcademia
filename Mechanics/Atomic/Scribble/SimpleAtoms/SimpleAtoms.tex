@@ -46,27 +46,33 @@
 \vspace{-4em}}
 \newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
 
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{matrix,positioning,fit}
+
+\def\econfig#1{\immediate\write18{echo "#1" | python /Users/zechen/Documents/PhantasiaAcademia/electronconfig.py > electronsconfigtmp.tex}\input{electronsconfigtmp.tex}}
+
 \begin{document}
 
-\begin{multicols*}{3}[\centerline{\titlefont 水素様原子ノ概要}]
+\begin{multicols*}{3}[\centerline{\titlefont 量子論の基礎及び雑務}]
 \raggedcolumns%
 \newheader{\bili{}{言葉}}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathitem{Lyman} && n = 1 && \mathitem{s} && l = 0 \\
-        & \mathitem{Balmer} && n = 2 && \mathitem{p} && l = 1 \\
-        & \mathitem{$H_\alpha$} &&  n=3\mapsto n=2 && \mathitem{d} && l = 2 \\
-        & \mathitem{Paschen} && n = 3 && \mathitem{f} && l = 3
+        & \mathitem{Lyman} && n = 1 && \mathitem{s} && l = 0 && \mathitem{S(Sub II)} && n\mathrm{s}\mapsto 3\mathrm{p} \\
+        & \mathitem{Balmer} && n = 2 && \mathitem{p} && l = 1 && \mathitem{P} && n\mathrm{p}\mapsto 3\mathrm{s} && \\
+        & \+:c3l{$\mathitem{$H_\alpha$}\quad n=3\mapsto n=2$} && \mathitem{d} && l = 2 && \mathitem{D(Sub I)} && n\mathrm{s}\mapsto 3\mathrm{p} \\
+        & \mathitem{Paschen} && n = 3 && \mathitem{f} && l = 3 && \mathitem{F(Bergmann)} && n\mathrm{f}\mapsto 3\mathrm{d} \\
+        & \mathitem{D線} && 3p \mapsto 3s
     \end{flalign*}
 \end{cheatresume}
 \newheader{Rutherford\bili{}{散乱}}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathheadcomment{ここで} && D = \rec{4\pi\epsilon_0}\frac{Z'Ze^2}{E} && \\
-        & \mathitem{散乱角} && \cot \frac{\theta}{2} = \frac{2b}{D} && \\
-        & \mathitem{断面積} && \+d\Omega d\sigma = \frac{D^2}{16}\rec{\sin^4 \pare{\theta/2}} && \\
+        & \mathheadcomment{以下に} && D = \rec{4\pi\epsilon_0}\frac{Z'Ze^2}{E} && \\
+        & \mathitem{散乱角} && \cot \frac{\theta}{2} = \frac{2b}{D} \quad %{\color{lightgray}\bigg|}
+         \mathitem{断面積} \quad \+d\Omega d\sigma = \frac{D^2}{16}\rec{\sin^4 \pare{\theta/2}} && \\
         & \mathitem{比率} && \frac{\rd{n}}{n\,\rd{\Omega}} = \frac{NtD^2}{16}\rec{\sin^4\pare{\theta/2}} && \\
-        & && n\pare{\theta_1\sim\theta_2} = Nnt\pi \frac{D^2}{4}\pare{\cot^2 \frac{\theta_2}{4} - \cot^2 \frac{\theta_1}{2}} &&
+        & && n\pare{\theta_1\sim\theta_2} = Nnt\pi \frac{D^2}{2}\pare{\cot^2 \frac{\theta_2}{4} - \cot^2 \frac{\theta_1}{2}} &&
     \end{flalign*}
 \end{cheatresume}
 \newheader{\bili{}{量子力学}}
@@ -79,21 +85,22 @@
     \end{flalign*}
     \midbreak
     \begin{flalign*}
-        & \mathitem{角運動量} && \hat L^2 Y_{ml} = l\pare{l+1}\hbar^2 Y_{ml} && \\
-        & && \hat L_z Y_{ml} = m\hbar Y_{ml} && \\
+        & \mathitem{角運動量} && \hat L^2 Y_{ml} = l\pare{l+1}\hbar^2 Y_{ml}\ {\color{lightgray}\vert}\ \hat L_z Y_{ml} = m\hbar Y_{ml} && \\
         & \mathitem{結合} && \+vJ = \+vL + \+vS && \\
         & && \quad J = \abs{L-S},\cdots,L+S,\quad M = -J,\cdots, J && \\
         & \mathitem{内積} && \+vS\cdot \+vL = \frac{\hbar^2}{2}\brac{j\pare{j+1} - s\pare{s+1} - l\pare{l+1}} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{不確定性原理} && \Delta p_x \Delta x \ge \frac{\hbar}{2},\quad \Delta E \Delta t \ge \frac{\hbar}{2} &&
     \end{flalign*}
 \end{cheatresume}
 \columnbreak
 \newheader{Bohr\bili{}{原子模型}}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathitem{軌道半径} && r_n = \frac{4\pi\epsilon_0 \hbar^2}{Ze^2 m_\mu}n^2 && \\
-        & \mathitem{周回速度} && v = \sqrt{\frac{Ze^2}{4\pi\epsilon_0 m_\mu r}} && \\
-        & \mathitem{エネルギー} && E_n = -\half m_\mu c^2 \alpha^2 \frac{Z^2}{n^2} && \\
-        & \mathitem{波数} && \tilde{\nu} = Z^2R\pare{\rec{n^2} - \rec{m^2}} &&
+        & \mathitem{軌道半径}\ r_n = \frac{4\pi\epsilon_0 \hbar^2}{Ze^2 m_\mu}n^2 \ \mathitem{エネルギー}\ E_n = -\half m_\mu c^2 \alpha^2 \frac{Z^2}{n^2} && \\
+        & \mathitem{周回速度}\enspace v = \sqrt{\frac{Ze^2}{4\pi\epsilon_0 m_\mu r}} \enspace \mathitem{波数}\enspace \tilde{\nu} = Z^2R\pare{\rec{n^2} - \rec{m^2}} && 
     \end{flalign*}
 \end{cheatresume}
 \newheader{\bili{}{光学}}
@@ -110,15 +117,11 @@
     \begin{flalign*}
         & \mathitem{表面回折} && d \sin\theta = n\lambda && \mathitem{Bragg} && 2d\sin\theta = n\lambda &&
     \end{flalign*}
-    \midbreak
-    \begin{flalign*}
-        & \mathitem{不確定性原理} && \Delta p_x \Delta x \ge \frac{\hbar}{2},\quad \Delta E \Delta t \ge \frac{\hbar}{2} &&
-    \end{flalign*}
 \end{cheatresume}
 \newheader{\bili{}{常用定数}}
 \begin{cheatresume}
     \begin{flalign*}
-        & && \frac{e^2}{4\pi\epsilon_0} = \SI{1.44}{\eV} && hc = \SI[inter-unit-product = \ensuremath{{}\cdot{}}]{1.24}{\nano\meter\kilo\eV} && \\
+        & && \frac{e^2}{4\pi\epsilon_0} = \SI{1.44}{\eV\cdot\nano\meter} && hc = \SI[inter-unit-product = \ensuremath{{}\cdot{}}]{1.24}{\nano\meter\kilo\eV} && \\
         & && m_e c^2 = \SI{0.511}{\mega\eV} && \hbar c = \SI[inter-unit-product = \ensuremath{{}\cdot{}}]{197}{\eV}{\nano\meter} &&
     \end{flalign*}
 \end{cheatresume}
@@ -130,46 +133,167 @@
         & \mathitem{Planck} && u\pare{\lambda} = \frac{8\pi hc}{\lambda^5}\rec{e^{h\nu/k_BT} - 1} &&
     \end{flalign*}
 \end{cheatresume}
-\columnbreak
 \newheader{Millikan\bili{}{油滴実験}}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathitem{油滴の半径} && r = \sqrt{\frac{9\eta v_g}{2\pare{\rho - \rho_0 g}}} && \\
-        & \mathitem{電荷量} && e_k = \frac{4\pi \eta rl}{V}\pare{v_e + v_g} &&
+        & \mathitem{油滴半径}\ r = \sqrt{\frac{9\eta v_g}{2\pare{\rho - \rho_0 g}}} \ \mathitem{電荷量} \ e_k = \frac{4\pi \eta rl}{V}\pare{v_e + v_g} &&
     \end{flalign*}
 \end{cheatresume}
-\newheader{\bili{}{水素原子ノ波動関数}}
+\columnbreak
+\newheader{\bili{}{多電子原子}}
 \begin{cheatresume}
-    \begin{flalign*}
-        & \mathitem{動径方向} && R_{nl}\pare{r} \propto e^{-\rho/2}\rho^l L_{n+1}^{2l+1}\pare{\rho},\quad \rho = \sqrt{-\frac{8mE}{\hbar^2}}r && \\
-        & && R_{10}\pare{r} = 2\pare{\frac{Z}{a_0}}^{3/2}e^{-Ze/a_0} && \\
-        & \mathitem{波動関数} && u = R_{nl}\pare{r}Y_{lm}\pare{\theta,\varphi} && \\
-        & && n \ge 1,\quad l = 0,\cdots, n - 1, \quad m = -l,\cdots,+l &&
-    \end{flalign*}
+    \begin{tabular}{@{}p{3cm}p{7cm}}
+        \mathitem{電子配置} & \mathitem{Hund規則}\quad $\textcircled{\small{1}}\max S \Rightarrow \textcircled{\small{2}}\max L $ \\
+        \+:r3{\begin{tikzpicture}[baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \draw
+            (0,0) node[minimum height=2.3em,minimum width=2em,anchor=north west] (1s) {1\strut s}
+            (0,-2.3em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (2s) {2\strut s}
+            (2em,-2.3em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (2p) {2\strut p}
+            (0,-4.6em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (3s) {3\strut s}
+            (2em,-4.6em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (3p) {3\strut p}
+            (4em,-4.6em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (3d) {3\strut d}
+            (0,-6.9em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (4s) {4\strut s}
+            (2em,-6.9em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (4p) {4\strut p}
+            (4em,-6.9em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (4d) {4\strut d}
+            (6em,-6.9em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (4f) {4\strut f}
+            (0,-9.2em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (5s) {5\strut s}
+            (2em,-9.2em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (5p) {5\strut p}
+            (4em,-9.2em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (5d) {5\strut d}
+            (0,-11.5em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (6s) {6\strut s}
+            (2em,-11.5em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (6p) {6\strut p}
+            (0,-13.8em) node[minimum height=2.3em,minimum width=2em,anchor=north west] (7s) {7\strut s}
+            ;
+            \draw[->] (1s.north east) -- (1s.south west);
+            \draw[->] (2s.north east) -- (2s.south west);
+            \draw[->] (2p.north east) -- (3s.south west);
+            \draw[->] (3p.north east) -- (4s.south west);
+            \draw[->] (3d.north east) -- (5s.south west);
+            \draw[->] (4d.north east) -- (6s.south west);
+            \draw[->] (4f.north east) -- (7s.south west);
+        \end{tikzpicture}}
+     & $\begin{array}[t]{@{}l}
+        \Rightarrow\textcircled{\small{3}} \begin{cases}
+            \min J & \text{\color{lightgray}半数以下} \\
+            \max J & \text{\color{lightgray}半数より多く} \\
+        \end{cases}
+    \end{array}$ \\
+    & \raisebox{-.5em}{\mathitem{$LS$結合\hspace{1.8cm}$jj$結合}} \\
+    & \begin{tikzpicture}[xscale=.65]
+        \draw (0,0) -- (1,0)  node (2p3pr) {}  node[midway,above] {$\scriptstyle 2\mathrm{p} 3\mathrm{p}$}
+        (1.5,0.5) node (1d){} -- (2.5,0.5) node (1dr) {} node[midway,above] {$\scriptstyle ^1\mathrm D$}
+        (1.5,1) node (1p){} -- (2.5,1) node (1pr) {}  node[midway,above] {$\scriptstyle ^1\mathrm P$}
+        (1.5,1.5) node (1s){} -- (2.5,1.5) node (1sr) {}  node[midway,above] {$\scriptstyle ^1\mathrm S$}
+        (1.5,-0.5) node (3s){}  -- (2.5,-0.5)  node (3sr){}  node[midway,above] {$\scriptstyle ^3\mathrm S$}
+        (1.5,-1) node (3p){}  -- (2.5,-1)  node (3pr){}  node[midway,above] {$\scriptstyle ^3\mathrm P$}
+        (1.5,-2) node (3d){}  -- (2.5,-2)  node (3dr){}  node[midway,above] {$\scriptstyle ^3\mathrm D$}
+        (3,0.5) node (1d2){}  -- (3.5,0.5) node[right] {$\scriptstyle ^1\mathrm D_2$}
+        (3,1) node (1p1){} -- (3.5,1) node[right] {$\scriptstyle ^1\mathrm P_1$}
+        (3,1.5) node (1s0){} -- (3.5,1.5) node[right] {$\scriptstyle ^1\mathrm S_0$}
+        (3,-0.5) node (3s1){} -- (3.5,-0.5) node[right] {$\scriptstyle ^3\mathrm S_1$}
+        (3,-0.9) node (3p2){} -- (3.5,-0.9) node[right] {$\scriptstyle ^3\mathrm P_2$}
+        (3,-1.1) node (3p1){} -- (3.5,-1.1) node[right] {$\scriptstyle ^3\mathrm P_1$}
+        (3,-1.2) node (3p0){} -- (3.5,-1.2) node[below right=-.2em and 0em] {$\scriptstyle ^3\mathrm P_0$}
+        (3,-1.8) node (3d3){} -- (3.5,-1.8) node[right] {$\scriptstyle ^3\mathrm D_3$}
+        (3,-2.2) node (3d2){} -- (3.5,-2.2) node[right] {$\scriptstyle ^3\mathrm D_2$}
+        (3,-2.4) node (3d1){} -- (3.5,-2.4) node[right] {$\scriptstyle ^3\mathrm D_1$}
+        ;
+        \draw[densely dotted] (2p3pr.center) -- (1s.center)
+        (2p3pr.center) -- (1p.center)
+        (2p3pr.center) -- (1d.center)
+        (2p3pr.center) -- (3s.center)
+        (2p3pr.center) -- (3p.center)
+        (2p3pr.center) -- (3d.center)
+        (1sr.center) -- (1s0.center)
+        (1pr.center) -- (1p1.center)
+        (1dr.center) -- (1d2.center)
+        (3sr.center) -- (3s1.center)
+        (3pr.center) -- (3p2.center)
+        (3pr.center) -- (3p1.center)
+        (3pr.center) -- (3p0.center)
+        (3dr.center) -- (3d3.center)
+        (3dr.center) -- (3d2.center)
+        (3dr.center) -- (3d1.center)
+        ;
+        %
+        \draw (4.5,0) -- (5.5,0)  node (nsnpr) {}  node[midway,above] {$\scriptstyle n\mathrm{s} n'\mathrm{p}$}
+        (6,0.8) node (halftrif){} -- (7,0.8) node (halftrifr) {}  node[midway,above] {$\scriptstyle \pare{\half,\frac{3}{2}}$}
+        (6,-0.8) node (halfhalf){} -- (7,-0.8) node (halfhalfr) {}  node[midway,above] {$\pare{\scriptstyle \half,\half}$}
+        (7.5,1.2) node (halftrif1){} -- (8.5,1.2) node[midway,above] {$\scriptstyle \pare{\half,\frac{3}{2}}_1$}
+        (7.5,0.4) node (halftrif2){} -- (8.5,0.4) node[midway,above] {$\scriptstyle \pare{\half,\frac{3}{2}}_2$}
+        (7.5,-1.2) node (halfhalf0){} -- (8.5,-1.2) node[midway,above] {$\scriptstyle \pare{\half,\half}_0$}
+        (7.5,-0.4) node (halfhalf1){} -- (8.5,-0.4) node[midway,above] {$\scriptstyle \pare{\half,\half}_1$}
+        ;
+        \draw[densely dotted] (nsnpr.center) -- (halftrif.center)
+        (nsnpr.center) -- (halfhalf.center)
+        (halftrifr.center) -- (halftrif1.center)
+        (halftrifr.center) -- (halftrif2.center)
+        (halfhalfr.center) -- (halfhalf0.center)
+        (halfhalfr.center) -- (halfhalf1.center)
+        ;
+        \draw (0.5,-2.7) node {$H_0$}
+        (2,-2.7) node {$H_C$}
+        (3.25,-2.7) node {$H_{LS}$}
+        (5,-2.7) node {$H_0$}
+        (8,-2.7) node {$H_C$}
+        (6.5,-2.7) node {$H_{LS}$}
+        ;
+    \end{tikzpicture}
+    \end{tabular}
+    \begin{tabular}{@{}l}
+        \mathitem{$LS$結合\wdiv Land\'e間隔則}\quad $\Delta E_J - \Delta E_{J-1} = \xi_{LS}\hbar^2 J$ \\
+        \mathitem{$LS$結合\wdiv Slaterダイアグラム} \\
+        \resizebox{\hsize}{!}{$\underbrace{\begin{array}{c|ccc}
+    &   & M_S & \\
+    \hline
+    &   & 1   & \\
+    & 1 & 2   & 1\\
+M_L & 1 & 3   & 1\\
+    & 1 & 2   & 1\\
+    &   & 1   &
+\end{array}}_{\displaystyle \text{\econfig{2p2}}} = \underbrace{\begin{array}{c|ccc}
+    &   & M_S & \\
+    \hline
+    &   & 1   & \\
+    &   & 1   & \\
+M_L &   & 1   & \\
+    &   & 1   & \\
+    &   & 1   &
+\end{array}}_{\displaystyle \ce{^1D}} + \underbrace{\begin{array}{c|ccc}
+    &   & M_S & \\
+    \hline
+    &   &     & \\
+    & 1 & 1   & 1 \\
+M_L & 1 & 1   & 1 \\
+    & 1 & 1   & 1 \\
+    &   &     &
+\end{array}}_{\displaystyle \ce{^3P}} + \underbrace{\begin{array}{c|ccc}
+    &   & M_S & \\
+    \hline
+    &   &     & \\
+    &   &     &   \\
+M_L &   & 1   &   \\
+    &   &     &   \\
+    &   &     &
+\end{array}}_{\displaystyle \ce{^1S}}$} \\
+        \mathitem{$LS$結合\wdiv 2つの電子の場合}\quad $2\divs \pare{L+S}$ \\
+        $\displaystyle n\mathrm{d}^2 \Rightarrow \begin{cases}
+            S=0 \Rightarrow L=0,2,4:& ^1\mathrm G_4, ^1\mathrm D_2, ^1\mathrm S_0 \\
+            S=1 \Rightarrow L=1,3:& ^3P_{2,1,0}, ^3F_{4,3,2}
+        \end{cases}$ \\
+        \mathitem{$LS$結合\wdiv 電子ー正孔対称性} \quad $\pare{nl}^{\nu} \cong \pare{nl}^{Y-\nu}$
+    \end{tabular}
 \end{cheatresume}
-\newheader{\bili{}{水素原子ノ微細構造}}
+\newheader{\bili{}{選択律}}
 \begin{cheatresume}
-    \begin{flalign*}
-        & \mathitem{選択率} && \Delta n = \forall,\quad \Delta l = \pm 1,\quad \Delta m = 0, \pm 1 && \\
-        & \mathitem{Bohr磁子} && \mu\+_B_ = \frac{e\hbar}{2m_e} && \\
-        & \mathitem{軌道磁気} && \+v\mu_l = -\mu\+_B_ \frac{\+vL}{\hbar},\quad \mu_{lz} = -m_l\mu\+_B_ && \\
-        & \mathitem{スピン磁気} && \+v\mu_s = -g_s \mu\+_B_ \frac{\+vS}{\hbar},\quad \mu_{sz} = -g_sm_s\mu\+_B_ &&
-    \end{flalign*}
-    \midbreak
-    \begin{flalign*}
-        & \mathitem{スピン軌道項} &&  -E_n \frac{\alpha^2 Z^2}{n^2} \frac{n}{\displaystyle 2\pare{l+\half}\pare{l+1}}, j = l + \half && \\
-        & \begin{array}{l}
-        \mathheadcomment{ここで}\\
-        \color{lightgray}E_n<0 \\
-        \color{lightgray}l\neq 0
-        \end{array} && +E_n \frac{\alpha^2 Z^2}{n^2} \frac{n}{\displaystyle 2l\pare{l+\half}}, \quad j = l - \half && \\
-        & \mathitem{運動エネルギー} && -E_n\frac{\alpha^2Z^2}{n^2}\pare{\frac{3}{4} - \frac{n}{\displaystyle l+1/2}} && \\
-        & \mathitem{Darwin}\mathcomment{l=0} && -E_n \frac{\alpha^2Z^2}{n} && \\
-        & \mathitem{全補正} && -E_n \frac{\alpha^2Z^2}{n^2}\pare{\frac{3}{4} - \frac{n}{j+1/2}} &&
-    \end{flalign*}
+\begin{flalign*}
+    & \mathitem{共用} && \Delta l = \pm 1 && \\
+    & && \Delta J = 0,\pm 1,\quad J=0\not\leftrightarrow 0 && \\
+    & && \Delta M_J = 0,\pm 1 \mathcomment{$\Delta J=0$と\ } M_J=0\not\leftrightarrow 0  && \\
+    & \mathitem{$LS$結合} && \Delta S = 0,\quad \Delta L = 0, \pm 1 && \\
+    & \mathitem{$jj$結合} && \Delta j = 0,\pm 1 \mathcomment{遷移する電子} &&
+\end{flalign*}
 \end{cheatresume}
 
 \end{multicols*}
-
 
 \end{document}

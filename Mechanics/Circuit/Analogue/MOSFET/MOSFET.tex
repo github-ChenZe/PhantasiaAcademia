@@ -1,0 +1,153 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{场效应管放大电路} % (fold)
+\label{sec:场效应管放大电路}
+
+\newpoint{}结型场效应管(JFET), 结构与原理, 特性曲线与参数.
+\newpoint{}JFET放大电路的小信号模型分析方法.
+\newpoint{}N沟道/P沟道耗尽型/增强性MOSFET.
+\newpoint{}沟道长度调制效应.
+\newpoint{}MOSFET主要参数.
+\newpoint{}MOSFET放大电路.
+FET分为
+\begin{cenum}
+    \item JFET: (耗尽型)
+    \begin{cenum}
+        \item N沟道;
+        \item P沟道.
+    \end{cenum}
+    \item MOSFET:
+    \begin{cenum}
+        \item 增强型:
+        \begin{cenum}
+            \item N沟道;
+            \item P沟道.
+        \end{cenum}
+        \item 耗尽型:
+        \begin{cenum}
+            \item N沟道;
+            \item P沟道.
+        \end{cenum}
+    \end{cenum}
+\end{cenum}
+\newpoint{}耗尽型在无偏置电压时就有导电沟道存在.
+\newpoint{}增强性在无偏置电压时无导电沟道.
+\newpoint{}FET输入阻抗高, 噪声系数低, 耐辐照能力强, 热稳定性好, 工艺简单, 功耗低, 适合大规模集成.
+
+\subsection{JFET的结构和原理} % (fold)
+\label{sub:jfet的结构和原理}
+
+\newpoint{}D结正偏, D极电流方向$P\mapsto N$.
+\newpoint{}P沟道的JFET符号方向相反.
+\newpoint{}高浓度掺杂是为了提供低阻通道.
+
+\subsubsection{N沟道JFET工作原理} % (fold)
+\label{ssub:n沟道jfet工作原理}
+
+\newpoint{}工作条件包括
+\begin{cenum}
+    \item $v\+_GS_< 0$, G与沟道间PN结反偏, $I\+_G_\approx 0$, G极呈高阻.
+    \item DS间加正电压, $v\+_DS_ > 0$, 形成电流$i\+_D_$.
+    \item $i\+_D_$大小受$v\+_GS_$控制.
+\end{cenum}
+\newpoint{}$v\+_GS_$的控制作用:
+\begin{cenum}
+    \item $v\+_GS_<0$, $v\+_DS_ = 0$时, PN结反偏, 耗尽层等宽度加厚, 直到沟道夹断, 此时$v\+_GS_ = V\+_P_$, $V\+_P_$为夹断电压, N沟道$V\+_P_<0$.
+    \item 当$v\+_GS_ = 0$, $v\+_DS_\uparrow \rightarrow i\+_D_\uparrow$, g, d间PN结反向电压增加, 耗尽层加宽, 沟道变窄.
+    \item 当$v\+_DS_$上升到$v\+_GD_ = V\+_P_$时, 紧靠漏极处出现预夹断. 此时$v\+_DS_\uparrow$, 夹断区延长, 沟道电阻$\uparrow$, $i\+_D_$基本不变.
+    \item 当$v\+_P_ < v\+_GS_ < 0$, 夹断更容易发生, 对于同样的$v\+_DS_$, $i\+_D_$比$v\+_GS_ = 0$的值要小. 在预夹断处$v\+_GD_ = v\+_GS_ - v\+_DS_ = V\+_P_$.
+\end{cenum}
+\newpoint{}沟道中只有一种类型的多数载流子参与导电, 所以场效应管也称为单极型三极管.
+\newpoint{}JFET的栅极与沟道间的PN结是反向偏置的, $i\+_G_\approx 0$, 输入电阻很高.
+\newpoint{}JFET是电压控制电流的器件, $i\+_D_$受$v\+_GS_$控制.
+\newpoint{}预夹断前$i\+_D_$与$v\+_DS_$近似呈线性关系. 预夹断后$i\+_D_$趋于饱和.
+
+% subsubsection n沟道jfet工作原理 (end)
+
+\subsubsection{特性曲线} % (fold)
+\label{ssub:特性曲线}
+
+\newpoint{}转移特性曲线为
+\[ i\+_D_ = I\+_DSS_\pare{1 - \frac{v\+_GS_}{v\+_P_}}^2,\quad V\+_P_ \le v\+_GS_ \le 0,\quad v\+_DS_ = \const. \]
+\newpoint{}输出特性曲线$i\+_D_ = f\pare{v\+_DS_}$, $v\+_GS_ = \const$. 预夹断曲线对应$v\+_GS_ = v\+_GS_ - v\+_DS_ = v\+_P_$.
+\begin{cenum}
+    \item I区(截止区): $v\+_GS_ < V\+_p_$, $i\+_D_ = 0$.
+    \item II区(可变电阻区): $v\+_DS_$上升后, 电流$i\+_D_$上升斜率不同.
+    \item III区(恒流区/饱和区): $i\+_D_$不随$v\+_DS_$变, $i\+_D_$主要随$v\+_DS_$变.
+\end{cenum}
+
+% subsubsection 特性曲线 (end)
+
+\subsubsection{主要参数} % (fold)
+\label{ssub:主要参数}
+
+\newpoint{}夹断电压: 漏极电流为令时$V\+_GS_$的值.
+\newpoint{}饱和漏极电流: $V\+_GS_ = 0$对应的漏极电流.
+\newpoint{}低频跨导:
+\[ g\+_m_ = \left.\+D{v\+_GS_}D{i\+_D_}\right\vert_{v\+_DS_} = -\frac{\displaystyle 2I\+_DSS_\pare{1-\frac{v\+_GS_}{V\+_P_}}}{V\+_P_}. \]
+\newpoint{}输出电阻
+\[ r\+_d_ = \left.\+D{i\+_D_}D{v\+_DS_}\right\vert_{v\+_GS_}. \]
+\newpoint{}直流输入电阻$R\+_GS_$.
+\newpoint{}$V\+_(BR)DS_$, $V\+_(BR)GS_$, 最大漏极功耗$P\+_DM_$.
+\begin{sample}
+    \begin{ex}
+        Q点:
+        \[ \begin{cases}
+            V\+_GS_ = -i\+_D_R, \\
+            V\+_DS_ = V\+_DD_ - I\+_D_\pare{R\+_d_ + R}, \\
+            i\+_D_ = I\+_DSS_\pare{1-\frac{v\+_GS_}{V\+_P_}}^2.
+        \end{cases} \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于自偏电路,
+        \[ V\+_GS_ = V\+_G_ - V\+_S_ = \frac{R\+_g2_}{R\+_g1_ + R\+_g2_}V\+_DD_ - I\+_D_R. \]
+        可得
+        \[ \begin{cases}
+            v\+_i_ = v\+_gs_ + g\+_m_ v\+_gs_R = v\+_gs_\pare{1+g\+_m_R}, \\
+            v\+_o_ = -g\+_m_v\+_gs_R\+_d_
+        \end{cases} \Rightarrow A\+_\mathnormal{v}m_ = -\frac{g\+_m_R\+_d_}{1+g\+_m_R}. \]
+        输入电阻
+        \[ R'\+_i_ = R'_i \parallel \brac{R\+_g3_ + \pare{R\+_g1_\parallel R\+_g2_}},\quad R'\+_i_ = \frac{v\+_i_}{i\+_g_} = r\+_gs_ + \pare{1+r\+_gs_g\+_m_}R. \]
+        通常$R'\+_i_$足够大,
+        \[ R\+_i_ \approx R\+_g3_ + \pare{R\+_g1_\parallel R\+_g2_}. \]
+        输出电阻
+        \[ R\+_o_ \approx R\+_d_. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 主要参数 (end)
+
+% subsection jfet的结构和原理 (end)
+
+\subsection{N沟道增强型} % (fold)
+\label{sub:n沟道增强型}
+
+\newpoint{}$L$为沟道长度, $W$为沟道宽度, $t\+_ox_$为绝缘层厚度.
+\newpoint{}符号中短划线表示增强型, 箭头由P指向N.
+
+\subsubsection{原理} % (fold)
+\label{ssub:原理}
+
+\newpoint{}$V\+_GS_ < 0$, 无导电沟道, D, S间加电压时无电流产生.
+\newpoint{}$0<V\+_GS_<V\+_T_$, 有电场但无导电沟道, D, S间加电压时无电流产生.
+\newpoint{}$V\+_GS_ \ge V\+_T_$, P型衬底中的电子被吸引到G下的薄层内, 形成N型感生沟道. D, S间加电压时有电流产生.
+\newpoint{}$V\+_GS_$越大, 导电沟道越厚.
+\newpoint{}$V\+_T_$谓开启电压.
+\newpoint{}$V\+_GS_>T$, $v\+_DS_\uparrow$, $i\+_D_\uparrow$, 沟道电位梯度$\uparrow$. 靠近D处点位升高, 电场强度减小, 沟道变薄.
+\newpoint{}$V\+_GS_$继续上升出现预夹断.
+\newpoint{}预夹断后, $v\+_DS_\uparrow$, 夹断区延长, 沟道电阻$\uparrow$, $i\+_D_$基本不变.
+\newpoint{}$v\+_DS_$和$v\+_GS_$同时作用时, $v\+_DS_$一定, $v\+_GS_$变化, 给定一个$v\+_GS_$, 就有一条不同的$i\+_D_$-$v\+_DS_$曲线.
+
+% subsubsection 原理 (end)
+
+% subsection n沟道增强型 (end)
+
+% section 场效应管放大电路 (end)
+
+\end{document}

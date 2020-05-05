@@ -127,12 +127,14 @@ $\displaystyle \curl \+vA = \half \brac{\+vB \div \+vr - \+vr \cancelto{0}{\div 
 $\displaystyle \div \+vA = -\half \+vB \cdot \pare{\curl \+vr} = 0$. \\
 设$\varphi$满足$\laplacian \varphi = 0$, 则
 \[ \curl \pare{\+vA + \grad \varphi} = \curl \+vA = \+vB,\quad \div \pare{\+vA + \grad \varphi} = \div \+vA + \laplacian \varphi= 0. \]
-故$\+vA' = \+vA + \varphi$是同样满足条件的矢势. 例如取$\displaystyle \varphi = \half\pare{x^2 - y^2}$, 有\\
-$\displaystyle \boxed{\+vA' = \half \+vB\times \+vr + x\+ux - y\+uy.}$ 两者之差的旋度为
-\[ \curl \pare{x\+ux - y\+uy} = \begin{vmatrix}
+故$\+vA' = \+vA + \grad\varphi$是同样满足条件的矢势. 例如取$\displaystyle \varphi = \half Bxy$, 有\\
+$\displaystyle \+vA' = \half \+vB\times \+vr + \half By\+ux + \half Bx\+uy.$ 若$\+vB = B\+uz$, 则$\boxed{\+vA' = Bx\+uy.}$
+\\
+两者之差的旋度为
+\[ \half B \curl \pare{y\+ux + x\+uy} = \begin{vmatrix}
     \+ux & \+uy & \+uz \\
     \partial_x & \partial_y & \partial_z \\
-    x & -y & 0
+    y & x & 0
 \end{vmatrix} = 0. \]
 \newprob{3.2}%
 设$\+v{\+gr} = \+vr - \+vr'$, 则

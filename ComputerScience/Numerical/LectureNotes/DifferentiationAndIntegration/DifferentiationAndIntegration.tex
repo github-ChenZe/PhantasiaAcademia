@@ -1,0 +1,470 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{数值微分和数值积分} % (fold)
+\label{sec:数值微分和数值积分}
+
+\subsection{数值微分} % (fold)
+\label{sub:数值微分}
+
+\subsubsection{一阶差商与一阶导数} % (fold)
+\label{ssub:一阶差商与一阶导数}
+
+$f$在$x_0$附近的各类差商为
+\begin{align*}
+    & f\brac{x_0,x_0+h} = f'\pare{x_0} + \frac{h}{2}f''\pare{x_0} + \frac{h^2}{6}f'''\pare{x_0}, \\
+    & f\brac{x_0-h,x_0} = f'\pare{x_0} - \frac{h}{2}f''\pare{x_0} + \frac{h^2}{6}f'''\pare{x_0}, \\
+    & f\brac{x_0 - h, x_0 + h} = f'\pare{x_0} + \frac{h^2}{6}f'''\pare{x_0}.
+\end{align*}
+上面的近似分别有一阶/二阶精度.
+\par
+若$f\in C^2\brac{a,b}$, $x_1 = x_0 + h$, $h>0$且足够小, 则可构造插值
+\[ p_1\pare{x} = f\pare{x_0} \frac{x-\pare{x_0+h}}{x_0 - \pare{x_0 + h}} + f\pare{x_1} = \frac{x-x_0}{x_0 + h - x_0}. \]
+考虑余项形式
+\[ f\pare{x} = p_1\pare{x} + \frac{f''\pare{\xi}}{2!}\pare{x-x_0}\pare{x-x_1}. \]
+则
+\[ f'\pare{x} = p'_1\pare{x} + \frac{\pare{x-x_0}\pare{x-x_1}}{2}D_x\pare{f''\pare{\xi\pare{x}}} + f''\pare{\xi\pare{x}} \frac{2\pare{x-x_0} - h}{2}. \]
+当$x=x_0$, 有
+\[ f'\pare{x_0} = p'_1\pare{x_0} + \frac{2\pare{x_0 - x_0} - h}{2}f''\pare{\xi\pare{x}}. \]
+对于$f\in C^{\pare{n+1}}\brac{a,b}$的一般情形, 取$x_0, \cdots, x_n \in I$,
+\[ f\pare{x} = \sum_{k=0}^n f\pare{x_k}l_k\pare{x} + f^{\pare{n+1}}\pare{\xi\pare{x}} \frac{\pare{x-x_0}\cdots \pare{x-x_n}}{\pare{n+1}!}. \]
+求导有
+\begin{align*}
+    f'\pare{x} &= \sum_{k=0}^n f\pare{x_k}l'_k\pare{x} + \frac{\pare{x-x_0}\cdots \pare{x-x_n}}{n!}D_x\brac{f^{\pare{n+1}}\pare{\xi\pare{x}}}\\
+     &\quad + \frac{f^{\pare{n+1}}\pare{\xi\pare{x}}}{\pare{n+1}!}D_x\brac{\pare{x-x_0}\cdots \pare{x-x_n}}.
+\end{align*}
+取$x=x_j$, 则
+\[ f'\pare{x_j} = \sum_{k=0}^n f\pare{x_k}l'_k\pare{x_j} + \frac{f^{\pare{n+1}}\pare{\xi\pare{x}}}{\pare{n+1}!} \prod_{\substack{i=0\\ i\neq j}}^n \pare{x_j - x_i}. \]
+谓近似$f'\pare{x_j}$的$\pare{n+1}$点公式.
+\newpoint{常用$3$点公式}
+\begin{align*}
+    & f'\pare{x_j} = f\pare{x_0} \frac{2x-x_1-x_2}{\pare{x_0-x_1}\pare{x_0-x_2}} + f\pare{x_1}\frac{2x-x_0-x_2}{\pare{x_1 - x_0}\pare{x_1 - x_2}}\\
+    &\quad + f\pare{x_2}\frac{2x-x_0-x_1}{\pare{x_2 - x_0}\pare{x_2 - x_1}}\\
+    &\quad + \rec{6}f'''\pare{\xi_j}\prod_{\substack{k=0\\k\neq j}}^2 \pare{x_j-x_k}.
+\end{align*}
+取$x+0 = x_0$, $x_1 = x_0 + h$, $x_2 = x_0 + 2h$, 则有
+\begin{align*}
+    & f'\pare{x_0} = \rec{2h}\brac{-3f\pare{x_0} + 4f\pare{x_0 + h} - f\pare{x_0 + 2h}} + \rec{3}h^2 f'''\pare{\xi_0}, \\
+    & f'\pare{x_0} = \rec{2h}\brac{-f\pare{x_0} + f\pare{x_0 + 2h}} - \rec{6}h^2 f'''\pare{\xi_1}, \\
+    & f'\pare{x_0} = \rec{2h}\brac{f\pare{x_0} - 4f\pare{x_0 + h} + 3f\pare{x_0 + 2h}} + \rec{3}h^2 f'''\pare{\xi_2}.
+\end{align*}
+\par
+对于高阶导数,
+\begin{align*}
+    & f\pare{x_0 + h} = f\pare{x_0} + f'\pare{x_0}h + \frac{h^2}{2}f''\pare{x_0} + \frac{h^3}{6}f'''\pare{x_0} + \frac{h^4}{24}f^{\pare{4}}\pare{\xi_1} + \cdots, \\
+    & f\pare{x_0 - h} = f\pare{x_0} - f'\pare{x_0}h + \frac{h^2}{2}f''\pare{x_0} - \frac{h^3}{6}f'''\pare{x_0} + \frac{h^4}{24}f^{\pare{4}}\pare{\xi_2} + \cdots. \\
+    & f\pare{x_0 + h} + f\pare{x_0 - h} = 2f\pare{x_0} + h^2 f''\pare{x_0} + \frac{h^4}{24}\pare{f^{\pare{4}}\pare{\xi_1} + f^{\pare{4}}\pare{\xi_2}}. \\
+    & f''\pare{x_0} = \frac{f\pare{x_0 + h} + f\pare{x_0 - h} - 2f\pare{x_0}}{h^2} - \frac{h^2}{24}\brac{f^{\pare{4}}\pare{\xi_1} + f^{\pare{4}}\pare{\xi_2}} \\
+    & \phantom{f''\pare{x_0}} = \frac{f\pare{x_0 + h} + f\pare{x_0 - h} - 2f\pare{x_0}}{h^2} + \frac{h^2}{12}f^{\pare{4}}\pare{\xi}.
+\end{align*}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.138 13, 15
+
+% paragraph 作业 (end)
+
+% subsubsection 一阶差商与一阶导数 (end)
+
+% subsection 数值微分 (end)
+
+\subsection{数值积分} % (fold)
+\label{sub:数值积分}
+
+在区间上取$n+1$个点$x_0,\cdots, x_n$, 以过这些点的插值多项式$p_n\pare{x}$逼近被积函数$f\pare{x}$, 得到积分近似值, 即
+\[ I\pare{f} = \int_a^b f\pare{x}\,\rd{x} = I_n\pare{f}E_n\pare{f}. \]
+其中
+\[ I_n\pare{f} = \sum_{j=0}^n a_j f\pare{x_j} \]
+谓数值积分公式, $\curb{x_j}$谓数值积分节点,
+\[ a_j = \int_a^b l_j\pare{x}\,\rd{x}, \]
+其中$l_j\pare{x}$是Lagrange基.
+\[ E_n\pare{f} = \rec{\pare{n+1}!} \int_a^b \prod_{j=0}^n \pare{x-x_j}f^{\pare{n+1}}\pare{\xi\pare{x}}\,\rd{x}. \]
+梯形公式:
+\[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{2}\brac{f\pare{x_0} + f\pare{x_1}} - \frac{h^3}{12}f''\pare{\xi}, \]
+此处
+\[ n = 1,\quad x_0 = a,\quad x_1=  b,\quad h = b-a. \]
+这是由于
+\begin{align*}
+    \int_a^b f\pare{x}\,\rd{x} &= \int_a^b \brac{f\pare{x_0} \frac{x-x_1}{x_0 - x_1} + f\pare{x_1}\frac{x-x_0}{x_1 - x_0}}\,\rd{x} \\
+    &\phantom{=\ }\half \int_a^b f''\pare{\xi}\pare{\xi - x_0}\pare{\xi - x_1}\,\rd{x}.
+\end{align*}
+注意到$\pare{\xi-x_0}\pare{\xi_i - x_1}$在区间内不变号, 故存在某$\xi$使得
+\[ \int_a^b f''\pare{\xi_1\pare{x}}\pare{x-x_0}\pare{x-x_1}\,\rd{x} = f''\pare{\xi} \int_a^b \pare{x-x_0}\pare{x-x_1}\,\rd{x} = -\frac{h^3}{6}f''\pare{\xi}. \]
+也可以有Simpson公式
+\[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{3}\brac{f\pare{x_0} + 4f\pare{x_1} + f\pare{x_2}} - \frac{h^5}{90}f^{\pare{4}}\pare{\xi}, \]
+此处
+\[ n=2,\quad x_0 = a,\quad x_1 = a+h,\quad x_2 = b,\quad h = \frac{b-a}{2}. \]
+这是由于
+\begin{align*}
+    \int_a^b f\pare{x}\,\rd{x} &= \int_a^b \brac{f\pare{x_0} l_0\pare{x} + f\pare{x_1} l_1\pare{x} + f\pare{x_2}l_2\pare{x}} \\
+    & \phantom{=\ } + \rec{6} \int_a^b f'''\pare{\xi\pare{x}} \pare{x-x_0}\pare{x-x_1}\pare{x-x_2} \,\rd{x} \\
+    &= \frac{h}{3}\brac{f\pare{x_0} + 4f\pare{x_1} + f\pare{x_2}} + R.
+\end{align*}
+此处
+\begin{align*}
+    R &= \rec{6} \int_a^b f'''\pare{\xi\pare{x}} \pare{x-x_0}\pare{x-x_1}\pare{x-x_2} \,\rd{x}, \\
+    f\pare{x} &= f\pare{x_1} + f'\pare{x_1}\pare{x-x_1} + \half f''\pare{x_1}\pare{x-x_1}^2 + \rec{6}f'''\pare{x_1}\pare{x-x_1}^3 + \frac{f^{\pare{4}}\pare{\xi_2\pare{x}}}{24}\pare{x-x_1}^4.
+\end{align*}
+注意到
+\[ \rec{24}\int_{x_0}^{x_1} f^{\pare{4}}\pare{\xi_2\pare{x}}\pare{x-x_1}^4\,\rd{x} = \frac{h^5}{60}f^{\pare{4}}\pare{\xi_3},\quad \xi_3 \in\pare{x_0,x_2}. \]
+故
+\begin{align*}
+    \int_a^b f\pare{x}\,\rd{x} &= \int_a^b f\pare{x_1} \,\rd{x} + \half f''\pare{x_1} \int_a^b \pare{x-x_1}^2 + \rec{24}\int_a^b {f^{\pare{4}}\pare{\xi_2\pare{x}}}\pare{x-x_1}^4\,\rd{x} \\
+    &= f\pare{x_1}\pare{b-a} + \frac{1}{3}h^3 f''\pare{x_1} + \frac{h^5}{60} f^{\pare{4}}\pare{\xi_3}, \\
+    f''\pare{x_1} &= \rec{h^2}\brac{f\pare{x_0} - 2f\pare{x_1} + f\pare{x_2}}  - \frac{h^2}{12}f^{\pare{4}}\pare{\xi_4}, \\
+    \int_a^b f\pare{x}\,\rd{x} &= \frac{h}{3} \brac{f\pare{x_0} + 4f\pare{x_1} + f\pare{x_2}} - \frac{h^5}{12} \brac{\rec{3}f^{\pare{4}}\pare{\xi_4} - \rec{5}f^{\pare{4}}\pare{\xi_3}}.
+\end{align*}
+可得余项$\displaystyle -\frac{h^5}{90}f^{\pare{4}}\pare{\xi}$.
+
+\subsubsection{代数精度} % (fold)
+\label{ssub:代数精度}
+
+\begin{definition}
+    设$\displaystyle I\pare{f} = \int_a^b f\pare{x}\,\rd{x} = I_n\pare{f} + E_n\pare{f}$, 若
+    \[ E_n\pare{x^k} = \int_a^b x^k \,\rd{x} - \sum_{j=0}^n a_j x_k^k = 0,\quad k = 0,1,\cdots,M \]
+    且$E_n\pare{x^{M+1}} \neq 0$, 则谓数值积分公式$I_n\pare{f}$具有$M$阶代数精度.
+\end{definition}
+梯形公式具有$1$阶代数精度. Simpson公式具有$3$阶代数精度.
+\newpoint{}具有$M$阶代数精度的积分对于不超过$M$阶的多项式是精确成立的.
+
+% subsubsection 代数精度 (end)
+
+% subsection 数值积分 (end)
+
+\subsection{Newton-Ctoes公式} % (fold)
+\label{sub:newton_ctoes公式}
+
+\subsubsection{端点为积分节点的情形} % (fold)
+\label{ssub:端点为积分节点的情形}
+
+\begin{theorem}
+    设$\displaystyle \sum_{j=0}^n a_j f\pare{x_j}$表示$n+1$点封闭的Newton-Ctoes公式, 端点为积分节点, $\displaystyle x_j = x_0 + jh$, $\displaystyle h = \frac{b-a}{n}$, $j=0,\cdots,n$, 且$x_0 = a$, $x_n = b$, 则存在$\xi \in \pare{a,b}$, 使得
+    \begin{cenum}
+        \item 当$n$为偶数时, $f\in C^{\pare{n+2}}\brac{a,b}$, 有
+        \[ \int_a^b f\pare{x}\,\rd{x} = \sum_{j=0}^n a_jf\pare{x_j} + h^{n+3} \frac{f^{\pare{n+2}}\pare{\xi}}{\pare{n+2}!} \int_0^n t^2\pare{t-1}\cdots \pare{t-n}\,\rd{t}. \]
+        \item 当$n$为奇数时, $f\in C^{\pare{n+1}}\brac{a,b}$, 有
+        \[ \int_a^b f\pare{x}\,\rd{x} = \sum_{j=0}^n a_jf\pare{x_j} + h^{n+2}\frac{f^{\pare{n+1}}\pare{\xi}}{\pare{n+1}!}\int_0^n t\pare{t-1}\cdots\pare{t-n}\,\rd{t}. \]
+        其中
+        \[ a_j = \int_{x_0}^{x_n}l_j\pare{x}\,\rd{x} = \pare{b-a}c_i^{\pare{n}}. \]
+        其中$c_i^{\pare{n}}$谓Newton-Ctoes系数.
+    \end{cenum}
+\end{theorem}
+特殊情形如
+\begin{cenum}
+    \item $n=1$, $x_0 = a$, $x_1 = b$, $h = b-a$, 有梯形公式
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{2}\brac{f\pare{x_0} + f\pare{x_1}} - \frac{h^3}{12}f''\pare{\xi}. \]
+    \item $n=2$, $x_0 = a$, $x_2 = b$, $\displaystyle h = \frac{b-a}{2}$, 有Simpson公式
+    \[ \int_a^b f\pare{x} = \frac{h}{3}\brac{f\pare{x_0} + 4f\pare{x_1} + f\pare{x_2}} - \frac{h^5}{90}f^{\pare{4}}\pare{\xi}. \]
+    \item $n=3$, $x_0 = a$, $x_1 = a+h$, $x_2 = a+2h$, $x_3 = b$, $\displaystyle h = \frac{b-a}{3}$, 有
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{3h}{8}\brac{f\pare{x_0} + 3f\pare{x_1} + 3f\pare{x_2} + f\pare{x_3}} + \frac{3}{80}f^{\pare{4}}\pare{\xi}. \]
+\end{cenum}
+
+% subsubsection 端点为积分节点的情形 (end)
+
+\subsubsection{端点不为积分节点的情形} % (fold)
+\label{ssub:端点不为积分节点的情形}
+
+\begin{theorem}
+    设$x_{-1} = a$, $x_j = x_0 + jh$, $\displaystyle h = \frac{b-a}{n+2}$, $j=1,2\cdots,n$, $x_0 = a+h$, $x_n = b-n$, $x_{n+1} = b$, 则存在$\xi \in \pare{a,b}$, 使得
+    \begin{cenum}
+        \item $n$为偶数时, $f\in C^{\pare{n+2}}\brac{a,b}$,
+        \[ \int_a^b f\pare{x}\,\rd{x} = \sum_{j=0}^n a_j f\pare{x_j} + h^{n+3} \frac{f^{\pare{n+2}}\pare{\xi}}{\pare{n+2}!} \int_{-1}^{n+1} t^2\pare{t-1}\cdots\pare{t-n}\,\rd{t}, \]
+        \item $n$为奇数时, $f\in C^{\pare{n+1}}\brac{a,b}$,
+        \[ \int_a^b f\pare{x}\,\rd{x} = \sum_{j=0}^n a_j f\pare{x_j} + h^{n+2} \frac{f^{\pare{n+1}}\pare{\xi}}{\pare{n+1}!} \int_{-1}^{n+1} t^2t\pare{t-1}\cdot \pare{t-n}\,\rd{t}. \]
+        其中
+        \[ a_j = \int_a^b l_j\pare{x}\,\rd{x}. \]
+    \end{cenum}
+\end{theorem}
+特殊情形如
+\begin{cenum}
+    \item $n=0$时给出中点公式
+    \[ \int_a^b f\pare{x}\,\rd{x} = 2hf\pare{x_0} + \frac{h^3}{3}f''\pare{\xi},\quad \xi \in \pare{x_{-1},x_1}. \]
+    \item $n=1$时给出
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{3h}{2}\brac{f\pare{x_0} + f\pare{x_1}} + \frac{3h^3}{4}f''\pare{\xi},\quad \xi \in \pare{x_{-1},x_2}. \]
+    \item $n=2$时给出
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{3h}{4}\brac{2f\pare{x_0} - f\pare{x_1} + 2f\pare{x_2}} + \frac{14h^5}{45}f^{\pare{4}}\pare{\xi},\quad \xi \in \pare{x_{-1},x_3}. \]
+\end{cenum}
+
+\begin{ex}
+    计算$\displaystyle \int_0^{\pi/4} \sin x\,\rd{x} = 1 - \frac{\sqrt{2}}{2}$.
+    \begin{center}
+        \begin{tabular}{ccccc}
+            $n$ & 0 & 1 & 2 & 3 \\
+            含端点 & & $0.27768016$ & $0.29293264$ & $0.29291070$ \\
+            误差 & & $0.01521303$ & $0.00003942$ & $0.00001748$ \\
+            无端点 & $0.30055887$ & $0.29798754$ & $0.29285866$ & $0.29286923$ \\
+            误差 & $0.00766565$ & $0.00509432$ & $0.00003456$ & $0.00002399$
+        \end{tabular}
+    \end{center}
+\end{ex}
+
+% subsubsection 端点不为积分节点的情形 (end)
+
+% subsection newton_ctoes公式 (end)
+
+\subsection{复化数值积分公式} % (fold)
+\label{sub:复化数值积分公式}
+
+\subsection{例子} % (fold)
+\label{sub:例子}
+
+\begin{ex}
+    求$I\pare{f} = \displaystyle \int_0^4 e^x\,\rd{x} = 53.59815$.
+    \begin{cenum}
+        \item 用Simpson公式近似,
+        \begin{align*}
+            & n=2,\quad h = 2, \quad x_0 = 0,\quad x_1 = 2, \quad x_2 = 4, \\
+            & I\pare{f} = \frac{h}{3}\pare{f\pare{x_0} + 4f\pare{x_1} + f\pare{x_2}} = 56.76958.
+        \end{align*}
+        \item 分为两个小区域, 每个小区域上用Simpson公式近似,
+        \[ I\pare{f} = \rec{3}\pare{e^0 + 4e^1 + e^2} + \rec{3}\pare{e^2 + 4e^3 + e^4} = 53.86385. \]
+        \item 分为四个小区域, 每个小区域上用Simpson公式近似,
+        \[ I\pare{f} = 53.616122. \]
+    \end{cenum}
+\end{ex}
+
+% subsection 例子 (end)
+
+\subsubsection{复化数值积分公式} % (fold)
+\label{ssub:复化数值积分公式}
+
+\begin{theorem}
+    令$f\in C^{\pare{4}}\brac{a,b}$, $n$为偶数, $\displaystyle h = \frac{b-a}{n}$, $x_j = a+jh$, $j=0,\cdots,n$, 则有复化Simpson公式
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{3}\brac{f\pare{a} + f\pare{b} + 2\sum_{j=1}^{n/2-1} f\pare{x_{2j}} + 4\sum_{j=1}^{n/2} f\pare{x_{2j+1}}} - \frac{b-a}{180}h^4 f^{\pare{4}}\pare{\mu}. \]
+\end{theorem}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.137 1(1), 2, 3
+
+% paragraph 作业 (end)
+
+\begin{proof}
+    剖分的区间为$\Omega_j = \brac{x_{2j-2},x_j}$, $j = 1,\cdots,n/2$, 则
+    \begin{align*}
+        \int_a^b f\pare{x}\,\rd{x} &= \sum_{j=1}^{n/2} \int_{x_{2j-2}}^{x_{2j}} f\pare{x}\,\rd{x} \\
+        &= \sum_{j=1}^{n/2} \curb{ \frac{h}{3} \brac{f\pare{x_{2j-2} + 4f\pare{x_{2j-1}} + f\pare{x_{2j}}}} - \frac{h^5}{90}f^{\pare{4}}\pare{\xi_j} } \\
+        &= \frac{h}{3}\brac{f\pare{a} + f\pare{b} + 2\sum_{j=1}^{n/2-1} f\pare{x_{2j}} + 4\sum_{j=1}^{n/2}f\pare{x_{2j-1}}} - \frac{h^5}{90}\sum_{j=1}^{n/2}f^{\pare{4}}\pare{\xi_j}.
+    \end{align*}
+    注意到余项的步长为$2h$, 故实际余项为
+    \[ - \frac{h^5}{90}\sum_{j=1}^{n/2}f^{\pare{4}}\pare{\xi_j} = - \frac{h^5}{90}\frac{n}{2} f^{\pare{4}}\pare{\xi} = -\frac{b-a}{180}h^4 f^{\pare{4}}\pare{\xi}. \qedhere \]
+\end{proof}
+
+\begin{theorem}
+    设$f\in C^2\brac{a,b}$, $\displaystyle h = \frac{b-a}{n}$, $x_j = a+j\cdot h$, $j = 0,\cdots, n$, 则有复化梯形公式
+    \[ \int_a^b f\pare{x}\,\rd{x} = \frac{h}{2}\brac{f\pare{a}+f\pare{b}+2\sum_{j=1}^{n-1}f\pare{x_{2j}}} - \frac{b-a}{12}h^2f''\pare{\mu}. \]
+\end{theorem}
+\begin{theorem}
+    设$f\in C^2\brac{a,b}$, $n$为偶数, $\displaystyle h = \frac{b-a}{n+2}$, $x_j = a+\pare{j+1}\cdot h$, $j = -1,0,\cdots,n+1$, 则有复化中点公式
+    \[ \int_a^b f\pare{x}\,\rd{x} = 2h\sum_{j=1}^{n/2}f\pare{x_{2j}} + \frac{b-a}{6}h^2 f''\pare{\mu}. \]
+\end{theorem}
+\begin{ex}
+    用复化Simpson公式求$\displaystyle \int_a^b \sin x\,\rd{x}$, 要求误差不超过$0.00002$, 则
+    \[ \abs{E} = \abs{\frac{\pi h^4}{180}\sin\mu} \le \frac{\pi h^4}{180} < 0.00002. \]
+    取$n=20$, 可得$I = 2.000006$. 若使用复化梯形公式, 则
+    \[ \abs{E\pare{f}} = \abs{\frac{b-a}{12}h^2 f''\pare{\mu}} \le \frac{\pi^3}{12n^2} < 0.00002 \Rightarrow n\ge 360. \]
+\end{ex}
+
+% subsubsection 复化数值积分公式 (end)
+
+\subsubsection{复化数值积分公式的稳定性} % (fold)
+\label{ssub:复化数值积分公式的稳定性}
+
+所有复化数值积分公式都是稳定的. 若被积函数在积分节点有误差, $\tilde{f}\pare{x_j} = f\pare{x_j} + e_j$, 设$\abs{e_j} \le \epsilon$, $\forall j$, 则使用复化积分公式时误差与$n$无关.
+
+\begin{align*}
+    e &= \abs{\frac{h}{3}\brac{e_0 + e_n + 2\sum_{j=1}^{n/2-1} e_{2j} + 4\sum_{j=1}^{n/2} e_{2j-1}}} \\
+    & \le \frac{h}{3}\brac{\epsilon + \epsilon + 2\pare{\frac{n}{2} - 1}\epsilon + 4\frac{n}{2}\epsilon} = nh\epsilon = \pare{b-a}\epsilon.
+\end{align*}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.137 6, 加上复化中点公式并评注
+
+% paragraph 作业 (end)
+
+% subsubsection 复化数值积分公式的稳定性 (end)
+
+% subsection 复化数值积分公式 (end)
+
+\subsection{自适应求数值积分} % (fold)
+\label{sub:自适应求数值积分}
+
+在给定误差$\epsilon$范围内求积分
+\[ I\pare{f} = \int_a^b f\pare{x}\,\rd{x} = I_n\pare{f}+E_n\pare{f}. \]
+\begin{cenum}
+    \item 任意选定$n$, 利用复化梯形公式计算$I_n\pare{f}$.
+    \item 加密网格, 用复化梯形公式计算$I_{2n}\pare{f}$, 在每个小区间中间增加节点. 误差大致满足
+    \[ E_n\pare{f} = 4E_{2n}\pare{f}. \]
+    \item 从而$\displaystyle \abs{E_{2n}\pare{f}} = \abs{I\pare{f} - I_{2n}\pare{f}} \approx \rec{3}\abs{I_{2n}\pare{f} - I_n\pare{f}}$.
+    \item 判断$\displaystyle \abs{E_{2n}\pare{f}} \approx \rec{3}\abs{I_{2n}\pare{f} - I_n\pare{f}} < \epsilon$是否满足. 不满足则继续加密.
+\end{cenum}
+
+% subsection 自适应求数值积分 (end)
+
+\subsection{Gauss积分} % (fold)
+\label{sub:gauss积分}
+
+在$\brac{a,b}$上选取节点$x_1,\cdots,x_n$使
+\[ \int_a^b f\pare{x}\,\rd{x} = \sum_{j=1}^n c_jf\pare{x_j} \]
+具有尽可能高的代数精度. 选取$c_1,\cdots,x_n$和$x_1,\cdots,x_n$可以令公式具有$2n-1$阶代数精度.
+
+\subsubsection{例子} % (fold)
+\label{ssub:例子}
+
+\begin{ex}
+    取$n=2$, $\brac{a,b} = \brac{-1,1}$, 对
+    \[ \int_a^b f\pare{x}\,\rd{x} = c_1f\pare{x_1} + c_2f\pare{x_2}, \]
+    试确定$c_1,c_2$和$x_1,x_2$, 使该数值积分公式能获得其最大代数精度.
+\end{ex}
+\begin{solution}
+    对于
+    \[ \begin{cases}
+        f\pare{x} = 1, & \displaystyle \int_{-1}^1 1\,\rd{x} = 2 = c_1 + c_2, \\
+        f\pare{x} = x, & \displaystyle \int_{-1}^1 x\,\rd{x} = 0 = c_1x_1 + c_2x_2, \\
+        f\pare{x} = x^2, & \displaystyle \int_{-1}^1 x^2\,\rd{x} = \frac{2}{3} = c_1x_1^2 + c_2x_2^2, \\
+        f\pare{x} = x^3, & \displaystyle \int_{-1}^1 x^3\,\rd{x} = 0 = c_1x_1^3 + c_2x_2^3.
+    \end{cases} \]
+    故
+    \[ c_1 = c_2 = 1,\quad x_1,x_2 = \mp \frac{\sqrt{3}}{3}. \qedhere \]
+\end{solution}
+
+% subsubsection 例子 (end)
+
+\subsubsection{\texorpdfstring{Gau\ss}{Gauss}积分公式} % (fold)
+\label{ssub:gauss积分公式}
+
+Legendre多项式构成正交多项式系, 且$L_n$在$\pare{-1,1}$上$n$个互异的实根. 对于低于$n$次的多项式$p\pare{x}$, 有
+\[ \int_{-1}^1 L_n\pare{x}p\pare{x}\,\rd{x} = 0. \]
+\begin{theorem}[Gau\ss-Legendre积分公式]
+    设$x_1,\cdots,x_n$是$n$阶Legendre多项式的根, 设
+    \[ c_j = \int_{-1}^1 \prod_{\substack{k=1\\k\neq j}}^n \frac{x-x_k}{x_j - x_k}\,\rd{x}. \]
+    若$p\pare{x}$是低于$2n$阶的多项式, 则
+    \[ \int_{-1}^1 p\pare{x}\,\rd{x} = \sum_{j=1}^n c_jp\pare{x_j}. \]
+\end{theorem}
+\begin{proof}
+    若$p$是小于$n$阶的多项式, 则结论显然. 否则若$p\pare{x}$次数小于$2n$, 设$p\pare{x} = Q\pare{x} L_n\pare{x} + R\pare{x}$, 其中$L_n\pare{x}$是$n$阶Legendre多项式, $Q\pare{x}$和$R\pare{x}$是低于$n$次的多项式. 则必定有
+    \[ \int_{-1}^1 Q\pare{x}L_n\pare{x}\,\rd{x} = 0, \]
+    故定理得证.
+\end{proof}
+Gau\ss-Legendre积分公式具有$2n-1$阶代数精度. 一般区间的积分可以通过变量代换
+\[ x = \frac{a+b}{2} + \frac{a-b}{2}t \]
+转化为$\brac{-1,1}$上的积分.
+\begin{ex}
+    用三点Gau\ss 积分计算$\displaystyle \int_{-\pi/2}^{\pi/2} \cos x\,\rd{x}$, 节点
+    \[ t_1 = -0.774597,\quad t_2 = 0,\quad t_3 = 0.774597. \]
+    积分系数
+    \[ c_1 = 0.555556,\quad c_2 = 0.888889,\quad c_3 = 0.555556. \]
+\end{ex}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.138 10(2)
+
+% paragraph 作业 (end)
+
+% subsubsection gauss积分公式 (end)
+
+% subsection gauss积分 (end)
+
+\subsection{Richardson外推法} % (fold)
+\label{sub:richardson外推法}
+
+用低阶方法可产生高阶结果.
+
+\subsubsection{Richardson外推法} % (fold)
+\label{ssub:richardson外推法}
+
+用$N\pare{h}$近似未知函数$M$, 即$M\approx N\pare{h}$. 假设$N\pare{h}$是$M$的一阶近似, 即
+\[ M = N\pare{h} = O\pare{h}. \]
+令$N_1\pare{h} = N\pare{h}$, 则有
+\[ M = N_1\pare{\frac{h}{2}} + \half k_1 h + \rec{2^2}k_2 h^2 + \rec{2^3}k_3 h^3 + \cdots. \]
+令$N_2\pare{h} = 2N_1\pare{h/2} - N_1\pare{h}$, 则有
+\[ M = N_2\pare{h} - \half k_2 h^2 - \frac{3}{4}k_3h^3 - \cdots, \]
+其中$N_2\pare{h}$是$M$的二阶近似. 令$N_3\pare{h} = \displaystyle \rec{3} \pare{4N_2\pare{\frac{h}{2}} - N_2\pare{h}}$, 则
+\[ M = N_3\pare{h} + \rec{8}k_3 h^3 + \cdots. \]
+故$N_3\pare{h}$是$M$的三阶近似. 同理可构造
+\[ N_j\pare{h} = \rec{2^{j-1}-1}\pare{2^{j-1}N_{j-1}\pare{\frac{h}{2}} - N_{j-1}\pare{h}}. \]
+有$N_j\pare{h}$是$M$的$j$阶近似.
+
+% subsubsection richardson外推法 (end)
+
+\subsubsection{Romberg积分} % (fold)
+\label{ssub:romberg积分}
+
+用复化梯形公式作为积分的初始近似, 之后可用Richardson外推法得到积分的高阶近似. 对于分点$x_0 = a$, $x_m = b$, $\displaystyle x_j = a+j\cdot h$, $j = 0,\cdots,m$, $\displaystyle h = \frac{b-a}{m}$. 设$m=2^{k-1}$, 则复化梯形公式为
+\begin{align*}
+    \int_a^b &= \frac{h}{2}\brac{f\pare{a} + f\pare{b} + 2\sum_{j=1}^{n-1} f\pare{x_j}} - \frac{b-2}{12}h^2 f''\pare{\mu} \\
+    &= \frac{h_k}{2}\brac{f\pare{a} + f\pare{b} + 2\sum_{j=1}^{2^{k-1}-1}f\pare{a+jh_k}} - \frac{b-a}{12}h_k^2 f''\pare{\mu_k}.
+\end{align*}
+取
+\begin{align*}
+    R_{k,1} &= \frac{h_k}{2}\brac{f\pare{a} + f\pare{b} + 2\sum_{j=1}^{2^{k-1}-1} f\pare{a+jh_k}}, \\
+    R_{1,1} &= \frac{h_1}{2}\brac{f\pare{a} + f\pare{b}}, \\
+    R_{2,1} &= \frac{h_2}{2}\brac{f\pare{a} + f\pare{b} + 2f\pare{a+h_2}} = \half \brac{R_{1,1} + h_1 f\pare{a+h_2}}, \\
+    R_{k,1} &= \half \curb{R_{k-1,1} + h_{k-1} \sum_{j=1}^{2^{k-2}} f\brac{a+\pare{2j-1}h_k}},\quad k = 2,\cdots,n.
+\end{align*}
+用$R_{k,1}$近似$\displaystyle \int_a^b f\pare{x}\,\rd{x}$, 收敛速度较慢.
+
+\paragraph{Richardson外推法} % (fold)
+\label{par:richardson外推法}
+
+记$\displaystyle R_{k,j} = \rec{4^{j-1}-1}\pare{4^{j-1}R_{k,j-1} - R_{k-1,j-1}}$, 则
+\begin{align*}
+    & \int_a^b f\pare{x}\,\rd{x} - R_{k,1} = h_1 h_k^2 + \sum_{j=2}^\infty k_j h_k^{2j}, \\
+    & \int_a^b f\pare{x}\,\rd{x} - R_{k+1,1} = \rec{4}k_1h_k^2 + \sum_{j=2}^\infty \rec{4^j}k_j h_k^{2j}, \\
+    & \int_a^b f\pare{x}\,\rd{x} - \rec{3}\pare{4R_{k+1,1} - R_{k,1}} = \rec{3} \sum_{j=2}^\infty \frac{1-4^{j-1}}{4^{j-1}} k_j h_k^{2j}. \\
+    & R_{k,2} = \rec{3}\pare{4R_{k+1,1} - R_{k,1}} \\
+    & \Rightarrow \int_a^b f\pare{x}\,\rd{x} - R_{k,1} = O\pare{h_k^2}, \\
+    & \Rightarrow \int_a^b f\pare{x}\,\rd{x} - R_{k,2} = O\pare{h_k^4}, \\
+    & \Rightarrow \int_a^b f\pare{x}\,\rd{x} - R_{k,j} = O\pare{h_k^{2j}}.
+\end{align*}
+
+% paragraph richardson外推法 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.137.8
+
+% paragraph 作业 (end)
+
+% subsubsection romberg积分 (end)
+
+% subsection richardson外推法 (end)
+
+\subsection{多重数值积分公式} % (fold)
+\label{sub:多重数值积分公式}
+
+采用均匀剖分, $x_i = a+ih_x$, $\displaystyle i = 0,\cdots,n_x$, 且$\displaystyle h_x = \frac{b-a}{n_x}$, $y = c + jh_y$, $j = 0,\cdots,n_y$, $\displaystyle h_y = \frac{d-c}{n_y}$, 且被积函数$f\pare{x,y}$性质足够好, 则
+\begin{cenum}
+    \item 计算$\displaystyle \int_c^d f\pare{x,y}\,\rd{y}$, 将$x$视为参数, 有
+    \[ \int_c^d f\pare{x,y}\,\rd{y} \approx h_y \brac{\half f\pare{x,y_0} + \half f\pare{x,y_{n_y}} + \sum_{j=1}^{n_y - 1}f\pare{x,y_j}}. \]
+    \item 计算$\displaystyle \int_a^b f\pare{x,y_j}\,\rd{x}$, 将$y_j$作为参数, 则有
+    \[ \int_a^b f\pare{x,y_j}\,\rd{x} \approx h_x\brac{\half f\pare{x_0,y_j} + \half f\pare{x_{n_x},y_j} + \sum_{i=1}^{n_x - 1}f\pare{x_i,y_j}}. \]
+    \item 计算$\displaystyle \sum_{j=1}^{n_y-1} \pare{\int_a^b f\pare{x,y_j}\,\rd{x}}$,
+    \[ \sum_{j=1}^{n_y-1} \int_a^b f\pare{x,y_j}\,\rd{x} = h_x \sum_{j=1}^{n_y - 1}\brac{\half f\pare{x_0,y_j} + \half f\pare{x_{n_x},y_j} + \sum_{n=1}^{n_x-1}f\pare{x_i,y_j}}. \]
+\end{cenum}
+最终
+\[ \int_a^b \int_c^d f\pare{x,y}\,\rd{x}\,\rd{y} = hk\sum_{i=0}^m \sum_{j=0}^n c_{i,j} f\pare{x_i,y_j}. \]
+其中积分区域四个角点的系数是$1/4$, $4$个边界的系数是$1/2$, 内部节点的系数是$1$.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.138 9(2)
+
+% paragraph 作业 (end)
+
+% subsection 多重数值积分公式 (end)
+
+% section 数值微分和数值积分 (end)
+
+\end{document}

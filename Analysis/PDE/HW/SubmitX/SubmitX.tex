@@ -1,0 +1,92 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{5.3}%
+偶関数であることに注意すれば、$\delta\pare{x}$のフーリエ係数は、
+\[ A_n = \rec{\pi}\int_{-\pi}^\pi \delta\pare{x} \cos nx\,\rd{x} = \rec{\pi},\quad B_n \equiv 0 \]
+となる. したがって、$\delta\pare{x}$のフーリエ級数は、
+\[ \boxed{\delta\pare{x} \sim \rec{2\pi} + \rec{\pi} \sum_{n=1}^\infty \cos nx} \]
+となる. リーマン·ルベーグの補題より
+\[ \lim_{n\rightarrow \infty} \sin n x \xlongequal{w} 0 \]
+だから$\displaystyle \int_{\epsilon<\abs{x}<\pi} \frac{f\pare{x}}{\sin \pare{x/2}}\sin \pare{N+\half }x\,\rd{x} \rightarrow 0,\quad \forall \epsilon > 0$.
+\[  \int_{-\pi}^{\pi} \rec{2\pi}\pare{1+2\sum_{n=1}^N \cos nx}\,\rd{x} = 1\quad\text{及び}\quad \lim_{n\rightarrow \infty} \lim_{x\rightarrow 0} \frac{\displaystyle \sin\pare{N+\half} x}{\displaystyle 2\pi \sin \frac{x}{2}} = \infty \]
+は明らか. よって
+\begin{align*}
+    \hspace{-2em}& \lim_{N\rightarrow \infty} \int_{-\pi}^\pi \rec{2\pi}\pare{1+2\sum_{n=1}^N \cos nx} f\pare{x} \,\rd{x}\\
+    \hspace{-2em} &= \lim_{N\rightarrow \infty} \int_{-\pi}^\pi \rec{2\pi}\pare{1+2\sum_{n=1}^N \cos nx} f\pare{0}\,\rd{x}\\
+    &\phantom{=\ } + \lim_{N\rightarrow \infty} \int_{-\pi}^\pi \rec{2\pi}\pare{1+2\sum_{n=1}^N \cos nx} \brac{f\pare{x} - f\pare{0}}\,\rd{x} \\
+    \hspace{-2em} &= f\pare{0} + \lim_{N\rightarrow \infty} \int_{-\epsilon}^\epsilon \rec{2\pi}\pare{1+2\sum_{n=1}^N \cos nx} \brac{f\pare{x} - f\pare{0}}\,\rd{x}\\
+    & \phantom{= f\pare{0}\ } + \lim_{N\rightarrow \infty} \int_{\epsilon<\abs{x}<\pi} \rec{2\pi}\pare{1+2\sum_{n=1}^N \cos nx} \brac{f\pare{x} - f\pare{0}}\,\rd{x} \\
+    & = f\pare{0} + O\pare{\epsilon} + 0 \rightarrow f\pare{0} = \int_{-\pi}^\pi \delta\pare{x}f\pare{x}\,\rd{x}
+\end{align*}
+を得る.
+\newprob{5.14 (1)}%
+$\displaystyle
+     \abs{\int_{\+bR} \cos nx f\pare{x}\,\rd{x}} = \abs{\left.\frac{\sin nx}{n}f\pare{x}\right\vert_{-\infty}^\infty - \int_{\+bR} \frac{\sin nx}{n}f'\pare{x}\,\rd{x}}
+     \le \rec{n} \int_{\+bR} \abs{f'}\,\rd{x} \rightarrow 0.$
+\par
+\newprobheader{(3)}%
+$\displaystyle \int_{\+bR} \rec{\sqrt{2\pi}\epsilon}e^{-x^2/2\epsilon^2}\,\rd{x} = 1$は明らか. 任意のもの$\+cE>0$に対して$\displaystyle \sup_{\abs{x}<\delta} \abs{f\pare{x} - f\pare{0}}<\+cE$となる$\delta$が存在します. $\displaystyle M = \sup_{x\in \+bR} \abs{f\pare{x}-f\pare{0}}$とする.
+\begin{align*}
+    & \abs{\int_{\+bR} \rec{\sqrt{2\pi}\epsilon}e^{-x^2/2\epsilon^2} f\pare{x}\,\rd{x} - f\pare{0}} = \abs{\int_{\+bR} \rec{\sqrt{2\pi}\epsilon}e^{-x^2/2\epsilon^2} \brac{f\pare{x}-f\pare{0}}\,\rd{x}} \\
+    &\le \abs{\int_{\abs{x}<\delta} \rec{\sqrt{2\pi}\epsilon}e^{-x^2/2\epsilon^2} \brac{f\pare{x}-f\pare{0}}\,\rd{x}} + \abs{\int_{\abs{x}>\delta} \rec{\sqrt{2\pi}\epsilon}e^{-x^2/2\epsilon^2} \brac{f\pare{x}-f\pare{0}}\,\rd{x}} \\
+    &\le \+cE + M \delta \int_{\abs{t}>\delta/\epsilon} \rec{\sqrt{2\pi}}e^{-t^2/2}\,\rd{t} = \+cE + O\pare{M\epsilon}.
+\end{align*}
+だから、
+\[ \abs{\int_{\+bR} \rec{\sqrt{2\pi}\epsilon}e^{-x^2/2\epsilon^2} f\pare{x}\,\rd{x} - f\pare{0}} = O\pare{M\epsilon} \]
+よって
+\[ \lim_{\epsilon\rightarrow 0} \rec{\sqrt{2\pi}\epsilon}e^{-x^2/2\epsilon^2} \xlongequal{w} \delta\pare{x} \]
+を得る.
+\par
+\newprobheader{(5)}\\[-2.5\baselineskip]
+\begin{flalign*}
+    \int_{\+bR} \frac{x}{\sqrt{2\pi}\epsilon^3} e^{-x^2/2\epsilon^2} f\pare{x}\,\rd{x} &= \int_{\+bR} \+dxd{}\brac{-\rec{\sqrt{2\pi}\epsilon} e^{-x^2/2\epsilon^2}} f\pare{x}\,\rd{x} && \\
+    &= \left. -\rec{\sqrt{2\pi}\epsilon} e^{-x^2/2\epsilon^2} f\pare{x}\right\vert_{-\infty}^\infty + \int_{\+bR} \rec{\sqrt{2\pi}\epsilon} e^{-x^2/2\epsilon^2}f'\pare{x}\,\rd{x} \\
+    & \rightarrow f'\pare{0} \quad \pare{\epsilon\rightarrow 0}\\
+    & = -\int_{\+bR} \delta'\pare{x}f\pare{x}\,\rd{x}.
+\end{flalign*}
+
+\end{document}

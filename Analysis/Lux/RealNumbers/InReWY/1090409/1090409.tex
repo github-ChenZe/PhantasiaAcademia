@@ -1,0 +1,18 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+注意到
+\begin{align*}
+    & \pare{1+x+x}^n\pare{1+1+x}^n \\
+    & = \brac{\sum_{k+l+m = n}\frac{n!}{k!l!m!}x^{k+l}}\brac{\sum_{k+l+m=n}\frac{n!}{k!l!m!}x^m} \\
+    & = \brac{\pare{1+2x}\pare{1+x}}^n = \pare{2+5x+2x^2}^n.
+\end{align*}
+注意到$x^n$项恰好为
+\[ \sum_{k+l+m=n} \pare{\frac{n!}{k!l!m!}}^2 x^n = \sum_{\substack{m+2l=n\\ m+n+k=n}} 2^k\pare{5x}^m \pare{2x^2}^l = \sum_{m+2l=n} 2^{2l}5^m x^n. \]
+这意味着$x^n$项的系数
+\[ \sum_{k+l+m=n} \pare{\frac{n!}{k!l!m!}}^2 = \sum_{m+2l=n} 2^{2l}5^m \]
+
+\end{document}

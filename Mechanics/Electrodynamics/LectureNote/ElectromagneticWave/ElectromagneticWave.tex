@@ -1,0 +1,927 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=潘海俊,gakka=電気力学,gakkabbr=ED,section=Denjiha]{styles/kurisu}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+
+\begin{document}
+
+\section{電磁波} % (fold)
+\label{sec:电磁波}
+
+\subsection{自由空间中的电磁波} % (fold)
+\label{sub:自由空间中的电磁波}
+
+\subsubsection{Maxwell方程组} % (fold)
+\label{ssub:maxwell方程组}
+
+自由空间中,
+\[ \begin{cases}
+    \div \+vE = 0, \\
+    \div \+vB = 0,
+\end{cases}\quad \begin{cases}
+    \curl \+vE = -\partial_t \+vB, \\
+    \curl \+vB = \partial_t \+vE/c^2.
+\end{cases} \]
+\begin{cenum}
+    \item 这是关于时间的一阶微分方程, 从而由Maxwell方程组加上初始条件$\curb{\+vE\pare{\+vr,0}, \+vB\pare{\+vr,0}}$可得任意时刻的$\curb{\+vE\pare{\+vr,t},\+vB\pare{\+vr,t}}$.
+    \item 若$t=0$时$\div \+vE = 0$, 此后的任意时刻由
+    \[ \div \pare{\curl \+vB} = \rec{r^2} \div \partial_t \+vE = 0 \]
+    知$\div \+vE$将一直保持为零.
+\end{cenum}
+
+% subsubsection maxwell方程组 (end)
+
+\subsubsection{波动方程} % (fold)
+\label{ssub:波动方程}
+
+由
+\begin{align*}
+    & \curl\pare{\curl \+vE} = -\curl \partial_t \+vB = -\partial_t \pare{\curl \+vB} = -\rec{c^2}\partial_t^2 \+vE \\
+    & = \laplacian \pare{\div \+vE} - \laplacian \+vE = -\laplacian \+vE, \\
+    & \Rightarrow \begin{cases}
+        \displaystyle \Box \+vE = \laplacian \+vE - \rec{c^2}\partial_t^2 \+vE = 0, \\
+        \displaystyle \Box \+vB = \laplacian \+vB - \rec{c^2}\partial_t^2 \+vB = 0,
+    \end{cases}
+\end{align*}
+有
+\begin{cenum}
+    \item $\+vE$和$\+vB$的每一个Cartesian分量都满足波动方程.
+    \item 波动方程加上无散条件$\div \+vE = 0$可以由$\curb{\+vE\pare{\+vr,0},\dot{\+vE}\pare{\+vr,0}}$确定$\+vE\pare{\+vr,t}$. $\dot{\+vE}\pare{\+vr,0}$可以由$\curl \+vB\pare{\+vr,0}$给出, 而利用$\partial_t \+vB = -\curl \+vE$可以由$\+vB\pare{\+vr,0}$给出$\+vB\pare{\+vr,t}$.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        设$\+vE = \+vE\pare{z,t}$, $\+vB = \+vB\pare{z,t}$, 试确定之.
+        \begin{cenum}
+            \item 波动方程
+            \begin{align*}
+                & 0 = \+D{z^2}D{^2 \+vE} - \rec{c^2}\+D{t^2}D{^2\+vE} \Rightarrow \+vE = \+vf\pare{z+ct} + \+vg\pare{z-ct}.
+            \end{align*}
+            \item 无散条件
+            \[ \begin{cases}
+                \displaystyle 0 = \div \+vE = \+DzD{E_z}, \\
+                \partial_t E_z = c^2 \pare{\curl \+vB}_z = c^2\pare{\partial_x B_y - \partial_y B_x} = 0
+            \end{cases} \Rightarrow E_z = \const. \]
+            $E_z$是恒定场, 不妨设为零.
+            \[ \+vE = \+vf_\perp \pare{z-ct} + \+vg_\perp \pare{z+ct}. \]
+            \item Faraday定律
+            \[ \+DtD{}\begin{Bmatrix}
+                \+vB_+ \\ \+vB_-
+            \end{Bmatrix} = -\curl \begin{Bmatrix}
+                \+vE_+ \\ \+vE_-
+            \end{Bmatrix} = -\+uz \times \+DzD{} \begin{Bmatrix}
+                \+vE_+ \\ \+vE_-
+            \end{Bmatrix} = -\+uz \times \rec{c} \+DtD{} \begin{Bmatrix}
+                \+vE_+ \\ \+vE_-
+            \end{Bmatrix}. \]
+            从而
+            \[ c\+vB_+ = -\+uz \times \+vE_+,\quad c\+vB_- = \+uz \times \+vB_-. \]
+        \end{cenum}
+    \end{ex}
+\end{sample}
+\begin{cenum}
+    \item 此时$\+vE$, $\+vB$与传播方向垂直, 谓\gloss{TEM波}.
+    \item $\pare{\+vE_+,\+vB_+,-\+uz}$, $\pare{\+vE_-,\+vB_-,-\+uz}$构成右手系, 且$\abs{\+vE_\pm} = c\abs{\+vB_\pm}$.
+\end{cenum}
+一般情形下
+\[ \+vE\pare{z,t} = \+vE_+ = \+vE_-,\quad c\+vB\pare{z,t} = -\+uz\times \+vE_+ + \+uz\times \+vE_-. \]
+可以重写为
+\begin{align*}
+    +\+uz:&\quad z-ct = \+uz \cdot \+vr - ct, \\
+    -\+uz:&\quad -\pare{z+ct} = -\+uz\cdot \+vr - ct.
+\end{align*}
+朝对于任意方向$\+uk$传播的电磁波, 引入相因子
+\[ \+uk:\quad \+vk\cdot \+vr - kct. \]
+
+% subsubsection 波动方程 (end)
+
+\subsubsection{沿着一般方向传播的电磁波} % (fold)
+\label{ssub:沿着一般方向传播的电磁波}
+
+对于沿着$\+uk$传播的电磁波, 有
+\[ \begin{cases}
+    \+vE\pare{\+vr,t} = \+vE_\perp\pare{\+vk\cdot \+vr - ckt} = E_\perp\pare{\phi}, & \phi = \+vk\cdot \+vr - ckt,\quad \+vk\cdot \+vE = 0, \\
+    c\+vB = \+uk\times \+vE.
+\end{cases} \]
+\begin{cenum}
+    \item $\+vE$, $\+vB$, $\+vk$构成右手系且$\abs{\+vE} = c\abs{\+vB}$.
+    \item 等相位面$\phi = \+vk\cdot \+vr - kct = \const$, 是垂直于$\+vk$的平面, 且$\+vE,\+vB$均相同.
+    \item 等相位面传播的速度(相速度)$\displaystyle \resumath{\+vv_p = \+dtd{\+vr} = c\+uk.}$
+    \[ 0 = \+dtd\phi = \grad \phi \cdot \+dtd{\+vr} + \+dtd\phi = \+vk\cdot \+dtd{\+vr} - kc. \]
+    第一项是相速度,
+    \[ \+vp = \+vk\cdot \+dtd{\+vr} = c. \]
+    \item 力学性质:
+    \begin{resume}
+        \vspace{-\baselineskip}
+        \begin{flalign*}
+            & \text{能量密度} && w = \half\epsilon_0 \pare{E^2 + c^2B^2} = \epsilon_0 E^2,\quad w_e = e_m, && \\
+            & \text{Poynting矢量} && \rec{\mu_0}\+vE\times \+vB = \epsilon_0 c^2 \+vE\times \+vB = \pare{\epsilon_0 E^2}c\+uk = wc\+uk, && \\
+            & \text{动量密度} && \+vg = \epsilon_0 \+vE\times \+vB = \frac{\+vS}{c^2} = \frac{w}{c}\+uk, && \\
+            & \text{角动量密度} && \+vl = \+vr\times \+vg \perp \+vk. &&
+        \end{flalign*}
+    \end{resume}
+\end{cenum}
+
+% subsubsection 沿着一般方向传播的电磁波 (end)
+
+\subsubsection{单色平面波} % (fold)
+\label{ssub:单色平面波}
+
+设$\pare{\+ve_1,\+ve_2,\+uk}$构成右手系, 则单色平面波可以写为
+\[ \begin{cases}
+    \+vE = E_1 \+ve_1 + E_2 \+ve_2 = A_1\cos\pare{\phi + \delta_1}\+ue_1 + A_2 \cos\pare{\phi + \delta_2} \+ue_2, \\
+    c\+vB = \+uk\times \+vE.
+\end{cases} \]
+其中$\phi = \+vk\cdot \+vr - \omega t$, $\omega = kc$.
+\begin{cenum}
+    \item 波长$\displaystyle \lambda = \frac{2\pi}{k}$, 周期$\displaystyle T = \frac{2\pi}{\omega}$, 相速度$\displaystyle v_p = \frac{\omega}{k}$.
+    \item 等相位面为等振幅面.
+    \item 电磁波的偏振以$\+vE$矢量的运动为准.
+    \[ \begin{cases}
+        \displaystyle \frac{E_1}{A_1}\sin \delta_2 - \frac{E_2}{A_2}\sin \delta_1 = \cos\delta \sin\pare{\delta_2 - \delta_1}, \\[0.5em]
+        \displaystyle \frac{E_1}{A_1}\cos \delta_2 - \frac{E_2}{A_2}\cos \delta_1 = \sin\phi \sin\pare{\delta_2 - \delta_1}.
+    \end{cases} \]
+    从而
+    \[ \pare{\frac{E_1}{A_1}}^2 + \pare{\frac{E_2}{A_2}}^2 - 2\frac{E_1}{A_1}\frac{E_2}{A_2}\cos\delta = \sin^2 \delta,\quad \delta = \delta_2 - \delta_1. \]
+    \begin{cenum}
+        \item $\sin \delta = 0$, $\displaystyle \frac{E_1}{A_1} = \pm \frac{E_2}{A_2}$, 此时构成线偏振.
+        \item $\sin \delta \neq 0$, 此时构成椭圆偏振.
+        \item 若特别有$\cos \theta = 0$, 则构成圆偏振.
+        \begin{cenum}
+            \item 若$\delta_2 - \delta_1 > 0$, 则构成右旋椭圆偏振. 如果$\sin \pare{\delta_2 - \delta_1} = 1$, 则构成右旋圆偏振(传播方向与旋转方向成右手关系).
+            \item 若$\delta_2 - \delta_1 < 0$, 则构成左旋椭圆偏振. 如果$\sin \pare{\delta_2 - \delta_1} = -1$, 则构成左旋圆偏振(传播方向与旋转方向成左手关系).
+        \end{cenum}
+    \end{cenum}
+\end{cenum}
+
+% subsubsection 单色平面波 (end)
+
+\subsubsection{复表示} % (fold)
+\label{ssub:复表示}
+
+记$\+vE = \+vE_0 e^{i\pare{\+vk\cdot \+vr - \omega t}} = \pare{E_{01}\+ue_1 + E_{02}\+ue_2}e^{i\phi}$, 其中$\+vE_{01} = A_1 e^{i\delta_1}$, $\+vE_{02} = A_2 e^{i\delta_2}$.
+\begin{cenum}
+    \item 物理场为其实部. 虚部只需将$\phi + \delta_{1,2}$替换为$\phi + \delta_{1,2} - \pi / 2$即可.
+    \item 偏振度$\displaystyle \tilde{R} = \frac{E_{02}}{E_{01}} = \frac{A_2}{A_1} e^{i\delta}$,$\delta = \delta_2 - \delta_1$.
+    \begin{cenum}
+        \item $\Im \tilde{R} = 0$, 则构成线偏振.
+        \item $\Im \tilde{R} \neq 0$, 构成椭圆偏振.
+        \begin{cenum}
+            \item $\Im \tilde{R} > 0$构成右旋.
+            \item $\Im \tilde{R} < 0$构成左旋.
+        \end{cenum}
+        \item $\Im \tilde{R} = \pm i$, 构成圆偏振.
+        \begin{cenum}
+            \item $\Im \tilde{R} = i$构成右旋.
+            \item $\Im \tilde{R} = -i$构成左旋.
+        \end{cenum}
+    \end{cenum}
+    引入
+    \[ \+vE_\pm = \frac{A}{\sqrt{2}}\pare{\+ue_1 \pm i\+ue_2}e^{i\pare{\phi + \delta_1}}. \]
+    \item 圆偏振基
+    \[ \+ue_+ = \frac{\+ue_1 + i\+ue_2}{\sqrt{2}},\quad \+ue_- = \frac{\+ue_1 - i \+ue_2}{\sqrt{2}}. \]
+    则
+    \[ \+ue_\pm^* \cdot \+ue_\pm = 1,\quad \+ue_\pm^* \cdot \+ue_\mp = 0. \]
+    则$\+vE$可以按这一圆偏振基展开,
+    \[ \+vE\pare{\+vr,t} = \pare{E_{0+}\+ue_+ + E_{0-}\+ue_-}e^{i\phi},\quad E_{0\pm} = \+ue_{\pm}^*\cdot \+vE_0. \]
+\end{cenum}
+设有
+\begin{cenum}
+    \item 向$+\+uz$传播的左旋光$\displaystyle \+vE_1 = \frac{A}{\sqrt{2}}\pare{\+ux - i\+uy} e^{i\pare{kz - \omega t}}$,
+    \item 向$-\+uz$传播的左旋光$\displaystyle \+vE_2 = \frac{A}{\sqrt{2}}\pare{\+ux + i\+uy} e^{i\pare{-kz - \omega t}}$,
+    \item 向$-\+uz$传播的右旋光$\displaystyle \+vE_3 = \frac{A}{\sqrt{2}}\pare{\+ux - i\+uy} e^{i\pare{-kz - \omega t}}$,
+\end{cenum}
+则$\+vE_1$和$\+vE_2$合成相应的磁场为
+\[ c\+vB_{12} = \Re\curb{\+uz\times \+vE_1 - \+uz\times \+vE_2}, \]
+$\+vE_1$和$\+vE_3$合成相应的磁场为
+\[ c\+vB_{13} = \Re\curb{\+uz\times \+vE_1 - \+uz\times \+vE_3}. \]
+可以发现两种情形都呈现驻波特性, 且$\+vE$和$\+vB$平行或反平行.
+
+\paragraph{复数} % (fold)
+\label{par:复数}
+
+设将场表示为
+\[ \+vF = \+vF_0 e^{i\pare{\+vk\cdot \+vr - \omega t}},\quad \begin{cases}
+    \Re \+vF \leftrightarrow \+vF, \\
+    L\brac{\Re \+vF} = 0 \Leftrightarrow L\brac{\+vF} = 0, \\
+    \resumath{\partial_t \leftrightarrow -i\omega,\quad \grad \leftrightarrow i\+vk.}
+\end{cases} \]
+且$\partial_t = -i\omega$, $\nabla = i\+vk$. 而
+\[ \begin{cases}
+    f_0 e^{iax} = g_0 e^{ibx} \Leftrightarrow f_0 = g_0, \quad a=b. \\
+    f_0 e^{iax} + g_0 e^{ibx} = h_0 e^{icx} \Leftrightarrow f_0 + g_0 = h_0,\quad a=b=c.
+\end{cases} \]
+第二条性质的证明可以通过多次求导得到,
+\[ \begin{cases}
+    f_0 + g_0 = h_0, \\
+    af_0 + bg_0 = ch_0, \\
+    a^2 f_0 + b^2 g_0 = c^2 h_0
+\end{cases} \Rightarrow a=b=c. \]
+\begin{sample}
+    \begin{ex}
+        设$f\pare{\+vr,t} = f_0\pare{\+vr} e^{-i\omega t}$, $g\pare{\+vr,t} = g_0\pare{\+vr} e^{-i\omega t}$. 则
+        \begin{align*}
+            \expc{\Re f\cdot \Re g} &= \frac{\omega}{2\pi}\int_0^{2\pi / \omega} \rd{t}\, \Re f\cdot \Re g \\
+            &= \expc{\frac{f+f^*}{2} \cdot \frac{g+g^*}{2}} \\
+            &= \rec{4}\expc{fg^* + f^*g + fg + f^*g^*} \\
+            &= \half \Re\pare{f^* g} = \half \Re\pare{f_0^* g_0}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{pitfall}
+    对于非线性量, 复数表示不一定得到和实数表示相同的结论.
+\end{pitfall}
+\begin{resume}
+    若$\+vf$, $\+vg$为时谐场, 则
+    \begin{align*}
+        \expc{\Re \+vf\cdot \Re \+vg} = \half \Re\pare{\+vf^*\cdot \+vg}, \\
+        \expc{\abs{\Re f}^2} = \half f_0^* \cdot \+vf = \half \abs{\+vf}^2, \\
+        \expc{\Re \+vf\times \Re \+vg} = \half \Re\pare{\+vf^* \times \+vg}.
+    \end{align*}
+\end{resume}
+\begin{sample}
+    \begin{ex}
+        对于$\+vE = \+vE_0 e^{i\pare{\+vk\cdot \+vr - \omega t}}$, 有(注意到$\partial_t = -i\omega$, $\grad = i\+vk$)
+        \begin{cenum}
+            \item 波动方程$\displaystyle \laplacian \+vE = \rec{c^2} \partial_t^2 \+vE \Rightarrow -\+vk\cdot \+vk = -\frac{\omega^2}{c^2} \Rightarrow k = \frac{\omega}{c}$.
+            \item 无散条件$\div \+vE = 0 \Rightarrow \+vk\cdot \+vE = 0$.
+            \item Faraday定律$\curl \+vE = -\partial_t \+vB$,
+            \[ \Rightarrow i\+vk\times \+vE = i\omega \+vB \Rightarrow \+vB = \frac{\+vk\times \+vE}{\omega},\quad c\+vB = \+uk \times \+vE. \]
+        \end{cenum}
+    \end{ex}
+\end{sample}
+
+% paragraph 复数 (end)
+
+% subsubsection 复表示 (end)
+
+% subsection 自由空间中的电磁波 (end)
+
+\subsection{绝缘介质中的电磁波} % (fold)
+\label{sub:绝缘介质中的电磁波}
+
+简单介质中的Maxwell方程组表明, 对于单色波(无色散, 均匀介质)
+\[ \begin{cases}
+    \div \+vD = 0 \Rightarrow \div \+vE = 0, \\
+    \div \+vB = 0,
+\end{cases}\quad \begin{cases}
+    \curl \+vE = -\partial_t \+vB, \\
+    \curl \+vH = \partial_t \+vD \Rightarrow \curl \+vB = \mu\epsilon \partial_t \+vE.
+\end{cases} \]
+将一般的时变场写作
+\begin{align*}
+    & \+vE\pare{\+vr,t} = \int \rd{\omega}\, \+vE\pare{\+vr,t} e^{-i\omega t}, \\
+    & \+vD\pare{\+vr,t} = \int \rd{\omega}\, \+vD\pare{\+vr,\omega} e^{i\omega t} = \int \rd{\omega}\, \epsilon\pare{\+vr,\omega}\+vE\pare{\+vr,\omega} e^{i\omega t}.
+\end{align*}
+
+\subsubsection{时谐场} % (fold)
+\label{ssub:时谐场}
+
+时谐场满足
+\[ \begin{cases}
+    \+vE\pare{\+vr,t} = \+vE\pare{\+vr}e^{-i\omega t}, \\
+    \+vH\pare{\+vr,t} = \+vH\pare{\+vr}e^{-i\omega t},
+\end{cases} \Rightarrow \begin{cases}
+    \+vD = \epsilon\pare{\omega} \+vE, \\
+    \+vB = \mu\pare{\omega} \+vH.
+\end{cases} \]
+Maxwell方程组对于非均匀介质亦成立的形式为
+\[ \begin{cases}
+    \div \+vD = 0, \\
+    \div \+vB = 0,
+\end{cases} \Leftarrow \begin{cases}
+    \curl \+vE = +i\omega \+vB, \\
+    \curl \+vH = -i\omega \+vD.
+\end{cases} \]
+\begin{cenum}
+    \item 独立方程
+    \[ \curl \+vE = i\omega \+vB,\quad \curl \+vH = -i\omega \+vD. \]
+    均匀介质内$\curl \+vE = i\omega \mu \+vH$, $\curl \+vH = -i\omega \epsilon \+vE$. 边值关系为$\+un\times \pare{\+vE_2 - \+vE_1} = 0$, $\+un\times \pare{\+vH_2 - \+vH_1} = 0$. 且$\+vD$, $\+vB$法向分量连续.
+    \item 引入参数
+    \[ \begin{array}{ll}
+        \text{折射率} & n=c\sqrt{\mu\epsilon} = \sqrt{\mu_r \epsilon_r} \approx \sqrt{\epsilon_r}, \\
+        \text{固有阻抗} & Z = \sqrt{\mu/\epsilon} \Rightarrow Z_0 = \sqrt{\mu_0/\epsilon_0} \approx \SI{377}{\ohm}.
+    \end{array} \]
+\end{cenum}
+有
+\[ \curl\pare{\curl \+vE} = \cancelto{0}{\grad\pare{\div \+vE}} - \laplacian \+vE = +i\omega \mu \curl \+vH = \omega^2 \mu\epsilon \+vE. \]
+
+% subsubsection 时谐场 (end)
+
+\subsubsection{Helmholtz方程} % (fold)
+\label{ssub:helmholtz方程}
+
+电场满足
+\[ \begin{array}{lll}
+    \text{Helmholtz方程} & \laplacian \+vE + k^2 \+vE = 0, & k = \omega\sqrt{\mu\epsilon} = \omega n/c, \\
+    \text{无散条件} & \div \+vE = 0, \\
+    \text{Faraday定律} & \displaystyle \+vH = -\frac{i}{\omega\mu} \curl \+vE, & \displaystyle \+vB = -\frac{i}{\omega}\curl \+vE.
+\end{array} \]
+在这些条件下,
+\begin{align*}
+    \curl \+vH &= -\frac{i}{\omega}{\mu} \curl\pare{\curl \+vE} = -\frac{i}{\omega\mu}\brac{\grad\pare{\div \+vE} - \laplacian \+vE} \\
+    &= \frac{i}{\omega\mu}\pare{-k^2 \+vE} = -i\omega\epsilon \+vE.
+\end{align*}
+设$u\pare{\+vr} = u\pare{x,y,z} = E_x\pare{\+vr} = X_1\pare{x_1} X_2\pare{x_2} X_3\pare{x_3}$, 则
+\[ \rec{X_1} \+d{x_1^2}d{^2X_1} + \rec{X_2}\+d{x_2^2}d{^2X_2} + \rec{X_3}\+d{x_3^2}d{^2X_3} + k^2 = 0. \]
+故
+\[ -k_1^2 - k_2^2 - k_3^2 + k^2 = 0. \]
+从而
+\[ E_1 = E_{0x} e^{i \+vk\cdot \+vr}. \]
+
+\begin{cenum}
+    \item Helmholtz方程要求
+    \begin{align*}
+        & \+vE\pare{\+vr} = E_{01}e^{\+vk'\cdot \+vr} \+ux_1 + E_{02}e^{\+vk''\cdot \+vr}\+ux_2 + E_{03}e^{i\+vk'''\cdot \+vr}\+ux_3, \\
+        & k'^2 = k''^2 = k'''^2 = k^2 = \omega^2\mu\epsilon = \frac{\omega^2}{c^2}n^2.
+    \end{align*}
+    \item 无散条件要求
+    \[ \+vk' E_{01} e^{i\+vk'\cdot \+vr} + \+vk'' E_{02}e^{i\+vk''\cdot \+vr} + \+vk''' e^{i \+vk'''\cdot \+vr} = 0. \]
+    即
+    \[ \+vk' = \+vk'' = \+vk''' = \+vk,\quad \+vE = \+vE_0 e^{i \+vk\cdot \+vr},\quad \+vk\cdot \+vE_0 = 0. \]
+    \item Faraday定律要求
+    \[ \+vH = -\frac{i}{\omega\mu} \curl \+vE = \frac{\+vk\times \+vE}{\omega\mu}. \]
+\end{cenum}
+
+% subsubsection helmholtz方程 (end)
+
+\subsubsection{单色平面波} % (fold)
+\label{ssub:单色平面波}
+
+对于单色平面波,
+\[ \begin{cases}
+    \displaystyle \+vE\pare{\+vr,t} = \+vE_0 e^{i\pare{\+vk\cdot \+vr - \omega t}}, & \displaystyle \+vk\cdot \+vE_0 = 0,\quad k = \omega\sqrt{\mu\epsilon} = \frac{\omega}{c}n. \\
+    \displaystyle \+vH = \frac{\+vk\times \+vE}{\omega\mu}, & Z\+vH = \+uk\times \+vE.
+\end{cases} \]
+设$\+vk$为实数矢量, 则
+\begin{cenum}
+    \item 电场与磁场相位相同.
+    \item $\+vE$, $\+vH$, $\+vk$构成正交右手坐标系, $\abs{\+vE} = Z\abs{\+vH}$.
+    \item 相速度$\displaystyle \+vv_p = \frac{\omega}{k}\+uk = \frac{c}{n}\+uk$.
+    \item 力学性质:
+    \begin{align*}
+        & w = \half \epsilon \pare{\abs{\Re \+vE}^2 + Z^2 \abs{\Re \+vH}^2} = \epsilon \abs{\Re \+vE}^2, \\
+        & \expc{w} = \half \epsilon \abs{\+vE}^2 = \half \epsilon \+vE^*_0 \cdot \+vE_0, \\
+        & \expc{\+vS} = \expc{\Re \+vE\times \Re \+vH} = \half \Re\pare{\+vE_0^* \times \+vH_0} = \frac{\abs{\+vE_0}^2}{2Z}\+uk.
+    \end{align*}
+    取实的$\+vE$, $\+vH$, 则
+    \begin{align*}
+        \tensor{T} &= w \tensor{I} - \pare{\+vD\+vE + \+vB\+vH} \\
+        & = w\tensor{I} - \epsilon\pare{\+vE \+vE + Z^2 \+vH\+vH} \\
+        & = w\tensor{I} - \epsilon E^2 \pare{\+uE\+uE + \+uH\+uH} \\
+        & = w\pare{\tensor{I} - \+uE\+uE - \+uH\+uH} \\
+        & = w\+uk\+uk.
+    \end{align*}
+\end{cenum}
+
+% subsubsection 单色平面波 (end)
+
+% subsection 绝缘介质中的电磁波 (end)
+
+\subsection{电磁波在介质界面处的反射与透射} % (fold)
+\label{sub:电磁波在介质界面处的反射与透射}
+
+介质界面为$xy$平面, $z = 0$.
+\begin{center}
+    \begin{tikzpicture}
+        \draw[->] (-3,0) -- (3,0) node[right] {$x$};
+        \draw[->] (0,-2) -- (0,2) node[right] {$z$};
+        \draw (-3,0) node[above] {$2$};
+        \draw (-3,0) node[below] {$1$};
+        \draw[->] (-1.5,-1.5) -- (-0.1,-0.1);
+        \draw (-0.7,-0.7) node[above left] {$\+vk\+_I_$};
+    \end{tikzpicture}
+\end{center}
+设入射平面为$xz$平面,
+\[ \+vk\+_I_ = k\+_I\mathnormal{x}_ \+ux + k\+_I\mathnormal{z}_ \+uz. \]
+设
+\begin{flalign*}
+    & \text{入射波} && \+vE\+_I_\pare{\+vr,t} = \+vE\+_0I_ e^{i\pare{\+vk\+_I_\cdot \+vr - \omega t}},\quad \+vk\+_I_ \cdot \+vE\+_0I_ = 0,\quad k\+_I_ = k_1 = \frac{\omega}{c}n_1, \\
+    & \text{反射波} && \+vE\+_R_\pare{\+vr,t} = \+vE\+_0R_ e^{i\pare{\+vk\+_R_\cdot \+vr - \omega t}},\quad \+vk\+_R_ \cdot \+vE\+_0R_ = 0,\quad k\+_R_ = k\+_I_ = k_1, \\
+    & \text{透射波} && \+vE\+_T_\pare{\+vr,t} = \+vE\+_0T_ e^{i\pare{\+vk\+_T_\cdot \+vr - \omega t}},\quad \+vk\+_T_ \cdot \+vE\+_0T_ = 0,\quad k\+_T_ = k_2 = \frac{\omega}{c}n_2.
+\end{flalign*}
+故
+\[ \begin{array}{cc}
+    \+vE_1\pare{\+vr,t} = \+vE\+_0I_ + \+vE\+_R_, & \+vE_2 = \+vE\+_T_\pare{\+vr,t}, \\
+    Z_1 \+vH_1 = \+uk\+_I_ \times \+vE\+_I_ + \+uk\+_R_\times \+vE\+_R_, & Z_2 \+vH_2 = \+vk\+_T_ \times \+vE\+_T_.
+\end{array} \]
+在$z=0$处的基本方程为
+\[ \+un \times \+vE_2 = \+un \times \+vE_1,\quad \+un\times \+vH_2 = \+un\times \+vH_1. \]
+分量形式为
+\[ \begin{cases}
+    E\+_I\mathnormal{x}_ + E\+_R\mathnormal{x}_ = E\+_T\mathnormal{x}_, \\
+    E\+_I\mathnormal{y}_ + E\+_R\mathnormal{y}_ = E\+_T\mathnormal{y}_,
+\end{cases}\quad \begin{cases}
+    H\+_I\mathnormal{x}_ + H\+_R\mathnormal{x}_ = H\+_T\mathnormal{x}_, \\
+    H\+_I\mathnormal{y}_ + H\+_R\mathnormal{y}_ = H\+_T\mathnormal{y}_.
+\end{cases} \]
+
+\subsubsection{边值关系对波矢的限制} % (fold)
+\label{ssub:边值关系对波矢的限制}
+
+当$z=0$时, 有
+\[ \pare{\cdots} e^{i\pare{\+vk\+_I_\cdot \+vr - \omega t}} + \pare{\cdots} e^{i\pare{\+vk\+_R_\cdot \+vr - \omega t}} = \pare{\cdots} e^{i\pare{\+vk\+_T_\cdot \+vr - \omega t}}. \]
+从而
+\[ \begin{cases}
+    k\+_R\mathnormal{x}_ = k\+_T\mathnormal{x}_ = k\+_I\mathnormal{x}_ = k_1 \sin \theta\+_I_, \\
+    k\+_R\mathnormal{y}_ = k\+_T\mathnormal{y}_ = k\+_I\mathnormal{y}_ = 0.
+\end{cases} \]
+\begin{cenum}
+    \item $\+vk\+_I_$, $\+vk\+_R_$, $\+vk\+_T_$及法向量共面.
+    \item 反射定律$\theta\+_R_ = \theta\+_I_ = \theta_1$.
+    \item 折射定律(Snell定律)$n_1 \sin\theta_1 = n_2 \sin\theta_2$. 即
+    \[ \frac{\sin\theta_1}{\sin\theta_2} = \frac{n_2}{n_1} = n_{21}. \]
+\end{cenum}
+
+% subsubsection 边值关系对波矢的限制 (end)
+
+\subsubsection{P波与S波} % (fold)
+\label{ssub:p波与s波}
+
+设$E\+_I\mathnormal{y}_ = 0$, 则
+\[ \+vH = \frac{\+vk\times \+vE}{\omega\mu} \Rightarrow H_x = \frac{k_z E_y}{\omega \mu}. \]
+有
+\[ \begin{cases}
+    E\+_R\mathnormal{y}_ = E\+_T\mathnormal{y}_, \\
+    \displaystyle H\+_R\mathnormal{x}_ = H\+_T\mathnormal{x}_ \Rightarrow -\frac{k\+_R\mathnormal{z}_}{\omega \mu_1}E\+_R\mathnormal{y}_ = -\frac{k\+_T\mathnormal{z}_}{\omega \mu_2}E\+_T\mathnormal{y}_,
+\end{cases} \Rightarrow E\+_R\mathnormal{y}_ = E\+_T\mathnormal{y}_ = 0. \]
+设$H\+_I\mathnormal{y}_ = 0$, 则
+\begin{align*}
+    & \+vH\times \+vk = \frac{k^2 \+vE - \pare{\+vk\cdot \+vE}\+vk}{\omega\mu} = \omega\epsilon \+vE, \\
+    & \Rightarrow \+vE = \frac{\+vH\times \+vk}{\omega\epsilon} \Rightarrow E_x = \frac{H_yk_z}{\omega \epsilon}.
+\end{align*}
+从而
+\[ \begin{cases}
+    E\+_R\mathnormal{x}_ = E\+_T\mathnormal{x}_, \\
+    H\+_R\mathnormal{y}_ = H\+_T\mathnormal{y}_,
+\end{cases} \Rightarrow H\+_R\mathnormal{y}_ = H\+_T\mathnormal{y}_ = 0. \]
+\begin{resume}
+    若入射波(其电场)垂直(S波)/平行(P波)于入射面偏振, 则反射波/透射波垂直/平行于入射面偏振.
+\end{resume}
+\begin{figure}[ht]
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{4.5cm}{PWave}
+        \caption{P波}
+    \end{subfigure}
+    \begin{subfigure}{5cm}
+        \centering
+        \incfig{4.5cm}{SWave}
+        \caption{S波}
+    \end{subfigure}
+\end{figure}
+
+% subsubsection p波与s波 (end)
+
+\subsubsection{边值关系对振幅的限制} % (fold)
+\label{ssub:边值关系对振幅的限制}
+
+对于P波,
+\begin{equation*}
+    \begin{cases}
+        \pare{E\+_0I_ - E\+_0R_}\cos\theta_1 = E\+_0T_\cos\theta_2, \\
+        Z_2\pare{E\+_0I_ + E\+_0R_} = Z_1 E\+_0T_,
+    \end{cases} \Leftarrow \begin{cases}
+        H\+_0I_ + H\+_0R_ = H\+_0T_, \\
+        Z\+vH = \+uk\times \+vE.
+    \end{cases}
+\end{equation*}
+对于S波,
+\begin{equation*}
+    \begin{cases}
+        E\+_0I_ + E\+_0R_ = E\+_0T_, \\
+        Z_2\pare{E\+_0I_ - E\+_0R_} \cos\theta_1 = Z_1 E\+_0T_\cos\theta_2,
+    \end{cases} \Leftarrow \pare{H\+_0I_ - H\+_0R_}\cos\theta_1 = H\+_0T_\cos\theta_2.
+\end{equation*}
+可得\gloss{Fresnel公式}(电场的比值)
+\begin{equation*}
+    \resumath{
+        \begin{cases}
+            \displaystyle r_\parallel = \frac{Z_1 \cos\theta_1 - Z_2\cos\theta_2}{Z_1\cos\theta_1 + Z_2\cos\theta_2}, \\[1em]
+            \displaystyle t_\parallel = \frac{2Z_2\cos\theta_1}{Z_1\cos\theta_1 + Z_2\cos\theta_2}.
+        \end{cases}\quad \begin{cases}
+            \displaystyle r_\perp = \frac{Z_2 \cos\theta_1 - Z_1\cos\theta_2}{Z_2\cos\theta_1 + Z_1\cos\theta_2}, \\[1em]
+            \displaystyle t_\perp = \frac{2Z_2\cos\theta_1}{Z_2\cos\theta_1 + Z_1\cos\theta_2}.
+        \end{cases}
+    }
+\end{equation*}
+\begin{cenum}
+    \item 对于法向入射的情形.
+    \[ r = \frac{Z_2-Z_1}{Z_2+Z_1},\quad t = \frac{2Z_2}{Z_2+Z_1}. \]
+    \item 能量输运:
+    \begin{flalign*}
+        & \text{反射系数} && R = \abs{\frac{\+un\cdot \expc{\+vS\+_R_}}{\+un\cdot \expc{\+vS\+_I_}}} = \frac{\abs{E\+_0R_}^2}{\abs{E\+_0I_}^2}, && \\
+        & \text{透射系数} && T = \abs{\frac{\+un\cdot \expc{\+vS\+_T_}}{\+un\cdot \expc{\+vS\+_I_}}} = \frac{Z_1\cos\theta_2}{Z_2\cos\theta_1}\frac{\abs{E\+_0T_}^2}{\abs{E\+_0I_}^2}. &&
+    \end{flalign*}
+    \item 弱磁性材料($\mu_1 \approx \mu_2 \approx \mu_0$),
+    \[ Z = \sqrt{\frac{\mu}{\epsilon}} \propto \rec{\sqrt{\epsilon}} \propto \rec{n} \propto \sin\theta \Rightarrow Z_i \mapsto \sin\theta_i. \]
+    此时
+    \[ \begin{cases}
+        \displaystyle r_\parallel = \frac{\tan \pare{\theta_1 - \theta_2}}{\tan\pare{\theta_1 + \theta_2}}, \\
+        \displaystyle t_\parallel = \frac{2\cos\theta_1\sin\theta_2}{\sin\pare{\theta_1+\theta_2}\cos\pare{\theta_1 - \theta_2}},
+    \end{cases}\quad \begin{cases}
+        \displaystyle r_\perp = -\frac{\sin\pare{\theta_1 - \theta_2}}{\sin\pare{\theta_1 + \theta_2}}, \\
+        \displaystyle t_\perp = \frac{2\cos\theta_1\sin\theta_2}{\sin\pare{\theta_1+\theta_2}}.
+    \end{cases} \]
+\end{cenum}
+可以证明
+\[ R + T = 1,\quad \pare{-\partial_t w = \div \+vS + \+vE\cdot \+vj_0 \Rightarrow \+un\cdot\pare{\+vS_2 - \+vS_1} = 0}. \]
+特例如
+\[ \begin{cases}
+    R_\parallel = \abs{r_\parallel}^2, \\
+    \displaystyle T_\parallel = \frac{Z_1\cos\theta_2}{Z_2\cos\theta_1} \abs{t_\parallel}^2,
+\end{cases} \Rightarrow R_\parallel + T_\parallel = \frac{\pare{Z_1 \cos\theta_1 - Z_2 \cos\theta_2}^2 + 4Z_1 Z_2\cos\theta_1 \cos\theta_2}{\pare{Z_1 \cos\theta_1 + Z_2\cos\theta_2}^2}. \]
+
+% subsubsection 边值关系对振幅的限制 (end)
+
+\subsubsection{偏振特性} % (fold)
+\label{ssub:偏振特性}
+
+当$\theta_1 + \theta_2 = \pi/2$, $r_\parallel = 0$. 此时$\displaystyle \tan\theta_1 = \frac{n_2}{n_1}$. 以该角度入射的圆偏光, 反射光的平行分量为零, 只有垂直分量.
+\par
+设$n_1 < n_2 \Rightarrow \theta_1 > \theta_2$,
+\begin{cenum}
+    \item $\theta_1 < \theta\+_B_$, $r_\parallel > 0$, $r_\perp < 0$, 设入射波为右旋圆偏振, 则出射为左旋椭圆偏振.
+    \begin{center}
+        \incfig{6cm}{InciI}
+    \end{center}
+    \item $\theta_1 > \theta\+_B_$, $r_\parallel < 0$, $r_\perp < 0$, 设入射波为右旋圆偏振, 则出射为右旋椭圆偏振.
+    \begin{center}
+        \incfig{6cm}{InciII}
+    \end{center}
+\end{cenum}
+
+% subsubsection 偏振特性 (end)
+
+\subsubsection{全反射} % (fold)
+\label{ssub:全反射}
+
+当$\theta_2 = \pi/2$, $n_1 \sin\theta_1 = n_2 \sin\theta_2 = n_2 \Rightarrow \sin\theta_1 = n_2/n_1$, 临界角
+\[ \sin \theta\+_c_ = n_{21}. \]
+当$n_1 > n_2$, 有$\theta_1 < \theta_2$. 当$\theta_1 = \theta_c$时,
+\begin{cenum}
+    \item 波矢满足
+    \[ \begin{cases}
+        k\+_I\mathnormal{x}_ = k\+_R\mathnormal{x}_ = k\+_T\mathnormal{x}_ = k_1 \sin\theta_1, \\
+        k\+_I\mathnormal{y}_ = k\+_R\mathnormal{y}_ = k\+_T\mathnormal{y}_ = 0,
+    \end{cases} \Rightarrow \begin{cases}
+        k\+_T\mathnormal{x}_ = k_1 \sin\theta_1,\quad k\+_T\mathnormal{y}_ = 0, \\
+        k\+_T\mathnormal{x}_^2 + k\+_T\mathnormal{z}_^2 = k\+_T_^2.
+    \end{cases} \]
+    从而
+    \[ k\+_T\mathnormal{z}_ = \sqrt{k_2^2 - k_1^2\sin\theta_1} = k_1\sqrt{n_{21}^2 - \sin^2\theta_1} \xlongequal{\theta_1 > \theta_c} i\kappa. \]
+    有
+    \[ \+vk\+_T_ = k\+_T\mathnormal{x}_ \+ux + i\kappa \+uz. \]
+    \item 透射的电场为
+    \[ \+vE\+_T_ = \+vE\+_0T_ e^{i\pare{\+vk\+_T_\cdot \+vr - \omega t}} = \+vE\+_0T_ e^{-\kappa z} e^{i\pare{k_2 \sin\theta x - \omega t}}. \]
+    此时出现振幅衰减.
+    \begin{cenum}
+        \item 这是一个沿$x$方向传播的, 相速度$\displaystyle v\+_p_ = \frac{\omega}{k_1\sin\theta_1} = \frac{c}{n_1\sin\theta_1} > \frac{c}{n_1}$的波.
+        \item 由$\displaystyle \sin \theta_1 > \sin \theta_c$, 有$\displaystyle v\+_p_ < \frac{c}{n_2}$. 故这一速度介于二介质的中的光速之间.
+        \item 波沿法向衰减, 穿透深度$\displaystyle d = \rec{\kappa}$.
+        \item 等相位面上各点的振幅不同.
+    \end{cenum}
+    \item 无散条件要求
+    \[ \div \+vE\+_T_ = 0 = i\brac{k\+_T\mathnormal{x}_ E\+_T\mathnormal{x}_ + i\kappa E\+_T\mathnormal{z}_}. \]
+    除非$\+vE\+_T_\parallel \+uy$, 否则$\+vE\+_T_$与传播方向不再垂直.
+    \item $\displaystyle \+vH = \frac{\+vk\+_T_\times \+vE\+_T_}{\omega \mu_2}$. 从而$\+vE$和$\+vH$不同相, 且不再是横波.
+    \item 反射系数
+    \[ \begin{cases}
+        k\+_T\mathnormal{x}_ = k_1 \sin\theta_1 = k_2 \sin\theta_2, & \sin\theta_2 = n_{12}\sin\theta_1, \\
+        k\+_T\mathnormal{z}_ = \sqrt{k_2^2 - k_1^2 \sin^2\theta_1} = k_2 \cos\theta_2, & \cos\theta_2 = i\sqrt{n_{12}^2 \sin^2\theta_1 - 1}.
+    \end{cases} \]
+    在此定义下, Fresnel公式仍然成立.
+    \[ \begin{cases}
+        0 = \+vk\+_T_\cdot \+vE\+_T_ = k_2 E\+_T\mathnormal{x}_\sin\theta_2 + k_2 E\+_T\mathnormal{z}_\cos\theta_2, \\
+        \displaystyle \+vE\+_0T_ = E\+_0T_ \+ue = E\+_0Tx_\+ux + E\+_0T\mathnormal{z}_ \+uz = E\+_0T\mathnormal{x}_\pare{\+ux + \+uz \tan\theta_2} = \frac{E\+_0T\mathnormal{x}_}{\cos\theta_2}\+ue.
+    \end{cases} \]
+    其中$\+ue$为电场振荡的方向. 在这一定义下, Fresnel公式无需改动即可成立. 只不过$\cos\theta_2$变为纯虚数,
+    \[ r_\parallel = \frac{a_1 - ib_1}{a_1 + ib_1} = e^{-i\delta_\parallel},\quad r_\perp = \frac{a_2 - ib_2}{a_2 + ib_2} = e^{-i\delta_\perp}. \]
+    对于弱磁性的介质, $Z = \sqrt{\mu/\epsilon} \propto 1/\sqrt{\epsilon} \propto \rec{n}$, 可替换$Z_1\mapsto n_2$, $Z_2\mapsto n_1$, 有
+    \[ R_\parallel = R_\perp = 1,\quad R_\parallel = \abs{r_\parallel}^2. \]
+    一般情形下,
+    \[ \begin{cases}
+        \+vE\+_I_ = E_\parallel \+ue\+_1I_ + E_\perp \+ue\+_2I_, \\
+        \+vE\+_R_ = E_\parallel e^{-i\delta_\parallel}\+ue\+_1R_ + E_\perp e^{-i\delta_\perp}\+ue\+_2R_ \Rightarrow R=1.
+    \end{cases} \]
+    线偏振光经过全反射可得椭圆偏振.
+    \item 透射系数
+    \[ T = \abs{\frac{\+un\cdot \expc{\+vS\+_T_}}{\+un\cdot \expc{\+vS\+_I_}}} = \frac{Z_1\cos\theta_2}{Z_2\cos\theta_1}\frac{\abs{E\+_T_}^2}{\abs{E\+_0I_}^2}. \]
+    此处
+    \[ \expc{\+vS} = \frac{\abs{\+vE_0}^2}{2Z}\+uk. \]
+    注意到
+    \begin{align*}
+        \expc{\+vS\+_T_} &= \half \Re\pare{\+vE\+_T_^*\times \+vH_2} = \rec{2\omega\mu_2}\Re\brac{\+vE\+_T_^* \times \pare{\+vk\+_T_\times \+vE\+_T_}} \\
+        &= \rec{2\omega\mu_2}\Re\brac{\abs{E\+_T_}^2 \+vk\+_T_ - \pare{\+vk\+_T_\cdot \+vE\+_T_^*}\+vE\+_T_}.
+    \end{align*}
+    可以发现
+    \[ \begin{cases}
+        \+vk\+_T_ \cdot \+vE\+_T_^* = k\+_T\mathnormal{x}_ E\+_T\mathnormal{x}_^* + i\kappa E\+_T\mathnormal{z}_^*, \\
+        0 = \pare{\+vk\+_T_\cdot \+vE}^* = k\+_T\mathnormal{x}_  E\+_T\mathnormal{x}_^* - i\kappa E\+_T\mathnormal{z}_^*.
+    \end{cases} \]
+    从而
+    \[ \+un\cdot \expc{\+vS\+_T_} = \+uz\cdot \expc{\+vS\+_T_} = \rec{2\omega\mu_2}\Re\brac{\abs{\+vE\+_T_}^2\pare{i\kappa} - 2i\kappa E\+_T\mathnormal{z}_^* E\+_T\mathnormal{z}_} = 0. \]
+    故$T = 0$.
+\end{cenum}
+对于一般的
+\[ \+vE = \+vE_0 e^{i\pare{\+vk\cdot \+vr - \omega t}}. \]
+Helmholtz方程中$\+vk\cdot \+vk = \omega^2\mu\epsilon$. 令
+\[ \+vk = \+v\beta + i\+v\alpha,\quad \begin{cases}
+    \beta^2 - \alpha^2 = \omega^2\mu\epsilon, \\
+    2\+v\alpha\cdot \+v\beta = 0.
+\end{cases} \]
+在一般意义下满足Helmholtz方程的电场为
+\[ \+vE_0 e^{-\+v\alpha\cdot \+vr} e^{i\pare{\+v\beta\cdot \+vr - \omega t}}. \]
+传播方向和衰减方向垂直.
+\par
+如果$E\+_T\mathnormal{z}_$是复数, 则
+\[ \+vE = \+vE_0 e^{-\+v\alpha\cdot \+vr} e^{i\pare{\+v\beta\cdot \+vr - \omega t}}. \]
+若$\+vE_0$仅有$\+uy$分量, $\+vE_0 = E_0 e^{i\delta} \+uy$, 则
+\[ \Re \+vE = \+uy E_0 e^{-\+v\alpha\cdot \+vr}\cos\pare{\+v\beta\cdot \+vr - \omega t + \delta}. \]
+
+% subsubsection 全反射 (end)
+
+% subsection 电磁波在介质界面处的反射与透射 (end)
+
+\subsection{导体对电磁波的影响} % (fold)
+\label{sub:导体对电磁波的影响}
+
+绝缘介质中的电磁波传播过程中无能量损失, 但导体中时变电场激发载流子形成电流会导致能量损失.
+
+\subsubsection{电荷与电流} % (fold)
+\label{ssub:电荷与电流}
+
+连续性方程要求
+\[ \+DtD{\rho_0} = -\div \+vj_0. \]
+由Ohm定律, $\+vj_0 = \sigma \+vE$,
+\[ \+DtD{\rho_0} = -\sigma \div \+vE = -\frac{\sigma}{\epsilon}\div \+vD = -\frac{\sigma}{\epsilon}\rho_0. \]
+从而
+\[ \rho_0\pare{\+vr,t} = \rho_0\pare{\+vr,0} e^{-t/\tau},\quad \tau = \frac{\epsilon}{\sigma}. \]
+其中$\rho_0$是净自由电荷密度.
+\begin{cenum}
+    \item 对于Ohm型导体, $\sigma$为有限值,
+    \[ \begin{cases}
+        \text{内部} & \+vj_0 = \sigma \+vE,\quad \rho_0 = 0,\\
+        \text{表面} & \+v\kappa = 0,\quad \sigma_0\text{由边界条件给出}.
+    \end{cases} \]
+    \item 理想导体, $\sigma = \infty$,
+    \[ \begin{cases}
+        \text{内部} & \+vj_0 = 0,\quad \rho_0 = 0 \\
+        \text{表面} & \+v\kappa_0,\sigma_0\text{由边界条件给出}.
+    \end{cases} \]
+\end{cenum}
+
+% subsubsection 电荷与电流 (end)
+
+考虑一般形式的Maxwell方程组,
+\[ \begin{array}{ll}
+    \div \+vD = \rho_0, & \curl \+vE = -\partial_t \+vB, \\
+    \div \+vB = 0, & \curl \+vH = \+vj_0 + \partial_t \+vD = \sigma \+vE + \partial_t \+vD.
+\end{array} \]
+
+\subsubsection{时谐场} % (fold)
+\label{ssub:时谐场}
+
+考虑$\begin{cases}
+    \+vE\pare{\+vr,t} = \+vE\pare{\+vr}e^{-i\omega t}, \\
+    \+vH\pare{\+vr,t} = \+vH\pare{\+vr}e^{-i\omega t}
+\end{cases}$, $\begin{cases}
+    \+vD\pare{\+vr,t} = \epsilon\pare{\+vr,\omega} \+vE\pare{\+vr,t}, \\
+    \+vB\pare{\+vr,t} = \mu\pare{\+vr,\omega} \+vH\pare{\+vr,t},
+\end{cases}$ 则
+\[ \begin{cases}
+    \curl \+vE = i\omega \+vB, \\
+    \curl \+vH = \sigma \+vE - i\omega \+vD.
+\end{cases} \]
+\begin{cenum}
+    \item 对于均匀导体内部,
+    \[ \begin{cases}
+        \div \+vE = 0, & \curl \+vE = i\omega\mu \+vH, \\
+        \div \+vH = 0, & \curl \+vH = \sigma \+vE - i\omega \epsilon \+vE.
+    \end{cases} \]
+    独立的方程只有右侧两个.
+    \item 边值关系为
+    \[ \begin{cases}
+        \+un\cdot \pare{\+vD_2 -  \+vD_1} = \sigma_0, & \+un\times \pare{\+vE_2 - \+vE_1} = 0, \\
+        \+un\cdot \pare{\+vB_2 - \+vB_1} = 0, & \+un\times\pare{\+vH_2 - \+vH_1} = 0.
+    \end{cases} \]
+    \item 引入复介电常数$\displaystyle \tilde{\epsilon} = \epsilon + i\frac{\sigma}{\omega} = \epsilon \pare{1 + i\frac{\sigma}{\epsilon \omega}}$. 
+    \begin{cenum}
+        \item 独立方程为
+        \[ \begin{cases}
+            \curl \+vE = i\omega\mu \+vH, \\
+            \curl \+vH = -i\omega\tilde{\epsilon} \+vE.
+        \end{cases} \]
+        \item 传导电流$\+vj_0 = \epsilon \+vE$与位移电流$\+vj\+_D_ = \partial_t \+vD = -i\omega\epsilon \+vE$. 故
+            \[ \frac{\abs{\+vj_0}}{\abs{\+vj\+_D_}} \approx \frac{\sigma}{\epsilon\omega} \Rightarrow \begin{cases}
+            \displaystyle \text{良导体}\pare{\frac{\sigma}{\epsilon \omega} \gg 1}\text{中, 传导电流为主}, \\
+            \displaystyle \text{不良导体}\pare{\frac{\sigma}{\epsilon \omega} \ll 1}\text{中, 位移电流为主},
+        \end{cases} \]
+        \item 复折射率$\tilde{n} = c\sqrt{\mu\tilde{\epsilon}}$, 复阻抗$\tilde{Z} = \displaystyle \sqrt{\frac{\mu}{\tilde{\epsilon}}}$. 注意$\Re \tilde{n} \neq n$, $\Re \tilde{Z} \neq Z$.
+    \end{cenum}
+    \item 由
+    \[ \curl\pare{\curl \+vE} = \grad\pare{\div \+vE} - \laplacian \+vE = i\omega\mu\curl \+vH = \omega^2\mu\tilde{\epsilon} \+vE. \]
+    可得Helmholtz方程
+    \[ \laplacian \+vE + \tilde{k}^2 \+vE = 0,\quad \tilde{k} = \omega\sqrt{\mu\tilde{\epsilon}} = \frac{\omega}{c}\tilde{n}. \]
+    附加
+    \[ \begin{cases}
+        \text{无散条件} & \div \+vE = 0, \\
+        \text{Faraday定律} & \displaystyle \+vH = -\frac{i}{\omega \mu} \curl \+vE.
+    \end{cases} \]
+\end{cenum}
+
+% subsubsection 时谐场 (end)
+
+\subsubsection{均匀导体中的单色平面波} % (fold)
+\label{ssub:均匀导体中的单色平面波}
+
+对于$\+vE = \+vE_0 e^{i\pare{\+vk\cdot \+vr - \omega t}}$, $\+vH = \+vH_0 e^{i\pare{\+vk\cdot \+vr - \omega t}}$. 此时成立$\+vk\cdot \+vk = \tilde{k}^2 = \omega^2 \mu \tilde{\epsilon}$的Helmholtz方程.
+\begin{cenum}
+    \item 波矢必定为复矢量, $\+vk = \+v\beta + i\+v\alpha$, $\+v\alpha$和$\+v\beta$为实数. 且$\beta^2 - \alpha^2 = \omega^2 \mu\epsilon$, $2\+v\alpha\cdot \+v\beta = \omega\mu\sigma$.
+    \item 电场$\+vE = \+vE_0 e^{-\+v\alpha\cdot \+vr}e^{i\pare{\+v\beta\cdot \+vr - \omega t}}$,
+    \begin{cenum}
+        \item 沿$\+v\beta$方向传播, 速度$v_p = \omega/\beta$.
+        \item 沿$\+v\alpha$方向衰减, 穿透深度$d = 1/\alpha$.
+        \item $\+v\alpha$和$\+v\beta$不垂直.
+    \end{cenum}
+    $\div \+vE = 0 \Rightarrow \+vk\cdot \+vE = \+v\beta\cdot \+vE + i\+v\alpha\cdot \+vE = 0$.
+    \item 无散条件不等价于横波条件, 仅当$\+vE \parallel \+v\beta\times \+v\alpha$时有$\+vE\perp \+v\beta$. 而
+    \[ \+vH = \frac{\+vk\times \+vE}{\omega\mu} = \frac{\pare{\+v\beta + i\+v\alpha}\times \+vE}{\omega \mu}. \]
+    \item $\+vE$和$\+vH$不同相.
+    \item 必定非横电磁波(TEM), 即不可能$\+vE$和$\+vH$都垂直于传播方向. 否则
+    \begin{align*}
+        & \+vE\perp \+v\beta \Rightarrow \+vE \parallel \+v\beta\times \+v\alpha \\
+        & \Rightarrow \+v\beta\cdot \+vH = i\frac{\+v\beta\pare{\+v\alpha\times \+vE}}{\omega\mu} = \frac{i}{\omega}{\mu}\pare{\+v\beta\times\+v\alpha}\cdot \+vE.
+    \end{align*}
+\end{cenum}
+
+% subsubsection 均匀导体中的单色平面波 (end)
+
+\subsubsection{导体表面的反射和透射} % (fold)
+\label{ssub:导体表面的反射和透射}
+
+设入射平面为$xz$平面, $k\+_I\mathnormal{x}_ \+ux = k\+_I\mathnormal{z}_\+uz$, 则
+\[ \begin{cases}
+    \+vE_1\pare{\+vr,t} = \+vE_{0I}e^{i\pare{\+vk\+_I_\cdot \+vr - \omega t}} + \+vE\+_0R_e^{i\pare{\+vk\+_R_\cdot \+vr - \omega t}}, & \displaystyle k\+_I_ = k\+_R_ = k_0 = \frac{\omega}{c} = \omega\sqrt{\mu_0\epsilon_0}. \\
+    \+vE_2\pare{\+vr,t} = \+vE_{0T}e^{i\pare{\+vk\+_T_\cdot \+vr - \omega t}}, & \+vk\+_T_ = \+v\beta + i\+v\alpha,\quad \beta^2 - \alpha^2 = \omega^2 \mu\epsilon,\quad 2\+v\alpha\cdot \+v\beta = \omega\mu\sigma.
+\end{cases} \]
+从而
+\begin{align*}
+    k_0 \sin\theta_1 &= k\+_I\mathnormal{x}_ = k\+_R\mathnormal{x}_ = k\+_T\mathnormal{x}_ = \beta_x + i\alpha_x, \\
+    0 &= k\+_I\mathnormal{y}_ = k\+_R\mathnormal{y}_ = k\+_T\mathnormal{y}_ = \beta_y + i\alpha_y.
+\end{align*}
+\begin{cenum}
+    \item $\+vk\+_I_$, $\+vk\+_R_$, $\+vk\+_T_$与法向共面, 且$\+v\alpha = \alpha\+uz$, 沿法向衰减.
+    \item 反射定律$\theta\+_I_ = \theta\+_R_ = \theta_1$.
+    \item 折射定律$\displaystyle \resumath{\tan\theta_2 = \frac{\beta_x}{\beta_z}.}$ $\displaystyle \beta_x = \frac{\omega}{c}\sin\theta_1$.
+    \[ \begin{cases}
+        \displaystyle \beta_z^2 - \alpha^2 = \omega^2\mu\epsilon - \frac{\omega^2}{c^2}\sin^2\theta_1 = \omega^2 \mu\epsilon\pare{1-\frac{\sin^2\theta_1}{n^2}}, \\
+        \displaystyle \alpha\beta_z = \frac{\omega\mu\sigma}{2}.
+    \end{cases} \]
+    从而
+    \[ \frac{\beta_z^2 - \alpha^2}{\alpha\beta_z} = \frac{2\omega\epsilon}{\sigma}\pare{1-\frac{\sin^2\theta_1}{n^2}}. \]
+    \item 在良导体近似$\displaystyle \frac{\sigma}{\epsilon\omega} \gg 1$下, $\displaystyle \resumath{\alpha \approx \beta \approx \sqrt{\frac{\omega\mu\sigma}{2}}}$. 此时
+    \[ \frac{\beta_x}{\beta_z} = \frac{\omega}{c}\sin\theta_1 \sqrt{\frac{2}{\omega\mu\sigma}} = \frac{\sin\theta_1}{c}\sqrt{\frac{2\omega\epsilon}{\mu\epsilon\sigma}} \Rightarrow \frac{\beta_x}{\beta_y} \approx \frac{\beta_x}{\beta_z} = \frac{\sin\theta_1}{n}\sqrt{\frac{2\omega\epsilon}{\sigma}} \ll 1. \]
+    \begin{cenum}
+        \item 透射波几乎沿着法向传播, $\theta_2 \approx 0$.
+        \item 相速度远小于相应的绝缘介质中的速度.
+        \[ v_p = \frac{\omega}{\beta} \approx \frac{\omega}{\beta_z} = \frac{\omega}{\alpha} = \sqrt{\frac{2\omega\epsilon}{\mu\epsilon\sigma}} = \frac{c}{n}\sqrt{\frac{2\omega\epsilon}{\sigma}} \ll \frac{c}{n}. \]
+        从而$\displaystyle d = \rec{\alpha} \approx \sqrt{\frac{2}{\omega\mu\sigma}} = \frac{v_p}{\omega} = \frac{\lambda}{2\pi}$.
+        \item 趋肤效应导致高频电磁波不易穿透导体.
+        \item 法向入射时, 良导体中的透射波为
+        \[ \begin{cases}
+            \+vE_1\pare{\+vr,t} = E\+_0I_ e^{i\pare{k_z z - \omega t}}\+uy + E\+_0R_e^{-i\pare{k_0 z + \omega t}}\+uy, \\
+            \+vE_2\pare{\+vr,t} = E\+_0T_e^{i\pare{\tilde{k}z - \omega t}},\quad \tilde{k} = \alpha\pare{1+i} \approx \sqrt{\omega\mu\sigma} e^{i\pi/4}.
+        \end{cases} \]
+        相应的磁场为
+        \[ \begin{cases}
+            \displaystyle \+vH_1\pare{\+vr,t} = \frac{k_0}{\omega\mu_0}\brac{-E\+_0I_ e^{i\pare{k_z z - \omega t}} + E\+_0R_ e^{-i\pare{k_0z + \omega t}}}\+ux, \\
+            \displaystyle \+vH_2\pare{\+vr,t} = -\frac{\tilde{k}}{\omega\mu} E\+_0T_ e^{-\alpha z}e^{i\pare{\alpha z - \omega t}}\+uz,\quad -\frac{\tilde{k}}{\omega\mu} e^{i\pi/4} = -\sqrt{\frac{\sigma}{\omega\mu}}e^{i\pi/4}.
+        \end{cases} \]
+        \begin{cenum}
+            \item $\+vH_2$比$\+vE_2$落后$\pi/4$相位.
+            \item $\displaystyle \frac{\expc{w\+_m_}}{\expc{w\+_e_}} = \frac{\mu\abs{H_2}^2}{\epsilon \abs{E_2}^2} = \frac{\mu}{\epsilon}\cdot \frac{\sigma}{\omega\mu} = \frac{\sigma}{\epsilon\omega} \gg 1$. 故良导体中以磁能为主.
+            \item 电流$\displaystyle \+vj = \sigma \+vE_2 = \sigma E\+_0T_ e^{-\alpha\pare{1-i}z}e^{i\omega t} \+uy$. 等效面电流
+            \begin{align*}
+                \+v\kappa &= \int_0^\infty \+vj\pare{z,t}\,\rd{z} = \frac{\sigma E\+_0T_}{\alpha\pare{1-i}}e^{-i\omega t}\+uy \\
+                &= \frac{\sigma E\+_0T_}{\sqrt{2}\alpha}e^{-i\pare{\omega t - \pi/4}}\+uy,\quad \kappa_0 = \frac{\sigma E\+_0T_}{\sqrt{2}\alpha}.
+            \end{align*}
+            \item Joule热
+            \begin{align*}
+                \expc{p} &= \+dVdP = \expc{\Re \+vE\cdot \Re \+vj} = \half \Re\pare{\+vE\cdot \+vj^*} \\
+                &= \half \sigma \abs{E\+_0T_}^2 e^{-2\alpha z}\+uy. \\
+                \+dSdP &= \int_0^\infty \expc{p}\,\rd{z} = \frac{\sigma}{4\alpha}\abs{E\+_0T_}^2 = \half \frac{\alpha}{\sigma}\abs{\kappa_0}^2 = \half \abs{\kappa_0}^2 R_s.
+            \end{align*}
+            其中$R_s = \alpha/\sigma$可以视为面电阻. 在板的表面处取$L\times L \times d$的体积元,
+            \[ R_s = \frac{L}{\sigma\cdot S\+_\perp_} = \rec{\sigma d} = \frac{\alpha}{\sigma}. \]
+            故可以穿透电流的Joule热视为穿透深度内面电流的Joule热. 等效体电流$J=\kappa_0/d$.
+            \item 设$\mu \approx \mu_0$, 则有振幅关系
+            \[ \begin{cases}
+                E\+_0I_ + E\+_0R_ = E\+_0T_, \\
+                k_0\pare{E\+_0I_ - E\+_0R_} = \tilde{k}E\+_0T_.
+            \end{cases} \]
+            可得
+            \begin{align*}
+                & r = \frac{E\+_0R_}{E\+_0I_} = \frac{k_0 - \tilde{k}}{k_0 + \tilde{k}} = \frac{k_0 d -  1 - i}{k_0 d + 1 + i}. \\
+                & R = \abs{r}^2 = \frac{\pare{1-k_0 d}^2 + 1}{\pare{1+k_0 d}^2 + 1},\quad k_0 d = \frac{\omega}{c}\sqrt{\frac{2}{\omega\mu_0\sigma}} = \rec{c}\sqrt{\frac{2\omega}{\mu_0\sigma}} \\
+                & = \frac{1-k_0 d}{1+k_0 d} \approx 1-2k_0 d.
+            \end{align*}
+            从而良导体必定为良反射体.
+        \end{cenum}
+    \end{cenum}
+\end{cenum}
+
+% subsubsection 导体表面的反射和透射 (end)
+
+% subsection 导体对电磁波的影响 (end)
+
+\subsection{谐振腔与波导体} % (fold)
+\label{sub:谐振腔与波导体}
+
+电磁波可由$LC$回路激发, $\omega_0 = 1/\sqrt{LC}$. 通过天线/谐振腔可激发$\SI{}{\milli\meter}$量级的信号. 电磁波可由导线输运, 但对于高频电磁信号, 应当使用同轴电缆或波导管.
+
+\subsubsection{理想导体边界条件下的时谐场} % (fold)
+\label{ssub:理想导体边界条件下的时谐场}
+
+$\+vE\pare{\+vr,t} = \+vE\pare{\+vr} e^{-i\omega t}$, $\+vH\pare{\+vr,t} = \+vH\pare{\+vr}e^{-i\omega t}$. 假设波导管内部为真空(无介质).
+\begin{cenum}
+    \item 电场求解: 方程
+    \[ \laplacian \+vE + k^2 \+vE = 0,\quad k = \omega\sqrt{\mu_0\epsilon_0} = \omega/c,\quad \div \+vE = 0. \]
+    边界条件: $\left.\+un\times \+vE\right\vert_S = 0$, 并借用$\pare{\div \+vE}_S = 0$.
+    \[ \pare{\div \+vE}_S = 0 \Rightarrow \begin{cases}
+        \text{平面边界} & \displaystyle \left.\+DnD{E_n}\right\vert_S = 0, \\
+        \text{球形边界} & \displaystyle \left.\rec{E_r}\+DrD{E_r}\right\vert_{r=R} = -\frac{2}{R}.
+    \end{cases} \]
+    \item $\displaystyle \+vH = -\frac{i}{\omega\mu}\curl \+vE$.
+    \item 其它物理量: $\+un$指向导体外.
+    \[ \sigma_0 = \+un\cdot \+vD\vert_S,\quad \+v\kappa_0 = \+vn\times \+vH\vert_S. \]
+\end{cenum}
+
+% subsubsection 理想导体边界条件下的时谐场 (end)
+
+\subsection{谐振腔} % (fold)
+\label{sub:谐振腔}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{HarmonicChamber}
+\end{figure}
+令$E_x\pare{x,y,z} = X\pare{x}Y\pare{y}Z\pare{z}$,
+\[ \rec{X}\+d{x^2}d{^2X} + \rec{Y}\+d{y^2}d{^2Y} + \rec{Z}\+d{z^2}d{^2Z} + k^2 = 0. \]
+从而
+\[ X \sim \curb{\begin{array}{c}
+    \cos k_1 x \\
+    \sin k_1 x
+\end{array}},\quad Y = \curb{\begin{array}{c}
+    \cos k_2 y \\
+    \sin k_2 y
+\end{array}},\quad Z = \curb{\begin{array}{c}
+    \cos k_3 z \\
+    \sin k_3 z
+\end{array}}. \]
+边界条件要求
+\begin{align*}
+    & \partial_x E_x\vert_{x=0} = 0 = \partial_x E_x \vert_{x=a}, \\
+    & E_x\vert_{y=0} = 0 = E_x\vert_{y=b}, \\
+    & E_x\vert_{z=0} = 0 = E_x\vert_{z=d}.
+\end{align*}
+从而
+\[ \begin{cases}
+    X \propto \cos k_1 x, & k_1 a = m\pi, \\
+    Y \propto \sin k_2 y, & k_2 b = n\pi, \\
+    Z \propto \sin k_3 z, & k_3 d = l\pi.
+\end{cases} \]
+相应有电场
+\[ \begin{cases}
+    E_x = A_1 \cos k_1 x \sin k_2 y \sin k_3 z\, e^{-i\omega t}, \\
+    E_y = A_2 \sin k_1 x \cos k_2 y \sin k_3 z\, e^{-i\omega t}, \\
+    E_z = A_3 \sin k_1 x \sin k_2 y \cos k_3 z\, e^{-i\omega t}.
+\end{cases}\quad k_1 = \frac{m\pi}{a},\quad k_2 = \frac{n\pi}{b},\quad k_3 = \frac{l\pi}{d}. \]
+$m,n,l$中至多一个为零. 为了在空腔中的每一个点出都成立无散条件, $x,y,z$对应的$k$都是相同的, 且$\+vk\cdot \+vA = k_1A_1 + k_2A_2 + k_3A_3 = 0$. 每一个这样的解都称为\gloss{电磁场的本征振荡解}.
+\begin{cenum}
+    \item 驻波解: 每一组$\pare{m,n,l}$表示一种本征模式, 对应两个独立的偏振模式($A_1:A_2:A_3$), 除非其中一个$\+vk$分量为零.
+    \item 本征频率只能取分立数值,
+    \[ k = \sqrt{k_1^2 + k_2^2 + k_3^2} \Rightarrow \omega = kc \Rightarrow \omega_{mnl} = \pi c\sqrt{\pare{\frac{m}{a}}^2 + \pare{\frac{n}{b}}^2 + \pare{\frac{l}{d}}^2}. \]
+    \item 在谐振腔内激发的电磁波存在最低频率(\gloss{下截止频率}). 设$a\ge b\ge d$, 则
+    \[ f\+_min_ = \frac{\omega_{110}}{2\pi} = \frac{c}{2}\sqrt{\rec{a^2} + \rec{b^2}} \Rightarrow \lambda\+_max_ = \rec{f\+_min_} = \frac{2}{\displaystyle \sqrt{\rec{a^2} + \rec{b^2}}}. \]
+\end{cenum}
+
+% subsection 谐振腔 (end)
+
+% subsection 谐振腔与波导体 (end)
+
+% section 电磁波 (end)
+
+\end{document}

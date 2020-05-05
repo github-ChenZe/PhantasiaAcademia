@@ -1,6 +1,20 @@
 \documentclass[hidelinks]{ctexart}
 
+\usepackage[sensei=潘海俊,gakka=電気力学,gakkabbr=ED,section=Seijiba]{styles/kurisu}
 \usepackage{van-de-la-illinoise}
+\usepackage{van-le-trompe-loeil}
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
 
 \begin{document}
 
@@ -66,7 +80,623 @@
 
 % subsubsection 基本方程 (end)
 
+\subsubsection{磁矢势} % (fold)
+\label{ssub:磁矢势}
+
+选择$\+vA$使$\curl \+vA\pare{\+vr} = \+vB\pare{\+vr}$, 即
+\[ \oint_{\partial \Sigma} \+vA\cdot \rd{\+vl} = \oint_{\+v\sigma}\cdot \+vB. \]
+\begin{cenum}
+    \item 不确定性: $\+vA'\pare{\+vr} = \+vA\pare{\+vr} + \grad \psi\pare{\+vr}$.
+    \item Coulomb规范: $\div \+vA = 0$.
+    \item 势方程(Coulomb规范下): $\laplacian \+vA = -\mu_0 \+vj$. 从而
+    \[ \mu_0 \+vj = \curl\pare{\curl \+vA} = \grad\pare{\div \+vA} - \laplacian \+vA. \]
+    \begin{cenum}
+        \item $\+vA_0 = \+vA_2$.
+        \item $\+un\times \pare{\curl \+vA_2 - \curl \+vA_2} = \mu_0 \+v\kappa$.
+        \item $\mu_0 \+vj = \curl\pare{\curl \+vA} = \grad\pare{\div \+vA} - \laplacian \+vA$.
+    \end{cenum}
+    \item 局域电势分布: $\displaystyle \+vA\pare{\+vr} = \frac{\mu_0}{4\pi} \iiint \rd{V'}\, \frac{\+vj\pare{\+vr'}}{\+gr}$. 可验证
+    \begin{align*}
+        \div \+vA &= -\frac{\mu_0}{4\pi} \iiint \rd{V'} \+vj\pare{\+vr'}\cdot \grad' \rec{\+gr} \\
+        &= -\frac{\mu_0}{4\pi}\brac{\oiint \rd{\+v\sigma'}\cdot \frac{\+vj\pare{\+vr'}}{\+gr} - \iiint \rd{V'}\, \frac{\grad'\+v\cdot \+vj\pare{\+vr'}}{\+gr}} = 0.
+    \end{align*}
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        对于无限长均匀圆柱体电流, 设半径$a$, 由对称性$\+vA = A\pare{s}\+uz$. 故
+        \[ \curl \+vA = \curl\pare{A\pare{s}\+uz} = \grad A\pare{s}\times \+uz = \+dsdA \+us\times \+uz. \]
+        从而
+        \[ \curl \+vA = -\+dsdA\+u\phi = \+vB = \begin{cases}
+            \displaystyle \frac{\mu_0 Is}{2\pi a^2}\+u\phi, & s<a, \\
+            \displaystyle \frac{\mu_0 I}{2\pi s}\+u\phi, & s>a.
+        \end{cases} \]
+        即有
+        \[ A_1 = -\frac{\mu_0 Is^2}{4\pi a^2} + C_1,\quad A_2 = -\frac{\mu_0 I}{2\pi}\ln \frac{s}{a} = C_2. \]
+        不妨设$C_1 = 0$, 则$\displaystyle C_2 = -\frac{\mu_0I}{4\pi}$, 有
+        \[ A = \begin{cases}
+            \displaystyle -\frac{\mu_0 I}{4\pi}\frac{s^2}{a^2}, & s<a, \\[.5em]
+            \displaystyle -\frac{\mu_0 I}{4\pi}\brac{1+2\ln\frac{s}{a}}, & s>a.
+        \end{cases} \]
+        由此可以计算$0<s'<s$, $0<z'<l$区域内的磁通量
+        \begin{align*}
+            & \Phi_B = -\int_0^s \rd{s'}\int_0^l \rd{z}\, B = -l\int_0^s B\,\rd{s}. \\
+            & s<a \Rightarrow \Phi_B = -l \int_0^s \frac{\mu_0 Is}{2\pi a^2}\,\rd{s} = -l\frac{\mu_0 I}{4\pi}\frac{s^2}{a^2}. \\
+            & s>a \Rightarrow \Phi_B = -l\frac{\mu_0}{4\pi} - l\int_a^s \frac{\mu_0 I}{2\pi s'}\,\rd{s'} = -l\frac{\mu_0}{4\pi} - l \frac{\mu_0 I}{2\pi} \ln \frac{s}{a}.
+        \end{align*}
+        也可以由电流给出这一结果.
+        \begin{align*}
+            & \laplacian \+vA = -\mu_0 \+vj \Rightarrow \laplacian \+vA\pare{s} = \rec{s}\+dsd{}\pare{s\+dsdA} = -\mu_0 j. \\
+            & s\+dsdA = -\half \mu_0 js^2 + C \Rightarrow A = -\rec{4}\mu_0 js^2 + D \ln \frac{s}{a} + D,\quad j = \frac{I}{\pi a^2}. \\
+            & \begin{cases}
+                \displaystyle A_1 = -\frac{\mu_0 I}{4\pi}\frac{s^2}{a^2} + D, \\[.5em]
+                \displaystyle A_2 = C\ln\frac{s}{a} - \frac{\mu_0 I}{4\pi} + D.
+            \end{cases} \\
+            & \+un\times\pare{\+vB_2 - \+vB_1} = 0, \quad \+vB = -\+dsdA\+u\phi \Rightarrow \+dsd{A_1} = \+dsd{A_2} \\
+            & \Rightarrow -\frac{\mu_0 I}{2\pi a} = \frac{C}{a} \Rightarrow C = -\frac{\mu_0 I}{2\pi}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 磁矢势 (end)
+
+\subsubsection{介质中的基本方程} % (fold)
+\label{ssub:介质中的基本方程}
+
+定义$\displaystyle \+vH = \frac{\+vB}{\mu_0} - \+vM$, 则
+\[ \div \+vB\pare{\+vr} = 0,\quad \curl \+vH\pare{\+vr} = \+vj_0\pare{\+vr},\quad \+vB\pare{\+vr} = \mu\pare{\+vr}\+vH\pare{\+vr}. \]
+\begin{cenum}
+    \item 均匀介质内, $\div \+vB = 0$, $\curl \+vB = \mu_0 \+vj_0$.
+    \item 边值关系: $\+un\cdot \pare{\+vB_2 - \+vB_1} = 0,\quad \+un\times \pare{\frac{\+vB_2}{\mu_2} - \frac{\+vB_1}{\mu_1}} = \+v\kappa_0$.
+\end{cenum}
+
+% subsubsection 介质中的基本方程 (end)
+
 % subsection 静磁场的基本规律 (end)
+
+\subsection{磁能} % (fold)
+\label{sub:磁能}
+
+静电能谓自由电荷$\rho_0$从无到有无限缓慢地建立过程中外界抵抗静电力的做功.
+\par
+类似定义磁场能为传导电流$\+vj_0$从无到有无限缓慢地建立过程中外界抵抗涡旋电场力做功.
+\begin{figure}[ht]
+    \centering
+    \incfig{4cm}{CurrentTube}
+\end{figure}
+\begin{align*}
+    & \curl \+vE = -\partial_t \+vB, \\
+    & \oint_C \rd{\+vl}\cdot \+vE = -\+dtd{}\iint_\Sigma \rd{\+vs}\cdot \+vB, \\
+    & \+cE = -\+dtd{\Phi_B}, \\
+    & -\rd{I_0}\,\+cE\cdot \delta t = \rd{I_0}\cdot \delta \Phi_B = j_0 \rd{\sigma_\perp}\iint \rd{\+vs}\cdot \delta \+vB \\
+    &= j_0 \rd{\sigma_\perp}\oint_C \rd{\+vl}\cdot \delta \+vA. \\
+    & \Rightarrow \Delta A = \iiint \rd{V} \+vj_0\cdot \delta \+vA.
+\end{align*}
+其中$\Delta A$表示外界做功.
+\begin{align*}
+    & \Delta A = \iiint \rd{V}\, \pare{\curl \+vH}\cdot \delta \+vA = \iiint \rd{V}\, \div \pare{\+vH\times \delta \+vA} + \iiint\rd{V}\,\pare{\curl \delta \+vA}\cdot \+vH \\
+    &= \oint \rd{\+v\sigma}\cdot \pare{\+vH\times \delta \+vA} + \iiint \rd{V}\, \+vH\cdot \delta \+vB. \\
+    & \Rightarrow \Delta A = \iiint \rd{V}\,\+vH\cdot \delta \+vB. \\
+    & \+vB = \mu \+vH \Rightarrow \+vH\cdot \delta \+vB = \rec{\mu}B\,\rd{B}.
+\end{align*}
+
+\subsubsection{能量局域于场} % (fold)
+\label{ssub:能量局域于场}
+
+此时$\displaystyle W = \half \iiint \rd{V}\,\+vB\cdot \+vH$,
+\[ \resumath{w = \half \+vB\cdot \+vH = \frac{B^2}{2\mu_0} - \half \+vM\cdot \+vB.} \]
+其中第二项$\displaystyle -\half \+vM\cdot \+vB$谓磁化能密度.
+
+% subsubsection 能量局域于场 (end)
+
+\subsubsection{能量局域于电路} % (fold)
+\label{ssub:能量局域于电路}
+
+此时$\displaystyle W = \half \iiint \rd{V}\,\pare{\curl \+vA}\cdot \+vH = \half \iiint \rd{V}\, \brac{\div \pare{\+vA\times \+vH} + \+vj_0\cdot \+vA}$. 从而
+\[ \resumath{W = \half \iiint \rd{V}\, \+vj_0 \cdot \+vA.} \]
+
+% subsubsection 能量局域于电路 (end)
+
+\subsubsection{移动介质外界做功} % (fold)
+\label{ssub:移动介质外界做功}
+
+将小介质移入磁场, 做功
+\begin{align*}
+    & A = \half \iiint \rd{V}\,\brac{\+vB\cdot \+vH - \+vB_0 \cdot \+vH_0}, \\
+    & \curl \+vH = \+vj_0 = \curl \+vH_0. \\
+    & A = \half \iiint \rd{V}\, \brac{\+vB\cdot \pare{\+vH - \+vH_0} + \+vB_0\cdot \pare{\+vH - \+vH_0}} + \half \iiint \rd{V}\, \brac{\+vB\cdot \+vH_0 - \+vB_0 \cdot \+vH}. \\
+    & \pare{\curl \+vA}\cdot \pare{\+vH - \+vH_0} = \div \brac{\+vA\times \pare{\+vH - \+vH_0}} + \brac{\cancelto{0}{\curl\pare{\+vH - \+vH_0}}}\cdot \+vA. \\
+    & \Rightarrow A = \half \iiint \rd{V}\, \brac{\+vB \cdot \frac{\+vB_0}{\mu_0} - \+vB_0\cdot \pare{\frac{\+vB}{\mu_0} - \+vM}}. \\
+    & \Rightarrow A = \iiint \rd{V}\, \pare{\half \+vM\cdot \+vB_0}.
+\end{align*}
+\begin{remark}
+    类比$\displaystyle A = \iiint \rd{V}\,\pare{-\half \+vP\cdot \+vE_0}$.
+\end{remark}
+
+% subsubsection 移动介质外界做功 (end)
+
+\subsubsection{在外场中的磁能} % (fold)
+\label{ssub:在外场中的磁能}
+
+不考虑介质.
+\begin{align*}
+    & W\brac{\+vj_1 + \+vj_2}  = W_1\brac{\+vj_1} + W_2\brac{\+vj_2} + W_{12}\brac{\+vj_1,\+vj_2} \\
+    &= \pare{\half \iiint \rd{V}\, \+vj_1\cdot \+vA_1} + \pare{\half \iiint \rd{V}\, \+vj_2\cdot \+vA_2} + \pare{\half \iiint \rd{V}\,\+vj_1\cdot\+vA_2 + \half \iiint \rd{V}\,\+vj_2\cdot \+vA_1}.
+\end{align*}
+可以证明
+\[ \iiint \rd{V}\, \+vj_1 \cdot \+vA_2 = \iiint \rd{V}\, \+vj_2\cdot \+vA_1. \]
+故
+\[ W = {\half \iiint \rd{V}\, \+vj_1\cdot \+vA_1} + {\half \iiint \rd{V}\, \+vj_2\cdot \+vA_2} + {\iiint \rd{V}\,\+vj_1\cdot\+vA_2}. \]
+互能项可视为第一个载流导体在第二个载流导体中的势能.
+
+% subsubsection 在外场中的磁能 (end)
+
+\subsubsection{载流线圈系统的磁能} % (fold)
+\label{ssub:载流线圈系统的磁能}
+
+对于载流线圈系统,
+\begin{align*}
+    & W = \half \iiint \rd{V}\, \+vj\cdot \+vA = \half \sum_i \iiint V_i \rd{v_i}\, \+vj_i\cdot \+vA. \\
+    & \rd{v_i}\, \+vj_2 = \rd{\sigma_i}\,\rd{l}\, \+vj_i = I_i\,rd{\+vl}. \\
+    & W = \half \sum_i I_i \oint_{C_i} \rd{\+vl_i}\cdot \+vA. \\
+    & \Phi_i = \iint_{\Sigma_i}\rd{\+vs_i}\cdot \+vB. \\
+    & \Phi_i = \oint_{C_i} \rd{\+vl_i}\cdot \+vA = \sum_k I_k \frac{\mu_0}{4\pi} \oint_{C_i}\oint_{C_k} \frac{\rd{\+vl_i}\cdot \+vl_k}{\+gr_{ik}} = \sum_{k} I_k L_{ik}. \\
+    & W = \half \sum_i I_i\Phi_i = \half \sum_{i,k} L_{ik}I_i I_k.
+\end{align*}
+可以发现
+\begin{cenum}
+    \item $L_{ik} = L_{ki}$.
+    \item $i=k$时$L_i = L_{ii}$为自感.
+    \item $i\neq k$时$M_{ik} = L_{ik}$为互感.
+\end{cenum}
+对于两个线圈,
+\[ W = \half L_1 I_1^2 + \half L_2I_2^2 + MI_1I_2 = W_1 + W_2 + W_{12}. \]
+前两项构成自能, 最后一项构成互能.
+\par
+假设最开始时二者相距无限远, 在第一个线圈上建立电流则外界需做功$W_1$, 在第二个线圈上建立电流则外界需要做功$W_2$.
+\par
+移动$A_2$时需要同时抵抗Amp\`ere力做功, 且为了维持电流需要抵抗动生电动势做功.
+\begin{cenum}
+    \item 原子实: $e\pare{\+vv_c\times \+vB}\cdot \+vv_c = 0$.
+    \item 电子: $-e\brac{\pare{\+vv_cc+\+vv_d}\times \+vB}\cdot \pare{\+vv_c+\+vv_d} = 0$. 注意到这里有两个非平凡的项. $-e\pare{\+vv_c\times \+vB}\cdot \+vv_d$中的$\+vv_c\times \+vB$恰好为非静电力. $-e\pare{\+vv_d\times \+vB}\cdot \+vv_c$中的$-e\+vv_d\times \+vB$恰好是Amp\`ere力做功.
+\end{cenum}
+抵抗$A_2$动生电动势做功
+\[ A\+_2\text{动}_ = \int I_2 \+dtd{M I_1}\rd{t} = I_1I_2\int \rd{M} = MI_1I_2 = -A\+_2amp_. \]
+抵抗$A_1$感生电动势做功
+\[ A\+_ind_ = \int I_1\+dtd{MI_2}\,\rd{t} = I_1I_2\int \rd{M} = MI_1I_2. \]
+抵抗Amp\`ere力做功
+\[ A\+_2amp_ = -MI_1I_2 = -W_{12}. \]
+
+% subsubsection 载流线圈系统的磁能 (end)
+
+\subsubsection{载流导体在外场中的力学势能} % (fold)
+\label{ssub:载流导体在外场中的力学势能}
+
+对于固定磁矩的磁子,
+\[ U = -W_{\text{外}} = -\iiint \rd{V}\, \+vj\pare{\+vr}\cdot \+vA_e\pare{\+vr}. \]
+
+% subsubsection 载流导体在外场中的力学势能 (end)
+
+\subsubsection*{磁场-电场类比} % (fold)
+\label{ssub:磁场_电场类比}
+
+$\varphi\leftrightarrow \+vA$,
+\[ \begin{cases}
+    \displaystyle W_e = \half \iiint \rd{V}\, \rho_0 \varphi, \\
+    \displaystyle W_m = \half \iiint \rd{V}\, \+vj_0\cdot \+vA.
+\end{cases} \]
+$\pare{\varphi,\+vA}\leftrightarrow\pare{\+vE,\+vB}$,
+\[ \begin{cases}
+    \displaystyle \+vF = q\+vE + q\+vv\times \+vB = \+dtd{\+vp}, \\
+    \displaystyle \delta \int_1^2 L\,\rd{t} = 0,\quad L = \half mv^2 - q\pare{\varphi - \+vv\cdot \+vA}.
+\end{cases} \]
+\begin{remark}
+    引入场的目的在于避免超距作用.
+\end{remark}
+
+% subsubsection 磁场_电场类比 (end)
+
+% subsection 磁能 (end)
+
+\subsection{磁多极子} % (fold)
+\label{sub:磁多极子}
+
+\subsubsection{关于局域电流的讨论} % (fold)
+\label{ssub:关于局域电流的讨论}
+
+若$V$包含了所有电荷和电流, 则
+\begin{align*}
+    & \rho = \rho\pare{\+vr,t}, \quad \+vj = \+vj\pare{\+vr,t}, \\
+    & \div \+vj = -\partial_t \rho, \\
+    & \div \pare{\+vj\+vr} = \pare{\div \+vj}\+vr + \+vj\+v\cdot \grad\pare{\+vr} = -\partial_t \rho \+vr + \+vj, \\
+    & \div \pare{\+vj\+vr\+vr} = \pare{\div \+vj}\+vr\+vr + \pare{\+vj\+v\cdot\grad \+vr}\+vr + \+vr\pare{\+vj\+v\cdot \grad \+vr} = -\partial_t \rho \+vr\+vr + \+vj\+vr + \+vr\+vj, \\
+    & \iiint \rd{V}\, \+vj = \iiint \rd{V}\, \brac{\div \pare{\+vj\+vr} + \partial_t \rho \+vr} = \oiint \rd{\+v\sigma}\cdot \+vj\+vr + \+dtd{} \iiint \rd{V}\, \rho \+vr. \\
+    & \resumath{\iiint \rd{V}\, \+vj = \dot{\+vp}.} \\
+    & \iiint \rd{V}\, \+vj\+vr = \half \iiint \rd{V}\, \pare{\+vj\+vr + \+vr\+vj} + \half \iiint \rd{V}\,\pare{\+vj\+vr - \+vr \+vj} \\
+    &= \half \iiint \rd{V}\,\brac{\div\pare{\+vj\+vr\+vr} + \partial_t \rho \+vr\+vr} + \half \iiint \rd{V}\,\pare{\+vj\+vr - \+vr\+vj} \\
+    &= \half \oiint \rd{\+v\sigma}\cdot \+vj\+vr\+vr + \rec{2}\cdot \rec{3} \+dtd{} \iiint \rd{V}\, \rho\pare{3\+vr\+vr - r^2\tensor{I}} + \rec{6}\+dtd{}\iiint \rd{V}\, \rho r^2\tensor{I}\\ &\phantom{=\,} + \half \iiint \rd{V}\, \pare{\+vr\times \+vj}\times \+ux_i \+ux_j. \\
+    & \resumath{\iiint \rd{V}\, \+vj\+vr = \+vm\times \tensor{I} + \rec{6}\dot{\tensor{D}} + \rec{6}\dot{g}\tensor{I}.}
+\end{align*}
+其中
+\[ \+vm = \half \iiint \rd{V}\,\pare{\+vr\times \+vj},\quad g = \iiint \rd{V}\, \rho r^2. \]
+对于稳恒电流,
+\[ \resumath{\iiint \rd{V}\, \+vj = 0,\quad \iiint \rd{V}\, \+vj\+vr = \+vm\times \tensor{I}.} \]
+
+% subsubsection 关于局域电流的讨论 (end)
+
+\subsubsection{磁偶极矩} % (fold)
+\label{ssub:磁偶极矩}
+
+定义
+\[ \resumath{\+vm = \half \iiint \rd{V}\, \+vr\times \+vj.} \]
+\begin{cenum}
+    \item $\+vm$与原点无关.
+    \[ \+vm_1 = \+vm_2 + \half \+vd\times \iiint \rd{V}\, \+vj = \+vm_2. \]
+    \item 对于载流线圈,
+    \begin{align*}
+        &\+vm = \half I \oint_C \+vr\times \rd{\+vl} = -\half I\oint_C \rd{\+vl}\times \+vr = -\half I \iint_{\Sigma}\pare{\rd{\+v\sigma}\times \grad} \times \+vr \\
+        &= -\half I \iint_{\Sigma} \brac{\grad\+vr\cdot \rd{\+v\sigma} - \pare{\div \+vr}\,\rd{\+v\sigma}} \\
+        &= I\iint_{\Sigma} \rd{\+v\sigma}.
+    \end{align*}
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        边长$a$的两个正交矩形电流环的电偶极矩为
+        \[ \+vm = Ia^2\pare{\+vz+\+vx} \Rightarrow m = \sqrt{2}Ia^2. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        欲求转动的均匀球面电荷$Q$的磁偶极矩, 注意到由对称性$\+vA = A\pare{r,\theta}\+u\phi$.
+        \begin{align*}
+            & \+v\kappa = \frac{Q}{4\pi a^2} \+v\omega \times \+vr,\quad \+vm = m\+uz,\quad \+uz\cdot\pare{\+vr\times \+v\kappa} = \pare{\+uz\times \+vr}\cdot \+v\kappa, \\
+            & \+vm = \half \oint_{r=a} \rd{\sigma}\cdot a\+ur\times \+v\kappa = \half a \oint_{r=a} \rd{\+v\sigma}\times \+v\kappa \\
+            & = \half a \iiint_{r\le a} \rd{V}\,\curl \+v\kappa = \half a\iiint_{r\le a}\rd{V}\,\curl\pare{\frac{Q}{4\pi a^2}\curl \pare{\+v\omega \times \+vr}} \\
+            &= \half a\cdot \frac{Q}{4\pi a^2}\cdot 2\+v\omega \cdot \frac{4\pi a^3}{3} \\
+            & \Rightarrow  \+vm = \frac{Qa^3}{3}\+v\omega.
+        \end{align*}
+        强行积分有
+        \begin{align*}
+            \+vA\pare{\+vr} &= \frac{\mu_0}{4\pi} \oint_{r'=a}\rd{\sigma'}\, \frac{\+v\kappa\pare{\+vr'}}{\+gr} = \frac{\mu_0}{4\pi} \cdot \frac{Q}{4\pi a^2} \+v\omega \times \oiint_{r=a}\rd{\sigma'}\, \frac{\+vr'}{\+gr} \\
+            &= \frac{\mu_0}{4\pi}\cdot \frac{3\+vm}{4\pi a^3}\times \oint_{r'=a} \frac{\rd{\+v\sigma'}}{\+gr} \\
+            &= \frac{3\mu_0 \+vm}{4\pi a^3}\times \rec{4\pi} \iiint_{r'<a}\rd{V'}\, \grad' \rec{\+gr} \\
+            &= \frac{3\mu_0 \+vm}{4\pi a^3}\times \rec{4\pi \epsilon_0} \iiint_{r'\le a}\rd{V'}\, \frac{\+u{\+gr}}{\+gr^2} \\
+            &= \frac{3\mu_0 \+vm}{4\pi a^3}\times \rec{4\pi \epsilon_0} \cdot \begin{cases}
+                \displaystyle \frac{\+vr}{3}, & r<a, \\
+                \displaystyle \frac{a^3 \+vr}{3r^3}, & r>a.
+            \end{cases} \\
+            \Rightarrow  \+vA &= \begin{cases}
+                \displaystyle \frac{\+vm\times \+vr}{4\pi a^3}, & r<a, \\
+                \displaystyle \frac{\+vm\times \+vr}{4\pi r^2}, & r>a.
+            \end{cases}
+        \end{align*}
+        注意到
+        \begin{align*}
+            \curl \pare{\+vm\times \+vr} &= 2\+vm, \\
+            \curl \frac{\+vm\times \+vr}{r^3} &= \frac{\curl\pare{\+vm\times \+vr}}{r^3} + \pare{\grad \rec{r^3}}\times \pare{\+vm\times \+vr} \\
+            &= \frac{2\+vm}{r^3} - \frac{3\+ur\times \pare{\+vm\times \+vr}}{r^3} \\
+            &= \frac{2\+vm}{r^3} - \frac{3\+vm - 3\pare{\+vm\cdot \+ur}\+ur}{r^3}.
+        \end{align*}
+        故
+        \[ \+vB = \begin{cases}
+            \displaystyle \frac{\mu_0 \+vm}{2\pi a^3}, & r<a, \\
+            \displaystyle \frac{\mu_0}{4\pi r^3}\brac{3\pare{\+vm\cdot \+ur}\+ur - \+vm}, & r>a.
+        \end{cases} \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 磁偶极矩 (end)
+
+\mathsubsubsection{Amul}{$A$的多极展开}{$A$的多极展开}{A的多极展开} % (fold)
+\label{ssub:a_的多极展开}
+
+将$\rec{\+gr}$展开后保留两项,
+\begin{align*}
+    \+vA\pare{\+vr} &= \frac{\mu_0}{4\pi} \iiint \rd{V'}\,\frac{\+vj\pare{\+vr'}}{\+gr} \\
+    &\approx \frac{\mu_0}{4\pi} \brac{\rec{r}\iiint \rd{V'}\, \+vj\pare{\+vr'} + \iiint \rd{V'}\, \+vj\pare{\+vr'} \+vr'\cdot \frac{\+vr}{r^3}} \\
+    &= \frac{\mu_0}{4\pi}\brac{\pare{\+vm\times \tensor{I}}\cdot \frac{\+vr}{r^3}} \\
+    &= \frac{\mu_0 \+vm\times \+vr}{4\pi r^3},\quad r\gg R. \\
+    \Rightarrow \+vB &= \frac{\mu_0}{4\pi r^3}\brac{3\pare{\+vm\cdot \+ur}\+ur - \+vm},\quad r \gg R.
+\end{align*}
+\begin{cenum}
+    \item 这一情形下磁场恰好有标量势
+    \[ \+vB\pare{\+vr} = -\grad \psi\pare{\+vr},\quad \psi\pare{\+vr} = \frac{\mu_0 \+vm\cdot \+vr}{4\pi r^3},\quad r\gg R. \]
+    \item $V$包含$\+vj$的球, 则
+    \begin{align*}
+        \iiint \rd{V}\, \+vB\pare{\+vr} &= \frac{\mu_0}{4\pi} \iint \rd{V} \iiint \rd{V'}\, \frac{\+vj\pare{\+vr'}\times \+u{\+gr}}{\+gr^2} \\
+        &= \mu_0 \iiint \rd{V'}\, \+vj\pare{\+vr'}\times \rec{4\pi} \iiint \rd{V}\, \frac{-\+u{\+gr}}{\+gr^2} \\
+        &= -\frac{\mu_0}{3}\iiint \rd{V'}\, \+vj\pare{\+vr'}\times \+vr' \\
+        &= \frac{2\mu_0}{3} \half \iiint \rd{V'}\, \+vr' \times \+vj\pare{\+vr'}. \\
+        \Rightarrow \+vm &= \frac{3}{2\mu_0}\iiint \rd{V}\, \+vB\pare{\+vr}.
+    \end{align*}
+    可类比电场的结论
+    \[ \+vp = -\frac{3}{\epsilon_0} \iiint \rd{V}\, \+vE\pare{\+vr}. \]
+    \item 磁矩与角动量: 设
+    \begin{align*}
+        \rho\pare{\+vr,t} &= \sum_k q_k \delta\pare{\+vr-\+vr_k}, \\
+        \+vj\pare{\+vr,t} &= \sum_k q_k \+vv_k \delta\pare{\+vr - \+vr_k},\quad \+vv_k = \dot{\+vr}_k. \\
+        \Rightarrow \+vL &= \sum_i \+vL_i = \sum_i m_i \+vr_i \times \+vv_i, \\
+        \Rightarrow \+vm_L &= \half \sum_i q_i \+vr_i\times \+vv_i = \sum_i \frac{q_i}{2m_i} m_i \+vr_i \times \+vv_i.
+    \end{align*}
+    如果所有粒子的荷质比相等, 则
+    \[ \+vm_L = \frac{q}{2m}\+vL. \]
+    其中$\displaystyle \frac{q}{2m}$谓磁旋比. 这是轨道磁矩和轨道角动量的关系. 对于自旋角动量, 应当有
+    \[ \+vm_S = g\frac{q}{2m}\+vL_S. \]
+    对于Dirac粒子, 有$g\approx 2$.
+    \item 外场中的均匀载流导体:
+    \begin{cenum}
+        \item 在外场中的磁能及势能$U$,
+        \begin{align*}
+            W_{\text{外}} &= \iiint \rd{V'}\, \+vj\pare{\+vr'}\cdot \+vA_e\pare{\+vr+\+vr'} \\
+            &= \iiint \rd{V'}\, \+vj\pare{\+vr'}\cdot \+vA_e\pare{\+vr} + \iiint \rd{V'}\, \+vj\cdot \brac{\+vr'\+v\cdot \grad \+vA_e} \\
+            &= \brac{\iiint \rd{V'}\, \+vj\pare{\+vr'}\+vr'\+v\cdot \grad}\cdot \+vA_e\pare{\+vr} \\
+            &= \brac{\+vm\times \tensor{I}\+v\cdot \grad}\cdot \+vA \\
+            &= \+vm\cdot \brac{\curl \+vA_e\pare{\+vr}} \\
+            &= \+vm\cdot \+vB_e, \\
+            U &= -\+vm\cdot \+vB_e = -W_{\text{外}}.
+        \end{align*}
+        \item 力.
+        \begin{align*}
+            \+vF &= \iiint \rd{V'}\, \+vj\pare{\+vr'} \times \+vB_e\pare{\+vr+\+vr'} \\
+            &= \iiint \rd{V'}\, \+vj\pare{\+vr'} \times \+vB_e\pare{\+vr} + \iiint \rd{V'}\, \+vj\pare{\+vr'}\times \brac{\+vr'\cdot \grad \+vB_e} \\
+            &= \brac{\iiint \rd{V'}\, \+vj\pare{\+vr'} \+vr' \+v\cdot \grad}\times \+vB_e\pare{\+vr} \\
+            &= \brac{\+vm\times \tensor{I}\+v\cdot \grad}\+vB_e\pare{\+vr} = \pare{\+vm\times} \curl \+vB\pare{\+vr}. \\
+            \+vF &=  \pare{\grad \+vB_e} \cdot \+vm - \pare{\div \+vB_e} \+vm = \pare{\grad \+vB_e}\cdot \+vm \\
+            &= \begin{cases}
+                \+vm\+v\cdot \grad \+vB_e, & \curl \+vB_e\pare{\+vr} = 0,\quad \text{线圈处无外电流}, \\
+                -\grad U,\quad \grad \+vm = 0.
+            \end{cases}
+        \end{align*}
+        注意到$\pare{\grad \+vB_e}\cdot \+vm + \pare{\grad \+vm}\cdot \+vB_e = \grad\pare{\+vm\cdot \+vB_e}$当$\+vm$和$\+vr$有关时不等同于能量.
+        \item 力矩:
+        \begin{align*}
+            \+v\tau &= \iiint \rd{V'}\, \+vr' \times \brac{\+vj\pare{\+vr'}\times \+vB_e\pare{\+vr+\+vr'}} \\
+            &\approx \iiint \rd{V'}\, \+vr' \times \brac{\+vj\pare{\+vr'} \times \+vB_e\pare{\+vr}} \\
+            &= \iiint \rd{V'}\, \+vj\pare{\+vr'}\+vr'\cdot \+vB_e\pare{\+vr} - \iiint \rd{V'}\, \+vr'\cdot \+vj\pare{\+vr'}\, \+vB_e\pare{\+vr}.
+        \end{align*}
+        注意到
+        \begin{align*}
+            \iiint \rd{V}\, \+vr\cdot \+vj\pare{\+vr} &= \trace \iiint \rd{V}\, \+vr\+vj \\
+            &= \half \trace \iiint \rd{V}\,\pare{\+vr\+vj + \+vj\+vr} + \half \trace \iiint \rd{V} \pare{\+vr\+vj - \+vj\+vr} \\
+            &= \half \trace\brac{\iiint \rd{V}\,\div\pare{\+vj\+vr\+vr}} \\
+            &= \half \trace \oint \rd{\+v\sigma}\cdot \+vj\+vr\+vr = 0.
+        \end{align*}
+        或者通过
+        \[ \div\pare{\+vj r^2} = 2\+vj\cdot \+vr \]
+        得到
+        \[ 2\iiint \rd{V}\, \+vj\cdot \+vr = \iiint \rd{V}\, \div \pare{\+vj r^2} = \oiint \rd{\+v\sigma}\cdot \+vj r^2= 0. \]
+        可得
+        \[ \+v\tau = \+vm\times \+vB. \]
+    \end{cenum}
+\end{cenum}
+
+% subsubsection a_的多极展开 (end)
+
+\subsubsection{磁标势} % (fold)
+\label{ssub:磁标势}
+
+磁场满足$\div \+vB\pare{\+vr} = 0$, $\curl \+vH\pare{\+vr} = \+vj_0\pare{\+vr}$, $\+vB = \mu_0\pare{\+vH+\+vM}$. 特别有
+\[ \curl \+vH = 0 \]
+在无传导电流的空间内成立, 例如空间内仅有永磁体的情形. 此时$\+vH = -\grad \psi$. 若$\curl \+vH = 0$仅在挖去传导电流的空间内成立, 则$\+vH = -\grad \psi$. 现在将$\+vB$分解为传导电流所激发的部分和极化电流所激发的部分,
+\begin{cenum}
+    \item 传导电流的场(无介质): 对此
+    \begin{align*}
+        \+vH\pare{\+vr} &= \frac{\+vB\pare{\+vr}}{\mu_0} = \frac{I}{4\pi} \oint_{\partial \Sigma} \rd{\+vl'}\times \frac{\+u{\+gr}}{\+gr^2}\\
+        &= \frac{I}{4\pi} \iint_{\Sigma}\pare{\rd{\+v\sigma'}\times \grad}\times \frac{\+u{\+gr}}{\+gr^2} \\
+        &= \frac{I}{4\pi} \iint_{\Sigma}\brac{\pare{\grad'\frac{\+u{\+gr}}{\+gr^2}}\cdot\rd{\+v\sigma'} - \pare{\grad'\+v\cdot \frac{\+u{\+gr}}{\+gr^2}}\,\rd{\+v\sigma'}} \\
+        &= \grad \frac{I}{4\pi} \iint_{\Sigma} \frac{-\+u{\+gr}\cdot\rd{\+v\sigma'}}{\+gr^2} + I \iint_\Sigma \delta\pare{\+vr - \+vr'}\,\rd{\+v\sigma'}.
+    \end{align*}
+    如果场点在源点外, 则第二项积分可置零. 恰好有
+    \[ \+vH = \frac{I}{4\pi}\grad \Omega,\quad \+vr\notin \Sigma. \]
+    其中$\Omega$是线圈(选择正方向后)对场点所成立体角. 故
+    \begin{cenum}
+        \item 曲面$\Sigma$相对于场点$\+vr$的立体角为
+        \[ \Omega\pare{\+vr} = \iint_{\Sigma} \frac{-\+u{\+gr}\cdot \rd{\+v\sigma'}}{\+gr^2}. \]
+        \item 磁标势$\resumath{\displaystyle \psi\pare{\+vr} = -\frac{I}{4\pi}\Omega\pare{\+vr}.}$
+        \item $\displaystyle \+vH = -\grad \psi\pare{\+vr}$.
+    \end{cenum}
+    \item 磁化电流激发的场. $\+vj' = \curl \+vM$, 交界面上$\+v\kappa' = \+un\times \pare{\+vM_2 - \+vM_1}$. 特别地, 对于$\+vM_2$为真空的情形, $\+v\kappa' = \+vM\times \+vn$. 而$\+vH$的边界条件为
+    \[ \begin{cases}
+        \curl \+vH = 0 \Rightarrow \+un\times \pare{\+vH_2 - \+vH_1} = 0, \\
+        \div \+vH = -\div \+vM = \rho^* \Rightarrow \+un\cdot \pare{\+vH_2 - \+vH_1} = \+un\cdot \pare{\+vM_1 - \+vM_2} = \sigma^*.
+    \end{cases} \]
+    因此可以引入$\psi$满足
+    \[ \laplacian \psi = \div \+vM = -\rho^*,\quad \begin{cases}
+        \psi_1 = \psi_2, \\
+        \displaystyle \+DnD{\psi_1} - \+DnD{\psi_2} = \+vn\cdot \pare{\+vM_1 - \+vM_2} = \sigma^*.
+    \end{cases} \]
+    此时
+    \[ \+vH = -\grad \psi,\quad \+vB = \mu_0\pare{\+vH + \+vM}. \]
+    若$\+vM$给定, 则在恰当的边界条件下$\psi$(从而$\+vH$)可唯一确定.
+    \item 简单介质情形下的总场: 设$V$为不含传导电流的单连通区域,
+    \[ \+vB\pare{\+vr} = \mu\pare{\+vr}\+vH\pare{\+vr}. \]
+    从而
+    \[ \begin{cases}
+        \curl \+vH = 0, \\
+        \div \pare{\mu \+vH} = 0
+    \end{cases} \Rightarrow \begin{cases}
+        \+un\times \pare{\+vH_2 - \+vH_1} = 0, \\
+        \+un\cdot \pare{\mu_2 \+vH_2 - \mu_1 \+vH_1} = 0.
+    \end{cases} \]
+    此时
+    \begin{align*}
+        & \div \pare{\mu \grad \psi} = 0 \\
+        & \Rightarrow \resumath{\laplacian \psi = 0,\quad \begin{cases}
+            \psi_1 = \psi_2, \\
+            \displaystyle \mu_0 \+DnD{\psi_1} = \mu_2 \+DnD{\psi_2}.
+        \end{cases}} \\
+        & \+vH = -\laplacian \psi, \\
+        & \+vB = \mu \+vH.
+    \end{align*}
+\end{cenum}
+\begin{remark}
+    注意到$\curl \+vF\pare{\+vr\in V} = 0$不蕴含$\displaystyle \oint_C \rd{\+vl}\cdot \+vF = 0$, 而后者是标势存在的条件. 无限长直导线即为一反例.
+\end{remark}
+\begin{ex}
+    对于通电两个相反电流的平行导线, 需要挖去一个平面才能得到单连通的区域以定义磁标势.
+\end{ex}
+\begin{sample}
+    \begin{ex}
+        对于半径$a$, 电流$I$的线圈, 中轴线上
+        \begin{align*}
+            \Omega &= -\int_{\Sigma} \frac{\rd{\sigma'}\, \cos\theta}{\+gr^2} = -\int_0^{2\pi} \rd{\phi} \int_0^a \frac{zs\,\rd{s}}{\pare{z^2+s^2}^{3/2}} \\
+            &= -2\pi \brac{1-\frac{z}{\sqrt{a^2+z^2}}}, \\
+            \+vB &= \frac{\mu_0 I}{4\pi}\+dzd\Omega \+uz = \frac{\mu_0 I}{2}\frac{a^2}{\pare{a^2+z^2}^{3/2}}\+uz.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        一个载流线圈在远处的立体角为
+        \begin{align*}
+            & \Omega = -\int_{\Sigma}\frac{\+gr\cdot \rd{\+v\sigma'}}{\+gr^2} = -\frac{\+ur}{r^2}\cdot \int_{\Sigma} \rd{\+v\sigma'} \\
+            & \Rightarrow \Omega = -\frac{\+vS\cdot \+vr}{r^3} \\
+            & \Rightarrow \psi = -\frac{I}{4\pi} = \frac{\+vm\cdot \+vr}{4\pi r^3} \\
+            & \Rightarrow -\mu_0 \grad \psi = \frac{\mu_0}{4\pi r^3}\brac{3\pare{\+vm\cdot \+ur}\+ur - \+vm}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        假设有无限大的均匀磁化介质, 在$z\in \pare{0,d}$内分布, $\+vM$和$z$轴成$\theta$角度. 从电流的角度看,
+        \begin{align*}
+            & \+v\kappa\+_above_' = \+vM\times \+uz = \pare{M\sin\theta} \+ux, \\
+            & \+v\kappa\+_below_' = \+vM\times \pare{-\+uz} = -\pare{M\sin \theta} \+ux, \\
+            & \+vB\+_in_ = \half \mu_0 \+v\kappa\+_above_'\times \pare{-\+uz} + \half \mu_0 \+v\kappa\+_below_'\times \pare{\+uz} = \mu_0 M\sin\theta \+uy, \\
+            & \+vB\+_ex_ = 0.
+        \end{align*}
+        从磁荷的角度,
+        \begin{align*}
+            & \sigma^*\+_above_ = \+vM\cdot \+uz = M\cos\theta = \sigma^*, \\
+            & \sigma^*\+_below_ = \+vM\cdot \pare{-\+uz} = -M\cos\theta = -\sigma^*, \\
+            & \+vH = -\sigma^* \+uz, \\
+            & \+vB = \mu_0\pare{\+vH + \+vM} = \pare{\mu_0 M \sin\theta} \+uy.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        对于均匀磁化($M\+uz$)介质球,
+        \begin{align*}
+            & \+v\kappa = \+vM \times \+ur = \pare{M\sin\theta}\+u\phi, \\
+            & \sigma^* = \+vM\cdot \+ur = M\cos\theta,\quad \rho^* = 0, \\
+            & \psi = \sum_l \pare{a_lr^l + \frac{b_l}{r^{l+1}}}P_l\pare{\cos\theta}, \\
+            & \psi_1 = \frac{r}{R}\cos\theta,\quad \psi_2 = \frac{R^2}{r^2}\cos\theta. \\
+            & \+DrD{\psi_1} = \frac{A}{R}\cos\theta,\quad \+DrD{\psi_2} = -A^2 \frac{2R^2}{r^3}\cos\theta. \\
+            & r=R,\quad \+DrD{\psi_1} - \+DrD{\psi_2} = M\cos\theta \Rightarrow A = \frac{MR}{3}. \\
+            & \psi_1 = \frac{\+vM\cdot \+vr}{3},\quad \psi_2 = \frac{\+vM\cdot \+vr}{3}\frac{R^3}{r^3}. \\
+            & \+vH_1 = -\grad \psi_1 = -\frac{\+vM}{3}, \\
+            & \+vH_2 = -\grad \psi_2 = \frac{3\pare{\+vm\cdot \+ur}\+ur - \+vm}{4\pi r^3}. \\
+            & \+vB_1 = \mu_0 \pare{\+vH_1 + \+vM} = \frac{2}{3} \+vM, \\
+            & \+vB_2 = \mu_0 \+vH_2.
+        \end{align*}
+        如果球面有
+        \[ \+v\kappa = \frac{Q}{4\pi R^2} \+v\omega \times \+vr = \+vM\times \+ur, \]
+        则
+        \[ \+vm = \frac{4\pi R^3}{3}\+vM = \frac{QR^2}{3}\+v\omega. \]
+        对于有限厚度的球壳, 可以视为两个$\+vM$相反的一大一小的球壳的叠加.
+    \end{ex}
+\end{sample}
+\begin{remark}
+    注意球内$\+vH$和$\+vB$反向.
+\end{remark}
+\begin{sample}
+    \begin{ex}
+        考虑均匀外场$\+vB_0 = B_0 \+uz$中的介质球, 半径$R$, 磁导率$\mu$. 此时介质球是均匀极化的, 参考均匀极化球的结论有
+        \begin{align*}
+            & \+vH_1 = -\grad \psi_1 = -\frac{\+vM}{3} + \frac{\+vB_0}{3}, \\
+            & \+vH_2 = -\grad \psi_2 = \frac{3\pare{\+vm\cdot \+ur}\+ur - \+vm}{4\pi r^3} + \frac{\+vB_0}{3}. \\
+            & \+vB_1 = \frac{2}{3} \+vM + \+vB_0, \\
+            & \+vB_2 = \mu_0 \+vH_2 + \+vB_0.
+        \end{align*}
+        这一解自动满足$\laplacian \psi=0$和边界条件. $\+vB_2 = \mu_0 \+vH_2$自动成立,
+        \[ \+vB_1 = \mu \+vH_1 \Rightarrow \+vM = \frac{3}{\mu_0}\frac{\mu - \mu_0}{\mu + 2\mu_0} \+vB_0. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        均匀外场中的柱壳, $\+vB_0 = B_0 \+ux$, 柱轴向$\+uz$, 内径$a$, 外径$b$,
+        \begin{align*}
+            & \psi = \sum_{m=0}^\infty \pare{a_m s^m + \frac{b_m}{r^{m}}}\pare{c_m \cos m\phi + d_m \sin m\phi}. \\
+            & \psi_0 = -H_0 s\cos\phi. \\
+            & \psi_1 = A\frac{s}{a}\cos \phi,\quad \phi_2 = \pare{c_1 \frac{s}{a} + c_2 \frac{a}{s}}\cos\phi,\quad \psi_3 = \pare{-H_0 + D \frac{b}{s}}\cos\phi. \\
+            & \+DsD{\psi_1} = \frac{A}{a}\cos\phi,\quad \+DsD{\psi_2} = \pare{\frac{c_1}{a} - \frac{c_2 a}{s^2}}\cos\phi,\quad \psi_3 = \pare{-H_0 - D\frac{b}{s^2}}\cos\phi. \\
+            & s=a,\quad \begin{cases}
+                \psi_2 = \psi_1, \\
+                \displaystyle \mu \+D{s}D{\psi_2} = \+DsD{\psi_1}
+            \end{cases} \Rightarrow \begin{cases}
+                c_1 + c_2 = A, \\
+                \mu\pare{c_1 - c_2} = A.
+            \end{cases} \\
+            & s=b,\quad \begin{cases}
+                \psi_2 = \psi_3, \\
+                \displaystyle \mu \+DsD{\psi_2} = \+DsD{\psi_3}
+            \end{cases} \Rightarrow \begin{cases}
+                \displaystyle c_1 \frac{b}{a} + c_2 \frac{a}{b} = -H_0 b + D, \\
+                \displaystyle \mu \pare{c_1 \frac{b}{a} - c_2 \frac{a}{b}} = -H_0 b - D.
+            \end{cases} \\
+            & -2H_0 b = \pare{\mu+1}\frac{b}{a} c_1 - \pare{\mu - 1}\frac{a}{b}c_2 = \frac{A}{2\mu} \brac{\pare{\mu+1}^2 \frac{b}{a} - \pare{\mu-1}^2 \frac{a}{b}}. \\
+            & A = -\frac{4\mu H_0 a}{\pare{\mu+1}^2 - \pare{\mu-1}^2 a^2/b^2}. \\
+            & \Rightarrow \psi_1 = \frac{A}{a}x,\\
+            & \Rightarrow \+vB_1 = -\mu_0 \grad \psi_1 = -\mu_0 \+dxd{\psi_1} \+ux = -\frac{\mu_0 A}{a}\+ux, \\
+            & \Rightarrow \+vB_1 = \frac{4\mu}{\pare{\mu+1}^2 - \pare{\mu - 1}^2 a^2/b^2}\+vB_0.
+        \end{align*}
+        特に若$\mu \gg 1$, 有
+        \[ \+vB_1 \approx \rec{1-a^2/b^2} \frac{4\+vB_0}{\mu}. \]
+        若$b \gg a$, 有
+        \[ \+vB_1 \approx \frac{4\+vB_0}{\mu}. \]
+        此时发生磁屏蔽.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        考虑如下磁化的柱壳, 内径$a$, 外径$b$.
+        \begin{align*}
+            & \+vM = M\pare{\+us \cos\phi + \+u\phi \sin \phi} \\
+            & = M \pare{\+ux \cos 2\phi + \+uy \sin 2\phi}. \\
+            & \laplacian \psi_1 = 0 = \laplacian \psi_3, \\
+            & \laplacian \psi_2 = \div \+vM = M\div \pare{\frac{\+us}{s}s\cos\phi + \+u\phi \sin\phi} \\
+            &= M\brac{\frac{\+us}{s}\cdot \grad \pare{s\cos\phi} + \+u\phi \cdot \grad \sin\phi} \\
+            &= M\brac{\frac{\+us}{s}\cdot \+us \+DsD{}\pare{s\cos\phi} + \+u\phi \cdot \+u\phi \rec{s}\+D{\phi}D{}\sin \phi} \\
+            &= \frac{2M}{s}\cos\phi. \\
+            & \laplacian \psi_2  = \rec{s}\+DsD{}\pare{s\+DsD{\psi_2}} + \rec{s^2}\+D{\phi^2}D{^2\psi_2} = \frac{2M}{s}\cos \phi, \\
+            & \psi_2 = 2Mf\pare{s}\cos\phi \Rightarrow \rec{s}\+dsd{}\pare{s\+DsD{f}} - \rec{s^2} f = f'' + \rec{s}f' - \rec{s^2}f = \rec{s}. \\
+            & f'' + \rec{s}f' - \rec{s^2}f = 0 \Rightarrow u_1 = s, \quad u_2 = \rec{s}.
+        \end{align*}
+        设齐次方程有基本解$u_1$和$u_2$, 令
+        \[ \begin{cases}
+            f = \alpha_1\pare{s} u_1 + \alpha_2\pare{s} u_2, \\
+            f' = \pare{\alpha_1 u'_1 + \alpha_2 u'_2} + \pare{\alpha'_1 u_1 + \alpha'_2 u_2}, \\
+            f'' = \pare{\alpha_1 u''_1 + \alpha_2 u''_2} + 2\pare{\alpha'_1 u'_1 + \alpha'_2 u'_2} + \pare{\alpha''_1 u_1 + \alpha''_2 u_2}.
+        \end{cases} \]
+        代入原来的方程有
+        \[ \pare{\alpha''_1 u_1 + \alpha''_2 u_2} + 2\pare{\alpha'_1 u'_1 + \alpha'_2 u'_2} + \frac{\alpha'_1 u_1 + \alpha'_2 u_2}{s} = \rec{s}. \]
+        可改写为
+        \[ Y' + X + \frac{Y}{s} = \rec{s}. \]
+        并且要求
+        \[ \begin{cases}
+            X = 0 = \alpha'_1 u'_1 + \alpha'_2 u'_2, \\
+            Y = 1 = \alpha'_1 u_1 + \alpha'_2 u_2
+        \end{cases} \Rightarrow \begin{cases}
+            \alpha'_1 - \alpha'_2/s^2 = 0, \\
+            \alpha'_1 + \alpha'_2/s^2 = 1/s.
+        \end{cases} \]
+        有解
+        \[ \alpha_1 = \half \ln s,\quad \alpha_2 = \frac{s^2}{4}. \]
+        于是有特解
+        \[ \psi_2 = 2M\brac{\half s\ln s + \frac{s}{4}}\cos\phi. \]
+        代入边界条件可得
+        \[ \begin{cases}
+            \displaystyle \psi_1 = A\frac{s}{a}\cos\phi, \\
+            \displaystyle \psi_2 = \pare{c_1 \frac{s}{a} + c_2 \frac{a}{s}}\cos\phi + \pare{M s\ln s}\cos\phi, \\
+            \displaystyle \psi_3 = D\frac{b}{s}\cos\phi,
+        \end{cases} \]
+        且有$C_2 = D = 0$.
+    \end{ex}
+\end{sample}
+
+% subsubsection 磁标势 (end)
+
+% subsection 磁多极子 (end)
 
 % section 静磁场 (end)
 

@@ -1,0 +1,235 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{3.15 (1)}%
+分离变量有
+\[ \frac{T''+2hT'}{a^2T} = -\omega^2 = \frac{R''+R'/r}{R} \Rightarrow \begin{cases}
+    T'' + 2hT' = -\omega^2 a^2 T, \\
+    r^2R'' + rR' + \omega^2 r^2 R = 0.
+\end{cases} \]
+解$R$有
+\[ R\pare{l} = 0 \Rightarrow  R_n\pare{r} = J_0\pare{\omega_n r},\quad J_0\pare{\omega_n l} = 0. \]
+解$T$有
+\[ T = e^{-ht} \begin{Bmatrix}
+    \cos \mu_n at \\
+    \sin \mu_n at
+\end{Bmatrix}, \quad \mu_n = \sqrt{a^2\omega_n^2 - h^2}. \]
+从而
+\[ \boxed{u = \sum_{n=1}^\infty J_0\pare{\omega_n r} e^{-ht}\pare{A_n \cos \mu_n t + B_n\sin \mu_n t},\quad \begin{array}{ll}
+    \text{$\omega_n$为$J_0\pare{\omega_n r} = 0$的正根,} \\
+    \mu_n = \sqrt{a^2\omega_n^2 - h^2}.
+\end{array}} \]
+其中
+\begin{align*}
+    A_n &= \frac{\displaystyle \int_0^l \varphi\pare{r}J_0\pare{\omega_n r}r\,\rd{r}}{\displaystyle \int_0^l J_0\pare{\omega_n r}J_0\pare{\omega_n r}r\,\rd{r}} = \boxed{\frac{\displaystyle 2 \int_0^l \varphi\pare{r}J_0\pare{\omega_n r}r\,\rd{r}}{l^2 J_1^2\pare{\omega l}}.} \\
+    B_n &= \boxed{\frac{hA_n}{\mu_n}.}
+\end{align*}
+\newprob{3.15 (2)}%
+分离变量有
+\[ -\frac{Z''}{Z} = \omega^2 = \frac{R''+R'/r}{R} \Rightarrow \begin{cases}
+    Z'' = -\omega^2 Z, \\
+    r^2R'' + rR' - \omega^2 r^2 R = 0.
+\end{cases} \]
+解$Z$有
+\[ Z\pare{0} = Z\pare{h} = 0 \Rightarrow Z = \sin \frac{n\pi z}{h},\quad \omega_n = \frac{n\pi}{h}. \]
+解$R$有
+\[ R = I_0\pare{\omega r} = I_0 \pare{\frac{n\pi r}{h}}. \]
+从而
+\[ u = \sum_{n=1}^\infty A_n \frac{\displaystyle I_0\pare{\frac{n\pi r}{h}}}{\displaystyle I_0\pare{\frac{n\pi a}{h}}} \sin \frac{n\pi z}{h}. \]
+其中
+\[ A_n = \frac{2}{h} \int_0^h f\pare{z} \sin \frac{n\pi z}{h}\,\rd{z}. \]
+对于$f\pare{z} = f_0$的情形,
+\[ A_n = \begin{cases}
+    \displaystyle \frac{4f_0}{n\pi}, & n = 2m+1, \\
+    0, & n=2m,
+\end{cases} \Rightarrow \boxed{u = \frac{4f_0}{\pi}\sum_{n=1,3,5,\cdots} \rec{n} \frac{\displaystyle I_0\pare{\frac{n\pi r}{h}}}{\displaystyle I_0\pare{\frac{n\pi a}{h}}} \sin \frac{n\pi z}{h}.} \]
+\newprob{3.16}%
+引入$v$满足$u = v + u_0$, 则
+\[ \begin{cases}
+    \displaystyle \+DtDv = a^2 \laplacian v, \\
+    v\vert_{t=0} = -u_0, \\
+    v\vert_{r=R} = 0.
+\end{cases} \]
+分离变量有
+\[ \frac{T'}{a^2T} = -\omega^2 = \frac{R''+R'/r}{R} \Rightarrow \begin{cases}
+    T' = -\omega^2 a^2 T, \\
+    r^2R'' + rR' + \omega^2 r^2 R = 0.
+\end{cases} \]
+解$R$有
+\[ R\pare{R} = 0 \Rightarrow  R_n\pare{r} = J_0\pare{\omega_n r},\quad J_0\pare{\omega_n R} = 0. \]
+解$T$有
+\[ T = e^{-a^2\omega^2 t}. \]
+从而
+\[ v = \sum_{n=1}^\infty A_n J_0\pare{\omega_n r} e^{-a^2\omega^2 t}. \]
+其中
+\[ A_n = \pare{-u_0}\frac{\displaystyle \int_0^l J_0\pare{\omega_n r}r\,\rd{r}}{\displaystyle \int_0^l J_0\pare{\omega_n r}J_0\pare{\omega_n r}r\,\rd{r}} = -\frac{2 u_0}{\omega_n R J_1\pare{\omega_n R}}. \]
+故
+\[ \boxed{u = u_0 - \sum_{n=1}^\infty \frac{2 u_0}{\omega_n R J_1\pare{\omega_n R}} J_0\pare{\omega_n r} e^{-a^2\omega_n^2 t}.} \]
+\newprob{3.18}%
+可列出方程
+\[ \begin{cases}
+    \displaystyle \+DtDu = a^2 \laplacian u, \\
+    u\vert_{t=0} = 1-r, \\
+    u\vert_{r=1} = 0.
+\end{cases} \]
+分离变量有
+\[ \frac{T'}{a^2T} = -\omega^2 = \frac{R''+2R'/r}{R} \Rightarrow \begin{cases}
+    T' = -\omega^2 a^2 T, \\
+    r^2R'' + 2rR' + \omega^2 r^2 R = 0.
+\end{cases} \]
+解$R$有
+\[ R\pare{r} = \frac{\sin n\pi r}{n\pi r},\quad \omega_n = n\pi. \]
+解$T$有
+\[ T = e^{-\pare{an\pi}^2 t}. \]
+从而
+\[ u = \sum_{n=1}^\infty A_n \frac{\sin n\pi r}{n\pi r} e^{-a^2\omega^2 t}. \]
+其中
+\[ A_n = \frac{\displaystyle \int_0^l \pare{1-r}\frac{\sin n\pi r}{n\pi r}r^2\,\rd{r}}{\displaystyle \int_0^l \pare{\frac{\sin n\pi r}{n\pi r}}^2 r^2\,\rd{r}} = \begin{cases}
+    \displaystyle \frac{8}{\pare{n\pi}^2},& n=2m+1, \\
+    \displaystyle 0, & n=2m.
+\end{cases} \]
+故
+\[ \boxed{u = \sum_{n=1,3,5,\cdots} \frac{8}{\pare{n\pi}^3} \frac{\sin n\pi r}{r} e^{-\pare{a\pi n}^2 t}.} \]
+\newprob{3.20}%
+设$u = R\pare{r}\Phi\pare{\phi}Z\pare{z}$, 则
+\[ \laplacian u = 0 \Rightarrow \frac{\displaystyle \rec{r}\+DrD{}\pare{r\+DrDR}}{R} + \frac{\displaystyle \rec{r^2}\+D{\phi^2}D{^2\Phi}}{\Phi} + \frac{\displaystyle \+D{z^2}D{^2Z}}{Z} = 0. \]
+从而
+\[ \+D{\phi^2}D{^2\Phi} = -m^2\Phi, \quad \+D{z^2}D{^2Z} = \lambda Z,\quad r^2R'' + rR' + \pare{\lambda r^2 - m^2}\Phi = 0,\quad m \in \+bN. \]
+故\par
+\makebox[0pt][r]{i.\ }$\lambda = \omega^2 > 0$,
+\[ \boxed{u = \begin{Bmatrix}
+    \cos m\phi \\ \sin m\phi
+\end{Bmatrix}\cdot \begin{Bmatrix}
+    J_m\pare{\omega r} \\ N_m\pare{\omega r}
+\end{Bmatrix}\cdot \begin{Bmatrix}
+    \sinh \omega z \\ \cosh \omega z
+\end{Bmatrix}.} \]
+\makebox[0pt][r]{ii.\ }$\lambda = -\omega^2 < 0$,
+\[ \boxed{u = \begin{Bmatrix}
+    \cos m\phi \\ \sin m\phi
+\end{Bmatrix}\cdot \begin{Bmatrix}
+    I_m\pare{\omega r} \\ K_m\pare{\omega r}
+\end{Bmatrix}\cdot \begin{Bmatrix}
+    \sin \omega z \\ \cos \omega z
+\end{Bmatrix}.} \]
+\makebox[0pt][r]{iii.\ }$\lambda = 0$, $m\neq 0$,
+\[ \boxed{u = \begin{Bmatrix}
+    \cos m\phi \\ \sin m\phi
+\end{Bmatrix}\cdot \begin{Bmatrix}
+    r^m \\ r^{-m}
+\end{Bmatrix}\cdot \begin{Bmatrix}
+    1 \\ z
+\end{Bmatrix}.} \]
+$m = 0$,
+\[ \boxed{u = \cdot \begin{Bmatrix}
+    1 \\ \ln r
+\end{Bmatrix}\cdot \begin{Bmatrix}
+    1 \\ z
+\end{Bmatrix}.} \]
+\newprob{4.1 (1)}%
+Fourier变换后
+\[ \+DtD{\hat u} + aip \hat u = \hat f\pare{t},\quad \hat u\pare{0,p} = \hat \varphi\pare{p}, \]
+解得
+\[ \hat u = e^{-aipt} \pare{\int_0^t \hat f\pare{t} e^{aipt}\,\rd{t} + \hat \varphi\pare{p}}. \]
+反演得
+\begin{align*}
+    u &= \rec{2\pi} \int_{-\infty}^\infty e^{ixp - iapt}\brac{\int_0^t \hat f\pare{\tau} e^{iap\tau}\,\rd{\tau} + \hat \varphi\pare{p}}\,\rd{p} \\
+    &= \boxed{\int_0^t f\pare{\tau, x-at+a\tau}\,\rd{\tau} + \varphi\pare{x-at}.}
+\end{align*}
+\newprob{4.1 (3)}%
+Fourier变换后
+\[ -p^2 \hat u + \+D{y^2}D{^2 u} = 0,\quad \hat u\pare{0,p} = \hat f\pare{p}, \]
+解得
+\[ \hat u = \hat f\pare{p} e^{-\abs{p}y}. \]
+反演得
+\begin{align*}
+    u &= F^{-1}\brac{\hat f\pare{p}} * F^{-1}\brac{e^{ipx - py}} = \frac{y}{\pi\pare{x^2+y^2}} * f\pare{x} \\
+    &= \boxed{\int_{-\infty}^\infty \frac{y}{\pi \pare{\xi^2 + y^2}}f\pare{x-\xi}\,\rd{\xi}.}
+\end{align*}
+\newprob{4.1 (4)}%
+先考虑一般的$u_t\pare{0,x} = \psi\pare{x}$. Fourier变换后
+\[ \+D{t^2}D{^2 \hat u} + 2\+DtD{\hat u} + \pare{1+p^2}\hat u = 0,\quad \hat u_t\pare{0,p} = \hat \psi\pare{p}, \]
+解得
+\[ \hat u = \frac{\hat \psi\pare{p}}{p}e^{-t}\sin pt. \]
+反演得
+\begin{align*}
+    u &= e^{-t} F^{-1}\brac{\hat \psi\pare{p}} * F^{-1}\brac{\frac{\sin pt}{p}} = e^{-t} \psi\pare{x}* \half \chi\pare{\abs{x}<t} \\
+    &= e^{-t} \cdot \half \int_{-t}^t \pare{x-\xi}\,\rd{\xi} = \boxed{e^{-t}xt.}
+\end{align*}
+%\newprob{4.1 (4)}%
+%先考虑一般的$u_t\pare{0,x} = \psi\pare{x}$. Fourier变换后
+%\[ \+D{t^2}D{^2 \hat u} + 2\+DtD{\hat u} + \pare{1+p^2}\hat u = 0,\quad \hat u_t\pare{0,p} = \hat \psi\pare{p}, \]
+%解得
+%\[ \hat u = \frac{\hat \psi\pare{p}}{p}e^{-t}\sin pt. \]
+%反演得
+%\begin{align*}
+%    u &= e^{-t} F^{-1}\brac{\hat \psi\pare{p}} * F^{-1}\brac{\frac{\sin pt}{p}} = e^{-t} \psi\pare{x}* \half \chi\pare{\abs{x}<t} \\
+%    &= e^{-t} \cdot \half \int_{-t}^t \pare{x-\xi}\,\rd{\xi} = \boxed{e^{-t}xt.}
+%\end{align*}
+\newprob{4.3 (2)}%
+$\displaystyle u_{tt} = a^2\rec{r^2}\+DrD{}\pare{r^2\+DrDu} \xLongrightarrow{v=ru} v_{tt} = a^2 v_{rr},\quad v\pare{0,r} = 0,\quad v_t\pare{0,r} = \frac{r}{\pare{1+r^2}^2}$. 正弦变换后
+\[ \hat{v}_tt + a^2p^2 \hat v = 0,\quad \hat v\pare{0,p} = 0,\quad \hat v_t\pare{0,p} = \frac{\pi p e^{-p}}{4}. \]
+解得
+\[ \hat v = \frac{\pi e^{-p}}{4a}\sin\pare{apt}. \]
+反演得
+\begin{align*}
+    v &= \frac{2}{\pi}\cdot \frac{\pi}{4a} \int_0^\infty \rd{p}\, \sin\pare{px} \sin\pare{apt}e^{-p} \\
+    &= \frac{tr}{\brac{1+\pare{r+at}^2}\brac{1+\pare{r-at}^2}}, \\[.5em]
+    \Rightarrow u &= \boxed{\frac{t}{\brac{1+\pare{r+at}^2}\brac{1+\pare{r-at}^2}}.}
+\end{align*}
+\newprob{4.3 (3)}%
+余弦变换后
+\[ -p^2 \hat{u} + \+D{y^2}D{^2 u} = 0,\quad \hat v\vert_{t=0} = \hat f. \]
+解得
+\[ \hat u = \hat f\pare{p} e^{-py}. \]
+反演得
+\begin{align*}
+    u &= \frac{2}{\pi} \int_0^\infty \rd{p}\, \cos\pare{px} \hat f\pare{p}e^{-py} \\
+    &= \frac{2}{\pi} \int_0^\infty\rd{\xi}\, f\pare{\xi} \int_0^\infty\rd{p}\, \cos\pare{px}\cos \pare{\xi p} e^{-py} \\
+    &= \boxed{\rec{\pi} \int_0^\infty\rd{\xi}\,\brac{\frac{y}{y^2+\pare{x+\xi}^2} + \frac{y}{y^2+\pare{x-\xi}^2}}\cdot f\pare{\xi}.}
+\end{align*}
+
+\end{document}

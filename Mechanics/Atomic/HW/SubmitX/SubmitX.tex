@@ -1,0 +1,74 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\def\writetofile#1#2{\immediate\write18{echo "#1" > #2}}
+\def\econfig#1{\immediate\write18{echo "#1" | python /Users/zechen/Documents/PhantasiaAcademia/electronconfig.py > electronsconfigtmp.tex}\input{electronsconfigtmp.tex}}
+
+\begin{document}
+
+\newprob{4.1}%
+$s=1$, 故
+\begin{cenum}
+    \item 电子不再是Fermion, 而是Boson, Pauli不相容原理不适用之.
+    \item 总的波函数不再是交换反对称的, 而是交换对称的.
+    \item 每个电子的自旋又三种可能$\curb{\uparrow,-,\downarrow}$. 总自旋可以取$s=0,1,2$. 使用CG系数展开,
+    \begin{align*}
+        \ket{2,2} &= \ket{\uparrow\uparrow}, \\
+        \ket{2,1} &= \rec{\sqrt{2}}\ket{\uparrow -} + \rec{\sqrt{2}}\ket{-\uparrow}, \\
+        \ket{2,0} &= \rec{\sqrt{6}}\ket{\uparrow\downarrow} + \sqrt{\frac{2}{3}}\ket{--} + \rec{\sqrt{6}}\ket{\downarrow\uparrow}, \\
+        \ket{2,-1} &= \rec{\sqrt{2}}\ket{-\downarrow} + \rec{\sqrt{2}}\ket{\downarrow-}, \\
+        \ket{2,-2} &= \ket{\downarrow\downarrow}.
+    \end{align*}
+    故$s=2$的态是交换对称的.
+    \begin{align*}
+        \ket{1,1} &= \rec{\sqrt{2}}\ket{\uparrow-} - \rec{\sqrt{2}}\ket{-\uparrow}, \\
+        \ket{1,0} &= \rec{\sqrt{2}}\ket{\uparrow\downarrow} - \rec{\sqrt{2}}\ket{\downarrow\uparrow}, \\
+        \ket{1,-1} &= \rec{\sqrt{2}}\ket{-\downarrow} - \rec{\sqrt{2}}\ket{\downarrow -}.
+    \end{align*}
+    故$s=1$的态是交换反对称的.
+    \begin{align*}
+        \ket{0,0} = \rec{\sqrt{3}}\ket{\uparrow\downarrow} - \rec{\sqrt{3}}\ket{--} + \rec{\sqrt{3}}\ket{\downarrow\uparrow}.
+    \end{align*}
+    故$s=0$的态是交换对称的.
+    \item 基态$\mathrm{1s^2}$, 空间波函数必定为交换对称的, 故自旋波函数也必定为交换对称的, 此时有$S=2$或$S=0$(五重态$+$单重态).
+    \item 如果$S=1$, 则自旋波函数为交换反对称的, 空间波函数必定亦为交换反对称的, 最低能态为$\ce{1s}\,\ce{2s}$, 是三重态.
+\end{cenum}
+
+\newprob{4.2}%
+$\Delta E_2$: 三重态的能级低于单重态的能级. 三重态的自旋交换对称, 故空间波函数交换反对称, 两电子的波函数重合减少, 故Coulomb排斥能降低.
+\par
+$\Delta E_1$: $\ce{2s}$态由穿透效应在原子核附近其波函数有一峰值, 故$\ce{2s}$态的屏蔽效应较低, 所受吸引更大, 其势能较低.
+\par
+$\Delta E_2 < \Delta E_1$.%
+
+\newprob{4.3}%
+$\ce{Ne}$: \econfig{1s2 2s2 2p6}.\\
+$\ce{Mg}$: \econfig{[Ne] 3s2}.\\
+$\ce{P}$: \econfig{[Ne] 3s2 3p3}.\\
+$\ce{Co}$: \econfig{[Ar] 3d7 4s2}.\\
+$\ce{Ge}$: \econfig{[Ar] 3d10 4s2 4p2}.\\
+($\ce{Ar}$: \econfig{[Ne]3s2 3p6}.)
+
+\end{document}

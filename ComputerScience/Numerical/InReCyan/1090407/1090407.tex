@@ -1,0 +1,19 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+这里是想先构造多项式$p_1$, $p_2$, $p_3$分别满足
+\[ \begin{cases}
+    p_1(x_0) = y_0, p_1(x_1) = 0, p_1'(x_0) = 0, \\
+p_2(x_0) = 0, p_2(x_1) = y_1, p_2'(x_0) = 0, \\
+p_3(x_0) = 0, p_3(x_1) = 0, p_3'(x_0) = \tilde{y}_0.
+\end{cases} \]
+这样三个多项式相加后$p=p_1+p_2+p_3$就自动满足三个条件$p(x_0) = y_0, p(x_1) = y_1, p'(x_0) = \tilde{y}_0$了.
+\par
+然后这里又把$p_1(x_0) = y_0, p_1(x_1) = 0, p_1'(x_0) = 0$简化成$s_1(x_0) = 1, s_1(x_1) = 0, s_1'(x_0) = 0$, 这样$s_1$乘$y_0$就可以得到$p_1$.
+\par
+也就是说, 题目里给了多少个条件, 就要写多少个多项式. 每个多项式刚好满足``1个1, 其它都是零''.
+
+\end{document}

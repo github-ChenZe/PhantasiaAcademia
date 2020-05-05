@@ -96,7 +96,7 @@
     \begin{flalign*}
         & \mathitem{\bili{}{方程式}} && \rec{\sin\theta}\pare{\sin\theta\Theta'}' + \pare{l\pare{l+1} - \frac{m^2}{\sin^2\theta}}\Theta = 0 && \\
         & \mathitem{\bili{}{定義}} && P_n^m \pare{x} = \pare{1-x^2}^{m/2}\+d{x^m}d{^m}P_n\pare{x} && \\
-        & \mathitem{\bili{}{規格化}} && \int_{-1}^1 P_l^m\pare{x}P_{l'}^m\pare{x}\,\rd{x} = \delta_{ll'} \cdot \frac{2}{2l+1}\frac{\pare{n+m}!}{\pare{n-m}!} &&
+        & \mathitem{\bili{}{規格化}} && \int_{-1}^1 P_l^m\pare{x}P_{l'}^m\pare{x}\,\rd{x} = \delta_{ll'} \cdot \frac{2}{2l+1}\frac{\pare{l+m}!}{\pare{l-m}!} &&
     \end{flalign*}
 \end{cheatresume}
 \columnbreak
@@ -114,7 +114,7 @@
     \end{flalign*}
     \midbreak
     \begin{flalign*}
-        & \mathitem{\bili{}{漸化式}} && \displaystyle \begin{array}[t]{l!{\color{lightgray}\vrule}l} \pare{x^\nu J_\nu}' = x^\nu J_{\nu - 1} & 2J'_\nu = J_{\nu - 1} - J_{\nu + 1} \\ \+:r2{$\pare{x^{-\nu}J_\nu}' = -x^{-\nu}J_{\nu + 1}$} & \+:r2{$\displaystyle \frac{2\nu J'_\nu}{x} = J_{\nu - 1} + J_{\nu + 1}$} \\ \+:c2{c}{} \end{array} &&
+        & \mathitem{\bili{}{漸化式}} && \displaystyle \begin{array}[t]{l!{\color{lightgray}\vrule}l} \pare{x^\nu J_\nu}' = x^\nu J_{\nu - 1} & 2J'_\nu = J_{\nu - 1} - J_{\nu + 1} \\ \+:r2{$\pare{x^{-\nu}J_\nu}' = -x^{-\nu}J_{\nu + 1}$} & \+:r2{$\displaystyle \frac{2\nu J_\nu}{x} = J_{\nu - 1} + J_{\nu + 1}$} \\ \+:c2{c}{} \end{array} &&
     \end{flalign*}
     \midbreak
     \begin{flalign*}
@@ -166,7 +166,7 @@
         & \mathitem{定義} && j_l\pare{x} = \sqrt{\frac{\pi}{2x}}J_{l+\half}\pare{x} && \\
         & && n_{l}\pare{x} = \sqrt{\frac{\pi}{2x}}N_{l+\half}\pare{x} && \\
         & \mathitem{陽な式} && j_{l}\pare{x} = \pare{-x}^l\pare{\rec{x}\+dxd{}}^l \pare{\frac{\sin x}{x}} && \\
-        & && n_{l}\pare{x} = -\pare{x}^l\pare{\rec{x}\+dxd{}}^l \pare{\frac{\cos x}{x}} &&
+        & && n_{l}\pare{x} = -\pare{-x}^l\pare{\rec{x}\+dxd{}}^l \pare{\frac{\cos x}{x}} &&
     \end{flalign*}
 \end{cheatresume}
 \newheader{\bili{球谐函数}{球面調和関数}}

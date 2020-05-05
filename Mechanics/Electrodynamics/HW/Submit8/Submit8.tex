@@ -1,0 +1,136 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{3.6}%
+\\[-2.5\baselineskip]
+\begin{align*}
+    \+vm &= \half \iiint \rd{V}\, \rho_e \+vr\times\pare{\+v\omega\times \+vr} = \frac{\rho_e}{2} \iiint \rd{V}\,\brac{r^2 \+v\omega - \pare{\+vr\cdot \+v\omega}\+vr}.
+\end{align*}
+其中
+\[ \iiint \rd{V}\, r^2 \+v\omega = \+v\omega \int_0^a \rd{r}\, 4\pi r^2 \cdot r^2 = \frac{4\pi a^5}{5}\+v\omega. \]
+而
+\begin{align*}
+    \iiint \rd{V}\, \pare{\+vr\cdot \+v\omega} \+vr &= \iiint \rd{V}\, \pare{\+vr\cdot \+v\omega}\grad \frac{r^2}{2} \\
+    &= \iiint \rd{V} \curb{\grad\brac{\frac{r^2}{2} \pare{\+vr\cdot \+v\omega}} - \+v\omega  \frac{r^2}{2}} \\
+    &= \oiint \rd{\+vS}\, \frac{r^2}{2} \pare{\+vr\cdot \+v\omega} - \+v\omega \iiint \rd{V} \, \frac{r^2}{2} \\
+    &= \frac{a^2}{2} \oiint \rd{\+vS}\, \pare{\+vr\cdot \+v\omega} - \+v\omega \frac{2\pi a^5}{5} \\
+    &= \frac{a^2}{2} \iiint \rd{V}\, \+v\omega - \+v\omega \frac{2\pi a^5}{5} \\
+    &= \frac{a^2}{2} \+v\omega V - \+v\omega \frac{2\pi a^5}{5}
+\end{align*}
+故
+\[ \+vm = \frac{\rho_e}{2}\cdot\frac{4\pi a^5}{5}\+v\omega - \frac{\rho_e}{2}\cdot \frac{a^2}{2} \+v\omega V + \frac{\rho_e}{2}\+v\omega \frac{2\pi a^5}{5} = \boxed{\rec{5}a^2Q\+v\omega.} \]
+而
+\[ \+vL = \iiint \rd{V}\, \rho_m \+vr\times\pare{\+v\omega\times \+vr} = \rho_m \iiint \rd{V}\,\brac{r^2 \+v\omega - \pare{\+vr\cdot \+v\omega}\+vr} = \boxed{\frac{2Ma^2}{5}\+v\omega.} \]
+磁旋比
+\[ \gamma = \frac{\+vm}{\+vL} = \boxed{\frac{Q}{2M}.} \]
+\newprob{3.7}%
+\\[-2.75\baselineskip]
+\begin{flalign*}
+    \+vB &= \frac{\mu_0}{4\pi} \oint_C \frac{\rd{\+vl}\, I\times \+u{\+gr}}{\+gr^2} &&\\
+    &= \frac{\mu_0I}{4\pi} \iint_{\Sigma} \pare{\rd{\+v\sigma}\times \grad'} \times \frac{\+u{\+gr}}{\+gr^2} &&\\
+    &= \frac{\mu_0 I}{4\pi} \iint_{\Sigma} \pare{\grad' \rd{\+v\sigma} \cdot \frac{\+u{\+gr}}{\+gr^2} - \rd{\+v\sigma}\, \grad'\+v\cdot \frac{\+u{\+gr}}{\+gr^2}}. &&
+\end{flalign*}
+%
+\begin{textblock}{3}(8.5,10)
+    \incfig{2.5cm}{BToSolidAngle}
+\end{textblock}
+%
+其中$\+v{\+gr} = \+vr - \+vr'$, $\Sigma$的法向与电流成右手关系. 第二项在非源点处为零. 故
+\begin{align*}
+    \+vB &= \frac{\mu_0 I}{4\pi} \iint_{\Sigma} \grad' \rd{\+v\sigma} \cdot \frac{\+u{\+gr}}{\+gr^2} \\
+    &= \boxed{-\grad \frac{\mu_0 I}{4\pi} \iint_{\Sigma} \rd{\+v\sigma} \cdot \frac{\+u{\+gr}}{\+gr^2}.}
+\end{align*}
+\newprob{3.9}%
+机械能
+\begin{align*}
+    W &= -\+vm' \cdot \+vB = -\+vm' \cdot \frac{\mu_0 m}{4\pi R^3} \pare{3\pare{\+uz \cdot \+ur}\+ur - \+uz} \\
+    &= -\frac{\mu_0 mm'}{2\pi R^3} = \boxed{-\SI{9.16e-28}{\joule}.}
+\end{align*}
+\newprob{3.10}%
+构造如图的镜像磁偶极子, 则导体边界处磁场无法向分量, 无穷远处有$\+vA\rightarrow 0$, 可断定该体系在上半空间可得正确的磁场. 镜像体系的机械能为
+\begin{align*}
+    W &= -\+vm\cdot \+vB = -\+vm_1 \cdot \frac{\mu_0}{4\pi \+gr^3}\brac{\pare{3\+vm_2 \cdot \+u{\+gr}}\+u{\+gr} - \+vm_2} \\
+    &= \frac{\mu_0 m^2}{4\pi\pare{2h}^3}\pare{1+\cos^2\theta}.
+\end{align*}
+%
+\begin{textblock}{3}(10,6.2)
+    \incfig{2.5cm}{MagnetonImage}
+\end{textblock}
+%
+由对称性($\+vm_1$和$\+vm_2$受力等大反向)知实际做功为
+\[ A = \frac{W}{2} = \frac{\mu_0 m^2}{64\pi h^3}\pare{1+\cos^2\theta}. \]
+\par
+\newprobheader{(1)}%
+$\theta = 0$, $\displaystyle A = \boxed{\frac{\mu_0 m^2}{32\pi h^3}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \theta = \frac{\pi}{4}$, $\displaystyle A = \boxed{\frac{3\mu_0 m^2}{128\pi h^3}.}$
+\newprob{3.11}%
+大线圈中轴线上的磁场为
+\[%
+    \+vB = \frac{\mu_0 a^2 I_a}{2\pare{z^2+a^2}^{3/2}}\+uz.%
+\]
+故互感为
+\[ M = \frac{\Phi_b}{I_a} = \boxed{\frac{\mu_0 \pi a^2b^2}{2\pare{a^2+d^2}^{3/2}}.} \]
+互能$\boxed{W = MI_1I_2.}$
+\begin{align*}
+    \+vF &= \+vm_b \+v\cdot \grad \+vB = -\+uz I_b \pi b^2 \+DzD{} \frac{\mu_0 a^2 I_a}{2\pare{z^2+a^2}^{3/2}} \\
+    &= \boxed{-\frac{3\mu_0 \pi d a^2b^2I_aI_b}{2\pare{d^2+a^2}^{5/2}}.}
+\end{align*}
+\newprob{Pr 1}
+内外的磁场皆与$\+us$垂直, 故
+\begin{align*}
+    \+vf &= -\+us \cdot \tensor{T}\+_ex_ + \+us\cdot \tensor{T}\+_in_ \\
+    &= \frac{\+us}{2\mu_0}\pare{B\+_in_^2 - B\+_ex_^2} \\
+    &= \frac{\+us}{2\mu_0}\cdot \mu_0^2 \pare{{\kappa_\phi}^2 - {\kappa_z}^2} \\
+    &= \frac{\mu_0 \+us}{2} \cdot \frac{N^2I^2}{L^2\sin^2\theta} \pare{\sin^2 \theta - \cos^2 \theta} \\
+    &= \boxed{\frac{\mu_0 N^2I^2\+us}{2\pare{2\pi R}^2}\pare{\tan^2\theta - 1}.}
+\end{align*}
+当$\theta < \SI{45}{\degree}$为吸引力, 当$\theta > \SI{45}{\degree}$为排斥力. 
+
+\end{document}

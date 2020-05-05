@@ -1,0 +1,185 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{3.3}%
+可设
+\[ \+vA = A\+uz,\quad A = \begin{cases}
+    \displaystyle A_0 + B_0 \pare{\frac{s}{a}}\cos\phi, & s<a, \\
+    \displaystyle C_0 \ln \frac{s}{a} + D_0\pare{\frac{s}{a}}\cos \phi, & s>a.
+\end{cases} \]
+有
+\[ \+vB = \curl \+vA = \pare{\grad \+vA}\times \+uz = \begin{cases}
+    \displaystyle -\pare{\frac{B_0}{a}\cos\phi}\+u\phi - \pare{\frac{B_0}{a}\sin\phi}\+us, & s < a, \\
+    \displaystyle -\pare{\frac{C_0}{s} - D_0 \frac{a}{s^2}\cos\phi}\+u\phi - \pare{D_0\frac{a}{s^2}\sin\phi}\+us, & s>a.
+\end{cases} \]
+边界处要求
+\[ \begin{cases}
+    B_{s1} = B_{s2}, & B_0 = D_0, \\
+    B_{\phi 2} - B_{\phi 1} = \mu_0 i_0\pare{1+\alpha\cos\phi}, & \displaystyle -\frac{C_0}{a} = \mu_0 i_0,\quad \frac{B_0}{a} + \frac{D_0}{a} = \mu_0 i_0 \alpha, \\
+    A_{z1} = A_{z2}, & A_0 + B_0 = D_0. 
+\end{cases} \]
+可得
+\[ A_0 = 0,\quad B_0 = D_0 = \frac{\mu_0 i_0\alpha a}{2},\quad C_0 = -\mu_0 i_0 a. \]
+从而
+\[ \+vA = \begin{cases}
+    \displaystyle \pare{\frac{\mu_0 i_0 \alpha}{2}s\cos\phi}\+uz, & s<a, \\
+    \displaystyle -\mu_0 i_0 a \ln \pare{\frac{s}{a}} + \frac{\mu_0 i_0 \alpha a^2}{2s}\cos\phi, & s>a.
+\end{cases} \]
+且
+\[ \boxed{\+vB = \begin{cases}
+    \displaystyle -\pare{\frac{\mu_0 i_0 \alpha}{2}\cos\phi}\+u\phi - \pare{\frac{\mu_0 i_0 \alpha}{2}\sin\phi}\+us, & s < a, \\
+    \displaystyle \pare{\frac{\mu_0 i_0 a}{s} + \frac{\mu_0 i_0\alpha a^2}{2s^2}\cos\phi}\+u\phi - \pare{\frac{\mu_0 i_0 \alpha a^2}{2s^2}\sin\phi}\+us, & s>a.
+\end{cases}} \]
+\newprob{3.4}%
+$\displaystyle \+vA = A\pare{s}\+uz$在$s<a$内满足$\laplacian A\pare{z} = -\mu_1 j$, 显然有特解
+\[ A = -\frac{x^2+y^2}{4}\mu_1 j = -\frac{s^2\mu_1 I}{4\pi a^2}. \]
+外部解有形式
+\[ A = A_0 \ln \frac{s}{a} + B_0. \]
+边界有条件
+\[ \begin{cases}
+    A_1 = A_2, & \displaystyle B_0 = -\frac{\mu_1 I}{4\pi}, \\[.5em]
+    \left.\pare{\+u\phi\cdot \curl \+vA_1}\right/\mu_1 - \left.\pare{\+u\phi\cdot \curl \+vA_2}\right/\mu_2 = 0, & \displaystyle  \frac{A_0}{\mu_2} = -\frac{I}{2\pi}.
+\end{cases} \]
+故
+\[ \boxed{\+vA = \begin{cases}
+    \displaystyle -\frac{s^2\mu_1 I}{4\pi a^2}\+uz, & s<a, \\[.5em]
+    \displaystyle -\frac{\mu_2 I}{2\pi} \ln \frac{s}{a} - \frac{\mu_1 I}{4\pi}, & s>a.
+\end{cases}} \]
+\newprob{3.5}%
+$\+vB = \curl \+vA = \pare{\grad A}\times \+uz \Rightarrow \grad A = \+uz\times \+vB \perp \+vB$, 故磁感线是$A$的等高线. 理想导体边界处$\+vB$和边界平行, 故理想导体边界是$A$的等高线. $A$满足的方程为
+\[ \laplacian A = -\mu_0 j,\quad \oint_{\partial S} \rd{\+vl}\times \grad A = \+uz \oint_{\partial S} \rd{\+vl}\cdot \+vB = -\mu_0 i. \]
+其中$j$是已知的电流密度, $i$求解区域外部导体住的电流强度, $S$是求解区域, $\partial S$与$S$为右手关系, $S$以$\+uz$为法向.
+\par
+设$A_1$和$A_2$是满足条件的两个解, $A' = A_2 - A_1$, 则
+\[ \laplacian A' = 0,\quad \oint_{\partial S} \rd{\+vl}\times \grad A' = 0. \]
+由
+\[ \oint_{\partial S} \rd{\+vl} \times A\grad A = -\+uz \oiint_S \brac{\pare{\grad A}^2 + A\laplacian A}\,\rd{\sigma} \]
+立刻有
+\begin{align*}
+    &\oint_{\partial S} \rd{\+vl} \times A'\grad A' = A' \oint_{\partial S} \rd{\+vl} \times \grad A' = 0 \\
+    &\Rightarrow \oiint_S \brac{\pare{\grad A'}^2 + A'\laplacian A'}\,\rd{\sigma} = \oiint_S \pare{\grad A'}^2\,\rd{\sigma} = 0.
+\end{align*}
+故$\grad A' \equiv 0$, 从而$\+vB_2 = \curl \+vA_2 = \curl \+vA_1 = \+vB_1$.
+\newprob{3.8}
+取$\+uz$沿$\+vM_0$, 由 $\+vM_0\cdot \+ur \propto \cos \theta$和边界处的$\psi_1 = \psi_2$可得
+\[ \psi = \begin{cases}
+    \displaystyle \psi_1 = A \frac{r}{a}\cos\theta, & r < a, \\
+    \displaystyle \psi_2 = A \pare{\frac{a}{r}}^2 \cos\theta, & r>a.
+\end{cases} \]
+由边界处的
+\[ \+DnD{\psi_1} - \+DnD{\psi_2} = \+un\cdot \pare{\+vM} \Rightarrow \mu A + 2\mu_0 A = \mu_0 M_0 R \Rightarrow A = \frac{\mu_0 M_0 a}{\mu + 2\mu_0}. \]
+从而
+\[ \+vH_1 = -\frac{A}{a}\+uz = -\frac{\mu_0 M_0}{\mu + 2\mu_0}\+uz \Rightarrow \+vB_1 = \mu \+vH_1 + \+vM_0 = \boxed{\frac{2\mu_0^2 \+vM_0}{\mu + 2\mu_0}.} \]
+且
+\[ \+vB_2 = \mu_0 A\frac{a^2}{r^3}\brac{3\pare{\+uz\cdot \+ur}\+ur - \+uz} = \boxed{\frac{\mu_0^2}{\mu+2\mu_0} \pare{\frac{a}{r}}^3 \brac{3\pare{\+vM_0\cdot \+ur}\+ur - \+vM_0}.} \]
+\newprob{Pr 1}%
+$\displaystyle \+vM = M\pare{\+us \cos\pare{n-1}\phi + \+u\phi \sin\pare{n-1}\phi}$, $\displaystyle \div \+vM = M\cdot \frac{n}{s} \cos \pare{n-1}\phi$. 有
+\[ \psi = \begin{cases}
+    \psi_1, & r<a, \\
+    \psi_2, & a<r<b, \\
+    \psi_3, & r>b,
+\end{cases} \Rightarrow \begin{cases}
+    \laplacian \psi_1 = 0, \\
+    \displaystyle \laplacian \psi_2 = \div \+vM = M\cdot \frac{n}{s}\cos \pare{n-1}\phi, \\
+    \laplacian \psi_3 = 0.
+\end{cases} \]
+\par
+\makebox[0pt][r]{i.\ }$n\neq 0,1,2$, 可设$\psi_2 = f\pare{s} Mn\cos\pare{n-1}\phi$加上一调和函数, 则
+\[ s^2 f'' + sf' - \pare{n-1}^2 f = s \Rightarrow f = \frac{s}{n\pare{2-n}}. \]
+故
+\[ \psi_2 = \frac{s}{n\pare{2-n}}Mn\cos\pare{n-1}\phi + \brac{B\pare{\frac{s}{b}}^{n-1} + C\pare{\frac{a}{s}}^{n-1}}\cos\pare{n-1}\phi. \]
+可设
+\[ \psi_1 = A\pare{\frac{s}{a}}^{n-1}\cos\pare{n-1}\phi,\quad \psi_3 = D\pare{\frac{b}{s}}^{n-1}\cos\pare{n-1}\phi. \]
+记$\displaystyle \alpha = \frac{M}{2-n}$, 边界条件要求
+\[ \hspace{-5em}\begin{cases}
+    \displaystyle \left.\psi_1\right\vert_{r=a} = \left.\psi_2\right\vert_{r=a}, & %
+    \displaystyle A = \alpha a + B\pare{\frac{a}{b}}^{n-1} + C, \\
+    \displaystyle \left.\+DrD{\psi_1} \right\vert_{r=a}  - \left.\+DrD{\psi_2} \right\vert_{r=a} = -M\cos\pare{n-1}\phi, & %
+    \displaystyle A\pare{n-1}\rec{a} - \alpha - \pare{n-1}B\rec{a}\pare{\frac{a}{b}}^{n-1} + C\pare{n-1}\rec{a} = -M, \\
+    \displaystyle \left.\psi_2\right\vert_{r=b} = \left.\psi_3\right\vert_{r=b}, & %
+    \displaystyle \alpha B + B + C\pare{\frac{a}{b}}^{n-1} = D, \\
+    \displaystyle \left.\+DrD{\psi_2} \right\vert_{r=b}  - \left.\+DrD{\psi_3} \right\vert_{r=b} = M\cos\pare{n-1}\phi, & %
+    \displaystyle \alpha + \pare{n-1}B\rec{b} - C\pare{n-1} \rec{b} \pare{\frac{a}{b}}^{n-1} + D\pare{n-1}\rec{b} = M.
+\end{cases} \]
+从而
+\[ A = \brac{\pare{\frac{a}{b}}^{n-1}b - a}\frac{M}{\pare{n-2}}. \]
+故空腔内磁场
+\begin{align*}
+    \+vH &= -A \grad\brac{\pare{\frac{s}{a}}^{n-1}\cos\pare{n-1}\phi} \\ 
+    &= -\frac{A}{a^{n-1}}\pare{n-1}s^{n-2}\brac{\+us \cos\pare{n-1}\phi - \+u\phi \sin\pare{n-1}\phi} \\
+    &= \boxed{\frac{n-1}{n-2}\brac{\rec{a^{n-2}} - \rec{b^{n-2}}}M s^{n-2} \brac{\+ux \cos\pare{n-2}\phi - \+uy \sin \pare{n-2}\phi}.}
+\end{align*}
+\par
+\makebox[0pt][r]{ii.\ }$n = 2$取极限有
+\[ \+vH = \boxed{\ln \pare{\frac{b}{a}}M \+ux.} \]
+\par
+\makebox[0pt][r]{iii.\ }$n = 1$有
+\[ \+vH = \boxed{0.} \]
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[width=4cm]{src/n2.pdf}\\
+        \includegraphics[width=4cm]{src/HitotsuMag.pdf}\\
+        \caption{$n=2$}
+    \end{subfigure}
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[width=4cm]{src/n3.pdf}
+        \includegraphics[width=4cm]{src/FutatsuMag.pdf}\\
+        \caption{$n=3$}
+    \end{subfigure}
+    \begin{subfigure}{.3\textwidth}
+        \centering
+        \includegraphics[width=4cm]{src/n4.pdf}
+        \includegraphics[width=4cm]{src/MittsuMag.pdf}\\
+        \caption{$n=4$}
+    \end{subfigure}
+\end{figure}
+
+\end{document}

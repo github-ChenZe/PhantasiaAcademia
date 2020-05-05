@@ -1,10 +1,12 @@
 \documentclass[hidelinks]{ctexart}
 
+\usepackage[sensei=陈向军/刘明辉,gakka=原子物理学,section=Bisaikouzou,gakkabbr=AP]{styles/kurisu}
+
 \usepackage{van-de-la-illinoise}
 
 \begin{document}
 
-\section{电子的自旋和原子能级的精细结构} % (fold)
+\section{电子自旋和原子能级的精细结构} % (fold)
 \label{sec:电子的自旋和原子能级的精细结构}
 
 \begin{figure}[ht]
@@ -278,7 +280,7 @@ $\+vL^2$和$\+vS^2$仍然为守恒量, 故$l$和$s$是好量子数. $L_z$和$S_z
 \begin{sample}
     \begin{ex}
         计算氢原子的$n=1,2$能级的精细结构修正. 对于$n=1$, 只有$\ce{1s}$态$\ce{1^2S_{1/2}}$, 从而
-        \[ \Delta E_{1,1/2} = -E_n \frac{\alpha^2 Z^2}{n^2} \pare{\frac{3}{4} - \frac{n}{j+1/2}} = \SI{1.46}{\per\centi\meter}. \]
+        \[ \Delta E_{1,1/2} = -E_n \frac{\alpha^2 Z^2}{n^2} \pare{\frac{3}{4} - \frac{n}{j+1/2}} = \SI{-1.46}{\per\centi\meter}. \]
         对于$\ce{2s}$态$\ce{2^2S_{1/2}}$,
         \[ \Delta E_{1,1/2} = -E_n \frac{\alpha^2 Z^2}{n^2} \pare{\frac{3}{4} - \frac{n}{j+1/2}} = \SI{-0.456}{\per\centi\meter}. \]
         对于$\ce{2p}$态$\ce{2^2P_{1/2}}$
@@ -449,19 +451,239 @@ $I$是核自旋角动量量子数. 自旋角动量为$\+vI$的带正电荷的原
 由于隧穿效应,
 \[ Z^*_{ns} > Z^*_{np} > Z^*_{nd} > \cdots. \]
 以及
-\[ E_{nl} = -\half \mu\alpha^2 c^2 \frac{Z^*_{nl}}{n^2} = -\half \mu \alpha^2c^2 \rec{n^{*2}}. \]
+\[ \resumath{E_{nl} = -\half \mu\alpha^2 c^2 \frac{Z^*_{nl}}{n^2} = -\half \mu \alpha^2c^2 \rec{n^{*2}}.} \]
 其中$\displaystyle n^* = n/Z_{nl}^*$. 由于$Z^*_{nl} > 1$, 有$n^* < n$, $n^* = n - \Delta_{n;}$. 其中$\Delta_{nl}$谓量子数亏损.
-\[ E_{nl} = -\half \mu\alpha^2c^2 \rec{\pare{n-\Delta_{nl}}^2}. \]
+\[ E_{nl} = -\half \mu\alpha^2c^2 \rec{\pare{n-\Delta_{nl}}^2} = -\frac{Rhc}{\pare{n-\Delta_{nl}}^2}. \]
 \begin{figure}[ht]
     \centering
     \includegraphics[width=8cm]{src/LevelComp.png}
 \end{figure}
+\par
+对于钠原子, $l=0$的亏损都在$1.36$附近. 对于$l=1$都在$0.86$附近. 对于$l=2$都在$0.1$附近. 可见$l$上升后亏损越来越小. 这导致$l=0$和$l=1$的轨道都近似下降$\Delta n = -1$.
+\par
+由电偶极跃迁的选择定则, $\Delta l = \pm 1$. 跃迁的光谱构成若干谱线系. 对于\gloss{主线系}$n\ce{p}\mapsto 3\ce{s}$, 由
+\[ \tilde{\nu}_n = \frac{R}{\pare{3-\Delta_s}^2} - \frac{R}{\pare{n-\Delta_p}^2},\quad n = 3,4,5,\cdots. \]
+主线系的第一条谱线$\ce{3p}\mapsto\ce{3s}$的波长是$\SI{589.3}{\nano\meter}$, 这是钠黄光\gloss{D线}.
+\par
+第一辅线系(漫线系)谓$n\ce{d}\mapsto \ce{3p}$, 相应的
+\[ \tilde{\nu}_n = \frac{R}{\pare{3-\Delta_p}^2} - \frac{R}{\pare{n-\Delta_d}^2},\quad n = 3,4,5,\cdots. \]
+第二辅线系(锐线系)谓$n\ce{s}\mapsto \ce{3p}$, 相应的
+\[ \tilde{\nu}_n = \frac{R}{\pare{3-\Delta_p}^2} - \frac{R}{\pare{n-\Delta_s}^2},\quad n = 4,5,6,\cdots. \]
+Bergmann线系(基线系)谓$n\ce{f}\mapsto \ce{3d}$, 相应的
+\[ \tilde{\nu}_n = \frac{R}{\pare{3-\Delta_d}^2} - \frac{R}{\pare{n-\Delta_f}^2},\quad n = 4,5,6,\cdots. \]
 
 % paragraph 隧穿效应 (end)
 
 % subsubsection 量子数亏损 (end)
 
+\subsubsection{碱金属能级的精细结构} % (fold)
+\label{ssub:碱金属能级的精细结构}
+
+Dirac方程的低速近似
+\[ \brac{\hat H_0 + \hat H_T + \hat H_{ls} + \hat H_V}u = Eu. \]
+动能和势能修正引发能级移动, 而自旋-轨道修正引起能级分裂.
+\[ \Delta E_{ls} = \begin{cases}
+    0, & l=0, \\
+    \displaystyle \frac{\mu c^2\alpha^4 Z_{fs}^{*4}}{2n^{*3}} \frac{j\pare{j+1} - l\pare{l+1} - s\pare{s+1}}{2l\pare{l+1/2}\pare{l+1}}, & l\neq 0.
+\end{cases} \]
+隧穿效应对应的有效电荷数$Z_{nl}^*$已经计入亏损后量子数$n^*$中. $Z_{fs}^*$是价电子因为相对论效应感受到的有效核电荷数.
+\par
+$l=0$不发生精细结构分裂. $l\neq 0$有$s=1/2$, $j=l\pm 1/2$,
+\[ \Delta E_{ls} = \begin{cases}
+    \displaystyle \frac{\mu c^2\alpha^4 Z_{fs}^{*4}}{2n^{*3}} \rec{\pare{l+1}\pare{2l+1}} > 0, & j=l+\half, \\
+    \displaystyle -\frac{\mu c^2\alpha^4 Z_{fs}^{*4}}{2n^{*3}} \rec{l\pare{2l+1}} < 0, & j=l-\half.
+\end{cases} \]
+分裂间距为
+\[ \delta E_{ls} = \frac{\mu c^2\alpha^4 Z_{fs}^{*4}}{2n^{*3}} \rec{l\pare{l+1}}. \]
+\par
+基态钠原子处于$\ce{3s}$态, $l=0$, $s=1/2$, $j=1/2$, 不发生精细结构分裂. 即使价电子激发到$n\ce{s}$态也不会发生精细结构分裂.
+\par
+若基态价电子激发到$n\ce{p}$态, 则分裂为两个精细结构能级, $l=1$, $s=1/2$, $j=\curb{3/2,1/2}$, 有$\curb{n\ce{^2P_{3/2}},n\ce{^2P_{1/2}}}$两个态. 若基态价电子激发到$n\ce{p}$态, 则亦分裂为两个精细结构能级, $l=2$, $s=1/2$, $j=\curb{5/2,3/2}$, 有$\curb{n\ce{^2D_{5/2}},n\ce{^2D_{3/2}}}$两个态.
+\par
+钠原子只有$\ce{p}$轨道发生明显分裂. 选择定则$\Delta l = \pm 1$, $\Delta j = 0,\pm 1$仍然适用, 故D线由两条线构成, $\mathrm{D}_1$线和$\mathrm{D}_2$线分别为
+\[ \curb{3\ce{^2P_{1/2}}\mapsto 3\ce{^2S_{1/2}}, 3\ce{^2P_{3/2}}\mapsto 3\ce{^2S_{1/2}}}. \]
+
+% subsubsection 碱金属能级的精细结构 (end)
+
 % subsection 碱金属原子 (end)
+
+\subsection{外场中的原子} % (fold)
+\label{sub:外场中的原子}
+
+\subsubsection{Zeeman效应} % (fold)
+\label{ssub:zeeman效应}
+
+将光源放在磁场中, 光源发出的每一条谱线都会分裂成三条偏振的谱线, 谓\gloss{Zeeman效应}.
+\begin{remark}
+    Lorentz的经典解释将电子视为原子中的谐振子, 频率$\nu_0$, 发射相同频率的电磁波. 有外磁场的情形下线性谐振分解为沿磁场方向和垂直于磁场方向者. 沿磁场方向的谐振不受影响, 圆周运动则受影响并发射$\nu_0 + \pm \Delta_\nu$的电磁波.
+\end{remark}
+然而实际上, $\mathrm{D}_1$线分裂为$4$条, $\mathrm{D}_2$线分裂为$6$条.
+\par
+原子中电子具有轨道磁矩$\+v\mu_l$和自旋磁矩$\+v\mu_s$. 原子核具有自旋磁矩$\+v\mu_I$. 后者可忽略不计, 故
+\[ \+v\mu \approx \+v\mu_l + \+v\mu_s = -\frac{\mu\+_B_}{\hbar}\pare{g_l \+vL + g_s \+vS} = -\frac{\mu\+_B_}{\hbar}\pare{\+vL + 2\+vS}. \]
+故取向势能为
+\[ U = -\+v\mu \cdot \+vB = \frac{\mu\+_B_}{\hbar}\pare{\+vL+2\+vS}\cdot \+vB. \]
+总修正
+\begin{align*}
+    \Delta E &= \Delta E_T + \Delta E_V + \Delta E_{ls} + \pare{-\+v\mu\cdot \+vB}\\
+    & = \pare{\Delta E_T + \Delta E_{ls}} + \pare{-\+v\mu_s \cdot \+vB_e} + \pare{-\+v\mu\cdot \+vB}.
+\end{align*}
+$\pare{-\+v\mu_s \cdot \+vB_e}$是电子自旋磁矩与内磁场的作用. $\pare{-\+v\mu\cdot \+vB}$是原子磁矩与外磁场的作用.
+
+% subsubsection zeeman效应 (end)
+
+\subsubsection{弱磁场情形} % (fold)
+\label{ssub:弱磁场情形}
+
+$B \ll B_e$, 此时$\abs{\+v\mu\cdot \+vB_e} \gg \abs{-\+v\mu\cdot \+vB}$. 此时由于自旋-轨道相互作用先产生精细结构分裂, 此时$\+vJ$绕$z$方向有进动. 原子磁矩
+\[ \+v\mu = -\frac{\mu\+_B_}{\hbar}\pare{\+vL+2\+vS} = -\frac{\mu\+_B_}{\hbar}\pare{\+vJ + \+vS}. \]
+原子总磁矩不再总角动量$\+vJ$的方向上, 而是绕着$\+vJ$进动.故$\+v\mu$不再守恒且$\mu_z$无确定取值. 将$\+v\mu$分解为平行于$\+vJ$和垂直于$\+vJ$的部分. 垂直分量在进动中平均后归零, 只有平行分量为有效磁矩.
+\begin{align*}
+    & \+v\mu_j = \frac{\+v\mu\cdot \+vJ}{J^2}\+vJ = -\frac{\mu\+_B_}{\hbar}\pare{\+vL\cdot \+vJ + 2\+vS\cdot \+vJ} \\
+    &= -\frac{\mu\+_B_}{\hbar}\brac{\half\pare{J^2 + L^2 - S^2} + \half\pare{J^2 + S^2 - L^2}}. \\
+    & \resumath{\+v\mu_j= -g_j \frac{\mu\+_B_}{\hbar} \+vJ.}
+\end{align*}
+其中
+\[ \resumath{g_j = 1 + \frac{j\pare{j+1} + s\pare{s+1} - l\pare{l+1}}{2j\pare{j+1}}.} \]
+故有效磁矩的大小为
+\[ \mu_j = g_j\sqrt{j\pare{j+1}}\mu\+_B_. \]
+$z$分量
+\[ \mu_{jz} = -g_j m_j \mu\+_B_,\quad m_j = -j,\cdots,+j. \]
+取向势能
+\[ \Delta_Z E = -\+v\mu_j \cdot \+vB = m_jg_j\mu\+_B_B. \]
+这会导致能级按照$m_j$的取值分裂为$2j+1$条. 谓Zeeman分裂.
+\[ \Delta E = \Delta E_T + \Delta E_V + \pare{-\+v\mu\cdot \+vB}. \]
+\begin{sample}
+    \begin{ex}
+        $\ce{^2S_{1/2}}$按$m=\pm 1/2$分裂为两级,
+        \begin{align*}
+            & g = 1 + \frac{j\pare{j+1} + s\pare{s+1} - l\pare{l+1}}{2j\pare{j+1}} = 2, \\
+            & \Delta E = mg\mu\+_B_ B = \pm \mu\+_B_B.
+        \end{align*}
+        $\ce{^2P_{1/2}}$按$m=\pm 1/2$分裂为两级,
+        \begin{align*}
+            & g = 1 + \frac{j\pare{j+1} + s\pare{s+1} - l\pare{l+1}}{2j\pare{j+1}} = \frac{2}{3}, \\
+            & \Delta E = mg\mu\+_B_ B = \pm \rec{3} \mu\+_B_B.
+        \end{align*}
+        $\ce{^2P_{3/2}}$按$m=\pm 1/2, \pm 3/2$分裂为四级,
+        \begin{align*}
+            & g = 1 + \frac{j\pare{j+1} + s\pare{s+1} - l\pare{l+1}}{2j\pare{j+1}} = \frac{4}{3}, \\
+            & \Delta E = mg\mu\+_B_ B = \curb{\pm \frac{2}{3} \mu\+_B_B,\pm 2\mu\+_B_B}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\paragraph{光谱的Zeeman分裂} % (fold)
+\label{par:光谱的zeeman分裂}
+
+考虑两个精细结构能级$E_2$, $E_1$之间的光谱跃迁, 设$E_2 > E_1$. 在无外磁场时, 精细结构的谱线频率满足
+\[ \nu_0 = \frac{E_2 - E_1}{h}. \]
+加上精细结构后, 产生分裂
+\[ E'_2 = E_2 + m_2g_2 \mu\+_B_B,\quad E'_1 = E_1 + m_1 g_1 \mu\+_B_B. \]
+光谱线的频率变为
+\[ \resumath{\nu = \nu_0 + \frac{\mu\+_B_B}{h}\pare{m_2g_2 - m_1g_1}.} \]
+用波数表示则
+\[ \resumath{\tilde{\nu} = \tilde{\nu}_0 + \+sL\pare{m_2 g_2 - m_1g_1}.} \]
+其中
+\[ \resumath{\+sL = \frac{\mu\+_B_B}{hc} = \frac{eB}{4\pi m_e c} = \SI{0.466}{\per\centi\meter} \cdot B/\SI{}{\tesla}.} \]
+选择定则要求$\Delta m = 0,\pm 1$. $\mathrm{D}_1$线$3\ce{^2P_{1/2}}\mapsto 3\ce{^2S_{1/2}}$有四个允许的$m\mapsto m$, 代入$\tilde{\nu}$的公式有$\mathrm{D}_1$偏离
+\[ \curb{-\frac{4}{3},-\frac{2}{3},\frac{2}{3},\frac{4}{3}}\+sL. \]
+$\mathrm{D}_2$线$3\ce{^2P_{3/2}}\mapsto 3\ce{^2S_{1/2}}$有六个允许的$m\mapsto m$, 代入$\tilde{\nu}$的公式有$\mathrm{D}_2$偏离
+\[ \curb{-\frac{5}{3},-1,-\frac{1}{3},\frac{1}{3},1,\frac{4}{3}}\+sL. \]
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=6cm]{src/ZeemanPaschen.png}
+    \caption{Zeeman效应与Paschen效应的比较}
+\end{figure}
+
+% paragraph 光谱的zeeman分裂 (end)
+
+% subsubsection 弱磁场情形 (end)
+
+\subsubsection{强磁场情形} % (fold)
+\label{ssub:强磁场情形}
+
+当$B>Z^4\SI{}{\tesla}$时可视为强磁场. 此时$B\gg B_e$, 故$\abs{-\+v\mu\cdot \+vB} \gg \abs{-\+v\mu_s \cdot \+vB_e}$, 忽略自旋-轨道耦合, $\+vL$和$\+vS$各自为守恒量, 则原子在强磁场中的取向势能为
+\begin{align*}
+    \Delta E &= U = -\+v\mu\cdot \+vB = \frac{\mu\+_B_}{\hbar}\pare{\+vL + 2\+vS}\cdot \+vB \\
+    &= \frac{\mu\+_B_B}{\hbar}\pare{L_z + 2S_z} = \pare{m_l + 2m_s}\mu\+_B_B.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        $\ce{3s}$能级有$m_l = 0$, $m_s = \pm 1/2$, 分裂为
+        \[ \Delta E = \pare{m_l + 2m_s}\mu\+_B_B = \pare{0\pm 2\times \half}\mu\+_B_B = \pm \mu\+_B_B. \]
+        $\ce{3p}$能级有$m_l = 0,\pm 1$, $m_s = \pm 1/2$, 分裂为
+        \[ \Delta E = \pare{m_l + 2m_s}\mu\+_B_B = \curb{0,\pm \mu\+_B_B, \pm 2\mu\+_B_B}. \]
+    \end{ex}
+\end{sample}
+光谱也会产生相应的分裂, 原本
+\[ \nu_0 = \frac{E_2 - E_1}{h}, \]
+加上外磁场后能级分裂为
+\[ E'_2 = E_2 + \pare{m_{l2} + 2m_{s2}}\mu\+_B_B,\quad E'_1 = E_1 + \pare{m_{l1} + 2m_{s1}}\mu\+_B_B, \]
+光谱频率变为
+\[ \nu = \nu_0 + \frac{2\mu\+_B_B}{h}\pare{m_{s2} - m_{s1}} + \frac{2\mu\+_B_B}{h}\pare{m_{l2} - m_{l1}}. \]
+选择定则要求$m_{s2} - m_{s1} = 0$, 从而
+\[ \nu = \nu_0 + \frac{\mu\+_B_B}{h}\Delta m_l. \]
+用波数表示,
+\[ \resumath{\tilde{\nu} = \tilde{\nu}_0 + \frac{\mu\+_B_B}{hc}\Delta m_l = \begin{cases}
+    \tilde{\nu}_0 + \+sL, & \Delta m_l = 1, \\
+    \tilde{\nu}_0, & \Delta m_l = 0, \\
+    \tilde{\nu}_0 - \+sL, & \Delta m_l = -1.
+\end{cases}} \]
+\begin{sample}
+    \begin{ex}
+        强场情形下, 钠原子$\ce{3p}$分裂为五条($\curb{0,\pm \mu\+_B_B, \pm 2\mu\+_B_B}$), $\ce{3s}$分裂为两条($\pm \mu\+_B_B$), 从而为选择定则($\Delta m_l = 0,\pm 1$, $\Delta m_s = 0$)所允许的跃迁一共有六条. 考虑能量简并后退化为三条.
+        \[ \tilde{\nu} = \tilde{\nu}_0 + \frac{\mu\+_B_B}{hc}\Delta m_l = \begin{cases}
+            \tilde{\nu}_0 + \+sL, & \Delta m_l = +1, \\
+            \tilde{\nu}_0, & \Delta m_l = 0, \\
+            \tilde{\nu}_0 - \+sL, & \Delta m_l = -1.
+        \end{cases} \]
+        其中$\displaystyle \+sL = \frac{\mu\+_B_B}{hc} = \frac{eB}{4\pi m_e c}$. $m_2 = \pm 1$分别为$\sigma^{\pm}$线, $m_2 = 0$对应$\pi$线.
+    \end{ex}
+\end{sample}
+在这一基础上进一步考虑自旋-轨道耦合,
+\[ \begin{cases}
+    \Delta E_{ls} = \xi_{nl}m_l m_s, & l \neq 0,\\
+    \Delta E_{ls} = 0, & l = 0.
+\end{cases} \]
+\begin{sample}
+    \begin{ex}
+        对于$m_l = 1$, $m_s = +1/2$, 修正为正. 对于$m_l = 0$, $m_s = \pm 1/2$, 修正为零. 对于$m_l = \pm 1$, $m_s = \mp 1/2$, 修正为负. 对于$m_l = -1$, $m_s = -1/2$, 修正为正. 故两条$\sigma$线发生分裂而$\pi$线不分裂.
+    \end{ex}
+\end{sample}
+\begin{cenum}
+    \item 零场: 完全由精细结构引发分裂.
+    \item 弱场: 精细结构分裂后发生磁分裂.
+    \item 强场: 自旋-轨道耦合被破坏, 磁分裂后按照$m_lm_s$分裂.
+\end{cenum}
+
+% subsubsection 强磁场情形 (end)
+
+\subsubsection{Zeeman谱线的偏振特性} % (fold)
+\label{ssub:zeeman谱线的偏振特性}
+
+取磁场的方向为$z$, 若$\Delta m = m_1 - m_2 = -1$, 原子发射一个光子后在磁场方向的角动量减小$\hbar$. 故光子在磁场方向上具有$\hbar$的角动量. 此时如果迎着磁场方向观察, 将会看到左旋圆偏振光(旋转方向与$\+uz$为右手关系). 如果从侧面观测, 会发现垂直于磁场方向偏振的线偏振光.
+\par
+若$\Delta m = m_1 - m_2 = 1$, 则迎着磁场方向观察可观测到右旋圆偏光(旋转方向与$\+uz$为左手关系). 横向观察时得到垂直于磁场方向偏振的线偏光.
+\par
+若$\Delta m = 0$, 则前后角动量的$z$分量不变, 故电矢量在与磁场平行的平面内. 只有$z$分量平均值非零, 故纵向无法观测到光, 横向可以观测到电矢量在磁场方向上的线偏光.
+
+% subsubsection zeeman谱线的偏振特性 (end)
+
+\subsubsection{原子束磁共振} % (fold)
+\label{ssub:原子束磁共振}
+
+原子在磁场中能级产生分裂后, 在垂直于磁场方向施加频率$\nu$的电磁波,
+\[ \nu = g_j \frac{\mu\+_B_B}{h} \]
+为强邻磁能级的间隔. 此时会发现强烈的共振吸收.
+\par
+钠原子基态为$\ce{3 ^2S_{1/2}}$, 其在磁场下分裂两个能级. 原子束通过均匀磁场发生偏折, $\pm 1/2$通过同一狭缝, 之后磁场反向, 两类原子被拉到第三个狭缝.
+\par
+在中间加上均匀磁场和射频电磁波, 两个能级可发生共振, 从而发生能级翻转, 反转后原子数不再通过第三个狭缝.
+
+% subsubsection 原子束磁共振 (end)
+
+% subsection 外场中的原子 (end)
 
 % section 电子的自旋和原子能级的精细结构 (end)
 

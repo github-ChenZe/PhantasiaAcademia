@@ -125,6 +125,8 @@ INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/translator/translator.sty
 INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/translator/translator.sty
 INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
 INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/siunitx/siunitx-version-1.cfg
+INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/siunitx/siunitx-version-1.cfg
 INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/esint/esint.sty
 INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/esint/esint.sty
 INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/amsfonts/amssymb.sty
@@ -527,8 +529,6 @@ INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/titling/titling.sty
 INPUT /usr/local/texlive/2019/texmf-dist/tex/latex/titling/titling.sty
 INPUT /Users/zechen/Library/texmf/tex/latex/local/van-de-omnibus.sty
 INPUT /Users/zechen/Library/texmf/tex/latex/local/van-de-omnibus.sty
-INPUT /Users/zechen/Library/texmf/tex/latex/local/van-de-obsolescence.sty
-INPUT /Users/zechen/Library/texmf/tex/latex/local/van-de-obsolescence.sty
 INPUT /Users/zechen/Library/texmf/tex/latex/local/van-de-neko.sty
 INPUT /Users/zechen/Library/texmf/tex/latex/local/van-de-neko.sty
 INPUT /Users/zechen/Library/texmf/tex/latex/local/van-de-environnement.sty
@@ -686,5 +686,6 @@ INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/lm/ec-lmro10.tfm
 OUTPUT Electrostatics.xdv
+INPUT /usr/local/texlive/2019/texmf-dist/fonts/tfm/public/lm/ec-lmbxi10.tfm
 INPUT Electrostatics.aux
 INPUT ./Electrostatics.out

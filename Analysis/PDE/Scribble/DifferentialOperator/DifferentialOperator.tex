@@ -14,7 +14,7 @@
     $\displaystyle u\pare{x,t_0} = e^{t_0\+DtD{}}u\pare{x}\vert_{t=0} = \brac{1+t\pare{\+D{x^2}D{^2}} + \cdots} x^2 = \boxed{x^2 + 2t.}$
 \end{solution}
 \begin{ex}
-    $\displaystyle \+D{t^2}{D^2 u} = \+D{x^2}D{^2u}$, $u\pare{x,0} = x^2$, $u_t\pare{x,0} = 0$.
+    $\displaystyle \+D{t^2}D{^2 u} = \+D{x^2}D{^2u}$, $u\pare{x,0} = x^2$, $u_t\pare{x,0} = 0$.
 \end{ex}
 \begin{solution}
     令$\displaystyle v = \+DtDu$, $\displaystyle A = \begin{pmatrix}
@@ -56,6 +56,102 @@
         \end{pmatrix} + \frac{t^2}{2} \begin{pmatrix}
             2 \\ *
         \end{pmatrix} + \cdots = \boxed{x^2 + t^2.} \qedhere
+    \end{align*}
+\end{solution}
+\begin{ex}
+    $\displaystyle \begin{cases}
+        \displaystyle \+D{t^2}D{^2u} + 2\+DtDu = \+D{x^2}D{^2u} - u, \quad t>0,\quad -\infty<x<+\infty, \\
+        u\pare{0,x} = 0,\quad u_t\pare{0,x} = x.
+    \end{cases}$
+\end{ex}
+\begin{solution}
+    记$\displaystyle A = \begin{pmatrix}
+        0 & 1 \\
+        \partial_{xx}^2 - 1 & -2
+    \end{pmatrix}$, 则
+    \begin{align*}
+        & \+DtD{} \begin{pmatrix}
+            u \\ u_t
+        \end{pmatrix} = \begin{pmatrix}
+        0 & 1 \\
+        \partial_{xx}^2 - 1 & -2
+    \end{pmatrix}\begin{pmatrix}
+        u \\ u_t
+    \end{pmatrix} = A \begin{pmatrix}
+        u \\ u_t
+    \end{pmatrix} \\
+        &\Rightarrow\begin{pmatrix}
+            u \\ u_t
+        \end{pmatrix} = e^{tA}\left.\begin{pmatrix}
+        u \\ u_t
+    \end{pmatrix}\right\vert_{t=0}
+        = e^{tA}\begin{pmatrix}
+            0 \\ x
+        \end{pmatrix}\\ 
+        &= \exp \brac{t \begin{pmatrix}
+            & 1 \\
+            \partial_{xx}^2 - 1 & -2
+        \end{pmatrix}} \begin{pmatrix}
+            0 \\ x
+        \end{pmatrix} = \exp \brac{t \begin{pmatrix}
+            & 1 \\
+            - 1 & -2
+        \end{pmatrix}} \begin{pmatrix}
+            0 \\ x
+        \end{pmatrix} \\
+        &= \exp \brac{t \begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}\begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}\begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}^{-1}} \begin{pmatrix}
+            0 \\ x
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}\exp \brac{t \begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}}\begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}^{-1} \begin{pmatrix}
+            0 \\ x
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}\begin{pmatrix}
+            1 - t + t^2/2! - t^3/3! + \cdot & t - 2t^2/2! + 3t^3/3! - \cdot \\
+            & 1 - t + t^2/2! - t^3/3!
+        \end{pmatrix}\begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}^{-1} \begin{pmatrix}
+            0 \\ x
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}\begin{pmatrix}
+            e^{-t} & te^{-t} \\
+            & te^{-t}
+        \end{pmatrix}\begin{pmatrix}
+            -1 & 1 \\
+            0 & -1
+        \end{pmatrix}^{-1} \begin{pmatrix}
+            0 \\ x
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            xte^{-t} \\
+            *
+        \end{pmatrix}\\
+        & \Rightarrow \boxed{u = xte^{-t}.} \qedhere
     \end{align*}
 \end{solution}
 

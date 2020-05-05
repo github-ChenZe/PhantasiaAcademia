@@ -47,9 +47,26 @@
 
 % subsubsection 调和函数 (end)
 
-
-
 % subsection laplace方程 (end)
+
+\subsection{角动量} % (fold)
+\label{sub:角动量}
+
+\begin{ex}
+    求电荷-磁单极子系统的角动量.
+\end{ex}
+\begin{solution}
+    设由电荷和磁单极子出发指向场点的单位矢量分别为$\+un$和$\+un'$, 则
+    \begin{align*}
+        \iiint \+vr\times \pare{\+vE\times \+vB} &= \iiint \frac{\+un}{r}\times \pare{\+un\times \+vB} \,\rd{V} \\
+        &= \rec{r}\brac{\pare{\+un\cdot \+vB}\+un - \+vB}\,\rd{V} \\
+        &= -\iiint \+vB\+v\cdot \grad \frac{\+vr}{r}\,\rd{V} \\
+        &= -\iiint \div\pare{\+vB\frac{\+vr}{r}}\,\rd{V} + \iiint \pare{\div \+vB} \frac{\+vr}{r}\,\rd{V} \\
+        &= \+uz. \qedhere
+    \end{align*}
+\end{solution}
+
+% subsection 角动量 (end)
 
 % section 静电学 (end)
 

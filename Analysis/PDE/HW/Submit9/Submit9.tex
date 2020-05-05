@@ -1,0 +1,80 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{4.2 (2)}%
+对$t$做Laplace变换后
+\[ p^2 \hat u - pu\vert_{t=0} - u'\vert_{t=0} = p^2\hat u - b = a^2 \+D{x^2}D{^2\hat u}. \]
+结合自然边界条件得到
+\[ \hat u = \frac{b}{p^2}\pare{1-e^{-px/a}}. \]
+逆变换为
+\[ u = \boxed{bt - H\pare{t-\frac{x}{a}}b\pare{t-\frac{x}{a}}.} \]
+\newprob{4.2 (4)}%
+对$t$做Laplace变换后
+\[ p^2 \hat u - pu\vert_{t=0} - u'\vert_{t=0} = p^2\hat u = a^2 \+D{x^2}D{^2 \hat u} + \frac{p}{p^2+\omega^2}. \]
+结合自然边界条件得到
+\[ \hat u = \rec{p\pare{p^2+\omega^2}}\pare{1-e^{-px/a}} = \pare{\rec{\omega^2}\rec{p} - \rec{\omega^2}\frac{p}{p^2+\omega^2}}\pare{1-e^{-px/a}}. \]
+逆变换为
+\begin{align*}
+    u &= \rec{\omega^2} - \rec{\omega^2}\cos\pare{\omega t} - H\pare{t-\frac{x}{a}}\brac{\rec{\omega^2} - \rec{\omega^2}\cos \omega\pare{t - \frac{x}{a}}} \\
+    &= \boxed{\frac{2}{\omega^2}\sin^2 \frac{\omega t}{2} - H\pare{t-\frac{x}{a}}\frac{2}{\omega^2}\sin^2 \brac{\frac{\omega}{2}\pare{t-\frac{x}{a}}}.}
+\end{align*}
+\newprob{5.1 (1)}%
+$\delta\pare{x} \cos x + \delta\pare{x}\sin x = \delta\pare{x} \cos 0 + \delta\pare{x}\sin 0 = \delta\pare{x}.$
+\par
+\newprobheader{(2)}%
+$\displaystyle \int_{-\infty}^\infty f\pare{x} x\delta'\pare{x} = f\pare{x}x\delta\pare{x}\Big\vert_{-\infty}^\infty - \int_{-\infty}^\infty \pare{f'\pare{x}x + f\pare{x}}\delta\pare{x}\,\rd{x} = -f\pare{0}.$
+\par
+\newprobheader{(3)}%
+$\displaystyle \delta\pare{x} = \delta\pare{-x}$两侧求导即$\delta'\pare{x} = -\delta'\pare{-x}$.
+\newprob{5.2}%
+$\displaystyle f\pare{x_0,y_0} = \int f\pare{x,y}\delta\pare{x-x_0,y-y_0}\,\rd{x}\,\rd{y}$\\
+$\displaystyle = \int f\pare{x,y}\delta\pare{x-x_0,y-y_0}\abs{J}\,\rd{\xi}\,\rd{\eta}$ \\
+$\displaystyle = f\pare{\xi_0,\eta_0} = \int f\pare{\xi,\eta}\delta\pare{\xi-\xi_0,\eta-\eta_0}\,\rd{\xi}\,\rd{\eta}$\\
+$\displaystyle \Rightarrow \delta\pare{x-x_0,y-y_0} \abs{J} = \delta\pare{\xi-\xi_0,\eta-\eta_0}.$\\
+极坐标下$\abs{J} = r$, 故\\
+$\displaystyle \delta\pare{x-x_0,y-y_0} = \rec{r}\delta\pare{r-r_0,\theta-\theta_0}.$
+
+\end{document}

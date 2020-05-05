@@ -1,0 +1,8 @@
+对给定容差TOL近似/@$\displaystyle \int_a^b f\pare{x}\,\rd{x}$@/
+/@$c$@/ = /@$\displaystyle \frac{a+b}{2}$@/
+/@$S_{\brac{a,b}}$@/ = /@$\displaystyle \pare{b-a}\frac{f\pare{a} + f\pare{b}}{2}$@/
+if /@$\displaystyle \abs{S_{\brac{a,b}} - S_{\brac{a,c}} - S_{\brac{c,b}}} < 3\times \mathrm{TOL} \times \frac{b-a}{b\+_orig_ - a\+_orig_}$@/
+    接受/@$S_{\brac{a,c}} - S_{\brac{c,b}}$@/作为区间/@$\brac{a,b}$@/上的近似
+else
+    对于区间/@$\brac{a,c}$@/和/@$\brac{c,b}$@/递归重复上面的步骤
+end

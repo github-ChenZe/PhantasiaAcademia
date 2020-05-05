@@ -481,6 +481,118 @@ p.45 13(两种方法, 构造以及Newton, 并证明误差), p.46 15(证明误差
 
 % subsection 分段插值 (end)
 
+\subsection{三次样条插值} % (fold)
+\label{sub:三次样条插值}
+
+\begin{definition}
+    给定一个定义在$\brac{a,b}$上的函数$f$和一组插值节点$a = x_0 < x_1<\cdots < x_n = b$. $f$的三次样条插值满足如下条件:
+    \begin{cenum}
+        \item $s\pare{x}$在子区间$\brac{x_j,x_{j+1}}$, $j = 0,\cdots,n-1$是一个(不超过)三次多项式, 记为$s_j$.
+        \item $s\pare{x_j} = f\pare{x_j}$, $j = 0,\cdots,n$.
+        \item $s_{j+1}\pare{x_{j+1}} = s_j\pare{x_{j+1}}$, $j = 0,\cdots,n-2$.
+        \item $s'_{j+1}\pare{x_{j+1}} = s'_j\pare{x_{j+1}}$, $j = 0,\cdots,n-2$.
+        \item $s''_{j+1}\pare{x_{j+1}} = s''_j\pare{x_{j+1}}$, $j = 0,\cdots,n-2$.
+        \item 满足下面两种边界条件之一:
+        \begin{cenum}
+            \item $s''\pare{x_0} = s''\pare{x_n} = 0$.
+            \item $s'\pare{x_0} = f'\pare{x_0}$, $s'\pare{x_n} = f'\pare{x_n}$.
+        \end{cenum}
+    \end{cenum}
+\end{definition}
+第一个条件要求
+\[ s_j\pare{x} = a_j + b_j\pare{x-x_j} + c_j\pare{x-x_j}^2 + d_j\pare{x-x_j}^3,\quad j = 0,\cdots, n - 1. \]
+即
+\[ s_{j+1}\pare{x} = a_{j+1} + b_{j+1}\pare{x-x_{j+1}} + c_{j+1}\pare{x-x_{j+1}}^2 + d_{j+1}\pare{x-x_{j+1}}^3. \]
+第二个条件(过数据点)要求
+\[ s_j\pare{x_j} = f\pare{x_j} = a_j,\quad j = 0,\cdots,n. \]
+记$h_j = x_{j+1} - x_j$, 则第三个条件(连续性)要求
+\[ a_{j+1} = s_{j+1}\pare{x_{j+1}} = s_j\pare{x_{j+1}}. \]
+故
+\[ a_{j+1} = a_j + b_j h_j + c_j h_j^2 + d_j h_j^3. \]
+第四个条件(一阶导数连续性)要求
+\[ b_{j+1} = b_j + 2c_j h_j + 3a_j h_j^2. \]
+第五个条件(二阶导数连续性)要求
+\[ c_{j+1} = c_j + 3d_j h_j. \]
+可得
+\begin{align*}
+    & a_{j+1} = a_j + b_j h_j + \rec{3}h_j^2\pare{2c_j + c_{j+1}}, \quad j = 0,\cdots,n-2, \\
+    & b_{j+1} = b_j + h_j \pare{c_j+c_{j+1}},\quad j = 0,\cdots,n-2, \\
+    & b_j = \frac{a_{j+1}-a_j}{h_j} - \rec{3}h_j\pare{2c_j + c_{j+1}}, \\
+    & \Rightarrow b_{j-1} = \frac{a_j - a_{j-1}}{h_{j-1}} - \rec{3}h_{j-1}\pare{2c_{j-1}+c_j}, \\
+    & \Rightarrow b_j = b_{j-1} + h_{j-1}\pare{c_{j-1} + c_j}, \\
+    & \Rightarrow h_{j-1} c_{j-1} + 2\pare{h_{j-1} + h_j}c_j + h_j c_{j+1} \\
+    & \phantom{\Rightarrow \ }= \frac{3}{h_j}\pare{a_{j+1} - a_j} - \frac{3}{h_{j-1}}\pare{a_j - a_{j-1}},\quad j = 1,\cdots,n-1.
+\end{align*}
+故确定$\curb{c_i}$即可.
+\begin{theorem}
+    设$\func{f}{\brac{a,b}}{\+bR}$, $a=x_0<\cdots<x_n = b$且$f$在端点可导. 若$f$关于$x_0, \cdots, x_n$的三次样条插值$s\pare{x}$满足$s'\pare{a} = f'\pare{a}$, $s'\pare{b} = f'\pare{b}$, 则$s\pare{x}$唯一.
+\end{theorem}
+\begin{proof}
+    由条件得到$b_0 = f'\pare{a}$, $b_n = f'\pare{b}$. 从而
+    \begin{align*}
+        & b_0 = \frac{a_1 - a_0}{h_0} - \frac{h_0}{3}\pare{2c_0 + c_1}, \\
+        & b_n = b_{n-1} + h_{n-1}\pare{c_{n-1} + c_n}, \\
+        & b_{n-1} = \rec{h_{n-1}}\pare{a_n - a_{n-1}} - \rec{3} h_{n-1}\pare{2c_{n-1}+c_n}, \\
+        & \Rightarrow f'\pare{b} = \frac{a_n - a_{n-1}}{h_{n-1}} - \rec{3}h_{n-1}\pare{2c_{n-1} + c_n} + h_{n-1}\pare{c_{n-1}+c_n}, \\
+        & \Rightarrow h_{n-1}c_{n-1} + 2h_{n-1}c_n = 3f'\pare{b} - \frac{3}{h_{n-1}}\pare{a_n - a_{n-1}}, \\
+        & 2h_0 c_0 + h_0 c_1 = \frac{3}{h_0}\pare{a_1 - a_0} - 3f'\pare{a}.
+    \end{align*}
+    最终得到联立方程组
+    \begin{align*}
+        & \begin{pmatrix}
+            2h_0 & h_0 & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            h_0 & 2\pare{h_0+h_1} & h_1 & 0 & \cdots & 0 & 0 & 0 \\
+            0 & h_1 & 2\pare{h_1+h_2} & h_2 & \cdots & 0 & 0 & 0 \\
+            \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+            0 & 0 & 0 & 0 & \cdots & h_{n-2} & 2\pare{h_{n-2} + h_{n-1}} & h_{n-1} \\
+            0 & 0 & 0 & 0 & \cdots & 0 & h_{n-1} & 2h_{n-1}
+        \end{pmatrix} \begin{pmatrix}
+            c_0 \\ c_1 \\ \vdots \\ c_{n-1} \\ c_n
+        \end{pmatrix}\\ &= \begin{pmatrix}
+            \displaystyle \frac{3}{h_0}\pare{a_1 - a_0} - 3f'\pare{a} \\
+            \displaystyle \frac{3}{h_1}\pare{a_2 - a_1} - \frac{3}{h_0}\pare{a_1 - a_0}\\
+            \vdots \\
+            \displaystyle \frac{3}{h_{1-1}}\pare{a_n - a_{n-1}} - \frac{3}{h_{n-2}}\pare{a_{n-1} - a_{n-2}}\\
+            \displaystyle 3f'\pare{b} - \frac{3}{h_{n-1}}\pare{a_n - a_{n-1}}
+        \end{pmatrix}.
+    \end{align*}
+    注意到LHS为对角占优矩阵, 从而解是唯一的.
+\end{proof}
+\begin{theorem}
+    设$\func{f}{\brac{a,b}}{\+bR}$, $a=x_0<\cdots<x_n = b$且$f$在端点可导. 若$f$关于$x_0, \cdots, x_n$的三次样条插值$s\pare{x}$满足$s''\pare{a} = s''\pare{b} = 0$, 则$s\pare{x}$唯一.
+\end{theorem}
+\begin{proof}
+    此时立刻有$c_0 = c_n = 0$. 此时方程组变为
+    \begin{align*}
+        & \begin{pmatrix}
+            1 & 0 & 0 & 0 & \cdots & 0 & 0 & 0 \\
+            h_0 & 2\pare{h_0+h_1} & h_1 & 0 & \cdots & 0 & 0 & 0 \\
+            0 & h_1 & 2\pare{h_1+h_2} & h_2 & \cdots & 0 & 0 & 0 \\
+            \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+            0 & 0 & 0 & 0 & \cdots & h_{n-2} & 2\pare{h_{n-2} + h_{n-1}} & h_{n-1} \\
+            0 & 0 & 0 & 0 & \cdots & 0 & 0 & 1
+        \end{pmatrix} \begin{pmatrix}
+            c_0 \\ c_1 \\ \vdots \\ c_{n-1} \\ c_n
+        \end{pmatrix}\\ &= \begin{pmatrix}
+            \displaystyle 0 \\
+            \displaystyle \frac{3}{h_1}\pare{a_2 - a_1} - \frac{3}{h_0}\pare{a_1 - a_0}\\
+            \vdots \\
+            \displaystyle \frac{3}{h_{1-1}}\pare{a_n - a_{n-1}} - \frac{3}{h_{n-2}}\pare{a_{n-1} - a_{n-2}}\\
+            \displaystyle 0
+        \end{pmatrix}.
+    \end{align*}
+    同样有唯一解.
+\end{proof}
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.46 16, 17
+
+% paragraph 作业 (end)
+
+% subsection 三次样条插值 (end)
+
 % section 插值 (end)
 
 \end{document}

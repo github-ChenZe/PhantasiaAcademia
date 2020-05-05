@@ -1,0 +1,533 @@
+\documentclass[hidelinks]{article}
+
+\usepackage{ctex}
+\usepackage{van-de-la-illinoise}
+\usepackage{tensor}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\VOL}{VOL}
+\let\oldgloss\gloss
+\def\gloss#1{\textbf{\oldgloss{#1}}}
+
+\begin{document}
+
+\section{Overview} % (fold)
+\label{sec:overview}
+
+\subsection{Two Kinds of Vectors} % (fold)
+\label{sub:two_kinds_of_vectors}
+
+\gloss{Vector} is defined as
+\[ \+vv = \sum_i \+v\partial_i v^i. \]
+And the corresponding transformation law is
+\[ \resumath{v'^j = \sum_i \+D{u^i}D{u'^j} v^i,} \]
+which is the transformation law for contravariant vectors.
+\par
+Defining $du^i\pare{\+vv}$ as the vector in the dual space s.t.
+\[ du^i\pare{\+vv} = \rd{u^i}\pare{\sum_j \+v\partial_j v^j} = v^i \]
+and that
+\[ \rd{f} = \+D{u^i}D{f}\,\rd{u^i} \]
+we found
+\[ \rd{f}\pare{\+vv} = \sum_i \+D{u^i}Df v^i. \]
+\par
+Here $\curb{\rd{u^i}}$ forms \gloss{dual basis} for $\curb{\+v\partial_i}$, namely
+\[ \rd{u^i}\pare{\+v\partial_j} = \delta^i_j. \]
+And every linear functional may be written as
+\[ \alpha = \pare{a_1,\cdots,a_n}\pare{\rd{u^1},\cdots,\rd{u^n}}^T = a\,\rd{u}, \]
+where a is a row matrix and $\rd{u}$ a column matrix.
+\par
+If $V$ is the space of contravariant vectors as $p$, then $V^*$ is called the space of \gloss{covariant vectors} or \gloss{1-forms} at $p$, which transforms as
+\[ \resumath{a'_j = \sum_i a_i\+D{u'^j}D{u^i}.} \]
+\par
+The value
+\[ \alpha\pare{\+vv} = \sum_i a_i v^i \]
+is \gloss{invariant}, i.e. independent of the coordinate uesed.
+
+% subsection two_kinds_of_vectors (end)
+
+\subsection{Superscripts, Subscripts, Summation Convention} % (fold)
+\label{sub:superscripts_subscripts_summation_convention}
+
+We denote contravariant components with indices up and covariant components with indices down.
+
+% subsection superscripts_subscripts_summation_convention (end)
+
+\subsection{Riemann Metrics} % (fold)
+\label{sub:riemann_metrics}
+
+In curvilinear coordinates we defind the \gloss{Riemannian metric}
+\[ g_{ij} = \expc{\+v\partial_i,\+v\partial_j} = g_{ji} \]
+and the arc length as
+\[ \rd{s^2} = g_{ij}\,\rd{u^i}\,\rd{u^j}, \]
+and generally
+\[ \resumath{\expc{\+vv,\+vw} = g_{ij}v^iw^j.} \]
+\par
+We also define the \gloss{tensor product} $\alpha \otimes \beta$ as
+\[ \alpha \otimes \beta\pare{\+vv,\+vw} = \alpha{\+vv}\beta\pare{\+vw}, \]
+and define the \gloss{second rank covariant tensor} as
+\[ \sum_{i,j} a_{ij}\rd{u^i}\otimes \rd{u^j}, \]
+and the \gloss{metric tensor} as
+\[ \rd{s^2} = g_{ij}\rd{u^i}\otimes \rd{u^j}. \]
+And we write
+\[ \rd{s^2}\pare{\+vv,\+vw} = \expc{\+vv,\+vw}, \]
+which is invariant under transformation of coordinates.
+\par
+Assciating each vector $\+vv$ with a covector $v$ by
+\[ v\pare{\+vw} = \expc{\+vv,\+vw}, \]
+we found
+\[ v_j = g_{jk}v^k. \]
+We define $g^{jk}$ as the inverse matrix of $g_{jk}$, which is a contravariant symmetric tensor. And for each covector $\alpha$ we could associate a vector $\+va$ by $a^i = g^{ij} a_j$.
+\par
+The \gloss{gradiant vector} is defined as
+\[ \pare{\grad f}^i = g^{ij} \+D{u^i}D{f}. \]
+And the direction of steepest ascent of a function is
+\[ \+dtd{u^i} = \pare{\grad f}^i = g^{ij}\+D{u^j}Df. \]
+
+% subsection riemann_metrics (end)
+
+\subsection{Tensors} % (fold)
+\label{sub:tensors}
+
+A tensor of the third rank, twice contravariant, once covariant, is locally of the form
+\[ A = \+v\partial_i \otimes \+v\partial_j \tensor{A}{^i^j_k}\otimes \rd{u^k}. \]
+It acts as
+\[ A\pare{\alpha,\beta,\+vv} = \alpha_i \beta_j \tensor{A}{^i^j_k}v^k. \]
+Contrating on $i$ and $k$ yield a contravariant vector
+\[ B^j = \tensor{A}{^i^j_i}. \]
+\par
+A \gloss{linear transformation} is a second rank tensor $P = \+v\partial_i P^i_j \otimes \rd{u^j}$, which maps vector to vector as
+\[ P\pare{\+vv} = \+v\partial_i P^i_j v^j. \]
+Contracting on $i$ and $j$ yields its trace, $\trace P = \tensor{P}{^i_i}$.
+
+% subsection tensors (end)
+
+\subsection{Line Integrals} % (fold)
+\label{sub:line_integrals}
+
+Let $C$ be a smooth oriented curve, and $\func{F}{\brac{a,b}\subset \+bR^1}{C\subset \+bR^3}$ with $F\pare{a} = p$ and $F\pare{b} = q$. If $\alpha = \alpha^1 = a_i\pare{x}\,\rd{x^i}$ is a 1-form in $\+bR^3$, we define
+\[ \int_C \alpha^1 = \int_C a_i\pare{x}\,\rd{x^i} = \int_a^b a_i\pare{x\pare{t}}\+dtd{x^i}\,\rd{t} = \int_a^b \alpha\pare{\+dtd{\+vx}}\,\rd{t}. \]
+We say that we \emph{pull back} the form $\alpha^1$ (that lives in $\+bR^3$) to a 1-form on the parameter space $\+bR^1$, called the \gloss{pull back} of $\alpha$, denoted by $F^*\pare{\alpha}$,
+\[ \resumath{F^*\pare{\alpha} = \alpha\pare{\+dtd{\+vx}}\,\rd{t} = a_i\pare{x\pare{t}}\pare{\+dtd{x^i}}\,\rd{t}.} \]
+Then we take the ordinary integral
+\[ \int_a^b \alpha\pare{\+dtd{\+vx}}\,\rd{t}. \]
+\par
+We associate with $\alpha$ its contravariant vector $\+vA$, s.t.
+\[ \alpha\pare{\+dtd{\+vx}} = \expc{\+vA,\+dsd{\+vx}}\pare{\+dtds}. \]
+Then
+\[ F^*\pare{\alpha} = \alpha\pare{\+dtd{\+vx}}\,\rd{t} = \expc{\+vA,\+dsd{\+vx}}\,\rd{s}. \]
+Hence
+\[ \int_C \alpha = \int_C \+vA\cdot \rd{\+vs}. \]
+
+% subsection line_integrals (end)
+
+\subsection{Exterior 2-Forms} % (fold)
+\label{sub:exterior_2_forms}
+
+We define the \gloss{wedge} or \gloss{exterior product} of 1-forms $\alpha\wedge\beta$ as
+\[ \resumath{\alpha^1\wedge \beta^1 = \alpha^1\otimes \beta^1 - \beta^1\otimes \alpha^1.} \]
+Thus
+\[ \rd{u^j}\wedge\rd{u^k}\pare{\+vv,\+vw} = v^jw^k - v^kw^j = \begin{vmatrix}
+    \rd{u^j}\pare{\+vv} & \rd{u^j}\pare{\+vw} \\
+    \rd{u^k}\pare{\+vv} & \rd{u^k}\pare{\+vw}
+\end{vmatrix}. \]
+We have
+\[ \rd{x}^j \wedge \rd{x^k} = -\rd{x^k}\wedge\rd{x^j},\quad \rd{x^k} \wedge\rd{x^k} = 0. \quad \text{(no sum)} \]
+
+% subsection exterior_2_forms (end)
+
+\subsection{Exterior \texorpdfstring{$p$}{p}-Forms and Algebra in \texorpdfstring{$\+bR^n$}{Rn}} % (fold)
+\label{sub:exterior_p_forms_and_algebra_in_rn}
+
+An exterior $p$-form $\alpha^p$ in $\+bR^n$ is a completely skew symmetric multilinear function of $p$-tuples of vectors $\alpha\pare{\+vv1,\cdots,\+vv_p}$ that changes sign whenever two vectors are interchanged.
+
+\begin{ex}
+    The 3-form $\rd{x^i}\wedge \rd{x^j}\wedge \rd{x^k}$ in $\+vR^n$ is an example of exterior 3-form.
+    \[ \rd{x^i}\wedge \rd{x^j}\wedge \rd{x^k} = \begin{vmatrix}
+        \rd{x^i}\pare{\+vA} & \rd{x^i}\pare{\+vB} & \rd{x^i}\pare{\+vC} \\
+        \rd{x^j}\pare{\+vA} & \rd{x^j}\pare{\+vB} & \rd{x^j}\pare{\+vC} \\
+        \rd{x^k}\pare{\+vA} & \rd{x^k}\pare{\+vB} & \rd{x^k}\pare{\+vC}
+    \end{vmatrix} = \begin{vmatrix}
+        A^i & B^i & C^i \\
+        A^j & B^j & C^j \\
+        A^k & B^k & C^k
+    \end{vmatrix}. \]
+\end{ex}
+
+\par
+The \gloss{exterior product} is defined via usual algebraic laws and the anti-commutative law.
+\begin{ex}
+    The product of two 1-forms is
+    \[ \alpha^1\wedge \gamma^1 = \begin{cases}
+        \pare{a_2c_3 - a_3c_2}\,\rd{x^2}\wedge \rd{x^3} \\
+        + \pare{a_3c_1 - a_1c_3}\,\rd{x^3}\wedge \rd{x^1} \\
+        + \pare{a_1c_2 - a_2c_1}\,\rd{x^1}\wedge \rd{x^2}.
+    \end{cases} \]
+\end{ex}
+\begin{ex}
+    The product of an 1-form and a 2-form is
+    \[ \alpha^1\wedge\beta^2 = \pare{a_1b_1 + a_2b_2 + a_3b_3}\,\rd{x^1}\wedge \rd{x^2}\wedge \rd{x^3}. \]
+\end{ex}
+By counting the number of interchanges we found
+\[ \resumath{\alpha^p \wedge \beta^q = \pare{-1}^{pq}\beta^q \wedge \alpha^p.} \]
+
+% subsection exterior_p_forms_and_algebra_in_rn (end)
+
+\subsection{The Exterior Differential} % (fold)
+\label{sub:the_exterior_differential}
+
+Defining
+\[ \rd{\alpha\pare{x}} = \sum_r \+DrD{a}\,\rd{x^r} \]
+and
+\[ \rd{\brac{\alpha\pare{x}\,\rd{x^i}\wedge\cdots\wedge\rd{x^k}}} = \rd{\alpha\pare{x}}\wedge \rd{x^i}\wedge\cdots\wedge\rd{x^k}, \]
+we found
+\[ \begin{cases}
+    \rd{f^0} \Leftrightarrow \grad \+vf\cdot \rd{\+vx}, \\
+    \rd{\alpha^1} \Leftrightarrow \pare{\curl \+va}\cdot\rd{\+vA}, \\
+    \rd{\beta^2} \Leftrightarrow \pare{\div \+vB}\,\rd{V}.
+\end{cases} \]
+And we have also
+\[ \resumath{\begin{array}{l}
+    \rd{^2\alpha^p} = \rd{\rd{\alpha^p}} = 0, \\
+    \rd{\alpha^p \wedge \beta^q} = \rd{\alpha}\wedge \beta + \pare{-1}^p\wedge\rd{\beta}.
+\end{array}} \]
+The \emph{necessary} condition for $\beta^p$ be a differntial of some $\pare{p-1}$-form is that $\rd{\beta} = 0$.
+\begin{ex}
+    $\rd{\pare{\alpha\wedge \beta}} = \rd{\alpha}\wedge \beta - \alpha\wedge \beta$ says
+    \[ \div \pare{\+va\times \+vb} = \pare{\curl \+va}\cdot \+vb - \+va\pare{\curl \+vb}. \]
+\end{ex}
+
+% subsection the_exterior_differential (end)
+
+\subsection{The Push-Forward of a Vector and the Pull-Back of a Form} % (fold)
+\label{sub:the_push_forward_of_a_vector_and_the_pull_back_of_a_form}
+
+Let $\func{F}{\+bR^k}{\+bR^n}$ be any differentiable map, and $\pare{u^1,\cdots,u^k}$ be any coordinates in $\+bR^k$, $\pare{x^1,\cdots,x^n}$ be any coordinates in $\+bR^n$. Denote $f$ as $x^i = x^i\pare{u}$.
+\par
+The pull-back of a function(0-form) $\phi = \phi\pare{x}$ on $\+bR^n$ is the function $F^*\phi = \phi\pare{x\pare{u}}$ on $\+bR^k$.
+\[ \resumath{F^*\phi = \phi.} \]
+\par
+Given a vector $\+vv_0$ at the point $u_0\in \+bR^k$ we can push-forward the vector to the point $x_0 = F\pare{u_0}$ as follows. Let $u=u\pare{t}$ be any curve in $\+vR^k$ with $u\pare{0} = u_0$ and velocity at $u_0$ be $\displaystyle \+vv_0 = \left.\+dtdu\right\vert_0$. For example $u^r\pare{t} = u_0^r + v_0^r t$ may work here. Then the image curve $x\pare{t} = x\pare{u\pare{t}}$ will have velocity at $t=0$ called $F_*\brac{\+vv_0}$ given by the chain rule,
+\[ \brac{F_*\pare{\+vv_0}}^i = \left.\rd{x^i}\pare{\+dtdu}\right|_0 = \brac{\+D{u^r}D{x^i}}_{u\pare{0}} \brac{\+dtd{u^r}}_0 = \brac{\+D{u^r}D{x^i}}_{u\pare{0}}\+vv_0^r. \]
+Briefly
+\[ \brac{F_*\pare{\+vv}}^i = \pare{\+D{u^r}D{x^i}}v^r. \]
+Then
+\[ F_*\brac{v^r \+v\partial_r} = v^r \+v\partial_i \pare{\+D{u^r}D{x^i}}. \]
+Therefore
+\[ \resumath{F_*\+v\partial_r = \+v\partial_i \pare{\+D{u^r}D{x^i}},} \]
+where $r$ for index in $\+bR^k$ and $i$ for index in $\+bR^n$.
+\par
+Given any $p$-form $\alpha$ at $x\in \+vR^n$, we define the \gloss{pull-back} $F^*\pare{\alpha}$ to be the $p$-form at each pre-image point $u\in F^{-1}\pare{x}$ of $\+vR^k$ by
+\[ \resumath{\pare{F^*\alpha}\pare{\+vv,\cdots,\+vw} = \alpha\pare{F_* \+vv,\cdots,F_* \+vw}.} \]
+\begin{remark}
+    This definition makes sense even if $\alpha$ is not an exterior form.
+\end{remark}
+For the 1-form $\rd{x^i}$, $F^*\rd{x^i}$ must be of the form $a_s\,\rd{u^s}$, hence
+\[ \pare{F^*\rd{x^i}}\pare{\+v\partial_r} = \rd{x^i}\brac{\+v\partial_j \pare{\+D{u^r}D{x^j}}} = \+D{u^r}D{x^i} = \pare{\+D{u^s}D{x^i}} \,\rd{u^s}\pare{\+v\partial_r}. \]
+Hence
+\[ F^*\rd{x^i} = \pare{\+D{u^s}D{x^i}}\,\rd{u^s}, \]
+Which is simply the chain rule.
+\par
+We have
+\[ \resumath{\begin{array}{l}
+    F^*\pare{\alpha^p\wedge \beta^q} = \pare{F^*\alpha}\wedge \pare{F^*\beta}, \\
+    F^*\rd{\alpha} = \rd{F^*\alpha}.
+\end{array}} \]
+And that
+\[ \resumath{F^*\pare{\rd{x^i} \wedge \cdots \wedge \rd{x^j}} = \sum_{a<\cdots<r} \+D{\pare{u^a,\cdots,u^r}}D{\pare{x^i,\cdots,x^j}} \,\rd{u^a}\wedge\cdots\wedge\rd{u^r}.} \]
+
+% subsection the_push_forward_of_a_vector_and_the_pull_back_of_a_form (end)
+
+\subsection{Surface Integrals and Stokes' Theorem} % (fold)
+\label{sub:surface_integrals_and_stokes_theorem}
+
+With
+\[ \func{F}{S^2\in\+bR^2}{\+bR^3},\quad x^i = x^i\pare{t^1,t^2}, \]
+we define
+\[ \int_V b_{23}\,\rd{x^2}\wedge \rd{x^3} + b_{31}\,\rd{x^3}\wedge \rd{x^1} + b_{12}\,\rd{x^1}\wedge \rd{x^2} = \int_V \beta^2 = \int_{F\pare{S}} \beta^2 = \int_S F^* \beta, \]
+which gives
+\begin{align*}
+    \int_S F^*\pare{b_{31}\pare{x}\,\rd{x^3}\wedge \rd{x^1}} &= \int_S b_{31}\pare{x\pare{t}}\brac{\pare{\+D{t^a}D{x^3}}\,\rd{t^a}\wedge \pare{\+D{t^b}D{x^1}}\,\rd{t^b}} \\
+    &= \int_S b_{31}\pare{x\pare{t}}\brac{\+D{\pare{x^3,x^1}}D{\pare{t^1,t^2}}\,\rd{t^1}\wedge\rd{t^2}} \\
+    &= \int_S b_{31}\pare{x\pare{t}}\brac{\+D{\pare{x^3,x^1}}D{\pare{t^1,t^2}}\,\rd{t^1}\,\rd{t^2}},
+\end{align*}
+where the last integral follows by definition. In this way, we have
+\begin{align*}
+    & \int_V \beta^2 = \int_{F\pare{S}}\beta^2 = \int_S F^* \beta^2 \\
+    & = \int_S \bigg\{ %
+        b_{23}\pare{x\pare{t}}\brac{\+D{\pare{t^1,t^2}}D{\pare{x^2,x^3}}} + %
+        b_{31}\pare{x\pare{t}}\brac{\+D{\pare{t^1,t^2}}D{\pare{x^3,x^1}}} + \\ %
+        & \phantom{=\int_S \ }b_{12}\pare{x\pare{t}}\brac{\+D{\pare{t^1,t^2}}D{\pare{x^1,x^2}}} %
+        \bigg\}\,\rd{t^1}\,\rd{t^2}.
+\end{align*}
+Notice that
+\[ \+vn = \pare{\+D{t^1}D{\+vx}\times \+D{t^2}D{\+vx}} = \pare{\+D{\pare{t^1,t^2}}D{\pare{x^2,x^3}}, \+D{\pare{t^1,t^2}}D{\pare{x^3,x^1}}, \+D{\pare{t^1,t^2}}D{\pare{x^1,x^2}}}^T \]
+is the surface area element. Therefore, the integral above may be interpreted as
+\[ \int_V \beta^2 = \iint_V \+vB\cdot \rd{\+v\sigma}. \]
+And we have \gloss{Stokes' Theorem}
+\[ \resumath{\int_V \rd{\beta^{p-1}} = \oint_{\partial V}\beta^{p-1}.} \]
+
+% subsection surface_integrals_and_stokes_theorem (end)
+
+\subsection{Electromagnetism} % (fold)
+\label{sub:electromagnetism}
+
+The electric field intensity $\+vE$ is a 1-form,
+\[ \+sE^1 = E_1 \,\rd{x^1} + E_2\,\rd{x^2} + E_3\,\rd{x^3}, \]
+as the working done against the field moving a charge is
+\[ W = \int_C q\+vE\cdot \rd{\+vr} = q\int_C E_1\,\rd{x^1} + E_2\,\rd{x^2} + E_3\,\rd{x^3}. \]
+\par
+The electric field $\+vD$ is a 2-form, as
+\[ \iint_{\partial V} \+sD^2 = \iiint_V \rd{\+sD} = 4\pi \iiint_V \rho\,\vol^3. \]
+Hence
+\[ \rd{\+sD^2} = 4\pi \rho\,\vol^3. \]
+\par
+The magnetic field intensity $\+vB$ is a 2-form, as
+\[ \oint_{\partial V} \+sE^1 = -\+dtd{}\iint_V \+sB^2. \]
+Hence
+\[ \rd{\+sE^1} = -\+DtD{\+sB^2}. \]
+Another axiom states that
+\[ \div \+vB = 0 = \rd{\+sB^2}. \]
+The magnetic field $\+vH$ is a 1-form, as
+\[ \oint_{C=\partial V} \+sH^1 = 4\pi \iiint_V \+sJ^2 + \+dtd{}\iint_V \+sD^2. \]
+Hence
+\[ \rd{\+sH^1} = 4\pi \+sJ^2 + \+DtD{\+sD^2}. \]
+
+% subsection electromagnetism (end)
+
+\subsection{Interior Products} % (fold)
+\label{sub:interior_products}
+
+If $\+vv$ is a vector and $\beta^p$ a $p$-form, $p > 0$. We define the \gloss{interior product} of $\+vv$ and $\beta$ to be the $\pare{p-1}$-form $i_{\+vv}\beta$ (or $i\pare{\+vv}\beta$) with values
+\[ i_{\+vv}\beta^p\pare{\+vA_2,\cdots,\+vA_p} = \beta^p\pare{\+vv,\+vA_2,\cdots,\+vA_p}. \]
+The interior product of an 1-form and a vector is a scalar. While
+\[ i_{\+vv}\pare{\alpha^1\wedge \beta^1}\pare{\+vC} = \brac{\pare{i_{\+vv}\alpha}\beta - \pare{i_{\+vv}\beta}\alpha}\pare{\+vC}, \]
+which is the BAC-CAB rule. We also have the product rule
+\[ \resumath{i_{\+vv}\pare{a^p\wedge \beta^q} = \brac{i_{\+vv}\pare{\alpha^p}}\wedge \beta^q + \pare{-1}^p \alpha^p \wedge\brac{i_{\+vv}\beta^q}.} \]
+
+% subsection interior_products (end)
+
+\subsection{Volume Forms and Cartan's Vector Valued Exterior Forms} % (fold)
+\label{sub:volume_forms_and_cartan_s_vector_valued_exterior_forms}
+
+We define the volumn $n$-form to be
+\[ \resumath{\vol^n = \sqrt{g}\,\rd{x^1}\wedge \cdots \wedge \rd{x^n}.} \]
+\begin{ex}
+    In spherical coordinate, we have
+    \[ \vol^3 = r^2\sin\theta\,\rd{r}\wedge \rd{\theta}\wedge \rd{\phi}. \]
+\end{ex}
+\begin{ex}
+    We have also
+    \[ i_{\+vv}\vol^3 = \sqrt{g}\brac{v^1\,\rd{x^2}\wedge \rd{x^3} + v^2\,\rd{x^3}\wedge \rd{x^1} + v^3\,\rd{x^1}\wedge \rd{x^2}} .\]
+\end{ex}
+It can be seen that for a surface $V^2$ in Riemannian $\+bR^3$ with unit normal vector field $\+vn$, $i\+_\+vn_\vol^3$ is the area 2-form for $V^2$ as $i\+_\+vn_\vol^3\pare{\+vA,\+vB} = \vol^3\pare{\+vn,\+vA,\+vB}$ is the area spanned by $\+vA$ and $\+vB$.
+\par
+Therefore, the most general 2-form $\beta^2$ in $\+bR^3$ in any coordinates is of the form
+\[ \beta^2 = i_{\+vb}\vol^3. \]
+In electromagnetism,
+\[ \+sD^2 = i_{\+vE}\vol^3. \]
+\par
+Now we define the \gloss{divergence of a vector field} as
+\[ \pare{\div \+vv}\vol^n = \rd{\pare{i_{\+vv}\vol^n}} = \brac{\+D{x^1}D{v^1\sqrt{g}} + \+D{x^2}D{v^2\sqrt{g}} + \cdots}\,\rd{x^1}\wedge\cdots\wedge \rd{x^n}. \]
+Hence
+\[ \resumath{\div \+vv = \rec{\sqrt{g}}\+D{x^i}D{\pare{v^i \sqrt{g}}}.} \]
+If the volume comes from a Riemann metric we could define the \gloss{Laplacian} of a function as
+\[ \resumath{\laplacian f = \div \grad f = \rec{\sqrt{g}}\+D{x^i}D{}\pare{\sqrt{g}g^{ij}\+D{x^j}D{f}}.} \]
+We define another version of cross product $\pare{\+va\times \+vb}_*$ as the unique 1-form s.t.
+\[ \resumath{\pare{\+va\times \+vb}_*\pare{\+vc} = \vol^3\pare{\+va,\+vb,\+vc}}. \]
+Now we have
+\[ \pare{\+va\times \+vb}_* = -i_{\+va}\brac{i_{\+vb}\vol^3} \]
+and that
+\begin{align*}
+    \pare{\+va\times \+vb}_* &= -i\pare{a^1\+v\partial_1 + a^2\+v\partial_2 + a^3\+v\partial_3}\\ &\phantom{=\ }\sqrt{g} \brac{b^1\,\rd{x^2}\wedge \rd{x^3} + b^2\,\rd{x^3}\wedge \rd{x^1} + b^3\,\rd{x^1}\wedge \rd{x^2}} \\
+    &= \sqrt{g}\brac{\pare{a^2b^3 - a^3b^2}\,\rd{x^1} + \pare{a^3b^1 - a^1b^3}\,\rd{x^2} + \pare{a^1b^2 - a^2b^1}\,\rd{x^3}}.
+\end{align*}
+Now we can write the Lorentz force law as
+\[ \+sF = q\pare{\+sE^1 - i_{\+vv}\+sB^2}. \]
+\par
+Denoting $\chi_*\pare{\+va,\+vb} = \pare{\+va\times \+vb}_*$, we have
+\[ \chi_*\pare{\+va,\+vb}_j = \pare{\+va\times \+vb}_j = \pare{\+va\times \+vb}_*\pare{\+v\partial_j} = \vol^3\pare{\+v\partial_j,\+va,\+vb} = \brac{i\pare{\+v\partial_j}\vol^3}\pare{\+va,\+vb}. \]
+Thus
+\[ \resumath{\chi_* = \rd{x^j}\otimes \chi_j = \rd{x^j}\otimes\brac{i\pare{\+v\partial_j}\vol^3}.} \]
+By definition,
+\[ \chi_*\pare{\+va,\+vb} = \brac{\vol^3\pare{\+v\partial_j,\+va,\+vb}}\,\rd{x^j}. \]
+And we have the contravariant version of it as
+\[ \+v\chi^* = \+v\partial_i \otimes g^{ij}i\pare{\+v\partial_j}\vol^3, \]
+which is a vector-valued two form with components
+\[ \begin{pmatrix}
+    \rd{y}\wedge \rd{z} & \rd{z}\wedge \rd{x} & \rd{x}\wedge \rd{y}
+\end{pmatrix}^T. \]
+
+% subsection volume_forms_and_cartan_s_vector_valued_exterior_forms (end)
+
+\subsection{Magnetic Field for Current in a Straight Wire} % (fold)
+\label{sub:magnetic_field_for_current_in_a_straight_wire}
+
+For a steady current $\+vJ$ in a thin straight wire of infinite length. We found via Amp\'ere's law that
+\[ \oint_C \+sH^1 = \begin{cases}
+    4\pi j, & \text{if $C$ encircles the wire}, \\
+    0, & \text{else}.
+\end{cases} \]
+We may guess that $\+sH = 2j\,\rd{\theta}$ in the region outside the wire, and that $\div \+vB = 0 = \rd{\+sB^2}$. Now $\+sB^2 = i_{\+vH}\, \vol^3$, where $\+vH$ is the contravariant version of the 1-form $\+sH$,
+\[ H^\theta = g^{\theta\theta}H_\theta = \rec{r^2}2j, \]
+hence
+\[ \+sB^2 = \pare{\frac{2j}{r^2}}i\pare{\+v\partial_\theta} r\,\rd{r}\wedge \rd{\theta}\wedge \rd{z} = \rd{\brac{-2j\pare{\ln r}\,\rd{z}}}. \]
+Obviously $\rd{\+sB} = 0$, and we have the magnetic potential $\brac{-2j\pare{\ln r}\,\rd{z}}$.
+
+% subsection magnetic_field_for_current_in_a_straight_wire (end)
+
+\subsection{Cauchy Stress, Floating Bodies, Twisted Cylinders and Strain Energy} % (fold)
+\label{sub:cauchy_stress_floating_bodies_twisted_cylinders_and_strain_energy}
+
+For a cylinder $B$ and its twisted version $F\pare{B}$, we consider any small surface $V$ in $F\pare{B}$ passing through a point $p$ and let $\+vn$ be a normal to $V$ at $p$. Cauchy's theorem states that the material on teh side of $V$ towards which $\+vn$ is pointing exerts a force $\+vf$ on the material on the other side of $V$.
+\[ \resumath{\+vf = \+v\partial_a \brac{\int_V t^{ab}i\pare{\+v\partial_b}\vol^3},} \]
+where $t$ is the Cauchy stress tensor. We also have
+\[ \resumath{t^{ab} = t^{ba}.} \]
+\par
+In the case of a nonviscous fluid, we found
+\[ \+sT = -\+v\partial_i \otimes pg^{ij}i\pare{\+v\partial_j}\vol^3. \]
+Therefore the total force is evaluated with Stokes' theorem as
+\begin{align*}
+    \+vf &= \+v\partial_i \int_{\partial B'} t^{ij}i\pare{\+v\partial_j}\,\vol^3 = -\+v\partial_i \int_{\partial B'}p\delta^{ij}i\pare{\+v\partial_j}\,\vol^3 \\
+    &= -\+v\partial_x \int_{\partial B'} \rho gz \,\rd{y}\wedge \rd{z} -\+v\partial_y \int_{\partial B'} \rho gz \,\rd{z}\wedge \rd{x} -\+v\partial_z \int_{\partial B'} \rho gz \,\rd{x}\wedge \rd{y} \\
+    &= -\+v\partial_z \int_{B'}\rho g\,\rd{x}\wedge \rd{y}\wedge \rd{z} = -\+v\partial_z W'.
+\end{align*}
+\par
+Now we introduce cylindrical coordinates $\pare{X^A} = \pare{R,\Theta,Z}$ for the untwisted cylinder $B$. We use capitalized letters for coordinates of the untwisted point and $\pare{r,\theta,z}$ for the twisted point in the identical coordinate system. Thus the twist $F$ is described by
+\[ r=R,\quad \theta = \Theta + kZ,\quad z=Z. \]
+Now we try to find out the Cauchy 2-form
+\[ \+sT = \+v\partial_a \otimes t^{ab}i\pare{\+v\partial_b}\vol^3. \]
+We pull back the 2-forms $\+sT^a$ by $F^*$ and push the vectors $\+v\partial_a$ back to $B$ by the inverse $\pare{F^{-1}}_*$. The resulting vector-valued 2-form on $B$ is
+\[ \+sS = \pare{F^{-1}}_* \pare{\+v\partial_a} \otimes F^*\brac{t^{ab}i\pare{\+v\partial_b}\vol^3}. \]
+This kind of 2-form $\+v\partial_A \otimes S^{AB}i\pare{\+v\partial_B}\vol^3$ is called the \gloss{second Piola-Kirchhoff} vector-valued stress 2-form.
+\par
+The pull-back of $\rd{s^2}$ is given by
+\begin{align*}
+    F^*\rd{s^2} &= F^*\pare{\rd{r^2} + r^2\,\rd{\theta^2} + \rd{z^2}} \\
+    &= \rd{R^2} + R^2\brac{\rd{\Theta^2} + 2k\,\rd{\Theta}\,\rd{Z} + k^2\,\rd{Z^2}} + \rd{Z^2}.
+\end{align*}
+Now we have a metric in the untwisted body
+\[ \expc{\+vA,\+vB} = \rd{S^2}\pare{\+vA,\+vB} \]
+as well as one on the twisted body
+\[ \rd{s^2}\pare{F_* \+vA,F_* \+vB} = \pare{F^* \rd{s^2}}\pare{\+vA,\+vB}. \]
+Now we define the \gloss{Lagrange deformation tensor} as
+\[ E = \half \brac{\pare{F^* \rd{s}^2} - \rd{S^2}}, \]
+thus
+\[ E = kR^2 \,\rd{\Theta}\,\rd{Z} + \half kR^2\,\rd{Z^2} \xLongrightarrow{k\rightarrow 0} \pare{E_{IJ}} = \begin{pmatrix}
+    0 & & \\
+    & 0 & kR^2/2 \\
+    & kR^2/2 & 0
+\end{pmatrix}. \]
+With the metic $\pare{G^{KL}} = \diag \pare{1,1/R^2,1}$ we found
+\[ \pare{\tensor{E}{^A_B}} = \begin{pmatrix}
+    0 & & \\
+    & 0 & k/2 \\
+    & kR^2/2 & 0
+\end{pmatrix},\quad \pare{E^{AB}} = \begin{pmatrix}
+    0 & & \\
+    & 0 & k/2 \\
+    & k/2 & 0
+\end{pmatrix}. \]
+\par
+It can be shown that in linear elasicity case,
+\[ \resumath{S^{AB} = 2\mu E^{AB} + \lambda \pare{\trace E}G^{AB}.} \]
+Hence
+\[ \pare{S^{AB}} = \begin{pmatrix}
+    0 & & \\
+    & 0 & \mu k \\
+    & \mu k & 0
+\end{pmatrix}, \]
+which gives
+\[ \+sS = \mu kR\brac{\+v\partial_\Theta \otimes \rd{R}\wedge\rd{\Theta} + \+v\partial_Z\otimes \rd{Z}\wedge\rd{R}}. \]
+Using $F^{-1}$ defined by $R=r$, $\Theta = \theta - kz$, $Z=z$, we get
+\begin{align*}
+    \+sT &= \mu kr\brac{\+v\partial_\theta \otimes \pare{F^{-1}}^*\pare{\rd{R}\wedge \rd{\Theta}} + \+v\partial_z \otimes \pare{F^{-1}}^* \pare{\rd{Z}\wedge \rd{R}}} \\
+    &= \mu kr\brac{\+v\partial_\theta \otimes \rd{r}\wedge \pare{\rd{\theta} - k\,\rd{z}} + \+v\partial_z \otimes \rd{z}\wedge \rd{r}} \\
+    &= \mu kr \brac{\+v\partial_\theta \otimes \rd{r}\wedge \rd{\theta} + \+v\partial_z \otimes \rd{z}\wedge \rd{r}} \\
+    &= \mu kr^2 \+ve_\theta \otimes \rd{r}\wedge \rd{\theta} + \mu kr \+ve_z \otimes \rd{z}\wedge \rd{r},
+\end{align*}
+where $\+ve_\theta = r^{-1}\+v\partial_\theta$.
+\par
+At surface $r=a$ we have $\rd{r} = 0$ hence $\+sT = 0$. At the end boundary $z=L$ we found stress from outside
+\[ \mu kr^2 \+ve_\theta \otimes \rd{r}\wedge \rd{\theta}. \]
+An integration may yield the total moment. Also, writing $\+ve_\theta$ in terms of $\+ve_x$ and $\+ve_y$ and we found $\displaystyle \iint_{\partial B} \+sT = 0$, therefore the Cauchy stresses produce no internal body forces.
+\par
+Also, the word done of the external traction is $\displaystyle W = \frac{\pi \mu a^4\alpha^2}{4L}$, which could be shown equal to
+\[ W = \half \iiint S^{AB}E_{AB}\VOL^3. \]
+
+% subsection cauchy_stress_floating_bodies_twisted_cylinders_and_strain_energy (end)
+
+\subsection{Moments as Generators of Rotations} % (fold)
+\label{sub:moments_as_generators_of_rotations}
+
+The \gloss{moment} should be defined as $\+sR\wedge \+sF$ where $\+sR = x^a\,\rd{x^a}$.
+\par
+Let $g\pare{t}$ be a 1-parameter group (i.e., $g\pare{t}g\pare{s} = g\pare{t+s}$, $g\pare{0}  =I$) of rotations of $\+bR^n$ about the origin. We found
+\[ g\pare{t}g\pare{t}^T = I \Rightarrow 0 = \dot{g}\pare{0} g\pare{0}^T + g\pare{0}\dot{g}\pare{0}^T = \dot{g}\pare{0} + \dot{g}\pare{0}^T = 0. \]
+Which says that $A = \dot{g}\pare{0}$ is a skew symmetric $n\times n$ matrix, and so defines a 2-form $\displaystyle \+sA = \sum_{j<k} A_{ij}\,\rd{x^j}\wedge \rd{x^k}$ at the origin.
+\begin{ex}
+    For rotation about the $z$ axis,
+    \[ g\pare{t} = \begin{pmatrix}
+        \cos \omega t & -\sin\omega t & \\
+        \sin \omega t & \cos \omega t & \\
+        & & 1
+    \end{pmatrix} \Rightarrow A = \dot{g}\pare{0} = \begin{pmatrix}
+        0 & -\omega \\
+        \omega & 0 \\
+        & & 0
+    \end{pmatrix}. \]
+    And we have $\+sA = -\omega \,\rd{x}\wedge\rd{y}$.
+\end{ex}
+\par
+If $a$ is a skew symmetric matrix at the origin, we define
+\[ g\pare{t} = e^{tA} = \sum_k \frac{t^kA^k}{k!} \]
+being the 1-parameter group of rotations generated by $A$.
+\par
+For each moment of force $\+vf$, we may attach the generator of its rotations, which is simply a skew $n\times n$ matrix. For elastic bodies, we have the moment about an origin density
+\[ \+sM_{ac} = \brac{x^a \tensor{t}{_c^b} - x^c \tensor{t}{_a^b}}i\pare{\+v\partial_b}\vol^3 = x^a \+sT_c - x^c \+sT_a. \]
+And the total moment about the origin is (assuming no external body forces)
+\[ M_{ac} = \int_{\partial B} \brac{x^a \+sT_c - x^c \+sT_a} = \int_B \rd{x^a \+sT_c - x^c\+sT_a} = \int_B\rd{x^a}\wedge \+sT_c - \rd{x^c}\wedge \+sT_a. \]
+Therefore we found
+\[ \rd{x^a} \wedge \+sT_c = \+rd{x^c}\wedge \+sT_a. \]
+And for 3-forms in $\+bR^3$ we have
+\[ t^{ca} = t^{ac}. \]
+
+% subsection moments_as_generators_of_rotations (end)
+
+\subsection{Remarkable Formula for Differentiating Line, Surface and Integrals} % (fold)
+\label{sub:remarkable_formula_for_differentiating_line_surface_and_integrals}
+
+Let $\+vv$ be a time-independent vector field in $U \subset \+bR^n$ for any coordinates $x^i$ and $V^r\subset U$ be $r$-dimensional surfaces. With $\displaystyle \+dtd{x^i} = v^i\pare{x}$ we could move along the integral curves of $\+vv$ for $t$ seconds, yielding a flow $\func{\phi_t}{U}{\+bR^n}$. We have $\phi_0$ as the identity map. Also
+\[ \resumath{\left.\+dtd{}\pare{\int_{V\pare{t}}\alpha^r}\right\vert_{t=0} = \int_V \+sL_{\+vv}\alpha^r,} \]
+where $\+sL_{\+vv}\alpha^r$ is the \gloss{Lie derivative} of $\alpha$, defined as
+\begin{align*}
+    \brac{\+sL_{\+vv}\alpha^r}\pare{\mathrm{at\ } x} &= \left.\+dtd{}\right|_{t=0}\phi_t^*\brac{\alpha^r \pare{\mathrm{at\ } \phi_t x}} \\
+    &= \lim_{t\rightarrow 0}\curb{\phi_t^* \brac{\alpha^r\pare{\mathrm{at\ } \phi_t x}} - \alpha^r\pare{\mathrm{at\ } x}}/t.
+\end{align*}
+We have the \gloss{Henri Cartan formula}
+\[ \resumath{\+sL_{\+vv}\alpha^r = i_{\+vv}\pare{\rd{\alpha^r}} + \rd{i_{\+vv}\alpha^r}.} \]
+With Stokes' theorem we found
+\[ \left.\+dtd{}\pare{\int_{V\pare{t}}\alpha^r}\right\vert_{t=0} = \int_V i_{\+vv}\,\rd{\alpha} + \int_{\partial V}i_{\+vv}\alpha. \]
+\begin{ex}
+    Consider for example the case of a line integral in $\+bR^3$ in the form in cartesian coordinates along a curve $C$ starting at point $P$ and ending at point $Q$, $\alpha = \+va\cdot \rd{\+vx}$. Then $i_{\+vv}\alpha$ is the 0-form, and
+    \[ \int_{\partial C} \+vv\cdot \+va = \pare{\+vv\cdot \+va}\pare{Q} - \pare{\+vv\cdot \+va}\pare{P}. \]
+    We have also $\rd{\alpha^1}$ being the 2-form version of $\curl \+va$, therefore $i_{\+vv}\, \rd{\alpha} = -\+vv\times \curl \+va$. We then have
+    \begin{align*}
+        \left.\+dtd{}\pare{\int_{C\pare{t}}\+va\cdot\rd{\+vx}}\right\vert_{t=0} &= -\int_C \brac{\+vv\times \curl \+va}\cdot \rd{\+vx} + \pare{\+vv\cdot \+va}\pare{Q} - \pare{\+vv\cdot \+va}\pare{P}.
+    \end{align*}
+\end{ex}
+\par
+For time dependent cases, we introduce the space $\+bR\times \+bR^n$ with $x^0 = t$, we have the new field $v\pare{t,\+vx} = \+v\partial_t + \+vv\pare{t,\+vx}$, which yields a new map $\func{\phi_t}{\+bR^1\times \+bR^n}{\+bR^1\times \+bR^n}$ that will form a flow. We have the previous result replaced by
+\begin{align*}
+    \left.\+dtd{}\right|_{t=0} \int_{V\pare{t}}\alpha &= \int_V \+sL_{\+vv}\alpha = \int_V i\pare{v}\,\rd{\alpha} + \int_V\rd{\brac{i\pare{v}\alpha}} \\
+    &= \int_V \pare{\+DtD\alpha} + i_{\+vv}\,\mathbf{d}\alpha + \mathbf{d}i_{\+vv}\alpha,
+\end{align*}
+where $i_{\+vv} = i\pare{\+vv}$ uses the original vector field, not the $v = \+vv+\+v\partial_t$ one. The bold $\mathbf{d}$ acts only on spatial components.
+\begin{ex}
+    With $\alpha = \+sB$, we have
+    \[ \+dtd{} \iint_{V\pare{t}} \+sB^2 = -\oint_{\partial V}\pare{\+sE - i_{\+vv}\+sB} = -\oint_{\partial V}\pare{\+vE+\+vv\times \+vB}\cdot \rd{\+vx}. \]
+\end{ex}
+
+% subsection remarkable_formula_for_differentiating_line_surface_and_integrals (end)
+
+% section overview (end)
+
+\end{document}

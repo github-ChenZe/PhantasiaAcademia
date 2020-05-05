@@ -1,0 +1,479 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\newenvironment{kaitou}{\begin{proof}[解答]}{\end{proof}}
+
+\begin{document}
+
+\section{积分变换法} % (fold)
+\label{sec:积分变换法}
+
+形式上, 积分变换可以写为
+\begin{align*}
+    \hat f\pare{p} &= \int_{-\infty}^\infty \rd{x}\,e\pare{p,x} f\pare{x}, \\
+    f\pare{x} &= \int_{-\infty}^\infty \rd{x}\,\hat{e}\pare{x,p}\hat f\pare{p}.
+\end{align*}
+
+\subsection{Fourier变换} % (fold)
+\label{sub:fourier变换}
+
+取$e\pare{p,x} = e^{-ipx}$, $\displaystyle \hat e\pare{x,p} = \frac{e^{ipx}}{2\pi}$, 则有
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{align*}
+    \hat f\pare{p} &= F_{p,x}\brac{f\pare{x}} = \int_{-\infty}^\infty \rd{x}\, e^{-ipx} f\pare{x}, \\
+    f\pare{x} &= F^{-1}_{x,p}\brac{\hat f\pare{p}} = \rec{2\pi}\int_{-\infty}^{\infty}\rd{p}\, e^{ipx}\hat f\pare{p}.
+\end{align*}
+\end{resume}
+
+\subsubsection{基本性质} % (fold)
+\label{ssub:基本性质}
+
+有$F_{p,x} = 2\pi F_{-p,x}^{-1}$, 从而
+\[ \resumath{F_{p,x}\brac{\hat f\pare{x}} = 2\pi f\pare{-p}.} \]
+简写$F=F_{p,x}$, $F^{-1} = F_{x,p}^{-1}$. 可以发现
+\[ \int_{-\infty}^\infty e^{-ixp - ax^2/2} = e^{-p^2/2a} \sqrt{\frac{2\pi}{a}}. \]
+再进行一次Fourier变换, 只需$a\mapsto 1/a$, 就可以得到$2\pi$因子.
+
+\paragraph{位移性} % (fold)
+\label{par:位移性}
+
+$\hat f\pare{p-p_0} = F\brac{e^{ip_0 x}f\pare{x}}$. 以及$f\pare{x+x_0} = F^{-1}\brac{e^{ipx_0}\hat f\pare{p}}$.
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{align*}
+    F\brac{f\pare{x+y}} &= e^{ipy}F\brac{f\pare{x}}, \\
+    F^{-1}\brac{\hat f\pare{p+q}} &= e^{-iqx}F^{-1}\brac{\hat f\pare{p}}.
+\end{align*}
+\end{resume}
+
+% paragraph 位移性 (end)
+
+\paragraph{相似性} % (fold)
+\label{par:相似性}
+
+$\displaystyle \resumath{\hat f\pare{\alpha p} = \frac{F\brac{f\pare{x/\alpha}}}{\abs{\alpha}}.}$
+
+% paragraph 相似性 (end)
+
+\paragraph{线性} % (fold)
+\label{par:线性}
+
+$\displaystyle \resumath{F\pare{a_1f_1+a_2f_2} = a_1F\brac{f_1} + a_2F\brac{F_2}.}$
+
+% paragraph 线性 (end)
+
+\paragraph{微分} % (fold)
+\label{par:微分}
+
+$F\brac{f'\pare{x}} = ip\hat f\pare{x}.$ 连续分部积分后有
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{align*}
+    F\brac{f^{\pare{n}}\pare{x}} &= \pare{ip}^n \hat f\pare{p}, \\
+    F^{-1}\brac{\hat f^{\pare{n}}\pare{p}} &= \pare{-ix}^nf\pare{x}.
+\end{align*}
+\end{resume}
+这里假设了函数在无穷远处归零.
+
+% paragraph 微分 (end)
+
+\paragraph{积分} % (fold)
+\label{par:积分}
+
+假设$\displaystyle \int_{-\infty}^\infty f\pare{y}\,\rd{y} = \hat f\pare{0} = 0$, 积分
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{align*}
+    F\brac{\int_{-\infty}^x \rd{y}\, f\pare{x}} &= \frac{\hat f\pare{p}}{ip}, \\
+    F^{-1}\brac{\int_{-\infty}^p \rd{q}\, \hat f\pare{p}} &= \frac{f\pare{x}}{-ix}.
+\end{align*}
+\end{resume}
+
+% paragraph 积分 (end)
+
+\paragraph{卷积} % (fold)
+\label{par:卷积}
+
+定义
+\[ f*g\pare{x} = \int_{-\infty}^\infty f\pare{y}g\pare{x-y} = g * f\pare{x}. \]
+则
+\[ \resumath{F\brac{f*g\pare{x}} = \hat f\pare{p}\hat g\pare{p}.} \]
+
+% paragraph 卷积 (end)
+
+% subsubsection 基本性质 (end)
+
+\subsubsection{应用} % (fold)
+\label{ssub:应用}
+
+Fourier变换适合无界空间, 可以将求导变为乘法.
+\[ u_t = u_{xx} \mapsto \hat u_t\pare{t,p} = -p^2 \hat u\pare{t,p}, \]
+初始条件可相应变换为
+\[ u\pare{t=0,x} = \varphi\pare{x} \mapsto \hat u\pare{t=0,p} = \hat \varphi\pare{p}. \]
+可以得到解
+\[ \hat u\pare{t,p} = \exp{-p^2 t}\hat \varphi\pare{p}. \]
+反变换得到
+\begin{align*}
+    u\pare{t,x} &= F^{-1}\brac{e^{-p^2 t}} * F^{-1}\brac{\hat \varphi\pare{p}} \\
+    &= \frac{e^{-x^2/4t}}{2\sqrt{\pi t}} * \varphi\pare{x} \\
+    &= \rec{2\sqrt{\pi t}}\int_{-\infty}^{\infty} \rd{y}\, e^{-y^2/4t}\varphi\pare{x-y}.
+\end{align*}
+
+\paragraph{非齐次情形} % (fold)
+\label{par:非齐次情形}
+
+对于非齐次方程,
+\[ u_t = u_{xx} + f\pare{t,x} \mapsto \hat u_t\pare{t,p} = -p^2 \hat u\pare{t,p} + \hat f\pare{t,p}, \]
+初始条件可相应变换为
+\[ u\pare{t=0,x} = 0 \mapsto \hat u\pare{t=0,p} = 0. \]
+从而
+\begin{align*}
+    & \hat u\pare{t,p} = \int_0^t \rd{\tau}\, e^{p^2\pare{\tau - t}} \hat f\pare{\tau, p}, \\ 
+    & \Rightarrow u\pare{t,x} = \int_0^t \rd{\tau}\, \frac{f\pare{\tau,x}}{2\sqrt{\pi \pare{t-\tau}}} * \exp\brac{\frac{x^2}{4\pare{\tau - t}}} \\
+    & = \int_{-\infty}^\infty \rd{y}\,\int_0^t \rd{\tau} \frac{f\pare{\tau,y}}{2\sqrt{\pi\pare{t-\tau}}} \exp\brac{\frac{\pare{x-y}^2}{4\pare{\tau - t}}}.
+\end{align*}
+
+% paragraph 非齐次情形 (end)
+
+% subsubsection 应用 (end)
+
+\subsubsection{半无界情形} % (fold)
+\label{ssub:半无界情形}
+
+$\brac{0,\infty}$上可用正弦或余弦变换,
+\begin{align*}
+    & \hat f_s\pare{p} = F_s\brac{f\pare{x}} = \int_0^\infty \rd{x}\,f\pare{x} \sin\pare{px}, \\
+    & f\pare{x} = F_s^{-1}\brac{\hat f_s\pare{p}} = \frac{2}{\pi} \int_0^\infty \rd{p}\, \hat f_s\pare{p} \sin\pare{px}, \\
+    & \hat f_c\pare{p} = F_c\brac{f\pare{x}} = \int_0^\infty \rd{x}\, f\pare{x}\cos \pare{px}, \\
+    & f\pare{x} = F_c^{-1}\brac{\hat f_c\pare{p}} = \frac{2}{\pi} \int_0^\infty\rd{p}\,\hat f_c\pare{p}\cos px.
+\end{align*}
+
+\paragraph{导数性质} % (fold)
+\label{par:导数性质}
+
+必须要考虑边界项.
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{align*}
+    & F_s\brac{f'\pare{x}} = -p\hat f_c\pare{p}, \\
+    & F_c\brac{f'\pare{x}} = p\hat f_s\pare{p} - f\pare{0}, \\
+    & F_s\brac{f''\pare{x}} = -p^2\hat f_s\pare{p} + pf\pare{0}, \\
+    & F_c\brac{f''\pare{x}} = -p^2 \hat f_c\pare{p} - f'\pare{0}.
+\end{align*}
+\end{resume}
+\newpoint{}由相关边界类型界定积分变换的选择.
+\newpoint{}Dirichlet条件选择正弦变换.
+\newpoint{}Neumann条件选择余弦变换.
+\newpoint{}Robin条件选择其线性组合.
+\begin{sample}
+    \begin{ex}
+        $u_t = u_{xx}$, $u\vert^{x=0} = u_0$,
+        \begin{align*}
+            & F_s\brac{u_{xx}} = pu_0 - p^2 \hat{u}, \\
+            & \dot{\hat{u}} + p^2 \hat u = pu_0, \\
+            & \hat u = u_0 \brac{1-\exp^{a^2 t}}, \\
+            & u = \frac{2u_0}{\sqrt{\pi}} \int_0^{x/\sqrt{2}t}\rd{y}\, e^{-y^2}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% paragraph 导数性质 (end)
+
+% subsubsection 半无界情形 (end)
+
+\subsubsection{高维情形} % (fold)
+\label{ssub:高维情形}
+
+高维情形可类似定义,
+\begin{align*}
+    & \hat f\pare{\+vp} = F\brac{f\pare{\+vx}} = \int_{-\infty}^\infty \rd{\+vx} \, e^{-i \+vp\cdot \+vx} f\pare{\+vx}, \\
+    & f\pare{\+vx} = F^{-1}\brac{\hat f\pare{\+vp}} = \rec{\pare{2\pi}^D} \int_{-\infty}^\infty \rd{\+vp}\, e^{i\+vp\cdot \+vx}\hat f\pare{\+vp}, \\
+    & F\brac{\grad f\pare{\+vx}} = i\+vp\hat f\pare{\+vp}, \\
+    & F\brac{\laplacian f\pare{\+vx}} = -\abs{\+vp^2}\hat f\pare{\+vp}, \\
+    & f * g\pare{\+vx} = \int_{-\infty}^\infty \rd{\+vy}\, f\pare{\+vy}g\pare{\+vx - \+vy} = g*f\pare{\+vy}, \\
+    & F\brac{f*g\pare{\+vx}} = \hat f\pare{\+vp}\hat g\pare{\+vp}.
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        求解
+        \begin{align*}
+            & \begin{cases}
+            u_t = \laplacian u,\quad t>0,\quad -\infty < x,y,z < \infty, \\
+            u\pare{t=0} = \varphi\pare{x,y,z}.
+            \end{cases} \\
+            & \Rightarrow \begin{cases}
+                \hat u_t + \abs{\+vp}^2 \hat u = 0, \\
+                \hat u\pare{0} = \hat \varphi.
+            \end{cases} \\
+            & \hat u = e^{-\abs{\+vp}^2 t}\hat \varphi, \\
+            & u = \pare{4\pi t}^{-3/2} e^{-\abs{\+vp}^2/4t}*\varphi\pare{\+vx}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 高维情形 (end)
+
+% subsection fourier变换 (end)
+
+\subsection{Laplace变换} % (fold)
+\label{sub:laplace变换}
+
+\newpoint{}若存在$\sigma_0 \ge 0$, $\displaystyle \lim_{t\rightarrow} \abs{f\pare{t}} e^{-\sigma_0 t} < \infty$, 则定义
+\[ \resumath{\tilde{f}\pare{p} = L\brac{f\pare{x}} = \int_0^\infty\rd{t}\, e^{-pt}f\pare{t}.} \]
+\newpoint{}像函数在$\Re p > \sigma_0$处解析, 可解析延拓.
+\newpoint{}这里假设时间的定义域是$t\ge 0$, 可以通过定义$f\pare{t<0}\equiv 0$拓展到$\+bR$. 此时形式上和Fourier变换之间有关系$\tilde{f}\pare{p} = \hat f\pare{-ip}$.
+\newpoint{}在形式上可以选择$q > \sigma_0$, 有逆变换
+\[ \resumath{f\pare{t} = L^{-1}\brac{\tilde{f}\pare{p}} = \rec{2\pi i}\int_{q-i \infty}^{q+i\infty} \rd{p}\, e^{pt} \tilde{f}\pare{p}.} \]
+
+\subsubsection{基本性质} % (fold)
+\label{ssub:基本性质}
+
+\paragraph{延迟} % (fold)
+\label{par:延迟}
+
+$\displaystyle \resumath{L\brac{f\pare{t-t_0}} = e^{-pt_0}\tilde{f}\pare{p},\quad t_0 \ge 0.}$
+
+% paragraph 延迟 (end)
+
+\paragraph{频移} % (fold)
+\label{par:频移}
+
+$\displaystyle \resumath{\tilde{f}\pare{p-p_0} = L\brac{e^{p_0 t}f\pare{t}}.}$
+
+% paragraph 频移 (end)
+
+\paragraph{相似} % (fold)
+\label{par:相似}
+
+$\displaystyle \resumath{\tilde{f}\pare{\alpha p} = \rec{\alpha}L^{-1}\brac{\tilde{f}\pare{\frac{p}{\alpha}}},\quad f\pare{\alpha x} = \rec{\alpha} L^{-1}\brac{\tilde{f}\pare{\frac{p}{\alpha}}},\quad \alpha > 0.} $
+
+% paragraph 相似 (end)
+
+\paragraph{线性} % (fold)
+\label{par:线性}
+
+$\displaystyle \resumath{L\brac{a_1 f_1 + a_2 f_2} = a_1 L\brac{f_1} + a_2 L\brac{f_2}.}$
+
+% paragraph 线性 (end)
+
+\paragraph{微分} % (fold)
+\label{par:微分}
+
+$\displaystyle \resumath{L\brac{f'\pare{t}} = p\tilde{f}\pare{t} - f\pare{0}.}$ 对于高阶微分,
+\[ \resumath{L\brac{f^{\pare{n}}\pare{t}} = p^n \tilde{f}\pare{t} - \sum_{k=0}^{n-1} p^{n-k-1} f^{\pare{k}}\pare{0}.} \]
+
+% paragraph 微分 (end)
+
+\paragraph{反变换的微分} % (fold)
+\label{par:反变换的微分}
+
+$\displaystyle \resumath{L^{-1}\brac{\tilde{f}^{\pare{n}}\pare{p}} = \pare{-t}^n f\pare{t}.}$
+
+% paragraph 反变换的微分 (end)
+
+\paragraph{积分} % (fold)
+\label{par:积分}
+
+$\displaystyle \resumath{L\brac{\int_0^t \rd{\tau}\, f\pare{\tau}} = \frac{\tilde{f}\pare{p}}{p}.}$
+
+% paragraph 积分 (end)
+
+\paragraph{反变换的微分} % (fold)
+\label{par:反变换的微分}
+
+$\displaystyle \resumath{L^{-1}\brac{\int_p^\infty \rd{q}\, \tilde{f}\pare{q}} = \frac{f\pare{t}}{t}.}$
+
+% paragraph 反变换的微分 (end)
+
+\paragraph{卷积} % (fold)
+\label{par:卷积}
+
+考虑到原函数只在正实数上有定义,
+\[ f*g\pare{t} = \int_{-\infty}^{+\infty} \rd{\tau}\,f\pare{\tau}g\pare{t-\tau} = \int_0^t \rd{\tau}\, f\pare{\tau}g\pare{t-\tau} = g*f\pare{t}. \]
+从而
+\begin{align*}
+    L\brac{f*g\pare{t}} &= \int_0^\infty \rd{t}\, e^{-pt}\int_0^\infty \rd{\tau}\, f\pare{\tau} g\pare{t-\tau} \\
+    &= \int_0^\infty \rd{\tau}\, f\pare{\tau} L\brac{g\pare{t-\tau}} \\
+    &= \tilde{g}\pare{p} \int_0^\infty \rd{\tau} e^{-p \tau}f\pare{\tau} \\
+    &= \tilde{f}\pare{p} \tilde{g}\pare{p}.
+\end{align*}
+故
+\[ \resumath{L\brac{f*g\pare{t}} = \tilde{f}\pare{p}\tilde{g}\pare{p}.} \]
+
+% paragraph 卷积 (end)
+
+% subsubsection 基本性质 (end)
+
+\subsubsection{应用} % (fold)
+\label{ssub:应用}
+
+\begin{sample}
+    \begin{ex}
+        求解$\displaystyle \begin{cases}
+            u_t = u_{xx},\quad t,x>0, \\
+            u\pare{t=0,x} = 0, \\
+            u\pare{t,x=0} = f\pare{t}.
+        \end{cases}$ 使用Laplace变换,
+        \begin{align*}
+            & p\tilde{u}\pare{p,x} = \tilde{u}_{xx}\pare{p,x}, \\
+            & \tilde{u}\pare{p,x=0} = \tilde{f}\pare{p}, \\
+            & \Rightarrow \tilde{u} = C e^{\sqrt{p} x} + D e^{-\sqrt{p}x}.
+        \end{align*}
+        考虑到$u\pare{t,x\rightarrow \infty} = 0$, $\tilde{u}\pare{t,\rightarrow \infty} = 0$, 故$C=0$.
+        \[ D = \tilde{f}\pare{p} \Rightarrow u = L^{-1}\brac{\tilde{f}\pare{p} e^{-\sqrt{p}x}} = f\pare{t} * \frac{x}{2\sqrt{\pi t^3}} e^{-x^2/4t}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        求解$\displaystyle \begin{cases}
+            u_{tt} = u_{xx},\quad t,x>0, \\
+            u\pare{t=0,x} = u_t\pare{t=0,x} = 0, \\
+            u_x\pare{t,x=0} = f\pare{t}.
+        \end{cases}$ 使用Laplace变换,
+        \begin{align*}
+            & p^2 \tilde{u}\pare{p,x} = \tilde{u}_{xx}\pare{p,x}, \\
+            & \tilde{u}_x\pare{p,x=0} = \tilde{f}\pare{p}, \\
+            & \tilde{u} = Ce^{px} + De^{-px}.
+        \end{align*}
+        考虑到$u\pare{t,x\rightarrow \infty} = 0$, $\tilde{u}\pare{t,\rightarrow \infty} = 0$, 故$C=0$.
+        \[ -pD = \tilde{f}\pare{p} \Rightarrow u = L^{-1}\brac{-\frac{\tilde{f}\pare{p}}{p}e^{-px}} = -\int_0^{\max \pare{t-x,0}} \rd{\tau}\,f\pare{\tau}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \begin{cases}
+            u_{tt} = u_{xx},\quad t>0, \quad x\in \brac{0,\pi}, \\
+            u\pare{t=0,x} = u_t\pare{t=0,x} = 0, \\
+            \displaystyle u\pare{t,x=0} = 0,\quad u_x\pare{t,x=0} = A \sin \omega t,\quad \omega \neq \frac{2k-1}{2}.
+        \end{cases}$を解いてください.
+    \end{ex}
+    \begin{kaitou}
+        ラプラス変換を使うことにより　%使用Laplace变换,
+        \begin{align*}
+            & p^2 \tilde{u}\pare{p,x} = \tilde{u}_{xx}\pare{p,x}, \\
+            & \tilde{u}\pare{p,x=0} = 0, \\
+            & \tilde{u}_x\pare{p,x=\pi} = \frac{A\omega}{p^2+\omega^2}
+        \end{align*}
+        を得る. 故に
+        \[ \tilde{u}\pare{p,x} = S \sinh px + C\cosh p\pare{x-\pi}. \]
+        となる. 境界条件によって
+        \[ \tilde{u}\pare{p,x} = \frac{A\omega \sinh px}{p\pare{p^2 + \omega^2}\cosh p\pi} \]
+        を得る.
+    \end{kaitou}
+\end{sample}
+
+\begin{remark}
+    在正弦/余弦变换和Laplace变换之间选择. Laplace变换适合任意阶导数, 正弦/余弦变换适合偶数阶导数. 对于二阶微分算子, Laplace变换产生两个边界项, 而正弦/余弦变换只产生一个, 正好对应边界条件. 通常时间上的问题有两个初始条件, 空间上的问题有一个初始条件. 因此时间用Laplace, 空间用正弦/余弦变换.
+\end{remark}
+% ラプラス変換を使うことにより xxx を得る
+% ラプラス変換から2境界条件を作る
+
+% subsubsection 应用 (end)
+
+% subsection laplace变换 (end)
+
+\subsection{一般的な積分変換} % (fold)
+\label{sub:一般的な積分変換}
+
+\newpoint{}SL问题的解可以用来做积分变换,
+\begin{align*}
+    & \ket{\psi} \leftrightarrow \psi_n = \frac{\braket{e_n}{\psi}}{\braket{e_n}{e_n}}, \\
+    & \braket{e_m}{e_n} = \delta_{m,n}\braket{e_n}{e_n}, \\
+    & \psi\pare{x} = \sum_n \psi_n \ket{e_n}, \\
+    & \psi\pare{x} \leftrightarrow \psi_n = \frac{\displaystyle \int x e_n^*\pare{x}\psi\pare{x}}{\braket{e_n}{e_n}}.
+\end{align*}
+当区间的一段变为$\infty$, 谱变为连续,
+\[ \psi = \int \rd{\lambda} \psi^\sigma\pare{\lambda}\sigma_\lambda. \]
+
+\subsubsection{从函数到向量} % (fold)
+\label{ssub:从函数到向量}
+
+\newpoint{}微分算子视为向量空间上的线性算符.
+\newpoint{}可以将微分方程视为线性方程,
+\[ Ax = y \Rightarrow x = A^{-1}y. \]
+
+% subsubsection 从函数到向量 (end)
+
+\subsubsection{Dirac\texorpdfstring{$\delta$}{delta}函数} % (fold)
+\label{ssub:diracdelta_函数}
+
+线性空间和函数之间可以有对应关系
+\[ \begin{array}{rl}
+    \+vv\in \+bR^D & \func{f}{\+bR}{\+bR} \\
+    v^i & f\pare{x} \\
+    \braket{v}{w} = v^i w^i & \braket{f}{g} = \displaystyle \int \rd{x}\,\rho fg \\
+    \pare{Mv}^i = M_j^i v^j & K\brac{f}\pare{x} = \displaystyle \int \rd{y}\, K\pare{x,y} f\pare{y} \\
+    \pare{\+b1}_j^i = \delta_j^i & \delta\pare{x,y} \\
+    \+b1 x = x & f\pare{x} = \displaystyle \int \rd{y}\, \delta\pare{x,y} f\pare{y}.
+\end{array} \]
+可以发现
+\[ \int \rd{y}\, \delta\pare{x+a,y+a}f\pare{y} = f\pare{x} = \int \rd{y}\, \delta\pare{x,y}f\pare{y}. \]
+对于任意$a$, 有
+\[ \delta\pare{x,y} = \delta\pare{x-y, 0} = \delta\pare{x-y}. \]
+可以发现$\delta_y = \delta\pare{x-y}$和向量空间的基类似,
+\[ f\pare{x} = \int \rd{y}\, f\pare{y}\delta_y\pare{x} \leftrightarrow \ket{f} = \int \rd{y}\, \ket{\delta_y}. \]
+$\delta$函数不是正常的函数, 而是满足
+\[ \int_a^b \rd{x}\, \delta\pare{x} = \begin{cases}
+    1, & a\le 0 \le b, \\
+    -1, & b\le 0 \le a, \\
+    0 & \mathrm{otherwise}
+\end{cases} \]
+的函数. 即$\delta\pare{x\neq 0} = 0$. $\delta$函数可以作为点源使用.
+\par
+$\delta$函数的根本性质应当由积分关系给出,
+\[ \delta\pare{0} = \int \rd{y}\, \delta\pare{y}\phi\pare{y} = \pare{\delta, \phi}. \]
+两者各定义了一个线性泛函, $\phi\pare{x} \mapsto \pare{f,\phi}$. 广义函数可以定义为函数空间上连续的线性泛函. 列向量的线性泛函是行向量, 函数空间的线性泛函是广义函数. Hilbert空间的广义函数与其本身同构.
+
+% subsubsection diracdelta_函数 (end)
+
+\subsubsection{\texorpdfstring{$\delta$}{delta}函数的性质} % (fold)
+\label{ssub:_delta_函数的性质}
+
+\paragraph{对称性} % (fold)
+\label{par:对称性}
+
+$\resumath{\delta\pare{-x} = \delta\pare{x}.}$
+
+% paragraph 对称性 (end)
+
+\paragraph{投射} % (fold)
+\label{par:投射}
+
+$\resumath{\chi\pare{x}\delta\pare{x-c} = \chi\pare{c}\delta\pare{x-c}.}$
+
+% paragraph 投射 (end)
+
+\paragraph{复合} % (fold)
+\label{par:复合}
+
+设当$f\in \brac{a,b}$时$u'\pare{x}\neq 0$且$c$是$u\pare{x}$的唯一零点, 则
+\[ \resumath{\delta\pare{u\pare{x}} = \frac{\delta\pare{x-c}}{\abs{u'\pare{c}}}.} \]
+如果有多个零点$\curb{c_n}$, 则
+\[ \resumath{\delta\pare{u\pare{x}} = \sum_n \frac{\delta\pare{x-c_n}}{\abs{u'\pare{c_n}}}.} \]
+
+% paragraph 复合 (end)
+
+% subsubsection _delta_函数的性质 (end)
+
+\subsubsection{例} % (fold)
+\label{ssub:例}
+
+\begin{ex}
+    $\delta\pare{ax} = \delta\pare{x}/\abs{a}$.
+\end{ex}
+\begin{ex}
+    $\displaystyle \delta\pare{x^2-a^2} = \frac{\delta\pare{x-a}+\delta\pare{x+a}}{2\abs{x}}.$
+\end{ex}
+\begin{ex}
+    $\delta\pare{\sin x} = \displaystyle \sum_{n\in \+bZ} \delta\pare{x-n\pi}$.
+\end{ex}
+
+% subsubsection 例 (end)
+
+% subsection 一般的な積分変換 (end)
+
+% section 积分变换法 (end)
+
+\end{document}
