@@ -1,0 +1,427 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Geometry\ in\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage[super]{nth}
+
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzset{snake it/.style={decorate, decoration=snake}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensorb#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+
+\begin{document}
+
+\section{Crystal Binding and Elastic Constants} % (fold)
+\label{sec:crystal_binding_and_elastic_constants}
+
+\subsection{Types of Crystals} % (fold)
+\label{sub:types_of_crystals}
+
+\subsubsection{Definitions} % (fold)
+\label{ssub:definitions}
+
+\begin{termdef}{Cohesive Energy}
+    The energy that must be added to the crystal to separate its components into \emph{neutral} free atoms at rest.
+\end{termdef}
+\begin{termdef}{Lattice Energy}
+    The energy that must be added to the crystal to separate its components into free \emph{ions} at rest at infinite separation.
+\end{termdef}
+
+% subsubsection definitions (end)
+
+\subsubsection{Crystals of Inert Gases} % (fold)
+\label{ssub:crystals_of_inert_gases}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \draw[snake it] (0,0) -- (2,0);
+        \draw[snake it] (5,0) -- (7,0);
+        \draw (0,0.3) -- (0,1);
+        \draw (2,0.3) -- (2,1);
+        \draw[-latex] (0,0.65) -- (2,0.65) node[midway, above] {$x_2$};
+        \draw (5,0.3) -- (5,1);
+        \draw (7,0.3) -- (7,1);
+        \draw[-latex] (5,0.65) -- (7,0.65) node[midway, above] {$x_1$};
+        \draw (0,-0.3) -- (0,-1);
+        \draw (5,-0.3) -- (5,-1);
+        \draw[-latex] (0,-0.65) -- (5,-0.65) node[midway, below] {$R$};
+        \draw[fill=white] (0,0) circle (0.3);
+        \draw[fill=white] (2,0) circle (0.3);
+        \draw[fill=white] (5,0) circle (0.3);
+        \draw[fill=white] (7,0) circle (0.3);
+        \draw (0,0) node {$+$};
+        \draw (2,0) node {$-$};
+        \draw (5,0) node {$+$};
+        \draw (7,0) node {$-$};
+    \end{tikzpicture}
+    \caption{Interacting harmonic oscillators.}
+    \label{fig:interacting_harmonic_oscillators}
+\end{figure}
+
+\paragraph{Van der Waals-London Interaction} % (fold)
+\label{par:van_der_waals_london_interaction}
+
+For the system \begin{marginwarns}
+    $\displaystyle \epsilon_0 = \rec{4\pi}$ hereinafter.
+\end{marginwarns} in \cref{fig:interacting_harmonic_oscillators}, the unperturbated Hamiltonian is
+\[ \+sH_0 = \rec{2m}p_1^2 + \half m\omega_0^2 x_1^2 + \rec{2m}p_2^2 + \half m\omega_0^2 x_2^2, \]
+while the perturbation is given by
+\[ \+cH_1 = \frac{e^2}{R} + \frac{e^2}{R+x_1 - x_2} - \frac{e^2}{R+x_1} - \frac{e^2}{R - x_2} \approx -\frac{2e^2 x_1x_2}{R^3}, \]
+which may be diagonalized by introducing
+\[ x_s = \rec{\sqrt{2}}\pare{x_1+x_2},\quad x_a = \rec{\sqrt{2}}\pare{x_1 - x_2},\quad p_s = \rec{\sqrt{2}}\pare{p_1+p_2},\quad \text{and}\quad p_a = \rec{\sqrt{2}}\pare{p_1 - p_2}, \]
+whence the total Hamiltonian is written
+\[ \+cH = \brac{\rec{2m}p_s^2 + \half\pare{m\omega_0^2 - \frac{2e^2}{R^3}}x_s^2} + \brac{\rec{2m}p_a^2 + \half \pare{m\omega_0^2+\frac{2e^2}{R^3}}x_a^2}, \]
+which lowers the zero-point energy by introducing a difference
+\[ \Delta U = -\hbar\omega_0 \cdot \rec{8}\pare{\frac{2e^2}{m\omega_0^2 R^3}}^2 = -\frac{A}{R^6}. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Van der Waals Potential}
+    $\displaystyle \Delta U = -{A}/{R^6}$, where $A = \hbar\omega_0 \alpha^2$, where $\omega_0$ is of the strongest optical absorption line and $\alpha$ is the electronic polarizability.
+\end{finaleq}
+
+% paragraph van_der_waals_london_interaction (end)
+
+\paragraph{Repulsive Interaction} % (fold)
+\label{par:repulsive_interaction}
+
+The repulsive potential is proportional to $R^{-12}$.
+\begin{finaleq}{Lennard-Jones Potential}
+    \[ U\pare{R} = 4\epsilon\brac{\pare{\frac{\sigma}{R}}^{12} - \pare{\frac{\sigma}{R}}^6}. \]
+\end{finaleq}
+
+% paragraph repulsive_interaction (end)
+
+\paragraph{Equilibrium Lattice Constants} % (fold)
+\label{par:equilibrium_lattice_constants}
+
+With $p_{ij} R$ denoting the distance between the atoms at site $i$ and site $j$ where $R$ is the nearest-neighbor distance, the total potential energy is
+\[ U\+_tot_\pare{R} = \half N\cdot {4\epsilon}\brac{{\sum_j}' \pare{\frac{\sigma}{p_{ij}R}}^{12} - {\sum_j}' \pare{\frac{\sigma}{p_{ij}R}}^6}. \]
+The energy for the FCC structure is given by
+\[ U\+_tot_\pare{R} = 2N\epsilon \brac{\num{12.13}\times \pare{\frac{\sigma}{R}}^{12} - \num{14.45}\pare{\frac{\sigma}{R}}^6}, \]
+which yields the stationary value $R_0/\sigma = 1.09$, and the cohesive energy $U\+_tot_\pare{R_0} = -\num{2.15}\times 4N\epsilon$.
+\begin{remark}
+    The quantum correction to the kinetic energy should be taken into account, which is smaller when the atoms are heavier.
+\end{remark}
+
+% paragraph equilibrium_lattice_constants (end)
+
+% subsubsection crystals_of_inert_gases (end)
+
+\subsubsection{Ionic Crystals} % (fold)
+\label{ssub:ionic_crystals}
+
+For ionic crystals of the formula \ce{AB}, if the potential of interaction between ions could be written as the sum of the Coulomb potential and a repulsive potential of the form $\lambda e^{-r/\rho}$, and with the approximation that the exponential potential is neglectable for ions other than the nearest neighbour, the potential is written
+\[ U_{ij} = \begin{cases}
+    \displaystyle \lambda e^{-R/\rho} - \frac{q^2}{R}, & \mathrm{nearest-neighbour}, \\
+    \displaystyle \pm \rec{p_{ij}} \frac{q^2}{R}, & \mathrm{otherwise},
+\end{cases} \]
+and the total potential energy is
+\[ U\+_tot_ = N\pare{z\lambda e^{-R/\rho} - \frac{\alpha q^2}{R}}, \]
+where $z$ is the coordination number of the ions, where \emph{$N$ is the total number of anions (or cations)} $\alpha$ is defined by
+\begin{termdef}{The Madelung Constant}
+    \[ \alpha = {\sum_j}' \frac{\pare{\pm}}{p_{ij}}. \]
+\end{termdef}
+The equilibrium \begin{margintips}
+    Substitute $q^2/4\pi\epsilon_0$ for $q^2$ to yield the expression in the SI units.
+\end{margintips} separation is given by demanding $\rd{U\+_tot_}/\rd{R} = 0$, whence we have
+\[ R_0^2 e^{-R_0 / \rho} = \frac{\rho \alpha q^2}{z\lambda}, \]
+and the total potential energy is thus
+\[ U\+_tot_ = -\frac{N\alpha q^2}{R_0}\pare{1-\frac{\rho}{R_0}}. \]
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{cc}
+        \hline
+        Structure & $\alpha$ \\
+        \hline
+        \ce{NaCl} & \num{1.747595} \\
+        \ce{CsCl} & \num{1.762675} \\
+        (Cubic) \ce{ZnS} & \num{1.6381} \\
+        \hline
+    \end{tabular}
+    \caption{The Madelung constants of some typical structures.}
+    \label{table:madelung_typical}
+\end{table}
+\begin{sample}
+    \begin{example}
+        The Madelung constant of the one-dimensional chain of ions is $\alpha = 2\ln 2$.
+    \end{example}
+\end{sample}
+The Madelung constants of some typical structures are listed in \cref{table:madelung_typical}.
+
+% subsubsection ionic_crystals (end)
+
+\subsubsection{Covalent Crystals} % (fold)
+\label{ssub:covalent_crystals}
+
+There is a continuous range of crystals between the ionic and the covalent limits.
+
+% subsubsection covalent_crystals (end)
+
+\subsubsection{Metals} % (fold)
+\label{ssub:metals}
+
+Metallic binding is characterized by the lowering of energy of the valence electrons in the metals as compared with the free atom.
+\par
+Metals tend to crystallize in relatively closed packed structures: hcp, fcc, bcc and some other closed related structures.
+\par
+In the transition metals there is aditional binding from inner electron shells. Transition metals and the metals immediately following them in the periodic table have large $d$-electron shells and are characterized by high-binding energy.
+
+% subsubsection metals (end)
+
+\subsubsection{Hydrogen Bonds} % (fold)
+\label{ssub:hydrogen_bonds}
+
+The hydrogen bond is largely ionic in character, being formed only between the most electronegative atoms, particularly \ce{F}, \ce{O}, and \ce{N}. The hydrogen bond connects only two atoms.
+
+% subsubsection hydrogen_bonds (end)
+
+\subsubsection{Atomic Radii} % (fold)
+\label{ssub:atomic_radii}
+
+Predictions of lattice constants may be done additively by assigning the self-consistent radii to various types of bonds:
+\begin{cenum}
+    \item one set for ionic crystals with the constituent ions 6-coordinated in inert gas closed shell configuration;
+    \item another set for the ions in tetrahedrally-coordinated structures;
+    \item and another set for 12-coordinated (close-packed) metals.
+\end{cenum}
+
+% subsubsection atomic_radii (end)
+
+% subsection types_of_crystals (end)
+
+\subsection{Analysis of Elastic Strains} % (fold)
+\label{sub:analysis_of_elastic_strains}
+
+If the crystal is subjected to a deformation
+\[ \+vR\pare{\+vr} = u\pare{\+vr}\+ux + v\pare{\+vr}\+uy + w\pare{\+vr}\+uz, \]
+with $\+vR\pare{0} = 0$ we may expand $\+vR\pare{\+vr}$ by the \gloss{strain components}
+\begin{finale}
+\vspace{-\baselineskip}
+    \begin{gather*}
+        e_{xx} = \+DxDu,\quad e_{yy} = \+DyDv,\quad e_{zz} = \+DzDw; \\
+        e_{yz} = \+DzDv + \+DyDw,\quad e_{zx} = \+DzDu + \+DxDw,\quad e_{xy} = \+DyDu + \+DxDv.
+    \end{gather*}
+\end{finale}
+
+\subsubsection{Dilation} % (fold)
+\label{ssub:dilation}
+
+With $V'$ denoting the volume after the deformation,
+\[ \inlinefinaleq{\delta = \frac{V' - V}{V} = e_{xx} + e_{yy} + e_{zz}.} \]
+
+% subsubsection dilation (end)
+
+\subsubsection{Stress Components} % (fold)
+\label{ssub:stress_components}
+
+There are nine \gloss{stress components}: $X_x, Y_y, Z_z$, $X_y = Y_x$, $X_z = Z_x$, $Y_z = Z_y$, where $X_y$ is applied in the $x$ direction to a unit area of a plane whose normal lies in the $y$ direction.
+
+% subsubsection stress_components (end)
+
+\subsubsection{Elastic Compliance and Stiffness Constants} % (fold)
+\label{ssub:elastic_compliance_and_stiffness_constants}
+
+The strain components and the stress components are related by
+\[ \+ve = \begin{pmatrix}
+    e_{xx} \\ e_{yy} \\ e_{zz} \\ e_{yz} \\ e_{zx} \\ e_{xy}
+\end{pmatrix} = \tensorb{S} \begin{pmatrix}
+    X_x \\ Y_y \\ Z_z \\ Y_z \\ Z_x \\ X_y
+\end{pmatrix},\quad \text{and} \quad \begin{pmatrix}
+    X_x \\ Y_y \\ Z_z \\ Y_z \\ Z_x \\ X_y
+\end{pmatrix} = \tensorb{C} \begin{pmatrix}
+    e_{xx} \\ e_{yy} \\ e_{zz} \\ e_{yz} \\ e_{zx} \\ e_{xy}
+\end{pmatrix} = \tensorb{C} \+ve. \]
+The quantities $S_{11}, S_{12}, \cdots$ are called the \gloss[-\baselineskip]{elastic compliance constants} or elastic constants. The quantities $C_{11}, C_{12}, \cdots$ are called the \gloss{elastic stiffness constants} or moduli of elasticity.
+
+% subsubsection elastic_compliance_and_stiffness_constants (end)
+
+\subsubsection{Elastic Energy Density} % (fold)
+\label{ssub:elastic_energy_density}
+
+\begin{finaleq}{Elastic Energy Density}
+    \[ U = \half \sum_{\lambda=1}^6 \sum_{\mu=1}^6 \tilde{C}_{\lambda\mu}e_\lambda e_\mu. \]
+\end{finaleq}
+
+% subsubsection elastic_energy_density (end)
+
+\subsubsection{Elastic Stiffness Constants of Cubic Crystals} % (fold)
+\label{ssub:elastic_stiffness_constants_of_cubic_crystals}
+
+The elastic energy density of a cubic crystal is
+\begin{align*}
+    U &= \half C_{11} \pare{e_{xx}^2 + e_{yy}^2 + e_{zz}^2} + \half C_{44}\pare{e_{yz}^2 + e_{zx}^2 + e_{xy}^2} + \\
+    &\phantom{=\ } C_{12} \pare{e_{yy}e_{zz} + e_{zz}e_{xx} + e_{xx}e_{yy}}.
+\end{align*}
+Therefore, the only independent stiffness constants in cubic crystals are $C_{11}$, $C_{12}$ and $C_{44}$.
+
+% subsubsection elastic_stiffness_constants_of_cubic_crystals (end)
+
+\subsubsection{Bulk Modulus and Compressibility} % (fold)
+\label{ssub:bulk_modulus_and_compressibility}
+
+For a cubic crystal, the \gloss{bulk modulus} is given by
+\[ B = -V\+dVdp = \rec{3}\pare{C_{11} + 2C_{12}}, \]
+where the relation
+\[ U = \half B\delta^2 = \rec{6}\pare{C_{11} + 2C_{12}}\delta^2 \]
+holds. The \gloss{compressibility} is defined by $K = 1/B$.
+
+% subsubsection bulk_modulus_and_compressibility (end)
+
+% subsection analysis_of_elastic_strains (end)
+
+\subsection{Elastic Waves in Cubic Crystals} % (fold)
+\label{sub:elastic_waves_in_cubic_crystals}
+
+The equation of motion in a cubic crystal is
+\begin{align}
+    \label{eq:motion_u}
+    \rho \+D{t^2}D{^2 u} &= C_{11} \+D{x^2}D{^2 u} + C_{44}\pare{\+D{y^2}D{^2u} + \+D{z^2}D{^2 u}} + \pare{C_{12} + C_{44}} \pare{\frac{\partial^2 v}{\partial x\partial y} + \frac{\partial^2 w}{\partial x \partial z}}, \\
+    \label{eq:motion_v}
+    \rho \+D{t^2}D{^2 v} &= C_{11} \+D{y^2}D{^2 v} + C_{44}\pare{\+D{x^2}D{^2v} + \+D{z^2}D{^2 v}} + \pare{C_{12} + C_{44}} \pare{\frac{\partial^2 u}{\partial x\partial y} + \frac{\partial^2 w}{\partial y \partial z}}, \\
+    \label{eq:motion_w}
+    \rho \+D{t^2}D{^2 w} &= C_{11} \+D{z^2}D{^2 w} + C_{44}\pare{\+D{x^2}D{^2w} + \+D{y^2}D{^2 w}} + \pare{C_{12} + C_{44}} \pare{\frac{\partial^2 u}{\partial x\partial z} + \frac{\partial^2 v}{\partial y \partial z}}.
+\end{align}
+
+% subsection elastic_waves_in_cubic_crystals (end)
+
+\mathsubsubsection{Wave100}{$\brac{100}$ Direction}{Waves in the $\brac{100}$ Direction}{Waves in the [100] Direction} % (fold)
+\label{ssub:waves_in_the_100_direction}
+
+\paragraph{Longitudinal} % (fold)
+\label{par:longitudinal}
+
+Seeking solutions to equation \eqref{eq:motion_u} of the form
+\[ u = u_0 \exp\brac{i\pare{Kx - \omega t}}, \]
+we find
+\[ \omega^2\rho = C_{11}K^2,\quad v_s = \sqrt{\frac{C_{11}}{\rho}}. \]
+
+% paragraph longitudinal (end)
+
+\paragraph{Transverse} % (fold)
+\label{par:transverse}
+
+Seeking solutions to equation \eqref{eq:motion_v} of the form
+\[ v = v_0 \exp\brac{i\pare{Kx - \omega t}}, \]
+we find
+\[ \omega^2\rho = C_{44}K^2,\quad v_s = \sqrt{\frac{C_{44}}{\rho}}. \]
+
+% paragraph transverse (end)
+
+% subsubsection waves_in_the_100_direction (end)
+
+\mathsubsubsection{Wave110}{$\brac{110}$ Direction}{Waves in the $\brac{110}$ Direction}{Waves in the [110] Direction} % (fold)
+\label{ssub:waves_in_the_100_direction}
+
+\paragraph{Out of the $xy$ plane} % (fold)
+\label{par:shear_wave}
+
+Seeking solutions to equation \eqref{eq:motion_w} of the form
+\[ w = w_0 \exp\brac{i\pare{K_x x + K_y y - \omega t}}, \]
+we find
+\[ \omega^2\rho = C_{44}\pare{K_x^2 + K_y^2}, \]
+independent of the exact direction.
+
+% paragraph shear_wave (end)
+
+\paragraph{In the $xy$ plane} % (fold)
+\label{par:transverse_wave}
+
+Seeking solutions to equation \eqref{eq:motion_u} and equation \eqref{eq:motion_v} of the form
+\[ \begin{cases}
+    u = u_0 \exp\brac{i\pare{K_x x + K_y y - \omega t}},
+    v = v_0 \exp\brac{i\pare{K_x x + K_y y - \omega t}},
+\end{cases} \]
+where $\displaystyle K_x = K_y = \frac{K}{\sqrt{2}}$, we find
+\[ \begin{cases}
+    \displaystyle \omega^2\rho = \half \pare{C_{11} + C_{12} + 2C_{44}}K^2,\quad u=v,& \mathrm{longitudinal}, \\[.5em]
+    \displaystyle \omega^2\rho = \half \pare{C_{11} - C_{12}}K^2,\quad u=-v,& \mathrm{transverse}.
+\end{cases} \]
+
+% paragraph transverse_wave (end)
+
+% subsubsection waves_in_the_100_direction (end)
+
+% section crystal_binding_and_elastic_constants (end)
+
+\end{document}

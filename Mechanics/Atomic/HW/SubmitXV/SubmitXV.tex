@@ -1,0 +1,48 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\def\writetofile#1#2{\immediate\write18{echo "#1" > #2}}
+\def\econfig#1{\immediate\write18{echo "#1" | python /Users/zechen/Documents/PhantasiaAcademia/electronconfig.py > electronsconfigtmp.tex}\input{electronsconfigtmp.tex}}
+
+\begin{document}
+
+\newprob{5.9 (1)}%
+只考虑$\nu=0$的吸收谱, $\pare{0,0}$带对应的$J=0$
+\[ \tilde{\nu}_{e\nu} = \tilde{\nu}_e + \half\pare{\overbar{\nu}'_0 - \overbar{\nu}_0} - \rec{4}\pare{\eta'\overbar{\nu}'_0 - \eta\overbar{\nu}_0} = \SI{102879.65}{\per\centi\meter}. \]
+R支前四条:
+\begin{align*}
+    \tilde{\nu} &= \tilde{\nu}_{e\nu} + 2B' + \pare{3B' - B}J + \pare{B'-B}J^2\vert_{J=0,1,2,3}\\ &= \boxed{\curb{\SI{102879.65}{\per\centi\meter},\SI{102880.21}{\per\centi\meter},\SI{102879.04}{\per\centi\meter},\SI{102876.14}{\per\centi\meter}}.}
+\end{align*}
+P支前四条:
+\begin{align*}
+    \tilde{\nu} &= \tilde{\nu}_{e\nu} -\pare{B'+B}J + \pare{B'-B}J^2\vert_{J=1,2,3,4}\\ &= \boxed{\curb{\SI{102873.34}{\per\centi\meter},\SI{102867.59}{\per\centi\meter},\SI{102860.11}{\per\centi\meter},\SI{102850.91}{\per\centi\meter}}.}
+\end{align*}
+\par
+\newprobheader{(2)}%
+$B'<B$, 故带头在紫端, R支$J=1$有最大$\tilde{\nu} = \boxed{\SI{102880.21}{\per\centi\meter}.}$
+\newprob{5.10}%
+$\tilde{\nu} = \SI{15802.8}{\per\centi\meter}$, $\tilde{\nu} - \Delta\tilde{\nu} = \SI{12812.3}{\per\centi\meter}$, $\tilde{\nu} + \Delta\tilde{\nu} = \SI{18793.5}{\per\centi\meter},$ $\Rightarrow \Delta\tilde{\nu} = \SI{2990.6}{\per\centi\meter}.$ \underline{大Raman散射}. 经典振动频率即$\Delta\tilde{\nu}\cdot c = \boxed{\SI{8.97e13}{\hertz}.}$
+
+\end{document}

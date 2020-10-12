@@ -1,0 +1,642 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{cmbright}
+\usepackage{van-de-la-illinoise}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\newcommand{\emphbox}[1]{\colorbox{lightgray!20}{$\displaystyle #1$}}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\textmathitem#1{{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\mitensor#1{\stackon[-0.1ex]{\+v#1}{\boldsymbol{\leftrightharpoonup{#1}}} }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+:}%
+\definecolor{emphgreen}{RGB}{238,255,207}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+\definecolor{CJKblack}{RGB}{72,72,72}
+
+\usetikzlibrary{calc}
+
+\sisetup{math-micro={\text{\textmu}}}
+
+\def\equals{=}
+\newcommand{\ib}[2]{to[battery1,l=$ #1 $, invert, #2]}
+\newcommand{\ic}[2]{to[capacitor,C=$ #1 $, #2]}
+\newcommand{\ivs}[2]{to[european voltage source,v<=$ #1 $, #2]}
+\newcommand{\iis}[2]{to[european current source,i=$ #1 $, #2]}
+\newcommand{\ir}[2]{to[resistor,R=$ #1 $, #2]}
+\newcommand{\iso}[1]{to[short,-o,#1]}
+\newcommand{\ios}[1]{to[short,o-,#1]}
+\newcommand{\is}[1]{to[short,#1]}
+%\newcommand{\iu}[3]{\draw #1  #2}
+\newcommand{\iou}[3]{\draw ($#1!0.5!#2$) node {$ #3 $};
+\draw ($#1!0.12!#2$) node {$\scriptstyle +$};
+\draw ($#1!0.88!#2$) node {$\scriptstyle -$};}
+\newcommand{\iblock}[3]{\draw[thick] #1 |- #2 |- cycle;
+\draw ($#1!0.5!#2$) node {#3};}
+
+\def\lefthandwidth{3cm}%
+\newtcolorbox{cheatresumefuta}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}, sidebyside, lefthand width=\lefthandwidth, sidebyside align=top, lower separated=false}%
+
+\pgfplotsset{compat=newest}
+\newcommand*{\mysans}{\fontfamily{phv}\selectfont}
+\usepackage{vwcol}
+
+\makeatletter
+\newcommand\makebig[2]{%
+  \@xp\newcommand\@xp*\csname#1\endcsname{\bBigg@{#2}}%
+  \@xp\newcommand\@xp*\csname#1l\endcsname{\@xp\mathopen\csname#1\endcsname}%
+  \@xp\newcommand\@xp*\csname#1r\endcsname{\@xp\mathclose\csname#1\endcsname}%
+}
+\makeatother
+
+\makebig{biggg} {3.0}
+\makebig{Biggg} {3.5}
+\makebig{bigggg}{4.0}
+\makebig{Bigggg}{4.5}
+\usepackage{colortbl}
+
+\begin{document}
+\begin{textblock}{3}[0,0](21,0)
+    \begin{tikzpicture}[scale=0.7]
+        \draw[fill=magenta,opacity=0.05,draw=none]  (0,0) rectangle (1,1);
+        \draw (0.5,0.5) node {\color{white} P};
+    \end{tikzpicture}
+    \begin{tikzpicture}[scale=0.7]
+        \draw[fill=cyan,opacity=0.05,draw=none]  (0,0) rectangle (1,1);
+        \draw (0.5,0.5) node {\color{white} N};
+    \end{tikzpicture}
+\end{textblock}
+\begin{multicols*}{2}[\centerline{\titlefont 様々ナ半導体部品ノ原理}]
+\raggedcolumns%
+\newheader{{\mysans PN}接合及ビダイオード}
+\begin{cheatresume}
+\mathitem{半導体}${\color{CJKblack}\Bigg\{}\begin{array}{@{}l}
+    \text{\mathitem{真性半導体} {\color{CJKblack}純粋なシリコンでは最外周の価電子(4個)が共有結合}}\\
+\text{\mathitem{{\mysans N}型半導体} {\color{CJKblack}5価元素(ヒ素等, \mathitem{ドナー})を混ぜると自由電子で電流が流れる}}\\
+\text{\mathitem{{\mysans P}型半導体} {\color{CJKblack}3価元素(ホウ素等, \mathitem{アクセプタ})を混ぜると正孔で電流が流れる}}
+\end{array}$\\
+\mathitem{キャリア} {\color{CJKblack}半導体に電流を流す電荷(自由電子と正孔の総称)}\\
+\mathitem{真性キャリア} {\color{CJKblack}価電子帯から伝導帯に電子が熱励起して生じる自由電子と正孔}\\
+\mathitem{電荷が移動}${\color{CJKblack}\Big\{}\begin{array}{@{}l}
+    \text{\mathitem{ドリフト} {\color{CJKblack}半導体に電界をかけると電荷が移動}}\\
+    \text{\mathitem{拡散} {\color{CJKblack}キャリアを片側から注入すると散らばっていく}}
+\end{array}$\\
+\mathitem{PN接合} {\color{CJKblack}P型半導体の領域とN型半導体の領域が接している部分}
+\begin{center}
+\begin{tikzpicture}[yscale=0.95]
+\draw[fill=magenta,opacity=0.05,draw=none] (0,-2.375) rectangle (2.75,-0.25);
+\draw[fill=cyan,opacity=0.05,draw=none] (2.75,-0.25) rectangle (5.5,-2.375);
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \draw (0.5*\j, -0.5*\i) node(minus\i\j) {$\ominus$};
+            \draw ($(minus\i\j) + (-0.2,-0.2)$) circle[radius=0.05] node(circle\i\j) {};
+        }
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \draw[-latex] (circle\i5.east) -- ++ (0.3,0);
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \draw (2.5 + 0.5*\j, -0.5*\i) node(plus\i\j) {$\oplus$};
+            \draw[fill=black] ($(plus\i\j) + (0.2,-0.2)$) circle[radius=0.05] node(dot\i\j) {};
+        }
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \draw[-latex] (dot\i1.west) -- ++ (-0.3,0);
+    }
+    \draw (0,-2.375) -- (0,-0.25) -- (5.5,-0.25) -- (5.5,-2.375) -- (0,-2.375);
+    \draw (2.75, -0.25) -- (2.75,-2.375);
+    \draw (1.375,-2.375) node[below] {\small\color{CJKblack}P型};
+    \draw (4.125,-2.375) node[below] {\small\color{CJKblack}N型};
+    \draw (2.75,-2.375) node[below] {\small\color{CJKblack}拡散};
+
+    \pgfmathtruncatemacro{\off}{6};
+\draw[fill=magenta,opacity=0.05,draw=none] (\off+0,-2.375) rectangle (\off+1.75,-0.25);
+\draw[fill=cyan,opacity=0.05,draw=none] (\off+3.75,-0.25) rectangle (\off+5.5,-2.375);
+
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \ifthenelse{\(\i=2 \OR \i=3\) \AND \(\j=4 \OR \j=5\)}{}{\draw (\off+0.5*\j, -0.5*\i) node(minus\i\j) {$\ominus$};}
+        }
+        \foreach \j in {1, ..., 3}
+        {
+            \draw ($(minus\i\j) + (-0.2,-0.2)$) circle[radius=0.05] node(circle\i\j) {};
+        }
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \ifthenelse{\(\i=2 \OR \i=3\) \AND \(\j=1 \OR \j=2\)}{}{\draw (\off+2.5 + 0.5*\j, -0.5*\i) node(plus\i\j) {$\oplus$};}
+        }
+        \foreach \j in {3, ..., 5}
+        {
+            \draw[fill=black] ($(plus\i\j) + (0.2,-0.2)$) circle[radius=0.05] node(dot\i\j) {};
+        }
+    }
+    \draw (\off+0,-2.375) -- (\off+0,-0.25) -- (\off+5.5,-0.25) -- (\off+5.5,-2.375) -- (\off+0,-2.375);
+    \draw[dashed] (\off+1.75, -0.25) -- (\off+1.75,-2.375);
+    \draw[dashed] (\off+3.75, -0.25) -- (\off+3.75,-2.375);
+    \draw[-latex] (\off + 3.5, -1.25) -- (\off + 2, -1.25) node[midway, above] {$\+vE$} node[midway, below] {\small\color{CJKblack}固有電位障壁};
+    \draw (\off+2.75,-2.375) node[below] {\small\color{CJKblack}空乏層(キャリアなし)};
+    \draw (0,-2.875) node[anchor=north west] (diffusion) {\parbox{3.2cm}{\small\color{CJKblack}多数キャリアが他の領域に拡散移動する}};
+    \draw node[right=.5cm of diffusion] (combine) {\parbox{3.2cm}{\small\color{CJKblack}接合面付近で, 異種キャリアと再結合する}};
+    \draw node[right=.5cm of combine] (efield) {\parbox{3.2cm}{\small\color{CJKblack}発生した電位差でキャリアの拡散が停止}};
+    \draw[-latex] (diffusion.east) -- (combine.west);
+    \draw[-latex] (combine.east) -- (efield.west);
+\end{tikzpicture}
+\end{center}
+\begin{center}
+\begin{tikzpicture}[yscale=0.95]
+    \pgfmathtruncatemacro{\off}{0};
+\draw[fill=magenta,opacity=0.05,draw=none] (\off+0,-2.375) rectangle (\off+2.25,-0.25);
+\draw[fill=cyan,opacity=0.05,draw=none] (\off+3.25,-0.25) rectangle (\off+5.5,-2.375);
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \ifthenelse{\i=-1}{}{\draw (\off+0.5*\j, -0.5*\i) node(minus\i\j) {$\ominus$};}
+        }
+        \foreach \j in {1, ..., 4}
+        {
+            \draw ($(minus\i\j) + (-0.2,-0.2)$) circle[radius=0.05] node(circle\i\j) {};
+        }
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \draw[-latex] (circle\i4.east) -- ++ (0.3,0);
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \ifthenelse{\i=-1}{}{\draw (\off+2.5 + 0.5*\j, -0.5*\i) node(plus\i\j) {$\oplus$};}
+        }
+        \foreach \j in {2, ..., 5}
+        {
+            \draw[fill=black] ($(plus\i\j) + (0.2,-0.2)$) circle[radius=0.05] node(dot\i\j) {};
+        }
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \draw[-latex] (dot\i2.west) -- ++ (-0.3,0);
+    }
+    \draw (\off+0,-2.375) -- (\off+0,-0.25) -- (\off+5.5,-0.25) -- (\off+5.5,-2.375) -- (\off+0,-2.375);
+    \draw[dashed] (\off+2.25, -0.25) -- (\off+2.25,-2.375);
+    \draw[dashed] (\off+3.25, -0.25) -- (\off+3.25,-2.375);
+    %\draw[-latex] (\off + 3.5, -1.25) -- (\off + 2, -1.25) node[midway, above] {$\+vE$} node[midway, below] {\small\color{CJKblack}固有電位障壁};
+    \draw (\off+2.75,-2.375) node[below] {\small\color{CJKblack}空乏層};
+    \draw (\off+0,-1.25) to[short] (\off-0.125,-1.25) to[short] (\off-0.125,-3) to[battery1] (\off + 2.625, -3) to[resistor] (\off + 5.5 + 0.125,-3) to[short] (\off + 5.5 + 0.125, -1.25) to[short] (\off + 5.5, -1.25);
+    %
+    \draw[thick]
+        (\off + 0.875, -4.0) node[above] {\small\color{CJKblack}順方向} --
+        (\off + 2.25, -4.0) --
+        (\off + 3.25, -3.75) --
+        (\off + 4.625, -3.75) ;
+    \draw[dashed]
+        (\off + 1.75, -4.0) --
+        (\off + 3.75, -3.5) --
+        (\off + 4.625, -3.5) node[right] {$U$};
+    \draw[-latex]
+        (\off + 4.625, -3.5) --
+        (\off + 4.625, -3.75);
+    \draw[dashed]
+        (\off + 2.25, -4.0) -- 
+        (\off + 4.625, -4.0);
+    %
+    \draw[fill=gray,opacity=0.35,draw=none] (\off + 1.25,-1.5) -- (\off + 1.25,-1.0) --  (\off + 3.75,-1.0) -- (\off + 3.75,-0.75) -- (\off + 4.25, -1.25) -- (\off + 3.75,-1.75) -- (\off + 3.75,-1.5) -- (\off + 1.25, -1.5);
+    \draw (\off + 2.75, -1.25) node {\color{white}拡散};
+
+    \pgfmathtruncatemacro{\off}{6.5};
+\draw[fill=magenta,opacity=0.05,draw=none] (\off+0,-2.375) rectangle (\off+1.25,-0.25);
+\draw[fill=cyan,opacity=0.05,draw=none] (\off+4.25,-0.25) rectangle (\off+5.5,-2.375);
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \ifthenelse{\i=-1}{}{\draw (\off+0.5*\j, -0.5*\i) node(minus\i\j) {$\ominus$};}
+        }
+        \foreach \j in {1, ..., 2}
+        {
+            \draw ($(minus\i\j) + (-0.2,-0.2)$) circle[radius=0.05] node(circle\i\j) {};
+        }
+    }
+    \foreach \i in {1, ..., 4}
+    {
+        \foreach \j in {1, ..., 5}
+        {
+            \ifthenelse{\i=-1}{}{\draw (\off+2.5 + 0.5*\j, -0.5*\i) node(plus\i\j) {$\oplus$};}
+        }
+        \foreach \j in {4, ..., 5}
+        {
+            \draw[fill=black] ($(plus\i\j) + (0.2,-0.2)$) circle[radius=0.05] node(dot\i\j) {};
+        }
+    }
+    \draw (\off+0,-2.375) -- (\off+0,-0.25) -- (\off+5.5,-0.25) -- (\off+5.5,-2.375) -- (\off+0,-2.375);
+    \draw[dashed] (\off+1.25, -0.25) -- (\off+1.25,-2.375);
+    \draw[dashed] (\off+4.25, -0.25) -- (\off+4.25,-2.375);
+    %\draw[-latex] (\off + 3.5, -1.25) -- (\off + 2, -1.25) node[midway, above] {$\+vE$} node[midway, below] {\small\color{CJKblack}固有電位障壁};
+    \draw (\off+2.75,-2.375) node[below] {\small\color{CJKblack}空乏層};
+    \draw (\off+0,-1.25) to[short] (\off-0.125,-1.25) to[short] (\off-0.125,-3) to[battery1,invert] (\off + 2.75, -3) to[resistor] (\off + 5.5 + 0.125,-3) to[short] (\off + 5.5 + 0.125, -1.25) to[short] (\off + 5.5, -1.25);
+    %
+    \draw[thick]
+        (\off + 0.875, -4.0) node[above] {\small\color{CJKblack}逆方向} -- 
+        (\off + 1.25, -4.0) -- 
+        (\off + 4.25, -3.25) -- 
+        (\off + 4.625, -3.25) ;
+    \draw[dashed] 
+        (\off + 1.75, -4.0) -- 
+        (\off + 3.75, -3.5) -- 
+        (\off + 4.625, -3.5) node[right] {$U$};
+    \draw[-latex] 
+        (\off + 4.625, -3.5) -- 
+        (\off + 4.625, -3.25);
+    \draw[dashed] 
+        (\off + 1.25, -4.0) -- 
+        (\off + 4.625, -4.0);
+    %
+    \draw[fill=gray,opacity=0.35,draw=none] (\off + 3.25,-1.375) -- (\off + 3.25,-1.125) --  (\off + 2.25,-1.125) -- (\off + 2.25,-1) -- (\off + 2, -1.25) -- (\off + 2.25,-1.5) -- (\off + 2.25,-1.375) -- (\off + 3.25, -1.375);
+    \draw (\off + 2.75, -1.25) node {\footnotesize\color{white}ドリフト};
+\end{tikzpicture}
+\end{center}
+\mathitem{電流ー電圧特性} ${\color{CJKblack}\Bigg\{}\begin{array}{@{}l}
+    \displaystyle i = I\+_S_\pare{e^{u/U\+_T_}} - 1\\
+    U\+_T_ \approx \SI{26}{\milli\volt}\\
+    I\+_S_ \text{\color{CJKblack}は逆方向飽和電流}
+\end{array}$
+\hfill\smash{\raisebox{-1.3cm}{\begin{tikzpicture}[scale=0.9]
+    \draw[-latex] (-3,0) -- (2,0) node[below] {$u$};
+    \draw[-latex] (0,-0.5) -- (0,1.5) node[left] {$i$};
+    \draw[domain=-2.79245:1.96591,samples=200] plot function {0.03 * (exp(2*x) - 1) - exp(-(x+2.8)*100)} node[left] {\scriptsize$\SI{20}{\celsius}$};
+    \draw[domain=-1.99245:0.982956,samples=200,dashed] plot function {0.03 * (exp(4*x) - 1) - exp(-(x+2)*100)};
+    \draw[dotted] (-2.8,-0.5) -- (-2.8,0) node[above] {$U\+_(BR)_$};
+    \draw[dotted,-latex] (0.7,0.463339) -- (-1.5,1.5) node[left] {\scriptsize$\SI{80}{\celsius}$};
+\end{tikzpicture}}}\\
+$\begin{array}{@{}l}
+    \mathitem{ブレーク} \\
+    \mathitem{ダウン}
+\end{array}$ ${\color{CJKblack}\bigggg\{}\begin{array}{@{}p{11.5cm}@{}}
+    \mathitem{\mysans Zener} \color{CJKblack}(高濃度)高エネルギー電荷担体は,\newline
+    \color{CJKblack} 原子と衝突して電子ー正孔対を生成し, 空乏領域は完全に消滅する \\
+    \mathitem{アヴァランシェ} \color{CJKblack}自由電子が電界で加速され衝突電離を引き起こす過程が, 繰り返し発生することで, 大電流が流れる
+\end{array}$\\
+$\begin{array}{@{}l@{}}
+    \mathitem{接合} \\
+    \mathitem{容量}
+\end{array}$ ${\color{CJKblack}\bigggg\{}\begin{array}{@{}p{12.5cm}}
+    \mathitem{蓄積容量(拡散容量)} \color{CJKblack}(順方向)キャリアが相手側に注入され, その寿命で決まる時間の間蓄積される. 過剰少数キャリア濃度で蓄積容量を決める. \\
+    \mathitem{障壁容量} \color{CJKblack}(逆方向)電場によりキャリアが引き抜かれ, 接合近傍にキャリアが存在しない空乏層ができる. 接合容量は空乏層の長さに逆比例する.
+\end{array}$\\
+\mathitem{ダイオード} ${\color{CJKblack}\Big\{}\begin{array}{@{}p{5.3cm}}
+    \mathitem{順方向電圧} $\SI{0.7}{\volt}$\mathitem{(\mysans Si)}\ $\SI{0.2}{\volt}$\mathitem{(\mysans Ge)} \\
+    \mathitem{微小信号等価} $r\+_d_ = U\+_T_/I\+_D_$
+\end{array}$\ \mathitem{{\mysans Zener}ダイオード}\smash{\raisebox{-0.5cm}{
+\begin{tikzpicture}[yscale=0.5,xscale=0.6]
+\draw (0,0) \ios{} (2,0) to[zD,*-*] (2,2) \ir{}{-o} (0,2);
+\draw (2,0) \iso{} (4,0);
+\draw (2,2) \iso{} (4,2);
+\draw (0,2) node[below] {\small$+$};
+\draw (0,0) node[above] {\small$-$};
+\draw (0,1) node {$U\+_i_$};
+\draw (4,2) node[below] {\small$+$};
+\draw (4,0) node[above] {\small$-$};
+\draw (4,1) node {$U\+_o_$};
+\end{tikzpicture}}
+}
+\end{cheatresume}
+\columnbreak\def\lefthandwidth{7cm}%
+\newheader{バイポーラトランジスタ}
+\begin{cheatresumefuta}
+\begin{center}\begin{tikzpicture}[scale=1.125]
+\def\drawdotat#1{\draw[fill=black] #1 circle (0.03)}
+    \draw[fill=lightgray,draw=none] (0.7,2.2) rectangle (1.3,2);
+    \draw[fill=lightgray,draw=none] (0.7,-2.2) rectangle (1.3,-2);
+    \draw[fill=lightgray,draw=none] (-0.2,0.3) rectangle (0,-0.3);
+    \draw[fill=cyan,opacity=0.04,draw=none] (0,2) rectangle (2,0.65);
+    \draw[fill=cyan,opacity=0.08,draw=none] (0,-2) rectangle (2,-0.65);
+    \draw[fill=magenta,opacity=0.04,draw=none] (0,-0.65) rectangle (2,0.65);
+    %
+    \draw (0,2) rectangle (2,-2);
+    %
+    \draw (1.2,-1.3) -- (1.05, -1.3) -- (1.45,-1.7) -- (1.85, -1.3) -- (1.7,-1.3) -- (1.7,1.8) -- (1.5,1.6) -- (1.3,1.8);
+    \draw (1.3,0.2) -- (1.3,1.8) node[midway,above,sloped] {$I\+_CN_$};
+    \draw (1.2,-1.3) -- (1.2,-0.75) node[midway,above=-.3em,sloped] {$I\+_EN_$} -- (1.2,-0.2);
+    \draw (1.3,0.2) -- (0.9,0.6);
+    \draw (0.65,0.35) -- (1.2,-0.2) node[midway,below=-.3em,sloped] {$I\+_BN_$};
+    \draw (0.65,0.35) -- (0.9,0.35) -- (0.9,0.6);
+    \draw[-latex] (1.6,-1.3) -- (1.6,-0.2);
+    \draw[-latex] (1.45,-1.3) -- (1.45,-0.2);
+    \draw[-latex] (1.3,-1.3) -- (1.3,-0.2);
+    \draw[-latex] (1.58,0.2) -- (1.58,1.3);
+    \draw[-latex] (1.42,0.2) -- (1.42,1.3);
+    \draw[-latex] (1.375,-0.125) -- (0.9625, 0.2875);
+    \drawdotat{(1.6,-1.3)};
+    \drawdotat{(1.45,-1.3)};
+    \drawdotat{(1.3,-1.3)};
+    \drawdotat{(1.58,0.2)};
+    \drawdotat{(1.42,0.2)};
+    \drawdotat{(1.375,-0.125)};
+    %
+    %\draw plot [smooth] coordinates { (0.2,0.6) (0.23,0.63) (0.45,1.2) (0.5,1.75) (0.5,1.8) };
+    %\draw plot [smooth] coordinates { (0.41213,0.38787) (0.44213,0.41787) (0.65,0.9) (0.8,1.6) (0.8,1.8) };
+    \draw (0.2,0.4) .. controls (0.5,0.7) and (0.5,1.5) .. (0.5,1.8) node[midway,sloped,above] {$I\+_CBO_$};
+    \draw (0.38,0.16) .. controls (0.78,0.56) and (0.8,1.2) .. (0.8,1.8);
+    \draw (0.2,0.4) -- (0.164,0.448);
+    \draw (0.38,0.16) -- (0.416,0.112);
+
+    \draw[latex-] (0.3,0.4) .. controls (0.6,0.8) and (0.6,1.2) .. (0.6,1.5);
+    \draw[-latex] (0.38,0.285).. controls (0.63,0.66) and (0.7,0.9) .. (0.7,1.5);
+    \draw[fill=white] (0.6,1.5) circle (0.03);
+    \draw[fill=black] (0.38,0.285) circle (0.03);
+    %
+    \draw (0.164,0.448) -- (0.122, 0.154) -- (0.416,0.112);
+    %
+    \draw (0.5,1.8) -- (0.65,1.65) -- (0.8,1.8);
+    \draw (0.4,-1.6) -- (0.5,-1.6) -- (0.5,-0.6);
+    \draw (0.5,-0.6) .. controls (0.5,-0.4) and (0.212, -0.318) .. (0.2,-0.3);
+    \draw (0.8,-0.6) .. controls (0.8,-0.3) and (0.398, -0.084) .. (0.38, -0.06);
+    \draw (0.8,-0.6) -- (0.8,-1.6) -- (0.9,-1.6) -- (0.65,-1.85) -- (0.4,-1.6);
+    \draw (0.2,-0.3) -- (0.41, -0.27) -- (0.38, -0.06);
+    \draw (0.4,-1.6) node (IEPref){};
+    \draw node[above left=1em and -1em of IEPref] {$I\+_EP_$};
+    \draw[latex-] (0.65,-1.5) -- (0.65,-0.6);
+    \draw (0.65,-0.6) .. controls (0.65,-0.4) and (0.53, -0.36) .. (0.47, -0.315);
+    \draw[fill=white] (0.47, -0.315) circle (0.03);
+    %
+    \draw[dashed] (0,0.6) -- (2,0.6);
+    \draw[dashed] (0,-0.6) -- (2,-0.6);
+    \draw[dashed] (0,0.7) -- (2,0.7);
+    \draw[dashed] (0,-0.7) -- (2,-0.7);
+    %
+    \draw (1,-2.2) to[short,i=$I\+_E_$,l_=e] (1,-2.5) to[resistor] (-0.5,-2.5) to[battery1,invert,-*] (-0.5,0) to[battery1,invert] (-0.5,2.5) to[resistor] (1,2.5) to[short,i=$I\+_C_$,l_=c] (1,2.2);
+    \draw (-0.5,0) to[short,i=$I\+_B_$,l_=b] (-0.2,0);
+    %
+    \draw (2.3,-1.85) node[right](etext) {\parbox{3.8cm}{\linespread{.5}\raggedright\small\color{CJKblack}
+        - Eの自由電子は, 拡散でB側に移動\mathitem{($I\+_EN_$)}\\
+        - Bのホールは, 拡散でE側に移動\mathitem{($I\+_EP_$)}
+    }};
+    \draw (2.3,0) node[right](btext) {\parbox{3.8cm}{\linespread{.5}\raggedright\small\color{CJKblack}
+        - ベースが薄い($＜\SI{1}{\micro\meter}$)ので, 自由電子は大部分C側に到達\mathitem{($I\+_CN_$)}\\
+        - キャリアの小さい部分再結合する\mathitem{($I\+_BN_$)}
+    }};
+    \draw (2.3,1.85) node[right](ctext) {\parbox{3.8cm}{\linespread{.5}\raggedright\small\color{CJKblack}
+        - C側に到達した自由電子は, ドリフトしてC端子より流出\mathitem{($I\+_CN_$)}\\
+        - 少数キャリアは, ドリフトで相手側に移動\mathitem{($I\+_CBO_$)}
+    }};
+    \draw (2,-1.35) -- (2.3,-1.85);
+    \draw (2,0) -- (2.3,0);
+    \draw (2,1.35) -- (2.3,1.85);
+    \draw[-latex] ($(etext.north) + (0,-0.1)$) -- ($(btext.south) + (0,0.1)$);
+    \draw[-latex] ($(btext.north) + (0,-0.1)$) -- ($(ctext.south) + (0,0.1)$);
+\end{tikzpicture}
+\end{center}
+\tcblower\small\setlength{\belowdisplayskip}{-0em}
+\begin{equation*}
+\begin{array}[t]{@{}r@{\ }l}
+    I\+_C_ &= I\+_CN_ + I\+_CBO_\\ \+:c2{r}{=\conj{\beta}I\+_B_ + \pare{1+\beta}I\+_CBO_ = \conj{\beta}I\+_B_ + I\+_CEO_} \\
+    \mbox{}\mathbin{+}I\+_B_ &= I\+_BN_ + I\+_EP_ - I\+_CBO_ = I'\+_B_ - I\+_CBO_ \\
+    \arrayrulecolor{lightgray}\hline
+    I\+_E_ &= I\+_EN_ + I\+_EP_ = I\+_CN_ + I\+_BN_ + I\+_EP_ \\
+    & = I\+_ES_\pare{e^{u\+_BE_/U\+_T_} - 1}
+\end{array}
+\end{equation*}\normalsize
+\mathitem{エミッタ接地電流増幅率}\newline
+\mathitem{直流} $\displaystyle \conj{\beta} = \frac{I\+_CN_}{I'\+_B_} = \frac{I\+_C_ - I\+_CBO_}{I\+_C_ + I\+_CBO_}$\newline
+\mathitem{交流} ${\beta} = \Delta i\+_C_/\Delta i\+_B_ \approx \conj{\beta}$\newline
+\mathitem{ベース接地電流増幅率}\newline
+\mathitem{直流} $\displaystyle \conj{\alpha} = \+/I\+_CN_/I\+_E_/$\ \mathitem{交流} $\displaystyle {\alpha} = \+/\Delta i\+_C_/\Delta i\+_E_/ \approx \alpha$\newline
+\footnotesize\color{CJKblack}$I\+_CBO_$はEを開放するとCの逆方向飽和電流. $I\+_CEO_$はBを開放するとCE間のリーク電流.
+\end{cheatresumefuta}
+\newheader{\mysans JFET}
+\begin{cheatresume}
+\begin{center}
+\begin{tikzpicture}[xscale=0.8,yscale=0.73]
+    \begin{scope}[shift={(0,0)},opacity=0.05]
+        \draw[ultra thick,-latex] (-1,-2.25) -- (14.75,-2.25) node[below left] {$\mathbf U\+_GS_$};
+        \draw[ultra thick,-latex] (14.35,-2.25) -- (14.35,2.25) node[left] {$\mathbf I\+_D_$};
+        \draw[ultra thick,domain=0:14.35] plot function {(x)**2/51.4806 - 2.25};
+    \end{scope}
+    \begin{scope}[shift={(0,-8)},opacity=0.05]
+        \draw[ultra thick,-latex] (-1,-2.25) -- (14.75,-2.25) node[below left] {$\mathbf U\+_DS_$};
+        \draw[ultra thick,-latex] (-0.5,-2.25) -- (-0.5,2.25) node[below right] {$\mathbf I\+_D_$};
+        \draw[ultra thick,domain=-0.5:14.35] plot function {2/pi*4*atan(x+0.5)-2.25};
+        \draw[ultra thick,dashed,domain=-0.5:5.5] plot function {(x+0.5)**2/9-2.25};
+    \end{scope}
+    \begin{scope}[shift={(12,0)}]
+        \draw[fill=lightgray,draw=none] (0.7,2.2) rectangle (1.3,2);
+        \draw[fill=lightgray,draw=none] (0.7,-2.2) rectangle (1.3,-2);
+        \draw[fill=lightgray,draw=none] (-0.2,0.3) rectangle (0,-0.3);
+        \draw[fill=lightgray,draw=none] (2,0.3) rectangle (2.2,-0.3);
+        \draw (-0.2,0) to[short,l_=g] (-0.5,0) to[short] (-0.5,-2.5) to[short] (2.5,-2.5) to[short] (2.5,0) to[short] (2.2,0);
+        \draw (1,-2.2) to[short,l_=s] (1,-2.5) to[short] (1,-2.8) to[short] (2.8,-2.8) to[short] (2.8,2.5) to[short] (1,2.5) to[short,l_=d] (1,2.2);
+        \draw (-0.5,0) to[short,*-] (-0.8,0) to[short] (-0.8,-2.8) to[short,-*] (1,-2.8) node[below] (gs3) {\parbox{4cm}{\linespread{.5}
+        \small\color{CJKblack}空乏層は広く, チャンネルは狭く, ドレイン・ソース間に電圧を印加すると電子がソースからドレインに流れる.}};
+        % P
+        \draw[fill=magenta,opacity=0.08,draw=none] (0,1) rectangle (0.3,-1);
+        \draw[dashed] (0,1) -- (0.3,1) -- (0.3,-1) -- (0,-1);
+        \draw[fill=magenta,opacity=0.08,draw=none] (2,1) rectangle (1.7,-1);
+        \draw[dashed] (2,1) -- (1.7,1) -- (1.7,-1) -- (2,-1);
+        % Depletion
+        \draw[draw=none, fill=cyan, opacity=0.04] (0,-2) -- (0,-1.3) -- (0.6,-1.3) -- (0.6,1.3) -- (0,1.3) -- (0,2) -- (2,2) -- (2,1.3) -- (1.4,1.3) -- (1.4,-1.3) -- (2,-1.3) -- (2,-2) -- (0,-2);
+        \draw [dashed] (0,-1.3) -- (0.6,-1.3) -- (0.6,1.3) -- (0,1.3);
+        \draw [dashed] (2,1.3) -- (1.4,1.3) -- (1.4,-1.3) -- (2,-1.3);
+        %
+        \draw[fill=none] (0,2) rectangle (2,-2);
+        \draw (-2,2.5) node[below right, inner sep=0] (gs) {\footnotesize$v\+_GS_ = 0$};
+        \draw (gs) node[below] {\footnotesize$v\+_DS_ = 0$};
+    \end{scope}
+    \begin{scope}[shift={(6,0)}]
+        \draw[fill=lightgray,draw=none] (0.7,2.2) rectangle (1.3,2);
+        \draw[fill=lightgray,draw=none] (0.7,-2.2) rectangle (1.3,-2);
+        \draw[fill=lightgray,draw=none] (-0.2,0.3) rectangle (0,-0.3);
+        \draw[fill=lightgray,draw=none] (2,0.3) rectangle (2.2,-0.3);
+        \draw (-0.2,0) to[short,l_=g] (-0.5,0) to[short] (-0.5,-2.5) to[short] (2.5,-2.5) to[short] (2.5,0) to[short] (2.2,0);
+        \draw (1,-2.2) to[short,l_=s] (1,-2.5) to[short] (1,-2.8) to[short] (2.8,-2.8) to[short] (2.8,2.5) to[short] (1,2.5) to[short,l_=d] (1,2.2);
+        \draw (-0.5,0) to[short,*-] (-1,0) to[battery1,invert] (-1,-2.8) to[short,-*] (1,-2.8) node[below] (gs2) {\parbox{4cm}{\linespread{.5}
+        \small\color{CJKblack}ゲート・ソース間に逆バイアスを印加すると空乏層が拡がり, キャリアの流れを抑制する.}};
+        % P
+        \draw[fill=magenta,opacity=0.08,draw=none] (0,1) rectangle (0.3,-1);
+        \draw[dashed] (0,1) -- (0.3,1) -- (0.3,-1) -- (0,-1);
+        \draw[fill=magenta,opacity=0.08,draw=none] (2,1) rectangle (1.7,-1);
+        \draw[dashed] (2,1) -- (1.7,1) -- (1.7,-1) -- (2,-1);
+        % Depletion
+        \draw[draw=none, fill=cyan, opacity=0.04] (0.2,-2) .. controls (0.5,-2) and (0.7,-1.8) .. (0.7,-1.5) -- (0.7,1.5) .. controls (0.7,1.8) and (0.5,2) .. (0.2,2) -- (1.8,2) .. controls (1.5,2) and (1.3,1.8) .. (1.3,1.5) -- (1.3,-1.5) .. controls (1.3,-1.8) and (1.5,-2) .. (1.8,-2) -- (0.2,-2);
+        \draw [dashed] (0.2,-2) .. controls (0.5,-2) and (0.7,-1.8) .. (0.7,-1.5) -- (0.7,1.5) .. controls (0.7,1.8) and (0.5,2) .. (0.2,2);
+        \draw [dashed] (1.8,2) .. controls (1.5,2) and (1.3,1.8) .. (1.3,1.5) -- (1.3,-1.5) .. controls (1.3,-1.8) and (1.5,-2) .. (1.8,-2);
+        %
+        \draw[fill=none] (0,2) rectangle (2,-2);
+        \draw (-2,2.5) node[below right, inner sep=0] (gs) {\footnotesize$U\+_(off)_ < v\+_GS_ < 0$};
+        \draw (gs) node[below] {\footnotesize$v\+_DS_ = 0$};
+    \end{scope}
+    \begin{scope}[shift={(0,0)}]
+        \draw[fill=lightgray,draw=none] (0.7,2.2) rectangle (1.3,2);
+        \draw[fill=lightgray,draw=none] (0.7,-2.2) rectangle (1.3,-2);
+        \draw[fill=lightgray,draw=none] (-0.2,0.3) rectangle (0,-0.3);
+        \draw[fill=lightgray,draw=none] (2,0.3) rectangle (2.2,-0.3);
+        \draw (-0.2,0) to[short,l_=g] (-0.5,0) to[short] (-0.5,-2.5) to[short] (2.5,-2.5) to[short] (2.5,0) to[short] (2.2,0);
+        \draw (1,-2.2) to[short,l_=s] (1,-2.5) to[short] (1,-2.8) to[short] (2.8,-2.8) to[short] (2.8,2.5) to[short] (1,2.5) to[short,l_=d] (1,2.2);
+        \draw (-0.5,0) to[short,*-] (-1,0) to[battery1,invert] (-1,-2.8) to[short,-*] (1,-2.8) node[below] (gs1) {\parbox{4cm}{\linespread{.5}
+        \small\color{CJKblack}\textmathitem{ピンチオフ(\mysans{Pinch-off}, 首を絞める)} 両ゲート側からの空乏層同士が接し, チャネルを閉じてしまう.
+        }};
+        % P
+        \draw[fill=magenta,opacity=0.08,draw=none] (0,1) rectangle (0.3,-1);
+        \draw[dashed] (0,1) -- (0.3,1) -- (0.3,-1) -- (0,-1);
+        \draw[fill=magenta,opacity=0.08,draw=none] (2,1) rectangle (1.7,-1);
+        \draw[dashed] (2,1) -- (1.7,1) -- (1.7,-1) -- (2,-1);
+        % Depletion
+        \draw[dashed] (1,2) -- (1,-2);
+        %
+        \draw[fill=none] (0,2) rectangle (2,-2);
+        %
+        \draw (-1.5,2.5) node[below right, inner sep=0] (gs) {\footnotesize$v\+_GS_ = U\+_(off)_$};
+        \draw (gs) node[below] {\footnotesize$v\+_DS_ = 0$};
+    \end{scope}
+    %
+    \begin{scope}[shift={(0,-8)}]
+        \draw[fill=lightgray,draw=none] (0.7,2.2) rectangle (1.3,2);
+        \draw[fill=lightgray,draw=none] (0.7,-2.2) rectangle (1.3,-2);
+        \draw[fill=lightgray,draw=none] (-0.2,0.3) rectangle (0,-0.3);
+        \draw[fill=lightgray,draw=none] (2,0.3) rectangle (2.2,-0.3);
+        \draw (-0.2,0) to[short,l_=g] (-0.5,0) to[short] (-0.5,-2.5) to[short] (2.5,-2.5) to[short] (2.5,0) to[short] (2.2,0);
+        \draw (1,-2.2) to[short,l_=s] (1,-2.5) to[short] (1,-2.8) to[short] (3,-2.8) to[battery1,invert,l] (3,2.5) to[short] (1,2.5) to[short,l_=d] (1,2.2);
+        \draw (-0.5,0) to[short,*-] (-1,0) to[battery1,invert,l] (-1,-2.8) to[short,-*] (1,-2.8) node[below] (ds1) {\parbox{4cm}{\linespread{.5}
+        \small\color{CJKblack}$u\+_DS_$を増加していくと空乏層が広がり, キャリアの通り道であるチャネルが狭くなり, $I\+_D_$が流れにくくなる.
+        }};
+        % P
+        \draw[fill=magenta,opacity=0.08,draw=none] (0,1) rectangle (0.3,-1);
+        \draw[dashed] (0,1) -- (0.3,1) -- (0.3,-1) -- (0,-1);
+        \draw[fill=magenta,opacity=0.08,draw=none] (2,1) rectangle (1.7,-1);
+        \draw[dashed] (2,1) -- (1.7,1) -- (1.7,-1) -- (2,-1);
+        % Depletion
+        \draw[draw=none, fill=cyan, opacity=0.04] (0,-2) -- (0,-1.5) .. controls (0.5,-1.2) and (0.7,-0.5) .. (0.8,0) .. controls (0.9,0.5) and (0.9,1) .. (0.9,2) -- (1.1,2) .. controls (1.1,1) and (1.1,0.5) .. (1.2,0) .. controls (1.3,-0.5) and (1.5,-1.2) .. (2,-1.5) -- (2,-2) -- (0,-2);
+        \draw [dashed] (0,-1.5) .. controls (0.5,-1.2) and (0.7,-0.5) .. (0.8,0) .. controls (0.9,0.5) and (0.9,1) .. (0.9,2);
+        \draw [dashed] (1.1,2) .. controls (1.1,1) and (1.1,0.5) .. (1.2,0) .. controls (1.3,-0.5) and (1.5,-1.2) .. (2,-1.5);
+        %
+        \draw[fill=none] (0,2) rectangle (2,-2);
+        \draw (-1.5,2.75) node[below right, inner sep=0] (gs) {\footnotesize$U\+_(off) < _v\+_GS_ < 0$};
+        \draw (gs) node[below] {\footnotesize$v\+_GD_ > U\+_(off)_$};
+    \end{scope}
+    \begin{scope}[shift={(6,-8)}]
+        \draw[fill=lightgray,draw=none] (0.7,2.2) rectangle (1.3,2);
+        \draw[fill=lightgray,draw=none] (0.7,-2.2) rectangle (1.3,-2);
+        \draw[fill=lightgray,draw=none] (-0.2,0.3) rectangle (0,-0.3);
+        \draw[fill=lightgray,draw=none] (2,0.3) rectangle (2.2,-0.3);
+        \draw (-0.2,0) to[short,l_=g] (-0.5,0) to[short] (-0.5,-2.5) to[short] (2.5,-2.5) to[short] (2.5,0) to[short] (2.2,0);
+        \draw (1,-2.2) to[short,l_=s] (1,-2.5) to[short] (1,-2.8) to[short] (3,-2.8) to[battery1,invert,l] (3,2.5) to[short] (1,2.5) to[short,l_=d] (1,2.2);
+        \draw (-0.5,0) to[short,*-] (-1,0) to[battery1,invert,l] (-1,-2.8) to[short,-*] (1,-2.8) node[below] (ds2) {\parbox{4cm}{\linespread{.5}
+        \small\color{CJKblack}$u\+_DS_$をさらに増加すると, ソース・ドレイン間の途中でチャネルが消失する.\newline\mbox{}
+        }};
+        % P
+        \draw[fill=magenta,opacity=0.08,draw=none] (0,1) rectangle (0.3,-1);
+        \draw[dashed] (0,1) -- (0.3,1) -- (0.3,-1) -- (0,-1);
+        \draw[fill=magenta,opacity=0.08,draw=none] (2,1) rectangle (1.7,-1);
+        \draw[dashed] (2,1) -- (1.7,1) -- (1.7,-1) -- (2,-1);
+        % Depletion
+        \draw[draw=none, fill=cyan, opacity=0.04] (0,-2) .. controls (0.5,-1.5) and (0.7,-0.5) .. (0.8,0) .. controls (0.9,0.5) and (0.95,1) .. (1,2) .. controls (1.05,1) and (1.1,0.5) .. (1.2,0) .. controls (1.3,-0.5) and (1.5,-1.5) .. (2,-2) -- (0,-2);
+        \draw [dashed] (0,-2) .. controls (0.5,-1.5) and (0.7,-0.5) .. (0.8,0) .. controls (0.9,0.5) and (0.95,1) .. (1,2);
+        \draw [dashed] (1,2) .. controls (1.05,1) and (1.1,0.5) .. (1.2,0) .. controls (1.3,-0.5) and (1.5,-1.5) .. (2,-2);
+        %
+        \draw[fill=none] (0,2) rectangle (2,-2);
+        \draw (-2,2.75) node[below right, inner sep=0] (gs) {\footnotesize$U\+_(off) < _v\+_GS_ < 0$};
+        \draw (gs) node[below] {\footnotesize$v\+_GD_ = U\+_(off)_$};
+    \end{scope}
+    \begin{scope}[shift={(12,-8)}]
+        \draw[fill=lightgray,draw=none] (0.7,2.2) rectangle (1.3,2);
+        \draw[fill=lightgray,draw=none] (0.7,-2.2) rectangle (1.3,-2);
+        \draw[fill=lightgray,draw=none] (-0.2,0.3) rectangle (0,-0.3);
+        \draw[fill=lightgray,draw=none] (2,0.3) rectangle (2.2,-0.3);
+        \draw (-0.2,0) to[short,l_=g] (-0.5,0) to[short] (-0.5,-2.5) to[short] (2.5,-2.5) to[short] (2.5,0) to[short] (2.2,0);
+        \draw (1,-2.2) to[short,l_=s] (1,-2.5) to[short] (1,-2.8) to[short] (3,-2.8) to[battery1,invert] (3,2.5) to[short] (1,2.5) to[short,l_=d] (1,2.2);
+        \draw (-0.5,0) to[short,*-] (-1,0) to[battery1,invert,l] (-1,-2.8) to[short,-*] (1,-2.8) node[below] (ds3) {\parbox{4cm}{\linespread{.5}
+        \small\color{CJKblack}$u\+_DS_ = u\+_GS_ - U\+_(off)_$以上の電圧を加えても, チャネルの形は変化しないので, $I\+_D_$は一定となる.
+        }};
+        % P
+        \draw[fill=magenta,opacity=0.08,draw=none] (0,1) rectangle (0.3,-1);
+        \draw[dashed] (0,1) -- (0.3,1) -- (0.3,-1) -- (0,-1);
+        \draw[fill=magenta,opacity=0.08,draw=none] (2,1) rectangle (1.7,-1);
+        \draw[dashed] (2,1) -- (1.7,1) -- (1.7,-1) -- (2,-1);
+        % Depletion
+        \draw[draw=none, fill=cyan, opacity=0.04] (0,-2) .. controls (0.5,-1.7) and (0.7,-0.5) .. (0.85,0) .. controls (1,0.5) and (1,0.5) .. (1,1) .. controls (1,0.5) and (1,0.5) .. (1.15,0) .. controls (1.3,-0.5) and (1.5,-1.7) .. (2,-2) -- (0,-2);
+        \draw[dashed] (0,-2) .. controls (0.5,-1.7) and (0.7,-0.5) .. (0.85,0) .. controls (1,0.5) and (1,0.5) .. (1,1);
+        \draw[dashed] (1,1) .. controls (1,0.5) and (1,0.5) .. (1.15,0) .. controls (1.3,-0.5) and (1.5,-1.7) .. (2,-2);
+        \draw[dashed] (1,1) -- (1,2);
+        %
+        \draw[fill=none] (0,2) rectangle (2,-2);
+        \draw (-2,2.75) node[below right, inner sep=0] (gs) {\footnotesize$U\+_(off) < _v\+_GS_ < 0$};
+        \draw (gs) node[below] {\footnotesize$v\+_GD_ < U\+_(off)_$};
+    \end{scope}
+    \draw[-latex] (gs3.north west) -- (gs2.north east);
+    \draw[-latex] (gs2.north west) -- (gs1.north east);
+    \draw[-latex] (ds1.north east) -- (ds2.north west);
+    \draw[-latex] (ds2.north east) -- (ds3.north west);
+\end{tikzpicture}
+\end{center}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

@@ -515,6 +515,594 @@ Laplace方程的点源形式为
 
 % subsection green函数的一般特征函数展开 (end)
 
+\subsection{Ostrogradsky-Gauss-Stokes定理} % (fold)
+\label{sub:ostrogradsky_gauss_stokes定理}
+
+\newpoint{}设$\partial V$是$V$的边界, $\rd{S}$是边界表面法向元素, $\rd{V}$是体积元素.
+\[ \oint_{\partial V} \rd{\+vS}\cdot \+vE = \int_V \rd{V}\, \div \+vE. \]
+\newpoint{}代入$E = u\grad v$得到Green公式,
+\begin{align*}
+    &\oint_{\partial V}\rd{\+vS}\cdot u\grad v = \iiint \rd{V}\,\pare{\grad u \cdot \grad v + u \laplacian v}, \\
+    &\oint_{\partial V}\rd{\+vS}\cdot \pare{u\grad v-v\grad u} = \int_V \rd{V}\pare{u\laplacian v - v\laplacian u}.
+\end{align*}
+\newpoint{}二维情形下之特例为Green公式
+\[ \oint_{\partial \Sigma} A_x\,\rd{x} + A_y\,\rd{y} = \iint_{\Sigma}\pare{\partial_y A_x - \partial_x A_y}\,\rd{x}\,\rd{y}. \]
+\begin{pitfall}
+    注意边界的定向. 此处和惯例不同.
+\end{pitfall}
+\newpoint{}任意维下有Kelvin-Stokes定理,
+\[ \oint_{\partial \Sigma} A_\mu\,\rd{x^\mu} = \oiint_\Sigma\pare{\partial_\nu A_\mu - \partial_\mu A_\nu}\,\rd{x^\nu}\,\rd{x^\mu}. \]
+\newpoint{}一般情形下有Stokes定理
+\[ \int_{\partial V} \omega = \int_V \,\rd{\omega}. \]
+
+% subsection ostrogradsky_gauss_stokes定理 (end)
+
+\subsection{变形Poisson方程的基本解} % (fold)
+\label{sub:变形poisson方程的基本解}
+
+\newpoint{}$\pare{\laplacian - k^2} G\pare{\+vx} = \delta\pare{\+vx}$.
+\newpoint{}和Helmholtz方程相差一个符号.
+\newpoint{}在球坐标下,
+\[ \laplacian = \rec{r^{D-1}}\partial_r\pare{r^{D-1}\partial_r} + \frac{\laplacian_{S^{D-1}}}{r^2}. \]
+\newpoint{}解仅有对$r$的依赖性,
+\[ \pare{\laplacian_D - k^2} G\pare{r} = G_{rr} + \frac{D-1}{r} G_r - k^2G = 0, \]
+除了$r=0$处.
+\newpoint{}做变换$x=kr$, $y\pare{x} = G\pare{r} = G\pare{x/k}$,
+\[ x^2 y'' + \pare{D-1}xy' - x^2y = 0, \]
+除了$x=0$.
+\newpoint{}令$y=x^\alpha z$, 则
+\[ x^2y'' + \pare{D-1}xy' - x^2y = x^\alpha\curb{x^2z'' + \brac{\pare{D-1}+2\alpha}xz' + \brac{\alpha\pare{\alpha+D-2}-x^2}z}. \]
+选择适当的$\alpha$可以将方程转化为柱Bessel方程.
+\newpoint{}选择$\alpha = 1/D/2$,
+\begin{align*}
+    & z\pare{x} = x^{D/2-1}y\pare{x}, \\
+    & x^2z'' + xz' + \brac{x^2 - \pare{D/2-1}^2}z = 0,\quad x\neq 0.
+\end{align*}
+这是$\pare{D/2-1}$阶变形Bessel方程的标准型.
+\newpoint{}通解为
+\[ G = \pare{kr}^{1-D/2}\brac{AI_{D/2-1}\pare{kr} + BK_{D/2-1}\pare{kr}}. \]
+\newpoint{}例如$D=3$,
+\[ I_{1/2} = \sqrt{\frac{2}{\pi x}}\sinh \pare{x},\quad K_{1/2} = \sqrt{\frac{\pi}{2x}}e^{-x}. \]
+物理要求$G\pare{r\rightarrow \infty} = 0$, $\Rightarrow A=0$. 可以得到三维空间下的解.
+\newpoint{}根据广义函数微分的定义,
+\begin{align*}
+    & \pare{\pare{\laplacian - k^2}\frac{e^{-kr}}{r},\phi} = \pare{\frac{e^{-kr}}{r},\pare{\laplacian - k^2}\phi} \\
+    &= \int_0^\infty \rd{r}\, r^2 \frac{e^{kr}}{r}\oiint_{S^2} \curb{r^{-2}\brac{\partial_r \pare{r^2\partial_r} + \laplacian_{S^2}} - k^2}\phi, \\
+    & \oiint_{S^2} = \int_0^\pi \rd{\theta}\,\sin\theta\int_0^{2\pi}\rd{\phi},\\
+    & \laplacian_{S^2} = \rec{\sin^2\theta}\brac{\pare{\sin \theta\,\partial_\theta}^2 + \partial_\phi^2}.
+\end{align*}
+对单值的球函数分部积分后, 边界项为零.
+\[ \forall \phi,\quad \oiint_{S^2}\laplacian_{S^2}\phi = 0. \]
+从而
+\begin{align*}
+    &\pare{\pare{\laplacian - k^2}\frac{e^{-kr}}{r},\phi} \\
+    &= \int_0^\infty \rd{r}\, r^2 \frac{e^{kr}}{r}\oiint_{S^2} \curb{r^{-2}\brac{\partial_r \pare{r^2\partial_r} + \laplacian_{S^2}} - k^2}\phi \\
+    &= \oiint_{S^2} \curb{re^{-kr} \partial_r \phi \vert_{r=0}^{r=\infty} + \int_0^\infty\rd{r}\, e^{-kr}\brac{\pare{kr+1}\partial_r - k^2 r}\phi} \\
+    &= \oiint_{S^2} e^{-kr}\pare{kr+1}\phi\vert_{r=0}^{r=\infty} \\
+    &= -4\pi \phi\pare{0}.
+\end{align*}
+从而
+\[ G\pare{\+vr} = -\frac{e^{-kr}}{r}. \]
+
+% subsection 变形poisson方程的基本解 (end)
+
+\subsection{二维空间中Laplace方程的基本解} % (fold)
+\label{sub:二维空间中laplace方程的基本解}
+
+\newpoint{}考虑$\laplacian G = \delta$, 点源在原点, 则$G=G\pare{r}$且
+\[ \pare{r\partial_r}^2 G = 0 \Rightarrow G = A + B \ln r. \]
+\newpoint{}定义
+\[ \pare{\ln r,\phi} = \int r\,\rd{r}\,\rd{\theta}\,\ln r\, \phi\pare{r,\theta}, \]
+则这一积分收敛. $\ln r$可视为一广义函数.
+\newpoint{}$A$不影响Laplacian, 故设$G = B\ln r$,
+\begin{align*}
+    \pare{\laplacian \ln r,\phi} &= \pare{\ln r,\laplacian \phi} \\
+    &= \int_0^\infty\,\rd{r}\, r\ln r \int_0^{2\pi} \rd{\theta}\, \rec{r^2}\brac{\pare{r\partial_r}^2 + \partial_\theta^2}\phi \\
+    &= \int_0^{2\pi} \rd{\theta}\int_0^\infty\rd{r}\,\ln r \,\partial_r\pare{r\partial_r \phi} \\
+    &= \int_0^{2\pi} \rd{\theta}\,\pare{r\ln r\partial_r\phi \vert_{r=0}^{r=\infty} - \int_0^\infty\rd{r}\,\partial_r\phi}
+    &= 2\pi\phi\pare{0}. \\
+    &\Rightarrow G = \frac{\ln r}{2\pi}.
+\end{align*}
+\newpoint{}从复分析来看, $z = x+iy$, $\conj{z} = x-iy$,
+\[ \Rightarrow \partial_z \partial_{\conj{z}} = \frac{\laplacian_2}{4} \Rightarrow \partial_{\conj{z}} \rec{z} = \partial_z \rec{\conj{z}} = \pi\delta\pare{x}\delta\pare{y}. \]
+
+% subsection 二维空间中laplace方程的基本解 (end)
+
+\subsection{Green函数} % (fold)
+\label{sub:green函数}
+
+\newpoint{}考虑二阶线性微分算子$\hat M$, 求解区域$V$, 边界条件
+\[ \alpha u + \beta\partial_n u\vert^{\partial V} = 0. \]
+$\alpha$, $\beta$不一定是常熟, $\partial_n$表示法向导数.
+\newpoint{}对应的Green函数满足
+\[ \hat M_{\+vx}G\pare{\+vx,\+va} = \delta\pare{\+vx-\+va}, \]
+其中$\hat M_{\+vx}$表示微分算子对$\+vx$求导. 这里$G$不再具备平移对称性, 不只依赖于$\+vx-\+va$.
+\newpoint{}考虑实数域上的$L^2$空间,
+\[ \braket{f}{g} = \int_V \rd{\+vx}\,f\pare{\+vx}g\pare{\+vx}. \]
+\newpoint{}更一般的情况可用复$L^2$和密度函数.
+\newpoint{}这里假设了简化公式
+\[ \pare{*,*} = \bra{*}\ket{*}. \]
+\newpoint{}假设$\hat M$是Hermitian算子, 是客观测量.
+\newpoint{}当$V$的维数超过$1$, 单个算子及其固有之不足以完整描述固有向量和基, 有无穷多的简并.
+\newpoint{}需要一个对易可观测量的完整集合(CSCO).
+\begin{ex}
+    三维空间中, 单个位置的坐标算子$\hat x_1$不足, 单个坐标的动量算子$\hat p_2$也不足.
+\end{ex}
+\begin{ex}
+    CSCO的例子如$\hat {\+vx}$, $\curb{\hat p_1,\hat p_2, \hat x^3}$, $\curb{\hat L_3,\abs{\+vL}^2,\hat p_3}$. 它们都对易.
+\end{ex}
+\begin{ex}
+    不是CSCO的例子如$\curb{\hat p_1,\hat p_2,\hat x^2}$, $\curb{\hat L_3,\hat L_1,\hat p_3}$, 这些相互间都不对易.
+\end{ex}
+\newpoint{}假设$\hat M$是一组CSCO$\+uM$的成员,
+\[ \hat M\ket{\+uM = m} = m\ket{\+uM = m} \]
+是本征值问题. $\+vm$包括所有$\+uM$的固有之, $m$是其中$\hat M$的固有之.
+\begin{align*}
+    & \hat M = \int \rd{\+vm}\, m \frac{\ket{\+uM = \+vm}\bra{\+uM = \+um}}{\rho^{\+uM}\pare{\+um}}, \\
+    & \mathbbm{1} = \int \rd{\+vm}\, \frac{\ket{\+uM = \+vm}\bra{\+uM = \+vm}}{\rho^{\+uM}\pare{\+vm}}.
+\end{align*}
+\newpoint{}如果没有本征值零, 则$\hat M$可逆, $\hat M^{-1} = \hat G$,
+\[ \hat G = \int \rd{\+vm}\, \frac{\ket{\+uM = \+vm}\bra{\+uM = \+vm}}{m\rho^{\+uM}\pare{\+vm}}. \]
+\newpoint{}如果有$m=0$, 则$M$不可逆, 需要特别处理.
+\newpoint{}谱是离散时, 积分改为求和, $\rho^{\+uM}\pare{\+vm}$改为$\abs{\ket{\+uM = \+vm}}^2$.
+
+% subsection green函数 (end)
+
+\subsection{边界条件和算子的对称性} % (fold)
+\label{sub:边界条件和算子的对称性}
+
+\newpoint{}可以将这里的讨论视为SL定理的推广, 令$\hat M = -\laplacian + q$, 则
+\begin{align*}
+    & \braket{\hat M u}{v} - \braket{u}{\hat M v} \\
+    &= \int_V \pare{u\laplacian v - \laplacian\pare{uv}} \\
+    &= \oint_{\partial V}\rd{\+vS}\cdot \pare{u\grad v - v\grad u} \\
+    &= \oint_{\partial V} \pare{u\partial_n v - v\partial_n u} \\
+    &= \oint_{\partial V} W.
+\end{align*}
+\newpoint{}引入Wronskian
+\[ W = \det \begin{pmatrix}
+    u & v \\
+    \partial_n u & \partial_n v
+\end{pmatrix}. \]
+
+% subsection 边界条件和算子的对称性 (end)
+
+\subsection{互反性} % (fold)
+\label{sub:互反性}
+
+\newpoint{}若$u,v$满足相同的边界条件, 即有$W = 0$. 因此$\hat M$是对称算子, 在复$L^2$空间中为Hermitian算子. 如果$u_i$是非齐次项$\rho_i$的解, 则
+\begin{align*}
+    & \hat M u_i = \rho_i, \\
+    & \int_V u\sigma - v\rho = \braket{u}{\sigma} - \braket{\rho}{v} = \braket{u}{\hat M v} - \braket{\hat Mu}{v} = 0.
+\end{align*}
+\newpoint{}这证明了互反定理
+\[ \braket{u}{\sigma} = \braket{\sigma}{u} = \braket{\rho}{v}. \]
+
+% subsection 互反性 (end)
+
+\subsection{对称性} % (fold)
+\label{sub:对称性}
+
+\newpoint{}考虑两个弱收敛于$\delta$函数的普通函数序列
+\[ \lim_{n\rightarrow \infty} \rho_n \xlongequal{w} = \delta\pare{\+vx-\+va_1},\quad \lim_{n\rightarrow \infty}\sigma_n \xlongequal{w} = \delta\pare{\+vx - \+va_2}. \]
+相应的非齐次项的解为
+\[ \hat u_n = \rho_n,\quad \hat M v_n = \sigma_n. \]
+\newpoint{}极限和$\hat M$的作用次序可以交换,
+\[ \lim_{n\rightarrow \infty} u_n \xlongequal{w} = G\pare{\+vx;\+va_1},\quad \lim_{n\rightarrow \infty}v_n \xlongequal{w} = G\pare{\+vx;\+va_2}. \]
+\newpoint{}这证明了Green函数的对称性,
+\begin{align*}
+    \lim_{n\rightarrow \infty}\braket{\rho_n}{v_n} \xlongequal{w} \braket{\rho}{v} = G\pare{\+va_1,\+va_2} \\
+    =\lim_{n\rightarrow \infty}\braket{\sigma_n}{u_n} \xlongequal{w} \braket{\sigma}{u} = G\pare{\+va_2,\+va_1}.
+\end{align*}
+
+% subsection 对称性 (end)
+
+\subsection{用Green函数解边值问题} % (fold)
+\label{sub:用green函数解边值问题}
+
+\newpoint{}设$v$为待求解, $v$为Green函数, 满足的边界条件的系数相同,
+\begin{align*}
+    & \phi_1 = \alpha u + \beta \partial_n u\vert^{\partial V} = \phi, \\
+    & \phi_2 = \alpha v + \beta \partial_n v\vert^{\partial V} = 0, \\
+    & W = u_1 \partial_n u_2 - u_2 \partial_n u_1 \\
+    & = \pare{\phi_2 u_1 - \phi_1 u_2}/\beta \\
+    & = \pare{\phi_1 \partial_n u_2 - \phi_2 \partial_n u_1}/\alpha. \\
+    & \rho = \hat K u,\quad \sigma = \hat K v = \delta\pare{\+vx-\+va}, v\pare{\+vx} = G\pare{\+vx;\+va}, \\
+    & W = \phi\pare{b} \partial_{nb} G\pare{b,a}/\alpha = \phi\pare{b}G\pare{b,a}/\beta.
+\end{align*}
+\newpoint{}由
+\[ \braket{\rho}{v} - \braket{\sigma}{u} = \oint_{\partial V}W, \]
+有
+\begin{align*}
+    u\pare{a} &= \braket{\sigma}{u} = \braket{\rho}{v} - \oint_{\partial V}\rd{^2x}\, W \\
+    &= \int_V \rd{\+vx}\, G\pare{\+va;\+vx}\rho\pare{\+vx} - \oint_{\partial V} \frac{\rd{\+vx}}{\alpha}\phi\pare{\+vx}\partial_{n\+vx}G\pare{\+va,\+vx} \\
+    &= \int_V \rd{\+vx}\,G\pare{\+va,\+vx}\rho\pare{\+vx} + \oint_{\partial V} \frac{\rd{\+vx}}{\beta}\phi\pare{\+vx}G\pare{\+va,\+vx}.
+\end{align*}
+\newpoint{}有些边界条件不允许标准Green函数存在.
+\newpoint{}例如$q=0$且边界条件为Neumann时,
+\[ \alpha = 0,\quad \beta = 1,\quad \laplacian u = \rho,\quad \partial_n u\vert^{\partial_v} = \phi, \]
+必须满足Gau\ss 定理
+\[ \oint_{\partial V}\phi = \int_V \rho \]
+才有解. 这也说明标准的Green函数不存在,
+\[ \oint_{\partial V}\rd{\+vx}\,\partial_{nx}G\pare{\+vx,\+va} = \int_V \rd{^3\+vx}\laplacian_{\+vx}G\pare{\+vx;\+va} = -1. \]
+而$\partial_{nx}G\pare{\+vx,\+va} = 0$与
+\[ -\laplacian_{\+vx}G\pare{\+vx,\+va} = \delta\pare{\+vx-\+va} \]
+矛盾.
+\newpoint{}此时可以修改Green函数的定义, 设
+\[ \laplacian_{\+vx} \tilde{G}\pare{\+vx;\+va} = \omega\pare{\+vx} - \delta\pare{\+vx-\+va}, \]
+且$\partial_{xn}\tilde{G}\pare{\+vx,\+va}\vert^{\+vx\in \partial V} = 0$. 则$w$只需满足
+\[ \int_V \rd{\+vx}\,\omega\pare{\+vx} = 1. \]
+因为$W = -\phi \tilde{G}$,
+\begin{align*}
+    & u\pare{\+va} = \int_V \rd{^3\+vx}\, u\pare{\+vx}\brac{\omega\pare{\+vx} - \laplacian_b \tilde{G}\pare{\+vx,\+va}} \\
+    &= \int_V \rd{^3 \+vx}\, \rho\pare{\+vx}\tilde{G}\pare{\+vx;\+va} - \oint_{\partial V}\rd{^2\+vx}\,\phi\pare{\+vx}\tilde{G}\pare{\+vx;\+va}+C.
+\end{align*}
+其中
+\[ C = \int_V \rd{^3 \+vx}\,\omega\pare{\+vx}u\pare{\+vx}. \]
+\newpoint{}Neumann边界条件本身就导致一个不确定的积分常熟, 从而$C$不重要.
+\newpoint{}$\omega$可根据解题方便选取, 例如取常数.
+\newpoint{}设$\rho = \omega\pare{\+vx} - \delta\pare{\+vx-\+va},\phi = 0$, 则
+\begin{align*}
+    & u\pare{\+vx} = G\pare{\+vx,\+va'}, \\
+    & G\pare{\+va,\+va'} - G\pare{\+va',\+va} = \int_V \rd{\+vx}\,\omega\pare{\+vx}\brac{G\pare{\+vx,\+va'} - G\pare{\+vx,a}}.
+\end{align*}
+\newpoint{}因此修改后的$G$一般不对称.
+
+% subsection 用green函数解边值问题 (end)
+
+\subsection{镜像法求解Green函数} % (fold)
+\label{sub:镜像法求解green函数}
+
+\newpoint{}Dirichlet条件: 选取大小相等, 符号相反, 处于镜像位置的电荷.
+\newpoint{}Neumann条件: 选取正电荷.
+\newpoint{}在复平面, 考虑上半复平面, 点源在$w$, 镜像在$\conj{w}$,
+\[ G\pare{z,w} = \rec{2\pi} \ln \abs{\frac{z-w}{z-\conj{w}}}. \]
+\newpoint{}球内: 猜测镜像电荷在通过球心和源电荷的轴上.
+\newpoint{}球外类似.
+\newpoint{}园内: 猜测镜像电荷在通过圆心和源电荷的轴上.
+\newpoint{}设待定位置和电荷, 计算总电荷, 要求满足边界条件即可确定.
+\newpoint{}圆外空间类似.
+\newpoint{}可以推广到高维球.
+
+% subsection 镜像法求解green函数 (end)
+
+\subsection{二维情形} % (fold)
+\label{sub:二维情形}
+
+\newpoint{}链式法则表明
+\[ \+DzD{} = \half \pare{\partial_x - i\partial_y},\quad \+D{\conj{z}}D{} = \half \pare{\partial_x + i\partial_y}, \]
+从而
+\[ \laplacian = \partial_x^2 + \partial_y^2 = 4\partial_z\partial_{\conj{z}}. \]
+\newpoint{}考虑亚纯函数
+\[ \tilde{x} + i\tilde{y} = f\pare{z} \Rightarrow \+D{\conj{z}}Df = 0 \Rightarrow \resumath{\partial_x \tilde{x} = \partial_y \tilde{y},\quad \partial_x \tilde{y} = -\partial_y \tilde{x}.} \]
+\newpoint{}因此
+\[ \partial_x^2 \tilde{x} = -\partial_y^2 \tilde{x},\quad \partial_x^2 \tilde{y} = -\partial_y^2 \tilde{y}. \]
+故亚纯函数的实部和虚部都是调和函数.
+\newpoint{}由Cauchy-Riemann方程可得出
+\[ f' = \partial_x \pare{\tilde{x} + i\tilde{y}} = \partial_y \pare{\tilde{y} - i\tilde{x}} \Rightarrow \resumath{\abs{f'}^2 = {\+D{\pare{x,y}}D{\pare{\tilde{x},\tilde{y}}}}.} \]
+\newpoint{坐标变换} 设$f$是双全纯或亚纯函数, 有反函数$g$, 则
+\[ \tilde{z} = f\pare{z},\quad g\pare{f\pare{z}} = z,\quad z = g\pare{\tilde{z}},\quad f\pare{g\pare{\tilde{z}}} = \tilde{z}. \]
+从而
+\[ \+DzD{} = \+DzD{\tilde{z}} \+D{\tilde{z}}D{} = f'\pare{z}\+D{\tilde{z}}D{} = \rec{g'\pare{z}}\+D{\tilde{z}}D{},\quad \+D{\tilde{z}}D{} = \rec{f'\pare{z}}\+DzD{}. \]
+反全纯变量$\conj{z}$和$\conj{\tilde{z}}$之间的关系类似.
+\[ \laplacian = 4\partial_z \partial_{\conj{z}} = \frac{\partial_w \partial_{\conj{w}}}{\abs{g'\pare{z}}^2}. \]
+\newpoint{}设
+\[ \pare{\tilde{x},\tilde{y}} = \hat f\pare{x,y},\quad \pare{x,y} = \hat g\pare{\tilde{x},\tilde{y}}, \]
+则
+\[ \laplacian u = \pare{\partial_x^2 + \partial_y^2} u = \rho \]
+表明
+\[ \tilde{\laplacian} \pare{u\comp \hat g} = \rho\abs{g'\pare{\tilde{z}}}^2. \]
+因此$\tilde{u} = u\comp \hat{g}$也是Poisson方程的解. 非齐次项变为
+\[ \tilde{\rho} = \rho\comp \hat g\abs{g'\pare{\tilde{z}}}^2. \]
+\newpoint{}考虑$\rho = \tilde{\rho} = 0$之特例,  有$u$和$\tilde{u}$都是Laplace方程的解. 对于$\rho = \delta\pare{x-x_0}\delta\pare{y-y_0}$,
+\begin{align*}
+    \tilde{\rho} &= \frac{\delta\pare{x-x_0}\delta\pare{y-y_0}}{\abs{f'\pare{z}}^2} \\
+    &= \delta\pare{x-x_0}\delta\pare{y-y_0}/\+D{\pare{x,y}}D{\pare{\tilde{x},\tilde{y}}} \\
+    &= \delta\pare{\tilde{x} - \tilde{x}_0}\delta\pare{\tilde{y} - \tilde{y}_0}.
+\end{align*}
+因此$u$和$\tilde{u}$都是Poisson方程的基本解.
+\newpoint{}因此Laplace方程和Poisson方程在$\hat f$的作用下有协变性.
+\[ u \mapsto \tilde{u} = u\comp \hat g,\quad \rho \mapsto \tilde{\rho} = \rho \comp \hat g \abs{g'\pare{\tilde{z}}}^2, \]
+因为$\rho$是张量.
+\newpoint{}用不同的$f$可以从一个解得到无穷多的其它解.
+\newpoint{}将$\hat f$和$\hat g$视为几何映射, 在每个点$\hat f$通过Jacobi矩阵对切向量作用,
+\[ \+D{\pare{x,y}}D{\pare{\tilde{x},\tilde{y}}} = \abs{f'\pare{z}}^2 \begin{pmatrix}
+    \cos \phi & \sin \phi \\
+    -\sin\phi & \cos\phi
+\end{pmatrix}. \]
+而
+\[ \tan \phi = \frac{\partial_y \tilde{x}}{\partial_x \tilde{x}}. \]
+\newpoint{}Cauchy-Riemann方程决定了这一矩阵的形状. 这是一个缩放与旋转的复合.
+\newpoint{}故亚纯函数构成保角变换.
+\newpoint{}$f$解析且$f' \neq 0$时$\hat f$是保角映射.
+\newpoint{}质量为零的场论有保角对称. 而Helmholtz方程和质量不为零的场论没有保角对称.
+\begin{sample}
+    \begin{ex}
+        二维空间的Poisson方程有基本解
+        \[ u = \frac{\ln \abs{z}^2}{4\pi}. \]
+        $u$在单位圆边界满足Dirichlet条件. 从这个解出发可得其它区域满足Dirichlet条件的Green函数. 设$f$将单位圆映射到求解区域$V$, 反函数$g\pare{z} = c\pare{z-z_0} + O\pare{z-z_0}^2$, 则
+        \[ G\pare{z,z_0} = \frac{\ln \abs{g\pare{z}}}{2\pi} \]
+        是$V$内的Green函数.
+        \begin{align*}
+            G\pare{z,z_0} &= \frac{\ln \abs{g\pare{z}}}{2\pi} = \rec{4\pi} \abs{\ln\abs{z-z_0}^2 + 2\Re \ln \frac{g\pare{z}}{z-z_0}} \\
+            &= \rec{4\pi}\curb{\ln \abs{z-z_0}^2 + 2\Re \ln \brac{c + O\pare{z-z_0}}}.
+        \end{align*}
+        而$\displaystyle \ln \frac{g\pare{z}}{z-z_0}$在$V$内解析, 故
+        \[ \laplacian G\pare{z,z_0} = \frac{\ln \abs{z}}{2\pi} = \delta\pare{x-x_0}\delta\pare{y-y_0}. \]
+        且$G\pare{z,z_0}\vert_{\partial V} = 0$满足边界条件.
+    \end{ex}
+\end{sample}
+\newpoint{}注意到
+\[ g\pare{z} = \frac{z-w}{1-z\conj{w}} \]
+满足$g\pare{w} = 0$, 且将单位圆映射为单位圆. 因此
+\[ G\pare{z,w} = \rec{2\pi} \ln \abs{\frac{z-w}{1-z\conj{w}}} \]
+是荷在$w$处的Green函数.
+\newpoint{}注意到$\displaystyle g\pare{z} = \frac{z-w}{z - \conj{w}}$将上班平面映射为单位圆, 故
+\[ G\pare{z,w} = \rec{2\pi}\ln \abs{\frac{z-w}{z-\conj{w}}} \]
+是上半平面荷在$w$处的Green函数.
+\begin{ex}
+    设$V = \curb{z\vert \Im z\in \pare{0,\pi}}$, 而$\func{e^z}{V}{\curb{z\vert \Im z>0}}$, 和上半平面的Green函数组合, 有
+    \[ G\pare{z,w} = \rec{2\pi} \ln \abs{\frac{e^z-e^z}{e^z - e^{\conj{w}}}} \]
+    是$V$内的Green函数.
+\end{ex}
+
+% subsection 二维情形 (end)
+
+\subsection{基本解和叠加原理求解Green函数} % (fold)
+\label{sub:基本解和叠加原理求解green函数}
+
+\newpoint{}设$\delta$输入对应的Green函数为$G_0$.
+\newpoint{}设$G_1$是齐次方程的解, 且在边界上
+\[ \pare{\alpha + \beta \partial_n} G_1 = -\pare{\alpha + \beta \partial_n} G_0, \]
+则$G = \pare{G_0 + G_1}$即为相应边界条件下对$\delta$输入的响应.
+
+% subsection 基本解和叠加原理求解green函数 (end)
+
+\subsection{Fourier方法求Green函数} % (fold)
+\label{sub:fourier方法求green函数}
+
+\newpoint{}对每个坐标做正交基展开(有界区间)或积分变换(无界或半无界区间), 注意边界条件.
+\newpoint{}将方程展开(求导变为乘以动量).
+\newpoint{}将Delta函数展开(三角/指数函数).
+\newpoint{}变换后的代数方程通常容易解.
+\newpoint{}反变换可得Green函数.
+\newpoint{}本质上是本征向量展开,
+\[ \hat G = \int \rd{\+vm}\, \frac{\ket{\+uM = \+vm}\bra{\+uM = \+vm}}{\lambda_{\+vm}\rho^{\hat M}\pare{\+vm}} \Leftrightarrow \hat G = \sum \rd{\+vm}\, \frac{\ket{e_n}\bra{e_n}}{\lambda_n \abs{\ket{e_n}}^2}. \]
+
+\begin{sample}
+    \begin{ex}
+        求解区域是圆心在原点的单位球内.
+        \[ \begin{cases}
+            \laplacian u = -\delta\pare{\+vx - \+vx_0}, \\
+            ku_r + hu\vert_{r=1} = 0,
+        \end{cases} \]
+        考虑CSCO$\curb{-\laplacian, \abs{\+vL}^2, L_3}$, 对应的固有值为
+        \[ k_{n;l}^2,\quad l\pare{l+1},\quad m. \]
+        其中$x = k_{n;l}$是$\displaystyle hj_l\pare{x} + \frac{k}{k_{n;l}}j'_l\pare{x}$的第$n$个正根. 用球坐标则
+        \begin{align*}
+            \ket{n,l,m} &= \psi_{n,l,m}\pare{r,\theta,\phi} \\
+            &= j_l\pare{k_{n;l}r}P_l\pare{\cos\theta}e^{im\phi}, \\
+            & l = 0,1,\cdots; m = -l,\cdots,l.
+        \end{align*}
+        相应的Green函数为
+        \[ u = \sum_{l=0}^\infty \sum_{n=1}^\infty \sum_{m=-l}^l \frac{\ket{k,l,m}\bra{n,l,m}}{k_{n;l}^2 \abs{\ket{n,l,m}}^2}. \]
+        使用球坐标, 让$\+vx_0$在$+z$轴上, $m\neq 0$的项依赖于$\phi$, 故可以丢弃,
+        \[ u = \sum_{l=0}^\infty \sum_{n=1}^\infty \frac{j_l\pare{k_{n;l}r} P_l\pare{\cos\theta} j_l\pare{k_{n;l}\abs{\+vx_0}}}{k_{n;l}^2 \abs{\ket{n,l,m}}^2}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        也可以使用基本解和叠加原理.
+        \begin{align*}
+            & u = U + g,\quad U = \rec{4\pi\abs{\+vx - \+vx_0}},\\ &\laplacian g=0,\quad kg_r + hg\vert_{r=1} = -kU_r + hU\vert_{r=1}.
+        \end{align*}
+        用正交基展开, $g$满足Laplace方程故使用球谐函数. 再用加法定理将$kU_r + hU$用球谐函数展开, 确定$g$. 可以选择$\+vx_0$在$z$轴上, 故只需使用Legendre多项式.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        在$\pare{0,\pi}\times \pare{0,\pi}$上对Dirichlet条件求解$\laplacian G = -\delta\pare{x-x_0}\delta\pare{y-y_0}$, Laplacian的固有向量为
+        \[ \ket{m,n} = \sin mx \sin ny, \]
+        固有值
+        \[ \lambda_{m,n} = m^2 + n^2, \]
+        模平方
+        \[ \abs{\ket{m,n}}^2 = \frac{\pi^2}{4}. \]
+        相应的
+        \[ G = \frac{4}{\pi^2}\sum_{m=1}^\infty\sum_{n=1}^\infty \rec{m^2 + n^2} \sin mx_1 \sin ny_1 \sin mx_2 \sin ny_2. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        在$\pare{0,\pi}\times \pare{0,\infty}$上对Dirichlet条件(且$y\rightarrow \infty$时$G$有界)求解$\laplacian G = -\delta\pare{x-x_0}\delta\pare{y-y_0}$, Laplacian的固有向量为
+        \[ \ket{m,p} = \sin mx \sin py, \]
+        固有值
+        \[ \lambda_{m,n} = m^2 + p^2, \]
+        此处连续谱和离散谱同时存在,
+        \[ \braket{m,p}{n,q} = \frac{\pi^2}{4}\delta_{m,n}\delta\pare{p,q}. \]
+        从而
+        \[ G = \frac{4}{\pi^2} \sum_{m=1}^\infty \int_0^\infty\rd{p}\, \rec{m^2 + p^2} \sin mx_1 \sin py_1 \sin mx_2 \sin py_2. \] 
+    \end{ex}
+\end{sample}
+
+% subsection fourier方法求green函数 (end)
+
+\subsection{Duhamel原理} % (fold)
+\label{sub:duhamel原理}
+
+\newpoint{}设$L_t$是微分算子, 最高阶时间导数为$a\pare{t}\partial_t^m$, Duhamel原理用到的$w\pare{t;\tau}$满足
+\begin{align*}
+    & t\ge \tau,\quad L_t w = 0, \\
+    & \partial_t^{m-1}w\pare{t;\tau}\vert_{t=\tau} = \frac{f\pare{\tau}}{a\pare{\tau}}, \\
+    & \partial_t^n w\pare{t=\tau;\tau}\vert_{t=\tau} = 0,\quad 0\le n < m-1.
+\end{align*}
+现在将$w$的定义域扩大到$t,\tau \ge 0$并规定$w\pare{t<\tau;\tau} \equiv 0$, 当$t>\tau$和$\tau >t$有$L_t w = 0$, $t$经过$\tau$时$\partial_t^{n<m-1} w\pare{t;\tau}$保持连续, 但是$\partial_t^{m-1} w\pare{t;\tau}$有阶梯状不连续性, 阶梯高度$\displaystyle \frac{f\pare{\tau}}{a\pare{\tau}}$. 从而
+\[ L_t w = a\pare{t} \partial_t^m \brac{\frac{f\pare{\tau}}{a\pare{\tau}} H\pare{t-\tau}} = f\pare{\tau}\delta\pare{t-\tau}. \]
+
+% subsection duhamel原理 (end)
+
+\subsection{冲量} % (fold)
+\label{sub:冲量}
+
+\newpoint{}因此$\displaystyle \frac{w\pare{t;\tau}}{f\pare{\tau}}$的意义是$\Delta$函数所描述的瞬间冲量的解.
+\newpoint{}而$L_tu = f\pare{t}$的齐次初始条件的定解就是
+\[ u = \int_0^\infty \rd{\tau}\, \frac{w\pare{t;\tau}}{f\pare{\tau}}f\pare{\tau}. \]
+$f,w,L_t$都可以包含其它自变量, $L_t$可以包含其它导数.
+
+% subsection 冲量 (end)
+
+\subsection{一阶发展方程} % (fold)
+\label{sub:一阶发展方程}
+
+\newpoint{}考虑一阶发展方程的基本解.
+\[ \partial_t u = L_{x}u + f,\quad t>0,\quad u\pare{t=0} = \phi. \]
+$L_x$不对时间求导. 之前的冲量原理将方程拆开后求解.
+\begin{align*}
+    & u = u_1 + u_2, \\
+    & \partial_t u_1 = L_x u_1,\quad u_1\pare{t=0} = \phi, \\
+    & \partial_t u_2 = L_x u_2 + f,\quad u_2\pare{t=0} = 0.
+\end{align*}
+相应的基本解为
+\begin{align*}
+    & u_1\pare{t,\+vx} = \int_0^t \rd{\tau}\,w\pare{t,\+vx;\tau}, \\
+    & \partial_t w\pare{t,\+vx;\tau} = L_x w\pare{t,\+vx;\tau}, \\
+    & w\pare{t,\+vx;\tau} = f\pare{\tau,\+vx}.
+\end{align*}
+\newpoint{}或者将定解问题的非齐次数据写成$\delta$函数的叠加,
+\[ f = \delta * f,\quad \phi = \delta * \phi, \]
+考虑任意时间起点的齐次方程的初值问题的解,
+\begin{align*}
+    & \partial_t U\pare{t,\+vx;\tau,\+vy} = L_x U\pare{t,\+vx;\tau,\+vy}, \\
+    & U\pare{t=\tau,\+vx;\tau,\+vy} = \delta\pare{\+vx-\+vy}.
+\end{align*}
+可得
+\begin{align*}
+    w\pare{t,\+vx;\tau} &= \int \rd{\+vy}\, U\pare{t,\+vx;\tau,\+vy} f\pare{\tau,\+vy}, \\
+    u_1\pare{t,\+vx} &= \int \rd{\+vy}\, U\pare{t,\+vx;0,\+vy} \phi\pare{\+vy}.
+\end{align*}
+如果$L$不含时, 则
+\[ U\pare{t,\+vx;\tau,\+vy} = U\pare{t-\tau,\+vx;0,\+vy}. \]
+如果$L$平移不变, 则
+\[ U\pare{t,\+vx;\tau,\+vy} = U\pare{t,\+vx-\+vy;\tau,0}. \]
+综合两个假设, $L$为常系数, 则
+\[ U\pare{t,\+vx;\tau,\+vy} = U\pare{t-\tau,\+vx-\+vy;0,0} = U\pare{t-\tau,\+vx-\+vy}. \]
+略去$x$坐标,
+\begin{align*}
+    u_1\pare{t} &= U\pare{t} * \phi, \\
+    w\pare{t;\tau} &= U\pare{t-\tau} * f\pare{\tau}, \\
+    \partial_t U\pare{t} &= LU\pare{t}, \\
+    U\pare{t=0} &= \delta.
+\end{align*}
+原问题的解为
+\[ u = u_1 + u_2 = U\pare{t}*\phi + \int_0^t \rd{\tau}\, U\pare{t-\tau}*f\pare{\tau}. \]
+
+% subsection 一阶发展方程 (end)
+
+\subsection{二阶发展方程} % (fold)
+\label{sub:二阶发展方程}
+
+拆开非齐次项, $u = u_1 + u_2 + u_3$,
+\begin{align*}
+    \partial_t u_1 = L_x u_1,\quad u_1\pare{t=0} = \phi,\quad \partial_t u_1\pare{t=0} = 0, \\
+    \partial_t u_2 = L_x u_2,\quad u_2\pare{t=0} = 0,\quad \partial_t u_1\pare{t=0} = \psi, \\
+    \partial_t u_3 = L_x u_3+f,\quad u_2\pare{t=0} = 0,\quad \partial_t u_1\pare{t=0} = 0.
+\end{align*}
+基本解为
+\begin{align*}
+    \partial_t^2 U\pare{t} &= LU\pare{t}, \\
+    U\pare{t=0} &= 0,\quad U_t\pare{t=0} = \delta.
+\end{align*}
+\newpoint{}$u_2$和$u_3$明显可以用$U$表示. 下面求$u_1$.
+\newpoint{}假设$L$无时间导数,
+\[ \partial_t^2 v = Lv,\quad v\pare{t=0} = 0,\quad \partial_t v\pare{t=0} = \phi \Rightarrow u_2 = \partial_t \Rightarrow u_2 \pare{t=0} = \phi. \]
+\newpoint{}$L$为常系数, 则
+\[ \partial_t^2 u_1 = \partial_t Lv = Lu_2. \]
+\newpoint{}由于$L$不含时间导数,
+\[ \partial_t u_2\pare{t=0} = \partial_t^2 v\pare{t=0} = Lv\pare{t=0} = 0. \]
+从而
+\[ u = \partial_t U\pare{t} * \phi + U\pare{t} * \phi + \int_0^t \rd{\tau}\, U\pare{t-\tau}*f\pare{\tau}. \]
+\newpoint{}若$f$有时间导数, 需要调节其它叠加项抵消之.
+
+\begin{sample}
+    \begin{ex}
+        热方程
+        \[ U_t = \laplacian U,\quad U\pare{t=0} = \delta\pare{\+vx} \]
+        可通过Fourier变换变为
+        \[ \hat U_t\pare{t,p} = -p^2\hat U,\quad \hat U\pare{t=0,p} = 1,\quad \hat U\pare{t,p} = e^{-\+vp^2 t}. \]
+        反变换可得
+        \begin{align*}
+            U\pare{t,x} &= \rec{2\pi} \int \rd{\+vx}\, \exp\pare{i\+vx\cdot \+vp - t\+vp^2}, \\
+            U\pare{t,x} &= \rec{\pare{2\sqrt{\pi t}}^D} \exp\pare{-\frac{\+vx^2}{4t}}.
+        \end{align*}
+        因此$\pare{\partial_t - \laplacian}u = f,u\pare{t=0}=\phi$的解为
+        \begin{align*}
+            u &= U\pare{t,x}*\phi\pare{x} + \int_0^t \rd{\tau}\,U\pare{\tau,x}* f\pare{t-\tau,x}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+\begin{sample}
+    \begin{ex}
+        考虑二维单向波
+        \begin{align*}
+            & U_t + U_x = 0,\quad x\in \+bR,\quad t\ge 0, \\
+            & U\pare{t=0,x} = \delta\pare{x}.
+        \end{align*}
+        将定解问题Fourier变换得到
+        \begin{align*}
+            & \hat U_t + ip\hat U = 0, \\
+            & \hat U\pare{t=0} = 1, \\
+            & \Rightarrow \hat U = \exp\pare{-ipt}, \\
+            & \Rightarrow U = \delta\pare{x-t}.
+        \end{align*}
+        因此
+        \[ \pare{\partial_t + \partial_x}u = f,\quad u\pare{t=0} = \phi \]
+        的解为
+        \begin{align*}
+            u\pare{t,x} &= \delta\pare{x-t}*\phi\pare{x} + \int_0^t \rd{\tau}\,\delta\pare{x-\tau} * f\pare{t-\tau} \\
+            &= \phi\pare{x-t} + \int_0^t \rd{\tau}\, f\pare{t-\tau,x-\tau}.
+        \end{align*}
+        对$u\pare{t,x}$有影响的是以波速从$\tau = 0$到$\tau = t$并结束在$\pare{t,x}$线段上的$f$及在线段起点的$\phi$.
+    \end{ex}
+\end{sample}
+
+\begin{sample}
+    \begin{ex}
+        波动方程
+        \begin{align*}
+            & U_{tt} = \laplacian U, \\
+            & U\pare{t=0} = 0,\quad U_t\pare{t=0} = \delta\pare{\+vx}, \\
+            & \Rightarrow \hat U_{tt} = -p^2\hat U, \\
+            & \hat U\pare{t=0} = 0,\quad \hat U_t\pare{t=0} = 1, \\
+            & \Rightarrow \hat U = \frac{\sin\pare{\abs{\+vp}t}}{\abs{\+vp}}, \\
+            & \Rightarrow U\pare{t,\+vx} = \frac{\delta\pare{\abs{\+vx} - t}}{4\pi\abs{\+vx}}.
+        \end{align*}
+        反变换可以如下得到:
+        \begin{align*}
+            U\pare{t,x} &= \rec{2\pi^3} \int \rd{\+vp}\, \exp\pare{i\+vx\cdot \+vp} \frac{\sin\pare{\abs{\+vp}t}}{\abs{\+vp}} \\
+            &= \rec{2\pi^3}\int_0^\infty \rd{p}\, p^2 \frac{\sin pt}{p} \int_0^\pi \rd{\theta} \rd{\theta}\, 2\pi \sin\theta \exp\pare{i\abs{\+vx}p\cos\theta} \\
+            &= \frac{-i}{2\pi^2 \abs{x}} \int_0^\infty \rd{p}\, \frac{\sin pt}{p}\exp\pare{i\abs{\+vx}pc}\vert_{c=-1}^{c=1} \\
+            &= \rec{2\pi^2\abs{\+vx}} \int_0^\infty \rd{p}\,\sin\pare{p\abs{\+vx}}\sin \pare{pt} \\
+            &= \frac{4\pare{\abs{\+vx} - t}}{4\pi\abs{\+vx}}.
+        \end{align*}
+        从而卷积为
+        \begin{align*}
+            U\pare{t,\+vx} * \psi\pare{\+vx} &= \int \rd{\+vy}\, \frac{\delta\pare{\abs{\+vy} - t}}{4\pi\abs{\+vy}}\psi\pare{\+vx-\+vy} \\
+            &= \frac{t}{4\pi t^2} \oint_{\abs{\+vy-\+vx} = t}\rd{\+vt}\,\psi\pare{\+vy} \\
+            &= t\expc{\psi}_{\abs{\+vy-\+vx} = t}. \\
+            \expc{\abs{\+vy-\+vx} = t} &= \rec{4\pi t^2}\oint_{\abs{\+vy-\+vx} = t}\rd{\+vy}\,\psi\pare{\+vy}.
+        \end{align*}
+        因此完整的解为
+        \[ u\pare{t,x} = t\expc{\psi}_{\abs{\+vx} = t} + \partial_t \pare{t\expc{\phi}_{\abs{\+vx} = t}} + \int_0^t \rd{\tau}\,\tau \expc{f\pare{t-\tau}}_{\abs{\+vx} = \tau}. \]
+    \end{ex}
+\end{sample}
+\begin{remark}
+    二维的波动方程的解为
+    \[ U\pare{t,\+vx} = \frac{H\pare{t-\abs{\+vx}}}{2\pi\sqrt{t^2 - \abs{\+vx}^2}}. \]
+    可见奇数维的$\delta$输入是即时作用, 而偶数维不是.
+\end{remark}
+
+% subsection 二阶发展方程 (end)
+
 % section green函数 (end)
 
 \end{document}

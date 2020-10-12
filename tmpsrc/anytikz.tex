@@ -1,0 +1,18 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=陈向军/刘明辉,gakka=原子物理学,section=Ryoushirikigaku,gakkabbr=AP]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+
+\def\tikzmark#1{\tikz[remember picture,overlay]\node[inner ysep=0pt,anchor=base](#1){\strut};}
+
+\begin{document}
+
+\begin{align}
+  \tikzmark{A}2x+y & = 11 \tikzmark{B} \\
+                3x & = 19 - 2y \tikzmark{C}
+\end{align}
+
+%\tikz[remember picture,overlay]\draw(A.south west)rectangle(B.north east);
+\tikz[remember picture,overlay] \draw (A) -| (C.center);
+
+\end{document}

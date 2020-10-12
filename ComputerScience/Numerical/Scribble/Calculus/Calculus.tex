@@ -1,0 +1,247 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\usetikzlibrary{positioning}
+\tikzset{>=stealth}
+\usetikzlibrary{decorations.markings}
+
+\definecolor{graybg}{RGB}{228,235,243}
+\definecolor{titlepurple}{RGB}{150,131,104}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\definecolor{warningred}{RGB}{159,57,61}
+\definecolor{CJKblack}{RGB}{72,72,72}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\DeclareMathOperator{\cond}{cond}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\def\bili#1#2{#2}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usetikzlibrary{arrows.meta}
+
+\tikzset{middlearrow/.style={
+        decoration={markings,
+            mark= at position 0.5 with {\arrow{#1}} ,
+        },
+        postaction={decorate}
+    }
+}
+
+\usepackage{colortbl}
+
+\begin{document}
+
+\begin{multicols*}{2}[\centerline{\titlefont 数値微分及び数値積分、微分方程式の数値解法}]
+\raggedcolumns%
+\newheader{数値微分}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{離散近似式} && y\pare{x} = y_0l_0\pare{x} + \cdots + y_nl_n\pare{x} + \frac{f^{\pare{n+1}}\pare{\xi}}{\pare{n+1}!}\pare{x-x_0}\cdots\pare{x-x_n}  && \\
+        & && \Rightarrow y'\pare{x_0} = y_0l'_0\pare{x_0} + \cdots + y_n l'_n\pare{x_0} + \frac{f^{\pare{n+1}}\pare{\xi}}{\pare{n+1}!}\brac{\pare{x-x_0}\cdots\pare{x-x_n}}'_{x_0} && \\
+        & \+:c5l{\mathitem{2点} $\displaystyle f'\pare{x} = \frac{f\pare{x+h} - f\pare{x}}{h} - \frac{h}{2}f''\pare{\xi}$ \ \mathitem{3点} $\displaystyle f'\pare{x} = \frac{f\pare{x+h} - f\pare{x-h}}{2h} - \frac{h^2}{6}f'''\pare{\xi}$}
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \+:c5l{\mathitem{二階} $\displaystyle f''\pare{x} = \frac{f\pare{x+h} - 2f\pare{x} + f\pare{x-h}}{h^2} - \frac{h^2}{12}f^{\pare{4}}\pare{\xi}$\mathcomment{\ $f$のTaylor展開を考える}}
+    \end{flalign*}
+\end{cheatresume}
+\newheader{数値積分}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Newton-Cotes} && \int_a^b y\pare{x}\,\rd{x} = \sum_{i=0}^n y_i \int_a^b l_i\pare{x}\,\rd{x} + \int_a^b \+/f^{\pare{n+1}}\pare{\xi} \pare{x-x_0}\cdots \pare{x-x_n}/ \pare{n+1}! /\,\rd{x} && \\
+        & \+:c5l{\begin{tabular}{@{}l!{\color{lightgray}\vrule}l!{\color{lightgray}\vrule}l}
+            \mathitem{台形} $\displaystyle \frac{h}{2}\pare{f_0 + f_1} - \frac{h^3}{12}f''$ & \mathitem{中点} $\displaystyle hf_{ \+/1/2/} + \frac{h^3}{24}f''$ & \mathitem{Simpson} $\displaystyle \frac{h}{3}\pare{f_0 + 4f_1 + f_2} - \frac{h^5}{90}f^{\pare{4}}$ \\[.5em]
+            $\displaystyle \frac{h}{2}\pare{y_0 + 2y_{\cdots} + y_n} - \frac{Lh^2}{12}f''$ & $\displaystyle h\pare{y_{\frac{\cdots}{2}}} + \frac{Lh^2}{24}f''$ & $\displaystyle \frac{h}{3}\pare{y_0 + \overline{4y_1 + 2y_2} + 4y_3 + y_4} - \frac{Lh^4}{180}f^{\pare{4}}$
+        \end{tabular}}\\[-2em]
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{Gau\ss} && \int_a^b f\pare{t}\,\rd{t} = \frac{b-a}{2}\pare{c_1 f_{x_1} + \cdots + c_n f_{x_n}},\quad c_i = \int_{-1}^1 l_i\pare{t}\,\rd{t}\mathcomment{\ $2n-1$次である} && \\
+        & && f_{x_i} = f\pare{\frac{a+b}{2} + \frac{a-b}{2}x_i}\mathcomment{ここで$x_1,\cdots,x_n$を$P_n$の零点に取る} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \text{\mathitem{次数}\quad {\stxihei \color{CJKblack}積分公式が} $x^m$ {\stxihei \color{CJKblack} まで正しい積分を与えるような整数} $m$ {\stxihei \color{CJKblack} のうち最大である} } && \\
+        & \text{\mathitem{適応自動積分}\quad $\abs{E_{2n}} \approx \rec{2^r - 1}\abs{I_{2n} - I_n} < \epsilon,\mathcomment{\ $I = h\sum a_i y_i + O\pare{h^r}$に対し}$ } \\
+        & \begingroup
+\setlength\arraycolsep{1pt}\text{\begin{tabular}{@{}l}
+            \mathitem{Romberg} \\
+            \mathheadcomment{台形}
+        \end{tabular}\hspace{-4em} $\begin{array}[t]{rlll}
+            \tikzmark{R11}\+v{R_{11}} = \frac{L}{2}\pare{y_0 + y_1}\tikzmark{R11r}%
+            \\
+            \tikzmark{R21}R_{21} = \+/\tikzmark{R21R11}R_{11}/2/ + \frac{L}{2}\pare{y_{\half}}\tikzmark{R21r}%
+            & \tikzmark{R22}\+v{R_{22}} = \frac{4\tikzmark{R22R21}R_{21} - \tikzmark{R22R11}R_{11}}{4-1}\tikzmark{R22r}%
+            \\
+            \tikzmark{R31}R_{31} = \+/\tikzmark{R31R21}R_{21}/2/ + \frac{L}{4}\pare{{\textstyle\sum} y_{\frac{1,3}{4}}}\tikzmark{R31r}%
+            & \tikzmark{R32}R_{32} = \frac{4\tikzmark{R32R31}R_{31} - \tikzmark{R32R21}R_{21}}{4-1}\tikzmark{R32r}%
+            & \tikzmark{R33}\+v{R_{33}} = \frac{4^2 \tikzmark{R33R32}R_{32} - \tikzmark{R33R22}R_{22}}{4^2-1}\tikzmark{R33r}%
+            \\
+            \tikzmark{R41}R_{41} = \+/\tikzmark{R41R31}R_{31}/2/ + \frac{L}{8}\pare{{\textstyle\sum} y_{\frac{1,3,5,7}{8}}}\tikzmark{R41r}%
+            & \tikzmark{R42}R_{42} = \frac{4\tikzmark{R42R41}R_{41} - \tikzmark{R42R31}R_{31}}{4-1}\tikzmark{R42r}%
+            & \tikzmark{R43}R_{43} = \frac{4^2\tikzmark{R43R42}R_{42} - \tikzmark{R43R32}R_{32}}{4^2-1}\tikzmark{R43r}%
+            & \tikzmark{R44}\+v{R_{44}} = \frac{4^3\tikzmark{R44R43}R_{43} - \tikzmark{R44R33}R_{33}}{4^3-1}\tikzmark{R44r}
+        \end{array}$\begin{tikzpicture}[overlay, remember picture]
+            \draw[lightgray,middlearrow={>}] (R11.center) -- (R21R11.center);
+            \draw[lightgray,middlearrow={>}] (R11r.center) -- (R22R11.center);
+            \draw[lightgray,middlearrow={>},thick] (R21r.north) -| (R22R21.center);
+            %
+            \draw[lightgray,middlearrow={>}] (R21.center) -- (R31R21.center);
+            \draw[lightgray,middlearrow={>}] (R21r.center) -- (R32R21.center);
+            \draw[lightgray,middlearrow={>},thick] (R31r.north) -| (R32R31.center);
+            \draw[lightgray,middlearrow={>}] (R22r.center) -- (R33R22.center);
+            \draw[lightgray,middlearrow={>},thick] (R32r.north) -| (R33R32.center);
+            %
+            \draw[lightgray,middlearrow={>}] (R31.center) -- (R41R31.center);
+            \draw[lightgray,middlearrow={>}] (R31r.center) -- (R42R31.center);
+            \draw[lightgray,middlearrow={>},thick] (R41r.north) -| (R42R41.center);
+            \draw[lightgray,middlearrow={>}] (R32r.center) -- (R43R32.center);
+            \draw[lightgray,middlearrow={>},thick] (R42r.north) -| (R43R42.center);
+            \draw[lightgray,middlearrow={>}] (R33r.center) -- (R44R33.center);
+            \draw[lightgray,middlearrow={>},thick] (R43r.north) -| (R44R43.center);
+        \end{tikzpicture}}
+        \endgroup \\[-2em]
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        \mathitem{多重積分} && \begin{array}[t]{c|cccc}
+    & 0 & L_x/3 & 2L_x/3 & L_x \\
+    \hline
+   0   & \cellcolor{black!20}f_{0,0} & \cellcolor{black!40}f_{0,\rec{3}}  & \cellcolor{black!40}f_{0,\frac{2}{3}}  & \cellcolor{black!20}f_{0,1} \\
+   L_y/3 & \cellcolor{black!40}f_{\rec{3},0} & \cellcolor{black!60}f_{\rec{3},\rec{3}}  & \cellcolor{black!60}f_{\rec{3},\frac{2}{3}}  & \cellcolor{black!40}f_{\rec{3},1} \\
+   2L_y/3 & \cellcolor{black!40}f_{\frac{2}{3},0} & \cellcolor{black!60}f_{\frac{2}{3},\rec{3}}  & \cellcolor{black!60}f_{\frac{2}{3},\frac{2}{3}} & \cellcolor{black!40}f_{\frac{2}{3},1} \\
+   L_y   & \cellcolor{black!20}f_{1,0} & \cellcolor{black!40}f_{1,\rec{3}} & \cellcolor{black!40}f_{1,\frac{2}{3}} & \cellcolor{black!20}f_{1,1}
+\end{array} && \raisebox{-3em}{$\displaystyle \Rightarrow \iint f\,\rd{x}\,\rd{y} = \begin{cases}
+    \displaystyle \frac{h_x h_y}{4} \sum {\color{black!20}\blacksquare} \\
+    \displaystyle + \frac{h_x h_y}{2} \sum {\color{black!40}\blacksquare} \\
+    \displaystyle + h_x h_y \sum {\color{black!60}\blacksquare}
+\end{cases}$} &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{常微分方程式ノ数値解法}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Euler前進法}\ w_{i+1} = w_i + f\pare{t_i, w_i} \, {\color{lightgray}\vert}\,  \mathitem{Euler後退法} w_{i+1} = w_i + f\pare{t_{i+1}, w_{i+1}}\, \mathheadcomment{局所$O\pare{h^2}$} && \\
+        & \begingroup
+\setlength\arraycolsep{2pt}\raisebox{.5\baselineskip}{\smash{\rotatebox[origin=lb]{-90}{\mathitem{Runge-Kutta}}}}\begin{array}[t]{@{}c!{\color{lightgray}\vrule}c!{\color{lightgray}\vrule}c}
+            \mathitem{修正Euler法} & \mathitem{中点} & \mathitem{Heun} {\mathcomment{局所$O\pare{h^3}$}} \\
+            \begin{array}[t]{l}
+                \displaystyle w_{i+1} = w_i + \frac{h}{2}\pare{K_1+K_2} \\
+                K_1 = f\pare{t_i, w_i} \\
+                K_2 = f\pare{t_i + h, w_i + hK_1}
+            \end{array}
+            & 
+            \begin{array}[t]{l}
+                \displaystyle w_{i+1} = w_i + h K_2 \\
+                K_1 = f\pare{t_i, w_i} \\
+                \displaystyle K_2 = f\pare{t_i + \frac{h}{2}, w_i + \+/hK_1/2/}
+            \end{array}
+            &
+            \begin{array}[t]{l}
+                \displaystyle w_{i+1} = w_i + \frac{h}{4}\pare{K_1 + 3K_2} \\
+                K_1 = f\pare{t_i, w_i} \\
+                \displaystyle K_2 = f\pare{t_i + \frac{2h}{3}, w_i + \frac{2h}{3}K_1}
+            \end{array}
+        \end{array}\endgroup && \\[-2em]
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \smash{\raisebox{.6em}{\begin{array}[t]{@{}l}
+            \mathitem{線}\\[-.4em]
+            \mathitem{型}\\[-.4em]
+            \mathitem{多}\\[-.4em]
+            \mathitem{段}\\[-.4em]
+            \mathitem{法}
+        \end{array}}} && w_{n+1} = w_{n-p} + \int_{t_{n-p}}^{t_{n+1}} \tikzmark{intf}f\,\rd{t} \approx w_{n-p} + \begin{cases}
+            \tikzmark{expalphanegq}\alpha_{-q} f_{n-q} + \cdots + \tikzmark{alpha0}\alpha_0 f_n + T, & \mathheadcomment{陽公式}\\
+            \tikzmark{impalphanegq}\alpha_{-q+1} f_{n-q+1} + \cdots + \tikzmark{alpha1}\alpha_1 f_{n+1} + T\tikzmark{impt}, & \mathheadcomment{陰公式}
+        \end{cases} && \\
+        & && \tikzmark{finterp}f\pare{t,w} = \begin{cases}
+            l_{-q} f_{n-q} + \cdots + l_0 f_n \\
+            l_{-q+1} f_{n-q+1} + \cdots + l_1 f_{n+1}
+        \end{cases} \Rightarrow \alpha_i = \int_{t_{n-p}}^{t_{n+1}} l_i\pare{t}\,\rd{t} && \\
+        & \+:c5l{$\begin{array}[t]{@{}l}
+            \displaystyle \mathitem{局所打ち切り誤差}\quad w_{n+1} = w_{n-2} + \frac{h}{4}\pare{3f_{n+1} + 9f_{n-1}} \Rightarrow w_{n+1} - w_{n-2} =  \mathcomment{例} \\
+            \displaystyle \frac{h}{4}\brac{3\pare{y_{n-2}^{{\color{warningred}\prime}} + 3hy_{n-2}^{{\color{warningred}\prime\prime}} + \frac{9h^2}{2}y_{n-2}^{{\color{warningred}\prime\prime\prime}} + \frac{27h^3}{6}y^{{\color{warningred}\pare{4}}}\vert_{\xi}} + 9\pare{y_{n-2}^{{\color{warningred}\prime}} + hy_{n-2}^{{\color{warningred}\prime\prime}} + \frac{h^2}{2}y_{n-2}^{{\color{warningred}\prime\prime\prime}} + \frac{h^3}{6}y^{{\color{warningred}\pare{4}}}\vert_{\eta}} } \\
+            \displaystyle = 3hy'_{n-2} + \frac{\pare{3h}^2}{2!}y''_{n-2} + \frac{\pare{3h}^3}{3!}y'''_{n-2} + \frac{\pare{3h}^4}{4!}y^{\pare{4}}_{n-2} - \brac{ - \frac{3h^4}{8}y^{\pare{4}}_{n-2} + O\pare{h^5}\tikzmark{ex1t}} = y\vert^{n+1}_{n-2} - T
+        \end{array}$\begin{tikzpicture}[overlay, remember picture]
+            \draw[lightgray,middlearrow={>}] (ex1t.north) -| (impt.center);
+        \end{tikzpicture} }\\
+        & \+:c5l{\mathitem{予測子ー修正子法}\quad $w_n \xlongrightarrow{O\pare{h^r}\text{\stxihei  \color{CJKblack}\ 陽公式}} \tilde{w}_{n+1} \xlongrightarrow{O\pare{h^r}\text{\stxihei  \color{CJKblack}\ 陰公式}} {w}_{n+1}$ } \\
+        & \+:c5l{\mathheadcomment{多段法の局所誤差$O\pare{h^r}$である場合には$O\pare{h^{r-1}}$の1段法により最初の$y$を求める}}
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{Adams} && w_{i+1} = w_i + \begin{cases}
+            \displaystyle f_{i-q} \int_{t_i}^{t_{i+1}} l_{-q}\pare{t}\,\rd{t} + \cdots + f_i \int_{t_i}^{t_{i+1}} l_0\pare{t}\,\rd{t} + \int_{t_i}^{t_{i+1}} \tikzmark{adamsexpt}R\pare{t}\,\rd{t}\\
+            \displaystyle f_{i-q+1} \int_{t_i}^{t_{i+1}} l_{-q+1}\pare{t}\,\rd{t} + \cdots + f_{i+1} \int_{t_i}^{t_{i+1}} l_{1}\pare{t}\,\rd{t} + \int_{t_i}^{t_{i+1}} R\pare{t}\,\rd{t}
+        \end{cases} && \\
+        & \+:c5l{\mathitem{局所打ち切り誤差}\quad $\displaystyle q=1$ {\stxihei \color{CJKblack} 陽公式} $\displaystyle \Rightarrow T = \int_{t_i}^{t_{i+1}} \frac{y^{{\color{warningred}\prime\prime\prime}}\pare{\eta}}{2}\pare{t-t_i}\pare{t-t_{i-1}}\,\rd{t} = \tikzmark{adamsext}\frac{5h^3}{12}y'''\pare{\xi}$ \begin{tikzpicture}[overlay, remember picture]
+            \draw[lightgray,middlearrow={>}] (adamsext.north) -| (adamsexpt.south);
+        \end{tikzpicture} }
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{連立1階}\tikzmark{dsystem} && \+dtd{\+vy} = \+vF\pare{t,\+vy} \Rightarrow \+vw_{n+1} = \+vw_{n-2} + \frac{h}{4}\brac{3\+vF_{n+1}\pare{t_{n+1},\+vw_{n+1}} + 9\+vF\pare{t_{n-1},\+vw_{n-1}}} && \\
+        & \mathitem{高階} && y^{\pare{n}} = f\pare{t,y,y',\cdots,y^{\pare{n-1}}} \Rightarrow z_0 = y, z_1 = y',\cdots ,z_{-1} = y^{\pare{n-1}} && \\
+        & && \tikzmark{higherorder}\Rightarrow \+dtd{}\begin{pmatrix}
+            z_0 & \cdots & z_{n-2} & z_{n-1}
+        \end{pmatrix} = \begin{pmatrix}
+            z_1 & \cdots & z_{n-1} & f\pare{t,z_0,\cdots,z_{n-1}}
+        \end{pmatrix} &&
+    \end{flalign*}\begin{tikzpicture}[overlay, remember picture]
+            \draw[lightgray,middlearrow={>}] (higherorder.center) -| (dsystem.south);
+    \end{tikzpicture}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{大局打ち切り誤差} && \abs{E} \le e^{L\pare{b-a}}\pare{\abs{E_0} + \frac{T}{Lh}}\mathcomment{\ $\abs{f\pare{x,y_1} - f\pare{x,y_2}} < L\abs{y_1-y_2}$} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathheadcomment{カシオ活用術...} && \int_{x_n}^{x_m} \frac{\pare{x - x_p}\pare{x-x_q}}{\pare{x_r - x_p}\pare{x_r-x_q}}\,\rd{x} = \frac{h}{\pare{r-p}\pare{r-q}} \int_n^m {\pare{x-p}\pare{x-q}}\,\rd{x} && \\
+        & && \int_{x_n}^{x_m} {\pare{x - x_{p_1}} \cdots \pare{x-x_{p_k}} }\,\rd{x} = h^{k+1} \int_n^m {\pare{x - p_1} \cdots \pare{x-p_k} }\,\rd{x} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

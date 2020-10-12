@@ -1,0 +1,121 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+\DeclareMathOperator{\cond}{cond}
+
+\begin{document}
+
+\newprob{8.1 (1)}%
+使用规范运算列表如下.
+\begin{longtable}{>{$}c<{$}>{$}c<{$}>{$}c<{$}}
+k & Y^{\pare{k}} & X^{\pare{k+1}} \\
+1 & \pare{1.,-0.655359} & \pare{6.966077365538062,-4.68928} \\
+2 & \pare{1.,-0.67316} & \pare{7.019478758378284,-4.65368} \\
+3 & \pare{1.,-0.662967} & \pare{6.988900168204065,-4.67407} \\
+4 & \pare{1.,-0.668784} & \pare{7.006352834654262,-4.66243} \\
+5 & \pare{1.,-0.665458} & \pare{6.996373100353816,-4.66908} \\
+6 & \pare{1.,-0.667358} & \pare{7.00207358846886,-4.66528} \\
+7 & \pare{1.,-0.666272} & \pare{6.998815443201124,-4.66746} \\
+8 & \pare{1.,-0.666892} & \pare{7.0006770041636255,-4.66622} \\
+9 & \pare{1.,-0.666538} & \pare{6.9996131778893815,-4.66692} \\
+10 & \pare{1.,-0.66674} & \pare{7.000221053421546,-4.66652} \\
+11 & \pare{1.,-0.666625} & \pare{6.999873687747939,-4.66675} \\
+12 & \pare{1.,-0.666691} & \pare{7.000072179732204,-4.66662} \\
+13 & \pare{1.,-0.666653} & \pare{6.999958754864036,-4.66669} \\
+14 & \pare{1.,-0.666675} & \pare{7.000023568787992,-4.66665} \\
+15 & \pare{1.,-0.666662} & \pare{6.999986532166492,-4.66668} \\
+16 & \pare{1.,-0.666669} & \pare{7.000007695919667,-4.66666} \\
+17 & \pare{1.,-0.666665} & \pare{6.999995602336452,-4.66667} \\
+18 & \pare{1.,-0.666668} & \pare{7.000002512952177,-4.66666} \\
+19 & \pare{1.,-0.666666} & \pare{6.999998564027843,-4.66667} \\
+20 & \pare{1.,-0.666667} & \pare{7.000000820555687,-4.66667}
+\end{longtable}
+得到按模最大特征值及其特征向量
+\[ \boxed{\lambda_1 = 7.00000,\quad v_1 = \begin{pmatrix}
+    1 \\
+    0.66667
+\end{pmatrix}.} \]
+\newprob{8.2 (1)}%
+对$\displaystyle A^{-1} = \begin{pmatrix}
+    -0.5 & 1.5 \\
+    1.5 & -3.5
+\end{pmatrix}$使用规范运算列表如下.
+\begin{longtable}{>{$}c<{$}>{$}c<{$}>{$}c<{$}}
+k & Y^{\pare{k}} & X^{\pare{k+1}} \\
+1 & \pare{1.00000000,1.00000000} & \pare{1.00000000,-2.00000000} \\
+2 & \pare{0.50000000,-1.00000000} & \pare{-1.75000000,4.25000000} \\
+3 & \pare{-0.41176471,1.00000000} & \pare{1.70588235,-4.11764706} \\
+4 & \pare{0.41428571,-1.00000000} & \pare{-1.70714286,4.12142857} \\
+5 & \pare{-0.41421144,1.00000000} & \pare{1.70710572,-4.12131716} \\
+6 & \pare{0.41421362,-1.00000000} & \pare{-1.70710681,4.12132044} \\
+7 & \pare{-0.41421356,1.00000000} & \pare{1.70710678,-4.12132034} \\
+8 & \pare{0.41421356,-1.00000000} & \pare{-1.70710678,4.12132034} \\
+9 & \pare{-0.41421356,1.00000000} & \pare{1.70710678,-4.12132034} \\
+10 & \pare{0.41421356,-1.00000000} & \pare{-1.70710678,4.12132034}
+\end{longtable}
+得到$A^{-1}$按模最大特征值及其特征向量
+\[ \lambda_1 = -4.12132034,\quad v_1 = \begin{pmatrix}
+    0.41421356 \\
+    -1
+\end{pmatrix}. \]
+故$A$按模最小特征值和特征向量为
+\[ \boxed{\lambda_2 = \rec{\lambda_1} = -0.24264069,\quad v_1 = \begin{pmatrix}
+    0.41421356 \\
+    -1
+\end{pmatrix}.} \]
+\newprob{8.3 (1)}%
+记$Q = \begin{pmatrix}
+    \cos\theta & \sin\theta \\
+    -\sin\theta & \cos\theta
+\end{pmatrix}$, 记$t = \tan\theta$, 则$t$为
+\[ t^2 + \frac{a_{22} - a_{11}}{a_{21}}t - 1 = 0 \]
+的根中模较小的一者, 即
+\[ t = \sqrt{2} - 1,\quad \sin\theta = \frac{t}{\sqrt{1+t^2}} = \frac{\sqrt{2-\sqrt{2}}}{2} = 0.382683,\quad \cos\theta = \frac{1}{\sqrt{1+t^2}} = 0.923880. \]
+从而
+\[ B = Q^T AQ = \begin{pmatrix}
+    2.58579 & 0 \\
+    0 & 5.41421
+\end{pmatrix} \Rightarrow \boxed{\lambda_1,\lambda_2 = 2.58579, 5.41421.} \]
+
+\end{document}

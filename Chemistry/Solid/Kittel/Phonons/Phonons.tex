@@ -1,0 +1,401 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Geometry\ in\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage[super]{nth}
+
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzset{snake it/.style={decorate, decoration=snake}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensorb#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+
+\begin{document}
+
+\section{Phonons} % (fold)
+\label{sec:phonons}
+
+\subsection{Phonons as Crystal Vibrations} % (fold)
+\label{sub:phonons_as_crystal_vibrations}
+
+\mathsubsubsection{MLL}{Monoatomic...}{Monoatomic Linear Lattice}{Monoatomic Linear Lattice} % (fold)
+\label{ssub:monoatomic_linear_lattice}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[scale=0.6]
+        \begin{axis}[disabledatascaling,
+                anchor=origin,
+                    xlabel = $k$,    ylabel =$\displaystyle \frac{\omega}{\pare{4C/M}^{1/2}}$, 
+                ymax=1, ymin=0, xmax =+pi, xmin=-pi,
+                ytick={0,0.2,0.4,0.6,0.8,1.0},xtick={-pi,0,pi},xticklabels={$-\pi/a$, $0$, $\pi/a$}, ylabel style={rotate=-90}]
+                \addplot [samples=201,color=black] function { abs(sin (x/2)) } ;
+        \end{axis}
+    \end{tikzpicture}
+    \caption{The dispersion relation of monoatomic chains.}
+    \label{fig:dispersion_monoatomic_1d}
+\end{figure}
+If the spring constant between the atoms of mass $M$ is $C$, and $u_n$ denotes the displacement of the atom at site $n$, with the ansatz that
+\[ u_n \propto e^{ikna - i\omega t}, \]
+we find the dispersion relation
+\begin{finaleq}{Dispersion Relation of the Monoatomic Chain}
+    \[ \omega = \sqrt{\frac{4C}{M}}\abs{\sin \pare{\half ka}}, \]
+\end{finaleq}
+plotted in \cref{fig:dispersion_monoatomic_1d}, where $\+vk$ takes its value in the first Brillouin zone.
+\par
+The group velocity is given by
+\[ v\+_g_ = \sqrt{\frac{Ca^2}{M}}\cos \pare{\half ka}, \]
+which becomes
+\[ \omega = \sqrt{\frac{C}{M}} ka \]
+in the long wavelength limit.
+
+\paragraph{Long Range Force} % (fold)
+\label{par:long_range_force}
+
+If the interaction is not limited to between only the nearest planes, where the spring constant between the planes distance $pa$ apart, the dispersion relation may be generalized to
+\[ \omega^2 = \frac{2}{M}\sum_{p>0} C_p \pare{1-\cos \pare{pka}}, \]
+whence we may obtain the spring constants by
+\[ C_p = -\frac{Ma}{2\pi} \int_{-\pi/a}^{\pi/a} \rd{k}\, \omega_k^2 \cos \pare{pka}. \]
+
+% paragraph long_range_force (end)
+
+\paragraph{Application in Solids} % (fold)
+\label{par:application_in_solids}
+
+The model above is approximately applicable to waves along, for example, the $\brac{100}$ direction in cubic crystals.
+
+% paragraph application_in_solids (end)
+
+% subsubsection monoatomic_linear_lattice (end)
+
+\subsubsection{Diatomic Linear Lattice} % (fold)
+\label{ssub:diatomic_linear_lattice}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[scale=0.6]
+        \begin{axis}[disabledatascaling,
+                anchor=origin,
+                    xlabel = $k$,    ylabel =$\displaystyle \frac{\omega}{\pare{2C\pare{\rec{M_1} + \rec{M_2}}}^{1/2}}\qquad\qquad$, 
+                ymax=1, ymin=0, xmax =+pi, xmin=-pi,
+                ytick={0,0.2,0.4,0.6,0.8,1.0},xtick={-pi,0,pi},xticklabels={$-\pi/a$, $0$, $\pi/a$}, ylabel style={rotate=-90}]
+                \addplot [samples=201,color=black] function { sqrt((3+sqrt(5+4*cos(x))) / 2) / sqrt(3) } ;
+                \addplot [samples=201,color=black] function { sqrt((3-sqrt(5+4*cos(x))) / 2) / sqrt(3) } ;
+        \end{axis}
+    \end{tikzpicture}
+    \caption{The dispersion relation of diatomic chains.}
+    \label{fig:dispersion_diatomic_1d}
+\end{figure}
+
+With the lattice constant $a$, i.e. the distance between nearest atoms being $a/2$, and the ansatz
+\[ u_n \propto e^{ikna - i\omega t},\quad \text{and}\quad v_n \propto e^{ikna - i\omega t} \]
+for the two types of atoms, we find the dispersion relation
+\begin{finaleq}{Dispersion Relation of the Diatomic Chain}
+    \[ \omega^2 = C\cdot \frac{\pare{M_1 + M_2} \pm \sqrt{M_1^2 + M_2^2 + 2M_1 M_2 \cos \pare{ak}}}{M_1 M_2}, \]
+\end{finaleq}
+plotted in \cref{fig:dispersion_diatomic_1d}.
+\par
+The dispersion relation in the long wavelength limit is given by
+\[ \omega^2 = \begin{cases}
+    \displaystyle 2C\pare{\rec{M_1} + \rec{M_2}}, & \mathrm{optical}, \\
+    \displaystyle \half \frac{C}{M_1 + M_2}K^2 a^2, & \mathrm{acoustic},
+\end{cases} \]
+while for $k = \pi/a$ we have
+\[ \omega^2 = \frac{2C}{M_2};\quad \text{and}\quad \omega^2 = \frac{2C}{M_2}. \]
+
+\paragraph{Generalization to Solids} % (fold)
+\label{par:generalization_to_solids}
+
+If there are $p$ atoms in the primitive cell, there will be $3p$ branches in the dispersion relation, $3$ of which \gloss[-\baselineskip]{acoustic} and $3p - 3$ \gloss{optical}.
+\par
+In an acoustic vibration, the atoms vibrate in phase with each other. In an optical vibration, the atoms vibrate against each other.
+
+% paragraph generalization_to_solids (end)
+
+\begin{finaleq}{Number of Allowed $k$'s}
+    Each allowed $k$ occupies a volume 
+    \[ \rd{^D k} = \frac{\pare{2\pi}^D}{V} \]
+    in the reciprocal space, where $D$ is the dimension of the space.
+\end{finaleq}
+
+% subsubsection diatomic_linear_lattice (end)
+
+% subsection phonons_as_crystal_vibrations (end)
+
+\subsection{Quantization of Phonons} % (fold)
+\label{sub:quantization_of_phonons}
+
+\subsubsection{Phonons as Modes of SHO} % (fold)
+\label{ssub:phonons_as_modes_of_sho}
+
+If the mode $\omega$ is excited to quantum number $n$, the energy is
+\[ \epsilon = \pare{n+\half}\hbar \omega, \]
+which is related to the amplitude of this mode by
+\[ \omega \expc{u^2} \propto \pare{n+\half}. \]
+
+% subsubsection phonons_as_modes_of_sho (end)
+
+\subsubsection{Second Quantization} % (fold)
+\label{ssub:second_quantization}
+
+We may transform the coordinates and momenta of the phonons to the canonical coordinates
+\[ Q_k = N^{-1/2} \sum_s q_s e^{-iksa},\quad \text{and}\quad P_k = N^{-1/2}\sum_s p_s e^{iksa}, \]
+where the allowed $k$ are given by the periodicity conditions as
+\[ k = \frac{2\pi n}{Na},\quad \text{where}\quad n = 0,\pm 1,\cdots,\pm \pare{\half N - 1}, \half N. \]
+The canonical commutation relation
+\[ \brac{Q_k, P_{k'}} = i\hbar \delta\pare{k,k'} \]
+holds. The Hamiltonian may be rewritten
+\[ H = \sum_{s=1}^n \curb{\rec{2M}p_s^2 + \half C\pare{q_{s+1} - q_s}^2} = \sum_k \curb{\rec{2M}P_{k}P^\dagger_k + \half M\omega_k^2 Q_{k}Q^\dagger_k}, \]
+where the properties $P^\dagger_k = P_{-k}$ and $Q^\dagger_k = Q_{-k}$ are used, and 
+\[ \omega_k = \pare{2C/M}^{1/2} \pare{1-\cos ka}^{1/2}. \]
+The equation of motion may be obtained as
+\[ \ddot{Q}_k + \omega_k^2 Q_k = 0, \]
+and the total energy is
+\[ U = \sum_k \pare{n_k + \half}\hbar\omega_k. \]
+\par
+Introducing the creation and annihilation operators
+\[ a^\dagger_k = \sqrt{\frac{M\omega_k}{2\hbar}}Q^\dagger_k - i\sqrt{\rec{2\hbar M\omega_k}}P_k,\quad \text{and}\quad a_k = \sqrt{\frac{M\omega_k}{2\hbar}}Q_k + i\sqrt{\rec{2\hbar M\omega_k}}P_k^\dagger, \]
+we find
+\[ \brac{a_k,a^\dagger_k} = \delta\pare{k,k'}, \]
+and that
+\[ H = \sum_k \hbar\omega_k\pare{a^\dagger_k a_k + \half}. \]
+
+% subsubsection second_quantization (end)
+
+\mathsubsubsection{PhononMomentum}{Momentum...}{Phonon Momentum and Scattering}{Phonon Momentum and Scattering} % (fold)
+\label{ssub:phonon_momentum}
+
+Phonons may be created in the scattering process of photons, where the following conservation law holds if the process creates or absorbs a phonon of wave vector $\+vK$.
+\begin{finaleq}{Conservation of Crystal Momentum}
+    \[ \+vk' \pm \+vK = \+vk + \+vG. \]
+\end{finaleq}
+\par
+If a incident neutron is scattering by a phonon created or absorbed, the consevation of energy
+\[ \frac{\hbar^2 k'^2}{2M_n} \pm \hbar\omega = \frac{\hbar^2 k^2}{2M_n} \]
+holds in addition to the conservation of crystal momentum, whereby the dispersion relation may be exprimentally determined.
+
+% subsubsection phonon_momentum (end)
+
+% subsection quantization_of_phonons (end)
+
+\subsection{Phonon Heat Capacity} % (fold)
+\label{sub:phonon_heat_capacity}
+
+\subsubsection{Planck Distribution} % (fold)
+\label{ssub:planck_distribution}
+
+The total energy of the lattice is
+\[ U = \sum_k \sum_p \expc{n_{k,p}} \hbar\omega_{k,p}, \]
+where $k$ denotes the wave vector and $p$ denotes the polarization state, and $\expc{n}$ obeys the \gloss{Planck distribution}, i.e.
+\[ \inlinefinaleq{\expc{n} = \rec{e^{\beta\hbar\omega} - 1}.} \]
+Therefore, the total energy is written
+\[ \inlinefinaleq{U = \sum_p \int \rd{\omega} \, D_p\pare{\omega} \frac{\hbar\omega}{e^{\beta\hbar\omega} - 1},} \]
+which yields the heat capacity
+\begin{finaleq}{Heat Capacity of the Lattice}
+    \[ C\+_lat_ = k\+_B_ \sum_p \int \rd{\omega}\, D_p\pare{\omega}\frac{\pare{\beta\hbar\omega}^2 e^{\beta\hbar\omega}}{\pare{e^{\beta\hbar\omega} - 1}^2}, \]
+\end{finaleq}
+where $D_p\pare{\omega}$ is the {density of states}.
+\begin{termdef}{Density of States}
+    \[ D_p\pare{\omega}\,\rd{\omega} = \text{Number of states in $\pare{\omega,\omega+\rd{\omega}}$ of polarization $p$.} \]
+\end{termdef}
+\begin{margindef}[-3\baselineskip]{DOS}
+    Density of States.
+\end{margindef}
+\begin{sample}
+    \begin{example}
+        For a one-dimensional chain, the DOS is given by
+        \[ D\pare{\omega} \,\rd{\omega} = \frac{L}{\pi}\cdot \frac{\rd{\omega}}{\rd{\omega}/\rd{k}}, \]
+        where we have used the fact that there are two $k$'s, one positive and one negative, corresponding to each $\omega$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        For a three-dimensional solid, the DOS is given by
+        \[ D\pare{\omega}\,\rd{\omega} = \frac{Vk^2}{2\pi^2}\cdot \frac{\rd{\omega}}{\rd{\omega}/\rd{k}}. \]
+    \end{example}
+\end{sample}
+\begin{finaleq}{General Formula for the DOS}
+    \[ D\pare{\omega} = \frac{V}{\pare{2\pi}^3}\int_S \frac{\rd{S}}{\abs{\grad_{\+vk}\omega}}, \]
+    where the integral is taken over the surface of $\omega = \const$.
+\end{finaleq}
+The \gloss{Van Hove singularity} occurs at those points where $\grad_{\+vk} \omega = 0$.
+
+% subsubsection planck_distribution (end)
+
+\subsubsection{The Debye Model} % (fold)
+\label{ssub:the_debye_model}
+
+With the assumption that, for each polarization,
+\[ \omega = vk, \]
+and that the total number of acoustic phonons is $N$, which yields the \gloss{cutoff frequency}, or the \gloss{Debye frequency},
+\[ \omega\+_D_^3 = \frac{6\pi^2 v^3 N}{V}, \]
+the total energy of one polarization is written
+\[ U_p = \int_0^{\omega\+_D_} \rd{\omega}\, \pare{\frac{V\omega^2}{2\pi^2 v^3}}\pare{\frac{\hbar\omega}{e^{\beta\hbar\omega} - 1}}. \]
+Assuming that the speeds of sound are the same for every polarization, and introducing the \gloss{Debye temperature} $\Theta\+_D_$, defined by $k\+_B_\Theta\+_D_ = \hbar\omega\+_D_$, the total energy is written
+\[ \inlinefinaleq{U = 9Nk\+_B_T \pare{\frac{T}{\Theta\+_D_}}^3 \int_0^{x\+_D_}\rd{x}\, \frac{x^3}{e^x - 1},}\quad \text{where}\quad x = \frac{\Theta\+_D_}{T}, \]
+which yields the heat capacity
+\begin{finaleq}{Heat Capacity of the Debye Model}
+    \[ C_V = 9Nk\+_B_\pare{\frac{T}{\Theta\+_D_}}^3 \int_0^{x\+_D_}\rd{x}\, \frac{x^4 e^x}{\pare{e^x - 1}^2}. \]
+\end{finaleq}
+
+\paragraph{The Debye $T^3$ Law} % (fold)
+\label{par:the_debye_law}
+
+When $T\ll \Theta\+_D_$, $x\+_D_ \rightarrow \infty$ and \begin{margintips}[-2\baselineskip]
+    $\begin{array}{@{}l}
+        \displaystyle \int_0^\infty \frac{x^n}{e^x - 1}\,\rd{x} \\
+        = n!\,\zeta\pare{n+1}.
+    \end{array}$
+\end{margintips}
+\[ C\+_V_ \approx \frac{12\pi^4}{5}Nk\+_B_\pare{\frac{T}{\Theta\+_D_}}^3. \]
+
+% paragraph the_debye_law (end)
+
+% subsubsection the_debye_model (end)
+
+\subsubsection{The Einstein Model} % (fold)
+\label{ssub:the_einstein_model}
+
+Assuming that all phonons have the same frequency, i.e. $D\pare{\omega} = N\delta\pare{\omega-\omega_0}$, the total energy and the heat capacity are given by
+\[ U = \frac{N\hbar\omega_0}{e^\beta\hbar\omega_0 - 1},\quad \text{and}\quad C_V = Nk\+_B_\pare{\beta\hbar\omega}^2 \frac{e^{\beta\hbar\omega}}{\pare{e^{\beta\hbar\omega} - 1}^2}, \]
+which yields the \gloss{Dulong-Petit value} $C_V \rightarrow 3Nk\+_B_$ for $T\rightarrow \infty$.
+\begin{remark}
+    The Debye model is an approximation to the acoustic phonons and the Einstein model is to the optical phonons.
+\end{remark}
+
+% subsubsection the_einstein_model (end)
+
+% subsection phonon_heat_capacity (end)
+
+\subsection{Anharmonic Crystal Interactions} % (fold)
+\label{sub:anharmonic_crystal_interactions}
+
+\subsubsection{Thermal Expansion} % (fold)
+\label{ssub:thermal_expansion}
+
+With $U\pare{x} = cx^2 - gx^3 - fx^4$, we find
+\[ \expc{x} = \frac{\displaystyle \int_{-\infty}^{\infty} \rd{x}\, x e^{-\beta U\pare{x}}}{\displaystyle \int_{-\infty}^\infty \rd{x}\, e^{-\beta U\pare{x}}} \approx \frac{3g}{4c^2}k\+_B_T. \]
+Therefore, anharmonic interacion accounts for thermal expansion.
+
+% subsubsection thermal_expansion (end)
+
+% subsection anharmonic_crystal_interactions (end)
+
+\subsection{Thermal Conductivity} % (fold)
+\label{sub:thermal_conductivity}
+
+From the kinetic theory of gases we obtain the following expression fo the thermal conductivity,
+\[ \kappa = \rec{3}Cvl, \]
+where $C$ is the heat capacity of the phonons, $v$ the phonon velocity and $l$ is the phonon mean free path.
+
+\subsubsection{Thermal Resistivity of Phonon Gas} % (fold)
+\label{ssub:thermal_resistivity_of_phonon_gas}
+
+\begin{termdef}{Normal Process, N Process}
+    A phonon scattering process where
+    \[ \+vK_1 + \+vK_2 = \+vK_3 \]
+    holds.
+\end{termdef}
+\begin{termdef}{Umklapp Process, U Process}
+    A phonon scattering process where
+    \[ \+vK_1 + \+vK_2 = \+vK_3 + \+vG \]
+    holds and $\+vG \neq 0$.
+\end{termdef}
+At high temperatures, a great portion of the scattering are U process, which accounts for the establishment of equilibrium.
+
+% subsubsection thermal_resistivity_of_phonon_gas (end)
+
+\subsubsection{Imperfections} % (fold)
+\label{ssub:imperfections}
+
+At low temperatures, the umklapp process becomes ineffective in limiting the thermal conductivity, and the size effect becomes dominant. The mean feww path would be constant and of the order of the diameter $D$ of the specimen, so that
+\[ \kappa \approx CvD, \]
+where $C \propto T^3$.
+
+% subsubsection imperfections (end)
+
+% subsection thermal_conductivity (end)
+
+% section phonons (end)
+
+\end{document}

@@ -7,10 +7,10 @@
 \usepackage{tensor}
 \usepackage{colortbl}
 
-\definecolor{graybg}{RGB}{228,235,243}
-\definecolor{titlepurple}{RGB}{150,131,104}
+\definecolor{graybg}{RGB}{241,243,245}
+\definecolor{titlepurple}{RGB}{116,95,181}
 \definecolor{shadegray}{RGB}{102,119,136}
-\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{itemgray}{RGB}{170,170,170}
 \definecolor{mathnormalblack}{RGB}{0,0,0}
 \pagecolor{graybg}
 
@@ -53,10 +53,12 @@
 \def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
 \vspace{-4em}}
 \newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+\newcommand*{\mysans}{\fontfamily{phv}\selectfont}
+\definecolor{CJKblack}{RGB}{72,72,72}
 
 \begin{document}
 
-\begin{multicols*}{3}[\centerline{\titlefont 第4章ノ概要}]
+\begin{multicols*}{3}[\centerline{\titlefont 積分変換}]
 \raggedcolumns%
 \newheader{Fourier変換}
 \begin{cheatresume}
@@ -81,7 +83,14 @@
     \end{flalign*}
     \midbreak
     \begin{flalign*}
-        && 1 & \mapsto 2\pi\delta\pare{p} & x^n & \mapsto 2\pi i^n \delta^{\pare{n}}\pare{p} &&
+        && 1 & \mapsto 2\pi\delta\pare{p} & x^n & \mapsto 2\pi i^n \delta^{\pare{n}}\pare{p} && \\
+        && \half e^{-\abs{x}} & \mapsto \rec{1+p^2} & e^{-x^2/2} & \mapsto \sqrt{2\pi}e^{-w^2/2} && 
+    \end{flalign*}
+\end{cheatresume}
+\newheader{\mysans{Useful Bullshit}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \int_{0}^{+\infty} \cos tx\,\rd{x} = \pi \delta\pare{t} && \int_0^{+\infty} \sin tx\,\rd{x} = \rec{t} &&
     \end{flalign*}
 \end{cheatresume}
 
@@ -106,13 +115,16 @@
         & \mathitem{微分} && L\brac{f^{\pare{n}}\pare{t}} = p^n\tilde{f}\pare{p} - p^{n-1}f\pare{0} - \cdots - f^{\pare{n-1}}\pare{0} && \\
         & && F^{-1}\brac{\tilde{f}^{\pare{n}}\pare{p}} = \pare{-t}^n f\pare{t} && \\
         & \mathitem{積分} && F\brac{\int_0^t \,\rd{\tau}\,f\pare{\tau}} = \frac{\tilde f\pare{p}}{p} && \\
-        & && F^{-1}\brac{\int_{p}^\infty \rd{q}\, \tilde f\pare{p}} = \frac{f\pare{t}}{t} &&
+        & && F^{-1}\brac{\int_{p}^\infty \rd{p}\, \tilde f\pare{p}} = \frac{f\pare{t}}{t} && \\
+        & && \int_0^\infty \frac{f\pare{\tau}}{\tau}\,\rd{\tau} = \int_0^\infty \tilde f\pare{p}\,\rd{p} &&
     \end{flalign*}
     \midbreak
     \begin{flalign*}
+        \delta\pare{t-\alpha} & \mapsto e^{-\alpha p} & \eta\pare{t-\alpha} & \mapsto \rec{p}e^{-\alpha p} \\
         1 & \mapsto \rec{p} & t^n & \mapsto \frac{n!}{p^{n+1}} \\
         \sinh \omega t & \mapsto \frac{\omega}{p^2 - \omega^2} & \cosh \omega t &\mapsto \frac{p}{p^2 - \omega^2} \\
-        e^{\lambda t}\sin\omega t & \mapsto \frac{\omega}{\pare{p-\lambda}^2 + \omega^2} & e^{\lambda t}\cos\omega t & \mapsto \frac{p-\lambda}{\pare{p-\lambda}^2 + \omega^2}
+        e^{\lambda t}\sin\omega t & \mapsto \frac{\omega}{\pare{p-\lambda}^2 + \omega^2} & e^{\lambda t}\cos\omega t & \mapsto \frac{p-\lambda}{\pare{p-\lambda}^2 + \omega^2} \\
+        \frac{e^{-\rec{4t}}}{2\sqrt{\pi}t^{3/2}} & \mapsto e^{-\sqrt{p}} & \+:c2c{$\displaystyle \erfc\pare{\rec{2\sqrt{t}}} \mapsto \frac{e^{-\sqrt{p}}}{p}$}
     \end{flalign*}
 \end{cheatresume}
 
@@ -130,10 +142,19 @@
     \begin{flalign*}
         & \displaystyle \begin{array}[t]{@{}l!{\color{lightgray}\vrule}l}%
          \mathitem{微分}\quad F_s\brac{f'} = -p\hat f_c\pare{p} & F_s\brac{f''} = -p^2 \hat f_s\pare{p} + pf\pare{0}  \\%
-         \quad F_c\brac{f'} = p\hat f_s\pare{p} - f\pare{0} & F_c\brac{f''} = -p^2 \hat f_c\pare{p} - f'\pare{0} \end{array} && \\
-         &\mathheadcomment{\ Dirichlet境界条件の場合は正弦変換を使う} && \\ % 選ぶ
-         &\mathheadcomment{\ Neumannは余弦変換を使う} && \\
-         &\mathheadcomment{\ Robinはその線型結合を作る} &&
+         \quad F_c\brac{f'} = p\hat f_s\pare{p} - f\pare{0} & F_c\brac{f''} = -p^2 \hat f_c\pare{p} - f'\pare{0} \end{array} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\newheader{正弦及ビ余弦、Laplace変換ノ違イ}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \+:c5l{\color{CJKblack} Dirichlet境界条件の場合には正弦変換を使う} \\
+        & \mathitem{例} && u_t = a^2 u_{xx},\ u\vert_{x=0} = \varphi\pare{t},\ u\vert_{t=0} = 0 && \\
+        & && \Rightarrow \tilde{u}_t = a^2 \pare{-w^2 \tilde{u} + w\varphi\pare{t}},\ \tilde{u}\vert_{t=0} = 0 && \\
+        & \+:c5l{\color{CJKblack} Neumannには余弦変換を使う} \\
+        & \+:c5l{\color{CJKblack} Robinにはその線型結合を作る} \\
+        & \+:c5l{\color{CJKblack} $u\vert_{t=0}$も$u_t\vert_{t=0}$も与えられた$\Rightarrow $ Laplace変換を使う}
     \end{flalign*}
 \end{cheatresume}
 

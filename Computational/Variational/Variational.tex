@@ -1,0 +1,129 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Computational\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\begin{document}
+
+\section{Variational Method} % (fold)
+\label{sec:variational_method}
+
+\subsection{Variational Calculus} % (fold)
+\label{sub:variational_calculus}
+
+The solution of the Schr\"odinger equation demands that
+\[ E\brac{\psi} = \frac{\bra{\psi}H\ket{\psi}}{\bra{\psi}\ket{\psi}} \]
+reach its minimum. Expanding
+\[ \ket{\psi} = \sum_p C_p\ket{\chi_p} \]
+with an orthonormal basis $\ket{\chi_p}$ such that $\bra{\chi_p}\ket{\chi_q} = \delta_{pq}$ yields
+\[ E = \frac{\sum_{p,q=1}^N C^*_p C_q H_{pq}}{\sum_{p,q=1}^N C^*_p C_q \delta_{pq}}, \]
+where
+\[ H_{pq} = \bra{\chi_p}H\ket{\chi_q}. \]
+The stationary conditional requires
+\[ \sum_{q=1}^N \pare{H_{pq} - E\delta_{pq}} C_q = 0,\quad \mathrm{for}\quad p=1,\cdots,N, \]
+or, in matrix notation,
+\[ \inlinefinaleq{\+vH\+vC = E \+vC.} \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Gerneralised Eigenvalue Problem}
+    If a non-orthonormal basis is used, with $S_{eq} = \bra{\chi_p}\ket{\chi_q}$, the sitationary conditional becomes
+    \[ \+vH\+vC = E\+vS\+vC. \]
+\end{finaleq}
+
+% subsection variational_calculus (end)
+
+\subsection{Solution of the Generalised Eigenvalue Problem} % (fold)
+\label{sub:solution_of_the_generalised_eigenvalue_problem}
+
+With $\+vV^\dagger \+vS \+vV = \+vI$, $\+vC' = \+vV^{-1}\+vC$, and $\+vH' = \+vV^\dagger \+vH \+vV$, we obtain
+\[ \+vH'\+vC' = E \+vC'. \]
+After diagonalizsing $\+vS$ by, for example, Givens-Householder $QR$ procedure,
+\[ \+vU^\dagger \+vS \+vU = \+vs, \]
+we have $\+vV = \+vU \+vs^{-1/2}$.
+
+% subsection solution_of_the_generalised_eigenvalue_problem (end)
+
+\subsection{Perturbation Theory} % (fold)
+\label{sub:perturbation_theory}
+
+Starting with an orthonormal basis, for example a set of plane waves. The basis is partitioned into two sets $A$ and $B$, where $A$ contain those of short wavelengths and $B$ of those long. Defining
+\[ H'_{pq} = H_{pq}\pare{1-\delta_{pq}},\quad h'_{pn} = \frac{H'_{pn}}{E-H_{pp}} \]
+yields
+\[ C_p = \sum_{n\in A}h'_{pn} C_n + \sum_{n\in B} h'_{p\alpha}C_\alpha. \]
+The $C_n$ and \begin{marginwarns}
+    L\"owdin's method requires $E$ be known before the calculation.
+\end{marginwarns} $C_\alpha$ in the above equation could be expanded using again the equation itself, which yields
+\[ C_p = \sum_{n\in A} \frac{U_{pn}^A - H_{pn}\delta_{pn}}{E - H_{pp}} C_n, \]
+where
+\[ U_{pn}^A = H_{pn} + \sum_{\alpha\in B} \frac{H'_{p\alpha}H'_{\alpha n}}{E-H_{\alpha\alpha}} + \sum_{\alpha\beta\in B} \frac{H'_{p\alpha} H'_{\alpha\beta} H'_{\beta n}}{\pare{E - H_{\alpha\alpha}} \pare{E - H_{\beta\beta}}} + \cdots. \]
+The equation of $C_p$ could be simplified as
+\[ \+vU \+vC = E \+vC, \]
+where $U$ is the $U^A_{pn}$ defined above and may be truncated.
+
+% subsection perturbation_theory (end)
+
+% section variational_method (end)
+
+\end{document}

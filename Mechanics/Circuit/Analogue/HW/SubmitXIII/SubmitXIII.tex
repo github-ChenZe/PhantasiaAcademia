@@ -1,0 +1,219 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\pgfplotsset{compat=newest}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+\def\rD{\mathrm{D}}
+\newcommand{\mathmin}[2]{(#1+#2)/2-abs(#1-#2)/2}
+\newcommand{\mathmax}[2]{(#1+#2)/2+abs(#1-#2)/2}
+
+\begin{document}
+
+\newprob{2.3.2 (a)}%
+$\displaystyle v\+_o_ = \pare{1+\frac{R_2}{R_1}}v_1 = \boxed{\SI{6}{\volt}.}$
+\par
+\newprobheader{(b)}%
+$\displaystyle v\+_o_ = \pare{1+\frac{R_2}{R_1}}v_1 = \boxed{\SI{6}{\volt}.}$
+\par
+\newprobheader{(c)}%
+$\displaystyle v\+_o_ = v\+_n_ + \SI{2}{\volt} = \boxed{\SI{2}{\volt}.}$
+\par
+\newprobheader{(d)}%
+$\displaystyle v\+_o_ = v\+_p_ = \boxed{\SI{2}{\volt}.}$
+%
+\newprob{2.3.3 (a)}%
+$\displaystyle v\+_p_ = \frac{R_2}{R_1+R_2} = \SI{2}{\volt}.$\\
+$\displaystyle i_1 = i_2 = \frac{v\+_i_}{R_1 + R_2} = \boxed{\SI{0.333}{\milli\ampere}.}$\\
+$\displaystyle v\+_o_ = \pare{1+\frac{R_4}{R_3}}v\+_p_ = \boxed{\SI{4}{\volt}.}$\\
+$\displaystyle i_3 = i_4 = -\frac{v\+_n_}{R_3} = -\boxed{\SI{0.2}{\milli\ampere}.}$\\
+$\displaystyle i\+_L_ = \frac{v\+_o_}{R\+_L_} = \boxed{\SI{0.8}{\milli\ampere}.}$\\
+$\displaystyle i\+_o_ = i\+_L_ - i_4 = \boxed{\SI{1}{\milli\ampere}.}$
+\par
+\newprobheader{(b)}%
+$\displaystyle i_1 = i_2 = \frac{v\+_i_}{R_1} = \boxed{0.01\sin \omega t \SI{}{\milli\ampere}.}$\\
+$\displaystyle v\+_o_ = -{\frac{R_2}{R_1}}v\+_i_ = \boxed{-150\sin \omega t \SI{}{\milli\volt}.}$\\
+$\displaystyle i\+_L_ = \frac{v\+_o_}{R\+_L_} = \boxed{-0.03\sin \omega t \SI{}{\milli\ampere}.}$\\
+$\displaystyle i\+_o_ = i\+_L_ - i_2 = \boxed{-0.04\sin \omega t \SI{}{\milli\ampere}.}$
+\par
+\newprobheader{(c)}%
+$\displaystyle i_1 = i_{21} = \frac{v\+_i1_}{R_1} = \boxed{\SI{0.012}{\milli\ampere}.}$\\
+$\displaystyle v\+_o1_ = -\frac{R\+_21_}{R_1} = {\SI{-1.2}{\volt}.}$\\
+$\displaystyle i_2 = i_{22} = \frac{v\+_o1_-v\+_i2_}{R_2} = \boxed{\SI{-0.02}{\milli\ampere}.}$\\
+$\displaystyle i\+_o1_ = i_2 - i_{21} = \boxed{\SI{0.032}{\milli\ampere}.}$\\
+$\displaystyle v\+_o_ = v\+_i2_ - \frac{R_{22}}{R_2}\pare{v\+_o1_ - v\+_i2_} = \boxed{\SI{1.8}{\volt}.}$
+%
+\newprob{2.3.4 (1)}%
+$\displaystyle R_1 \ge \frac{v\+_i_}{i\+_max_} = \frac{\SI{0.8}{\volt}}{\SI{100}{\micro\ampere}} = \boxed{\SI{8}{\kilo\ohm}.}$\\
+$\displaystyle R_2 = 9R_1 \ge \boxed{\SI{72}{\kilo\ohm}.}$
+\begin{center}
+\begin{tikzpicture}
+        \draw
+        (0,0) node[op amp,yscale=-1] (opamp) {}
+        (opamp.+) to[short,-o] ++(-0.5,0) node[left] {$v\+_i_$}
+        (opamp.-) to[short] ++ (0,-1) node(n) {}
+        to[resistor,R=$\SI{8}{\kilo\ohm}$] ++(0,-2)
+        node[rground]{}
+        (opamp.out) to[short] ++(0.5,0) node(o) {}
+        (o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        (opamp.out) to[short,*-]
+        (opamp.out|-n) to[resistor,R=$\SI{72}{\kilo\ohm}$,-*]
+        (n)
+        ;
+\end{tikzpicture}
+\end{center}
+\par
+\newprobheader{(2)}%
+$\displaystyle R_1 \ge \abs{\frac{v\+_i_}{i\+_max_}} = \frac{\SI{1}{\volt}}{\SI{20}{\micro\ampere}} = \boxed{\SI{50}{\kilo\ohm}.}$\\
+$\displaystyle R_2 = 8R_1 \ge \boxed{\SI{400}{\kilo\ohm}.}$
+\begin{center}
+\begin{tikzpicture}
+        \draw
+        (0,0) node[op amp] (opamp) {}
+        (opamp.-) to[resistor,R=$\SI{50}{\kilo\ohm}$,-o] ++(-2,0) node[left] {$v\+_i_$}
+        (opamp.out) to[short] ++(0.5,0) node(o) {}
+        (o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        (opamp.+) -- ++(0,-0.5)
+        node[rground]{}
+        (opamp.-) to[short,*-]
+        ++(0,1) node(nabove){} to[resistor,R=$\SI{400}{\kilo\ohm}$]
+        (nabove-|o) to[short]
+        (o)
+        ;
+\end{tikzpicture}
+\end{center}
+\newprob{2.3.5 (1)}%
+使用Th\'evenin定理将电流源等效为内阻$R\+_si_$, 电压$v\+_s_ = i\+_s_R\+_si_$的电压源, 则电路为反相放大器, $v\+_o_ = -\frac{R}{R\+_si_}v\+_s_ = -i\+_s_R$.\\
+电压并联负反馈$\Rightarrow \boxed{R\+_i_ \rightarrow 0, R\+_o_ \rightarrow 0.}$
+\par
+\newprobheader{(2)}%
+$A_r = \boxed{\SI{10}{\kilo\ohm}.}$\\
+$\displaystyle v\+_o_ = -i\+_s_R = \boxed{\SI{-5}{\volt}.}$
+%
+\newprob{2.4.5}%
+$\displaystyle v\+_o1_ = v\+_i1_$, $\displaystyle v\+_o2_ = v\+_i2_$.\\
+$\displaystyle v\+_p3_ = v\+_n3_ = \frac{R_2}{R_1 + R_2}v\+_o1_ = \frac{R_2}{R_1 + R_2}v\+_i1_$.\\
+$\displaystyle v\+_o4_ = v\+_p3_ + \frac{R_2}{R_1}\pare{v\+_p3_ - v\+_o2_} = \frac{R_2}{R_1}\pare{v\+_i1_ - v\+_i2_}.$\\
+$\displaystyle v\+_o_ = -\frac{R'_4}{R_3}v\+_o4_ = \boxed{-\frac{R'_4 R_2}{R_3 R_1}\pare{v\+_i1_ - v\+_i2_}.}$
+%
+\newprob{2.4.6}%
+\vspace{-\baselineskip}
+\begin{center}
+\begin{tikzpicture}
+        \draw
+        (0,0) node[op amp] (opamp) {}
+        (opamp.-) to[short] ++(-0.5,0) to[resistor,R=$\SI{40}{\kilo\ohm}$,*-o] ++(-2,0) node[left] {$v\+_i1_$}
+        (opamp.-) ++(-0.5,0) to[short] ++(0,1) to[resistor,l=$\SI{20}{\kilo\ohm}$,*-o] ++(-2,0) node[left] {$v\+_i2_$}
+        (opamp.-) ++(-0.5,0) to[short] ++(0,2) to[resistor,l=$\SI{80}{\kilo\ohm}$,*-o] ++(-2,0) node[left] {$v\+_i3_$}
+        (opamp.-) ++(-0.5,0) to[short] ++(0,3) to[resistor,l=$\SI{28}{\kilo\ohm}$,-o] ++(-2,0) node[left] {$v\+_i4_$}
+        (opamp.out) node(o) {}
+        (o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        (opamp.+) node[rground]{}
+        (opamp.-) to[short,*-]
+        ++(0,1) node(nabove){} to[resistor,R=$\SI{280}{\kilo\ohm}$]
+        (nabove-|o) to[short,-*]
+        (o)
+        ;
+\end{tikzpicture}
+\end{center}
+%
+\newprob{2.4.7 (1)}%
+$\displaystyle v\+_o_ = \pare{1+\frac{R_4}{R_3}}v\+_p_ = \boxed{\pare{1+\frac{R_4}{R_3}}\frac{R_2 v\+_i1_ + R_1 v\+_i2_}{R_1 + R_2}.}$\\
+$\displaystyle R_1=R_2=R_3=R_4 \Rightarrow v\+_o_ = \boxed{v\+_i1_ + v\+_i2_.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle v\+_o_ = v\+_p_ = \boxed{\frac{R_2R_3 v\+_i1_ + R_1R_3 v\+_i2_ + R_1R_2 v\+_i3_}{R_2R_3 + R_1R_3 + R_1R_2}.}$\\
+$\displaystyle R_1=R_2=R_3 \Rightarrow v\+_o_ = \boxed{\frac{v\+_i1_ + v\+_i2_ + v\+_i3_}{3}.}$
+%
+\newprob{2.4.8}%
+$\displaystyle v\+_p_ = \pare{\frac{v\+_i3_}{R_3} + \frac{v\+_i4_}{R_4}}\pare{R_3\parallel R_4\parallel R_5} = \frac{6}{11}v\+_i3_ + \frac{3}{11}v\+_i4_$.\\
+$\displaystyle v\+_o_ = v\+_p_ - R_6\pare{\frac{v\+_i1_ - v\+_p_}{R_1} + \frac{v\+_i2_ - v\+_p_}{R_2}} = \boxed{-\frac{5}{4}v\+_i1_ - 2v\+_i2_ + \frac{51}{22}v\+_i3_ + \frac{51}{44}v\+_i4_.}$
+%
+\newprob{2.4.9}%
+$\displaystyle v\+_o1_ = \boxed{\SI{-3}{\volt}.}$\\
+$\displaystyle v\+_o2_ = \boxed{\SI{4}{\volt}.}$\\
+$\displaystyle v\+_n3_ = v\+_p3_ = \frac{R_5}{R_4+R_5} V_3 = \SI{2}{\volt}.$\\
+$\displaystyle v\+_o_ = v\+_p_ - \frac{R_3}{R_1}\pare{v\+_o1_ - v\+_p3_} - \frac{R_3}{R_2}\pare{v\+_o2_ - v\+_p3_} = \boxed{\SI{5}{\volt}.}$
+%
+\newprob{2.4.11 (1)}%
+$\displaystyle v\+_n1_ = v\+_p1_ = \frac{R_3}{R_2+R_3}v\+_i2_$,\\
+$\displaystyle v\+_o1_ = v\+_p1_ - \frac{R_4}{R_1}\pare{v\+_i1_ - v\+_p1_} = \frac{R_3\pare{R_1+R_4}}{R_1\pare{R_2+R_3}}v\+_i2_ - \frac{R_4}{R_1}v\+_i1_$.\\
+记$\displaystyle \+sC = \rec{C}\int_0^t \rd{\tau}$,\\则
+$\displaystyle v\+_o_ = -\frac{\+sC}{R_6}v\+_i3_ - \frac{\+sC}{R_5}v\+_o1_ = \boxed{- \rec{C}\int_0^t \brac{ \frac{v\+_i3_}{R_6} + \rec{R_5}\frac{R_3\pare{R_1+R_4}}{R_1\pare{R_2+R_3}}v\+_i2_ - \rec{R_5}\frac{R_4}{R_1}v\+_i1_ }\,\rd{\tau}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle v\+_o_ = \boxed{-\rec{RC}\int_0^t \pare{v\+_i3_ + v\+_i2_ - v\+_i1_}\,\rd{\tau}.}$
+%
+\newprob{2.4.13}%
+$\displaystyle v\+_o_ = -RC\+dtd{v\+_o_} = -\SI{1}{\second}\cdot \+dtd{v\+_o_}$.
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=center,
+        ylabel=$v\+_o_/\SI{}{\volt}$,xlabel=$t/\SI{}{\second}$,xmin=0,xmax=45,ymin=-7,ymax=7,xtick={10,20,30,40},xticklabels={$10$,$20$,$30$,$40$},ytick={-5,0,5},yticklabels={$-0.1$, $0$, $0.1$}, %
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=north,
+        %right=6.5em,
+        %above=-2em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=0,
+        %above=3em,
+        %right=0em
+        },clip=false,height=5cm,width=8cm]
+    \draw[very thick] (0,-5) -- (10,-5) -- (10,0) -- (30,0) -- (30,5) -- (40,5);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+%
+\newprob{2.4.15 (1)}%
+$\displaystyle \tilde{v}\+_o_ = -\frac{\displaystyle R_2 + \rec{i\omega C}}{R_1}\tilde{v}\+_i_ \Rightarrow A_v\pare{s} = \boxed{-\pare{\frac{R_2}{R_1} + \rec{sR_1C}}.}$
+\par
+\newprobheader{(2)}%
+\vspace{-\baselineskip}
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=center,
+        ylabel=$v\+_o_/\SI{}{\volt}$,xlabel=$t/\SI{}{\second}$,xmin=0,xmax=45,ymin=-7,ymax=7,xtick={10,20,30,40},xticklabels={$t_1$,$t_2$,$t_3$,$t_4$},ymajorticks=false,
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=north,
+        %right=6.5em,
+        %above=-2em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=0,
+        %above=3em,
+        %right=0em
+        },clip=false,height=5cm,width=8cm]
+    \draw[very thick] (0,4) -- (10,5) -- (10,-3) -- (20,-4) -- (20,4) -- (30,5) -- (30,-3) -- (40,-4);
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\end{document}

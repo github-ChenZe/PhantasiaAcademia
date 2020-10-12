@@ -1,0 +1,124 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{arrows.meta}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+    \tikzset{
+    partial ellipse/.style args={#1:#2:#3}{
+        insert path={+ (#1:#3) arc (#1:#2:#3)}
+    }}
+
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareSIUnit\year{yr}
+
+\begin{document}
+
+\newprob{8.1}%
+\vspace{-\baselineskip}
+\[ \Delta t = \rec{c}\cdot \gamma\pare{c\Delta t' + \beta \Delta x} = \SI{3.75e-8}{\second}. \]
+故$B$领先$\boxed{\SI{3.75e-8}{\second}.}$
+\newprob{8.2}%
+在车厢系中,
+\[ \Delta x' = l,\quad \Delta t' = \frac{l}{u}. \]
+故地面系中
+\[ \Delta t = \rec{c}\cdot \gamma\pare{c\Delta t' + \beta \Delta x} = \boxed{\frac{l}{c^2u}\frac{c^2+uv}{\sqrt{1-\pare{v/c}^2}}.} \]
+\newprob{8.3}%
+二尺之间的相对速度为
+\[ \beta' = \frac{2\beta}{1+\beta^2} \Rightarrow \rec{\gamma'} = \sqrt{1-\beta'^2} = \frac{1-\beta^2}{1+\beta^2}. \]
+故
+\[ l = \frac{l_0}{\gamma} = \boxed{\frac{l_0\pare{c^2-v^2}}{c^2+v^2}.} \]
+\newprob{8.4 (1)}%
+由加速度变换公式, 地面系
+\[ a_x = \pare{\sqrt{1-\beta^2}}^3 g \Rightarrow \frac{\beta}{\sqrt{1-\beta^2}} = \frac{gt}{c}. \]
+解得(在第一个加速阶段)
+\[ \beta = \frac{gt/c}{\sqrt{1+\pare{gt/c}^2}} \Rightarrow \frac{\rd{t}}{\sqrt{1+\pare{gt/c}^2}} = \rd{\tau}. \]
+即(在完成一个加速或减速阶段时)
+\[ \frac{c \arcsinh \pare{gt/c}}{g} = \tau \Rightarrow t = \SI{11.136}{\year}. \]
+考虑到出发时$20$岁, 共经过$4$个加速/减速阶段, 回来后地球上的人\boxed{${64.5}\text{岁}.$}
+\par
+\newprobheader{(2)}%
+积分可得在第一个加速阶段
+\[ x = c\brac{\sqrt{\frac{c^2}{g^2} + t^2} - \frac{c}{g}} = \SI{10.2}{\lightyear}. \]
+从而在经过第一个加速阶段和第一个减速阶段后$x = \boxed{\SI{20.4}{\lightyear}.}$
+\newprob{8.5}%
+设宇航员观测到的波长为$\lambda'$, 地面观测者观测到的波长为$\lambda$, 则由Doppler频移公式,
+\[ \frac{\lambda'}{\lambda} = \sqrt{\frac{1-\beta}{1+\beta}} \Rightarrow v = \boxed{\SI{4721}{\kilo\meter\per\second}.} \]
+\newprob{8.6 (1)}%
+保留到$\beta$的一阶项,
+\begin{align*}
+    \tan \theta' - \tan\theta &\approx \frac{\alpha}{\cos^2\theta}, \\
+    \tan \theta' - \tan\theta &= \frac{\sin\theta}{\cos\theta - \beta} - \frac{\sin\theta}{\cos\theta}
+    = \frac{\beta \sin \theta}{\cos\theta\pare{\cos\theta - \beta}}
+     \approx \frac{\beta\sin\theta}{\cos^2\theta}.
+\end{align*}
+从而
+\[ \alpha \approx \beta \sin\theta. \]
+\par
+\newprobheader{(2)}%
+$\alpha = \beta = v/c = \SI{e-4}{\radian} = \boxed{\SI{20.6}{\arcsecond}.}$
+\newprob{8.7}%
+对于$v$和光发射方向相同的情形, $S'$系下
+\[ \omega' = \sqrt{\frac{1-\beta}{1+\beta}}\omega \Rightarrow \omega' - \omega \approx -\beta\omega. \]
+从而$S'$系下光速
+\[ c' = \frac{c}{n\pare{\omega'}} \approx \frac{c}{n\pare{\omega}} - \frac{c}{n\pare{\omega}^2} \+d\omega d{n\pare{\omega}}\,\pare{\omega' - \omega} \approx \frac{c}{n} - \frac{c}{n^2}\+d\omega d{n\pare{\omega}}\cdot {-\beta\omega}. \]
+由速度合成律,
+\begin{align*}
+    u &= \frac{v+c'}{1+vc'/c^2} \approx v + c' - v \pare{\frac{c'}{c}}^2 \approx v+\frac{c}{n} + \rec{n^2}\+d\omega d{n\pare{\omega}}\cdot {v \omega} - \frac{v}{n^2} \\
+    &= \boxed{\frac{c}{n} + v\pare{1 - \rec{n^2} + \frac{\omega}{n^2} \+d\omega d{n\pare{\omega}}}.}
+\end{align*}
+对于$v$和光发射方向相反的情形, 替换$v\rightarrow -v$即可.
+\newprob{8.8}%
+光的4-动量为$\displaystyle p = \frac{\+cE}{c}\pare{1,\+vn}$. 在两个参考系中分别为
+\[ p = \frac{\+cE}{c}\pare{1,\+un},\quad p' = \frac{\+cE'}{c}\pare{1,\+un'}. \]
+两者由Lorentz变换联系.
+\[ \frac{\+cE'}{c} = \frac{\+cE}{c}\cdot \gamma\pare{1-\+v\beta\cdot \+un},\quad \frac{\+cE'}{c}\+un'_\parallel = \frac{\+cE}{c}\cdot\gamma \pare{\+un_\parallel - \frac{\+vv}{c}},\quad \frac{\+cE}{c}\+un_\perp = \frac{\+cE}{c}\+un_\perp. \]
+故
+\begin{align*}
+    \cos\phi' &= \frac{\gamma\pare{\hat u_\parallel - v/c}}{\gamma\pare{1-\+v\beta\cdot \+un}} = \boxed{\frac{\cos\phi - v/c}{1-v\cos\phi/c}.}\\
+    \cos \psi' &= \frac{\cos\psi}{\gamma\pare{1 - \+v\beta\cdot \+un}} = \boxed{\frac{\cos\psi}{\gamma\pare{1-v\cos\phi/c}}.} \\
+    \cos \chi' &= \frac{\cos\chi}{\gamma\pare{1 - \+v\beta\cdot \+un}} = \boxed{\frac{\cos\chi}{\gamma\pare{1-v\cos\phi/c}}.} 
+\end{align*}
+
+\end{document}

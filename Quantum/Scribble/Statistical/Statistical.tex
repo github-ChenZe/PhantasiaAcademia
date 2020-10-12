@@ -1,0 +1,103 @@
+\documentclass[hidelinks]{article}
+
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\usepackage[most]{tcolorbox}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\newcommand{\titlefont}{\tt }
+\newcommand{\mathtextfont}{\mysans }
+\newcommand{\emphbox}[1]{\colorbox{lightgray!20}{$\displaystyle #1$}}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple}\mysans #1\qquad}}
+\vspace{1em}
+\mbox{{\Large\color{titlepurple}\mysans #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}}
+}
+\def\newsimpheader#1{%
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}\newline
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\mitensor#1{\stackon[-0.1ex]{\+v#1}{\boldsymbol{\leftrightharpoonup{#1}}} }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+:}%
+
+\newcommand*{\mysans}{\fontfamily{phv}\selectfont}
+\definecolor{emphgreen}{RGB}{238,255,207}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+
+    \tikzset{
+    partial ellipse/.style args={#1:#2:#3}{
+        insert path={+ (#1:#3) arc (#1:#2:#3)}
+    }}
+
+\usepackage{physics}
+\usepackage{bbm}
+
+\begin{document}
+
+\begin{multicols*}{3}[\centerline{\titlefont Quantum Statistical Mechanics}]
+\raggedcolumns%
+\newheader{Density Matrix}
+\begin{cheatresume}
+\begin{gather*}
+    \rho = \sum_j p_j \ket{\psi_j}\bra{\psi_j} \\
+    \trace{\rho} = 1 \\
+    \brac{A} = \trace{\rho A}
+\end{gather*}
+\mathitem{Purity Condition}\quad $\rho = \rho^2 \Leftrightarrow \trace{\rho^2} = 1$ \\
+\mathitem{Evolution} \quad $\displaystyle i\hbar \+DtD{\rho} = \brac{{\color{warningred}H,\rho}}$,\quad $\rho\pare{t} = e^{{\color{warningred}-iHt}/\hbar}\rho\pare{0}e^{{\color{warningred}iHt}/\hbar}$
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

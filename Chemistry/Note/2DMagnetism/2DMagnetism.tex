@@ -1,0 +1,479 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=C.Z.,gakka=Magnetochemistry,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage{biblatex}
+\bibliography{2DMagnetism.bib}
+
+\definecolor{dcyan}{RGB}{0,76,84}
+\let\oldce\ce
+\def\ce#1{{\textsf{\color{dcyan}\oldce{#1}}}}
+
+\begin{document}
+
+\section{2D Magmetism in vdW Materials} % (fold)
+\label{sec:2d_magmetism}
+
+\subsection{Theoretical Models} % (fold)
+\label{sub:theoretical_models}
+
+\subsubsection{Magnetism Models} % (fold)
+\label{ssub:magnetism_models}
+
+2D Heisenberg model exhibits neither FM nor AFM while the Ising model does. Magnetic anisotropy is required for magnetism to present.
+\par
+The \gloss{Heisenberg model} may be used to interprete magnetism in, for example, \ce{Cr2Ge2Te6} flakes.
+\par
+Magnets with easy plane anisotropy may be desribed by the \gloss{XY model}, a lattice model of classical spins rotating in a plane.
+\par
+The \gloss{Ising model} describes highly anisotropic magnets, e.g. in \ce{Cr2Si2Te6}.
+\par
+Magnetism in metallic magnets may either be interpreted by the \gloss{Stoner model} or the Heisenberg model with \gloss{RKKY interaction}.
+
+\paragraph{The Stoner Model} % (fold)
+\label{par:the_stoner_model}
+
+Two parameters, the Stoner parameter $I$ and the EDOS \begin{margindef}{EDOS}
+    Electronic DOS.
+\end{margindef} at the Fermi level of the non-spin-polarized system, describes the magnetic state of metals.
+\begin{finaleq}[2\baselineskip]{Stoner Criterion}
+    Metals having a large EDOS at the Fermi level or a large value of exchange interaction, i.e. $I\rho\pare{E_F} > 1$, tend to be FM.
+\end{finaleq}
+\begin{termdef}{The ME Effect}
+    The induction of magnetization (polarization) by an electric (magnetic) field.
+\end{termdef}
+The ME effect requires the breaking of both time-reversak and spatial-inversion symmetries.
+\begin{finaleq}{Interlayer Exchange Constant}
+    The interlayer exchange constant is
+    \[ J_\perp = \mu_0 M\+_S_\pare{H\+_sf_ - \frac{M\+_S_}{2t}}, \]
+    where $H\+_sf_$ is the spin-flip field.
+\end{finaleq}
+
+% paragraph the_stoner_model (end)
+
+\paragraph{The Stoner-Wohlfarth Model} % (fold)
+\label{par:the_stoner_wohlfarth_model}
+
+A modified \gloss{Stoner-Wohlfarth model} may describe the 2D vdW ferromagetic materials with strong perpendicular anisotropy.
+
+% paragraph the_stoner_wohlfarth_model (end)
+
+% subsubsection magnetism_models (end)
+
+\subsubsection{Transport Properties} % (fold)
+\label{ssub:transport_properties}
+
+\begin{termdef}{Spin-Filter}
+    A junction that filter out one spin direction by creating different barriers for electrons of different spins.
+\end{termdef}
+\begin{termdef}{TMR}
+    Tunnel magnetoresistance, where the resistance is controlled by the magnetic order of the ferromagnetic layers.
+\end{termdef}
+\begin{termdef}{Electrostatic Doping}
+    Where a positive gate bias induces an electron population that spreads over the body.
+\end{termdef}
+
+% subsubsection transport_properties (end)
+
+% subsection theoretical_models (end)
+
+\subsection{Sample Preparation} % (fold)
+\label{sub:sample_preparation}
+
+\subsubsection{Bulk Single-Crystal Growth} % (fold)
+\label{ssub:bulk_single_crystal_growth}
+
+\paragraph{The CVT Method} % (fold)
+\label{par:the_cvt_method}
+
+The chemical vapor transport (\gloss{CVT}) method grows the single crystal at the cold end of a vacuumed quartz tube in a horizontal furnace using high-purity elemental precursors while commercial starting materials are place on the hot end.
+\par
+Applied to \ce{CrX3}, \ce{TMPS3}, and \ce{Fe3GeTe2}.
+
+% paragraph the_cvt_method (end)
+
+\paragraph{Flux Methods} % (fold)
+\label{par:flux_methods}
+
+\gloss{Flux method} is a method of crystal growth where the components of the desired substance are dissolved in a solvent (flux). The residue fluxes are removed by a centrifugation step.
+\par
+Applied to \ce{CrXTe3}, \ce{TMPSe3}, and \ce{Fe3GeTe2}.
+
+% paragraph flux_methods (end)
+
+% subsubsection bulk_single_crystal_growth (end)
+
+\subsubsection{Exfoliation and Encapsulation} % (fold)
+\label{ssub:exfoliation_and_encapsulation}
+
+\paragraph{Exfoliation} % (fold)
+\label{par:exfoliation}
+
+Low cleavage energy allows single-atomic-layer to be obtained. But the weak in-plane bond stiffness lowers the size of the flake if conventional exfoliation is used.
+\par
+\ce{Au}- or \ce{Al2O3}- assisted exfoliation \jgloss{Metal-assisted exfoliation} uses adsorptive molecules in place of the glue, and the tape is released thermally, which is mandatory in exfoliation of \ce{Fe3GeTe2}.
+\par
+Before \begin{margindef}{hBN}
+    Hexagonal Boron Nitride.
+\end{margindef} the flakes are removed from the inert atmosphere in the gloves where they are exfoliated, they should be encapsulated between, for example, hBN or graphene layers to avoid reaction in the ambient condition.
+\par
+The thickness may then be determined by correlating changes in optical contrast with the step height measured using AFM. Raman scattering may provide complementary information.
+
+% paragraph exfoliation (end)
+
+% subsubsection exfoliation_and_encapsulation (end)
+
+% subsection sample_preparation (end)
+
+\subsection{Detecting Magnetic Order} % (fold)
+\label{sub:detecting_magnetic_order}
+
+\mathsubsubsection{MOKE}{MOKE and ...}{From the MOKE and MCD}{From the MOKE and MCD} % (fold)
+\label{ssub:from_the_moke_and_mcd}
+
+\begin{termdef}{MOKE}
+    Magneto-optic Kerr effect. The change of the polarization and intensity of light reflected.
+\end{termdef}
+\begin{termdef}{MCB}
+    Magnetic circular birefringence.
+\end{termdef}
+\begin{termdef}{MCD}
+    Magnetic circular dichroism, where absorption of LCP and RCP light differ.
+\end{termdef}
+The MCD on reflectance is called \gloss{RMCD}.
+\par
+Materials that exhibit an out-of-plane magnetization $M$ may exhibit MCB and MCD, which accrue a difference in the phase and amplitude, respectively, between RCP and LCP light that varies as a function of $M$. This may rotate the polarization of a linearly polarized incident light (due to MOKE) by $\theta\+_K_$ and induces ellipticity (through RMCD).
+\par
+The hysteresis curve showing a nonzero $\Theta\+_K_$ indicates ferromagnetism. ZFC/FC curve of $\Theta\+_K_$ may be used to measure the $T\+_C_$.
+
+% subsubsection from_the_moke_and_mcd (end)
+
+\mathsubsubsection{RAMAN}{From Raman ...}{From Raman Spectroscopy}{From Raman Spectroscopy} % (fold)
+\label{ssub:from_raman_spectroscopy}
+
+The Raman spectroscopy may be used to determine the number and orientation of layers, the quality and types of edge, and the effects of perturbations.
+\par
+Temperature-dependent Raman spectroscopy measures phonon dynamics and spin-phonon coupling.
+
+% subsubsection from_raman_spectroscopy (end)
+
+\subsubsection{From Transport Measurement} % (fold)
+\label{ssub:from_transport_measurement}
+
+For magnetic insulators, the tunneling magnetoresistance (\gloss{MR}) may differ for electrons of opposite spins as the barrier height are different.
+\par
+For magnetic conductors, the Hall resistance $R_{xy}$ of the anomalous Hall effect (\gloss{AHE}) may be measured, yielding the magnetization curve. Various junction-like effect may be seen.
+
+% subsubsection from_transport_measurement (end)
+
+% subsection detecting_magnetic_order (end)
+
+\mathsubsection{CrX3}{CrX\textsubscript{3}}{CrX\textsubscript{3}}{CrX3} % (fold)
+\label{sub:crx3}
+
+\mathsubsubsection{CrX3Bulk}{Bulk}{Bulk Counterparts}{Bulk Counterparts} % (fold)
+\label{ssub:bulk_counterparts}
+
+\begin{table}[ht]
+\centering
+    \begin{tabular}{cccc}
+    \hline
+        Compound & $T\+_C_$/K & Magnetic Order & Spin Orientation \\
+    \hline
+        \ce{CrCl3} & \num{17} & AFM & $\parallelsum$ \\
+        \ce{CrBr3} & \num{37} & FM & $\perp$ \\
+        \ce{CrI3} & \num{61} & FM & $\perp$ \\
+    \hline
+    \end{tabular}
+    \caption{Magnetic properties of layered \ce{CrX3} compounds.}
+\end{table}
+
+The crystal structures are hexagonal, rhombohedral \ce{BiI3} (space group $R\conj{3}$) at low temperatures and monoclinic \ce{AlCl3} (space group $C2/m$) above the phase-transition temperatures where a layer-to-layer shift in the stacking sequence perpendicular to the $ab$ plane occurs.
+\par
+\ce{CrCl3} undergoes a transition at \SI{16.8}{\kelvin} to an AFM state where the magnetic moments within each layers are parallel, but moments of adjacent layers are oppositely directed. It is interpreted that FM ordering within the layers develops first at a higher temperature and then interlayer AFM order sets in at a lower temperature.
+\par
+Moving from \ce{Cl} to \ce{Br} to {I}, the magnetic ordering temperature increases, the spin-orbit coupling increases, and \hl{\emph{the magnetic anisotropy increases}}. \ce{CrBr3} and \ce{CrI3} have their easy axes along the $c$-axis, which corresponds to the \hl{\emph{Ising type}}.
+
+% subsubsection bulk_counterparts (end)
+
+\subsubsection{2D Layers} % (fold)
+\label{ssub:2d_layers}
+
+\paragraph{Magnetism} % (fold)
+\label{par:magnetism}
+
+\ce{CrX3} \hl{\emph{monolayers are all FM}}, and the Curie temperature may be increased by hole doping.
+\par
+The MOKE measurement suggests that monolayer and trilayer \ce{CrI3} are FM while the \hl{\emph{bilayer ones are AFM}}.
+\par
+The AFM in the bilayer is hampered by the inhomogeneous critical fields and spin-flip transition widths. Small remanent magnetization may present due to the symmetry breaking, which results in a remanent RMCD signal at zero field.
+\par
+The AFM in the bilayer and fourlayer is a result of the AFM-favored $C2/m$ structre, in contrast to the FM-favored $R\conj{3}$ sturcture in the bulk at low temperatures.
+
+% paragraph magnetism (end)
+
+\paragraph{Optical Properties} % (fold)
+\label{par:relations_to_optics}
+
+Field-independent spontaneous circularly polarized photoluminescence (PL) on monolayers shows divergent $\sigma^+$ and $\sigma^-$ at low temperatures, whence the dependence of $\rho = \pare{I_+ - I_-}/\pare{I_+ + I_-}$ on $T$ shows a transition at $T\+_C_$ of FM, and field-dependent measurement shows hysteresis, while no such divergence and hysteresis are present in bilayers.
+
+% paragraph relations_to_optics (end)
+
+\paragraph{Transport Properties} % (fold)
+\label{par:relations_to_transport}
+
+Tunneling magnetoresistance in \ce{CrI3} abruptly changes at critical magnetic fields,\inlinenewquestion{What's the direction of the bias voltage and the current, in Figure 13 (a) and (c) of \cite{Li2019}?} which is a result of the transition of magnetic states.
+\par
+Multi-layered \ce{CrI3} shows much greater TMR and much lower tunneling currents, which may be interpreted by the spin-filter model by taking each layer as a spin filter, where the AFM arrangement results in opposite polarizations in adjacent layers.
+
+% paragraph relations_to_transport (end)
+
+\paragraph{Magnetism Tuning} % (fold)
+\label{par:magnetism_controlling}
+
+In dual-gated bilayer \ce{CrCl3} by \ce{SiO2}/\ce{Si} back gate, the magnetic state, AFM or FM, is a function of the applied field $H$ and the back gate voltage $V$, which is controlled by $V$ near the critical field $H\+_C_$. At zero field, the net magnetization is also tuned by the gate voltage. These could be interpreted as a result of change on magnetism by electrostatic doping.
+\par
+Bilayer \ce{CrCl3} also has the linear ME effect where non-zero net magnetization $M$ at zero $H$ is present and proportional to $E$ as well as a critical $H\+_C_$ varying with $E$, which may be exploited to enable magnetic state switching.
+\par
+With elctrostatic doping in \ce{CrI3}-graphene vertical heterostructures, $H\+_C_$ decreases drastically with increasing doping density $n$, and the structure is \hl{\emph{FM at zero field}} above a critical doping density.
+
+% paragraph magnetism_controlling (end)
+
+% subsubsection 2d_layers (end)
+
+% subsection crx3 (end)
+
+\mathsubsection{TMPX3}{TMPX\textsubscript{3}}{TMPX\textsubscript{3}}{TMPX3} % (fold)
+\label{sub:tmpx3}
+
+\mathsubsubsection{TMPX3Bulk}{Bulk}{Bulk Counterparts}{Bulk Counterparts} % (fold)
+\label{ssub:bulk_counterparts}
+
+\begin{table}[ht]
+\centering
+    \begin{tabular}{ccccc}
+    \hline
+        Compound & Structure & $T\+_C_$/K & Magnetic Order & Spin Orientation \\
+    \hline
+        \ce{FePS3} & $C2/m$ & \num{120} & AFM & $\perp$ Ising \\
+        \ce{NiPS3} & $C2/m$ & \num{155} & AFM & $\parallelsum$ XY \\
+        \ce{MnPS3} & $C2/m$ & \num{78} & AFM & $\perp$ Heisenberg \\
+        \ce{CoPS3} & $C2/m$ & \num{122} & AFM & $\parallelsum$ XY \\
+        \ce{FePSe3} & $R\conj{3}$ & \num{120} & AFM & $\perp$ \\
+        \ce{MnPSe3} & $R\conj{3}$ & \num{74} & AFM & $\parallelsum$ \\
+        \ce{CrSiSTe3} & $R\conj{3}$ & \num{32} & FM & $\perp$ Ising \\
+        \ce{Cr2Ge2Te6} & $R\conj{3}$ & \num{61} & FM & $\perp$ Heisenberg \\
+    \hline
+    \end{tabular}
+    \caption{Magnetic properties of \ce{TMPX3} and \ce{CrXTe3} compounds.}
+\end{table}
+
+For X being \ce{S}, the \ce{S} anions presents a layered arrangement with ABC packing, forming a \ce{CdCl2} monoclinic structure with a space group $C2/m$, while TM atoms form a graphene-like honeycomb lattice.
+\par
+For X being \ce{Se}, the \ce{Se} anions presents a AB packing, forming the \ce{CdI2} structural type with an $R\conj{3}$ space group.
+\par
+No crystallographic phase transition has been reported.
+
+% subsubsection bulk_counterparts (end)
+
+\mathsubsubsection{2DLayersTMPX3}{2D Layers}{2D Layers of TMPX\textsubscript{3}}{2D Layers of TMPX3} % (fold)
+\label{ssub:2d_layers}
+
+\paragraph{Magnetism} % (fold)
+\label{par:magnetism}
+
+In \ce{FePS3}, the AFM ground state is present and the critical temperature is almost independent of the thickness.
+\par
+The same holds for \ce{NiPS3} except for the monolayer, where the AFM order is drastically suppressed. The dependence of phonon-freqency difference in few-layer \ce{NiPS3} on temperature coincides with the susceptibility of bulk \ce{NiPS3}.\inlinenewquestion{How are susceptibility and phonon-frequency related?}
+
+% paragraph magnetism (end)
+
+\paragraph{Transport Properties} % (fold)
+\label{par:transport_properties}
+
+\ce{MnPSe3} nanosheets are calculated to become FM semimetals with proper doping. FETs based on \ce{MnPSe3} and \ce{NiPS3} have been fabricated.
+
+% paragraph transport_properties (end)
+
+% subsubsection 2d_layers (end)
+
+\mathsubsubsection{2DLayersCrXTe3}{2D Layers}{2D Layers of CrXTe\textsubscript{3}}{2D Layers of CrXTe3} % (fold)
+\label{ssub:2d_layers}
+
+\ce{CrSiTe3} monolayers may degrade when exposed to air.
+
+\paragraph{Magnetism} % (fold)
+\label{par:magnetism}
+
+FM-AFM transition occurs in \ce{CrXTe3} under small a compression strain, resulting from the competition between the direct AFM interaction and indirect FM superexchange. A tensile strain enhances $T\+_C_$.
+\par
+Calculation shows that \ce{CrGeTe3} is the only member of the \ce{TMPX3} and \ce{CrXTe3} families which has the FM ground state in the unstrained monolayer form by taking $J_3$, the third nearest neighbour exchange, into account. Long range FM order was observed in all few-layer \ce{Cr2Ge2Te6} except for the monolayer, where out-of-plane anisotropy is preferred in the former and in-plane in the latter.
+\par
+$T\+_C_$ in \ce{Cr2Ge2Te6} is a function of thickness and the applied $H$. $T\+_C_$ lowers with increased thickness and significantly raises even with small $H$ applied. In the spin-wave theory, the DOS for magnon modes near the excitation gap is rapidly reduced as the number of layers increases, therefore $T\+_C_$ rises to ensure a sufficient population of excitations to destroy the magnetic order.
+
+% paragraph magnetism (end)
+
+\paragraph{Transport Properties} % (fold)
+\label{par:transport_properties}
+
+\ce{CrSiTe3} and \ce{CrGeTe3} are both half-semiconductors. Electron doping and absorbance of organic molecules could drive \ce{CrXTe3} to half-metal state.
+\par
+\ce{CrSiTe3} FETs, which show p-type characteristics, were successfully fabricated. Field effect is also present in BN-encapsulated \ce{Cr2Ge2Te6}.
+
+% paragraph transport_properties (end)
+
+\paragraph{Magnetism Tuning} % (fold)
+\label{par:magnetism_controlling}
+
+The magnetization curves of \ce{Cr2Ge2Te6} encapsulated in BN or gated by DEME-TFSI are tunable by the gate bias. However, no significant effect on $T\+_C_$ is observed.
+
+% paragraph magnetism_controlling (end)
+
+% subsubsection 2d_layers (end)
+
+% subsection tmpx3 (end)
+
+\mathsubsection{Fe3GeTe2}{Fe\textsubscript{3}GeTe\textsubscript{2}}{Fe\textsubscript{3}GeTe\textsubscript{2}}{Fe3GeTe2} % (fold)
+\label{sub:fe3gete2}
+
+\mathsubsubsection{Fe3GeTe2Bulk}{Bulk}{Bulk Counterparts}{Bulk Counterparts} % (fold)
+\label{ssub:bulk_counterparts}
+
+\ce{Fe3GeTe2} features a layered hexagonal crystal structure of space group $P63/mmc$, where the \ce{Fe3Ge} slabs are sandwiched between \ce{Te} layers. \ce{Fe} atoms occupy two different sites in the crystal lattice, denoted Fe(1) and Fe(2).
+\par
+Deficiency on Fe(2) easily forms. Increasing the \ce{Fe} composition increases the Curie temperature.
+\par
+The \ce{Fe3GeTe2} single crystal exhibits strong out-of-plane easy magnetization anisotropy.
+
+% subsubsection bulk_counterparts (end)
+
+\mathsubsubsection{2DLayerFe3GeTe2}{2D Layers}{2D Layers}{2D Layers} % (fold)
+\label{ssub:2d_layers}
+
+\paragraph{Magnetism} % (fold)
+\label{par:magnetism}
+
+Calculation shows that monolayer \ce{Fe3GeTe2} is of FM ground state with a strong out-of-plane Ising anisotropy. The magnetic anisotropy energy (\gloss{MAE}) and the magnetic moment increases with increasing strain, indicating a \hl{\emph{strong magnetostriction}}. Rectangular hysteresis in RMCD is observed in few-layer cases. For thickness above \SI{15}{\nano\meter}, labyrinthine domains may occur and the loop is phased out. In a certain range of thickness, a ``two-phase'' behavior may occur, where different kinds of hysteresis loops, retangular and flat, are present.
+\par
+$R_{xy}$ shows hysteresis loop as well. The $T\+_C_$ decreases significantly with decreasing thickness in the AHE measurement while remains the same for thickness above five layers in the RMCD measurement.
+
+% paragraph magnetism (end)
+
+\paragraph{Transport Properties} % (fold)
+\label{par:transport_properties}
+
+Calculation shows that monolayer \ce{Fe3GeTe2} is metallic.
+
+% paragraph transport_properties (end)
+
+\paragraph{Magnetism Tuning} % (fold)
+\label{par:magnetism_controlling}
+
+Ionic-liquid gating \begin{margintips}
+    Gating induces electron doping.
+\end{margintips} modulates the ferromagnetism and may boost the $T\+_C_$ up to room temperature.
+
+% paragraph magnetism_controlling (end)
+
+% subsubsection 2d_layers (end)
+
+% subsection fe3gete2 (end)
+
+\subsection{Miscellaneous Materials} % (fold)
+\label{sub:miscellaneous_materials}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lm{4cm}m{4cm}}
+        \hline
+        & Ferromagnetic & Antiferromagnetic \\
+        \hline
+        Metals & \ce{Co(OH)2}, \ce{CoO2}, \ce{ErHCl}, \ce{ErSeI}, \ce{EuOBr},\ce{EuOI}, \ce{FeBr2}, \ce{FeI2}, \ce{FeTe}, \ce{LaCl}, \ce{NdOBr}, \ce{PrOBr}, \ce{ScCl}, \ce{SmOBr}, \ce{SmSI}, \ce{TbBr}, \ce{TmI2}, \ce{TmOI}, \ce{VS2}, \ce{VSe2}, \ce{VTe2}, \ce{YCl}, \ce{YbOBr}, \ce{YbOCl} & \ce{CoI2}, \ce{CrSe2}, \ce{FeO2}, \ce{FeOCl}, \ce{FeSe}, \ce{PrOI}, \ce{VOBr} \\[1em]
+        \\
+        Semiconductors & \ce{CdOCl}, \ce{CoBr2}, \ce{CoCl2}, \ce{CrOBr}, \ce{CrOCl}, \ce{CrSBr}, \ce{CuCl2}, \ce{ErSCl}, \ce{HoSI}, \ce{LaBr2}, \ce{NiBr2}, \ce{NiCl2}, \ce{NiI2} & \ce{CrBr2}, \ce{CrI2}, \ce{LaBr}, \ce{Mn(OH)2}, \ce{MnBr2}, \ce{MnCl2}, \ce{MnI2}, \ce{VBr2}, \ce{VCl2}, \ce{VI2}, \ce{VOBr2}, \ce{VOCl2} \\
+        \hline
+    \end{tabular}
+    \caption{Easily exfoliable magnetic compounds.}
+    \label{table:ee_magnetic}
+\end{table}
+
+Some easily exfoliable magnetic compounds computed with less than \num{6} atoms per cell \cite{Mounet2018} are listed in \cref{table:ee_magnetic}. Note that \ce{CrI3} and \ce{CrGeTe3} are not present because they have more than \num{6} atoms per cell.
+\par
+\ce{VSe2} shows large magnetic moment persisting to above room temperature. Monolayer \ce{Cr3Te4} has a Curie temperature calculated \SI{2057}{\kelvin}, one order of magnitude higher than that of its bulk.
+
+% subsection miscellaneous_materials (end)
+
+% section 2d_magmetism (end)
+
+\subsection{Bibliography} % (fold)
+\label{sub:bibliography}
+
+\printbibliography[heading=none]
+
+% subsection bibliography (end)
+
+\end{document}

@@ -1,0 +1,136 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=M.J.\ Shi,gakka=Quantum\ Mechanics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\diag}{diag}
+
+\def\kurisueniconwidth{3.2cm}
+\def\kurisueniconpath{img/CMSncFS.png}
+
+\begin{document}
+
+\section{Dynamics} % (fold)
+\label{sec:dynamics}
+
+\mathsubsection{TimeEvolution}{Time-Evol...}{Time-Evolution and the Schr\"odinger Equation}{Time-Evolution and the Schrodinger Equation} % (fold)
+\label{sub:time_evolution_and_the_schrodinger_equation}
+
+\mathsubsubsection{Schrodinger}{Schr\"odinger...}{The Schr\"odinger Equation}{The Schrodinger Equation} % (fold)
+\label{ssub:the_schrodinger_equation}
+
+The states at different $t$'s are related by a unitary operator $U\pare{t;t_0}$, i.e.
+\[ \ket{\alpha,t_0;t} = U\pare{t;t_0}\ket{\alpha,t_0}. \]
+$U$ is called the \gloss{time-evolution operator}, which satisfies
+\begin{cenum}
+    \item $\displaystyle \lim_{t\rightarrow t_0} U\pare{t;t_0} = \mathbbm{1}$;
+    \item $U$ is a unitary operator;
+    \item and $U\pare{t_2;t_0} = U\pare{t_2,t_1}U\pare{t_1,t_0}$.
+\end{cenum}
+\begin{finaleq}{Infinitesimal Time-Evolution Operator}
+    \[ U\pare{t_0 + \rd{t}, t_0} = \mathbbm{1} - \frac{iH\,\rd{t}}{\hbar}. \]
+\end{finaleq}
+Therefore, we have
+\[ i\hbar \+DtD{} U\pare{t;t_0} = HU\pare{t;t_0}. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Schr\"odinger Equation}
+    \[ i\hbar \+DtD{} \ket{\alpha,t_0;t} = H\ket{\alpha,t_0;t}. \]
+\end{finaleq}
+If $H$ is independent of $t$, we have
+\[ \inlinefinaleq{U\pare{t;t_0} = e^{-iH\pare{t-t_0}/\hbar}.} \]
+If $H$ is dependent on $t$ and $H$ at different $t$'s commutes, we have
+\[ U\pare{t;t_0} = \exp\brac{-\frac{i}{\hbar} \int_{t_0}^t \rd{t'}\, H\pare{t'}}, \]
+otherwise it should be written as the \gloss{Dyson Series}
+\[ U\pare{t;t_0} = \mathbbm{1} + \sum_{n=1}^\infty \pare{\frac{-i}{\hbar}}^n \int_{t_0}^t \rd{t_1}\,\int_{t_0}^{t_1}\rd{t_2}\,\cdots \, \int_{t_0}^{t_{n-1}}\rd{t_n} \, H\pare{t_1}H\pare{t_2}\cdots H\pare{t_n}. \]
+\par
+For the cases where $H$ is independent of $t$, we may expand any states into summations of the eigenstates of the Hamiltonian, which yields the states at any time $t>t_0$,
+\[ \ket{\alpha,t_0=0;t} = \sum_{a'} \ket{a'}\bra{a'}\ket{\alpha} e^{-iE_{a'}t/\hbar}. \]
+
+% subsubsection the_schrodinger_equation (end)
+
+\subsubsection{Time-Evolution of Expectation Values} % (fold)
+\label{ssub:time_evolution_of_expectation_values}
+
+The expectation values of any operators that commute with $H$ is time-independent. For a general state, we have
+\[ \expc{B} = \sum_{a',a''} C^*_{a'}C_{a''}\bra{a'}B\ket{a''}\exp{-\frac{i}{\hbar}\pare{E_{a'} - E_{a''}}}. \]
+\begin{sample}
+    \begin{example}
+        For $\displaystyle H = -\pare{\frac{e}{mc}}\+vS\cdot \+vB$, we have, for a initial state $\ket{\alpha} = c_+\ket{+} + c_-\ket{-}$,
+        \[ \ket{\alpha,t_0 = 0; t} = c_+ e^{-i\omega t/2}\ket{+} + c_- e^{i\omega t/2}\ket{-}. \]
+        The time-evolution of the initial state $\ket{S_x;+}$ is given by
+        \[ \abs{\bra{S_x;\pm}\ket{\alpha}}^2 = \begin{cases}
+            \cos^2 \pare{\omega t/2}, & +, \\
+            \sin^2 \pare{\omega t/2}, & -.
+        \end{cases} \]
+    \end{example}
+\end{sample}
+
+% subsubsection time_evolution_of_expectation_values (end)
+
+% subsection time_evolution_and_the_schrodinger_equation (end)
+
+% section dynamics (end)
+
+\end{document}

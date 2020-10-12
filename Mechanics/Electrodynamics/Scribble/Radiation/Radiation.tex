@@ -1,0 +1,217 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\newcommand{\emphbox}[1]{\colorbox{lightgray!20}{$\displaystyle #1$}}
+\newcommand*{\mysans}{\fontfamily{phv}\selectfont}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\mitensor#1{\stackon[-0.1ex]{\+v#1}{\boldsymbol{\leftrightharpoonup{#1}}} }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+:}%
+\definecolor{emphgreen}{RGB}{238,255,207}
+\definecolor{warningred}{RGB}{159,57,61}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+
+\begin{document}
+
+\begin{multicols*}{3}[\centerline{\titlefont 電磁放射}]
+\raggedcolumns%
+\newheader{遅延ポテンシャル}
+\begin{cheatresume}
+\begin{flalign*}
+    %& \mathitem{連鎖律} && %\grad \varphi\pare{t_r} = \pare{\grad t_r}\dot\varphi = \dot\varphi\pare{\grad t_r} && \\
+    %& && \grad \+vA\pare{t_r} = \pare{\grad t_r}\dot{\+vA} && \\
+    %& && \div \+vA\pare{t_r} = \pare{\grad t_r}\cdot \dot{\+vA} = \dot{\+vA}\cdot \grad t_r && \\
+    %& && \curl \+vA\pare{t_r} = \pare{\grad t_r} \times \dot{\+vA} = -\dot{\+vA}\times \grad t_r && \\
+    & \mathitem{連鎖律} && \grad * {X}\pare{\+vr',t_r} = \pare{-\frac{\+u{\+gr}}{c}}*\overset{\bm .}{X}\pare{\+vr',t_r} && \\
+    & \mathitem{勾配} && \grad \frac{\+ur}{r^{n-1}} = \frac{\tensor{I} - n\+ur\+ur}{r^n},\quad \color{warningred}{\grad \+vA\pare{t_r} \neq \dot{\+vA}{\grad t_r}} && \\
+    & \smash{\begin{array}[t]{@{}ll}
+        \mathitem{ポテン}\\[0em]
+        \mathitem{シャル}
+    \end{array}} && \varphi\pare{\+vr,t} = \rec{4\pi\epsilon_0} \iiint \rd{V'}\, \frac{\rho\pare{\+vr',t_r}}{\+gr} && \\
+    & && \+vA\pare{\+vr,t} = \frac{\mu_0}{4\pi} \iiint \rd{V'}\, \frac{\+vj\pare{\+vr',t_r}}{\+gr} && \\
+    & \mathitem{Jefimenko} && \+vE = \rec{4\pi\epsilon_0}\int \rd{V'}\, \brac{\frac{\rho \+u{\+gr}}{\+gr^2} + \frac{\dot{\rho}\+u{\+gr}}{c\+gr} - \frac{\dot{\+vj}}{c^2\+gr} } && \\
+    & && \+vB = \frac{\mu_0}{4\pi} \int \rd{V'}\,\brac{\frac{\+vj}{\+gr^2}\times \+u{\+gr} + \frac{\dot{\+vj}}{c\+gr}\times \+u{\+gr}} && \\
+    & \mathitem{仕事率} && \+d{\Omega}d{P} = \frac{r^2}{\mu_0}\+ur\cdot \pare{\+vE\+_rad_\times \+vB\+_rad_} &&
+\end{flalign*}
+\end{cheatresume}
+\newheader{調和源}
+\begin{cheatresume}
+\begin{flalign*}
+    & \mathitem{連鎖律} && \partial_t = -i\omega && \\
+    & \mathitem{源} && \+vj = \+vj_0\pare{\+vr} e^{-i\omega t},\, \rho = \rho_0\pare{\+vr}e^{-i\omega t} = \frac{i}{\omega}\div \+vj && \\
+    & \smash{\begin{array}[t]{@{}ll}
+        \mathitem{ポテン}\\[0em]
+        \mathitem{シャル}
+    \end{array}} && \+vA\pare{\+vr} = \+vA_0\pare{\+vr}e^{-i\omega t} = \frac{\mu_0}{4\pi} \int\rd{V'}\, \frac{\+vj\pare{\+vr', t}}{\+gr}e^{ik\+gr} && \\
+    & && \varphi\pare{\+vr,t} = -i\frac{c^2}{\omega} \div \+vA\pare{\+vr,t} && \\
+    & \mathitem{場} && \+vB = \curl \+vA,\quad \+vE = i\frac{c^2}{\omega}\curl \+vB &&
+\end{flalign*}
+\end{cheatresume}
+\newheader{遠方界}
+\begin{cheatresume}
+\begin{flalign*}
+    & \mathitem{近似} && R\lessapprox \lambda \ll r,\quad \+vk = k\+ur && \\
+    & \mathitem{連鎖律} && \partial_t = -i\omega,\quad \grad = i\+vk = i\frac{\omega}{c}\+ur = -\frac{\+ur}{c}\partial_t && \\
+    & \mathitem{場} && \+vA\pare{\+vr,t} = \frac{\mu_0 e^{ikr}}{4\pi r} \int \rd{V'}\, \+vj\pare{\+vr', t} e^{-i\+vk\cdot \+vr'} && \\
+    & && \+vB = i\+vk\times \+vA = \rec{c}\dot{\+vA}\times \+ur,\quad \+vE = c\+vB\times \+ur && \\
+    & \mathitem{仕事率} && \+d\Omega d{\expc{P}} = \frac{c}{2\mu_0}\abs{\+vB}^2 r^2 &&
+\end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{電磁波ノ放射}
+\begin{cheatresume}
+\begin{flalign*}
+    \+:c6l{\mathitem{電気双極子}\quad $\displaystyle \+vA = \frac{\mu_0 e^{ikr}}{4\pi r}\dot{\+vp},\  \+vB = \frac{\mu_0 e^{ikr}}{4\pi cr}\ddot{\+vp}\times \+ur$} && \\
+    & \mathitem{仕事率} && \+d{\Omega}d{\expc{P}}=\frac{\mu_0}{32\pi^2 c}\abs{\ddot{\+vp}\times \+ur}^2,\expc{P} = \frac{\abs{\ddot{\+vp}}^2}{12\pi\epsilon_0 c^3} &&
+\end{flalign*}
+\midbreak
+\begin{flalign*}
+    \+:c6l{\mathitem{磁気双極子}\quad $\displaystyle \+vA = \frac{\mu_0 e^{ikr}}{4\pi cr}\dot{\+vm}\times \+ur,\  \+vB = \frac{\mu_0 e^{ikr}}{4\pi c^2 r}\pare{\ddot{\+vm}\times \+ur}\times \+ur$} && \\
+    & \mathitem{仕事率} && \+d{\Omega}d{\expc{P}}=\frac{\mu_0}{32\pi^2 c^3}\abs{\ddot{\+vm}\times \+ur}^2,\expc{P} = \frac{\abs{\ddot{\+vm}}^2}{12\pi\epsilon_0 c^5} &&
+\end{flalign*}
+\midbreak
+\begin{flalign*}
+    \+:c6l{\mathitem{電気四極子}\quad $\displaystyle \+vA = \frac{\mu_0 e^{ikr}}{24\pi cr}\+ur\cdot \ddot{\tensor{D}},\  \+vB = \frac{\mu_0 e^{ikr}}{24\pi c^2 r}\+ur\cdot{\dddot{\tensor{D}}\times \+ur}$} && \\
+    & \mathitem{仕事率} && \+d{\Omega}d{\expc{P}}=\frac{\mu_0}{1152\pi^2 c^3}\abs{\+ur\cdot \dddot{\tensor{D}}\times \+ur }^2,\expc{P} = \frac{\abs{\dddot{\tensor{D}}}^2}{1440\pi\epsilon_0 c^3} &&
+\end{flalign*}
+\midbreak
+\begin{flalign*}
+    & \mathitem{回転する電荷} && \+vp = eR\pare{\+ux + i\+uy} e^{-i\omega t} &&
+\end{flalign*}
+\end{cheatresume}
+\newheader{ダイポールアンテナ}
+\begin{cheatresume}
+\begin{flalign*}
+    & \mathitem{電流} && I = I_0 \sin \pare{m\pi - k\abs{z}},\quad k\abs{z} \le m\pi && \\
+    & \mathitem{半波長} && m=1/2 \Rightarrow I = I_0 \cos kz,\quad \abs{z} \le \lambda/4 && \\
+    & \mathitem{場}　&& \+vA\pare{\+vr,t} = \+uz \frac{\mu_0 I_0 e^{i\pare{kr - \omega t}}}{2\pi kr}\frac{g\pare{\theta}}{\sin\theta} && \\
+    & && g\pare{\theta} = \frac{\cos\pare{m\pi \cos\theta} - \cos m\pi}{\sin\theta} && \\
+    & && \+vB = -i\frac{\mu_0 I_0}{2\pi}\frac{g\pare{\theta}}{r} e^{i\psi}\+u\phi,\  \+vE = -i\frac{\mu_0 cI_0}{2\pi}\frac{g\pare{\theta}}{r}e^{i\psi}\+u\theta && \\
+    & \mathitem{仕事率} && \+d\Omega d{\expc{P}} = \frac{\mu_0 cI_0^2}{8\pi^2}g^2\pare{\theta} &&
+\end{flalign*}
+\end{cheatresume}
+\newheader{\mysans{Li\'enard-Wiechert}}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \smash{\begin{array}[t]{@{}ll}
+        \mathitem{ポテン}\\[0em]
+        \mathitem{シャル}
+        \end{array}} && \varphi = \frac{e}{4\pi\epsilon_0 {\+gr}^*} \rec{1-\+u{\+gr}^*\cdot \+v\beta^*},\quad \+vA = \frac{\+vv^*}{c^2}\varphi && \\
+        & && \phantom{\varphi} = \frac{e}{4\pi \epsilon_0} \rec{\+v{\+gr}^* \cdot \+vn^*},\quad \+vn^* = \+u{\+gr} - \+v\beta^* && \\
+        & \+:c5l{\mathitem{場}\quad $\displaystyle \+vE = \frac{e}{4\pi\epsilon_0} \frac{\+gr^*}{\pare{\+v{\+gr}^*\cdot \+vn^*}^3}\brac{\pare{1-\beta^{*2}}\+un^* + \frac{\+v{\+gr}^*\times\pare{\+vn^*\times \+va^*}}{c^2}}$} \\
+        & \+:c5l{\phantom{\mathitem{場}}\quad$\+vB = {\+u{\+gr}^*}\times \+vE/c$}
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{\mysans{Larmor}放射}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{場} && \+vE = \frac{e}{4\pi\epsilon_0 c^2 \+gr^*}\frac{\+u{\+gr}^*\times \pare{\+vn^*\times \+va^*}}{\pare{\+u{\+gr}^* \cdot \+vn^*}^3},\quad c\+vB = \+u{\+gr}^*\times \+vE && \\
+        & \mathitem{仕事率} && \left.\+d{\Omega}d{P}\right\vert_{\text{粒子}} = \pare{\frac{e}{4\pi}}^2 \rec{\epsilon_0 c^3} \frac{\abs{\+u{\+gr}\times \pare{\+vn^*\times \+va^*}}^2}{\pare{\+u{\+gr}^*\cdot \+un^*}^{\color{warningred}5}}. && \\
+        & && P = \frac{e^2}{6\pi\epsilon_0 c^3}\gamma^6 \pare{a^2 - \abs{\+v\beta \times \+va}^2} \approx \frac{e^2a^2}{6\pi\epsilon_0 c^3} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{相対論的力学}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \+:c5l{\mathitem{定義} \ $\displaystyle U^\alpha = \pare{\gamma c,\gamma \+vu},\ p^\alpha = mU^\alpha = \pare{\frac{\+cE}{c}, \+vp},\ K^\alpha = \+d\tau d{p^\alpha}$ } \\
+        & \+:c5l{\mathitem{力学}\ $\displaystyle \+vF\cdot \+vu = \+dtd{\+cE},\quad \+vF = \+dtd{\+vp}$\quad \mathitem{合成則}\ $\displaystyle w = \frac{u+v}{1+uv/c^2}$} \\
+        & \mathitem{加速度} && \+va_\parallel = \+va_\parallel^{\pare{\mathrm{MCRF}}}/\gamma^3,\quad  && \+va_\perp = \+va_\perp^{\pare{\mathrm{MCRF}}}/\gamma^2 \\
+        & \+:c5l{\mathitem{Lorentz変換}\quad \begingroup
+\setlength\arraycolsep{2pt}
+\renewcommand*{\arraystretch}{0.75}$\displaystyle \begin{pmatrix}
+            x'^0 \\ x'^1
+        \end{pmatrix} = \begin{pmatrix}
+            \gamma & -\beta\gamma \\
+            -\beta\gamma & \gamma
+        \end{pmatrix}\begin{pmatrix}
+            x^0 \\ x^1
+        \end{pmatrix} $\endgroup} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{相対論的電気力学}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \+:c5l{\mathitem{定義} \ $\displaystyle j^\alpha = \pare{\rho c, \+vj} = \rho_0u^\alpha,\quad A^\alpha = \pare{{\varphi}/{c},\+vA}$ } \\
+        & \mathitem{Faraday} && F^{\alpha\beta} = \begin{pmatrix}
+            0 & \+vE/c \\
+            -\+vE/c & -\+vB\times \tensor{I}
+        \end{pmatrix} = \curb{\frac{\+vE}{c},\+vB} && \\
+        & && F_{\alpha\beta} = \curb{-{\+vE}/{c},\+vB},\quad G^{\alpha\beta} = \curb{\+vB, -{\+vE}/{c}} && \\
+        & \+:c5l{$\displaystyle -\rec{4\mu_0}F_{\alpha\beta}F^{\alpha\beta} = \half \epsilon_0 \pare{E^2 - c^2B^2},\quad -\frac{c}{4}F_{\alpha\beta}G^{\alpha\beta} = \+vE\cdot \+vB$} \\
+        & \+:c5l{\mathitem{保存則}\ ${j^\alpha}_{,a} = 0$\ \mathitem{Maxwell} $\Box{}^2 A^\alpha = -\mu_0 j^\alpha, \begin{cases}
+            {F^{\alpha\beta}}_{,\beta} = \mu_0 j^\alpha \\ {G^{\alpha\beta}}_{,\beta} = 0
+        \end{cases}$} \\
+        & \+:c5l{\mathitem{Lorentz変換}\ $\begin{array}[t]{@{}ll}
+            \+vE'_\parallel = \+vE_\parallel, & \+vE'_\perp = \gamma_0 \pare{\+vE_\perp + \+v\beta_0 \times c\+vB} \\
+        \+vB'_\parallel = \+vB_\parallel, & c\+vB'_\perp = \gamma_0 \pare{c\+vB_\perp - \+v\beta_0 \times \+vE}
+        \end{array}$} \\
+        & \mathitem{Lorentz力} && f^\mu = F^{\mu\alpha}j_\alpha = -{T^{\mu\nu}}_{,\nu}, \ \+vK = \gamma q\pare{\+vE + \+vu\times \+vB} && \\
+        & \+:c5l{$\displaystyle \quad T^{\mu\nu} = -\rec{4\mu_0}\eta^{\mu\nu}F_{\alpha\beta}F^{\alpha\beta} - \rec{\mu_0}F^{\mu\alpha}{F_\alpha}^\nu = \begin{pmatrix}
+        w & \+vS/c \\
+        \+vS/c & \tensor{T} \\
+    \end{pmatrix}$} \\
+        & \mathitem{トルク} && \tau^{\mu\nu} = x^\mu f^\nu - x^\nu f^\mu = -\pare{x^\mu T^{\nu\alpha} - x^\nu T^{\mu\alpha}}_{,\alpha} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

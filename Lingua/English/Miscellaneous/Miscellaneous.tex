@@ -1,0 +1,90 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc,singleton,epu]{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usepackage{pxrubrica}
+\usepackage{tipa}
+
+\def\katanode#1#2#3#4#5#6{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#2) {\Large #3};
+    \draw (#2.corner 1) node[below left] {\small\textsf{\phantom{Hj}#4}};
+    \draw (#2.corner 2) node[below right] {\footnotesize\color{lightgray}\textit{#5}};
+    \draw (#2.side 3) node[above] {\footnotesize \color{lightgray} #6};
+}
+
+\def\hiranode#1#2#3#4#5#6{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=yellow!80!black, line width=0.4mm, fill=yellow!45!white, #1, inner sep=-2mm](#2) {\Large #3};
+    \draw (#2.corner 1) node[below left] {\small\textsf{\phantom{Hj}#4}};
+    \draw (#2.corner 2) node[below right] {\footnotesize\color{lightgray}\textit{#5}};
+    \draw (#2.side 3) node[above] {\footnotesize \color{lightgray} #6};
+}
+
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\begin{document}
+
+\showtitle{Miscellaneous}
+
+\newpoint{alleviate} to make (suffering, deficiency, or a problem) less severe.
+\\
+\href{https://www.google.com/amp/s/www.internationalscienceediting.com/how-to-use-respectively-correctly/amp/}{to use `respectively' correctly}\\
+\href{https://www.nature.com/articles/nphys411}{Green function or Green's function}
+\newpoint{split infinitive} a construction consisting of an infinitive with an adverb or other word inserted between to and the verb.
+\newpoint{raison d'\^ etre} the most important reason or purpose for someone or something's existence.
+\newpoint{panacea} a solution or remedy for all difficulties or diseases.
+\newpoint{tallyho} a huntsman's cry to the hounds on sighting a fox; a simple greeting.
+\newpoint{tallywhacker} penis.
+\newpoint{ansatz} an educated guess or an additional assumption made to help solve a problem, and which is later verified to be part of the soluton by its results.
+\newpoint{YMMV, Your mileage may vary} One person's experience with a product may be different from another's.
+\newpoint{(with) tongue in cheek} without really meaning what one is saying or writing.
+\newpoint{femboy} a cisgender young male as effeminate in disparaging or desirable way.
+\newpoint{ground coffee} coffee beans are grinded and prepared to be brewed in a coffee machine or hand pour.
+\\
+The past tense and past participle of `grind' is `ground'.
+\newpoint{eunuch} a man who has been castrated.
+\\
+Martini - Martinus\\
+\newpoint{henceforth/henceforward/henceforwards} from now on.
+\newpoint{here}
+\begin{citemize}
+    \item herein: within this content, context, or thing. e.g. that if he be not fully satisfied herein.
+    \item hereinafter: in the parts of this document, statement, or book that follow.
+    \item hereinbefore: in a preceding part of this speech, book, or text.
+    \item heretofore: prior to now; until now.
+    \item hereabout/hereabouts: close to; nearby.
+    \item hereafter: in time to come; from now on.
+    \item herebefore: before now.
+    \item hereby: by this means, action, or process.
+    \item hereof: of this; concerning this.
+    \item hereon: on this place; to this place.
+\end{citemize}
+See \href{https://en.wiktionary.org/wiki/hereon}{here-, there- and where- words}.
+\newpoint{whither} to what place; to where.
+\newpoint{whence} from where; from which place.
+\newpoint{hither} to this place; to here; over here.
+\newpoint{hence} from here; from this place.
+\newpoint{thither} to that place.
+\newpoint{thence} from there; from that place or from that time.
+\\
+\href{https://english.stackexchange.com/questions/32217/what-is-meant-by-pun-intended}{pun intended}
+\newpoint{hipocrisy} the pratice of claiming to have moral standards or belief to which one's own behaviour does not conform; pretense.
+\newpoint{cross-check} verify by using an alternative source or method.
+\\
+\href{http://commonerrorscalendar.blogspot.com/2013/04/volumnvolume-common-errors-in-english.html?m=1#:~:text=The%20archaic%20spelling%20of%20%22volumn,the%20e%20and%20the%20n.}{on `volumn' and `volume'}.
+\\
+\href{https://english.stackexchange.com/questions/96162/is-it-correct-to-say-i-kindly-request-you-to}{Polite usage `we kindly'}.
+\begin{citemize}
+    \item We kindly request ...
+    \item We politely request ...
+    \item We humbly request ...
+    \item We respectfully request ...
+    \item We earnestly request ...
+\end{citemize}
+\href{https://english.stackexchange.com/questions/31980/why-themselves-and-himself}{Why `themselves' and `himself'}.
+
+\end{document}

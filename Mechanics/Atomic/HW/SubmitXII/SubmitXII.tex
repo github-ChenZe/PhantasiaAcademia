@@ -1,0 +1,41 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\def\writetofile#1#2{\immediate\write18{echo "#1" > #2}}
+\def\econfig#1{\immediate\write18{echo "#1" | python /Users/zechen/Documents/PhantasiaAcademia/electronconfig.py > electronsconfigtmp.tex}\input{electronsconfigtmp.tex}}
+
+\begin{document}
+
+\newprob{4.16}%
+$\displaystyle h = \frac{T\lambda}{c} = \boxed{\SI{6.65e-34}{\joule\cdot\second}.}$
+\newprob{4.17}%
+$\displaystyle E = \frac{hc}{\lambda\+_min_} = \SI{20.0}{\kilo\eV}$.\\
+$\mathrm K_\alpha$线的能量$\mathrm K$和$\mathrm L$壳层的能量差为$\displaystyle E_\alpha = \SI{13.6}{\eV}\pare{Z-1}^2\pare{\rec{1^2} - \rec{2^2}} = \SI{19.7}{\kilo\eV} \approx E.$
+故入射电子不足以电离$\mathrm K$层原子, 无法观察到.
+\newprob{4.18}%
+$\displaystyle \sqrt{\frac{0.1791}{0.2291}} \approx \frac{24-1}{27-1} \Rightarrow \boxed{Z=24,\mathrm{Cr}.}$\\
+$\displaystyle \sqrt{\frac{0.1791}{0.1542}} \approx \frac{29-1}{27-1} \Rightarrow \boxed{Z=29,\mathrm{Cu}.}$
+
+\end{document}

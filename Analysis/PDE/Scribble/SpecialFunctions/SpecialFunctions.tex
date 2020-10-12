@@ -122,12 +122,11 @@
         & && J_0' = -J_1 &&
     \end{flalign*}
 \end{cheatresume}
-\newlongheader{\bili{}{球面座標系における変数分離解}}
+\newlongheader{\bili{}{球面座標系における変数分離}}
 \begin{cheatresume}
     \begin{flalign*}
-        & \+:c3{l}{\mathitem{Laplace方程式}$\quad \laplacian u = 0$} \\
-        & \mathitem{\bili{}{軸対称}} && u = \sum_{n=0}^\infty\curb{r^n,r^{-\pare{n+1}}}P_n\pare{\cos\theta} && \\
-        & \mathitem{\bili{}{一般解}} && u = \sum_{n=0}^\infty\sum_{m=-n}^n \curb{r^n,r^{-\pare{n+1}}}Y_{nm}\pare{\theta,\phi} &&
+        & \mathitem{$\laplacian u = 0$} && u = \sum_{n=0}^\infty\sum_{m=-n}^n \curb{r^n,r^{-\pare{n+1}}}Y_{nm}\pare{\theta,\phi} && \\
+        & \mathitem{\bili{}{軸対称}} && \phantom{u } = \sum_{n=0}^\infty\curb{r^n,r^{-\pare{n+1}}}P_n\pare{\cos\theta}. &&
     \end{flalign*}
     \midbreak
     \begin{flalign*}
@@ -141,11 +140,16 @@
     \end{flalign*}
 \end{cheatresume}
 \columnbreak
-\newlongheader{\bili{}{円柱座標系における変数分離解}}\vspace{0em}
+\newlongheader{\bili{}{円柱座標系における変数分離}}\vspace{0em}
 \begin{cheatresume}
         \begin{flalign*}
-        & \+:c3{l}{\mathitem{Laplace方程式}$\quad \laplacian u = 0$} \\
-        & \mathitem{\bili{}{一般解}} && u = \sum_{n=0}^\infty\sum_{m=-n}^n \curb{r^n,r^{-\pare{n+1}}}Y_{nm}\pare{\theta,\phi} &&
+        & \mathitem{$\laplacian u = 0$} && u = \begin{Bmatrix}
+            \sinh \mu_k z \\
+            \cosh \mu_k z
+        \end{Bmatrix}\begin{Bmatrix}
+            J_m\pare{\mu_k s} \\
+            N_m\pare{\mu_k s}
+        \end{Bmatrix} e^{im\theta} &&
     \end{flalign*}
     \midbreak
     \begin{flalign*}

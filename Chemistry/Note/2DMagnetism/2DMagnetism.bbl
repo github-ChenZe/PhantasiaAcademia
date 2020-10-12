@@ -1,0 +1,164 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Li2019}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9b1528d0b6c9bc88bfd8c569f290bcec}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Hui},
+           giveni={H\bibinitperiod}}}%
+        {{hash=36abc8b4e9b5f9ae5337928a8a449407}{%
+           family={Ruan},
+           familyi={R\bibinitperiod},
+           given={Shuangchen},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b2b2012fc7771eb2df4bc050c464f887}{%
+           family={Zeng},
+           familyi={Z\bibinitperiod},
+           given={Yu-Jia},
+           giveni={Y\bibinithyphendelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley}%
+      }
+      \strng{namehash}{0059d045a6a44e21dd0226a719a7193e}
+      \strng{fullhash}{0059d045a6a44e21dd0226a719a7193e}
+      \strng{bibnamehash}{0059d045a6a44e21dd0226a719a7193e}
+      \strng{authorbibnamehash}{0059d045a6a44e21dd0226a719a7193e}
+      \strng{authornamehash}{0059d045a6a44e21dd0226a719a7193e}
+      \strng{authorfullhash}{0059d045a6a44e21dd0226a719a7193e}
+      \field{sortinit}{L}
+      \field{sortinithash}{2c7981aaabc885868aba60f0c09ee20f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Advanced Materials}
+      \field{month}{5}
+      \field{number}{27}
+      \field{title}{Intrinsic Van Der Waals Magnetic Materials from Bulk to the 2D Limit: New Frontiers of Spintronics}
+      \field{volume}{31}
+      \field{year}{2019}
+      \field{pages}{1900065}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1002/adma.201900065
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1002/adma.201900065
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1002/adma.201900065
+      \endverb
+    \endentry
+    \entry{Mounet2018}{article}{}
+      \name{author}{11}{}{%
+        {{hash=c11e8ad8e35ca000416abc5208ac02e9}{%
+           family={Mounet},
+           familyi={M\bibinitperiod},
+           given={Nicolas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=17eeb22b071f7651f7f932a2615dd4b5}{%
+           family={Gibertini},
+           familyi={G\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=b1a2a4b3097315ec7c5752f1040fcb6b}{%
+           family={Schwaller},
+           familyi={S\bibinitperiod},
+           given={Philippe},
+           giveni={P\bibinitperiod}}}%
+        {{hash=091e3415d0e8d8af55921d15953132de}{%
+           family={Campi},
+           familyi={C\bibinitperiod},
+           given={Davide},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d03ff2bd3cb22f2a24f41395469f348c}{%
+           family={Merkys},
+           familyi={M\bibinitperiod},
+           given={Andrius},
+           giveni={A\bibinitperiod}}}%
+        {{hash=48d2e894f52ad45f2fc09fb10ee42ba2}{%
+           family={Marrazzo},
+           familyi={M\bibinitperiod},
+           given={Antimo},
+           giveni={A\bibinitperiod}}}%
+        {{hash=bd342b49caf8fada4214a2a8db4f5bd2}{%
+           family={Sohier},
+           familyi={S\bibinitperiod},
+           given={Thibault},
+           giveni={T\bibinitperiod}}}%
+        {{hash=617ae3f6171490b1475db22d60ab2ef2}{%
+           family={Castelli},
+           familyi={C\bibinitperiod},
+           given={Ivano\bibnamedelima Eligio},
+           giveni={I\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=333bf1bc88422fbb55eb505912b8159a}{%
+           family={Cepellotti},
+           familyi={C\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=47973b2c6c1e2725285ea460cd714d35}{%
+           family={Pizzi},
+           familyi={P\bibinitperiod},
+           given={Giovanni},
+           giveni={G\bibinitperiod}}}%
+        {{hash=789148b9644893e2b07e550eec09d89c}{%
+           family={Marzari},
+           familyi={M\bibinitperiod},
+           given={Nicola},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Springer Science}%
+        {Business Media {LLC}}%
+      }
+      \strng{namehash}{3e3d82e018c7c01ffdaac36a1010e771}
+      \strng{fullhash}{598edf8c5f8fc2cdb0a0cfe15a94149b}
+      \strng{bibnamehash}{3e3d82e018c7c01ffdaac36a1010e771}
+      \strng{authorbibnamehash}{3e3d82e018c7c01ffdaac36a1010e771}
+      \strng{authornamehash}{3e3d82e018c7c01ffdaac36a1010e771}
+      \strng{authorfullhash}{598edf8c5f8fc2cdb0a0cfe15a94149b}
+      \field{sortinit}{M}
+      \field{sortinithash}{cfd219b90152c06204fab207bc6c7cab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature Nanotechnology}
+      \field{month}{2}
+      \field{number}{3}
+      \field{title}{Two-dimensional materials from high-throughput computational exfoliation of experimentally known compounds}
+      \field{volume}{13}
+      \field{year}{2018}
+      \field{pages}{246\bibrangedash 252}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.1038/s41565-017-0035-5
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1038/s41565-017-0035-5
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1038/s41565-017-0035-5
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

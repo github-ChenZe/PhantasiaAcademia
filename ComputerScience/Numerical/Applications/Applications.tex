@@ -1,0 +1,157 @@
+\documentclass{ctexart}
+
+\usepackage[margintoc]{van-de-la-sehen}
+\DeclareMathOperator{\cond}{cond}
+\usepackage{arydshln}
+
+\begin{document}
+
+\section{应用} % (fold)
+\label{sec:应用}
+
+\subsection{随机数} % (fold)
+\label{sub:随机数}
+
+\subsubsection{随机数的产生} % (fold)
+\label{ssub:随机数的产生}
+
+\begin{definition}[线性同余生成器(LCG)]
+    线性同余生成器表示为以下形式
+    \[ x_i = ax_{i-1} + b {\mod m}, \]
+    其中$a$为乘子, $b$为偏移, $m$为模数.
+\end{definition}
+\begin{definition}[最小标准随机数生成器]
+    在线性同余生成器中取
+    \[ m = 2^{31} - 1,\quad a = 7^5 = 16807,\quad b = 0. \]
+\end{definition}
+\begin{ex}
+    可用随机数生成器计算函数均值, 谓Monte Carlo I型问题.
+\end{ex}
+\begin{ex}
+    可用随机数生成器计算不规则区域面积, 谓Monte Carlo II型问题.
+\end{ex}
+\begin{definition}[RANDU生成器]
+    \begin{align*}
+        x_i = ax_{i-1} {\mod m}, \\
+        u_i = x_i / m,
+    \end{align*}
+    其中最后一行的作用是将$x$映射到$\blr{0,1}$内, 而$a = 65539 = 2^{16}+3$, $m=2^{31}$.
+\end{definition}
+RANDU生成器的所有点都在$15$个平面内, 故其随机数之间的关系容易被察觉.
+
+% subsubsection 随机数的产生 (end)
+
+\subsubsection{分布变换} % (fold)
+\label{ssub:分布变换}
+
+若$u$为$\brac{0,1}$上均匀分布的随机变量, 指数分布满足
+\[ u = P\pare{V \le x} = 1-e^{-ax}, \]
+即
+\[ x = -\frac{\ln\pare{1-u}}{a}. \]
+\par
+二维的正态分布可以写为
+\[ p\pare{x,y} = \rec{2\pi} e^{-\pare{x^2+y^2}/2} = \rec{2\pi}e^{-r^2/2}, \]
+从而$r^2$满足指数分布而$\theta$满足均匀分布.
+\[ r^2 = -\frac{\ln \pare{1-u_1}}{1/2}. \]
+从而可以生成两个满足标准正态分布的独立随机数
+\[ \begin{cases}
+    n_i = r\cos 2\pi u_2 = \sqrt{-2\ln\pare{1-u_1}}\cos 2\pi u_2,\\
+    n_i = r\sin 2\pi u_2 = \sqrt{-2\ln\pare{1-u_1}}\sin 2\pi u_2.
+\end{cases} \]
+注意到$\pare{1-u_i}$可以用$u_i$代替. 此种方法谓Box-Muller方法.
+\par
+改进后的Box-Muller方法从$U\brac{0,1}$中选择$x_1, x_2$, 定义$u_1 = x_1^2  x_2^2$. 如果$u_1 < 1$则接受, 否则拒绝. 这样选择的$u_1$也满足$U\brac{0,1}$. 计算$u_2 = \arctan \pare{x_2 - x_1}$, 则
+\[ n_i = x_i \sqrt{-\frac{2\ln u_1}{u_1}} \]
+可以生成二维正态分布随机变量.
+
+% subsubsection 分布变换 (end)
+
+\subsubsection{Monte Carlo模拟} % (fold)
+\label{ssub:monte_carlo模拟}
+
+I型和II型Monte Carlo模拟(伪随机数字)误差
+\[ \mathrm{Error} \propto n^{-1/2}. \]
+假设独立随机变量$X_i$是函数在随机点的取值, 则函数均值为
+\[ Y = \frac{X_1 + \cdots + X_n}{n} \]
+的期望, 即
+\[ E\brac{\frac{X_1 + \cdots + X_n}{n}} = A. \]
+方差为
+\[ E\brac{\pare{\frac{X_1 + \cdots + X_n}{n} - A}^2} = \frac{\sigma^2}{n}, \]
+其中$\sigma$为变量$X_i$的方差. 故标准差为$\sigma/\sqrt{n}$.
+
+\par
+放弃随机数的独立性而要求自避性则得到拟随机数. 例如Van der Corput提出的$p$进制下的低差异序列算法可生成Halton随机数序列.
+\begin{cenum}
+    \item 设$p$为一个素数, 按$p$进制写出$1\sim n$的自然数.
+    \item 假设第$i$个数字的$p$进制表示为$b_kb_{k-1}\cdots b_2b_1$, 则生成随机数
+    \[ 0.b_1b_2\cdots b_{k-1}b_k. \]
+\end{cenum}
+$d$维拟随机数生成器I型Monte Carlo模拟的误差为
+\[ \mathrm{Error} \propto \pare{\ln n}^d n^{-1}, \]
+而II型Monte Carlo模拟的误差为
+\[ \mathrm{Error} \propto n^{-\half - \rec{2d}}. \]
+
+% subsubsection monte_carlo模拟 (end)
+
+\subsubsection{离散和连续Brown运动} % (fold)
+\label{ssub:离散和连续brown运动}
+
+\paragraph{离散Brown运动} % (fold)
+\label{par:离散brown运动}
+
+随机游走$W_i$是以$0$为起始位置, 且在每个整数时刻移动一个距离$s_i$的运动, 其中$s_i$是独立同分布的随机变量, 此处假设每个$s_i$只能是$+1$或$-1$, 且概率皆为$1/2$.
+\par
+离散Brown运动是按如下公式生成的随机游走序列,
+\[ W_t = W_0 + s_1 + s_2 + \cdots + s_t. \]
+显然
+\[ E\pare{W_t} = 0,\quad V\pare{W_t} = t, \]
+因为独立随机变量的方差可加.
+\par
+设$a,b$为正整数, 则初始位置为零的随机游走序列首次到达$\brac{-b,a}$区间边缘的时刻称为逃逸时间. 可以证明在$a$处而非在$b$处逃逸的概率为$b/\pare{a+b}$.
+
+% paragraph 离散brown运动 (end)
+
+\paragraph{连续Brown运动} % (fold)
+\label{par:连续brown运动}
+
+$W_t^k$表示的随机游走过程的时间步长为$1/k$, 每次位移$\pm 1/\sqrt{k}$, 则
+\[ E\pare{W_t^k} = 0,\quad V\pare{W_t^k} = t. \]
+当$k\rightarrow \infty$, 极限$W_t^\infty$称为连续Brown运动. $B_t = W_t^\infty$是$t\ge 0$上的随机变量. $B_t$满足如下性质:
+\begin{cenum}
+    \item 对任意$t$, $E\pare{B_t} = 0$而$V\pare{V_t} = t$.
+    \item 对任意$t_1 < t_2$, $B_{t_2} - B_{t_1}$是服从正态分布, 方差为$\pare{t_2 - t_1}$, 且独立于所有满足$0\le s \le t_1$的$B_s$.
+    \item $B_t$是一条连续路径.
+\end{cenum}
+因此Brown运动的位移可以按如下方法计算: 先按$N\pare{0,1}$选取一随机数, 再乘以$\sqrt{\Delta t}$.
+\par
+无论是连续Brown运动还是随机游走, 从$\brac{-b,a}$中于$a$处逃逸的概率为$b/\pare{a+b}$, 逃逸的时间期望为$ab$.
+
+% paragraph 连续brown运动 (end)
+
+% subsubsection 离散和连续brown运动 (end)
+
+\subsubsection{随机微分方程} % (fold)
+\label{ssub:随机微分方程}
+
+以实数$t\ge 0$为索引的随机变量集合$x_t$谓时域连续随机过程. 每个实力, 或者随机过程的一次实现, 是随机变量$x_t$在每个时刻$t$的一次取值, 即参数为$t$的函数.
+\par
+随机微分方程(SDE)的初值问题
+\[ \begin{cases}
+    \rd{y} = r\,\rd{t} + \sigma\,\rd{B}, \\
+    y\pare{0} = 0
+\end{cases} \]
+有等价的积分表示
+\[ y\pare{t} = y\pare{0} + \int_0^t f\pare{s,y}\,\rd{s} + \int_0^t g\pare{s,y}\,\rd{B_s}, \]
+上述第二个积分项即伊藤积分, 其定义为
+\[ \lim_a^b f\pare{t}\,\rd{B_t} = \lim_{\Delta t\rightarrow 0} \sum_{t=1}^n f\pare{t_{i-1}}\Delta B_i, \]
+其中$\Delta B_i = B_{t_i} - B_{t_{i-1}}$.
+\par
+$\displaystyle I = \int_a^b f\pare{t}\,\rd{B_t}$的微分$\rd{I} = f\,\rd{B_t}$.
+
+% subsubsection 随机微分方程 (end)
+
+% subsection 随机数 (end)
+
+% section 应用 (end)
+
+\end{document}

@@ -1,0 +1,159 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{blkarray}
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{特征值求解} % (fold)
+\label{sec:特征值求解}
+
+\subsection{幂法} % (fold)
+\label{sub:幂法}
+
+设有特征值/线性无关的特征向量系统
+\[ \curb{\pare{\lambda_1,v^{\pare{1}}},\cdots,\pare{\lambda_n,v^{\pare{n}}}}. \]
+将向量以特征向量为基做展开, $x = \alpha_1 v^{\pare{1}} + \cdots + \alpha_n v^{\pare{n}}$, 则
+\[ A^k x = \alpha_1 \lambda_1^k v^{\pare{1}} + \cdots + \alpha_n \lambda_n^k v^{\pare{n}}. \]
+\par
+若模长最大的特征值只有一个且为单根, 设$\lambda_1$为模长最大的特征值的特征值, 则
+\[ \lim_{k\rightarrow \infty} \frac{\pare{A^{k+1} x}_l}{\pare{A^k x}_l} = \lambda_1, \]
+从而任取$x^{\pare{0}}$, 定义$x^{\pare{k+1}} = Ax^{\pare{k}}$, 有
+\[ x^{\pare{k}}\sim \lambda_1^k x^{\pare{0}},\quad k\gg 1. \]
+即
+\[ \lambda_1 \approx \frac{x^{\pare{k+1}}_l}{x^{\pare{k}}_l},\quad l = 1,\cdots,n. \]
+而$x^{\pare{k}}$是$\lambda_1$对应的特征向量.
+\par
+若模长最大的特征值有两个且为符号相反, 设为$\lambda_1 = -\lambda_2$, 则
+\[ \lambda_1 \approx \sqrt{\frac{x_l^{\pare{k+2}}}{x_l^{\pare{k}}}}. \]
+为了得到特征向量,
+\[ \begin{cases}
+    x^{\pare{k}} \approx \lambda_1^k \pare{\alpha_1 v^{\pare{1}} + \pare{-1}^k \alpha_2 v^{\pare{2}}}, \\
+    x^{\pare{k+1}} \approx \lambda_1^{k+1} \pare{\alpha_1 v^{\pare{1}} + \pare{-1}^{k+1} \alpha_2 v^{\pare{2}}},
+\end{cases} \Rightarrow \begin{cases}
+    2\lambda_1^{k+1}\alpha_1 v^{\pare{1}} = x^{\pare{k+1}} + \lambda_1 x^{\pare{k}}, \\
+    2\pare{-1}^{k+1}\lambda_1^{k+1}\alpha_2v^{\pare{2}} = x^{\pare{k+1}} - \lambda_1 x^{\pare{k}}.
+\end{cases} \]
+
+\subsubsection{规范算法} % (fold)
+\label{ssub:规范算法}
+
+定义
+\[ \begin{cases}
+    y^{\pare{k}} = x^{\pare{k}}/\norm{x^{\pare{k}}}_\infty,\\
+    x^{\pare{k+1}} = A\cdot y^{\pare{k}},
+\end{cases}\quad k = 0,1,\cdots. \]
+则
+\begin{align*}
+    y^{\pare{k}} &= \frac{\lambda_1^k\alpha_1 v^{\pare{1}} + \cdots + \lambda_n^k \alpha_n v^{\pare{n}}}{\displaystyle \prod_{l=0}^k \norm{x^{\pare{k}}}_\infty}, \\
+    x^{\pare{k}} &= \frac{\lambda_1^{k+1}\alpha_1 v^{\pare{1}} + \cdots + \lambda_n^{k+1} \alpha_n v^{\pare{n}}}{\displaystyle \prod_{l=1}^k \norm{x^{\pare{k}}}_\infty}.
+\end{align*}
+\begin{cenum}
+    \item 若$\abs{\lambda_1} > \abs{\lambda_2} \ge \cdots \ge \abs{\lambda_n}$, 则
+    \begin{align*}
+        y^{\pare{k}} &\approx \frac{\lambda_1^k \alpha_1 v^{\pare{1}}}{\prod_{l=0}^k \norm{x^{\pare{l}}}_\infty}, \\
+        x^{\pare{k+1}} &\approx \lambda_1 y^{\pare{k}}, \\
+        \Rightarrow \lambda_1 &\approx \frac{x^{\pare{k+1}}_l}{y^{\pare{k}}_l},
+    \end{align*}
+    若$\lambda > 0$, 则$x^{\pare{k}}$收敛,
+    \[ \lambda_1 \approx \norm{x^{\pare{k}}}_\infty. \]
+    若$\lambda < 0$, 则$\curb{x^{\pare{2k}}}$和$\curb{x^{\pare{2k+1}}}$分别收敛于互反的向量,
+    \[ \lambda_1 \approx -\norm{x^{\pare{k}}}_\infty. \]
+    \item 若$\abs{\lambda_1} = \abs{\lambda_2} \ge \cdots \ge \abs{\lambda_n}$, 且$\lambda_1 = -\lambda_2$, 则
+    \begin{align*}
+        y^{\pare{k}} &\approx \frac{\lambda_1^k\pare{\alpha_1 v^{\pare{1}} + \pare{-1}^k \alpha_2 v^{\pare{2}}}}{\prod_{l=0}^k \norm{x^{\pare{l}}}_\infty}, \\
+        x^{\pare{k+1}} &\approx \frac{\lambda_1^{k+1}\pare{\alpha_1 v^{\pare{1}} + \pare{-1}^{k+1} \alpha_2 v^{\pare{2}}}}{\prod_{l=0}^k \norm{x^{\pare{l}}}_\infty}.
+    \end{align*}
+    由
+    \[ Ax^{\pare{k}} = A^2 y^{\pare{k-1}} \]
+    可得
+    \[ \lambda_1 = \sqrt{\frac{\pare{Ax^{\pare{k}}}_l}{y^{\pare{k-1}}_l}},\quad \lambda_2 = -\lambda_1. \]
+    两个特征向量分别为
+    \[ \begin{cases}
+        v^{\pare{1}} = Ax^{\pare{k}} + \lambda_1 x^{\pare{k}}, \\
+        v^{\pare{2}} = Ax^{\pare{k}} - \lambda_1 x^{\pare{k}}.
+    \end{cases} \]
+\end{cenum}
+\par
+若$\curb{x^{\pare{k}}}$收敛, 则
+\[ \abs{\lambda_1} > \abs{\lambda_2} \ge \cdots \ge \abs{\lambda_n},\quad \lambda_1 > 0. \]
+若$\curb{x^{\pare{2k}}}$和$\curb{x^{\pare{2k+1}}}$收敛到互反的两个向量, 则
+\[ \abs{\lambda_1} > \abs{\lambda_2} \ge \cdots \ge \abs{\lambda_n},\quad \lambda_1 < 0. \]
+若$\curb{x^{\pare{2k}}}$和$\curb{x^{\pare{2k+1}}}$收敛到两个不同的向量, 则
+\[ \abs{\lambda_1} = \abs{\lambda_2} > \abs{\lambda_3} \ge \cdots \ge \abs{\lambda_n},\quad \lambda_1 = -\lambda_2. \]
+其它情形下情况复杂.
+\begin{remark}
+    即使$\alpha_1$最开始为零, 由于舍入误差对于充分大的$k$也有相应的$\alpha_1$非零.
+\end{remark}
+
+% subsubsection 规范算法 (end)
+
+\subsubsection{位移幂法} % (fold)
+\label{ssub:位移幂法}
+
+对$A - MI$使用幂法,
+\[ x^{\pare{k+1}} = \pare{A-MI}x^{\pare{k}} \]
+即可得到离$M$最远的特征值. 若
+\[ \abs{\frac{\lambda_2 - M}{\lambda_1 - M}} < \abs{\frac{\lambda_2}{\lambda_1}}, \]
+则幂法收敛更快.
+
+% subsubsection 位移幂法 (end)
+
+\subsubsection{反幂法} % (fold)
+\label{ssub:反幂法}
+
+对$A^{-1}$使用幂法,
+\[ x^{\pare{k+1}} = A^{-1}x^{\pare{k}},\quad Ax^{\pare{k+1}} = x^{\pare{k}} \]
+所得$\lambda'$即为$1/\lambda_n$, $\lambda_n$为$A$的模最小的特征值.
+
+% subsubsection 反幂法 (end)
+
+% subsection 幂法 (end)
+
+\subsection{实对称矩阵的Jacobi方法} % (fold)
+\label{sub:实对称矩阵的jacobi方法}
+
+\begin{theorem}
+    若$A$为$n\times n$实对称矩阵, 则存在正交矩阵$Q$满足
+    \[ Q^TAQ = \diag\pare{\lambda_1,\cdots,\lambda_n}. \]
+\end{theorem}
+记
+\[ Q\pare{p,q,Q} = \begin{blockarray}{cccccccc}
+& & p & & q\\
+\begin{block}{(ccccccc)c}
+    1 & & & & & & \\
+    & \ddots \\
+    & & \cos\theta & & \sin \theta & & &p \\
+    & & & \ddots \\
+    & & -\sin\theta & & \cos\theta & & & q \\
+    & & & & & \ddots \\
+    & & & & & & 1 \\
+\end{block}
+\end{blockarray}. \]
+令$B = Q^T AQ$, 其中$p,q$给定. 选取$Q$使得$b_{pq} = b_{qp} = 0$, 即
+\[ b_{pq} = b_{qp} = a_{pq}\cos 2\theta + \half \pare{a_{pp} - a_{qq}}\sin 2\theta = 0, \]
+可证明
+\[ \sum_{i\neq j} b_{ij}^2 < \sum_{i\neq j}a_{ij}^2,\quad b_{ii}^2 > \sum a_{ii}^2. \]
+最终
+\[ \begin{cases}
+    b_{ij} = a_{ij}, & i,j\neq p,q, \\
+    b_{ip} = b_{pi} = a_{ip}\cos\theta - a_{iq}\sin\theta,& i\neq p,q, \\
+    b_{iq} = b_{qi} = a_{ip}\sin\theta + a_{iq}\cos\theta,\\
+    b_{pp} = a_{pp}\cos^2\theta + a_{qq}\sin^2\theta - a_{pq}\sin 2\theta, \\
+    b_{qq} = a_{pp}\sin^2\theta + a_{qq}\cos^2\theta + a_{pq}\sin 2\theta.
+\end{cases} \]
+从而
+\begin{align*}
+    \sum_{i\neq j} &= \sum_{i,j \neq p,q} b_{ij}^2 + \sum_{i\neq p,q} \pare{b_{ip}^2 + b_{pi}^2 + b_{iq}^2 + b_{qi}^2} \\
+    &=\sum_{i,j\neq p,q} a_{ij}^2 + \sum_{i\neq p,q} \pare{a_{ip}^2 + a_{pi}^2 + a_{iq}^2 + a_{qi}^2} \\
+    &= \sum_{i\neq j} a_{ij}^2 - \pare{a_{pq}^2 + a_{qp}^2}.
+\end{align*}
+每一步选择$p,q$满足$\abs{a_{pq}} = \max_{i\neq j}\abs{a_{ij}}$, 当
+\[ \sum_{i\neq j} a_{ij}^2 < \epsilon \]
+即终止迭代.
+
+% subsection 实对称矩阵的jacobi方法 (end)
+
+% section 特征值求解 (end)
+
+\end{document}

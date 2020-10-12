@@ -1,0 +1,62 @@
+%% Creator: Inkscape inkscape 0.92.2, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Differential_cross_section.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{684bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.42105263)%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{Differential_cross_section.pdf}}%
+    \put(0.34612338,0.13154189){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{ϑ}}}%
+    \put(0.45181967,0.38875193){\color[rgb]{0,0.69019608,0}\makebox(0,0)[rb]{\smash{Differential solid angle $\rd{\Omega}$}}}%
+    \put(0.94059667,0.23133948){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.93646044,0.23133948){\color[rgb]{1,0,0}\makebox(0,0)[rb]{\smash{Differential cross section $\rd{\sigma}$}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{Differential_cross_section.pdf}}%
+    \put(0.29200035,0.02347184){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Scattering center}}}%
+    \put(0.68705448,0.02347184){\color[rgb]{0,0,0}\makebox(0,0)[b]{\smash{Scattered particle}}}%
+    \put(0.77013113,0.14817482){\color[rgb]{0,0,0.69019608}\makebox(0,0)[lb]{\smash{Impact parameter b}}}%
+  \end{picture}%
+\endgroup%

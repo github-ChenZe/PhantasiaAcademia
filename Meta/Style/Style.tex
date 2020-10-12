@@ -1,0 +1,164 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Academic\ Council,gakka=Styles,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\GF}{GF}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\SL}{SL}
+
+\makeatletter
+
+\newcommand*\SetSuchThat{\@ifstar\@SetSuchThat@star\@SetSuchThat@nostar}
+\newcommand*\@SetSuchThat@star{%
+    \mathrel{}%
+    % \nobreak % superfluous inside "\left... ... \right..."
+    \middle\vert
+    \mathrel{}%
+}
+\newcommand*\@SetSuchThat@nostar[1][]{%
+    \mathrel{#1\vert}%
+}
+\newcommand*\@SetSuchThat{}
+\DeclarePairedDelimiterX \SetCond [2] {\lbrace}{\rbrace}
+    {\nonscript\,#1\@SetSuchThat@nostar #2\nonscript\,}
+
+\makeatother
+
+\usepackage[all]{xy}
+
+\begin{document}
+
+\section{Style Guide} % (fold)
+\label{sec:style_guide}
+
+This style guide applies to lecture notes in English, and is subjected to revision in the future.
+\par
+Some of the rules here are adopted from the following sources:
+\begin{citemize}
+    \item \href{https://en.wikipedia.org/wiki/Wikipedia:Manual_of_Style/Mathematics}{Wikipedia: Manual of Style/Mathematics}.
+\end{citemize}
+
+\subsection{Grammar} % (fold)
+\label{sub:grammar}
+
+The usage of ``denoted'' and ``denoted by'' are \href{https://english.stackexchange.com/questions/25179/denoted-by-or-just-denoted}{both acceptable}.
+
+% subsection grammar (end)
+
+\subsection{Equations} % (fold)
+\label{sub:equations}
+
+Equations should be punctuated in the way such that the sentences that contain the equations are grammatical if the equations are substituted by nouns. Equations may be used as apposition.
+\par
+A sentence which ends with a formula must have a period at the end of the formula. This equally applies to displayed formulae. Similarly, if the conventional punctuation rules would require a question mark, comma, semicolon, or other punctuation at that place, the formula must have that punctuation at the end.
+\begin{sample}
+    Therefore we have the following relation
+    \[ E = mc^2. \]
+    Now we begin the next section.
+\end{sample}
+
+% subsection equations (end)
+
+\subsection{Lists} % (fold)
+\label{sub:lists}
+
+Lists should be punctuated in the way such that the sentences that contain the lists are grammatical if the numbering or bullets in the list are removed.
+\begin{sample}
+    A number is called a positive real number if
+    \begin{cenum}
+        \item it is real;
+        \item and it is positive.
+    \end{cenum}
+\end{sample}
+
+% subsection lists (end)
+
+\subsection{Names} % (fold)
+\label{sub:names}
+
+Names of people and places should be romanized. If multiple romanization are available, the one occurs the most frequently in authorized sources should be adopted. Accent marks should be retained.
+
+\subsubsection{Japanese Names} % (fold)
+\label{ssub:japanese_names}
+
+In the names of people, the following conventions are followed.
+\begin{cenum}
+    \item The long vowels are indicated by macrons, or circumflex, depending on the most common choices in publications.
+\end{cenum}
+\begin{sample}
+    It\^o's lemma is a key component in the It\^o Calculus.
+\end{sample}
+
+% subsubsection japanese_names (end)
+
+% subsection names (end)
+
+% section style_guide (end)
+
+\end{document}

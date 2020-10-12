@@ -1,0 +1,269 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Geometry\ in\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage[super]{nth}
+
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzset{snake it/.style={decorate, decoration=snake}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensorb#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+
+\def\kurisueniconwidth{3.2cm}
+\def\kurisueniconpath{img/CMSncFS.png}
+
+\begin{document}
+
+\section{Scattering Theory} % (fold)
+\label{sec:scattering_theory}
+
+\subsection{Stationary Scattering Theory} % (fold)
+\label{sub:stationary_scattering_theory}
+
+\subsubsection{Definitions} % (fold)
+\label{ssub:definitions}
+
+If the incident particles have momentum $\+vp_i$, and the scattering is elastic, the quantum states are given by
+\[ \ket{\psi\pare{t}} = \ket{\psi}e^{-\frac{i}{\hbar}E_i t}, \]
+where
+\begin{equation}
+    \label{eq:stationary_scattering_schrodinger}
+    \pare{\rec{2m}p^2 + V\pare{\+vr}}\ket{\psi} = E_i\ket{\+v\psi},\quad \text{and}\quad E_i = \rec{2m}p_i^2.
+\end{equation}
+Take an volume around $\+vr = 0$ much smaller than the total section of the incident beam while at the boundary $C$ we have $V\rightarrow 0$. The general solution outside $C$ could be written as
+\begin{equation}
+    \label{eq:psi_expanded}
+    \psi\pare{\+vr} = A e^{ikz} + \sum_{lm}\frac{u_l\pare{r}}{r}Y_l^m\pare{\theta,\varphi} = A\brac{e^{ikz} + f\pare{\theta,\varphi}\frac{e^{ikr}}{r}}.
+\end{equation}
+\vspace{-\baselineskip}
+\begin{termdef}{Differential Cross Section}
+    $\rd{\sigma}/\rd{\Omega}$ is defined as the ratio of the number of particles entering a unit solid angle in the $\pare{\theta,\varphi}$ direction per unit time, $\rd{N}/\rd{\Omega}$, to the incident particle flux $\conj{J_0}$.
+\end{termdef}
+\begin{finaleq}{Differential Cross Section}
+    \[ \+d\Omega d\sigma \pare{\theta,\varphi} = \abs{f\pare{\theta,\varphi}}^2. \]
+\end{finaleq}
+\begin{termdef}{Total Cross Section}
+    \[ \sigma = \int \rd{\sigma} = \int_0^{2\pi}\rd{\varphi}\,\int_0^\pi \sin\theta\,\rd{\theta} \abs{f\pare{\theta,\varphi}}^2. \]
+\end{termdef}
+The wavefunction in the $\+vk$-space is
+\[ \bra{\+vr}\ket{\+vk} = \rec{\pare{2\pi}^{3/2}}e^{i\+vk\cdot \+vr} = \hbar^{3/2}\bra{\+vr}\ket{\+vp}, \]
+with which the normalization condition $\bra{\+vk}\ket{\+vk'} = \delta\pare{\+vk - \+vk'}$ holds.
+
+% subsubsection definitions (end)
+
+\subsubsection{Green's Function} % (fold)
+\label{ssub:green_s_function}
+
+With $G_0\pare{k_i^2,\+vr}$ denoting the Green's function that satisfies
+\begin{equation}
+    \label{eq:scattering_delta}
+    \frac{\hbar^2}{2m}\pare{\grad^2 + k_i^2}G_0\pare{k_i^2,\+vr} = \delta\pare{\+vr},
+\end{equation}
+the wavefunction $\psi\pare{\+vr}$ is given by
+\[ \psi\pare{\+vr} = \varphi\pare{\+vr} + G\pare{k_i^2,\+vr}\underset{\+vr}{*} \brac{V\pare{\+vr}\psi\pare{\+vr}}, \]
+where $\varphi\pare{\+vr}$ is the solution to the homogeneous part of \eqref{eq:scattering_delta}.
+\par
+\eqref{eq:scattering_delta} is a Helmholtz equation, therefore the Green's function is given by
+\[ G^{\pm}_{0}\pare{k_i^2,\+vr} = -\frac{m}{2\pi\hbar^2}\rec{r}e^{\pm ikr}. \]
+The $+$ sign denotes the retarded one. For $r\rightarrow \infty$ we have
+\[ \psi^+_{\+vp_i}\pare{\+vr} \underset{r\rightarrow \infty}{\rightarrow }\rec{\pare{2\pi}^{3/2}}\brac{e^{ikz} + f\pare{\theta,\varphi} \frac{e^{ikr}}{r}}, \]
+where
+\begin{equation}
+    \label{eq:f_in_green_function}
+    f\pare{\theta,\varphi} = -\frac{\pare{2\pi}^{3/2}}{4\pi}\frac{2m}{\hbar^2}\int \rd{\+vr'}\, e^{-i\+vk_f \cdot \+vr'}V\pare{\+vr'}\psi_{\+vp_i}^+\pare{\+vr'},
+\end{equation}
+and $\+vk_f = k\+vn$, where $\+vn$ denotes the direction $\pare{\theta,\varphi}$.
+
+% subsubsection green_s_function (end)
+
+\mathsubsubsection{Lippmann}{Lippmann...}{Lippmann-Schwinger Equation}{Lippmann-Schwinger Equation} % (fold)
+\label{ssub:lippmann_schwinger_equation}
+
+The equation \eqref{eq:stationary_scattering_schrodinger} could be rewritten as
+\[ \pare{E_i - H_0}\pare{\ket{\psi_{\+vp_i}} - \ket{\+vk_i}} = V\ket{\psi_{\+vp_i}}, \]
+where $\ket{\+vk_i}$ is the plane-wave part of $\ket{\psi}$, and $\displaystyle H_0 = \frac{p^2}{2m}$ denotes the kinetic energy.
+\begin{finaleq}{Lippmann-Schwinger Equation}
+    \[ \ket{\psi^{\pm}_{\+vp}} = \ket{\+vk} + \rec{E_i - H_0 \pm i\epsilon} V\ket{\psi^\pm_{\+vp}}. \]
+\end{finaleq}
+The \gloss{Green's operator} is defined by
+\[ G_0^\pm\pare{E} = \rec{E - H_0 \pm i\epsilon}, \]
+whence we have $\pare{G_0^+}^\dagger = G_0^-$. The Schr\"odinger equation may also be rewritten as
+\[ \ket{\psi_{\+vp_i}^\pm} = \ket{\+vk_i} + \rec{E_i - H \pm i\epsilon}V\ket{\+vk_i}. \]
+We therefore define another Green's operator
+\[ G^\pm\pare{E} = \rec{E - H \pm i\epsilon}. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Dyson Equation}
+    \[ G^\pm\pare{E_i} = G^\pm_0\pare{E_i} + G^\pm_0\pare{E_i}VG^\pm\pare{E_i}. \]
+\end{finaleq}
+
+% subsubsection lippmann_schwinger_equation (end)
+
+\mathsubsubsection{TS}{The T ...}{The $T$ Operator and the $S$ Operator}{The T Operator and the S Operator} % (fold)
+\label{ssub:the_t_operator_and_the_s_operator}
+
+\begin{termdef}{The $T$ Operator, the Transition Operator}
+    \[ T^{\pm}\ket{\+vk_i} = V\ket{\psi_{\+vp_i}^\pm}. \]
+\end{termdef}
+With the $T$ operator, \eqref{eq:f_in_green_function} may be rewritten as
+\[ f\pare{\theta,\varphi} = -\frac{4\pi^2m}{\hbar^2}\bra{\+vk_f}V\ket{\psi_{\+vp_i}^+} = -\frac{4\pi^2 m}{\hbar^2}\bra{\+vk_f}T^+\ket{\+vk_i} = -4\pi^2\hbar m\bra{\+vp_f}T^+\ket{\+vp_i}. \]
+We also have
+\begin{equation}
+\label{eq:t_operator_eq}
+\begin{cases}
+    T^\pm\pare{E} = V + VG^\pm_0\pare{E}T^\pm\pare{E}, \\
+    T^\pm\pare{E} = V + VG^\pm\pare{E}V,
+\end{cases}\quad\text{and}\quad \begin{cases}
+    G_0^\pm T^\pm = G^\pm V, \\
+    T^\pm G_0^\pm = VG^\pm, \\
+    G^\pm = G^\pm_0 + G^\pm T^\pm G^\pm_0.
+\end{cases}
+\end{equation}
+\vspace{-\baselineskip}
+\begin{termdef}{The M\o ller Operators}
+    \[ \Omega^\pm \ket{\+vk} = \ket{\psi_{\+vp_i}^\pm}. \]
+\end{termdef}
+We have
+\[ \pare{\Omega^\pm}^\dagger \Omega^\pm = \mathbbm{1}. \]
+$\Omega$ is unitary if $H$ doesn't admit any bound states.
+\begin{termdef}{The $S$ Operator, the Scattering Operator}
+    \[ S = \pare{\Omega^-}^\dagger \Omega^+. \]
+\end{termdef}
+$S$ is a unitary operator. We have the following relation
+\[ \inlinefinaleq{S = \mathbbm{1} - 2\pi i\delta\pare{E_f - E_i}T^+.} \]
+
+% subsubsection the_t_operator_and_the_s_operator (end)
+
+\subsubsection{Scattering Cross Sections and the Born Approximation} % (fold)
+\label{ssub:scattering_cross_sections_and_the_born_approximation}
+
+From the operator equations in \eqref{eq:t_operator_eq} we find
+\[ T^+\pare{E} = V + VG_0^+V + VG_0^+VG_0^+V + \cdots. \]
+With the first-order Born approximation,
+\[ \+d\Omega d\sigma = \frac{m^2}{\pare{2\pi}^2 \hbar^4}\abs{\int \rd{\+vr}\, e^{i\pare{\+vk_i - \+vk_f}\cdot \+vr}V\pare{\+vr}}^2. \]
+\begin{sample}
+    \begin{example}
+        With $\displaystyle H = \rec{2m}p^2 + e\varphi\pare{r} + V'\pare{r}\+vS\cdot \+vL$ where
+        \[ V'\pare{\+vr} = \rec{4\pi\epsilon_0}\frac{e^2}{2m^2 c^2}\rec{r}\+DrD{\varphi\pare{r}}. \]
+    \end{example}
+    The scattering cross section is given by
+    \[ \+d\Omega d\sigma = \abs{f\pare{\theta,\varphi}}^2 = \frac{\pare{2\pi}^4 m^2}{\hbar^4}\abs{\bra{\+vk_f\otimes \+uk_f m'_f} V \ket{\+vk_i\otimes \+uk_i m_i}}^2, \]
+    which consists of two items,
+    \[ \bra{\+vk_f\otimes \+uk_f m'_f}\varphi\ket{\+vk_i\otimes \+uk_i m_i} = \bra{\+uk_f m'_f}\ket{\+uk_i m_i}\rec{\pare{2\pi}^3}\int \rd{\+vr}\, e^{i\pare{\+vk_i - \+vk_f}\cdot \+vr}\varphi\pare{\+vr}, \]
+    and
+    \begin{align*}
+        & \phantom{{}={}} \bra{\+vk_f\otimes \+uk_f m'_f}V'\pare{r}\+vS\cdot \+vL\ket{\+vk_i\otimes \+uk_i m_i} \\ &= \rec{8\pi\epsilon_0}\frac{e^2}{m^2c^2}\rec{\pare{2\pi}^3}\times \bra{\+uk_f m'_f} \int e^{-i\+vk_f\cdot \+vr}\rec{r}\+DrD\varphi \+vS\cdot \+vr \times \pare{-i\hbar\grad}e^{i\+vk_i\cdot \+vr}\,\rd{\+vr} \ket{\+uk_i m_i} \\
+        &= -\frac{e^2}{8\pi\epsilon_0}\frac{i\hbar^2 k^2}{2m^2c^2}\sin\theta\bra{\+uk_f m'_f} \+v\sigma\cdot \+vn \ket{\+uk_i m_i} \rec{\pare{2\pi}^3}\int e^{i\pare{\+vk_i - \+vk_f}\cdot \+vr}\varphi\pare{r}\,\rd{\+vr},
+    \end{align*}
+    where $\+vn$ is the unit vector perpendicular to both $\+vk_i$ and $\+vk_f$.
+\end{sample}
+
+% subsubsection scattering_cross_sections_and_the_born_approximation (end)
+
+% subsection stationary_scattering_theory (end)
+
+\subsection{Time-Dependent Scattering Theory} % (fold)
+\label{sub:time_dependent_scattering_theory}
+
+\subsubsection{Time-Dependent Green's Operator} % (fold)
+\label{ssub:time_dependent_green_s_operator}
+
+Introducing the \gloss{time-dependent Green's operator} defined by
+\[ \pare{i\hbar H_0}G^\pm_0\pare{t - t'} = \delta{t - t'},\quad \text{and}\quad \pare{i\hbar H}G^\pm_0\pare{t - t'} = \delta{t - t'}, \]
+we find
+\[ G^\pm_0\pare{t-t'} = \mp\frac{i}{\hbar}\Theta\pare{\pm t\mp t'}e^{-\frac{i}{\hbar}\pare{t-t'}H_0},\quad \text{and}\quad G^\pm\pare{t - t'} = \mp\frac{i}{\hbar}\Theta\pare{\pm t\mp t'}e^{-\frac{i}{\hbar}\pare{t - t'}H}, \]
+with which the solution to the time-dependent Schr\"odinger equation $\displaystyle \pare{i\hbar\+DtD{} - H}\ket{\varphi_{\+vp_i}} = 0$ could be written as
+\begin{align*}
+    \ket{\psi^\pm_{\+vp_i}\pare{t}} &= \ket{\varphi^\pm_{\+vp_i}\pare{t}} + \int_{-\infty}^\infty G_0^\pm\pare{t - t'}V\ket{\psi^\pm_{\+vp_i}\pare{t'}}\,\rd{t'}; \\
+    \ket{\psi^\pm_{\+vp_i}\pare{t}} &= \ket{\varphi^\pm_{\+vp_i}\pare{t}} + \int_{-\infty}^\infty G^\pm\pare{t - t'}V\ket{\varphi^\pm_{\+vp_i}\pare{t'}}\,\rd{t'},
+\end{align*}
+where $\ket{\varphi_{\+vp_i}\pare{t}}$ is the solution to
+\[ \pare{i\hbar\+DtD{} - H_0}\ket{\varphi_{\+vp_i}\pare{0}} = 0,\quad \text{i.e.}\quad \ket{\varphi_{\+vp_i}\pare{0}} = \ket{\+vk_i}e^{-\frac{i}{\hbar}E_i t}. \]
+
+% subsubsection time_dependent_green_s_operator (end)
+
+% subsection time_dependent_scattering_theory (end)
+
+% section scattering_theory (end)
+
+\end{document}

@@ -772,7 +772,7 @@ Helmholtz方程中$\+vk\cdot \+vk = \omega^2\mu\epsilon$. 令
 \subsubsection{导体表面的反射和透射} % (fold)
 \label{ssub:导体表面的反射和透射}
 
-设入射平面为$xz$平面, $k\+_I\mathnormal{x}_ \+ux = k\+_I\mathnormal{z}_\+uz$, 则
+设入射平面为$xz$平面, $\+vk = k\+_I\mathnormal{x}_ \+ux + k\+_I\mathnormal{z}_\+uz$, 则
 \[ \begin{cases}
     \+vE_1\pare{\+vr,t} = \+vE_{0I}e^{i\pare{\+vk\+_I_\cdot \+vr - \omega t}} + \+vE\+_0R_e^{i\pare{\+vk\+_R_\cdot \+vr - \omega t}}, & \displaystyle k\+_I_ = k\+_R_ = k_0 = \frac{\omega}{c} = \omega\sqrt{\mu_0\epsilon_0}. \\
     \+vE_2\pare{\+vr,t} = \+vE_{0T}e^{i\pare{\+vk\+_T_\cdot \+vr - \omega t}}, & \+vk\+_T_ = \+v\beta + i\+v\alpha,\quad \beta^2 - \alpha^2 = \omega^2 \mu\epsilon,\quad 2\+v\alpha\cdot \+v\beta = \omega\mu\sigma.
@@ -792,7 +792,7 @@ Helmholtz方程中$\+vk\cdot \+vk = \omega^2\mu\epsilon$. 令
     \end{cases} \]
     从而
     \[ \frac{\beta_z^2 - \alpha^2}{\alpha\beta_z} = \frac{2\omega\epsilon}{\sigma}\pare{1-\frac{\sin^2\theta_1}{n^2}}. \]
-    \item 在良导体近似$\displaystyle \frac{\sigma}{\epsilon\omega} \gg 1$下, $\displaystyle \resumath{\alpha \approx \beta \approx \sqrt{\frac{\omega\mu\sigma}{2}}}$. 此时
+    \item 在良导体近似$\displaystyle \frac{\sigma}{\epsilon\omega} \gg 1$下, $\displaystyle \resumath{\alpha \approx \beta \approx \sqrt{\frac{\omega\mu\sigma}{2}}.}$ 此时
     \[ \frac{\beta_x}{\beta_z} = \frac{\omega}{c}\sin\theta_1 \sqrt{\frac{2}{\omega\mu\sigma}} = \frac{\sin\theta_1}{c}\sqrt{\frac{2\omega\epsilon}{\mu\epsilon\sigma}} \Rightarrow \frac{\beta_x}{\beta_y} \approx \frac{\beta_x}{\beta_z} = \frac{\sin\theta_1}{n}\sqrt{\frac{2\omega\epsilon}{\sigma}} \ll 1. \]
     \begin{cenum}
         \item 透射波几乎沿着法向传播, $\theta_2 \approx 0$.
@@ -803,7 +803,7 @@ Helmholtz方程中$\+vk\cdot \+vk = \omega^2\mu\epsilon$. 令
         \item 法向入射时, 良导体中的透射波为
         \[ \begin{cases}
             \+vE_1\pare{\+vr,t} = E\+_0I_ e^{i\pare{k_z z - \omega t}}\+uy + E\+_0R_e^{-i\pare{k_0 z + \omega t}}\+uy, \\
-            \+vE_2\pare{\+vr,t} = E\+_0T_e^{i\pare{\tilde{k}z - \omega t}},\quad \tilde{k} = \alpha\pare{1+i} \approx \sqrt{\omega\mu\sigma} e^{i\pi/4}.
+            \+vE_2\pare{\+vr,t} = E\+_0T_e^{i\pare{\tilde{k}z - \omega t}}\+uy,\quad \tilde{k} = \alpha\pare{1+i} \approx \sqrt{\omega\mu\sigma} e^{i\pi/4}.
         \end{cases} \]
         相应的磁场为
         \[ \begin{cases}
@@ -871,8 +871,8 @@ $\+vE\pare{\+vr,t} = \+vE\pare{\+vr} e^{-i\omega t}$, $\+vH\pare{\+vr,t} = \+vH\
 
 % subsubsection 理想导体边界条件下的时谐场 (end)
 
-\subsection{谐振腔} % (fold)
-\label{sub:谐振腔}
+\subsubsection{谐振腔} % (fold)
+\label{ssub:谐振腔}
 
 \begin{figure}[ht]
     \centering
@@ -918,7 +918,204 @@ $m,n,l$中至多一个为零. 为了在空腔中的每一个点出都成立无�
     \[ f\+_min_ = \frac{\omega_{110}}{2\pi} = \frac{c}{2}\sqrt{\rec{a^2} + \rec{b^2}} \Rightarrow \lambda\+_max_ = \rec{f\+_min_} = \frac{2}{\displaystyle \sqrt{\rec{a^2} + \rec{b^2}}}. \]
 \end{cenum}
 
-% subsection 谐振腔 (end)
+% subsubsection 谐振腔 (end)
+
+\subsubsection{矩形波导管} % (fold)
+\label{ssub:矩形波导管}
+
+对于$\pare{x,y}\in\pare{0,a}\times \pare{0,b}$的波导管, 有沿着$z$轴方向传播的行波解
+\[ \begin{cases}
+    \+vE\pare{\+vr,t} = \+vE\pare{x,y} e^{i\pare{k_3 z - \omega t}}, \\
+    \+vH\pare{\+vr,t} = \+vH\pare{x,y} e^{i\pare{k_3 z - \omega t}}.
+\end{cases} \]
+设$E_x\pare{x,y} = X\pare{x}Y\pare{y}$, 则
+\[ 0 = \frac{\laplacian E_x}{E_x} + k^2 - k_3^2 = \rec{X}\+d{x^2}d{^2X} + \rec{Y}\+d{y^2}d{^2Y} + k^2 - k_3^2 = 0. \]
+可得
+\[
+\begin{cases}
+    X\pare{x} = \cos k_1 x, \\
+    Y\pare{y} = \sin k_2 y.
+\end{cases}
+\]
+其中$k_1 a = m\pi$, $k_2 b = n\pi$, 这是边界条件
+\[ \begin{cases}
+    \partial_x E_x\vert_{x=0} = \partial_x E_x\vert_{x=a}, \\
+    E_x\vert_{y=0} = 0 = E_x\vert_{y=b}
+\end{cases} \]
+要求的. 因此
+\[ \resumath{\begin{cases}
+    E_x = A_1 \cos k_1 x \sin k_2 y e^{i\phi}, \\
+    E_y = A_2 \sin k_2 x \cos k_2 y e^{i\phi}, \\
+    E_z = A_3 \sin k_1 x \sin k_2 y e^{i\phi},
+\end{cases}\quad \begin{cases}
+    k_1 = m\pi/a,\quad k_2 = n\pi/b,\quad k_1,k_2\text{不全为零},\\
+    \displaystyle k = \frac{\omega}{c} = \sqrt{\pare{\frac{m\pi}{a}}^2 + \pare{\frac{n\pi}{b}}^2 + k_3^2}, \\
+    \div \+vE = 0 \Rightarrow k_1A_1 + k_2A_2 + k_3A_3 = 0.
+\end{cases}} \]
+$\+vH = \displaystyle -\frac{i}{\omega\mu}\curl \+vE$, 故
+\[ \resumath{\begin{cases}
+    \displaystyle H_x = -\frac{i}{\omega\mu}\pare{k_2A_3 - ik_3A_2}\sin k_1 x\cos k_2 y e^{i\phi}, \\
+    \displaystyle H_y = -\frac{i}{\omega\mu}\pare{ik_3 A_1 - k_1 A_3}\cos k_1x \sin k_2y e^{i\phi}, \\
+    \displaystyle H_z = -\frac{i}{\omega\mu}\pare{k_1A_2 - k_2A_1}\cos k_1x \cos k_2y e^{i\phi}.
+\end{cases}} \]
+\begin{cenum}
+    \item 波导管内的行波解不允许横电磁波存在, 即不允许$E_z = H_z = 0$. 只可能为横电波($E_z = 0$但$H_z\neq 0$)或横磁波($H_z = 0$而$E_z\neq 0$)或其组合.
+    \item 特定的$m\neq 0$, $n\neq 0$, 存在两个独立的偏振模式$\begin{cases}
+        \mathrm{TE}_{mn}, & A_3 = 0, k_1A_1 + k_2A_2 = 0, \\
+        \mathrm{TM}_{mn}, & k_1A_2 = k_2A_1.
+    \end{cases}$ 对于特定的$m\neq 0$, $n=0$, 对应一个独立的偏振模式. 从而$\mathrm{TE}_{mn}$要求$m,n$至多一个为零, $\mathrm{TM}_{mn}$要求$m,n$皆非零.
+    \item 对于特定的$\pare{m,n}$, $\omega$连续取值, 存在下截止频率
+    \[ \omega_{c,mn} = \pi c\sqrt{\pare{\frac{m}{a}}^2 + \pare{\frac{n}{b}}^2},\quad \omega = \sqrt{\omega_{c,mn}^2 + k_3^2c^2}. \]
+    \item 对于特定的波导管$\pare{a,b}$, 存在最低截止频率
+    \[ \omega\+_min_ = \min\curb{\omega_{c,10},\omega_{c,01}}. \]
+    若$a>b$, 则
+    \[ \omega\+_min_ = \frac{\pi c}{a} \Rightarrow f\+_min_ = \frac{\omega_{m,n}}{2\pi} = \frac{c}{2a} \Rightarrow \lambda\+_max_ = 2a. \]
+    \item 相速度$\displaystyle v_p = \frac{\omega}{k_3}$与群速度$v_g = \+d{k_3}d{\omega}$分别为
+    \begin{align*}
+        v\+_p_ &= \frac{\omega c}{\sqrt{\omega^2 - \omega_{c,mn}^2}} = \frac{c}{\sqrt{1-\omega_{c,mn}^2/\omega^2}} > c, \\
+        v_g &= \frac{k_3 c^2}{\sqrt{\omega_{c,mn}^2 + k_3^2c^2}} = \frac{k_3 c^2}{\omega} = \frac{c^2}{v_p} < c.
+    \end{align*}
+    \item 直模($a>b$: $\mathrm{TE}_{10}$, $k_1 = \pi/a$, $k_2 = 0$),
+    \begin{align*}
+        & E_x = E_z = 0,\quad E_y = E_0 \sin \frac{\pi x}{a} e^{i\phi}, \\
+        & H_y = 0,\quad H_x = -\frac{k_3 E_0}{\omega\mu}\sin \frac{\pi x}{a} e^{i\phi},\quad H_z = -\frac{i\pi E_0}{\omega\mu a}\cos \frac{\pi x}{a}e^{i\phi}.
+    \end{align*}
+    窄边$b$上
+    \begin{align*}
+        & \sigma_0 \vert_{x=0} = \+ux \cdot \epsilon_0 \+vE\vert_{x=0} = 0 = \sigma_0 \vert_{x=a}, \\
+        & \+v\kappa_0\vert_{x=0} = \+ux\times \+vH\vert_{x=0} = -\+uy H_z\vert_{x=0} = \+uy \frac{i\pi E_0}{\omega\mu a} e^{i\phi}, \\
+        & \+v\kappa_0\vert_{x=a} = -\+ux\times \+vH\vert_{x=a} = \+uy H_z\vert_{x=a} = \+v\kappa_0\vert_{x=0}.
+    \end{align*}
+    宽边$a$上
+    \begin{align*}
+        &\sigma_0\vert_{y=0} = \+uy\cdot \epsilon_0 \+vE\vert_{y=0} = \epsilon_0 E_y, \\
+        &\sigma_0\vert_{y=b} = -\+uy\cdot \epsilon_0 \+vE\vert_{y=b} = -\epsilon_0 E_y, \\
+        &\+v\kappa_0\vert_{y=0} = \+uy\times \+vH\vert_{y=0} = H_z \+ux - H_x\+uz = -\+v\kappa_0\vert_{y=b}, \\
+        &\+ux\cdot \+v\kappa_0 \vert_{x=a/2} = H_z\vert_{x=a/2} = 0.
+    \end{align*}
+\end{cenum}
+\begin{proof}[不能存在TEM解]
+    $H_z = 0 \Rightarrow k_1 A_2 = k_2 A_1$, $E_z = 0 \Rightarrow A_3 = 0$或$k_1 = 0$或$k_2 = 0$. 而由无散条件$k_1 A_1 + k_2 A_2 = 0$, 而$k_1$和$k_2$不同时为零, 故$A_3 = 0$下不存在TEM解. 若$k_1 = 0$, 有$A_1 = 0$, $\pare{E_x,E_y,E_z} = \pare{0,0,0}$. 对$k_2=0$的情形类似.
+\end{proof}
+
+% subsubsection 矩形波导管 (end)
+
+\subsubsection{波导管问题的一般讨论} % (fold)
+\label{ssub:波导管问题的一般讨论}
+
+以$\+uz$表示纵向, $\+un$表示表面向内的法向, $\+u\tau$表示表面切向,
+\[ \begin{cases}
+    \+vE\pare{\+vr,t} = \+vE\pare{\+vr_\perp} e^{i\phi} = \brac{\+vE_\perp\pare{\+vr_\perp} + E_z\pare{\+vr_\perp} \+uz} e^{i\phi}, \\
+    \+vH\pare{\+vr,t} = \+vH\pare{\+vr_\perp} e^{i\phi} = \brac{\+vH_\perp\pare{\+vr_\perp} + H_z\pare{\+vr_\perp} \+uz} e^{i\phi},
+\end{cases} \]
+其中$\+vr = x\+ux + y\+uy + z\+uz = \+vr_\perp + z\+uz$, 则
+\begin{align*}
+    \grad\brac{f\pare{\+vr_\perp}e^{i\phi}} &= \brac{\grad f\pare{\+vr_\perp}}e^{i\phi} + f\pare{\+vr_\perp}\grad e^{i\phi} \\
+    &= \brac{\grad_\perp f\pare{\+vr_\perp} + ik_3 \+uz f\pare{\+vr_\perp}} e^{i\phi},
+\end{align*}
+其中$\grad = \+ux\partial_x + \+uy\partial_y + \+uz\partial_z = \pare{\grad_\perp + ik_3 \+uz}$.
+\begin{cenum}
+    \item 独立方程$\curl \+vE = i\omega\mu \+vH$, $\curl \+vH = -i\omega\epsilon \+vE$(注意到$\+vE\mapsto \+vH$, $\+vH\mapsto -\+vE$, $\mu \leftrightarrow \epsilon$可以在两个方程之间互换),
+    \begin{align*}
+        & \pare{\grad_\perp + ik_3 \+uz}\times\pare{\+vE_\perp + E_z\+uz} = i\omega\mu \+vH_\perp + i\omega\mu H_z \+uz, \\
+        & \Rightarrow \grad_\perp \+vE_\perp + ik_3 \+uz\times \+vE_\perp - \+uz\times \grad_\perp \+vE_z, \\
+        & \Rightarrow \begin{cases}
+            \grad_\perp \times \+vE_\perp = i\omega\mu H_z\+uz,\quad k_3\+uz\times \+vE_\perp - \omega\mu \+vH_\perp = -i\+uz\times \grad_\perp E_z, \\
+            \grad_\perp \times \+vH_\perp = -i\omega\epsilon E_z \+uz,\quad k_3 \+uz\times \+vH_\perp + \omega\epsilon \+vE_\perp = -i\+uz\times \grad_\perp H_z.
+        \end{cases}
+    \end{align*}
+    \item TM与TE方程: TM要求$H_z = 0, E_z \neq 0$, 从而
+    \begin{align*}
+        & \pare{\laplacian_\perp + \gamma^2} E_z = 0, \\
+        & \+vE_\perp = \frac{ik_3}{\gamma^2}\grad_\perp E_z, \\
+        & \+vH = \+vH_\perp = \frac{i\omega\epsilon}{\gamma^2}\+uz\times \grad_\perp E_z = \frac{\omega\epsilon}{k_3} \+uz\times \+vE_\perp.
+    \end{align*}
+    TE要求$E_z = 0, H_z = 0$, 从而
+    \begin{align*}
+        & \pare{\laplacian_\perp + \gamma^2}H_z = 0, \\
+        & \+vH_\perp = \frac{ik_3}{\gamma^2}\grad_\perp H_z, \\
+        & \+vE = \+vE_\perp = -\frac{i\omega\mu}{\gamma^2}\+uz\times \grad_\perp H_z = -\frac{\omega\mu}{k_3}\+uz\times \+vH_\perp.
+    \end{align*}
+    \item 边界条件$\+un\times \+vE\vert_S = 0$, TM要求$E_z\vert_S = 0$, TE要求
+    \[ \+un\times \+vE\vert_S \propto \+un\times\pare{\+uz\times \grad_\perp H_z}\vert_S = \+uz\pare{\+un\cdot \grad_\perp H_z}\vert_S = \+uz \left.\+DnD{H_z}\right\vert_S = 0. \]
+\end{cenum}
+\begin{proof}[不允许TEM存在]
+    $\begin{cases}
+        \grad_\perp \times \+vE_\perp = 0, \Rightarrow k_3\+uz \times \+vE_\perp = \omega\mu \+vH_\perp \Rightarrow \curl_\perp\pare{\+uz \times \+vE_\perp} =  \\
+        \grad_\perp \times \+vH_\perp = 0,
+    \end{cases}$ 且
+    \[ \curl_\perp \pare{\+uz\times \+vE_\perp} = \+uz\pare{\grad_\perp\+v\cdot E_\perp} - \cancelto{0}{\pare{\+uz\cdot \grad_\perp} \+vE_z}, \]
+    从而$\+vE_\perp = -\grad_\perp \varphi\pare{\+vr_\perp} \Rightarrow \laplacian_\perp \varphi\pare{\+vr_\perp} = 0$, 而表面处$\+un \times \+vE_\perp\vert_{S}  = 0$, 从而$\+vE_\perp$垂直于管, 故表面为等势面, $\varphi_\perp = \const \Rightarrow \+vE_\perp = 0$.
+\end{proof}
+\begin{remark}
+    同轴电缆不受这一限制, 电缆内部和外部的$\varphi$不一定相等.
+\end{remark}
+
+于是有结论
+    \begin{cenum}
+        \item 不允许TEM存在.
+        \item 对于TM, $H_z = 0, E_z \neq 0$, 有$E_z \neq \const$. 对于TE, $E_z = 0, H_z \neq 0$, 有$H_z \neq \const$. 否则沿着内部边界的积分
+        \[ \oint_C \rd{\+vl}\cdot \+vE_\perp = 0 = \iint_\Sigma \rd{\+v\sigma}\cdot \pare{\grad_\perp \times \+vE_\perp} = i\omega\mu \iint_\sigma \rd{\sigma} \, H_z = i\omega \mu H_z \Sigma \Rightarrow H_z = 0. \]
+        \item 通过右侧两条方程, $\+vE_\perp$可以显式写出,
+        \begin{align*}
+            & k_3^2 \+uz\times \pare{\+uz\times \+vE_\perp} + \omega^2\mu\epsilon \+vE_\perp = -ik_3\brac{\+uz\times \pare{\grad_\perp E_z}} - i\omega\mu \+uz\times \grad_\perp H_z \\
+            & = \pare{\omega^2 \mu \epsilon - k_3^2} \+vE_\perp.
+        \end{align*}
+        且右侧两条方程等价于
+        \[ \begin{cases}
+            \gamma^2 \+vE_\perp = ik_3 \grad_\perp E_z - i\omega\mu\+uz\times \grad_\perp H_z, \\
+            \gamma^2 \+vH_\perp = ik_3 \grad_\perp H_z + i\omega\epsilon \+uz\times \grad_\perp E_z,
+        \end{cases} \]
+        有结论
+        \[ \gamma^2 = \omega^2\mu\epsilon - k_3^2 \neq 0. \]
+        \item 取旋度有
+        \[ \gamma^2\pare{-i\omega\epsilon E_z\+uz} = i\omega \epsilon = i\omega\epsilon \grad_\perp \times\pare{\+uz\times \grad_\perp E_z} = \pare{i\omega\epsilon\laplacian_\perp E_z}\+uz. \]
+        从而
+        \[ \begin{cases}
+            \pare{\laplacian_\perp + \gamma^2} E_z = 0, \\
+            \pare{\laplacian_\perp + \gamma^2} H_z = 0.
+        \end{cases} \]
+        \item $\gamma^2 = \omega^2\mu\epsilon - k_3^2 > 0$, 设$\psi\pare{\+vr_\perp} = E_z\pare{\+vr_\perp}$或$H_z\pare{\+vr_\perp}$, 有
+        \begin{align*}
+            & \laplacian_\perp \psi + \gamma^2 \psi = 0, \\
+            & \gamma^2 \int \rd{V}\,\abs{\psi}^2 = \int \rd{V}\, \psi^* \gamma^2\psi = -\int \rd{V}\, \psi^* \laplacian_\perp \psi \\
+            &= -\int \rd{V}\brac{\grad_\perp \cdot \pare{\psi^* \grad_\perp \psi} - \grad_\perp \psi^*\cdot \grad_\perp \psi} \\
+            &= - \oiint \rd{\+v\sigma}\cdot \psi^*\grad_\perp \psi + \iiint \rd{V}\,\abs{\grad_\perp\psi}^2 + \iint_{\text{侧}} \rd{\+v\sigma}\, \psi^* \+DnD{\psi} \\
+            &= \iiint \rd{V}\,\abs{\grad_\perp \psi}^2 > 0 \Rightarrow \gamma^2 > 0.
+        \end{align*}
+    \end{cenum}
+
+\begin{sample}
+    \begin{ex}
+        对于矩形波导管, TM波$E_z = X\pare{x}Y\pare{y}$, 有
+        \[ X\pare{x} = \sin k_1 x,\quad Y = \sin k_2 y, \]
+        从而
+        \[ \Rightarrow E_z = A\sin k_1 x \sin k_2 y,\quad k_1 = \frac{m\pi}{a},\quad k_2 = \frac{n\pi}{b},\quad m,n\text{不为零}. \]
+        TE波$H_z = X\pare{x}Y\pare{y}$, $\displaystyle \left.\+DnD{H_z}\right\vert_S = 0$, 有
+        \[ H_z = A \cos k_1 x \cos k_2 y, \quad k_1 = \frac{m\pi}{a},\quad k_2 = \frac{n\pi}{b},\quad m,n\text{不为零}. \]
+        和之前的结论相同.
+    \end{ex}
+\end{sample}
+
+\begin{resume}
+\paragraph{总结} % (fold)
+\label{par:总结}
+
+TM波需要求解$\pare{\laplacian_\perp + \gamma^2}E_z = 0$, 加上$E_z\vert_S = 0$的条件, $\gamma^2 = \omega^2\mu\epsilon - k_3^2$,
+\begin{align*}
+    & \Rightarrow \+vE = \pare{\frac{ik_3}{\gamma^2} \grad_\perp E_z + E_z \+uz} e^{i\phi}, \\
+    & \Rightarrow \+vH = \frac{\omega\epsilon}{k_3} \+uz\times \+vE.
+\end{align*}
+TE波需要求解$\pare{\laplacian_\perp + \gamma^2}H_z = 0$, 加上$\displaystyle \left.\+DnD{H_z}\right\vert_S = 0$的条件,
+\begin{align*}
+    & \Rightarrow \+vH = \pare{\frac{ik_3}{\gamma^2}\grad_\perp H_z + H_z\+uz}e^{i\phi}, \\
+    & \Rightarrow \+vE = -\frac{\omega\mu}{k_3}\+uz\times \+vH.
+\end{align*}
+\end{resume}
+
+% paragraph 总结 (end)
+
+% subsubsection 波导管问题的一般讨论 (end)
 
 % subsection 谐振腔与波导体 (end)
 

@@ -1,0 +1,213 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=李明憲,gakka=計算材料學,section=A,gakkabbr=CC]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{基礎知識} % (fold)
+\label{sec:基礎知識}
+
+\begin{cenum}
+    \item Ball-and-Stick模型適用於共價鍵.
+    \item CPK模型適用於離子晶體/分子晶體.
+    \item Polyhedron模型適用於礦物, 以多面體表示硬鍵, 以多面體連接點表示軟鍵.
+    \item Clean按钮用于调整分子构型.
+\end{cenum}
+\gloss{平面波贗勢法}: 以平面波基組展開波函數, 且只考慮價電子.
+\par
+\begin{cenum}
+    \item 核数通常选为irreducible k-points数目的因数.
+\end{cenum}
+
+\subsection{晶体结构} % (fold)
+\label{sub:晶体结构}
+
+\begin{cenum}
+    \item 以$\+va$, $\+vb$, $\+vc$三个向量标记晶胞. 角度$\alpha = \expc{\+vb,\+vc}$, $\beta = \expc{\+va,\+vc}$, $\gamma = \expc{\+va,\+vb}$.
+    \item 顶点处原子计$1/8$个, 边上原子计$1/4$个, 面上原子计$1/2$个, 内部原子计$1$个.
+    \item 用
+    \[ \+vr = r_a \+va + r_b \+vb + r_c \+vc,\quad r_a,r_b,r_c\in \brac{0,1} \]
+    标记各原子的位置.
+    \item 最小晶胞谓原胞. 也可以选择尽可能方正的Conventional Cell.
+\end{cenum}
+
+\subsubsection{富勒烯} % (fold)
+\label{ssub:富勒烯}
+
+\gloss{Schlegel图}: 将多面体转化为平面图表示.
+
+% subsubsection 富勒烯 (end)
+
+% subsection 晶体结构 (end)
+
+\subsection{量子力学} % (fold)
+\label{sub:量子力学}
+
+\mathsubsubsection{SchrodingerEq}{Schr\"odinger...}{Schr\"odinger方程}{Schrodinger方程}
+\label{ssub:schrodinger方程}
+
+总的波函数为
+\[ \Psi\pare{x,t} = \sum_n c_n \psi_n\pare{x} e^{-\frac{i E_n t}{\hbar}}. \]
+其中$\psi_n\pare{x}$为定态, 满足
+\[ -\frac{\hbar^2}{2m}\laplacian \psi + V\psi = E\psi. \]
+系数可由
+\[ c_n = \int \psi_n^*\pare{x}\Psi\pare{x,0}\,\rd{x} \]
+确定.
+
+% subsubsection schrodinger方程 (end)
+
+\subsubsection{多电子的量子力学问题} % (fold)
+\label{ssub:多电子的量子力学问题}
+
+例如对于双电子的情形,
+\[ \brac{-\half \laplacian_1 - \half \laplacian_2 + V\pare{\+vr_1,\+vr_2}}\Psi\pare{\+vr_1,\+vr_2} = E\Psi\pare{\+vr_1,\+vr_2}. \]
+
+% subsubsection 多电子的量子力学问题 (end)
+
+\subsubsection{密度泛函理论} % (fold)
+\label{ssub:密度泛函理论}
+
+基态的总能量可以写为电荷密度的泛函, 即存在泛函$E\+_GS_\brac{\Psi}$使得
+\[ E\+_GS_ = E\+_GS_\brac{\rho\pare{\+vr}}. \]
+若将非基态的电荷密度代入, 则
+\[ E\+_GS_\brac{\rho\pare{\+vr}} \ge E\+_GS_. \]
+然而$E\+_GS_$的具体形式未知.
+
+% subsubsection 密度泛函理论 (end)
+
+\subsubsection{Kohn-Sham方法} % (fold)
+\label{ssub:kohn_sham方法}
+
+将总能量泛函视为
+\[ E\brac{\rho} = T\+_m_\brac{\rho} + E\+_ee_\brac{\rho} + E\+_ext_\brac{\rho}, \]
+其中$T\+_m_$是动能, $E\+_ee_$是电子交换能, $E\+_ext_$是外场中的电子势能. 可以分解
+\[ E\brac{\rho} = T\+_s_\brac{\rho} + E\+_xc_\brac{\rho} + E\+_H_\brac{\rho} + E\+_ext_\brac{\rho}. \]
+其中$T\+_s_$为各电子独立运动时的动能, $E\+_H_$时古典静电分布的静位能, 剩余部分归结为交换-关联能$E\+_xc_$. 其中
+\[ T_s\brac{\rho} = \half \sum_i \int \Psi_i^*\pare{\+vr}\laplacian \Psi_i\pare{\+vr}\,\rd{^3\+vr}. \]
+其中
+\[ \rho\pare{\+vr} = \sum_i \abs{\Psi_i\pare{\+vr}}^2, \]
+且满足归一化条件
+\[ N = \int \rho\pare{\+vr}\,\rd{^3\+vr}. \]
+
+\paragraph{交换-关联能的局域密度近似} % (fold)
+\label{par:交换_关联能的局域密度近似}
+
+经典静电能为
+\[ E\+_H_\brac{\rho} = \iint \frac{\rho\pare{\+vr'}\rho\pare{\+vr}}{\abs{\+vr' - \+vr}}\,\rd{^3\+vr'}\,\rd{^3\+vr}. \]
+外势能为
+\[ E\+_ext_\brac{\rho} = \int V\+_ext_\pare{\+vr}\rho\pare{\+vr}\,\rd{^3\+vr}. \]
+定义$\epsilon\+_xc_\brac{\rho\pare{\+vr}}$使之满足
+\[ E\+_xc_\brac{\rho} = \int \epsilon\+_xc_\brac{\rho\pare{\+vr}}\rho\pare{\+vr}\,\rd{^3\+vr}. \]
+在LDA近似下,
+\[ \epsilon\+_xc_\brac{\rho\pare{\+vr}} = \epsilon\+_xc_^{\mathrm{LDA}}\pare{\rho\pare{\+vr}}. \]
+对各部分做泛函微分, 引入Lagrange乘子, 则
+\[ \pare{H - E_i}\Psi_i  = \brac{\half \laplacian + \int \frac{\rho\pare{\+vr'}}{\abs{\+vr' - \+vr}}\,\rd{^3\+vr'} + V\+_ext_ - V\+_xc_ - E_i}\Psi_i = 0. \]
+$H$和$\rho$有关, 需先猜测初始的$\rho$后通过SCF迭代求解.
+
+% paragraph 交换_关联能的局域密度近似 (end)
+
+% subsubsection kohn_sham方法 (end)
+
+\subsubsection{共轭梯度法} % (fold)
+\label{ssub:共轭梯度法}
+
+使用共轭梯度法, $N$维抛物面可以$N$次内命中最小值点.
+
+% subsubsection 共轭梯度法 (end)
+
+\subsubsection{预先调节} % (fold)
+\label{ssub:预先调节}
+
+对高能态和低能态的$\Psi_i$在共轭梯度时给予不同权重考虑.
+
+% subsubsection 预先调节 (end)
+
+\subsubsection{赝势} % (fold)
+\label{ssub:赝势}
+
+通过选择恰当的$V\+_pseudo_\pare{\+vr}$使得价电子的本征系统和电子云密度得到重现.
+
+% subsubsection 赝势 (end)
+
+% subsection 量子力学 (end)
+
+\subsection{能带} % (fold)
+\label{sub:能带}
+
+\subsubsection{波数} % (fold)
+\label{ssub:波数}
+
+由Bloch定理, 对于周期性位矢, 波函数必定有
+\[ \varphi\pare{\+vr} = u_k\pare{\+vr}e^{i\+vk\cdot \+vr} \]
+的形式. $\+vk$为空间的平易对称性产生的量子数.
+
+% subsubsection 波数 (end)
+
+\subsubsection{单个晶胞的方程} % (fold)
+\label{ssub:单个晶胞的方程}
+
+考虑Bloch定理后,
+\[ \brac{-\frac{\hbar^2}{2m}\pare{\laplacian + 2ik\cdot \grad - k^2} + U\pare{\+vr}}u_k\pare{\+vr} = E_k u_k\pare{\+vr}. \]
+在同个能带内, $\+vk$是准连续变化的. 通常用第一Brillouin区内的约化波矢表示各个能带. 在无外磁场的情形下,
+\[ E_n\pare{\+vk} = E_n\pare{-\+vk}. \]
+这一结论源于时间反演对称性.
+
+% subsubsection 单个晶胞的方程 (end)
+
+\subsubsection{能带结构看物性} % (fold)
+\label{ssub:能带结构看物性}
+
+\begin{cenum}
+    \item 价带填满, 导带完全无电子, 则视能隙确定其为半导体或绝缘体.
+    \item 导带部分填充, 为导体.
+\end{cenum}
+在外电场的作用下, $+\+vk$处的电子数目大于$-\+vk$处者, 故可以导电. $\+vk$处的能带等值面的曲率为群速度, 确定了电子的有效质量.
+\par
+对于有磁性的物质, 同一能带将分裂为两条, spin-up与spin-down分别填充之. 如果两条能带其中只有一条Fermi面通过, 另一条没有, 则材料为半金属.
+\par
+对于单原子链, 如果周期由$a$变为$2a$, 则第一Brillouin区的分界线由$\pi / a$变为$\pi/\pare{2a}$, 简并微扰导致能级进一步下降, 可引发自发性对称性破缺.
+
+% subsubsection 能带结构看物性 (end)
+
+\subsubsection{超晶胞} % (fold)
+\label{ssub:超晶胞}
+
+第一Brillouin区由某一固定点于相邻各点的中垂面截成. 第一Brillouin区将继承晶格的所有对称点群.
+
+% subsubsection 超晶胞 (end)
+
+\subsubsection{FFT} % (fold)
+\label{ssub:fft}
+
+将超晶胞的波函数设为
+\[ \Psi_k\pare{\+vr} = u_k\pare{\+vr} e^{i\+vk\cdot \+vr}. \]
+通过Fourier展开,
+\[ u_k\pare{\+vr} = \sum_G c_{k,G} e^{i\+vG\cdot \+vr}. \]
+
+% subsubsection fft (end)
+
+\subsubsection{投影态密度} % (fold)
+\label{ssub:投影态密度}
+
+布局数$n$对能量$E$作图, 可得投影态密度.
+
+% subsubsection 投影态密度 (end)
+
+% subsection 能带 (end)
+
+\subsection{选项} % (fold)
+\label{sub:选项}
+
+\begin{cenum}
+    \item Use TS 用于更精确计算van der Waals相互作用.
+    \item Spin polarized用于自旋相关计算.
+    \item LDA+U用于强关联体系.
+    \item 不确定的体系需要勾选Metal.
+\end{cenum}
+
+% subsection 选项 (end)
+
+% section 基礎知識 (end)
+
+\end{document}

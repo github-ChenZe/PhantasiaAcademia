@@ -1,0 +1,59 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\def\writetofile#1#2{\immediate\write18{echo "#1" > #2}}
+\def\econfig#1{\immediate\write18{echo "#1" | python /Users/zechen/Documents/PhantasiaAcademia/electronconfig.py > electronsconfigtmp.tex}\input{electronsconfigtmp.tex}}
+
+\begin{document}
+
+\newprob{5.1}%
+$\displaystyle E\+_Coulomb_ = -\rec{4\pi\epsilon_0}\frac{e^2}{R_0} = -\SI{4.72}{\eV}$,\par
+$\displaystyle E = \SI{4.72}{\eV} + \SI{3.08}{\eV} - \SI{4.34}{\eV} = \boxed{\SI{3.46}{\eV}.}$\par
+\newprob{5.2}%
+$\displaystyle E\+_Coulomb_ = -\SI{4.64}{\eV} + \SI{3.82}{\eV} - \SI{4.34}{\eV} = \SI{-5.16}{\eV} \Rightarrow R_0 = \SI{0.279}{\nano\meter}$.\par
+$\displaystyle \tilde{\nu}_1 = 2\cdot \frac{\hbar}{4\pi \mu R_0^2 c} = 2\cdot \frac{\hbar}{4\pi \pare{\frac{39.1\times 35.5}{39.1+35.5}u} R_0^2 c} = \boxed{\SI{0.233}{\per\centi\meter}.}$\par
+\newprob{5.3}%
+$\displaystyle \Delta\tilde{\nu} = \frac{\hbar}{2\pi Ic} \Rightarrow I = \frac{\hbar}{2\pi \Delta\tilde{\nu}c} = \boxed{\SI{3.30e-47}{\kilogram\cdot\square\meter}.}$\par
+$\displaystyle R_0 = \sqrt{\frac{I}{\mu}} = \sqrt{\frac{I}{\frac{1\times 79.9}{1+79.9}u}} = \boxed{\SI{0.142}{\nano\meter}.}$
+\newprob{5.4}%
+$\displaystyle \Delta E = \hbar\sqrt{\frac{k}{\mu}} = \hbar\sqrt{\frac{k}{\frac{1\times 35}{1+35}u}}  = \SI{5.96e-20}{\joule}$.\\
+第一激发态对基态布居数比值为$\displaystyle \frac{N_1}{N_0} = e^{-\Delta E/kT} = e^{-14.4} 5.57\times 10^{-7}\ll 1$, 故大部分处于基态.
+\newprob{5.5 (1)}%
+$\displaystyle E \propto \sqrt{\rec{\mu}} = \sqrt{\frac{A_1 + A_2}{A_1A_2}} \Rightarrow \tilde{\nu}_{37} = \tilde{\nu}_{35} \sqrt{\frac{1+37}{1\times 37}}/\sqrt{\frac{1+35}{1\times 35}} = \boxed{\SI{2884.02}{\per\centi\meter}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle \tilde{\nu}_{35} - \tilde{\nu}_{37} = \boxed{\SI{2.17}{\per\centi\meter}.}$
+\newprob{5.6}%
+$\displaystyle B = \half \Delta\tilde{\nu} = \boxed{\SI{1.93}{\per\centi\meter}.}$\par
+$\displaystyle R_0 = \sqrt{\frac{\hbar}{4\pi \mu Bc}} = \sqrt{\frac{\hbar}{4\pi \pare{\frac{12\times 16}{12+16}u} Bc}} = \boxed{\SI{0.113}{\nano\meter}.}$\par
+$\displaystyle k = \mu \pare{2\pi\nu_0}^2 = \pare{\frac{12\times 16}{12+16}u} \pare{2\pi c\tilde{\nu}_0}^2 = \boxed{\SI{1903}{\newton\per\meter}.}$
+\newprob{5.7 (1)}%
+$\displaystyle \frac{\Delta \lambda}{\lambda} \approx \frac{\Delta E}{E} \approx \frac{\Delta \mu}{\mu} \approx \frac{\displaystyle \frac{23\times 37}{23+37} - \frac{23\times 35}{23+35}}{\displaystyle \frac{23\times 35}{23+35}} = \boxed{0.0219.}$
+\par
+\newprobheader{(2)}%
+对于振动能级,\par
+$\displaystyle \frac{\Delta \lambda}{\lambda} \approx \frac{\Delta E}{E} \approx \half\frac{\Delta \mu}{\mu} \approx \half\frac{\displaystyle \frac{23\times 37}{23+37} - \frac{23\times 35}{23+35}}{\displaystyle {\frac{23\times 35}{23+35}}} = 0.0110 < 0.0219$故\underline{不能分辨}.
+
+\end{document}

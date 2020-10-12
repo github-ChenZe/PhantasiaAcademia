@@ -9,7 +9,9 @@
 \definecolor{graybg}{RGB}{241,243,245}
 \definecolor{titlepurple}{RGB}{116,95,181}
 \definecolor{shadegray}{RGB}{102,119,136}
-\definecolor{itemgray}{RGB}{170,170,170}
+%\definecolor{itemgray}{RGB}{170,170,170}
+%\definecolor{itemgray}{RGB}{143,159,172}
+\definecolor{itemgray}{RGB}{114,134,144}
 \definecolor{mathnormalblack}{RGB}{0,0,0}
 \pagecolor{graybg}
 
@@ -40,6 +42,7 @@
 }
 \def\mathitem#1{\text{\color{itemgray}#1}}
 \def\mathcomment#1{\mathitem{\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
 \def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
 \vspace{-4em}}
 \newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
@@ -112,21 +115,23 @@
         \end{cases} && 
     \end{flalign*}
 \end{cheatresume}
-\newheader{二阶线性方程\wdiv 双曲型}
+\newheader{二阶线性方程\wdiv 抛物型}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathitem{特征} && \+dxdy = \frac{a_{12} + \sqrt{\Delta}}{a_{11}} \Rightarrow \xi = \varphi\pare{x,y} = \const \\
-        & && \+dxdy = \frac{a_{12} - \sqrt{\Delta}}{a_{11}} \Rightarrow \eta = \psi\pare{x,y} = \const \\
-        & \mathitem{标准形} && \frac{\partial^2 u}{\partial \xi \partial \eta} + \rec{2A_{12}}\pare{B_1 u_\xi + B_2 u_\eta + Cu} = 0
+        & \mathitem{特征} && \+dxdy = \frac{a_{12}}{a_{11}} \Rightarrow \xi = \varphi\pare{x,y} = \const \\
+        & &&\eta = \psi\pare{x,y} \mathcomment{巧取} \\
+        & \mathitem{标准形} && \frac{\partial^2 u}{\partial \eta^2} + \rec{A_{22}}\pare{B_1 u_\xi + B_2 u_\eta + Cu} = 0
     \end{flalign*}
 \end{cheatresume}
-\newheader{二阶线性方程\wdiv 椭圆型}
+\newheader{冲量原理}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathitem{特征} && \+dxdy = \frac{a_{12} \pm i\sqrt{-\Delta}}{a_{11}} \\
-        & && \Rightarrow \varphi\pare{x,y} \pm i\psi\pare{x,y} = \const \\
-        & && \xi = \varphi\pare{x,y},\quad \eta = \psi\pare{x,y} \\
-        & \mathitem{标准形} && \+D{\xi^2}D{^2u} + \+D{\eta^2}D{^2u} + \rec{A_{11}} \pare{B_1 \+D\xi Du + B_2 \+D\eta Du + Cu} = 0
+        & \mathitem{原型} && \+D{t^m}D{^m u} - Lu = f\pare{t,\+vx},\quad \deg_t L < m \\
+        & && u\vert_{t=0} = \left.\+DtDu\right\vert_{t=0} = \cdots \left.\+D{t^{m-1}}D{^{m-1}u}\right\vert_{t=0} = 0 \\
+        & \mathitem{转化} && \+D{t^m}D{^m w} - Lw = 0 \\
+        & && w\vert_{t=\tau} = \left.\+DtDu\right\vert_{t=\tau} = \cdots \left.\+D{t^{m-2}}D{^{m-2}w}\right\vert_{t=\tau} = 0 \\
+        & && \left.\+D{t^{m-1}}D{^{m-1}w}\right\vert_{t=\tau} = f\pare{\tau, \+vx}\\
+        & \mathitem{代回} && u\pare{t,\+vx} = \int_0^t w\pare{t,\+vx;\tau}\,\rd{\tau}
     \end{flalign*}
 \end{cheatresume}
 \columnbreak
@@ -144,26 +149,28 @@
         & && A_{22} = a_{11}\eta_x^2 + 2a_{12}\eta_x\eta_y + a_{22}\eta_y^2\\
         & && A_{12} = a_{11}\xi_x\eta_x + a_{12}\pare{\xi_x \eta_y + \xi_y\eta_x} + a_{22}\xi_y\eta_y \\
         & && B_1 = a_{11}\xi_{xx} + 2a_{12}\xi_{xy} + a_{22}\xi_{yy} + b_1\xi_x + b_2\xi_y\\
-        & && B_2 = a_{11}\eta_{xx} + 2a_{12}\eta_{xy} + a_{22}\eta_{yy} + b_1\eta_x + b_2\eta_y
+        & && B_2 = a_{11}\eta_{xx} + 2a_{12}\eta_{xy} + a_{22}\eta_{yy} + b_1\eta_x + b_2\eta_y \\
+        & && \mathheadcomment{i.e.} \begin{cases}
+            A_{IJ} = a_{ij}I_i J_j \\
+            B_I = a_{ij}I_{ij} + b_i I_i
+        \end{cases} &&
     \end{flalign*}
 \end{cheatresume}
-\newheader{二阶线性方程\wdiv 抛物型}
+\newheader{二阶线性方程\wdiv 双曲型}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathitem{特征} && \+dxdy = \frac{a_{12}}{a_{11}} \Rightarrow \xi = \varphi\pare{x,y} = \const \\
-        & &&\eta = \psi\pare{x,y} \mathcomment{巧取} \\
-        & \mathitem{标准形} && \frac{\partial^2 u}{\partial \eta^2} + \rec{2A_{12}}\pare{B_1 u_\xi + B_2 u_\eta + Cu} = 0
+        & \mathitem{特征} && \+dxdy = \frac{a_{12} + \sqrt{\Delta}}{a_{11}} \Rightarrow \xi = \varphi\pare{x,y} = \const \\
+        & && \+dxdy = \frac{a_{12} - \sqrt{\Delta}}{a_{11}} \Rightarrow \eta = \psi\pare{x,y} = \const \\
+        & \mathitem{标准形} && \frac{\partial^2 u}{\partial \xi \partial \eta} + \rec{2A_{12}}\pare{B_1 u_\xi + B_2 u_\eta + Cu} = 0
     \end{flalign*}
 \end{cheatresume}
-\newheader{冲量原理}
+\newheader{二阶线性方程\wdiv 椭圆型}
 \begin{cheatresume}
     \begin{flalign*}
-        & \mathitem{原型} && \+D{t^m}D{^m u} - Lu = f\pare{t,\+vx},\quad \deg_t L < m \\
-        & && u\vert_{t=0} = \left.\+DtDu\right\vert_{t=0} = \cdots \left.\+D{t^{m-1}}D{^{m-1}u}\right\vert_{t=0} = 0 \\
-        & \mathitem{转化} && \+D{t^m}D{^m w} - Lw = 0 \\
-        & && w\vert_{t=\tau} = \left.\+DtDu\right\vert_{t=\tau} = \cdots \left.\+D{t^{m-2}}D{^{m-2}w}\right\vert_{t=\tau} = 0 \\
-        & && \left.\+D{t^{m-1}}D{^{m-1}w}\right\vert_{t=\tau} = f\pare{\tau, \+vx}\\
-        & \mathitem{代回} && u\pare{t,\+vx} = \int_0^t w\pare{t,\+vx;\tau}\,\rd{\tau}
+        & \mathitem{特征} && \+dxdy = \frac{a_{12} \pm i\sqrt{-\Delta}}{a_{11}} \\
+        & && \Rightarrow \varphi\pare{x,y} \pm i\psi\pare{x,y} = \const \\
+        & && \xi = \varphi\pare{x,y},\quad \eta = \psi\pare{x,y} \\
+        & \mathitem{标准形} && \+D{\xi^2}D{^2u} + \+D{\eta^2}D{^2u} + \rec{A_{11}} \pare{B_1 \+D\xi Du + B_2 \+D\eta Du + Cu} = 0
     \end{flalign*}
 \end{cheatresume}
 

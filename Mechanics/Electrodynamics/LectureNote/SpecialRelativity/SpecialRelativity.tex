@@ -1,0 +1,1788 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=潘海俊,gakka=電気力学,gakkabbr=ED,section=Soutaiseiriron]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\usepackage{tensor}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensorb#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+
+\begin{document}
+
+\section{特殊相対性理論} % (fold)
+\label{sec:特殊相対性理論}
+
+\subsection{时空假设与Einstein假设} % (fold)
+\label{sub:时空假设与einstein假设}
+
+\subsubsection{惯性观测者} % (fold)
+\label{ssub:惯性观测者}
+
+惯性观测者(\mgloss[-\baselineskip]{Inertial Observer}), 或者谓惯性标架(\mgloss{Inertial Frame}), 是具有如下属性的系统:
+\begin{cenum}
+    \item 信息采集系统: 能够获得事件的事件和地点. 应当设想空间被划分为一个个小格子, 每一个格子里有一个和观测者相对静止的时钟, 每一个时钟是同步的. 时钟的Cartesian坐标标记地点. 对于火车上的参考者也应当配置同样的时钟系统.
+    \item 以时空相同点定义事件发生的时间与地点. 以同时记录首位相重点间的距离定义运动尺子长度.
+    \[ \Delta l = \sqrt{\pare{\Delta x}^2 + \pare{\Delta y}^2 + \pare{\Delta z}^2}. \]
+    \item 假定空间是均匀且各向同性的, 时间是均匀的. 静止的尺子长度与方向及何时何地测量无关. 匀速运动的尺子长度与合适何地测量无关. 匀速运动的时钟走时未知.
+\end{cenum}
+
+% subsubsection 惯性观测者 (end)
+
+\subsubsection{Newton时空观} % (fold)
+\label{ssub:newton时空观}
+
+\begin{center}
+  \begin{tikzpicture}
+    \draw[->] (-0.5,0) -- (2,0) node[below] {$x$};
+    \draw[->] (0,-0.5) -- (0,2) node[right] {$t$};
+    \draw (0,0) node[below left] {$O$};
+
+    \draw[->] (3.5,0) -- (6,0) node[below] {$x'$};
+    \draw[->] (4,-0.5) -- (4,2) node[right] {$t'$};
+    \draw (4,0) node[below left] (Op) {$O'$};
+    \draw (4,0) node[above=-0.7em of Op] {\includegraphics[width=1em,angle=-45,origin=c]{src/rocket.png}};
+
+    \draw[->,thick] (2,0.8) -- (2.5,1.8);
+    \draw[dashed] (0,0) -- (2,0.8);
+    \draw[->] (0,0) -- (0.5,1);
+    \draw[dashed] (4,0) -- (2,0.8);
+    \draw[->] (4,0) -- (4.2,0.8);
+  \end{tikzpicture}
+\end{center}
+\begin{cenum}
+    \item Galileo变换:
+    \[ \begin{cases}
+        \+vr' = \+vr - \+vv_0 t - \+vr_0, \\
+        t' = t-t_0.
+    \end{cases} \]
+    \begin{cenum}
+        \item 事件发生的时间, 地点是相对的.
+        \item 距离, 走时, 同时性是绝对的.
+        \[ \rd{\+vr'} = \rd{\+vr},\quad \rd{t} = \rd{t'},\quad  t_1 = t_2 \Leftrightarrow t'_1 = t'_2. \]
+        \item 速度是相对的,
+        \[ \+vv = \+vv' + \+vv_0,\quad \+vv\+_AC_ = \+vv\+_AB_ + \+vv\+_BC_. \]
+    \end{cenum}
+    \item 粒子动力学:
+    \[ \+vF = m\+va \Leftrightarrow \+vF' = m\+va'. \]
+    若这一定律成立, 则可证明$\displaystyle v^2 = \frac{2T}{m}$, 从而速度可以任意大.
+    \item 波动: 设有$K$系中的标量场$f\pare{\+vr,t}$, 满足波动方程
+    \[ \pare{\laplacian - \rec{v^2}\+D{t^2}D{^2}}f\pare{\+vr,t} = 0. \]
+    则$K'$系中, 由
+    \begin{align*}
+        & \+vr' = \+vr - \+vv_0 t - \+vr_0, \\
+        & t' = t - t_0, \\
+        & \grad = \+D{\+vr}D{} = \+D{\+vr}D{\+vr'}\cdot \+D{\+vr'}D{} + \+D{\+vr}D{t'}\cdot \+D{t'}D{} = \grad' \Rightarrow \laplacian = \nabla'^2. \\
+        & \+DtD{} = \+DtD{\+vr'}\cdot\+D{\+vr'}D{} + \+DtD{t'}\+D{t'}D{} = \+D{t'}D{} - \+vv'_0 \cdot \grad',
+    \end{align*}
+    可得新的参考系下的波动方程
+    \begin{align*}
+        & f'\pare{\+vr',t'} = f\pare{\+vr,t}, \\
+        & \brac{\pare{\nabla'^2 - \rec{v^2}\+D{t'^2}D{}} - \frac{\pare{\+vv_0\cdot \grad'}^2}{v^2} + \frac{2}{v^2}\pare{\+vv_0\cdot \grad}\+D{t'}D{}}f' = 0.
+    \end{align*}
+    实际上变换后的$f$谓
+    \[ f'\pare{\+vr',t'} = g\pare{x' + v_0 t' - vt'} = g\pare{x' - \pare{v-v_0}t'} \Rightarrow v' = v-v_0. \]
+\end{cenum}
+
+\paragraph{Michelson-Morley实验} % (fold)
+\label{par:michelson_morley实验}
+
+若以太存在, 则地球上不同方向的光速不一致. Michelson-Morley实验通过Michelson干涉仪否证了这一点.
+
+% paragraph michelson_morley实验 (end)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{Aberration}
+    \caption{光行差}
+    \label{fig:光行差}
+\end{figure}
+
+\paragraph{光行差} % (fold)
+\label{par:光行差}
+
+如\cref{fig:光行差}, 实验中观测到地球处于3和4两个点处时远处恒星的仰角有最值, 而非点2和点3处.
+
+% paragraph 光行差 (end)
+
+% subsubsection newton时空观 (end)
+
+\subsubsection{Einstein假设} % (fold)
+\label{ssub:einstein假设}
+
+\paragraph{相对性原理} % (fold)
+\label{par:相对性原理}
+
+物理定律在所有惯性参考系中具有相同的形式.
+
+% paragraph 相对性原理 (end)
+
+\paragraph{光速普适原理} % (fold)
+\label{par:光速普适原理}
+
+真空中光速对所有惯性系具有相同的数值
+
+% paragraph 光速普适原理 (end)
+
+% subsubsection einstein假设 (end)
+
+% subsection 时空假设与einstein假设 (end)
+
+\subsection{数学符号} % (fold)
+\label{sub:数学符号}
+
+下文中希腊字母指标如$\alpha,\beta,\gamma$取值范围为$0,1,2,3$. 拉丁字母指标如$i,j,k$取值范围为$1,2,3$. 
+
+\subsubsection{4-矢量} % (fold)
+\label{ssub:4_矢量}
+
+以$x^\alpha$标记$\pare{x^0,x^1,x^2,x^3}$标记事件的坐标,
+\[ \pare{x^0,x^1,x^2,x^3} = \pare{ct,x,y,z} = \pare{ct,\+vr}. \]
+也用$x$标记这一4-矢量. 以$x^i$标记$\pare{x^1,x^2,x^3}$,
+\[ x^i = \pare{x^1,x^2,x^3} = \pare{x,y,z} = \+vr. \]
+
+% subsubsection 4_矢量 (end)
+
+\subsubsection{度规矩阵极其逆矩阵} % (fold)
+\label{ssub:度规矩阵极其逆矩阵}
+
+\mgloss{度规矩阵}为
+\[ g_{\alpha\beta} = g^{\alpha\beta} = \begin{pmatrix}
+    -1 & 0 & 0 & 0 \\
+    0 & +1 & 0 & 0 \\
+    0 & 0 & +1 & 0 \\
+    0 & 0 & 0 & +1
+\end{pmatrix}. \]
+左边的指标永远表示行指标, 右边的指标永远表示列指标, 无关于其位置上下.
+\begin{ex}
+    $X_\alpha Y^\alpha$需要求和, 求和一共$4$项, 其值为
+    \[ X_\alpha Y^\alpha = X_0Y^0 + X_1Y^1 + X_2Y^2 + X_3Y^3 = X_0Y^0 + X_i Y^i. \]
+\end{ex}
+\begin{ex}
+    度规矩阵自缩并,
+    \[ g^{\alpha\gamma}g_{\gamma\beta} = \delta^{\alpha}_{\beta}. \]
+\end{ex}
+$g_{\alpha\beta}x^\beta = \pare{-x^0,x^1,x^2,x^3} = \pare{-ct,\+vr}$. 记作$x_\alpha$, 谓之\mgloss{协变时空坐标}.
+
+% subsubsection 度规矩阵极其逆矩阵 (end)
+
+\subsubsection{求和约定} % (fold)
+\label{ssub:求和约定}
+
+若某一指标在一个单项式中分别以上下指标的形式各出现一次, 则默认对其求和.
+
+% subsubsection 求和约定 (end)
+
+\subsubsection{指标升降} % (fold)
+\label{ssub:指标升降}
+
+\paragraph{下降} % (fold)
+\label{par:下降}
+
+$\displaystyle g_{\alpha\rho} = T^{\cdots \rho \cdots} = \tensor{T}{^{\cdots}_\alpha^{\cdots}}.$
+
+% paragraph 下降 (end)
+
+\paragraph{上升} % (fold)
+\label{par:上升}
+
+$\displaystyle g^{\alpha\rho} T_{\cdots \rho \cdots} = \tensor{T}{_{\cdots}^\alpha_{\cdots}}.$
+
+% paragraph 上升 (end)
+
+\begin{ex}
+    $X^\alpha = \pare{a,b,c,d} = g^{\alpha\rho}X_\rho$, $X_\alpha = g_{\alpha\rho}X^\rho = \pare{-a,b,c,d}.$
+\end{ex}
+\begin{ex}
+    $g^{\alpha\gamma}g_{\gamma\beta} = \delta^\alpha_\beta = {g^\alpha}_\beta$.
+\end{ex}
+\begin{ex}
+    $g^{\alpha\gamma} \delta^\beta_\gamma = g^{\alpha\beta}$. 将其视为$\delta$的指标上升, 可知$\delta^{\alpha\beta} = g^{\alpha\beta}$.
+\end{ex}
+\begin{ex}
+    设
+    \[ T^{\alpha\beta} = \begin{pmatrix}
+        T^{00} & T^{01} & T^{02} & T^{03} \\
+        T^{10} & T^{11} & T^{12} & T^{13} \\
+        T^{20} & T^{21} & T^{22} & T^{23} \\
+        T^{30} & T^{31} & T^{32} & T^{33}
+    \end{pmatrix}. \]
+    则有
+    \[ {T^\alpha}_\beta = g_{\beta\rho}T^{\alpha\rho} = {\pare{Tg}^\alpha}_\beta = T^{\alpha\beta} = \begin{pmatrix}
+        -T^{00} & T^{01} & T^{02} & T^{03} \\
+        -T^{10} & T^{11} & T^{12} & T^{13} \\
+        -T^{20} & T^{21} & T^{22} & T^{23} \\
+        -T^{30} & T^{31} & T^{32} & T^{33}
+    \end{pmatrix}. \]
+    类似有
+    \[ {T_\alpha}^\beta = \begin{pmatrix}
+        -T^{00} & -T^{01} & -T^{02} & -T^{03} \\
+        T^{10} & T^{11} & T^{12} & T^{13} \\
+        T^{20} & T^{21} & T^{22} & T^{23} \\
+        T^{30} & T^{31} & T^{32} & T^{33}
+    \end{pmatrix}, \]
+    以及
+    \[ {T_{\alpha\beta}} = \begin{pmatrix}
+        T^{00} & -T^{01} & -T^{02} & -T^{03} \\
+        -T^{10} & T^{11} & T^{12} & T^{13} \\
+        -T^{20} & T^{21} & T^{22} & T^{23} \\
+        -T^{30} & T^{31} & T^{32} & T^{33}
+    \end{pmatrix}. \]
+\end{ex}
+
+\paragraph{法则1} % (fold)
+\label{par:法则1}
+
+等式中的某个自由指标左右两侧同时上升或下降后, 所得等式与原式等价.
+\[ T^{\alpha\beta} = S^{\alpha\beta} \Leftrightarrow {T^\alpha}_\beta = {S^\alpha}_\beta \Leftrightarrow {T_\alpha}^\beta = {S_\alpha}^\beta \Leftrightarrow {T_{\alpha\beta}} = {S_{\alpha\beta}}. \]
+
+% paragraph 法则1 (end)
+
+\paragraph{法则2} % (fold)
+\label{par:法则2}
+
+将单项式中的一对哑指标中的一个抬升, 一个下降, 结果与原式相同.
+\[ \tensor{T}{^{\cdots}^\alpha^{\cdots}_{\cdots}_\alpha_{\cdots}} = \tensor{T}{^{\cdots}_\alpha^{\cdots}_{\cdots}^\alpha_{\cdots}}. \]
+
+% paragraph 法则2 (end)
+
+\begin{ex}
+    $T^{\alpha\beta} S_{\alpha\gamma} = {T_\alpha}^\beta{S^\alpha}_\gamma$. 而$T^{\alpha\beta}S_{\alpha\beta} = T_{\alpha\beta}S^{\alpha\beta}$. 因为
+    \[ T^{\alpha\beta}S_{\alpha\beta} = \pare{g^{\alpha\rho}g^{\beta\sigma}T_{\rho\sigma}}\pare{g_{\alpha\mu}g_{\beta\nu}S^{\mu\nu}} = \delta_\mu^\rho \delta_\nu^\sigma T_{\rho\sigma}S^{\mu\nu} = T_{\rho\sigma}S^{\rho\sigma}. \]
+\end{ex}
+
+% subsubsection 指标升降 (end)
+
+% subsection 数学符号 (end)
+
+\subsection{Lorentz变换} % (fold)
+\label{sub:lorentz变换}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{Lorentz}
+    \caption{两个惯性系}
+\end{figure}
+
+设$K'$系相对$K$以速度$\+vv$均匀运动,
+\[ \pare{ct',x',y',z'} = x'^\alpha = f^\alpha\pare{x^0,x^1,x^2,x^3} = f^\alpha\pare{x}. \]
+
+\subsubsection{变换必定是线性变换} % (fold)
+\label{ssub:变换必定是线性变换}
+
+设有二事件$P$和$Q$,
+\[ \begin{cases}
+    P: x^\alpha \leftrightarrow x'^\alpha = f^\alpha\pare{x}, \\
+    Q: y^\alpha \leftrightarrow y'^\alpha = f^\alpha\pare{y}.
+\end{cases} \]
+有
+\[ y'^\alpha - x'^\alpha = f^\alpha\pare{y} = f^\alpha\pare{x}. \]
+由时空的均匀性, 时间和空间的参考点可以任意选取, 故
+\begin{align*}
+    & y'^\alpha - x'^\alpha = f^\alpha\pare{y} - f^\alpha\pare{x} = f^\alpha\pare{y+b} - f^\alpha\pare{x+b},\quad \forall b^\alpha\\
+    & \Rightarrow \+D{x^\beta}D{f^\alpha}\pare{x} = \+D{x^\beta}D{f^\alpha}\pare{x+b} = {\Lambda^\alpha}_\beta\pare{\+vv}.
+\end{align*}
+从而变换必定取形式
+\[ x'^\alpha = {\Lambda^\alpha}_\beta x^\beta + a^\alpha. \]
+
+% subsubsection 变换必定是线性变换 (end)
+
+\subsubsection{时空间隔} % (fold)
+\label{ssub:时空间隔}
+
+记($K$系中)$\Delta s^2 = g_{\alpha\beta} \Delta x^\alpha \Delta x^\beta = g^{\alpha\beta}\Delta x_\alpha \Delta x_\beta = \Delta x^\alpha \Delta x_\alpha$. 在$K'$系中
+\[ \Delta s'^2 = g_{\alpha\beta} \Delta x'^\alpha \Delta x'^\beta = \pare{\Delta l'}^2 - \pare{c\Delta t'}^2. \]
+从而
+\begin{align*}
+    \Delta s'^2 &= g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma \Delta x^\rho \Delta x^\sigma \\
+    &= M_{\rho\sigma}\Delta x^\rho \Delta x^\sigma,\quad M_{\rho\sigma}\pare{\+vv} = M_{\sigma\rho}.
+\end{align*}
+
+\paragraph{光速普适原理} % (fold)
+\label{par:光速普适原理}
+
+考虑由光信号联系的两个事件,
+\[ c\Delta t = \pm \Delta l \Leftrightarrow c\Delta t' = \pm \Delta l'. \]
+从而
+\[ \Delta s^2 = 0 \Leftrightarrow \Delta s'^2 = 0. \]
+$\Delta s'^2$是$c\Delta t$的二次多项式, $\pare{c\Delta t}^2$前的系数为$M_{00}$, 且有两个零点. 从而
+\[ \Delta s'^2 = M_{00}\pare{c\Delta t - \Delta l}\pare{c\Delta t + \Delta l} = -M_{00}\pare{\Delta l^2-\pare{c\Delta t}^2}. \]
+因此不同参考系下的$\Delta s^2$最多差一个常数因子$\phi\pare{\abs{\+vv}}$.
+
+% paragraph 光速普适原理 (end)
+
+\paragraph{空间各向同性} % (fold)
+\label{par:空间各向同性}
+
+$\phi\pare{\+vv} = \phi\pare{\abs{\+vv}}$.
+
+% paragraph 空间各向同性 (end)
+
+\paragraph{第三参考系} % (fold)
+\label{par:第三参考系}
+
+引入$K''$相对$K'$以$-\+vv$运动, $K''$和$K$相对静止,
+\[ \Delta s^2 = \Delta s''^2 = \phi\pare{\abs{-\+vv}}\Delta s'^2 = \phi\pare{\abs{-\+vv}}\phi\pare{\abs{\+vv}}\Delta s^2 = \brac{\phi\pare{\abs{\+vv}}}^2 \Delta s^2. \]
+从而
+\[ \phi = \pm 1. \]
+由连续性知道$\phi = \pm 1$.
+
+% paragraph 第三参考系 (end)
+
+\begin{resume}
+    时空间隔是与参考系无关的度量.
+    \[ g_{\alpha\beta}\Delta x'^\alpha \Delta x'^\beta = \Delta s'^2 = \Delta s^2 = g_{\alpha\beta}\Delta x^\alpha \Delta x^\beta. \]
+\end{resume}
+\begin{ex}
+    使$\rd{s}^2 = \rd{s'}^2$成立的变换$x'^\alpha = x'^\alpha\pare{x}$的变换必定为线性变换.
+    \begin{align*}
+        & g_{\rho\sigma}\,\rd{x^\rho}\,\rd{x^\sigma} = g_{\alpha\beta}\,\rd{x'^\alpha}\,\rd{x'^\beta} = g_{\alpha\beta}\+D{x^\rho}D{x'^\alpha}\+D{x^\sigma}D{x'^\beta} \,\rd{x^\rho}\,\rd{x^\sigma}. \\
+        & g_{\rho\sigma} = g_{\alpha\beta}\+D{x^\rho}D{x'^\alpha}\+D{x^\sigma}D{x'^\beta}.
+    \end{align*}
+    线性要求$x'$对$x$求二次导数为零.
+    \begin{align*}
+        & 0 = \+D{x^\tau}D{g_{\rho\sigma}} = g_{\alpha\beta}\frac{\partial^2 x'^\alpha}{\partial x^\tau \partial x^\rho} \+D{x^\sigma}D{x'^\beta} + g_{\alpha\beta} \+D{x^\rho}D{x'^\alpha} \frac{\partial^2 x'^\beta}{\partial x^\tau \partial x^\sigma}. \\
+        & 0 = \+D{x^\rho}D{g_{\tau\sigma}} = g_{\alpha\beta} \frac{\partial^2 x'^\alpha}{\partial x^\rho \partial x^\tau}\+D{x^\sigma}D{x'^\beta} + g_{\alpha\beta}\+D{x^\tau}D{x'^\alpha}\frac{\partial^2 x'^\beta}{\partial x^\rho \partial x^\sigma}. \\
+        & 0 = \+D{x^\sigma}D{g_{\rho\tau}} = g_{\alpha\beta} \frac{\partial^2 x'^\alpha}{\partial x^\sigma \partial x^\rho}\+D{x^\tau}D{x'^\beta} + g_{\alpha\beta}\+D{x^\rho}D{x'^\alpha}\frac{\partial^2 x'^\beta}{\partial x^\sigma \partial x^\tau}. \\
+    \end{align*}
+    第一式加第二式减第三式得
+    \[ 0 = 2g_{\alpha\beta}\frac{\partial^2 x'^\alpha}{\partial x^\rho \partial x^\tau} \+D{x^\sigma}D{x'^\beta}. \]
+    由变换的可逆性, Jacobian的非奇异性表明
+    \[ \frac{\partial^2 x'^\alpha}{\partial x^\rho \partial x^\tau} \Rightarrow x'^\alpha = {\Lambda^\alpha}_\rho x^\rho + a^\alpha. \]
+\end{ex}
+
+% subsubsection 时空间隔 (end)
+
+\subsubsection{变换矩阵的性质} % (fold)
+\label{ssub:变换矩阵的性质}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{c|c|c}
+        & $\det \Lambda = 1$ & $\det \Lambda = -1$ \\
+        \hline 
+        ${\Lambda^0}_0 \ge 1$ & 空间转动 & 空间反演 \\
+        \hline 
+        ${\Lambda^0}_0 \le -1$ & 时空反演 & 时间反演
+    \end{tabular}
+\end{table}
+由Minkowski度规的不变性,
+\[ g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma = g_{\rho \sigma},\quad \Lambda^T g\Lambda = g. \]
+这里一共有$16$个方程. 由$g$的对称性只有$10$个独立方程. 将$\Lambda$构成的群记作Lorentz群$O\pare{1,3}$.
+\begin{cenum}
+    \item ${\Lambda^\alpha}_\beta$中有$6$个独立参数.
+    \item $\det \Lambda = \pm 1$. 提取两侧的$g_{00}$分量, 即有
+    \[ -1 = g_{00} = g_{\alpha\beta}{\Lambda^\alpha}_0 {\Lambda^\beta}_0 = -\pare{{\Lambda^0}_0}^2 + \sum_{i=1}^3 \pare{{\Lambda^i}_0}^2. \]
+    故
+    \[ \pare{{\Lambda^0}_0}^2 = 1 + \sum_{i=1}^3 \pare{{\Lambda^i}_0}^2 \ge +1. \]
+    将满足
+    \[ {\Lambda^0}_0 \ge +1,\quad \det \Lambda = +1 \]
+    的变换$\Lambda$所构成只集合记作$SO\pare{1,3}$.
+    \item Poincar\'e变换$x'^\alpha = {\Lambda^\alpha}_\beta x^\beta + a^\alpha$, 共$10$参数.
+    \item Lorentz变换$\resumath{x'^\alpha = {\Lambda^\alpha}_\beta x^\beta}$, 此处要求$\Lambda \in SO\pare{1,3}$.
+\end{cenum}
+\begin{ex}
+    $x'^\alpha = {\Lambda^\alpha}_\beta x^\beta$. 为了得到协变分量的变换式, 引入
+    \begin{align*}
+        & x'_\alpha = {\Lambda_\alpha}^\beta x_\beta,\quad g_{\alpha\rho}g^{\beta\sigma}{\Lambda^\rho}_\sigma. \\
+        & g_{\alpha\beta}{\Lambda^\beta}_\sigma x'^\alpha = g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma x^\rho, \\
+        & \Rightarrow g_{\alpha\beta}{\Lambda^\beta}_\sigma x'^\alpha = g_{\rho\sigma}x^\rho, \\
+        & \Rightarrow {\Lambda^\beta}_\sigma x'_\beta = g_{\rho\sigma}x^\rho = x_\sigma \\
+        & \Rightarrow \resumath{x_\alpha = {\Lambda^\beta}_\alpha x'_\beta.} \\
+        & \Rightarrow \resumath{x^\alpha = {\Lambda_\beta}^\alpha x'^\beta.}
+    \end{align*}
+\end{ex}
+在${\Lambda^\alpha}_\beta$中$\alpha$表示$K'$系的指标, $\beta$表示$K$系的指标. 正变换为
+\[ x'^\alpha = {\Lambda^\alpha}_\beta x^\beta. \]
+反变换为
+\[ x^\alpha = {\Lambda_\beta}^\alpha x'^\beta. \]
+指标下降后
+\[ x'_\alpha = {\Lambda_\alpha}^\beta x_\beta,\quad x_\alpha = {\Lambda^\beta}_\alpha x'_\beta. \]
+$\Lambda$的第一个指标必定是$K'$系中的指标.
+\par
+注意到
+\begin{align*}
+    g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma &= g_{\rho\sigma}, \\
+    {\Lambda^\alpha}_\rho {\Lambda_\alpha}^\sigma &= g_\rho^\sigma = \delta_\rho^\sigma.
+\end{align*}
+
+% subsubsection 变换矩阵的性质 (end)
+
+\subsubsection{无穷小Lorentz变换} % (fold)
+\label{ssub:无穷小lorentz变换}
+
+对于
+\[ {\Lambda^\alpha}_\beta = {S^\alpha}_\beta + {\Omega^\alpha}_\beta,\quad \abs{{\Omega^\alpha}_\beta} \ll 1. \]
+则
+\begin{align*}
+    g_{\rho\sigma} &= g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma = g_{\alpha\beta}\pare{{\delta^\alpha}_\rho + {\Omega^\alpha}_\rho}\pare{{\delta^\beta}_\sigma + {\Omega^\beta}_\sigma} \\
+    &= g_{\rho\sigma} + g_{\rho\beta}{\Omega^\beta}_\sigma + g_{\alpha\sigma} {\Omega^\alpha}_\rho.
+\end{align*}
+此时即有
+\[ \begin{cases}
+    g\Omega + \Omega^T g = 0 \Rightarrow \Omega^T = -g\Omega g, \\
+    \Omega_{\rho\sigma} = -\Omega_{\sigma\rho}.
+\end{cases} \]
+故无穷小变换满足如下条件:
+\begin{cenum}
+    \item ${\Lambda^\alpha}_\beta = {\delta^\alpha}_\beta + {\Omega^\alpha}_\beta = {\delta^\alpha}_\beta + g^{\alpha\rho} \Omega_{\rho\beta}$, 其中$\Omega_{\rho\beta} = -\Omega_{\beta\rho}$.
+    \[ {\Omega^\alpha}_\beta = \begin{pmatrix}
+        0 & -\xi_1 & -\xi_2 & -\xi_3 \\
+        -\xi_1 & 0 & -\theta n_3 & \theta n_2 \\
+        -\xi_2 & \theta n_3 & 0 & -\theta n_1 \\
+        -\xi_3 & -\theta n_2 & \theta n_1 & 0
+    \end{pmatrix},\quad \+un\cdot \+un = 1. \]
+    \item 具体的变换形如
+    \[ \begin{cases}
+        ct' = ct - \+v\xi \cdot \+vr, \\
+        \+vr' = \+vr - \+v\xi ct + \theta\pare{\+un\times \+vr}.
+    \end{cases} \]
+    特别地, 若$\xi = 0$, 则这一变换为无穷小转动. 若$\theta = 0$, 则这一变换为Lorentz推动.
+\end{cenum}
+\begin{theorem}
+    任何$\Lambda = {\Lambda^\alpha}_\beta \in SO\pare{1,3}$都可以写作
+    \[ \Lambda = e^{\Omega} = \sum_{n=0}^\infty \frac{\Omega^n}{n!},\quad \Omega^0 = I. \]
+\end{theorem}
+\begin{proof}
+    $\Lambda^T g \Lambda = g$:
+    \begin{align*}
+        & e^{\Omega^T} = e^{-g\Omega g} = g\pare{\sum_{n=0}^\infty \frac{\pare{-1}^n}{n!}\Omega^n}g \\
+        & \Rightarrow \Lambda^T g\Lambda = e^{\Omega^T} g e^{\Omega} = ge^{-\Omega}gge^{\Omega} = g. \qedhere
+    \end{align*}
+\end{proof}
+\begin{ex}
+    对于
+    \[ \Omega = \begin{pmatrix}
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & -1 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}\theta,\quad \Omega = \begin{pmatrix}
+        0 & -1 & 0 & 0 \\
+        -1 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}\xi \]
+    分别有
+    \[ e^\Omega = \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & \cos\theta & \sin\theta & 0 \\
+        0 & -\sin\theta & \cos\theta & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix},\quad e^\Omega = \begin{pmatrix}
+        \cosh \xi & -\sinh \xi & 0 & 0 \\
+        -\sinh \xi & \cosh \xi & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}. \]
+    其中$\xi$谓快度,
+    \[ \xi = \half \ln \frac{1+\beta}{1-\beta}. \]
+\end{ex}
+
+% subsubsection 无穷小lorentz变换 (end)
+
+% subsection lorentz变换 (end)
+
+\subsection{Minkowski几何与时空图} % (fold)
+\label{sub:minkowski几何与时空图}
+
+\subsubsection{标架} % (fold)
+\label{ssub:标架}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{SpacetimeDiagram}
+    \caption{时空图}
+\end{figure}
+标价是$\pare{ct,x,y,z}$构成的直角坐标.
+\begin{cenum}
+    \item 点对应于事件.
+    \item 世界线是点的一维集合, 切线斜率$\beta = \tan \theta$.
+    \item $ct$轴构成一特殊的世界线, 是静止与原点的时钟的世界线.
+    \item $x$轴构成一特殊的世界线, 是$t=0$的事件集合.
+\end{cenum}
+\begin{figure}[ht]
+    \centering
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{4.5cm}{SpacetimeDiagramMirror}
+        \caption{光经过镜子反射的时空图}
+    \end{subfigure}
+    \begin{subfigure}[b]{.45\textwidth}
+        \centering
+        \incfig{4.5cm}{MeasureLength}
+        \caption{尺子长度测量的时空图}
+    \end{subfigure}
+    \caption{各种系统的时空图}
+\end{figure}
+测量尺子的长度即测量
+\[ \Delta l = \abs{\Delta x_{AB}} = x_2 - x_1. \]
+对于运动中的尺子, 必须同时记录首位两端的位置差.
+
+% subsubsection 标架 (end)
+
+\subsubsection{构建另一标架} % (fold)
+\label{ssub:构建另一标架}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{SpacetimeDiagramTrans}
+    \caption{时空图的变换}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{YAxisTrans}
+    \caption{$y$轴和$z$轴的变换}
+\end{figure}
+设$K'$相对于$K$一速度$v$沿着$\+ux$方向运动. 以某个时刻的发光点为两个参考系的原点, 以光的传播方向为$x$轴方向.
+\begin{cenum}
+    \item $ct'$轴在$K$系中即$K'$系中静止于原点的时钟的世界线. 故$ct$轴为$x = vt = \beta ct$. 转动角度
+    \[ \tan \theta = \beta. \]
+    \item 为了找到$x'$轴, 考虑$K'$系中的镜子, 以及其中在时刻$-t_0$发射, 在$t=0$镜子反射的光线在$K$系中的世界线, 可得$x'$轴上点在$K$系中的坐标.
+    \item 为了找到$y'$轴和$z'$轴, 考虑随着$K'$系运动并经过$y$轴上一尺子中点的时钟. 在某个时刻时钟发射出光子, 经过尺子两端$A$, $B$反射后被同一个时钟同时接收. 因此垂直于运动方向的两个事件, 若在$K$中同时, 则在$K'$中同时. 由$\Delta s^2 = \Delta s'^2$, $\Delta t = 0$知$\Delta l = \Delta l'$. 故垂直于运动方向的尺子长度不变.
+    \par
+    因此可以假设零时刻$y$和$y'$轴重合, $z$和$z'$轴重合. 从而$y$和$z$分量的变换为恒等变换.
+\end{cenum}
+
+% subsubsection 构建另一标架 (end)
+
+\subsubsection{不变双曲线} % (fold)
+\label{ssub:不变双曲线}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{HyperbolaInvar}
+    \caption{两个参考系中的不变双曲线}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{TransCoor}
+    \caption{不同参考系下的同一事件的坐标}
+    \label{fig:不同参考系下的同一事件的坐标}
+\end{figure}
+时空图中的双曲线(双曲面)为
+\[ x^2 - c^2t^2 = a^2 = x'^2 - c^2t'^2. \]
+这是距离原点的$\Delta s^2$相同的点的集合. 这在不同参考系中的形状是一致的. 图中绿色和青色的切线分别为$K'$系中的同地和同时的世界线.
+
+\paragraph{标度变换} % (fold)
+\label{par:标度变换}
+
+四个点标记的各个时间的坐标如下.
+\[ \begin{array}{ccccc}
+    & A \text{\color{red}$\bullet$} & E \text{\color{green}$\bullet$} & B \text{\color{purple}$\bullet$} & F \text{\color{cyan}$\bullet$} \\
+    \pare{ct,x} & \pare{0,a} & \pare{\beta \gamma a,\gamma a} & \pare{b,0} & \pare{\gamma b,\beta \gamma b} \\
+    \pare{ct',x'} & & \pare{0,a} & & \pare{b,0}
+\end{array} \]
+其中
+\[ \text{\color{green}$\bullet$} \begin{cases}
+    ct = \beta x & \Rightarrow ct = \beta \gamma a,\\
+    x^2 - c^2t^2 = a^2 = \pare{1-\beta^2}x^2 & \Rightarrow x = \gamma a,
+\end{cases} \]
+以及
+\[ \text{\color{cyan}$\bullet$} \begin{cases}
+    x = \beta ct & \Rightarrow x = \beta\gamma b, \\
+    x^2 - c^2t^2 = -b^2 = -\pare{1-\beta^2}c^2t^2 & \Rightarrow ct = \gamma b.
+\end{cases} \]
+线段长度
+\begin{align*}
+    OE &= a\gamma\pare{1+\beta^2} = a\gamma\sqrt{1+\tan^2\theta} = \frac{\gamma a}{\cos\theta}.
+    \Rightarrow x'_E &= x_A = a = \frac{OE\cos\theta}{\gamma}. \\
+    ct'_F &= ct_B = b = \frac{OF\cos\theta}{\gamma}.
+\end{align*}
+确定$K'$系中事件坐标的方法如\cref{fig:不同参考系下的同一事件的坐标}所示.
+\[ ct' = \frac{m\cos\theta}{\gamma},\quad x' = \frac{n\cos\theta}{\gamma}. \]
+注意到
+\[ \begin{cases}
+    \displaystyle ct = m\cos\theta + n\cos\theta = \gamma\pare{\frac{m\cos\theta}{\gamma} + \frac{n\cos\theta}{\gamma} \tan\theta} = \gamma\pare{ct' + \beta x'}, \\
+    \displaystyle x = n\cos\theta + m\sin\theta = \gamma\pare{\frac{n\cos\theta}{\gamma} + \frac{m\cos\theta}{\gamma}\tan\theta} = \gamma\pare{x' + \beta ct'}.
+\end{cases} \]
+
+% paragraph 标度变换 (end)
+
+% subsubsection 不变双曲线 (end)
+
+\subsubsection{Lorentz反变换} % (fold)
+\label{ssub:lorentz反变换}
+
+立刻可得
+\begin{resume}
+Lorentz反变换
+\[ \begin{cases}
+    ct = \gamma\pare{ct' + \beta x'}, \\
+    x = \gamma\pare{x' + \beta ct'}, \\
+    y = y', \\
+    z = z'.
+\end{cases} \]
+Lorentz变换
+\[ \begin{cases}
+    ct' = \gamma\pare{ct - \beta x}, \\
+    x' = \gamma\pare{x - \beta ct}, \\
+    y' = y, \\
+    z' = z.
+\end{cases} \]
+一般变换
+\[ \begin{cases}
+    ct' = \gamma\pare{ct - \+v\beta\cdot \+vr}, \\
+    \+vr'_\parallel = \gamma\pare{\+vr_{\parallel} - \+v\beta ct} = \gamma\pare{\+vr_{\parallel} - \+vvt}, \\
+    \+vr_\perp' = \+vr_\perp.
+\end{cases} \]
+\end{resume}
+Lorentz变换可写为矩阵形式
+\[ \begin{pmatrix}
+    ct' \\
+    x'
+\end{pmatrix} = \begin{pmatrix}
+    \gamma & -\beta \gamma \\
+    -\beta\gamma & \gamma
+\end{pmatrix} \begin{pmatrix}
+    ct \\
+    x
+\end{pmatrix}. \]
+可设
+\[ \begin{cases}
+    \gamma = \cosh \xi, \\
+    \beta = \tanh \xi.
+\end{cases} \]
+从而
+\[ \pare{1-\beta} e^{2\xi} = 1+\beta. \]
+故可以定义快度
+\[ \xi = \half \ln \frac{1+\beta}{1-\beta}. \]
+
+% subsubsection lorentz反变换 (end)
+
+% subsection minkowski几何与时空图 (end)
+
+\subsection{狭义相对论时空观} % (fold)
+\label{sub:狭义相对论时空观}
+
+\subsubsection{事件分类} % (fold)
+\label{ssub:事件分类}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{ConeReg}
+    \caption{光锥将时空图的区域分割}
+    \label{fig:光锥将时空图的区域分割}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{SyncFrame}
+    \caption{不同参考系下同时同地的相对性}
+    \label{fig:不同参考系下同时同地的相对性}
+\end{figure}
+按照$\Delta s^2 = \pare{\Delta l}^2 - \pare{c\Delta t}^2$的符号将事件的分隔分类如下:
+\[ \Delta s^2 = \begin{cases}
+    <0, & \text{类时分隔},\\
+    =0, & \text{类光分割},\\
+    >0, & \text{类空分割}.
+\end{cases} \]
+如\cref{fig:光锥将时空图的区域分割}, 可得任一事件的绝对过去, 绝对未来和绝对它处.
+\par
+对于两个类时分隔的事件, 总能找到标架使其发生在同一地点. 对于两个类空分隔的事件, 总能找到标架使其发生在同一时刻(如\cref{fig:不同参考系下同时同地的相对性}).
+
+% subsubsection 事件分类 (end)
+
+\subsubsection{同时的相对性} % (fold)
+\label{ssub:同时的相对性}
+
+Lorentz变换为
+\[ \begin{cases}
+    c\Delta t' = \gamma \pare{c\Delta t - \beta \Delta x}, \\
+    \Delta x' = \gamma\pare{\Delta x - \beta c\Delta t}.
+\end{cases} \]
+其反变换为
+\[ \begin{cases}
+    c\Delta t = \gamma\pare{c\Delta t' + \beta \Delta x'}, \\
+    \Delta x = \gamma\pare{\Delta x' + \beta c\Delta t'}.
+\end{cases} \]
+设在$K'$中同时发生二事件$\Delta t' = t_2' - t_1' = 0$, 设$\Delta x' = x'_2 - x'_1 > 0$. 则由正变换第一式和第二式,
+\[ \begin{cases}
+    c\Delta t = \beta \Delta x, \\
+    \displaystyle \Delta x' = \frac{\gamma}{\beta}\pare{1-\beta^2}c\Delta t = \rec{\beta \gamma}c\Delta t \Rightarrow c\Delta t = \beta \gamma \Delta x' > 0.
+\end{cases} \]
+反变换的两式分别给出
+\[ \begin{cases}
+    c\Delta t = \beta \gamma \Delta x',\\
+    \Delta x = \gamma \Delta x'.
+\end{cases} \]
+通过时空图亦有
+\begin{align*}
+    c\Delta t &= n\sin\theta = n\cos\theta\tan\theta \\
+    &= \beta \Delta x \\
+    &= \beta \gamma \Delta x'.
+\end{align*}
+
+% subsubsection 同时的相对性 (end)
+
+\subsubsection{事件间隔的相对性} % (fold)
+\label{ssub:事件间隔的相对性}
+
+设有$K'$系中的静止时钟. $\Delta t' > 0$而$\Delta x' = 0$. 则由正变换第一式和第二式,
+\[ \begin{cases}
+    c\Delta t' = \gamma\pare{1-\beta^2}c\Delta t \Rightarrow \Delta t = \gamma \Delta t', \\
+    \Uparrow \Delta x = \beta c\Delta t.
+\end{cases} \]
+反变换的第一式直接给出
+\[ \Delta t = \gamma \Delta t'. \]
+通过时空图亦有
+\begin{align*}
+    c\Delta t = m \cos\theta = \gamma \frac{m\cos\theta}{\gamma} = \gamma c \Delta t'.
+\end{align*}
+
+% subsubsection 事件间隔的相对性 (end)
+
+\paragraph{自身参考系} % (fold)
+\label{par:自身参考系}
+
+物体在自身参考系中的时钟走时谓原时(固有时)$\rd{\tau}$.
+\[ \rd{t} = \gamma \,\rd{\tau} = \frac{\rd{\tau}}{\sqrt{1-\beta^2}}. \]
+由
+\[ \rd{s^2} = \abs{\rd{\+vr}}^2 - \abs{c\,\rd{t}}^2 = 0 - \pare{c\,\rd{t}}^2 \]
+可得
+\[ \rd{\tau} = \frac{\sqrt{-\rd{s^2}}}{c}. \]
+由
+\[ \abs{\rd{\+vr}}^2 + \pare{c\,\rd{\tau}}^2 = \pare{c\,\rd{t}}^2. \]
+故有
+\[ c^2 = v^2 + c^2\pare{1-\beta^2}. \]
+即
+\[ c = \sqrt{\pare{\frac{\rd{\+vr}}{\rd{t}}}^2 + \pare{\frac{c\,\rd{\tau}}{\rd{t}}}^2}. \]
+
+% paragraph 自身参考系 (end)
+
+\subsubsection{空间间隔的相对性} % (fold)
+\label{ssub:空间间隔的相对性}
+
+考虑$K'$系中静止的一把尺子, $\Delta l_0 = \Delta x'$为其原长. 在$K$系中同时测量两端点距离, 则Lorentz变换第一式和第二式给出
+\[ \begin{cases}
+    c\Delta t' = -\beta \Delta x, \\
+    \displaystyle \Delta x' = \gamma \Delta x \Rightarrow \Delta l = \frac{\Delta l_0}{\gamma}.
+\end{cases} \]
+反变换给出
+\[ \begin{cases}
+    c\Delta t' = -\beta \Delta x', \\
+    \displaystyle \gamma \pare{1-\beta^2}\Delta x' \Rightarrow \Delta l = \frac{\Delta l_0}{\gamma}.
+\end{cases} \]
+通过时空图亦有
+\begin{align*}
+    \Delta l &= n\cos\theta - n\sin\theta \tan\theta = n\cos\theta\pare{1-\tan^2\theta} = \gamma\frac{n\cos\theta}{\gamma}\pare{1-\beta^2} \\
+    &= \gamma \Delta l_0 \rec{\gamma^2} = \frac{\Delta l_0}{\gamma}.
+\end{align*}
+\begin{remark}
+    通过测量在尺子一段发射的光经过另一段反射后被接收与发射的时间差以测量其长度, 由此亦可得长度的变换.
+\end{remark}
+\begin{figure}[ht]
+    \centering
+    \incfig{6cm}{GroundFrameTrain}
+    \caption{地面参考系上的火车}
+    \label{fig:地面参考系上的火车}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        如\cref{fig:地面参考系上的火车}, 火车原长$l_0$, 速度$v$. 隧道原长$L_0$. 分别在地面及火车参考系中求车头到达隧道入口至车尾离开隧道出口这一过程所经历的时间间隔.
+    \end{ex}
+    \begin{solution}
+        由Lorentz变换第二式,
+        \begin{align*}
+            & -l_0 = \gamma\pare{L_0 - vt}, \\
+            & \Rightarrow t = \frac{L_0 + l_0/\gamma}{v}.
+        \end{align*}
+        由反变换第二式
+        \begin{align*}
+            & L_0 = \gamma\pare{-l_0 + vt'} \\
+            & \Rightarrow t' = \frac{L_0/\gamma + l_0}{v}. \qedhere
+        \end{align*}
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        现在有长度$l$的仓库和长为$2l$的梯子. 设甲相对于地面静止, 而乙拿着梯子以速度$u = \sqrt{3}c/2$跑向仓库.
+    \end{ex}
+    \begin{solution}
+        $\gamma = 2$. 在乙的角度看, 仓库不能容纳梯子. 在甲的角度看, 仓库可以容纳梯子. 而梯子的头部碰壁的信号传递到尾部之时刻可由时空图看出必定在尾部进入仓库后.
+    \end{solution}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        在其20岁生日时, 双胞胎中的甲留在地球上, 乙以速度$\displaystyle \frac{24}{25}c$前往距离地球$24$光年的行星, 到达后立刻返航, 问回到家中时其年龄.
+    \end{ex}
+    \begin{solution}
+        $\gamma = 25/7$, 从甲的观点看旅行的时间为$50$年, 从乙的观点看所花的时间为$T' = T/\gamma = 14$年.
+    \end{solution}
+\end{sample}
+若在运动的箱子中以从下方发射光线被上方反射回下方所需的时间确定$\Delta \tau$, 则在地面参考系
+\[ c\Delta t = \sqrt{\pare{v\Delta t}^2 + \pare{c\Delta \tau}^2} \Rightarrow \Delta t= \frac{\Delta\tau}{\sqrt{1-v^2/c^2}} = \gamma\Delta \tau. \]
+仍然适用光线反射确定长度,
+\[ l + v\Delta t_1 = c\Delta t_1,\quad l - v\Delta t_2 = c\Delta t_2 \Rightarrow c\Delta t = \frac{2l}{1-\beta^2}. \]
+又由
+\[ c\Delta \tau = 2l_0,\quad \Delta t = \gamma \Delta \tau, \Rightarrow l = l_0 \sqrt{1-\beta^2} = \frac{l_0}{\gamma}. \]
+
+% subsubsection 空间间隔的相对性 (end)
+
+\subsubsection{速度变换} % (fold)
+\label{ssub:速度变换}
+
+设$K'$相对于$K$有速度$\+v\beta_0$, 粒子相对于$K$的速度为$\displaystyle \+vu = \+dtd{\+vr}$, 粒子相对于$K'$的速度为$\displaystyle \+vu' = \+d{t'}d{\+vr'}$. 对于粒子, 由Lorentz变换,
+\[ \beta_x = \frac{\rd{x}}{c\,\rd{t}} = \frac{\beta'_x + \beta_0}{1+\beta_0 \beta_x'}, \quad \beta_{y,z} = \frac{\rd{y,z}}{c\,\rd{t}} = \frac{\beta'_{y,z}}{\gamma_0 \pare{1+\beta_0\beta'_x}}. \]
+即
+\[ u_x = \frac{u'_x+v_0}{1+v_0u'_x/c^2},\quad u_{y,z} = \frac{u'_{y,z}}{\gamma_0 \pare{1+v_0u'_x/c^2}}. \]
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{VelocityDirection}
+    \caption{速度方向的变换}
+    \label{fig:速度方向的变换}
+\end{figure}
+\begin{cenum}
+    \item 对于$u'_y = u'_z = 0$之特例, $u'_x = u'$,
+    \[ \beta = \frac{\beta' + \beta_0}{1+\beta_0\beta'},\quad u = \frac{u' + v_0}{1+v_0u' /c^2}. \]
+    还可以验证
+    \[ \xi\+_AC_ = \xi\+_AB_ + \xi\+_BC_. \]
+    \item 若$\+vu'\perp \+vv_0$, 则由
+    \[ u_x = v_0,\quad u_{y,z} = \frac{u'_{y,z}}{\gamma_0}. \]
+    \item 速度大小的变换:
+    \begin{align*}
+        1-\beta^2 &= 1 - \rec{\pare{1+\beta_0\beta'_x}^2}\brac{\pare{\beta'_x + \beta_0}^2 + \pare{1-\beta_0^2}\pare{\beta'^2_y + \beta'^2_z}} \\
+        &= \frac{\pare{1-\beta_0^2}\pare{1-\beta'^2}}{\pare{1+\beta_0\beta'_x}^2}.
+    \end{align*}
+    或者
+    \[ \gamma = \gamma_0 \gamma' \pare{1+\+v\beta_0'\cdot \+v\beta'}. \]
+    特别有
+    \[ \beta'< 1 \Leftrightarrow \beta<1,\quad \beta' = 1 \Leftrightarrow \beta = 1. \]
+    \item 速度方向: 如\cref{fig:速度方向的变换},
+    \[ \tan\theta = \frac{\beta_\perp}{\beta_\parallel} = \frac{\beta'\sin\theta'}{\gamma_0\pare{\beta'\cos\theta' + \beta_0}}. \]
+    若$\beta' = 1$, 则
+    \[ \tan\theta = \frac{\sqrt{1-\beta_0^2}\sin\theta'}{\beta_0 + \cos\theta'}. \]
+    以及
+    \[ \sin\theta = \frac{\sqrt{1-\beta_0^2}\sin\theta'}{1+\beta_0\cos\theta'}. \]
+    若$\beta_0 \ll 1$, 则
+    \begin{align*}
+        \Delta \sin\theta &= \sin\theta' - \sin\theta = \beta_0 \sin\theta' \cos\theta' \ll 1.
+    \end{align*}
+    相应有\gloss{光行差公式}
+    \[ \Delta\theta = \theta' - \theta = \beta_0 \sin\theta. \]
+    如\cref{fig:光行差}, 在$4$处望远镜筒应当降低, 在$3$处望远镜筒应当抬高.
+    \item 加速度变换:
+    \begin{align*}
+        \+dtd{\beta_x} &= \frac{a_x}{c} = \rec{\rd{t}/\rd{t'}} \+d{t'}d{} \frac{\beta'_x + \beta_0}{1+\beta_0 \beta'_x} \\
+        &= \rec{\gamma_0 \pare{1+\beta_0 \beta'_x}} \brac{\frac{a'_x / c}{1+\beta_0 \beta'_x} - \frac{\pare{\beta'_x + \beta_0}\beta_0 a'_x / c}{\pare{1+\beta_0\beta'_x}^2}}. \\
+        \+dtd{\beta_y} &= \frac{a_y}{c} = \rec{\rd{t}/\rd{t'}} \+d{t'}d{} \frac{\beta'_y}{\gamma_0\pare{1+\beta_0 \beta'_x}} \\
+        &= \rec{\gamma^2_0 \pare{1+\beta_0 \beta'_x}}\brac{\frac{a'_y /c}{1+\beta_0 \beta'_x} - \frac{\beta'_y \beta_0 a'_x / c}{\pare{1+\beta_0\beta'_x}^2}}.
+    \end{align*}
+    若取$K'$为MCRF(Momentarily Comoving Reference Frame), 则$\+v\beta' = 0$, $\+v\beta_0 = \+v\beta = \beta\+ux$. 从而
+    \[ a_x = \frac{a'_x}{\gamma^3},\quad a_y = \frac{a'_y}{\gamma^2},\quad a_z = \frac{a'_z}{\gamma^2}. \]
+\end{cenum}
+
+% subsubsection 速度变换 (end)
+
+% subsection 狭义相对论时空观 (end)
+
+\subsection{Minkowski空间中的张量} % (fold)
+\label{sub:minkowski空间中的张量}
+
+由间隔的不变性,
+\begin{align*}
+    \rd{s^2} &= g_{\rho\sigma}\,\rd{x^\rho}\,\rd{x^\sigma} = g_{\alpha\beta} \,\rd{x'^\alpha}\,\rd{x'^\beta} = g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma \,\rd{x^\rho}\,\rd{x^\sigma} \\
+    &=  g_{\rho\sigma}{\Lambda_\alpha}^\rho {\Lambda_\beta}^\sigma \,\rd{x'^\alpha}\,\rd{x'^\beta}.
+\end{align*}
+度规的不变性即
+\[ \begin{cases}
+    g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma = g_{\rho\sigma}, & {\Lambda^\alpha}_\rho {\Lambda_\alpha}^\sigma = \delta_\rho^\sigma, \\
+    g^{\rho\sigma}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma = g^{\alpha\beta}, & {\Lambda^\alpha}_\rho {\Lambda_\beta}^\rho = \delta_\rho^\beta.
+\end{cases} \]
+
+\subsubsection{4-标量} % (fold)
+\label{ssub:4_标量}
+
+4-标量即满足$\varphi' = \varphi$的量.
+\begin{cenum}
+    \item 一个4-标量必定同时为一3-标量.
+    \item 例子: 真空中光速$c$, 粒子电荷$Q$, 质量$m$, 时空间隔$\rd{s^2}$, 固有时$\rd{\tau}$, 固有长度$\rd{l_0}$, 固有4-体积元
+    \[ \rd{^4x} = \rd{x^0}\,\rd{x^1}\,\rd{x^2}\,\rd{x^3} = c\,\rd{\tau}\,\rd{V_0}. \]
+\end{cenum}
+
+% subsubsection 4_标量 (end)
+
+\subsubsection{4-矢量} % (fold)
+\label{ssub:4_矢量}
+
+若具有4分量的量的变换行为如
+\[ X'^\alpha = {\Lambda^\alpha}_\beta X^\beta, \quad X'_\alpha = {\Lambda_\alpha}^\beta X_\beta, \]
+则前者谓\gloss{逆变矢量}, 后者谓\gloss[\baselineskip]{协变矢量}.
+\begin{cenum}
+    \item 逆变, 协变矢量是一一对应的.
+    \[ X^\alpha = \pare{a,b,c,d} \leftrightarrow X_\alpha = \pare{-a,v,c,d}. \]
+    \item $X^\alpha$和$X_\alpha$的空间分量必定为3-矢量,
+    \[ X^\alpha = \pare{X^0,\+vX},\quad X_\alpha = \pare{X_0,\+vX} = \pare{-X^0,\+vX}. \]
+    \item 同种矢量的线性组合仍然为该种矢量.
+    \[ Z^\alpha = aX^\alpha + bY^\beta,\quad Z_\alpha = aX_\alpha + bY_\beta. \]
+    \item 矢量的标量积:
+    \[ g_{\alpha\beta}X^\alpha Y^\beta = X^\alpha Y_\alpha = -X^0 Y^0 + \+vX\cdot \+vY. \]
+    以及
+    \[ g_{\alpha\beta}X'^\alpha X'^\beta = g_{\alpha\beta}{\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma X^\rho Y^\sigma = g_{\rho\sigma} X^\rho Y^\sigma. \]
+    \begin{cenum}
+        \item 有$X^\alpha X_\alpha = -\pare{X^0}^2 + \abs{\+vX}^2$. 可以对矢量分类如
+        \[ X^\alpha X_\alpha = \begin{cases}
+            >0, & \text{类空矢量}, \\
+            = 0, & \text{类光矢量}, \\
+            <0, & \text{类时矢量}.
+        \end{cases} \]
+        \item 若$X^\alpha Y_\alpha = 0$则谓$X^\alpha$和$Y^\alpha$正交.
+    \end{cenum}
+\end{cenum}
+事件的位矢构成一4-矢量,
+\[ x^\alpha = \pare{ct, \+vr},\quad x_\alpha = \pare{-ct,\+vr}. \]
+偏导数
+\[ \partial_\alpha = \+D{x^\alpha}D{} = \pare{\rec{c}\+DtD{},\grad},\quad \partial^\alpha = \+D{x_\alpha}D{} = \pare{-\rec{c}\+DtD{},\grad}. \]
+可以证明其分别构成逆变和协变矢量.
+\[ \+D{x'^\alpha}D{} = \+D{x'^\alpha}D{x^\rho}\+D{x^\rho}D{} = {\Lambda_\alpha}^\rho \+D{x^\rho}D{}. \]
+可定义d'Alembert算子
+\[ \Box{}^2 = \partial_\alpha \partial^\alpha = -\rec{c^2}\+D{t^2}D{^2} + \laplacian. \]
+又定义4-速度
+\[ U^\alpha = \+d{\tau}d{x^\alpha} = \gamma\pare{c,\+vu}. \]
+\begin{cenum}
+    \item 在MCRF中
+    \[ U^\alpha = \pare{c,0}. \]
+    \item $U^\alpha U_\alpha = -c^2$.
+    \item 两个参考系下的4-速度之间成立
+    \[ \gamma c \begin{pmatrix}
+        1 \\ \beta_x \\ \beta_y \\ \beta_z
+    \end{pmatrix} = \begin{pmatrix}
+        \gamma_0 & \beta_0 \gamma_0 & & \\
+        \beta_0 \gamma_0 & \gamma_0 & & \\
+        & & 1 & \\
+        & & & 1
+    \end{pmatrix} \gamma'c \begin{pmatrix}
+        1 \\ \beta'_x \\ \beta'_y \\ \beta'_z
+    \end{pmatrix}. \]
+    从而
+    \[ \begin{cases}
+        \gamma = \gamma_0 \gamma'\pare{1+\beta_0 \beta'_x}, \\
+        \gamma \beta_x = \gamma_0 \gamma'\pare{\beta_0 + \beta'_x}, \\
+        \gamma \beta_{y,z} = \gamma'\beta'_{y,z}.
+    \end{cases} \]
+\end{cenum}
+4-加速度定义为
+\[ A^\alpha = \+d{\tau}d{U^\alpha} = \+d\tau d{t} \+dtd{U^\alpha}. \]
+由
+\[ \+dtd\gamma = \+/\gamma^2/c/ \+v\beta \cdot \+va, \]
+有
+\begin{align*}
+    A^\alpha &= \+d\tau dt \+dtd{U^\alpha} = \+d\tau dt \+dtd{} \pare{\gamma c,\gamma c\+v\beta} \\
+    &= \gamma c\pare{\+dtd\gamma, \gamma\+dtd{\+v\beta} + \+dtd\gamma \+v\beta} \\
+    &= \gamma^4 \pare{\+v\beta\cdot \+va, \frac{\+va}{\gamma^2} + \pare{\+v\beta\cdot \+va}\+v\beta}.
+\end{align*}
+\begin{cenum}
+    \item 在MCRF中,
+    \[ A^\alpha = \pare{0,\+va'}. \]
+    \item $A^\alpha A_\alpha = a'^2$. 且$U_\alpha A^\alpha = 0$.
+    \item 设$K'$为MCRF, 则$\+v\beta_0 = \+v\beta = \beta \+ux$. 在$K$系中, 加速度为
+    \[ \begin{pmatrix}
+        \gamma^4 \beta a_x \\
+        \gamma^4 a_x \\
+        \gamma^2 a_y \\
+        \gamma^2 a_z
+    \end{pmatrix} = \begin{pmatrix}
+        \gamma & \beta\gamma & & \\
+        \beta\gamma & \beta & & \\
+        & & 1 & \\
+        & & & 1
+    \end{pmatrix} \begin{pmatrix}
+        0 \\ a'_x \\ a'_y \\ a'_z
+    \end{pmatrix}. \]
+    即
+    \[ a_x = \frac{a'_x}{\gamma^3},\quad a_{y,z} = \frac{a'_{y,z}}{\gamma^2}. \]
+\end{cenum}
+\begin{sample}
+    \begin{ex}[4-动量]
+        记
+        \[ p^\alpha = mU^\alpha = m\+d\tau d{x^\alpha} = \pare{\gamma mc,\gamma m\+vu} = \pare{\frac{\+cE}{c},\+vp}. \]
+        其中
+        \[ \+cE = \gamma m c^2,\quad \+vp = \gamma m\+vu. \]
+    \end{ex}
+\end{sample}
+\begin{cenum}
+    \item MCRF中
+    \[ p^\alpha = \pare{mc,0} = \pare{\frac{\+cE_0}{c},0},\quad \+cE_0 = mc^2. \]
+    自乘可得
+    \[ p^\alpha p_\alpha = -m^2 c^2 = p^2 - \frac{\+cE^2}{c^2}. \]
+    \item $\+cE^2 = p^2 c^2 + m^2 c^4$,
+    \[ \+v\beta = \frac{\+vu}{c} = \frac{c\+vp}{\+cE}. \]
+    \item 对于$m=0$, 实验表明
+    \[ \+cE = pc,\quad \beta  = 1. \]
+    故有
+    \[ p^\alpha = \pare{\frac{\+cE}{c},\+vp} = \pare{p,\+vp},\quad p^\alpha p_\alpha = 0. \]
+    \item 能量
+    \[ \+cE = \hbar\omega,\quad p = \frac{h}{\lambda} = \hbar k. \]
+    从而
+    \[ m = 0,\quad \omega = kc,\quad p^\alpha = \hbar \pare{\frac{\omega}{c},\+vk} = \hbar\pare{k,\+vk}. \]
+    其中4-波矢
+    \[ k^\alpha = \pare{\frac{\omega}{c},\+vk} = \pare{k,\+vk},\quad k^\alpha k_\alpha = 0. \]
+\end{cenum}
+
+% subsubsection 4_矢量 (end)
+
+\subsubsection{张量} % (fold)
+\label{ssub:张量}
+
+$\displaystyle \binom{2}{0}$型张量如
+\[ T'^{\alpha\beta} = {\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma T^{\rho\sigma}, \]
+$\displaystyle \binom{0}{2}$型张量如
+\[ T'_{\alpha\beta} = {\Lambda_\alpha}^\rho {\Lambda_\beta}^\sigma T_{\rho\sigma},\]
+$\displaystyle \binom{1}{1}$型张量如
+\[ {T'^\alpha}_\beta = {\Lambda^\alpha}_\rho {\Lambda_\rho}^\sigma {T^\rho}_\sigma. \]
+\begin{cenum}
+    \item 同类型张量线性组合保持类型不变,
+    \[ R^{\alpha\beta} = T^{\alpha\beta} + S^{\alpha\beta}. \]
+    \item 张量可以写成矩阵形式
+    \[ T^{\alpha\beta} = \begin{pmatrix}
+        T^{00} & T^{01} & T^{02} & T^{03} \\
+        T^{10} & T^{11} & T^{12} & T^{13} \\
+        T^{20} & T^{21} & T^{22} & T^{23} \\
+        T^{30} & T^{31} & T^{32} & T^{33}
+    \end{pmatrix} = \begin{pmatrix}
+        \varphi & \+vp \\
+        \+vq & \tensorb{T}
+    \end{pmatrix}. \]
+    取Lorentz旋转矩阵变换之, 可以验证$T^{00}$是一个3-标量, $\pare{T^{01},T^{02},T^{03}}$和$\pare{T^{10},T^{20},T^{30}}$构成一个3-矢量, $T^{ij}$构成一3-张量.
+    \item 对称张量
+    \[ S^{\mu\nu} = S_{\nu\mu} = \begin{pmatrix}
+        \varphi & \+vp \\
+        \+vp & \tensorb{T}
+    \end{pmatrix}. \]
+    反对称张量
+    \[ A^{\mu\nu} = -A^{\mu\nu}. \]
+    对称/反对称性与坐标系无关.
+    \begin{cenum}
+        \item 一般的张量可以分解为
+        \[ T^{\mu\nu} = \frac{T^{\mu\nu} + T^{\nu\mu}}{2} + \frac{T^{\mu\nu} - T^{\nu\mu}}{2} = T^{\pare{\mu\nu}} + T^{\brac{\mu\nu}}. \]
+        \item 若$S^{\mu\nu}$对称, $A_{\mu\nu}$反对称, 则
+        \[ S^{\mu\nu}A_{\mu\nu} = 0. \]
+        从而
+        \[ S^{\mu\nu}T_{\mu\nu} = S^{\mu\nu}T_{\pare{\mu\nu}},\quad A^{\mu\nu}T_{\mu\nu} = A^{\mu\nu}T_{\brac{\mu\nu}}. \]
+    \end{cenum}
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        $g_{\alpha\beta}$, $g^{\alpha\beta}$是二阶张量, 在所有坐标系中分量相同.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        $\displaystyle \varepsilon = \begin{cases}
+            +1,& \sigma\pare{\alpha\beta\mu\nu} = 1, \\
+            -1,& \sigma\pare{\alpha\beta\mu\nu} = -1, \\
+            0, & \mathrm{otherwise}.
+        \end{cases}$ 相应的协变分量为
+        \[ \varepsilon_{\alpha\beta\mu\nu} = -\varepsilon^{\alpha\beta\mu\nu}. \]
+        在Lorentz变换下,
+        \[ \varepsilon^{\alpha\beta\mu\nu} {\Lambda^\gamma}_\alpha {\Lambda^\delta}_\beta {\Lambda^\rho}_\mu {\Lambda^\sigma}_\nu = \det \Lambda \varepsilon^{\gamma\delta\rho\sigma}. \]
+        其中在$\det\Lambda = +1$的条件下$\varepsilon$的变换方式与张量一致.
+    \end{ex}
+\end{sample}
+
+% subsubsection 张量 (end)
+
+\subsubsection{张量的代数运算} % (fold)
+\label{ssub:张量的代数运算}
+
+\begin{cenum}
+    \item 同类型张量的线性组合(加法与数乘)
+    \[ aT^{\alpha\beta} + bS^{\alpha\beta}. \]
+    \item 张量积
+    \[ R^{\alpha\cdots\beta\mu\cdots\nu}_{\rho\cdots\sigma\gamma\cdots\delta} = T^{\alpha\cdots\beta}_{\rho\cdots\sigma}S^{\mu\cdots\nu}_{\gamma\cdots\delta}. \]
+    \item 缩并
+    \[ T^{\alpha\beta\gamma} \Rightarrow \begin{cases}
+        T^{\alpha\beta}_\beta = \tensor{T}{^\alpha_\beta^\beta} = X^\alpha, \\
+        T^{\beta\alpha}_\beta = \tensor{T}{_\beta^\alpha^\beta} = Y^\alpha, \\
+        \tensor{T}{^\beta_\beta^\alpha} = \tensor{T}{_\beta^\beta^\alpha} = Z^\alpha.
+    \end{cases} \]
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        $X^\alpha$, $Y^\beta$可以合成张量积$T^{\alpha\beta} = X^\alpha Y^\beta$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        张量的迹为$T^\alpha_\alpha$,
+        \[ {T'^\alpha}_\alpha = {\Lambda^\alpha}_\rho {\Lambda_\alpha}^\sigma {T^\rho}_\sigma = \delta^\sigma_\rho {T^\rho}_\sigma = {T^\rho}_\rho. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        设$A^{\alpha\beta}$为反对称张量, 则对偶张量为
+        \[ A^{*\alpha\beta} = \rec{2!}\varepsilon^{\alpha\beta\mu\nu}A_{\mu\nu}. \]
+        此仍为二阶张量. 设
+        \[ A^{\alpha\beta} = \begin{pmatrix}
+            0 & p_1 & p_2 & p_3 \\
+            -p_1 & 0 & a_3 & -a_2 \\
+            -p_2 & -a_3 & 0 & a_1 \\
+            -p_3 & a_2 & -a_1 & 0
+        \end{pmatrix} = \curb{\+vp,\+va}. \]
+        相应的协变分量为
+        \[ A_{\alpha\beta} = \begin{pmatrix}
+            0 & -p_1 & -p_2 & -p_3 \\
+            p_1 & 0 & a_3 & -a_2 \\
+            p_2 & -a_3 & 0 & a_1 \\
+            p_3 & a_2 & -a_1 & 0
+        \end{pmatrix} = \curb{-\+vp,\+va}. \]
+        对偶张量的分量如
+        \begin{align*}
+            A^{*01} &= \rec{2}\varepsilon^{0123}A_{23} + \rec{2}\varepsilon^{0132}A_{32} = a_1, \\
+            A^{*23} &= \rec{2}\varepsilon^{2301}A_{01} + \rec{2}\varepsilon^{2310}A_{10} = -p_1. \\
+            A^{*\alpha\beta} &= \begin{pmatrix}
+                0 & a_1 & a_2 & a_3 \\
+                -a_1 & 0 & -p_3 & p_2 \\
+                -a_2 & p_3 & 0 & -p_1 \\
+                -a_3 & -p_2 & p_1 & 0
+            \end{pmatrix} = \curb{\+va,-\+vp}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 张量的代数运算 (end)
+
+\subsubsection{张量场的导数} % (fold)
+\label{ssub:张量场的导数}
+
+设
+\[ T^{\alpha\beta} = \begin{pmatrix}
+    \varphi & \+vp \\
+    \+vq & \tensorb{T}
+\end{pmatrix},\quad X^\alpha = \partial_\beta T^{\alpha\beta} = \begin{cases}
+    X^0 = \partial_0 \varphi + \div \+vp, \\
+    \displaystyle X^i = \partial_0 q_i + \partial_j T^{ij},\quad \partial_0 = \rec{c}\partial_t.
+\end{cases} \]
+若$T^{\alpha\beta} = T^{\beta\alpha}$,
+\[ T^{\alpha\beta} = T^{\beta\alpha} = \begin{pmatrix}
+    \varphi & \+vp \\
+    \+vp & \tensorb{T}
+\end{pmatrix} \Rightarrow \partial_\beta T^{\alpha\beta} = \begin{pmatrix}
+    \partial_0 \varphi + \div \+vp \\
+    \partial_0 \+vp + \div \tensorb{T}
+\end{pmatrix}. \]
+若$T^{\alpha\beta} = -T^{\alpha\beta} = \curb{\+vp,\+va}$,
+\[ \partial_\beta T^{\alpha\beta} = \begin{pmatrix}
+    \div \+vp, \\
+    -\partial_0 \+vp + \curl \+va
+\end{pmatrix}. \]
+例如于$i=1$的情形,
+\[ \partial_j T^{1j} = \partial_2 a_3 - \partial_3 a_2 = \pare{\curl \+va}_1. \]
+
+% subsubsection 张量场的导数 (end)
+
+% subsection minkowski空间中的张量 (end)
+
+\subsection{电磁规律与相对论协变性} % (fold)
+\label{sub:电磁规律与相对论协变性}
+
+\subsubsection{电荷与电流} % (fold)
+\label{ssub:电荷与电流}
+
+电荷密度和电流密度
+\[ \rho = \+dVdQ,\quad \+vj = \rho \+vu. \]
+\begin{cenum}
+    \item 在MCRF下, 电荷的瞬时速度为零, 相应的电荷密度为固有电荷密度,
+    \[ \rho_0 = \+d{V_0}d{Q_0},\quad \rho\,\rd{V} = \rho_0\,\rd{V_0}. \]
+    而体积元有变换
+    \[ \rd{V} = \frac{\rd{V_0}}{\gamma} \Rightarrow \rho = \gamma \rho_0. \]
+    电流密度
+    \[ \+vj = \gamma\rho_0 \+vu. \]
+    $\rho_0$为固有密度.
+    \item \gloss{4-电流密度}
+    \[ j^\alpha = \rho_0 U^\alpha = \rho_0\gamma\pare{c,\+vu} = \pare{\rho c,\+vj}. \]
+    \item 连续性方程
+    \[ \partial_t \rho + \div \+vj = 0 \Rightarrow \partial_\beta j^\beta = 0. \]
+\end{cenum}
+
+% subsubsection 电荷与电流 (end)
+
+\subsubsection{Maxwell方程组} % (fold)
+\label{ssub:maxwell方程组}
+
+\begin{cenum}
+    \item 电磁场强张量
+    \begin{align*}
+        F^{\alpha\beta} &= \begin{pmatrix}
+        0 & E_1/c & E_2/c & E_3/c \\
+        -E_1/c & 0 & B_3 & -B_2 \\
+        -E_2/c & -B_3 & 0 & B_1 \\
+        -E_3/c & B_2 & -B_1 & 0
+    \end{pmatrix} = \curb{\frac{\+vE}{c},\+vB}, \\
+        {F_\alpha}^\beta &= \begin{pmatrix}
+            0 & -E_1/c & -E_2/c & -E_3/c \\
+            -E_1/c & 0 & B_3 & -B_2 \\
+            -E_2/c & -B_3 & 0 & B_1 \\
+            -E_3/c & B_2 & -B_1 & 0
+        \end{pmatrix}.
+    \end{align*}
+    协变分量为
+    \[ F_{\alpha\beta} = \curb{-\frac{\+vE}{c},\+vB}. \]
+    对偶张量为
+    \[ G^{\alpha\beta} = \curb{\+vB,-\frac{\+vE}{c}}. \]
+    相应地
+    \begin{align*}
+        \partial_\beta F^{\alpha\beta} &= \begin{pmatrix}
+            \displaystyle \rec{c}\div \+vE \\
+            \displaystyle \curl \+vB - \rec{c^2} \partial_t \+vE
+        \end{pmatrix} = \mu_0 \begin{pmatrix}
+            \rho c \\ \+vj
+        \end{pmatrix}, \\
+        \partial_\beta G^{\alpha\beta} &= \begin{pmatrix}
+            \displaystyle \div \+vB \\
+            \displaystyle -\rec{c}\curl \+vE - \rec{c}\partial_t \+vB
+        \end{pmatrix} = \begin{pmatrix}
+            0 \\ 0
+        \end{pmatrix}.
+    \end{align*}
+    \item Maxwell方程组恰好可写为
+    \[ \begin{cases}
+        \partial_\beta F^{\alpha\beta} = \mu_0 j^\alpha, \\
+        \partial_\beta G^{\alpha\beta} = 0 \Leftrightarrow \partial_\alpha F_{\beta\gamma} + \partial_\beta F_{\gamma\alpha} + \partial_\gamma F_{\alpha\beta} = 0.
+    \end{cases} \]
+    张量
+    \[ 0 = \half \varepsilon^{\alpha\beta\mu\nu}\partial_\beta F_{\mu\nu} \xlongequal{\alpha = 0} \partial_1 F_{23} + \partial_2 F_{31} + \partial_3 F_{12}. \]
+    \item $F^{\alpha\beta}$构成张量:
+    \begin{align*}
+        & \partial'_\beta F'^{\alpha\beta} = \mu_0 j'^\alpha, \\
+        & {\Lambda_\alpha}^\mu {\Lambda_\beta}^\nu \partial_\nu F'^{\alpha\beta} = \mu_0 {\Lambda_\alpha}^\mu {\Lambda^\alpha}_\gamma j^\gamma. \\
+        & \partial_\nu \pare{{\Lambda_\alpha}^\mu{\Lambda_\beta}^\nu F'^{\alpha\beta}} = \mu_0 \delta^\mu_\gamma j^\gamma = \mu_0 j^\mu = \partial_\nu F^{\mu\nu}.
+    \end{align*}
+\end{cenum}
+
+% subsubsection maxwell方程组 (end)
+
+\subsubsection{电磁场的变换} % (fold)
+\label{ssub:电磁场的变换}
+
+$F$的变换如
+\[ F'^{\alpha\beta} = {\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma F^{\rho\sigma}. \]
+将
+\[ {\Lambda^\alpha}_\beta = \begin{pmatrix}
+    \gamma_0 & -\beta_0\gamma_0 & &  \\
+    -\beta_0\gamma_0 & \gamma_0 & &  \\
+    & & 1 & \\
+    & & & 1
+\end{pmatrix}. \]
+例如
+\begin{align*}
+    F'^{01} &= {\Lambda^{0}}_\rho {\Lambda^1}_\sigma F^{\rho\sigma} = \gamma_0^2 \frac{E_1}{c} - \pare{-\beta_0\gamma_0}^2 \frac{E_1}{c} \Rightarrow E'_1 = E_1. \\
+    F'^{02} &= {\Lambda^{0}}_\rho {\Lambda^2}_\sigma F^{\rho\sigma} = \gamma_0 \frac{E_2}{c} - \beta_0\gamma_0 B_3 \Rightarrow E'_2 = \gamma_0 \pare{E_2 - \beta_0 cB_3}. \\
+    F'^{02} &= {\Lambda^{0}}_\rho {\Lambda^3}_\sigma F^{\rho\sigma} = \gamma_0 \frac{E_3}{c} + \beta_0\gamma_0 B_2 \Rightarrow E'_2 = \gamma_0 \pare{E_3 + \beta_0 cB_2}. \\
+    F'^{23} &= {\Lambda^2}_\rho {\Lambda^3}_\sigma F^{\rho\sigma} = F^{23} \Rightarrow B'_1 = B_1. \\
+    F'^{31} &= {\Lambda^3}_\rho {\Lambda^1}_\sigma F^{\rho\sigma} = \beta_0\gamma_0 \frac{E_3}{c} + \gamma_0 B_2 \Rightarrow cB'_2 = \gamma_0\pare{cB_2 + \beta_0\gamma_0 E_3}. \\
+    F'^{12} &= {\Lambda^1}_\rho {\Lambda^2}_\sigma F^{\rho\sigma} = \beta_0\gamma_0 \frac{E_2}{c} + \gamma_0 B_3 \Rightarrow cB'_3 = \gamma_0\pare{cB_3 - \beta_0\gamma_0 E_2}.
+\end{align*}
+上述变换可以统一写为
+\begin{resume}
+    \vspace{-\baselineskip}
+    \begin{align*}
+    &    \begin{cases}
+        \+vE'_\parallel = \+vE_\parallel, & \+vE'_\perp = \gamma_0 \pare{\+vE_\perp + \+v\beta_0 \times c\+vB}, \\
+        \+vB'_\parallel = \+vB_\parallel, & c\+vB'_\perp = \gamma_0 \pare{c\+vB_\perp - \+v\beta_0 \times \+vE}.
+    \end{cases} \\
+    &   \begin{cases}
+        \+vE_\parallel = \+vE'_\parallel, & \+vE_\perp = \gamma_0 \pare{\+vE'_\perp - \+v\beta_0 \times c\+vB'}, \\
+        \+vB_\parallel = \+vB'_\parallel, & c\+vB_\perp = \gamma_0 \pare{c\+vB'_\perp + \+v\beta_0 \times \+vE'}.
+    \end{cases}
+    \end{align*}
+\end{resume}
+\begin{ex}
+    于$\beta_0 \ll 1$之情形,
+    \[ \+vE' = \+vE + \+vv_0 \times \+vB,\quad \+vB' = \+vB - \frac{\+vv_0 \times \+vE}{c^2}. \]
+\end{ex}
+\begin{ex}
+    设$\+vB' = 0$, 则反变换
+    \[ \+vE = \+vE'_\parallel + \gamma_0 \+vE'_\perp,\quad c\+vB = \gamma_0 \+v\beta_0 \times \+vE. \]
+    电磁场之间有关系
+    \[ \+vB = \frac{\+vv_0 \times \+vE}{c^2}. \]
+\end{ex}
+\begin{sample}
+    \begin{ex}
+        对于沿$\+ux$匀速运动的点电荷$e$, 设$x = v_0 t$. 在$K'$系中$\+vB' = 0$, $\displaystyle \+vE' = \frac{e}{4\pi\epsilon_0}\frac{\+vr'}{r'^3}$. 根据逆变换公式, 更定义$\+vR = \+vr - \+vv_0 t$,
+        \[ \begin{cases}
+            \displaystyle \+vE_\parallel = \+vE'_\parallel = \frac{e}{4\pi\epsilon_0} \frac{\+vr'_\parallel}{r'^3} = \frac{e}{4\pi\epsilon_0} \frac{\gamma_0 \pare{\+vr_\parallel - \+vv_0 t}}{r'^3} = \frac{e}{4\pi\epsilon_0}\frac{\gamma_0 \+vR_\parallel}{r'^3}, \\[.5em]
+            \displaystyle \+vE_\perp = \gamma_0 \+vE'_\perp = \frac{e}{4\pi\epsilon_0} \frac{\gamma_0 \+vr'_\perp}{r'^3} = \frac{e}{4\pi\epsilon_0} \frac{\gamma_0 \+vr_\perp}{r'^3} = \frac{\gamma_0 \+vR_\perp}{r'^3}.
+        \end{cases} \]
+        其中
+        \[ r'^2 = r'^2_\parallel + r'^2_\perp = \gamma_0^2 \pare{R_\parallel^2 + \pare{1-\beta_0^2}R_\perp^2} = \gamma_0^2 \brac{R^2 \pare{1-\beta_0^2\sin^2\theta}}. \]
+        从而
+        \[ \+vE = \frac{e}{4\pi\epsilon_0}\frac{\+uR}{R}g\pare{\theta},\quad g\pare{\theta} = \frac{1-\beta_0^2}{\pare{1-\beta_0^2\sin^2\theta}^{3/2}}. \]
+        而磁场
+        \[ \+vB = \frac{\+v_0\times \+vE}{c^2} = \frac{\mu_0 e\+vv_0\times \+uR}{4\pi R^2}g\pare{\theta}. \]
+    \end{ex}
+\end{sample}
+对Faraday张量二度缩并,
+\begin{align*}
+    F_{\alpha\beta}F^{\alpha\beta} &= -2\frac{E^2}{c^2} + 2B^2 = -2\mu_0\epsilon_0 \pare{E^2 - c^2B^2}. \\
+    F_{\alpha\beta}G^{\alpha\beta} &= -4 \frac{\+vE\cdot \+vB}{c}.
+\end{align*}
+可定义4-标量
+\[ -\rec{4\mu_0}F_{\alpha\beta}F^{\alpha\beta} = \half \epsilon_0 \pare{E^2 - c^2B^2}. \]
+以及另一个标量
+\[ -\frac{c}{4}F_{\alpha\beta}G^{\alpha\beta} = \+vE\cdot \+vB. \]
+\begin{cenum}
+    \item 电场与磁场的夹角是否大于$\SI{90}{\degree}$是不变量.
+    \item 电磁场分类
+    \[ \begin{cases}
+        E>cB: &\text{类电}.\\
+        E<cB: &\text{类磁}.\\
+        E=cB: &\text{类电磁波}.
+    \end{cases} \]
+    \item 若$\+vE \cdot \+vB = 0$在某电相互垂直, 则
+    \[ \begin{cases}
+        E > cB: & \text{存在标架, 使得其中电磁场为纯电场}.\\
+        E < cB: & \text{存在标架, 使得其中电磁场为纯磁场}.
+    \end{cases} \]
+    \item 若$\+vE\cdot \+vB \neq 0$, 则存在标架使得其中$\+vE' \parallel \+vB'$.
+\end{cenum}
+\begin{ex}
+    当$\+vE\cdot \+vB = 0$, 且$E > cB$, 则变换后
+    \[ \+vB'_\parallel = \+vB_\parallel = 0,\quad c\+vB'_\perp = \gamma_0 \pare{c\+vB_\perp - \+v\beta_0\times \+vE} = 0. \]
+    这可以通过要求
+    \[ \+v\beta_0 \perp \+vB,\quad c\+vB_\perp = c\+vB = \+v\beta_0 \times \+vE \]
+    得到.
+    \[ \+vE\times c\+vB = \+vE\times \pare{\+v\beta_0 \times \+vE} = E^2 \+v\beta_0 - \pare{\+v\beta_0\cdot \+vE}\+vE. \]
+    不妨设$\+v\beta_0 \cdot \+vE = 0$, 有
+    \[ \+v\beta_0 = \frac{\+vE\times c\+vB}{E^2}. \]
+    如果$E<cB$, 则相应的
+    \[ \+v\beta_0 = \frac{\+vE\times c\+vB}{\pare{cB}^2}. \]
+    若$\+vE\cdot \+vB\neq 0$, 则
+    \[ \frac{\+v\beta_0}{1+\beta_0^2} = \frac{\+vE\times c\+vB}{E^2 + c^2B^2}. \]
+\end{ex}
+
+% subsubsection 电磁场的变换 (end)
+
+\subsubsection{能量和动量守恒} % (fold)
+\label{ssub:能量和动量守恒}
+
+4-力密度可定义为
+\[ f^\mu = F^{\mu \alpha}j_\alpha = \pare{f^0,\+vf}. \]
+可以发现
+\[ f^0 = \frac{\+vE\cdot \+vj}{c},\quad \+vf = \rho \+vE + \+vj\times \+vB. \]
+记
+\[ \partial_\beta = \frac{\partial}{\partial x^\beta} = \pare{\rec{c}\partial_t, \grad},\quad \partial^\beta = \frac{\partial}{\partial x_\beta} = \pare{-\rec{c}\partial_t,\grad}. \]
+则Maxwell方程之第一组可写为
+\[ \partial_\beta F^{\alpha\beta} = \mu_0 j^\alpha \Rightarrow \partial^\beta F_{\alpha\beta} = \mu_0 j_\alpha. \]
+从而
+\begin{align*}
+    f^\mu &= \rec{\mu_0} F^{\mu\alpha}\partial^\beta F_{\alpha\beta} \\
+    &= \rec{\mu_0}\partial^\beta \pare{F^{\mu\alpha} F_{\alpha\beta}} - \rec{\mu_0} F_{\alpha\beta} \partial^\beta F^{\mu\alpha} \\
+    &= \partial^\beta \pare{\rec{\mu_0} F^{\mu\alpha}F_{\alpha\beta}} - \partial^\mu \+cL_0 \\
+    &= \partial_\nu \pare{\rec{\mu_0} F^{\mu\alpha} {F_\alpha}^\nu} - \partial_\nu \pare{g^{\mu\nu} \+cL_0}.
+\end{align*}
+其中
+\begin{align*}
+    -F_{\alpha\beta}\partial^\beta F^{\mu\alpha} &= F_{\alpha\beta}\partial^\mu F^{\alpha\beta} + F_{\alpha\beta} \partial^\alpha F^{\beta\mu} \\
+    &= \half \partial^\mu \pare{F_{\alpha\beta} F^{\alpha\beta}} + F_{\beta\alpha} \partial^{\beta}F^{\alpha\mu} \\
+    &= \half \partial^\mu \pare{F_{\alpha\beta}F^{\alpha\beta}} + F_{\alpha\beta}\partial^\beta F^{\mu\alpha}. \\
+    \Rightarrow -F_{\alpha\beta}\partial^\beta F^{\mu\alpha} &= \partial^\mu \pare{\rec{4\mu_0} F_{\alpha\beta}F^{\alpha\beta}} = -\partial^\mu = -\partial^\mu \+cL_0.
+\end{align*}
+从而有
+\begin{resume}
+    能量动量守恒定律
+    \[ f^\mu = -\partial_\nu T^{\mu\nu}. \]
+    其中
+    \[ T^{\mu\nu} = g^{\mu\nu} \+cL_0 - \rec{\mu_0} F^{\mu\alpha} {F_\alpha}^\nu \]
+    谓能量-动量张量.
+\end{resume}
+\begin{cenum}
+    \item $T^{\mu\nu}$构成一对称张量. $T^{\mu\nu} = T^{\nu\mu}$. 注意到
+    \[ g_{\alpha\beta} F^{\alpha\mu} F^{\nu\beta} \]
+    是对称的即可.
+    \item $\displaystyle T^{\mu\nu} = \begin{pmatrix}
+        w & \+vS/c \\
+        \+vS/c & \tensorb{T}
+    \end{pmatrix}.$ 其中
+    \[ \begin{cases}
+        \displaystyle w = \half \epsilon_0 \pare{E^2 + c^2B^2}, \\[.5em]
+        \displaystyle \+vS = \rec{\mu_0} \+vE\times \+vB = \epsilon_0 c^2 \+vE\times \+vB = c^2 \+vg, \\[.5em]
+        \displaystyle \tensorb{T} = w\tensorb{I} - \epsilon_0\pare{\+vE\+vE + c^2 \+vB\+vB}.
+    \end{cases} \]
+    从而
+    \[ -\partial_\nu T^{\mu\nu} = -\begin{pmatrix}
+        \displaystyle \partial_0 w + \div \frac{\+vS}{c} \\[.5em]
+        \displaystyle \partial_0 \frac{\+vS}{c} + \div \tensorb{T}
+    \end{pmatrix} = f^\mu = \begin{pmatrix}
+        \+vE \cdot \frac{\+vj}{c} \\[.5em]
+        \rho \+vE + \+vj\times \+vB
+    \end{pmatrix}. \]
+    时间分量和空间分量分别对应
+    \[ \begin{cases}
+        \+vE\cdot \+vj = -\partial_t w - \div \+vS, \\
+        \+vf = \rho \+vE + \+vj\times \+vB = -\partial_t \+vg - \div \tensorb{T}.
+    \end{cases} \]
+\end{cenum}
+对于角动量, 可以考虑
+\begin{align*}
+    x^\mu f^\nu - x^\nu f_\mu &= -x^\mu \partial_\alpha T^{\nu\alpha} + x^\nu \partial_\alpha T^{\mu\alpha} \\
+    &= -\partial_\alpha \pare{x^\mu T^{\mu\alpha} - x^\nu T^{\mu\alpha}} + T^{\nu\alpha} \+D{x^\alpha}D{x^\mu} - T^{\mu\alpha}\+D{x^\alpha}D{x^\nu} \\
+    &= -\partial_\alpha M^{\mu\nu\alpha} + \pare{T^{\nu\mu} - T^{\mu\nu}} \\
+    &= -\partial_\alpha M^{\mu\nu\alpha}.
+\end{align*}
+从而角动量守恒为
+\[ \tau^{\mu\nu} = -\partial_\alpha M^{\mu\nu\alpha}. \]
+其中
+\[ \tau^{\mu\nu} = x^\mu f^\nu - x^\nu f_\mu. \]
+
+% subsubsection 能量和动量守恒 (end)
+
+\subsubsection{规范势} % (fold)
+\label{ssub:规范势}
+
+\begin{cenum}
+    \item 数学定理:
+    \begin{cenum}
+        \item $\curl \+vF = 0 \Leftrightarrow \+vF = -\grad \varphi$, 其中$\varphi$可相差一常量.
+        \item $\div \+vF = 0 \Leftrightarrow \+vF = \curl \+vA$, 其中$\+vA$可相差一$\grad \psi$.
+    \end{cenum}
+    从而
+    \begin{cenum}
+        \item $\partial_\alpha F_\beta = \partial_\beta F_\alpha \Rightarrow F_\alpha = \partial_\alpha \psi$.
+        \item (Bianchi恒等式)$\partial_\alpha F_{\beta\lambda} + \partial_\beta F_{\lambda\alpha} + \partial_\lambda F_{\alpha\beta} = 0$且$F_{\alpha\beta} = -F_{\beta\alpha} \Leftrightarrow F_{\alpha\beta} = \partial_\alpha A_\beta - \partial_\beta A_\alpha$.
+    \end{cenum}
+    \item 规范势: $A^\alpha = \pare{\varphi/c, \+vA}$. 有$F^{\alpha\beta} = \partial^\alpha A^\beta - \partial^\beta A^\alpha$.
+    \begin{align*}
+        & \frac{E_1}{c} = F^{01} = \partial^0 A^1 - \partial^1 A^0 = -\rec{c}\partial_t A_1 - \partial_1 \frac{\varphi}{c}, \\
+        & B_1 = F^{23} = \partial^2 A^3 - \partial^3 A^2.
+    \end{align*}
+    这恰好是
+    \[ \+vE = -\grad \varphi - \partial_t \+vA,\quad \+vB = \curl \+vA. \]
+    \item $\tilde{\+vA}^\alpha = A^\alpha + \partial^\alpha\psi$不影响$F^{\alpha\beta}$. 谓之规范变换.
+    \item 势方程:
+    \begin{align*}
+        \mu_0 j^\alpha &= \partial_\beta F^{\alpha\beta} = \partial_\beta \pare{\partial^\alpha A^\beta - \partial^\beta A^\alpha} \\
+        &= \partial^\alpha \pare{\partial_\beta A^\beta} - \partial_\beta \partial^\beta A^\alpha.
+    \end{align*}
+    记
+    \[ \partial_\beta A^\beta = \rec{c^2}\partial_t \varphi + \div \+vA = L, \]
+    有
+    \[ \Box{} A^\alpha - \partial^\alpha L = -\mu_0 j^\alpha. \]
+    在Lorentz规范下,
+    \[ \Box{}A^\alpha = -\mu_0 j^\alpha. \]
+\end{cenum}
+
+% subsubsection 规范势 (end)
+
+\subsubsection{介质中的Maxwell方程组} % (fold)
+ 
+关于$\+vD$和$\+vH$的方程
+\[ \div \pare{\+vD c} = \rho_0 c,\quad \curl \+vH - \partial_t \+vD = \+vj_0. \]
+可类似于$F$而引入辅助张量场$\partial_\beta H^{\alpha\beta} = j_0^\alpha$. 其中$j_0$表示自由电荷和传导电流构成的4-矢量. 通过$\mu_0 \rightarrow 1$, $\+vE/c\rightarrow c\+vD$, $\+vB \rightarrow \+vH$可得
+\[ H^{\alpha\beta} = \curb{c\+vD,\+vH} = \begin{pmatrix}
+    0 & cD_1 & cD_2 & cD_3 \\
+    -cD_1 & 0 & H_3 & -H_2 \\
+    -cD_2 & -H_3 & 0 & H_1 \\
+    -cD_3 & H_2 & -H_1
+\end{pmatrix}. \]
+由
+\[ \div \pare{c\+vP} = \rho' c,\quad \curl \+vM + \partial_t \+vP = \+vj' \Rightarrow \partial_\beta M^{\alpha\beta} = v'^\alpha, \]
+可定义
+\[ M^{\alpha\beta} = \curb{-c\+vP,\+vM} = \begin{pmatrix}
+    0 & -cP_1 & -cP_2 & -cP_3 \\
+    cP_1 & 0 & M_3 & -M_2 \\
+    cP_2 & -M_3 & 0 & M_1 \\
+    cP_3 & M_2 & -M_1 & 0
+\end{pmatrix} = \frac{F^{\alpha\beta}}{\mu_0} - H^{\alpha\beta}. \]
+\begin{sample}
+    \begin{ex}
+        由静止介质的性能方程$\+vD = \epsilon \+vE$, $\+vB = \mu \+vH$推导运动介质的电磁性能方程.
+    \end{ex}
+    \begin{solution}
+        在MCRF, $\+vD' = \epsilon \+vE'$, $\+vB' = \mu \+vH'$, 则$K$系中
+        \[ \+vD = \+vD\pare{\+vE,\+vH},\quad \+vB = \+vB\pare{\+vE,\+vH}. \]
+        电场满足(低速运动情形)
+        \[ \+vE = \+vE' - \+v\beta_0 \times c\+vB', \]
+        磁场满足
+        \[ \+vB = \+vB' + \frac{\+v\beta_0 \times \+vE'}{c}. \]
+        利用正变换,
+        \[ \+vE' = \+vE + \+vv_0 \times \+vB,\quad \+vB' = \+vB - \frac{\+vv_0 \times \+vE}{c^2}. \]
+        $\+vD,\+vH$的变换通过替换$\+vE/c \rightarrow c\+vD$, $\+vB \rightarrow \+vH$得到. 从而
+        \[ \+vD' = \+vD + \frac{\+vv_0 \times \+vH}{c^2},\quad \+vH' = \+vH - {\+vv_0 \times \+vE}. \]
+        从而
+        \[ \begin{cases}
+            \displaystyle \+vD + \frac{\+vv_0 \times \+vH}{c^2} = \epsilon \+vE + \epsilon \+vv_0 \times \+vB, \\[.5em]
+            \displaystyle \+vB - \frac{\+vv_0 \times \+vE}{c^2} = \mu \+vH - \mu \+vv_0 \times \+vD.
+        \end{cases} \]
+        在一阶近似下,
+        \[ \+vB = \mu \+vH,\quad \+vD = \epsilon \+vE. \]
+        从而
+        \[ \begin{cases}
+            \displaystyle \+vD = \epsilon \+vE + \pare{\epsilon \mu - \rec{c^2}} \+vv_0 \times \+vH, \\
+            \displaystyle \+vB = \mu \+vH - \pare{\epsilon \mu -\rec{c^2}} \+vv_0 \times \+vE.
+        \end{cases} \qedhere \]
+    \end{solution}
+\end{sample}
+
+% subsubsection 介质中的maxwell方程组 (end)
+
+% subsection 电磁规律与相对论协变性 (end)
+
+\subsection{四维力} % (fold)
+\label{sub:四维力}
+
+Newton第二定律可改写为协变形式
+\[ K^\alpha = \+d\tau d{p^\alpha},\quad k^\alpha U_\alpha = 0. \]
+
+% subsection 四维力 (end)
+
+\subsection{粒子与场的变分原理} % (fold)
+\label{sub:粒子与场的变分原理}
+
+\subsubsection{离散体系的Lagrange表述} % (fold)
+\label{ssub:离散体系的lagrange表述}
+
+\begin{cenum}
+    \item 术语:
+    \begin{cenum}
+        \item 广义坐标为$q_k\pare{t}$, $k=1,\cdots,n$.
+        \item 广义速度为$\dot{q}_k\pare{t}$.
+        \item Lagrange函数为$L = L\pare{q,\dot{q},t}$.
+        \item 作用量
+        \[ S\brac{q} = \int_{t_1}^{t_2}L\pare{q,\dot{q},t}\,\rd{t}. \]
+    \end{cenum}
+    \item Hamilton原理:
+    \[ \begin{cases}
+        \displaystyle 0 = \delta S = S\brac{q+\delta q} - S\brac{q} = \int_{t_1}^{t_2} \delta L\pare{q,\dot{q},t}\,\rd{t}, \\
+        \displaystyle \delta q_k\pare{t_1} = 0 = \delta q_k\pare{t_2}.
+    \end{cases} \]
+    即
+    \begin{align*}
+        0 &= \delta S = \int_{t_1}^{t_2} \brac{\+D{q_k}D{L}\delta q_k + \+D{\dot{q}_k}DL \delta\dot{q}_k}\,\rd{t} \\
+        &= \left.\int_{t_1}^{t_2} \rd{t}\, \brac{\+D{q_k}DL - \+dtd{} \+D{\dot{q}_k}DL} \delta q_k + \+D{\dot{q}_k}D{L}\delta q_k\right\vert_{t_1}^{t_2}.
+    \end{align*}
+    \item Euler-Lagrange方程:
+    \[ \+dtd{} \+D{\dot{q}_k}DL - \+D{q_k}D{L} = 0,\quad k = 1,\cdots,n. \]
+    可以引入广义正则动量
+    \[ p_k = \+D{\dot{q}_k}DL \Rightarrow \dot{p}_k = \+D{q_k}DL. \]
+    \item 规范不变性:
+    \[ L\pare{q,\dot{q},t} \Leftrightarrow \tilde{L}\pare{q,\dot{q},t} = L\pare{q,\dot{q},t} + \+dtd{F\pare{q,t}}. \]
+    则相应的
+    \[ \frac{\delta}{\delta q_k}\+dtd{F} \equiv 0 \Rightarrow S = S+\const. \]
+    \item 在非相对论的情形下,
+    \[ L = T-U = \sum_\alpha \half m_\alpha v_\alpha^2 - U\pare{\+vr,t}. \]
+    \item 相对论自由粒子: $S$须构成一4-标量,
+    \[ S = \int L\,\rd{t} = \int \gamma L \,\rd{\tau}. \]
+    这要求$\gamma L$构成一4-标量,
+    \[ L = -\frac{mc^2}{\gamma} = -mc^2 \sqrt{1-\beta^2}. \]
+    可得
+    \[ \+vp = \frac{m\+vu}{\sqrt{1-u^2/c^2}} = \gamma m\+vu. \]
+\end{cenum}
+\begin{ex}
+    对于$\displaystyle L = \half m\dot{\+vr}^2 - U\pare{\+vr}$, 有
+    \[ \frac{\delta L}{\delta \+vr} = \+D{\+vr}D{L} - \+dtd{} \+D{\dot{\+vr}}DL = -\grad U - \+dtd{}\pare{m\dot{\+vr}} = 0. \]
+\end{ex}
+
+% subsubsection 离散体系的lagrange表述 (end)
+
+\subsubsection{连续体系的Lagrange表述} % (fold)
+\label{ssub:连续体系的lagrange表述}
+
+\begin{cenum}
+    \item 术语:
+    \[ \begin{cases}
+        \text{场函数:} & \psi_I\pare{x} = \psi_I \pare{t,\+vr},\quad I = 1,\cdots,N,\\
+        \text{Lagrange密度:} & \+sL = \+sL\pare{\psi,\partial\psi,x}, \\
+        \text{作用量:} & \displaystyle S\brac{\psi} = \int_{t_1}^{t_2} L\,\rd{t} = \int_D \+sL\,\rd{^4x}.
+    \end{cases} \]
+    其中$D$为一4-区域. 其中
+    \[ \rd{^4 x} = c\,\rd{t} \,\rd{x^1}\,\rd{x^2}\,\rd{x^3}, \Rightarrow L = c\int \rd{t} \int \+SL\,\rd{^3}x. \]
+    \item Gauss定理: 设$V$为一三维区域,
+    \[ \oint_{\partial V}\rd{\+vr}\cdot \+vA = \int_V \rd{V}\,\div \+vA,\quad \oint_{\partial V}\rd{\+vr} = \int_V \rd{V}\,\grad. \]
+    亦可以写为
+    \[ \oint_{\partial V}\rd{\sigma_i}\,A^i = \int_V\rd{V}\,\partial_i A^i,\quad \oint_{\partial V}\rd{\sigma_i} = \int_V \rd{V}\,\partial_i. \]
+    对于4-区域,
+    \[ \oint_{\partial D}\rd{\Sigma_\alpha}\,A^\alpha = \int_D \rd{^4 x}\,\partial_\alpha A^\alpha. \]
+    \item Hamilton原理: 真实的$\+SL$为使得做用量取驻定值者,
+    \[ 0 = \delta S = \int_D \delta L\pare{\psi,\partial\psi,x}\,\rd{^4x}. \]
+    Lagrange密度的变化为
+    \[ \delta \+sL = \+SL\pare{\psi + \delta \psi, \partial \psi + \partial \delta \psi,x} - \+sL\pare{\psi,\partial \psi, x}. \]
+    从而驻定值条件要求(注意到边界$\delta\psi = 0$)
+    \begin{align*}
+        0 &= \delta S = \int_D \rd{^4 x}\, \brac{\+D{\psi_I}D{\+sL}\delta \psi_I + \+D{\pare{\partial_\beta \psi_I}}D{\+sL}\partial_\beta \delta \psi_I} \\
+        &= \int_D \rd{^4 x}\, \brac{\+D{\psi_I}D{\+sL} - \partial_\beta \+D{\pare{\partial_\beta \psi_I}}D{\+sL}} \delta \psi_I + \cancelto{0}{\int_D \underbrace{\partial_\beta \brac{\+D{\pare{\partial_\beta \psi_I}}D{\+sL}\delta \psi_I}}_{\partial_\beta X^\beta}\,\rd{^4 x}}.
+    \end{align*}
+    \item Lagrange方程:
+    \[ \+D{\psi_I}D{\+sL} - \partial_\beta \+D{\pare{\partial_\beta \psi_I}}D{\+sL} = 0. \]
+    特别地, 对于Minkowski时空,
+    \[ \+D{\psi_I}D{\+sL} - \partial_t \+D{\pare{\partial_t \psi_I}}D{\+sL} - \div \+D{\grad \psi_I}D{\+sL}. \]
+    \item $\+sL$的不确定性:
+    \begin{align*}
+        \+sL\pare{\psi,\partial \psi, x} & \Leftrightarrow \+sL\pare{\psi,\partial \psi, x} = \+sL\pare{\psi,\partial \psi, x} + \partial_\alpha X^\alpha\pare{\psi,x}. \\
+        \tilde{S} &= S + \oint_{\partial D}X^\alpha\,\rd{\Sigma_\alpha} = S = \const.
+    \end{align*}
+    \item 相对论中, $S$和$\+sL$为4-标量.
+\end{cenum}
+\begin{sample}
+    \begin{ex}
+        取$\displaystyle \+sL = \half \partial_\alpha \psi \partial^\alpha \psi$,
+        \[ \+D{\psi}D{\+sL} = 0, \]
+        而
+       \begin{align*}
+           \+D{\pare{\partial_\beta \psi}}D{\+sL} &= \half \+D{\pare{\partial_\beta \psi}}D{}\brac{g^{\alpha\gamma}\partial_\alpha \psi \partial_\gamma \psi} \\
+           &= \half g^{\alpha\gamma}\brac{\delta_\alpha^\beta \partial_\gamma \psi + \partial_\alpha \psi \delta_\gamma^\beta} \\
+           &= \half \brac{g^{\beta\gamma}\partial_\gamma \psi + g^{\alpha\beta}\partial_\alpha \psi} \\
+           &= \half \brac{\partial^\beta \psi + \partial^\beta \psi} \\
+           &= \partial^\beta \psi.
+       \end{align*}
+       相应的Euler-Lagrange方程为
+       \[ \partial_\beta \partial^\beta \psi = 0 \Rightarrow \Box{}^2 \psi = 0. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 连续体系的lagrange表述 (end)
+
+\subsubsection{电磁Lagrange函数} % (fold)
+\label{ssub:电磁lagrange函数}
+
+$L\+_p_$表示粒子的Lagrange函数, $L\+_pf_$表示粒子-场相互作用的Lagrange函数, $L\+_f_$表示场的Lagrange函数,
+\begin{align*}
+    L\+_em_ &= L\+_p_ + L\+_pf_ + L\+_f_.
+\end{align*}
+\begin{cenum}
+    \item 给定电磁场中运动的带电粒子(忽略带电粒子$e$对场的反作用),
+    \begin{align*}
+        \gamma L &= -mc^2 + eU^\alpha A_\alpha = -mc^2 + e\gamma e\pare{\+vu\cdot \+vA - \varphi}. \\
+        \Rightarrow L &= -mc^2 \sqrt{1-\frac{u^2}{c^2}} + e\pare{\+vu\cdot \+vA - \varphi}.
+    \end{align*}
+    \item 可以验证
+    \begin{align*}
+        \+D{\+vr}D{L} &= e\grad\pare{\+vu\cdot \+vA - \varphi} = e\pare{\grad \+vA}\cdot \+vu - e\grad \psi, \\
+        \+D{\+vu}D{L} &= \+dtd{\+vp} + \+dtd{}\pare{e\+vA} = \+dtd{\+vp} + e\+DtD{\+vA} + e\+vu\cdot \grad \+vA. \\
+        \Rightarrow \+dtd{\+vp} &= e\pare{-\grad \varphi - \partial_t \+vA} + e\brac{\pare{\grad \+vA}\cdot \+vu - \+vu\cdot \grad \+vA} \\
+        &= e\+vE = e\+vE + \+vu\times \pare{\curl \+vA} \\
+        &= e\+vE + e\+vu\times \+vB.
+    \end{align*}
+    \item 规范变换:
+    \[ A_\alpha \rightarrow \tilde{A}_\alpha = A_\alpha + \partial_\alpha \psi \Rightarrow \begin{cases}
+        \tilde{\varphi} = \varphi - \partial_t \psi, \\
+        \tilde{\+vA} = \+vA + \grad \psi.
+    \end{cases} \]
+    相应的
+    \[ \tilde{L} = L + e\+dtd{\psi}. \]
+\end{cenum}
+
+% subsubsection 电磁lagrange函数 (end)
+
+\subsubsection{给定场源时的电磁场} % (fold)
+\label{ssub:给定场源时的电磁场}
+
+\vspace{-\baselineskip}
+\begin{align*}
+    \+sL &= \+sL_0 + j^\mu A_\mu = -\rec{4\mu_0}F_{\mu\nu}F^{\mu\nu} + j^\mu A_\mu \\
+    &= \half \epsilon_0 \pare{E^2 - c^2B^2} + \pare{\+vj\cdot \+vA - \rho \varphi} \\
+    &= \half \epsilon_0 \pare{E^2 - c^2B^2} + \pare{\+vj\cdot \+vA - \rho \varphi}.
+\end{align*}
+之所以不加入$F_{\mu\nu}G^{\mu\nu}$, 原因在于
+\begin{align*}
+    F_{\mu\nu}G^{\mu\nu} &= \rec{2!}\epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}F_{\rho\sigma} \\
+    &= \rec{2!} \epsilon^{\mu\nu\rho\sigma}F_{\mu\nu}\pare{\partial_\rho A_\sigma - \partial_\sigma A_\rho} \\
+    &= \epsilon^{\mu\nu\rho\sigma} F_{\mu\nu}\partial_\rho A_\sigma \\
+    &= \partial_\rho \pare{\epsilon^{\mu\nu\rho\sigma} F_{\mu\nu}A_\sigma} - \cancel{0}{\pare{\partial_\rho G^{\rho\sigma}}}A_\sigma \\
+    &= \partial_\rho X^\rho.
+\end{align*}
+在规范变换
+\[ \tilde{A}_\mu = A_\mu + \partial_\mu \psi \]
+下,
+\begin{align*}
+    \tilde{\+sL} &= \+sL + j^\mu \partial_\mu \psi = \+sL + \partial_\mu\pare{j^\mu \psi} - \pare{\partial_\mu j^\mu} \psi \\
+    &= \+sL + \partial_\mu\pare{\psi j^\mu} \\
+    &= \+sL + \partial_\mu\pare{\psi j^\mu}.
+\end{align*}
+各个偏导数为
+\begin{align*}
+    \+D{A_\alpha}D{\+sL} &= j^\alpha = \partial_\beta \+D{\pare{\partial_\beta A_\alpha}}D{\+sL}, \\
+    \+D{\pare{\partial_\beta A_\alpha}}D{\+sL} &= -\rec{4\mu_0} F^{\mu\nu} \+D{\pare{\partial_\beta A_\alpha}}D{\pare{\partial_\mu A_\nu - \partial_\nu A_\mu}} \\
+    &= -\rec{2\mu_0} F^{\mu\nu} \brac{\delta_\mu^\beta \delta_\nu^\alpha - \delta_\nu^\beta \delta_\mu^\alpha} \\
+    &= -\rec{2\mu_0} \brac{F^{\beta\alpha} - F^{\alpha\beta}} \\
+    &= \rec{\mu_0}F^{\alpha\beta}.
+\end{align*}
+从而
+\[ j^\alpha = \rec{\mu_0}\partial_\beta F^{\alpha\beta} \Rightarrow \partial_\beta F^{\alpha\beta} = \mu_0 j^\alpha. \]
+故得到了
+\[ \div \+vE = \frac{\rho}{\epsilon_0},\quad \curl \+vB - \rec{c^2}\partial_t \+vE = \mu_0 \+vj. \]
+
+% subsubsection 给定场源时的电磁场 (end)
+
+\subsubsection{一般情形} % (fold)
+\label{ssub:一般情形}
+
+对应的$L$为
+\begin{align*}
+    L = \sum_k -m_k c^2 \sqrt{1-\pare{\frac{u_k}{c}}^2} + c\int \rd{^3 x}\,\brac{\+sL_0 - \rec{4\mu_0} F_{\mu\nu}F^{\mu\nu} + j^\alpha A_\alpha}.
+\end{align*}
+
+% subsubsection 一般情形 (end)
+
+% subsection 粒子与场的变分原理 (end)
+
+\subsection{Noether定理} % (fold)
+\label{sub:noether定理}
+
+\subsubsection{场的变换} % (fold)
+\label{ssub:场的变换}
+
+在Lorentz变换下,
+\[ x'^\mu = {\Lambda^\nu}_\rho x^\rho + a^\mu, \quad \begin{cases}
+    \text{标量场:} & \varphi'\pare{x'} = \varphi\pare{x}, \\
+    \text{矢量场:} & A'^\alpha\pare{x'} = {\Lambda^\alpha}_\beta A^\beta\pare{x}, \\
+    \text{张量场:} & F'^{\alpha\beta}\pare{x'} = {\Lambda^\alpha}_\rho {\Lambda^\beta}_\sigma F^{\rho\sigma}\pare{x}.
+\end{cases} \]
+对于无穷小变换, ${\Lambda^\mu}_\rho = {\delta^\mu}_\rho + {\Omega^\mu}_\rho$, 其中$\Omega$时无穷小量. 且$\Omega_{\alpha\beta} = -\Omega_{\beta\alpha}$. 故
+\[ x'^\mu = x^\mu + {\Omega^\mu}_\rho x^\rho + a^\mu. \]
+张量场的变化为
+\[ A'^\alpha\pare{x'} = A^\alpha\pare{x} + {\Omega^\alpha}_\beta A^\beta\pare{x}. \]
+
+% subsubsection 场的变换 (end)
+
+\subsubsection{场的变分} % (fold)
+\label{ssub:场的变分}
+
+\begin{cenum}
+    \item 对于$\delta x^\mu = x'^\mu - x^\mu = {\Omega^\mu}_\rho x^\rho + a^\mu$,
+    \begin{cenum}
+        \item $\partial_\mu \delta x^\mu = 0$.
+        \[ \partial_\mu \delta^\mu = {\Omega^\mu}_\rho \delta^\rho_\mu = \Omega^\mu_\mu  = 0. \]
+        \item $\delta x_\mu = \Omega_{\mu\rho}x^\rho + a_\mu$.
+    \end{cenum}
+    \item 全变分: $\overbar{\delta}A^\alpha = A'^\alpha\pare{x'} - A^\alpha\pare{x} = {\Omega^\alpha}_\beta A^\beta$.
+    \[ \Rightarrow \overbar{\delta} A_\alpha = \Omega_{\alpha\beta}A^\beta = \Omega_{\alpha\beta}g^{\beta\gamma}A_\gamma. \]
+    \item 形式变分: $\delta A_\alpha = A'_\alpha\pare{x} - A_\alpha\pare{x}$. 从而
+    \begin{align*}
+        \delta A_\alpha &= A'_\alpha\pare{x} - A'_\alpha\pare{x'} + A'_\alpha\pare{x'} - A_\alpha\pare{x} \\
+        &= -\delta x^\mu \partial_\mu A'_\alpha\pare{x} + A'_\alpha\pare{x'} - A_\alpha\pare{x} \\
+        &= -\delta x^\mu \partial_\mu A'_\alpha\pare{x} + \overbar{\delta} A_\alpha \\
+        &= -\delta x^\mu \partial_\mu A_\alpha + \Omega_{\alpha\beta}g^{\beta\gamma} A_\gamma.
+    \end{align*}
+\end{cenum}
+
+% subsubsection 场的变分 (end)
+
+\subsubsection{Lagrange密度的变分} % (fold)
+\label{ssub:lagrange密度的变分}
+
+设体系由Lagrange密度决定, $\+sL = \+sL\pare{A,\partial A,x}$, 则
+\begin{align*}
+    \delta \+sL &= \+sL\pare{A'\pare{x'},\partial'A'\pare{x'},x'} - \+sL\pare{A\pare{x},\partial A\pare{x}, x} \\
+    &\phantom{=\,} -\+sL\pare{A'\pare{x},\partial A'\pare{x},x} + \+sL\pare{A'\pare{x},\partial A'\pare{x}, x}. \\
+    \delta L &= \delta x^\nu \partial_\nu \+sL + \+D{A_\alpha}D{\+sL}\delta A_\alpha + \+D{\pare{\partial_\nu A_\alpha}}D{\+sL} \partial_\nu \delta A_\alpha \\
+    &= \partial_\nu \underbrace{\pare{\delta x^\nu \+sL + \Pi^{\nu \alpha}\delta A_\alpha}}_{X^\alpha}. \\
+    X^\nu &= \delta x^\nu \+sL - \delta x^\mu \Pi^{\nu\alpha} \partial_\mu A_\alpha + \Omega_{\alpha\beta} \Pi^{\nu\alpha} g^{\beta\gamma}A_\gamma \\
+    &= \delta x_\mu \pare{g^{\mu\nu}\+sL - \Pi^{\nu\alpha}\partial^\nu A_\alpha} + \Omega_{\alpha\beta} \Pi^{\nu\alpha}g^{\beta\gamma}A_\gamma.
+\end{align*}
+
+% subsubsection lagrange密度的变分 (end)
+
+% subsection noether定理 (end)
+
+% section 特殊相対性理論 (end)
+
+\end{document}

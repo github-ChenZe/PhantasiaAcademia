@@ -1,0 +1,119 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+
+\begin{document}
+
+\newprob{补充题}%
+设$f\pare{x}$在$x_0$处有$r$重根, 则$f\pare{x} = \pare{x-x_0}^r h\pare{x}$,
+\begin{align*}
+    x_{n+1} &= \varphi\pare{x_n} = x_n - r\frac{f\pare{x_n}}{f'\pare{x_n}},\quad \varphi\pare{x} = x - r\frac{f\pare{x}}{f'\pare{x}}, \\
+    \varphi\pare{x} &= x - \frac{\pare{x-x_0}^n h\pare{x}}{n\pare{x-x_0}^{n-1}h\pare{x} + \pare{x-x_0}^n h'\pare{x}} = x_0 + \frac{\pare{x-x_0}^2h\pare{x}}{\pare{x-x_0}h'\pare{x} + rh\pare{x}}.
+\end{align*}
+因此
+\[ \frac{\abs{e_{k+1}}}{\abs{e_k}^2} = \abs{\frac{\varphi\pare{x_k} - {x_0}}{\pare{x_k - x_0}^2}} = \abs{\frac{\varphi\pare{x_k} - \varphi\pare{x_0}}{\pare{x_k - x_0}^2}} = \abs{\frac{O\pare{x_k-x_0}^2}{\pare{x_k-x_0}^2}} = O\pare{1}, \]
+故为二阶收敛.
+
+\newprob{3.2}%
+$\bullet$等效为$2x^3 - 5x^2 - 18x + 42 = x$,
+\[ \left. \+dxd{}\pare{2x^3 - 5x^2 - 18x + 42}\right\vert_{x=3.0} = 6.0 \notin \pare{-1,1}, \]
+故在$x=3.0$附近迭代不收敛.
+\par
+$\bullet$等效为$\displaystyle \rec{5}\pare{2x^2 - 19 + \frac{42}{x}} = x$,
+\[ \left. \+dxd{}\brac{\rec{5}\pare{2x^2 - 19 + \frac{42}{x}}}\right\vert_{x=3.0} = 1.467 \notin \pare{-1,1}, \]
+故在$x=3.0$附近迭代不收敛.
+\par
+$\bullet$等效为$\displaystyle \sqrt[3]{\frac{5x^2 + 19x - 42}{2}} = x$,
+\[ \left. \+dxd{}\pare{\sqrt[3]{\frac{5x^2 + 19x - 42}{2}}}\right\vert_{x=3.0} = 0.8459 \in \pare{-1,1}, \]
+且导数在$x>3$时$\in \pare{-1,1}$, 且$x>3$时$\displaystyle \sqrt[3]{\frac{5x^2 + 19x - 42}{2}} > 3$, 故$x=3.0$附近迭代收敛.
+
+\newprob{3.3}%
+$f\pare{0} = -1$, $f\pare{1} = 1$, 故$\brac{0,1}$上有根.
+\[ \begin{array}{llllll}
+    a & f\pare{a} & b & f\pare{b} & \displaystyle \frac{a+b}{2} & \displaystyle f\pare{\frac{a+b}{2}} \\
+    0 & -1 & 1 & 1 & 0.5 & -0.625 \\
+0.5 & -0.625 & 1 & 1 & 0.75 & -0.015625 \\
+0.75 & -0.015625 & 1 & 1 & 0.875 & 0.43555 \\
+0.75 & -0.015625 & 0.875 & 0.43555 & 0.8125 & 0.19653 \\
+0.75 & -0.015625 & 0.8125 & 0.19653 & 0.78125 & 0.087189 \\
+0.75 & -0.015625 & 0.78125 & 0.087189 & 0.76562 & 0.034977 \\
+0.75 & -0.015625 & 0.76562 & 0.034977 & 0.75781 & 0.0094762 \\
+0.75 & -0.015625 & 0.75781 & 0.0094762 & 0.75391 & -0.0031242 \\
+0.75391 & -0.0031242 & 0.75781 & 0.0094762 & 0.75586 & 0.0031635 \\
+0.75391 & -0.0031242 & 0.75586 & 0.0031635 & 0.75488 & 1.6567\times 10^{-5}
+\end{array} \]
+最终$\displaystyle x^* = \frac{0.75391 + 0.75488}{2} = \boxed{0.75439.}$
+
+\newprob{3.5}%
+$x^n - a = 0 \Rightarrow \displaystyle x_{k+1} = x_k - \frac{x_k^n-a}{nx_k^{n-1}}.$
+\[ 2 \xrightarrow{x-\frac{x^5-9}{5x^4}} 1.7125 \xrightarrow{x-\frac{x^5-9}{5x^4}} 1.57929 \xrightarrow{x-\frac{x^5-9}{5x^4}} 1.55278 \xrightarrow{x-\frac{x^5-9}{5x^4}} \boxed{1.55185.}  \]
+
+\newprob{3.7}%
+记$f\pare{x} = x^3 - 3x - 2$, 则弦截法的迭代式为
+\[ x_{n+1} = \frac{-f\pare{x_n} x_{n-1} + f\pare{x_{n-1}}x_n}{f\pare{x_{n-1}} - f\pare{x_n}}. \]
+从而
+\[ 1 \rightarrow 3 \rightarrow 1.4 \rightarrow 1.68421 \rightarrow 2.23188 \rightarrow 1.94949 \rightarrow 1.99286 \rightarrow 2.00025 \rightarrow \boxed{1.9999988.} \]
+\newprob{3.8}%
+$\displaystyle J = \begin{pmatrix}
+    2x & 2y \\
+    3x^2 & -1
+\end{pmatrix} \Rightarrow J^{-1} = \rec{2x + 6x^2y}\begin{pmatrix}
+    1 & 2y \\
+    3x^2 & -2x
+\end{pmatrix}.$
+\[ \begin{pmatrix}
+    0.8 \\
+    0.6
+\end{pmatrix} \xrightarrow{X=X - J^{-1}F} \begin{pmatrix}
+    0.827049 \\
+    0.563934
+\end{pmatrix} \xrightarrow{X=X - J^{-1}F} \begin{pmatrix}
+    0.826032 \\
+    0.563624
+\end{pmatrix} \xrightarrow{X=X - J^{-1}F} \boxed{\begin{pmatrix}
+    x=0.826031 \\
+    y=0.563624
+\end{pmatrix}.} \]
+
+\end{document}

@@ -1,0 +1,81 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{arrows.meta}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+    \tikzset{
+    partial ellipse/.style args={#1:#2:#3}{
+        insert path={+ (#1:#3) arc (#1:#2:#3)}
+    }}
+
+\begin{document}
+
+\newprob{5.6 (1)}%
+设$x = \alpha s$, $y=\beta t$, 则
+\[ \alpha^2 \+D{x^2}D{^2u} + \beta^2 \+D{y^2}D{^2u} = \delta\pare{x,y} \Rightarrow \+D{s^2}D{^2u} + \+D{t^2}D{^2u} = \frac{\delta\pare{s,t}}{\alpha\beta}, \]
+从而
+\[ u = \rec{4\pi \alpha\beta} \ln \pare{s^2 + t^2} = \boxed{\rec{4\pi \alpha\beta} \ln \brac{\pare{\frac{x}{\alpha}}^2 + \pare{\frac{y}{\beta}}^2}.} \]
+\par
+\newprobheader{(3)}%
+$\displaystyle \laplacian \laplacian u = \delta\pare{x,y,z} \Rightarrow \laplacian u = -\rec{4\pi r}$, 即
+\[ \rec{r^2}\+DrD{}\pare{r^2 \+DrDu} = -\rec{4\pi r} \Rightarrow {r^2 \+DrDu} = -\frac{r^2}{8\pi} \Rightarrow \boxed{u = -\frac{r}{8\pi}.} \]
+\newprob{5.8 (2)}%
+按如图方式构造镜像, 则有Green函数
+\[ G = \boxed{\rec{4\pi} \brac{\rec{\abs{\+vr-\+vr_1}} - \frac{R}{r'} \rec{\abs{\+vr - \+vr_2}} - \rec{\abs{\+vr - \+vr_3}} + \frac{R}{r'}\rec{\abs{\+vr - \+vr_4}}}.} \]
+\begin{center}
+    \incfig{12cm}{SphereImage}
+\end{center}
+\vspace{1em}
+\par
+\newprobheader{(3)}%
+设单位正电荷位于$\pare{x_0,y_0,z_0}$处, 则构造电像后点电荷分布为
+\begin{align*}
+    +1&: \pare{x_0,y_0,z_0 + 2nH}, \quad n = 0, \pm 1, \pm 2, \cdots, \\
+    -1&: \pare{x_0,y_0,-z_0 - 2nH}, \quad n = 0, \pm 1, \pm 2, \cdots.
+\end{align*}
+故
+\[ \hspace{-6.17em} G = \boxed{\rec{4\pi} \sum_{n=-\infty}^{+\infty} \pare{\rec{\sqrt{\pare{x-x_0}^2 + \pare{y-y_0}^2 + \pare{z - z_0 - 2nH}^2}} - \rec{\sqrt{\pare{x-x_0}^2 + \pare{y-y_0}^2 + \pare{z + z_0 - 2nH}^2}} } .} \]
+
+\end{document}

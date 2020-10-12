@@ -1,0 +1,287 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{线性方程组} % (fold)
+\label{sec:线性方程组}
+
+\subsection{消元法} % (fold)
+\label{sub:消元法}
+
+\subsubsection{特殊线性方程组的消元法} % (fold)
+\label{ssub:特殊线性方程组的消元法}
+
+对于对角方程组,
+\[ \begin{pmatrix}
+    a_{11} & & & \\
+    & a_{22} & & \\
+    & & \ddots & \\
+    & & & a_{nn}
+\end{pmatrix} \begin{pmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix} = \begin{pmatrix}
+    b_1 \\ b_2 \\ \vdots \\ b_n
+\end{pmatrix} \Rightarrow x_i = \frac{b_i}{a_{ii}}. \]
+运算量为$O\pare{n}$. 对于下三角方程组
+\[ \begin{pmatrix}
+    l_{11} & & & \\
+    l_{21} & l_{22} & & \\
+    \vdots & \vdots & \ddots \\
+    l_{n1} & l_{n2} & \cdots & l_{nn}
+\end{pmatrix}\begin{pmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix} = \begin{pmatrix}
+    b_1 \\ b_2 \\ \vdots \\ b_n
+\end{pmatrix} \Rightarrow x_j = \frac{b_j - \displaystyle \sum_{i=1}^{j-1} l_{ji}x_i}{l_{jj}},\quad j = 1,\cdots, n. \]
+运算量为$O\pare{n^2}$. 上三角方程组
+\[ \begin{pmatrix}
+    u_{11} & u_{12} & \cdots & u_{1n} \\
+           & u_{22} & \cdots & u_{2n} \\
+     &  & \ddots & \vdots \\
+     & & & u_{nn}
+\end{pmatrix}\begin{pmatrix}
+    x_1 \\ x_2 \\ \vdots \\ x_n
+\end{pmatrix} = \begin{pmatrix}
+    b_1 \\ b_2 \\ \vdots \\ b_n
+\end{pmatrix}, \]
+运算量为$O\pare{n^2}$.
+
+% subsubsection 特殊线性方程组的消元法 (end)
+
+\subsubsection{\texorpdfstring{Gau\ss}{Gauss} 消元法} % (fold)
+\label{ssub:gauss_消元法}
+
+对线性方程组做等价变换得到同解的线性方程组.
+\[ \begin{cases}
+    E_1: a_{11}x_1 + \cdots + a_{1n}x_n = a_{1,n+1}, \\
+    \vdots, \\
+    E_n: a_{n1}x_1 + \cdots + a_{nn}x_n = a_{n,n+1}.
+\end{cases} \]
+\begin{cenum}
+    \item 以非零数$\lambda$乘$E_i$, 记为$\lambda E_i \rightarrow E_i$.
+    \item 将$E_j$的$\mu$倍加到$E_i$上, 记为$\mu E_j + E_i \rightarrow E_i$.
+    \item 将$E_j$和$E_i$互换位置, $E_i \leftrightarrow E_j$.
+\end{cenum}
+按照如下步骤消元:
+\begin{cenum}
+    \item 设$p\in \curb{1,\cdots,n}$为满足$a_{p1}\neq 0$之最小者, $E_p \leftrightarrow E_1$.
+    \item 消去$E_2,\cdots,E_n$中的$x_1$项,
+    \[ m_{i1} = \frac{a_{i1}}{a_{11}},\quad -m_{i1} E_1 + E_i \rightarrow E_i, \quad i = 1,\cdots,n. \]
+    \item 设$p\in \curb{2,\cdots,n}$为满足$a_{p2}\neq 0$之最小者, $E_p \leftrightarrow E_2$.
+    \item 消去$E_3,\cdots,E_n$中的$x_2$项,
+    \[ m_{i2} = \frac{a_{i2}}{a_{22}},\quad -m_{i2} E_2 + E_i \rightarrow E_i,\quad i = 2,\cdots,n. \]
+\end{cenum}
+Gau\ss 消元的复杂度为$O\pare{n^3}$.
+\begin{remark}
+    当$\abs{a_{kk}^{\pare{k}}}$很小, 舍入误差增大.
+\end{remark}
+
+% subsubsection gau\ss_消元法 (end)
+
+\subsubsection{列主元和全主元素消元} % (fold)
+\label{ssub:列主元和全主元素消元}
+
+列主元素消元法在Gau\ss 消元中将$p$的选择条件替换为该列中$\abs{a_{pi}}$最大者. 全主元素消元法在Gau\ss 消元中将$p$的选择条件替换为右下方中绝对值最大者, 且交换列和行.
+
+\paragraph{补充题} % (fold)
+\label{par:补充题}
+
+列主元素消元法/全主元消元法与Gau\ss 消元法运算量是否相等? 差距如何?
+
+% paragraph 补充题 (end)
+
+% subsubsection 列主元和全主元素消元 (end)
+
+\subsubsection{\texorpdfstring{Gau\ss-Jordan}{Gauss-Jordan}消元法} % (fold)
+\label{ssub:gauss_jordan消元法}
+
+在经过Gau\ss 消元法后再将矩阵转化为对角型后求解.
+
+% subsubsection gauss_jordan消元法 (end)
+
+% subsection 消元法 (end)
+
+\subsection{直接分解法} % (fold)
+\label{sub:直接分解法}
+
+\subsubsection{例子} % (fold)
+\label{ssub:例子}
+
+Gauss消元法(不做行对换)对于线性方程组
+\[ AX = b \]
+做LU分解
+\[ A = LU. \]
+这要求$A$的各阶主子式非零.
+
+% subsubsection 例子 (end)
+
+\subsubsection{Doolittle分解} % (fold)
+\label{ssub:doolittle分解}
+
+Doolittle分解在
+\[ A = LU \]
+中要求$L$的对角元为$1$. 此时方程组变为
+\[ \begin{cases}
+    LY = b, \\
+    UX = Y.
+\end{cases} \]
+
+% subsubsection doolittle分解 (end)
+
+\subsubsection{Courant分解} % (fold)
+\label{ssub:courant分解}
+
+Doolittle分解在
+\[ A = LU \]
+中要求$U$的对角元为$1$. 此时方程组变为
+\[ \begin{cases}
+    LY = b, \\
+    UX = Y.
+\end{cases} \]
+\begin{remark}
+    Courant分解要求$l_{kk} \neq 0$, Doolittle分解要求$u_{kk}\neq 0$. 故$A$的各阶主子式非零.
+\end{remark}
+\begin{ex}
+    对于
+    \[ AX=b \leftrightarrow \begin{pmatrix}
+        1 & 2 & 3\\
+        -2 & -1 & -5 \\
+        & -1 & 6
+    \end{pmatrix}\begin{pmatrix}
+        x_1\\x_2\\x_3
+    \end{pmatrix} = \begin{pmatrix}
+        24 \\ -63 \\ 50
+    \end{pmatrix}. \]
+    做Courant列主元分解,
+    \[ A = \begin{pmatrix}
+        l_{11} & & \\
+        l_{21} & l_{22} & \\
+        l_{31} & l_{32} & l_{33}
+    \end{pmatrix} \begin{pmatrix}
+        1 & u_{12} & u_{13} \\
+        & 1 & u_{23} \\
+        & & 1
+    \end{pmatrix}. \]
+    立即有
+    \[ l_{i1} = a_{i1} \Rightarrow l_{11} = 1,\quad l_{21} = -2,\quad l_{31} = 0. \]
+    $E_2 \leftrightarrow E_1$可得
+    \[ A^{\pare{1}} = \begin{pmatrix}
+        -2 & -1 & -5 \\
+        1 & 2 & 1\\
+        & -1 & 6
+    \end{pmatrix},\quad b^{\pare{1}} = \begin{pmatrix}
+        -63 \\ 24 \\ 50
+    \end{pmatrix}. \]
+    可得
+    \[ l_{11} = -2, l_{21} = 1, l_{31} = 0,\quad u_{12} = \frac{a_{12}^{\pare{1}}}{l_{11}} = \half,\quad u_{13} = \frac{a_{13}^{\pare{1}}}{l_{11}} = \frac{5}{2}. \]
+    可类似求得剩下的$l$和$u$.
+\end{ex}
+
+% subsubsection courant分解 (end)
+
+\subsubsection{追赶法} % (fold)
+\label{ssub:追赶法}
+
+追赶法主要用于$m$对角阵的分解(例如Jordan块为$2$对角阵). $3$对角阵的Courant分解如
+\[ \begin{pmatrix}
+    a_1 & b_1 & & & \\
+    c_2 & a_2 & b_2 & & \\
+    & \ddots & \ddots & \ddots & \\
+    & & c_{n-1} & a_{n-1} & b_{n-1} \\
+    & & & c_n a_n
+\end{pmatrix} = \begin{pmatrix}
+    u_1 & & & \\
+    w_2 & u_2 & & \\
+    & \ddots & \ddots & \\
+    & & w_n & u_n
+\end{pmatrix} \begin{pmatrix}
+    1 & v_1 & & \\
+    & 1 & \ddots & \\
+    & & \ddots & v_{n-1} \\
+    & & & 1
+\end{pmatrix}. \]
+可得
+\[ \begin{cases}
+    u_k = a_k - c_k v_{k-1},\\
+    v_k = b_k / u_k,
+\end{cases}\quad k = 1,2,\cdots,n. \]
+
+% subsubsection 追赶法 (end)
+
+\subsubsection{对称正定矩阵的分解} % (fold)
+\label{ssub:对称正定矩阵的分解}
+
+对称正定矩阵总可以分解为$LDL^T$的形式, 其中$D$为对角矩阵. 可具有形式
+\begin{align*}
+    A &= \begin{pmatrix}
+        1 & & & \\
+        l_{21} & 1 & & \\
+        \vdots & \vdots & \ddots \\
+        l_{n1} & l_{n2} & \cdots & 1
+    \end{pmatrix}\begin{pmatrix}
+        u_{11} & u_{12} & \cdots & u_{1n} \\
+        & u_{22} & \cdots & u_{2n} \\
+        & & \ddots & \vdots \\
+        & & & u_{nn}
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        1 & & & \\
+        l_{21} & 1 & & \\
+        \vdots & \vdots & \ddots \\
+        l_{n1} & l_{n2} & \cdots & 1
+    \end{pmatrix}\begin{pmatrix}
+        u_{11} & & &  \\
+        & u_{22} & &  \\
+        & & \ddots &  \\
+        & & & u_{nn}
+    \end{pmatrix}\begin{pmatrix}
+        1 & u_{12} & \cdots & u_{1n} \\
+        & 1 & \cdots & u_{2n} \\
+        & & \ddots & \vdots \\
+        & & & 1
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        1 & & & \\
+        l_{21} & 1 & & \\
+        \vdots & \vdots & \ddots \\
+        l_{n1} & l_{n2} & \cdots & 1
+    \end{pmatrix}\begin{pmatrix}
+        d_{1} & & &  \\
+        & d_{2} & &  \\
+        & & \ddots &  \\
+        & & & d_{n}
+    \end{pmatrix}\begin{pmatrix}
+        1 & l_{12} & \cdots & l_{1n} \\
+        & 1 & \cdots & l_{2n} \\
+        & & \ddots & \vdots \\
+        & & & 1
+    \end{pmatrix} \\
+    &= \begin{pmatrix}
+        1 & & & \\
+        l_{21} & 1 & & \\
+        \vdots & \vdots & \ddots \\
+        l_{n1} & l_{n2} & \cdots & 1
+    \end{pmatrix}\begin{pmatrix}
+        d_1 & d_1 l_{12} & \cdots & d_1 l_{1n} \\
+        & d_2 & \cdots & d_2 l_{2n} \\
+        & & \ddots & \vdots \\
+        & & & d_n
+    \end{pmatrix}.
+\end{align*}
+
+% subsubsection 对称正定矩阵的分解 (end)
+
+% subsection 直接分解法 (end)
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+参考书1 p.94-95 1(1), 5(1), 6(1), 7(1), 8(1), 以及补充题.
+
+% paragraph 作业 (end)
+
+% section 线性方程组 (end)
+
+\end{document}

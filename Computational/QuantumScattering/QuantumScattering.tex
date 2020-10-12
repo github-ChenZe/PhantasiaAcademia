@@ -1,0 +1,144 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Computational\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\begin{document}
+\section{Quantum Scattering} % (fold)
+\label{sec:quantum_scattering}
+
+\subsection{Schr\"odinger Equation} % (fold)
+\label{sub:schrodinger_equation}
+
+A scattering process with a spherically symmtric potential is described by the single-particle Schr\"odinger Equation
+\[ \brac{-\frac{\hbar^2}{2m}\laplacian + V\pare{r}} \psi\pare{\+vr} = E\psi\pare{\+vr}, \]
+which has the solution
+\[ \psi\pare{\+vr} = \sum_{l=0}^\infty \sum_{m=-l}^l A_{lm}\frac{u_l\pare{r}}{r}Y_m^l\pare{\theta,\varphi}, \]
+where $u_j$ satisfies
+\[ \curb{\frac{\hbar^2}{2m}\+d{r^2}d{^2} + \brac{E - V\pare{r} - \frac{\hbar^2 l\pare{l+1}}{2mr^2}}}u_l\pare{r} = 0. \]
+For a spherical well potential, the above equation has the solution
+\[ u_l\pare{r>r\+_max_} \propto kr\brac{\pare{\cos\delta_l j_l}j_l\pare{kr} -\pare{\sin\delta_l n_l}n_l\pare{kr}} \approx \sin\pare{kr - \frac{l\pi}{2} + \delta_l},\quad k = \frac{\sqrt{2mE}}{\hbar}. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Cross Section via Phase Shift}
+    \vspace{-\baselineskip}
+    \begin{align*}
+        \+d\Omega d\sigma &= \rec{k^2}\abs{\sum_{l=0}^\infty \pare{2l+1}e^{i\delta_l}\sin\pare{\delta_l}P_l\pare{\cos\theta}}^2, \quad \sigma\+_tot_ = \frac{4\pi}{k^2} \sum_{l=0}^\infty \pare{2l+1}\sin^2\delta_l.
+    \end{align*}
+\end{finaleq}
+To determine the phase shift, the Schr\"odinger Equation should firstly be integrated from $r=0$ outwards with boundary condition $u_l\pare{r=0} = 0$. At $r\+_max_$, the numerical solution must be match on both sides, we therefore pick two different point $r_1$ and $r_2$ beyond $r\+_max_$ and the phase shift is now given by
+\begin{equation}
+    \label{eq:radial_schrodinger_match}
+    \tan \delta_l = \frac{Kj_l^{\pare{1}} - j_l^{\pare{2}}}{Kn_l^{\pare{1}} - n_l^{\pare{2}}},\quad K = \frac{r_1 u_l^{\pare{2}}}{r_2 u_l^{\pare{1}}},
+\end{equation}
+where $j_l^{\pare{1}}$ stands for $j_l\pare{kr_1}$, etc.
+
+% subsection schrodinger_equation (end)
+
+\subsection{Programming} % (fold)
+\label{sub:programming}
+
+\subsubsection{Numerov's Algorithm} % (fold)
+\label{ssub:numerov_s_algorithm}
+
+Rewrite the single-particle Schr\"odinger equation as
+\[ \frac{\hbar^2}{2m}\+d{r^2}d{^2}u\pare{r} = F\pare{l,r,E}u\pare{r},\quad F\pare{l,r,E} = V\pare{r} + \frac{\hbar^2 l\pare{l+1}}{2mr^2} - E. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Numerov's Algorithm}
+    For $\hbar^2/2m = 1$ Numerov's algorithm reads
+    \[ w\pare{r+h} = 2w\pare{r} - w\pare{r-h} + h^2 F\pare{l,r,E}u\pare{r}, \]
+    and
+    \[ u\pare{r} = \brac{1-\frac{h^2}{12}F\pare{l,r,E}}^{-1}w\pare{r}. \]
+\end{finaleq}
+\par
+The $r_1$ in \eqref{eq:radial_schrodinger_match} may be taken as the first integration point beyond $r\+_max_$, and $r_2$ be larger than $r_1$, roughly half a wavelength beyond the latter, where $\lambda = 2\pi\hbar/\sqrt{2mE}$.
+\par
+We start from $u_l\pare{r=0} = 0$, but the derivative is yet unknown and is determined later by normalisation. We may take $u_l\pare{h} = h^{l+1}$.
+
+% subsubsection numerov_s_algorithm (end)
+
+\subsubsection{H-Kr Scattering} % (fold)
+\label{ssub:h_kr_scattering}
+
+For a hydrogen atom scattered by a krypton atom, the interaction potential is given by the Lennard-Jonnes potantial
+\[ V\+_LJ_ = \epsilon\brac{\pare{\frac{\rho}{r}}^{12} - 2\pare{\frac{\rho}{r}}^6}. \]
+The potential is highly singular near the origin and therefore requires a nonzero $r\+_min_$, below which the Schr\"odinger equation is approximately
+\[ \+d{r^2}d{^2u} = \epsilon \alpha \rec{r^{12}}u\pare{r} \Longrightarrow u\pare{r} = \exp\pare{-Cr^{-5}}. \]
+The approximation is justified as long as $r$ stays small and the $r^{-12}$ term in the potential dominates.
+
+% subsubsection h_kr_scattering (end)
+
+\subsubsection{Obtaining the Results} % (fold)
+\label{ssub:obtaining_the_results}
+
+The $r\+_max_$ should be chosen carefully such that the error remains $O\pare{h^6}$. The deviation in the phase shift caused by cutting off the potential $r\+_max_$ is given by
+\[ \Delta \delta_l = -\frac{2m}{\hbar^2}k \int_{r\+_max_}^\infty j_l^2\pare{kr}V\+_LJ_\pare{r}r^2\,\rd{r}. \]
+
+% subsubsection obtaining_the_results (end)
+
+% subsection programming (end)
+
+% section quantum_scattering (end)
+\end{document}

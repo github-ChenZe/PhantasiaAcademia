@@ -6,8 +6,107 @@
 
 \showtitle{Shell技巧}
 
+\section{通用} % (fold)
+\label{sec:通用}
+
+\href{https://www.redhat.com/sysadmin/stupid-bash-tricks}{Bash tricks}
+\href{https://www.redhat.com/sysadmin/more-stupid-bash-tricks}{More Bash Tricks}
+\href{https://www.howtogeek.com/439199/15-special-characters-you-need-to-know-for-bash/amp/}{Bash special characters}
+\href{https://devhints.io/bash}{Bash cheatsheet}
+
+
+\subsection{语法} % (fold)
+\label{sub:语法}
+
+\subsubsection{不记录} % (fold)
+\label{ssub:不记录}
+
+\begin{shlst}
+unset HISTFILE && exit
+# or
+kill -9 $$ # $$ stands for the pid of the current shell
+\end{shlst}
+The above code should be executed before the shell exits normally.
+
+% subsubsection 不记录 (end)
+
+\subsubsection{历史选择} % (fold)
+\label{ssub:历史选择}
+
+\begin{shlst}
+history 3
+# 1002 ls
+# 1003 tail audit.log
+# 1004 history 3
+!1003
+# tail audit.log
+\end{shlst}
+
+% subsubsection 历史选择 (end)
+
+\subsubsection{历史替换} % (fold)
+\label{ssub:历史替换}
+
+\begin{shlst}
+sudo systemctl status sshd
+!!:s/status/start # sudo systemctl start sshd
+\end{shlst}
+In the above example, \texttt{!!} repreats the last command from history, and \texttt{:s/status/start/} substitute \texttt{status} with \texttt{start}.
+
+% subsubsection 历史替换 (end)
+
+\subsubsection{上一参数} % (fold)
+\label{ssub:上一参数}
+
+\begin{shlst}
+ls /home/username/
+# files
+cd $_
+\end{shlst}
+The \texttt{\$\_} in the above code stands for the last argument of the previous command.
+
+% subsubsection 上一参数 (end)
+
+% subsection 语法 (end)
+
+% section 通用 (end)
+
 \section{文件管理} % (fold)
 \label{sec:文件管理}
+
+\subsection{文件夹} % (fold)
+\label{sub:文件夹}
+
+\subsubsection{批量创建} % (fold)
+\label{ssub:批量创建}
+
+\begin{shlst}
+mkdir -v dir_{rmp,txt,zip,pdf}
+\end{shlst}
+
+% subsubsection 批量创建 (end)
+
+\subsubsection{复制} % (fold)
+\label{ssub:复制}
+
+\begin{shlst}
+cp /etc/long/path/to/dir/file{,.back}
+# cp /etc/long/path/to/dir/file /etc/long/path/to/dir/file.back
+\end{shlst}
+
+% subsubsection 复制 (end)
+
+\subsubsection{移动} % (fold)
+\label{ssub:移动}
+
+\begin{shlst}
+mv -- *.rpm dir_rpm
+\end{shlst}
+In the above example, the double dash characters \texttt{--} mean ``end of options'', which is to prevent files that begin begin with a dash from being treated as arguments.
+
+% subsubsection 移动 (end)
+
+% subsection 文件夹 (end)
 
 \subsection{文件结构} % (fold)
 \label{sub:文件结构}
@@ -46,7 +145,55 @@ rename 's/prefix([0-9])/file_$1' prefix*
 
 % subsubsection 重命名 (end)
 
+\subsubsection{测试类型} % (fold)
+\label{ssub:测试类型}
+
+\begin{shlst}
+[[ -L /path/to/file ]] && echo "File is a symlink."
+\end{shlst}
+
+% subsubsection 测试类型 (end)
+
 % subsection 文件结构 (end)
+
+\subsection{压缩} % (fold)
+\label{sub:压缩}
+
+\subsubsection{压缩} % (fold)
+\label{ssub:压缩}
+
+See \href{https://www.howtogeek.com/248780/how-to-compress-and-extract-files-using-the-tar-command-on-linux/}{here}.
+
+\begin{shcommand}{tar}
+\ttfamily
+\begin{tabular}{@{$\bullet\quad$}ll}
+   -x & extract to disk from the archive \\
+   -c & create an archive \\
+   -z & compress the archive with gzip \\
+   -j & compress the archive with bzip \\
+   -v & display progress in the terminal \\
+   -f & allows you to specify the filename of the archive
+\end{tabular}
+\end{shcommand}
+\begin{shlst}
+tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
+tar -xzvf archive.tar.gz -C /tmp
+\end{shlst}
+
+% subsubsection 压缩 (end)
+
+\subsubsection{批量} % (fold)
+\label{ssub:批量}
+
+\begin{shlst}
+for f in ./*.gz;
+do tar zxvf "$f";
+done
+\end{shlst}
+
+% subsubsection 批量 (end)
+
+% subsection 压缩 (end)
 
 % section 文件管理 (end)
 
@@ -146,6 +293,21 @@ source ~/.bashrc
 % subsubsection apt (end)
 
 % subsection 包安装 (end)
+
+\subsection{加密} % (fold)
+\label{sub:加密}
+
+\subsubsection{随机串} % (fold)
+\label{ssub:随机串}
+
+\begin{shlst}
+openssl rand -base64 12
+# zw03I1n6MZ4FHn6g
+\end{shlst}
+
+% subsubsection 随机串 (end)
+
+% subsection 加密 (end)
 
 % section 系统 (end)
 

@@ -1,0 +1,1027 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Geometry\ in\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage{slashed}
+\usepackage{tensor}
+
+\begin{document}
+
+\section{Quantum Physics} % (fold)
+\label{sec:quantum_physics}
+
+\subsection{Analytical Mechanics} % (fold)
+\label{sub:analytical_mechanics}
+
+\subsubsection{Lagranian Formalism} % (fold)
+\label{ssub:lagranian_formalism}
+
+\begin{termdef}{Configuration Space}
+    The manifold $M$ which consists of the $N$ parameters $\curb{q_i}$ describing the state of a system.
+\end{termdef}
+The parameters $\curb{q_i}$ are called \gloss{generalized coordinates}. The \gloss[2\baselineskip]{generalized velocity} is defined by $\dot{q}_i = \rd{q_i}/\rd{t}$. The \gloss[2\baselineskip]{generalized momentum} is $\displaystyle p_k = \+D{\dot{q}_k}DL$.
+\begin{termdef}[4\baselineskip]{Action}
+    The functional
+    \[ S\brac{q\pare{t},\dot{q}\pare{t}} = \int_{t_i}^{t_f} L\pare{q,\dot{q}}\,\rd{t}. \]
+\end{termdef}
+\begin{termdef}{Functional Derivative}\vspace{-\baselineskip}
+    \[ \frac{\delta S\brac{q,\dot{q}}}{\delta q\pare{s}} = \lim_{\epsilon \rightarrow 0} \frac{\displaystyle \curb{S\brac{q\pare{t} + \epsilon \delta\pare{t-s}, \dot{q}\pare{t} + \epsilon \+dtd{} \delta\pare{t-s}}} - S\brac{q\pare{t},\dot{q}\pare{t}}}{\epsilon}. \]
+\end{termdef}
+\begin{finaleq}{Hamilton's Principle, Principle of the Least Action}
+    The physically realized trajectory corresponds to an extremum of the action.
+\end{finaleq}
+\begin{finaleq}{Euler-Lagrange Equation}
+    \centerline{$\displaystyle \frac{\delta S}{\delta q\pare{s}}\+DqDL - \+dtd{}\+D{\dot{q}}DL = 0,$\quad i.e.\quad $\displaystyle \+dtd{p_k} = \+D{q_k}DL.$}
+\end{finaleq}
+\begin{termdef}{Cylic}
+    A coordinate is called cylic if $\displaystyle \+D{q_k}DL = 0$.
+\end{termdef}
+The momentum conjugate to a cylic coordinate is conserved.
+More generally, if $S$ in invariant under $q_k\pare{t} \rightarrow q_k\pare{t} + \delta q_k\pare{t}$, the quantity $\displaystyle \sum_k \delta q_k\pare{t}p_k\pare{t}$ is independent of $t$.
+
+% subsubsection lagranian_formalism (end)
+
+\subsubsection{Hamiltonian Formalism} % (fold)
+\label{ssub:hamiltonian_formalism}
+
+\begin{termdef}{Hamiltonian}
+    \[ H\pare{q,p} = \sum_k p_k \dot{q}_k - L\pare{q,\dot{q}}. \]
+\end{termdef}
+The space with coordinates $\pare{q_k, p_k}$ is called the \gloss{phase space}.
+\begin{finaleq}{\\Hamilton's Equations of Motion}
+    \centerline{$\displaystyle \dot{q}_k = \+D{p_k}DH,\quad \dot{p}_k = -\+D{q_k}DH.$}
+\end{finaleq}
+\begin{termdef}{Poisson Bracket}
+    \[ \brac{A,B} = \sum_k \pare{\+D{q_k}DA \+D{p_k}DB - \+D{p_k}DA\+D{q_k}DB}. \]
+\end{termdef}
+The poisson bracket is a \gloss{Lie bracket}, i.e.
+\begin{align*}
+    \brac{A,c_1B_1 + c_2B_2} &= c_1\brac{A,B_1} + c_2\brac{A,B_2}, \\
+    \brac{A,B} &= -\brac{B,A}, \\
+    \brac{\brac{A,B},C} + \brac{\brac{C,A},B} + \brac{\brac{B,C},A} &= 0.
+\end{align*}
+The time development of physical quantity $A\pare{q,p}$ is expressed in terms of Poisson bracket as
+\[ \+dtdA = \brac{A,H}. \]
+\begin{finaleq}{Noether's Theorem}
+    If $H\pare{q_k,p_k}$ is invariant under an infinitesimal coordinate transformation $q_k \mapsto q'_k = q_k + \epsilon f_k\pare{q}$, then
+    \[ Q = \sum_k p_k f_k\pare{q} \]
+    is conserved.
+\end{finaleq}
+The conserved quantity $Q$ is the generator of the transformation, i.e.
+\[ \brac{q_i,Q} = f_i\pare{q} \Rightarrow \delta q_i = \epsilon\brac{q_i,Q}. \]
+
+% subsubsection hamiltonian_formalism (end)
+
+% subsection analytical_mechanics (end)
+
+\subsection{Canonical Quantization} % (fold)
+\label{sub:canonical_quantization}
+
+\subsubsection{Bracket Notation and Axioms} % (fold)
+\label{ssub:bracket_notation_and_axioms}
+
+\begin{termdef}{Ket, Ket Vector}
+    An element in a complex Hilbert space $\+cH = \curb{\ket{\phi}, \ket{\psi}, \cdots}$.
+\end{termdef}
+\begin{termdef}{Dual Vector Space}
+    The set of linear functions $\func{\alpha}{\+cH}{\+bC}$, denoted by $\+cH^*$.
+\end{termdef}
+\begin{termdef}{Bra, Bra Vector}
+    An element of $\+cH^*$.
+\end{termdef}
+The \gloss{dual basis} of $\curb{\ket{e_k}}$ is defined by
+\[ \bra{\varepsilon_i}\ket{e_j} = \delta_{ij}. \]
+Under the expansion
+\[ \ket{\psi} = \sum_k \psi_k \ket{e_k},\quad \bra{\phi} = \sum_k \phi_k^* \bra{\varepsilon_k}, \]
+the \gloss{inner product} is
+\[ \bra{\phi}\ket{\psi} = \sum_k \phi_k^* \psi_k. \]
+The \gloss{norm} is defined by
+\[ \norm{\ket{\psi}} = \sqrt{\braket{\psi}{\psi}}, \]
+where
+\[ \bra{\psi} = \sum_k \psi_k^* \bra{\varepsilon_k}. \]
+\begin{finaleq}{Completeness Relation}
+    If $\ket{e_k}$ is an orthonormal basis, then
+    \[ \sum_k \bra{e_k}\ket{e_k} = \mathbbm{1}. \]
+\end{finaleq}
+The axioms of canonical quantization are listed below.
+\begin{cenum}
+    \item The \gloss[-\baselineskip]{state} or \gloss{state vector} is a vector $\ket{\psi}\in \+cH$. Moreover, for any $c\in \+bC\backslash\curb{0}$, $\ket{\psi}$ and $c\ket{\psi}$ describe the same state. The state is a \gloss{ray representation} of $\+cH$.
+    \item An \gloss{observable} is a Hermitian operator $\hat{A}$ acting on $\+cH$.
+    \item The Poisson bracket is replaced by \gloss{commutator}
+    \[ \brac{\hat{A},\hat{B}} = \rec{i}\pare{\hat{A}\hat{B} - \hat{B}\hat{A}}. \]
+    \item The expectation value of the result of an observation of $A$ is
+    \[ \expc{A}_t = \frac{\expval{\hat{A}\pare{t}}{\psi}}{\bra{\psi}\ket{\psi}}. \]
+    \item For any $\ket{\psi} \in \+cH$, there exists an operator for which $\ket{\psi}$ is one of the eigenstates.
+\end{cenum}
+
+% subsubsection bracket_notation_and_axioms (end)
+
+\subsubsection{Quantum Dynamics} % (fold)
+\label{ssub:quantum_dynamics}
+
+\begin{finaleq}{Heisenberg's Equation of Motion}
+    \centerline{$\displaystyle \+dtd{\hat{A}} = \rec{i}\brac{\hat{A},\hat{H}}.$}
+\end{finaleq}
+The probability of $\ket{\psi}$ being in $\ket{n}$ is
+\[ \abs{\psi_n}^2 = \abs{\bra{n}\ket{\psi}}^2. \]
+$\braket{n}{\psi}$ is called the \gloss{probability amplitude}.
+If $\hat{A}$ has a continuous spectrum $a$, the state $\ket{\psi}$ is expanded as
+\[ \ket{\psi} = \int \rd{a}\,\psi\pare{a}\ket{a}. \]
+The completeness relation is now
+\[ \int \rd{a}\,\ket{a}\bra{a} = \mathbbm{1}, \]
+ans the normalization is
+\[ \bra{a'}\ket{a} = \delta\pare{a'-a}, \]
+where $\delta$ is the \textbf{Dirac $\delta$-function}\jgloss{Dirac $\delta$-Function}.
+\begin{termdef}[\baselineskip]{Heisenberg Picture}
+    Operators depend on $t$ while states do not.
+\end{termdef}
+In this formalism,
+\[ \hat{A}\pare{t} = \hat{U}^\dagger\pare{t}\hat{A}\pare{0}\hat{U}\pare{t}, \]
+where
+\[ \hat{U}\pare{t} = e^{-i\hat{H}t}. \]
+\begin{termdef}{Schr\"odinger Picture}
+    The states depend on $t$ while operators do not.
+\end{termdef}
+The evolution of the state vector is described by \gloss{Schr\"odinger equation}
+\[ i\+dtd{}\ket{\psi\pare{t}}_S = \hat{H}\ket{\psi\pare{t}}_S. \]
+$\psi\pare{x} = \bra{x}\ket{\psi}$ is called the \gloss{wavefunction}.
+\begin{lemma}
+    $\hat{U}\pare{a} = e^{-ia\hat p}$ satisfies
+    \[ \hat{U}\pare{a}\ket{x} = \ket{x+a}. \]
+\end{lemma}
+The action of operators on wavefunctions are
+\begin{align*}
+    \bra{x}\hat{x}\ket{\psi} &= x\bra{x}\ket{\psi} = x\psi\pare{x}, \\
+    \bra{x}\hat{p}\ket{\psi} &= -i\+dxd{}\bra{x}\ket{\psi} = -i\+dxd{}\psi\pare{x}.
+\end{align*}
+The latter equation is obtained noting that\begin{marginwarns}
+    The $\mathrm{d}/\mathrm{d}x$ here is the difference between two eigenstates.
+\end{marginwarns}
+\[ \hat{U}\pare{\epsilon}\ket{x} = \ket{x+\epsilon} \sim \pare{1-i\epsilon \hat{p}}\ket{x} \Rightarrow \hat{p}\ket{x} = i\+dxd{}\ket{x}. \]
+\begin{proposition}
+    $\displaystyle \braket{x}{p} = \rec{\sqrt{2\pi}}e^{ipx}$,\quad $\displaystyle \braket{p}{x} = \rec{\sqrt{2\pi}}e^{-ipx}$.
+\end{proposition}
+\begin{finaleq}{Time-Dependent Schr\"odinger Equation}
+    For a Hamiltonian of the type $\displaystyle \hat H = \frac{\hat p^2}{2m} + V\pare{\hat{x}}$,
+    \[ i\+dtd{}\psi\pare{x,t} = -\rec{2m}\+d{x^2}d{^2}\psi\pare{x,t}+V\pare{x}\psi\pare{x,t}. \]
+\end{finaleq}
+With separation of variables, one obtains the \gloss[-2\baselineskip]{time-independent Schr\"odinger equation}, i.e. the \gloss[0\baselineskip]{stationary state Schr\"odinger equation}, or the \gloss[3\baselineskip]{Schr\"odinger equation}
+\[ -\rec{2m}\laplacian \phi\pare{\+vx} + V\pare{\+vx}\phi\pare{\+vx} = E\phi\pare{\+vx}. \]
+\begin{sample}
+    \begin{example}
+        For a harmonic oscillator $\displaystyle \hat H = \frac{\hat p^2}{2m} + \half m\omega^2 \hat{x}^2$, with $\xi = \sqrt{m\omega}x$, $\varepsilon = E/\hbar\omega$, one arrives at
+        \[ \psi'' + \pare{\varepsilon - \xi^2}\psi = 0, \]
+        and $\displaystyle E = E_n = \pare{n+\half}\omega$,
+        \[ \psi\pare{\xi} = \sqrt{\frac{m\omega}{2^n n! \sqrt{\pi}}} H_n\pare{\xi}e^{-\xi^2/2}, \]
+        where
+        \[ H_n\pare{\xi} = \pare{-1}^n e^{\xi^2/2}\+d{\xi^n}d{^n}e^{-\xi^2/2}. \]
+    \end{example}
+\end{sample}
+With the \gloss{annihilation operator} $\hat a$ and the \gloss[2\baselineskip]{creation operator} $\hat a^\dagger$ defined by
+\[ \hat a = \sqrt{\frac{m\omega}{2}}\hat x + i\sqrt{\rec{2m\omega}}\hat p,\quad \hat a^\dagger = \sqrt{\frac{m\omega}{2}}\hat x - i\sqrt{\rec{2m\omega}}\hat p, \]
+and the number operator by
+\[ \hat N = \hat a^\dagger \hat a, \]
+one obtains
+\[ \hat N\hat a\ket{n} = \pare{n-1}\hat a\ket{n},\quad \hat N\hat a^\dagger\ket{n} = \pare{n+1}\hat a\dagger\ket{n}. \]
+Since $n = \bra{n}\hat N\ket{n} \ge 0$ and the equiality holds if and only if $\hat a\ket{n} = 0$, $n$ must be a non-negative integer. With $\displaystyle \hat H = \pare{\hat N+\half}\omega$, one finds $\displaystyle E = \pare{n+\half}\omega$.
+
+% subsubsection quantum_dynamics (end)
+
+% subsection canonical_quantization (end)
+
+\subsection{Path Integral Quantization of a Bose Particle} % (fold)
+\label{sub:path_integral_quantization_of_a_bose_particle}
+
+\subsubsection{Path Integral Quantization} % (fold)
+\label{ssub:path_integral_quantization}
+
+Let $\ket{x_i,t_i}$ and $\ket{x_f,t_f}$ denote the eigenvector of position in Heisenberg picture, respectively, i.e.
+\[ \hat x\pare{t_i}\ket{x_i,t_i} = x_i\ket{x_i,t_i},\quad \hat x\pare{t_f}\ket{x_f,t_f} = x_f\ket{x_f,t_f}, \]
+with which we define the transition amplitude.
+\begin{termdef}{Transition Amplitude}
+    The probability amplitude $\bra{x_f,t_f}\ket{x_i,t_i}$.
+\end{termdef}
+Writing in terms of the Schr\"odinger picture,\begin{margintips}
+    $\begin{array}{@{}l}
+        \displaystyle \int_{-\infty}^\infty e^{-iap^2}\,\rd{p}\\
+        \displaystyle  = \sqrt{\frac{\pi}{ia}}.
+    \end{array}$
+\end{margintips}
+\[ \ket{x_i,t_i} = e^{i\hat H t_i}\ket{x_i},\quad \ket{x_f,t_f} = e^{i\hat H t_f}\ket{x_f}, \]
+we found
+\[ \bra{x_f,t_f}\ket{x_i,t_i} = \bra{x_f}e^{-i\hat H\pare{t_f - t_i}}\ket{x_i} = h\pare{x_f,x_i;i\pare{t_f - t_i}}, \]
+where the function
+\[ h\pare{x,y;\beta} = \bra{x}e^{-\hat H\beta}\ket{y} \]
+is called the \gloss[-\baselineskip]{heat kernel} of $\hat H$.\begin{margintips}[2\baselineskip]
+    $\begin{array}{@{}l}
+        \bra{x}A\pare{\hat x,\hat p}\ket{p}\\
+        = A\pare{\hat x,-i\partial_x}\bra{x}\ket{p}.
+    \end{array}$
+\end{margintips}
+\begin{finaleq}{Infinitesimal Transition Amplitude}
+    \begin{proposition}
+        For $\displaystyle \hat H = \frac{\hat p^2}{2m} + V\pare{\hat x}$ and $\epsilon$ an infinitesimal positive number,
+        \begin{align*}
+            \bra{x}e^{-i\hat H\epsilon}\ket{y} &= \rec{\sqrt{2\pi i\epsilon}}\exp\brac{i\epsilon\curb{\frac{m}{2} \pare{\frac{{x-y}}{\epsilon}}^2 - V\pare{\frac{x+y}{2}}} + O\pare{\epsilon^2} + O\pare{\epsilon\pare{x-y}^2}}.
+        \end{align*}
+    \end{proposition}
+\end{finaleq}
+\marginnote[-\baselineskip]{\inlinehardlink{cf. \S 2.6, Sakurai.}}
+The prescription that the average value $\pare{x+y}/2$ is taken as the variable of $V$ is called the \gloss{Weyl ordering}.
+\par
+The transition amplitude for a finite time interval is
+\begin{align*}
+    \bra{x_f,t_f}\ket{x_i,t_i} &= \bra{x_f,t_f} \int \rd{x_{n-1}}\,\ket{x_{n-1},t_{n-1}}\bra{x_{n-1},t_{n-1}} \\
+    &\phantom{=\ }\times \int \rd{x}_{n-2}\,\ket{x_{n-2},t_{n-2}}\cdots \int \rd{x_1}\,\ket{x_1,t_1}\bra{x_1,t_1}\ket{x_0,t_0} \\
+    &= \lim_{n\rightarrow \infty}\pare{\frac{m}{2\pi i\epsilon}}^{n/2} \int \prod_{j=1}^{n-1}\rd{x_j}\, \exp\pare{i\sum_{k=1}^n \Delta S_k},
+\end{align*}
+where
+\[ \Delta S_k = \epsilon\brac{\frac{m}{2}\pare{\frac{x_k-x_{k-1}}{\epsilon}}^2 - V\pare{\frac{x_{k-1}+x_k}{2}}}, \]
+which may be written symbolically as
+\begin{align*}
+    \bra{x_f,t_f}\ket{x_i,t_i} &= \int \+cDx\,\exp\brac{i\int_{t_i}^{t_f}\rd{t}\,\pare{\frac{m}{2}v^2 - V\pare{x}}} \\
+    &= \int \+cDx\,\exp\brac{i\int_{t_i}^{t_f}\rd{t}\,L\pare{x,\dot{x}}},
+\end{align*}
+where $\displaystyle \int \+cDx$ represents summation over all paths $x\pare{t}$ with $x\pare{t_i} = x_i$ and $x\pare{t_f} = x_f$.
+\begin{sample}
+    \begin{example}
+        The propagator of a free particle is obtained via
+        \begin{align*}
+            \bra{x_f,t_f}\ket{x_i,t_i} &= \lim_{n\rightarrow \infty}\pare{\frac{m}{2\pi i\epsilon}}^{n/2}\int \rd{x_1}\,\cdots\,rd{x_{n-1}} \\
+            &\phantom{=}\ \exp\brac{i\epsilon \sum_{k=1}^n \frac{m}{2}\pare{\frac{x_k - x_{k-1}}{\epsilon}}^2} \\
+            &= \sqrt{\frac{m}{2\pi iT}}\exp\brac{\frac{im\pare{x_f - x_i}^2}{2T}},
+        \end{align*}
+        where $\epsilon = T/n$ and $T = t_f - t_i$.
+    \end{example}
+\end{sample}
+
+% subsubsection path_integral_quantization (end)
+
+\subsubsection{Imaginary Time and Partition Function} % (fold)
+\label{ssub:imaginary_time_and_partition_function}
+
+The \gloss{Wick rotation} is the replacement
+\[ t = -i\tau,\quad \tau\in\+bR_+, \]
+with which the path integral is expressed as
+\begin{align*}
+    \bra{x_f,\tau_f}\ket{x_i,\tau_i} &= \bra{x_f}e^{-\hat H\pare{\tau_f - \tau_i}}\ket{x_i} \\
+    &= \int \conj{\+cD}x\,\exp\brac{-\int_{\tau_i}^{\tau_f} \rd{\tau}\, \brac{\half m\pare{\+d\tau dx}^2 + V\pare{x}}}.
+\end{align*}
+\begin{termdef}{Partition Function}
+    The {partition function} for a given Hamiltonian $\hat H$ is defined by
+    \[ Z\pare{\beta} = \trace e^{-\beta \hat H} = \sum_n e^{-\beta E_n}, \]
+\end{termdef}
+which may also be written as
+\[ Z\pare{\beta} = \int \rd{x}\,\bra{x}e^{-\beta\hat H}\ket{x}. \]
+Putting $\beta = iT$, we find
+\begin{align}
+    Z\pare{\beta} &= \int \rd{y}\int_{x\pare{0} = x\pare{\beta} = y}\conj{\+cD}x\,\exp\curb{-\int_0^\beta \rd{\tau}\,\pare{\half m\dot{x}^2 + V\pare{x}}}. \notag
+\end{align}\vspace{-\baselineskip}
+\begin{finaleq}{Partition Funtion via Path Integral}
+    \begin{equation}
+    \label{eq:partition_function_by_path_integral}
+        Z\pare{\beta} = \int_{\mathrm{periodic}}\conj{\+cD}x\,\exp\curb{-\int_0^\beta \rd{\tau}\,\pare{\half m\dot{x}^2 + V\pare{x}}}.
+    \end{equation}
+\end{finaleq}
+
+% subsubsection imaginary_time_and_partition_function (end)
+
+\subsubsection{Time-Ordered Product and Generating Functional} % (fold)
+\label{ssub:time_ordered_product_and_generating_functional}
+
+\begin{termdef}{$T$-product}
+    The $T$-product of Heisenberg operators $A\pare{t}$ and $B\pare{t}$ is defined by
+    \[ T\brac{A\pare{t_1}B\pare{t_2}} = A\pare{t_1}B\pare{t_2}\Theta\pare{t_1 - t_2} + B\pare{t_2}A\pare{t_1}\Theta\pare{t_2 - t_1}. \]
+\end{termdef}
+For the case with more than three operators, the result is an arragement of operators in an order such that the time parameters decrease from the left to the right.
+\par
+Suppose $t_i < t_1\le t_2\le \cdots\le t_n<t_f$, inserting $\mathbbm{1}$ between the operators one gets
+\begin{align*}
+    \bra{x_f,t_f}\hat x\pare{t_n}\cdots \hat x\pare{t_1}\ket{x_i,t_i} & = \int \rd{x_1}\,\cdots \,\rd{x_n}\, x_1\cdots x_n \bra{x_f,t_f}\ket{x_n,t_n}\cdots\bra{x_1,t_1}\ket{x_i,t_i} \\
+    &= \int \+cD x\,x\pare{t_1}\cdots x\pare{t_n}e^{iS}.
+\end{align*}
+The ordering of time parameters on the RHS is arbitrary, therefore the equality holds as long as the ordering on the LHS is the one prescribed by the $T$-product, i.e.
+\[ \bra{x_f,t_f}T\brac{\hat x\pare{t_n}\cdots \hat x\pare{t_1}}\ket{x_i,t_i} = \int \+cD x\,x\pare{t_1}\cdots x\pare{t_n}e^{iS}. \]
+\par
+With a coupling $x\pare{t}J\pare{t}$ added into the Lagrangian, the functional derivative of the transition amplitude with respect to $J\pare{t}$ is
+\[ \frac{\delta}{\delta J\pare{t}}\bra{x_f,t_f}\ket{x_i,t_i}_J = \int \+cD{x}\, ix\pare{t}\exp\brac{i\int_{t_i}^{t_f}\rd{t}\,\pare{\half m\dot{x}^2 - V\pare{x} + xJ}}. \]
+Therefore,
+\[ \bra{x_f,t_f}T\brac{\hat x\pare{t_n}\cdots \hat x\pare{t_1}}\ket{x_i,t_i} = \left.\pare{-i}^n \frac{\delta^n}{\delta J\pare{t_1} \cdots \delta J\pare{t_n}}\int \+cD x\, e^{iS\brac{x\pare{t},J\pare{t}}}\right\vert_{J=0}. \]
+\begin{termdef}{Generating Functional}
+    With $U^J\pare{b,a}$ being the time evolution operator of $H^J = H - x\pare{t}J\pare{t}$ and $J = 0$ outside $\brac{a,b}$, the generating functional is defined by
+    \[ Z\brac{J} = \bra{0}U^J\pare{b,a}\ket{0} = \lim_{\stackrel{t_f \rightarrow \infty}{t_i \rightarrow -\infty}}\bra{0}U^J\pare{t_f,t_i}\ket{0}, \]
+\end{termdef}
+where the ground state energy have been shifted to zero. Under this definition, the transition amplitude may be written as
+\begin{align*}
+    \bra{x_f,t_f}\ket{x_i,t_i}_J &= \sum_{m,n} e^{-iE_m\pare{t_f - b}}e^{-iE_n\pare{a-t_i}}\bra{x_f}\ket{m}\bra{n}\ket{x_i}\bra{m}U^J\pare{b,a}\ket{n},
+\end{align*}
+where only the ground state contributes to the summation, i.e.
+\[ \lim_{\stackrel{t_f \rightarrow \infty}{t_i \rightarrow -\infty}}\bra{x_f,t_f}\ket{x_i,t_i}_J = \bra{x_f}\ket{0}\bra{0}\ket{x_j}Z\brac{J}. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Generating Functional}
+    With $\+cN$ chosen such that $Z\brac{0} = 1$ i.e. $\displaystyle \+cN^{-1} = \int \+cD x\, e^{iS\brac{x,0}}$, we have
+    \[ Z\brac{J} = \lim_{\stackrel{t_f \rightarrow \infty}{t_i\rightarrow -\infty}} \frac{\bra{x_f,t_f}\ket{x_i,t_i}_J}{\bra{x_f}\ket{0}\bra{0}\ket{x_i}} = \+cN \int \+cD x\, e^{iS\brac{x,J}}. \]
+\end{finaleq}
+\begin{finaleq}{$T$-product Between the Ground States}
+    \centerline{$\displaystyle \bra{0}T\brac{x\pare{t_1}\cdots x\pare{t_n}}\ket{0} = \left.\pare{-i}^n \frac{\delta^n}{\delta J\pare{t_1}\cdots \delta J\pare{t_n}}Z\brac{J}\right\vert_{J=0}.$}
+\end{finaleq}
+
+% subsubsection time_ordered_product_and_generating_functional (end)
+
+% subsection path_integral_quantization_of_a_bose_particle (end)
+
+\subsection{Harmonic Oscillator} % (fold)
+\label{sub:harmonic_oscillator}
+
+\subsubsection{Transition Amplitude} % (fold)
+\label{ssub:transition_amplitude}
+
+The action of the classical path of motion is
+\begin{equation}
+    \label{eq:SHO_action_classical_path}
+    S_c = \frac{m\omega}{2\sin\omega T}\brac{\pare{x_f^2 + x_i^2}\cos\omega T - 2x_f x_i},
+\end{equation}
+which has the functional derivative
+\begin{align*}
+    \frac{\delta^2 S}{\delta x\pare{t_1} \delta x\pare{x_2}} &= -m\pare{\+d{t_1^2}d{^2}+\omega^2}\delta\pare{t_1 - t_2},
+\end{align*}
+hence the new action of a path around $x_c$
+\begin{align*}
+    S\brac{x_c+y} &= S\brac{x_c} + \rec{2!}\int \rd{t_1}\,\rd{t_2}\, y\pare{t_1}y\pare{t_2}\left.\frac{\delta^2 S\brac{x}}{\delta x\pare{x_1}\delta\pare{x_2}}\right\vert_{x=x_c} \\
+    &= S\brac{x_c} + \frac{m}{2}\int \rd{t}\,\pare{\dot{y}^2 - \omega^2 y^2} \\
+    &= S\brac{x_c} + \frac{m}{2}\cdot \frac{T}{2}\sum_{n\in\+bN} a_n^2\brac{\pare{\frac{n\pi}{T}}^2 - \omega^2},
+\end{align*}
+with the expansion
+\[ y\pare{t} = \sum_{n\in\+bN} a_n \sin \frac{n\pi t}{T}. \]
+The transition amplitude is
+\begin{align*}
+    \bra{x_f,T}\ket{x_i,0} &= e^{iS\brac{x_c}}\int_{y\pare{t_i} = y\pare{t_f} = 0}\+cD y\, e^{i\frac{m}{2}\int_{0}^{T} \rd{t}\,\pare{\dot{y}^2 - \omega^2 y^2}} \\
+    &= \lim_{N\rightarrow \infty} J_N \pare{\frac{1}{2\pi i\epsilon}}^{N/2} e^{iS\brac{x_c}}\int \rd{a_1}\,\cdots \,\rd{a_{N-1}}\,\exp\brac{i\frac{mT}{4}\sum_{n=1}^{N-1}a_n^2 \curb{\pare{\frac{n\pi}{T}}^2 - \omega^2}},
+\end{align*}
+where
+\[ J_N = N^{-N/2}2^{-\pare{N-1}/2}\pi^{N-1}\pare{N-1}! \]
+is the Jacobian $\det \partial y_k/\partial a_n$. The integrals could be evaluated to yield the final form of the propagator.
+\begin{finaleq}{Transition Amplitude of the Harmonic Oscillator}
+    \centerline{$\displaystyle \bra{x_f,t_f}\ket{x_i,t_i} = \pare{\frac{\omega}{2\pi i\sin \omega T}}^{1/2} \exp\brac{\frac{i\omega}{2\sin\omega T}\curb{\pare{x_f^2 + x_i^2}\cos\omega T - 2x_i x_f}}.$}
+\end{finaleq}
+
+% subsubsection transition_amplitude (end)
+
+\subsubsection{Partition Function} % (fold)
+\label{ssub:partition_function}
+
+\paragraph{Method 1} % (fold)
+\label{par:method_1}
+
+Putting $\beta = it$, \marginnote{\inlinehardlink{\Cref{ssub:imaginary_time_and_partition_function}}}\begin{marginwarns}[1.5\baselineskip]{Factors of $m$ missing.}\end{marginwarns}
+\begin{align*}
+    Z\pare{\beta} &= \int \rd{x}\,\bra{x}e^{-\beta \hat H}\ket{x} \\
+    &= \pare{\frac{\omega}{2\pi i \pare{-i\sinh \beta \omega}}}^{1/2}\int \rd{x}\,\exp i\brac{\frac{\omega}{-2i\sinh \beta\omega}\pare{2x^2 \cosh \beta \omega - 2x^2}} \\
+    &= \rec{2\sinh \pare{\beta\omega/2}}.
+\end{align*}
+
+% paragraph method_1 (end)
+
+\paragraph{Method 2} % (fold)
+\label{par:method_2_of_partition_function_of_harmonic_oscillator}
+
+The flucuation part in \eqref{eq:partition_function_by_path_integral} is evaluated as
+\begin{align*}
+    \int_{y\pare{0} = y\pare{\beta} = 0} \conj{\+cD}y\,\exp\brac{-\half \int\rd{\tau}\, y\pare{-m\+d{\tau^2}d{^2} + m\omega^2}y}
+    &= -\rec{\sqrt{\det\+_D_ \brac{\pare{m/\pi}\cdot\pare{-\mathrm{d}^2/\mathrm{d}\tau^2 + \omega^2}}}},
+\end{align*}
+where the subscript $\mathrm{D}$ implies that the eigenvalues are evaluated with Dirichlet boundary condition $y\pare{0} = y\pare{\beta} = 0$.
+\begin{termdef}{Spectral $\zeta$-function}
+    \[ \zeta_{\+cO}\pare{s} = \sum_n \rec{\lambda_n^s}. \]
+\end{termdef}
+With the above definition we arrive at\begin{margintips}
+    $\begin{array}{@{}l}
+        \displaystyle \prod_{n=1}^\infty \pare{1+\frac{x^2}{n^2}}\\
+        \displaystyle  = \frac{\sinh \pi x}{\pi x}.
+    \end{array}$
+\end{margintips}
+\[ \det \+cO = \exp\brac{\left.\+dsd{\zeta_{\+cO}\pare{s}}\right\vert_{s=0}}. \]
+Taking $\+cO = -\pare{m/\pi}\cdot\pare{-\mathrm{d}^2/\mathrm{d}^2\tau^2}$, we get
+\[ \zeta_{-\pare{m/\pi}\mathrm{d}^2/\mathrm{d}\tau^2}\pare{s} = \sum_{n\ge 1} \pare{\frac{mn}{\beta}}^{-2s} = \pare{\frac{\beta}{m}}^{2s}\zeta\pare{2s}. \]
+Now
+\[ {\det}_D \pare{-\frac{\mathrm{d^2}}{\mathrm{d}\tau^2} + \omega^2} = \prod_{n=1}^\infty \pare{\frac{n \pi}{\beta}}^2 \prod_{p=1}^\infty \brac{1+\pare{\frac{\beta \omega}{p\pi}}^2}, \]
+and the partition function is obtained after evaluating the infinite products multiplied by the integral of the non-fluctuation part \eqref{eq:SHO_action_classical_path} with $\tau = it$.
+
+% paragraph method_2 (end)
+
+% subsubsection partition_function (end)
+
+% subsection harmonic_oscillator (end)
+
+\subsection{Path Integral Quantization of a Fermi Particle} % (fold)
+\label{sub:path_integral_quantization_of_a_fermi_particle}
+
+\subsubsection{Fermionic Harmonic Oscillator} % (fold)
+\label{ssub:fermionic_harmonic_oscillator}
+
+\begin{termdef}{Fermionic Harmonic Oscillator}
+    The Hamiltonian is defined by
+    \[ H = \half\pare{c^\dagger c - cc^\dagger} \omega. \]
+\end{termdef}
+Where $c$ and $c^\dagger$ satisfy the anti-commutation relations
+\[ \curb{c,c^\dagger} = 1,\quad \curb{c,c} = \curb{c^\dagger,c^\dagger} = 0, \]
+and the Hamiltonian takes the form
+\[ H = \pare{N-\half}\omega. \]
+where $N = c^\dagger c$. Now $N^2 = c^\dagger c c^\dagger c = N$, we obtain the Pauli principle $N\pare{N-1} = 0$, and that
+\[ c^\dagger\ket{0} = \ket{1},\quad c\ket{0} = 0,\quad c^\dagger\ket{1} = 0,\quad c\ket{1} = \ket{0}. \]
+
+% subsubsection fermionic_harmonic_oscillator (end)
+
+\subsubsection{Calculus of Grassmann numbers} % (fold)
+\label{ssub:calculus_of_grassmann_numbers}
+
+With generators $\curb{\theta_1,\cdots,\theta_n}$ satisfying \begin{margindef}{C-Number}
+    `C' stands for `commuting'.
+\end{margindef} the anti-commutation relations
+\[ \curb{\theta_i,\theta_j} = 0,\quad \forall i,j \]
+we could define the Grassman number and the Grassmann algebra.
+\begin{termdef}[\baselineskip]{Grassmann Number}
+    The set of linear combinations of $\curb{\theta_i}$ with c-number coefficients.
+\end{termdef}
+\begin{termdef}{Grassmann Algebra}
+    The algebra generated by $\curb{\theta_i}$, denoted by $\Lambda^n$, i.e. the algebra consisting of
+    \[ f\pare{\theta} = f_0 + \sum_{i=1}^n f_i\theta_i + \sum_{i<j}f_{ij}\theta_i\theta_j + \cdots = \sum_{0\le k\le n} \rec{k!}\sum_{\curb{i}}f_{i_1\cdots i_k}\theta_{i_1}\cdots \theta_{i_k}. \]
+    Where the $\curb{f_{i_1\cdots i_l}}$ are c-numbers and anti-symmetric under exchange of any two indices.
+\end{termdef}
+The elements $f\pare{\theta}$ may also be written as
+\[ f\pare{\theta} = \sum_{k_i = 0,1} \tilde{f}_{k_1\cdots k_n}\theta_1^{k_1}\cdots \theta_n^{k_n}. \]
+\begin{sample}
+    \begin{example}
+        For a Grassmann number $\theta$, $e^\theta = 1+\theta$.
+    \end{example}
+\end{sample}
+$\Lambda^n$ may be written as a direct sum
+\[ \Lambda^n = \Lambda^n_+ \oplus \Lambda^n_-, \]
+where $\Lambda^n_+$ and $\Lambda^n_-$ denotes the subset generated by monomials of even power and odd power, respectively. This separation is called \textbf{$\+bZ_2$-grading}\jgloss{Z\textsubscript{2}-Grading}.
+\par
+The generators satisfy the following relations:
+\begin{align*}
+    \theta_k^2 &= 0, \\
+    \theta_{k_1}\cdots \theta_{k_n} &= \epsilon_{k_1 \cdots k_n}\theta_1\cdots\theta_n, \\
+    \theta_{k_1}\cdots \theta_{k_m} &= 0,\quad m>n.
+\end{align*}
+
+% subsubsection calculus_of_grassmann_numbers (end)
+
+\subsubsection{Differentiation} % (fold)
+\label{ssub:differentiation}
+
+The differential operator anti-commutes with $\theta_k$, and the Leibniz rule takes the form
+\[ \+D{\theta_i}D{}\pare{\theta_j \theta_k} = \delta_{ij}\theta_k - \theta_{ik}\theta_j, \]
+and therefore the differential operator is nilpotent:
+\[ \+D{\theta_i^2}D{^2} = 0. \]
+
+% subsubsection differentiation (end)
+
+\subsubsection{Integration} % (fold)
+\label{ssub:integration}
+
+\begin{termdef}{Integration of Grassmann Numbers}
+    \[ \int \rd{\theta}\, f\pare{\theta} = \+D\theta D{f\pare{\theta}}. \]
+\end{termdef}
+For $n$ generators we have \begin{marginwarns}
+    The ordering of $\curb{\rd{\theta_i}}$ and $\curb{\partial/\partial \theta_i}$ matters.
+\end{marginwarns}
+\[ \int \rd{\theta_1}\,\rd{\theta_2}\cdots \rd{\theta_n}\, f\pare{\theta_1,\theta_2,\cdots,\theta_n} = \+D{\theta_1}D{} \+D{\theta_2}D{} \cdots \+D{\theta_n}D{} f\pare{\theta_1,\theta_2,\cdots,\theta_n}. \]
+Under the change of variables $\theta' = a\theta$,
+\[ \int \rd{\theta_1}\,\rd{\theta_2}\cdots \rd{\theta_n}\, f\pare{\theta} = \det a \int \rd{\theta_1'}\,\rd{\theta_2'}\cdots \rd{\theta_n'}\, f\pare{a^{-1}\theta}. \]
+\begin{sample}
+    \begin{example}
+        $\displaystyle \int \rd{\theta} = 0,\ \int \rd{\theta}\,\theta = 1$.
+    \end{example}
+\end{sample}
+
+% subsubsection integration (end)
+
+\subsubsection{Delta-Function} % (fold)
+\label{ssub:delta_function}
+
+The $\delta$ function is given by
+\[ \delta\pare{\theta-\alpha} = \theta-\alpha. \]
+It may also be written in the form of Fourier transformation as
+\[ \delta\pare{\theta} = \theta = -i\int \rd{\xi}\,e^{i\xi\theta}. \]
+
+% subsubsection delta_function (end)
+
+\subsubsection{Gaussian Integral} % (fold)
+\label{ssub:gaussian_integral}
+
+For two independent Grassmann variables $\curb{\theta_i}$ and $\curb{\omega_i}$, and an $n\times n$ c-number matrix $M$,
+\begin{equation}
+    \label{eq:gaussian_integral_to_det}
+    \boxed{\int\rd{\omega_1}\,\rd{\theta_1}\cdots \rd{\omega_n}\,\rd{\theta_n}\, e^{-\sum_{ij}\omega_i M_{ij} \theta_j} = \det M.}
+\end{equation}\vspace{-\baselineskip}
+\begin{termdef}{Pfaffian}
+    \[ \Pfaffian\pare{a} = \rec{2^n n!}\sum_{\substack{\mathrm{Permutations of}}{\curb{i_1,\cdots,i_{2n}}}} \sign\pare{P} a_{i_1i_2}\cdots a_{i_{2n-1}i_{2n}}. \]
+\end{termdef}
+\begin{proposition}
+    $\det a = \Pfaffian\pare{a}^2$.
+\end{proposition}
+
+% subsubsection gaussian_integral (end)
+
+\subsubsection{Functional Derivative} % (fold)
+\label{ssub:functional_derivative}
+
+Let $\psi\pare{t}$ be a Grassmann variable depending on a c-number $t$ and $F\brac{\psi\pare{t}}$ be a functional of $\psi$, we define \begin{marginwarns}
+    Division by a Grassmann number is not well defined.
+\end{marginwarns}
+\[ \frac{\delta F\brac{\psi\pare{t}}}{\delta \psi\pare{s}} = \rec{\epsilon}\curb{F\brac{\psi\pare{t}} + \epsilon \delta\pare{t-s} - F\brac{\psi\pare{t}}}, \]
+where the numerator is evaluated via Taylor expansion.
+
+% subsubsection functional_derivative (end)
+
+\subsubsection{Complex Conjugation} % (fold)
+\label{ssub:complex_conjugation}
+
+The complex conjugation of Grassmann numbers is defined by $\pare{\theta_i}^* = \theta_i^*$ and $\pare{\theta_i^*}^* = \theta_i$, and that
+\[ \pare{\theta_i\theta_j}^* = \theta_j^*\theta_i^*. \]
+
+% subsubsection complex_conjugation (end)
+
+\subsubsection{Coherent States and Completeness Relation} % (fold)
+\label{ssub:coherent_states_and_completeness_relation}
+
+\begin{termdef}{Coherent States}
+    The Coherent States of a fermionic oscillator is of the form
+    \[ \ket{\theta} = \ket{0} + \ket{1}\theta,\quad \bra{\theta} = \bra{0} + \theta^*\bra{1}, \]
+    where $\theta$ and $\theta^*$ are Grassmann numbers.
+\end{termdef}
+\begin{sample}
+    \begin{example}
+        With $\ket{f} = \ket{0}f_0 + \ket{1}f_1$, we have $\displaystyle \bra{\theta}c\ket{f} = \bra{\theta}\ket{0}f_1 = \+D{\theta^*}D{}\bra{\theta}\ket{f}$.
+    \end{example}
+\end{sample}
+\begin{finaleq}{Completeness Relation of a Fermionic Oscillator}
+    \begin{equation}
+        \label{eq:completeness_relation_of_a_fermionic_oscillator}
+        \int \rd{\theta^*}\,\rd{\theta}\, \ket{\theta}\bra{\theta}e^{-\theta^*\theta} = \mathbbm{1}.
+    \end{equation}
+\end{finaleq}
+
+% subsubsection coherent_states_and_completeness_relation (end)
+
+\subsubsection{Parition function of a Fermionic Oscillator} % (fold)
+\label{ssub:parition_function_of_a_fermionic_oscillator}
+
+The partition function is given by
+\[ Z\pare{\beta} = \trace e^{-\beta H} = \sum_{n=0}^1 \bra{n}e^{-\beta H}\ket{n} = 2\cosh\pare{\beta \omega/2}, \]
+where $\ket{n}$ denotes an eigenvector of $N$.
+\begin{lemma}
+    Let $H$ be the Hamiltonian of a fermionic harmonic oscillator, then the partition function may be written as
+    \[ Z\pare{\beta} = \trace e^{-\beta H} = \int \rd{\theta^*}\,\rd{\theta}\,\bra{-\theta}e^{-\beta H}\ket{\theta} e^{-\theta^*\theta}. \]
+\end{lemma}
+
+\paragraph{Method 1} % (fold)
+\label{par:method_1}
+
+With the expansion $\displaystyle e^{-\beta H} = \lim_{N\rightarrow \infty} \pare{1-\beta H/N}^N$ and inserting the completeness relation \eqref{eq:completeness_relation_of_a_fermionic_oscillator} at each step we find
+\begin{align*}
+    Z\pare{\beta} &= \lim_{N\rightarrow \infty}\int \prod_{k=1}^N \rd{\theta_k^*}\,\rd{\theta_k}\, e^{-\sum_{n=1}^Nb} \\
+    &\phantom{=\ } \times \bra{\theta_N}\pare{1-\epsilon H}\ket{\theta_{N-1}}\bra{\theta_{N-1}}\cdots \ket{\theta_1}\bra{\theta_1}\pare{1-\epsilon H}\ket{-\theta_N},
+\end{align*}
+where $\epsilon = \beta/N$ and $\theta = -\theta_N = \theta_0$, $\theta^* = -\theta^*_N = \theta^*_0$. Each matrix element is evaluated as
+\[ \bra{\theta_k}\pare{1-\epsilon H}\ket{\theta_{k-1}} = e^{\epsilon \omega/2}e^{\pare{1-\epsilon\omega}\theta_k^*\theta_{k-1}}. \]
+The partition function is now expressed as
+\begin{equation}
+    \label{eq:gaussian_integral_form_of_partition_function_of_fermionic_oscillator}
+    Z\pare{\beta} = e^{\beta\omega/2}\lim_{N\rightarrow \infty} \prod_{k=1}^N \int \rd{\theta_k^*}\,\rd{\theta_k}\, e^{-\theta^\dagger\cdot B\theta},
+\end{equation}
+where
+\[ \theta = \begin{pmatrix}
+    \theta_1 \\ \theta_2 \\ \vdots \\ \theta_N
+\end{pmatrix},\quad B_N = \begin{pmatrix}
+    1 & 0 & \cdots & 0 & -y \\
+    y & 1 & 0 & \cdots & 0 \\
+    0 & y & 1 & 0 & \cdots \\
+    \vdots & & \ddots & & \vdots \\
+    0 & 0 & \cdots & y & 1
+\end{pmatrix},\quad y = -1+\epsilon\omega. \]
+Therefore, with \eqref{eq:gaussian_integral_to_det} we find
+\[ Z\pare{\beta} = e^{\beta\omega/2}\lim_{N\rightarrow \infty} \det B_N = e^{\beta\omega/2}\lim_{N\rightarrow \infty} \brac{1+\pare{1-\beta\omega/N}^N} = 2\cosh \frac{\beta \omega}{2}. \]
+
+% paragraph method_1 (end)
+
+\paragraph{Method 2} % (fold)
+\label{par:method_2}
+
+Starting from \eqref{eq:gaussian_integral_form_of_partition_function_of_fermionic_oscillator} and expanding the $\theta$ in the path integral into Fourier series, \marginnote{\inlinehardlink{\Cref{par:method_2_of_partition_function_of_harmonic_oscillator}}}
+we find
+\begin{align*}
+    Z\pare{\theta} &= e^{\beta\omega/2}\lim_{N\rightarrow \infty}\prod_{k=1}^N \int \rd{\theta_k^*}\,\rd{\theta_k} e^{-\sum_n\brac{\pare{1-\epsilon\omega}\theta_n^*\pare{\theta_n - \theta_{n-1}}/\epsilon + \omega\theta_n^*\theta_n}} \\
+    &= e^{\beta\omega/2}\int \+cD\theta^*\,\+cD\theta \exp\brac{-\int_0^\beta \rd{\tau}\,\theta^*\pare{\pare{1-\epsilon\omega}\+d\tau d{} + \omega}\theta} \\
+    &= e^{\beta\omega/2}{\det}\+_APBC_\pare{\pare{1-\epsilon\omega}\+d\tau d{} + \omega},
+\end{align*}
+where the subscript APBC implies that the eigenvalues should be evaluated for the solutions subjected to the boundary condition $\theta\pare{\theta} = -\theta\pare{0}$.
+\par
+Note that the coherent states are overcomplete and the actual number of freedom is $N$ since $\epsilon = \beta/N$, and the product should be truncated with only $N/2$ eigenvalues left since each complex variable has two real degrees of freedom. Therefore,
+\begin{align*}
+    Z\pare{\beta} &= e^{\beta\omega/2}\prod_{n=-N/4}^{N/4}\brac{i\pare{1-\epsilon\omega} \frac{\pi\pare{2n-1}}{\beta} + \omega} \\
+    &= \underbrace{\prod_{k=1}^\infty \brac{\frac{\pi\pare{2k-1}}{\beta}}^2}_P \prod_{n=1}^\infty \brac{1+\pare{\frac{\beta\omega}{\pi\pare{2n-1}}}^2}.
+\end{align*}
+The first infinite product is divergent but may be assigned a value via the \textbf{Hurwitz $\zeta$-function}\jgloss{Hurwitz Zeta-Function}
+\[ \zeta\pare{s,a} = \sum_{k=1}^\infty \rec{\pare{k+a}^s},\quad 0<a<1. \]
+We obtain\begin{margintips}
+    $\begin{array}{@{}l}
+        \displaystyle \prod_{n=1}^\infty \pare{1+\frac{x^2}{n^2}}\\
+        \displaystyle  = \frac{\sinh \pi x}{\pi x}.
+    \end{array}$
+\end{margintips}
+\[ P = e^{-2\zeta'\pare{s,1/2}\vert_{s=0}} = 2. \]
+Finally we have
+\[ Z\pare{\beta} = 2\prod_{n=1}^\infty \brac{1+\pare{\frac{\beta\omega}{\pi\pare{2n-1}}}^2} = 2\cosh \frac{\beta\omega}{2}. \]
+
+% paragraph method_2 (end)
+
+\begin{finaleq}{Partition Function of a Fermionic Oscillator}
+    \[ Z\pare{\beta} = 2\cosh\pare{\beta\omega/2}. \]
+\end{finaleq}
+
+% subsubsection parition_function_of_a_fermionic_oscillator (end)
+
+% subsection path_integral_quantization_of_a_fermi_particle (end)
+
+\subsection{Quantization of a Scalar Field} % (fold)
+\label{sub:quantization_of_a_scalar_field}
+
+\subsubsection{Free Scalar Field} % (fold)
+\label{ssub:free_scalar_field}
+
+\paragraph{Real Scalar Field} % (fold)
+\label{par:real_scalar_field}
+
+Let $\phi\pare{x^0,\+vx}$ denoting a scalar field, and the action
+\[ S = \int \rd{x}\, \+cL\pare{\phi,\partial_\mu \phi}, \]
+where $\+cL$ is the Lagrangian density.
+\begin{finaleq}{Euler-Lagrange Equation}
+    \[ \+D{x^\mu}D{}\pare{\+D{\pare{\partial_\mu \phi}}D{\+cL}} - \+D\phi D{\+cL} = 0. \]
+\end{finaleq}
+\jgloss{Klein-Gordon Equation}
+\begin{sample}
+    \begin{example}
+        For $\displaystyle \+cL_0\pare{\phi,\partial_\mu \phi} = -\half\pare{\partial_\mu \partial^\mu \phi + m^2\phi^2}$, the Euler-Lagrange equation is exactly the Klein-Gordon equation
+        \[ \pare{\Box^2 - m^2}\phi = 0 \]
+        where $\Box^2 = -\partial_0^2 + \laplacian$.
+    \end{example}
+\end{sample}
+The vacuum-to-vacuum amplitude in the presence of a source $J$ is
+\begin{align*}
+    Z_0\brac{J} &= \int \+cD\phi\,\exp\brac{i\int \rd{x}\,\pare{\+cL_0 + J\phi + \frac{i}{2}\epsilon \phi^2}} \\
+    &= \int \+cD\phi\,\exp\brac{i\int \rd{x}\, \pare{\half \curb{\phi\pare{\Box^2 - m^2}\phi + i\epsilon \phi^2} + J\phi}}.
+\end{align*}
+The integral may be written in terms of the Feynman propagator.
+\begin{finaleq}{Feynman Propagator}
+    The Feynman propagator
+    \[ \Delta\pare{x-y} = \frac{-1}{\pare{2\pi}^d}\int \rd{^d k}\, \frac{e^{ik\pare{x-y}}}{k^2 + m^2 - i\epsilon} \]
+    is the Green's function of the inhomogeneous Klein-Gordon equation
+    \[ \pare{\Box^2 - m^2 + i\epsilon}\phi_c = -J, \]
+    i.e. $\phi_c\pare{x} = -\Delta * J$.
+\end{finaleq}
+\begin{remark}
+    The Feynman propagator may be obtained by
+    \[ \Delta\pare{x-y} = \frac{i}{Z_0\brac{0}}\left. \frac{\delta^2 Z_0\brac{J}}{\delta J\pare{x}\delta J\pare{y}} \right\vert_{J=0}. \]
+\end{remark}
+\begin{finaleq}{Generating Functional of a Scalar Field}
+    \[ Z_0\brac{J} = Z_0\brac{0} \exp\brac{-\frac{i}{2}\int \rd{x}\,\rd{y}\, J\pare{x}\Delta\pare{x-y}J\pare{y}} \]
+\end{finaleq}
+Now we evaluate $Z_0\brac{J}$. With the imaginary time $x^4 = \tau = ix^0$,
+\begin{align*}
+    Z_0\brac{0} &= \int \conj{\+cD}\phi\,\exp\brac{\half \int \rd{x}\,\phi\pare{\conj{\Box}^2 - m^2}\phi} \\
+    &= \brac{\det\pare{\conj{\Box}^2 - m^2}}^{-1/2},
+\end{align*}
+where $\conj{\Box}^2 = \partial_\tau^2 + \laplacian$.
+
+% paragraph real_scalar_field (end)
+
+\paragraph{Complex Scalar Field} % (fold)
+\label{par:complex_scalar_field}
+
+The Lagrangian density is now
+\[ \+cL_0 = -\partial_\mu \phi^* \partial^\mu \phi - m^2\phi^*\phi + J\phi^* + J^*\phi, \]
+the propagator
+\[ \Delta\pare{x-y} = \frac{i}{Z_0\brac{0,0}}\left.\frac{\delta^2 Z_0\brac{J,J^*}}{\delta J^*\pare{x}\delta J\pare{y}}\right\vert_{J=J^* = 0}, \]
+the generating funtional
+\begin{align*}
+    Z_0\brac{J,J^*} &= \int \+cD \phi \,\+cD \phi^*\, \exp\brac{i\int \rd{x}\,\pare{\+cL_0 + i\epsilon \phi^*\phi}} \\
+    &= \int \+cD\phi\,\+cD\phi^*\, \exp\brac{i\int \rd{x}\,\curb{\phi^*\pare{\Box^2 - m^2 + i\epsilon}\phi + J^*\phi + J\phi^*}} \\
+    &= Z_0\brac{0,0}\exp\brac{-i\int \rd{x}\,\rd{y}\, J^*\pare{x}\Delta\pare{x-y}J\pare{y}},
+\end{align*}
+where
+\begin{align*}
+    Z_0\brac{0,0} &= \int \+cD\phi \,\+cD\phi^* \,\exp\brac{i\int \rd{x}\, \phi^* \pare{\Box^2 - m^2 + i\epsilon}\phi} \\
+    &= \brac{\det \pare{\conj{\Box}^2 - m^2}}^{-1}.
+\end{align*}
+
+% paragraph complex_scalar_field (end)
+
+% subsubsection free_scalar_field (end)
+
+\subsubsection{Interacting Scalar Field} % (fold)
+\label{ssub:interacting_scalar_field}
+
+Adding an interaction term to the free field Lagrangian\marginnote{\inlinehardlink{cf. \S 9.2, Peskin.}}
+\[ \+cL\pare{\phi,\partial_\mu \phi} = \+cL_0\pare{\phi,\partial_\mu \phi} - V\pare{\phi},\quad V\pare{\phi} = \frac{g}{n!}\phi^n,\quad n\ge 3. \]
+Treating $V$ as a perturbation, we may expand the $Z\brac{J}$ into Dyson series
+\begin{align*}
+    Z\brac{J} &= \int \+cD \phi \,\exp\brac{i\int \rd{x}\,\curb{\half \phi\pare{\Box^2 - m^2}\phi - V\pare{\phi} + J\phi}} \\
+    &= \sum_{k=0}^\infty \int \rd{x_1}\,\cdots \,\int \rd{x_k}\, \frac{\pare{-i}^k}{k!} V\pare{\rec{i}\frac{\delta}{\delta J\pare{x_1}}}\cdots V\pare{\rec{i}\frac{\delta}{\delta J\pare{x_k}}}Z_0\brac{J},
+\end{align*}
+where
+\[ Z_0\brac{J} = \int\+cD\phi\,\exp\brac{i\int \rd{x}\,\curb{\+cL_0 + J\phi}}. \]
+The vacuum expectation value of the $T$-product of field operators is given by
+\[ G_n\pare{x_1,\cdots,x_n} = \bra{0}T\brac{\phi\pare{x_1}\cdots\phi\pare{x_n}}\ket{0} = \left. \frac{\pare{-i}^n \delta^n}{\delta J\pare{x_1}\cdots \delta J\pare{x_n}}Z\brac{J} \right\vert_{J=0}, \]
+also known as the \gloss{Green's function}.
+\par
+The functional Taylor expansion of $Z\brac{J}$ is
+\[ Z\brac{J} = \sum_{n=1}^\infty \rec{n!}\brac{\prod_{i=1}^n \int \rd{x_i}\, J\pare{x_i}}\bra{0}T\brac{\phi\pare{x_1}\cdots \phi\pare{x_n}}\ket{0} = \bra{0}T\exp\curb{\int \rd{x}\,J\pare{x}\phi\pare{x}}\ket{0}. \]
+\vspace{-\baselineskip}
+\begin{termdef}{Effective Action}
+    The effective action $\Gamma\brac{\phi\+_cl_}$ is defined by the Legendre transformation
+    \[ \Gamma\brac{\phi\+_cl_} = W\brac{J} - \int \rd{\tau}\,\rd{\+vx}\,J\phi\+_cl_, \]
+    where
+    \[ \phi\+_cl_ = \expc{\phi}^J = \frac{\delta W\brac{J}}{\delta J}, \]
+    and $W\brac{J}$ is defined by $Z\brac{J} = e^{-W\brac{J}}$.
+\end{termdef}
+The functional generates \gloss{one-particle irreducible} diagrams.
+
+% subsubsection interacting_scalar_field (end)
+
+% subsection quantization_of_a_scalar_field (end)
+
+\subsection{Quantization of a Dirac Field} % (fold)
+\label{sub:quantization_of_a_dirac_field}
+
+\begin{margindef}[1.5\baselineskip]{Feynman Slash}
+    $\slashed{A} = \gamma^\mu A_\mu$.
+\end{margindef}
+The Lagrangian of the free \gloss{Dirac field} $\psi$ is
+\[ \+cL_0 = \conj{\psi}\pare{i\slashed{\partial} - m}\psi. \]
+Varitaion with respect to $\conj{\psi}$ yields the Dirac equation.
+\begin{finaleq}{Dirac Equation}
+    \[ \pare{i\slashed{\partial} - m}\psi = 0. \]
+\end{finaleq}
+The Dirac field satisfies the anti-commutation relation
+\[ \curb{\conj{\psi}\pare{x^0,\+vx}, \psi\pare{x^0,\+vy}} = \delta\pare{\+vx-\+vy}. \]
+The generating functional is
+\[ Z_0\brac{\conj{\eta},\eta} = \int \+cD \conj{\psi}\, \+cD\psi \, \exp\brac{i\int \rd{x}\, \pare{ \conj{\psi}\pare{i\slashed{\partial} - m}\psi + \conj{\psi}\eta + \conj{\eta}\psi} } = Z_0\brac{0,0}\exp\brac{-i\int \rd{x}\,\rd{y}\, \conj{\eta}\pare{x}S\pare{x-y}\eta\pare{y}}, \]
+where $\eta$ and $\conj{\eta}$ are Grassmannian sources, and
+\begin{align*}
+    S\pare{x-y} &= -\frac{\delta^2 Z_0\brac{\conj{\eta},\eta}}{\delta\conj{\eta}\pare{x}\delta\eta\pare{y}} = \rec{\pare{2\pi}^d}\int \rd{^d k} \frac{e^{ik\pare{x-y}}}{\slashed{k}-m-i\epsilon} = \pare{i\slashed{\partial} + m + i\epsilon}\Delta\pare{x-y}
+\end{align*}
+is the propagator, where $\Delta\pare{x-y}$ is the scalar field propagator, and the normalization factor is obtained as
+\[ Z_0\brac{0,0} = \det\pare{i\slashed{\partial} - m} = \prod_i \lambda_i, \]
+where $\lambda_i$ is the $i$th eigenvalue of the Dirac operator.
+
+% subsection quantization_of_a_dirac_field (end)
+
+\subsection{Gauge Theories} % (fold)
+\label{sub:gauge_theories}
+
+\subsubsection{Abelian Gauge Theories} % (fold)
+\label{ssub:abelian_gauge_theories}
+
+Maxwell's equations are invariant under the \gloss{gauge transformation}
+\[ A_\mu \rightarrow A_\mu + \partial_\mu \chi. \]
+The Lagrangian
+\[ \+cL = \conj{\psi}\brac{i\gamma^\mu\pare{\partial_\mu - ieA_\mu} + m}\psi \]
+is invariant under
+\[ \psi \rightarrow e^{-ie\alpha\pare{x}}\psi,\quad \conj{\psi} \rightarrow \conj{\psi}e^{ie\alpha\pare{x}}, \]
+whence we have
+\[ \conj{\psi}\pare{i\gamma^\mu\partial_\mu + m}\psi \rightarrow \conj{\psi}\pare{i\gamma^\mu\partial_\mu + e\gamma^\mu \partial_\mu \alpha + m}\psi, \]
+and
+\[ A_\mu \rightarrow A'_\mu = A_\mu - \partial_\mu \alpha\pare{x}. \]
+After introducing the \gloss{covariant derivatives}
+\[ \nabla_\mu = \partial_\mu - ieA_\mu,\quad \partial'_\mu = \partial_\mu - ieA'_\mu, \]
+we have
+\[ \nabla'_\mu \psi' = e^{-ie\alpha\pare{x}}\nabla_\mu \psi. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{QED Lagrangian}
+    The total quantum electrodynamic Lagrangian is
+    \[ \+cL\+_QED_ = -\rec{4}F^{\mu\nu}F_{\mu\nu} + \conj{\psi}\pare{i\gamma^\mu \nabla_\mu + m}\psi. \]
+\end{finaleq}
+
+% subsubsection abelian_gauge_theories (end)
+
+\subsubsection{Non-Abelian Gauge Theories} % (fold)
+\label{ssub:non_abelian_gauge_theories}
+
+\begin{termdef}{Structure Constants}
+    The coefficients $\tensor{f}{_\alpha_\beta^\gamma}$ in the commutation relations of anti-Hermitian generators $\curb{T_\alpha}$
+    \[ \brac{T_\alpha,T_\beta} = \tensor{f}{_\alpha_\beta^\gamma}T_\gamma. \]
+\end{termdef}
+An element $U$ of a Lie group $G$ near the unit element can be expressed as
+\[ U = \exp{-\theta^\alpha T_\alpha}. \]
+We suppose a Dirac field $\psi$ transforms under $U\in G$ as
+\[ \psi \rightarrow U\psi,\quad \conj{\psi} \rightarrow \conj{\psi}U^\dagger. \]
+Consider the Lagrangian
+\[ \+cL = \conj{\psi}\brac{i\gamma^\mu\pare{\partial_\mu + g\+cA_\mu} + m}\psi, \]
+where the \gloss[-\baselineskip]{Yang-Mills gauge field} $\+cA_\mu$ takes its values in the Lie algebra of $G$, i.e. $\+cA_\mu = \tensor{A}{_\mu^\alpha}T_\alpha$.
+\begin{finaleq}{Gauge Invariance of Yang-Mills Lagrangian}
+    The $\+cL$ defined above is invariant under
+    \begin{align*}
+        & \psi \rightarrow \psi' = U\psi,\quad \conj{\psi} \rightarrow \conj{\psi}' = \conj{\psi}U^\dagger, \\
+        & \+cA_\mu \rightarrow \+cA'_\mu = U\+cA_\mu U^\dagger + g^{-1}U\partial_\mu U^\dagger.
+    \end{align*}
+    The covariant derivative defined by $\nabla_\mu = \partial_\mu + g\+cA_\mu$ transforms covariantly under the gauge transformation,
+    \[ \nabla'_\mu \psi' = U\nabla_\mu \psi. \]
+\end{finaleq}
+\begin{termdef}{Yang-Mills Field Tensor}
+    \[ \+cF_{\mu\nu} = \partial_\mu \+cA_\nu - \partial_\nu \+cA_\mu + g\brac{\+cA_\mu,\+cA_\nu}. \]
+\end{termdef}
+The Yang-Mills field tensor has components \begin{margindef}{Dual Field Tensor}
+    $\displaystyle *\+cF_{\mu\nu} = \half \epsilon_{\mu\nu\kappa\lambda}\+cF^{\kappa\lambda}$.
+\end{margindef}
+\[ \tensor{F}{_\mu_\nu^\alpha} = \partial_\mu \tensor{A}{_\nu^\alpha} - \partial_\nu \tensor{A}{_\mu^\alpha} + g\tensor{f}{_\beta_\gamma^\alpha}\tensor{A}{_\mu^\beta}\tensor{A}{_\nu^\gamma}. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Bianchi Identity}
+    \[ \+cD_\mu * \+cF^{\mu\nu} = \partial_\nu * \+cF^{\mu\nu} + g\brac{\+cA_\mu,*\+cF^{\mu\nu}} = 0. \]
+\end{finaleq}
+It can be shown that $\+cF_{\mu\nu}$ transforms as \begin{marginwarns}
+    \raggedright
+    Calligraphic font stands for matrix here.
+\end{marginwarns}
+\[ \+cF_{\mu\nu} \rightarrow U\+cF_{\mu\nu} U^\dagger, \]
+from which we find a gauge-invariant action
+\[ \+cL\+_YM_ = -\half \trace{\+cF^{\mu\nu}\+cF_{\mu\nu}}, \]
+or, in component form,
+\[ \+cL\+_YM_ = -\half \tensor{F}{^\mu^\nu^\alpha}\tensor{F}{_\mu_\nu^\beta}\trace\pare{T_\alpha T_\beta} = \rec{4}\tensor{F}{^\mu^\nu^\alpha}\tensor{F}{_\mu_\nu_\alpha}, \]
+where $\curb{T_\alpha}$ is normalized such that $\displaystyle \trace\pare{T_\alpha T_\beta} = -\half \delta_{\alpha\beta}$. The field equation is
+\[ \+cD_\mu \+cF_{\mu\nu} = \partial_\mu \+cF_{\mu\nu} + g\brac{\+cA_\mu,\+cF_{\mu\nu}} = 0. \]
+
+% subsubsection non_abelian_gauge_theories (end)
+
+\subsubsection{Higgs Fields} % (fold)
+\label{ssub:higgs_fields}
+
+For a complex scalar field $\phi$ whose Lagrangian is given by
+\[ \+sL = -\rec{4}F^{\mu\nu}F_{\mu\nu} + \pare{\nabla_\mu \phi}^\dagger \pare{\nabla_\mu \phi} - \lambda\pare{\phi^\dagger\phi - v^2}^2. \]
+The Lagrangian in invariant under the local gauge transformation
+\[ A_\mu \rightarrow A_\mu - \partial_\mu \alpha,\quad \phi \rightarrow e^{-ie\alpha}\phi,\quad \phi^\dagger \rightarrow e^{ie\alpha}\phi^\dagger. \]
+Take the \gloss{unitary gauge} such that $\phi$ has only the real part and expand $\phi$ as
+\[ \phi\pare{x} = \rec{\sqrt{2}}\pare{v+\rho\pare{x}}, \]
+the equations of motion derived from the Lagrangian now become
+\[ \partial^\nu F_{\nu\mu} + 2e^2v^2 A_\mu = 0,\quad \partial_\mu \partial^\mu \rho + 2\lambda v^2\rho = 0. \]
+From the first equation we find $A^\mu$ must satisfy the Lorentz condition $\partial_\mu A^\mu = 0$. The degrees of freedom of the original Lagrangian is $2\text{(photon)}+2\text{(real scalar)} = 4$, and if the \gloss[\baselineskip]{vacuum expectation value} \begin{margindef}[-4\baselineskip]{VEV}
+    Vacuum expectation value.
+\end{margindef}
+ of the \gloss{Higgs field} $\phi$ is not zero, we have $3\text{(massive vector)}+1\text{(real scalar)}=4$. The field $A_0$ has the wrong sign and so cannot be a physical degree of freedom. The creation of massive fields out of a gauge field is called the \gloss{Higgs mechanism}.
+
+% subsubsection higgs_fields (end)
+
+% subsection gauge_theories (end)
+
+\subsection{Magnetic Monopoles} % (fold)
+\label{sub:magnetic_monopoles}
+
+\subsubsection{Dirac Monopole} % (fold)
+\label{ssub:dirac_monopole}
+
+The vector potential of a magnetic monopole is
+\[ \+vA^{\mathrm{N}}\pare{\+vr} = \frac{g\pare{1-\cos\theta}}{r\sin\theta}\+u\phi,\quad \+vA^{\mathrm{S}}\pare{\+vr} = -\frac{g\pare{1+\cos\theta}}{r\sin\theta}\+u\phi. \]
+The two expressions break down either on the positive $z$-axis or the negative one. The singularity is called the \gloss{Dirac string}.
+
+% subsubsection dirac_monopole (end)
+
+\subsubsection{The Wu-Yang Monopole} % (fold)
+\label{ssub:the_wu_yang_monopole}
+
+The vector potentials on the northern and southern hemispheres are related by the gauge transformation
+\[ \+vA^{\mathrm{N}} - \+vA^{\mathrm{S}} = \nabla\pare{2g\phi}, \]
+from which we deduce the total flux
+\[ \Phi = \oint_S \curl \+vA\cdot \rd{\+vS} = \oint_{\mathrm{equator}} \nabla\pare{2g\phi}\cdot \rd{\+vs} = 4g\pi. \]
+
+% subsubsection the_wu_yang_monopole (end)
+
+\subsubsection{Charge Quantization} % (fold)
+\label{ssub:charge_quantization}
+
+A point particle with electric charge $e$ and mass $m$ moving in the field of a magnetic monopole of charge $g$ is described by the Schr\"odinger equation
+\[ \rec{2m}\pare{\+vp - \frac{e}{c}\+vA}^2 \psi\pare{\+vr} = E\psi\pare{\+vr}. \]
+The values of the wave function on the northern and southern hemisphere are related by
+\[ \psi^{\mathrm{S}}\pare{\+vr} = \exp\pare{-\frac{ie\Lambda}{\hbar c}}\psi^{\mathrm{N}}\pare{\+vr}. \]
+On the equator, we found the \gloss{Dirac quantization condition}
+\[ \frac{2eg}{\hbar c} = n. \]
+
+% subsubsection charge_quantization (end)
+
+% subsection magnetic_monopoles (end)
+
+\subsection{Instantons} % (fold)
+\label{sub:instantons}
+
+The vacuum-to-vacuum amplitude in the Euclidean theory is \marginnote{\inlinehardlink{ \Cref{ssub:time_ordered_product_and_generating_functional} }}
+\[ Z = \bra{0}\ket{0} \propto \int \+cD\phi\, e^{-S\brac{\phi,\partial_\mu \phi}}. \]
+The local minima of $S\brac{\phi,\partial_\mu \phi}$ in non-Abelian gauge theories are called \gloss{instantons}.
+
+\subsubsection{The SU(2) Case} % (fold)
+\label{ssub:the_su}
+
+Consider the $\mathrm{SU}\pare{2}$ gauge theory defined in four-dimensional Euclidean space $\+bR^4$, with
+\[ \+cA_\mu = \tensor{A}{_\mu^\alpha}\frac{\sigma_\alpha}{2i},\quad \+cF_{\mu\nu} = \tensor{F}{_\mu_\nu^\alpha}\frac{\sigma_\alpha}{2i}, \]
+The field equation in \cref{ssub:non_abelian_gauge_theories} becomes
+\[ \+cD_\mu \+cF_{\mu\nu} = \partial_\mu \+cF_{\mu\nu} + g\brac{\+cA_\mu,\+cF_{\mu\nu}} = 0. \]
+Suppose $\+cA_\mu$ satisfies
+\[ \+cA_\mu \rightarrow U\pare{x}^{\dagger}\partial_\mu U\pare{x},\quad \abs{x}\rightarrow \infty, \]
+where $U\in \mathrm{SU}\pare{2}$, it can be shown that $\+cF_{\mu\nu}$ vanishes for this asymptotic part. We require that on $S^3$ of large radius, the gauge potential be given by the above expression.
+
+% subsubsection the_su (end)
+
+\subsubsection{The (Anti-)Self-Dual Solution} % (fold)
+\label{ssub:the_anti_self_dual_solution}
+
+In the inequality
+\[ \int \rd{^4 x}\,\trace\pare{\+cF_{\mu\nu} \pm * \+cF_{\mu\nu}}^2 \ge 0, \]
+$\+cF$ is \gloss{self-dual} (or \gloss[\baselineskip]{anti-self-dual}) if the positive (or negative) sign in chosen. In either case, the field equation is automatically satisfied, which can be seen from the Bianchi identity. With \begin{margintips}
+    $\displaystyle \begin{array}{@{}l}
+        *\+cF_{\mu\nu}*\+cF^{\mu\nu}\\ = \+cF_{\mu\nu}\+cF^{\mu\nu}
+    \end{array}$
+\end{margintips}
+\[ Q = -\rec{16\pi^2}\int \rd{^4 x}\,\trace{\+cF_{\mu\nu} * \+cF^{\mu\nu}} \]
+being an integer characterizing the way $S^3$ is mapped to $\mathrm{SU}\pare{2}$, we find from the above inequality that
+\[ S\ge 8\pi^2 \abs{Q}. \]
+The inequality is saturated in self-dual and anti-self-dual cases. Looking for solutions of the form
+\[ \+cA_\mu = f\pare{r}U\pare{x}^{-1}\partial_\mu U\pare{x} \]
+where $r = \abs{x}$ and
+\[ f\pare{r} \rightarrow 1,\quad r\rightarrow \infty,\quad U\pare{x} = \rec{r}\pare{x_4 + ix_i\sigma_i}, \]
+we find
+\[ \+cA_\mu\pare{x} = \frac{r^2}{r^2+\lambda^2}U\pare{x}^{-1}\partial_\mu U\pare{x},\quad \+cF_{\mu\nu}\pare{x} = \frac{4\lambda^2}{r^2+\lambda^2}\sigma_{\mu\nu}, \]
+where
+\[ \sigma_{ij} = \rec{4i}\brac{\sigma_i,\sigma_j},\quad \sigma_{i0} = \half\sigma_i = -\sigma_{0i}. \]
+This solution gives $Q=+1$ and $S=8\pi^2$.
+
+% subsubsection the_anti_self_dual_solution (end)
+
+% subsection instantons (end)
+
+% section quantum_physics (end)
+
+\end{document}

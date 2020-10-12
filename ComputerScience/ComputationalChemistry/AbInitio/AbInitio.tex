@@ -1,0 +1,347 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=ない,gakka=計算化学,section=AbInitio,gakkabbr=CC]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+\usepackage{chemfig}
+
+\DeclareSIUnit\bohr{Bohr}
+\DeclareSIUnit\hatree{Hatree}
+
+\begin{document}
+
+\section{非経験的分子軌道法} % (fold)
+\label{sec:非経験的分子軌道法}
+
+\subsection{基本原理} % (fold)
+\label{sub:基本原理}
+
+\subsubsection{预备知识} % (fold)
+\label{ssub:预备知识}
+
+在原子单位制下, $\epsilon_0 = 1/4\pi$, $\hbar = 1$, $m_e = 1$, $e=1$, 相应的能量单位为$\SI{1}{\hatree} = 2\times \SI{13.6}{\eV}$, 长度单位为$\SI{1}{\bohr} = \SI{0.529}{\angstrom}$. 在此单位制下, 氦原子的Hamiltonian为
+\[ \hat H = -\half \laplacian_1 - \half \laplacian_2 - \frac{Z}{r_1} - \frac{Z}{r_2} + \rec{r_{12}}. \]
+对波函数取初始猜测值
+\[ \psi_0 = \psi_0\pare{1}\psi_0\pare{2}\psi_0\pare{3}\cdots \psi_0\pare{n}, \]
+其中$\psi_0\pare{1}$是$\+vr_1$的函数, $\psi_0\pare{2}$是$\+vr_2$的函数, 以此类推. 这些单电子函数$\psi_0\pare{i}$谓原子轨道(\mgloss{atomic orbital})或者分子轨道(\mgloss[\baselineskip]{molecular orbital}), 取决于系统是原子或分子. 乘积波函数谓空间轨道(\mgloss[\baselineskip]{spatial orbital}).
+\par
+Hatree方法随后要求在考虑$\psi_0\pare{2},\psi_0\pare{3},\cdots,\psi_0\pare{n}$产生的平均场后求解$\psi_1\pare{1}$. 随后在考虑$\psi_1\pare{1},\psi_0\pare{3},\cdots,\psi_0\pare{n}$产生的平均场后求解$\psi_1\pare{1}$的平均长后求解$\psi_1\pare{2}$. 循环得到
+\begin{align*}
+    \psi_1 &= \psi_1\pare{1} \psi_1\pare{2} \psi_1\pare{3} \cdots \psi_1\pare{n}, \\
+    \psi_2 &= \psi_2\pare{1} \psi_2\pare{2} \psi_2\pare{3} \cdots \psi_2\pare{n}.
+\end{align*}
+经过自洽迭代(\gloss{self-consistent-field-procedure, SCF})后得到近似解.
+\begin{remark}
+    Hatree方法忽略了Pauli不相容原理和交换对称性/反对称性.
+\end{remark}
+
+% subsubsection 预备知识 (end)
+
+\subsubsection{Hatree-Fock方法} % (fold)
+\label{ssub:hatree_fock方法}
+
+Slater波函数并非空间轨道, 而是自旋轨道(\mgloss{spin orbital}). 在空间轨道的基础上应乘一自旋波函数.
+\[ \psi\pare{\mathrm{spin\ }\alpha} = \psi\pare{\mathrm{spatial}}\alpha = \psi\pare{x,y,z}\alpha. \]
+以$\alpha$和$\beta$分别表示满足
+\[ S_z \alpha = \frac{\hbar}{2}\alpha,\quad S_z \beta = -\frac{\hbar}{2}\beta \]
+的本征函数. 且可设
+\[ \alpha\pare{\xi} = \delta\pare{\xi - \half},\quad \beta\pare{\xi} = \delta\pare{\xi + \half}. \]
+任何空间轨道$\psi$都可以直接乘以$\alpha$和$\beta$产生两个自旋轨道. 设有$\psi_1$和$\psi_2$两个空间轨道, 以$\psi_j\pare{i}$表示第$i$个电子的空间波函数, $\alpha\pare{i}$或$\beta\pare{i}$表示第$i$个电子的自旋波函数, 则Slater行列式(\mgloss{Slater determinant})为
+\[ \Psi = \rec{\sqrt{4!}} \begin{vmatrix}
+    \psi_1\pare{1}\alpha\pare{1} & \psi_1\pare{1}\beta\pare{1} & \psi_2\pare{1}\alpha\pare{1} & \psi_2\pare{1}\beta\pare{1} \\
+    \psi_1\pare{2}\alpha\pare{2} & \psi_1\pare{2}\beta\pare{2} & \psi_2\pare{2}\alpha\pare{2} & \psi_2\pare{2}\beta\pare{2} \\
+    \psi_1\pare{3}\alpha\pare{3} & \psi_1\pare{3}\beta\pare{3} & \psi_2\pare{3}\alpha\pare{3} & \psi_2\pare{3}\beta\pare{3} \\
+    \psi_1\pare{4}\alpha\pare{4} & \psi_1\pare{4}\beta\pare{4} & \psi_2\pare{4}\alpha\pare{4} & \psi_2\pare{4}\beta\pare{4}
+\end{vmatrix}. \]
+具有$2n$个电子和$\mu$个原子核的分子有Hamiltonian
+\[ \hat H = \sum_{i=1}^{2n} -\half \laplacian_i - \sum_{\mu,i} \frac{Z_\mu}{r_{\mu,i}} + \sum_{i,j}\rec{r_{i,j}}. \]
+记原子核的相互作用能为
+\[ V_{NN} = \sum_{\mu,\nu} \frac{Z_\mu Z_\nu}{r_{\mu,\nu}}. \]
+总能量为
+\[ E = \bra{\psi}\hat H\ket{\psi} = 2\sum_{i=1}^n H_{ii} + \sum_{i=1}^n \sum_{j=1}^n \pare{2J_{ij} - K_{ij}}. \]
+其中
+\begin{align*}
+    H_{ii} &= \int \psi_i^*\pare{1} \hat H^{\mathrm{core}}\pare{1} \psi_i\pare{1}\,\rd{\nu},\quad \rd{\nu} = \rd{x}\,\rd{y}\,\rd{z}. \\
+    \hat H^{\mathrm{core}}\pare{1} &= -\half \laplacian_1 - \sum_{\mu} \frac{Z_\mu}{r_{\mu,1}}. \\
+    J_{ij} &= \int \psi^*_i\pare{1}\psi_i\pare{1} \pare{\rec{r_{12}}}\psi_j^*\pare{2} \psi_j\pare{2}\,\rd{\nu_1}\,\rd{\nu_2}. \\
+    K_{ij} &= \int \psi^*_i\pare{1}\psi_j^*\pare{2}\pare{\rec{r_{12}}}\psi_i\pare{2}\psi_j\pare{1}\,\rd{\nu_1}\,\rd{\nu_2}.
+\end{align*}
+在保持各个$\psi$正交(即$S_{ij} = \delta_{ij}$)的约束下, 变分取最小值,
+\begin{align*}
+    & E + \sum_{i=1}^n \sum_{j=1}^n l_{ij}S_{ij} = \const, \\
+    & \rd{E} + \rd{\sum_{i=1}^n \sum_{j=1}^n l_{ij} S_{ij}} = 0, \\
+    & 2\sum_{i=1}^n \rd{H_{ii}} + \sum_{i=1}^n \sum_{j=1}^n \pare{2\,\rd{J_{ij}} - \rd{K_{ij}}} + \sum_{i=1}^n \sum_{j=1}^n l_{ij}\,\rd{S_{ij}} = 0. \\
+    & \rd{H_{ii}} = \int \rd{\psi^*_i\pare{1}}\hat H^{\mathrm{core}}\pare{1}\psi_i\pare{1}\,\rd{\nu_1} + \int \psi^*_i\pare{1}\hat H^{\mathrm{core}}\pare{1}\,\rd{\psi_i\pare{1}}\,\rd{\nu_1}, \\
+    & \rd{J_{ij}} = \int \rd{\psi^*_i}\pare{1}\hat J_j\pare{1} \psi_i\pare{1}\,\rd{\nu_1} + \int \rd{\psi^*_j\pare{1}}\hat J_i\pare{1}\psi_j\pare{1}\,\rd{\nu_1} + \mathrm{conj}. \\
+    & \rd{K_{ij}} = \int \rd{\psi_i^*\pare{1}}\hat K_j\pare{1}\psi_i\pare{1}\,\rd{\nu_1} + \int \rd{\psi^*_j\pare{1}}\hat K_i\pare{1} \psi_j\pare{1}\,\rd{\nu_1} + \mathrm{conj}. \\
+    & \hat J_i\pare{1} = \int \psi_i^* \pare{2}\rec{r_{12}}\psi_i\pare{2}\,\rd{\nu_2}, \\
+    & \hat K_i\pare{1}\psi_j\pare{1} = \psi_i\pare{1}\int \psi_i^*\pare{2}\pare{\rec{r_{12}}}\psi_j\pare{2}\,\rd{\nu_2}, \\
+    & \rd{S_{ij}} = \int \rd{\psi_i^*\pare{1}}\psi_j\pare{1}\,\rd{\nu_1} + \psi_i^*\pare{1}\,\rd{\psi_j\pare{1}}\,\rd{\nu_1}. \\
+    & 2 \sum_{i=1}^n \int \rd{\psi_i^*\pare{1}}\,\brac{\hat H^{\mathrm{core}}\pare{1}\psi_i\pare{1} + \sum_{j=1}^n \pare{2\hat J_j\pare{1} - \hat K_j\pare{1}} \psi_i\pare{1} + \half \sum_{j=1}^n l_{ij}\psi_j\pare{1}}\,\rd{\nu} + \mathrm{conj}. = 0. \\
+    & \hat F \psi_i\pare{1} = -\half \sum_{j=1}^n l_{ij}\psi_j\pare{1},\quad \resumath{\hat F = \hat H^{\mathrm{core}}\pare{1} + \sum_{j=1}^n\pare{2\hat J_j\pare{1} - \hat K_j\pare{1}}.}
+\end{align*}
+其中$\hat G$为Fock算子(\mgloss{Fock operator}).
+\begin{pitfall}
+    波函数中的$\pare{1}$表示单电子的波函数. Fock算子也是针对单电子.
+\end{pitfall}
+将上述方程写为$\displaystyle \hat F \+v\psi = -\half \+vL\+v\psi$, 并设$\+vL = \+vP\+vL'\+vP^{-1}$, 其中$\+vL' = \diag\pare{l'_1,l'_2,\cdots,l'_n}$为对角矩阵, 则方程可化为
+\[ \hat F\+v\psi' = \+v\epsilon \+v\psi',\quad \+v\epsilon = -\half \diag\pare{l'_1,l'_2,\cdots,l'_n}. \]
+去掉撇号, 即
+\[ \resumath{\hat F\psi_1\pare{1} = \epsilon_1 \psi_1\pare{1},\quad \hat F\psi_2\pare{1} = \epsilon_2\psi_2\pare{1}, \quad \cdots,\quad \hat F\psi_n\pare{1} = \epsilon_n\psi_n\pare{1}.} \]
+注意到$\hat F$本身和$\psi$有关. 求解时需借助SCF迭代.
+
+% subsubsection hatree_fock方法 (end)
+
+\subsubsection{基函数与Roothaan-Hall方程} % (fold)
+\label{ssub:基函数与roothaan_hall方程}
+
+选取基函数$\curb{\phi_s}$后可以将分子轨道展开为
+\[ \psi_i = \sum_{s=1}^m c_{si}\phi_s. \]
+谓之\gloss{LCAO表示}. 至少需要$n$个$\psi$以容纳$2n$个电子.
+\begin{ex}
+    对于甲烷, 选取$\phi$为碳原子的$5$个MO和$4$个氢原子各一个MO,
+    \[ \phi\pare{C,\mathrm{1s}},\phi\pare{C,\mathrm{2s}},\phi\pare{C,\mathrm{2p}_x},\phi\pare{C,\mathrm{2p}_y},\phi\pare{C,\mathrm{2p}_z},\phi\pare{H,\mathrm{1s}}\times 4. \]
+\end{ex}
+\begin{remark}
+    基函数的数目可以远远多于电子数目.
+\end{remark}
+代入Hatree-Fock方程有
+\[ \sum_{s=1}^m c_{si}\hat F\phi_{s} = \epsilon_i \sum_{s=1}^m c_{si}\phi_s,\quad i = 1,2,\cdots,m. \]
+对$\bra{\phi_r}$取内积, 设
+\[ F_{rs} = \bra{\phi_r}\hat F\ket{\phi_s},\quad S_{rs} = \bra{\phi_r}\ket{\phi_s}, \]
+有
+\[ \begin{cases}
+    \displaystyle \sum_{s=1}^m c_{s1}F_{1s} = \epsilon_1 \sum_{s=1}^m c_{s1}S_{1s}, \\
+    \displaystyle \sum_{s=1}^m c_{s2}F_{1s} = \epsilon_2 \sum_{s=1}^m c_{s2}S_{1s},\\
+    \vdots \\
+    \displaystyle \sum_{s=1}^m c_{sm}F_{1s} = \epsilon_m \sum_{s=1}^m c_{sm}S_{1s}.
+\end{cases}\quad \begin{cases}
+    \displaystyle \sum_{s=1}^m c_{s1}F_{2s} = \epsilon_1 \sum_{s=1}^m c_{s1}S_{2s}, \\
+    \displaystyle \sum_{s=1}^m c_{s2}F_{2s} = \epsilon_2 \sum_{s=1}^m c_{s2}S_{2s},\\
+    \vdots \\
+    \displaystyle \sum_{s=1}^m c_{sm}F_{2s} = \epsilon_m \sum_{s=1}^m c_{sm}S_{2s}.
+\end{cases}\quad \cdots \quad  \begin{cases}
+    \displaystyle \sum_{s=1}^m c_{s1}F_{ms} = \epsilon_1 \sum_{s=1}^m c_{s1}S_{ms}, \\
+    \displaystyle \sum_{s=1}^m c_{s2}F_{ms} = \epsilon_2 \sum_{s=1}^m c_{s2}S_{ms},\\
+    \vdots \\
+    \displaystyle \sum_{s=1}^m c_{sm}F_{ms} = \epsilon_m \sum_{s=1}^m c_{sm}S_{ms}.
+\end{cases} \]
+\begin{cenum}
+    \item 选取基函数
+    \[ \curb{\phi_1,\phi_2,\phi_3,\phi_4}. \]
+    \item 设$\psi_1$, $\psi_2$, $\psi_3$, $\psi_4$为$\curb{\phi_i}$的线性组合.
+    \item 求解方程得到一组本征系
+    \[ \curb{\epsilon_1,\psi_1},\quad \curb{\epsilon_2,\psi_2},\quad \curb{\epsilon_3,\psi_3},\quad \curb{\epsilon_4,\psi_4}. \]
+    \item 如果分子中有$4$各电子, 则只有$\psi_1$和$\psi_2$的轨道被占有, 故总的波函数为
+    \[ \Psi = \rec{\sqrt{4!}} \begin{vmatrix}
+    \psi_1\pare{1}\alpha\pare{1} & \psi_1\pare{1}\beta\pare{1} & \psi_2\pare{1}\alpha\pare{1} & \psi_2\pare{1}\beta\pare{1} \\
+    \psi_1\pare{2}\alpha\pare{2} & \psi_1\pare{2}\beta\pare{2} & \psi_2\pare{2}\alpha\pare{2} & \psi_2\pare{2}\beta\pare{2} \\
+    \psi_1\pare{3}\alpha\pare{3} & \psi_1\pare{3}\beta\pare{3} & \psi_2\pare{3}\alpha\pare{3} & \psi_2\pare{3}\beta\pare{3} \\
+    \psi_1\pare{4}\alpha\pare{4} & \psi_1\pare{4}\beta\pare{4} & \psi_2\pare{4}\alpha\pare{4} & \psi_2\pare{4}\beta\pare{4}
+\end{vmatrix}. \]
+\end{cenum}
+Roothaan-Hall方程可写为矩阵形式
+\[ \resumath{\+vF\+vC = \+vS\+vC\+v\epsilon.} \]
+可以按照和SHM相同的步骤求解该本征值问题. 惟为确定$\hat F$需要实现猜测一$c_{ij}$, 之后以SCF迭代求解.
+\begin{cenum}
+    \item 指定分子的几何构型, 电荷与电子态. 例如中性 $\ce{CH4}$ 单重态或三重态. 选取基函数.
+    \item 计算动能/势能/重叠积分$\+vS$.
+    \item 计算$\+vS^{1/2}$.
+    \item 通过动能/势能积分和$\+vC$的初始估计计算初始的Fock矩阵. $\+vC$的初始估计可以通过H\"uckel步骤得到.
+    \item 通过$\+vS^{1/2}$变换Fock矩阵.
+    \item 将Fock矩阵对角化得到$\+vC'$.
+    \item 将$\+vC'$变换为新的$\+vC$.
+    \item 比较前后的$\+vC$, 如果不够接近则从第$4$步开始重复.
+\end{cenum}
+Fock矩阵为
+\[ F_{rs} = \bra{\phi_r\pare{1}}\hat H^{\mathrm{core}}\pare{1}\ket{\phi_s\pare{1}} + \sum_{j=1}^n \brac{2\bra{\phi_r\pare{1}}\ket{\hat J_j\pare{1}\phi_s\pare{1}} - \bra{\phi_r\pare{1}}\ket{\hat K_j\pare{1} \phi_s\pare{1}}}. \]
+设$\psi_j^*\pare{2} = \sum c^*_{tj}\phi^*_t\pare{2}$, $\psi_j\pare{2} = \sum c_{uj}\phi_u\pare{2}$, 则
+\begin{align*}
+    \hat J_j\pare{1}\phi_s\pare{1} &= \phi_s\pare{1}\int \frac{\psi^*_j\pare{2} \psi_j\pare{2}}{r_{12}}\,\rd{\nu_2}, \\
+    &= \phi_s\pare{1} \sum_{t=1}^m \sum_{u=1}^m c^*_{tj}c_{uj} \int \frac{\phi^*_t\pare{2}\phi_u\pare{2}}{r_{12}}\,\rd{\nu_2}, \\
+    \bra{\phi_r\pare{1}}\ket{\hat J_j\pare{1}\phi_s\pare{1}} &= \sum_{t=1}^m \sum_{u=1}^m c^*_{tj}c_{uj} \int\int \frac{\phi^*_r\pare{1}\phi_s\pare{1}\phi^*_t\pare{2}\phi_u\pare{2}}{r_{12}}\,\rd{\nu_1}\,\rd{\nu_2}\\
+    &= \sum_{t=1}^m \sum_{u=1}^m c^*_{tj}c_{uj}\pare{rs\vert tu}. \\
+    \hat K_j\pare{1}\psi_s\pare{1} &= \psi_j\pare{1} \int \frac{\psi^*_j\pare{2}\phi_s\pare{2}}{r_{12}}\,\rd{\nu_2} \\
+    &= \phi_u\pare{1}\sum_{t=1}^m \sum_{u=1}^m c^*_{tj}c_{uj} \int \frac{\phi_t^*\pare{2}\phi_s\pare{2}}{r_{12}}\,\rd{\nu_2}, \\
+    \bra{\phi_r\pare{1}}\ket{\hat K_j\pare{1}\phi_s\pare{1}} &= \sum_{t=1}^m \sum_{u=1}^m c^*_{tj}c_{uj} \iint \frac{\phi^*_r\pare{1}\phi_u\pare{1}\phi_t^*\pare{2}\phi_2\pare{2}}{r_{12}}\,\rd{\nu_1}\,\rd{\nu_2}. \\
+    &= \sum_{t=1}^m \sum_{u=1}^m c^*_{tj}c_{uj} \pare{ru\vert ts}.
+\end{align*}
+其中$\pare{rs\vert tu}$是一个六重积分, 谓二电子排斥积分(\gloss{two-electron repulsion integral}). 设
+\begin{align*}
+    H_{rs}^{\mathrm{core}}\pare{1} &= \bra{\phi_r\pare{1}}\hat H^{\mathrm{core}}\pare{1}\ket{\phi_s\pare{1}}, \\
+    P_{tu} &= 2\sum_{j=1}^n c^*_{tj}c_{uj},\quad t= 1,2,\cdots,m,\quad u = 1,2,\cdots,m.
+\end{align*}
+其中$P$又作密度矩阵(\gloss{density matrix}). 则有
+\[ {F_{rs} = H_{rs}^{\mathrm{core}}\pare{1} + \sum_{t=1}^m \sum_{u=1}^m \sum_{j=1}^n c_{tj}^* c_{uj}\brac{2\pare{rs\vert tu} - \pare{ru\vert ts}}. } \]
+即
+\[ \resumath{F_{rs} = H_{rs}^{\mathrm{core}}\pare{1} + \sum_{t=1}^m \sum_{u=1}^m P_{tu}\brac{2\pare{rs\vert tu} - \pare{ru\vert ts}}. } \]
+注意到$\epsilon_i$是单个电子的动能加上和其它电子的排斥能, 故$\epsilon_i$求和并非总能量.
+\[ \epsilon_i = H_{ii}^{\mathrm{core}} + \sum_{j=1}^n \pare{2J_{ij}\pare{1} - K_{ij}\pare{1}}, \]
+对$n$个分子轨道上的$2n$个电子求和后减去重复计算的排斥能, 有
+\[ E\+_HF_ = 2\sum_{i=1}^n \epsilon_j - \sum_{i=1}^n \sum_{j=1}^n \pare{2J_{ij}\pare{1} - K_{ij}\pare{1}} = \sum_{i=1}^n \epsilon_i + \sum_{i=1}^n H^{\mathrm{core}}_{ii}. \]
+即
+\[ \resumath{E\+_HF_ = 2\sum_{i=1}^n \epsilon_i + \sum_{r=1}^m \sum_{s=1}^m \sum_{i=1}^n c^*_{ri}c_{si}H_{rs}^{\mathrm{core}} = \sum_{i=1}^n \epsilon_i + \half \sum_{r=1}^m \sum_{s=1}^m P_{rs}H_{rs}^{\mathrm{core}}.} \]
+分子的总能量还应当包括振动的零点能(zero point energy, \gloss{ZPVE}, 或zero point energy, \gloss{ZPE}). 核-核相互排斥势能为
+\[ V\+_NN_ = \sum_{\mu,\nu} \frac{Z_\mu Z_\nu}{r_{\mu\nu}}. \]
+而ZPE的计算较为复杂. 不计入ZPE的``frozen-nuclei''能量为
+\[ E\+_HF_^{\mathrm{total}} = E\+_HF_ + V\+_NN_ = \sum_{i=1}^n \epsilon_i + \half \sum_{r=1}\sum_{s=1}^m P_{rs}H_{rs}^{\mathrm{core}} + V\+_NN_. \]
+
+% subsubsection 基函数与roothaan_hall方程 (end)
+
+\subsubsection{算例} % (fold)
+\label{ssub:算例}
+
+以 \chemfig{He-H^+} 为例计算.
+
+\paragraph{指定分子构型和基函数} % (fold)
+\label{par:指定分子构型和基函数}
+
+设分子间距为$\SI{0.800}{\angstrom}$, 即$\SI{1.5117}{\bohr}$. 选择Gau\ss 型基函数, 例如$\phi\+_s_ = a e^{-br^2}$, 且选择STO-1G(Slater-type orbitals-one Gaussian)基函数集. 相应的$\mathrm{1s}$基函数为
+\[ \begin{cases}
+    \phi\pare{\mathrm{H}} = \phi_1 = 0.3696\exp{-0.4166\abs{\+vr-\+vR_1}^2}, \\
+    \phi\pare{\mathrm{He}} = \phi_2 = 0.5881\exp\pare{-0.7739\abs{\+vr - \+vR_2}^2}.
+\end{cases} \]
+仅考虑单重态, 即$S=0$.
+
+% paragraph 指定分子构型和基函数 (end)
+
+\paragraph{积分计算} % (fold)
+\label{par:积分计算}
+
+Fock矩阵为
+\begin{align*}
+    F_{rs} &= H_{rs}^{\mathrm{core}}\pare{1} + \sum_{t=1}^m \sum_{u=1}^m P_{tu}\brac{\pare{rs\vert tu} - \half \pare{ru\vert ts}} \\
+    &= T_{rs} + V_{rs}\pare{\mathrm{H}} + V_{rs}\pare{\mathrm{He}} + G_{rs}.
+\end{align*}
+其中
+\begin{align*}
+    T_{rs}\pare{1} &= \int \phi_r \pare{-\half \laplacian_1}\phi_s\,\rd{\nu}, \\
+    V_{rs}\pare{\mathrm{H},1} &= \int \phi_r\pare{\frac{Z\+_H_}{r\+_H1_}}\phi_s\,\rd{\nu}, \\
+    V_{rs}\pare{\mathrm{He},1} &= \int \phi_r \pare{\frac{Z\+_He_}{r\+_He1_}}\phi_s\,\rd{\nu}.
+\end{align*}
+可直接计算得
+\[ \begin{array}{ccc}
+    T_{11} = 0.6249 & T_{12} = T_{21} = 0.2395 & T_{22} = 1.1609 \\
+    V_{11}\pare{\mathrm{H}}  = -1.0300 & V_{12}\pare{\mathrm{H}} = V_{21}\pare{\mathrm{H}} = -0.4445 & V_{22}\pare{\mathrm{H}} = -0.6563 \\
+    V_{11}\pare{\mathrm{He}} = -1.2555 & V_{12}\pare{\mathrm{He}} = V_{21}\pare{\mathrm{He}} = -1.1110 & V_{22}\pare{\mathrm{He}} = -2.8076.
+\end{array} \]
+对于双电子积分, 注意到交换左侧或右侧中的两个符号, 以及直接交换左右侧, 积分不变, 即
+\[ \pare{rs\vert tu} = \pare{rs\vert ut} = \pare{st\vert tu} = \pare{sr\vert ut} = \pare{tu\vert rs} = \pare{tu\vert sr} = \pare{ut\vert rs} = \pare{ut\vert sr}. \]
+独立的双电子积分为
+\[ \begin{array}{cc}
+    \pare{11\vert 11} = 0.7283 & \pare{21\vert 21} = 0.2192 \\
+    \pare{21\vert 11} = 0.3418 & \pare{22\vert 21} = 0.4368 \\
+    \pare{22\vert 11} = 0.5850 & \pare{22\vert 22} = 0.9927.
+\end{array} \]
+重叠积分为
+\[ \+vS = \begin{pmatrix}
+    1.0000 & 0.5017 \\
+    0.5017 & 1.0000
+\end{pmatrix}. \]
+
+% paragraph 积分计算 (end)
+
+\paragraph{重叠积分矩阵的平方根} % (fold)
+\label{par:重叠积分矩阵的平方根}
+
+直接计算可得
+\[ \+vS^{-1/2} = \begin{pmatrix}
+    1.1163 & -0.3003 \\
+    -0.3003 & 1.1163
+\end{pmatrix}. \]
+
+% paragraph 重叠积分矩阵的平方根 (end)
+
+\paragraph{Fock矩阵的计算} % (fold)
+\label{par:fock矩阵的计算}
+
+单电子矩阵为
+\[ \+vH^{\mathrm{core}} = \begin{pmatrix}
+    -1.6606 & -1.3160 \\
+    -1.3160 & -2.3030
+\end{pmatrix}. \]
+使用初始值$c_{11} = 0.249$, $c_{21} = 0.867$(这是SHM的估计), 并且注意到只有一个被占据的分子轨道(两个电子),
+\[ P_{11} = 2c_{11}c_{11} = 0.1240,\quad P_{12} = 2c_{11}c_{21} = 0.4318,\quad P_{22} = 2c_{21}c_{21} = 1.5034. \]
+从而
+\[ \+vG_0 = \begin{pmatrix}
+    0.9075 & 0.3652 \\
+    0.3652 & 0.9938
+\end{pmatrix},\quad \+vF_0 = \+vH^{\mathrm{core}} + \+vG_0 = \begin{pmatrix}
+    -0.7511 & -0.9508 \\
+    -0.9508 & -1.3092
+\end{pmatrix}. \]
+
+% paragraph fock矩阵的计算 (end)
+
+\paragraph{变换Fock矩阵} % (fold)
+\label{par:变换fock矩阵}
+
+$\displaystyle \+vF'_0 = \+vS^{-1/2} \+vF_0 \+vS^{-1/2} = \begin{pmatrix}
+    -0.4166 & -0.5799 \\
+    -0.5799 & -1.0617
+\end{pmatrix}.$
+
+% paragraph 变换fock矩阵 (end)
+
+\paragraph{对角化Fock矩阵} % (fold)
+\label{par:对角化fock矩阵}
+
+$\displaystyle \+vF_0 = \+vC'_1 \+v\epsilon_0 \+vC_1'^{-1} = \begin{pmatrix}
+    0.5069 & 0.8620 \\
+    0.8620 & -0.5069
+\end{pmatrix} \begin{pmatrix}
+    -1.4027 & \\
+    & -0.0756
+\end{pmatrix} \begin{pmatrix}
+    0.5069 & 0.8620 \\
+    0.8620 & -0.5069
+\end{pmatrix}.$
+因此在经过正交变换后的基函数下,
+\[ \+vv'_1 = \begin{pmatrix}
+    0.5069 \\ 0.8620
+\end{pmatrix},\quad \+vv'_2 = \begin{pmatrix}
+    0.8620 \\ -0.5069
+\end{pmatrix}. \]
+
+% paragraph 对角化fock矩阵 (end)
+
+\paragraph{系数矩阵的变换} % (fold)
+\label{par:系数矩阵的变换}
+
+$\displaystyle \+vC_1 = \+vS^{-1/2} \+vC'_1 = \begin{pmatrix}
+    0.3070 & 1.1145 \\
+    0.8100 & -0.8247
+\end{pmatrix}.$
+此时得到了第一轮本征系
+\begin{align*}
+    & \curb{\epsilon_1 = -1.4027,\quad \psi_1 = 0.3070\phi_1 + 0.8100 \phi_2},\\ 
+    & \curb{\epsilon_2 = -0.0756,\quad \psi_2 = 1.1145\phi_1 - 0.8247\phi_2}. 
+\end{align*}
+
+% paragraph 系数矩阵的变换 (end)
+
+\paragraph{收敛判定} % (fold)
+\label{par:收敛判定}
+
+可得新一轮的密度矩阵
+\[ P_{11} = 2c_{11}c_{11} = 0.1885,\quad P_{12} = 2c_{11}c_{21} = 0.4973,\quad P_{22} = 2c_{21}c_{21} = 1.3122. \]
+如果收敛判准为前后$\+vP$的相对差异不超过$1/1000$, 则收敛仍为达成, 故仍需一轮循环. 实际上共需要$5$轮循环达到收敛.
+
+% paragraph 收敛判定 (end)
+
+\par
+最终
+\[ E\+_HF_ = \sum_{i=1}^n \epsilon_i + \half \sum_{r=1}^m \sum_{s=1}^m P_{rs}H_{rs}^{\mathrm{core}},\quad V\+_NN_ = \sum_{\mu,\nu} \frac{Z_\mu Z_\nu}{r_{\mu\nu}},\quad E\+_HF_^{\mathrm{total}} = \SI{-2.4438}{\hatree}. \]
+\begin{remark}
+    可以直接取$\+vH^{\mathrm{core}}$为初始的Fock矩阵.
+\end{remark}
+此处描述的方法仅适用于满壳层分子(不存在孤电子). 该方法谓限制Hatree-Fock(restricted Hatree-Fock, \gloss{RHF})方法. 「限制」谓自旋朝上和朝下者的空间轨道相同. 
+\par
+处理自由基需要非限制Hatree-Fock(unrestricted Hatree-Fock, \gloss{UHF})方法. 需要对自旋朝山和朝下者引入不同的空间轨道. 有时也会使用限制开壳层Hatree-Fock(restricted open-shell Hatree-Fock, \gloss{ROHF})方法.
+
+% subsubsection 算例 (end)
+
+% subsection 基本原理 (end)
+
+% section 非経験的分子軌道法 (end)
+
+\end{document}

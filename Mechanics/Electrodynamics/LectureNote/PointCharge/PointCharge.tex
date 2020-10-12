@@ -1,0 +1,533 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=潘海俊,gakka=電気力学,gakkabbr=ED,section=Kadenryuushi]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+
+\begin{document}
+
+\section{荷電粒子} % (fold)
+\label{sec:荷電粒子}
+
+\mathsubsection{LW}{Li\'enard-Wirchert势}{Li\'enard-Wirchert势}{Lienard-Wirchert势} % (fold)
+\label{sub:Lienard_Wirchert势}
+
+\subsubsection{场源} % (fold)
+\label{ssub:场源}
+
+\vspace{-2\baselineskip}
+\begin{align*}
+    & \rho\pare{\+vr,t} = e\delta\pare{\+vr - \+vw\pare{t}}, \\
+    & \+vj\pare{\+vr,t} = \dot{\+vw}\pare{t} e\delta\pare{\+vr - \+vw\pare{t}}. \\
+    & \varphi\pare{\+vr,t} = \rec{4\pi\epsilon_0} \int \rd{V'}\, \frac{\rho\pare{\+vr',t_r}}{\+gr} = \frac{e}{4\pi\epsilon_0}\int \rd{V'}\, \frac{\delta\pare{\+vr' - \+vw\pare{t_r}}}{\+gr}, \\
+    & t_r = t - \frac{\+gr}{c} = t_r\pare{\abs{\+vr - \+vr'},t}.
+\end{align*}
+相应的势为
+\begin{align*}
+    \varphi\pare{\+vr,t} &= \rec{4\pi\epsilon_0}\int \rd{V'}\, \frac{\rho\pare{\+vr',t_r}}{\+gr} = \frac{e}{4\pi\epsilon_0} \int \rd{V'}\, \frac{\delta\pare{\+vr' - \+vw\pare{t_r}}}{\+gr}, \\
+    \+vA\pare{\+vr,t} &= \frac{\mu_0}{4\pi}\int \rd{V'} \frac{\+vj\pare{\+vr',t_r}}{\+gr} = \frac{e}{4\pi\epsilon_0 c^2}\int \rd{V'}\, \frac{\+vv\pare{t_r}\delta\pare{\+vr' - \+vw\pare{t_r}}}{\+gr}.
+\end{align*}
+
+% subsubsection 场源 (end)
+
+\subsubsection{坐标变换} % (fold)
+\label{ssub:坐标变换}
+
+$\+vr' \rightarrow \+vr'' = \+vr' - \+vw\pare{r_t}$, 则
+\begin{cenum}
+    \item 体积元
+    \[ \rd{V'} = \abs{\+D{\pare{x_1'',x_2'',x_3''}}D{\pare{x_1',x_2',x_3'}}}\,\rd{V''} = \rec{J}\,\rd{V''}. \]
+    \item Jacobian
+    \begin{align*}
+        J &= \+D{\pare{x_1',x_2',x_3'}}D{\pare{x_1'',x_2'',x_3''}} = \det\pare{\+D{x_i'}D{}x_j''} = \det \grad' \+vr''. \\
+        \grad' \+vr'' &= \grad' \+vr' - \grad' \+vw\pare{t_r} = \tensor{I} - \pare{\grad' t_r}\+d{t_r}d{\+vw\pare{t_r}} \\
+        &= \tensor{I} - \frac{\+u{\+gr}}{c}\+vv\pare{t_r} = \tensor{I} - \+u{\+gr}\+v\beta, \\
+        \Rightarrow \J &= \det\pare{\tensor{I} - \+u{\+gr}\+v\beta} = 1-\+u{\+gr}\cdot \+v\beta.
+    \end{align*}
+    \item 对于$m\neq 0$的粒子, $v<c$, 且带电粒子均有质量, 故$J > 0$.
+    \item 标量势
+    \[ \varphi\pare{\+vr,t} = \frac{e}{4\pi\epsilon_0}\int \rd{V''}\, \frac{\delta\pare{\+vr''}}{\abs{J}\+gr} \Rightarrow {\varphi\pare{\+vr,t} = \left.\frac{e}{4\pi\epsilon_0 \+gr} \rec{1-\+u{\+gr}\cdot \+v\beta}\right\vert_{\+vr' = \+vw\pare{t_r}}.} \]
+\end{cenum}
+
+% subsubsection 坐标变换 (end)
+
+\mathsubsubsection{LW}{Li\'enard-Wirchert势}{Li\'enard-Wirchert势}{Lienard-Wirchert势} % (fold)
+\label{ssub:Lienard_Wirchert势}
+
+\begin{resume}
+\vspace{-\baselineskip}
+\begin{align*}
+    \varphi\pare{\+vr,t} &= \frac{e}{4\pi\epsilon_0 \+gr^*} \rec{1-\+u{\+gr}^*\cdot \+v\beta^*}, \\
+    \+vA &= \frac{\+vv^*}{c^2}\varphi\pare{\+vr,t}.
+\end{align*}
+\end{resume}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{GeoInterp}
+\end{figure}
+\begin{cenum}
+    \item 其中
+    \begin{align*}
+        \abs{\+vr - \+vw\pare{t^*}} &= c\pare{t-t^*} = c\Delta t > 0 \Rightarrow t^* = t^*\pare{\+vr,t}, \\
+        \+v{\+gr}^* &= \+vr - \+vw\pare{t^*} = \+v{\+gr}^*\pare{\+vr,t}, \\
+        {\+gr}^* &= c\pare{t-t^*} = c\Delta t = {\+gr}^*\pare{\+vr,t}, \\
+        \+vv^* &= \+vv\pare{t^*},\quad \+va^* = \+va\pare{t^*} = \left.\+d{t^2}d{^2 \+vw\pare{t}}\right\vert_{t=t^*}.
+    \end{align*}
+    \item 与同一时空点上的势相联系的推迟时间至多有一个. 否则
+    \begin{align*}
+        & c\pare{t-t_1^*} = \+gr_1^*,\quad c\pare{t-t_2^*} = \+gr_2^*, \\
+        & \Rightarrow c\abs{t_1^* - t_2^*} = \abs{{\+gr}_1^* - {\+gr}_2^*} \le \abs{\+v{\+gr}_1^* - \+v{\+gr}_2^*} \le \Delta S \\
+        &\Rightarrow \expc{v} = \frac{\Delta S}{\abs{t_1^* - t_2^*}} \ge c.
+    \end{align*}
+    \item 几何含义: 定义$\+vn^* = \+u{\+gr} - \+v\beta \Rightarrow \+v{\+gr}^*\cdot \+vn^* = \+v{\+gr}^* - \+v{\+gr}^* \cdot \+v\beta^*$,
+    \begin{align*}
+        \varphi\pare{\+vr,t} &= \frac{e}{4\pi\epsilon_0}\rec{\+v{\+gr}^* \cdot \+vn^*}, \\
+        \+v{\+gr}^* \cdot \+vn^* &= \+v{\+gr}^* \cdot \pare{\+gr \+u{\+gr} - \+gr^* \+v\beta^*} = \+v{\+gr}^* \cdot \pare{c\Delta t \+u{\+gr}^* - \+vv^* \Delta t}.
+    \end{align*}
+\end{cenum}
+\begin{figure}[ht]
+    \centering
+    \incfig{8cm}{UniformVeloc}
+    \caption{匀速运动的点电荷}
+    \label{fig:匀速运动的点电荷}
+\end{figure}
+\begin{sample}
+    \begin{ex}
+        对于如\cref{fig:匀速运动的点电荷}的匀速运动的点电荷$\+vw\pare{t} = \+vv t = vt\+uz$,
+        \begin{align*}
+            & \+v{\+gr}^* \cdot \+vn^* = R\cos \alpha, \\
+            & \beta = \frac{v\Delta t}{c\Delta t} = \frac{\sin \alpha}{\sin\theta} \Rightarrow \sin \alpha = \beta \sin\theta, \\
+            & \Rightarrow \+v{\+gr}^* \cdot \+vn^* = R\sqrt{1-\beta^2\sin^2\theta}, \\
+            & \varphi\pare{\+vr,t} = \frac{e}{4\pi\epsilon_0 \+gr} \rec{\sqrt{1-\beta \sin^2\theta}}, \\
+            & \+vA\pare{\+vr,t} = \frac{\+v\beta^*}{c}\varphi\pare{\+vr,t}.
+        \end{align*}
+    \end{ex}
+    \begin{ex}
+        也可以按正规方法计算,
+        \begin{align*}
+            & \abs{\+vr - \+vw\pare{t^*}} = c\pare{t-t^*} = c\Delta > 0, \\
+            & \abs{\+vr - \+vvt^*} = \abs{\+vr - \+vv t + \+vv \Delta t} = \abs{\+vr - \+v\beta c\Delta t + \+v\beta c\Delta t}, \\
+            & \pare{1-\beta^2}\pare{c\Delta t}^2 - 2\+vR\cdot \+v\beta\pare{c\Delta t} - \+vR^2 = 0 \\
+            & \Rightarrow c\Delta t = \frac{\+vR\cdot \+v\beta + \sqrt{\pare{\+vR\cdot \+v\beta}^2 + \pare{1-\beta^2}R^2}}{1-\beta^2}, \\
+            & \+v{\+gr}^* \cdot \+vn^* = \+v{\+gr}^* - \+v{\+gr}^*\cdot \+v\beta^* = c\Delta t - \pare{\+vR + \+v\beta c\Delta t}\cdot \+v\beta \\
+            & = \pare{1-\beta^2}c\Delta t - \+vR \cdot \+v\beta \\
+            &= \sqrt{\pare{\+vR\cdot \+v\beta}^2 + \pare{1-\beta^2}R^2} \\
+            &= R \sqrt{1-\beta^2 \sin^2\theta}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection Lienard_Wirchert势 (end)
+
+% subsection Lienard_Wirchert势 (end)
+
+\subsection{运动点电荷的电磁场} % (fold)
+\label{sub:运动点电荷的电磁场}
+
+\vspace{-\baselineskip}
+\begin{align*}
+    \+vv^* &= \+vv\pare{t^*} \Rightarrow \begin{cases}
+        \displaystyle \partial_t \+vv^* = \+DtD{t^*} \+D{t^*}D{\+vv^*} = \+va^* \partial_t t^*, \\
+        \displaystyle \grad * \+vv^* = \pare{\grad t^*}* \+d{t^*}d{\+vv^*} = \pare{\grad t^*} * \+va^*.
+    \end{cases} \\
+    {\+gr}^* &= c\pare{t-t^*} \Rightarrow \partial_t \+gr^* = c\pare{1-\partial_t t^*},\quad \grad \+gr^* = -c\grad t^*. \\
+    \+v{\+gr}^* &= \+vr - \+vw\pare{t^*} \Rightarrow \partial_t \+v{\+gr}^* = -\+vv^* \partial_t t^*,\quad \grad \+v{\+gr}^* = \+vI - \pare{\grad t^*}\+vv^*.
+\end{align*}
+
+\subsubsection{各类导数} % (fold)
+\label{ssub:各类导数}
+
+\vspace{-2\baselineskip}
+    \begin{align*}
+        & \+v{\+gr}^* = c\pare{t-t^*} = \abs{\+v{\+gr}^*} = \abs{\+vr - \+vw\pare{t^*}}, \\
+        & \partial_t \+gr^2 = 2\+gr^* \partial_t \+gr^* = 2\+gr^* c\pare{1-\partial_t t^*}, \\
+        & \partial_t \pare{\+v{\+gr}^*\cdot \+v{\+gr}^*} = 2\+v{\+gr}^* \cdot \partial_t \+v{\+gr}^* = -2\+v{\+gr}^* {\+vv}^* \partial_t t^*. \\
+        & \Rightarrow \resumath{\partial_t t^* = \frac{\+gr^*}{\+v{\+gr}^* \cdot \+vn^*}.} \\
+        & \grad \+gr^{*2} = 2\+gr^* \grad \+gr^* = -2\+gr^* c\grad t^*, \\
+        & \grad\pare{\+v{\+gr}^* \cdot \+v{\+gr}^*} = 2\pare{\grad \+v{\+gr}^*} \cdot \+v{\+gr}^* = 2\+v{\+gr}^* - 2\pare{\+v{\+gr}^*\cdot \+vv^*}\grad t^*, \\
+        & {\grad t^* = - \frac{\+v{\+gr}^*}{\+gr^* c - \+v{\+gr}^* \cdot \+vv^*} } \Rightarrow \resumath{\grad t^* = -\frac{\+v{\+gr}^*}{c\+v{\+gr}^*\cdot \+vn^*}.} \\
+        & \grad t^* = -\frac{\+u{\+gr}^*}{c}\partial_t t^*, \\
+        & \+v{\+gr}^* \cdot \+vn^* = {\+gr}^* - \+v{\+gr}\cdot \+v\beta^*, \\
+        & \partial_t\pare{\+v{\+gr}^* \cdot \+vn^*} = \partial_t \+gr^* - \pare{\partial_t \+v{\+gr}^*}\cdot \+v\beta^* - \+v{\+gr}^*\cdot \partial_t \+v\beta^* \\
+        &= c\pare{1-\partial_t t^*} - \pare{-\beta^{*2} c\partial_t t^*} - \+v{\+gr}^* \cdot \frac{\+va^* \partial_t t^*}{c} \\
+        &= c - \pare{1-\beta^{*2} + \frac{\+v{\+gr}^*\cdot \+va^*}{c^2}}c\partial_t t^*. \\
+        & \grad\pare{\+v{\+gr}^* \cdot \+vn^*} = \grad \+gr^* - \pare{\grad \+v{\+gr}^*}\cdot \+v\beta^* - \pare{\grad \+v\beta^*}\cdot \+v{\+gr}^* \\
+        &= -c\grad t^* - \brac{\+v\beta^* - \beta^{*2} c\grad t^*} - \frac{\+v{\+gr}^*\cdot \+va^*}{c}\grad t^* \\
+        &= -\+v\beta^* - \pare{1 - \beta^{*2} + \frac{\+v{\+gr}^*\cdot \+va^*}{c^2}}c\grad t^* \\
+        & = -\+v\beta^* + \pare{1-\beta^{*2} + \frac{\+v{\+gr}^* \cdot \+va^*}{c^2}}\+u{\+gr} \partial_t t^* \\
+        &= -\frac{\+u{\+gr}^*}{c}\partial_t \pare{\+v{\+gr}^* \cdot \+vn^*} + \+vn^*.
+    \end{align*}
+    代入
+    \[ \left\{ \begin{array}{ll}
+        \partial_t \+vv^* = \+va^* \partial_t t^*, & \grad \+vv^* = \pare{\grad t^*} \+va^*, \\
+        \partial_t {\+gr}^* = c\pare{1-\partial_t t^*}, & \grad {\+gr}^* = -c\grad t^*, \\
+        \partial_t \+v{\+gr}^* = -\+vv^*\partial_t t^*, & \grad \+v{\+gr}^* = \tensor{I} - \pare{\grad t^*}\+vv^*,
+    \end{array} \right. \]
+    即可得全部所需的导数.
+
+% subsubsection 各类导数 (end)
+
+\subsubsection{电磁场} % (fold)
+\label{ssub:电磁场}
+
+\vspace{-\baselineskip}
+    \begin{align*}
+        \+vE &= -\grad \varphi - \partial_t \+vA = -\grad \varphi - \frac{\+v\beta^*}{c}\partial_t \varphi - \frac{\varphi}{c}\partial_t \+v\beta^* \\
+        &= -\frac{e}{4\pi\epsilon_0}\brac{\pare{\grad + \frac{\+v\beta^*}{c}\partial_t}\rec{\+v{\+gr}^* \cdot \+vn^*} + \rec{c\+v{\+gr}^*\cdot \+vn^*}\partial \+v\beta^*} \\
+        &= \frac{e}{4\pi\epsilon_0} \rec{\pare{\+v{\+gr}^* \cdot \+vn^*}^2}\brac{\pare{\grad + \frac{\+v\beta^*}{c}\partial_t}\+v{\+gr}^*\cdot \+vn^* - \frac{\+v{\+gr}^* \cdot \+vn^*}{c^2}\+va^*\partial_t t^*} \\
+        &= \frac{e}{4\pi\epsilon_0}\rec{\pare{\+v{\+gr}^* \cdot \+vn^*}^2}\brac{\pare{1-\beta^{*2} + \frac{\+v{\+gr}^* \cdot \+va^*}{c^2}}\+vn^* - \frac{\+v{\+gr}^*\cdot \+vn^*}{c^2}\+va^*}\partial_t t^*. \\
+        c\+vB &= \curl\pare{c\+vA} = \curl\pare{\+v\beta^* \varphi} = \grad \varphi \times \+v\beta^* + \varphi \curl \+v\beta^* \\
+        &= \frac{e}{4\pi\epsilon_0}\brac{\grad \rec{\+v{\+gr}^* \cdot \+vn^*}\times \+v\beta^* + \rec{\+v{\+gr}^* \cdot \+vn^*} \curl \+v\beta^*} \\
+        &= \frac{e}{4\pi\epsilon_0 \pare{\+v{\+gr}^*\cdot \+vn^*}^2}\brac{-\grad\pare{\+v{\+gr}^*\cdot \+vn^*}\times \+v\beta^* + \frac{\+v{\+gr}^* \cdot \+vn^*}{c}\grad t^* \times \+va^*} \\
+        &= \+u{\+gr}^*\times \frac{e}{4\pi\epsilon_0 \pare{\+v{\+gr}^* \times \+vn^*}^2}\brac{\pare{1-\beta^{*2} + \frac{\+v{\+gr}^* \cdot \+va^*}{c^2}}\times \pare{-\+v\beta^*} - \frac{\+v{\+gr}^* \cdot \+vn^*}{c^2}\+va^* }\partial_t t^*.
+    \end{align*}
+    将$\+vB$中的$\+v\beta^*$替换为$\+vn^*$, 磁场的表达式不受影响.
+
+% subsubsection 电磁场 (end)
+
+\mathsubsubsection{LWField}{Li\'enard-Wiechart场}{Li\'enard-Wiechart场}{Lienard-Wiechart场}
+\label{ssub:lienard_wiechart场}
+
+\vspace{-\baselineskip}
+    \begin{align*}
+        \+vE\pare{\+vr,t} &= \frac{e}{4\pi\epsilon_0}\frac{{\+gr}^*}{\pare{\+v{\+gr}^* \cdot \+vn^*}^3}\brac{\pare{1-\beta^{*2}} \+vn^* + \frac{\+v{\+gr}^* \times \pare{\+vn^* \times \+va^*}}{c^2}}. \\
+        \+vB\pare{\+vr,t} &= \frac{\+u{\+gr}^*}{c}\times \+vE\pare{\+vr,t}.
+    \end{align*}
+可以发现
+\begin{cenum}
+    \item 在空间中任何一点都有$\+vE\cdot \+vB = 0$且$\+u{\+gr}^* \cdot \+vB = 0$, 但一般$\+u{\+gr}^*\cdot \+vE \neq 0$.
+    \item $c\abs{\+vB} \le \abs{\+vE} \Rightarrow W_B \le W_E$.
+    \item 电磁场可分为速度场与加速度场. 电场可写为$\+vE = \+vE_v = \+vE_a$, $\+vB = \+vB_v + \+vB_a$, 其中
+    \begin{align*}
+        & \+vE_0 = \frac{e}{4\pi\epsilon_0}\frac{\+gr\pare{1-\beta^{*2}}}{\pare{\+v{\+gr}^* \cdot \+vn^*}^3}\+vn^*,\quad \+vE_a = \frac{e}{4\pi\epsilon_0 c^2 \+gr^*} \frac{\+u{\+gr}^* \times \pare{\+vn^* \times \+va^*}}{\pare{\+u{\+gr}^* \cdot \+vn^*}^3}. \\
+        & c\+vB_v = \+u{\+gr}^* \times \+vE_v,\quad c\+vB_a = \+u{\+gr}^*\times \+vE_a.
+    \end{align*}
+    可以发现
+    \begin{cenum}
+        \item $\displaystyle \+vE_v, \+vB_v \sim \rec{\+gr^{*2}}$, $\displaystyle \+vE_a,\+vE_b \sim \rec{\+gr^*}$.
+        \item $\+vE_a\cdot \+vB_a = 0, \+u{\+gr}^* \cdot \+vE_a = 0, \+u{\+gr}^*\cdot \+vB_a = 0$.
+        \item $c\abs{\+vB_a} = \abs{\+vE_a} \Rightarrow W_B = W_E$.
+    \end{cenum}
+\end{cenum}
+
+\begin{sample}
+    \begin{ex}
+        将$\+vR$定义为非推迟时间的源点到场点的位矢.
+        \begin{align*}
+            & \+v{\+gr}^* \+vn^* = \+vR, \\
+            & \+v{\+gr}^* \cdot \+vn^* = R\cos\alpha = R\sqrt{1-\beta^2 \sin^2\theta},\\
+            & \+vE = \frac{e\+u{R}}{4\pi\epsilon_0 R^2} \frac{1-\beta^2}{\pare{1-\beta^2\sin^2\theta}^{3/2}}. \\
+            & \+vB = \frac{\+u{\+gr}^*\times \+vE}{c} = \frac{\pare{\+vn^* + \+v\beta^*}\times \+vE}{c} = \frac{\+v\beta^*\times \+vE}{c}. \\
+            & \+vB = \frac{\mu_0}{4\pi}\frac{e\+vv\times \+u{R}}{R^2} \frac{1-\beta^2}{\pare{1-\beta^2\sin^2\theta}^{3/2}}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        在常数力$\+vF = F\+ux$作用下的粒子运动,
+        \[ F = \+dtd{} \frac{m\dot{x}}{\sqrt{1-\beta^2}} \Rightarrow Ft = \frac{m\dot{x}}{\sqrt{1-\beta^2}}. \]
+        从而
+        \begin{align*}
+            & F^2t^2 - F^2t^2\beta^2 = m^2c^2 \beta^2, \\
+            & \Rightarrow \beta = \frac{Ft}{\sqrt{m^2c^2 + F^2t^2}} = \frac{ct}{\sqrt{m^2c^4/F^2 + c^2t^2}} \\
+            & \Rightarrow \beta = \frac{ct}{\sqrt{b^2 + c^2t^2}},\quad b = \frac{mc^2}{F}, \\
+            & \Rightarrow x-x_0 = \int_0^t \frac{c^2 t\,\rd{t}}{\sqrt{b^2 + c^2t^2}} = \sqrt{b^2 + c^2t^2}\vert_0^t = \sqrt{b^2 + c^2t^2} - b.
+        \end{align*}
+        设$x_0 = b$, $x = \sqrt{b^2+c^2t^2}$. 故
+        \[ \+vw\pare{t} = \sqrt{b^2 + c^2t^2}\+ux,\quad \beta\pare{t} = \frac{ct}{\sqrt{b^2+c^2t^2}}. \]
+        注意到该系统下$x<-ct$处无电场(没有对应于任何推迟时间的源点). 设场点位于推迟时刻点电荷的右侧, $x > w\pare{t^*} = \sqrt{b^2 + c^2t^{*2}}$.
+        \begin{align*}
+            & \+u{\+gr}^* = \+ux,\quad \+vn^* = \+u{\+gr}^* - \+v\beta^* = \pare{1-\beta^*}\+ux, \\
+            & \+v{\+gr}^*\cdot \+v^* = \+gr^*\pare{1-\beta^*} = c\Delta t\pare{1-\beta^*}, \\
+            & \varphi = \frac{e}{4\pi\epsilon_0 \+v{\+gr}^*\cdot \+vn^*} = \frac{e}{4\pi\epsilon_0 \+gr^*} \rec{1-\beta^*},\quad \+vA = \frac{\+v\beta^*}{c}\varphi, \\
+            & \+vE = \frac{e}{4\pi\epsilon_0 \+gr^{*2}} \frac{\pare{1-\beta^{*2}}\pare{1-\beta^*}\+ux}{\pare{1-\beta^*}^3} = \frac{e}{4\pi\epsilon_0 \+gr^{*2}}\frac{1+\beta^*}{1-\beta^*}\+ux. \\
+            & x - \sqrt{b^2 + c^2t^{*2}} = c\pare{t-t^*} = c\Delta t > 0. \\
+            & x^2 - 2xc \Delta t + \pare{c\Delta t}^2 = b^2 + c^2t^2 - 2c^2t\Delta t + \pare{c\Delta t}^2. \\
+            & \Rightarrow c\Delta t = \frac{x^2 - b^2 - c^2t^2}{2\pare{x-ct}}. \\
+            & \rec{1-\beta^*} = \rec{1-\displaystyle \frac{ct^*}{w\pare{t^*}}} = \frac{w\pare{t^*}}{w\pare{t^*} - ct^*} = \frac{x-c\Delta t}{x-ct}, \\
+            & \Rightarrow \rec{1-\beta^*} = \frac{b^2 + \pare{x-ct}^2}{2\pare{x-ct}^2} \Rightarrow \frac{1+\beta^*}{1-\beta^*} = \frac{2}{1-\beta^*} - 1 = \frac{b^2}{\pare{x-ct}^2}.\\
+            & \varphi = \frac{e}{4\pi\epsilon_0}\frac{b^2 + \pare{x-ct}^2}{\pare{x-ct}\pare{x^2-b^2-c^2t^2}}. \\
+            & \+vE = \frac{e}{4\pi\epsilon_0}\frac{4b^2}{\pare{x^2-b^2-c^2t^2}^2}\+ux.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection lienard_wiechart场 (end)
+
+% subsection 运动点电荷的电磁场 (end)
+
+\subsection{运动点电荷的辐射} % (fold)
+\label{sub:运动点电荷的辐射}
+
+\subsubsection{辐射场} % (fold)
+\label{ssub:辐射场}
+
+\vspace{-\baselineskip}
+\[ \+vE = \frac{e}{4\pi\epsilon_0 c^2 \+gr^*}\frac{\+u{\+gr}^*\times \pare{\+vn^*\times \+va^*}}{\pare{\+u{\+gr}^* \cdot \+vn^*}^3},\quad c\+vB = \+u{\+gr}^*\times \+vE. \]
+\begin{cenum}
+    \item 横电磁场:
+    \[ \+u{\+gr}^*\cdot \+vE = 0 = \+u{\+gr}^*\cdot \+vB = \+vE\cdot \+vB. \]
+    \item $\abs{\+vE} = c\abs{\+vB} \Rightarrow w = \epsilon_0 E^2$,
+    \[ \Rightarrow w = \epsilon_0 E^2 = \frac{e_s^2}{4\pi c^4 \+gr^{*2}} = \frac{\abs{\+u{\+gr}\times \pare{\+vn^*\times \+va^*}}^2}{\pare{\+u{\+gr}^* \cdot \+vn^*}^6}. \]
+    \item Poynting矢量:
+    \[ \+vS = \rec{\mu_0}\+vE\times \+vB = \epsilon_0 c\+vE\times cB = wc\+u{\+gr}^*. \]
+\end{cenum}
+
+% subsubsection 辐射场 (end)
+
+\subsubsection{瞬时辐射功率} % (fold)
+\label{ssub:瞬时辐射功率}
+
+在接收者的角度看来,
+\begin{align*}
+    &\left.\rd{P\pare{t}}\right\vert_{\text{観測者}} = \+vS\cdot \rd{\+v\sigma} = \pare{\+vS\cdot \+u{\+gr}^*} \+gr^{*2}\,\rd{\Omega} \\
+    & \Rightarrow \+d{\Omega}d{P} = S\+gr^{*2} = \frac{e_s^2}{4\pi c^2}\frac{\abs{\+u{\+gr}\times \pare{\+vn^*\times \+va^*}}^2}{\pare{\+u{\+gr}\cdot \+un^*}^6}.
+\end{align*}
+真正令人有兴趣的物理量是单位时间内粒子因为辐射而损失的能量.
+\begin{figure}[ht]
+    \centering
+    \incfig{10cm}{DualSpheres}
+\end{figure}
+在发射者的角度看, 壳层厚度
+\begin{align*}
+    & \+gr^* - \+gr'^* - v^*\,\rd{t^*}\,\cos\theta \\
+    &= c\,\rd{t^*} - \+u{\+gr}^* \cdot \+v\beta^* c\,\rd{t^*} \\
+    &= \pare{1-\+u{\+gr}^*\cdot \+v\beta^*} c\,\rd{t^*} \\
+    &= \pare{\+u{\+gr}^*\cdot \+vn^*}c\,\rd{t^*}.
+\end{align*}
+从而
+\begin{align*}
+    \left.\+d{\Omega}d{P}\right\vert_{\text{観測者}} &= \frac{\rd{W}}{\rd{t}\,\rd{\Omega}} = \+dtd{t^*} \frac{\rd{W}}{\rd{t^*}\,\rd{\Omega}} = \left. \+d{\Omega}d{P}\right\vert_{\text{粒子}} \times \rec{\+u{\+gr}^*\cdot \+vn^*}.
+\end{align*}
+\begin{ex}
+    在运动速度$v$的车上向前发射子弹, 则接收速率为发射速率的$\displaystyle \rec{1-\beta}$倍.
+\end{ex}
+下文中去除推迟时刻量上的星号.
+
+% subsubsection 瞬时辐射功率 (end)
+
+\subsubsection{低速运动点电荷的辐射} % (fold)
+\label{ssub:低速运动点电荷的辐射}
+
+以$\+va$方向为$\+uz$轴,
+\begin{align*}
+    & \+vn = \+u{\+gr} - \+v\beta \approx \+u{\+gr},\quad \+u{\+gr}\cdot \+vn \approx 1. \\
+    & \+u{\+gr} \times \pare{\+vn\times \+va} \approx \+u{\+gr}\times\pare{\+u{\+gr}\times \+va} = a\sin\theta \,\+u\theta, \\
+    & \+d\Omega dP = \frac{e_s^2 a^2}{4\pi c^3}\sin^2\theta \propto a^2,\sin^2\theta. \\
+    & \int \sin^2\theta\,\rd{\Omega} = \frac{8\pi}{3}. \\
+    & \resumath{P = \frac{2}{3}\frac{e_s^2 a^2}{c^3}.}
+\end{align*}
+\begin{sample}
+    \begin{ex}
+        设$v_0 \ll c$, 匀减速运动的带电荷$e$的粒子经过距离$d$后停下. $d\approx \SI{30}{\angstrom}$, $v_0 \approx \SI{e5}{\meter\per\second}$.
+        \[ \xi = \frac{PT}{m_ev_0^2/2} = \frac{2}{3}\frac{e_s^2}{c^3}\frac{v_0^4}{4d^2}\frac{2d}{v_0}\frac{2}{m_ev_0^2} = \frac{2}{3}\frac{e_s^2 v_0}{m_e c^3 d} = \frac{2}{3}\frac{e_s^2}{m_ec^2\cdot d}\beta. \]
+        经典电子半径$\displaystyle r_e = \frac{e_s^2}{m_e c^2}$, $\displaystyle \xi = \frac{2}{3}\frac{r_e}{d}\beta \sim 10^{-9}$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        Bohr模型下的氢原子基态
+        \[ \beta = \alpha,\quad a = c^2\frac{r_e}{r^2}. \]
+        机械能
+        \[ \+cE = -\frac{e_s^2}{2r}. \]
+        从而
+        \begin{align*}
+            & P = -\+dtd{\+cE} \Rightarrow \frac{2}{3}\frac{e_s^2}{c^3}\pare{c^2 \frac{r_e}{r^2}}^2 = -\frac{e_s^2}{2r^2}\+dtdr., \\
+            & \Rightarrow \+dtdr = -\frac{4}{3}c\pare{\frac{r_e}{r}}^2,\\
+            & \Rightarrow \rd{t} = -\frac{3}{4}\frac{r^2}{r_e^2}\,\rd{r}, \\
+            & \Rightarrow t \approx -\rec{4cr_e^2} \pare{-r_0^3} = \rec{4}\frac{r_0^2}{r_e^2}\frac{r_0}{c} \approx \SI{e-12}{\second}.
+        \end{align*}
+    \end{ex}
+\end{sample}
+
+% subsubsection 低速运动点电荷的辐射 (end)
+
+% subsection 运动点电荷的辐射 (end)
+
+\subsection{相对论运动的点电荷辐射} % (fold)
+\label{sub:相对论运动的点电荷辐射}
+
+以$\+v\beta$方向为$\+uz$轴, $\+u{\+gr}\cdot \+vn = 1-\+u{\+gr}\cdot \+v\beta = 1-\beta\cos\theta$.
+\[ \+d\Omega dP = \frac{e_s^2}{4\pi c^3} \frac{\abs{\+u{\+gr}\times \pare{\+vn\times \+va}}^2}{\pare{\+u{\+gr}\cdot \+vn}^5},\quad \+vn = \+u{\+gr} - \+v\beta. \]
+
+\subsubsection{速度与加速度平行} % (fold)
+\label{ssub:速度与加速度平行}
+
+$\+vv\parallel \pm \+va$, $\+va_\parallel = a_\parallel \+uz$,
+\[ \+u{\+gr}\times\pare{\+vn\times \+va} = \+u{\+gr}\times\pare{\+u{\+gr}\times \+va_{\parallel}} = a_{\parallel} \sin\theta\,\+u\theta. \]
+
+\begin{cenum}
+    \item 角分布
+    \[ \+d\Omega dP = \frac{e_s^2 a_\parallel^2}{4\pi c^3}g_\parallel\pare{\theta},\quad g_\parallel\pare{\theta} = \frac{\sin^2\theta}{\pare{1-\beta\cos\theta}^5}. \]
+    \begin{cenum}
+        \item $\displaystyle \+d\Omega dP$与$a\parallel$的符号无关.
+        \item 运动的正前方$\pare{\theta = 0}$或正后方$\pare{\theta = \pi}$无辐射.
+        \[ \left.\+d\Omega dP\right\vert_{\theta = \pi/2} = \frac{e_s^2 a_\parallel^2}{4\pi c^3}. \]
+        \item 极端相对论的情形下, $\beta \approx 1$, 辐射主要集中于前方附近. 此时
+        \begin{align*}
+            & 1-\beta \approx \rec{2\gamma^2}, \\
+            & \theta \ll 1 \Rightarrow 1-\beta\cos\theta \approx \frac{1 + \gamma^2\theta^2}{2\gamma^2}, \\
+            & g_\parallel \approx 32\gamma^8 \frac{\gamma^2 \theta^2}{\pare{1+\gamma^2\theta^2}^5}. \\
+            & \+d{\pare{\gamma^2\theta^2}}d{g_\parallel} = 32\gamma^8 \brac{\rec{\pare{1+\gamma^2\theta}^2} - \frac{5\gamma^2\theta^2}{\pare{1+\gamma^2\theta^2}^6}} = 32\gamma^8 \frac{1-4\gamma^2\theta^2}{\pare{1+\gamma^2\theta^2}^6} \\
+            & \Rightarrow r^2\theta\+_max_^2 = \rec{4} \Rightarrow \theta\+_max_ = \rec{2\gamma},\quad \gamma\gg 1.
+        \end{align*}
+    \end{cenum}
+    \item 总功率
+    \begin{align*}
+        & P = \int \+d\Omega dP\,\rd{\Omega}, \\
+        & \int g_{\parallel} \,\rd{\Omega} = 2\pi \int_{-1}^{+1} \frac{1-u^2}{\pare{1-\beta u}^5}\,\rd{u}. \\
+    & \int_{0}^\pi g_{\parallel}\pare{\theta}\sin\theta\,\rd{\theta} = \frac{4}{3}\rec{\pare{1-\beta^2}^3} = \frac{4}{3}\gamma^6 \Rightarrow \int g_{\parallel}\pare{\theta}\,\rd{\Omega} = \frac{8\pi}{3}\gamma^6. \\
+    & P = \int \+d{\Omega}d{P}\,\rd{\Omega} \Rightarrow P_{\parallel} = \frac{2}{3}\frac{e_s^2 a_{\parallel}^2}{c^3}\gamma^6.
+\end{align*}
+\end{cenum}
+
+% subsubsection 速度与加速度平行 (end)
+
+\subsubsection{速度垂直于加速度} % (fold)
+\label{ssub:速度垂直于加速度}
+
+以$\+vv,\+va$张成的平面为$x,z$平面, 以$\+vv$方向为为$\+uz$方向, 
+\begin{align*}
+    \+u{\+gr}\times\pare{\+vn\times \+va} &= \+u{\+gr}\times\pare{\+u{\+gr}\times \+va} - \+u{\+gr}\times\pare{\+v\beta\times \+va} \\
+    &= \pare{\+u{\+gr}\cdot \+va}\+u{\+gr} - a_{\perp}\+ux - \beta a_\perp \+u{\+gr}\times \+uy, \\
+    \brac{\+u{\+gr}\times\pare{\+vn\times \+va}}\cdot \+u\theta &= -a_\perp \+u\theta\cdot \+ux + \beta a_\perp \+u\phi \cdot \+uy \\
+    &= -a_\perp \cos\theta\cos\phi + \beta a_\perp \cos\phi, \\
+    \brac{\+u{\+gr}\times\pare{\+vn\times \+va}}\cdot \+u\phi &= -a_\perp \+u\phi\cdot \+ux - \beta a_\perp \cos\theta\sin\phi, \\
+    \Rightarrow \+u{\+gr}\times\pare{\+vn\times \+va} &= a_\perp \brac{\+u\theta\pare{\beta - \cos\theta}\cos\phi + \+u\phi\pare{1-\beta \cos\theta}\sin\phi}, \\
+    \Rightarrow \abs{\+u{\+gr}\times\pare{\+vn\times \+va}}^2 &= a_\perp^2 \brac{\pare{\beta - \cos\theta}^2 \cos^2\phi + \pare{1-\beta\cos\theta}^2\pare{1-\cos^2\phi}} \\
+    &= a_\perp^2 \brac{\pare{1-\beta\cos\theta}^2 - \pare{1-\beta^2}\sin^2\theta\cos^2\phi}.
+\end{align*}
+\begin{cenum}
+    \item 角分布
+    \begin{align*}
+        \+d\Omega d{P_\perp} &= \frac{e_s^2 a_\perp^2}{4\pi c^3}g_\perp\pare{\theta,\phi},\quad g_\perp\pare{\theta,\phi} = \rec{\pare{1-\beta\cos\theta}^3}  - \frac{\sin^2\theta}{\pare{1-\beta\cos\theta}^5}\frac{\cos^2\phi}{\gamma^2}.
+    \end{align*}
+    $\theta=0$处具有最强辐射.
+    \item 总功率
+    \begin{align*}
+        \int g_\perp\pare{\theta,\varphi}\,\rd{\Omega} &= 2\pi \int_{-1}^1 \frac{\rd{u}}{\pare{1-\beta u}^3} - \rec{\gamma^2}\int_0^{2\pi}\cos^2\phi\,\rd{\phi} \int_0^\pi g_\parallel\pare{\theta}\sin\theta\,\rd{\theta} \\
+        &= 2\pi \cdot \rec{2\beta}\brac{\rec{\pare{1-\beta}^2} - \rec{\pare{1+\beta}^2}} - \rec{\gamma^2}\cdot \half \cdot 2\pi \cdot \frac{4}{3}\gamma^6 \\
+        &= \frac{8\pi}{3}\gamma^4. \\
+        P_\perp &= \frac{2}{3}\frac{e_s^2 a_\perp^2}{c^3}\gamma^4.
+    \end{align*}
+\end{cenum}
+
+% subsubsection 速度垂直于加速度 (end)
+
+\subsubsection{一般情形的辐射} % (fold)
+\label{ssub:一般情形的辐射}
+
+一般情形下,
+\[ \+u{\+gr}\times\pare{\+vn\times \+va} = a_\parallel \sin\theta\,\+u\theta + a_\perp\brac{\+u\theta \pare{\beta - \cos\theta}\cos\phi + \+u\phi \pare{1-\beta\cos\theta}\sin\phi}, \]
+故
+\[ \+d{\Omega}dP = \+d\Omega d{P_\parallel} + \+d\Omega d{P_\perp} + \frac{e_s^2 a_\parallel a_\perp}{2\pi c^3} \frac{\pare{\beta - \cos\theta}\sin\theta\cos\phi}{\pare{1-\beta\cos\theta}^2}. \]
+从而
+\begin{align*}
+    & P = \int \+d\Omega dP \,\rd{\Omega} = P_\parallel + P_\perp = \frac{2}{3}\frac{e_s^2}{c^3}\gamma^6 \pare{a_\parallel^2 + \frac{a_\perp^2}{\gamma^2}},\\
+    & \Rightarrow \resumath{P = \frac{2}{3}\frac{e_s^2}{c^3}\gamma^6\pare{a^2 - \abs{\+v\beta\times \+va}^2}.}
+\end{align*}
+\begin{remark}
+    参考轫致辐射(Bremsstrahlung).
+\end{remark}
+
+% subsubsection 一般情形的辐射 (end)
+
+\subsubsection{相对论力学摘要} % (fold)
+\label{ssub:相对论力学摘要}
+
+\begin{cenum}
+    \item 相对论能量和动量:
+    \[ \begin{cases}
+        \+cE = \gamma mc^2 = \frac{mc^2}{\sqrt{1-\beta^2}}, \\[.5em]
+        \+vp = \gamma m\+vv = \frac{m\+vv}{\sqrt{1-\beta^2}}.
+    \end{cases} \]
+    \begin{cenum}
+        \item $\+cE^2 = p^2c^2 + m^2c^4$, $\displaystyle \+v\beta = \frac{c\+vp}{\+cE}$.
+        \item $\gamma \gg 1$, $\displaystyle \+cE = pc$, $\beta \approx 1$.
+        \item $\displaystyle m=0 \Rightarrow $
+    \end{cenum}
+    \item 相对论力学方程:
+    \[ \+vF = \+dtd{\+vp}. \]
+    从而
+    \begin{align*}
+        & \+dtd{\gamma} = \+dtd{} \rec{\sqrt{1-\beta^2}} = \half \rec{\pare{1-\beta^2}^{3/2}}\cdot \pare{-2\+v\beta\cdot \+v\beta} \Rightarrow \dot\gamma = \gamma^3 \+v\beta \cdot \dot{\+v\beta}.\\
+        & \+vF = \dot{\gamma}m\+vv + \gamma m\+va = \gamma^3 mc\brac{\pare{\+v\beta\cdot \dot{\+v\beta}}\+v\beta + \frac{\dot{\+v\beta}}{\gamma^2}}.\\
+        & \+v\beta \parallel \+vF \Rightarrow F = \gamma^3 ma = \+dtd{p}.\\
+        & \+v\beta\perp \+vF = F=\gamma ma.
+    \end{align*}
+    \item 动能定理:
+    \begin{align*}
+        & \+cE^2 = p^2c^2 + m^2c^4 \Rightarrow 2\+cE \+dtd{\+cE} = 2c^2\+vp\+dtd{\+vp} \\
+        & \Rightarrow \+dtd{\+cE} = \frac{c^3 \+vp}{\+cE}\cdot \+dtd{\+vp} = \+vv\cdot \+vF. \\
+        & \+vF\cdot \+vv = \+dtd{\+cE} = \+dtdT,\quad t = \gamma mc^2 - mc^2.
+    \end{align*}
+    \begin{cenum}
+        \item 直线运动:
+        \begin{align*}
+            & Fv = \+dtd{\+cE} = \+dtdx \+dxd{\+cE}, \\
+            & \Rightarrow F = \+dtdp = \+dxd{\+cE}.
+        \end{align*}
+        \item 圆周运动($\+v\beta\perp \+vF$):
+        \[ \+cE = \const. \]
+    \end{cenum}
+\end{cenum}
+
+% subsubsection 相对论力学摘要 (end)
+
+\subsubsection{加速度平行于速度的辐射分析} % (fold)
+\label{ssub:加速度平行于速度的辐射分析}
+
+此时
+\[ P_\parallel = \frac{2}{3}\frac{e_s^2 a^2}{c^3}\gamma^6 = \frac{2}{3}\frac{e_s^2 F^2}{m^2c^3} = \frac{2}{3}\frac{e_s^2}{m^2c^3}\pare{\+dxd{\+cE}}^2. \]
+\begin{cenum}
+    \item 当速度或能量一定, $P_\parallel \propto a^2$.
+    \item 当$F$一定, $P_\parallel$与能量相关.
+    \item 当$F$一定, $\displaystyle P_\parallel \propto \rec{m^2} \Rightarrow \frac{P_\parallel\pare{\mathrm{electron}}}{P_\parallel\pare{\mathrm{proton}}} = \pare{\frac{m_p}{m_e}}^2 \sim 10^6$.
+    \item 在直线加速器中, 对于电子
+    \[ \xi = \frac{P_\parallel}{Fv} = \frac{2}{3}\frac{e_s^2 F}{\beta m_e^2 c^4} = \frac{2}{3}\frac{r_e F}{\beta m_e c^2}. \]
+    考虑极端相对论情形, $\beta \approx 1$, 取$\xi = 1\%$,
+    \[ F \sim \SI{e18}{\eV\per\meter} \Rightarrow E\sim \SI{e18}{\volt\per\meter}. \]
+    从而通常辐射都是可忽略的.
+\end{cenum}
+
+% subsubsection 加速度平行于速度的辐射分析 (end)
+
+\subsubsection{加速度垂直于速度的辐射分析} % (fold)
+\label{ssub:加速度垂直于速度的辐射分析}
+
+此时
+\[ P_\perp = \frac{2}{3}\frac{e_s^2 a^2}{c^3}\gamma^4 = \frac{2}{3}\frac{e_s^2 F^2}{m^2 c^3}\gamma^2 = \frac{2}{3}\frac{e_s^2 c}{R^2}\beta^4\pare{\frac{\+cE}{mc^2}}^4. \]
+这是由于
+\[ F = \gamma ma = \gamma m \frac{v^2}{R} \Rightarrow a = \frac{v^2}{R} = \beta^2 \frac{c^2}{R}. \]
+\begin{cenum}
+    \item $a$一定, 则$\displaystyle \frac{P_\parallel}{P_\perp} = \gamma^2$.
+    \item $F$一定, 则$\displaystyle \frac{P_\parallel}{P_\perp} = \rec{\gamma^2}$.
+    \item 能量一定时, $\displaystyle P_\perp \propto \rec{m^4} \Rightarrow \frac{P_\parallel\pare{\mathrm{electron}}}{P_\parallel\pare{\mathrm{proton}}} = \pare{\frac{m_p}{m_e}}^4 \sim 10^{13}$.
+    \item 对于环形加速器, 定义
+    \begin{align*}
+        & \xi = \frac{P_\perp T}{\+cE} = \frac{2}{3}\frac{e_s^2 c}{R^2 \cdot mc^2} \beta^4 \pare{\frac{\+cE}{mc^2}}^3 \cdot \frac{2\pi R}{\beta c}. \\
+        & \Rightarrow \xi = \frac{4\pi}{3}\frac{e_s^2}{R\cdot mc^2}\beta^4\pare{\frac{\+cE}{mc^2}}^3. \\
+        & \Rightarrow \xi\+_electron_ = \frac{4\pi}{3}\frac{r_e}{R}\pare{\frac{\+cE}{m_e c^2}}^3 \approx \SI{8.8e-5}{}\cdot \frac{\pare{\+cE/\SI{}{\giga\eV}}^3}{R/\SI{}{\meter}}, \\
+        & \Rightarrow \xi\+_proton_ = \SI{7.7e-18}{}\frac{\+cE^3}{R}.
+    \end{align*}
+    对于$R = \SI{4.5}{\kilo\meter}$, 质子$\+cE=7{\tera\eV} \Rightarrow \xi = \SI{5.9e-10}{}$. 如果加速电子, 则$\xi = \cancel{\SI{6700}{}}$. 如果电子的$\+cE=\SI{60}{\giga\eV}$, 则$\xi = 0.42\%$.
+\end{cenum}
+
+% subsubsection 加速度垂直于速度的辐射分析 (end)
+
+% subsection 相对论运动的点电荷辐射 (end)
+
+% section 荷電粒子 (end)
+
+\end{document}

@@ -1,0 +1,78 @@
+\documentclass{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage[scaled =.92]{helvet}
+\setlength{\paperwidth}{5.2075in}
+\setlength{\paperheight}{4.90in}
+\renewcommand*{\familydefault}{phv}
+\usepackage[pdftex,margin=0.5in]{geometry}
+\usepackage{fancyhdr}
+\lhead{A Sample Calculation}\chead{}
+\rhead{Area of Circle}
+\lfoot{}\cfoot{}\rfoot{}
+\pagestyle{fancy}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[pdftex,pdfpagelayout=SinglePage,
+pdftitle={Wishing you a happy year},pdfsubject={Invest your new year improving your TeX skills}%
+]{hyperref}
+\setlength{\parindent}{0.0cm}
+\usepackage[pdftex]{insdljs}
+
+
+\begin{insDLJS}[test]{test}{JavaScript}
+function doCalculation()
+{
+var radius=0.0 + this.getField("radius").value;
+ this.getField("diameter").value=radius*2;
+ this.getField("areacircle").value=  Math.PI * Math.pow(radius, 2);
+}
+\end{insDLJS}
+
+%% Short hand commands
+\newcommand{\textforlabel}[2]{%
+\TextField[name={#1}, value={#2}, width=9em,align=2,%
+               bordercolor={0.990 .980 .85},%
+               readonly=true]{}%
+}
+
+
+%% Define the heading
+\newcommand{\heading}[1]{\textsc{#1}}
+
+\begin{document}
+\begin{center}
+\textbf{\Huge Calculations\\ with JavaScript\\*[4pt] and pdfLateX!}
+\end{center}
+
+\newpage
+
+\begin{Form}
+
+\heading{Area of Circle}
+
+%% 
+%%% Input field radius
+
+\textforlabel{l01}{Radius:}
+\TextField[name=radius,width=10em, bordercolor={0.650 .790 .94}]{}%
+~m\\
+
+%% Push button is defined here
+\textforlabel{l02}{Press to calculate}  
+\PushButton[name=start,onclick={doCalculation();},bordercolor={0.650 .790 .94}%
+]{Calculate}\\ 
+
+\heading{Results}\\
+
+%% RESULTS
+%% Diameter
+\textforlabel{name=l04}{%
+Diameter :} \TextField[name=diameter,width=10em,bordercolor={0.650 .790 .94},%
+readonly=true]{}~m
+
+\textforlabel{name=l05}{Area:}  
+\TextField[name=areacircle,width=10em,%
+bordercolor={0.650 .790 .94},readonly=true]{}~m$^2$\\*[-0.8em]
+\end{Form}
+\end{document}

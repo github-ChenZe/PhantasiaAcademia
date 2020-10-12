@@ -756,6 +756,85 @@ $jj$耦合的选择定则为
 
 % subsection 多电子原子 (end)
 
+\subsection{原子内层能级和特征X射线} % (fold)
+\label{sub:原子内层能级和特征x射线}
+
+\subsubsection{X射线的能谱} % (fold)
+\label{ssub:x射线的能谱}
+
+高能电子束射入金属, 可得连续的韧致辐射谱和离散的X射线谱. 连续谱满足
+\[ h\nu\+_max_ = \frac{hc}{\lambda\+_min_} = eU. \]
+当电压大于一定值, 连续谱上将出现一定的分立谱. 其波长与加速电压无关, 仅与靶材料有关. 不同靶材料除了波长不同, X射线谱具有相似的结构.
+\par
+特征谱包括两组谱线,
+\[ \begin{cases}
+    \text{$\mathrm K$线系:} & \mathrm K_\alpha, \mathrm K_\beta, \mathrm K_\gamma, \cdots, \\
+    \text{$\mathrm L$线系:} & \mathrm L_\alpha, \mathrm L_\beta, \mathrm L_\gamma, \cdots.
+\end{cases} \]
+原子序数大的元素还会出现$\mathrm M$线, $\mathrm N$线等. \gloss{Moseley公式}表明
+\[ \begin{cases}
+    \mathrm K_\alpha: & \displaystyle \tilde{\nu}\+_K_ = R\pare{Z-1}^2\pare{\rec{1^2} - \rec{2^2}}, \\[.5em]
+    \mathrm L_\alpha: & \displaystyle \tilde{\nu}\+_K_ = R\pare{Z-7.4}^2\pare{\rec{2^2} - \rec{3^2}}.
+\end{cases} \]
+根据实验测量的特征线波数, 在Moseley图上就可以标识元素的种类, 所以特征谱又谓标识谱. 为了让$2\mapsto 1$的跃迁发生, 需要在$\mathrm K$层制造空穴, 这要求使用高能电子电离之.
+\par
+例如镉的最外层为 \econfig{5s2 4d10}, 各层皆填满, 基态$^1\mathrm S_0$. 可以激发到 \econfig{5s5p}, \econfig{5s 6p}, \econfig{5s 7p} 等. 也可以激发到 \econfig{5s 6s}, \econfig{5s 7s} 等.
+\par
+当$\mathrm K$壳层电离一个电子后, 相应的基态变为$^2\mathrm S_{1/2}$, 此时能级最高. $\mathrm L$壳层电离一个$2\mathrm{s}$电子后相应的基态也变为$^2\mathrm S_{1/2}$. 电离$2\mathrm p$电子则基态变为$^2\mathrm P_{1/2,3/2}$, 从而$\mathrm L$壳层的电离有三支. $\mathrm M$壳层电离一个$3\mathrm{s}$电子后相应的基态也变为$^2\mathrm S_{1/2}$. 电离$3\mathrm p$电子则基态变为$^2\mathrm P_{1/2,3/2}$, 电离$3d$电子则基态变为$^2\mathrm D_{3/2,5/2}$, 从而$M$壳层的电离有五支.
+\par
+以$\mathrm K$, $\mathrm L\+_I_$, $\mathrm L\+_II_$, $\mathrm L\+_III_$等表示相应壳层电离一个电子后的能级. 则$\mathrm K\mapsto \mathrm L\+_II,III_$是允许的跃迁, $\mathrm K\mapsto \mathrm M\+_II, III_$也是允许的跃迁, 还可以跃迁到$N$能级. 分别为$\mathrm K_\alpha$和$\mathrm K_\beta$线系.
+\begin{center}
+    \begin{tikzpicture}
+        \draw[dashed] (0,0) node[left] {$\mathrm{N}$} -- (8,0) node[right] {};
+        \draw (0,2) node[left] {$\mathrm{M}\+_V_$} -- (8,2) node[right] {$^2\mathrm D_{5/2}$};
+        \draw (0,2.5) node[left] {$\mathrm{M}\+_IV_$} -- (8,2.5) node[right] {$^2\mathrm D_{3/2}$};
+        \draw (0,3.5) node[left] {$\mathrm{M}\+_III_$} -- (8,3.5) node[right] {$^2\mathrm P_{3/2}$};
+        \draw (0,4) node[left] {$\mathrm{M}\+_II_$} -- (8,4) node[right] {$^2\mathrm P_{1/2}$};
+        \draw (0,5) node[left] {$\mathrm{M}\+_I_$} -- (8,5) node[right] {$^2\mathrm S_{1/2}$};
+        \draw (0,7) node[left] {$\mathrm{L}\+_III_$} -- (8,7) node[right] {$^2\mathrm P_{3/2}$};
+        \draw (0,7.5) node[left] {$\mathrm{L}\+_II_$} -- (8,7.5) node[right] {$^2\mathrm P_{1/2}$};
+        \draw (0,8.5) node[left] {$\mathrm{L}\+_I_$} -- (8,8.5) node[right] {$^2\mathrm S_{1/2}$};
+        \draw (0,10.5) node[left] {$\mathrm{K}$} -- (8,10.5) node[right] {$^2\mathrm S_{1/2}$};
+        \draw[latex-latex] (1,10.5) -- (1,7.5) node[midway,fill=white] {$\alpha_2$};
+        \draw[latex-latex] (1.5,10.5) -- (1.5,7) node[midway,fill=white] {$\alpha_1$};
+        \draw[latex-latex] (2,10.5) -- (2,4) node[midway,fill=white] {$\beta_1$};
+        \draw[latex-latex] (2.5,10.5) -- (2.5,3.5) node[midway,fill=white] {$\beta_3$};
+        \draw[latex-latex] (3,10.5) -- (3,0) node[midway,fill=white] {$\beta_{\cdots}$};
+        \draw[latex-latex] (3.5,8.5) -- (3.5,4) node[midway,fill=white] {$\beta_{4}$};
+        \draw[latex-latex] (4,8.5) -- (4,3.5) node[midway,fill=white] {$\beta_{3}$};
+        \draw[latex-latex] (4.5,7.5) -- (4.5,5) node[midway,fill=white] {$\eta$};
+        \draw[latex-latex] (5,7.5) -- (5,2.5) node[midway,fill=white] {$\beta_1$};
+        \draw[latex-latex] (5.5,7) -- (5.5,5) node[midway,fill=white] {$l$};
+        \draw[latex-latex] (6,7) -- (6,2.5) node[midway,fill=white] {$\alpha_2$};
+        \draw[latex-latex] (6.5,7) -- (6.5,2) node[midway,fill=white] {$\alpha_1$};
+        \draw[latex-latex] (7,7) -- (7,0) node[midway,fill=white] {$\beta_2$};
+    \end{tikzpicture}
+\end{center}
+
+% subsubsection x射线的能谱 (end)
+
+\subsubsection{Auger电子能谱} % (fold)
+\label{ssub:auger电子能谱}
+
+$\mathrm K$壳层出现空穴后, $\mathrm L$壳层上的一个$\mathrm s$电子可能跃迁到$\mathrm K$壳层填补这一空位, 释放出的能量导致一个$\mathrm 2p$电子电离, 谓$\mathrm K\mathrm L\+_I_\mathrm L\+_II,III_$跃迁. 其动能
+\[ E\+_A_ = E\+_K_ - E\+_{L\+_I_}_ - E\+_{L\+_II,III_}_. \]
+X荧光发射和Auger发射是随机的.
+
+% subsubsection auger电子能谱 (end)
+
+\subsubsection{荧光产额} % (fold)
+\label{ssub:荧光产额}
+
+荧光产额为
+\[ \omega\+_K_ = \frac{K\text{X光子数}}{\text{有$K$层空位的原子数}}, \]
+有
+\[ \omega\+_K_ \approx \pare{1+b_K Z^4}^{-1},\quad b_K \approx 7.5\times 10^{-5}. \]
+重元素的$\mathrm K$层以荧光过程为主, 氢元素以Auger过程为主.
+
+% subsubsection 荧光产额 (end)
+
+% subsection 原子内层能级和特征x射线 (end)
+
 % section 多电子原子 (end)
 
 \end{document}

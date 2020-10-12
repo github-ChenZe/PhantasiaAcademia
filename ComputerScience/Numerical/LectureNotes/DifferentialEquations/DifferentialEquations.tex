@@ -1,0 +1,334 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{常微分方程的数值解} % (fold)
+\label{sec:常微分方程的数值解}
+
+\subsection{常微分方程的初值问题} % (fold)
+\label{sub:常微分方程的初值问题}
+
+\begin{theorem}
+    若初值问题
+    \[ \begin{cases}
+        y' = f\pare{x,y}, & x\in\brac{a,b}, \\
+        y\pare{a} = \tilde{y}.
+    \end{cases} \]
+    满足$f\pare{x,y}$是实值函数, 在矩形区域$\brac{a,b} \times \+bR$上连续, 且$f\pare{x,y}$关于$y$满足Lipschitz条件, 即存在常数$L$, 使得对于任意$x\in\brac{a,b}$和$y_1,y_2 \in \+bR$都有
+    \[ \abs{f\pare{x,y_1} - f\pare{x,y_2}} \le L\abs{y_1-y_2}, \]
+    则方程对任意初值都是适定的, 即其解$y\in C^1\brac{a,b}$存在唯一且稳定.
+\end{theorem}
+记$y_j$为$y\pare{x_j}$的近似值, 取均匀剖分$x_j = x_0 + jh$, $x_0 = a$, $j = 1,\cdots,N$, 空间步长$\displaystyle h = \frac{b-a}{N}$.
+
+% subsection 常微分方程的初值问题 (end)
+
+\subsection{Euler方法} % (fold)
+\label{sub:euler方法}
+
+\subsubsection{Euler方法} % (fold)
+\label{ssub:euler方法}
+
+\newpoint{}前差为
+\[ y'\pare{x}\vert_{x=x_n} \approx \frac{y_{n+1} - y_n}{h}, \]
+可得显式单步方法
+\[ \begin{cases}
+    y_{n+1} = y_n + hf\pare{x_n,y_n}, \\
+    y_0 = \tilde{y}.
+\end{cases} \]
+谓之二层方法(单步法).
+\newpoint{}后差为
+\[ y'\pare{x}\vert_{x=x_n} \approx \frac{y\pare{x_n} - y\pare{x_{n-1}}}{h} \approx \frac{y_n - y_{n-1}}{h}. \]
+可得隐式单步法
+\[ \begin{cases}
+    y_{n+1} = y_n + hf\pare{x_{n+1},y_{n+1}}, & n = 0,\cdots.
+\end{cases} \]
+\newpoint{}中心差为
+\[ y'\pare{x}\vert_{x=x_n} \approx \frac{y\pare{x_{n+1}} - y\pare{x_{n-1}}}{2h} \approx \frac{y_{n+1} - y_{n-1}}{2h}. \]
+可得显式多步法
+\[ \begin{cases}
+    y_{n+1} = y_{n-1} + 2hf\pare{x_n,y_n}.
+\end{cases} \]
+
+% subsubsection euler方法 (end)
+
+\subsubsection{误差分析} % (fold)
+\label{ssub:误差分析}
+
+按照误差产生的原因可以分为
+\begin{cenum}
+    \item 舍入误差: 计算过程中数值的舍入引起的误差.
+    \item 局部截断误差: 数值近似引起的误差(例如有差商近似导数).
+    \item 整体截断误差: 不包含舍入误差引起的误差, 即精确解与数值解之差, $y\pare{x_n} - y_n$.
+\end{cenum}
+主要针对Euler方法讨论后两种误差,
+\begin{cenum}
+    \item 局部截断误差与精度:
+    \[ T_n = \frac{y\pare{x_{n+1}} - y\pare{x_n}}{h} - y'\pare{x}\vert_{x=x_n} = \frac{h}{2}y''\pare{\xi_n},\quad \xi_n\in\pare{x_n,x_{n+1}}. \]
+    \item 整体截断误差$e_n = y\pare{x_n} - y_n$, 收敛性
+    \[ \abs{e_{n+1}} \le e^{\pare{n+1} hL}\pare{\abs{e_0} + \frac{T}{L}} = e^{\pare{b-a}L}\pare{\abs{e_0} + \frac{T}{L}}. \]
+    设$T = \max \abs{T_n}$, 有
+    \begin{align*}
+        \abs{e_{n+1}} &\le \abs{e_n} + h\abs{f\pare{x_n,y\pare{x_n}} - f\pare{x_n,y_n}} + hT \\
+        & < \abs{e_n} + Lh\abs{e_n} + hT.
+    \end{align*}
+    从而
+    \[ \abs{e_{n+1}} < \pare{1+hL}\abs{e_n} + hT < \cdots < \pare{1+hL}^{n+1}\pare{\abs{e_0} + \frac{T}{L}}. \]
+    注意到$\pare{1+z}^n \le e^{nz}$, 有
+    \begin{align*}
+        & \abs{e_{N+1}} \le e^{\pare{n+1}hL}\pare{\abs{e_0} + \frac{T}{L}}.
+        & \Rightarrow \abs{e_N} \le e^{\pare{b-a}L}\abs{e_0} + e^{\pare{b-a}L}\frac{T}{L}.
+    \end{align*}
+    第一项对应初值误差, 第二项对应截断误差.
+\end{cenum}
+\begin{definition}
+    对于给定的数值方法, 若截断误差为$T_n = O\pare{h^p}$, 则谓之具有$p$阶精度.
+\end{definition}
+向前Euler方法是$1$阶的.
+
+% subsubsection 误差分析 (end)
+
+\subsubsection{Euler方法的稳定性} % (fold)
+\label{ssub:euler方法的稳定性}
+
+Euler方法初值的微小变化导致的误差满足
+\[ \abs{y_n - z_n} \le C\abs{y_0 - z_0},\quad 0<h<h_0,\quad a<nh<b. \]
+注意到
+\begin{align*}
+    & y_{n+1} = y_n + hf\pare{x_n,y_n}, \\
+    & z_{n+1} = z_n + hf\pare{x_n,z_n}, \\
+    &\abs{y_{n+1} - z_{n+1}} \le \abs{y_n - z_n} + h\abs{f\pare{x_n,y_n} - f\pare{x_n,z_n}},\\
+    & \le \abs{y_n - z_n} + hL\abs{y_n - z_n} = \pare{1+hL}\abs{y_n - z_n} \\
+    & = \cdots < \pare{1+hL}^{n+1}\abs{y_0 - z_0} \\
+    & \le e^{nhL}\abs{y_0 - z_0}.
+\end{align*}
+
+% subsubsection euler方法的稳定性 (end)
+
+% subsection euler方法 (end)
+
+\subsection{显式Runge-Kutta方法} % (fold)
+\label{sub:显式runge_kutta方法}
+
+\subsubsection{Runge-Kutta方法} % (fold)
+\label{ssub:runge_kutta方法}
+
+$\displaystyle \begin{cases}
+    \displaystyle \+dxdy = f\pare{x,y}, \\
+    y\pare{a} = \tilde{y}.
+\end{cases}$
+一般显式格式为
+\[ y_{n+1} = y_n + h\pare{c_1 K_1 + \cdots + c_RK_R}, \]
+其中
+\begin{align*}
+    K_1 &= f\pare{x_n,y_n}, \\
+    K_2 &= f\pare{x_n + a_2h, y_n + hb_{21}K_1}, \\
+    \cdots & \\
+    K_R &= f\pare{x_n + a_Rh,y_n + h\sum_{s=1}^{R-1}b_{Rs}K_s},
+\end{align*}
+其中$c_r$, $r=1,\cdots,R$, $a_j$, $j=2,\cdots,R$, $b_{sm}$, $s=1,\cdots,R$, $m=1,\cdots,R-1$是特定的常系数.
+
+% subsubsection runge_kutta方法 (end)
+
+\subsubsection{单步法的基本性质} % (fold)
+\label{ssub:单步法的基本性质}
+
+一般显式格式
+\[ y_{n+1} = y_n + h\varphi\pare{x_n,y_n,h}, \]
+截断误差
+\[ T_n = \frac{y\pare{x_{n+1}} - y\pare{x_n}}{h} - \varphi\pare{x_n,y_n,h}. \]
+\begin{definition}
+    若$p$是使$T_h = O\pare{h^p}$成立的最大整数, 则谓之$p$阶的.
+\end{definition}
+\begin{definition}
+    若$\varphi\pare{x_n,y_n,h}$满足$\varphi\pare{x,y,0} = f\pare{x,y}$, 则谓之与$\+dxdy = f\pare{x,y}$相容.
+\end{definition}
+\begin{theorem}
+    若对于$0<h\le h_0$, $\varphi\pare{x,y,h}$满足Lipschitz条件, 则$y_{n+1} = y_n + h\varphi\pare{x_n,y_n,h}$是稳定的.
+\end{theorem}
+\begin{definition}
+    若$x=x_n$时, $\displaystyle \lim_{h\rightarrow 0} y_n = y\pare{x_n}$, 则谓该单步法收敛.
+\end{definition}
+\begin{theorem}
+    若$\varphi\pare{x,y,h}$满足Lipschitz条件且局部截断误差满足$T_n \le T = c\cdot h^p$, 则$y_{n+1} = y_n + h\varphi\pare{x_n,y_n,h}$的解的整体误差$e_n = y\pare{x_n} - y_n$满足
+    \[ \abs{e_n} \le e^{L\pare{b-a}}\abs{e_0} + h^p \frac{c}{L}\brac{e^{L\pare{b-a}}-1}. \]
+\end{theorem}
+
+% subsubsection 单步法的基本性质 (end)
+
+\subsubsection{常用的Runge-Kutta方法} % (fold)
+\label{ssub:常用的runge_kutta方法}
+
+二阶精度的Runge-Kutta法要求$T_n = O\pare{h^2}$, $R=2$, 即
+\[ \varphi\pare{x_n,y_n,h} = c_1K_1 + c_2K_2 = c_1 f\pare{x_n,y_n} + c_2 f\pare{x_n + a_2h, y_n + b_{21}f\pare{x_n,y_n}}. \]
+从而
+\begin{align*}
+    & \varphi\pare{x_n,y_n,h} = \brac{\pare{c_1+c_2}f\pare{x,y} + c_2a_2 h f_x + c_2b_{21}hff_y}_{x=x_n,y=y_n}, \\
+    & \frac{y\pare{x_{n+1}} - y\pare{x_n}}{h} = \brac{y' + \frac{h}{2}y'' + \cdots + \frac{h^{p-1}}{p!}y^{\pare{p}}}_{x=x_n,y=y_n} + O\pare{h^p}.
+\end{align*}
+其中
+\begin{align*}
+    y' &= f\pare{x,y}, \\
+    y'' &= \+dxd{}\pare{f\pare{x,y}} = f_x + ff_y, \\
+    y''' &= \+dxd{}\pare{f_x+ff_y} = f_{xx} + 2ff_{xy} + f^2 f_{yy} + f_y\pare{f_x - ff_y}.
+\end{align*}
+从而
+\begin{align*}
+    & T_n = \frac{y\pare{x_{n+1}} - y\pare{x_n}}{h} - \varphi\pare{x_n,y_n,h} \\
+    &= \brac{f + \frac{h}{2}\pare{f_x + ff_y} + O\pare{h^2}}_{x=x_n,y=y_n} \\
+    &\phantom{=\ } - \brac{\pare{1-\pare{c_1+c_2}}f + \pare{\frac{h}{2} - c_2a_2h}f_x + \pare{\frac{h}{2} - c_2b_{21}h}ff_y + O\pare{h^2}}_{x=x_n,y=y_n}\\
+    &= O\pare{h^2}.
+\end{align*}
+这要求
+\[ \begin{cases}
+    c_1 + c_2 = 1, \\
+    c_2 a_2 = 1/2, \\
+    c_2b_{21} = 1/2.
+\end{cases} \]
+\begin{cenum}
+    \item 改进的Euler公式: $c_1 = 1/2, c_2=1/2, a_2 = 1, b_{21} = 1$,
+    \[ \begin{cases}
+        \displaystyle y_{n+1} = y_n + \frac{h}{2}\pare{K_1 + K_2}, \\
+        \displaystyle K_1 = f\pare{x_n,y_n}, \\
+        \displaystyle K_2 = f\pare{x_n+h,y_n + hK_1}.
+    \end{cases} \]
+    \item 中心公式: $c_1 = 0, c_2 = 1, a_2 = 1/2, b_{21} = 1/2$,
+    \[ \begin{cases}
+        \displaystyle y_{n+1} = y_n + hK_2, \\
+        K_1 = f\pare{x_n,y_n}, \\
+        K_2 = f\pare{x_n + h/2, y_n + hK_1/2}.
+    \end{cases} \]
+    \item Heun公式: $c_1 = 1/4, c_2 = 3/4, a_2 = 2/3, b_{21} = 2/3$,
+    \[ \begin{cases}
+        \displaystyle y_{n+1} = y_n + h\pare{K_1+3K_2}/4, \\
+        K_1 = f\pare{x_n,y_n}, \\
+        K_2 = f\pare{x_n + 2h/3, y_n + 2hK_1/3}.
+    \end{cases} \]
+\end{cenum}
+
+% subsubsection 常用的runge_kutta方法 (end)
+
+% subsection 显式runge_kutta方法 (end)
+
+\subsection{基于数值积分的差分的多步法} % (fold)
+\label{sub:基于数值积分的差分的多步法}
+
+\subsubsection{1阶常微分方程初值问题的多步法} % (fold)
+\label{ssub:1阶常微分方程初值问题的多步法}
+
+对于初值问题
+\[ \begin{cases}
+    y' = f\pare{x,y},& x\in\brac{a,b}, \\
+    y\pare{a} = \tilde{y}.
+\end{cases} \]
+多步法的一般形式为
+\[ y_{n+1} = \sum_{j=1}^k \alpha_j y_{n-j+1} + h\phi\pare{x_{n+1},x_n,\cdots,x_{n-k+1},y'_{n+1},\cdots,y'_{n-k+1},h}. \]
+其中$k$是整数, $\curb{\alpha_j}$是给定的实数. 线性$k$步法的一般显式为
+\[ y_{n+1} = \sum_{j=1}^k \alpha_j y_{n-j+1} + h\sum_{j=0}^k \beta_j y'_{n-j+1}. \]
+其中$\curb{\alpha_j}$, $\curb{\beta_j}$是常熟, 且$\alpha_k^2 + \beta_k^2 \neq 0$.
+
+% subsubsection 1阶常微分方程初值问题的多步法 (end)
+
+\subsubsection{基于数值积分的构造} % (fold)
+\label{ssub:基于数值积分的构造}
+
+有
+\[ y\pare{x_{n+1}} = y\pare{x_{n-p}} + \int_{x_{n-p}}^{x_{n+1}} f\pare{x,y\pare{x}}\,\rd{x}. \]
+用数值积分公式近似上式中的积分,
+\begin{cenum}
+    \item 以$x_n,x_{n-1},\cdots,x_{n-q}$为积分节点, 导出数值积分公式, 为显式Adams公式,
+    \begin{citem}
+        \item $p=0,q=0$, 有
+        \[ y\pare{x_{n+1}} \approx y\pare{x_n} + hf\pare{x_n,y\pare{x_n}}. \]
+        即
+        \[ y_{n+1} = y_n + hf\pare{x_n,y_n}. \]
+        \item $p=0, q=1$, 有
+        \begin{align*}
+            f\pare{x,y\pare{x}} &= \frac{x-x_{n-1}}{x_n-x_{n-1}}f\pare{x_n,y\pare{x_n}}\\
+            & \phantom{=\ } + \frac{x-x_n}{x_{n-1}-x_n}f\pare{x_{n-1},y\pare{x_{n-1}}} + \frac{f''\pare{\xi_1}}{2} \pare{x-x_n}\pare{x-x_{n-1}}.
+        \end{align*}
+        可得
+        \[ \int_{x_n}^{x_{n+1}}f\pare{x,y\pare{x}}\,\rd{x} = \frac{h}{2}\brac{3f\pare{x_n,y\pare{x_n}} - f\pare{x_{n-1}, y\pare{x_{n-1}}}} + \frac{5}{12}h^3f''\pare{\xi_n}. \]
+    \end{citem}
+    \item 以$x_{n+1},x_n,\cdots,x_{n+1-q}$为插值节点, 构造$f\pare{x,y\pare{x}}$在区间$\brac{x_{n-p},x_{n+1}}$的插值多项式, 再求积分, 可得隐式Adams公式.
+    \begin{citem}
+        \item $p=0,q=0$, 插值节点为$x_{n+1}$,
+        \[ y_{n+1} = y_n + hf\pare{x_{n+1},y_{n+1}}. \]
+        \item $p=0,q=2$, 节点为$x_{n+1}, x_n, x_{n-1}$, 从而
+        \[ y_{n+1} = y_n + \rec{12}h\brac{5f\pare{x_{n+1},y_{n+1}} + 8f\pare{x_n,y_n} - f\pare{x_{n-1},y_{n-1}}}. \]
+    \end{citem}
+\end{cenum}
+
+% subsubsection 基于数值积分的构造 (end)
+
+\subsubsection{预估-校正法} % (fold)
+\label{ssub:预估_校正法}
+
+用显式格式得出预估值, 再用隐式方法校正.
+\[ \begin{cases}
+    \overbar{y}_{n+1} = y_n + hf\pare{x_n,y_n}, \\
+    \displaystyle y_{n+1} = y_n + \half h\brac{f\pare{x_n,y_n} + f\pare{x_{n+1},\overbar{y}_{n+1}}}.
+\end{cases} \]
+
+% subsubsection 预估_校正法 (end)
+
+% subsection 基于数值积分的差分的多步法 (end)
+
+\subsection{常微分方程组的初值问题的数值方法} % (fold)
+\label{sub:常微分方程组的初值问题的数值方法}
+
+\subsubsection{1阶常微分方程组} % (fold)
+\label{ssub:1阶常微分方程组}
+
+\[ \begin{cases}
+    \displaystyle \+dxd{y_1} = f_1\pare{x,y_1,\cdots,y_m}, \\
+    \vdots\\
+    \displaystyle \+dxd{y_m} = f_m\pare{x,y_1,\cdots,y_m},
+    y_1\pare{a} = \eta_1, \\
+    \vdots\\
+    y_m\pare{a} = \eta_m.
+\end{cases} \]
+从而
+\[ \begin{cases}
+    \displaystyle \+dxdY = F\pare{x,Y}, \\
+    Y\pare{a} = \eta.
+\end{cases} \]
+向前Euler公式为
+\[ Y_{n+1} = y_n + hF\pare{x_n,Y_n}. \]
+二阶显式Adams公式为
+\[ Y_{n+1} = y_n + \half h\brac{3F\pare{x_n,Y_n} - F\pare{x_{n-1},Y_{n-1}}}. \]
+
+% subsubsection 1阶常微分方程组 (end)
+
+\subsubsection{高阶常微分方程初值问题} % (fold)
+\label{ssub:高阶常微分方程初值问题}
+
+对于
+\[ \begin{cases}
+    \displaystyle \+d{x^2}d{^2y} = f\pare{x,y,\+dxdy}, & x\in\brac{a,b}, \\
+    \displaystyle \left. \+dxdy \right\vert_{x=a} = z_0, \\
+    \displaystyle y\pare{a} = \eta_1,
+\end{cases} \]
+可以通过令$\displaystyle z = \+dxdy$, 将方程转化为
+\[ \begin{cases}
+    \displaystyle \+dxdz = f\pare{x,y,z}, \\
+    \displaystyle \+dxdy = z, \\
+    z\pare{a} = \eta_0, \\
+    y\pare{a} = \eta_1.
+\end{cases} \]
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+p.162 3, 6, 7, 8
+
+% paragraph 作业 (end)
+
+% subsubsection 高阶常微分方程初值问题 (end)
+
+% subsection 常微分方程组的初值问题的数值方法 (end)
+
+% section 常微分方程的数值解 (end)
+
+\end{document}

@@ -1,0 +1,318 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\usetikzlibrary{positioning}
+\tikzset{>=stealth}
+\usetikzlibrary{decorations.markings}
+
+\definecolor{graybg}{RGB}{228,235,243}
+\definecolor{titlepurple}{RGB}{150,131,104}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\definecolor{warningred}{RGB}{159,57,61}
+\definecolor{CJKblack}{RGB}{72,72,72}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\DeclareMathOperator{\cond}{cond}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\def\bili#1#2{#2}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usetikzlibrary{arrows.meta}
+
+\tikzset{middlearrow/.style={
+        decoration={markings,
+            mark= at position 0.5 with {\arrow{#1}} ,
+        },
+        postaction={decorate}
+    }
+}
+
+\usepackage{colortbl}
+
+\begin{document}
+
+\begin{multicols*}{2}[\centerline{\titlefont 線型計算}]
+\raggedcolumns%
+\newheader{多項式補間}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Lagrange} && p = \frac{\pare{x-x_1}\pare{x-x_2}}{\pare{x_0-x_1}\pare{x_0-x_2}}y_0
+         + \frac{\pare{x-x_0}\pare{x-x_2}}{\pare{x_1-x_0}\pare{x_1-x_2}}y_1
+         + \frac{\pare{x-x_0}\pare{x-x_1}}{\pare{x_2-x_0}\pare{x_2-x_1}}y_2 % \begin{array}{c|c|c|c}
+        %    x & x_0 & x_1 & x_2 \\
+        %    \hline
+        %    y & y_0 & y_1 & y_2
+        %\end{array} \Rightarrow  \displaystyle p = \begin{cases}
+        %    \displaystyle \phantom{+} \frac{\pare{x-x_1}\pare{x-x_2}}{\pare{x_0-x_1}\pare{x_0-x_2}}y_0\\[.5em]
+        %    \displaystyle  + \frac{\pare{x-x_0}\pare{x-x_2}}{\pare{x_1-x_0}\pare{x_1-x_2}}y_1\\[.5em]
+        %    \displaystyle +\frac{\pare{x-x_0}\pare{x-x_1}}{\pare{x_2-x_0}\pare{x_2-x_1}}y_2
+        %\end{cases} &&\\[-1.5em]
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{Newton} && \begin{array}[t]{c|c|c|c}
+            f\brac{x_i} & f\brac{x_ix_{i+1}} & f\brac{x_ix_{i+1}x_{i+2}} & f\brac{x_0x_1x_2x_3} \\
+            \hline
+            & & & \\[-1em]
+            f\pare{x_0} & \displaystyle \frac{f\brac{x_1} - f\brac{x_0}}{x_1 - x_0} &  \displaystyle \frac{f\brac{x_1x_2} - f\brac{x_0x_1}}{x_2 - x_0} & \displaystyle \frac{f\brac{x_1x_2x_3} - f\brac{x_0x_1x_2}}{x_3 - x_0} \\[.5em]
+            f\pare{x_1} & \displaystyle \frac{f\brac{x_2} - f\brac{x_1}}{x_2 - x_1} &  \displaystyle \frac{f\brac{x_2x_3} - f\brac{x_1x_2}}{x_3 - x_1} &  \\[.5em]
+            f\pare{x_2} & \displaystyle \frac{f\brac{x_3} - f\brac{x_2}}{x_3 - x_2} &  &  \\[.5em]
+            f\pare{x_3} &  &  &
+        \end{array} && \\
+        & && \Rightarrow p = f\brac{x_0} + f\brac{x_0x_1}\pare{x - x_0} + f\brac{x_0x_1\cdots x_n}\pare{x-x_0}\cdots \pare{x-x_{n-1}} && \\
+        & \+:c5l{\mathitem{微分に対し} \  $\displaystyle f\underbrace{\brac{x_0\cdots x_0}}_{\text{$\pare{n+1}$-fold}} = \frac{f^{\pare{n}}\pare{x_0}}{n!}$ \quad {\color{lightgray}|}\quad \mathitem{性質} \ $x^n{\brac{x_0x_1\cdots x_n}} = 1,\ x^n{\brac{x_0x_1\cdots x_{n+1}}} = 0$ } &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \+:c5l{\raisebox{.75\baselineskip}{\mathitem{Hermite}} $\begin{array}{ll}
+            {f\pare{x_0} = y_0,\quad f'\pare{x_0} = y'_0,\quad f\pare{x_1} = y_1} \\
+            \Rightarrow p = y_0 s_0\pare{x} + y'_0 \tilde{s}_0\pare{x} + \tilde{y}_1 s_1\pare{x}
+        \end{array}
+        \begin{array}{|lll}
+            s_0\pare{x_0} = 1 & \tilde{s}_0\pare{x_0} = 0 & s_1\pare{x_0} = 0 \\
+            s'_0\pare{x_0} = 0 & \tilde{s}'_0\pare{x_0} = 1 & s'_1\pare{x_0} = 0 \\
+            s_0\pare{x_1} = 0 & \tilde{s}_0\pare{x_1} = 0 & s_1\pare{x_1} = 1
+        \end{array}$} \\
+        & \+:c5l{\mathitem{補間誤差} \quad $\displaystyle g\pare{t} = f\pare{t} - p\pare{t} - \brac{f\pare{x} - p\pare{x}}\frac{\pare{t-x_0}^2\pare{t-x_1}}{\pare{x-x_0}^2\pare{x-x_1}}$ \mathcomment{例} } \\
+        & \+:c5l{$\displaystyle g\pare{x_0} = g'\pare{x_0} = g\pare{x_1} = g\pare{x} = 0 \Rightarrow g'''\pare{\xi} = 0 \Rightarrow R\pare{x} = \frac{f'''\pare{\xi}}{3!}\pare{x-x_0}^2\pare{x-x_1}$ } \\
+        & \+:c5l{\mathitem{Lagrange補間誤差} \quad $\displaystyle R\pare{x} = \frac{f^{\pare{n+1}}\pare{\xi}}{\pare{n+1}!}\pare{x-x_0}\cdots \pare{x-x_n}$ }
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \+:c5l{\mathitem{スプライン}% && \begin{array}{ccccccc}
+        %    x_0 & \xrightarrow{+\delta_0} & x_1 & \xrightarrow{+\delta_1} & x_2 & \xrightarrow{+\delta_2} & x_3 \\
+        %    \hline
+        %    y_0 & \xrightarrow{+\Delta_0} & y_1 & \xrightarrow{+\Delta_1} & y_2 & \xrightarrow{+\Delta_2} & y_3
+        %\end{array} \Rightarrow \begin{array}{rl}
+        %    p &= a_i + b_i\pare{x-x_i} \\
+        %    & \phantom{=} + c_i\pare{x-x_i}^2 + d_i\pare{x-x_i}^3
+        %\end{array} && \\
+        \ $p = a_i + b_i\pare{x-x_i} + c_i\pare{x-x_i}^2 + d_i\pare{x-x_i}^3, \delta_i = x_{i+1} - x_i, \Delta_i = y_{i+1} - y_i$} \\
+        & \+:c5l{$\displaystyle \begin{array}{@{}l}
+            p''\pare{x_0} = \\
+            p''\pare{x_n} = 0
+        \end{array} \Rightarrow \begin{pmatrix}
+    1 & & & \\
+    \delta_0 & 2\pare{\delta_0+\delta_1} & \delta_1 & \\
+    & \delta_1 & 2\pare{\delta_1+\delta_2} & \delta_2 \\
+    & & & 1
+\end{pmatrix} \begin{pmatrix}
+    c_0 \\ c_1 \\ c_2 \\ c_3
+\end{pmatrix} = \begin{pmatrix}
+    0 \\
+    \displaystyle \rec{3}\pare{\frac{\Delta_1}{\delta_1} - \frac{\Delta_0}{\delta_0}} \\
+    \displaystyle \rec{3}\pare{\frac{\Delta_2}{\delta_2} - \frac{\Delta_1}{\delta_1}} \\
+    0
+\end{pmatrix}$} \\
+        & \+:c5l{$ \displaystyle \begin{array}{@{}l}
+            p'\pare{x_0} \text{\color{lightgray}と} \\
+            p'\pare{x_n} \text{\color{lightgray}は} \\
+            \text{\color{lightgray}既知である}
+        \end{array} \Rightarrow \begin{pmatrix}
+    \color{warningred}{2\delta_0} & \color{warningred}{\delta_0} & & \\
+    \delta_0 & 2\pare{\delta_0+\delta_1} & \delta_1 & \\
+    & \delta_1 & 2\pare{\delta_1+\delta_2} & \delta_2 \\
+    & & \color{warningred}{\delta_2} & \color{warningred}{2\delta_2}
+\end{pmatrix} \begin{pmatrix}
+    c_0 \\ c_1 \\ c_2 \\ c_3
+\end{pmatrix} = \begin{pmatrix}
+    \displaystyle \color{warningred}{\rec{3}\pare{\frac{\Delta_0}{\delta_0} - p'\pare{x_0}}} \\
+    \displaystyle \rec{3}\pare{\frac{\Delta_1}{\delta_1} - \frac{\Delta_0}{\delta_0}} \\
+    \displaystyle \rec{3}\pare{\frac{\Delta_2}{\delta_2} - \frac{\Delta_1}{\delta_1}} \\
+    \displaystyle \color{warningred}{\rec{3}\pare{p'\pare{x_n} - \frac{\Delta_2}{\delta_2}}}
+\end{pmatrix}$} \\[-.8\baselineskip]
+        & \+:c5l{$\displaystyle \Rightarrow d_i = \frac{c_{i+1} - c_i}{3\delta_i},\quad b_i = \frac{\Delta_i}{\delta_i} - \frac{\delta_i}{2c_i + c_{i+1}},\quad a_i = y_i$}
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{最小二乗法}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{過剰決定系} \quad A\+vx = \+vb \mapsto A^T A\+vx = A^T \+vb\quad {\color{lightgray}|}\quad \mathitem{非線形}\quad y = {x}/\pare{a+bx} \Rightarrow {y}^{-1} = a{x}^{-1}+b &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{非線形方程式}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Newton} \quad \+vx -\kern-.40em\relax= J^{-1}\+vF\pare{\+vx},\ J = \begin{pmatrix}
+            \partial_x F_1 & \partial_y F_1 \\
+            \partial_x F_2 & \partial_y F_2 \\
+        \end{pmatrix}\ {\color{lightgray}|}\ \mathitem{割線法} \quad x_{k+1} = x_k -  \frac{\pare{x_k - x_{k-1}}f\pare{x_k}}{f\pare{x_k} - f\pare{x_{k-1}}} && \\
+        & \mathitem{収束速度} \quad \varphi\pare{x} \approx \varphi\pare{\alpha} + \frac{\varphi^{\pare{n}}\pare{\alpha}}{n!}\pare{x-\alpha}^n \Rightarrow x_{k+1}-\alpha \approx \frac{\varphi^{\pare{n}}\pare{\alpha}}{n!}\pare{x_k - \alpha}^n &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{線型方程式系\wdiv 直接法及ビ反復法}
+\begin{cheatresume}
+\vspace{-.25\baselineskip}
+\begingroup
+\setlength\arraycolsep{2pt}
+\renewcommand*{\arraystretch}{0.5}
+    \centerline{\begin{tabular}{@{}c!{\color{lightgray}\vrule}c!{\color{lightgray}\vrule}c}
+        \mathitem{Doolittle} & \mathitem{Crout} & \mathitem{LDL\textsuperscript T} \\
+        $\begin{pmatrix}
+            1 & & \\
+            \tikzmark{Dl21}* & 1 & \\
+            \tikzmark{Dl31}* & \tikzmark{Dl32}* & 1
+        \end{pmatrix} \begin{pmatrix}
+            \tikzmark{Du11}* & \tikzmark{Du12}* & \tikzmark{Du31}* \\
+            & \tikzmark{Du22}* & \tikzmark{Du23}* \\
+            & & \tikzmark{Du33}*
+        \end{pmatrix}$ & $\begin{pmatrix}
+            \tikzmark{Cl11}* & & \\
+            \tikzmark{Cl21}* & \tikzmark{Cl22}* & \\
+            \tikzmark{Cl31}* & \tikzmark{Cl32}* & \tikzmark{Cl33}*
+        \end{pmatrix} \begin{pmatrix}
+            1 & \tikzmark{Cu12}* & \tikzmark{Cu13}* \\
+            & 1 & \tikzmark{Cu23}* \\
+            & & 1
+        \end{pmatrix}$ & $\begin{pmatrix}
+        1 & & \\
+        l_{21} & 1 & \\
+        l_{31} & l_{32} & 1
+    \end{pmatrix} \begin{pmatrix}
+        d_1 & d_1 l_{21} & d_1 l_{31} \\
+        & d_2 & d_2 l_{32} \\
+        & & d_3
+    \end{pmatrix} $
+    \end{tabular}\begin{tikzpicture}[overlay, remember picture]
+        \draw[lightgray,middlearrow={>}] (Du11) -- (Dl21);
+        \draw[lightgray,middlearrow={>}] (Dl21) -- (Du22);
+        \draw[lightgray,middlearrow={>}] (Du22) -- (Dl32);
+        \draw[lightgray,middlearrow={>}] (Dl32) -- (Du33);
+        \draw[lightgray,middlearrow={>}] (Cl11) -- (Cu12);
+        \draw[lightgray,middlearrow={>}] (Cu12) -- (Cl22);
+        \draw[lightgray,middlearrow={>}] (Cl22) -- (Cu23);
+        \draw[lightgray,middlearrow={>}] (Cu23) -- (Cl33);
+        %
+    \end{tikzpicture}}
+\let\oldddots\ddots
+\renewcommand{\ddots}{\smash{\oldddots}}%
+    \mathitem{三重対角行列}\quad $\begin{pmatrix}
+    * & * & & \\
+    c_2 & * & {\ddots} & \\
+    & {\ddots} & {\ddots} & * \\
+    & & c_n & *
+\end{pmatrix} = \begin{pmatrix}
+    \tikzmark{Sl11}* & & & \\
+    c_2 & \tikzmark{Sl22}* & & \\
+    & \ddots & \tikzmark{Sl33}\ddots & \\
+    & & c_n & \tikzmark{Sl44}*
+\end{pmatrix} \begin{pmatrix}
+    1 & \tikzmark{Su12}* & & \\
+    & 1 & \tikzmark{Su23}\ddots & \\
+    & & \ddots & \tikzmark{Su34}* \\
+    & & & 1
+\end{pmatrix}$\begin{tikzpicture}[overlay, remember picture]
+        \draw[lightgray,middlearrow={>}] (Sl11) -- (Su12);
+        \draw[lightgray,middlearrow={>}] (Su12) -- (Sl22);
+        \draw[lightgray,middlearrow={>}] (Sl22) -- (Su23);
+        \draw[lightgray,middlearrow={>}] (Su23) -- (Sl33);
+        \draw[lightgray,middlearrow={>}] (Sl33) -- (Su34);
+        \draw[lightgray,middlearrow={>}] (Su34) -- (Sl44);
+        %
+\end{tikzpicture}
+\endgroup
+\\
+{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}
+\\
+    \begin{tabular}{@{}l!{\color{lightgray}\vrule}l}
+        \mathitem{Jacobi} $M=D^{-1}\pare{D-A}$ & \mathitem{SOR} $\xRightarrow{\omega = 1}$ \mathitem{Gau\ss-Seidel} $M = \pare{D+L}^{-1}\pare{D+L-A}$ \\
+        $\displaystyle \begin{array}{rlll}
+            x_1^{\pare{k+1}} &= & a'_{12}x_2^{\pare{k}} & + b'_1 \\
+            x_2^{\pare{k+1}} &= a'_{21}x_2^{\pare{k}} & & + b'_2
+        \end{array}$ & $\displaystyle \begin{array}{rlll}
+            x_1^{\pare{k+1}} &= \pare{1-\omega}x_1^{\pare{k}} & +a'_{12}\omega x_2^{\pare{k}} & + \omega b'_1 \\
+            x_2^{\pare{k+1}} &= a'_{21}\omega x_2^{\pare{k+1}} & +\pare{1-\omega}x_2^{\pare{k}} & + \omega b'_2
+        \end{array}$\\
+        %\arrayrulecolor{lightgray}\hline
+    \end{tabular}
+\\
+{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}
+\\
+    \begin{tabular}{@{}l!{\color{lightgray}\vrule}l!{\color{lightgray}\vrule}l}
+        {\mathitem{ノルム}\ $\displaystyle \norm{A} = \sup_{\norm{\+vx} = 1}\norm{A\+vx}$} & {$ \norm{A}_1 = \max \sum \abs{\text{\stxihei \color{CJKblack}列ごとに成分}}$} & \+:r2{\mathitem{摂動} $\displaystyle \frac{\norm{\delta \+vx}}{\norm{\+vx}} \le \frac{\norm{\delta \+vb}}{\norm{\+vb}}\cond{A} $} \\
+        {$\displaystyle \norm{A}_2 = \sqrt{\max \abs{\lambda \mathrm{\ of\ } AA^T}}$} & {$ \norm{A}_\infty = \max \sum \abs{\text{\stxihei \color{CJKblack}行ごとに成分}}$} & \\
+        {\mathitem{スペクトル半径}\ $\max \abs{\lambda}$} & {\mathitem{条件数}\ $\cond_p A = \norm{A}_p \norm{A^{-1}}_p$}
+    \end{tabular}
+\end{cheatresume}
+\newheader{固有値問題}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \smash{\raisebox{.6em}{\begin{array}[t]{@{}l}
+            \mathitem{べ}\\[-.4em]
+            \mathitem{き}\\[-.4em]
+            \mathitem{乗}\\[-.4em]
+            \mathitem{法}
+        \end{array}}} && \abs{\lambda_1} > \cdots \approx \+/\+vx^{\pare{k+1}}/\+vx^{\pare{k}}/ && \+vv \approx \+vx^{\pare{k}} && \smash{\raisebox{.6em}{\begin{array}[t]{@{}!{\color{lightgray}\vrule}l}
+            \mathitem{規}\\[-.4em]
+            \mathitem{格}\\[-.4em]
+            \mathitem{化}\\
+            \mbox{}
+        \end{array}}} && \+vy^{\pare{k}} = \+/\+vx^{\pare{k}}/\norm{\+vx^{\pare{k}}}_\infty/ && \lambda_1 \approx \pm \norm{\+vx^{\pare{k}}}_\infty \\[-.6em]
+        & && \lambda_1 = -\lambda_2 \approx \sqrt{\+/\+vx^{\pare{k+2}}/\+vx^{\pare{k}}/ } && \begin{array}{@{}l}
+            \+vv \approx A\+vx^{\pare{k}}\\
+            \quad \pm \lambda_1 \+vx^{\pare{k}}
+        \end{array} && && \+vx^{\pare{k+1}} = A\+vy^{\pare{k}} && \lambda_1 \approx \sqrt{\frac{\+vx^{\pare{k+1}}}{\+vy^{\pare{k-1}}}} \\[-.7em]
+        \+:c{14}c{$A\mapsto A-\mu I \Rightarrow \lambda' = \max \abs{\lambda_A - \mu}$, $A\mapsto \pare{A-\mu I}^{-1} = \pare{LU}^{-1} \Rightarrow \lambda'^{-1} = \min \abs{\lambda_A - \mu}$} \\[-.3em]
+        & \smash{\raisebox{1\baselineskip}{\rotatebox{-90}{\mathitem{Jacobi}}}} && \+:c9l{\setlength\arraycolsep{2pt}
+\renewcommand*{\arraystretch}{0.5}$Q = \begin{pmatrix}
+        I & & & & \\
+        & \cos\theta & & \sin\theta & \\
+        & & I & & \\
+        & -\sin\theta & & \cos\theta & \\
+        & & & & I
+    \end{pmatrix}, A = \begin{pmatrix}
+        \cdot & \cdot & \cdot & \cdot & \cdot \\
+        \cdot & a_{pp} & \cdot & a_{pq} & \cdot \\
+        \cdot & \cdot & \cdot & \cdot & \cdot \\
+        \cdot & a_{pq} & \cdot & a_{qq} & \cdot \\
+        \cdot & \cdot & \cdot & \cdot & \cdot
+    \end{pmatrix},\quad \begin{array}{l}
+        \displaystyle t^2 + \frac{a_{qq} - a_{pp}}{a_{pq}} t - 1 = 0 \\
+        \tan\theta = t_1,\quad \abs{t_1} < \abs{t_2} \\
+        B = Q^TAQ, 
+    \end{array}$}
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

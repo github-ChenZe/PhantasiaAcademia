@@ -17,6 +17,7 @@
 
 \setCJKmainfont{STHeitiSC-Light}
 \setmainfont{Arial}
+\newcommand*{\mysans}{\fontfamily{phv}\selectfont}
 
 \usepackage{multicol}
 \setlength{\columnsep}{.1in}
@@ -67,6 +68,7 @@ $\scriptstyle\rightharpoonup$\cr}}\relax%
 \definecolor{emphgreen}{RGB}{238,255,207}
 %\newcommand{\resume}[1]{\par
 %\noindent\colorbox{emphgreen}{#1}}
+\definecolor{CJKblack}{RGB}{72,72,72}
 
 \usetikzlibrary{calc}
 
@@ -98,7 +100,7 @@ $\scriptstyle\rightharpoonup$\cr}}\relax%
 \newheader{差動増幅回路}
 \begin{cheatresume}
 \begin{tabular}{c>{\centering\arraybackslash}p{5.6cm}>{\centering\arraybackslash}p{5.6cm}}
- & \+:c1c{\color{titlepurple}2つの出力} & \+:c1c{\color{titlepurple}単一出力} \\
+\+:c1c{\color{titlepurple}バイポーラ} & \+:c1c{\color{titlepurple}2つの出力} & \+:c1c{\color{titlepurple}単一出力} \\
 \begin{tikzpicture}[yscale=0.85]
         \draw (0,0) node {}
         (0,4) node{\mathitem{基本回路}};
@@ -173,20 +175,218 @@ $\scriptstyle\rightharpoonup$\cr}}\relax%
     \mathitem{差動利得} & $\displaystyle A\+_\mathnormal{v}d_ = \frac{v\+_o_}{v\+_id_} = -\frac{\displaystyle \beta\pare{R\+_c_\parallel \frac{R\+_L_}{2}}}{r\+_be_}$ & $\hspace{-.3cm}\displaystyle A\+_\mathnormal{v}d1_ = \frac{v\+_o1_}{v\+_id_} = -\frac{v\+_o2_}{v\+_id_} = -\frac{\displaystyle \beta\pare{R\+_c_\parallel {R\+_L_}}}{2r\+_be_}$ \\
     \mathitem{同相利得} & $\displaystyle A\+_\mathnormal{v}c_ \rightarrow 0$ & $\displaystyle A\+_\mathnormal{v}c1_ \approx -\frac{R\+_c_\parallel R\+_L_}{2r\+_O_}$ \\
     \mathitem{差動抵抗} & \+:c2c{$R\+_id_ = 2r\+_be_$} \\
-    \mathitem{同相抵抗} & \+:c2c{$\displaystyle \half r\+_be_ + \pare{1+\beta}r\+_O_$} \\
+    \mathitem{同相抵抗} & \+:c2c{$\displaystyle R\+_ic_ = \half r\+_be_ + \pare{1+\beta}r\+_O_$} \\
     \mathitem{出力抵抗} & $R\+_o_ = 2R\+_c_$ & $R\+_o_ = R\+_c_$ \\
-    \mathitem{注意} & & \+:c1l{\mathheadcomment{$\mathrm{C_1}$出力と$\mathrm{C_2}$出力の場合には、}} \\
+\+:c3c{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);} \\
+\+:c1c{\color{titlepurple}FET} & \begin{tikzpicture}[baseline={([yshift={-\ht\strutbox}]current bounding box.north)},yscale=0.85,xscale=0.75]
+        \draw 
+            (-2,3) node(C1) {}
+            (2,3) node(C2) {}
+            (0,5) node(CC) {}
+            (C1) node[njfet,anchor=D] (T1) {}
+            (C2) node[njfet,anchor=D,xscale=-1] (T2) {}
+            (T1.D) to[short,*-o]
+            (T1.D-|-1,0) to[resistor,R=$R\+_L_$,v=$v\+_o_$]
+            (T2.D-|1,0) to[short,o-*]
+            (T2.D)
+            (T1.D) to[resistor,R=$R\+_d1_$]
+            (T1.D|-CC)
+            (T2.D|-CC) to[resistor,R=$R\+_d2_$]
+            (T2.D)
+            ;
+    \end{tikzpicture} & \begin{tikzpicture}[baseline={([yshift={-\ht\strutbox}]current bounding box.north)},yscale=0.85,xscale=0.75]
+        \draw 
+            (-2,3) node(C1) {}
+            (2,3) node(C2) {}
+            (0,5) node(CC) {}
+            (C1) node[njfet,anchor=D] (T1) {}
+            (C2) node[njfet,anchor=D,xscale=-1] (T2) {}
+            (T1.D) to[short,*-o]
+            (T1.D-|-1,0) to[resistor,R=$R\+_L_$,v=$v\+_o1_$,-o]
+            ++ (2,0) -- ++(0,-1) node[rground] {}
+            (T1.D) to[resistor,R=$R\+_d1_$]
+            (T1.D|-CC)
+            (T2.D|-CC) to[resistor,R=$R\+_d2_$]
+            (T2.D)
+            ;
+    \end{tikzpicture} \\
+    \mathitem{差動利得} & $\displaystyle A\+_\mathnormal{v}d_ = \frac{v\+_o_}{v\+_id_} = -g\+_m_\pare{R\+_d_\parallel \frac{R\+_L_}{2}}$ & $\hspace{-.5cm}\displaystyle A\+_\mathnormal{v}d1_ = \frac{v\+_o1_}{v\+_id_} = -\frac{v\+_o2_}{v\+_id_} = -\frac{g\+_m_\pare{R\+_d_\parallel R\+_L_}}{2}$ \\
+    \mathitem{同相利得} & $\displaystyle A\+_\mathnormal{v}c_ \rightarrow 0$ & $\hspace{-.5cm}\displaystyle A\+_\mathnormal{v}c1_ \approx -\frac{g\+_m_\pare{R\+_d_\parallel R\+_L_}}{1+2g\+_m_r\+_o_} \approx -\frac{R\+_d_\parallel R\+_L_}{r\+_o_}$ \\
+    \mathitem{入力抵抗} & \+:c2c{$R\+_id_ \rightarrow \infty,\quad R\+_ic_ \rightarrow \infty$} \\
+    \mathitem{出力抵抗} & $R\+_o_ = 2R\+_d_$ & $R\+_o_ = R\+_d_$ \\
+    \+:c3c{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);} \\
+\mathitem{注意} & & \+:c1l{\mathheadcomment{$\mathrm{C_1}$出力と$\mathrm{C_2}$出力の場合には、}} \\
     & & \+:c1l{\mathcomment{$v\+_o_$の符号が反対である}}
 \end{tabular}
 \end{cheatresume}
 \columnbreak
-
+\newheader{負帰還増幅回路}
+\begin{cheatresume}
+\ctikzset{tripoles/op amp/width=1.25}
+\ctikzset{tripoles/op amp/height=1}
+    \begin{tabular}{@{}c>{\centering\arraybackslash}p{4.6cm}>{\centering\arraybackslash}p{6.6cm}}
+        {\color{lightgray}出\textbackslash 入} & \+:c1c{{\color{titlepurple}直列}\ $\displaystyle R\+_i_ \mapsto R\+_i_\pare{1+AF}$} & \+:c1c{{\color{titlepurple}並列} $\displaystyle R\+_i_\mapsto R\+_i_/\pare{1+AF}$} \\
+    \begin{tikzpicture}[yscale=0.7]
+        \draw (0,0) node {}
+        (0,3.5) node (denatsu) {\color{titlepurple}{電圧}};
+        \draw node[below=0em of denatsu.south west,anchor=north west] {\makebox[0pt][l]{$\substack{\displaystyle R\+_o_ \mapsto\\[.5em] \displaystyle \frac{R\+_o_}{1+A\+_o_F} }$}};
+    \end{tikzpicture} & \begin{tikzpicture}[scale=0.55]
+        \draw
+        (0,0) node[op amp,yscale=-1] (opamp) {}
+        (opamp.+) to[short,-o] ++(-0.5,0) node[left] {$v\+_i_$}
+        (opamp.-) to[short] ++ (0,-1) node(n) {}
+        to[resistor,R=$R_1$,v=$v\+_f_$] ++(0,-2)
+        node[rground]{}
+        (opamp.out) to[short] ++(0.5,0) node(o) {}
+        to[resistor,R=$R\+_L_$,*-] ++(0,-2)
+        node[rground] (og) {}
+        (o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        (opamp.out) to[short,*-]
+        (opamp.out|-n) to[resistor,R=$R_2$,-*]
+        (n)
+        ;
+        \draw (3,-3.2) node {$\begin{array}{@{}l}
+            \displaystyle F = \frac{U\+_f_}{U\+_o_} = \frac{R_1}{R_1 + R_2}
+        \end{array}$};
+    \end{tikzpicture} & \begin{tikzpicture}[scale=0.55]
+        \draw
+        (0,0) node[op amp] (opamp) {}
+        (opamp.-) to[resistor,R=$R\+_s_$,-o] ++(-2,0) node[left] {$v\+_i_$}
+        (opamp.out) to[short] ++(0.5,0) node(o) {}
+        to[resistor,R=$R\+_L_$,*-] ++(0,-2)
+        node[rground] (og) {}
+        (o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        (opamp.+) -- (opamp.+|-og)
+        node[rground]{}
+        (opamp.-) to[short,*-]
+        ++(0,1) node(nabove){} to[resistor,R=$R\+_f_$]
+        (nabove-|o) to[short]
+        (o)
+        ;
+        \draw (5,-1) node {$\begin{array}{@{}l}
+            \displaystyle F = \rec{R\+_f_}
+        \end{array}$};
+    \end{tikzpicture} \\
+    \begin{tikzpicture}[yscale=0.7]
+        \draw (0,0) node {}
+        (0,4) node (denryuu) {\color{titlepurple}{電流}};
+        \draw node[below=0em of denryuu.south west,anchor=north west] {\makebox[0pt][l]{$\substack{\displaystyle R\+_o_ \mapsto\\[.5em] \displaystyle {R\+_o_}\pare{1+A\+_o_F} }$}};
+    \end{tikzpicture} & \begin{tikzpicture}[scale=0.55]
+        \draw
+        (0,0) node[op amp,yscale=-1] (opamp) {}
+        (opamp.+) to[short,-o] ++(-0.5,0) node[left] {$v\+_i_$}
+        (opamp.-) to[short] ++ (0,-1.5) node(n) {}
+        to[resistor,R=$R_1$,v=$v\+_f_$] ++(0,-2)
+        node[rground](ng){}
+        (opamp.out) to[short] ++(0.5,0) node(o) {}
+        to[resistor,l_=$R\+_L_$,*-*] ++(0,-2)
+        node (og) {} to[short,-*]
+        (og-|ng)
+        (o) to[short,-o] ++(1,0) node[below] {$+$}
+        (og) to[short,-o] ++(1,0) node[above] {$-$}
+        ($(o)!0.5!(og)$) ++(1,0) node {$v\+_o_$}
+        ;
+        \draw (3,-3.2) node {$\begin{array}{@{}l}
+            \displaystyle F = R_1
+        \end{array}$};
+    \end{tikzpicture} & \begin{tikzpicture}[scale=0.55]
+        \draw
+        (0,0) node[op amp,yscale=-1] (opamp) {}
+        (opamp.-) to[resistor,R=$R\+_s_$,-o] ++(-2,0) node[left] {$v\+_i_$}
+        (opamp.out) to[short] ++(0.5,0) node(o) {}
+        to[resistor,l_=$R\+_L_$,*-] ++(0,-2)
+        node (vop) {}
+        (opamp.+) node[rground]{}
+        (opamp.-) to[short,*-]
+        (opamp.- |- vop) to[resistor,R=$R_1$,-*]
+        (vop) to[resistor,R=$R_2$] ++(0,-2)
+        node[rground] (og) {}
+        (o) to[short,-o] ++(1,0) node[below] {$+$}
+        (vop) to[short,-o] ++(1,0) node[above] {$-$}
+        ($(o)!0.5!(vop)$) ++(1,0) node {$v\+_o_$}
+        ;
+        \draw (6,-1) node {$\begin{array}{@{}l}
+            \displaystyle F = \frac{R_2}{R_1 + R_2}
+        \end{array}$};
+        \draw (-1,-3.5) node (exprA) {$\begin{array}{@{}l}
+            \displaystyle A \mapsto \frac{A}{1+AF} \approx \rec{F}
+        \end{array}$};
+        \draw[lightgray,-latex] (exprA.west) ++ (-0.6,0) -- (exprA.west);
+        \draw[lightgray,-latex] (exprA.north west) ++ (0,0.6) -- ($(exprA.north west) + (0.6,0)$);
+        \draw[lightgray,-latex] ($(exprA.north) + (-1,0)$) ++ (0,0.6) -- ($(exprA.north) + (-1,0)$);
+    \end{tikzpicture}
+    \end{tabular}
+\end{cheatresume}
+\newheader{演算回路}
+\begin{cheatresume}
+\ctikzset{tripoles/op amp/width=1.25}
+\ctikzset{tripoles/op amp/height=1}
+    \begin{tabular}{ccc}
+        %\begin{tikzpicture}[scale=0.55]
+        %\draw
+        %(0,0) node[op amp] (opamp) {}
+        %(opamp.-) to[resistor,R=$R\+_s_$,-o] ++(-2,0) node[left] {$v\+_i_$}
+        %(opamp.out) node(o) {}
+        %(o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        %(opamp.+) node[rground]{}
+        %(opamp.-) to[short,*-]
+        %++(0,1) node(nabove){} to[resistor,R=$R\+_f_$]
+        %(nabove-|o) to[short,-*]
+        %(o)
+        %;
+    %\end{tikzpicture} & 
+    \begin{tikzpicture}[scale=0.55]
+        \draw
+        (0,0) node[op amp] (opamp) {}
+        (opamp.-) to[resistor,R=$R$,-o] ++(-2,0) to[short] ++(-0.5,0) node[rground] {}
+        (opamp.+) to[resistor,R=$R\+_s_$,-o] ++(-2,0) node[left] {$v\+_i_$}
+        (opamp.out) node(o) {}
+        (o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        (opamp.-) to[short,*-]
+        ++(0,1) node(nabove){} to[resistor,R=$R\+_f_$]
+        (nabove-|o) to[short,-*]
+        (o)
+        ;
+    \end{tikzpicture} & \begin{tikzpicture}[scale=0.55]
+        \draw
+        (0,0) node[op amp] (opamp) {}
+        (opamp.-) to[short] ++(-0.5,0) to[resistor,R=$R\+_1_$,*-o] ++(-2,0) node[left] {$v\+_i1_$}
+        (opamp.-) ++(-0.5,0) to[short] ++(0,1) to[resistor,l_=$R\+_2_$,-o] ++(-2,0) node[left] {$v\+_2_$}
+        (opamp.out) node(o) {}
+        (o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        (opamp.+) node[rground]{}
+        (opamp.-) to[short,*-]
+        ++(0,1) node(nabove){} to[resistor,R=$R\+_f_$]
+        (nabove-|o) to[short,-*]
+        (o)
+        ;
+    \end{tikzpicture} & %\begin{tikzpicture}[scale=0.55]
+        %\draw
+        %(0,0) node[op amp] (opamp) {}
+        %(opamp.-) to[resistor,R=$R\+_s_$,-o] ++(-2,0) node[left] {$v\+_i_$}
+        %(opamp.out) node(o) {}
+        %(o) to[short,-o] ++(0.5,0) node[right] {$v\+_o_$}
+        %(opamp.+) node[rground]{}
+        %(opamp.-) to[short,*-]
+        %++(0,1) node(nabove){} to[capacitor,C=$C$]
+        %(nabove-|o) to[short,-*]
+        %(o)
+        %;
+    %\end{tikzpicture} \\
+    %$\displaystyle v\+_o_ = -\frac{R\+_f_}{R}v\+_i_$ & 
+    $\displaystyle \begin{array}[b]{l}
+        \displaystyle C \rightarrow \rec{C}\int \rd{t} \\
+        \displaystyle \rec{C} \rightarrow C\+dtd{}
+    \end{array}$ \\
+    $\displaystyle v\+_o_ = \pare{1+ \frac{R\+_f_}{R}}v\+_i_$ & $\displaystyle v\+_o_ = -R\+_f_\pare{\frac{v\+_i1_}{R_1} + \frac{v\+_i2_}{R_2}}$ &% $\displaystyle v\+_o_ = -\rec{RC}\int v\+_i_\,\rd{t}$
+    \end{tabular}
+\end{cheatresume}
 \begin{multicols*}{2}
 \raggedcolumns\def\lefthandwidth{1.5cm}%%
-\newheader{Wildar電流源}
+\newheader{{\mysans Wildar}電流源}
 \begin{cheatresumefuta}
     \begin{center}
-        \begin{tikzpicture}[yscale=0.7]
+        \begin{tikzpicture}[yscale=0.65]
             \draw
                 (0,0) node (BB) {}
                 (BB) node[npn,anchor=G,xscale=-1,label={[label distance=.35cm]-75:{$\mathrm{T}_1$}}] (T1) {}
@@ -214,11 +414,67 @@ $\scriptstyle\rightharpoonup$\cr}}\relax%
         & \mathitem{交流抵抗} && \\
         & r\+_o_ = r\+_ce_\pare{1+\frac{\beta R\+_e2_}{r\+_be2_ + R\+_e2_}} && \\
         & \mathitem{出力電流} && \\
-        & I\+_C_ \approx \frac{V\+_T_}{R\+_e_}\ln \frac{I\+_R_}{I\+_C_} &&
+        & I\+_C_ \approx \frac{V\+_T_}{R\+_e_}\ln \frac{I\+_R_}{I\+_C_} && \\
+        & \mathitem{カレントミラー} && \\
+        & R\+_e_ = 0, \ I\+_C_ \approx I\+_B_,\ r\+_o_ = r\+_ce_ &&
     \end{flalign*}
 \end{cheatresumefuta}
 \columnbreak
-\newheader{More}
+\newheader{周波数特性}
+\begin{cheatresume}
+\begin{tikzpicture}[scale=0.6]
+    \begin{axis}[
+        at={(0,0)},
+        axis lines=left,
+        ylabel=\raisebox{6em}{$20\log\abs{\dot{A}_v}/\SI{}{\decibel}$},xmin=0,xmax=33,ymin=0,ymax=24,%xtick={0,4,8,12,16,20,24,28},xticklabels={$1^{\phantom{0}}$,$10^{\phantom{0}}$,$10^2$,$10^3$,$10^4$,$10^5$,$10^6$,$10^7$}
+        xmajorticks=false,ytick={0,6.7,13.4,20.1},yticklabels={$0$, $20$, $40$, $60$}, %
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=north,
+        right=6.5em,
+        above=-2em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=-90,
+        above=3em,
+        right=0em
+        },clip=false,height=5cm,width=8cm]
+    \draw (0,0) -- (4,13.4) -- (8,20.1) -- (20,20.1) -- (24,13.4) -- (28,0);
+    \draw[dashed] (24,0) -- (24,13.4);
+    \draw[dashed] (20,0) -- (20,20.1);
+    \draw[dashed] (4,0) -- (4,13.4);
+    \draw[dashed] (8,0) -- (8,20.1);
+    \draw (30,10) node[right] {\color{CJKblack}$\SI{20}{\decibel\per\text{10倍周波数}\per\text{段}}$};
+    \end{axis}
+    \begin{axis}[
+        at={(0,-3.5cm)},
+        axis lines=left,xlabel=\mbox{\hspace{14em}$f/\SI{}{\hertz}$},
+        ylabel=\raisebox{6em}{$\varphi$},xmin=0,xmax=33,ymin=0,ymax=24,xtick={0,4,8,12,16,20,24,28},xticklabels={$1^{\phantom{0}}$,$10^{\phantom{0}}$,$10^2$,$10^3$,$10^4$,$10^5$,$10^6$,$10^7$},ytick={0,5,10,15,20},yticklabels={$\SI{-180}{\degree}$, $\SI{-90}{\degree}$, $\SI{0}{\degree}$, $\SI{+90}{\degree}$, $\SI{+180}{\degree}$}, %
+        xlabel style={
+        at={(current axis.right of origin)},
+        anchor=north,
+        right=6.5em,
+        above=-2em
+        },%
+        ylabel style={
+        at={(current axis.above origin)},
+        anchor=west,
+        rotate=-90,
+        above=3em,
+        right=0em
+        },clip=false,height=5cm,width=8cm]
+    \draw (0,20) -- (4,17.5) -- (8,12.5) -- (12,10) -- (16,10) -- (20,7.5) -- (24,2.5) -- (28,0);
+    \draw[dashed] (24,0) -- (24,2.5);
+    \draw[dashed] (20,0) -- (20,7.5);
+    \draw[dashed] (4,0) -- (4,17.5);
+    \draw[dashed] (8,0) -- (8,12.5);
+    \draw (30,20) node[right] (cutoff) {\color{CJKblack}遮断周波数に$\SI{90}{\degree\per\text{段}}$};
+    \draw (cutoff) node[below=1em] {\parbox{3.5cm}{\linespread{.25}\color{CJKblack}遮断周波数で45度となり, その後90度に向かって滑らかに変化していきます.}};
+    \end{axis}
+\end{tikzpicture}
+\end{cheatresume}
 \end{multicols*}
 
 \end{multicols*} 

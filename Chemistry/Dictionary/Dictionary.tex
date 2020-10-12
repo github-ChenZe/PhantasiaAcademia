@@ -1,0 +1,61 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[margintoc,singleton,epu]{van-de-la-sehen}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{positioning}
+\usetikzlibrary{matrix}
+\usepackage{pxrubrica}
+\usepackage{tipa}
+
+\def\katanode#1#2#3#4#5#6{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#2) {\Large #3};
+    \draw (#2.corner 1) node[below left] {\small\textsf{\phantom{Hj}#4}};
+    \draw (#2.corner 2) node[below right] {\footnotesize\color{lightgray}\textit{#5}};
+    \draw (#2.side 3) node[above] {\footnotesize \color{lightgray} #6};
+}
+
+\def\hiranode#1#2#3#4#5#6{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=yellow!80!black, line width=0.4mm, fill=yellow!45!white, #1, inner sep=-2mm](#2) {\Large #3};
+    \draw (#2.corner 1) node[below left] {\small\textsf{\phantom{Hj}#4}};
+    \draw (#2.corner 2) node[below right] {\footnotesize\color{lightgray}\textit{#5}};
+    \draw (#2.side 3) node[above] {\footnotesize \color{lightgray} #6};
+}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\begin{document}
+
+\showtitle{Dictionary of Chemistry}
+\newpoint{tin} \begin{tikzpicture}
+    \elementcell{}{Tin}{TinCell}{Sn}{118.71}{50}{$\mathrm{4d^{10} 5s^2 5p^2}$};
+\end{tikzpicture}
+\newpoint{cis-} 顺式.
+\newpoint{cathode} the negatively charged electrode by which electrons enter an electrical device.
+\newpoint{Magnetocaloric Effect} Magnetocaloric effect (MCE) is a heating or cooling of a magnetic material when the applied magnetic field changes.
+\newpoint{orthorhombic} of or denoting a crystal system or three-dimensional geometric arrangement having three unequal axes at right angles; 正交晶系.
+\newpoint{intercalate} insert (something) between layers in a crystal lattice, geological formation, or other structure.
+\newpoint{spin-glass} spin glasses are contrasted with ferromagnets as ``disordered'' magnets in which their atoms' spins are not aligned in a regular pattern.
+\newpoint{lamella} A lamella (plural lamellae) is a small plate or flake, from the Latin, and may also be used to refer to collections of fine sheets of material held adjacent to one another, in a gill-shaped structure, often with fluid in between though sometimes simply a set of 'welded' plates.
+\newpoint{twinned} (of a crystal) that is a composite consisting of two (or sometimes more) parts which are reversed in orientation with respect to each other (typically by reflection in a particular plane).
+\newpoint{Chalcogenide} A chalcogenide is a chemical compound consisting of at least one chalcogen anion (S, Se, Te) and at least one more electropositive element.
+\newpoint{iodine} \begin{tikzpicture}
+    \elementcell{}{Iodine}{IdCell}{I}{126.90}{50}{$\mathrm{4d^{10} 5s^2 5p^5}$};
+\end{tikzpicture}
+\newpoint{starting material} A reactant in a chemical reaction or mechanism step. This term is usually reserved for the reactant that contributes the greatest number of carbon atoms to the product, or the reactant that is considered most 'precious' because of availability, cost, effort to synthesize, etc.
+\newpoint{eutectic} relating to or denoting a mixture of substances (in fixed proportions) that melts and solidifies at a single temperature that is lower than the melting points of the separate constituents or of any other mixture of them.
+\newpoint{crucible} a ceramic or metal container in which metals or other substances may be melted or subjected to very high temperatures.
+\newpoint{photoluminescence} the emission of light which is caused by the irradiation of a substance with other light.
+\newpoint{labyrinth} a complicated irregular network of passages or paths in which it is difficult to find one's way; a maze.
+\newpoint{DEME-TFSI} (Ionic liquid) Diethylmethyl (2-methoxyethyl) ammonium bis(trifluoromethylsulfonyl) imide.
+
+\end{document}

@@ -1,0 +1,156 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\def\writetofile#1#2{\immediate\write18{echo "#1" > #2}}
+\def\econfig#1{\immediate\write18{echo "#1" | python /Users/zechen/Documents/PhantasiaAcademia/electronconfig.py > electronsconfigtmp.tex}\input{electronsconfigtmp.tex}}
+
+\begin{document}
+
+\newprob{4.4}%
+等效电子: $C_{10}^2 = \boxed{45.}$\\
+非等效电子: $10\times 10 = \boxed{100.}$
+\newprob{4.5 (1)}%
+\econfig{1p2d}不能存在, $n=2$没有d壳层.\\
+\econfig{2s3f}不能存在, $n=3$没有f壳层.\\
+\econfig{2p3d}存在.
+\par
+\newprobheader{(2)}%
+$^1\mathrm P_2$不能存在, $S=0$, $L=1$, $\Rightarrow J = 1$.\\
+$^3\mathrm F_2$存在, $S=1$, $L=3$, $J = \curb{2,3,4}$.
+\newprob{4.6}%
+矩阵元表示相应的$\pare{M_L,M_S}$对应的组合数,
+\[ \underbrace{\begin{array}{c|cccc}
+    &   & \+:c2{c}{M_S} & \\
+    \hline
+    &   & 1   & 1    &  \\
+    &   & 2   & 2   & \\
+M_L & 1 & 3   & 3   & 1 \\
+    &   & 2   & 2   & \\
+    &   & 1   & 1   &
+\end{array}}_{\displaystyle \text{\econfig{2p2}}} = \underbrace{\begin{array}{c|cccc}
+    &   & \+:c2{c}{M_S} & \\
+    \hline
+    &   & 1   & 1   &  \\
+    &   & 1   & 1   & \\
+M_L &   & 1   & 1   & \\
+    &   & 1   & 1   & \\
+    &   & 1   & 1   &
+\end{array}} _{\displaystyle ^2\mathrm D} + \underbrace{\begin{array}{c|cccc}
+    &   & \+:c2{c}{M_S} & \\
+    \hline
+    &   &     &     &  \\
+    &   & 1   & 1   & \\
+M_L &   & 1   & 1   & \\
+    &   & 1   & 1   & \\
+    &   &     &     &
+\end{array}} _{\displaystyle ^2\mathrm P} + \underbrace{\begin{array}{c|cccc}
+    &   & \+:c2{c}{M_S} & \\
+    \hline
+    &   &     &     &  \\
+    &   &     &     & \\
+M_L & 1 & 1   & 1   & 1. \\
+    &   &     &     & \\
+    &   &     &     &
+\end{array}}_{\displaystyle ^4\mathrm S} \]
+状态凡$\boxed{20}$种.
+\[ ^2\mathrm D_{3/2,5/2}: 4 + 6 = 10\text{种},\quad ^2\mathrm P_{1/2,3/2}: 2 + 4 = 6\text{种},\quad ^4\mathrm S_{3/2}: 4\text{种}. \]
+\newprob{4.7}
+$\displaystyle J_2 = \frac{3}{2}$, $\displaystyle J_3 = \frac{5}{2}$, $\displaystyle J_1 = \half$, $\displaystyle \Rightarrow L+S = J_3 = \frac{5}{2}$, $\displaystyle \abs{L-S} = J_1 = \half$, $\displaystyle \Rightarrow L=1$, $\displaystyle S=\frac{3}{2}$, $\Rightarrow \boxed{^4 \mathrm{P_{1/2,3/2,5/2}}.}$
+\newprob{4.8}%
+Al: \econfig{1s2 2s2 2p6 3s2 3p}. Hund III要求$\min J$, $\Rightarrow \boxed{^2\mathrm P_{1/2}.}$\\
+Mg: \econfig{1s2 2s2 2p6 3s2}. $\Rightarrow \boxed{^1\mathrm S_{0}.}$\\
+Ti: \econfig{1s2 2s2 2p6 3s2 3p6 4s2 3d2}. Hund III要求$\min J$, $\Rightarrow \boxed{^3\mathrm F_{2}.}$
+\newprob{4.9 (1)}%
+\econfig{4d8} $\cong$ \econfig{4d2} $\Rightarrow 2\divs \pare{L+S}$
+\begin{align*}
+    \text{\econfig{4d2}} &= \curb{L=4,S=0}\cup \curb{L=3,S=1}\cup \curb{L=2,S=0}\cup \curb{L=1,S=1}\cup \curb{L=0,S=0},
+    %&= {^1\mathrm G_{}}\cup{^3\mathrm F_{}}\cup {^1\mathrm D_{}}\cup {^3\mathrm P_{}}\cup {^1\mathrm S_{}}.
+\end{align*}
+再和 \econfig{5s1} 耦合,
+\begin{align*}
+    \text{\econfig{5s1 4d2}} &= \curb{L=4,S=\half}\cup \curb{L=3,S=\curb{\half,\frac{3}{2}}}\cup \curb{L=2,S=\half} \\
+    &\phantom{=\ } \cup \curb{L=1,S=\curb{\half,\frac{3}{2}}}\cup \curb{L=0,S=\half}\\
+    &= \boxed{\begin{cases}
+        {^2\mathrm G_{7/2,9/2}} \cup {^2\mathrm F_{5/2,7/2}} \cup {^4\mathrm F_{3/2,5/2,7/2,9/2}} \cup {^2\mathrm D_{3/2,5/2}}\\ \cup {^2\mathrm P_{1/2,3/2}} \cup {^4\mathrm P_{1/2,3/2,5/2}} \cup {^2\mathrm S_{1/2}}.
+    \end{cases}}
+\end{align*}
+\par
+\newprobheader{(2)}%
+取$\max S$, 后$\max L$, 后$\max J$, 得到$\boxed{^4\mathrm F_{9/2}}$.
+\newprob{4.10}%
+\vspace{-1.75\baselineskip}
+\begin{align*}
+    \pare{\half,\half} &= \pare{\half,\half}_0 \cup \pare{\half,\half}_1, \\
+    \pare{\half, \frac{3}{2}} &= \pare{\half,\frac{3}{2}}_1 \cup \pare{\half,\frac{3}{2}}_2, \\
+    \pare{\frac{3}{2}, \half} &= \pare{\frac{3}{2}, \half}_1 \cup \pare{\frac{3}{2}, \half}_2, \\
+    \pare{\frac{3}{2},\frac{3}{2}} &= \pare{\frac{3}{2},\frac{3}{2}}_0 \cup \pare{\frac{3}{2},\frac{3}{2}}_1 \cup \pare{\frac{3}{2},\frac{3}{2}}_2 \cup \pare{\frac{3}{2},\frac{3}{2}}_3.
+\end{align*}
+\newprob{4.11}%
+\econfig{3p5} $\cong$ \econfig{3p1} $= {^2\mathrm P_{3/2,1/2}}$. Hund III要求取$\max J$, 故基态为${^2\mathrm P_{3/2}}$. \\
+$m_j = \curb{-3/2,-1/2,1/2,3/2}$凡$\boxed{4}$条谱线.
+\[ g\+_Cl_ = \frac{3}{2} + \frac{S\pare{S+1} - L\pare{L+1}}{2J\pare{J+1}} = \frac{4}{3}. \]
+而氢原子的基态${^2\mathrm S_{1/2}}$,
+\[ g\+_H_ = \frac{3}{2} + \frac{s\pare{s+1} - l\pare{l+1}}{2j\pare{j+1}} = 2, \]
+从而
+\[ d\+_Cl_ = \frac{g\+_Cl_}{g\+_H_}d\+_H_ = \frac{2}{3}d\+_H_ = \boxed{\SI{0.4}{\centi\meter}.} \]
+\newprob{4.12}%
+弱磁场适用. 对于${^1\mathrm D_2}$,
+\[ g_1 = \frac{3}{2} + \frac{S\pare{S+1} - L\pare{L+1}}{2J\pare{J+1}} = 1, \]
+对于${^1\mathrm P_1}$,
+\[ g_2 = \frac{3}{2} + \frac{S\pare{S+1} - L\pare{L+1}}{2J\pare{J+1}} = 1, \]
+从而$g_1 = g_2 = 1$,
+\[ \Delta \nu = \frac{\mu\+_B_ B}{h} = \frac{e}{m}\frac{B}{4\pi} \Rightarrow \frac{e}{m} = 4\pi\frac{\Delta \nu}{B} = \boxed{\SI{1.76e11}{\coulomb\per\kilo\gram}.} \]
+\newprob{4.13 (1)}%
+$\displaystyle g = \frac{3}{2} + \frac{S\pare{S+1} - L\pare{L+1}}{2J\pare{J+1}} = \boxed{\frac{3}{2}.}$
+\par
+\newprobheader{(2)}%
+$\displaystyle g = \frac{3}{2} + \frac{S\pare{S+1} - L\pare{L+1}}{2J\pare{J+1}} = \frac{3}{2} + \frac{S\pare{S+1}}{2S\pare{S+1}} = 2$.
+\par
+\newprobheader{(2)}%
+$\displaystyle g = \frac{3}{2} + \frac{S\pare{S+1} - L\pare{L+1}}{2J\pare{J+1}} = \frac{3}{2} + \frac{- L\pare{L+1}}{2\pare{L}\pare{L+1}} = 1$.
+\newprob{4.14 (1)}%
+\underline{允许}.
+\par
+\newprobheader{(2)}%
+\underline{禁戒}. $\Delta S \neq 0$.
+\par
+\newprobheader{(3)}%
+\underline{允许}.% 其中一个电子$\Delta l \neq \pm 1$.
+\par
+\newprobheader{(4)}%
+\underline{禁戒}. $J=0 \not\rightarrow J=0$.
+\par
+\newprobheader{(5)}%
+\underline{禁戒}. $\Delta J \neq 1$.
+\newprob{4.15}%
+\econfig{3p1 4p1} $\cong$ ${^3\mathrm D_{1,2,3}} \cup {^1\mathrm D_{2}} \cup {^3\mathrm P_{0,1,2}} \cup {^1\mathrm P_{1}} \cup {^3\mathrm S_{1}} \cup {^1\mathrm S_{0}}$.\\
+\econfig{3s1 3p1} $\cong$ ${^3\mathrm P_{0,1,2}} \cup {^1\mathrm P_{1}}$.\\
+${^3\mathrm P_{0}} \leftarrow {^3\mathrm D_{1}}, {^3\mathrm P_{1}}, {^3\mathrm S_{1}}$.\\
+${^3\mathrm P_{1}} \leftarrow {^3\mathrm D_{1,2}}, {^3\mathrm P_{0,1,2}}, {^3\mathrm S_{1}}$.\\
+${^3\mathrm P_{2}} \leftarrow {^3\mathrm D_{1,2,3}}, {^3\mathrm P_{1,2}}, {^3\mathrm S_{1}}$.\\
+${^1\mathrm P_{1}} \leftarrow {^1\mathrm D_{2}}, {^1\mathrm P_{1}}, {^1\mathrm S_{0}}$.\\
+凡$\boxed{18}$种.
+
+\end{document}

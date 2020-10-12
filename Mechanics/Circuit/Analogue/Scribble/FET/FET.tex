@@ -1,0 +1,438 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{cmbright}
+\usepackage{van-de-la-illinoise}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\usepackage{stackengine}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\newcommand{\emphbox}[1]{\colorbox{lightgray!20}{$\displaystyle #1$}}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\mitensor#1{\stackon[-0.1ex]{\+v#1}{\boldsymbol{\leftrightharpoonup{#1}}} }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+:}%
+\definecolor{emphgreen}{RGB}{238,255,207}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+
+\usetikzlibrary{calc}
+
+\def\equals{=}
+\newcommand{\ib}[2]{to[battery1,l=$ #1 $, invert, #2]}
+\newcommand{\ic}[2]{to[capacitor,C=$ #1 $, #2]}
+\newcommand{\ivs}[2]{to[european voltage source,v<=$ #1 $, #2]}
+\newcommand{\iis}[2]{to[european current source,i=$ #1 $, #2]}
+\newcommand{\ir}[2]{to[resistor,R=$ #1 $, #2]}
+\newcommand{\iso}[1]{to[short,-o,#1]}
+\newcommand{\ios}[1]{to[short,o-,#1]}
+\newcommand{\is}[1]{to[short,#1]}
+%\newcommand{\iu}[3]{\draw #1  #2}
+\newcommand{\iou}[3]{\draw ($#1!0.5!#2$) node {$ #3 $};
+\draw ($#1!0.12!#2$) node {$\scriptstyle +$};
+\draw ($#1!0.88!#2$) node {$\scriptstyle -$};}
+\newcommand{\iblock}[3]{\draw[thick] #1 |- #2 |- cycle;
+\draw ($#1!0.5!#2$) node {#3};}
+\newcommand*{\mysans}{\fontfamily{phv}\selectfont}
+
+\def\lefthandwidth{3cm}%
+\newtcolorbox{cheatresumefuta}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}, sidebyside, lefthand width=\lefthandwidth, sidebyside align=top, lower separated=false}%
+
+\pgfplotsset{compat=newest}
+
+\def\drawfet#1#2{\draw (0,1) node[#1,#2] (#1A) {};
+        \draw (#1A.S) node[right] {s};
+        \draw (#1A.D) node[right] {d};
+        \draw (#1A.G) node[below] {g};
+}
+
+\begin{document}
+\centerline{\titlefont 電界効果トランジスタ}
+\vspace{.5em}
+\newheader{電圧ー電流特性}
+\begin{cheatresume}
+\begin{tabular}{c>{\centering\arraybackslash}p{8.5cm}>{\centering\arraybackslash}p{8.5cm}>{\centering\arraybackslash}p{8.5cm}}
+    & \+:c1c{\mysans\color{titlepurple}接合形FET} & \+:c1c{\mysans\color{titlepurple}エンハンスメントMOSFET} & \+:c1c{\mysans\color{titlepurple}ディプリーションMOSFET} \\
+    \begin{tikzpicture}
+        \draw (0,0) node {}
+        (0,1.5) node{\mysans\mathitem{\color{titlepurple}N形}};
+    \end{tikzpicture} & \begin{tikzpicture}
+        \drawfet{njfet}{};
+        %
+        \draw[-latex] (1,0) -- (3.3,0) node[below] {$u\+_GS_$};
+        \draw[-latex] (3.0,0) -- (3.0,2) node[left] {$i\+_D_$};
+        \draw[domain=1.5:3] plot function {1.5/2.25*(x-1.5)**2} node[right] {$I\+_DSS_$};
+        \draw (2,0) node[below] {$U\+_GS(off)_$};
+        %
+        \draw[-latex] (4,0) -- (6.3,0) node[below] {$u\+_DS_$};
+        \draw[-latex] (4,0) -- (4,2) node[right] {$i\+_D_$};
+        \draw[domain=4:6] plot function {1.5/2*4/pi*atan(20*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*9.0/16*4/pi*atan(18*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*4.0/16*4/pi*atan(16*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*1.0/16*4/pi*atan(14*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*0.2/16*4/pi*atan(8*(x-4))};
+        \draw (5.5,1.5) node[above] {$U\+_GS_ = 0$};
+        \draw (5,0) node[below] (UGSoff) {$U\+_GS(off)_$};
+        \draw[-latex] (UGSoff.east) -- (6,0);
+        %
+    \end{tikzpicture} & \begin{tikzpicture}
+        \drawfet{nigfete}{};
+        %
+        \draw[-latex] (1,0) -- (3.3,0) node[below] {$u\+_GS_$};
+        \draw[-latex] (1,0) -- (1,2) node[left] {$i\+_D_$};
+        \draw[domain=1.5:3] plot function {1.5/2.25*(x-1.5)**2};
+        \draw (2,0) node[below] {$U\+_GS(th)_$};
+        %
+        \draw[-latex] (4,0) -- (6.3,0) node[below] {$u\+_DS_$};
+        \draw[-latex] (4,0) -- (4,2) node[right] {$i\+_D_$};
+        \draw[domain=4:6] plot function {1.5/2*4/pi*atan(20*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*9.0/16*4/pi*atan(18*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*4.0/16*4/pi*atan(16*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*1.0/16*4/pi*atan(14*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*0.2/16*4/pi*atan(8*(x-4))};
+        \draw (5,0) node[below] (UGSoff) {$U\+_GS(th)_$};
+        \draw[-latex] (UGSoff.east) -- (6,0);
+        %
+\end{tikzpicture} & \begin{tikzpicture}
+        \drawfet{nigfetd}{};
+        %
+        \draw[-latex] (1,0) -- (3.3,0) node[below] {$u\+_GS_$};
+        \draw[-latex] (2.5,0) -- (2.5,2) node[left] {$i\+_D_$};
+        \draw[domain=1.5:3] plot function {1.5/2.25*(x-1.5)**2};
+        \draw (2,0) node[below] {$U\+_GS(off)_$};
+        %
+        \draw[-latex] (4,0) -- (6.3,0) node[below] {$u\+_DS_$};
+        \draw[-latex] (4,0) -- (4,2) node[right] {$i\+_D_$};
+        \draw[domain=4:6] plot function {1.5/2*4/pi*atan(20*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*9.0/16*4/pi*atan(18*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*4.0/16*4/pi*atan(16*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*1.0/16*4/pi*atan(14*(x-4))};
+        \draw[domain=4:6] plot function {1.5/2*0.2/16*4/pi*atan(8*(x-4))};
+        \draw (5.5,0.8) node[above] {$U\+_GS_ = 0$};
+        \draw (5,0) node[below] (UGSoff) {$U\+_GS(off)_$};
+        \draw[-latex] (UGSoff.east) -- (6,0);
+        %
+\end{tikzpicture} \\
+    \begin{tikzpicture}
+        \draw (0,0) node {}
+        (0,1) node{\mysans\mathitem{\color{titlepurple}P形}};
+    \end{tikzpicture} & \begin{tikzpicture}
+        \drawfet{pjfet}{yscale=-1};
+        %
+        \draw[-latex] (1,1.8) -- (3.3,1.8) node[below] {$u\+_GS_$};
+        \draw[-latex] (1.3,0) -- (1.3,2.3) node[left] {$i\+_D_$};
+        \draw[domain=2.8:1.3] plot function {1.8+-1.5/2.25*(x-2.8)**2} node[right] {$I\+_DSS_$};
+        \draw (2.3,1.8) node[above] {$U\+_GS(off)_$};
+        %
+        \draw[-latex] (4,1.8) -- (6.3,1.8) node[below] {$u\+_DS_$};
+        \draw[-latex] (6,0) -- (6,2.3) node[right] {$i\+_D_$};
+        \draw[domain=4:6] plot function {1.8+1.5/2*4/pi*(-atan(20*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*9.0/16*4/pi*(-atan(18*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*4.0/16*4/pi*(-atan(16*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*1.0/16*4/pi*(-atan(14*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*0.2/16*4/pi*(-atan(8*(6-x)))};
+        \draw (5,0.45) node[below] {$U\+_GS_ = 0$};
+        \draw (4.5,1.8) node[above] (UGSoff) {$U\+_GS(off)_$};
+        \draw[-latex] (UGSoff.east) -- (5.5,1.8);
+        %
+    \end{tikzpicture} & \begin{tikzpicture}
+        \drawfet{pigfete}{yscale=-1};
+        %
+        \draw[-latex] (1,1.8) -- (3.3,1.8) node[below] {$u\+_GS_$};
+        \draw[-latex] (3,0) -- (3,2.3) node[right] {$i\+_D_$};
+        \draw[domain=2.8:1.3] plot function {1.8+-1.5/2.25*(x-2.8)**2};
+        \draw (2.3,1.8) node[above] {$U\+_GS(th)_$};
+        %
+        \draw[-latex] (4,1.8) -- (6.3,1.8) node[below] {$u\+_DS_$};
+        \draw[-latex] (6,0) -- (6,2.3) node[right] {$i\+_D_$};
+        \draw[domain=4:6] plot function {1.8+1.5/2*4/pi*(-atan(20*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*9.0/16*4/pi*(-atan(18*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*4.0/16*4/pi*(-atan(16*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*1.0/16*4/pi*(-atan(14*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*0.2/16*4/pi*(-atan(8*(6-x)))};
+        \draw (4.5,1.8) node[above] (UGSoff) {$U\+_GS(th)_$};
+        \draw[-latex] (UGSoff.east) -- (5.5,1.8);
+        %
+\end{tikzpicture} & \begin{tikzpicture}
+        \drawfet{pigfetd}{yscale=-1};
+        %
+        \draw[-latex] (1,1.8) -- (3.3,1.8) node[below] {$u\+_GS_$};
+        \draw[-latex] (1.8,0) -- (1.8,2.3) node[left] {$i\+_D_$};
+        \draw[domain=2.8:1.3] plot function {1.8+-1.5/2.25*(x-2.8)**2};
+        \draw (2.8,1.8) node[above] {$U\+_GS(off)_$};
+        %
+        \draw[-latex] (4,1.8) -- (6.3,1.8) node[below] {$u\+_DS_$};
+        \draw[-latex] (6,0) -- (6,2.3) node[right] {$i\+_D_$};
+        \draw[domain=4:6] plot function {1.8+1.5/2*4/pi*(-atan(20*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*9.0/16*4/pi*(-atan(18*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*4.0/16*4/pi*(-atan(16*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*1.0/16*4/pi*(-atan(14*(6-x)))};
+        \draw[domain=4:6] plot function {1.8+1.5/2*0.2/16*4/pi*(-atan(8*(6-x)))};
+        \draw (5,1.1) node[below] {$U\+_GS_ = 0$};
+        \draw (4.5,1.8) node[above] (UGSoff) {$U\+_GS(off)_$};
+        \draw[-latex] (UGSoff.east) -- (5.5,1.8);
+        %
+\end{tikzpicture}
+\end{tabular}
+\end{cheatresume}
+
+\def\deleteall#1{}
+
+\begin{multicols*}{2}
+\raggedcolumns
+\def\lefthandwidth{6.5cm}%
+\newheader{\mysans{JFET}基本回路}
+\begin{cheatresume}
+\begin{tabular}{@{}c>{\centering\arraybackslash}p{5.5cm}>{\centering\arraybackslash}p{5.5cm}}
+    & \+:c1c{\color{titlepurple}エミッタ接地} & \+:c1c{\color{titlepurple}コレクタ接地}  \\
+\begin{tikzpicture}
+        \draw (0,0) node {}
+        (0,2.7) node{\mathitem{{基本回路}}};
+\end{tikzpicture}& \begin{tikzpicture}[xscale=0.9,yscale=0.9]
+\draw
+    (0,1) \ib{V\+_GG_}{}
+    (0,0)
+    (0,1) \ivs{U\+_i_}{}
+    (0,2) \ir{R\+_g_}{}
+    (2,2) node[njfet,anchor=G,label=right:T](T) {}
+    (T.S) \is{-*}
+    (T.S|-0,0) node[rground] (g) {}
+    (0,0) \is{}
+    (g) \iso{*-o}
+    ($(g) + (0.7,0)$)
+    (T.D|-5,5) node[left]{$+V\+_DD_$} \ir{R\+_d_}{o-}
+    (T.D) \iso{*-o}
+    ($(T.D) + (0.7,0)$)
+    ;
+\iou{($(T.D) + (0.7,0)$)}{($(g) + (0.7,0)$)}{u\+_o_}
+\end{tikzpicture} & \begin{tikzpicture}[yscale=1.4175,xscale=0.9]
+\draw
+    (0,0) \ib{V\+_BB_}{}
+    (0,1) \ivs{U\+_i_}{}
+    (0,2) \ir{R\+_b_}{}
+    (2,2) node[njfet,anchor=G,label=right:T](T) {}
+    (T.S) to[resistor,l_=$R\+_c_$,-*]
+    (T.S|-0,0) node[rground] (g) {}
+    (0,0) \is{}
+    (g)
+    (T.D|-5,3.125) node[left] {$+V\+_DD_$} \ios{}
+    (T.D) 
+    (T.S) \iso{*-o}
+    ($(T.S) + (0.7,0)$)
+    (g) \iso{*-o}
+    ($(g) + (0.7,0)$)
+    ;
+\iou{($(T.S) + (0.7,0)$)}{($(g) + (0.7,0)$)}{u\+_o_}
+\end{tikzpicture} \\
+\begin{tikzpicture}
+        \draw (0,0) node {}
+        (0,1) node{\mathitem{等価回路}};
+\end{tikzpicture}  & \begin{tikzpicture}
+    \draw
+        (0,2) to[resistor,R=$R\+_g_$,o-o]
+        (2,2) node[above] {g}
+        (2,0) to[short,-o]
+        (0,0)
+        (2,0) to[short]
+        (3,0) node[rground] {} node[above left] {s}
+        (3,0) to[european controlled current source,i_<=$g\+_m_u\+_gs_$,*-]
+        (3,2) node[above] {d}
+        (3,2) to[short]
+        (4,2) to[resistor,l=$R\+_d_$,*-*]
+        (4,0) to[short]
+        (3,0)
+        (4,2) to[short,-o]
+        (5,2) node[below] {$+$}
+        (4,0) to[short,-o]
+        (5,0) node[above] {$-$}
+        (5,1) node {$v\+_o_$}
+        (0,0) node[above] {$-$}
+        (0,2) node[below] {$+$}
+        (0,1) node {$v\+_i_$}
+        (2,0) node[above] {$-$}
+        (2,2) node[below] {$+$}
+        (2,1) node {$v\+_gs_$}
+        ;
+    \end{tikzpicture} & \begin{tikzpicture}
+    \draw
+        (0,2) to[resistor,R=$R\+_g_$,o-o]
+        (2,2) node[above] {g}
+        (2,0) to[short,-o]
+        (0,0)
+        (2,0) to[short]
+        (3,0) node[rground] {} node[above left] {d}
+        (3,0) to[european controlled current source,i_=$g\+_m_u\+_gs_$,*-]
+        (3,2) node[above] {s}
+        (3,2) to[short]
+        (4,2) to[resistor,l=$R\+_s_$,*-*]
+        (4,0) to[short]
+        (3,0)
+        (4,2) to[short,-o]
+        (5,2) node[below] {$+$}
+        (4,0) to[short,-o]
+        (5,0) node[above] {$-$}
+        (5,1) node {$v\+_o_$}
+        (0,0) node[above] {$-$}
+        (0,2) node[below] {$+$}
+        (0,1) node {$v\+_i_$}
+        (3,2) node[below left] {$-$}
+        (2,2) node[below] {$+$}
+        (2.35,2) node[below] {$v\+_gs_$}
+        ;
+    \end{tikzpicture} \\
+\mathitem{電圧増幅} & $A_v = -g\+_m_R\+_d_$ & $\displaystyle A_v = \frac{g\+_m_ R\+_s_}{1+g\+_m_R\+_s_}$ \\
+\mathitem{入力抵抗} & \+:c2c{$\infty$} \\
+\mathitem{出力抵抗} & $\displaystyle R\+_o_ = R\+_d_$ & $\displaystyle R\+_o_ = R_s \parallelsum \rec{g\+_m_}$
+\end{tabular}
+\end{cheatresume}
+\columnbreak
+\newheader{バイアス}
+\begin{cheatresumefuta}
+\mathitem{自己バイアス}\\[-2\baselineskip]
+\begin{center}
+\begin{tikzpicture}[yscale=0.8]
+\draw
+    (0,0) node[above] {$-$}
+    (0,2) node[below] {$+$}
+    (0,1) node {$v\+_i_$}
+    (0,2) to[capacitor,C=$C_1$, o-]
+    (1,2)
+    (1,2) to[resistor, l_=$R\+_g_$,*-*]
+    (1,0)
+    (1,2) to[short]
+    (2,2) node[njfet,anchor=G,label=right:T](T) {}
+    (T.S) to[resistor,R=$R\+_s_$]
+    (T.S|-0,0) node[rground] (g) {}
+    (0,0) \is{o-}
+    (g) \is{}
+    (5,0) \ir{R\+_L_}{}
+    (5,0|-T.D) to[capacitor,C=$C_2$,-*]
+    (T.D) to[resistor,R=$R\+_d_$,-o] ++(0,1.7) node[left] {$+V\+_DD_$}
+    %(T.D|-5,5) \ir{R\+_c_}{}
+    %(T.D) \iso{*-o}
+    %($(T.D) + (0.7,0)$)
+    (T.S) to[short,*-]++(1,0) to[capacitor,C=$C\+_s_$,-*]
+    ($(g) + (1,0)$)
+    ;
+%\iou{($(T.D) + (0.7,0)$)}{($(g) + (0.7,0)$)}{u\+_o_}
+\end{tikzpicture}
+\vspace{-1em}
+\begin{flalign*}
+    & \mathitem{電流} && I\+_DQ_ = I\+_DSS_\pare{1-{U\+_GSQ_}/{U\+_GS(off)_}}^2 && \\
+    & \mathitem{電圧} && U\+_GSQ _ = -I\+_DQ_R\+_s_ \mathcomment{連立} &&
+\end{flalign*}
+\end{center}
+\tcblower
+\mathitem{電流帰還}\\[-3\baselineskip]
+\begin{center}
+\begin{tikzpicture}[yscale=0.8,xscale=1.2]
+\draw
+    (0,0) node[above] {$-$}
+    (0,2) node[below] {$+$}
+    (0,1) node {$v\+_i_$}
+    (0,2) to[capacitor,C=$C_1$, o-]
+    (1,2)
+    (1,1.5) to[resistor, l_=$R\+_g1_$,*-*]
+    (1,0)
+    (1,2) to[short]
+    (2,2) node[nigfete,anchor=G,label=right:T](T) {}
+    (T.S) to[resistor,R=$R\+_s_$]
+    (T.S|-0,0) node[rground] (g) {}
+    (0,0) \is{o-}
+    (g) \is{}
+    (5,0) \ir{R\+_L_}{}
+    (5,0|-T.D) to[capacitor,C=$C_2$,-*]
+    (T.D) to[resistor,R=$R\+_d_$,-o] node (vdd) {} ++(0,1.7) node[right] {$+V\+_DD_$}
+    %(T.D|-5,5) \ir{R\+_c_}{}
+    %(T.D) \iso{*-o}
+    %($(T.D) + (0.7,0)$)
+    (T.S) to[short,*-]++(1,0) to[capacitor,C=$C\+_s_$,-*]
+    ($(g) + (1,0)$)
+    (1,1.5) to[resistor, l_=$R\+_g3_$, -*]
+    (1,1.5-|T.G) to[short]
+    (T.G)
+    (1,1.5) to[resistor, R=$R\+_g2_$]
+    (1,1.5|-vdd) to[short] (vdd)
+    ;
+%\iou{($(T.D) + (0.7,0)$)}{($(g) + (0.7,0)$)}{u\+_o_}
+\end{tikzpicture}
+\vspace{\dimexpr-\baselineskip-1em\relax}
+\begin{flalign*}
+    & I\+_GSQ_ = I\+_DO_\pare{U\+_GSQ_/U\+_GS(th)_ - 1}^2 && \\
+    & U\+_GSQ _ = R\+_g1_ V\+_DD_/{R\+_g1_+R\+_g2_} - I\+_DQ_ R\+_s_ &&
+\end{flalign*}
+\end{center}
+\end{cheatresumefuta}
+\newheader{モデル}
+\begin{cheatresumefuta}
+\begin{flalign*}
+    & \+:c5l{\mathitem{中域コンダクタンス}\ $\displaystyle g\+_m_ = \pare{\mathrm{d}u\+_GS_ / \mathrm{d}{i\+_D_}}\vert_{U\+_DS_}$} \\
+    & \mathitem{EMOSFET} && g\+_m_ = 2\sqrt{I\+_DO_I\+_DQ_}/U\+_GS(th)_ && \\
+    & \mathitem{飽和領域(N)} && u\+_DS_ > u\+_GS_ - U\+_GS(th/off)_ && \\
+    & \mathitem{\phantom{飽和領域} (P)} && u\+_DS_ < u\+_GS_ - U\+_GS(th/off)_ &&
+\end{flalign*}
+\tcblower
+\begin{flalign*}
+    & \mathitem{JFET} && g\+_m_ = 2\sqrt{I\+_DSS_I\+_DQ_}/U\+_GS(off)_ && \\
+    & \mathitem{(N)JFET} && i\+_D_ = I\+_DSS_ \pare{1-{u\+_GS_}/{U\+_GS(off)_}}^2 && \\
+    & \mathitem{(NE)MOS} && i\+_D_ = i\+_DO_\pare{{u\+_GS_}/{U\+_GS(th)_} - 1}^2 && \\
+    & && I\+_DO_ = i\+_D_\vert_{u\+_GS_ = 2U\+_GS(th)_} &&
+\end{flalign*}
+\end{cheatresumefuta}
+
+\end{multicols*}
+
+\end{document}

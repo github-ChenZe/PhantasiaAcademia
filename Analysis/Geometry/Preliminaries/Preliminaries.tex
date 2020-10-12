@@ -1,0 +1,490 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Geometry\ in\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Int}{Int}
+
+\providecommand{\comp}{\circ}
+
+\usepackage{slashed}
+\usepackage{tensor}
+\usepackage[all]{xy}
+\usetikzlibrary {arrows.meta}
+
+\makeatletter
+
+\newcommand*\SetSuchThat{\@ifstar\@SetSuchThat@star\@SetSuchThat@nostar}
+\newcommand*\@SetSuchThat@star{%
+    \mathrel{}%
+    % \nobreak % superfluous inside "\left... ... \right..."
+    \middle\vert
+    \mathrel{}%
+}
+\newcommand*\@SetSuchThat@nostar[1][]{%
+    \mathrel{#1\vert}%
+}
+\newcommand*\@SetSuchThat{}
+\DeclarePairedDelimiterX \SetCond [2] {\lbrace}{\rbrace}
+    {\nonscript\,#1\@SetSuchThat@nostar #2\nonscript\,}
+
+\makeatother
+
+\begin{document}
+
+\section{Mathemtical Preliminaries} % (fold)
+\label{sec:mathemtical_preliminaries}
+
+\subsection{Maps} % (fold)
+\label{sub:maps}
+
+\subsubsection{Definitions} % (fold)
+\label{ssub:definitions}
+
+\begin{termdef}{Map, Mapping}
+    A map (or mapping) is denoted by
+    \[ \func{f}{X}{Y}, \quad f:x\mapsto f\pare{x}. \]
+\end{termdef}
+A subset of $X$ whose elements are mapped to $y\in Y$ under $f$ is called the \gloss{inverse image} of $y$, denoted by $f^{-1}\pare{y}$.
+\par
+The set $X$ is called the \gloss[-\baselineskip]{domain} of the map. $Y$ is called the \gloss{range} of the map. The \gloss{image} of the map is $f\pare{X}$, also denoted by $\Im f$.
+\begin{termdef}[2\baselineskip]{Injective, Surjective, and Bijective}
+    A map is called
+    \begin{citemize}
+        \item injective (or one-to-one) if $x\neq x'$ implies $f\pare{x} \neq f\pare{x'}$;
+        \item surjective if for each $y\in Y$ there exists at least one element $x\in X$ such that $f\pare{x} = y$;
+        \item bijective if it is both injective and surjective.
+    \end{citemize}
+\end{termdef}
+A \gloss{constant map} $\func{c}{X}{Y}$ is defined by $c\pare{x} = y_0$ where $y_0$ is a fixed element. The \gloss{restriction} of $f$ is denoted by $\restr{f}{A}$. The \gloss[\baselineskip]{composite map} is denoted by $g\comp f$. A diagram of maps is called \gloss[\baselineskip]{commutative} if any composite maps between a pair of sets do not depend on how they are composed.
+\begin{sample}
+    \begin{example}
+        The graph below is a commutative diagram, where $f\comp g = h\comp j = k$.
+        \[ \xymatrix{
+            X \ar[r]^g \ar[rd]^k \ar[d]_j & Y \ar[d]^f \\
+            Z \ar[r]_h & W
+        } \]
+    \end{example}
+\end{sample}
+\par
+An \gloss{inclusion map} $\func{i}{A}{X}$ is defined by $i\pare{a} = a$, often written as $i: A\xhookrightarrow X$. The \gloss{Identity map} $\func{\rd_X}{X}{Y}$ is a special case of an inclusion map for which $A=X$. If $\func{f}{X}{Y}$ is bijective, there exists an \gloss{inverse map} $\func{f^{-1}}{Y}{X}$.
+\par
+$\func{f}{X}{Y}$ is called a \gloss{homomorphism} if it preserves the algebraic structures of $X$ and $Y$. A homomorphism is called an \gloss{isomorphism} if it is bijective, and in this case $X$ is said to be \gloss{isomorphic} to $Y$, denoted $X \cong Y$. 
+
+% subsubsection definitions (end)
+
+\subsubsection{Equivalence Relation and Equivalence Class} % (fold)
+\label{ssub:equivalence_relation_and_equivalence_class}
+
+A \gloss{relation} $R$ defined in a set $X$ is a subset of $X^2$. If a point $\pare{a,b} \in X^2$ is in $R$, we write $aRb$.
+\begin{termdef}{Equivalence Relation}
+    An equivalence relation $\sim$ is a relation which satisfies
+    \begin{citemize}
+        \item $a\sim a$ (reflective);
+        \item $a\sim b \Rightarrow b\sim a$ (symmetric);
+        \item $a\sim b$ and $b\sim c \Rightarrow a\sim c$ (transitive).
+    \end{citemize}
+\end{termdef}
+\begin{termdef}{Equivalence Classes}
+    Equivalence classes are subsets in the partition induced by an equivalence relation $\in$ of $X$. A class $\brac{a}$ is
+    \[ \brac{a} = \SetCond{x\in X}{x\sim a}. \]
+\end{termdef}
+The set of all classes is called the \gloss{quotient space}, denoted by $X/\sim$. The element $a$ (or any element in $\brac{a}$) is called the \gloss{representative} of a class $\brac{a}$.
+\begin{sample}
+    \begin{example}
+        With the relation $\sim$ deviding integers into odd and even ones, we have
+        \[ {\+bZ/\sim} \cong \+bZ_2. \]
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        With $X = \SetCond{\pare{x,y}\in \+bR^2}{\abs{x}\le 1, \abs{y}\le 1}$, identifying $\pare{-1,y}\sim\pare{1,y}$ yields the cylinder, while identifying $\pare{-1,-y}\sim \pare{1,y}$ yields the M\"obius strip.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        With $X = \+bR^2$, the equivalence relation $\sim$ defined by $\pare{x_2 - x_1,y_2,-y_1} = \pare{2\pi n_x,2\pi n_y}$, where $n_x,n_y\in \+bZ$ induces a torus $T^2$. 
+    \end{example}
+\end{sample}
+\begin{marginwarns}
+    \raggedright
+    The projective plane should not be identified with a hemisphere.
+\end{marginwarns}
+\begin{sample}
+    \begin{example}
+        Identifying $\pare{x,1}\sim\pare{-x,-1}$ and $\pare{1,y}\sim \pare{-1,y}$ yields the Klein bottle. Identifying $\pare{x,1} \sim \pare{-x,-1}$ and $\pare{1,y} \sim \pare{-1,-y}$ yields the projective plane $RP^2$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        \label{ex:sigma_2_construction}
+        Identifying pairs of edges of the octagon below yields a tortus with two handles, denoted by $\Sigma_2$. More generally, $\Sigma_g$, the torus with $g$ handles, can be obtained by a similar identification.
+        \centerline{
+        \begin{tikzpicture}[scale=1]
+            \coordinate (O1) at (67.5:1) {};
+            \coordinate (O2) at (112.5:1) {};
+            \coordinate (O3) at (157.5:1) {};
+            \coordinate (O4) at (202.5:1) {};
+            \coordinate (O5) at (247.5:1) {};
+            \coordinate (O6) at (292.5:1) {};
+            \coordinate (O7) at (337.5:1) {};
+            \coordinate (O8) at (22.5:1) {};
+            \draw ($0.5*(O1) + 0.5*(O8)$) -- (O8);
+            \draw[-{Latex[open]}] (O1) -- ($0.5*(O1) + 0.5*(O8)$);
+            \draw ($0.5*(O8) + 0.5*(O7)$) -- (O7);
+            \draw[-{Kite[open,gray]}] (O8) -- ($0.5*(O8) + 0.5*(O7)$);
+            \draw ($0.5*(O6) + 0.5*(O7)$) -- (O7);
+            \draw[-{Latex[open]}] (O6) -- ($0.5*(O6) + 0.5*(O7)$);
+            \draw ($0.5*(O5) + 0.5*(O6)$) -- (O6);
+            \draw[-{Kite[open,gray]}] (O5) -- ($0.5*(O5) + 0.5*(O6)$);
+            %
+            \draw ($0.5*(O1) + 0.5*(O2)$) -- (O2);
+            \draw[-{Kite[gray]}] (O1) -- ($0.5*(O1) + 0.5*(O2)$);
+            \draw ($0.5*(O2) + 0.5*(O3)$) -- (O3);
+            \draw[-{Latex}] (O2) -- ($0.5*(O2) + 0.5*(O3)$);
+            \draw ($0.5*(O4) + 0.5*(O3)$) -- (O3);
+            \draw[-{Kite[gray]}] (O4) -- ($0.5*(O4) + 0.5*(O3)$);
+            \draw ($0.5*(O5) + 0.5*(O4)$) -- (O4);
+            \draw[-{Latex}] (O5) -- ($0.5*(O5) + 0.5*(O4)$);
+        \end{tikzpicture}
+        }
+    \end{example}
+\end{sample}
+The $g$ in the above example is called the \gloss{genus} of the torus.
+\begin{sample}
+    \begin{example}
+        With $D^2 = \SetCond{\pare{x,y}\in \+bR^2}{x^2+y^2 \le 1}$ be a closed disc, identifying the boundary into a single point yields the sphere $S^2$. This may be written more generally as $D^n/S^{n-1} = S^n$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        Let $G$ be a group, $H$ a subgroup of $G$, and $\sim$ a equivalence relation in $G$ where $g\sim g'$ if there is an $h\in H$ such that $g' = gh$. The equivalence class $\brac{g} = \SetCond{gh}{h\in H}$ is denoted by $gH$.
+    \end{example}
+\end{sample}
+The class $gH$ is called a \gloss{left coset}. The quotient space is denoted by $G/H$, which is generally not a group unless $H$ is a \gloss{normal subgroup} of $G$, i.e. $ghg^{-1}\in H$ for any $g\in G$ and $h\in H$. If $H$ is a normal subgroup of $G$, $G/H$ is called the \gloss{quotient group}, whose group operator is given by $\brac{g}*\brac{g'} = \brac{gg'}$.
+
+% subsubsection equivalence_relation_and_equivalence_class (end)
+
+% subsection maps (end)
+
+\subsection{Vector Spaces} % (fold)
+\label{sub:vector_spaces}
+
+\subsubsection{Vectors and Vector Spaces} % (fold)
+\label{ssub:vectors_and_vector_spaces}
+
+A \gloss{vector space} (or a \gloss[\baselineskip]{linear space}) $V$ over a field $K$ is a set in which two operations, addition and multiplication by an element of $K$ (called a \gloss[\baselineskip]{scalar}) are defined. The elements (called \gloss[\baselineskip]{vectors}) of $V$ satisfy the following axioms:
+\begin{cenum}
+    \item $\+vu+\+vv = \+vv+\+vu$;
+    \item $\pare{\+vu+\+vv} + \+vw = \+vu + \pare{\+vv+\+vw}$;
+    \item There exists a zero vector $\+v0$ such that $\+vv+\+v0 = \+vv$;
+    \item For any $\+vu$, there exists $-\+vu$, such that $\+vu+\pare{-\+vu} = \+v0$;
+    \item $c\pare{\+vu+\+vv} = c\+vu+c\+vv$;
+    \item $\pare{c+d}\+vu = c\+vu+d\+vu$;
+    \item $\pare{cd}\+vu = c\pare{d\+vu}$;
+    \item $1\+vu = \+vu$.
+\end{cenum}
+If the equation
+\[ x_1 \+vv_1 + x_2 \+vv_2 + \cdots + x_k \+vv_k = \+v0, \]
+where $\curb{\+vv_i}$ is a set of $k$ vectors, has a non-trivial solution, the set of vectors $\curb{\+vv_j}$ is called \gloss{linearly dependent}. Otherwise, it is said to be \gloss[\baselineskip]{linearly independent}.
+\par
+A set of linearly independent vectors $\curb{\+ve_i}$ may form a basis of $V$, if any element $\+vv\in V$ is written uniquely as a linear combination of $\curb{\+ve_i}$,
+\[ \+vv = v^1 \+ve_1 + v^2 \+ve_2 + \cdots + v^n \+ve_n. \]
+The numbers $v^i\in K$ are called the \gloss{components} of $\+vv$.
+
+% subsubsection vectors_and_vector_spaces (end)
+
+\subsubsection{Linear Maps, Images and Kernels} % (fold)
+\label{ssub:linear_maps_images_and_kernels}
+
+A map $\func{f}{V}{W}$ between two vector spaces $V$ and $W$ is called a \gloss{linear map} if it satisfies $f\pare{a_1 \+vv_1 + a_2 \+vv_2} = a_1f\pare{\+vv_1} + a_2 f\pare{\+vv_2}$ for any $a_1,a_2 \in K$ and $\+vv_1, \+vv_2 \in V$. The \gloss{image} of $f$ is $f\pare{V}$ and the \gloss[\baselineskip]{kernel} of $f$ is $\SetCond{\+vv\in V}{f\pare{\+vv} = 0}$ and denoted by $\Im f$ and $\Ker f$ respectively.
+\par
+If $W$ is the field $K$ itself, $f$ is called a \gloss{linear function}. If $f$ is an isomorphism, $V$ is said to be \gloss{isomorphic} to $W$ and vice versa, denoted by $V\cong W$.
+\begin{finaleq}[\baselineskip]{Rank-Nullity Theorem}
+    If $\func{f}{V}{W}$ is a linear map, then
+    \[ \dim V = \dim \Ker f + \dim \Im f. \]
+\end{finaleq}
+Let the basis of $\Im f$ be $\curb{\+vh'_1,\+vh_2,\cdots,\+vh'_s}$, and take $\+vh_i\in V$ such that $f\pare{\+vh_i} = \+vh'_i$. The vector space spanned by $\curb{\+vh_1,\cdots,\+vh_s}$ is called the \gloss{orthogonal complement} of $\Ket f$ and is denoted by $\pare{\Ker f}^{\perp}$.
+
+% subsubsection linear_maps_images_and_kernels (end)
+
+\subsubsection{Dual Vector Space} % (fold)
+\label{ssub:dual_vector_space}
+
+The linear space of all linear functions on a vector space $V$ is called the \gloss{dual vector space} to $V$, denoted by $V^*$. If $\dim V$ is finite, $\dim V^* = \dim V$. We may choose the \gloss{dual basis}
+\[ e^{*i}\pare{\+ve_j} = \delta^i_j, \]
+and any linear function, a \gloss{dual vector}, is expanded is terms of $\curb{e^{*i}}$,
+\[ f = f_i e^{*i}. \]
+The action of $f$ on $\+vv$ is the \gloss{inner product} between vectors,
+\[ f\pare{\+vv} = f_i e^{*i}\pare{v^j e_j} = f_jv^j e^{*i}\pare{\+ve_j} = f_iv^i. \]
+\vspace{-\baselineskip}
+\begin{termdef}{Pullback}
+    The element $h\in V^*$ induced from $\func{f}{V}{W}$ and $\func{g}{W}{K}$ defined by
+    \[ h\pare{\+vv} = g\pare{f\pare{\+vv}} \]
+    is the pull back of $g$ by $f^*$, where $\func{f^*}{W^*}{V^*}$.
+\end{termdef}
+
+% subsubsection dual_vector_space (end)
+
+\subsubsection{Inner Product and Adjoint} % (fold)
+\label{ssub:inner_product_and_adjoint}
+
+Let $g$ be a vector space isomorphism $\func{g}{V}{V^*}$, which has the component representation
+\[ \func{g}{v^j}{g_{ij}v^j}. \]
+From this isomorphism we may define the \gloss{inner product} of two vectors by
+\[ g\pare{\+vv_1,\+vv_2} = \expc{g\+vv_1,\+vv_2}. \]
+If $K$ is a real number $\+bR$, the above equation has a component expression
+\[ g\pare{\+vv_1,\+vv_2} = {v_1}^i g_{ij} {v_2}^j. \]
+We require $\pare{g_{ij}}$ be positive definite and symmetric.
+\par
+With a map $\func{f}{V}{W}$ given, and a vector space isomorphism $\func{G}{W}{W^*}$, we define the \gloss{adjoint} of $f$ by
+\[ G\pare{\+vw,f\+vv} = g\pare{\+vv,\tilde{f}\+vw}. \]
+We have $\tilde{\pare{\tilde{f}}} = f$. The component expression of the above equation is
+\[ w^\alpha G_{\alpha\beta} \tensor{f}{^\beta_i}v^i = v^i g_{ij}\tensor{\tilde{f}}{^j_\alpha}w^\alpha. \]
+For the special case $g_{ij} = \delta_{ij}$ and $G_{\alpha\beta} = \delta_{\alpha\beta}$, we have $\tilde{f} = f^T$. More generally,
+\[ \tilde{f} = g^{-1}f^t G^t \]
+in their matrix representation. Therefore $\dim \Im f = \dim \Im \tilde{f}$. For the case of $V$ being a vector space over $\+bC$, the above equation is replaced by $\tilde{f} = g^{-1} f^\dagger G^\dagger$.
+\begin{finaleq}{Toy Index Theorem}
+    Let $V$ and $W$ be finite dimensional vector spaces over a field $K$ and let $\func{f}{V}{W}$ be a linear map.
+    \[ \dim \Ker f - \dim \Ker \tilde{f} = \dim V - \dim W. \]
+\end{finaleq}
+
+% subsubsection inner_product_and_adjoint (end)
+
+\subsubsection{Tensors} % (fold)
+\label{ssub:tensors}
+
+A \gloss{tensor} $T$ of type $\pare{p,q}$ is a multilinear map
+\[ \func{T}{\bigotimes^q V^* \bigotimes^q V}{\+bR}. \]
+The set of all tensors of type $\pare{p,q}$ is called the \gloss{tensor space} of type $\pare{p,q}$ and denoted by $\+cT^p_q$. The \gloss{tensor product} $\tau = \mu\otimes \nu \in \+cT^p_q \otimes \+cT^{p'}_{q'}$ is an element of $\+cT^{p+p'}_{q+q'}$ defined by
+\begin{align*}
+    & \tau\pare{\omega_1,\cdots,\omega_p,\xi_1,\cdots,\xi_{p'};u_1,\cdots,u_q,v_1,\cdots,v_{q'}} \\
+    &= \mu\pare{\omega_1,\cdots,\omega_p;u_1,\cdots,u_q}\nu\pare{\xi_1,\cdots,\xi_{p'}; v_1,\cdots,v_{q'}}.
+\end{align*}
+\gloss{Contraction} is a map from a tensor space of type $\pare{p,q}$ to type $\pare{p-1,q-1}$ defined by
+\[ \tau\pare{\cdots,e^{*i},\cdots;\cdots,e_i,\cdots}, \]
+where $\curb{\+ve_i}$ and $\curb{e^{*i}}$ are the dual bases.
+
+% subsubsection tensors (end)
+
+% subsection vector_spaces (end)
+
+\subsection{Topological Spaces} % (fold)
+\label{sub:topological_spaces}
+
+\subsubsection{Definitions} % (fold)
+\label{ssub:definitions}
+
+\begin{termdef}{Topological Space, Open Sets}
+    The pair $\pare{X,\+cT}$, where $X$ is any set and $\+cT$ a certain collection of subsets of $X$ called the open sets, is a topological space if
+    \begin{citemize}
+        \item $\varnothing, X\in \+cT$;
+        \item the union of any subcollection of $\+cT$ is an open set;
+        \item the intersection of any finite subcollection of $\+cT$ is an open set.
+    \end{citemize}
+\end{termdef}
+The \gloss{discrete topology} is induced by a $\+cT$ which consists of all subsets of $X$.
+\par
+The \gloss{trivial topology} is induced by $\+cT = \curb{\varnothing,X}$.
+\par
+The \gloss{usual topology} of $\+bR$ is generated by all open intervals and their unions.
+\begin{termdef}[\baselineskip]{Metric}
+    A metric $\func{d}{X\times X}{\+bR}$ is a function that satisfies the following conditions:
+    \begin{citemize}
+        \item $d\pare{x,y} = d\pare{y,x}$;
+        \item $d\pare{x,y} \ge 0$ where the equality holds if and only if $x=y$;
+        \item $d\pare{x,y} + d\pare{y,z} \ge d\pare{x,z}$.
+    \end{citemize}
+\end{termdef}
+The topology generated by open discs under $d$ is called the \gloss{metrix topology}. Such a topological space $\pare{X,\+cT}$ is called a \gloss{metrix space}.
+\par
+Let $\pare{X,\+cT}$ be a topological space and $A$ be any subset of $X$, then $\+cT = \curb{U_i}$ induces the relative topology in $A$ by $\+cT' = \SetCond{U_i\cap A}{U_i \in \+cT}$.
+
+\begin{termdef}{Continuous}
+    $\func{f}{X}{Y}$ is continuous if the inverse image of an open set in $Y$ is an open set in $X$.
+\end{termdef}
+\begin{sample}
+    \begin{example}
+        Continuity is not defined by demanding open sets in $X$ be mapped to open set in $Y$. For example, $\pare{-a,a}$ is mapped to $\blr{0,a^2}$ in $\+bR$, which is not open.
+    \end{example}
+\end{sample}
+\begin{termdef}{Neighbourhood}
+    $N$ is a neighbourhood of a point $x\in X$ if $N$ is a subset of $X$ and $N$ contains at least one open set $U_i$ which contains $x$.
+\end{termdef}
+$N$ is not necessarily open. If it is open, $N$ is called an \gloss[-\baselineskip]{open neighbourhood}.
+\begin{termdef}{Hausdorff Space}
+    A topological space $\pare{X,\+cT}$ is a Hausdorff space if, for an arbitrary pair of distinct points $x,x' \in X$, there always exist disjoint neighbourhoods $U_x$ of $x$ and $U_{x'}$ of $x'$.
+\end{termdef}
+\begin{termdef}{Closed Set}
+    A set is closed if its complement is open.
+\end{termdef}
+The \gloss{closure} of $A$, denoted by $\conj{A}$, is the intersection of all of a closed sets that contains $A$. The \gloss{interior} of $A$ is the union of the open subsets of $A$ and is denoted by $\Int A$. The \gloss{boundary} $\partial A$ is the complement of $\Int A$ in $A$, i.e. $\partial A = A - \Int A$.
+\par
+A family $\curb{A_i}$ of subsets of $X$ is called a \gloss{covering} of $X$ if
+\[ \cup_{i\in I} A_i = X. \]
+If all the $A_i$ are open, the covering is an \gloss[-\baselineskip]{open covering}.
+\begin{termdef}{Compact}
+    The set $X$ is compact if, for every open covering of $X$, there exists a finite sub-covering.
+\end{termdef}
+\begin{finaleq}{Compactness in $\+bR^n$}
+    Let $X$ be a subset of $\+bR^n$. $X$ is compact is and only if it is closed and bounded.
+\end{finaleq}
+The \gloss{one-point compactification} of $\+bR^n$ is given by $S^n = \+bR^n \cup \curb{\infty}$.
+\begin{termdef}{Connected Space}
+    A topological space is connected if it cannot be written a union of two disjoint open sets.
+\end{termdef}
+If $X$ is not connected, it is a \gloss[-\baselineskip]{disconnected space}.
+\begin{termdef}{Arcwise Connected Space}
+    A topological space $X$ is called arcwise connected if, for any points $x,y \in X$, there exists a continuous map $\func{f}{\brac{0,1}}{X}$ such that $f\pare{0} = x$ and $f\pare{1} = y$.
+\end{termdef}
+With a few pathological exceptions, arcwise connectedness is practically equivalent to connectedness.
+\par
+A \gloss{loop} in a topological space $X$ is a continuous map $\func{f}{\brac{0,1}}{X}$ such that $f\pare{0} = f\pare{1}$.
+\begin{termdef}{Simply Connected Space}
+    Any loop in $X$ can be continuously shrunk to a point.
+\end{termdef}
+
+% subsubsection definitions (end)
+
+% subsection topological_spaces (end)
+
+\subsection{Homeomorphism and Topological Invariants} % (fold)
+\label{sub:homeomorphism_and_topological_invariants}
+
+\subsubsection{Homeomorphisms} % (fold)
+\label{ssub:homeomorphisms}
+
+\begin{termdef}{Homeomorphism}
+    A map $\func{f}{X_1}{X_2}$ is a homeomorphism if it is continuous and has an continuous inverse.
+\end{termdef}
+If there exists a homeomorphism between $X_1$ and $X_2$, $X_1$ is said to be \gloss{homeomorphic} to $X_2$.
+
+% subsubsection homeomorphisms (end)
+
+\subsubsection{Topological Invariants} % (fold)
+\label{ssub:topological_invariants}
+
+If two topological spaces have different \gloss{topological invariants} they cannot be homeomorphic to each other.
+
+% subsubsection topological_invariants (end)
+
+\subsubsection{Homotopy Type} % (fold)
+\label{ssub:homotopy_type}
+
+\begin{sample}
+    \begin{example}
+        $S^1$ is of the same homotopy type as a cylinder. The M\"obius strip is of the same homotopy type as $S^1$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        A disc $D^2 = \SetCond{\pare{x,y}\in \+bR^2}{x^2+y^2<1}$ is of the same homotopy type as a point. $D^2 - \curb{\pare{0,0}}$ is of the same homotopy type as $S^1$. Similarly, $\+bR^2 - \curb{\pare{0,0}}$ is of the same homotopy type as $S^1$ and $\+bR^3 - \curb{\pare{0,0}}$ as $S^2$.
+    \end{example}
+\end{sample}
+
+% subsubsection homotopy_type (end)
+
+\subsubsection{Euler Characteristic} % (fold)
+\label{ssub:euler_characteristic}
+
+\begin{termdef}{Euler Characteristic}
+    Let $X$ be a subset of $\+bR^3$. The Euler Characteristic $\chi\pare{X}$ of $X$ is defined by
+    \begin{equation*}
+        \chi = \pare{\mathrm{number\ of\ vertices\ in\ }X} - \pare{\mathrm{number\ of\ edges\ in\ } X} + \pare{\mathrm{number\ of\ faces\ in\ }X}.
+    \end{equation*}
+\end{termdef}
+\begin{finaleq}{Poincar\'e-Alexander Theorem}
+    The Euler characteristic $\chi\pare{X}$ is independent of the polyheadron $K$ as long as $K$ is homeomorphic to $X$.
+\end{finaleq}
+\begin{finaleq}{Euler's Theorem}
+    If $K$ is any polyhedron homeomorphic to $S^2$, with $v$ vertives, $e$ edges and $f$ two-dimensional faces, then
+    \[ v-e+f=2. \]
+\end{finaleq}
+\begin{sample}
+    \begin{example}
+        From the quotient constructions from a rectangle we find that $\chi\pare{\mathrm{Klein\ bottle}} = 0$, $\chi\pare{\mathrm{Projective\ plane}} = 1$, and (cf. \Cref{ex:sigma_2_construction}) that $\chi\pare{\Sigma_2} = 1$.
+    \end{example}
+\end{sample}
+The \gloss{connected sum} $X\# Y$ of two surfaces $X$ and $Y$ is the surface obtained by removing a small disc from each of $X$ and $Y$ and connecting the resulting holes with a cylinder. For example,
+\[ S^2 \# X = X, \]
+and
+\[ T^2 \# T^2 = \Sigma_2,\quad \underbrace{T^2\# T^2\# \cdots \# T^2}_{g\mathrm{\ factors}} = \Sigma_g. \]
+\begin{finaleq}{Euler Characteristic of Connect Sum}
+    \[ \chi\pare{X\# Y} = \chi\pare{X} + \chi\pare{Y} - 2. \]
+\end{finaleq}
+\begin{finaleq}{Euler Characteristic as a Topological Invariant}
+    If $X$ and $Y$ are two figures in $\+bR^2$ and $X$ is homeomorphic to $Y$, then $\chi\pare{X} = \chi\pare{Y}$.
+\end{finaleq}
+Euler Characteristic is a Topological Invariant. In fact, if a figure $X$ is of the same homotopy type as a figure $Y$, then $\chi\pare{X} = \chi\pare{Y}$.
+
+% subsubsection euler_characteristic (end)
+
+% subsection homeomorphism_and_topological_invariants (end)
+
+% section mathemtical_preliminaries (end)
+
+\end{document}

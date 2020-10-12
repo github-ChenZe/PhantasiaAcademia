@@ -29,9 +29,11 @@
 \end{align*}
 作差可得$f'\pare{x}$的表达式.
 \begin{theorem}[三点中心差分公式]
+    \label{thm:三点中心差分公式}
     $\displaystyle f'\pare{x} = \frac{f\pare{x+h}-f\pare{x-h}}{2h} - \frac{h^2}{6}f'''\pare{c}$, 其中$x-h<c<x+h$.
 \end{theorem}
 \begin{theorem}[二阶导数的三点中心差分公式]
+    \label{thm:二阶导数的三点中心差分公式}
     存在$c\in\brac{x-c,x+c}$满足
     \[ f''\pare{x} = \frac{f\pare{x-h} - 2f\pare{x} + f\pare{x+h}}{h^2} - \frac{h^2}{12}f^{\pare{4}}\pare{c}. \] 
 \end{theorem}
@@ -251,6 +253,526 @@ end
 % subsubsection gauss_积分 (end)
 
 % subsection 数值微分和积分 (end)
+
+\subsection{常微分方程} % (fold)
+\label{sub:常微分方程}
+
+\subsubsection{初值问题} % (fold)
+\label{ssub:初值问题}
+
+对于方程
+\[ \begin{cases}
+    y' = f\pare{t,y},\\
+    y\pare{a} = y_a, \\
+    t\in\pare{a,b},
+\end{cases} \]
+以及$\brac{a,b}$的一个分割$\curb{t_i}$, 有如下的Euler方法.
+\begin{theorem}[Euler方法]
+    $\displaystyle \begin{cases}
+        w_0 = y_0, \\
+        w_{i+1} = w_i + hf\pare{t_i,w_i}.
+    \end{cases}$
+\end{theorem}
+\begin{definition}
+    当存在常数$L$(即Lipschitz常数)对矩形$S=\brac{a,b}\times\brac{\alpha,\beta}$中的每对$\pare{t,y_1}$, $\pare{t,y_2}$满足
+    \[ \abs{f\pare{t,y_1} - f\pare{t,y_2}} \le L\abs{y_1-y_2}, \]
+    谓函数$f\pare{t,y}$相对变量$y$在$S$上Lipschitz连续.
+\end{definition}
+\begin{theorem}
+    若$f\pare{t,y}$定义在集合$\brac{a,b}\times\brac{\alpha,\beta}$且$\alpha < y_a < \beta$, 函数对于变量$y$是Lipschitz连续, 则在$a,b$之间存在$c$, 使初值问题
+    \[ \begin{cases}
+        y' = f\pare{t,y}, \\
+        y\pare{a} = y_a, \\
+        t \in \brac{a,c}
+    \end{cases} \]
+    有唯一解$y\pare{t}$. 且若$f$在$\brac{a,b}\times \pare{-\infty,\infty}$内Lipschitz连续, 则其在$\brac{a,b}$上有唯一解.
+\end{theorem}
+\begin{theorem}
+    设$f\pare{t,y}$在集合$S=\brac{a,b}\times \brac{\alpha,\beta}$上关于$y$连续. 若$Y\pare{t}$和$Z\pare{t}$是微分方程
+    \[ y' = f\pare{t,y} \]
+    在$S$上的解, 分别具有初值条件$Y\pare{a}$和$Z\pare{a}$, 则
+    \[ \abs{Y\pare{t} - Z\pare{t}} \le e^{L\pare{t-a}}\abs{Y\pare{a} - Z\pare{a}}. \]
+\end{theorem}
+\begin{remark}
+    这是Gr\"onwall不等式的特殊情形.
+\end{remark}
+对于初值问题
+\[ \begin{cases}
+    y' = g\pare{t} y + h\pare{t}, \\
+    y\pare{a} = y_a, \\
+    t\in\brac{a,b},
+\end{cases} \]
+设$G'\pare{t} = g\pare{t}$, 则有显式解
+\[ y\pare{t} = e^{G\pare{t}} \int e^{-G\pare{t}}h\pare{t}\,\rd{t}. \]
+
+% subsubsection 初值问题 (end)
+
+\subsubsection{IVP求解器的分析} % (fold)
+\label{ssub:ivp求解器的分析}
+
+全局截断误差为
+\[ g_i = \abs{w_i - y_i}, \]
+即近似值和初值问题精确解之间的差异. 局部截断误差为
+\[ e_{i+1} = \abs{w_{i+1} - z\pare{t_{i+1}}}, \]
+这是区间上求解器的值与单步初值问题
+\[ \begin{cases}
+    y' = f\pare{t,y}, \\
+    y\pare{t_i} = w_i, \\
+    t\in \brac{t_i,t_{i+1}}
+\end{cases} \]
+的正确解之间的差异.
+\begin{ex}
+    假设$y''$连续, 有
+    \[ y\pare{t_i + h} = y\pare{t_i} + hf\pare{t_i,w_i} + \frac{h^2}{2}y''\pare{c}, \]
+    而Euler方法为
+    \[ w_{i+1} = w_i + hf\pare{t_i,w_i}, \]
+    可得局部误差
+    \[ e_{i+1} = \abs{w_{i+1} - y\pare{t_{i+1}}} = \frac{h^2}{2}\abs{y''\pare{c}} \le \frac{Mh^2}{2}, \]
+    其中$M = \sup \abs{y''}$.
+\end{ex}
+为了得到累积的全局误差, 注意到$w_1$对应的全局误差和局部误差一致. 从$w_1$开始, 求解
+\[ \begin{cases}
+    y' = f\pare{t,y}, \\
+    y\pare{t_1} = w_1,\\
+    t\in\brac{t_1,t_2}
+\end{cases} \]
+可得初始条件$\pare{t_1,w_1}$下的精确解$z\pare{t_2}$, 则$w_2$和精确解的差异由两部分给出,
+\begin{align*}
+    g_2 &= \abs{w_2 - y_2} \le \abs{w_2 - z\pare{t_2}} + \abs{z\pare{t_2} - y_2} \\
+    &= e_2 + e^{Lh} g_1 = e_2 + e^{Lh} e_1.
+\end{align*}
+对于$i=3$类似,
+\[ g_3 = \abs{w_3 - y_3} \le e_3 + e^{Lh}g_2 \le e_3 + e^{Lh}e_2 + e^{2Lh}e_1. \]
+类似地, 在第$i$步的全局截断误差满足
+\[ g_i = \abs{w_i - y_i} \le e_i + e^{Lh}e_{i-1} + e^{2Lh}e_{i-2} + \cdots + e^{\pare{i-1}Lh}e_1. \]
+如果有$e_i \le Ch^{k+1}$, 则
+\[ g_i \le Ch^{k+1}\frac{e^{iLh} - 1}{e^{Lh}-1} \le Ch^{k+1}\frac{e^{L\pare{t_i - a}} - 1}{Lh} = \frac{Ch^k}{L}\pare{e^{L\pare{t_i-a}} - 1}. \]
+\begin{theorem}
+    设$f\pare{t,y}$对$y$有Lipschitz常数$L$, 设局部截断误差满足$e_i \le C h^{k+1}$, 则
+    \[ g_i = \abs{w_i - y_i} \le \frac{Ch^k}{L}\pare{e^{L\pare{t_i - a}} - 1}. \]
+\end{theorem}
+此时谓该方法为$k$阶方法, 例如Euler方法的局部截断误差界为$Mh^2/2$, 故为一阶方法.
+\begin{corollary}[Euler方法收敛]
+    设$f\pare{t,y}$对$y$有Lipschitz常数$L$, 则Euler方法下
+    \[ \abs{w_i - y_i} \le \frac{Mh}{2L}\pare{e^{L\pare{t_i-a}} - 1}, \]
+    其中$M = \sup \abs{y''}$.
+\end{corollary}
+\begin{theorem}[显式梯形方法, 改进的Euler方法, Heun方法]
+    \[ \begin{cases}
+        \displaystyle w_0 = y_0,\\
+        \displaystyle w_{i+1} = w_i + \frac{h}{2}\brac{f\pare{t_i,w_i} + f\pare{t_i+h,w_i+hf\pare{t_i+w_i}}}.
+    \end{cases} \]
+\end{theorem}
+由链式法则,
+\[ y''\pare{t} = \+DtDf\pare{t,y} + \+DyDf\pare{t,y}y'\pare{t} = \+DtDf\pare{t,y} + \+DyDf\pare{t,y}f\pare{t,y}. \]
+故
+\[ y_{i+1} = y_i + hf\pare{t_i,y_i} + \frac{h^2}{2}\pare{\+DtDf\pare{t_i,y_i} + \+DyDf\pare{t_i,y_i}f\pare{t_i,y_i}} + \frac{h^3}{6}y'''\pare{c}. \]
+显式梯形方法为
+\begin{align*}
+    w_{i+1} &= y_i + \frac{h}{2}f\pare{t_i,y_i} + \frac{h}{2}\curb{f\pare{t_i,y_i} + h\brac{\+DtDf\pare{t_i,y_i} + f\pare{t_i,y_i}\+DyDf\pare{t_i,y_i}}+O\pare{h^2}} \\
+    &= y_i + hf\pare{t_i,y_i} + \frac{h^2}{2}\brac{\+DtDf\pare{t_i,y_i} + f\pare{t_i,y_i}\+DyDf\pare{t_i,y_i}} + O\pare{h^3}.
+\end{align*}
+可得局部截断误差
+\[ y_{i+1} - w_{i+1} = O\pare{h_3}. \]
+从而全局误差$\propto h^3$, 是二阶方法.
+\begin{theorem}[$k$阶Taylor方法]
+    \[ \begin{cases}
+        \displaystyle w_0 = y_0, \\
+        \displaystyle w_{i+1} = w_i + hf\pare{t_i,w_i} + \frac{h^2}{2}f'\pare{t_i,w_i} + \cdots + \frac{h^k}{k!}f^{\pare{k-1}}\pare{t_i,w_i}.
+    \end{cases} \]
+    其中$f'$表示全导数, 例如
+    \[ f'\pare{t,y} = f_t\pare{t,y} + f_y\pare{t,y}y'\pare{t} = f_t\pare{t,y} + f_y\pare{t,y} f\pare{t,y}. \]
+\end{theorem}
+可以发现相应的
+\[ y_{i+1} - w_{i+1} = \frac{h^{k+1}}{\pare{k+1}!}y^{\pare{k+1}}\pare{c}, \]
+从而该方法为$k$阶方法.
+
+% subsubsection ivp求解器的分析 (end)
+
+\subsubsection{常微分方程组} % (fold)
+\label{ssub:常微分方程组}
+
+一阶方程组的形式如
+\[ \begin{cases}
+    y'_1 = f_1\pare{t,y_1,\cdots,y_n}, \\
+    y'_2 = f_2\pare{t,y_1,\cdots,y_n}, \\
+    \vdots \\
+    y'_n = f_n\pare{t,y_1,\cdots,y_n}.
+\end{cases} \]
+\begin{ex}
+    对两个一阶方程系统使用Euler方法,
+    \[ \begin{cases}
+        y'_1 = y_2^2 - 2y_1, \\
+        y'_2 = y_1 - y_2 - ty_2^2, \\
+        y_1\pare{0} = 0,\\
+        y_2\pare{0} = 1,
+    \end{cases} \Rightarrow \begin{cases}
+        w_{i+1,1} = w_{i,1} + h\pare{w_{i,2}^2 - 2w_{i,1}}, \\
+        w_{i+1,2} = w_{i,2} + h\pare{w_{i,1} - w_{i,2} + t_i w_{i,2}^2}.
+    \end{cases} \]
+\end{ex}
+高阶方程可以转化为常微分方程组. 对于
+\[ y^{\pare{n}} = f\pare{t,y',y'',\cdots,y^{\pare{n-1}}}, \]
+设
+\[ y_1 = y,\quad y_2 = y',\quad y_3 = y'',\quad \cdots,\quad y_n = y^{\pare{n-1}}, \]
+并将原始的常微分方程写成
+\[ y'_n = f\pare{t,y_1,y_2,\cdots,y_n} \]
+即可.
+\begin{ex}
+    三阶微分方程
+    \[ y''' + a\pare{y''}^2 - y' + yy'' + \sin t \]
+    可转化为
+    \[ \begin{cases}
+        y'_1 = y_2, \\
+        y'_2 = y_3, \\
+        y'_3 = ay_3^2 - y_2 + y_1y_3 + \sin t.
+    \end{cases} \]
+\end{ex}
+
+% subsubsection 常微分方程组 (end)
+
+\subsubsection{Runge-Kutta方法} % (fold)
+\label{ssub:runge_kutta方法}
+
+\begin{theorem}[中点方法]
+    $\displaystyle \begin{cases}
+        w_0 = y_0, \\
+        \displaystyle w_{i+1} = w_i + hf\pare{t_i + \frac{h}{2}, w_i + \frac{h}{2}f\pare{t_i,w_i}}.
+    \end{cases}$
+\end{theorem}
+为了计算局部截断误差,
+\begin{align*}
+    y_{i+1} &= y_i + hf\pare{t_i,y_i} + \frac{h^2}{2}\brac{\+DtDf\pare{t_i,y_i} + \+DyDf\pare{t_i,y_i}f\pare{t_i,y_i}} + \frac{h^3}{6}y'''\pare{c}, \\
+    w_{i+1} &= y_i + h\brac{f\pare{t_i,y_i} + \frac{h}{2}\+DtDf\pare{t_i,y_i} + \frac{h}{2}\+DyDf\pare{t_i,y_i} + O\pare{h^2}}.
+\end{align*}
+从而
+\[ y_{i+1} - w_{i+1} = O\pare{h^3}, \]
+从而中点方法为二阶方法.
+\par
+右侧每个函数的求值谓该方法的阶段. 梯形方法和中点方法都是二阶Runge-Kutta方法家族中的成员, 形式如
+\[ w_{i+1} = w_i + h\pare{1-\rec{2\alpha}}f\pare{t_i,w_i} + \frac{h}{2\alpha}f\pare{t_i + \alpha h, w_i + \alpha hf\pare{t_i,w_i}}. \]
+其中$\alpha = 1$对应显式梯形方法, $\alpha = 1/2$对应中点方法.
+\begin{theorem}[$4$阶Runge-Kutta方法]
+    \[ w_{i+1} = w_i + \frac{h}{6}\pare{s_1 + 2s_2 + 2s_3 + s_4}. \]
+    其中
+    \begin{align*}
+        s_1 &= f\pare{t_i,w_i}, \\
+        s_2 &= f\pare{t_i + \frac{h}{2}, w_i + \frac{h}{2}s_1}, \\
+        s_3 &= f\pare{t_i + \frac{h}{2}, w_i + \frac{h}{2}s_2}, \\
+        s_4 &= f\pare{t_i + h, w_i + hs_3}.
+    \end{align*}
+\end{theorem}
+
+% subsubsection runge_kutta方法 (end)
+
+\subsubsection{可变步长方法} % (fold)
+\label{ssub:可变步长方法}
+
+若某一步的相对误差目标$e_i/\abs{w_i} < T$满足, 假设$e_i = ch_i^{p+1}$, 则满足容差$e_i/\abs{w_i} < T$的最优步长为
+\[ T\abs{w_i} = ch^{p+1}. \]
+对于$h$和$c$, 可得
+\[ h_* = 0.8 \pare{\frac{T\abs{w_i}}{e_i}}^{1/\pare{p+1}}h_i, \]
+其中$0.8$为安全因子. 每一步中若相对误差目标$e_i/\abs{w_i} < T$未满足, 则简单将步长减半直到满足目标即可.
+\begin{ex}[Runge-Kutta $2$阶/$3$阶嵌入对]
+    \[ \begin{cases}
+        \displaystyle w_{i+1} = w_i + h \frac{s_1 + s_2}{2}, \\
+        \displaystyle z_{i+1} = w_i + h \frac{s_1 + 4s_3 + s_2}{6},
+    \end{cases} \]
+    其中
+    \begin{align*}
+        s_1 &= f\pare{t_i,w_i}, \\
+        s_2 &= f\pare{t_i + h, w_i + hs_1}, \\
+        s_3 &= f\pare{t_i + \half h, w_i + \half h \frac{s_1+s_2}{2}}.
+    \end{align*}
+    可得局部误差的估计
+    \[ e_{i+1} \approx \abs{w_{i+1} - z_{i+1}} = \abs{h\frac{s_1 - 2s_3+s_2}{3}}. \]
+\end{ex}
+\begin{ex}[Bogacki-Shampine $2$阶/$3$阶嵌入对]
+    \[ \begin{cases}
+        \displaystyle z_{i+1} = w_i + \frac{h}{9}\pare{2s_1 + 3s_2 + 4s_3}, \\
+        \displaystyle w_{i+1} = w_i + \frac{h}{24}\pare{7s_1 + 6s_2 + 8s_3 + 3s_4},
+    \end{cases} \]
+    其中
+    \begin{align*}
+        s_1 &= f\pare{t_i,w_i}, \\
+        s_2 &= f\pare{t_i + \half h, w_i + \half hs_1}, \\
+        s_3 &= f\pare{t_i + \frac{3}{4}h, w_i + \frac{3}{4}hs_2}, \\
+        s_4 &= f\pare{t+h, z_{i+1}}.
+    \end{align*}
+    $z_{i+1}$是$3$阶估计, $w_{i+1}$是$2$阶估计, 步长控制误差估计为
+    \[ e_{i+1} \approx \abs{z_{i+1} - w_{i+1}} = \frac{h}{72}\pare{7s_1 + 6s_2 + 8s_3 + 3s_4}. \]
+    如果$s_4$被接受, 下一步中可直接作为$s_1$.
+\end{ex}
+\begin{ex}[Runge-Kutta $4$阶/$5$阶嵌入对]
+    \[ \begin{cases}
+        \displaystyle w_{i+1} = w_i + h\pare{\frac{25}{216}s_1 + \frac{1408}{2565}s_3 + \frac{2197}{4104}s_4 - \rec{5}s_5}, \\
+        \displaystyle z_{i+1} = w_i + h\pare{\frac{16}{135}s_1 + \frac{6656}{12825}s_3 + \frac{28561}{56430}s_4 - \frac{9}{50}s_5 + \frac{2}{55}s_6},
+    \end{cases} \]
+    其中
+    \begin{align*}
+        s_1 &= f\pare{t_i,w_i}, \\
+        s_2 &= f\pare{t_i + \rec{4}h, w_i + \rec{4}hs_1}, \\
+        s_3 &= f\pare{t_i + \frac{3}{8}h, w_i + \frac{3}{32}hs_1 + \frac{9}{32}hs_2}, \\
+        s_4 &= f\pare{t_i + \frac{12}{13}, w_i + \frac{1932}{2197}hs_1 - \frac{7200}{2197}hs_2 + \frac{7296}{2197}hs_3}, \\
+        s_5 &= f\pare{t_i + h, w_i + \frac{439}{216}hs_1 - 8hs_2 + \frac{3680}{513}hs_3 - \frac{845}{4104}hs_4}, \\
+        s_6 &= f\pare{t_i + \half h, w_i - \frac{8}{27} hs_1 + 2hs_2 - \frac{3544}{2565}hs_3 + \frac{1859}{4104}hs_4 - \frac{11}{40}hs_5}.
+    \end{align*}
+    可以发现$z_{i+1}$是$5$阶近似, $w_{i+1}$是$4$阶近似. 误差估计为
+    \[ e_{i+1} \approx \abs{w_{i+1} - z_{i+1}} = h\abs{\rec{360}s_1 - \frac{128}{4275}s_3 - \frac{2197}{75240}s_4 + \rec{50}s_5 + \frac{2}{55}s_6}. \]
+\end{ex}
+若$i=1$处相对误差测试$e_i/\abs{w_i} < T$成功, 则新的$w_1$被替换为局部外推的$z_1$, 程序移动到下一步. 否则按
+\[ h_* = 0.8 \pare{\frac{T\abs{w_i}}{e_i}}^{1/\pare{p+1}}h_i \]
+得到新的步长, 其中$p=4$. 若失败则将步长不断减半直到成功通过测试.
+\begin{ex}[Dormand-Prince $4$阶/$5$阶嵌入对]
+    \[ \begin{cases}
+        \displaystyle z_{i+1} = w_i + h\pare{\frac{35}{384}s_1 + \frac{500}{1113}s_3 + \frac{125}{192}s_4 - \frac{2187}{6784}s_5 + \frac{11}{84}s_6}, \\
+        \displaystyle w_{i+1} = w_i + h\pare{\frac{5179}{57600}s_1 + \frac{7571}{16695}s_3 + \frac{393}{640}s_4 - \frac{92097}{339220}s_5 + \frac{187}{2100}s_6 + \rec{40}s_7},
+    \end{cases} \]
+    其中
+    \begin{align*}
+        s_1 &= f\pare{t_i,w_i}, \\
+        s_2 &= f\pare{t_i + \rec{5}h, w_i + \rec{5}hs_1}, \\
+        s_3 &= f\pare{t_i + \frac{3}{10}h, w_i + \frac{3}{40}hs_1 + \frac{9}{40}hs_2}, \\
+        s_4 &= f\pare{t_i + \frac{4}{5}h, w_i + \frac{44}{45}hs_1 - \frac{56}{15}hs_2 + \frac{32}{9}hs_3}, \\
+        s_5 &= f\pare{t_i + \frac{8}{9}h, w_i + h\pare{\frac{19372}{6561}s_1 - \frac{25360}{2187}s_2 + \frac{64448}{6561}s_3 - \frac{212}{729}s_4}}, \\
+        s_6 &= f\pare{t_i + h, w_i + h\pare{\frac{9017}{3168}s_1 - \frac{355}{33}s_2 + \frac{46732}{5247}s_3 + \frac{49}{176}s_4 - \frac{5103}{18656}s_5}}, \\
+        s_7 &= f\pare{t_i + h, z_{i+1}}.
+    \end{align*}
+    误差估计为
+    \[ e_{i+1} = \abs{z_{i+1} - w_{i+1}} = h\abs{\frac{71}{57600}s_1 - \frac{71}{16695}s_3 + \frac{71}{1920}s_4 - \frac{17253}{339200}s_5 + \frac{22}{525}s_6 - \rec{40}s_7}. \]
+\end{ex}
+
+% subsubsection 可变步长方法 (end)
+
+\subsubsection{隐式方法与刚性方程} % (fold)
+\label{ssub:隐式方法与刚性方程}
+
+$f\pare{t,y} = 10\pare{1-y}$之类型的方程对于某些$h$难以达到平衡, 即吸引解被附近变化更快的解包围, 谓刚性方程. 通过平衡点处的$\displaystyle \+DyDf = -10$可得其为刚性之结论.
+\begin{theorem}[后向Euler方法]%
+    $\displaystyle \begin{cases}
+        w_0 = y_0, \\
+        w_{i+1} = w_i + h\pare{t_{i+1}, w_{i+1}}.
+    \end{cases}$
+\end{theorem}
+\begin{ex}
+    对初值问题使用后向Euler方法
+    \[ \begin{cases}
+        y' = y + 8y^2 - 9y^3, \\
+        y\pare{0} = 1/2, \\
+        t \in \brac{0,3},
+    \end{cases} \]
+    即
+    \[ w_{i+1} = w_i + hf\pare{t_{i+1},w_{i+1}} = w_i + h\pare{w_{i+1} + 8w_{i+1}^2 - 9w{i+1}^3}. \]
+\end{ex}
+
+% subsubsection 隐式方法与刚性方程 (end)
+
+\subsubsection{多步方法} % (fold)
+\label{ssub:多步方法}
+
+\begin{theorem}[Adams-Bashforth两步方法]
+    \[ w_{i+1} = w_i + h\brac{\frac{3}{2}f\pare{t_i,w_i} - \rec{2}f\pare{t_{i-1}, w_{i-1}}}. \]
+\end{theorem}
+在使用多步方法时, 必须先用单步方法获得$w_1,w_2,\cdots,w_{s-1}$才能应用多步方法的递推式.
+\par
+一般的$s$步方法的形式为
+\[ w_{i+1} = a_1w_i + a_2w_{i-1} + \cdots + a_s w_{i-s+1} + h\pare{b_0 + f_{i+1} + b_1 f_{i} + b_2f_{i-1} + \cdots + b_s f_{i-s+1}}, \]
+其中$f_i = f\pare{t_i,w_i}$. 如果$b_0 = 0$则谓之显式方法, 否则谓隐式方法.
+\par
+一般的两步方法的形式为
+\[ w_{i+1} = a_1 w_i + a_2 w_{i-1} + h\brac{b_0 f_{i+1} + b_1f_i + b_2 f_{i-1}}. \]
+Taylor展开后有
+\begin{align*}
+    w_{i+1} &= a_1 w_i + a_2 w_{i-1} + h\brac{b_0f_{i+1} + b_1 f_i + b_2 f_{i-1}} = a_1\brac{y_i} \\
+    &= a_2\brac{y_i - hy'_i + \frac{h^2}{2}y''_i - \frac{h^3}{6}y'''_i + \frac{h^4}{24}y''''_i - \cdots} \\
+    &\phantom{=\ }+ b_0\brac{hy'_i + h^2 y'' + \frac{h^3}{2}y'''_i + \frac{h^4}{6}y''''_i + \cdots} \\
+    &\phantom{=\ }+ b_1\brac{h y'_i} \\
+    &\phantom{=\ }+ b_2\brac{hy'_i - h^2y''_i + \frac{h^3}{2}y'''_i - \frac{h^4}{6}y''''_i + \cdots} \\
+    &= \pare{a_1 + a_2}y_i + \pare{b_0 + b_1 + b_2 - a_2}hy'_i + \pare{a_2 - 2b_2 + 2b_0} \frac{h^2}{2} y''_i \\
+    &\phantom{=\ } + \pare{-a_2 + 3b_0 + 3b_2}\frac{h^3}{6}y'''_i + \pare{a_2 + 4b_0 - 4b_2}\frac{h^4}{24}y''''_i + \cdots.
+\end{align*}
+适当选取$a_i$, $b_i$即可使之满足
+\[ y_{i+1} = y_i + hy'_i + \frac{h^2}{2}y''_i + \frac{h^3}{6}y'''_i + \cdots. \]
+
+\paragraph{显式多步方法} % (fold)
+\label{par:显式多步方法}
+
+设$b_0 = 0$, 可得
+\[ \begin{cases}
+    a_1 + a_2 = 1,\\
+    -a_2 + b_1 + b_2 = 1, \\
+    a_2 - 2b_2 = 1
+\end{cases} \Rightarrow \begin{cases}
+    a_2 = 1-a_1, \\
+    \displaystyle b_1 = 2-\half a_1, \\
+    \displaystyle b_2 = -\half a_1.
+\end{cases} \]
+局部误差为
+\[ y_{i+1} - w_{i+1} = \frac{4+a_1}{12}h^3 y'''_i + O\pare{h^4}. \]
+\begin{cenum}
+    \item 设置$a_1 = 1$可得二阶Adams-Bashforth方法. 其局部截断误差为$\displaystyle \frac{5}{12}h^3 y'''_i + O\pare{h^4}$.
+    \item 设置$a_1 = 1/2$可得二阶两步方法
+    \[ w_{i+1} = \half w_i + \half w_{i-1} + h\pare{\frac{7}{4}f_i - \rec{4}f_{i-1}},\quad y_{i+1} - w_{i+1} = \frac{3}{8}h^3 y'''\pare{t_i} + O\pare{h^4}. \]
+    \item 设置$a_1 = -a$可得二阶两步方法
+    \[ w_{i+1} = -w_i + 2w_{i-1} + h\pare{\frac{5}{2}f_i + \half f_{i-1}}. \]
+\end{cenum}
+第三种选择给出了不稳定的方法. 例如对于
+\[ \begin{cases}
+    y' = 0,\\
+    y\pare{0} = 0, \\
+    t\in\brac{0,1},
+\end{cases} \]
+可得
+\[ w_{i+1} = -w_i + 2w_{i-1} + h\brac{0}, \]
+从而$w_i \equiv 0$式一个解. 但这一递推式的特征多项式有根$\curb{1,-2}$, 故形如$\pare{-2}^i c$的数列也是一解.
+
+% paragraph 显式多步方法 (end)
+
+\begin{definition}
+    若多项式$P\pare{x} = x^s - a_1 x^{s-1} - \cdots - a_s$的根的绝对值的界为$1$, 任何绝对值为$1$的根是单根, 则多步方法稳定. 若$1$是唯一一个绝对值为$1$的单根, 则谓之强稳定, 否则谓之弱稳定.
+\end{definition}
+Adams-Bashforth方法的根为$\curb{0,1}$, 故为强稳定. 可以验证
+\[ w_{i+1} = w_{i-1} + 2hf_i \]
+是弱稳定的, 特征多项式的根为$\curb{-1,1}$.
+
+\begin{definition}
+    若一多步方法至少为$1$阶, 则谓之一致. 若$h\rightarrow 0$时对于每个$t$, 近似解都收敛到精确解, 则谓之收敛.
+\end{definition}
+\begin{theorem}[Dahlquist]
+    若初值正确, 则多步方法收敛当且仅当它稳定并一致.
+\end{theorem}
+\begin{theorem}[Adams-Bashforth三步方法(三阶)]
+    \[ w_{i+1} = w_i + \frac{h}{12}\brac{23 f_i - 16f_{i-1} + 5f_{i-2}}. \]
+\end{theorem}
+\begin{theorem}[Adams-Bashforth四步方法(四阶)]
+    \[ w_{i+1} = w_i + \frac{h}{24}\brac{55f_i - 59f_{i-1} + 37f_{i-2} - 9f_{i-3}}. \]
+\end{theorem}
+
+\paragraph{隐式多步方法} % (fold)
+\label{par:隐式多步方法}
+
+此时$b_0 \neq 0$.
+\begin{theorem}[隐式梯形方法(二阶)]
+    \[ w_{i+1} = w_i + \frac{h}{2}\brac{f_{i+1} + f_i}. \]
+\end{theorem}
+\begin{theorem}[Adams-Moulton两步方法(三阶)]
+    \[ w_{i+1} = w_i + \frac{h}{12}\brac{5f_{i+1} +8f_i - f_{i-1}} \]    
+\end{theorem}
+为了避免对函数球逆, 通常使用预测-矫正方法: 用显式方法预测$w_{i+1}$后代入隐式方法. 在Taylor展开中匹配相应的系数可得
+\[ \begin{cases}
+    a_1 + a_2 = 1,\\
+    -a_2 + b_0 + b_1 + b_2 = 1, \\
+    a_2 + 2b_0 - 2b_2 = 1, \\
+    -a_2 + 3b_0 + 3b_2,
+\end{cases} \Rightarrow \begin{cases}
+    \displaystyle a_2 = 1 - a_1, \\
+    \displaystyle b_0 = \rec{3} + \rec{12}a_1, \\[.5em]
+    \displaystyle b_1 = \frac{4}{3} - \frac{2}{3}a_1, \\[.5em]
+    \displaystyle b_2 = \rec{3} - \frac{5}{12}a_1.
+\end{cases} \]
+局部截断误差为
+\[ y_{i+1} - w_{i+1} = -\frac{a_1}{24}h^4y''''_i = O\pare{h^5}. \]
+若$a_1 = 1$则可得Adams-Moulton方法. 若选择$a_1 = 0$则可得Milne-Simpson方法.
+\begin{theorem}[Milne-Simpson方法]
+    \[ w_{i+1} = w_{i-1} + \frac{h}{3}\brac{f_{i+1} + 4f_i + f_{i-1}}. \]
+\end{theorem}
+大多数多步方法都可以通过积分插值近似得到, 即将
+\[ y\pare{t_{i+1}} - y\pare{t_i} = \int_{t_i}^{t_{i+1}} f\pare{t,y}\,\rd{t} \]
+以梯形公式近似即得到隐式梯形方法, 以Simpson公式近似即得到Milne-Simpson方法.
+\begin{theorem}[Adams-Moulton $3$步方法($4$阶)]
+    \[ w_{i+1} = w_i + \frac{h}{24}\pare{9f_{i+1} + 19f_i - 5f_{i-1} + f_{i-2}}. \]
+\end{theorem}
+\begin{theorem}[Adams-Moulton $4$步方法($5$阶)]
+    \[ w_{i+1} = w_i + \frac{h}{720}\pare{251f_{i+1} + 646f_i - 264f_{i-1} + 106f_{i-2} - 19f_{i-3}}. \]
+\end{theorem}
+
+% paragraph 隐式多步方法 (end)
+
+% subsubsection 多步方法 (end)
+
+% subsection 常微分方程 (end)
+
+\subsection{边值问题} % (fold)
+\label{sub:边值问题}
+
+\subsubsection{打靶方法} % (fold)
+\label{ssub:打靶方法}
+
+对于边值问题
+\[ \begin{cases}
+    y'' = f\pare{t,y,y'}, \\
+    y\pare{a} = y_a, \\
+    y\pare{b} = y_b,
+\end{cases} \]
+定义下面的函数:
+\[ F\pare{s} = \begin{cases}
+    y_b - y\pare{b},\\
+    \text{其中$y\pare{t}$为初值问题$y\pare{a} = y_a, y'\pare{a} = s$的解.}
+\end{cases} \]
+通过方程求解器可以得到$F\pare{s}$的根, 即得到边值问题的解.
+
+% subsubsection 打靶方法 (end)
+
+\subsubsection{有限差分方法} % (fold)
+\label{ssub:有限差分方法}
+
+将$y'\pare{t}$和$y''\pare{t}$分别用\cref{thm:三点中心差分公式}和\cref{thm:二阶导数的三点中心差分公式}代替即可将微分方程转化为代数方程.
+\par
+若微分方程关于$y, y', y''$线性, 则可将方程转化为三对角线性方程. 否则, 方程组为非线形, 须使用Newton方法求解, 迭代式
+\[ DF\pare{w^k}\Delta w = -F\pare{w^k}. \]
+
+% subsubsection 有限差分方法 (end)
+
+\subsubsection{排列与有限元方法} % (fold)
+\label{ssub:排列与有限元方法}
+
+\paragraph{排列方法} % (fold)
+\label{par:排列方法}
+
+选取一组基函数使得
+\[ y\pare{t} = \sum_{j=1}^n c_j\phi_j\pare{t} \]
+后, 方程即变为代数方程.
+
+% paragraph 排列方法 (end)
+
+\paragraph{有限元以及Galerkin方法} % (fold)
+\label{par:有限元以及galerkin方法}
+
+选取基函数后, 设法令
+\[ \int_a^b y'' \phi_i\pare{t}\,\rd{t} = \int_a^b f\pare{t,y,y'}\phi_i\pare{t}\,\rd{t}, \]
+可得边值问题的弱形式. 分布积分后转化为
+\[ \int_a^b f\pare{t,y,y'}\phi_i\pare{t}\,\rd{t} = \phi_i\pare{b}y'\pare{b} - \phi_i\pare{a}y'\pare{a} - \int_a^b y'\pare{t}\phi'_i\pare{t}\,\rd{t}, \]
+即可以如下形式求解$c_i$,
+\[ y\pare{t} = \sum_{i=0}^{n+1} c_i\phi\pare{t}. \]
+设$t$轴上数据格点为$t_0 < t_1 < \cdots < t_n < t_{n+1}$. 对于$i = 1,\cdots,n$, 定义
+\[ \phi_i\pare{t} = \begin{cases}
+    \pare{t - t_{i-1}} / \pare{t_i - t_{i-1}}, & t_{i-1} < t \le t_i, \\
+    \pare{t_{i+1} - t} / \pare{t_{i+1} - t_i}, & t_i < t < t_{i+1}, \\
+    0, & \mathrm{otherwise}.
+\end{cases} \]
+同时定义
+\[ \phi_0\pare{t} = \begin{cases}
+    \pare{t_1 - t} / \pare{t_1 - t_{0}}, & t_{0} \le t < t_1, \\
+    0, & \mathrm{otherwise},
+\end{cases}\quad \phi_{n+1}\pare{t} = \begin{cases}
+    \pare{t - t_n} / \pare{t_{n+1} - t_{n}}, & t_{n} \le t < t_{n+1}, \\
+    0, & \mathrm{otherwise}.
+\end{cases} \]
+这些函数有性质$\phi_i\pare{t_j} = \delta_{ij}$. 定义分段线性B样条
+\[ S\pare{t} = \sum_{i=0}^{n+1} c_i\phi_i\pare{t}, \]
+可知系数恰好为$y$坐标. 代入弱形式可得
+\[ \int_a^b \phi_i\pare{t} f\pare{t,\sum c_j \phi_j\pare{t}, \sum c_j\phi'_j\pare{t}}\,\rd{t} + \int_a^b \phi'_i\pare{t} \sum c_j\phi'_j\pare{t}\,\rd{t} = 0. \]
+对于均匀分布, 步长为$h$的格点, 有
+\begin{align*}
+    \int_a^b \phi_i\pare{t}\phi_{i+1}\pare{t}\,\rd{t} &= \frac{h}{6},\quad \int \phi_i^2\pare{t}\,\rd{t} = \frac{2}{3}h, \\
+    \int_a^b \phi'_i\pare{t}\phi'_{i+1}\pare{t}\,\rd{t} &= -\rec{h},\quad \int \phi_i'^2\pare{t}\,\rd{t} = \frac{2}{h}.
+\end{align*}
+
+% paragraph 有限元以及galerkin方法 (end)
+
+% subsubsection 排列与有限元方法 (end)
+
+% subsection 边值问题 (end)
 
 % section 求解方程 (end)
 

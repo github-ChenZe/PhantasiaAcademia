@@ -62,6 +62,50 @@
 
 % subsection 增益的一般表达式 (end)
 
+\subsection{负反馈对放大电路性能的影响} % (fold)
+\label{sub:负反馈对放大电路性能的影响}
+
+\newpoint{}提高增益的稳定性:
+\[ \+dAd{A\+_f_} = \rec{1+AF}\frac{\rd{A}}{A}. \]
+\newpoint{}减少环内非线性失真.
+\newpoint{}抑制反馈环内噪声, 信噪比提高$A\+_\mathnormal{v}2_$倍.
+\newpoint{}引入串联负反馈后, $R\+_if_ = \pare{1+AF}R\+_i_$.
+\newpoint{}引入并联负反馈后, $R\+_if_ = R\+_i_/\pare{1+AF}$.
+\newpoint{}引入电压负反馈后, $R\+_of_ = R\+_o_/\pare{1+A\+_o_F}$.
+\newpoint{}引入电流负反馈后, $R\+_of_ = \pare{1+A\+_s_F}R\+_o_$.
+\newpoint{}闭环上限频率$f\+_Hf_ = \pare{1+\tilde{A}\+_M_F}f\+_H_$.
+\newpoint{}闭环下限频率$\displaystyle f\+_Lf_ = \frac{f\+_L_}{1+\tilde{A}\+_M_F}$.
+
+% subsection 负反馈对放大电路性能的影响 (end)
+
+\subsection{深度负反馈} % (fold)
+\label{sub:深度负反馈}
+
+此时$\abs{1+\tilde{A}\tilde{F}}\gg 1$, 从而
+\[ \tilde{A}\+_f_ = \frac{\tilde{A}}{1+\tilde{A}\tilde{F}} \approx \rec{\tilde{F}}. \]
+深度负反馈条件下, 闭环增益仅与反馈网络有关.
+\newpoint{}串联负反馈
+\[ \begin{cases}
+    v\+_id_ = v\+_i_ - v\+_f_ \approx 0, \\
+    \displaystyle i\+_id_ = \frac{v\+_id_}{r\+_i_} \approx 0.
+\end{cases} \]
+\newpoint{}并联负反馈
+\[ \begin{cases}
+    i\+_id_ = i\+_i_ - i\+_f_ \approx 0,\\
+    v\+_id_ = i\+_id_r\+_i_ \approx 0.
+\end{cases} \]
+\begin{ex}
+    电压串联负反馈$\displaystyle A\+_\mathnormal{v}f_ = \frac{v\+_o_}{v\+_i_} = 1+\frac{R\+_f_}{R\+_b2_}$.
+\end{ex}
+\begin{ex}
+    电流并联负反馈$\displaystyle A\+_\mathnormal{v}f_ = \frac{v\+_o_}{v\+_s_} = -\pare{1+\frac{R\+_f_}{R}}\frac{R\+_L_}{R\+_s_}$.
+\end{ex}
+\begin{ex}
+    电压并联负反馈$\displaystyle A\+_\mathrm{r}f_ = -R\+_f_$.
+\end{ex}
+
+% subsection 深度负反馈 (end)
+
 % section 反馈 (end)
 
 \end{document}

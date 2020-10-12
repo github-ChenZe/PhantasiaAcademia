@@ -1,0 +1,69 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+\begin{document}
+
+\newprob{5.7}%
+Fourier变换后
+\[ -\pare{p_x^2 + p_y^2 + p_z^2} \hat u + k^2\hat u = 1 \Rightarrow \hat u = \rec{k^2 - p^2}, \]
+对$p$空间采用球坐标系.
+\begin{align*}
+    u &= \rec{\pare{2\pi}^3} \int_{\+bR^3} \rec{k^2-p^2} e^{i\+vr\cdot \+vp}\,\rd{^3p} \\
+    &= \rec{\pare{2\pi}^3}\times 2\pi \times \int_{0}^\infty \frac{p^2}{k^2 - p^2}\,\rd{p} \int_0^\pi \sin\theta e^{irp\cos\theta}\,\rd{\theta} \\
+    &= \rec{\pare{2\pi}^2} \int_0^\infty \frac{p}{k^2 - p^2}\times \frac{2}{r}\sin \pare{rp}\,\rd{p} \\
+    &= \rec{8\pi^2 ri}\int_{-\infty}^\infty\pare{\rec{k-p} - \rec{k+p}}e^{irp}\,\rd{p}.
+\end{align*}
+注意到
+\[ F\brac{1} = 2\pi\delta\pare{p} \Rightarrow F\brac{\rec{x}} = -i 2\pi \int \delta\pare{p}\,\rd{p} = -2\pi iH\pare{p}+C, \]
+且$\displaystyle F\brac{\rec{x}}$应为奇函数, 故
+\[ F\brac{\rec{x}} = -2\pi iH\pare{x} + \pi i. \]
+从而
+\[ F\brac{\rec{x-k}} = e^{-ikp}\pare{-2\pi iH\pare{p} + i\pi},\quad F\brac{\rec{x+k}} = e^{ikp}\pare{-2\pi iH\pare{p} + i\pi}. \]
+故
+\begin{align*}
+    & \int_{-\infty}^\infty\pare{\rec{k-p} - \rec{k+p}}e^{irp}\,\rd{p} = \pare{-e^{ikr} - e^{-ikr}}\pare{-2\pi iH\pare{-r} + i\pi} = -2\pi i\cos kr. \\
+    & u = \rec{8\pi^2 ri}\int_{-\infty}^\infty\pare{\rec{k-p} - \rec{k+p}}e^{irp}\,\rd{p} = \boxed{-\frac{\cos kr}{4\pi r}.}
+\end{align*}
+
+\end{document}

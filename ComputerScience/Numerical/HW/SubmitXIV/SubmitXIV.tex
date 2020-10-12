@@ -1,0 +1,247 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+\DeclareMathOperator{\cond}{cond}
+
+\begin{document}
+
+\newprob{补充题}%
+$\displaystyle \begin{pmatrix}
+    0.2161 & 0.1441 \\
+    1.2968 & 0.8648
+\end{pmatrix}\begin{pmatrix}
+    x_1 \\ x_2
+\end{pmatrix} = \begin{pmatrix}
+    0.1440 \\
+    0.8640
+\end{pmatrix}$
+\begin{align*}
+    & A = \begin{pmatrix}
+    0.2161 & 0.1441 \\
+    1.2968 & 0.8648
+\end{pmatrix},\quad\norm{A}_\infty = 2.1616. \\
+    & A^{-1} = \begin{pmatrix}
+    60055.6 & -10006.9 \\
+    -90055.6 & 15006.9
+\end{pmatrix},\quad\norm{A^{-1}}_\infty = 105063. \\
+& \cond_\infty\pare{A} = \norm{A}_\infty\norm{A^{-1}}_\infty = 227104.
+\end{align*}
+变化有上界$\displaystyle \norm{\delta \+vx}\+_\infty_ \le \cond_\infty \pare{A} \frac{\norm{\delta \+vb}_\infty}{\norm{\+vb}_\infty} \cdot \norm{\+vx}_\infty = 0.00525704.$
+实际上变化后解为
+\[ \begin{pmatrix}
+    x'_1 \\ x'_2
+\end{pmatrix} = \begin{pmatrix}
+    2.0007 \\
+    -2.00105
+\end{pmatrix},\quad \norm{\delta \+vx}\+_\infty_ = 0.00105 < 0.00525704. \]
+
+\newprob{5.1 (2)}%
+$\displaystyle \norm{A}_1 = \max_j {\sum_{i} \abs{a_{ij}}} = \boxed{7.}$\\
+$\displaystyle \norm{A}_2 = \sqrt{\max \abs{\lambda \mathrm{\ of\ }AA^T}} = \sqrt{\max \abs{\lambda \mathrm{\ of\ }\begin{pmatrix}
+    27 & 3 & 2 \\
+    3 & 9 & 3 \\
+    2 & 3 & 38
+\end{pmatrix} }} = \boxed{\SI{6.22614}{}.}$\\
+$\displaystyle \norm{A}_\infty = \max_i {\sum_{j} \abs{a_{ij}}} = \boxed{8.}$\\
+$\curb{\lambda\mathrm{\ of\ }A} = \curb{3, 5.5\pm \SI{0.866025}{}i} \Rightarrow \max{\abs{\lambda\mathrm{\ of\ }A}} = \boxed{\SI{5.56776}{}.}$
+\newprob{5.3 (1)}%
+\\[-2\baselineskip]
+\[ \begin{cases}
+    \displaystyle x_1^{\pare{k+1}} = \frac{1+x_2^{\pare{k}}}{10}, \\[.5em]
+    \displaystyle x_2^{\pare{k+1}} = \frac{x_1^{\pare{k}}+x_3^{\pare{k}}}{10}, \\[.5em]
+    \displaystyle x_3^{\pare{k+1}} = \frac{1+x_2^{\pare{k}}+x_4^{\pare{k}}}{10}, \\[.5em]
+    \displaystyle x_4^{\pare{k+1}} = \frac{2+x_3^{\pare{k}}}{10}.\end{cases}
+    \quad \begin{pmatrix}
+        0 \\
+        0 \\
+        0 \\
+        0
+    \end{pmatrix} \rightarrow \boxed{\begin{pmatrix}
+        0.1 \\
+        0 \\
+        0.1 \\
+        0.2
+    \end{pmatrix} \rightarrow \begin{pmatrix}
+        0.1 \\
+        0.02 \\
+        0.12 \\
+        0.21
+    \end{pmatrix} \rightarrow \begin{pmatrix}
+        0.102 \\
+        0.022 \\
+        0.123 \\
+        0.212
+    \end{pmatrix}. }
+\]
+\par
+\newprobheader{(2)}%
+\\[-2\baselineskip]
+\[ \begin{cases}
+    \displaystyle x_1^{\pare{k+1}} = \frac{1+x_2^{\pare{k}}}{10}, \\[.5em]
+    \displaystyle x_2^{\pare{k+1}} = \frac{x_1^{\pare{k+1}}+x_3^{\pare{k}}}{10}, \\[.5em]
+    \displaystyle x_3^{\pare{k+1}} = \frac{1+x_2^{\pare{k+1}}+x_4^{\pare{k}}}{10}, \\[.5em]
+    \displaystyle x_4^{\pare{k+1}} = \frac{2+x_3^{\pare{k+1}}}{10}.\end{cases}
+    \quad \begin{pmatrix}
+        0 \\
+        0 \\
+        0 \\
+        0
+    \end{pmatrix} \rightarrow \boxed{\begin{pmatrix}
+        0.1 \\
+        0.01 \\
+        0.101 \\
+        0.2101
+    \end{pmatrix} \rightarrow \begin{pmatrix}
+        0.101 \\
+        0.0202 \\
+        0.12303 \\
+        0.212303
+    \end{pmatrix} \rightarrow \begin{pmatrix}
+        0.10202 \\
+        0.022505 \\
+        0.123481 \\
+        0.212348
+    \end{pmatrix}. }
+ \]
+\newprobheader{(3)}%
+\begin{align*}
+& M\+_Jacobi_ = \begin{pmatrix}
+    & 0.1 & & \\
+    0.1 & & 0.1 & \\
+    & 0.1 & & 0.1 \\
+    & & 0.1
+\end{pmatrix} \Rightarrow \norm{M\+_Jacobi_}_1 = 0.2,\\ & M\+_Gau\text{\ss}_ = \begin{pmatrix}
+    0 & 0.1 & & \\
+    0 & 0.01 & 0.1 & \\
+    0 & 0.001 & 0.01 & 0.1 \\
+    0 & 0.0001 & 0.001 & 0.01 
+\end{pmatrix} \Rightarrow \norm{M\+_Gau\text{\ss}_}_1 = 0.1111.     
+\end{align*}
+两者的$p=1$范数皆小于$1$, 故迭代收敛.
+\newprob{5.6}%
+$\displaystyle L = \begin{pmatrix}
+    0 & \\
+    t & 0
+\end{pmatrix},\quad D = \begin{pmatrix}
+    1 & \\
+    & 2
+\end{pmatrix},\quad U = \begin{pmatrix}
+    0 & t \\
+    & 0
+\end{pmatrix}.$
+\par
+\newprobheader{(1)}%
+$\displaystyle M\+_Jacobi_ = D^{-1}\pare{D-A} = \begin{pmatrix}
+    & -t \\
+    -t/2 &
+\end{pmatrix},\quad M\+_Jacobi_^2 = \begin{pmatrix}
+    t^2/2 & \\
+    & t^2/2
+\end{pmatrix}$. 故$\abs{t} < \sqrt{2}$时Jacobi迭代收敛.
+\par
+\newprobheader{(2)}%
+$\displaystyle M\+_Gau\text{\ss}_ = \pare{D+L}^{-1}\pare{D+L-A} = \begin{pmatrix}
+    0 & -t \\
+    0 & 0.5t^2
+\end{pmatrix},\quad M\+_Gau\text{\ss}_^n = \begin{pmatrix}
+    0 & -t^{2n-1}/2^{n-1} \\
+    0 & t^{2n}/2^n
+\end{pmatrix}$. 故$\abs{t} < \sqrt{2}$时Gau\ss 迭代收敛.
+\newprob{5.7 (1)}%
+$\displaystyle L = \begin{pmatrix}
+    0 & & \\
+    1 & 0 & \\
+    2 & 2 & 0
+\end{pmatrix},\quad D = \begin{pmatrix}
+    1 & & \\
+    & 1 & \\
+    & & 1
+\end{pmatrix},\quad U = \begin{pmatrix}
+    0 & 2 & -2 \\
+    & 0 & 1 \\
+    & & 0
+\end{pmatrix}.$
+\begin{align*}
+    & M\+_Jacobi_ = D^{-1}\pare{D-A} = \begin{pmatrix}
+        0 & -2 & 2 \\
+        -1 & 0 & -1 \\
+        -2 & -2 & 0
+    \end{pmatrix} \Rightarrow \lambda = \curb{0,0,0}. \\
+    & M\+_Gau\text{\ss}_ = \pare{D+L}^{-1}\pare{D+L-A} = \begin{pmatrix}
+        0 & -2 & 2 \\
+        0 & 2 & -3 \\
+        0 & 0 & 2
+    \end{pmatrix} \Rightarrow \lambda = \curb{2,2,0}.
+\end{align*}
+故$M\+_Jacobi_$谱半径为零, $M\+_Gau\text{\ss}_$谱半径大于一, 故前者迭代收敛而后者不收敛.
+\par
+\newprobheader{(2)}%
+$\displaystyle L = \begin{pmatrix}
+    0 & & \\
+    1 & 0 & \\
+    1 & 1 & 0
+\end{pmatrix},\quad D = \begin{pmatrix}
+    2 & & \\
+    & 1 & \\
+    & & -1
+\end{pmatrix},\quad U = \begin{pmatrix}
+    0 & -1 & 1 \\
+    & 0 & 1 \\
+    & & 0
+\end{pmatrix}.$
+\begin{align*}
+    & M\+_Jacobi_ = D^{-1}\pare{D-A} = \begin{pmatrix}
+        0 & 1/2 & -1/2 \\
+        -1 & 0 & -1 \\
+        1 & 1 & 0
+    \end{pmatrix} \Rightarrow \lambda = \curb{\sqrt{2}i,-\sqrt{2}i,0}. \\
+    & M\+_Gau\text{\ss}_ = \pare{D+L}^{-1}\pare{D+L-A} = \begin{pmatrix}
+        0 & 1/2 & -1/2 \\
+        0 & -1/2 & -1/2 \\
+        0 & 0 & -1
+    \end{pmatrix} \Rightarrow \lambda = \curb{-1,-1/2,0}.
+\end{align*}
+故$M\+_Jacobi_$谱半径大于一, $M\+_Gau\text{\ss}_$谱半径为一, 故前者迭代不收敛而后者对于大多数初始向量收敛.
+
+\end{document}

@@ -1,0 +1,316 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=ない,gakka=計算化学,section=Kiso,gakkabbr=CC]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+\usepackage{chemfig}
+
+\DeclareSIUnit\bohr{Bohr}
+
+\begin{document}
+
+\section{基础} % (fold)
+\label{sec:基础}
+
+\mathsubsection{Huckel}{H\"uckel的相关工作}{H\"uckel的相关工作}{Huckel的相关工作} % (fold)
+\label{sub:huckel的相关工作}
+
+\subsubsection{杂化} % (fold)
+\label{ssub:杂化}
+
+$\mathrm{2p}$轨道和$\mathrm{2s}$轨道可以按如下方式发生$\mathrm{sp^3}$杂化(\gloss{\mbox{$\mathrm{sp^3}$ hybridization}}):
+\begin{align*}
+    \phi_1 &= \half \pare{\mathrm{s} + \mathrm{p}_x + \mathrm{p}_y + \mathrm{p}_z}, \\
+    \phi_2 &= \half \pare{\mathrm{s} + \mathrm{p}_x + \mathrm{p}_y - \mathrm{p}_z}, \\
+    \phi_3 &= \half \pare{\mathrm{s} + \mathrm{p}_x - \mathrm{p}_y - \mathrm{p}_z}, \\
+    \phi_4 &= \half \pare{\mathrm{s} + \mathrm{p}_x - \mathrm{p}_y + \mathrm{p}_z}.
+\end{align*}
+或者
+\begin{align*}
+    \phi_1 &= \half \pare{\mathrm{s} + \mathrm{p}_x + \sqrt{2}\mathrm{p}_z}, \\
+    \phi_2 &= \half \pare{\mathrm{s} + \mathrm{p}_x - \sqrt{2}\mathrm{p}_z}, \\
+    \phi_3 &= \half \pare{\mathrm{s} - \mathrm{p}_x + \sqrt{2}\mathrm{p}_y}, \\
+    \phi_4 &= \half \pare{\mathrm{s} - \mathrm{p}_x - \sqrt{2}\mathrm{p}_y}.
+\end{align*}
+两种情形下$\mathrm{s}$和$\mathrm{p}$轨道的有效成分比皆为$1:3$. 实际上, 尽管甲烷具有正四面体对称性, 其能量仍非四重简并, 而是一重和三重简并.
+
+% subsubsection 杂化 (end)
+
+\mathsubsubsection{SHM}{简单H\"uckel理论}{简单H\"uckel理论}{简单Huckel理论} % (fold)
+\label{ssub:简单Huckel理论}
+
+简单H\"uckel理论(\gloss[-\baselineskip]{\mbox{SHM, SHT, HMO}})将$\psi$视为原子轨道的线性组合(\gloss[\baselineskip]{LCAO}). 在这一假设下分子轨道(\gloss[1\baselineskip]{MO})可以视为基函数(\gloss[1\baselineskip]{\mbox{basis function}})的线性组合. 基函数构成一组基(\gloss[2\baselineskip]{basis set}). 例如$\mathrm{p}$AO可以结合成$\pi$AO.
+\par
+\gloss[2\baselineskip]{HOMO}表示Highest Occupied Molecular Orbital. \gloss[3\baselineskip]{LUMO}表示Lowest Unoccupied Molecular Orbital.
+\begin{remark}
+    实际上基不一定是相应原子的原子轨道.
+\end{remark}
+$n$个基函数可结合成$n$个分子轨道. 对于两个分子轨道的情形, 设
+\[ \psi = c_1 \phi_1 + c_2 \phi_2, \]
+即有
+\[ E = \frac{\bra{c_1\phi_1 + c_2 \phi_2}H\ket{c_1 \phi_1 + c_2 \phi_2}}{\bra{c_1\phi_1 + c_2 \phi_2}\ket{c_1 \phi_1 + c_2 \phi_2}} = \frac{c_1^2 H_{11} + 2c_1c_2 H_{12} + c_2^2 H_{22}}{c_1^2 S_{11} + 2c_1c_2 S_{12} + c_2^2 S_{22}}. \]
+取对于$c_1$的偏导数,
+\begin{align*}
+    &\pare{\+D{c_1}D{E}}\pare{c_1^2 S_{11} + 2c_1c_2 S_{12} + c_2^2 S_{22}} + E\pare{2c_1 S_{11} + 2c_2 S_{12}} = 2c_1H_{11} = 2c_2 H_{12}, \\
+    & \xLongrightarrow{\partial E/\partial c_1 = 0} \pare{H_{11} - ES_{11}}c_1 + \pare{H_{12} - E S_{12}}c_2 = 0.
+\end{align*}
+类似取对$c_2$的偏导数,
+\[ \pare{H_{21} - ES_{21}}c_1 = \pare{H_{22} - ES_{22}}c_2 = 0. \]
+可得联立方程
+\[ \begin{cases}
+    \pare{H_{11} - ES_{11}}c_1 + \pare{H_{12} - ES_{12}}c_2 = 0, \\
+    \pare{H_{21} - ES_{21}}c_1 + \pare{H_{22} - ES_{22}}c_2 = 0.
+\end{cases} \]
+这是久期方程,
+\[ \brac{\+vH - E\+vS}\+vc = 0 \Leftrightarrow \+vH\+vc = E\+vS\+vc. \]
+完整的特征系统具有如下的形式:
+\begin{align*}
+    & \+vH \+vC = \+vS\+vC\+v\epsilon.\\
+    & \+vH = \begin{pmatrix}
+        H_{11} & H_{12} \\
+        H_{21} & H_{22}
+    \end{pmatrix},\quad
+    \+vC = \begin{pmatrix}
+        c_{11} & c_{12} \\
+        c_{12} & c_{22}
+    \end{pmatrix},\\
+    & \+vS = \begin{pmatrix}
+        S_{11} & S_{12} \\
+        S_{21} & S_{22}
+    \end{pmatrix},\quad
+    \+v\epsilon = \begin{pmatrix}
+        \epsilon_1 & 0 \\
+        0 & \epsilon_2
+    \end{pmatrix}.
+\end{align*}
+其中$\+vH$谓Fock矩阵(\gloss{Fock matrix}). $\+vC$谓系数矩阵(\gloss{\mbox{coefficients matrix}}), 各列为一组系数. $\+vS$谓重叠矩阵(\gloss{\mbox{overlap matrix}}). $\epsilon_i$是相应的轨道能级.
+\par
+对于$S_{ij} = \delta_{ij}$之情形,
+\[ \+vH\+vC = \+vC\+v\epsilon \Rightarrow \+vH = \+vC\epsilon \+vC^{-1}. \]
+定义Coulomb积分(\gloss[-\baselineskip]{\mbox{Coulomb integral}})$\alpha$和共振积分(\gloss{\mbox{resonance integral}})如下:
+\[ \alpha = H_{ii} = \bra{\phi_i}H\ket{\phi_i},\quad \beta = H_{ij} = \bra{\phi_i}H\ket{\phi_j}. \]
+前者对于同一个原子上的基函数定义, 后者对于相邻原子上的两个基函数定义. 对于并非同一分子或相邻分子上的基函数, 定义
+\[ \int \phi_i \hat H \phi_j \,\rd{v} = H_{ij} = \int \phi_j \hat H \phi_i \,\rd{v} = H_{ji} = 0. \]
+$\alpha$相应的能量零点应当解释为电子和基函数(轨道)相距无穷远的情形. $\beta$是重叠区域内的电子能量, 能量零点应当解释为电子和该二中心轨道相聚无穷远的情形. 设$\beta = -1$, $\alpha = 0$, 则乙烯相应的矩阵为
+\[ \+vH = \begin{pmatrix}
+    0 & -1 \\
+    -1 & 0
+\end{pmatrix}. \]
+对角化可得
+\[ \+vc_1 = \begin{pmatrix}
+    1/\sqrt{2} \\
+    1/\sqrt{2}
+\end{pmatrix},\quad \epsilon_1 = -1,\quad \+vc_2 = \begin{pmatrix}
+    1/\sqrt{2} \\
+    -1/\sqrt{2}
+\end{pmatrix},\quad \epsilon_2 = 1. \]
+分别是成键轨道与反键轨道.
+\par
+丙烯\marginnote{\parbox{3cm}{\centerline{\chemfig{C=[::30]C-[::-60]C}}\centerline{丙烯}}}相应的矩阵为
+\[ \+vH = \begin{pmatrix}
+    0 & -1 & 0 \\
+    -1 & 0 & -1 \\
+    0 & -1 & 0
+\end{pmatrix} \]
+对角化可得
+\[ \+vc_1 = \begin{pmatrix}
+    1/2 \\
+    1/\sqrt{2} \\
+    1/2
+\end{pmatrix},\quad \epsilon_1 = -\sqrt{2},\quad \+vc_2 = \begin{pmatrix}
+    1/\sqrt{2} \\
+    -1/\sqrt{2}
+\end{pmatrix},\quad \epsilon_2 = 0,\quad \+vc_3 = \begin{pmatrix}
+    1/2 \\
+    -1/\sqrt{2} \\
+    1/2
+\end{pmatrix},\quad \epsilon_3 = \sqrt{2}. \]
+分别是成键轨道, 非键轨道与反键轨道.
+\par
+环丁二烯\marginnote{\parbox{3cm}{\centerline{\chemfig{C*4(-C=[90]C-[180]C=)}}\centerline{环丁二烯}}}相应的矩阵为
+\[ \+vH = \begin{pmatrix}
+    0 & -1 & 0 & -1 \\
+    -1 & 0 & -1 & 0 \\
+    0 & -1 & 0 & -1 \\
+    -1 & 0 & -1 & 0
+\end{pmatrix}. \]
+对角化可得
+\[ \+vc_1 = \begin{pmatrix}
+    1/2 \\
+    \pm 1/2 \\
+    1/2 \\
+    \pm 1/2
+\end{pmatrix},\quad \epsilon_1 = \mp 2,\quad \+vc_2 = \begin{pmatrix}
+    1/2 \\
+    \mp 1/2 \\
+    -1/2 \\
+    \pm 1/2
+\end{pmatrix},\quad \epsilon_2 = 0. \]
+分别是成键轨道, 反键轨道和两个非键轨道.
+
+% subsubsection 简单Huckel理论 (end)
+
+\mathsubsubsection{SHMApplication}{应用}{简单H\"uckel理论的应用}{简单Huckel理论的应用} % (fold)
+\label{ssub:简单Huckel理论的应用}
+
+两个原子之间的键级谓
+\[ B_{i,j} = 1 + \sum nc_i c_j. \]
+其中$1$由$\sigma$键贡献, 剩下的项由$\pi$键贡献. 求和遍历被占据的轨道.
+\begin{ex}
+    乙烯有$c_1 = c_2 = 1/\sqrt{2}$,
+    \[ B_{i,j} = 1 + 2\rec{\sqrt{2}}\rec{\sqrt{2}} = 2. \]
+\end{ex}
+\begin{ex}
+    乙烯基阴离子的成键轨道有$c_1 = c_2 = 1/\sqrt{2}$, 反键轨道有$c_1 = -c_2 = 1/\sqrt{2}$
+    \[ B_{i,j} = 1 + 2\rec{\sqrt{2}}\rec{\sqrt{2}} - \rec{\sqrt{2}}\rec{\sqrt{2}} = 1.5. \]
+\end{ex}
+\begin{pitfall}
+    H\"uckel理论仅适用于处理$\mathrm{p}$轨道.
+\end{pitfall}
+一般的SHM需要求解如下问题:
+\[ \begin{vmatrix}
+    H_{11} - ES_{11} & H_{12} - ES_{12} & \cdots & H_{1n} - ES_{1n} \\
+    H_{21} - ES_{21} & H_{22} - ES_{22} & \cdots & H_{2n} - ES_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    H_{n1} - ES_{n1} & H_{n2} - ES_{n2} & \cdots & H_{nn} - ES_{nn}
+\end{vmatrix} = 0. \]
+在$S_{ij} = \delta_{ij}$之近似下变为
+\[ \begin{vmatrix}
+    x & 1 & \cdots & 0 \\
+    1 & x & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & 0 & \cdots & x
+\end{vmatrix} = 0,\quad x = \frac{\alpha - E}{\beta}. \]
+
+% subsubsection 简单Huckel理论的应用 (end)
+
+% subsection huckel的相关工作 (end)
+
+\mathsubsection{HuckelE}{H\"uckel方法的拓展}{H\"uckel方法的拓展}{Huckel方法的拓展} % (fold)
+\label{sub:huckel方法的拓展}
+
+\subsubsection{理论} % (fold)
+\label{ssub:理论}
+
+拓展的H\"uckel方法(\gloss{EHM})不仅考虑了$\mathrm{p}$轨道, 而且也将$\mathrm{s}$轨道纳入基函数, 且各个矩阵元都被数值算出. 通常取
+\[ \bra{\phi_i}\hat H\ket{\phi_i} = -I_i,\quad \bra{\phi_i}\hat H\ket{\phi_j} = -\half KS_{ij}\pare{I_i + I_j}. \]
+其中$I_i$是相应原子的电离能. $K\approx 2$. 使用Slater基函数
+\[ \phi\pare{\mathrm{1s}} = \sqrt{\frac{\zeta_1^3}{\pi}} \exp\pare{-\zeta_1\abs{\+vr - \+vR\+_1s_}},\quad \phi\pare{\mathrm{2s}} = \sqrt{\frac{\zeta_2^5}{96\pi}} \abs{\+vr - \+vR\+_2s_} \exp\pare{-\frac{\zeta_2 \abs{\+vr - \+vR\+_2s_}}{2}}. \]
+使用正交基函数简化本征值问题, 即可有
+\[ \+vH \+vC = \+vS\+vC\+v\epsilon \rightarrow \+vH'\+vC' = \+vC'\+v\epsilon. \]
+设$\+vC' = \+vS^{1/2}\+vC$, $\+vH' = \+vS^{-1/2}\+vH\+vS^{-1/2}$即可. 此时即有
+\[ \+vH' = \+vC' \+v\epsilon \+vC'^{-1}. \]
+\begin{resume}
+    EHM之一般步骤如下:
+    \begin{cenum}
+        \item 分子的几何构型作为输入.
+        \item 计算重叠矩阵$\+vS$.
+        \item 计算Fock矩阵$\bra{\phi_i}\hat H\ket{\phi_j}$. 可以参照电离能与参量$K$.
+        \item 将$\+vS$对角化, 并算出$\+vS^{1/2}$.
+        \item 计算相应的$\+vH'$.
+        \item 将$\+vH'$对角化得到$\+vC'$和$\+v\epsilon$.
+        \item 将$\+vC'$变换到原先的基下的表示$\+vC$.
+    \end{cenum}
+\end{resume}
+
+% subsubsection 理论 (end)
+
+\subsubsection{氦氢分子离子} % (fold)
+\label{ssub:氦氢分子离子}
+
+考虑 \chemfig{He-H^+} 分子.
+
+\paragraph{结构} % (fold)
+\label{par:结构}
+
+取键长$\SI{0.8}{\angstrom}$, 即$\mathrm{H}_1\pare{0,0,0}$, $\mathrm{He}_2\pare{0,0,0.800}$.
+
+% paragraph 结构 (end)
+
+\paragraph{重叠积分} % (fold)
+\label{par:重叠积分}
+
+取Slater基
+\[ \phi_1\pare{\mathrm{H}\+_1s_} = \sqrt{\frac{\zeta\+_H_^3}{\pi}} \exp \pare{-\zeta\+_H_\abs{\+vr - \+vR\+_H_}} \]
+以及
+\[ \phi_2\pare{\mathrm{He}\+_1s_} = \sqrt{\frac{\zeta\+_He_^3}{\pi}} \exp \pare{-\zeta\+_H_\abs{\+vr - \+vR\+_He_}}. \]
+取$\zeta\+_H_ = \SI{1.24}{\per\bohr}$, $\zeta\+_He_ = \SI{2.0925}{\per\bohr}$, 则
+\[ \+vS = \begin{pmatrix}
+    1 & 0.435 \\
+    0.435 & 1
+\end{pmatrix}. \]
+
+% paragraph 重叠积分 (end)
+
+\paragraph{Fock矩阵} % (fold)
+\label{par:fock矩阵}
+
+取$K = 1.75$, $I\+_H_ = I_1 = \SI{13.6}{\eV}$, $I\+_He_ = I_2 = \SI{24.6}{\eV}$, 即有
+\[ H = \begin{pmatrix}
+    -13.6 & -14.5 \\
+    -14.5 & -24.6
+\end{pmatrix}. \]
+
+
+% paragraph fock矩阵 (end)
+
+\paragraph{正交化} % (fold)
+\label{par:正交化}
+
+$\displaystyle \+vS^{1/2} = \begin{pmatrix}
+    1.083 & -0.248 \\
+    -0.248 & 1.083
+\end{pmatrix}$.
+
+% paragraph 正交化 (end)
+
+\paragraph{Fock矩阵变换} % (fold)
+\label{par:fock矩阵变换}
+
+$\displaystyle \+vH' = \+vS^{-1/2}\+vH\+vS^{-1/2} = \begin{pmatrix}
+    -9.67 & -7.65 \\
+    -7.68 & -21.74
+\end{pmatrix}$.
+
+% paragraph fock矩阵变换 (end)
+
+\paragraph{Fock矩阵对角化} % (fold)
+\label{par:fock矩阵对角化}
+
+$\displaystyle \+vH' = \+vC' \+v\epsilon \+vC'^{-1} = \begin{pmatrix}
+    0.436 & 0.899 \\
+    0.900 & -0.437
+\end{pmatrix}\begin{pmatrix}
+    -25.5 \\
+    & -5.95
+\end{pmatrix}\begin{pmatrix}
+    0.436 & 0.900 \\
+    0.899 & -0.437
+\end{pmatrix}$.
+
+% paragraph fock矩阵对角化 (end)
+
+\paragraph{系数矩阵变换} % (fold)
+\label{par:系数矩阵变换}
+
+$\displaystyle \+vC = \+vS^{-1/2} \+vC' = \begin{pmatrix}
+    0.249 & 1.082 \\
+    0.867 & -0.696
+\end{pmatrix} = \begin{pmatrix}
+    c_{11} & c_{12} \\
+    c_{21} & c_{22}
+\end{pmatrix}$. 相应的轨道为
+\[ \psi_1 = c_{11}\phi_1 + c_{21}\phi_2,\quad \psi_2 = c_{12}\phi_1 + c_{22}\phi_2. \]
+
+\begin{pitfall}
+    SHM和EHM皆未考虑电子-电子排斥作用和电子自旋的相互作用.
+\end{pitfall}
+
+% paragraph 系数矩阵变换 (end)
+
+% subsubsection 氦氢分子离子 (end)
+
+% subsection huckel方法的拓展 (end)
+
+% section 基础 (end)
+
+\end{document}

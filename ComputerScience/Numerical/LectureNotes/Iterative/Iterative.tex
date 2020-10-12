@@ -1,0 +1,269 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\DeclareMathOperator{\cond}{cond}
+
+\begin{document}
+
+\section{迭代解法} % (fold)
+\label{sec:迭代解法}
+
+\subsection{向量/矩阵的模/范数} % (fold)
+\label{sub:向量_矩阵的模_范数}
+
+\subsubsection{向量的模} % (fold)
+\label{ssub:向量的模}
+
+$l_p$模
+\[ \norm{\+vx}_p = \pare{\sum_{i=1}^n \abs{x_i}^p}^{1/p},\quad 1\le p \le \infty, \]
+对于$p=\infty$,
+\[ \norm{\+vx}_\infty = \max_{1\le i\le n}\abs{x_i}. \]
+性质:
+\begin{cenum}
+    \item $\norm{\+vx} \ge 0$. $\norm{\+vx} = 0 \Leftrightarrow \+vx = 0$.
+    \item $\forall \alpha \in \+bR, \norm{\alpha \+vx} = \abs{\alpha}\norm{\+vx}$.
+    \item $\+vx,\+vy\in \+bR^n, \norm{\+vx+\+vy} \le \norm{\+vx} + \norm{\+vy}$.
+    \item $m\norm{\+vx}_1 \le \norm{\+vx}_2 \le M\norm{\+vx}_1.$
+\end{cenum}
+特别地,
+\begin{align*}
+    & \norm{\+vx}_\infty \le \norm{\+vx}_1 \le n\cdot \norm{\+vx}_\infty, \\
+    & \rec{\sqrt{n}} \norm{\+vx}_1 \le \norm{\+vx}_2 \le \norm{\+vx}_1, \\
+    & \rec{\sqrt{n}} \norm{\+vx}_2 \le \norm{\+vx}_\infty \le \norm{\+vx}_2, \\
+    & \norm{\+vx}_\infty \le \norm{\+vx}_2 \le \sqrt{n}\norm{\+vx}_\infty.
+\end{align*}
+
+% subsubsection 向量的模 (end)
+
+\subsubsection{向量序列的极限} % (fold)
+\label{ssub:向量序列的极限}
+
+设有向量序列$\curb{\+vx^{\pare{k}}}$, 若$\forall \epsilon > 0$, 存在$N>a$使得$k\ge N$时
+\[ \norm{\+vx^{\pare{k}} - \+vx}<\epsilon, \]
+则谓$\curb{\+vx^{\pare{k}}}$是收敛序列, 极限为$\+vx$.
+\begin{lemma}
+    向量序列收敛当且仅当每一个分量收敛.
+\end{lemma}
+
+% subsubsection 向量序列的极限 (end)
+
+\subsubsection{方阵的模} % (fold)
+\label{ssub:方阵的模}
+
+算子范数
+\[ \norm{A} = \sup \frac{\norm{A\+vx}}{\norm{\+vx}} = \sup_{\norm{\+vx} = 1}\norm{A\+vx}. \]
+而
+\begin{align*}
+    \norm{A}_\infty &= \max_{1\le i\le n} \sum_{j=1}^n \abs{a_{ij}}, \\
+    \norm{A}_1 &= \max_{1\le j \le n} \sum_{i=1}^n \abs{a_{ij}}, \\
+    \norm{A}_2 &= \sqrt{\max_{1\le i\le n} \abs{\lambda_i \pare{AA^T}}},\quad \text{$\lambda_i$为$AA^T$特征值}.
+\end{align*}
+上述定义皆满足
+\[ \norm{A\+vx}\le \norm{A}\cdot \norm{\+vx}. \]
+
+% subsubsection 方阵的模 (end)
+
+% subsection 向量_矩阵的模_范数 (end)
+
+\subsection{矩阵的极限} % (fold)
+\label{sub:矩阵的极限}
+
+\subsubsection{矩阵的收敛性} % (fold)
+\label{ssub:矩阵的收敛性}
+
+设$\curb{A^{\pare{k}}}$为矩阵序列, 若$\forall \epsilon > 0$, 存在$N>a$使得$k\ge N$时
+\[ \norm{A^{\pare{k}} - A}<\epsilon, \]
+则谓$\curb{A^{\pare{k}}}$是收敛序列, 极限为$A$. 矩阵收敛当且仅当各个分量收敛.
+\begin{definition}[收敛矩阵]
+    $\displaystyle \lim_{k\rightarrow \infty} A^k = 0.$
+\end{definition}
+
+% subsubsection 矩阵的收敛性 (end)
+
+\subsubsection{矩阵谱半径} % (fold)
+\label{ssub:矩阵谱半径}
+
+\begin{definition}[谱半径]
+    $\displaystyle P\pare{A} = \max_{1\le i\le n} \abs{\lambda_i\pare{A}}$.
+\end{definition}
+设$\norm{A}$为任一范数, 有$P\pare{A} \le \norm{A}$.
+\[ \abs{\lambda}\cdot \norm{\+vx} = \norm{\lambda \+vx} = \norm{A\+vx} \le \norm{A}\cdot \norm{\+vx} \Rightarrow \abs{\lambda} \le \norm{A}. \]
+$\displaystyle \lim_{k\rightarrow \infty} A^k = 0 \Leftrightarrow P\pare{A} < 1$.
+\begin{lemma}
+    若在某个范数下$\norm{A} < 1$, 则$\displaystyle \lim_{n\rightarrow \infty} A^k = 0$.
+\end{lemma}
+
+% subsubsection 矩阵谱半径 (end)
+
+\subsubsection{条件数} % (fold)
+\label{ssub:条件数}
+
+\begin{definition}
+    $\cond_p\pare{A} = \norm{A}_p \cdot \norm{A^{-1}}_p$.
+\end{definition}
+$\cond_p\pare{A}\ge 1$. 若$A$为正交阵, $\cond\pare{A} = 1$.
+\par
+对于$A\+vx = \+vb$, 考虑微扰$A \rightarrow A+\delta A$, $\+vx \rightarrow \delta \+vx$, 则
+\begin{align*}
+    & \pare{A+\delta A}\pare{\+vx + \delta \+vx} = \+vb\Rightarrow \norm{\delta \+vx} \le \norm{A^{-1}}\norm{\delta A}\pare{\norm{\+vx} + \norm{\delta \+vx}}. \\
+    & \norm{A^{-1}} \cdot \norm{\delta A}\le 1 \Rightarrow \pare{1-\norm{A^{-1}} \cdot \norm{\delta A}}\norm{\delta \+vx} \le \norm{A^{-1}}\cdot \norm{\delta A}\cdot \norm{\+vx}, \\
+    & \frac{\norm{\delta \+vx}}{\norm{\+vx}} \le \frac{\norm{A^{-1}}\cdot \norm{\delta A}}{1-\norm{A^{-1}}\norm{\delta A}} = \frac{\norm{A}\norm{A^{-1}} \norm{\delta A}/\norm{A}}{1-\norm{A}\norm{A^{-1}} \norm{\delta A}/\norm{A}} = \frac{\displaystyle \cond \pare{A}\cdot \frac{\norm{\delta A}}{\norm{A}}}{\displaystyle 1-\cond\pare{A}\cdot \frac{\norm{\delta A}}{\norm{A}}}.
+\end{align*}
+考虑微扰$\+vb \rightarrow \+vb+\delta \+vb$,
+\begin{align*}
+    & A\pare{\+vx+\delta \+vx} = \+vb + \delta \+vb,\quad \delta \+vx = A^{-1}\delta \+vb,\quad \norm{\delta \+vx} \le \norm{A^{-1}}\cdot \norm{\delta \+vb}, \\
+    & A \+vx = \+vb,\quad \norm{A}\cdot \norm{\+vx} \ge \norm{\+vb},\quad \norm{\+vx} \ge \norm{A}^{-1}\cdot \norm{\+vb}, \\
+    & \frac{\norm{\delta \+vx}}{\norm{\+vx}} \le \frac{\norm{A^{-1}}\cdot \norm{\delta \+vb}}{\norm{A}^{-1}\cdot \norm{\+vb}} = \norm{A^{-1}} \cdot \norm{A} \cdot \frac{\norm{\delta \+vb}}{\norm{\+vb}} = \cond \pare{A} \cdot \frac{\norm{\delta \+vb}}{\norm{\+vb}}.
+\end{align*}
+$\cond A$越大, $\norm{\delta x}/\norm{x}$越大.
+\begin{ex}
+    考虑
+    \[ \begin{cases}
+        1.0002x_1 + 0.9998x_2 = 2,\\
+        0.9998x_1 + 1.0002x_2 = 2,
+    \end{cases} \Rightarrow \begin{cases}
+        x_1 = 1,\\
+        x_2 = 1.
+    \end{cases} \]
+    若
+    \[ \delta \+vb = \begin{pmatrix}
+        0.001 \\
+        -0.001
+    \end{pmatrix} \Rightarrow \begin{pmatrix}
+        x_1\\ x_2
+    \end{pmatrix} = \begin{pmatrix}
+        3.5 \\ 1.5
+    \end{pmatrix}. \]
+    原因在于
+    \[ \cond_\infty A = \norm{A}_\infty \cdot \norm{A^{-1}}_\infty = 5000. \]
+\end{ex}
+
+% subsubsection 条件数 (end)
+
+% subsection 矩阵的极限 (end)
+
+\subsection{方程组的迭代法} % (fold)
+\label{sub:方程组的迭代法}
+
+将方程组$A\+vx=\+vb$改写为
+\[ \+vx = M\+vx + \+vg, \]
+即可通过
+\[ \+vx^{\pare{k+1}} = M\+vx^{\pare{k}}+\+vg \]
+求解之. 设$N$为可逆矩阵, 将方程转化为
+\[ \+vx = N^{-1}\pare{N-A}\+vx + N^{-1}\+vb. \]
+记$M = N^{-1}\pare{N-A}$, $\+vg = N^{-1}\+vb$, 则迭代格式为
+\[ \+vx^{\pare{k+1}} = M\+vx^{\pare{k}}+\+vg. \]
+若$P\pare{M} < 1$则上述迭代收敛. 特别地, 若在某种范数下$\norm{M} \le 1$, 迭代收敛.
+
+\subsubsection{Jacobi迭代} % (fold)
+\label{ssub:jacobi迭代}
+
+分解为
+\[ A = D+L+U,\quad N = D, \]
+则
+\[ \+vx^{\pare{k+1}} = D^{-1}\pare{D-A}\+vx^{\pare{k}} + D^{-1}\+vb. \]
+即
+\[ x^{\pare{k+1}}_i = \rec{a_{ii}}\brac{-\sum_{\substack{j=1\\ j\neq i}}^n a_{ij}x_j^{\pare{k}} + v_i}. \]
+
+\begin{theorem}
+    左列二情形下Jacobi迭代收敛:
+    \begin{cenum}
+        \item $A$为严格行对角占优,
+        \[ a_{ii} > \sum_{j\neq i}\abs{a_{ij}},\quad i = 1,\cdots,n. \]
+        \item $A$为严格列对角占优,
+        \[ a_{jj} > \sum_{i\neq j}\abs{a_{ij}},\quad j = 1,\cdots,n. \]
+    \end{cenum}
+\end{theorem}
+
+% subsubsection jacobi迭代 (end)
+
+\subsubsection{\texorpdfstring{Gau\ss}{Gauss}-Seidel迭代} % (fold)
+\label{ssub:gauss_seidel迭代}
+
+$A = D+L+U$, $N=D+L$, 则
+\begin{align*}
+    & \+vx = -\pare{D+L}^{-1}U\+vx + \pare{D+L}^{-1}\+vb, \\
+    & \+vx^{\pare{k+1}} = -\pare{D+L}^{-1}U\+vx^{\pare{k}} + \pare{D+L}^{-1}\+vb, \\
+    & M = -\pare{D+L}^{-1}U, \\
+    & \pare{D+L}\+vx^{\pare{k+1}} = -U\+vx^{\pare{k}}+\+vb, \\
+    & \+vx^{\pare{k+1}} = -\pare{D+L}^{-1}UX^{\pare{k}} + \pare{D+L}^{-1}\+vb, \\
+    & S = -\pare{D+L}^{-1}U,\quad f = \pare{D+L}^{-1}b, \\
+    & X^{\pare{k+1}} = SX^{\pare{k}} + f. \\
+    & x_i^{\pare{k+1}} = \rec{a_{ii}}\brac{-\sum_{j=1}^{i-1}a_{ij}x_k^{\pare{k+1}} - \sum_{j=i+1}^n a_{ij}x_j^{\pare{k}} + b_i}.
+\end{align*}
+\begin{theorem}
+    左列二情形下Gau\ss-Seidel迭代收敛:
+    \begin{cenum}
+        \item $A$为严格对角占优,
+        \[ a_{ii} > \sum_{j\neq i}\abs{a_{ij}},\quad i = 1,\cdots,n. \]
+        \item $A$为正定矩阵.
+    \end{cenum}
+\end{theorem}
+
+% subsubsection gauss_seidel迭代 (end)
+
+\subsubsection{松弛迭代} % (fold)
+\label{ssub:松弛迭代}
+
+在Gau\ss-Seidel迭代的基础上加权,
+\begin{align*}
+    & \+vx^{\pare{k+1}} = \pare{1-\omega}x^{\pare{k}} + \omega \+vx\+_GS_^{\pare{k+1}} \\
+    & = \pare{1-\omega} \+vx^{\pare{k}} + \omega\pare{-D^{-1} \pare{L\+vx^{\pare{k+1}}} + D^{-1}\+vb}. \\
+    & \Rightarrow \+vx^{\pare{k+1}} = \pare{D+\omega L}^{-1}\brac{\pare{1-\omega}D - \omega U}\+vx^{\pare{k}} + \pare{D+\omega L}^{-1} \omega \+vb.
+\end{align*}
+
+\begin{sample}
+    \begin{ex}
+        方程组
+        \[ \begin{cases}
+            2x_1 - x_2 - x_3 = 5, \\
+            x_1 + 5x_2 - x_3 = 8, \\
+            x_1 + x_2 + 10x_3 = 11
+        \end{cases} \]
+        的等价方程为
+        \[ \begin{cases}
+            x_1 = 0.5 x_2 + 0.5 x_3 + 2.5, \\
+            x_2 = -0.2x_1 + 0.2x_3 + 1.6, \\
+            x_3 = -0.1x_1 - 0.1x_2 + 1.1.
+        \end{cases} \]
+        Jacobi迭代为
+        \[ \left\{\begin{array}{lllll}
+            x_1^{\pare{k+1}} & = & 0.5x_2^{\pare{k}} & +0.5x_3^{\pare{k}} & +2.5, \\
+            x_2^{\pare{k+1}} & =-0.2x_1^{\pare{k}} & & +0.2x_3^{\pare{k}} & +1.6, \\
+            x_3^{\pare{k+1}} & =-0.1x_1^{\pare{k}} & -0.1x_2^{\pare{k}} & & +1.1.
+        \end{array}\right. \]
+        Gau\ss-Seidel迭代为
+        \[ \left\{\begin{array}{lllll}
+            x_1^{\pare{k+1}} & = & 0.5x_2^{\pare{k}} & +0.5x_3^{\pare{k}} & +2.5, \\
+            x_2^{\pare{k+1}} & =-0.2x_1^{\pare{k+1}} & & +0.2x_3^{\pare{k}} & +1.6, \\
+            x_3^{\pare{k+1}} & =-0.1x_1^{\pare{k+1}} & -0.1x_2^{\pare{k+1}} & & +1.1.
+        \end{array}\right. \]
+        松弛迭代为
+        \[ \left\{\begin{array}{lllll}
+            x_1^{\pare{k+1}} & =\pare{1-\omega}x_1^{\pare{k}} & 0.5\omega x_2^{\pare{k}} & +0.5\omega x_3^{\pare{k}} & +2.5\omega , \\
+            x_2^{\pare{k+1}} & =-0.2\omega x_1^{\pare{k+1}} & + \pare{1-\omega}x_2^{\pare{k}} & +0.2\omega x_3^{\pare{k}} & +1.6\omega , \\
+            x_3^{\pare{k+1}} & =-0.1\omega x_1^{\pare{k+1}} & -0.1\omega x_2^{\pare{k+1}} & \pare{1-\omega}x_3^{\pare{k}} & +1.1\omega .
+        \end{array}\right. \]
+        Jacobi迭代的矩阵为
+        \[ M = \begin{pmatrix}
+            0 & 0.5 & 0.5 \\
+            -0.2 & 0 & 0.2 \\
+            -0.1 & -0.2 & 0
+        \end{pmatrix},\quad \norm{M}_1 = 0.7 < 1. \]
+        Gau\ss-Seidel迭代的矩阵为
+        \[ M = \begin{pmatrix}
+            0 & 0.5 & 0.5 \\
+            0 & -0.1 & -0.1 \\
+            0 & -0.04 & -0.05
+        \end{pmatrix},\quad \norm{M}_1 = 0.66 < 1. \]
+    \end{ex}
+\end{sample}
+
+% subsubsection 松弛迭代 (end)
+
+% subsection 方程组的迭代法 (end)
+
+% section 迭代解法 (end)
+
+\end{document}

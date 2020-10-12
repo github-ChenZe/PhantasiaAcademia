@@ -1,0 +1,186 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=C.Z.,gakka=QFT,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta}
+
+\def\kurisueniconwidth{3.2cm}
+\def\kurisueniconpath{img/CMSncFS.png}
+\newcommand{\hermitianconj}{\mathrm{h.c.}}
+
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzset{snake it/.style={decorate, decoration=snake}}
+
+\usepackage{tensor}
+\usepackage{slashed}
+\let\grad\nabla
+
+\begin{document}
+
+\section{Interacting Fields} % (fold)
+\label{sec:interacting_fields_and_feynman_diagrams}
+
+\subsection{The Feynman Rules} % (fold)
+\label{sub:the_feynman_rules}
+
+\subsubsection{Rules} % (fold)
+\label{ssub:rules}
+
+To calculate the Amplitude $\+sM$, associated with a particular Feynman diagram, proceed as follows:
+\begin{cenum}
+    \item Notation.
+    \begin{cenum}
+        \item Label the incoming the outgoing four-momenta $p_1,p_2,\cdots$, and the corresponding spins $s_1,s_2,\cdots$.
+        \item Label the internal four-momenta $q_1,q_2,\cdots$.
+        \item The arrows on external fermion lines indicate whether it is an electron or a positron.
+        \item Arrows on internal fermion lines are assigned so that the ``direction of flow'' through the diagram is preserved.
+        \item The arrows on external photon lines point ``forward''.
+        \item For internal photon lines the choice is arbitrary.
+    \end{cenum}
+    \item External lines. External lines contribute factors as follows:
+    \begin{cenum}
+        \item Electrons: $\begin{cases}
+            Incoming\pare{\smash{\begin{tikzpicture}
+                \draw[-latex](0,0) -- (0.5,0.1);
+                \draw (0.5,0.1) -- (1,0.2);
+                \draw[fill=black] (1,0.2) circle (0.05);
+            \end{tikzpicture}}}: & u,\\
+            Outgoing\pare{\smash{\begin{tikzpicture}
+                \draw[-latex](0,0) -- (0.5,0.1);
+                \draw (0.5,0.1) -- (1,0.2);
+                \draw[fill=black] (0,0) circle (0.05);
+            \end{tikzpicture}}}: & \conj{u}.
+        \end{cases}$
+        \item Positrons: $\begin{cases}
+            Incoming\pare{\smash{\begin{tikzpicture}
+                \draw(0,0) -- (0.5,0.1);
+                \draw[latex-] (0.5,0.1) -- (1,0.2);
+                \draw[fill=black] (1,0.2) circle (0.05);
+            \end{tikzpicture}}}: & v,\\
+            Outgoing\pare{\smash{\begin{tikzpicture}
+                \draw(0,0) -- (0.5,0.1);
+                \draw[latex-] (0.5,0.1) -- (1,0.2);
+                \draw[fill=black] (0,0) circle (0.05);
+            \end{tikzpicture}}}: & \conj{v}.
+        \end{cases}$
+        \item Photons: $\begin{cases}
+            Incoming\pare{\smash{\begin{tikzpicture}
+                \draw[snake it](0,0) -- (1,0.2);
+                \draw[fill=black] (1,0.2) circle (0.05);
+            \end{tikzpicture}}}: & \+v\epsilon_\mu,\\
+            Outgoing\pare{\smash{\begin{tikzpicture}
+                \draw[snake it](0,0) -- (1,0.2);
+                \draw[fill=black] (0,0) circle (0.05);
+            \end{tikzpicture}}}: & \conj{\+v\epsilon}^*_\mu.
+        \end{cases}$
+    \end{cenum}
+    \item Vectex Factors. Each vertex contributes a factor
+    \[ ig_e \gamma^\mu, \]
+    where $g_e = e\sqrt{4\pi/\hbar c}$.
+    \item Propagators. Each internal line contributes a factor as follows:
+    \begin{cenum}
+        \item Electrons and positrons: $\displaystyle \frac{i\pare{\slashed{q} + mc}}{q^2 - m^2c^2}$.
+        \item Photons: $\displaystyle \frac{-ig_{\mu\nu}}{q^2}$.
+    \end{cenum}
+    \item Conservation of Energy and Momentum. For each vertex, write a delta function of the form
+    \[ \pare{2\pi}^4 \delta^4\pare{k_1 + k_2 + k_3}, \]
+    where the $k$'s are the three four-momenta coming into the vertex.
+    \item Integrate Over Internal Momenta. For each internal momentum $q$, write a factor $\displaystyle \frac{\rd{^4 q}}{\pare{2\pi}^4}$ and integrate.
+    \item Cancel the Delta Function. The result will include a factor
+    \[ \pare{2\pi^4}\delta^4\pare{p_1 + p_2 + \cdots - p_n} \]
+    corresponding to overall energy-momentum conservation. Cancel this factor, and what remains is $-i\+sM$.
+    \item Antisymmetrization. Include a minus sign between diagrams that differ only in the interchange of two incoming (or outgoing) electrons (or positrons), or of an incoming electron with an outgoint positron (or vice versa).
+\end{cenum}
+
+% subsubsection rules (end)
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics{src/e-mu.pdf}
+    \caption{Electron-muon scattering.}
+    \label{fig:electron_muon_scattering}
+\end{figure}
+\begin{sample}
+    \begin{example}[Electron-Muon Scattering]
+        We proceed ``backward'' along each fermion line in \cref{fig:electron_muon_scattering}:
+        \begin{gather*}
+            \pare{2\pi}^4 \int \brac{\conj{u}^{\pare{s_3}}\pare{p_3}\pare{ig_e\gamma^\mu}u^{\pare{s_1}}\pare{p_1}}\times \\
+            \frac{-ig_{\mu\nu}}{q^2}\brac{\conj{u}^{\pare{s_4}}\pare{p_4}\pare{ig_e \gamma^\nu}u^{\pare{s_2}}\pare{p_2}}\times \\
+            \delta^4\pare{p_1 - p_3 - q}\delta^4\pare{p_2 + q - p_r}\,\rd{^4 q}.
+        \end{gather*}
+        Carrying out the $q$ integration and dropping the overall delta function, we find
+        \[ \+sM = -\frac{g_e^2}{\pare{p_1 - p_3}^2}\brac{\conj{u}^{\pare{s_3}}\pare{p_3} \gamma^\mu u^{\pare{s_1}}\pare{p_1}}\brac{\conj{u}^{\pare{s_4}}\pare{p_4}\gamma_\mu u^{\pare{s_2}}\pare{p_2}}. \]
+    \end{example}
+\end{sample}
+
+% subsection the_feynman_rules (end)
+
+% section interacting_fields_and_feynman_diagrams (end)
+
+\end{document}

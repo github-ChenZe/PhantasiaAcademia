@@ -1,0 +1,99 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=297mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+\usepackage{colortbl}
+
+\definecolor{graybg}{RGB}{228,235,243}
+\definecolor{titlepurple}{RGB}{150,131,104}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\definecolor{warningred}{RGB}{159,57,61}
+\definecolor{warningorange}{RGB}{185,117,8}
+\definecolor{warninggreen}{RGB}{39,91,4}
+\definecolor{warningcyan}{RGB}{0,99,101}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\def\bili#1#2{#2}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\newlongheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=0,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\begin{document}
+
+\centerline{\titlefont 特殊関数}
+\vspace{.5em}
+\begin{cheatresume}
+    \begin{flalign*}
+& \mathitem{Legendre多項式} && \mathitem{Bessel関数} && \mathitem{Laguerre多項式} \\
+& {\color{warningred}\pare{1-x^2} \+d{x^2}d{^2P_n} - 2x\+dxd{P_n} + l\pare{l+1} P_n = 0} && {\color{warningred}x^2 \+d{x^2}d{^2J_\alpha} + x\+dxd{J_\alpha} + \pare{x^2 - \alpha^2} J_\alpha = 0} && {\color{warningred}x \+d{x^2}d{^2 L_\alpha} + \pare{1-x}\+dxd{L_\alpha} + n L_\alpha = 0} \\
+& P_n\pare{x} = {\color{warningorange}\rec{2^n n!}\+d{x^n}d{^n}\pare{x^2-1}^n} && J_\alpha\pare{x} = \sum_{m=0}^\infty \frac{\pare{-1}^m}{m!\Gamma\pare{m+\alpha+1}}\pare{\frac{x}{2}}^{2m+\alpha} && L_n\pare{x} = {\color{warningorange}\frac{e^x}{n!}\+d{x^2}d{^n}\pare{e^{-x} x^n}} \\
+& {\color{warninggreen}\pare{n+1}P_{n+1} + nP_{n-1} = \pare{2n+1}xP_{n+1}} && Y_\alpha\pare{x} = \frac{J_\alpha\pare{x} \cos \pare{\alpha \pi} - J_{-\alpha}\pare{x}}{\sin\pare{\alpha \pi}} && {\color{warninggreen} \pare{k+1} L_{k+1}\pare{x} + kL_{k-1}\pare{x} = \pare{2k+1-x}L_k\pare{x}} \\
+& {\color{warninggreen}\begin{array}[t]{@{}l!{\color{lightgray}\vrule}l}nP_n = xP'_n - P'_{n-1} & nP_{n-1} = P'_n - xP'_{n-1} \end{array}} && H^{\pare{1,2}}_\alpha\pare{x} = J_\alpha\pare{x} \pm iY_\alpha\pare{x} && {\color{warningcyan}\int_0^\infty e^{-x} L_m\pare{x}L_n\pare{x}\,\rd{x} = \delta_{mn}} \\
+& {\color{warninggreen}\pare{2n+1}P_n = P'_{n+1} - P'_{n-1}} && J_{-n} = \pare{-1}^n J_n, \quad Y_{-n} = \pare{-1}^n Y_n  && \\
+& {\color{warningcyan}\int_{-1}^1 P_l\pare{x}P_{l'}\pare{x}\,\rd{x} = \frac{2}{2l+1}\delta_{ll'}} && \displaystyle {\color{warninggreen}\begin{array}[t]{@{}l!{\color{lightgray}\vrule}l} \pare{x^\nu J_\nu}' = x^\nu J_{\nu - 1} & 2J'_\nu = J_{\nu - 1} - J_{\nu + 1} \\ \+:r2{$\pare{x^{-\nu}J_\nu}' = -x^{-\nu}J_{\nu + 1}$} & \+:r2{$\displaystyle \frac{2\nu J_\nu}{x} = J_{\nu - 1} + J_{\nu + 1}$} \\ & \end{array}} && \\
+& Q_0\pare{x} = \half \ln \frac{1+x}{1-x},\quad Q_1\pare{x} = xQ_0\pare{x}-1 && {\color{warningred}x^2 \+d{x^2}d{^2 y} + \pare{1-2a} x\+dxd{y} + \brac{\pare{bcx^c}^2 + \pare{a^2 - p^2c^2}} y = 0} && \\
+& Q_n\pare{x} = \frac{2n-1}{n}xQ_{n-1}\pare{x} - \frac{n-1}{n}Q_{n-2}\pare{x} && y = x^a Z_p\pare{bx^c} && \\
+%
+& \mathitem{Legendre陪多項式} && \mathitem{変形Bessel関数} && \mathitem{Laguerre陪多項式} \\
+& {\color{warningred}\pare{1-x^2} \+d{x^2}d{^2P_n^m} - 2x\+dxd{P_n^m} + \brac{l\pare{l+1} - \frac{m^2}{1-x^2}} P_n^m = 0} && {\color{warningred}x^2 \+d{x^2}d{^2I_\alpha} + x\+dxd{I_\alpha} - \pare{x^2 + \alpha^2} I_\alpha = 0} && {\color{warningred}x \+d{x^2}d{^2 L_\alpha} + \pare{\alpha + 1-x}\+dxd{L_\alpha} + n L_\alpha = 0} \\
+& P_n^m \pare{x} = \pare{1-x^2}^{m/2}\+d{x^m}d{^m}P_n\pare{x} && I_\alpha\pare{x} = i^{-\alpha} J_\alpha\pare{ix} && L_n^k\pare{x} = \pare{-1}^k \+d{x^k}d{^k} L_{n+k}\pare{x} = {\color{warningorange} \frac{e^x x^{-k}}{n!}\+d{x^n}d{^n}\pare{e^{-x}x^{n+k}}} \\
+& Q_n^m\pare{x} = \pare{1-x^2}^{m/2}\+d{x^m}d{^m}Q_n\pare{x} && Y_\alpha\pare{x} = \frac{\pi}{2}\frac{I_{-\alpha}\pare{x} - I_\alpha\pare{x}}{\sin\pare{\alpha\pi}} && {\color{warningcyan}\int_0^\infty e^{-x} L_m^k\pare{x}L_n^k\pare{x}\,\rd{x} = \frac{\pare{n+k}!}{n!}\delta_{mn}} \\
+& {\color{warningcyan}\int_{-1}^1 P_l^m\pare{x}P_{l'}^m\pare{x}\,\rd{x} = \delta_{ll'} \cdot \frac{2}{2l+1}\frac{\pare{l+m}!}{\pare{l-m}!}} && I_{-n} = I_n, \quad K_{-\alpha} = K_\alpha && \\
+%
+& \mathitem{球面調和関数} && \mathitem{球Bessel関数} && \mathitem{Hermite多項式} \\
+& {\color{warningred}\rec{\sin\theta}\+D\theta D{}\pare{\sin\theta\+D\theta DY} + \rec{\sin^2\theta}\+D{\varphi^2}D{^2Y} = -l\pare{l+1}Y} && {\color{warningred}x^2 \+d{x^2}d{^2j_\alpha} + 2x\+dxd{j_\alpha} + \brac{x^2 - \alpha\pare{\alpha+1}} j_\alpha = 0} && {\color{warningred} H''_n\pare{x} - 2xH'_n\pare{x} + 2nH_n\pare{x} = 0} \\
+& Y_l^m\pare{\theta,\varphi} = \sqrt{\frac{2l+1}{4\pi}\frac{\pare{l-m}!}{\pare{l+m}!}}P_l^m\pare{\cos\theta}e^{im\varphi} && j_\alpha\pare{x} = \pare{\frac{\pi}{2x}}^{1/2}J_{\alpha+1/2}\pare{x} = {\color{warningorange}\pare{-x}^l\pare{\rec{x}\+dxd{}}^l \pare{\frac{\sin x}{x}}} && H_n\pare{x} = {\color{warningorange} \pare{-1}^n e^{x^2}\+d{x^n}d{^n}e^{-x^2}} \\
+& {\color{warningcyan}\iint_{S^2} Y_l^m Y_{l'}^{m'*}\,\rd{\Omega} = \delta_{ll'}\delta_{mm'}} && y_\alpha\pare{x} = \pare{\frac{\pi}{2x}}^{1/2}Y_{\alpha+1/2}\pare{x} = {\color{warningorange}-\pare{-x}^l\pare{\rec{x}\+dxd{}}^l \pare{\frac{\cos x}{x}}} && {\color{warninggreen}\begin{array}[t]{@{}l!{\color{lightgray}\vrule}l} H_{n+1} = 2xH_n - 2nH_{n-1} & H'_n = 2nH_{n-1} \end{array}} \\
+& P_l\pare{\+ux \cdot \+uy} = \frac{4\pi}{2l+1} \sum_{m=-l}^{l} Y_{l}^m\pare{\+uy}Y_{l}^{m*} \pare{\+ux} && h^{\pare{1,2}}_\alpha\pare{x} = j_\alpha\pare{x} \pm iy_\alpha\pare{x} && {\color{warningcyan}\int_{-\infty}^\infty e^{-x^2}H_m\pare{x}H_n\pare{x} = 2^n \pi^{1/2}n! \delta_{mn}} \\
+%
+& \mathitem{特殊積分} && \mathitem{変形球Bessel関数} && \mathitem{超幾何関数} \\
+& B\pare{x,y} = \int_0^1 t^{x-1}\pare{1-t}^{y-1}\,\rd{t} && {\color{warningred}x^2 \+d{x^2}d{^2i_\alpha} + 2x\+dxd{i_\alpha} - \brac{x^2 + \alpha\pare{\alpha+1}} i_\alpha = 0} && P^{\mu}_\lambda\pare{z} = \rec{\Gamma\pare{1-\mu}}\pare{\frac{1+z}{1-z}}^{\mu/2}{_2F_1}\pare{-\lambda,\lambda+1;1-\mu;\frac{1-z}{2}} \\
+& = 2\int_0^{\pi/2} \pare{\sin\theta}^{2x-1}\pare{\cos\theta}^{2y-1}\,\rd{\theta} = \frac{\Gamma\pare{x}\Gamma\pare{y}}{\Gamma\pare{x+y}} && i_\alpha\pare{x} = \pare{\frac{\pi}{2x}}^{1/2}I_{\alpha+1/2}\pare{x} && J_\nu\pare{z} = \frac{\pare{z/2}^\nu}{\Gamma\pare{\nu+1}}{_0F_1}\pare{\nu+1;-z^2/4} \\
+& \zeta\pare{z} = \sum_{n=1}^\infty \rec{n^z} = \rec{\Gamma\pare{z}}\int_0^\infty \frac{t^{z-1}\,\rd{t}}{e^t-1} && k_\alpha\pare{x} = \pare{\frac{\pi}{2x}}^{1/2}K_{\alpha+1/2}\pare{x} && L_n^m\pare{z} = \frac{\pare{n+m}!}{n!m!}{_1F_1}\pare{-n;m+1;z} \\
+& \Li_p\pare{z} = \sum_{n=1}^\infty \frac{z^n}{n^p} = \int_0^z \Li_{p-1}\pare{t}\,\frac{\rd{t}}{t} && k_{-n-1/2} = k_{n+1/2} && H_{2n}\pare{z} = \pare{-1}^n \frac{\pare{2n}!}{n!}{_1F_1}\pare{-n;\half;z^2} \\
+& K\pare{m} = \int_0^{\pi/2} \pare{1-m\sin^2\theta}^{-1/2}\,\rd{\theta} && E\pare{m} = \int_0^{\pi/2} \pare{1-m\sin^2\theta}^{1/2}\,\rd{\theta} && H_{2n+1}\pare{z} = \pare{-1}^n \frac{2\pare{2n+1}!}{n!}{_1F_1}\pare{-n;\frac{3}{2};z^2} \\
+& \phantom{K\pare{m}} = \int_0^1 \brac{\pare{1-t^2}\pare{1-mt^2}}^{-1/2}\,\rd{t} && \phantom{E\pare{m}} = \int_0^1 \pare{\frac{1-mt^2}{1-t^2}}^{1/2}\,\rd{t} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{document}

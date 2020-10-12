@@ -1,0 +1,100 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+\usepackage{colortbl}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+
+\begin{document}
+
+\newprob{6.6}%
+梯形: $h=0.20$,\\
+$\displaystyle I = \frac{h}{2}\pare{5.70 + 2\times 4.60 + 2\times 3.50 + 2\times 3.70 + 2\times 4.90 + 2\times 5.20 + 5.50} = \boxed{5.50.}$\\
+Simpson: $h=0.20$,\\
+$\displaystyle I = \frac{h}{3}\pare{5.70 + 4\times 4.60 + 2\times 3.50 + 4\times 3.70 + 2\times 4.90 + 4\times 5.20 + 5.50} = \boxed{5.467.}$\\
+中点: $h=0.40$,\\
+$\displaystyle I = h\pare{4.60 + 3.70 + 5.20} = \boxed{5.40.}$\\
+梯形公式的余项为$\displaystyle E_1 = -\frac{\pare{b-a}h_1^2}{12}f''\pare{\xi_1}$, 中点公式的余项为$\displaystyle E_2 = \frac{\pare{b-a}h_2^2}{24}f''\pare{\xi_2}$. 如果假设$f''\pare{\xi_1} \approx f''\pare{\xi_2}$, 由$h_2 = 2h_1$有$2E_1 \approx -E_2.$将Simpson公式视为最接近正确值的逼近, 则$E_1 \approx -0.033$, $E_2 \approx 0.067$, 符合这一关系.
+\newprob{6.10 (2)}%
+应当取$n=2$的Gau\ss 积分, 代数精度为$2n-1 = 3$阶. 取
+\[ \func{x\pare{t} = 2t - 1}{\brac{-1,1}}{\brac{-3,1}},  \]
+令$f\pare{t} = x\pare{t}^5 + x\pare{t}$,
+\begin{align*}
+    \int_{-3}^1 \pare{x^5 + x}\,\rd{x} &= \int_{-1}^1 f\pare{t}x'\pare{t} \,\rd{t} = 2 \int_{-1}^1 \brac{f\pare{-x^{\pare{2}}_1}\frac{t - x^{\pare{2}}_1}{-x^{\pare{2}}_1 - x^{\pare{2}}_1} + f\pare{x^{\pare{2}}_1}\frac{t+x^{\pare{2}}_1}{x^{\pare{2}}_1 + x^{\pare{2}}_1}} \,\rd{t} \\
+    &= 2 \pare{f\pare{-0.57735} + f\pare{0.57735}} \\
+    &= \boxed{-96.889.}
+\end{align*}
+\newprob{6.8}%
+$\displaystyle R_{11} = \half\pare{\ln 1 + \ln 2} = 0.346573590279973$.\\
+$\displaystyle R_{21} = \half R_{11} + \half \ln 1.5 = 0.376019349194069$.\\
+$\displaystyle R_{22} = \frac{4R_{21} - R_{11}}{4-1} = 0.385834602165434$.\\
+$\displaystyle R_{31} = \half R_{21} + \rec{4}\pare{\ln 1.25 + \ln 1.75} = 0.383699509409442$.\\
+$\displaystyle R_{32} = \frac{4R_{31} - R_{21}}{4-1} = 0.386259562814567$.\\
+$\displaystyle R_{33} = \frac{16R_{32} - R_{22}}{16-1} = 0.386287893524509$.\\
+$\displaystyle R_{41} = \half R_{31} + \rec{8}\pare{\ln 1.125 + \ln 1.375 + \ln 1.625 + \ln 1.875} = 0.385643909952095$.\\
+$\displaystyle R_{42} = \frac{4R_{41} - R_{31}}{4-1} = 0.386292043466313$.\\
+$\displaystyle R_{43} = \frac{16R_{42} - R_{32}}{16-1} = 0.386294208843096$.\\
+$\displaystyle R_{44} = \frac{64R_{43} - R_{33}}{64-1} = \boxed{0.386294309086248.}$\quad ($R_{44} - R_{33} = 6.4\times 10^{-6} < 10^{-4}$)\\[.5em]
+积分表如下.
+\[ \begin{array}{llll}
+    0.346573590279973 \\
+    0.376019349194069 & 0.385834602165434 \\
+    0.383699509409442 & 0.386259562814567 & 0.386287893524509 \\
+    0.385643909952095 & 0.386292043466313 & 0.386294208843096 & 0.386294309086248
+\end{array}. \]
+\newprob{6.9 (2)}%
+各节点函数值如下.
+\[ \begin{array}{c|cccc}
+    & 1 & 4/3 & 5/3 & 2 \\
+    \hline
+   1   & \cellcolor{cyan!20}1/2 & \cellcolor{green!20}3/7  & \cellcolor{green!20}3/8  & \cellcolor{cyan!20}1/3 \\
+   4/3 & \cellcolor{green!20}3/7 & \cellcolor{olive!20}3/8  & \cellcolor{olive!20}1/3  & \cellcolor{green!20}3/10 \\
+   5/3 & \cellcolor{green!20}3/8 & \cellcolor{olive!20}1/3  & \cellcolor{olive!20}3/10 & \cellcolor{green!20}3/11 \\
+   2   & \cellcolor{cyan!20}1/3 & \cellcolor{green!20}3/10 & \cellcolor{green!20}3/11 & \cellcolor{cyan!20}1/4
+\end{array} \]
+取$h=1/3$, 按照\colorbox{cyan!20}{$1/4$}, \colorbox{green!20}{$1/2$}, \colorbox{olive!20}{$1$}的权重相加,
+\begin{align*}
+    I &= h^2\brac{\rec{4}\times\pare{\half + \rec{3} + \rec{3} + \rec{4}} + \half\times 2 \times \pare{\frac{3}{7} + \frac{3}{8} + \frac{3}{10} + \frac{3}{11}} + 1\times \pare{\frac{3}{8} + \rec{3} + \rec{3} + \frac{3}{10}}} \\
+    &= \boxed{0.3413.}
+\end{align*}
+
+\end{document}

@@ -1,0 +1,510 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Geometry\ in\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+\newtheorem{corollary}{Corollary}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\GF}{GF}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\SO}{SO}
+\DeclareMathOperator{\SL}{SL}
+
+\makeatletter
+
+\newcommand*\SetSuchThat{\@ifstar\@SetSuchThat@star\@SetSuchThat@nostar}
+\newcommand*\@SetSuchThat@star{%
+    \mathrel{}%
+    % \nobreak % superfluous inside "\left... ... \right..."
+    \middle\vert
+    \mathrel{}%
+}
+\newcommand*\@SetSuchThat@nostar[1][]{%
+    \mathrel{#1\vert}%
+}
+\newcommand*\@SetSuchThat{}
+\DeclarePairedDelimiterX \SetCond [2] {\lbrace}{\rbrace}
+    {\nonscript\,#1\@SetSuchThat@nostar #2\nonscript\,}
+
+\makeatother
+
+\usepackage[all]{xy}
+
+\begin{document}
+
+\section{Foundations of Group Theory} % (fold)
+\label{sec:foundations_of_group_theory}
+
+\subsection{Basic Concepts} % (fold)
+\label{sub:definitions}
+
+\subsubsection{Definitions} % (fold)
+\label{ssub:definitions}
+
+\begin{termdef}{Group}
+    A group is a set $G$ with a binary operator $\func{\cdot}{G\times G}{G}$ satisfying the following conditions:
+    \begin{citemize}
+        \item $x\cdot y \in G$;
+        \item there exists an $e\in G$ such that $e\cdot x = x$ for any $x\in G$;
+        \item $x\cdot \pare{y\cdot z} = \pare{x\cdot y}\cdot z$;
+        \item for any $x\in G$, there exists an $x^{-1} \in G$ such that $x^{-1}\cdot x = e$.
+    \end{citemize}
+\end{termdef}
+\begin{sample}
+    \begin{example}
+        $\pare{\+bZ,+}$ forms a group.
+    \end{example}
+\end{sample}
+In a group, the left identity element is equal to the right identity element and is unique, and the left inverse is equal to the right inverse and is also unique.
+\par
+The power of a element is defined as
+\[ a^n = \underbrace{a\cdot \cdots \cdot a}_{n \mathrm{\ times}},\quad n\in \+bZ, \]
+where, if $n$ is negative, the power is defined as $\pare{a^{-1}}^{\abs{n}}$. \begin{marginwarns}
+    $xy \neq yx$ in general except for abelian groups.
+\end{marginwarns}
+\begin{proposition}
+    The following properties of a group are satisfied:
+    \begin{cenum}
+        \item $e^{-1} = e$.
+        \item $\pare{g^{-1}}^{-1} = g$.
+        \item $\pare{ab}^{-1} = b^{-1}a^{-1}$.
+    \end{cenum}
+\end{proposition}
+The \gloss{order} of a group is the number of the its elements. Groups are therefore categorized into finte groups and infinite groups, the latter of which are further divided into discrete ones and continuous ones.
+\begin{termdef}{Abelian Group}
+    For all $x,y \in G$, $xy = yx$.
+\end{termdef}
+\begin{sample}
+    \begin{example}
+        $\pare{\+bR,+}$ is an abelian group.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $\GL\pare{n}$, the invertible linear transformations on $\+bR^n$, is a group but not an abelian group.
+    \end{example}
+\end{sample}
+
+% subsubsection definitions (end)
+
+\subsubsection{Cayley Table} % (fold)
+\label{ssub:cayley_table}
+
+The multiplication table of a group is called its \gloss{Cayley table}.
+\begin{sample}
+    \begin{example}
+        For a group of a single element $\curb{e}$, the multiplication table is shown below.
+        \[ \begin{array}{c|c}
+         & e \\
+        \hline
+        e & e    
+        \end{array} \]
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        For a group of two elements $\curb{e,a}$, the multiplication table is shown below.
+        \[ \begin{array}{c|cc}
+         & e & a \\
+        \hline
+        e & e & a \\
+        a & a & e
+        \end{array} \]
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        For a group of three elements $\curb{e,a,b}$, the multiplication table is shown below.
+        \[ \begin{array}{c|ccc}
+         & e & a & b \\
+        \hline
+        e & e & a & b \\
+        a & a & b & e  \\
+        b & b & e & a
+        \end{array} \]
+        It can be shown that there can be no other possible Cayley tables.
+    \end{example}
+\end{sample}
+We define $aA = \SetCond{x\in A}{ax}$, $Aa = \SetCond{x\in A}{xa}$, $\SetCond{x\in A}{x^{-1}}$, and $AB = \SetCond{x,y\in A}{xy}$.
+\begin{finaleq}{Reordering Theorem}
+    The rows and columns of the Cayley table of a group $G$ are permutations of all the elements of $G$, i.e. $aG = G$ and $Ga = G$.
+\end{finaleq}
+\begin{sample}
+    \begin{example}
+        $U\pare{1} = \SetCond{g\pare{\theta}}{g\pare{\theta}=e^{i\theta},\theta\in\blr{0,2\pi}}$ forms a group under the usual mjltiplication of complex numbers.
+    \end{example}
+\end{sample}
+
+% subsubsection cayley_table (end)
+
+\subsubsection{Generators and Relations} % (fold)
+\label{ssub:generators}
+
+\begin{termdef}{Generators}
+    If all elements in $G$ can be written as products of elements in $S\subset G$, then elements of $S$ are called the generators of $G$.
+\end{termdef}
+\begin{termdef}{Relations}
+    Identities satisfied by generators are called relations.
+\end{termdef}
+\begin{termdef}{Presentation of a Group}
+    If $S$ is a set of generators of $G$ and $R$ are the relations among them which completely characterize $G$, then $\bra{S}\ket{G}$ is called a presentation of $G$.
+\end{termdef}
+\begin{theorem}
+    Every group has a presentation.
+\end{theorem}
+\begin{sample}
+    \begin{example}
+        $\bra{a}\ket{a^n = e}$ is a presentation of $C_n$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $\bra{p,q}\ket{p^3 = e,q^2 = e, qpqp=e}$ is a group whose elements can be written as $p^m q^n$ where the last relation prescribes how do $p$ and $q$ commute.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $\bra{a,b,c}\ket{c=\brac{a,b},\brac{c,a} = e,\brac{c,b} = e}$ is the Heisenberg group, where $\brac{a,b} = aba^{-1}b^{-1}$ is the commutor.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        The tetrahedral group $T = \bra{s,t}\ket{s^2 = e, t^3 = e,\pare{st}^3=e}$, where $t$ is a rotation around the center of an edge and $t$ is a rotation around the center of a face. We have $T=A_4$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        The octaheadral group $O = \bra{s,t}\ket{s^2=e,t^3=e,\pare{st}^4=e} = S_4$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        The icosahedral group $I = \bra{s,t}\ket{s^2=e,t^3=e,\pare{st}^5 = e} = A_5$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        The dihedral groups are the symmetry groups of regular $n$-gons. $D_n = \bra{\rho,r}\ket{\rho^n = e, \rho r = r\rho^{-1}}$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}[Klein Group]
+        $V_4 = \bra{P,T}\ket{\bra{P,T} = e,P^2=e,T^2=e}$ where $P$ is the parity transformation and $T$ is the time reversal operator. The multiplication group is shown below.
+        \begin{equation*}
+            \begin{array}{c|cccc}
+                & 1 & P & T & PT \\
+                \hline
+                1 & 1 & P & T & PT \\
+                P & P & 1 & PT & T \\
+                T & T & PT & 1 & P \\
+                PT & PT & T & P & 1
+            \end{array}
+        \end{equation*}
+        The Klein Group and $C_4$ are the possible groups of order $4$.
+    \end{example}
+\end{sample}
+\begin{termdef}{Order of Elements}
+    The minimal positive integer $r$ such that $g^r = e$ is called the rank of $g$, denoted $\abs{g}$ or $\rank g$.
+\end{termdef}
+If $g^n \neq e$ for all $n>0$, then $\abs{g}$ is defined to be $0$.
+\begin{termdef}{Rank of Groups}
+    The rank of a group is the minimal number of generators.
+\end{termdef}
+
+% subsubsection generators (end)
+
+\subsubsection{Examples} % (fold)
+\label{ssub:examples}
+
+\begin{sample}
+    \begin{example}
+        The 2-dimensional Eucliean group are the rigid motion in $\+bR^2$, i.e. transformations of the form
+        \[ \begin{pmatrix}
+            x_1' \\ x_2'
+        \end{pmatrix} = \begin{pmatrix}
+            \cos\theta & \sin\theta \\
+            -\sin\theta & \cos\theta
+        \end{pmatrix}\begin{pmatrix}
+            x_1 \\ x_2
+        \end{pmatrix} + \begin{pmatrix}
+            a \\ b
+        \end{pmatrix}. \]
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}[Affine Group]
+        The affine group consists of affine transformations in $\+bR^n$, which are the operators
+        \[ \func{\pare{M,\+va}}{\+vx}{\+vx' = \pare{M,\+va}\circ \+vx = M\+vx + \+va}, \]
+        where $M \in \GL\pare{\+bR^n}$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $\SU\pare{2}$ is a subgroup of $\SL\pare{2,\+bC}$, which is a double cover of $\SO\pare{3}$.
+    \end{example}
+\end{sample}
+
+% subsubsection examples (end)
+
+\subsubsection{Other Algebraic Structures} % (fold)
+\label{ssub:other_algebraic_structures}
+
+\begin{figure}[ht]
+\centerline{
+    \xymatrix{
+    \text{Set} \ar[r]^{\text{Binary}} & \text{Magma} \ar[d]^{\text{Close}} \\
+    \text{Semigroup}\ar[d]^{e} & \ar[l]^{\text{Associative}}\text{Groupoid}\ar[r]^{x/y} & \text{Quasigroup}\ar[d]^{e} \\
+    \text{Monoid} \ar[rd]^{x^{-1}} & & \text{Loop} \ar[ld]^{\text{Associative}} \\
+    & \text{Group}
+}}
+\caption{Different algebraic structures.}
+\end{figure}
+\begin{termdef}{Ring}
+    A set $R$ with binary operations $+$ and $\cdot$ that satisfies the following conditions
+    \begin{cenum}
+        \item $\pare{R,+}$ is abelian;
+        \item $\pare{R,\cdot}$ is a semigroup;
+        \item $a\pare{b+c} = ab+ac$ and $\pare{a+b}c = ac+bc$
+    \end{cenum}
+    is called a ring.
+\end{termdef}
+A ring that $\pare{R,\cdot}$ is an abelian group is called a \gloss{commutative ring}. A ring that $\pare{R,\cdot}$ is a monoid is called a \gloss{ring with identity}
+\begin{sample}
+    \begin{example}
+        $\+bR\brac{x}$, the polynomials on $\+bR$, is a commutative ring with identity.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $n\times n$ matrices on $\+bC$ forms a ring with identity.
+    \end{example}
+\end{sample}
+\begin{termdef}{Skew-Field}
+    A skew field is a ring with identity where every nonzero element has a multiplicative inverse.
+\end{termdef}
+\begin{termdef}{Field}
+    A field is a commutative skew-field.
+\end{termdef}
+\begin{sample}
+    \begin{example}
+        $\pare{\+bR,+,\cdot}$, $\pare{\+bC,+,\cdot}$ and $\pare{\+bQ,+,\cdot}$ are all fields.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        Quaternions $\+bH$ are elements of the form
+        \[ q_0 + q_1 \+vi + q_2 \+vj + q_3 \+vk \]
+        where the basis vector satisfies
+        \[ \+vi\+vj = \+vk = -\+vj\+vi, \quad \+vj\+vk=\+vi = -\+vk\+vj,\quad \+vk\+vi = \+vj = -\+vi\+vk, \]
+        and that
+        \[ \+vi^2 = \+vj^2 = \+vk^2 = -1. \]
+        $\+bH$ forms a skew-field, but not a field.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $\GF\pare{2} = \curb{0,1}$ is a finite field, which may be extended to $\GF\pare{4}$ as
+        \[ \+bF_2 = \SetCond{a+bx}{a,b\in \+bF_2}/\curb{x^2+x+1}, \]
+        i.e. the linear polynomials on $\GF\pare{2}$ modulus $\pare{x^2 + x + 1}$. Similar definitions apply to $\GL\pare{p}$ where $p$ is a prime number, and may be extended to $\GL\pare{p^n}$. The existence of multiplicative inversion is guaranteed by the fact that primitive polynomials do not vanish on $\GF\pare{p}$.
+    \end{example}
+\end{sample}
+$\GF\pare{p^n}$ defined above are all possible finite fields.
+
+% subsubsection other_algebraic_structures (end)
+
+% subsection definitions (end)
+
+\subsection{Parition of Groups} % (fold)
+\label{sub:parition_of_groups}
+
+\subsubsection{Partition of Sets} % (fold)
+\label{ssub:partition_of_sets}
+
+Let $A$ be a set. A \gloss{relation} on $A$ is a set $R\subset A\times A$. If $\pare{a,b} \in R$, then $a\sim b$.
+\begin{termdef}[\baselineskip]{Equivalence Relation}
+    A relation is called an equivalence relation if
+    \begin{cenum}
+        \item $\forall a\in A$, $a\sim a$;
+        \item $a\sim b \Leftrightarrow b\sim a$;
+        \item and $a\sim b \land b\sim c\Rightarrow a\sim c$.
+    \end{cenum}
+\end{termdef}
+If $\sim$ is an equivalence relation, then $\SetCond{b\in A}{b\sim a}$ is a \gloss{equivalence class}.
+\begin{termdef}[\baselineskip]{Partition of a Set}
+    A partition of a set $A$ is a collection $\curb{X_i}$ of the subsets of $A$ which satisfies
+    \begin{cenum}
+        \item $\displaystyle \bigcup_{i=1}^n X_i = A$;
+        \item and $X_i \cap X_j = \varnothing$ if $i\neq j$.
+    \end{cenum}
+\end{termdef}
+An equivalence relation naturally arises a parition that is all the equivalence classes.
+
+% subsubsection partition_of_sets (end)
+
+\subsubsection{Partition of Groups} % (fold)
+\label{ssub:partition_of_groups}
+
+If $a,b\in G$ are related by $a = gbg^{-1}$, then $a$ and $b$ are \gloss{conjugate}.
+\begin{proposition}
+    A few properties of conjugation relations are listed below.
+    \begin{cenum}
+        \item The conjugation relation is an equivalence relation.
+        \item The identity element itself forms an equivalence relation.
+        \item Abelian groups have only a single equivalence class which is itself.
+        \item The elements in the same conjugation class have the same order.
+        \item A conjugation class is completely characterized by any single element of it,
+        \[ K = \SetCond{gag^{-1}}{g\in G}. \]
+        \item A conjugation class is invariant under conjugation, i.e. $gKg^{-1} = K$.
+        \item If a subset $A\subset G$ is invariant under conjugation, $A$ could be written as the union of conjugation classes. Consequently, the product of conjugation classes could be written as the union of conjugation classes.
+    \end{cenum}
+\end{proposition}
+\begin{sample}
+    \begin{example}
+        The conjugation classes of $D_3$ are
+        \[ K_1 = \curb{e};\quad K_2 = \curb{\rho,\rho^2};\quad K_3 = \curb{r,r\rho,r\rho^2}. \]
+    \end{example}
+\end{sample}
+
+% subsubsection partition_of_groups (end)
+
+\subsubsection{Subgroups and Cosets} % (fold)
+\label{ssub:subgroups_and_cosets}
+
+\begin{termdef}{Subgroup}
+    A subset $H\subset G$ is called a subgroup if it forms a group under the binary operation prescribed by $G$.
+\end{termdef}
+A subgroup is called a \gloss{proper subgroup} if it's neither $\curb{e}$ nor $G$, where we write $H<G$. Otherwise it's called a \gloss{trivial subgroup}.
+\begin{sample}
+    \begin{example}
+        $\curb{e}$, $\curb{e,\rho,\rho^2}$, $\curb{e,r}$, $\curb{e,r\rho}$ and $\curb{e,r\rho^2}$ are subgroups of $D_3$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $\SL\pare{n,\+bC}$ is a subgroup of $\GL\pare{n,\+bC}$.
+    \end{example}
+\end{sample}
+\begin{termdef}{Left Coset}
+    A set of the form
+    \[ gH = \SetCond{gh}{h\in H} \]
+    is called a left coset of $H$.
+\end{termdef}
+\begin{proposition}
+    The collection of left cosets of $H$ is a partition of the group $G$. In particular, the left cosets are either equal or disjoint. Therefore, being in the same left coset is a equivalence relation.
+\end{proposition}
+\begin{proposition}
+    A few properties of left cosets are listed below.
+    \begin{cenum}
+        \item $g_1 H \cap g_2 H \neq \varnothing \Leftrightarrow g_1H = g_2H$.
+        \item $gH \neq H \Rightarrow e\notin gH$.
+        \item $gH\neq H \Rightarrow H$ is not a subgroup.
+        \item $\abs{gH} = H$.
+    \end{cenum}
+\end{proposition}
+\begin{termdef}{Index of Subgroups}
+    The index of a subgroup $H \subset G$ is the number of left cosets of $H$ in $G$, denoted $\brac{G:H}$.
+\end{termdef}
+Taking representative elements from every coset yields a collection $L = \curb{l_1,l_2,\cdots,l_k}$ where $k = \brac{G:H}$, we have for any $g\in G$, $g = l_i h_g$ where $h_g \in H$.
+\begin{finaleq}{Lagrange Theorem}
+    \[ \brac{G:H} = \frac{\abs{G}}{\abs{H}}. \]
+\end{finaleq}
+\begin{corollary}
+    The only subgroups of groups of prime order are the trivial subgroups.
+\end{corollary}
+\begin{corollary}
+    The order of an element $g\in G$ divides $\abs{G}$.
+\end{corollary}
+\begin{termdef}{Centralizer}
+    The centralizer of $a$ is
+    \[ C_G\pare{a} = \SetCond{g\in G}{gag^{-1} = a}. \]
+\end{termdef}
+The centralizer is a subgroup of $G$.
+\begin{theorem}
+    The number of elements in a conjugation class divides $\abs{G}$.
+\end{theorem}
+\begin{proof}
+    To obtain the number of elements in a conjugation class $K = \SetCond{gag^{-1}}{g\in G}$, we note that $\abs{K} = \brac{G:C_G\pare{a}}$, since $gag^{-1} = hah^{-1}$ if and only if $gh^{-1}\in C_G\pare{a}$.
+\end{proof}
+\begin{termdef}{Normalizer}
+    \[ N_G\pare{M} = \SetCond{g\in G}{gMg^{-1} = M}. \]
+\end{termdef}
+\begin{termdef}{Centralizer of a Subset}
+    \[ C_G\pare{M} = \SetCond{g\in G}{\forall a\in M, gag^{-1} = a}. \]
+\end{termdef}
+\begin{termdef}{Center}
+    The center of a group $G$ is $C\pare{G} = C_G\pare{G}$.
+\end{termdef}
+\begin{termdef}{Commutator Subgroup, Derived Group}
+    \[ \brac{G,G} = \SetCond{\brac{a,b}}{a\in G, b\in G}. \]
+\end{termdef}
+
+% subsubsection subgroups_and_cosets (end)
+
+% subsection parition_of_groups (end)
+
+% section foundations_of_group_theory (end)
+
+\end{document}

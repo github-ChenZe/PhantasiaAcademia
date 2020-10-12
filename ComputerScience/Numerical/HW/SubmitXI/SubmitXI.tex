@@ -1,0 +1,109 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+\newcommand{\tmpresumath}[1]{\tcboxmath[colback=emphgreen, boxrule=.3pt, sharp corners=all,left=.1mm,right=.1mm,top=.1mm,bottom=.1mm]{#1}}
+
+\begin{document}
+
+\newprob{7.3}%
+$y\pare{0} = 50976$, $f = 2.9\times 10^{-2} y - 1.4\times 10^{-7}$,
+\[ \begin{array}[t]{cccccc}
+    n & x_n & y_n & k_1 = f\pare{x_n,y_n} & \displaystyle k_2 = f\pare{x_n + \frac{h}{2},y_n + \frac{h}{2}} & y_{n+1} \\
+    0 & 0 & 50976 & 1114.5 & 1122.6 & 52098.7 \\
+    1 & 1 & 52098.7 & 1130.9 & 1139.0 & 53237.6 \\
+    2 & 2 & 53237.6 & 1147.1 & 1155.1 & 54392.8 \\
+    3 & 3 & 54392.8 & 1163.2 & 1171.2 & 55563.9 \\
+    4 & 4 & 55563.9 & 1179.1 & 1187.0 & 56750.9 \\
+    5 & 5 & \boxed{56750.9.}
+\end{array} \]
+
+\newprob{7.6}%
+$f\pare{x,y} = xy$, 由四阶RK方法得到$y_1$,
+\begin{align*}
+    & k_1 = f\pare{x_0,y_0} = 3,\quad k_2 = f\pare{x_0 + \frac{h}{2}, y_0 + \frac{h}{2}k_1} = 4.03, \\
+    & k_3 = f\pare{x_0 + \frac{h}{2}, 1 + \frac{h}{2}k_2} = 4.3493,\quad k_4 = f\pare{x_0 + h, y_0 + hk_3} = 5.983552, \\
+    & y_1 = y_0 + \frac{h}{6}\pare{k_1 + 2k_2 + 2k_3 + k_4} = 1.85807.
+\end{align*}
+使用$p=1$, $q=2$的隐式格式, 在$\brac{x_{n-1},x_{n+1}}$上积分, 节点为$\curb{x_{n+1},x_n,x_{n-1}}$,
+\begin{align*}
+    & \int_{-h}^h \frac{x\pare{x+h}}{h\cdot 2h} = \frac{h}{3}, \quad \int_{-h}^h \frac{\pare{x-h}\pare{x+h}}{-h\cdot h} = \frac{4h}{3}, \quad \int_{-h}^h \frac{x\pare{x-h}}{h\cdot 2h} = \frac{h}{3}, \\
+    & \Rightarrow y_{n+1} = y_{n-1} + \frac{h}{3} \brac{f_{n+1} + 4f_n + f_{n-1}} \xLongrightarrow{f=xy} y_{n+1} = \frac{\displaystyle y_{n-1} + \frac{h}{3}\pare{4f_n + f_{n-1}}}{\displaystyle 1-\frac{h}{3}x_{n+1}}. \\
+    & y_2 = \frac{\displaystyle y_{0} + \frac{h}{3}\pare{4f_1 + f_{0}}}{\displaystyle 1-\frac{h}{3}x_{2}} = 3.60201,\quad y_3 = \frac{\displaystyle y_{1} + \frac{h}{3}\pare{4f_2 + f_{1}}}{\displaystyle 1-\frac{h}{3}x_{3}} = 7.26353. \\
+    & \begin{array}{|c|cccc|}
+        \hline
+        x_i & 3 & 3.2 & 3.4 & 3.6 \\
+        \hline
+        y_i & 1 & 1.85807 & 3.60201 & 7.26353. \\
+        \hline
+    \end{array}
+\end{align*}
+\newprob{7.7}%
+$f\pare{x,y} = -xy$, 由四阶RK方法得到$y_1$,
+\begin{align*}
+    & k_1 = f\pare{x_0,y_0} = 0,\quad k_2 = f\pare{x_0 + \frac{h}{2}, y_0 + \frac{h}{2}k_1} = -0.05, \\
+    & k_3 = f\pare{x_0 + \frac{h}{2}, 1 + \frac{h}{2}k_2} = -0.049875,\quad k_4 = f\pare{x_0 + h, y_0 + hk_3} = -0.099501, \\
+    & y_1 = y_0 + \frac{h}{6}\pare{k_1 + 2k_2 + 2k_3 + k_4} = 0.995012.
+\end{align*}
+使用两步Adams公式,
+\begin{align*}
+    y_2 &= y_1 + \frac{h}{2}\brac{3f\pare{x_1,y_1} - f\pare{x_0,y_0}} = 0.980199, \\
+    y_3 &= y_2 + \frac{h}{2}\brac{3f\pare{x_2,y_2} - f\pare{x_1,y_1}} = 0.955659, \\
+    y_4 &= y_4 + \frac{h}{2}\brac{3f\pare{x_3,y_3} - f\pare{x_2,y_2}} = 0.922455, \\
+    y_5 &= y_5 + \frac{h}{2}\brac{3f\pare{x_4,y_4} - f\pare{x_3,y_3}} = 0.881443. \\
+    & \begin{array}{|c|cccccc|}
+    \hline
+        x_i & 0 & 0.1 & 0.2 & 0.3 & 0.4 & 0.5 \\
+    \hline
+        y_i & 1 & 0.995012 & 0.980087 & 0.955659 & 0.922455 & 0.881443. \\
+    \hline
+    \end{array}
+\end{align*}
+\newprob{7.8}%
+记$f_n = f\pare{x_n,y_n}$, $f_{n-1} = f\pare{x_{n-1},y_{n-1}}$, $f_{n-2} = f\pare{x_{n-2},y_{n-2}}$, 则
+\begin{align*}
+    \hspace{-4em} y_{n+1} &= y_n + \int_{x_n}^{x_{n+1}} \brac{l_0\pare{x}f_n + l_1\pare{x} f_{n-1} + l_2\pare{x} f_{n-2} + \frac{\pare{x-x_n}\pare{x-x_{n-1}}\pare{x-x_{n-2}}}{3!}y^{\pare{4}}\pare{\eta}}\,\rd{x} \\
+    \hspace{-4em} &= y_n + \frac{h}{12}\brac{23f_n - 16f_{n-1} + 5f_{n-2}} + \rec{3!}\int_0^h x\pare{x+h}\pare{x+2h}\,\rd{x}\cdot y^{\pare{4}}\pare{\xi} \\
+    \hspace{-4em} &= y_n + \frac{h}{12}\brac{23f_n - 16f_{n-1} + 5f_{n-2}} + \boxed{\frac{3}{8}h^4 y^{\pare{4}}\pare{\xi}.}
+\end{align*}
+
+\end{document}

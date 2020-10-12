@@ -1,0 +1,15 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=陈向军/刘明辉,gakka=原子物理学,section=Ryoushirikigaku,gakkabbr=AP]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+记$\displaystyle h=\frac{b-a}{2}$,
+\begin{align*}
+    \int_{a}^{b} x\pare{x-a}\pare{x-\frac{a+b}{2}}\pare{x-b}\,\rd{x} &= \int_{-h}^h x^2\pare{x-h}\pare{x+h}\,\rd{x} + \frac{a+b}{2}\underbrace{\cancelto{0}{\int_{-h}^h x\pare{x-h}\pare{x+h}\,\rd{x}}}_{\text{奇函数}} \\
+    &= \int_{-h}^h \pare{x^2-h^2}x^2\,\rd{x} \\
+    &= \pare{\frac{2}{5} - \frac{2}{3}}h^5 = -\frac{\pare{b-a}^5}{120}.
+\end{align*}
+
+\end{document}

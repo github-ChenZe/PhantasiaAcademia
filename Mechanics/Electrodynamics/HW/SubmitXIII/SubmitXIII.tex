@@ -1,0 +1,226 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{arrows.meta}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+    \tikzset{
+    partial ellipse/.style args={#1:#2:#3}{
+        insert path={+ (#1:#3) arc (#1:#2:#3)}
+    }}
+
+\begin{document}
+
+\newprob{5.6 (1)}%
+对于$\+vr\neq 0$, ($\+vp$一律在推迟时间计算)
+\begin{align*}
+    \grad \+vA &= -\frac{\mu_0}{4\pi}\brac{\frac{\+ur}{r^2}\dot{\+vp}\pare{t-\frac{r}{c}} + \frac{\+ur}{cr}\ddot{\+vp}\pare{t-\frac{r}{c}}}, \\
+    \div \pare{\frac{\+ur}{r^2}\dot{\+vp}\pare{t-\frac{r}{c}}} &= \frac{\+ur}{r^2}\cdot \pare{-\frac{\+ur}{c}}\ddot{\+vp}\pare{t-\frac{r}{c}} = -\rec{cr^2}\ddot{\+vp}. \\
+    \div\pare{\frac{\+ur}{cr}\ddot{\+vp}} &= \rec{cr^2}\ddot{\+vp} + \frac{\+ur}{cr}\cdot\pare{-\frac{\+ur}{c}}\dddot{\+vp} = \rec{cr^2}\ddot{\+vp} - \frac{\dddot{\+vp}}{c^2 r}. \\
+    \Rightarrow \laplacian \+vA &= \frac{\mu_0}{4\pi}\frac{\dddot{\+vp}}{c^2 r} = \rec{c^2}\partial_t^2 \+vA.
+\end{align*}
+\par
+\newprobheader{(2)}%
+\vspace{-1.75\baselineskip}
+\begin{align*}
+    \div \+vA &= \frac{\mu_0}{4\pi}\brac{\grad \pare{\rec{r}}\cdot \dot{\+vp} + \rec{r}\div \dot{\+vp}} = -\frac{\mu_0 \+ur}{4\pi}\pare{\frac{\dot{\+vp}}{r^2} + \frac{\ddot{\+vp}}{cr}}. \\
+    \dot{\varphi} &= -c^2 \div \+vA = \rec{4\pi\epsilon_0} \+ur\cdot\brac{\frac{\dot{\+vp}}{r^2} + \frac{\ddot{\+vp}}{cr}} \\
+    \Rightarrow \varphi &= \boxed{\rec{4\pi\epsilon_0} \+ur\cdot\brac{\frac{{\+vp\pare{t-r/c}}}{r^2} + \frac{\dot{\+vp}\pare{t-r/c}}{cr}}.}
+\end{align*}
+\par
+\newprobheader{(3)}%
+\vspace{-1.75\baselineskip}
+\begin{align*}
+    \+vB &= \curl \+vA = \frac{\mu_0}{4\pi}\brac{\rec{r}\curl \dot{\+vp} + \grad\pare{\rec{r}}\times \dot{\+vp}} \\
+    &= \boxed{\frac{\mu_0}{4\pi}\pare{\frac{\ddot{\+vp}}{cr} + \frac{\dot{\+vp}}{r^2}}\times \+ur.} \\
+    \grad \pare{\frac{\+ur}{r^2}\cdot \+vp} &= \grad\pare{\frac{\+ur}{r^2}}\cdot \+vp + \pare{\grad \+vp}\cdot \frac{\+ur}{r^2} \\
+    &= \frac{\+vp - 3\+ur\pare{\+ur\cdot \+vp}}{r^3} - \frac{\+ur\pare{\+ur\cdot \ddot{\+vp}}}{cr^2}. \\
+    \grad\pare{\frac{\+ur}{r}\cdot \dot{\+vp}} &= \grad\pare{\frac{\+ur}{r}}\cdot \dot{\+vp} + \pare{\grad \dot{\+vp}}\cdot \frac{\+ur}{r^2} \\
+    &= \frac{\dot{\+vp} - 2\+ur\pare{\+ur\cdot \dot{\+vp}}}{r^2} - \frac{\+ur\pare{\ddot{\+vp}\cdot \+ur}}{cr}, \\
+    \grad\pare{\frac{\+ur \cdot \+vp}{r^2} + \frac{\+ur\cdot \dot{\+vp}}{cr}} &= \frac{\+vp - 3\+ur\pare{\+ur\cdot \+vp}}{r^3} + \frac{\dot{\+vp} - 3\+ur\pare{\+ur\cdot \dot{\+vp}}}{cr^2} - \frac{\+ur\pare{\ddot{\+vp}\cdot \+ur}}{c^2 r}, \\
+    \partial_t \frac{\dot{\+vp}}{c^2 r} &= \frac{\ddot{\+vp}}{c^2 r}, \\
+    \+vE &= -\grad \varphi - \partial_t \+vA \\
+    &= \boxed{-\rec{4\pi\epsilon_0} \brac{\frac{\+vp - 3\+ur\pare{\+ur\cdot \+vp}}{r^3} + \frac{\dot{\+vp} - 3\+ur\pare{\+ur\cdot \dot{\+vp}}}{cr^2} + \frac{\+ur\times\pare{\ddot{\+vp}\times \+ur}}{c^2r}}.}
+\end{align*}
+\par
+\newprobheader{(4)}%
+设$\+vp = \+vp_0 e^{-i\omega t}$, 则
+\[ \+vp\pare{t - \frac{r}{c}} = e^{ikr}\+vp,\quad \dot{\+vp}\pare{t-\frac{r}{c}} = -i\omega e^{ikr} \+vp,\quad \ddot{\+vp}\pare{t-\frac{r}{c}} = -\omega^2 e^{ikr}\+vp. \]
+直接代入即有
+\begin{align*}
+    \+vA &= \boxed{-\frac{i\omega \mu_0 e^{ikr}}{4\pi r}\+vp.} \\
+    \+vB &= \frac{\mu_0 e^{ikr}}{4\pi}\pare{-i\omega \frac{\+vp}{r^2} - \omega^2 \frac{\+vp}{cr}}\times \+ur = \boxed{\frac{\mu_0 e^{ikr}}{4\pi r}\pare{\+ur\times \+vp}\omega \pare{\frac{i}{r} + \frac{\omega}{c}}.} \\
+    \+vE &= \boxed{-\frac{e^{ikr}}{4\pi\epsilon_0}\brac{\pare{1-ikr}\frac{\+vp - 3\+ur\pare{\+ur\cdot \+vp}}{r^3} - \frac{k^2}{r}\+ur\times\pare{\+vp\times \+ur}}.}
+\end{align*}
+\newprob{5.7}%
+对球面$r=\const$积分, 瞬时辐射出去的电磁角动量为
+\begin{align*}
+    \+dtd{\+vL} &= \oiint \rd{\+v\sigma}\cdot \tensor{T}\times \+vr \\
+    &= \oiint \rd{\+v\sigma}\cdot \pare{\frac{\epsilon_0}{2}E^2 \tensor{I} + \frac{B^2}{2\mu_0}\tensor{I} - \epsilon_0 \+vE\+vE - \frac{\+vB\+vB}{\mu_0}}\times \+vr \\
+    &= -\oiint \rd{\+v\sigma}\cdot \pare{\epsilon_0 \+vE\pare{\+vE\times \+vr} + \frac{\+vB}{\mu_0}\pare{\+vB\times \+vr}} \\
+    &= -\oiint \rd{\+v\sigma}\cdot \epsilon_0 \+vE\pare{\+vE\times \+vr}.
+\end{align*}
+对积分有非零贡献者, 第一个$\+vE$取$1/r^2$项, 第二个$\+vE$取$1/r$项, 平均辐射率
+\begin{align*}
+    \expc{\+dtd{\+vL}} &= -\half \Re \oiint\rd{\+v\sigma} \cdot \epsilon_0 \+vE^* \pare{\+vE\times \+vr} \\
+    &= -\half \Re \oiint \rd{\+v\sigma}\cdot \epsilon_0 \pare{\frac{ikr}{4\pi\epsilon_0}\frac{3\pare{\+ur \cdot \+vp^*}\+ur - \+vp^*}{r^3}}\pare{\frac{-k^2}{4\pi\epsilon_0}\frac{\+ur\times \pare{\+ur\times \+vp}}{r}}\+vr \\
+    &= \frac{k^3}{\pare{4\pi}^2\epsilon_0}\half \Re i\cdot \oiint \rd{\Omega}\, \brac{3\pare{\+vr\cdot \+vp^*} - \+ur\cdot \+vp^*}\pare{\+ur \times \+vp} \\
+    &= \frac{k^3}{\pare{4\pi}^2 \epsilon_0}\half \Re \pare{-i}\cdot \+vp^* \oiint \rd{\Omega}\, 2\+ur\+ur\times \+vp \\
+    &= \frac{k^3}{\pare{4\pi}^2\epsilon_0} \times 2 \times \frac{4\pi}{3}\times \half \Im\brac{\+vp^*\cdot \pare{\tensor{I}\times \+vp}} \\
+    &= \boxed{\frac{k^3}{12\pi\epsilon_0}\Im\pare{\+vp^*\times \+vp}.}
+\end{align*}
+\newprob{5.8}%
+\vspace{-1.75\baselineskip}
+\begin{align*}
+    \+vp &= qa_0\pare{\+ux+i\+uy}e^{-i\omega t}, \\
+    \+vp^* &= qa_0\pare{\+ux - i\+uy}e^{i\omega t}, \\
+    \Im \+vp^*\times \+vp &= q^2a_0^2 \pare{\+ux\times \+uy - \+uy\times \+ux} = 2q^2 a_0^2 \+uz, \\
+    \+dtd{\+vL} &= \frac{k^3}{12\pi \epsilon_0}\Im \pare{\+vp^*\times \+vp} = \boxed{\frac{\mu_0 \omega^3 q^2 a_0^2 \+uz}{6\pi c}.} \\
+    \left.\+dtd{\+vL}\right/P &= \+/\omega^3/\omega^4/ = \rec{\omega}.
+\end{align*}
+\newprob{5.9}%
+\vspace{-1.75\baselineskip}
+\begin{align*}
+    \Re \+vm &= I\pi a^2 \pare{\+ux \cos \omega t + \+uy \sin \omega t}, \\
+    \+vm &= I\pi a^2 \pare{\+ur \sin\theta + \+u\theta \cos\theta + i\+u\phi}e^{i\pare{\phi - \omega t}}, \\
+    \dot{\+vm}\times \+ur &= \pare{-i\omega}I\pi a^2 e^{i\pare{\phi - \omega t}}\pare{-\+u\phi \cos\theta + i\+u\theta}, \\
+    \+vA &= \pare{-ie^{i\pare{kr + \phi - \omega t}}}\frac{\omega Ia^2\mu_0}{4cr}\pare{-\+u\phi \cos\theta + i\+u\theta}, \\
+    \+vB &= \frac{\dot{\+vA}}{c}\times \+ur = \boxed{e^{i\pare{kr + \phi - \omega t}}\frac{\mu_0 \omega^2 Ia^2}{4c^2 r}\pare{\+u\theta\cos\theta + i\+u\phi}.} \\
+    \+vE &= c\+vB\times \+ur = \boxed{e^{i\pare{kr + \phi - \omega t}}\frac{\mu_0 \omega^2 Ia^2}{4c r}\pare{-\+u\phi\cos\theta + i\+u\theta}.} \\
+    \expc{P} &= 2\pi \int_0^\pi \rd{\theta}\,\sin\theta \cdot \frac{c}{2\mu_0}\abs{\+vB}^2 r^2 = \boxed{\frac{\mu_0 \pi \omega^4 I^2 a^4}{6c^3}.}
+\end{align*}
+\newprob{5.10}%
+记$\cos\alpha = \+ur\cdot \+ux = \sin\theta\cos\varphi$, 以$r_-$标记场点到$x=+a$的距离, $r_+$标记场点到$x=-a$的距离,
+\begin{align*}
+    \pare{\frac{e^{ikr_-}}{r^-} - \frac{e^{ikr_+}}{r^+}} &= \frac{e^{ikr}}{r}\brac{e^{ik\pare{r_- - r}}\frac{r}{r_-} - e^{ik\pare{r_+ - r}}\frac{r}{r_+}} \\
+    &= \frac{e^{ikr}}{r}\brac{\pare{1 - ika\cos\alpha}\pare{1+\frac{a}{r}\cos\alpha} - \pare{1 + ika\cos\alpha}\pare{1 - \frac{a}{r}\cos\alpha}} \\
+    &= -2\frac{e^{ikr}}{r}{ika\cos\alpha}. \\
+    \+vA &= \frac{-i \omega \mu_0}{4\pi} p_0 e^{-i\omega t} \+uz \pare{\frac{e^{ikr_-}}{r^-} - \frac{e^{ikr_+}}{r^+}} \\
+    &= \boxed{-\frac{\mu_0 \omega^2 a p_0}{2\pi c r} e^{i\pare{kr - \omega t}} \sin\theta\cos\varphi\, \+uz.} \\
+    \+vB &= i\+vk\times \+vA = \boxed{\frac{i\mu_0 k a\omega^2 p_0}{2\pi cr}e^{i\pare{kr - \omega t}} \sin^2\theta \cos\varphi\, \+u\varphi.} \\
+    \+vE &= c\+vB\times \+ur = \boxed{\frac{i\mu_0 k a\omega^2 p_0}{2\pi r}e^{i\pare{kr - \omega t}} \sin^2\theta \cos\varphi\, \+u\theta.} \\
+    \oiint_{S^2}\rd{\Omega}\, \sin^4\theta\cos^2\varphi &= \int_0^{2\pi}\cos^2\varphi\,\rd{\varphi}\int_0^\pi \sin^5\theta\,\rd{\theta} = \frac{16}{15}\pi. \\
+    P &= \frac{c}{2\mu_0}\oiint \rd{\Omega}\, \abs{\+vB}^2 r^2 = \boxed{\frac{2\mu_0 \omega^6 a^2 p_0^2}{15\pi c^3}.}
+\end{align*}
+\newprob{5.11}%
+设$\tensor{T}$为二阶实对称迹零张量, $T$为其矩阵, 又设$T = P\Lambda P^T$, 其中$P\in SO_3$而$\Lambda$为对角矩阵, 设$R$为$\tensor{I}\times \+ur$的矩阵, 设$\hat r$为$\+ur$对应的列矢量, 则
+\[ \+ur \cdot \tensor{T} \times \+ur = \hat r^T P\Lambda P^T R \Rightarrow \abs{\+ur \cdot \tensor{T} \times \+ur}^2 = \hat r^T P\Lambda P^T R R^T P \Lambda P^T \hat r. \]
+注意到
+\begin{align*}
+    -\pare{\tensor{I}\times \+ur} \cdot \pare{\tensor{I}\times \+ur}\cdot \+va &= -\+ur\times\pare{\+ur\times \+va} = - \brac{\pare{\+ur\cdot \+va}\+ur - \pare{\+ur\cdot \+ur}\+va} = \tensor{I}\+va - \+ur\+ur \cdot \+va,
+\end{align*}
+有$\displaystyle RR^T = I - \hat r\hat r^T$. 从而
+\begin{align*}
+    \hat r^T P\Lambda P^T R R^T P \Lambda P^T \hat r &= \hat r^T P\Lambda P^T \pare{I - \hat r\hat r^T} P \Lambda P^T \hat r \\
+    &= \pare{P^T \hat r}^T \Lambda^2 \pare{P^T \hat r} - \brac{\pare{P^T \hat r}\Lambda \pare{P^T \hat r}}^2.
+\end{align*}
+$S^2$在$P$的作用下不变, 故
+\begin{align*}
+    \oiint_{S^2}\,\rd{\Omega}\, \abs{\+ur \cdot \tensor{T} \times \+ur}^2 &= \oiint_{S^2}\,\rd{\Omega}\, \curb{\pare{P^T \hat r}^T \Lambda^2 \pare{P^T \hat r} - \brac{\pare{P^T \hat r}\Lambda \pare{P^T \hat r}}^2} \\
+    &= \oiint_{S^2}\,\rd{\Omega}\, \brac{\hat r^T \Lambda^2 \hat r - \pare{\hat r^T\Lambda \hat r}^2} = \oiint_{S^2}\,\rd{\Omega}\, \hat r^T \Lambda\pare{I - \hat r \hat r^T}\Lambda \hat r \\
+    &= \oiint_{S^2}\,\rd{\Omega}\, \hat r^T \Lambda RR^T \Lambda \hat r =\oiint_{S^2}\,\rd{\Omega}\, \abs{\+ur\cdot \tensor{\mathnormal{\Lambda}}\times \+ur}^2 \\
+    &= \oiint_{S^2}\,\rd{\Omega}\, \brac{\pare{\Lambda_2-\Lambda_3}^2y^2z^2 + \pare{\Lambda_1-\Lambda_3}^2x^2z^2 + \pare{\Lambda_1-\Lambda_2}^2x^2y^2}.
+\end{align*}
+注意到
+\begin{align*}
+    & \oiint_{S^2} \rd{\Omega}\, \pare{x^4+y^4+z^4} = \oiint_{S^2}\rd{\+v\sigma}\cdot \pare{x^3\+ux + y^3\+uy + z^3\+uz} \\
+    &= \iiint \rd{V}\,\div \pare{x^3\+ux + y^3\+uy + z^3\+uz} = \int_0^1 4\pi r^2\cdot 3r^2\,\rd{r} = \frac{12\pi}{5}, \\
+    & \oiint_{S^2} \rd{\Omega}\, y^2z^2 = \oiint_{S^2} \rd{\Omega}\, x^2z^2 = \oiint_{S^2} \rd{\Omega}\, x^2y^2 \\
+    &= \rec{3} \cdot \half \oiint_{S^2}\rd{\Omega}\,\brac{\pare{x^2+y^2+z^2}^2 - \pare{x^4+y^4+z^4}} = \frac{4}{15}\pi.
+\end{align*}
+再由$\Lambda_1 + \Lambda_2 + \Lambda_3 = 0$,
+\begin{align*}
+    & \oiint_{S^2}\,\rd{\Omega}\, \abs{\+ur \cdot \tensor{T} \times \+ur}^2 = \frac{4\pi}{15}\brac{\pare{\Lambda_2-\Lambda_3}^2 + \pare{\Lambda_1-\Lambda_3}^2 + \pare{\Lambda_1-\Lambda_2}^2} \\
+    & = \frac{4\pi}{15}\brac{3\pare{\Lambda_1^2+\Lambda_2^2+\Lambda_3^2} - \pare{\Lambda_1+\Lambda_2+\Lambda_3}^2} \\
+    &= \frac{4\pi}{5}\pare{\Lambda_1^2+\Lambda_2^2+\Lambda_3^2}.
+\end{align*}
+对于一般的复矩阵$\tensor{T}$,
+\begin{align*}
+    & \oiint_{S^2}\,\rd{\Omega}\, \abs{\+ur \cdot \tensor{T} \times \+ur}^2 = \oiint_{S^2}\,\rd{\Omega}\, \brac{\abs{\Re \+ur \cdot \tensor{T} \times \+ur}^2 + \abs{\Im \+ur \cdot \tensor{T} \times \+ur}^2 } \\
+    &= \frac{4\pi}{5}\brac{\pare{\Re \Lambda_1}^2 + \pare{\Re \Lambda_2}^2 + \pare{\Re \Lambda_3}^2 + \pare{\Im \Lambda_1}^2 + \pare{\Im \Lambda_2}^2 + \pare{\Im \Lambda_3}^2} \\
+    &= \frac{4\pi}{5}\tensor{T}^*:\tensor{T}.
+\end{align*}
+令$\tensor{T} = {\tensor{D}}$, 则
+\[ P = \frac{\mu_0}{1152\pi^2 c^3\omega^6} \oiint \rd{\Omega}\,\abs{\+ur \cdot {\tensor{D}}\times \+ur}^2 = \frac{\mu_0 \omega^6}{1440\pi c^3}\tensor{D}^*:\tensor{D}. \]
+\newprob{5.12}%
+以$\+vr'_i$表示第$i$个电偶极子相对其中心的位矢,
+\begin{align*}
+    \half \sum_i \+vr_i \times \dot{\+vp}_i &= \half \sum_i \+vr_i \times \iiint_{V_i} \rd{V'}\, \+vr'_i \dot{\rho} \\
+    &= -\half \sum_i \+vr_i \times \iiint_{V_i} \rd{V'}\, \+vr'_i\div \+vj \\
+    &= -\half \sum_i \+vr_i \times \iiint_{V_i} \rd{V'}\, \brac{\div \pare{\+vj\+vr'_i} - \+vj} \\
+    &= \half \sum_i \+vr_i \times \iiint_{V_i} \rd{V'}\, \+vj \\
+    &= \half \sum_i \iiint_{V_i} \rd{V'}\, \+vr_i \times \+vj \\
+    &= \+vm.
+\end{align*}
+\newprob{5.13}%
+$\displaystyle \+vm = 2\times \half a\+ux \times \pare{-i\omega}\+vp_{+a} = \boxed{i\omega ap_0 e^{-i\omega t}\+uy.}$\par
+$\displaystyle \tensor{D}' = 2\pare{a\+ux \+vp_{+a} + a\+vp_{+a}\+ux} = \boxed{2a\pare{\+ux\+uz + \+uz\+ux}p_0 e^{-i\omega t}.}$ $\displaystyle \tensor{D} = 6a\pare{\+ux\+uz + \+uz\+ux}p_0 e^{-i\omega t}.$
+\begin{align*}
+    \+vA &= \frac{\mu_0 e^{ikr}}{4\pi cr}\dot{\+vm}\times \+ur + \frac{\mu_0 e^{ikr}}{24\pi cr}\+ur \cdot \ddot{\tensor{D}} = -\frac{\mu_0 \omega^2 ap_0 e^{i\pare{kr-\omega t}}}{4\pi cr}\+ur\cdot \pare{\tensor{I}\times \+uy + \+uz\+ux + \+uz\+ux} \\ &= \boxed{-\frac{\mu_0 \omega^2 ap_0 e^{i\pare{kr-\omega t}}}{2\pi cr}\sin\theta\cos\varphi\,\+uz.}
+\end{align*}
+磁偶极辐射功率
+\[ P_m = \frac{\abs{\ddot{\+vm}}^2}{12\pi\epsilon_0 c^5} = \boxed{\frac{\mu_0 \omega^6 a^2 p_p^2}{12\pi c^3}.} \]
+$\tensor{D}$的本征值为$\curb{0,\pm 6ap_0 e^{-i\omega t}}$, 故
+\[ P_D = \frac{mu_0 \omega^6}{1440\pi c^3}\pare{\abs{D_1}^2 + \abs{D_2}^2 + \abs{D_3}^2} = \boxed{\frac{\mu_0 \omega^6 a^2 p_0^2}{20\pi c^3}.} \]
+总辐射功率
+\[ P = P_m + P_D = \boxed{\frac{2\mu_0 \omega^6 a^2 p_0^2}{15\pi c^3}.} \]
+\newprob{5.14}%
+\vspace{-1.75\baselineskip}
+\begin{align*}
+    \+vA &= \frac{\mu_0 e^{i\pare{kr - \omega t}}}{4\pi r} \int_{-d/2}^{d/2} \rd{z}\, I_0 \sin \frac{2\pi z}{d}\, e^{-ikz\cos\theta} \\
+    &= \frac{\mu_0 I_0 \pare{-i e^{i\pare{kr-\omega t}}}\+uz}{4\pi rk}\frac{2\sin\pare{\pi \cos\theta}}{\sin^2\theta}, \\
+    \+vB &= i\+vk\times \+vA = \frac{\mu_0 I_0 e^{i\pare{kr - \omega t}}}{4\pi r}\frac{2\sin\pare{\pi\cos\theta}}{\sin\theta}\pare{-\+u\phi}, \\
+    \+d\Omega d{\expc{P}} &= \frac{c}{2\mu_0}\abs{\+vB}^2 r^2 = \boxed{\frac{c\mu_0 I_0^2 \sin^2\pare{\pi\cos\theta}}{8\pi^2\sin^2\theta}.}
+\end{align*}
+\newprob{5.15}%
+\vspace{-1.75\baselineskip}
+\begin{align*}
+    I &= I_0 \cos kz \, e^{-i\omega t},\quad \abs{z} < \frac{\lambda}{4}, \\
+    \dot{\+vp} &= \+uz \int_{-\lambda/4}^{\lambda/4} \cos kz\,\rd{z}\cdot I_0 e^{-i\omega t} = \frac{2I_0 e^{-i\omega t}}{k}\+uz, \\
+    \ddot{\+vp} &= \pare{-ie^{-i\omega t}}\frac{2I_0\omega}{k}\+uz, \\
+    \expc{P} &= \frac{\abs{\ddot{\+vp}}^2}{12\pi\epsilon_0 c^3} = \frac{\pare{2I_0 c}^2}{12\pi \epsilon_0 c^3} = \frac{I_0^2}{3\pi\epsilon_0 c} = \boxed{\frac{\mu_0 c I_0^2}{3\pi}.}
+\end{align*}
+天线辐射不能适用小场源近似, 故天线辐射的角分布和理想电偶极辐射不同, 故功率不同.
+
+\end{document}

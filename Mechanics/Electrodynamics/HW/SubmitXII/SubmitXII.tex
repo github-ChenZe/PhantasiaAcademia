@@ -1,0 +1,117 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{arrows.meta}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+    \tikzset{
+    partial ellipse/.style args={#1:#2:#3}{
+        insert path={+ (#1:#3) arc (#1:#2:#3)}
+    }}
+
+\begin{document}
+
+\newprob{5.4}%
+设$\pare{\+va,\+vb,\+vc}$构成$\braket{\+vv}{\+vu} = {\+vv}^*\cdot{\+vu}$的酉空间$\+bC^3$的规范正交基, $\tensor{C} = \tensor{I}\times \+vc$, 则
+\begin{align*}
+    &\pare{\tensor{C}^\dagger \cdot \tensor{C}}\cdot \+va = -\+vc^*\times \pare{\+vc\times \+va} = -\+vc^*\cdot\pare{\+va\+vc - \+vc\+va} = \+va,\\
+    &\pare{\tensor{C}^\dagger \cdot \tensor{C}}\cdot \+vb = -\+vc^*\times \pare{\+vc\times \+vb} = -\+vc^*\cdot\pare{\+vb\+vc - \+vc\+vb} = \+vb,\\
+    &\pare{\tensor{C}^\dagger \cdot \tensor{C}}\cdot \+vc = -\+vc^*\times \pare{\+vc\times \+vc} = 0.
+\end{align*} 
+可知半正定Hermitian矩阵$\pare{\tensor{C}^\dagger \cdot \tensor{C}}$的三个特征值为$\curb{1,1,0}$.
+\begin{align*}
+    & \iint \rd{\Omega}\,\abs{\+vc\times \+ur}^2 = \iint \rd{\Omega}\,\abs{\tensor{C} \cdot \+ur}^2 = \iint \rd{\Omega}\, \+ur\cdot \pare{\tensor{C}^\dagger \cdot \tensor{C}}\cdot \+ur = \frac{2}{3} \iint \rd{\Omega}\, \+ur\cdot \tensor{I} \cdot \+ur = \frac{8\pi}{3}. \\
+    & P = \iint \rd{\Omega}\, \frac{\mu_0}{32\pi^2 c}\abs{\ddot{\+vp}\times \+ur}^2 = \frac{\mu_0}{32\pi^2 c}\frac{8\pi}{3}\abs{\ddot{\+vp}}^2 = \frac{\mu_0}{12\pi c}\abs{\ddot{\+vp}}^2.
+\end{align*}
+\newprob{5.5}%
+等效的偶极子${\+vp} = 6\+uz \pi\epsilon_0 a^2 V \cos\omega t \Rightarrow \ddot{\+vp} = -6\+uz \pi\epsilon_0 a^2\omega^2 V \cos\omega t$, 从而
+\begin{align*}
+    \+d\Omega d{\expc{P}} &= \frac{\mu_0}{32\pi^2 c}\abs{\ddot{\+vp}\times \+ur}^2 = \frac{\mu_0}{32\pi^2 c}\abs{6\pi\epsilon_0 a^2 \omega^2 V_0 \sin\theta}^2 = \boxed{\frac{9\epsilon_0 a^4\omega^4 V^2}{8c^3} \sin^2\theta.}
+\end{align*}
+总辐射功率
+\[ \expc{P} = \frac{\abs{\ddot{\+vp}}^2}{12\pi\epsilon_0 c^3} = \frac{\pare{6\pi\epsilon_0 a^2\omega^2 V}}{12\pi\epsilon_0 c^3} = \boxed{\frac{3\pi\epsilon_0 a^4\omega^4 V^2}{c^3}.} \]
+\newprob{Pr 1}%
+$\+vA = \const$,
+\begin{align*}
+    \varphi &= \rec{4\pi\epsilon_0} \iiint \frac{\rho\pare{\+vr',t_r}}{\+gr} = \rec{4\pi\epsilon_0}\brac{\iiint\rd{V'}\,\pare{ \frac{\rho\pare{\+vr',t}}{\+gr} - \frac{\+gr}{c}\frac{\dot{\rho}\pare{\+vr',t_r}}{\+gr}}}\\ &= \rec{4\pi\epsilon_0}\brac{\iiint\rd{V'}\,\pare{ \frac{\rho\pare{\+vr',t}}{\+gr} + \frac{\div \+vj}{c}}} = \rec{4\pi\epsilon_0}{\iiint\rd{V'}\,4{ \frac{\rho\pare{\+vr',t}}{\+gr}}}. \\
+    \+vE &= -\partial_t \+vA - \grad \varphi = \rec{4\pi\epsilon_0}{\iiint\rd{V'}\,{ \frac{\rho\pare{\+vr',t}}{\+gr^2}\+u{\+gr}}}.
+\end{align*}
+\newprob{Pr 2}%
+$\varphi \equiv 0$,
+\begin{align*}
+    \+vA &= \frac{\mu_0}{4\pi}\iiint \rd{V'}\, \frac{\+vj\pare{\+vr',t_r}}{\+gr} = \frac{\mu_0}{4\pi}\brac{\iiint \rd{V'}\, \pare{\frac{\+vj\pare{\+vr',t}}{\+gr} + \pare{t_r - t}\frac{\dot{\+vj}\pare{\+vr',t}}{\+gr}}} \\
+    &= \frac{\mu_0}{4\pi}\iiint \rd{V'}\, \frac{\+vj\pare{\+vr',t}}{\+gr} - \frac{\mu_0}{4\pi}\iiint \rd{V'}\, \frac{\dot{\+vj}\pare{\+vr',t}}{c} = \frac{\mu_0}{4\pi}\iiint \rd{V'}\, \frac{\+vj\pare{\+vr',t}}{\+gr} - \frac{\mu_0 \ddot{\+vp}\pare{t}}{4\pi c}. \\
+    \+vB &= \curl \+vA = \frac{\mu_0}{4\pi}\iiint \rd{V'}\, \frac{\+vj\pare{\+vr',t}}{\+gr^2}\times \+u{\+gr}.
+\end{align*}
+\newprob{Pr 3}%
+$\boxed{\varphi \equiv 0.}$
+\begin{align*}
+    \+vA &= \frac{\mu_0 \+uz}{4\pi} \int_{-\infty}^{+\infty} \rd{z}\, \frac{\displaystyle I\pare{t - \frac{\sqrt{s^2+z^2}}{c}}}{\sqrt{s^2 + z^2}} = \frac{\mu_0 \+uz}{4\pi} \int_{-\sqrt{\pare{ct}^2 - s^2}}^{\sqrt{\pare{ct}^2 - s^2}} \rd{z}\, \brac{\frac{kt}{\sqrt{s^2+z^2}} - \frac{k}{c}} \\
+    &= \boxed{\frac{\mu_0 \+uz kt}{2\pi} \ln \brac{\frac{ct + \sqrt{\pare{ct}^2 -s^2}}{s}} - \frac{\mu_0 \+uz}{2\pi}\frac{k}{c}\sqrt{\pare{ct}^2 - s^2}.} \\
+    \+vE &= -\grad \varphi -\partial_t \+vA = \boxed{\begin{cases}
+        \displaystyle -\frac{\mu_0 \+uz k}{2\pi}\ln \brac{\frac{ct + \sqrt{\pare{ct}^2 -s^2}}{s}}, & s<ct, \\
+        0, & s>ct.
+    \end{cases}} \\
+    \+vB &= \curl \+vA = \+us \+DsD{} \+vA = \boxed{\begin{cases}
+        \displaystyle \+u\phi \frac{\mu_0 k}{2\pi} \frac{\sqrt{\pare{ct}^2 - s^2}}{cs}, & s<ct, \\
+        0, & s>ct.
+    \end{cases}}
+\end{align*}
+\newprob{Pr 4 (1)}%
+显然$\displaystyle \div \+vA + \rec{c}\partial_t\varphi = 0$故Lorentz规范成立.
+\begin{align*}
+    & \Box{}^2 \varphi = 0 \Rightarrow \boxed{\rho \equiv 0.} \\
+    & \laplacian \+vA = \+D{x^2}D{^2\+vA} = \frac{\mu_0 k\+uz}{4c}\Theta\pare{ct-\abs{x}}\pare{2-4ct \delta\pare{x}}. \\
+    & \+D{t^2}D{^2\+vA} = \frac{\mu_0 k\+uz}{4c}\Theta\pare{ct-\abs{x}}\cdot 2c^2. \\
+    & \Box{}^2 \+vA = \laplacian \+vA - \rec{c^2}\+D{t^2}D{^2\+vA} = \frac{\mu_0 k\+uz}{4c}\Theta\pare{ct-\abs{x}}\pare{-4ct\delta\pare{x}} = -\mu_0 \+vj \Rightarrow \+vj = \boxed{k\+uz t\delta\pare{x}.}
+\end{align*}
+\par
+\newprobheader{(2)}%
+$\displaystyle \+vB = \curl \+vA = \+ux \times \+DxD{\+vA} = \+uy \frac{\mu_0 k}{2}\pare{ct-\abs{x}}\sgn x$. \\
+$\displaystyle \+vE = -\partial_t \+vA = -\+uz \frac{\mu_0 k}{2}\pare{ct-\abs{x}}$.
+\[ W_1 = \boxed{0.}\quad W_2 = \half \epsilon_0 lw \int_{d}^{d+h}\,\rd{x}\,\pare{E^2 + c^2B^2} = \epsilon_0 lw \int_{d}^{d+h}\,\rd{x}\,E^2 = \boxed{\frac{\mu_0 k^2}{12c^2}lwh^3.} \]
+$\+vE\times \+vB$沿$\+ux$方向, 且上底面$\+vS = 0$,
+\[ -\int_{t_1}^{t_2}\rd{t}\,\iint \rd{\+v\sigma}\cdot \+vS = \frac{wl}{\mu_0 c}\int_{d/c}^{\pare{d+h}/c}\rd{t}\, \frac{\mu_0^2 k^2}{4}\pare{ct - d}^2 = \boxed{\frac{\mu_0 k^2}{12c^2}lwh^3.} \]
+
+\end{document}

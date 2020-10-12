@@ -1,0 +1,138 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+\usepackage{van-le-trompe-loeil}
+\usetikzlibrary{quotes,angles}
+\usetikzlibrary{arrows.meta}
+\usepackage{makecell}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+}}%
+
+    \tikzset{
+    partial ellipse/.style args={#1:#2:#3}{
+        insert path={+ (#1:#3) arc (#1:#2:#3)}
+    }}
+
+\begin{document}
+
+\newprob{4.10}%
+$\displaystyle \pare{\frac{2\pi c}{\lambda}}^2 \ge c^2 \brac{\pare{\frac{\pi m}{a}}^2 + \pare{\frac{\pi n}{b}}^2} \Rightarrow \frac{4}{\lambda^2} = \pare{\frac{m}{a}}^2 + \pare{\frac{n}{b}}^2$.\\
+可得$\pare{m,n} = \pare{0,1}, \pare{1,0}, \pare{1,1}$. 允许的模为$\boxed{\mathrm{TE}_{01}, \mathrm{TE}_{10}, \mathrm{TE}_{11}, \mathrm{TM}_{11}.}$
+\newprob{4.11}%
+TM波: 设$E_z = E_0 X\pare{x} Y\pare{y}$, 有
+\[ X = \sin \frac{n\pi x}{a},\quad Y = \cos \frac{m\pi y}{a}, \]
+边界条件$\displaystyle E_z\vert_S = 0$无法在$x+y = a$上满足.
+\par
+TE波: 设$H_z = H_0 X\pare{x}Y\pare{y}$, 有
+\[ X = \cos \frac{n\pi x}{a},\quad Y = \cos \frac{m\pi y}{a}. \]
+$x+y = a$上的边界条件
+\begin{align*}
+    \+DnD{}H_z & \propto \pare{\+DxD{}X}Y + \pare{\+DyD{}Y}X \\
+    & \propto n \sin \frac{n\pi x}{a}\cos \frac{m\pi y}{a} + m \sin \frac{m\pi y}{a}\cos \frac{n\pi x}{a} \\
+    &= \pare{-1}^m n \sin \frac{n\pi x}{a} \cos \frac{m\pi x}{a} - \pare{-1}^m m \cos \frac{n\pi x}{a}\sin \frac{m\pi x}{a} = 0,
+\end{align*}
+这要求$m=n$, 从而(不乘传播因子)
+\begin{align*}
+    H_z &= H_0 \cos \frac{n\pi x}{a}\cos \frac{n\pi y}{a},\quad \gamma^2 = \frac{2n^2\pi^2}{a^2}, \\
+    H_x &= \frac{ik_3}{\gamma^2}\partial_x H_z = -\frac{ik_3a}{2n\pi} H_0 \sin \frac{n\pi x}{a}\cos \frac{n\pi y}{a}, \\
+    H_y &= \frac{ik_3}{\gamma^2}\partial_y H_z = -\frac{ik_3a}{2n\pi} H_0 \cos \frac{n\pi x}{a}\sin \frac{n\pi y}{a}, \\
+    E_z &= 0, \\
+    E_x &= -\frac{\omega\mu}{k_3}\pare{-H_y} = -\frac{i\omega \mu a}{2n\pi} H_0 \cos \frac{n\pi x}{a}\sin \frac{n\pi y}{a}, \\
+    E_y &= -\frac{\omega\mu}{k_3}\pare{H_x} = \frac{i\omega \mu a}{2n\pi} H_0 \sin \frac{n\pi x}{a}\cos \frac{n\pi y}{a}.
+\end{align*}
+乘以传播因子$e^{i\pare{k_3 z - \omega t}}$后,\def\ppg{e^{i\pare{k_3 z - \omega t}}} 下截止频率$\displaystyle \omega\+_min_ = c\sqrt{\pare{\frac{\pi}{a}}^2 + \pare{\frac{\pi}{a}}^2} = \boxed{\frac{\sqrt{2} c\pi}{a}.}$
+\[ \boxed{\begin{aligned}
+    H_x &= -\frac{ik_3a}{2n\pi} H_0 \sin \frac{n\pi x}{a}\cos \frac{n\pi y}{a} \ppg, & E_x &= -\frac{i\omega \mu a}{2n\pi} H_0 \cos \frac{n\pi x}{a}\sin \frac{n\pi y}{a} \ppg, \\
+    H_y &= -\frac{ik_3a}{2n\pi} H_0 \cos \frac{n\pi x}{a}\sin \frac{n\pi y}{a} \ppg, & E_y &= \frac{i\omega \mu a}{2n\pi} H_0 \sin \frac{n\pi x}{a}\cos \frac{n\pi y}{a}\ppg , \\
+    H_z &= H_0 \cos \frac{n\pi x}{a}\cos \frac{n\pi y}{a} \ppg, & E_z &= 0.
+\end{aligned}} \]
+\newprob{4.12 (a)}%
+$\displaystyle \pare{\frac{2\pi c}{\lambda}}^2 = c^2\brac{\pare{\frac{\pi m}{L_x}}^2 + \pare{\frac{\pi n}{L_y}}^2 + \pare{\frac{\pi l}{L_z}}^2}$\\
+$\displaystyle \Rightarrow l^2 + \pare{\frac{m}{2}}^2 + \pare{\frac{n}{3}}^2 \in \brac{\frac{13}{16},\frac{5}{4}}$ \\
+$\displaystyle \Rightarrow \pare{n,m,l} = \boxed{\pare{1,3,0}, \pare{2,1,0}, \pare{1,0,1}, \pare{0,1,1}.}$
+\par
+\newprobheader{(b)}%
+$\displaystyle \lambda = \frac{2}{\sqrt{\displaystyle \pare{\frac{m}{L_x}}^2 + \pare{\frac{n}{L_y}}^2 + \pare{\frac{l}{L_z}}^2}} = \boxed{4/\sqrt{5}, 6/\sqrt{10}, 6/\sqrt{10}, 4/\sqrt{5}\SI{}{\centi\meter}.}$
+\par
+\newprobheader{(c)}%
+$\displaystyle \pare{1,3,0}: E_x = 0, E_y = 0, E_z = E_0 \sin \frac{\pi x}{2}\sin \pi y e^{-i\omega t}$,\\
+$\displaystyle \pare{2,1,0}: E_x = 0, E_y = 0, E_z = E_0 \sin \pi x\sin \frac{\pi y}{3} e^{-i\omega t}$,\\
+$\displaystyle \pare{1,0,1}: E_x = 0, E_y = E_0 \sin \frac{\pi x}{2}\sin \pi z e^{-i\omega t}, E_z = 0$, \\
+$\displaystyle \pare{0,1,1}: E_x = E_0 \sin \frac{\pi y}{3}\sin \pi z e^{-i\omega t}, E_y = 0, E_z = 0$.
+\par
+\newprobheader{(d)}%
+$\displaystyle \pare{\frac{m}{L_x}}^2 + \pare{\frac{n}{L_y}}^2 + \pare{\frac{l}{L_z}}^2 = \pare{\frac{2}{\lambda}}^2 \Rightarrow N \approx \left. \rec{8} \frac{4\pi}{3}L_xL_yL_z \pare{\frac{2}{\lambda}}^3\right\vert_{\lambda_1}^{\lambda_2} \approx \boxed{6.25\times 10^6.}$
+\newprob{4.13}%
+$\displaystyle H_z = H_0 \cos \frac{\pi x}{a}, H_x = \frac{k_3 a}{i\pi} H_0 \sin \frac{\pi x}{a}, E_y = -\frac{\omega\mu a}{i\pi}H_0 \sin \frac{\pi x}{a},\quad \omega^2 = c^2 \brac{\pare{\frac{\pi}{a}}^2 + k^2}.$\\
+$\displaystyle \oint_C \rd{l}\, \abs{\kappa_0}^2  = \oint_C \rd{l}\, \abs{\+un\times \+vH}^2 = 2\int_0^b \rd{y}\, \abs{H_z}^2 + 2\int_0^a\rd{x}\, \pare{\abs{H_z}^2 + \abs{H_x}^2}$ \\
+$\displaystyle = 2bH_0^2 + H_0^2 \cdot a\pare{\frac{\omega a}{c\pi}}^2 = \pare{\frac{\pi}{\omega\mu a}}^2 E_0^2 \brac{2b + a\pare{\frac{\omega a}{c\pi}}^2}.$\\
+$\displaystyle \expc{P} = \frac{\alpha}{2\sigma}\oint \rd{l}\, \abs{\+v\kappa_0}^2 = \half \sqrt{\frac{\omega\mu}{2\sigma}}\pare{\frac{\pi}{\omega\mu a}}^2 E_0^2 \brac{2b + a\pare{\frac{\omega a}{c\pi}}^2}$\\
+$\displaystyle  = \boxed{\rec{\sqrt{2\sigma \omega^3\mu^3}}\pare{\frac{\pi}{a}}^2 E_0^2 \brac{b + \frac{a}{2}\pare{\frac{\omega a}{c\pi}}^2}.}$
+\newprob{5.1}%
+$\displaystyle \varphi = 0 \Rightarrow \begin{cases}
+    \displaystyle \+vE = -\+DtD{\+vA},\\
+    \displaystyle \+vB = \curl \+vA.
+\end{cases}$
+\begin{align*}
+    & \div \+vE = 0 \Rightarrow -\+DtD{}\div \+vA = 0 \Rightarrow \+vk\cdot \+vA_0 \+DtD{}\pare{e^{i\pare{\+vk\cdot \+vr - \omega t}}} = 0 \Rightarrow \boxed{\+vk\cdot \+vA_0 = 0.} \\
+    & \curl \+vB = \rec{c^2}\+D{t}D{\+vE} \Rightarrow \cancelto{0}{\grad\pare{\div \+vA}} - \laplacian \+vA = -\rec{c^2}\+D{t^2}D{^2 \+vA} \Rightarrow k^2 = \rec{c^2}\omega^2 \Rightarrow \boxed{k=\frac{\omega}{c}.}
+\end{align*}
+\newprob{5.2}%
+时谐场$\displaystyle \+DtD{} = -i\omega$, 故
+\[ \+vE = -\grad \varphi - \+DtD{\+vA} \Leftrightarrow \+vE = i\omega \+vA - \grad \varphi. \]
+而
+\[ \+DtD{\+vE} = c^2\pare{\curl \+vB - \mu_0 \+vj} \Leftrightarrow \+vE = \frac{ic^2}{\omega} \pare{\curl \+vB - \mu_0 \+vj}. \]
+\newprob{5.3}点源:
+\begin{align*}
+    & \psi\pare{\+vr,t} = \int \frac{f\pare{\+vr',t'}}{\abs{\+vr - \+vr'}}\,\rd{V'} = \delta\pare{t-\frac{r}{c}}\int \frac{\delta\pare{x'}\delta\pare{y'}\delta\pare{z'}}{\abs{\+vr - \+vr'}}\,\rd{V'} = \boxed{\rec{r}\delta\pare{t - \frac{r}{c}}.}
+\end{align*}
+线源: 设$\pm z_0$满足$z_0^2 + s^2 = \pare{ct}^2$,
+\begin{align*}
+    \psi\pare{\+vr,t} &= \int \frac{f\pare{\+vr',t'}}{\abs{\+vr - \+vr'}}\,\rd{V'} = \int_{\+bR} \rd{z}\, \frac{\delta\pare{\displaystyle t - \frac{\sqrt{z^2+s^2}}{c}}}{\sqrt{z^2 + s^2}}\\ 
+    &= \frac{2}{\sqrt{z_0^2 + s^2}}\cdot \frac{c\sqrt{z_0^2 + s^2}}{z_0}\Theta\pare{ct - s} = \boxed{\frac{2c}{\sqrt{\pare{ct}^2 - s^2}}\Theta\pare{ct-s}.}
+\end{align*}
+面源: 设$\pm s_0$满足$s_0^2 + x^2 = \pare{ct}^2$,
+\begin{align*}
+    \psi\pare{\+vr,t} &= \int \frac{f\pare{\+vr',t'}}{\abs{\+vr - \+vr'}}\,\rd{V'} = 2\pi \int_0^\infty s\,\rd{s} \cdot \frac{\delta\pare{\displaystyle t - \frac{\sqrt{x^2+s^2}}{c}}}{\sqrt{x^2 + s^2}}\\ 
+    &= 2\pi\cdot \frac{s_0}{\sqrt{x^2+s_0^2}}\cdot \frac{c\sqrt{x^2+s_0^2}}{s_0} \Theta\pare{ct - \abs{x}} = \boxed{2\pi c\Theta\pare{ct-\abs{x}}.}
+\end{align*}
+线源和面源可视为点源的叠加, 线源和面源脉冲在空间中某点$\+vr$产生的扰动是$t=0$时各个点源脉冲产生的扰动的叠加, 不同位置的点源脉冲到达$\+vr$的时间不同, 而源的分布延伸至无穷远处意味着一旦$\+vr$处在某时刻发生了扰动, 在其后的任何时刻都将受到其它点源的作用.
+
+\end{document}

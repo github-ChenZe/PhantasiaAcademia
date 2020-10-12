@@ -1,0 +1,427 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Nakahara,gakka=Geometry\ in\ Physics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usepackage[super]{nth}
+
+\usetikzlibrary{decorations.pathmorphing}
+
+\tikzset{snake it/.style={decorate, decoration=snake}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensorb#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+  \mathbin{\vcenter{\baselineskip.67ex
+    \hbox{\onedot}\hbox{\onedot}}%
+  }}%
+
+\begin{document}
+
+\section{Metals} % (fold)
+\label{sec:metals}
+
+\subsection{Electron Heat Capacity} % (fold)
+\label{sub:electron_heat_capacity}
+
+\subsubsection{The Fermi-Dirac Distribution} % (fold)
+\label{ssub:the_fermi_dirac_distribution}
+
+The Fermi-Dirac distribution \begin{marginwarns}
+    The Fermi energy is defined as the one at \SI{0}{\kelvin}. The $E\+_F_$ hereinafter is called the chemical potential, ususally denoted by $\mu$.
+\end{marginwarns}
+\[ f\pare{E} = \rec{e^{\beta\pare{E-E\+_F_}} + 1} \]
+is approximated by
+\[ f\pare{E} \approx \begin{cases}
+    1, & \text{if $E < E\+_F_$}, \\
+    0, & \text{if $E > E\+_F_$},
+\end{cases} \]
+which holds for $\pare{E - E\+_F_} > O\pare{k\+_B_T}$. The $E\+_F_$ is determined by
+\[ \sum_i f\pare{E_i} = N. \]
+The number of electrons of energy $\pare{E,E+\rd{E}}$ is given by $f\pare{E} N\pare{E}\,\rd{E}$, where $N\pare{E}$ is the DOS.
+
+% subsubsection the_fermi_dirac_distribution (end)
+
+\subsubsection{The Determination of the Fermi Energy} % (fold)
+\label{ssub:the_determination_of_the_fermi_energy}
+
+The $E\+_F_$ is determined by
+\[ N = \int_0^{E^0\+_F_} N\pare{E}\,\rd{E}, \]
+at \SI{0}{\kelvin} while by
+\[ N = \int_0^\infty Q\pare{E}\pare{-\+DEDf}\,\rd{E} \approx \int_{-\infty}^{\infty} Q\pare{E}\pare{-\+DEDf}\,\rd{E} \]
+at a finite temperture where $\displaystyle Q\pare{E} = \int_0^E N\pare{E}\,\rd{E}$, which yields
+\[ N = Q\pare{E\+_F_} + \frac{\pi^2}{6}Q''\pare{E\+_F_}\pare{k\+_B_T}^2, \]
+whence we obtain the Fermi energy
+\[ \inlinefinaleq{E\+_F_ = E^0\+_F_ \curb{1 - \frac{\pi^2}{6E^0\+_F_} \brac{\+dEd{}\ln N\pare{E}}_{E\+_F_^0} \pare{k\+_B_T}^2 }.} \]
+For nearly free electrons, $N\pare{E} \propto E^{1/2}$.
+\begin{finaleq}{The Fermi Energy of Nearly Free Electrons}
+    \[ E\+_F_ \approx E\+_F_^0\brac{1 - \frac{\pi^2}{12}\pare{\frac{k\+_B_ T}{E\+_F_^0}}^2}. \]
+\end{finaleq}
+
+% subsubsection the_determination_of_the_fermi_energy (end)
+
+\subsubsection{Electron Heat Capacity} % (fold)
+\label{ssub:electron_heat_capacity}
+
+The total energy of the electron is given by
+\[ U \approx \int_{-\infty}^\infty R\pare{E} \pare{-\+DEDf}\,\rd{E} \approx R\pare{E\+_F_^0} + \frac{\pi^2}{6}N\pare{E\+_F_^0}\pare{k\+_B_T}^2, \]
+where $\displaystyle R\pare{E} = \int_0^E EN\pare{E}\,\rd{E}$ and $R\pare{E\+_F_^0}$ is, by definition, the total energy at \SI{0}{\kelvin}. Therefore the heat capacity of the electrons is given by
+\begin{finaleq}{Heat Capacity of Electrons}
+    \[ C_V = k\+_B_\brac{\frac{\pi^2}{3}N\pare{E\+_F_^0}\pare{k\+_B_T}}. \]
+\end{finaleq}
+\begin{sample}
+    \begin{example}
+        The heat capacity of free electrons is given by
+        \[ C_V = N_0 \frac{\pi^2}{2}\pare{\frac{k\+_B_T}{E\+_F_^0}} k\+_B_. \]
+    \end{example}
+\end{sample}
+The $C_V$ here dominates for the heat capacity in the low temperature, since the heat capacity of the lattice is $O\pare{T^3}$. The slope at low temperatures of transition metals are higher since their $N\pare{E\+_F_^0}$ is higher, which is caused by the existence $d$-band.
+\par
+Plotting $C\+_V_/T$ against $T^2$ may yield a straight line where the intercept marks the contribution from the electron while the slope marks that from the lattice vibration.
+\par
+The $C\+_V_$ should be calculated using the \gloss{thermal effective mass} $m\+_th_$ in place of $m_e$ in $E\+_F_^0$. In some compounds the $m\+_th_/m_e$ may be $O\pare{10^3}$, where the electrons are called \gloss{heavy fermions}.
+
+% subsubsection electron_heat_capacity (end)
+
+% subsection electron_heat_capacity (end)
+
+\subsection{Work Function and Contact Potential} % (fold)
+\label{sub:work_function_and_contact_potential}
+
+\subsubsection{Thermionic Emission and Work Function} % (fold)
+\label{ssub:thermionic_emission_and_work_function}
+
+For free electrons,
+\[ \+vv\pare{\+vk} = \rec{\hbar}\grad_{\+vk}E = \frac{h \+vk}{m}. \]
+From the Fermi-Dirac distribution, the DOS in the $\+v$ space is found to be
+\[ \rd{n} = 2\pare{\frac{m}{2\pi \hbar}}^3 \rec{\displaystyle \exp\brac{\pare{\half mv^2 - E\+_F_} / \pare{k\+_B_T}} + 1}\,\rd{^3 v} \approx 2\pare{\frac{m}{2\pi \hbar}}^3 e^{\frac{E\+_F_}{k\+_B_T}} e^{-\frac{mv^2}{2k\+_B_T}}\,\rd{^3v}. \]
+If the depth of the potential well is $\chi$, then the emission current density is
+\[ j = -\frac{4\pi m\pare{k\+_B_T}^2 q}{\pare{2\pi\hbar}^3}e^{-\pare{\chi - E\+_F_}/\pare{k\+_B_T}}, \]
+and the \gloss{work function} $W$ is defined by $W = \chi - E\+_F_$.
+
+% subsubsection thermionic_emission_and_work_function (end)
+
+\subsubsection{Contact Potential} % (fold)
+\label{ssub:contact_potential}
+
+Two pieces of metals of different work function $W_A$ and $W_B$ that contacts with each other would show a potential different to cancel the bias created by the difference in the work function, i.e.
+\[ \inlinefinaleq{V_A - V_B = \rec{q}\pare{W_B - W_A}.} \]
+
+% subsubsection contact_potential (end)
+
+% subsection work_function_and_contact_potential (end)
+
+\subsection{Transport Properties} % (fold)
+\label{sub:transport_properties}
+
+\subsubsection{The Boltzmann Equation} % (fold)
+\label{ssub:the_boltzmann_equation}
+
+\paragraph{The Drift Current} % (fold)
+\label{par:the_drift_current}
+
+The electric current density is given by
+\[ \+vj = -\frac{2q}{\pare{2\pi}^3} \int f\pare{\+vk}\+vv\pare{\+vk}\,\rd{^3k}, \]
+where the time evolution of $\+vk$ is determined by
+\[ \+dtd{\+vk} = \rec{\hbar}\curb{-q\+vE - q\brac{\rec{\hbar} \grad_{\+vk}E\pare{\+vk} \times \+vB}} \]
+and $f$ by the continuity equation
+\[ \+DtD{} f\pare{\+vk,t} = -\grad_{\+vk}\cdot \brac{f\pare{\+vk,t}\+dtd{\+vk}} = -\+dtd{\+vk}\cdot \grad_{\+vk}f\pare{\+vk,t}. \]
+In more general situations, the variation of $f$ in the real space should be taken into account, and the equation is modified to be
+\[ \+DtDf = -\+vv\pare{\+vk}\cdot \grad_{\+vr}f\pare{\+vk,\+vr,t} - \+dtd{\+vk}\cdot \grad_{\+vk}f\pare{\+vk,\+vr,t}. \]
+
+% paragraph the_drift_current (end)
+
+\paragraph{Collision} % (fold)
+\label{par:collision}
+
+The number of electrons scattered out of the state $\+vk$ in a time interval $\delta t$ is given by
+\[ \int_{\+vk'} f\pare{\+vk,t}\brac{1-f\pare{\+vk',t}}\Theta\pare{\+vk,\+vk'}\frac{\rd{^3 k}}{\pare{2\pi}^3}\pare{2\frac{\rd{^3 k'}}{\pare{2\pi}^3}\delta t}, \]
+where $\Theta\pare{\+vk,\+vk'}$ is the probability for the transition $\+vk \rightarrow \+vk'$ to occur in unit time.  THe number of electrons scattered into the state $\+vk$ is similarly given by
+\[ \int_{\+vk'} f\pare{\+vk',t}\brac{1-f\pare{\+vk,t}}\Theta\pare{\+vk',\+vk}\frac{\rd{^3 k'}}{\pare{2\pi}^3}\pare{2\frac{\rd{^3 k}}{\pare{2\pi}^3} \delta t}. \]
+Taking both terms into account, we find
+\[ \+DtDf = b-a, \]
+where
+\begin{align*}
+    b &= \rec{\pare{2\pi}^3}\int f\pare{\+vk',t}\brac{1-f\pare{\+vk,t}}\Theta\pare{\+vk',\+vk}\,\rd{^3 k'}, \\
+    a &= \rec{\pare{2\pi}^3}\int f\pare{\+vk,t}\brac{1-f\pare{\+vk',t}}\Theta\pare{\+vk,\+vk'}\,\rd{^3 k'}.
+\end{align*}
+Combining the contributions to $\partial_t f$ by the drift current and collision, we obtain the Boltzmann equation.
+\begin{finaleq}{Boltzmann Equation}
+    \[ \+DtDf = -\+vv_k\cdot \grad_{\+vr}f\pare{\+vr,\+vk,t} - \pare{\+dtd{\+vk}}\cdot \grad_{\+vk}f\pare{\+vk,\+vr,t} + b - a. \]
+\end{finaleq}
+For stationary problems, $\displaystyle \+DtDf = 0$, hence
+\[ \+vv_k\cdot \grad_{\+vr}f\pare{\+vr,\+vk,t} + \pare{\+dtd{\+vk}}\cdot \grad_{\+vk}f\pare{\+vk,\+vr,t} = b - a. \]
+If $f$ is further independent of $\+vr$, and $\displaystyle \+dtd{\+vk} = -\frac{q \+vE}{\hbar}$, the Boltzmann equation is simplified to
+\begin{equation}
+    \label{eq:boltzmann_eq_simplified}
+    \inlinefinaleq{-\frac{q}{\hbar} \+vE\cdot \grad_{\+vk}f\pare{\+vk} = b - a.}
+\end{equation}
+
+% paragraph collision (end)
+
+% subsubsection the_boltzmann_equation (end)
+
+\subsubsection{Beyond the Relaxation-Time Approximation} % (fold)
+\label{ssub:beyond_the_relaxation_time_approximation}
+
+With the assumption
+\begin{equation}
+    \label{eq:relaxation_time_def}
+    b - a = -\frac{f-f_0}{\tau\pare{\+vk}},
+\end{equation}
+where $f_0$ is the distribution at equilibrium, and the expansion
+\[ f = f_0 + f_1 + f_2 + \cdots \]
+where $f_1, f_2, \cdots$ are from the contribution of $\+vE$, $\+vE^2$, $\cdots$, respectively, the Boltzmann equation may be rewritten
+\[ -\frac{q}{\hbar}\+vE\cdot \grad_{\+vk} f_0 - \frac{q}{\hbar}\+vE\cdot \grad_{\+vk} f_1 - \cdots = -\frac{f_1}{\tau} - \frac{f_2}{\tau} - \cdots. \]
+For $\+vE$ weak enough, only $f_0$ and $f_1$ are retained, and
+\[ f_1 = q\tau \+vE\cdot \+vv\pare{\+vk}\pare{\+dEd{f_0}}, \]
+whence we deduce the current density
+\[ \+vj = -\frac{q}{\pare{2\pi}^3}\int 2f\+vv\pare{\+vk}\,\rd{^3 k} = -\frac{2q^2}{\pare{2\pi}^3}\int \tau \+vv\pare{\+vk}\brac{\+vv\pare{\+vk}\cdot \+vE}\+dEd{f_0}\,\rd{^3 k}. \]
+We may rewrite it with the electrical conductivity tensor, defined by
+\[ j_\alpha = \sum_\beta \sigma_{\alpha\beta}E_\beta. \]
+\vspace{-\baselineskip}
+\begin{finaleq}{Electrical Conductivity Tensor}
+    \[ \sigma_{\alpha\beta} = -\frac{2q^2}{\pare{2\pi}^3} \int \tau\pare{\+vk} v_\alpha\pare{\+vk} v_\beta\pare{\+vk} \pare{\+DED{f_0}}\,\rd{^3k}. \]
+\end{finaleq}
+\begin{sample}
+    \begin{example}
+        Assuming that $\displaystyle E\pare{\+vk} = \frac{\hbar^2 k^2}{2m^*}$, we find that $\sigma_{\alpha\beta}$ could be written as $\sigma_0 I$, where
+        \[ \sigma_0 = \frac{q^2}{3\pi^2 m^*}\int \rd{E}\, \brac{k^3 \tau\pare{k}}\pare{-\+DED{f_0}} \approx \frac{q^2}{m^*}\frac{k\+_F_^3}{3\pi^2}\tau\pare{k\+_F_} = \frac{nq^2\tau\pare{k\+_F_}}{m^*}. \]
+    \end{example}
+\end{sample}
+\begin{finaleq}{Free Electron Resistivity}
+    \[ \sigma = \frac{ne^2\tau\pare{k\+_F_}}{m^*}. \]
+\end{finaleq}
+
+% subsubsection beyond_the_relaxation_time_approximation (end)
+
+\subsubsection{Isotropic Elastic Scattering} % (fold)
+\label{ssub:isotropic_elastic_scattering}
+
+We have $\Theta\pare{\+vk,\+vk'} = 0$ if $E\pare{\+vk} \neq E\pare{\+vk'}$, and that $\Theta\pare{\+vk,\+vk'} = \Theta\pare{\+vk',\+vk}$. More generally, $\Theta\pare{\+vk,\+vk'}$ could only depend on the the magnitude $k$ and $k'$, and the angle between $\+vk$ and $\+vk'$. \eqref{eq:boltzmann_eq_simplified} may be rewritten
+\[ -\frac{q}{\hbar}\+vE\cdot \grad_{\+vk}f_0\pare{\+vk} = \rec{\pare{2\pi}^3} \int \Theta\pare{\+vk,\+vk'}\brac{f_1\pare{\+vk'} - f_1\pare{\+vk}}\,\rd{^3 k'}, \]
+which is further simplified with the ansatz $f_1\pare{\+vk} = \+vk\cdot \+uE \varphi\pare{E}$ to
+\begin{align*}
+    \frac{q}{\hbar}\+vE\cdot \+vk \rec{k}\pare{\+dkdE}\pare{-\+DED{f_0}} &= \frac{\varphi\pare{E}}{\pare{2\pi}^3}\brac{\int \Theta\pare{\+vk,\+vk'} \pare{\+vk' - \+vk}\,\rd{^3 k'}}\cdot \+uE \\
+    &= -\+vk\cdot \+uE \frac{\varphi\pare{E}}{\pare{2\pi}^3} \int \Theta\pare{\+vk,\+vk'}\pare{1-\cos\eta}\,\rd{^3 k'}.
+\end{align*}
+With equation \eqref{eq:relaxation_time_def} and the approximation $f_1 = f - f_0$, we find
+\begin{finaleq}{Approximation Formula to the Relaxation-Time}
+    \begin{equation}
+        \label{eq:approximation_relaxation_time}
+        \rec{\tau\pare{\+vk}} = \rec{\pare{2\pi}^3}\int \Theta\pare{\+vk,\+vk'}\pare{1-\cos\eta}\,\rd{^3 k'}.
+    \end{equation}
+\end{finaleq}
+
+% subsubsection isotropic_elastic_scattering (end)
+
+\subsubsection{Lattice Scattering} % (fold)
+\label{ssub:lattice_scattering}
+
+A phonon polarized in the direction $\+ve$ of amplitude $A$ introduces a perturbation
+\[ \Delta H = -\half Ae^{i\omega t}\sum_n e^{-i\+vq\cdot \+vR_n}\+ve\cdot \grad V\pare{\+vr - \+vR_n}, \]
+which yields the transition rate by the \href{https://en.wikipedia.org/wiki/Fermi%27s_golden_rule}{Fermi's golden rule},
+\[ \Theta\pare{\+vk,\+vk'} = \frac{2\pi}{\hbar} \begin{cases}
+    \displaystyle \abs{\bra{\+vk'} -\frac{A}{2}\sum e^{i\+vq\cdot \+vR_n} \+ve\cdot \grad V\pare{\+vr - \+vR_n} \ket{\+vk}}^2 \cdot \delta\brac{E\pare{\+vk'} - E\pare{\+vk} - \hbar\omega} + \\
+    \displaystyle \abs{\bra{\+vk'} -\frac{A}{2}\sum e^{-i\+vq\cdot \+vR_n} \+ve\cdot \grad V\pare{\+vr - \+vR_n} \ket{\+vk}}^2 \cdot \delta\brac{E\pare{\+vk'} - E\pare{\+vk} + \hbar\omega}.
+\end{cases} \]
+There is one phonon absorbed or emitted in the process. However, the energy is so small that the scattering is approximately elastic.
+\par
+The matrix elements may be written
+\[ V_{\+vk'\+vk} = \frac{A}{2}\pare{\+ve\cdot \+vI_{\+vk\+vk'}}\brac{\rec{N} \sum e^{-i\pare{\+vk' - \+vk \mp \+vq}\cdot \+vR_n}}, \]
+where
+\[ \+vI_{\+vk\+vk'} = \int\+_cell_ e^{i\pare{\+vk - \+vk'}\cdot \+v\zeta}\mu^*_{\+vk}\pare{\+v\zeta}\mu_{\+vk'}\pare{\+v\zeta}\grad V\pare{\+v\zeta}\,\rd{\+v\zeta}, \]
+where $\mu_{\+vk}\pare{\+vr}$ is related to the wavefunction by
+\[ \psi_{\+vk}\pare{\+vr} = \rec{\sqrt{N}}e^{i\+vk\cdot \+vr}\mu_{\+vk}\pare{\+vr}. \]
+The sum
+\[ \brac{\rec{N} \sum e^{-i\pare{\+vk' - \+vk \mp \+vq}\cdot \+vR_n}} = \begin{cases}
+    1, & \text{if $\+vk' - \+vk \mp \+vq = \+vG_n$,} \\
+    0, & \text{otherwise.}
+\end{cases} \]
+If $\+vG_n = 0$, the scattering is a \gloss{normal scattering}, otherwise it is a \gloss[\baselineskip]{umklapp scattering}. With $j$ denoting the polarization of the phonon, the transition amplitude is written
+\[ \Theta_{\pm j} = \frac{\pi\abs{A_j}^2}{\hbar}\abs{\+ve_j \cdot \+vI_{\+vk\+vk'}}^2 \delta\pare{E' - E}. \]
+\par
+With the kinetic energy given by
+\[ \half N k\+_B_T = \frac{NMA_j^2}{4}\omega_j^2, \]
+the total transition amplitude of all polarizations is given by
+\[ \Theta\pare{\+vk,\+vk'} = \frac{2\pi^2 k\+_B_T}{NM\hbar \conj{c}^2}\sum_j \abs{\frac{\conj{c}}{c_j} \rec{\abs{\+vk' - \+vk}} \+ve\cdot \+vI_{\+vk\+vk'}}^2\delta\pare{E - E'}, \]
+where the $c$'s stand for the speeds of sound. With
+\[ J^2\pare{E,\eta} = \sum_j \abs{\frac{\conj{c}}{c_j} \rec{\abs{\+vk' - \+vk}} \+ve\cdot \+vI_{\+vk\+vk'}}^2, \]
+on which we have the estimation $J = O\pare{\SI{1}{\eV}}$, the approximation to the relaxation-time \eqref{eq:approximation_relaxation_time} yields
+\[ \inlinefinaleq{\rec{\tau} = \frac{k\+_B_T}{4\pi NM\hbar \conj{c}^2} k^2 \pare{\+dkdE}^{-1} \int \rd{\eta}\, J^2\pare{E,\eta}\pare{1-\cos\eta}2\pi \sin\eta.} \]
+Some properties of the electrical conductivity could be obtained.
+\begin{cenum}
+    \item For $T > \Theta\+_D_$, $1/\tau \propto T$.
+    \item If the band structure is isotropic, $\displaystyle N\pare{E} \propto \pare{\+dkdE}^{-1}$, therefore higher the DOS, higher the resistivity.
+    \item At low temperatures, the equipartition of energy breaks down, and we have $\displaystyle \rec{\tau} \propto T^5$ then.
+    \item If there are other mechanisms of scattering, the final $1/\tau$ is simply
+    \[ \rec{\tau} = \rec{\tau_L} + \rec{\tau\+_other_}. \]
+\end{cenum}
+\begin{finaleq}{Matthiessen's Rule}
+    The net resistivity is given by $\rho = \rho\+_L_ + \rho\+_i_$, where $\rho\+_L_$ is the resistivity caused by the thermal phonons, and $\rho\+_i_$ is caused by the scattering by defects. $\rho\+_L_$ is often independent of the number of defects, and $\rho\+_i_$ is often independent of temperature.
+\end{finaleq}
+The \gloss[-\baselineskip]{residual resistivity} is defined as $\rho\+_i_\pare{0} = \rho\pare{0}$. The \gloss{resistivity ratio} of a ratio of the resistivity at room temperature to the residual resistivity. For many materials an impurity creates a residual resistivity of about \SI{1}{\micro\ohm\centi\meter} per atomic percent of impurity.
+\par
+The number of phonons that could take part in the umklapp scattering is proportional to $e^{-\Theta\+_U_/T}$, where $\Theta\+_U_$ is a temperature determined by the geometry of the first Brillouin zone.
+
+% subsubsection lattice_scattering (end)
+
+\subsubsection{The Hall Effect} % (fold)
+\label{ssub:the_hall_effect}
+
+The \gloss{Hall coefficient} is defined by \begin{marginwarns}
+    The formula in semiconductors is more complex.
+\end{marginwarns}
+\[ \inlinefinaleq{R\+_H_ = \frac{E_y}{j_x B_z},} \]
+which can be calculated from the relation (up to a factor close to $1$)
+\[ \inlinefinaleq{R\+_H_ = \rec{nqc},} \]
+where $q$ the the charge of the carrier (negative if the carrier is the electron).
+
+% subsubsection the_hall_effect (end)
+
+\subsubsection{Thermal Conductivity} % (fold)
+\label{ssub:thermal_conductivity}
+
+The thermal conductivity of electrons is given by
+\[ \kappa = \rec{3}Cvl, \]
+where $l$ is the mean free path.
+\begin{finaleq}{Wiedemann-Franz Law, the Lorenz Number}
+    \[ L = \frac{K}{\sigma T} = \frac{\pi^2}{3}\pare{\frac{k\+_B_}{e}}^2 = \SI{2.45e-8}{\watt\ohm\per\square\kelvin}. \]
+\end{finaleq}
+
+% subsubsection thermal_conductivity (end)
+
+\mathsubsubsection{KGFormula}{K-G Formula}{Kubo-Greenwood Formula}{Kubo-Greenwood Formula} % (fold)
+\label{ssub:kubo_greenwood_formula}
+
+The transition rate by photon absorption is given by
+\[ \rec{4}q^2F^2 \frac{2\pi}{\hbar}\abs{X_{E+\hbar\omega,E}}^2 N\pare{E+\hbar\omega}\times 2 = \frac{\pi q^2\hbar}{m^2\omega^2}F^2\abs{D_{E+\hbar\omega,E}}^2\+_av_ N\pare{E+\hbar\omega}, \]
+where
+\[ X_{E',E} = \int \psi_E^* x\psi_E\,\rd{\tau},\quad \text{and}\quad D_{E',E} = \int \psi_{E'}^* \+DxD{}\psi_E\,\rd{\tau}, \]
+and the subscript $\mathrm{av}$ takes the average value of all states of energy $E' = E+\hbar\omega$.
+\par
+The transition rate by photon emission is given by substituting $\pare{E-\hbar\omega}$ in the above expression for $\pare{E+\hbar\omega}$. The total energy exchanged with the electric field is given by
+\[ P = \frac{\pi q^2\hbar}{m^2\omega^2} F^2\pare{\hbar\omega}^2 \int \pare{-\+DEDf}\abs{D}^2\+_av_ N\pare{E}N\pare{E+\hbar\omega}\,\rd{E} = \half \sigma\pare{\omega}F^2. \]
+As $\omega \rightarrow 0$, we have the Kubo-Greenwood formula,
+\begin{equation}
+    \label{eq:kubo_greenwood}
+    \sigma\pare{0} = \int \pare{-\+DED{f_0}}\sigma_E\pare{0}\,\rd{E} \approx \curb{\sigma_{E\+_F_}\pare{0}};\quad \inlinefinaleq{\sigma_E\pare{0} = \frac{2\pi q^2 \hbar^3}{m^2}\abs{D}^2\+_av_ N\pare{E}^2.}
+\end{equation}
+The Kubo-Greenwood formula may be applied to noncrystalline solids, which have lower mean free paths and greater $\Delta k$, rendering the Boltzmann equation inapplicable.
+
+% subsubsection kubo_greenwood_formula (end)
+
+% subsection transport_properties (end)
+
+\subsection{Metal-Insulator Transition} % (fold)
+\label{sub:metal_insulator_transition}
+
+\subsubsection{Wilson Transition} % (fold)
+\label{ssub:wilson_transition}
+
+Under huge applied pressures, an overlap between the valence band and the conduction band may occur, therefore the insulator becomes a conductor.
+
+% subsubsection wilson_transition (end)
+
+\subsubsection{Peierls Transition} % (fold)
+\label{ssub:peierls_transition}
+
+A perturbation to the crystal structure may, for example, double the lattice constant and change the shape of the band structure. This may change a half-filled conduction band into a filled valence band.
+
+% subsubsection peierls_transition (end)
+
+\subsubsection{Mott Transition} % (fold)
+\label{ssub:mott_transition}
+
+Due to electric field screening the potential energy becomes much more sharply peaked around the equilibrium position of the atom and electrons become localized and can no longer conduct a current.
+
+% subsubsection mott_transition (end)
+
+\subsubsection{Anderson Transition} % (fold)
+\label{ssub:anderson_transition}
+
+In the Kubo-Greenwood formula \eqref{eq:kubo_greenwood}, if $\psi_E$ and $\psi_{E'}$ near the Fermi surface have no overlap at all, $\sigma = 0$. In this case, the electrical conductivity is contributed by phonon-electron interaction that transfer the electron from one localized state to another, which exhibits a negative temperature coefficient, known as the \gloss{Fermi glass}.
+\par
+Doping in this case, for example, may trigger an metal-insulator transition.
+
+% subsubsection anderson_transition (end)
+
+% subsection metal_insulator_transition (end)
+
+% section metals (end)
+
+\end{document}

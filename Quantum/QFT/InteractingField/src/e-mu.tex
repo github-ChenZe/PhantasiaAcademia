@@ -1,0 +1,14 @@
+\documentclass[hidelinks]{standalone}
+
+\usepackage{van-de-la-sehen-en}
+\usepackage[compat=1.1.0]{tikz-feynman}
+
+\begin{document}
+
+\feynmandiagram [vertical=a to b, horizontal=i1 to f1] {
+  i1[particle=$e^-$] -- [fermion, momentum=$p_1$] a -- [fermion, momentum=$p_3$] f1[particle=$e^-$],
+  a -- [photon, momentum=$q$] b,
+  i2[particle=$\mu^-$] -- [fermion, momentum'=$p_2$] b -- [fermion, momentum'=$p_4$] f2[particle=$\mu^-$],
+};
+
+\end{document}

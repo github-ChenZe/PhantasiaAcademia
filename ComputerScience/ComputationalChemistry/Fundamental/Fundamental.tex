@@ -1,0 +1,150 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=ない,gakka=計算化学,section=Butsurigakutekikiso,gakkabbr=CC]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{物理学基础} % (fold)
+\label{sec:物理学基础}
+
+\subsection{泛函的微积分} % (fold)
+\label{sub:泛函的微积分}
+
+\subsubsection{泛函导数} % (fold)
+\label{ssub:泛函导数}
+
+\paragraph{定义与例子} % (fold)
+\label{par:定义与例子}
+
+设$F\brac{\varphi\pare{\+vx}}$为一泛函, 则其泛函导数$\displaystyle \frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vx}}$定义为满足
+\[ \int \frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vx}}\,\nu\pare{\+vx}\,\rd{\+vx} = \lim_{\epsilon \rightarrow 0} \frac{F\brac{\varphi + \epsilon \nu} - F\brac{\varphi}}{\epsilon} \]
+者. 亦可等价地定义为满足
+\[ \resumath{\delta F\brac{\varphi\pare{\+vx}} = \int \rd{\+vx}\, \frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vx}}\delta \varphi\pare{\+vx}} \]
+者.
+\begin{ex}[GGA类泛函]
+    对于
+    \[ T\+_w_\brac{\rho\pare{\+vr}} = \int \rd{\+vr} \frac{\grad \rho\pare{\+vr}\cdot \grad \rho\pare{\+vr}}{\rho\pare{\+vr}}, \]
+    可以得到
+    \[ \frac{\delta T\+_w_\brac{\rho\pare{\+vr}}}{\delta \rho\pare{\+vr}} = -2\frac{\laplacian \rho\pare{\+vr}}{\rho\pare{\+vr}} + \frac{\grad \rho\pare{\+vr}\cdot \grad \rho \pare{\+vr}}{\rho^2\pare{\+vr}}. \]
+\end{ex}
+利用$\delta$函数可得泛函导数的第三种定义
+\[ \resumath{\left.\frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vx}}\right\vert_{\+vy} = \left.\+d\epsilon d{} F\brac{\varphi\pare{\+vx} + \epsilon \delta\pare{\+vx- \+vy}}\right\vert_{\epsilon = 0}.} \]
+\begin{ex}[配分函数]
+    对于
+    \[ F\brac{y} = \int \cdots \int \prod_{i=1}^N e^{-\beta y\pare{\+vx_i}}\,\rd{\+vx_1}\cdots \rd{\+vx_N}, \]
+    有
+    \[ \left.\frac{\delta F\brac{y}}{\delta y\pare{\+vx}}\right\vert_{\+vx_0} = -N\beta e^{-\beta y\pare{\+vx_0}} \int \cdots \int \prod_{i=2}^N e^{-\beta y\pare{\+vx_i}}\,\rd{\+vx_2}\cdots \rd{\+vx_N}. \]
+\end{ex}
+
+% paragraph 定义与例子 (end)
+
+\paragraph{常用关系式} % (fold)
+\label{par:常用关系式}
+
+设泛函为$\displaystyle F\brac{\varphi\pare{\+vx}} = \int f\pare{\+vx,\varphi\pare{\+vx}}\,\rd{\+vx}$, 则
+\[ \resumath{\frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vx}} = \+D{\varphi\pare{\+vx}}D{f\pare{\varphi\pare{\+vx}}}.} \]
+若$\displaystyle F\brac{\varphi\pare{\+vx}} = \iint f\pare{\varphi\pare{\+vx}, \varphi\pare{\+vx'}}\,\rd{\+vx}\,\rd{\+vx'}$, 则
+\[ \resumath{\frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vx}} = \int \pare{\+D{\varphi\pare{\+vx}}D{f} + \left.\+D{\varphi\pare{\+vx'}}Df\right\vert_{\+vx\leftrightarrow \+vx'}}\,\rd{\+vx'}.} \]
+\begin{ex}
+    对于
+    \[ J\brac{\rho} = \iint \exp\pare{-\rho\pare{\+vr}}\sin\pare{\rho\pare{\+vr'}}\,\rd{\+vr}\,\rd{\+vr'}, \]
+    有
+    \[ \frac{\delta J\brac{\rho}}{\delta \rho\pare{\+vr}} = \int \brac{-\exp\pare{-\rho\pare{\+vr}} \sin \pare{\rho\pare{\+vr'}} + \exp\pare{-\rho\pare{\+vr'}}\cos\pare{\rho\pare{\+vr}}}\,\rd{\+vr'}. \]
+\end{ex}
+若$\displaystyle F\brac{\varphi\pare{\+vx}} = \int f\pare{\+vx,\varphi\pare{\+vx},\grad\varphi\pare{\+vx}}\,\rd{\+vx}$, 则
+\[ \resumath{\frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vx}} = \+D{\varphi\pare{\+vx}}D{f\pare{\+vx,\varphi\pare{\+vx},\grad\varphi\pare{\+vx}}} - \div \+D{\grad\varphi\pare{\+vx}}D{f\pare{\+vx,\varphi\pare{\+vx},\grad\varphi\pare{\+vx}}}.} \]
+\begin{ex}
+    设
+    \[ F\brac{y} = \half \int \pare{\grad y\pare{\+vx}}^2\,\rd{\+vx}, \]
+    则有
+    \[ \frac{\delta F\brac{y}}{\delta y\pare{\+vx}} = -\div \grad y\pare{\+vx} = -\laplacian y\pare{\+vx}. \]
+\end{ex}
+
+% paragraph 常用关系式 (end)
+
+\paragraph{泛函偏导数} % (fold)
+\label{par:泛函偏导数}
+
+设$\+vy = \pare{y_\alpha,y_\beta,\cdots}$, 则泛函偏导数可以推广定义为
+\[ \int \frac{\delta F\brac{\+vy}}{\delta y_\alpha\pare{\+vx}}\nu_\alpha\pare{\+vx}\,\rd{\+vx} = \pare{\+D{\epsilon_\alpha}D{F\brac{\+vy+\+v\epsilon\cdot \+v\nu}}}_{\epsilon = 0}. \]
+
+% paragraph 泛函偏导数 (end)
+
+\paragraph{链式法则} % (fold)
+\label{par:链式法则}
+
+\[ \frac{\delta F\brac{y}}{\delta \eta\pare{x}} = \int \frac{\delta F\brac{y}}{\delta y\pare{x_1}}\frac{\delta y\pare{x_1}}{\delta \eta\pare{x}}\,\rd{x_1}. \]
+
+% paragraph 链式法则 (end)
+
+\paragraph{泛函极值} % (fold)
+\label{par:泛函极值}
+
+$F\brac{\+vy}$的极值条件为
+\[ \frac{\delta F\brac{y}}{\delta y_\alpha\pare{\+vx}} = 0,\quad \alpha = 1,2,\cdots. \]
+再通过
+\[ K\psi = \int \frac{\delta^2 F}{\delta y\pare{\+vx}\,\delta y\pare{\+vx'}}\psi\pare{\+vx'}\,\rd{\+vx'} = \lambda \psi \]
+的本征值确定极性. $\lambda$全正对应极小, $\lambda$全负对应极大.
+
+% paragraph 泛函极值 (end)
+
+\paragraph{量纲} % (fold)
+\label{par:量纲}
+
+当求导的宗量和泛函的宗量相同时, 即导数形如$\displaystyle \frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vy}}$时, $\displaystyle \frac{\delta F\brac{\varphi\pare{\+vx}}}{\delta \varphi\pare{\+vy}}$和$F$量纲相同. 此于链式法则之情形不成立.
+
+% paragraph 量纲 (end)
+
+% subsubsection 泛函导数 (end)
+
+\subsubsection{多变量情形} % (fold)
+\label{ssub:多变量情形}
+
+\paragraph{泛函微分} % (fold)
+\label{par:泛函微分}
+
+一阶和二阶微分定义如
+\begin{align*}
+    \delta F &= \sum_\alpha \int \frac{\delta F}{\delta y_\alpha\pare{\+vx}} \delta y_\alpha\pare{\+vx}\,\rd{\+vx}, \\
+    \delta^2 F &= \sum_{\alpha\beta} \int \frac{\delta^2 F}{\delta y_\alpha\pare{\+vx}\,\delta y_\beta\pare{\+vx'}}\delta y_\alpha\pare{\+vx}\,\delta y_\beta\pare{\+vx'}\,\rd{\+vx}\,\rd{\+vx'}.
+\end{align*}
+隐函数求导之对应为
+\[ \delta F = 0 \Rightarrow \int \frac{\delta F}{\delta u\pare{\+vx'}} \frac{\delta u\pare{\+vx'}}{\delta \nu\pare{\+vx}} \,\rd{\+vx} + \frac{\delta F}{\delta \nu\pare{\+vx}} = 0. \]
+
+% paragraph 泛函微分 (end)
+
+\paragraph{泛函的Taylor展开} % (fold)
+\label{par:泛函的taylor展开}
+
+Taylor展开可写为
+\[ F\brac{\+vy + \+v\nu} = \sum_{k=0}^\infty \rec{k!} \int \cdots \int \frac{\delta^k F\brac{\+vy}}{\delta y_{\alpha_1}\pare{\+vx_1} \cdots \delta y_{\alpha_k}\pare{\+vx_k}}\nu_{\alpha_1}\pare{\+vx_1}\cdots \nu_{\alpha_k}\pare{\+vx_k}\,\rd{\+vx_1}\cdots \rd{\+vx_k}. \]
+
+% paragraph 泛函的taylor展开 (end)
+
+% subsubsection 多变量情形 (end)
+
+\subsubsection{泛函积分} % (fold)
+\label{ssub:泛函积分}
+
+\paragraph{对泛函导数的积分} % (fold)
+\label{par:对泛函导数的积分}
+
+在
+\[ F\brac{y} = F\brac{0} + \int_0^1 \+d\epsilon d{F\brac{\epsilon y}}\,\rd{\epsilon} \]
+中, 注意到
+\[ \+d\epsilon d{F\brac{\epsilon y}} = \int \frac{\delta F\brac{\epsilon y}}{\delta\pare{\epsilon y\pare{\+vx}}} y\pare{\+vx}\,\rd{\+vx}, \]
+即有
+\[ F\brac{y} = F\brac{0} + \int_0^1 \int \frac{\delta F\brac{\epsilon y}}{\delta\pare{\epsilon y\pare{\+vx}}} y\pare{\+vx}\,\rd{\+vx}\,\rd{\epsilon}. \]
+对于多元的情况,
+\[ F\brac{\+vy} = F\brac{0} + \sum_\alpha \int_0^1 \int \frac{\delta F\brac{\epsilon \+vy}}{\delta\pare{\epsilon y_\alpha\pare{\+vx}}} y_\alpha\pare{\+vx}\,\rd{\+vx}\,\rd{\epsilon}. \]
+
+% paragraph 对泛函导数的积分 (end)
+
+% subsubsection 泛函积分 (end)
+
+% subsection 泛函的微积分 (end)
+
+% section 物理学基础 (end)
+
+\end{document}

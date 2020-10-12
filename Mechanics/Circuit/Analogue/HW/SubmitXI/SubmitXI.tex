@@ -1,0 +1,176 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\pgfplotsset{compat=newest}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+\def\rD{\mathrm{D}}
+\newcommand{\mathmin}[2]{(#1+#2)/2-abs(#1-#2)/2}
+\newcommand{\mathmax}[2]{(#1+#2)/2+abs(#1-#2)/2}
+
+\begin{document}
+
+\newprob{8.1.1 (a)}%
+通过$R_2$反馈. 直流/交流负反馈.
+\par
+\newprobheader{(b)}%
+通过$R\+_f1_$, $C$, $R\+_f2_$反馈. 直流负反馈.\\
+通过$T_3$的$\mathrm{E}$极到$R\+_e1_$反馈. 直流/交流负反馈.
+\par
+\newprobheader{(c)}%
+通过$R\+_f_$反馈. 直流/交流负反馈.
+\par
+\newprobheader{(d)}%
+通过$R_2$, $R_1$反馈. 直流/交流负反馈.
+\par
+\newprobheader{(e)}%
+通过$\mathrm{A}_2$, $R_3$反馈. 直流/交流负反馈.
+\par
+\newprobheader{(f)}%
+通过$R\+_L_$, $R_6$反馈. 直流/交流负反馈.
+\newprob{8.1.3 (a)}%
+电压串联负反馈, 故视信号源为电压源, \underline{$R\+_si_$小}.
+\par
+\newprobheader{(b)}%
+电流并联负反馈, 故视信号源为电流源, \underline{$R\+_si_$大}.
+\newprob{8.1.5 (a)}%
+不能. 引入了正反馈. 应当将OP AMP的$+$端和$-$段对调.
+\par
+\newprobheader{(b)}%
+不能. 应将$R$与$R\+_L_$互换.
+\newprob{8.1.6 (1)}%
+a-c, b-d, f-j, i-h.\vspace{-2\baselineskip}
+\begin{center}
+    \begin{tikzpicture}[yscale=0.9]
+        \draw
+        (0,0) node[rground] {} -- 
+        (0,1) node (b) {} to[european voltage source,v<=$v\+_s_$]
+        (0,3) --
+        (1,3) node (a) {} to[resistor,R=$R_1$]
+        (3,3) node[op amp,anchor=+,yscale=-1] (opamp) {}
+        (b) to[resistor,R=$R_2$,*-*] ++(2,0) node(Rb) {} |- (opamp.-)
+        (opamp.out) node[npn,anchor=G,label=right:{$\mathrm T_1$}](T1) {}
+        (T1.S) --++(0.5,0) node[npn,anchor=G,label=right:{$\mathrm T_2$}](T2) {}
+        (T1.D) |-
+        (T2.D|-0,3.5) to[resistor,R=$R_3$,*-o]
+        ++(0,2) node[right]{$+V\+_CC_$}
+        (T2.D) -- (T2.D|-0,3.5)
+        (Rb) to[resistor,R=$R\+_f_$,-*] (T2.S|-Rb)
+        to[short,-o] ++(1,0) node[right] {$v\+_o_$}
+        (T2.S) to[resistor,R=$R_4$,-o]
+        ++(0,-2) node[right] {$-V\+_EE_$}
+        ;
+    \end{tikzpicture}
+\end{center}
+\par
+\newprobheader{(2)}%
+a-d, b-c, f-j, i-h.\vspace{-2\baselineskip}
+\begin{center}
+    \begin{tikzpicture}[yscale=0.9]
+        \draw
+        (0,0) node[rground] {} -- 
+        (0,2) node (b) {}
+        (1,3) node (a) {} to[resistor,R=$R_1$] node(Rb) {}
+        (3,3) node[op amp,anchor=+,yscale=-1] (opamp) {}
+        (opamp.-) to[resistor,R=$R_2$] ++(-2,0) node (R2in) {}
+        (R2in-|0,2) ++ (0,-0.5) to[european voltage source,v<=$v\+_s_$] (0,3.5)
+        (0,3.5) --++(0.5,0) to[short] (R2in)
+        (R2in-|0,2) ++ (0,-0.5) to[short,*-] ++ (0.5,0) to[short] (1,3)
+        (opamp.out) node[npn,anchor=G,label=right:{$\mathrm T_1$}](T1) {}
+        (T1.S) --++(0.5,0) node[npn,anchor=G,label=right:{$\mathrm T_2$}](T2) {}
+        (T1.D) |-
+        (T2.D|-0,3.5) to[resistor,R=$R_3$,*-o]
+        ++(0,2) node[right]{$+V\+_CC_$}
+        (T2.D) -- (T2.D|-0,3.5)
+        (opamp.-) to[short,*-] (Rb|-T2.S) to[resistor,R=$R\+_f_$,-*] (T2.S)
+        to[short,-o] ++(1,0) node[right] {$v\+_o_$}
+        (T2.S) to[resistor,R=$R_4$,-o]
+        ++(0,-2) node[right] {$-V\+_EE_$}
+        ;
+    \end{tikzpicture}
+\end{center}
+\par
+\newprobheader{(3)}%
+a-d, b-c, e-j, i-g.\vspace{-2\baselineskip}
+\begin{center}
+    \begin{tikzpicture}[yscale=0.9]
+        \draw
+        (0,0) node[rground] {} -- 
+        (0,2) node (b) {}
+        (1,3) node (a) {} to[resistor,R=$R_1$] node(Rb) {}
+        (3,3) node[op amp,anchor=+,yscale=-1] (opamp) {}
+        (opamp.-) to[resistor,R=$R_2$] ++(-2,0) node (R2in) {}
+        (R2in-|0,2) ++ (0,-0.5) to[european voltage source,v<=$v\+_s_$] (0,3.5)
+        (0,3.5) --++(0.5,0) to[short] (R2in)
+        (R2in-|0,2) ++ (0,-0.5) to[short,*-] ++ (0.5,0) to[short] (1,3)
+        (opamp.out) node[npn,anchor=G,label=right:{$\mathrm T_1$}](T1) {}
+        (T1.S) --++(0.5,0) node[npn,anchor=G,label=right:{$\mathrm T_2$}](T2) {}
+        (T1.D) |-
+        (T2.D|-0,3.5) to[resistor,R=$R_3$,*-o]
+        ++(0,2) node[right]{$+V\+_CC_$}
+        (T2.D) -- (T2.D|-0,3.5)
+        (opamp.+) to[short,*-] (opamp.+|-0,4) to[resistor,R=$R\+_f_$] (7,4) to[short,-*] (7,3.5)
+        (T2.S) to[short,-o] ++(1,0) node[right] {$v\+_o_$}
+        (T2.S) to[resistor,R=$R_4$,-o]
+        ++(0,-2) node[right] {$-V\+_EE_$}
+        ;
+    \end{tikzpicture}
+\end{center}
+\par
+\newprobheader{(4)}%
+a-c, b-d, e-j, i-g.\vspace{-2\baselineskip}
+\begin{center}
+    \begin{tikzpicture}[yscale=0.9]
+        \draw
+        (0,0) node[rground] {} -- 
+        (0,1) node (b) {} to[european voltage source,v<=$v\+_s_$]
+        (0,3) --
+        (1,3) node (a) {} to[resistor,R=$R_1$]
+        (3,3) node[op amp,anchor=+,yscale=-1] (opamp) {}
+        (b) to[resistor,R=$R_2$,*-] ++(2,0) node(Rb) {} |- (opamp.-)
+        (opamp.out) node[npn,anchor=G,label=right:{$\mathrm T_1$}](T1) {}
+        (T1.S) --++(0.5,0) node[npn,anchor=G,label=right:{$\mathrm T_2$}](T2) {}
+        (T1.D) |-
+        (T2.D|-0,3.5) to[resistor,R=$R_3$,*-o]
+        ++(0,2) node[right]{$+V\+_CC_$}
+        (T2.D) -- (T2.D|-0,3.5)
+        %(Rb) to[resistor,R=$R\+_f_$,-*] (T2.S|-Rb)
+        (T2.S) to[short,-o] ++(1,0) node[right] {$v\+_o_$}
+        (T2.S) to[resistor,R=$R_4$,-o]
+        ++(0,-2) node[right] {$-V\+_EE_$}
+        (opamp.+) to[short,*-] (opamp.+|-0,4) to[resistor,R=$R\+_f_$] (7,4) to[short,-*] (7,3.5)
+        ;
+    \end{tikzpicture}
+\end{center}
+\newprob{8.2.1}%
+$\displaystyle v\+_id_ = v\+_o_/A_v = \boxed{\SI{1}{\milli\volt}.}$\\
+$\displaystyle v\+_f_ = F_v v_o = \boxed{\SI{0.099}{\volt}.}$\\
+$\displaystyle v\+_i_ = v\+_id_ + v\+_f_ = \boxed{\SI{0.1}{\volt}.}$
+\newprob{8.2.2}%
+$A_2$的闭环增益为$\displaystyle A\+_2f_ = \frac{A_2}{1+A_2F_2}$.\\
+若$F_1$不存在, 则增益为$\displaystyle A\+_o_ = A_1 A\+_2f_$.\\
+故总的闭环增益为$\displaystyle A\+_f_ = \frac{A\+_o_}{1+A\+_o_F_1} = \boxed{\frac{A_1A_2}{1+A_2F_2 + A_1A_2F_1}.}$
+\newprob{8.2.3}%
+$\displaystyle F = \frac{R_1}{R_1+R\+_f_} = \boxed{0.0979.}$\\
+$\displaystyle A\+_\mathnormal{v}f_ = \frac{A\+_\mathnormal{v}o_}{1+A\+_\mathnormal{v}o_F_v} = \boxed{10.2.}$
+
+\end{document}

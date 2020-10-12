@@ -1,0 +1,255 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage[sensei=丁泽军,gakka=计算物理学,section=MonteCarlo,gakkabbr=CP]{styles/kurisu}
+\usepackage{van-de-la-illinoise}
+\renewcommand{\mod}{\mathbin{\mathrm{mod}}}
+
+\begin{document}
+
+\section{Monte Carlo方法} % (fold)
+\label{sec:monte_carlo方法}
+
+\subsection{随机数} % (fold)
+\label{sub:随机数}
+
+\subsubsection{随机数产生器} % (fold)
+\label{ssub:随机数产生器}
+
+真随机数要求
+\begin{cenum}
+    \item 结果不可预测: 无周期性.
+    \item 独立性.
+\end{cenum}
+
+通常随机数产生器产生均匀分布的随机数. 而产生一定概率分布的随机变量算法称为随机抽样. \gloss{PRNG}, 即伪随机数产生器, 是由数学方法产生的数字序列.
+
+\begin{ex}
+    Von Neumann提出的平方取中法是一种伪随机数算法.
+\end{ex}
+
+一般的随机数产生算法形如
+\[ I_{n+1} = f\pare{I_n},\quad x_n = g\pare{I_n}, \]
+其中$I_n$是随机整数, $I_0$是种子, 而$x_n$是随机数. 由鸽笼原理, 伪随机数必定具有周期性.
+\begin{definition}[Lehmer线性同余法产生器, LCG]
+    \[ I_{n+1} = aI_n + c \mod m,\quad x_n = I_n / m,\quad I \in \lbr{0,m-1}. \]
+    其中$m$谓modulus, $a$谓multiplier, 而$c$谓increment, 都是整数.
+\end{definition}
+同余生成器会产生Marsaglia效应, 即生成的点会分布在等间距分布的若干平面上.
+\begin{definition}[16807产生器]
+    具有全周期$\lbr{0,m-1}$, 以及统计随机性和高效性. 例如$a=48271$和$a=69621$. 当$a=16807$时谓16807产生器.
+\end{definition}
+Schrage方法将$m$先表示为
+\[ m = aq + r,\quad q = \brac{m/a},\quad r = m \mod a. \]
+则
+\begin{equation*}
+    az \mod m = \begin{cases}
+        a\pare{z\mod q} - r\brac{r/q}, & r\ge 0,\\
+        a\pare{z\mod q} - r\brac{r/q} + m, & \mathrm{otherwise}.
+    \end{cases}
+\end{equation*}
+\par
+为了避免随机数的周期性的问题, 使用广义线性同余法,
+\[ I_n = f\pare{I_{n-1},\cdots,I_{n-k}} \mod m. \]
+例如多递归产生器(MRG)
+\[ I_n = \pare{a_1I_{n-1} + \cdots + a_k I_{n-k}}\mod m, \quad x_n = I_n/m. \]
+需要$k$个种子值$I_{0},\cdots,I_{k-1}$. 最大可能周期$m^k - 1$.
+\par
+Tausworthe位移计数器产生器(Shift registor generator)
+\[ I_n = I_{n-p} \oplus I_{n-q}, \]
+其中$\oplus$表示XOR. 可以选择$p^2+q^2+1$为质数的$p,q$. 例如R250产生器选择$p=250$, $q=103$.
+\par
+更一般地, 有Fibonacci延迟产生器,
+\[ I_n = I_{n-p} \otimes I_{n-q} \mod m, \]
+其中$\otimes$可以是任何二元操作符, 而$p,q$表示延迟.
+
+% subsubsection 随机数产生器 (end)
+
+\subsubsection{伪随机数的检验} % (fold)
+\label{ssub:伪随机数的检验}
+
+\paragraph{独立性测试} % (fold)
+\label{par:独立性测试}
+
+间距为$l$的自相关函数为
+\[ C\pare{l} = \frac{\expc{x_i x_{i+l}} - \expc{x_i}^2}{\expc{x_i^2} - \expc{x_i}^2},\quad \expc{x_i} = \rec{N}\sum_{i=1}^N x_i. \]
+相关系数的一般定义为
+\[ C\pare{x,y} = \frac{\expc{xy} - \expc{x}\expc{y}}{\sqrt{\expc{x^2} - \expc{x}^2} \sqrt{\expc{y^2} - \expc{y}^2}}, \]
+$C\in \pare{-1,1}$, 越接近$\pm 1$则相关性越好, 而越接近$0$则相关性越差. 间距为$l$的自相关函数即
+\[ C\pare{x_i, x_{i+l}}. \]
+理想情况应当有
+\[ C\pare{l} = 0,\quad \abs{C\pare{l}} = O\pare{\rec{\sqrt{N}}}. \]
+
+% paragraph 独立性测试 (end)
+
+\paragraph{均匀性测试} % (fold)
+\label{par:均匀性测试}
+
+将$\brac{0,1}$划分为$k$个子区间, 定义
+\[ \chi^2 = \sum_{i=1}^k \frac{\pare{o_i - e_i}^2}{e_i}. \]
+其中$\chi^2$变量满足分布
+\[ P\pare{\chi^2\le x\vert \nu} = \rec{2^{\nu/2}\Gamma\pare{\nu/2}}\int_0^x t^{\pare{\nu-2}/2}e^{-t/2}\,\rd{t}, \]
+其中$\nu = k-1$是自由度.
+
+% paragraph 均匀性测试 (end)
+
+\par
+也可以使用矩测试,
+\[ \expc{x^k} = \rec{k+1},\quad \abs{\expc{x^k} - \rec{k+1}} \approx O\pare{\rec{\sqrt{N}}}, \]
+
+% subsubsection 伪随机数的检验 (end)
+
+\subsubsection{一般分布的随机数产生器} % (fold)
+\label{ssub:一般分布的随机数产生器}
+
+\paragraph{直接抽样法} % (fold)
+\label{par:直接抽样法}
+
+直接抽样法需要对CDF求逆.
+
+% paragraph 直接抽样法 (end)
+
+\paragraph{离散情形} % (fold)
+\label{par:离散情形}
+
+概率密度函数
+\[ p\pare{x} = \sum_i p_i\delta\pare{x-x_i}. \]
+设CDF为$F\pare{x}$, $F_0 = 0$且$F_i = p_1 + \cdots + p_i$, 又设$U\brac{0,1}$随机数为$u$, 若
+\[ F_{i-1} \le u \le F_{i} \]
+则取随机数$x = x_i$, 有$P\pare{x=x_i} = p_i$.
+
+% paragraph 离散情形 (end)
+
+\paragraph{连续情形} % (fold)
+\label{par:连续情形}
+
+设$U\pare{0,1}$随机数为$u$, 则相应的$X$为$x = F^{-1}\pare{u}$, 其中$F$为CDF.
+
+% paragraph 连续情形 (end)
+
+\begin{sample}
+    \begin{ex}
+        为了获得$U\brac{a,b}$, 由
+        \[ F = \frac{x-a}{b-a},\quad a<x<b, \]
+        可得
+        $x = \pare{b-a}\pare{u+a}$.
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        指数分布$\displaystyle f\pare{x} = \rec{\lambda} e^{-x/\lambda}$,
+        \[ F\pare{x} = 1-e^{-x/\lambda}, \]
+        故
+        \[ x = -\lambda \ln\pare{1-u}, \]
+        或等效为
+        \[ x = -\lambda \ln {u}. \]
+    \end{ex}
+\end{sample}
+\begin{sample}
+    \begin{ex}
+        散射方位角的余弦分布
+        \[ f\pare{x} = \rec{\pi \sqrt{1-x^2}},\quad -1\le x\le 1, \]
+        有
+        \[ F\pare{x} = \rec{\pi} \arcsin x + \half. \]
+        从而
+        \[ x = \sin \pare{\pi u - \frac{\pi}{2}}. \]
+        可以等效为
+        \[ x = \cos \pi u,\quad x = \sin 2\pi u,\quad x = \cos 2\pi u. \]
+    \end{ex}
+\end{sample}
+
+\paragraph{变换抽样法} % (fold)
+\label{par:变换抽样法}
+
+设有$X\sim f\pare{x}$, $Y\sim g\pare{y}$, 且$x$到$y$有一一对应关系, 则
+\[ f\pare{x}\,\rd{x} = g\pare{y}\,\rd{y}. \]
+\begin{sample}
+    \begin{ex}
+        设粒子在半径为$1$的圆环上均匀分布, 则
+        \[ f\pare{\varphi} = \rec{2\pi}. \]
+        在$x$上的分布设为$g\pare{x}$, 则
+        \[ g\pare{x}\,\rd{x} = 2f\pare{\varphi}, \]
+        其中$x = \cos\varphi$, 因子$2$来源于每个$x$有两个$\varphi$与之对应. 故
+        \[ g\pare{x} = \rec{\pi \sqrt{1-x^2}}. \]
+    \end{ex}
+\end{sample}
+$x\mapsto y$的目的是令$x$的非均匀分布$f\pare{x}$转化为$y$的均匀分布$g\pare{y}$.
+\[ p\pare{x} = g\pare{y}\abs{\+dxdy},\quad g\pare{y} = 1, \]
+即
+\[ p\pare{x} = \+dxdy. \]
+推广到多变量情形,
+\[ x = x\pare{u,v},\quad y = y\pare{u,v}, \]
+且
+\[ f\pare{x,y} \rightarrow g\pare{u,v}, \]
+要求$g\pare{u,v}$为均匀分布, 即$g\pare{u,v} = I\pare{\brac{0,1}\times \brac{0,1}}$.
+\[ f\pare{x,y} = \abs{\frac{\partial \pare{u,v}}{\partial \pare{x,y}}}g\pare{u,v} = \abs{\frac{\partial \pare{u,v}}{\partial \pare{x,y}}}. \]
+
+% paragraph 变换抽样法 (end)
+
+\begin{sample}
+    \begin{ex}[Box-Muller抽样]
+        设$f_1\pare{x}$为标准正态分布
+        \[ f_1\pare{x} = \rec{\sqrt{2\pi}}\exp\pare{-\frac{x^2}{2}}, \]
+        记$\varphi = 2\pi \nu$, $r = \sqrt{-2\ln u}$, 则
+        \[ \begin{cases}
+            x = \sqrt{-2\ln u}\cos 2\pi \nu,\\
+            y = \sqrt{-2\ln u}\sin 2\pi \nu.
+        \end{cases} \]
+        可以验证$x$和$y$都满足标准正态分布,
+        \[ f\pare{x,y} = \abs{\frac{\partial \pare{u,v}}{\partial \pare{x,y}}} = \rec{2\pi} \exp\curb{-\frac{x^2+y^2}{2}}. \]
+    \end{ex}
+\end{sample}
+
+\paragraph{Box-Muller抽样} % (fold)
+\label{par:box_muller抽样}
+
+Box-Muller抽样可以推导如下,
+\begin{align*}
+    f\pare{x,y}\,\rd{x}\,\rd{y} &= f\pare{r\cos\varphi,r\sin\varphi} r\,\rd{r}\,\rd{\varphi} \\
+    &= \half f\pare{\sqrt{s} \cos\varphi, \sqrt{s}\sin\varphi}\,\rd{s}\,\rd{\varphi} \\
+    &= \half \times \rec{2\pi} e^{-s/2}\,\rd{s}\,\rd{\varphi}.
+\end{align*}
+从而$\varphi$应满足$\brac{0,2\pi}$上的均匀分布而$s$应满足$\displaystyle \lambda = \half$的指数分布.
+
+% paragraph box_muller抽样 (end)
+
+\paragraph{Marsaglia抽样} % (fold)
+\label{par:marsaglia抽样}
+
+Marsaglia抽样法(舍选法)在$\brac{0,1}\times \brac{0,1}$上对$x$和$y$坐标分别取均匀分布随机数, 若$x^2+y^2 >1$则舍弃之, 否则
+\[ \frac{x}{\sqrt{x^2+y^2}} = \cos\varphi, \quad \frac{y}{\sqrt{x^2+y^2}} = \sin\varphi \]
+即可得$\varphi$为均匀分布下的$\cos\varphi$和$\sin\varphi$.
+\par
+舍选法的随机抽样点被接受的概率正比于$p\pare{x}$.
+\par
+一般情形下, 对于具有PDF
+\[ f\pare{x} \rd{x} = \frac{\displaystyle \int_{-\infty}^{h\pare{x}} g\pare{x,t}\,\rd{t}}{\displaystyle \int_{-\infty}^{+\infty}\,\rd{s}\,\int_{-\infty}^{h\pare{s}} g\pare{s,t}\,\rd{t}}\,\rd{x} = \frac{P\pare{s\in \pare{x,x+\rd{x}}}\cdot P\pare{t<h\pare{x}\vert s=x}}{P\pare{t<h\pare{s}}} \]
+的随机变量, 由$g\pare{s,t}$产生相应的$\pare{s,t}$, 并判断$t < h\pare{s}$是否成立, 如果成立则$s$为$x$的随机抽样, 因为
+\[ P\pare{s|t<h\pare{s}} = \frac{P\pare{s \land \pare{t<h\pare{s}}}}{P\pare{t<h\pare{s}}} = f\pare{s}. \]
+\begin{sample}
+    \begin{ex}
+        余弦分布随机变量$X$可写成条件形式,
+        \[ s = \frac{x^2 - y^2}{x^2 + y^2} = \cos 2\theta,\quad \theta \in \pare{-\pi/2,\pi/2}, \]
+        其中
+        \[ x \sim U\pare{0,1},\quad y \sim U\pare{-1,1}, \]
+        且$t = x^2 + y^2 < 1$时方接纳随机数.
+    \end{ex}
+\end{sample}
+若$p\pare{x}$占矩形区域的面积很小, 则简单抽样法效率低. 取已知积分的$\phi\pare{x}$覆盖$f\pare{x}$并按照$\Phi\pare{x}$做简单随机抽样, 之后再舍选.
+\par
+\begin{sample}
+    \begin{ex}
+        半Gauss分布可以使用舍选法抽样,
+        \[ f\pare{x} = \sqrt{\frac{2}{\pi}}e^{-x^2/2},\quad \phi\pare{x} = \sqrt{\frac{2}{\pi}}\exp\pare{\half}\exp\pare{-x}, \]
+        选取$\xi$为$\phi$, 即指数分布的抽样.
+    \end{ex}
+\end{sample}
+
+% paragraph marsaglia抽样 (end)
+
+% subsubsection 一般分布的随机数产生器 (end)
+
+% subsection 随机数 (end)
+
+% section monte_carlo方法 (end)
+
+\end{document}

@@ -1,0 +1,241 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+
+\definecolor{graybg}{RGB}{242,241,236}
+\definecolor{titlepurple}{RGB}{138,47,57}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\newcommand{\emphbox}[1]{\colorbox{lightgray!20}{$\displaystyle #1$}}
+\newcommand*{\mysans}{\fontfamily{phv}\selectfont}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+
+\usepackage{stackengine}
+\stackMath
+\usepackage{scalerel}
+\usepackage[outline]{contour}
+
+\newlength\thisletterwidth
+\newlength\gletterwidth
+\newcommand{\leftrightharpoonup}[1]{%
+{\ooalign{$\scriptstyle\leftharpoonup$\cr%\kern\dimexpr\thisletterwidth-\gletterwidth\relax
+$\scriptstyle\rightharpoonup$\cr}}\relax%
+}
+\def\tensor#1{\settowidth\thisletterwidth{$\mathbf{#1}$}\settowidth\gletterwidth{$\mathbf{g}$}\stackon[-0.1ex]{\mathbf{#1}}{\boldsymbol{\leftrightharpoonup{#1}}}  }
+\def\mitensor#1{\stackon[-0.1ex]{\+v#1}{\boldsymbol{\leftrightharpoonup{#1}}} }
+\def\onedot{$\mathsurround0pt\ldotp$}
+\def\cddot{% two dots stacked vertically
+:}%
+\definecolor{emphgreen}{RGB}{238,255,207}
+\definecolor{warningred}{RGB}{159,57,61}
+%\newcommand{\resume}[1]{\par
+%\noindent\colorbox{emphgreen}{#1}}
+
+\begin{document}
+
+\begin{multicols*}{3}[\centerline{\titlefont 数学的基礎及び電磁気学的基礎}]
+\raggedcolumns%
+\newheader{ビクトル解析公式集}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{BAC-CAB} && \+vf\times\pare{\+vg\times \+vh} = \+vf\cdot\pare{\+vh\+vg - \+vg\+vh} && \\
+        & && = \pare{\+vg\+vh - \+vh\+vg}\cdot \+vf = \pare{\+vh\times \+vg}\times \+vf && \\
+        & \mathitem{ダブルドット積} && \tensor{T}\cddot \tensor{T} = \trace \tensor{T},\quad \pare{\+vf\+vg}\cddot \tensor{I} = \+vf\cdot \+vg && \\
+        & \makebox[0pt][l]{\raisebox{-.6\baselineskip}{\color{warningred} \text{一般的に}$\tensor{T}\times \+vf \neq \pm \+vf\times \tensor{T}$}}\mathitem{クロス積} && \begingroup\setlength\arraycolsep{2pt}\renewcommand*{\arraystretch}{0.5} \+vf\times \tensor{I} = \tensor{I}\times \+vf = \begin{pmatrix}
+            0 & -f_3 & f_2 \\
+            f_3 & 0 & -f_1 \\
+            -f_2 & f_1 & 0
+        \end{pmatrix} \endgroup && \\
+        & \+:c5l{\qquad $\+vf\times \tensor{I}\cdot \+vg = \+vf\times \+vg,\quad \tensor{I}\times \pare{\+vj\times \+vr} = \+vr\+vj - \+vj\+vr$}
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \+:c5l{$\emphbox{\grad\pare{\+vf\cdot \+vg} = \begin{array}[t]{@{}l}
+            \pare{\+vf\+v\cdot\grad}\+vg + \pare{\+vg\+v\cdot \grad}\+vf\\ + \+vf\times\pare{\curl \+vg} + \+vg\times\pare{\curl \+vf}
+        \end{array}}$} \\
+        & \+:c5l{$\emphbox{\curl\pare{\+vf\times \+vg} = \pare{\+vg\+v\cdot \grad + \div \+vg}\+vf - \pare{\+vf\+v\cdot\grad + \div \+vf}\+vg} $} \\
+        & \+:c5l{$\emphbox{\div\pare{\+vf\times \+vg} = \+vg\cdot\pare{\curl \+vf} - \+vf\cdot\pare{\curl \+vg}}$ } \\
+        & \+:c5l{$\curl\pare{\curl \+vF} = \grad\pare{\div \+vA} - \laplacian \+vA$ } \\
+        %& && \div\pare{\+vf\+vg} = \pare{\div \+vf}\+vg + \+vf\+v\cdot\grad \+vg && \\
+        %& && \div\pare{\varphi\tensor{T}} = \pare{\grad\varphi}\cdot \tensor{T} + \varphi \div \tensor{T} && \\
+        & \+:c5l{$\displaystyle \div\pare{\+vf\+vg\+vh} = \pare{\div \+vf}\+vg\+vh + \+vf\+v\cdot\pare{\grad \+vg} \+vh + \+vg\pare{\+vf\+v\cdot \grad} \+vh$} \\
+        %& \mathitem{Poincar\'e} && \curl \grad \varphi = 0,\quad \div\pare{\curl \+vA} = 0 && \\
+        & \mathitem{特例} && \grad \+vr = \tensor{I},\quad \div\pare{\varphi \tensor{I}} = \grad \varphi && \\
+        & \mathheadcomment{対称$\tensor{T}$} && \+vr\times \pare{\div \tensor{T}} = -\div\pare{\tensor{T}\times \+vr} && \\
+        & && \div\pare{\+vj\+vr\+vr} = -\pare{\partial_t \rho}\+vr\+vr + \+vj\+vr + \+vr\+vj && \\
+        & \mathitem{連鎖律} && \grad * \varphi\pare{u} = \pare{\grad * u}\varphi'\pare{u} && \\
+        \+:c4{l}{$\displaystyle \mathitem{Taylor}\  \varphi\pare{\+vr+\+v\epsilon} = \brac{1+\+v\epsilon\+v\cdot\grad + \pare{\+v\epsilon\+v\epsilon\cddot \grad\grad}/2! + \cdots}\varphi\pare{\+vr}$} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{Stokes} && \int \rd{V}\,\grad * = \oiint_{\partial V}\rd{\+v\sigma}\,*,\ \oint_{\Sigma}\pare{\rd{\sigma}\times \grad}* = \oint_{\partial\Sigma}\rd{\+vl}\,* && \\
+        & \mathitem{Green} && \int_V \rd{V}\pare{\varphi \laplacian \psi - \psi \laplacian\varphi} = \oint_{\partial V} \rd{\sigma}\pare{\varphi\partial_n \psi - \psi\partial_n \varphi} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{$\delta\pare{\+vr}$} && \delta\pare{f\pare{x}} = \sum_k \frac{\delta\pare{x-x_k}}{\abs{f'\pare{x_k}}},\  \delta\pare{\+vr-\+vr'} = \frac{\delta^3\pare{u_i - u'_i}}{h_1h_2h_3} && \\
+        & \mathitem{特例} && \laplacian\brac{-1/\pare{4\pi r}} = \div \brac{{\+ur}/\pare{4\pi r^2}} = \delta\pare{\+vr} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{電磁ポテンシャル}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{電磁場} && \begin{array}[t]{l!{\color{lightgray}|}l}
+            \+vE = -\grad\varphi - \partial_t \+vA & \+vB = \curl \+vA
+        \end{array} && \\
+        & \mathitem{ゲージ変換} && \begin{array}[t]{l!{\color{lightgray}|}l}
+            \varphi' = \varphi - \partial_t \psi & \+vA' = \+vA + \grad \psi
+        \end{array} && \\
+        & \+:c5l{\mathitem{Lorentz} $\displaystyle \div \+vA + \partial_t \varphi/c^2 = 0 \Rightarrow \Box^2\pare{\varphi,\+vA} = -\pare{{\rho}/{\epsilon_0},\mu_0 \+vj}$}
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{多重極展開}
+\begin{cheatresume}
+\begin{flalign*}
+    & \mathitem{電場} && Q = \int \rd{q},\  \+vp = \int \+vr'\,\rd{q},\  \tensor{D} = \int \pare{3\+vr'\+vr'-r'^2 \tensor{I}}\,\rd{q} && \\
+    & \+:c5l{ $\displaystyle \varphi = \rec{4\pi\epsilon_0}\pare{\frac{Q}{r} + \frac{\+vp\cdot \+ur}{r^2} + \half \frac{\+ur\cdot \tensor{D}\cdot \+ur}{r^3} + \cdots} $} \\
+    & \+:c5l{ $\displaystyle \phantom{\varphi} = \rec{4\pi\epsilon_0}\sum_{l,m} A_{lm}\pare{r^l + \rec{r^{l+1}}}Y_l^m\pare{\+ur} $ }\\
+    & \+:c5l{$\displaystyle \rightarrow \rec{4\pi\epsilon_0}\sum_{l} A_{l}\pare{r^l + \rec{r^{l+1}}}P_l\pare{\cos\theta}\leftarrow A_l = \int \rd{q}\, r'^l P_l$} \\
+    & \+:c5l{\mathitem{電気スカラーポテンシャル}\quad $\+vE = -\grad \varphi$} \\
+    & \+:c5l{$\displaystyle \laplacian \varphi = -\rho_0/\epsilon \quad \varphi_1 = \varphi_2 \quad \epsilon_1 \partial_n\varphi_1 = \epsilon_2 \partial_n\varphi_2$} \\
+    & \mathitem{磁場} && \+vA \approx \frac{\mu_0 \+vm\times \+ur}{4\pi r^2},\quad \+vm = \half \int \rd{V}\, \+vr\times \+vj && \\
+    & \+:c5l{\mathitem{磁気スカラーポテンシャル}\quad $\+vH = -\grad \psi$} \\
+    & \+:c5l{$\displaystyle \begin{array}{@{}r@{\,}lr@{\,}lr@{\,}l}
+        \laplacian \psi &= \div \+vM & \psi_1 &= \psi_2 & \partial_n \psi_1 - \partial_n \psi_2 &= \+un\cdot\pare{\+vM_1 - \+vM_2} \\
+        \laplacian \psi &= 0 & \psi_1 &= \psi_2 & \mu_1 \partial_n\psi_1 &= \mu_2 \partial_n\psi_2 \\
+    \end{array}$} 
+\end{flalign*}
+\end{cheatresume}
+\newheader{直交座標系}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{勾配} && \grad\varphi = \sum_a \pare{{\+uu_a}/{h_a}}\partial_a{\varphi} && \\
+        & \+:c5l{$\displaystyle \grad u_a = {\+uu_a}/{h_a},\  \curl\pare{{\+uu_a}/{h_a}} = 0,\  \div \pare{{h_a\+uu_a}/{H}} = 0$}
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{$\laplacian f$} && = \rec{s}\+DsD{}\pare{s\+DsDf} + \rec{s^2}\+D{\varphi^2}D{^2f} + \+D{z^2}D{^2 f} && \\
+        \+:c4{l}{$\displaystyle = \rec{r^2}\+DrD{}\pare{r^2\+DrDf} + \rec{r^2\sin\theta} \+D\theta D{}\pare{\sin\theta \+D\theta Df} + \rec{r^2\sin^2\theta}\+D{\varphi^2}D{^2f}$} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{Green関数}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Dirichlet} && \laplacian G_D\pare{\+vr;\+vr'} = -\delta\pare{\+vr-\+vr'}/\epsilon_0,\  G_D\pare{\+vr;\+vr'}\vert_{\+vr\in \partial V} = 0 && \\
+        & \+:c5l{ $\varphi = \displaystyle \int_V \rd{V'}\,\rho\pare{\+vr'}G_D\pare{\+vr;\+vr'} - \epsilon_0 \int_{\partial V} \rd{\sigma'}\,\varphi\pare{\+vr'}\+D{n'}D{G_D\pare{\+vr;\+vr'}}$ }
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{鏡像法} && \mathheadcomment{球面}\quad Q' = -aQ/r',\quad r'' = a^2/r' && \\
+        & \mathitem{表面磁場} && \mu \rightarrow \infty \Rightarrow B_\parallel = 0,\quad \text{\color{lightgray}導体} \Rightarrow B_\perp = 0 &&
+    \end{flalign*}
+\end{cheatresume}
+\columnbreak
+\newheader{\mysans{Maxwell}方程式}
+\begin{cheatresume}
+    \begin{flalign*}
+        \+:c4{l}{$\begin{array}[t]{@{}l}
+            \mathitem{真空中}
+        \end{array}\quad\begin{array}[t]{ll}
+            \displaystyle \div \+vE = {\rho}/{\epsilon_0} & \curl \+vE = -\partial_t \+vB \\
+            \div \+vB = 0 & \div \+vB = \mu_0 \+vj + \mu_0\epsilon_0 \partial_t \+vE
+        \end{array}$} && \\
+        \+:c4{l}{$\mathitem{境界条件}\  \begin{array}[t]{ll}
+            \displaystyle \+un\cdot \pare{\+vE_2 - \+vE_1} = {\sigma}/{\epsilon_0} & \+un\times \pare{\+vE_2 - \+vE_1} = 0 \\
+            \+un\cdot \pare{\+vB_2 - \+vB_1} = 0 & \+un\times \pare{\+vB_2 - \+vB_1} = \mu_0 \+v\kappa
+        \end{array}$} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        \+:c4{l}{$\begin{array}[t]{@{}l}
+            \mathitem{媒質中}
+        \end{array}\quad\begin{array}[t]{ll}
+            \displaystyle \div \+vD = \rho_0 & \curl \+vE = -\partial_t \+vB \\
+            \div \+vB = 0 & \div \+vH = \+vj_0 + \partial_t \+vD
+        \end{array}$} && \\
+        \+:c4{l}{$\mathitem{境界条件}\  \begin{array}[t]{ll}
+            \displaystyle \+un\cdot \pare{\+vD_2 - \+vD_1} = \sigma_0 & \+un\times \pare{\+vE_2 - \+vE_1} = 0 \\
+            \+un\cdot \pare{\+vB_2 - \+vB_1} = 0 & \+un\times \pare{\+vH_2 - \+vH_1} = \+v\kappa
+        \end{array}$} && \\
+        & \smash{\begin{array}[t]{@{}l}
+            \mathitem{定義}
+        \end{array}} && \begin{array}[t]{l@{\ }l}
+            \+vD = \epsilon_0 \+vE + \+vP = \epsilon \+vE & \+vB = \mu_0\pare{\+vH + \+vM} = \mu \+vH \\
+            \rho' = -\div \+vP & \+vj' = \curl \+vM + \partial_t \+vP
+        \end{array} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        &\+:c5l{ \mathitem{様々な法則}\ $\partial_t \rho + \div \+vJ = 0,\  \+vJ = \sigma \+vE,\  \+vf = \rho \+vE + \+vj\times \+vB$}
+    \end{flalign*}
+\end{cheatresume}
+\newheader{エネルギーと運動量}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \+:c5l{\mathitem{エネルギー}\ $\displaystyle w = \half \epsilon_0 E^2 + \rec{2\mu_0}B^2$ \quad \mathitem{流れ}\ $\displaystyle \+vS = \rec{\mu_0}\+vE\times \+vB$} \\
+        & \mathitem{保存則} && \+dtd{\pare{U+W}} = -\oiint_{\partial V}\rd{\+v\sigma}\cdot \+vS &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{運動量} && \+vg = \epsilon_0 \+vE\times \+vB = \frac{\+vS}{c^2} && \\
+        & \mathitem{Maxwellテンソル} && \tensor{T} = \frac{\epsilon_0}{2} E^2 + \frac{B^2}{2\mu_0} - \epsilon_0 \+vE\+vE - \frac{\+vB\+vB}{\mu_0} && \\
+        & \mathitem{保存則} && \+dtd{\pare{\+vp+\+vG}} = -\oiint_{\partial V}\rd{\+v\sigma}\cdot \tensor{T} &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \+:c5l{\mathitem{角運動量}\quad $\displaystyle \+vl\+_em_ = \+vr\times \+vg$\quad \mathitem{流れ}\quad $\displaystyle \tensor{R} = -\tensor{T}\times \+vr$} \\
+        & \mathitem{保存則} && -\+dtd{\+vL\+_em_} = -\oiint_{\partial V}\rd{\+v\sigma}\cdot \tensor{R} + \+v\tau &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{線型媒介中} && \+vD = \mitensor{\varepsilon}\pare{\+vr}\cdot \+vE,\quad \+vB = \mitensor{\mu}\pare{\+vr}\cdot \+vH && \\
+        & \+:c5l{ \mathitem{エネルギー} $\displaystyle w = \half \+vD\cdot \+vE + \rec{2} \+vB\cdot \+vH$\quad \mathitem{流れ} $\displaystyle \+vS = \+vE\times \+vH$ } \\
+        & \mathitem{保存則} && \+vE\cdot \+vj_0 = -\div \+vS - \partial_t w &&
+    \end{flalign*}
+    \midbreak
+    \begin{flalign*}
+        & \mathitem{電気多極子} && U = Q\varphi\pare{\+vr} -\+vp\cdot \+vE - \tensor{D}:\grad \+vE\pare{\+vr}/6 && \\
+        & \mathitem{磁気双極子} && W = \+vm\cdot \+vB,\quad U = -\+vm\cdot \+vB &&
+    \end{flalign*}
+\end{cheatresume}
+\end{multicols*}
+
+\end{document}

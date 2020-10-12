@@ -1,0 +1,173 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage{cmbright}
+\usepackage{nccmath}
+\usepackage[paperheight=297mm,paperwidth=240mm,top=.2in,left=.1in,right=.1in,bottom=.2in, landscape]{geometry}
+\usepackage{tensor}
+\usepackage{colortbl}
+
+\definecolor{graybg}{RGB}{228,235,243}
+\definecolor{titlepurple}{RGB}{150,131,104}
+\definecolor{shadegray}{RGB}{102,119,136}
+\definecolor{itemgray}{RGB}{163,149,128}
+\definecolor{mathnormalblack}{RGB}{0,0,0}
+\pagecolor{graybg}
+
+\setCJKmainfont{STHeitiSC-Light}
+\setmainfont{Arial}
+
+\usepackage{multicol}
+\setlength{\columnsep}{.1in}
+
+\newcommand{\raisedrule}[2][0em]{\qquad}
+%\leaders\hbox{\rule[#1]{1pt}{#2}}\hfill}
+\newcommand{\wdiv}{\,·\,}
+
+\setlength{\parindent}{0pt}
+
+\setCJKfamilyfont{pfsc}{STYuanti-SC-Regular}
+\newcommand{\titlefont}{\CJKfamily{ttt}}
+\setCJKfamilyfont{ttt}{STFangsong}
+\newcommand{\mathtextfont}{\CJKfamily{ttt}}
+\def\bili#1#2{#2}
+
+\newdimen\indexlen
+\def\newheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=.2,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\newlongheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\Large\color{titlepurple} #1\qquad}}
+\vspace{1em}
+{\Large\color{titlepurple} #1\qquad}
+\raisebox{.5em}{\tikz \fill[titlepurple,opacity=0,path fading=east] (0,0.05em) rectangle (\dimexpr\linewidth-\indexlen\relax,0em);}
+}
+\def\mathitem#1{\text{\color{itemgray}#1}}
+\def\mathcomment#1{\text{\color{lightgray}\quad \texttt{\#}\kern-0pt#1}}
+\def\mathheadcomment#1{\text{\color{lightgray}\texttt{\#}\kern-0pt#1}}
+\def\midbreak{\smash{\raisebox{1.5em}{\smash{\tikz \path[opacity=.2,left color=white,right color=white,middle color=black] (0,0.05em) rectangle (\linewidth,0em);}}}
+\vspace{-4em}}
+\newtcolorbox{cheatresume}{enhanced, arc=.5pt, left=.5em, frame hidden, boxrule=0pt, colback=white, fuzzy halo=.05pt with lightgray, shadow={.4pt}{-.4pt}{0pt}{fill=shadegray,opacity=0.3}}
+\definecolor{CJKblack}{RGB}{72,72,72}
+
+\begin{document}
+
+\begin{multicols*}{2}[\centerline{\titlefont 様々なGreen関数及び応用}]
+\raggedcolumns%
+\newheader{様々ナGreen関数}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Laplace方程式} && \laplacian G\pare{\+vr;\+vr'} = -\delta\pare{\+vr - \+vr'} && \\
+        & \+:c5l{$\displaystyle \begin{array}{@{}lp{5.5cm}lp{6.5cm}}
+            \mathitem{2D} & $\displaystyle \boxed{G\pare{\+vr;\+vr'} = -\rec{2\pi}\ln\abs{\+vr - \+vr'}}$ &
+            \mathitem{3D} & $\displaystyle \boxed{G\pare{\+vr;\+vr'} = \rec{4\pi \abs{\+vr - \+vr'}}}$
+        \end{array}$} \\
+        & \mathitem{Helmholtz方程式} && \pare{\laplacian + k^2} G\pare{\+vr;\+vr'} = -\delta\pare{\+vr-\+vr'} && \\
+        & \+:c5l{$\displaystyle \begin{array}{@{}lp{5.5cm}lp{6.5cm}}
+            \mathitem{2D} & $\displaystyle \boxed{G\pare{\+vr;\+vr'} = \rec{4}N_0\pare{k\abs{\+vr - \+vr'}}}$ &
+            \mathitem{3D} & $\displaystyle \boxed{G\pare{\+vr;\+vr'} = \curb{\frac{e^{ik{\abs{\+vr - \+vr'}}}}{\abs{\+vr - \+vr'}}, \frac{e^{-ik{\abs{\+vr - \+vr'}}}}{\abs{\+vr - \+vr'}}}}$
+        \end{array}$} \\
+        & \mathitem{波動方程式} && \pare{\partial_t^2 - a^2\laplacian} G\pare{\+vr,t;\+vr',t'} = \delta\pare{\+vr-\+vr'}\delta\pare{t-t'} && \\
+        & && G\pare{\+vr,t<t';\+vr',t'} = 0,\quad \partial_t G\pare{\+vr,t<t';\+vr',t} = 0 && \\
+        & \+:c5l{$\displaystyle \begin{array}{@{}lp{5.5cm}lp{6.5cm}}
+            \mathitem{2D} & $\displaystyle \boxed{G\pare{\+vr,t;0,0} = \rec{2\pi a} \frac{\Theta\pare{at - r}}{\sqrt{\pare{at}^2 - r^2}}}$ &
+            \mathitem{3D} & $\displaystyle \boxed{G\pare{\+vr,t;0,0} = \rec{4\pi a}\frac{\delta\pare{r - at}}{r} }$
+        \end{array}$} \\
+        & \mathitem{熱方程式-$n$D} && \pare{\partial_t - \kappa\laplacian}G\pare{\+vr,t;\+vr',t'} = \delta\pare{\+vr-\+vr'}\delta\pare{t-t'} && \\
+        & && \abs{G\pare{\infty,t;\+vr',t'}}<\infty,\quad G\pare{\+vr,0;\+vr',t'} = 0 && \\
+        & \+:c5c{$\displaystyle \boxed{G\pare{\+vr,t;\+vr',t'} = \pare{\rec{2\sqrt{\kappa\pi\pare{t-t'}}}}^n\exp\curb{-\frac{\pare{\+vr-\+vr'}^2}{4\kappa\pare{t-t'}}}\Theta\pare{t-t'}}$} \\
+        & \mathitem{Schr\"odinger方程式} && \pare{i\hbar \partial_t - H_x} G\pare{x,t;x',t'} = \delta\pare{x-x'}\delta\pare{t-t'} && \\
+        & \+:c5c{$\displaystyle \boxed{G\pare{x,t;x',t'} = \rec{i\hbar} \Theta\pare{t-t'}K\pare{x,t;x',t'},\quad K\pare{x,t;x',t'} = \bra{x}\hat U\pare{t,t'}\ket{x'}}$} \\
+        & \+:c5l{\mathitem{自由粒子}\quad $\displaystyle K\pare{x,t;x',0} = \brac{{m}/\pare{2\pi i\hbar t}}^{1/2}e^{-m\pare{x-x'}^2/\pare{2i\hbar t}}$} \\
+        & \+:c5l{\mathitem{調和振動子}\quad $\displaystyle K\pare{x,t;x',0} = \pare{\frac{m\omega}{2\pi i\hbar \sin \omega t}}^{1/2}\exp\curb{-\frac{m\omega\brac{\pare{x^2 + x'^2}\cos\omega t-2xx'}}{2i\hbar \sin\omega t}}$}
+    \end{flalign*}
+\end{cheatresume}
+\newheader{基本解}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Duhamel} && \begin{cases}
+            \partial_t u = \+sLu + f,\ u\vert_{\partial D} = 0,\quad u\vert_{t=0} = 0 \\
+            \partial_t v^\tau = \+sLv,\ v^\tau\vert_{\partial D} = 0,\quad v^\tau\vert_{t=\tau} = f\pare{\tau,\+vr}
+        \end{cases} \Rightarrow \begin{array}{@{}r@{}l}
+            u &= \displaystyle \int_0^t {v^\tau}\pare{t,\+vr}\,\rd{\tau} \\
+            &= e^{\+sLt}*f\pare{t,\+vr}
+        \end{array} && \\
+        & \mathitem{$u_t = \+sLu$} && \begin{cases}
+            \displaystyle \partial_t u = \+sL u + f,\quad u\vert_{t=0} = \varphi \\
+            \displaystyle \partial_t U = \+sL U,\quad U\vert_{t=0} = \delta\pare{\+vr}
+        \end{cases} \Rightarrow \begin{array}{@{}l}
+            u\pare{t,\+vr} = U\pare{t,\+vr} * \varphi\pare{\+vr} \\
+            \displaystyle + U\pare{t,\+vr} ** f\pare{t,\+vr}
+        \end{array} && \\
+        & \mathitem{$u_{tt} = \+sLu$} && \begin{cases}
+            \displaystyle \partial_t^2 u = \+sL u + f,\quad u\vert_{t=0} = \varphi, \quad \partial_t u\vert_{v=0} = \psi \\
+            \displaystyle \partial_t^2 U = \+sL U,\quad U\vert_{t=0} = 0,\quad \partial_t U\vert_{t=0} = \delta\pare{\+vr} 
+        \end{cases} \Rightarrow \begin{array}{@{}l}
+            u\pare{t,\+vr} = U\pare{t,\+vr} * \psi\pare{\+vr} \\
+            \displaystyle + \partial_t \brac{U\pare{t,\+vr} * \varphi\pare{\+vr}} \\
+            \displaystyle + U\pare{t,\+vr} ** f\pare{t,\+vr}
+        \end{array} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\columnbreak
+
+\newheader{Green関数ノ求メ方}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{積分変換} && \begin{array}{ccccc}
+            \pare{\partial_t - \kappa\partial_x^2} G = \delta\pare{x,t} & \rightarrow & \pare{\partial_t + \kappa w^2}\tilde{G} = \delta\pare{t} & \rightarrow & \pare{p+\kappa w^2}\tilde{\tilde{G}} = 1 \\
+            \pare{x,t} & F & \pare{w,t} & L & \pare{w,p} \downarrow \\
+            \displaystyle G = \rec{2\sqrt{\pi\kappa t}}e^{-\+/x^2/\pare{4\kappa t}/}\Theta\pare{t} & \leftarrow & \displaystyle \tilde{G} = e^{-\kappa w^2 t}\Theta\pare{t} & \leftarrow & \displaystyle \tilde{\tilde{G}} = \rec{p+\kappa w^2}
+        \end{array}  && \\
+        & \+:c5l{\mathitem{斉次と見なされ}\ $\displaystyle \laplacian G\pare{\+vr} = \delta\pare{\+vr} \Rightarrow G \propto \rec{r}, \quad \int_V \laplacian G\,\rd{\+vr} = \oint_S \+DnD{G}\,\rd{\sigma} = 1 \Rightarrow k = \rec{4\pi}$ } \\
+        & \mathitem{鏡像法} && \mathitem{3D球面}\quad Q' = -\frac{aQ}{r},\quad r' = \frac{a^2}{r}\quad \mathitem{2D球面}\quad Q' = -Q,\quad r' = \frac{a^2}{r} && \\
+        & \mathitem{等角写像} && \func{w\pare{z} = x+iy}{z\in D}{\setcond{w}{\abs{w}<1}},\quad w\pare{x' + iy'} = 0 && \\
+        & && \Rightarrow \boxed{G\pare{x,y;x',y'} = \rec{2\pi}\ln\rec{\abs{w\pare{z}}}} \Rightarrow \laplacian G = -\delta\pare{x-x_0,y-y_0},\ G\vert_{\partial D} = 0 && \\
+        & \mathitem{Fourier} && \begin{cases}
+            \pare{\laplacian + \lambda_n}\psi_n = 0 \\
+            \psi_n\vert_{\partial V} = 0
+        \end{cases} \begin{array}{l}
+            \displaystyle \Rightarrow G\pare{\+vr,\+vr'} = \sum_n \frac{\psi_n^*\pare{\+vr'}\psi_n\pare{\+vr}}{\lambda_n},\  \laplacian G = -\delta\pare{\+vr-\+vr'} \\
+            \displaystyle G = \sum_n \frac{\psi_n^*\pare{\+vr'}\psi_n\pare{\+vr}}{k^2 - \lambda_n},\  \pare{\laplacian + k^2} G = \delta\pare{\+vr-\+vr'}
+        \end{array} &&
+    \end{flalign*}
+\end{cheatresume}
+\newheader{Green関数ノ使イ方}
+\begin{cheatresume}
+    \begin{flalign*}
+        & \mathitem{Poisson方程式} && \begin{cases}
+            \laplacian \varphi\pare{\+vr} = -\rho\pare{\+vr}\\  \varphi\pare{\+vr}\vert_{\partial V} = \varphi_S\pare{\+vr}
+        \end{cases} \xLongrightarrow{} \begin{cases}
+            \laplacian G\pare{\+vr;\+vr'} = -\delta\pare{\+vr-\+vr'}\\  G\pare{\+vr}\vert_{\partial V} = 0 
+        \end{cases}&& \\
+        & && \label{eq:phiByGreen} \boxed{\varphi = \int_V \rd{V'}\,\rho\pare{\+vr'}G\pare{\+vr;\+vr'} - \int_{\partial V}\rd{\sigma'}\, \varphi_S\pare{\+vr'}\+D{n'}D{G\pare{\+vr;\+vr'}}} \tag{1} && \\
+        & \mathitem{Poisson核} && \mathitem{球面}\quad \begin{array}{@{}l}
+            \mathheadcomment{$\+bR^n$内半径$a$の球に対し} \\
+            \mathheadcomment{$\omega_{n-1}$は$S^{n-1}$の表面積}
+        \end{array} -\+D{n'}D{G\pare{\+vr;\+vr'}} = \frac{a^2 - r^2}{a\omega_{n-1}\abs{\+vr - \+vr'}^n} && \\
+        & && \mathitem{上半平面}\quad \mathheadcomment{$\+bR^n$内$H^n$に対し} -\+D{n'}D{G\pare{\+vr;\+vr'}} = \frac{\Gamma\pare{n/2}}{\pi^{n/2}}\frac{z}{\pare{z^2 + s^2}^{n/2}} && \\
+        & \mathitem{Helmholtz方程式} && \text{\color{CJKblack}$\laplacian$を$\pare{\laplacian + k^2}$と替え、\eqref{eq:phiByGreen}がまだ成り立つ.} && \\
+        & \mathitem{波動方程式} && \begin{cases}
+            \pare{\partial_t^2 - a^2\laplacian} u = f \\
+            \displaystyle \pare{\alpha\partial_n u + \beta u}\vert_{\partial V} = \theta \\
+            u\vert_{t=0} = \varphi,\ \partial_t u\vert_{t=0} = \psi
+        \end{cases} \Rightarrow \begin{cases}
+            \pare{\partial_t^2 - a^2\laplacian} u = \delta\pare{\+vr-\+vr_0,t-t_0} \\
+            \displaystyle \pare{\alpha\partial_n u + \beta u}\vert_{\partial V} = 0 \\
+            u\vert_{t=0} = 0,\quad \partial_t u\vert_{t=0} = 0
+        \end{cases} && \\
+        & \+:c3l{$\displaystyle \label{eq:uByGreen}
+            \boxed{u = \int_V \int_0^t G f \,\rd{t'}\,\rd{\+vr'} + a^2 \int_{\partial V} \int_0^t \pare{G\partial_{n'}u - u\partial_{n'}G}\,\rd{t'}\,\rd{\+v\sigma'}+ \int_V \brac{G\partial_{t'} u - u\partial_{t'} G}_0 \,\rd{\+vr'}} \tag{2} $ } \\
+        & \mathitem{熱方程式} && \text{\color{CJKblack}$\pare{\partial_t^2, \brac{G\partial_{t'} u - u\partial_{t'} G}}$を$\pare{\partial_t, \brac{uG}}$と替え、\eqref{eq:uByGreen}がまだ成り立つ.} &&
+    \end{flalign*}
+\end{cheatresume}
+
+\end{multicols*}
+
+\end{document}

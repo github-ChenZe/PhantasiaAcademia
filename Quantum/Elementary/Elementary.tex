@@ -1,0 +1,711 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=M.J.\ Shi,gakka=Quantum\ Mechanics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\diag}{diag}
+
+\def\kurisueniconwidth{3.2cm}
+\def\kurisueniconpath{img/CMSncFS.png}
+
+\begin{document}
+
+\section{Elementary} % (fold)
+\label{sec:elementary}
+
+\subsection{Canonical Quantization} % (fold)
+\label{sub:canonical_quantization}
+
+Axioms of quantum mechanics (canonical quantization) are listed below.
+\begin{cenum}
+    \item A \gloss{state} is a vector in a Hilbert space $\hat H$.
+    \item An \gloss{observable} is a Hermitian operator $\hat Q$.
+    \item The \gloss{expectation value} of an observable $A$ is given by $\bra{\psi}A\ket{\psi}$.
+\end{cenum}
+The eigenvalues of a Hermitian operator are all real, and are exactly the values observed. The eigenvectors of different eigenvalues are orthorgonal, i.e. the outcomes are strictly distinguishable.
+\begin{remark}
+    The dimension of the Hilbert space is the numbers of strcitly distinguishable outcomes of a measurement.
+\end{remark}
+If $Q$ is a Hermitian operator, then $iQ$ is anti-Hermitian.
+\par
+An operator may be expressed in terms of its eigenvalues and eigenvectors as
+\[ A = \sum_{i} a_i \ket{\alpha_i}\bra{\alpha_i}. \]
+Two properties shared by norms are
+\[ \inlinefinaleq{\abs{\bra{\psi}\ket{\varphi}} \le \norm{\psi}\cdot \norm{\varphi},\quad \norm{\psi + \varphi} \le \norm{\psi} + \norm{\varphi}.} \]
+It is assumed without proof that the Hilbert spaces encountered in quantum mechanics are complete, and we may pick an orthonormal basis from it.
+\par
+The \gloss{direct sum} of two spaces is a space with the two subspaces as orthogonal subspaces, which consists of vectors of the form
+\[ \begin{pmatrix}
+    \psi_1 \\ \vdots \\ \psi_n \\ \varphi_1 \\ \vdots \\ \varphi_m
+\end{pmatrix} \in \Psi = \psi \oplus \varphi. \]
+The \gloss{direct product} of two vectors is defined by
+\[ \psi\otimes \varphi = \begin{pmatrix}
+    \psi_1 \\ \vdots \\ \psi_n
+\end{pmatrix} \otimes \begin{pmatrix}
+    \varphi_1 \\ \vdots \\ \varphi_n
+\end{pmatrix} = \begin{pmatrix}
+    \psi_1 \varphi_1 \\
+    \vdots \\
+    \psi_1 \varphi_n \\
+    \psi_2 \varphi_1 \\
+    \vdots \\
+    \psi_2 \varphi_n \\
+    \vdots
+\end{pmatrix}. \]
+The direct sum of two matrices is a linear transform defined on the direct sum of the two linear spaces on which the two matrices acts respectively,
+\[ A\oplus B = \begin{pmatrix}
+    A & \\
+    & B
+\end{pmatrix}. \]
+The direct product of two matrices is a linear transform defined on the direct product of the two linear spaces on which the two matrices acts respectively,
+\[ A\otimes B = \begin{pmatrix}
+    a_{11}B & a_{12}B & \cdots \\
+    \vdots & \vdots & \ddots
+\end{pmatrix}. \]
+
+% subsection canonical_quantization (end)
+
+\subsection{Two-State System} % (fold)
+\label{sub:two_state_system}
+
+\begin{remark}
+    ``Two-state'' stands for the fact that there are two strictly distinguishable outcomes.
+\end{remark}
+
+\subsubsection{Spin-Half System} % (fold)
+\label{ssub:spin_half_system}
+
+The eigenvectors of $S_x$ and $S_y$ are related to those of $S_z$ by
+\[ \begin{cases}
+    \displaystyle \ket{S_x;+} = \rec{\sqrt{2}}\ket{S_z;+} + \rec{\sqrt{2}}\ket{S_z;-}, \\
+    \displaystyle \ket{S_x;-} = \rec{\sqrt{2}}\ket{S_z;+} - \rec{\sqrt{2}}\ket{S_z;-},
+\end{cases}\quad \text{and}\quad \begin{cases}
+    \displaystyle \ket{S_y;+} = \rec{\sqrt{2}}\ket{S_z;+} + \frac{i}{\sqrt{2}}\ket{S_z;-}, \\
+    \displaystyle \ket{S_y;-} = \rec{\sqrt{2}}\ket{S_z;+} - \frac{i}{\sqrt{2}}\ket{S_z;-}.
+\end{cases} \]
+$\pare{S_x, S_z}$, $\pare{S_x, S_y}$ and $\pare{S_y,S_z}$ are pairs of \gloss{complementary observables} because the norm of the transition amplitudes between any of the eigenstates of one of the operators in each pair with the any of the eigenstates of the other are identically $1/2$.
+\par
+For a spin in a general direction,
+\[ \inlinefinaleq{\ket{\+vS\cdot \+un;+} = \cos\pare{\frac{\theta}{2}}\ket{+} + \sin\pare{\frac{\theta}{2}}e^{i\varphi}\ket{-}.} \]
+\par
+From the above representations of the eigenstates of $S_x$ and $S_y$, we obtain the matrix representation of the operators in terms of the \gloss{Pauli matrices}
+\[ \inlinefinaleq{\sigma_x = \begin{pmatrix}
+    0 & 1 \\
+    1 & 0
+\end{pmatrix},\quad \sigma_y = \begin{pmatrix}
+    0 & -i \\
+    i & 0
+\end{pmatrix},\quad \sigma_z = \begin{pmatrix}
+    1 & 0 \\
+    0 & -1
+\end{pmatrix}} \]
+as
+\begin{equation}
+    \label{eq:matrix_representation_of_S}
+    S_x = \frac{\hbar}{2}\sigma_x,\quad S_y = \frac{\hbar}{2}\sigma_y,\quad S_z = \frac{\hbar}{2}\sigma_z.
+\end{equation}
+
+% subsubsection spin_half_system (end)
+
+% subsection two_state_system (end)
+
+\subsection{Infinitesimal Transformations} % (fold)
+\label{sub:infinitesimal_transformations}
+
+\begin{example}
+    For time-independent Hamiltonian $H$, $e^{-iHt}\ket{\phi\pare{0}} = \ket{\phi\pare{t}}$.
+\end{example}
+Let
+\[ G = -\+dxd{}, \]
+which is made into a Hermitian operator by
+\[ \hat P_x = -i\+dxd{}. \]
+We have
+\[ e^{-ia\hat P_x}f\pare{x} = \brac{\mathbbm{1} - ia\hat P_x + \rec{2!}\pare{-ia\hat P_x}^2 + \cdots} f\pare{x} = f\pare{x-a}, \]
+which is a translation.
+Let
+\[ G_z = \begin{pmatrix}
+    0 & -1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 0
+\end{pmatrix},\quad G_x = \begin{pmatrix}
+    0 & 0 & 0 \\
+    0 & 0 & -1 \\
+    0 & 1 & 0
+\end{pmatrix},\quad G_y = \begin{pmatrix}
+    0 & 0 & 1 \\
+    0 & 0 & 0 \\
+    -1 & 0 & 0
+\end{pmatrix}, \]
+which are made into Hermitian operator by
+\[ \hat L_x = iG_x,\quad \hat L_y = iG_y,\quad \hat L_z = iG_z. \]
+We found
+\[ \inlinefinaleq{\brac{\hat L_i,\hat L_j} = i\epsilon{ijk}\hat L_k.} \]
+\begin{sample}
+    \begin{example}
+        It can be verified that with the matrix representation given in \eqref{eq:matrix_representation_of_S},
+        \[ \brac{S_x,S_y} = i\hbar S_z, \]
+        along with the even permutations of the subscripts.
+    \end{example}
+\end{sample}
+
+% subsection infinitesimal_transformations (end)
+
+\subsection{Hilbert Spaces} % (fold)
+\label{sub:hilbert_spaces}
+
+\subsubsection{Operators} % (fold)
+\label{ssub:operators}
+
+With $\+cH$ and $\+cH'$ denoting Hilbert spaces, $\+cL\pare{\+cH,\+cH'}$, the space of linear transformations from $\+cH$ to $\+cH'$, is a linear space. If both $\+cH$ and $\+cH'$ are of finite dimension, the space of linear transformations is denoted $\+cL\pare{\+bC^n}$ and may be represented by matrices of size $n\times n$.
+\par
+The \gloss{functionals} on $\+cH$ are those in $\+cL\pare{\+cH, \+bC}$, which is the \gloss[\baselineskip]{dual space} of $\+cH$ and is denoted $\+cH^\dagger$. It is guaranteed by the \gloss[\baselineskip]{Riesz theorem} that for any $T \in \+cH^\dagger$, there exists a unique $\varphi_T \in \+cH$ such that for all $\psi \in \+cH$,
+\[ T\pare{\psi} = \pare{\varphi_T,\psi}. \]
+\vspace{-\baselineskip}
+\begin{termdef}{Hermitian Conjugation}
+    If $\pare{\psi,A\varphi} = \pare{A^\dagger \psi,\varphi}$ for all $\psi,\varphi$, then $A^\dagger$ is called the Hermitian Conjugation of $A$.
+\end{termdef}
+If $A = A^\dagger$, $A$ is said to be \gloss{Hermitian}.
+\par
+In finite dimensional spaces, Hermitian operators are exactly \gloss[\baselineskip]{self-adjoint operators}. For this proposition to hold in infinite dimensional cases, the eigenvectors of the operator should be complete. This is guaranteed to be true if the operator is bounded. Otherwise, the operator should be defined on $\+cD\pare{A}$, the domain of $A$, and $A$ is said to be Hermitian if $\pare{A\psi,\varphi} = \pare{\psi,A\varphi}$ for all $\psi,\varphi \in \+cD\pare{A}$.
+\begin{proposition}
+    If an operator is Hermitian and has its eigenvectors are complete, then it is self-adjoint, and represents an observable.
+\end{proposition}
+
+% subsubsection operators (end)
+
+\subsubsection{The Dirac Notation} % (fold)
+\label{ssub:dirac_notation}
+
+The ket-vectors are elements in the Hilbert space $\+cH$, denoted $\psi = \ket{\psi}$. The bra-vectors are elements in $\+cH^\dagger$, denoted $\bra{\varphi}$, which represent the functional $\pare{\varphi,*}$.
+\begin{proposition}
+    In finite dimensional cases, $\+cH$ and $\+cH^\dagger$ are isomorphic.
+\end{proposition}
+\vspace{-\baselineskip}
+\begin{finaleq}{Dual of Operators}
+    \[ \pare{\bra{\varphi}X}^\dagger = X^\dagger\ket{\varphi},\quad \bra{\psi}X\ket{\varphi} = \bra{\varphi}X^\dagger\ket{\psi}^*,\quad \pare{\ket{\psi}\bra{\varphi}}^\dagger = \ket{\varphi}\bra{\psi}. \]
+    If $X$ is Hermitian, we have
+    \[ \bra{\psi}X\ket{\varphi} = \bra{\varphi}X\ket{\psi}^*. \]
+\end{finaleq}
+\begin{proposition}
+    A few properties satisfied by Hermitian operators are listed below.
+    \begin{cenum}
+        \item The eigenvalues are all real numbers, i.e. $\inlinefinaleq{A\ket{\alpha_j} = a_j \ket{\alpha_j} \Rightarrow a_j \in \+bR.}$
+        \item Eigenvectors of distinct eigenvalues are orthogonal. If degeneracy occurs, there exists an orthogonal basis of the degenerate subspace, i.e. $\inlinefinaleq{\bra{\alpha_i}\ket{\alpha_j} = \delta_{ij}.}$
+    \end{cenum}
+\end{proposition}
+With proper diagonalization,
+\[ A = \sum_{i} a_i \ket{\alpha_i}\bra{\alpha_i}. \]
+The basis vectors $\curb{\ket{e_i}}$ may be picked as the eigenvectors of any Hermitian operator, with which the ket-vectors may be expanded as
+\[ \ket{\psi} = \sum_i \psi_i \ket{e_i},\quad \text{where}\quad \psi = \bra{e_i}\ket{\psi}. \]
+Bra-vectors may be expanded as
+\[ \bra{\varphi} = \sum_j \bra{e_j}\varphi^*_j. \]
+Inner product is written as
+\[ \bra{\varphi}\ket{\psi} = \sum_{ij} = \varphi_j^* \psi_i \bra{e_i}\ket{e_j} = \sum_i \varphi_i^* \psi_i. \]
+We have $\inlinefinaleq{\bra{\psi}\ket{\varphi} = \bra{\varphi}\ket{\psi}^*.}$
+\par
+Operators may be written with the Dirac notation as
+\[ X = \sum_{ij} X_{ij} \ket{e_i}\bra{e_j},\quad \text{where}\quad X_{ij} = \bra{e_i}X\ket{e_j}. \]
+for example, the identity matrix is written as
+\[ \mathbbm{1} = \sum_i \ket{e_i}\bra{e_j}. \]
+The Hermitian conjugation is written as
+\[ X^\dagger = \sum_{ij} X_{ji}^* \ket{e_i}\bra{e_j}. \]
+The trace is written as
+\[ \trace X = \sum_i \bra{e_i}X\ket{e_i}. \]
+We have
+\[ \trace \pare{AB} = \trace{BA}. \]
+\begin{sample}
+    \begin{example}
+        $\trace \pare{\ket{a}\bra{b}} = \bra{a}\ket{b}$.
+    \end{example}
+\end{sample}
+
+% subsubsection dirac_notation (end)
+
+\subsubsection{Unitary Transformation and Change of Basis} % (fold)
+\label{ssub:change_of_basis}
+
+\begin{termdef}{Unitary Transformation}
+    A transformation $U$ is unitary if
+    \[ UU^\dagger = U^\dagger U = \mathbbm{1}. \]
+\end{termdef}
+Unitary transformations may be equivalently defined as those transformations that satisfies
+\[ \pare{U\varphi,\psi} = \pare{\varphi,U^{-1}\psi}. \]
+We have, consequently,
+\[ \inlinefinaleq{\bra{\varphi}\ket{\psi} = \bra{\varphi}U^\dagger U\ket{\psi}.} \]
+\begin{proposition}
+    A few properties of unitary matrices are listed below.
+    \begin{cenum}
+        \item The eigenvalues are complex numbers of modulus $1$.
+        \item The rows and columns are orthonormal vectors in $\+bC^n$.
+        \item The number of independent real parameters (degrees of freedom) of the group $U\pare{n}$ is $n^2$. Therefore, the degrees of freedom of $SU\pare{n}$ is $n^2-1$.
+    \end{cenum}
+\end{proposition}
+Unitary matrices on $\+bC^2$ are of the form
+\[ U = e^{i\gamma} \begin{pmatrix}
+    a & b \\
+    -b^* & a
+\end{pmatrix}, \]
+where we demand
+\[ \abs{a}^2 + \abs{b^2} = 1. \]
+\begin{finaleq}{Wigner Theorem}
+    $U$ is an arbitrary transfomation. Let $\ket{\psi'} = U\ket{\psi}$ and $\ket{\varphi'} = U\ket{\varphi}$. If for any $\ket{\psi}$ and $\ket{\varphi}$,
+    \[ \abs{\bra{\varphi}\ket{\psi}} = \abs{\bra{\varphi'}\ket{\psi'}}, \]
+    then $U$ is either unitary or anti-unitary.
+\end{finaleq}
+
+\paragraph{Change of Basis} % (fold)
+\label{par:change_of_basis}
+
+For a general change of basis
+\[ \pare{f_1,f_2,\cdots,f_n} = \pare{e_1,e_2,\cdots,e_n}T, \]
+the components transforms like
+\[ c'_j = \sum_i \pare{T^{-1}}_{ji}c_i. \]
+We may introduce a new basis by
+\[ \ket{b^{\pare{i}}} = U\ket{a^{\pare{i}}}, \]
+where
+\[ \inlinefinaleq{U = \sum_k \ket{b^{\pare{k}}}\bra{a^{\pare{k}}}} \]
+is unitary. The new basis is guaranteed to be orthonormal. The transformation matrix is given by
+\[ u_{ij}  = \bra{a_i}\ket{b_j} = \bra{a^{\pare{i}}} U\ket{a^{\pare{j}}}. \]
+Now
+\begin{align*}
+    \ket{\psi} &= \sum_i c_i \ket{\alpha_i} = \sum_{ij} c_i \ket{\beta_j}\bra{\beta_j}\ket{\alpha_i} = \sum_j \pare{\sum_i u^*_{ij}c_i}\ket{\beta_j} = \sum_j d_j \ket{\beta_j}.
+\end{align*}
+\begin{remark}
+    Unitary transformations are those which map an orthonormal basis to another orthonormal basis.
+\end{remark}
+The coefficients are related by
+\[ \inlinefinaleq{\begin{pmatrix}
+    d_1 \\ \vdots \\ d_n
+\end{pmatrix} = U^\dagger \begin{pmatrix}
+    c_1 \\ \vdots \\ c_n
+\end{pmatrix}.} \]
+The above derivation may be written in matrix notation as
+\[ \begin{pmatrix}
+    \ket{a^{\pare{1}}} & \cdots & \ket{a^{\pare{n}}}
+\end{pmatrix} \begin{pmatrix}
+    c_1 \\ \vdots \\ c_n
+\end{pmatrix} = \begin{pmatrix}
+    \ket{a^{\pare{1}}} & \cdots & \ket{a^{\pare{n}}}
+\end{pmatrix} UU^\dagger \begin{pmatrix}
+    c_1 \\ \vdots \\ c_n
+\end{pmatrix} = \begin{pmatrix}
+    \ket{b^{\pare{1}}} & \cdots & \ket{b^{\pare{n}}}
+\end{pmatrix} \begin{pmatrix}
+    d_1 \\ \vdots \\ d_n
+\end{pmatrix}. \]
+The operators transforms as
+\begin{align*}
+    X &= \sum_{ij} x_{ij} \ket{\alpha_i}\bra{\alpha_j} \\
+    &= \sum_{ijmn} x_{ij} \ket{\beta_m}\bra{\beta_m}\ket{\alpha_i}\bra{\alpha_j}\ket{\beta_n}\ket{\beta_n} \\
+    &= \sum_{mn} \pare{\sum_{ij} u^*_{im} x_{ij} u_{jn}} \ket{\beta_m}\bra{\beta_n},
+\end{align*}
+i.e.
+\begin{equation}
+    \label{eq:operator_unitary_transform}
+    \inlinefinaleq{\pare{\mathrm{matrix\ }X} \rightarrow U^\dagger \pare{\mathrm{matrix\ }X} U.}
+\end{equation}
+Matrices $U^\dagger X U$ and $X$ are \gloss{unitarily equivalent}.
+\begin{sample}
+    \begin{example}
+        We transform from the basis $\curb{\ket{z;+},\ket{z;-}}$ to $\curb{\ket{x;+},\ket{x;-}}$, i.e.
+        \begin{align*}
+            U &= \ket{x;+}\bra{z;+} + \ket{x;-}\bra{z;+} \\
+            &= \rec{\sqrt{2}}\begin{pmatrix}
+                1 & 1 \\
+                1 & -1
+            \end{pmatrix},
+        \end{align*}
+        where the matrix representation of $U$ is in the basis $\curb{\ket{z;+},\ket{z;-}}$.
+        \[ \sigma_x \rightarrow U^\dagger \sigma_x U = \begin{pmatrix}
+            1 & 0 \\
+            0 & -1
+        \end{pmatrix}. \]
+    \end{example}
+\end{sample}
+\begin{remark}
+    The passive transformation transforms the basis, while the active transformation transforms the ket-vectors.
+\end{remark}
+\begin{proposition}
+    A few properties satisfied by unitary transformations are listed below.
+    \begin{cenum}
+        \item $A$ and $U^\dagger A U$ have the same set of eigenvalues.
+        \item $\trace A = \trace \pare{U^\dagger A U}$.
+        \item $\det A = \det\pare{U^\dagger AU}$.
+    \end{cenum}
+\end{proposition}
+\begin{proposition}
+    Observables that commute with each other may be simutaneously diagonalized in the same basis.
+\end{proposition}
+A complete set of commuting observables (\gloss{CSCO}) is a set of commuting operators whose eigenvalues completely specify the state of a system.
+\begin{sample}
+    \begin{example}
+        Eigenvalues of $L^2$ and $L_z$ eliminate the ambiguity arises from the degeneracy of the pricipal quantum number $n$ of the Hydrogen atom.
+    \end{example}
+\end{sample}
+Matrices always have the \gloss{polar decomposition} of the form
+\[ X = PU, \]
+where $P$ is a positive semi-definite matrix and $U$ is a unitary matrix. We may also decompose any matrix as
+\[ X = V\Lambda W^\dagger. \]
+
+% paragraph change_of_basis (end)
+
+% subsubsection change_of_basis (end)
+
+\subsubsection{Measurement} % (fold)
+\label{ssub:measurement}
+
+The \gloss{Born rule} asserts that
+\begin{cenum}
+    \item the outcome of a measurement of $A$ corresponds to a eigenvalue of $A$,
+    \item and that the probability of a certain outcome is given by $P = \abs{\bra{a_i}\ket{\psi}}^2$.
+\end{cenum}
+The latter demands, by the conservation of probability $\sum p_i = 1$,
+\[ \bra{\psi}\ket{\psi} = 1, \]
+i.e. the ket-vector is normalized.
+\par
+The \gloss{projection operator} is defined by
+\[ \Pi_i = \ket{\alpha_i}\bra{\alpha_i}. \]
+We have
+\[ \Pi_i \ket{\psi} = c_i \ket{\alpha_i},\quad \text{where}\quad \ket{\psi} = \sum_k c_k \ket{\alpha_k}. \]
+The composition of the projection operators is
+\[ \Pi_i \Pi_j = \Pi_i \delta_{ij}. \]
+Therefore
+\[ \Pi_i^2 = \Pi_i, \]
+and
+\[ \sum_i \Pi_i = \mathbbm{1}. \]
+The probability of obtaining a given outcome $a_i$ is
+\[ p_i = \bra{\psi}\ket{\alpha_i}\bra{\alpha_i}\ket{\psi} = \bra{\psi}\Pi_i\ket{\psi} = \trace\pare{\Pi_i \ket{\psi}\bra{\psi}}. \]
+If degeneracy occurs and the degenerate subspace of outcome $a_i$ is generated by $\ket{\alpha_{ik}}$, the projection operator is given by
+\[ \Pi_i = \sum_k \ket{\alpha_{ik}}\bra{\alpha_{ik}}. \]
+
+% subsubsection measurement (end)
+
+\subsubsection{Quantum Statistical Mechanics} % (fold)
+\label{ssub:quantum_statistical_mechanics}
+
+\begin{termdef}{Pure State}
+    A statistical state where all particles are in exactly the same quantum state.
+\end{termdef}
+\begin{termdef}{Mixed State}
+    A statistical state that is not pure.
+\end{termdef}
+The \gloss{density matrix} of a statistical state is defined by
+\[ \inlinefinaleq{\rho = \sum_i p_i \ket{\psi_i}\bra{\psi_i},} \]
+where $\curb{\ket{\psi_i}}$ are the states in the ensemble and $p_i$ is the fraction of the particles in state $\ket{\psi_i}$.
+The \gloss{expectation value} of the statistical state is given by
+\[ \inlinefinaleq{\brac{A} = \trace{\rho A}.} \]
+\begin{remark}
+    In the density matrix, the states $\curb{\ket{\psi_i}}$ are not required to be orthonormal.
+\end{remark}
+If the preparation procedures generate mixed states, the ensemble may be written as
+\[ \+cE = \curb{p_i,\rho_i}, \]
+and the density matrix is now
+\[ \rho = \sum_i p_i \rho_i. \]
+\begin{proposition}
+    A few properties satisfied by the density matrix are listed below.
+\begin{finale}
+        \begin{cenum}
+        \item $\trace \rho = 1$.
+        \item $\rho^\dagger = \rho$.
+        \item $\rho \ge 0$, i.e. $\rho$ is positive semidefinite. Therefore, all eigenvalues of $\rho$ are in $\brac{0,1}$.
+        \item $\rho$ describes a pure state $\Leftrightarrow$ $\rho^2 = \rho$ $\Leftrightarrow$ $\trace{\rho^2} = 1$ $\Leftrightarrow$ the only nonzero eigenvalue of $\rho$ is $1$.
+    \end{cenum}
+\end{finale}
+\end{proposition}
+Defining
+\[ \Psi = \ket{\psi}\bra{\psi}, \]
+where $\ket{\psi}$ is the initial pure state, we have
+\[ \Pi_i \Psi \Pi_i^\dagger = \ket{\alpha_i}\bra{\alpha_i}\Psi\ket{\alpha_i}\bra{\alpha_i} = p_i \ket{\alpha_i}\bra{\alpha_i}. \]
+Therefore, after a measurement on $A$, the initial pure state evolves into a mixed state described by the density matrix
+\[ \rho = \sum_i \Pi_i \Psi \Pi_i^\dagger. \]
+The above statement holds even if the initial state is not pure, i.e.
+\[ \rho \rightarrow \sum_i \Pi_i \rho \Pi_i^\dagger \]
+after measurement. If two measurements $A$ and $B$ are conducted in sequence, then
+\[ \rho \rightarrow \sum_{i,j} \Pi_j^B \Pi_i^A \psi \Pi_i^A \Pi_j^B, \]
+where each item in the summation looks like
+\[ p\pare{a_i}\abs{\bra{\beta_j}\ket{\alpha_i}}^2 \ket{\beta_j}\bra{\beta_j} = p\pare{a_i, b_j}\ket{\beta_j}\bra{\beta_j}. \]
+Where $p\pare{a_i,b_j}$ denotes the probability for the measurement to yield $a_i$ first and then $b_j$.
+\begin{finaleq}{Kraus' Theorem}
+    The action of any such quantum operation $\Phi$ on a state $\rho$ can always be written as
+    \[ \Phi\pare{\rho} = \sum_{k} B_{k}\rho B_{k}^{*}, \]
+    for some set of operators ${\displaystyle \{B_{k}\}_{k}}$ satisfying ${\displaystyle \sum _{k}B_{k}^{*}B_{k}\leq 1}$.
+\end{finaleq}
+\begin{remark}
+    A statistical state may be written as a convex sum of pure states. The space of all possible statistical states is a convex set whose boundary consists of all pure states.
+\end{remark}
+\begin{sample}
+    \begin{example}
+        A pure state $\ket{z;+}$ passing through a SG($x$) yields
+        \[ \rho = \ket{z;+}\bra{z;+} \rightarrow \rho = \half \ket{x;+}\bra{x;+} + \half \ket{x;-}\bra{x;-}, \]
+        or in matrix notation (in the $S_z$ basis)
+        \[ \rho = \begin{pmatrix}
+            1 & \\
+            & 0
+        \end{pmatrix} \rightarrow \rho = \half \begin{pmatrix}
+            1 & \\
+            & 1
+        \end{pmatrix}. \]
+        The latter is a maximally mixed state, which has the density matrix $\mathbbm{1}/n$ in any basis.
+    \end{example}
+\end{sample}
+The Born rule in terms of the density matrix is
+\[ \inlinefinaleq{p_i = \trace\pare{\Pi_i \rho}.} \]
+$\rho$ may be diagonalized in the basis $\ket{x_i}$ if
+\[ \brac{X,\rho} = 0. \]
+In this case, for a measurement on $A$,
+\[ p\pare{a_i} = \trace\pare{\Pi_i^A \rho} = \sum_j \lambda_j\abs{\bra{\alpha_i}\ket{x_j}}^2, \]
+where $\rho$ is diagonalized as $\diag\pare{\lambda_1,\cdots,\lambda_n}$. Defining
+\[ \+vp^X = \begin{pmatrix}
+    \lambda_1 & \cdots & \lambda_n
+\end{pmatrix}^T, \quad \text{and}\quad \+vp^A = \begin{pmatrix}
+    p\pare{a_1} & \cdots & p\pare{a_n}
+\end{pmatrix}^T, \]
+we have
+\[ \+vp^A = D\+vp^X,\quad \text{where}\quad D_{ij} = \abs{\bra{x_i}\ket{\alpha_j}}^2. \]
+\vspace{-\baselineskip}
+\begin{termdef}{Doubly Stochastic Matrix}
+    A square matrix $A$ of nonnegative real numbers, each of whose rows and columns sums to $1$.
+\end{termdef}
+The matrix $D$ above is a double stochastic matrix.
+\begin{termdef}{Majorization}
+    Put entries in vectors $\+vx$ and $\+vy$ in descending order. If
+    \begin{citemize}
+        \item $\displaystyle \sum_{i=1}^k x_i \le \sum_{i=1}^k y_i$ for all $k = 1,\cdots, n$;
+        \item and $\displaystyle \sum_{i=1}^n x_i = \sum_{i=1}^n y_i$;
+    \end{citemize}
+    then $\+vx$ is majorized by $\+vy$.
+\end{termdef}
+We have
+\[ x_{\pare{n}}^\downarrow = \pare{\rec{n},\cdots,\rec{n}} \preccurlyeq x^\downarrow \preccurlyeq \pare{1,0,\cdots,0} = x_{\pare{1}}^\downarrow. \]
+We also have
+\[ x_1^\downarrow \preccurlyeq y^\downarrow \land x_2^\downarrow \preccurlyeq y^\downarrow \Rightarrow p_1 x_1^\downarrow + p_2 x_2^\downarrow \preccurlyeq y^\downarrow \]
+if $p_1 + p_2 = 1$.
+\begin{proposition}
+    $x^\downarrow \preccurlyeq y^\downarrow \Leftrightarrow$ there exists a doubly stochastic matrix $B$ such that $\+vx = B\+vy$.
+\end{proposition}
+A function $f$ is called a \gloss{Shur convex function} if for any $\+vx \preccurlyeq \+vy$, $f\pare{\+vx} < f\pare{\+vy}$.
+\begin{sample}
+    \begin{example}
+        $\displaystyle f\pare{\+vx} = \sum_i x_i \log x_i$, $f\pare{\+vx} = \sum_i x_i^k$, and $f\pare{\+vx} = -\prod_i x_i$ are all Shur convex function, where $k\ge 1$.
+    \end{example}
+\end{sample}
+The \gloss{Shannon entropy} is defined by
+\[ H\pare{X} = -\sum_i p_i \log p_i, \]
+which is a concave function.
+\begin{sample}
+    \begin{example}
+        The Shannon entropy of a pure state system is $0$.
+    \end{example}
+\end{sample}
+The maximally mixed state is given by $p_i = 1/n$, the entropy of which is
+\[ H = -\log \rec{n}. \]
+The \gloss{von Neumann entropy} is defined by
+\[ S\pare{\rho} = -\trace \pare{\rho \log \rho} = -\sum_i \lambda_i \log \lambda_i. \]
+If $\+vp^A \preccurlyeq \+v\lambda$, we have
+\[ H\pare{\+vp^A} \ge H\pare{\+v\lambda} = S\pare{\rho}. \]
+
+% subsubsection quantum_statistical_mechanics (end)
+
+\subsubsection{Uncertainty Principle} % (fold)
+\label{ssub:uncertainty_principle}
+
+\begin{finaleq}{Uncertainty Principle}
+    \[ \expc{\pare{\Delta A}^2}\expc{\pare{\Delta B}^2} \ge \rec{4}\abs{\expc{\brac{A, B}}}^2,\quad \text{where}\quad \Delta A = A - \expc{A}. \]
+\end{finaleq}
+
+% subsubsection uncertainty_principle (end)
+
+% subsection hilbert_spaces (end)
+
+\subsection{Two-State System} % (fold)
+\label{sub:two_state_system}
+
+\subsubsection{Formulation} % (fold)
+\label{ssub:formulation}
+
+A general normalized vector in $\+bC^2$ may be written as
+\[ \ket{\psi} = e^{i\gamma}\begin{pmatrix}
+    \cos \frac{\theta}{2} e^{-i\phi/2} & \sin \frac{\theta}{2} e^{i\phi/2}
+\end{pmatrix}^T, \]
+and $\gamma$ is eliminated in $\ket{\psi}\bra{\psi}$.
+\par
+An arbitrary matrix may be decomposed into the linear combination of $\curb{\mathbbm{1}, \mathbbm{\sigma_x}, \mathbbm{\sigma_y}, \mathbbm{\sigma_z}}$. If $A$ is Hermitian, then in the decomposition
+\[ A = a_0 \mathbbm{1} + a_1 \sigma_x + a_2 \sigma_y + a_3 \sigma_z \]
+the coefficients $a_0$, $a_1$, $a_2$ and $a_3$ are all real numbers. We have
+\[ \trace \pare{A\sigma_i} = 2a_i. \]
+The density matrix is written as \begin{marginwarns}
+    Two states $\ket{\+vn;+}$ and $\ket{\+vn';+}$ are orthogonal if $\+vn = -\+vn'$.
+\end{marginwarns}
+\[ \inlinefinaleq{\ket{\psi}\bra{\psi} = \half\pare{\mathbbm{1} + \+vn\cdot \+v\sigma},} \]
+where $\+vn$ is unit vector in $\+bR^3$ pointing in the $\pare{\theta,\varphi}$ direction, which is called the \gloss{Bloch vector}.
+\begin{sample}
+    \begin{example}
+        With $\+ui$ denoting one of $\+ux$, $\+uy$ and $\+uz$, we have
+        \[ \ket{\+ui;\pm}\bra{\+ui;\pm} = \half\pare{\mathbbm{1} + \sigma_i}. \]
+    \end{example}
+\end{sample}
+The density matrix of a mixed state may be written as
+\begin{align*}
+    \rho &= p_1 \ket{\psi_1}\bra{\psi_1} + p_2 \ket{\psi_2}\bra{\psi_2} \\
+    &= \half\pare{\mathbbm{1} + \pare{p_1 \+vn_1 + p_2 \+vn_2} \cdot \+v\sigma} \\
+    &= \half\pare{\mathbbm{1} + \+vr\cdot \+v\sigma},
+\end{align*}
+where $\+vr < 1$ and lies in the interior of the Bloch sphere. By taking $\ket{\psi_1}$ and $\ket{\psi_2}$ orthogonal to each other and $p_1 = p_2 = 1/2$, we have $\+vr = 0$, yielding the maximally mixed state.
+\par
+A general observable may be written as $A = \+vn\cdot \+v\sigma$, up to a scale factor and a constant shifting which do not affect the eigenvectors. Therefore, $A$ is always equivalent to a component of spin angular momentum.
+
+% subsubsection formulation (end)
+
+% subsection two_state_system (end)
+
+\subsection{Continuum Spaces} % (fold)
+\label{sub:continuum_spaces}
+
+Basis ket-vectors in continuum spaces satisfies
+\[ \xi\pare{\xi'} = \xi' \ket{\xi'},\quad \bra{\xi'}\ket{\xi''} = \delta\pare{\xi' - \xi''}. \]
+For example, the eigenstates of the position operator satisfies
+\[ x\ket{x'} = x'\ket{x'}. \]
+The summation in the expansion of $\mathbbm{1}$ is now replaced by integration, i.e.
+\[ \mathbbm{1} = \int_{-\infty}^{\infty}\rd{x''}\,\ket{x''}\bra{x''}. \]
+The wavefunction of $\alpha$ is
+\[ f\pare{\xi'} = \bra{\xi'}\ket{\alpha}. \]
+The summation in the inner product is now replaced by integration, i.e.
+\[ \inlinefinaleq{\bra{\beta}\ket{\alpha} = \int_{-\infty}^\infty \rd{\xi'}\, \bra{\beta}\ket{\xi'}\bra{\xi'}\ket{\alpha} = \int_{-\infty}^\infty \rd{\xi'}\,\psi_\beta^*\pare{\xi'}\psi_\alpha\pare{\xi'}.} \]
+
+\subsubsection{Translation Operators} % (fold)
+\label{ssub:translation_operators}
+
+\begin{termdef}{Translation Operators}
+    The translation operator $T\pare{\rd{\+vx'}}$ moves the ket-vector $\ket{\+vx'}$ as
+\[ T\pare{\rd{\+vx'}}\ket{\+vx'} = \ket{\+vx' + \rd{\+vx'}}. \]
+\end{termdef}
+T is an unitary operator. And the composition of $T$ is additive, i.e.
+\[ T\pare{\rd{\+vx'} + \rd{\+vx''}} = T\pare{\rd{\+vx'} + \rd{\+vx''}}. \]
+We may expand $T$ as
+\[ T\pare{\rd{\+vx'}} = \mathbbm{1} - \frac{i\+vp}{\hbar}\cdot \rd{\+vx'} + O\pare{\rd{x'}^2}, \]
+which satisfies $T^\dagger = T^{-1}$ where $K$ is Hermitian.
+\par
+From $\brac{\+vx,T\pare{\rd{\+vx'}}} = \rd{\+vx'}$ we know
+\[ \brac{x_i,p_j} = i\delta_{ij}\hbar. \]
+The $\+vp$ is the \gloss{momentum operator}. Some useful commutation relations are
+\[ \inlinefinaleq{\brac{x,p^n} = i\hbar n p^{n-1},\quad \brac{x,f\pare{p}} = i\hbar \+dpd{f\pare{p}},\quad \brac{f\pare{x},p} = i\hbar \+DxD{f\pare{x}}.} \]
+Translation of a finite displacement may be written as
+\[ T\pare{\Delta x' \+ux} = \exp{-\frac{ip_x \Delta x'}{\hbar}}. \]
+\begin{remark}
+    We have the Dirac's quantization rule
+    \[ \brac{A,B}\+_classical_ \rightarrow \frac{\brac{A,B}}{i\hbar}. \]
+\end{remark}
+Eigenvectors of the translation operators are the eigenvectors of the momentum operators,
+\[ T\pare{\Delta \+vx'}\ket{\+vp'} = e^{-i\+vp'\cdot \Delta \+vx'/\hbar}\ket{\+vp'}. \]
+The eigenvalues are not real.
+
+% subsubsection translation_operators (end)
+
+\subsubsection{Wavefunctions} % (fold)
+\label{ssub:wavefunctions}
+
+The wavefunction of position is \[ \psi\pare{x'} = \bra{x'}\ket{\alpha}. \]
+
+% subsubsection wavefunctions (end)
+
+\mathsubsubsection{Momentum}{Momentum...}{The Momentum Operator Expanded in the Real Space}{The Momentum Operator Expanded in the Real Space} % (fold)
+\label{ssub:the_momentum_operator_expanded_in_coordinates}
+
+From
+\[ \pare{1-\frac{ip\Delta x'}{\hbar}}\ket{\alpha} = \int \rd{x'}\,\ket{x'}\brac{\bra{x'}\ket{\alpha} - \Delta x' \+D{x'}D{}\bra{x'}\ket{\alpha}} \]
+we know
+\[ \inlinefinaleq{\bra{x'}p\ket{\alpha} = -i\hbar \+D{x'}D{}\bra{x'}\ket{\alpha},\quad \text{and}\quad \bra{x'}p^n\ket{\alpha} = \pare{-i\hbar}^n \+D{x'^n}D{^n}\bra{x'}\ket{\alpha}.} \]
+
+% subsubsection the_momentum_operator_expanded_in_coordinates (end)
+
+\subsubsection{Transformation between the Real Space and the Momentum Space} % (fold)
+\label{ssub:transformation_between_the_real_space_and_the_momentum_space}
+
+\begin{finaleq}{Eigenfunctions of Momentum}
+    \[ \bra{\+vx'}\ket{\+vp'} = \rec{\pare{2\pi\hbar}^{D/2}}e^{i\+vp'\cdot \+vx'/\hbar}, \]
+    where $D$ is the dimension of the space.
+\end{finaleq}
+\begin{finaleq}{Transformation between $x$ and $p$}
+    \vspace{-\baselineskip}
+    \[ \psi\pare{\+vx'} = \rec{\pare{2\pi \hbar}^{D/2}}\int \rd{\+vp'}\, e^{i\+vp'\cdot \+vx'/\hbar}\phi\pare{\+vp'};\quad \psi\pare{\+vp'} = \rec{\pare{2\pi \hbar}^{D/2}}\int \rd{\+vx'}\, e^{-i\+vp'\cdot \+vx'/\hbar}\psi\pare{\+vx'}. \]
+\end{finaleq}
+\begin{sample}
+    \begin{example}
+        The Gaussian wave packet is given by
+        \[ \bra{x'}\ket{\alpha} = \rec{\pi^{1/4}\sqrt{d}}e^{ikx' - \frac{x'^2}{2d^2}}, \]
+        which satisfies
+        \[ \expc{\pare{\Delta x}^2}\expc{\pare{\Delta p}^2} = \frac{\hbar^2}{4}. \]
+    \end{example}
+    We have
+    \[ \expc{x} = 0,\quad \expc{x^2} = \frac{d^2}{2},\quad \expc{p} = \hbar k,\quad \expc{p^2} = \frac{\hbar^2}{2d^2} + \hbar^2 k^2. \]
+\end{sample}
+
+% subsubsection transformation_between_the_real_space_and_the_momentum_space (end)
+
+% subsection continuum_spaces (end)
+
+% section elementary (end)
+
+\end{document}

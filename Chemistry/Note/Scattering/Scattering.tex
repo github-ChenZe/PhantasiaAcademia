@@ -1,0 +1,146 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=Ze\ Chen,gakka=Scattering,section=Scattering,gakkabbr=MS]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+
+\begin{document}
+
+\section{Scattering} % (fold)
+\label{sec:scattering}
+
+\subsection{Scattering by Central Force} % (fold)
+\label{sub:scattering_by_central_force}
+
+\subsubsection{In the COM Frame} % (fold)
+\label{ssub:in_the_com_frame}
+
+\begin{marginfigure}[10em]%
+\captionsetup{justification=raggedright, width=1.5in}
+    \begin{tikzpicture}[scale=0.6]
+        \draw[thick,warningred,-latex] plot[domain=0.2:1.8944] ({deg(\x)}:{-1/(1-2*cos(deg(\x-1.0472)))});
+        \draw[thick,termcolor,-latex] plot[domain=0.03:2.0644] ({deg(\x)}:{0.15/(1-2*cos(deg(\x-1.0472)))});
+        \draw[thin,dashed] plot[domain=-3:3] function {0};
+        \draw[thin,dashed] plot[domain=-1.5:1.5] function {-1.73205*x};
+        \coordinate (a) at (1,0);
+        \coordinate (b) at (0,0);
+        \coordinate (c) at (120:1);
+        \coordinate (d) at (-1,0);
+        \draw pic["$2\varphi_0$",draw=black,-,angle eccentricity=2.5,angle radius=0.15cm] {angle=a--b--c};
+        \draw pic["$\chi$",draw=black,-,angle eccentricity=2,angle radius=0.2cm] {angle=c--b--d};
+        \draw[thin,latex-latex] (3,0) -- (3,0.57735) node[midway,left] {$b$};
+    \end{tikzpicture}
+    \caption{Scattering in the COM Frame. Green line for the target particle and red line for the incident particle.}%
+\end{marginfigure}%
+The deflection angle is $\chi = \abs{\pi - 2\varphi_0}$,\begin{margindef}{COM Frame}
+    The frame where the total momentum vanishes.
+\end{margindef} where
+\[ \varphi_0 = \int_{r\+_min_}^\infty \frac{\pare{M/r^2}\,\rd{r}}{\sqrt{2m\brac{E-U\pare{r}} - M^2/r^2}} = \int_{r\+_min_}^\infty \frac{\pare{b/r^2}\,\rd{r}}{\sqrt{1-b^2/r^2 - 2U/\pare{mv_0^2}}}, \]
+and $\+vr$ is the position vector from the target to the incident particle, $v$ the relative velocity and $b$ the impact parameter.
+\begin{termdef}{Differential Cross Section}
+    The differential cross section is $\displaystyle \+d\Omega d\sigma$, where $\rd{\sigma} = b\,\rd{\varphi}\,\rd{b}$ and $\rd{\Omega} = \sin\theta \,\rd{\theta}\,\rd{\varphi}$.
+\end{termdef}
+\begin{figure}[ht]
+    \centering
+    \incfig{12cm}{Differential_cross_section}
+    \caption{Differential Cross Section.}
+\end{figure}
+\begin{finaleq}{Differential Cross Section in Cylindrical Symmetry}
+    \centerline{$\displaystyle \+d\Omega d{\sigma} = \frac{b}{\sin \chi} \abs{\+d\chi db}.$}
+\end{finaleq}
+
+% subsubsection in_the_com_frame (end)
+
+\subsubsection{In the Laboratory Frame} % (fold)
+\label{ssub:in_the_laboratory_frame}
+
+In the laboratory frame,\begin{marginfigure}
+    \captionsetup{justification=raggedright, width=1.5in}
+    \incfig{1.5in}{VelocityTriangle}
+    \caption{$\+vv'$ in the COM frame and $\+vv_1$ in the laboratory frame.}
+\end{marginfigure} the deflection angle is less than the one in the COM frame and they are related by
+\[ \tan\vartheta = \frac{\sin \chi}{\cos\chi + \rho},\quad \cos\vartheta = \frac{\cos\chi + \rho}{\sqrt{1+2\rho \cos\chi + \rho^2}}, \]
+where, with $v_0$ denoting the initial relative velocity and $v\+_f_$ the final relative velocity,
+\[ \rho = \frac{m_1}{m_2}\frac{v_0}{v\+_f_}, \]
+which gives $\displaystyle \inlinefinaleq{\rho = m_1/m_2}$ for elastic scattering. Therefore,
+\[ \frac{\sin\chi}{\sin\vartheta}\abs{\+d\vartheta d\chi} = \abs{\+d{\cos\vartheta}d{\cos\chi}} = \frac{\pare{1+2\rho\cos\chi + \rho^2}^{3/2}}{1+\rho\cos\chi}, \]
+and the cross section in the laboratory frame is
+\begin{finaleq}{Cross Section in the Laboratory Frame}
+    \centerline{$\displaystyle \rd{\sigma'\pare{\vartheta}} = \rd{\sigma\pare{\chi}} \frac{\pare{1+2\rho \cos\chi + \rho^2}^{3/2}}{1+\rho\cos\Theta}.$}
+\end{finaleq}
+
+% subsubsection in_the_laboratory_frame (end)
+
+\subsubsection{Rutherford Scattering} % (fold)
+\label{ssub:rutherford_scattering}
+
+For a central potential of the form $\displaystyle U\pare{r} = \rec{4\pi\epsilon_0} \frac{Z'Ze^2}{E_0}$, where $\displaystyle E_0 = \half mv_0^2$, defining
+\[ D = \rec{4\pi\epsilon_0}\frac{Z'Ze^2}{E_0} \]
+we have the deflection angle given by
+\[ \cot \frac{\chi}{2} = \frac{2b}{D} \]
+and
+\begin{finaleq}{Differential Cross Section of Rutherford Scattering}
+    \centerline{$\displaystyle \+d\Omega d\sigma = \frac{D^2}{16}\rec{\sin^4\pare{\chi/2}}.$}
+\end{finaleq}
+
+% subsubsection rutherford_scattering (end)
+
+% subsection scattering_by_central_force (end)
+
+% section scattering (end)
+
+\end{document}

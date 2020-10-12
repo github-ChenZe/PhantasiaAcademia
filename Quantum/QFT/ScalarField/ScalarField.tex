@@ -1,0 +1,467 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=C.Z.,gakka=QFT,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{arrows.meta}
+
+\def\kurisueniconwidth{3.2cm}
+\def\kurisueniconpath{img/CMSncFS.png}
+\newcommand{\hermitianconj}{\mathrm{h.c.}}
+
+\usepackage{tensor}
+\let\grad\nabla
+
+\usepackage{biblatex}
+\bibliography{ScalarField.bib}
+
+\begin{document}
+
+\section{Quantization of the Scalar Field} % (fold)
+\label{sec:quantization_of_scalar_field}
+
+\subsection{The Klein Gordon Equation} % (fold)
+\label{sub:the_klein_gordon_equation}
+
+\subsubsection{Lorentz Invariance} % (fold)
+\label{ssub:lorentz_invariance}
+
+\begin{marginwarns}
+    Inconsistent signature of $\pare{+,-,-,-}$ and $\pare{-,+,+,+}$ may occur.
+\end{marginwarns}
+Coordinates in different inertial frames are related by
+\[ \conj{x}^\mu = \tensor{\Lambda}{^\mu_\nu} x^\nu + a^\mu. \]
+The minkowski metric obeys
+\[ g_{\mu\nu} \tensor{\Lambda}{^\mu_\rho}\tensor{\Lambda}{^\nu_\sigma} = g_{\rho\sigma} \]
+in order to maintain the invariance of the proper distance. The partial derivatives on coordinates are
+\[ \partial^\mu x^\nu = g^{\mu\nu}, \]
+therefore the $\partial$-operator transforms like \begin{marginwarns}
+    Inconsistent systems of units may occur.
+\end{marginwarns}
+\[ \conj{\partial}^\mu = \tensor{\Lambda}{^\mu_\nu} \partial^\nu. \]
+
+% subsubsection lorentz_invariance (end)
+
+\subsubsection{The Klein-Gordon Equation} % (fold)
+\label{ssub:the_klein_gordon_equation}
+
+\begin{finaleq}{The Klein-Gordon Equation}
+    \begin{equation}
+        \label{eq:the_klein-gordon-equation}
+        \pare{-\partial^2 + \frac{m^2c^2}{\hbar^2}}\psi\pare{x} = 0.
+    \end{equation}
+\end{finaleq}
+The Klein-Gordon equation is Lorentz invariant.
+
+% subsubsection the_klein_gordon_equation (end)
+
+% subsection the_klein_gordon_equation (end)
+
+\subsection{The Klein Gordon Field} % (fold)
+\label{sub:the_klein_gordon_field}
+
+\subsubsection{Classical Field Theory} % (fold)
+\label{ssub:classical_field_theory}
+
+\paragraph{Lagrangian Field Theory} % (fold)
+\label{par:lagrangian_field_theory}
+
+In the Lagrangian formulation, the stationary point of the action
+\[ S = \int \+cL\pare{\phi,\partial_\mu}\,\rd{^4x} \]
+is evaluated, leading to
+\begin{finaleq}{The Euler-Lagrange Equation of Fields}
+    \[ \partial_\mu\pare{\+D{\pare{\partial_\mu \phi}}D{\+cL}} - \+D\phi D{\+cL} = 0. \]
+\end{finaleq}
+
+% paragraph lagrangian_field_theory (end)
+
+\paragraph{Hamiltonian Field Theory} % (fold)
+\label{par:hamiltonian_field_theory}
+
+The \gloss{momentum density} conjugate to $\phi\pare{\+vx}$ is defined by
+\[ \pi\pare{\+vx} = \+D{\dot{\phi}\pare{\+vx}}D{\+cL}, \]
+and the \gloss{Hamiltonian density} is written
+\[ \+cH = \pi\pare{\+vx} \dot{\phi}\pare{\+vx} - \+cL, \]
+and the Hamiltonian
+\[ H = \int \rd{^3x}\, \+cH. \]
+\begin{sample}
+    \begin{example}
+        $\displaystyle \+cL = \half \dot{\phi}^2 - \half \pare{\grad\phi}^2 - \half m\phi^2$ yields the Klein-Gordon Equation \eqref{eq:the_klein-gordon-equation}. The Hamiltonian is given by
+        \begin{equation}
+            \label{eq:hamiltonian_of_the_klein_gordon_field}
+            H = \int \rd{^3 x}\, \+cH = \int \rd{^3 x}\,\brac{\half \pi^2 + \half \pare{\grad \phi}^2 + \half m^2\phi^2}.
+        \end{equation}
+    \end{example}
+\end{sample}
+
+% paragraph hamiltonian_field_theory (end)
+
+\paragraph{Noether's Theorem} % (fold)
+\label{par:noether_s_theorem}
+
+If $S$ is invariant under the infinitesimal transformation
+\[ \phi\pare{x} \rightarrow \phi\pare{x} + \alpha\Delta\phi\pare{x}, \]
+the Lagrangian is then invariant up to a 4-divergence, i.e.
+\[ \+cL\pare{x} \rightarrow \+cL\pare{x} + \alpha\partial_\mu \+cJ^\mu\pare{x}. \]
+Introducing
+\[ j^\mu \pare{x} = \+D{\pare{\partial_\mu \phi}}D{\+cL}\Delta \phi - \+cJ^\mu, \]
+we find
+\begin{finaleq}{Conservation of Charge}
+    \[ \partial_\mu j^\mu = 0, \]
+    which may be written as
+    \[ \dot{Q} = 0,\quad \text{where}\quad Q = \int \rd{^3x}\, j^0. \]
+\end{finaleq}
+\begin{marginwarns}
+    Note that the $\phi^*$ is placed before $\pare{\partial^\mu \phi}$.
+\end{marginwarns}
+\begin{sample}
+    \begin{example}
+        Treating $\phi$ and $\phi^*$ as independent fields, the Lagrangian
+        \[ \+cL = \abs{\partial_\mu \phi}^2 - m^2\abs{\phi}^2 \]
+        is invariant under $\phi \rightarrow e^{i\alpha}\phi$, from which we find the Noether current
+        \[ j^\mu = i\brac{\pare{\partial^\mu \phi^*}\phi - \phi^*\pare{\partial^\mu \phi}} \]
+        conserved.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        Under the infinitesimal translation $x^\mu \rightarrow x^\mu - a^\mu$, we have
+        \[ \phi\pare{x} \rightarrow \phi\pare{x} + a^\mu \partial_\mu \phi\pare{x},\quad \text{and}\quad \+cL = \+cL + a^\nu \partial_\mu \pare{\tensor{\delta}{^\mu_\nu}\+cL}, \]
+        which yields a nonzero $\+cJ^\mu$ and conserved currents
+        \[ \tensor{T}{^\mu_\nu} = \+D{\pare{\partial_\mu \phi}}D{\+cL}\partial_\nu \phi - \+cL \tensor{\delta}{^\mu_\nu}. \]
+        The conserved charges are
+        \begin{equation}
+            \label{eq:conserved_momentum}
+            P^\mu = \int \rd{^3x}\, T^{0\mu},
+        \end{equation}
+        where $T^{00} = \+cH$ and $P^0 = H$.
+    \end{example}
+\end{sample}
+
+% paragraph noether_s_theorem (end)
+
+% subsubsection classical_field_theory (end)
+
+\subsubsection{The Klein-Gordon Field as Harmonic Oscillators} % (fold)
+\label{ssub:the_klein_gordon_field_as_harmonic_oscillators}
+
+\begin{finaleq}{Fundamental Commutation Relations}
+    \[ \brac{\phi\pare{\+vx},\pi\pare{\+vy}} = i\delta^{\pare{3}}\pare{\+vx - \+vy},\quad \text{and}\quad \brac{\phi\pare{\+vx},\phi\pare{\+vy}} = \brac{\pi\pare{\+vx},\pi\pare{\+vy}} = 0, \]
+\end{finaleq}
+where $\phi$ and $\pi$ are promoted to operators now. \begin{margintips}
+    To obtain the expression of $\pi\pare{\+vx}$, convert the $\+vp\cdot \+vx$ into its covariant form $-i\omega_{\+vp} + \+vp\cdot \+vx$ and then evaluate the $\partial_t$ as a shortcut since $\pi = \dot{\phi}$.
+\end{margintips} Expanding the classical Klein-Gordon equation with its Fourier transformation, we found that $\phi$ in the momentum space evolves like the position operator of a classical harmonic oscillator of frequency $\omega_{\+vp} = \sqrt{\+vp^2 + m^2}$. We therefore write, in analog with the classical creation and annihilation operators, that
+\begin{align}
+    \label{eq:phi_at_time_init}
+    \phi\pare{\+vx} &= \int \frac{\rd{^3 p}}{\pare{2\pi}^3} \rec{\sqrt{2\omega_{\+vp}}}\pare{a_{\+vp} + a^\dagger_{-\+vp}}e^{i\+vp\cdot \+vx}; \\
+    \label{eq:pi_at_time_init}
+    \pi\pare{\+vx} &= \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\pare{-i}\sqrt{\frac{\omega_{\+vp}}{2}}\pare{a_{\+vp} - a_{-\+vp}^\dagger} e^{i\+vp\cdot \+vx},
+\end{align}
+where the commutation relation
+\begin{finaleq}{The Commutation Relation of Creation and Annihilation Operators}
+    \[ \brac{a_{\+vp},a^\dagger_{\+vp'}} = \pare{2\pi}^3 \delta^{\pare{3}}\pare{\+vp - \+vp'} \]
+\end{finaleq}
+holds, whence we could easily verify that \begin{margintips}
+    Carry out $\int \rd{x}$ in $H$ first. Then apply $p \rightarrow -p$ if necessary.
+\end{margintips}
+\[ \brac{\phi\pare{\+vx},\pi\pare{\+vx'}} = i\delta^{\pare{3}}\pare{\+vx - \+vx'}, \]
+and that the $H$ in equation \eqref{eq:hamiltonian_of_the_klein_gordon_field} may be expanded as
+\begin{equation}
+    \label{eq:h_expanded}
+    H = \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\omega_{\+vp}\pare{a_{\+vp}^\dagger a_{\+vp} + \half \brac{a_{\+vp}, a_{\+vp}^\dagger}}.
+\end{equation}
+The last term, proportional to $\delta\pare{0}$, is the zero-point energy and could be discarded. Therefore, we have the following commutation relations,
+\begin{equation}
+    \label{eq:commutation_relations_of_H_and_a}
+    \inlinefinaleq{\brac{H,a_{\+vp}^\dagger} = \omega_{\+vp}a_{\+vp}^\dagger;\quad \brac{H,a_{\+vp}} = -\omega_{\+vp}a_{\+vp}.}
+\end{equation}
+From equation \eqref{eq:conserved_momentum} we find
+\[ \+vP = -\int \rd{^3 x}\,\pi\pare{\+vx}\grad \phi\pare{\+vx} = \int \frac{\rd{^3 p}}{\pare{2\pi}^3} \+vp a_{\+vp}^\dagger a_{\+vp}. \]
+So the operator $a_{\+vp}^\dagger$ creates a particle of momentum $\+vp$ and energy $\omega_{\+vp} = \sqrt{\+vp^2 + m^2}$. We define the normalization
+\[ \inlinefinaleq{\ket{\+vp} = \sqrt{2E_{\+vp}}a_{\+vp}^\dagger\ket{0}} \]
+so that
+\[ \bra{\+vp}\ket{\+vq} = 2E_{\+vp}\pare{2\pi}^3 \delta^{\pare{3}}\pare{\+vp - \+vq} \]
+is Lorentz invariant. Under a Lorentz transformation $\Lambda$ we have
+\[ U\pare{\Lambda}\ket{\+vp} = \ket{\Lambda \+vp},\quad \text{and}\quad U\pare{\Lambda} a_{\+vp}^\dagger U^{-1}\pare{\Lambda} = \sqrt{\frac{E_{\Lambda \+vp}}{E_{\+vp}}}a^\dagger_{\Lambda \+vp}. \]
+With this normalization, the completeness relation for the one-particle states is
+\[ \pare{\mathbbm{1}}\+_1-particle_ = \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\ket{\+vp}\rec{2E_{\+vp}}\bra{\+vp}. \]
+\begin{sample}
+    \begin{example}
+        The integral
+        \[ \int \frac{\rd{^3 p}}{\pare{2\pi}^3} \frac{f\pare{p}}{2E_{\+vp}} = \int \left.\frac{\rd{^4 p}}{\pare{2\pi}^4}\pare{2\pi}\delta\pare{p^2 - m^2} f\pare{p}\right\vert_{p^0 > 0} \]
+        is Lorentz invariant of $f\pare{p}$ is.
+    \end{example}
+\end{sample}
+A particle at position $\+vx$ is created by
+\[ \phi\pare{\+vx}\ket{0} = \int \frac{\rd{^3 \+vp}}{\pare{2\pi}^3}\rec{2E_{\+vp}} e^{-i\+vp\cdot \+vx}\ket{\+vp}. \]
+The position-space representation of $\ket{\+vp}$ is given by
+\[ \bra{0}\phi\pare{\+vx}\ket{\+vp} = \bra{0} \int \frac{\rd{^3 p}}{\pare{2\pi}^3} \rec{\sqrt{2E_{\+vp'}}}\pare{a_{\+vp'} e^{i\+vp' \cdot \+vx} + a^\dagger_{\+vp'} e^{-i\+vp'\cdot \+vx}}\sqrt{2E_{\+vp}}a_{\+vp}^\dagger\ket{0} = e^{i\+vp\cdot \+vx}. \]
+
+% subsubsection the_klein_gordon_field_as_harmonic_oscillators (end)
+
+\subsubsection{The Complex Scalar Field} % (fold)
+\label{ssub:the_complex_scalar_field}
+
+The Lagrangian is given by \marginnote{
+    \inlinehardlink{Problem 3.5, \cite{Srednicki:1019751}.} \\
+    \inlinehardlink{Problem 2.2, \cite{Peskin:257493}.}
+}
+\[ \partial_\mu \phi^* \partial^\mu \phi - m^2\phi^* \phi, \]
+and the Hamiltonian is given by
+\begin{align*}
+    H &= \int \rd{^3 x}\,\pare{\pi^* \pi + \grad \phi^* \cdot \grad \phi + m^2\phi^* \phi} \\
+    &= \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\omega_{\+vp}\brac{a^\dagger_{\+vp}a_{\+vp} + b^\dagger_{\+vp}b_{\+vp} + \frac{\brac{a_{\+vp}, a^\dagger_{\+vp}}}{2} + \frac{\brac{b_{\+vp}, b^\dagger_{\+vp}}}{2}},
+\end{align*}
+where two kinds of annihilation operators $a$ and $b$ have been introduced, corresponding to two kinds of particles involved.
+
+% subsubsection the_complex_scalar_field (end)
+
+% subsection the_klein_gordon_field (end)
+
+\subsection{The Klein-Gordon Field in Space-Time} % (fold)
+\label{sub:the_klein_gordon_field_in_space_time}
+
+\subsubsection{Time Evolution} % (fold)
+\label{ssub:time_evolution}
+
+With the Heisenberg equation of motion we identify the time evolution of $\phi$ and $\pi$ as \begin{margintips}
+    For $\partial_t{\pi}$, notice that the $\grad$ acts only on $x'$, and use the Green's identity to swap the items on the left and right of $\grad^2$.
+\end{margintips}
+\begin{align*}
+    i\+DtD{}\phi\pare{\+vx,t} &= \brac{\phi\pare{\+vx,t}, \int \rd{^3 x'} \,\curb{ \half \pi^2\pare{\+vx',t} + \half \pare{\grad \phi\pare{\+vx',t}}^2 + \half m^2 \phi^2\pare{\+vx',t} }}\\ &= i\pi\pare{\+vx,t}; \\
+    i\+DtD{}\pi\pare{\+vx,t} &= \brac{\pi\pare{\+vx,t},\int \rd{^3 x'}\,\curb{\half \pi^2\pare{\+vx',t} \pare{-\grad^2 + m^2} \phi\pare{\+vx',t}}}\\ &= -i\pare{-\grad^2 + m^2}\phi\pare{\+vx,t}.
+\end{align*}
+Combining the two results yields the Klein-Gordon equation \eqref{eq:the_klein-gordon-equation}. Using commutation relations \eqref{eq:commutation_relations_of_H_and_a} we find
+\[ e^{iHt}a_{\+vp}e^{-iHt} = a_{\+vp}e^{-iE_{\+vp}t},\quad \text{and}\quad e^{iHt}a^\dagger_{\+vp}e^{-iHt} = a^\dagger_{\+vp} e^{iE_{\+vp}t}, \]
+where $a_{\+vp}$ are time-independ operators in the Schr\"odinger picture. Combining $\phi\pare{\+vx} = e^{iHt} \phi\pare{\+vx} e^{-iHt}$ with equations \eqref{eq:phi_at_time_init} and \eqref{eq:pi_at_time_init} yields
+\begin{equation}
+    \label{eq:phi_pi_at_time_any}
+    \inlinefinaleq{\phi\pare{\+vx,t} = \int \left.\frac{\rd{^3 p}}{\pare{2\pi}^3} \rec{\sqrt{2E_{\+vp}}} \pare{a_{\+vp} e^{-ip\cdot x} + a^\dagger_{\+vp} e^{ip\cdot x}}\right\vert_{p^0 = E_p};\quad \pi\pare{\+vx,t} = \+DtD{}\phi\pare{\+vx,t}.}
+\end{equation}
+With the identities \begin{margintips}
+    One could also start with $\brac{\phi\pare{\+vx},\+vP} = i\partial_x \phi\pare{\+vx}$.
+\end{margintips}
+\[ e^{-i\+vP\cdot \+vx} a_{\+vp} e^{i\+vP\cdot \+vx} = a_{\+vp} e^{i\+vp\cdot \+vx},\quad \text{and} \quad e^{-i\+vP\cdot \+vx} a^\dagger_{\+vp} e^{i\+vP\cdot \+vx} = a^\dagger_{\+vp} e^{-i\+vp\cdot \+vx}, \]
+we found (note that $\brac{\+vP,H} = 0$)
+\[ \phi\pare{x} = e^{i\pare{Ht - \+vP\cdot \+vx}} \phi\pare{0} e^{-i\pare{Ht - \+vP\cdot \+vx}} = e^{iP\cdot x}\phi\pare{0} e^{-iP\cdot x}. \]
+
+% subsubsection time_evolution (end)
+
+\subsubsection{Causality} % (fold)
+\label{ssub:causality}
+
+The amplitude for a particle to propagate from $y$ to $x$ is \begin{margintips}
+    \raggedright
+    Only $\bra{0} a_{\+vp} a^\dagger_{\+vq}\ket{0}$ $=$ $\pare{2\pi}^3 \delta^{\pare{3}}\pare{\+vp-\+vq}$ survives.
+\end{margintips}
+\[ D\pare{x-y} = \bra{0}\phi\pare{x}\phi\pare{y}\ket{0} = \int \left.\frac{\rd{^3 p}}{\pare{2\pi}^3} \rec{2E_{\+vp}} e^{-ip\cdot \pare{x-y}}\right\vert_{p^0 = E_{\+vp}}. \]
+\begin{sample}
+    \begin{example}
+    \label{ex:time_like_propagator}
+        For $x^0 - y^0 = t$ and $\+vx - \+vy = 0$, we have
+        \begin{align*}
+            D\pare{x-y} &= \frac{4\pi}{\pare{2\pi}^3} \int_0^\infty \frac{p^2}{2\sqrt{p^2 + m^2}} e^{-i\sqrt{p^2 + m^2}t} \\
+            &= \rec{4\pi^2} \int_m^\infty \rd{E}\, \sqrt{E^2 - m^2} e^{-iEt} \\
+            & \underset{t\rightarrow \infty}{\sim} e^{-imt}.
+        \end{align*}
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+    \label{ex:space_like_propagator}
+        For $x^0 - y^0 = 0$, $\+vx - \+vy = \+vr$, we have
+        \begin{align*}
+            D\pare{x-y} = \frac{-i}{2\pare{2\pi}^2 r} \int_{-\infty}^{\infty}\rd{p}\, \frac{pe^{ipr}}{\sqrt{p^2 + m^2}} = \rec{4\pi^2 r} \int_m^\infty \frac{\rho e^{-\rho r}}{\sqrt{\rho^2 - m^2}} \underset{r\rightarrow \infty}{\sim} e^{-mr}.
+        \end{align*}
+    \end{example}
+\end{sample}
+To see if the measurements on two points could affect one another, we calculate
+\begin{equation}
+    \label{eq:commutator_of_position_field}
+    \brac{\phi\pare{x},\phi\pare{y}} = \int \frac{\rd{^3 p}}{\pare{2\pi}^3} \rec{2E_{\+vp}}\pare{e^{-ip\cdot \pare{x-y}} - e^{ip\cdot \pare{x-y}}} = D\pare{x-y} - D\pare{y-x}.
+\end{equation}
+If $\pare{x-y}$ is space-like, a Lorentz transformation may carry it into the form in \cref{ex:space_like_propagator}, and the two terms cancels each other. If $\pare{x-y}$ is time-like, it may be carried into the form in \cref{ex:time_like_propagator} and the amplitude is roughly $\pare{e^{-imt} - e^{imt}}$, which is nonzero.
+
+% subsubsection causality (end)
+
+\subsubsection{The Klein-Gordon Propagator} % (fold)
+\label{ssub:the_klein_gordon_propagator}
+
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{scope}[thick,decoration={
+            markings,
+            mark=at position 0.5 with {\arrow{latex}}}
+            ] 
+            \draw[postaction={decorate}] (-3,0) -- (-1.7,0);
+            \draw[postaction={decorate}] (-1.3,0) -- (1.3,0);
+            \draw[postaction={decorate}] (1.7,0) -- (3,0);
+        \end{scope}
+        \draw (0,-1) -- (0,1);
+        \draw (-3,0) -- (3,0);
+        \draw (-1.7,0) arc (180:0:0.2);
+        \draw (1.3,0) arc (180:0:0.2);
+        \draw[fill=black] (-1.5,0) circle (0.05) node[below] {$-E_{\+vp}$};
+        \draw[fill=black] (1.5,0) circle (0.05) node[below] {$E_{\+vp}$};
+    \end{tikzpicture}
+    \caption{Contour of the integral in equation \eqref{eq:retarded_propagator_total}.}
+    \label{fig:retarded_contour}
+\end{figure}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{scope}[thick,decoration={
+            markings,
+            mark=at position 0.5 with {\arrow{latex}}}
+            ] 
+            \draw[postaction={decorate}] (-3,0) -- (-1.7,0);
+            \draw[postaction={decorate}] (-1.3,0) -- (1.3,0);
+            \draw[postaction={decorate}] (1.7,0) -- (3,0);
+        \end{scope}
+        \draw (0,-1) -- (0,1);
+        \draw (-3,0) -- (3,0);
+        \draw (-1.7,0) arc (180:360:0.2);
+        \draw (1.3,0) arc (180:0:0.2);
+        \draw[fill=black] (-1.5,0) circle (0.05) node[above] {$-E_{\+vp}$};
+        \draw[fill=black] (1.5,0) circle (0.05) node[below] {$E_{\+vp}$};
+    \end{tikzpicture}
+    \caption{Contour of the integral in equation \eqref{eq:feynman_propagator}.}
+    \label{fig:feynman_contour}
+\end{figure}
+Evaluating \eqref{eq:commutator_of_position_field} for $x^0 > y^0$, we find \begin{margintips}
+    \raggedright
+    The propagator could also be found via the Fourier transform. See \href{https://en.wikipedia.org/wiki/Propagator}{propagator}.
+\end{margintips}
+\begin{align}
+    \bra{0}\brac{\phi\pare{x},\phi\pare{y}}\ket{0} &= \int \frac{\rd{^3 p}}{\pare{2\pi}^3} \curb{\left. \rec{2E_{\+vp}}e^{-ip\cdot\pare{x-y}} \right\vert_{p^0 = E_{\+vp}} + \left. \rec{-2E_{\+vp}}e^{-ip\cdot\pare{x-y}} \right\vert_{p^0 = -E_{\+vp}}} \notag \\
+    &\label{eq:retarded_propagator_total}\underset{x^0 > y^0}{=} \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\int \frac{\rd{p^0}}{2\pi i} \frac{-1}{p^2 - m^2} e^{-ip\cdot \pare{x-y}},
+\end{align}
+where the integral in $p^0$ is along the contour shown in \cref{fig:retarded_contour}.
+\par
+We define the \gloss{retarded propagator} as
+\[ D_R\pare{x-y} = \Theta\pare{x^0 - y^0}\bra{0}\brac{\phi\pare{x},\phi\pare{y}}\ket{0}, \]
+which is a Green's function of the Klein-Gordon operator, i.e. \begin{margintips}[-2\baselineskip]
+    If $f\pare{0} = 0$, then $\delta'\cdot f = -\delta\cdot f'$. And $ D_R\pare{x-y} = 0 $ if $x-y$ is space-like.
+\end{margintips}
+\[ \inlinefinaleq{\pare{\partial^2 + m^2}D_R\pare{x-y} = -i\delta^{\pare{4}}\pare{x-y}.} \]
+\par
+The \gloss{Feynman propagator}, which adopts a different contour shown in \cref{fig:feynman_contour}, is defined by
+\begin{equation}
+    \label{eq:feynman_propagator}
+    D_F\pare{x-y} = \int \frac{\rd{^4 p}}{\pare{2\pi}^4} \frac{i}{p^2 - m^2 + i\epsilon} e^{-ip\cdot \pare{x-y}}.
+\end{equation}
+Closing the contour above and below for $x^0 < y^0$ and $x^0 > y^0$, respectively, yields
+\begin{align*}
+    D_F\pare{x-y} &= \begin{cases}
+        D\pare{x-y}, & \mathrm{if\ } x^0 > y^0; \\
+        D\pare{y-x}, & \mathrm{if\ } x^0 < y^0
+    \end{cases} \\
+    &= \Theta\pare{x^0 - y^0}\bra{0}\phi\pare{x}\phi\pare{y}\ket{0} + \theta\pare{y^0 - x^0}\bra{0}\phi\pare{y}\phi\pare{x}\ket{0},
+\end{align*}
+which is another Green's function of the Klein-Gordon operator.
+\begin{finaleq}{Feynman Propagator as Time-Ordered Transition Amplitude}
+    \[ D_F\pare{x-y} = \bra{0}T\phi\pare{x}\phi\pare{y}\ket{0}. \]
+\end{finaleq}
+
+% subsubsection the_klein_gordon_propagator (end)
+
+\subsubsection{Particle Creation by a Classical Source} % (fold)
+\label{ssub:particle_creation_by_a_classical_source}
+
+For a source $j\pare{x}$ that is nonzero only for a finite time interval, the Lagranian is
+\[ \+cL = \half\pare{\partial_\mu \phi}^2 - \half m^2 \phi^2 + j\pare{x}\phi\pare{x}, \]
+which yields the field equation
+\[ \pare{\partial^2 + m^2}\phi\pare{x} = j\pare{x}. \]
+The $\phi\pare{x} = \phi_0\pare{x}$ before the source is turned on is given by equation \eqref{eq:phi_pi_at_time_any}, while the $\phi\pare{x}$ when all of $j$ is in the past is
+\begin{align*}
+    \phi\pare{x} &= \phi_0\pare{x} + i\int \rd{^4 y}\,D_R\pare{x-y}j\pare{y} \\
+    &= \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\rec{\sqrt{2E_{\+vp}}}\curb{\pare{a_{\+vp} + \frac{i}{\sqrt{2E_{\+vp}}}\tilde{j}\pare{p}}e^{-ip\cdot x} + \hermitianconj},
+\end{align*}
+where
+\[ \tilde{j}\pare{p} = \int \rd{^4 y}\, e^{ip\cdot y}j\pare{y}. \]
+The Hamiltonian after $j\pare{x}$ is acted is obtained, by replacing the $a_{\+vp}$ in equation \eqref{eq:h_expanded} with $\pare{a_{\+vp} + i\tilde{j}\pare{p}/\sqrt{2E_{\+vp}}}$, as
+\[ H = \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\, E_{\+vp}\pare{a^\dagger_{\+vp} - \frac{i}{\sqrt{2E_{\+vp}}}\tilde{j}^*\pare{p}}\pare{a_{\+vp} + \frac{i}{\sqrt{2E_{\+vp}}}\tilde{j}\pare{p}}. \]
+The energy of the system after the source has been turned off is
+\[ \bra{0}H\ket{0} = \int \frac{\rd{^3 p}}{\pare{2\pi}^3} E_{\+vp}\cdot \rec{2E_{\+vp}}\abs{\tilde{j}\pare{p}}^2, \]
+where the integrand may be understood as the probability density for creating a particle in mode $p$, giving
+\[ \int \rd{N} = \int \frac{\rd{^3 p}}{\pare{2\pi}^3}\rec{2E_{\+vp}}\abs{\tilde{j}\pare{p}}^2. \]
+
+% subsubsection particle_creation_by_a_classical_source (end)
+
+% subsection the_klein_gordon_field_in_space_time (end)
+
+% section quantization_of_scalar_field (end)
+
+\subsection{Bibliography} % (fold)
+\label{sub:bibliography}
+
+\printbibliography[heading=none]
+
+% subsection bibliography (end)
+
+\end{document}

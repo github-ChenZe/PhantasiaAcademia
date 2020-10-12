@@ -1,0 +1,209 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+
+\begin{document}
+
+\section{非线性方程求根} % (fold)
+\label{sec:非线性方程求根}
+
+\subsection{二分法} % (fold)
+\label{sub:二分法}
+
+\begin{theorem}[中值定理]
+    若$f\in C\brac{a,b}$, $\kappa$介于$f\pare{a}$和$f\pare{b}$之间, 则存在$c\in \brac{a,b}$使$f\pare{c} = \kappa$.
+\end{theorem}
+\begin{ex}
+    $f\pare{x} = x^5 - 2x^3 + 3x^2 - 1$在$\brac{0,1}$中有根, $f\pare{0} = -1$, $f\pare{1} = 1$.
+\end{ex}
+\newpoint{}从而对于连续的$f$, 若$f\pare{a}\cdot f\pare{b} < 0$, 必定有$p\in \pare{a,b}$使$f\pare{p} = 0$.
+
+\paragraph{二分法过程} % (fold)
+\label{par:二分法过程}
+
+仅搜索其中一个根,
+\begin{align*}
+    & a_1 = a, \quad b_1 = b,\quad p_1 = \frac{a_1 + b_1}{2}, \\
+    & \Rightarrow \begin{cases}
+        f\pare{p_1} = 0 \Rightarrow p\in \pare{a_1,p_1} \Rightarrow p = p_1, \\
+        f\pare{a_1}f\pare{p_1} < 0 \Rightarrow p\in\pare{a_1,p_1} \Rightarrow a_2 = a_1, b_2 = p_1, \\
+        f\pare{a_1}f\pare{p_1} > 0 \Rightarrow p\in\pare{p_1,b_1} \Rightarrow a_2 = p_1, b_2 = b_1.
+    \end{cases} \\
+    & p_2 = \frac{a_2 + b_2}{2}, \Rightarrow \begin{cases}
+        f\pare{p_2} = 0 \Rightarrow p = p_2, \\
+        f\pare{a_2}f\pare{p_2} < 0 \Rightarrow p \in \pare{a_2,p_2} \Rightarrow a_3 = a_2, b_3 = p_2, \\
+        f\pare{a_2}f\pare{p_2} > 0 \Rightarrow p \in \pare{p_2,b_2} \Rightarrow a_3 = p_2, b_3 = b_2.
+    \end{cases} \\
+    & p_3 = \frac{a_3 + b_3}{2} \Rightarrow \cdots \Rightarrow p_1,p_2,\cdots,p_N.
+\end{align*}
+判别式
+\[ \begin{cases}
+    \abs{p_N - p_{N-1}} < \epsilon, \\
+    \displaystyle \frac{\abs{p_N - p_{N-1}}}{\abs{p_N}} < \epsilon, \\
+    \abs{f\pare{p_N}} < \epsilon.
+\end{cases} \]
+常用判别式
+\[ \frac{\abs{b_{n+1} - a_{n+1}}}{\abs{a_{n+1}}} < \epsilon. \]
+\begin{theorem}
+    若$f\in C\brac{a,b}$, 且$f\pare{a} \cdot f\pare{b} < 0$, 由二分法产生的$\curb{p_n}$满足
+    \[ \abs{p_n - p} \le \frac{b-a}{2^n},\quad n\ge 1. \]
+\end{theorem}
+为了计算的准确性, 通常在判别式中使用符号函数,
+\[ 
+    \sgn x = \begin{cases}
+        -1, & x<0, \\
+        0, & x=0, \\
+        1, & x>0.
+    \end{cases}
+ \]
+ 用$\sgn f\pare{p_n} \cdot \sgn f\pare{a_n}$代替$f\pare{p_n}\cdot f\pare{a_n}$.
+
+% paragraph 二分法过程 (end)
+
+% subsection 二分法 (end)
+
+\subsection{不动点迭代} % (fold)
+\label{sub:不动点迭代}
+
+\subsubsection{不动点} % (fold)
+\label{ssub:不动点}
+
+若$g\pare{p} = p$, 则谓$p$为$g$的一个不动点.对于给定的求根问题, $f\pare{p} = 0$, 可以通过多种方法定义函数$g$, 将其转化为求函数$g$的不动点的问题. 如取$g\pare{x} = x-f\pare{x}$, $g\pare{x} = x+3f\pare{x}$. 反过来, 若函数$g$有不动点$p$, 即$g\pare{p} = p$, 则$f\pare{x} = x-g\pare{x}$确定的函数$f$有零点$p$.
+\begin{theorem}[不动点存在的条件]
+\mbox{}
+    \begin{cenum}
+        \item 若$g\in C\brac{a,b}$, 且$g\pare{\brac{a,b}}\subset\brac{a,b}$, 则不动点存在.
+        \item 此外, 若$\forall x\in \brac{a,b}$, $g'\pare{x}$存在, 且$\exists k<1$使得$\abs{g'\pare{x}} \le k$, $x\in\pare{a,b}$, 则$\brac{a,b}$中的不动点唯一.
+    \end{cenum}
+\end{theorem}
+\begin{ex}
+    设$\displaystyle g\pare{x} = \rec{3}\pare{x^2-1}$, 显然不动点存在且唯一.
+\end{ex}
+
+% subsubsection 不动点 (end)
+
+\subsubsection{不动点迭代} % (fold)
+\label{ssub:不动点迭代}
+
+取初值$p_0$, 令$p_n = g\pare{p_{n-1}}$, $n\ge 1$, 产生序列$\curb{p_n}$. 若$\curb{p_n}$收敛于$p$, 且$g$是连续的, 则有
+\[ p = \lim_{n\rightarrow \infty}p_n = \lim_{n\rightarrow \infty}g\pare{p_{n-1}} = g\pare{p}, \]
+故$p$为不动点.
+\begin{theorem}
+    令$g\in C\brac{a,b}$, $\forall x\in\brac{a,b}$有$g\pare{x} \in \brac{a,b}$. 此外$\forall x\in \brac{a,b}$, $g'\pare{x}$存在, 且$\exists k<1$满足$\forall x\in\brac{a,b}$, $\abs{g'\pare{x}} \le k$, 则$\forall p_0 \in \brac{a,b}$, 由$p_n = g\pare{p_{n-1}}$产生的序列$\curb{p_n}$收敛于$g$在$\brac{a,b}$上的唯一不动点.
+\end{theorem}
+\begin{corollary}
+    若$g$满足前一定理的假设, 则
+    \[ \abs{p_n - p} \le \max\curb{p_0 - a,b-p_0}k^n,\quad \abs{p_n - p} \le \frac{k^n}{1-k}\abs{p_1 - p_0}. \]
+    从而$k$越小, 收敛越快.
+\end{corollary}
+\begin{ex}
+    方程$x^3 + 4x^2 -10 = 0$在$\brac{1,2}$上有唯一的根. 可以转化为如下的固定点问题:
+    \begin{align*}
+        x&= g_1\pare{x} = x-x^3 -4x^2 + 10, \\
+        x&= g_2\pare{x} = \sqrt{\frac{10}{x} - 4x}, \\
+        x&= g_3\pare{x} = \half \sqrt{10-x^2}, \\
+        x&= g_4\pare{x} = \sqrt{\frac{10}{x+4}}, \\
+        x&= g_5\pare{x} = x - \frac{x^3 + 4x^2 - 10}{3x^2 + 8x}.
+    \end{align*}
+    取$p_0 = 1.5$迭代,
+    \begin{equation*}
+        \begin{array}{cccccc}
+            & g_1 & g_2 & g_3 & g_4 & g_5 \\
+            0 & 1.5 & 1.5 & 1.5 & 1.5 & 1.5 \\
+            1 & -0.875 & 0.8165 & 1.28693768 & 1.348399725 & 1.37333333 \\
+            2 & 6.732 & 2.9969 & 1.28693768 & 1.367376372 & 1.365262013 \\
+            3 & -469.7 & -\sqrt{8.65} & 1.402540804 & 1.364957015 & 1.365230014 \\
+            4 &  1.03 \times 10^8 & & 1.345458374 & 1.365264748 & 1.365230013. \\
+            15 & & & 1.375170253 & 1.365230012 \\
+            20 & & & 1.365230013
+        \end{array}
+    \end{equation*}
+    \begin{cenum}
+        \item $g_1 = x-x^4 - 4x^2 + 10$, $x\in \brac{1,2}$并不映射到$\brac{a,b}$内.
+        \item $\displaystyle g_2 = \sqrt{\frac{10}{x} - x}$, $x\in \brac{1,2}$也不映射到$\brac{a,b}$内.
+        \item $\displaystyle g_3 = \half \sqrt{10-x^3}$, $\displaystyle g'_3 = -\frac{3}{4}x^2\rec{\sqrt{10 - x^3}} < 0$, 因此$g_3$严格递减, 且$g_3$将$\brac{1,1.5}$映射为$\brac{1.28,1.5}$, $\abs{g_3'} \le \abs{g_3'\pare{1.5}}\approx 0.66$.
+        \item $\displaystyle g_4\pare{x} = \sqrt{\frac{10}{4+x}}, g_4'\pare{x} < 0, g_4''\pare{x} > 0 \Rightarrow g'_4$严格递增, $g_4$严格递减, 且$g_4$将$\brac{1,2}$映射到$\brac{1,2}$内. $\abs{g'_4} \lessapprox 0.13$.
+        \item $g_5$对应Newton迭代. $\abs{g_5'}\rightarrow 0$.
+    \end{cenum}
+\end{ex}
+
+% subsubsection 不动点迭代 (end)
+
+\subsubsection{不动点迭代的收敛速度} % (fold)
+\label{ssub:不动点迭代的收敛速度}
+
+\begin{definition}
+    设$\curb{p_n}$收敛于$p$, $p_n \neq p$, 如果有正常数$\lambda$, $\alpha$使
+    \[ \lim_{n\rightarrow \infty} \frac{\abs{p_{n+1} - p}}{\abs{p_n - p}^\alpha} = \lambda, \]
+    则谓$\curb{p_n}$以$\alpha$阶收敛于$p$. 若$p = g\pare{p}$, 则谓迭代格式$p_n = g\pare{p_{n-1}}$收敛的阶数为$\alpha$.
+\end{definition}
+$\alpha$越大, $p_n$收敛越快. 若$\alpha = 1$, 则谓$\curb{p_n}$线性收敛, 相应的迭代格式谓线性迭代格式. 若$\alpha = 2$, 则谓$\curb{p_n}$二次收敛, 相应的迭代格式谓二次迭代格式.
+\par
+对于充分光滑的$g\pare{p}$, 若迭代格式$p_n = g\pare{p_{n-1}}$收敛, 则
+\begin{cenum}
+    \item 若$g'\pare{p} \neq 0$, 则$\abs{p-p_n} = \abs{g\pare{p} - g\pare{p_n }} = \abs{g'\pare{\xi_{n-1}}}\cdot \abs{p-p_{n-1}}$.
+    \[ \Rightarrow \lim_{n\rightarrow \infty} \frac{\abs{p_{n+1} - p}}{p_n - p} = \abs{g'\pare{p}}, \]
+    大多数固定点迭代格式是一阶的.
+    \item 若$g'\pare{p} = g''\pare{p} = \cdots = g^{\pare{m-1}}\pare{p} = 0$, $g^{\pare{m}}\pare{p} \neq 0$, 则
+    \[ \abs{p-p_n} = \abs{g\pare{p} - g\pare{p_{n-1}}} = \rec{m!}\abs{g^{\pare{m}}\pare{\xi_{n-1}}}\cdot \abs{p-p_{n-1}}^m. \]
+    即
+    \[ \lim_{n\rightarrow \infty} \frac{\abs{p_{n+1} - p}}{\abs{p_n - p}^m} = \rec{m!}\abs{g^{\pare{m}}\pare{p}}. \]
+\end{cenum}
+
+% subsubsection 不动点迭代的收敛速度 (end)
+
+% subsection 不动点迭代 (end)
+
+\subsection{Newton迭代} % (fold)
+\label{sub:newton迭代}
+
+\newpoint{}Newton迭代是二阶收敛的.
+\newpoint{}若$f$无实根, 则当初值取实数时, 迭代不收敛.
+\newpoint{}若$p$为$f\pare{x} = 0$的$m$重根, Newton迭代格式为
+\[ x_{n+1} = x_n - m \frac{f\pare{x_n}}{f'\pare{x_n}}. \]
+
+% subsection newton迭代 (end)
+
+\subsection{弦截法} % (fold)
+\label{sub:弦截法}
+
+$\displaystyle f\brac{x_{n-1},x_n} = \frac{f\pare{x_n} - f\pare{x_{n-1}}}{x_n - x_{n-1}}$, 弦截法的迭代格式
+\[ x_{n+1} = x_n - \frac{x_n - x_{n-1}}{f\pare{x_n} - f\pare{x_{n-1}}}f\pare{x_n}. \]
+
+% subsection 弦截法 (end)
+
+\subsection{非线性方程组的Newton迭代} % (fold)
+\label{sub:非线性方程组的newton迭代}
+
+考虑
+\[ \begin{cases}
+    f_1\pare{x,y} = 0, \\
+    f_2\pare{x,y} = 0,
+\end{cases} \]
+记
+\[ X = \begin{pmatrix}
+    x \\ y
+\end{pmatrix},\quad F\pare{X} = \begin{pmatrix}
+    f_1\pare{x,y}\\f_2\pare{x,y}
+\end{pmatrix},\quad J\pare{x} = \begin{pmatrix}
+    \partial_x f_1 & \partial_y f_1 \\
+    \partial_x f_2 & \partial_y f_2
+\end{pmatrix}. \]
+从而
+\[ F\pare{X_0} + J\pare{X-X_0} = 0, \]
+Newton迭代格式为
+\[ X_{n+1} = X_n - J^{-1}\pare{X_n}F\pare{X_n}. \]
+更多元的方程可类似求解.
+
+\paragraph{作业} % (fold)
+\label{par:作业}
+
+Newton方法是二阶收敛的, 以及参考书1 p.74 2,3,5,7,8
+
+% paragraph 作业 (end)
+
+% subsection 非线性方程组的newton迭代 (end)
+
+% section 非线性方程求根 (end)
+
+\end{document}

@@ -1,0 +1,203 @@
+\documentclass[hidelinks]{article}
+
+\usepackage[sensei=M.J.\ Shi,gakka=Quantum\ Mechanics,section=Quantum,gakkabbr=QM]{styles/kurisuen}
+\usepackage{sidenotes}
+\usepackage{van-de-la-sehen-en}
+\usepackage{van-de-environnement-en}
+\usepackage{boite/van-de-boite-en}
+\usepackage{van-de-abbreviation}
+\usepackage{van-de-neko}
+\usepackage{van-le-trompe-loeil}
+\usepackage{cyanide/van-de-cyanide}
+\setlength{\parindent}{0pt}
+\usepackage{enumitem}
+\newlist{citemize}{itemize}{3}
+\setlist[citemize,1]{noitemsep,topsep=0pt,label={-},leftmargin=1em}
+
+\usepackage{mathtools}
+\usepackage{ragged2e}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\newcommand*{\Value}{\frac{1}{2}x^2}%
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\smash{\raisebox{2.75em}{{\hspace{1cm}\color{lightgray}\textsf{\rightmark\quad Page \thepage/\pageref{LastPage}}}}}} %RO=right odd, RE=right even
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+\pagestyle{plain}
+
+\newtheorem*{experiment*}{Measurement}
+\newtheorem{example}{Example}
+\newtheorem{remark}{Remark}
+
+\def\elementcell#1#2#3#4#5#6#7{%
+    \draw node[draw, regular polygon, regular polygon sides=4, minimum height=2cm, draw=cyan, line width=0.4mm, fill=cyan!15!white, #1, inner sep=-2mm](#3) {\Large\textbf{\textsf{\color{cyan!50!black}#4}}};
+    \draw (#3.corner 1) node[below left] {\footnotesize{\phantom{Hj}#5}};
+    \draw (#3.corner 2) node[below right] {\small{\textsf{#6}}};
+    \draw (#3.side 3) node[above] {\footnotesize #7};
+    \draw (#3.corner 2) ++ (0,-0.4mm) node(nw#3) {};
+    \tcbsetmacrotowidthofnode{\elementcellwidth}{#3}
+    \node [fill=cyan, line width=0mm, rectangle, rounded corners=1.8mm, rectangle round south east=false, rectangle round south west=false, anchor=south west, minimum width=\elementcellwidth] at (nw#3) {\small\textsf{\color{white}#2}};
+}
+
+\DeclareSIUnit\Dq{Dq}
+\usepackage{physics}
+\usepackage{bbm}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+
+\DeclareMathOperator{\Pfaffian}{Pf}
+\DeclareMathOperator{\sign}{sign}
+
+\begin{document}
+
+\section{Angular Momentum} % (fold)
+\label{sec:angular_momentum}
+
+\subsection{Rotation} % (fold)
+\label{sub:rotation}
+
+\subsubsection{Rotation in the Three Dimensional Space} % (fold)
+\label{ssub:rotation_in_the_three_dimensional_space}
+
+\begin{remark}
+    The parity operator $P$ belongs to $O\pare{3}$, where $P_{ji} = -\delta{ji}$, and is an improper rotation.
+\end{remark}
+If $Q$ is a proper rotation then for $\+vz = \+vx\times \+vy$,
+\[ Q\+vz = Q\+vx\times Q\+vy,\quad Q'\+vz = -Q'\+vx \times Q' \+vy. \]
+Rotation in $\+vR^3$ may be characterized by the Euler angles as
+\[ Q\pare{\alpha\beta\gamma} = Q\pare{\+vk\alpha}Q\pare{\+vj\beta}Q\pare{\+vj\gamma}, \]
+i.e. the following sequence of rotation is performed on the frame attached to the rigid body:
+\begin{cenum}
+    \item rotation around $\+uz$ by $\gamma$;
+    \item rotation around $\+uy$ by $\beta$;
+    \item rotation around $\+ux$ by $\alpha$.
+\end{cenum}
+With columns of $Q$ being the components in the old frame of the new basis vectors of the frame after rotation,
+\[ Q\pare{\alpha\beta\gamma} = \begin{pmatrix}
+    \cos\alpha\cos\beta\cos\gamma - \sin\alpha\sin\gamma & -\cos\alpha\cos\beta\sin\gamma - \sin\alpha\cos\gamma & \cis\alpha\sin\beta \\
+    \sin\alpha\cos\beta\cos\gamma + \cos\alpha\sin\gamma & -\sin\alpha\cos\beta\sin\gamma + \cos\alpha\cos\gamma & \sin\alpha\sin\beta \\
+    -\sin\beta \cos\gamma & \sin\beta\sin\gamma & \cos\beta
+\end{pmatrix}. \]
+
+% subsubsection rotation_in_the_three_dimensional_space (end)
+
+\subsubsection{Proper Rotation Group} % (fold)
+\label{ssub:proper_rotation_group}
+
+Matrices in the $SU\pare{2}$ are those of the form
+\[ \inlinefinaleq{u = \begin{pmatrix}
+    a & b \\
+    -b^* & a^*
+\end{pmatrix},\quad \abs{a}^2 + \abs{b}^2 = 1.} \]
+This may also be written as
+\[ u\pare{\xi\zeta\eta} = \begin{pmatrix}
+    e^{-i\xi}\cos\eta & e^{-i\zeta}\sin\eta \\
+    e^{i\zeta}\sin\eta & e^{i\xi}\cos\eta
+\end{pmatrix},\quad \text{where}\quad \xi \in \pare{0,2\pi},\quad \zeta\in\pare{0,2\pi},\quad \eta\in\pare{0,\frac{\pi}{2}}. \]
+
+\paragraph{Homomorphism between SO(3) and SU(2)} % (fold)
+\label{par:homomorphism}
+
+The operator
+\[ h = \+v\sigma\cdot \+vr = \begin{pmatrix}
+    z & x-iy \\
+    x+iy & -z
+\end{pmatrix} \]
+under the unitary transformation
+\[ h' = uhu^\dagger \]
+represents another $\+vr' = \pare{x',y',z'}$ which satisfies $r'^2 = r^2$. Therefore, $u\in SU\pare{2}$ may be mapped to an element in $Q\in SO\pare{3}$, under which
+\[ \+vr' = Q\pare{u}\+vr. \]
+\begin{sample}
+    \begin{example}
+        $\displaystyle u = \begin{pmatrix}
+            e^{-i\alpha/2} & 0 \\
+            0 & e^{i\alpha/2}
+        \end{pmatrix}$ represents a rotation around $\+uz$ by $\alpha$.
+    \end{example}
+\end{sample}
+\begin{sample}
+    \begin{example}
+        $\displaystyle u = \begin{pmatrix}
+            \cos \pare{\beta/2} & -\sin\pare{\beta/2} \\
+            \sin\pare{\beta/2} & \cos\pare{\beta/2}
+        \end{pmatrix}$ is a rotation around $\+uy$ by $\beta$.
+    \end{example}
+\end{sample}
+A general rotation may be written as
+\[ u\pare{\alpha\beta\gamma} = \begin{pmatrix}
+    \displaystyle e^{-i\frac{\alpha+\gamma}{2}}\cos \frac{\beta}{2} &\displaystyle  -e^{-i\frac{\alpha-\gamma}{2}}\sin \frac{\beta}{2} \\[.5em]
+    \displaystyle e^{i\frac{\alpha-\gamma}{2}}\sin\frac{\beta}{2} & \displaystyle e^{-\frac{\alpha+\gamma}{2}}\cos\frac{\beta}{2}
+\end{pmatrix}. \]
+The kernel of the homomorphism $SU\pare{2} \rightarrow SO\pare{3}$ is $\curb{\pm I}$, i.e. $\pm u$ are mapped to the same rotation in $SO\pare{3}$.
+
+% paragraph homomorphism (end)
+
+\paragraph{Representation of SU(2)} % (fold)
+\label{par:representation_of_SU2}
+
+Take $\+vv$ to be a vector in $\+vC^2$ which has the form
+\[ \+vv =  \begin{pmatrix}
+    \xi \\ \eta
+\end{pmatrix}. \]
+Homogeneous polynomials of $\xi$ and $\eta$ are the linear combinations of the following monomials
+\begin{flalign*}
+    & \deg = 0 && 1 && \rightarrow \xi^0 \eta^0, \\
+    & \deg = 1 && \xi,\ \eta && \rightarrow \xi^{\half + \half} \eta^{\half-\half},\ \xi^{\half-\half}\eta^{\half+\half}, \\
+    & \deg = 2 && \xi^2,\ \xi\eta,\ \eta^2 && \rightarrow \xi^{1+1} \eta^{1-1},\ \xi^{1+0}\eta^{1-0},\ \xi^{1-1}\eta^{1+1}, \\
+    & \vdots && \vdots && \vdots \\
+    & \deg = 2j && && \xi^{j+j} \eta^{j-j},\ \xi^{j+\pare{j-1}}\eta^{j-\pare{j-1}},\ \cdots,\ \xi^{j+\pare{-j}}\eta^{j-\pare{-j}}.
+\end{flalign*}
+Each row spans a $\pare{2j+1}$ dimensional space, which has basis vectors
+\[ f_m^j\pare{\+vv} = f_m^j\pare{\xi,\eta} = -\frac{\xi^{j-m}\eta^{j+m}}{\sqrt{\pare{j-m}!\pare{j+m}!}},\quad \text{where}\quad m = -j,\cdots,j. \]
+Under the transformation $\+vv\rightarrow u\+vv$, $f$ is transformed to
+\[ \pare{f'}_m^j \pare{\+vv} = \hat{D}\pare{u} f_m^j \pare{\+vv} = f_m^j\pare{u^{-1}\+vv} = \frac{\pare{a^* - b\eta}^{j-1} \pare{b^*\xi + a\eta}^{j+m}}{\sqrt{\pare{j-m}!\pare{j+m}!}}. \]
+We defined the \gloss{Wigner D-matrices}, which have the components $D^j_{m'm}$, by
+\[ \inlinefinaleq{\hat D\pare{u} f_m^j\pare{\xi,\eta} = \sum_{m'=-j}^j f_{m'}^j\pare{\xi,\eta} D^j_{m'm}\pare{u}.} \]
+With the binomial expansion of $f$ we found
+\[ D^j_{m'm}\pare{a,b} = \sum_n \pare{-1}^n \frac{\sqrt{\pare{j-m}!\pare{j+m}!\pare{j-m'}!\pare{j+m'}!}}{\pare{j+m'-n}!\pare{j-m-n}!n!\pare{n+m-m'}!}\times a^{j+m'-n}\pare{a^*}^{j-m-n}b^n\pare{b^*}^{n+m-m'}. \]
+$D^j_{m'm}$ is the $\pare{2j+1}$-dimensional representation matrix of $u$, where $m'$ and $m$ take values from $-j$ to $j$.
+\begin{proposition}
+    Some properties of $D^j_{m'm}$ are listed below.
+    \begin{cenum}
+        \item $D^j_{m'm}$ is a unitary matrix.
+        \item $\curb{D^j_{m'm}}$ make up the irreducible representation of $SU\pare{2}$.
+    \end{cenum}
+\end{proposition}
+
+% paragraph representation_of_SU2 (end)
+
+\paragraph{Representation of SO(3)} % (fold)
+\label{par:representation_of_SO3}
+
+Operators in $SO\pare{3}$ are mapped into operators in $SU\pare{2}$ by
+\[ a = e^{-i\frac{\alpha+\gamma}{2}}\cos\frac{\beta}{2},\quad b = e^{-i\frac{\alpha-\gamma}{2}}\sin\frac{\beta}{2}, \]
+which yields the representation (dropping  a factor of $\pare{-1}^{m-m'}$)
+\[ D^j_{m'm}\pare{\alpha\beta\gamma} = \sum_n \pare{-1}^n \]
+
+% paragraph representation_of_SO3 (end)
+
+% subsubsection proper_rotation_group (end)
+
+% subsection rotation (end)
+
+% section angular_momentum (end)
+
+\end{document}

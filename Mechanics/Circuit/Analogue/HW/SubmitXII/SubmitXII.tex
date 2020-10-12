@@ -1,0 +1,80 @@
+\documentclass[hidelinks]{ctexart}
+
+\usepackage{van-de-la-illinoise}
+\usepackage[paper=b5paper,top=.3in,left=.9in,right=.9in,bottom=.3in]{geometry}
+\usepackage{calc}
+\usepackage{van-le-trompe-loeil}
+\pagenumbering{gobble}
+\setlength{\parindent}{0pt}
+\pgfplotsset{compat=newest}
+
+\newdimen\indexlen
+\def\newprobheader#1{%
+\def\probindex{#1}
+\setlength\indexlen{\widthof{\textbf{\probindex}}}
+\hskip\dimexpr-\indexlen-1em\relax
+\textbf{\probindex}\hskip1em\relax
+}
+\def\newprob#1{%
+\newprobheader{#1}%
+\def\newprob##1{%
+\probsep%
+\newprobheader{##1}%
+}%
+}
+\def\probsep{\vskip1em\relax{\color{gray}\dotfill}\vskip1em\relax}
+\def\rD{\mathrm{D}}
+\newcommand{\mathmin}[2]{(#1+#2)/2-abs(#1-#2)/2}
+\newcommand{\mathmax}[2]{(#1+#2)/2+abs(#1-#2)/2}
+
+\begin{document}
+
+\newprob{8.3.1}%
+$\displaystyle \rec{1+A\+_\mathnormal{v}o_F} = \frac{A\+_\mathnormal{v}f_}{A\+_\mathnormal{v}o_} \Rightarrow \frac{\rd{A\+_\mathnormal{v}f_}}{A\+_\mathnormal{v}f_} = \rec{1+A\+_\mathnormal{v}o_F} \frac{\rd{A\+_\mathnormal{v}o_}}{A\+_\mathnormal{v}o_} = \frac{50}{10^4}\times 0.1 = \boxed{5\times 10^{-4}.}$
+
+\newprob{8.3.4}%
+输出稳定电压(电压反馈): (a), (d), (e).
+\par
+输出稳定电流(电流反馈): (b), (c), (f).
+\par
+提高输入电阻(串联反馈): (b), (d), (f).
+\par
+降低输入电阻(并联反馈): (a), (c), (e).
+
+\newprob{8.3.8}%
+$\displaystyle A\cdot \mathrm{BW} = \SI{4e5}{\hertz} \Rightarrow \mathrm{BW} = \boxed{\SI{8}{\kilo\hertz}.}$
+
+\newprob{8.3.9}%
+$\displaystyle A\cdot \mathrm{BW} = 10^6 \times \SI{5}{\hertz} = \boxed{\SI{5}{\mega\hertz}.}$\\
+$\displaystyle \mathrm{BW}\+_f_ = \frac{A\cdot \mathrm{BW}}{A\+_\mathnormal{v}f_} = \frac{\SI{5}{\mega\hertz}}{100} = \boxed{\SI{50}{\kilo\hertz}.}$
+
+\newprob{8.3.10}%
+$\displaystyle A\+_om_ = 300 \Rightarrow A\+_fm_ = \frac{A\+_om_}{1+A\+_om_F} = \boxed{3.30.}$\\
+$\displaystyle f\+_oH_ = \SI{e4}{\hertz} \Rightarrow f\+_fH_ = \frac{A\+_om_f\+_oH_}{A\+_fm_} = \boxed{\SI{909}{\kilo\hertz}.}$
+
+\newprob{8.4.1}%
+引入电压串联负反馈. $\displaystyle A\+_\mathnormal{v}f_ = \rec{F} = \boxed{1 + \frac{R\+_f_}{R\+_b2_}.}$ 输入电阻大, 输出电阻小.
+
+\newprob{8.4.2 (a)}%
+电压并联负反馈. $\displaystyle A\+_\mathnormal{r}f_ = \boxed{-R_2.}$ $\displaystyle A\+_\mathnormal{v}f_ = \boxed{-\frac{R_2}{R_1}.}$
+\par
+\newprobheader{(b)}%
+电流串联负反馈. $\displaystyle A\+_\mathnormal{g}f_ = \boxed{\rec{R\+_e1_}.}$ $\displaystyle A\+_\mathnormal{v}f_ = \boxed{-\frac{R\+_f2_ \parallel R\+_c3_}{R\+_e1_}.}$
+\par
+\newprobheader{(c)}%
+电流并联负反馈. $\displaystyle A\+_\mathnormal{i}f_ = \boxed{-\pare{1 + \frac{R\+_f_}{R\+_e2_}}.}$ $\displaystyle A\+_\mathnormal{v}f_ = \boxed{\frac{R\+_c2_}{R\+_si_}\pare{1 + \frac{R\+_f_}{R\+_e2_}}.}$
+\par
+\newprobheader{(d)}%
+电压串联负反馈. $\displaystyle A\+_\mathnormal{v}f_ = \boxed{1 + \frac{R_2}{R_1}.}$
+
+\newprob{8.4.5 (1)}%
+\underline{电压并联负反馈}.
+\par
+\newprobheader{(2)}%
+改为电压串联负反馈. $R\+_f_$连接$v\+_O_$与$\mathrm{T}_2$的基极, $\mathrm{T}_3$的基极改为连接$\mathrm{T}_1$的集极.
+\par
+\newprobheader{(3)}%
+更改前, $\displaystyle A\+_\mathnormal{v}f_ = {-\frac{R\+_f_}{R\+_b1_}} = \boxed{-10.}$\par
+更改后, $\displaystyle A\+_\mathnormal{v}f_ = {1 + \frac{R\+_f_}{R\+_b2_}} = \boxed{11.}$
+
+\end{document}
